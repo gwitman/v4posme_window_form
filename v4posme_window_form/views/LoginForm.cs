@@ -17,7 +17,7 @@ namespace v4posme_window_form.views
             InitializeComponent();
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
         }
