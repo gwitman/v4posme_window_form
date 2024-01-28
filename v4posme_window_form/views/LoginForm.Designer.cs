@@ -28,23 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.ultraPanel1 = new Infragistics.Win.Misc.UltraPanel();
-            this.btnPagar = new Infragistics.Win.Misc.UltraButton();
             this.chkPagar = new DevExpress.XtraEditors.CheckEdit();
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
-            this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.btnIngresar = new MaterialSkin.Controls.MaterialFlatButton();
-            this.materialSingleLineTextField2 = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.btnCancelar = new MaterialSkin.Controls.MaterialFlatButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.txtUsuario = new DevExpress.XtraEditors.TextEdit();
+            this.txtPassword = new DevExpress.XtraEditors.TextEdit();
+            this.btnPagar = new DevExpress.XtraEditors.SimpleButton();
+            this.btnIngresar = new DevExpress.XtraEditors.SimpleButton();
+            this.btnCancelar = new DevExpress.XtraEditors.SimpleButton();
             this.ultraPanel1.ClientArea.SuspendLayout();
             this.ultraPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkPagar.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUsuario.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // dockPanel1_Container
@@ -60,37 +61,20 @@
             // 
             // ultraPanel1.ClientArea
             // 
+            this.ultraPanel1.ClientArea.Controls.Add(this.btnCancelar);
+            this.ultraPanel1.ClientArea.Controls.Add(this.btnIngresar);
             this.ultraPanel1.ClientArea.Controls.Add(this.btnPagar);
+            this.ultraPanel1.ClientArea.Controls.Add(this.txtPassword);
+            this.ultraPanel1.ClientArea.Controls.Add(this.txtUsuario);
             this.ultraPanel1.ClientArea.Controls.Add(this.chkPagar);
             this.ultraPanel1.ClientArea.Controls.Add(this.pictureEdit1);
-            this.ultraPanel1.ClientArea.Controls.Add(this.materialSingleLineTextField1);
             this.ultraPanel1.ClientArea.Controls.Add(this.labelControl2);
-            this.ultraPanel1.ClientArea.Controls.Add(this.btnIngresar);
-            this.ultraPanel1.ClientArea.Controls.Add(this.materialSingleLineTextField2);
-            this.ultraPanel1.ClientArea.Controls.Add(this.btnCancelar);
             this.ultraPanel1.ClientArea.Controls.Add(this.labelControl1);
             this.ultraPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ultraPanel1.Location = new System.Drawing.Point(0, 0);
             this.ultraPanel1.Name = "ultraPanel1";
             this.ultraPanel1.Size = new System.Drawing.Size(507, 512);
             this.ultraPanel1.TabIndex = 16;
-            // 
-            // btnPagar
-            // 
-            appearance1.BackColor = System.Drawing.Color.Green;
-            appearance1.BackColor2 = System.Drawing.Color.Green;
-            appearance1.ForeColor = System.Drawing.Color.White;
-            this.btnPagar.Appearance = appearance1;
-            this.btnPagar.ButtonStyle = Infragistics.Win.UIElementButtonStyle.Office2010Button;
-            this.btnPagar.Enabled = false;
-            this.btnPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPagar.Location = new System.Drawing.Point(144, 354);
-            this.btnPagar.Name = "btnPagar";
-            this.btnPagar.Size = new System.Drawing.Size(190, 40);
-            this.btnPagar.TabIndex = 24;
-            this.btnPagar.Text = "Pagar";
-            this.btnPagar.UseOsThemes = Infragistics.Win.DefaultableBoolean.False;
-            this.btnPagar.Visible = false;
             // 
             // chkPagar
             // 
@@ -112,21 +96,6 @@
             this.pictureEdit1.Size = new System.Drawing.Size(295, 128);
             this.pictureEdit1.TabIndex = 22;
             // 
-            // materialSingleLineTextField1
-            // 
-            this.materialSingleLineTextField1.Depth = 0;
-            this.materialSingleLineTextField1.Hint = "";
-            this.materialSingleLineTextField1.Location = new System.Drawing.Point(126, 190);
-            this.materialSingleLineTextField1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField1.Name = "materialSingleLineTextField1";
-            this.materialSingleLineTextField1.PasswordChar = '\0';
-            this.materialSingleLineTextField1.SelectedText = "";
-            this.materialSingleLineTextField1.SelectionLength = 0;
-            this.materialSingleLineTextField1.SelectionStart = 0;
-            this.materialSingleLineTextField1.Size = new System.Drawing.Size(200, 23);
-            this.materialSingleLineTextField1.TabIndex = 16;
-            this.materialSingleLineTextField1.UseSystemPasswordChar = false;
-            // 
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.5F);
@@ -137,53 +106,6 @@
             this.labelControl2.TabIndex = 21;
             this.labelControl2.Text = "Contraseña";
             // 
-            // btnIngresar
-            // 
-            this.btnIngresar.AutoSize = true;
-            this.btnIngresar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnIngresar.BackColor = System.Drawing.Color.White;
-            this.btnIngresar.Depth = 0;
-            this.btnIngresar.Location = new System.Drawing.Point(126, 427);
-            this.btnIngresar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnIngresar.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Primary = false;
-            this.btnIngresar.Size = new System.Drawing.Size(77, 36);
-            this.btnIngresar.TabIndex = 17;
-            this.btnIngresar.Text = "Ingresar";
-            this.btnIngresar.UseVisualStyleBackColor = false;
-            // 
-            // materialSingleLineTextField2
-            // 
-            this.materialSingleLineTextField2.Depth = 0;
-            this.materialSingleLineTextField2.Hint = "";
-            this.materialSingleLineTextField2.Location = new System.Drawing.Point(126, 256);
-            this.materialSingleLineTextField2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField2.Name = "materialSingleLineTextField2";
-            this.materialSingleLineTextField2.PasswordChar = '\0';
-            this.materialSingleLineTextField2.SelectedText = "";
-            this.materialSingleLineTextField2.SelectionLength = 0;
-            this.materialSingleLineTextField2.SelectionStart = 0;
-            this.materialSingleLineTextField2.Size = new System.Drawing.Size(200, 23);
-            this.materialSingleLineTextField2.TabIndex = 20;
-            this.materialSingleLineTextField2.UseSystemPasswordChar = true;
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.AutoSize = true;
-            this.btnCancelar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCancelar.Depth = 0;
-            this.btnCancelar.Location = new System.Drawing.Point(286, 427);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Primary = false;
-            this.btnCancelar.Size = new System.Drawing.Size(82, 36);
-            this.btnCancelar.TabIndex = 18;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
             // labelControl1
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.5F);
@@ -193,6 +115,64 @@
             this.labelControl1.Size = new System.Drawing.Size(43, 16);
             this.labelControl1.TabIndex = 19;
             this.labelControl1.Text = "Usuario";
+            // 
+            // txtUsuario
+            // 
+            this.txtUsuario.EnterMoveNextControl = true;
+            this.txtUsuario.Location = new System.Drawing.Point(126, 191);
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.Size = new System.Drawing.Size(242, 20);
+            this.txtUsuario.TabIndex = 25;
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.EnterMoveNextControl = true;
+            this.txtPassword.Location = new System.Drawing.Point(126, 256);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Properties.UseSystemPasswordChar = true;
+            this.txtPassword.Size = new System.Drawing.Size(242, 20);
+            this.txtPassword.TabIndex = 26;
+            // 
+            // btnPagar
+            // 
+            this.btnPagar.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(121)))), ((int)(((byte)(145)))));
+            this.btnPagar.Appearance.Options.UseBackColor = true;
+            this.btnPagar.AppearanceHovered.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(154)))), ((int)(((byte)(134)))));
+            this.btnPagar.AppearanceHovered.Options.UseBackColor = true;
+            this.btnPagar.Location = new System.Drawing.Point(173, 349);
+            this.btnPagar.Name = "btnPagar";
+            this.btnPagar.Size = new System.Drawing.Size(101, 29);
+            this.btnPagar.TabIndex = 27;
+            this.btnPagar.Text = "Pagar";
+            this.btnPagar.ToolTip = "Ir a pagar";
+            this.btnPagar.ToolTipTitle = "Pagar";
+            this.btnPagar.Visible = false;
+            // 
+            // btnIngresar
+            // 
+            this.btnIngresar.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(88)))), ((int)(((byte)(52)))));
+            this.btnIngresar.Appearance.Options.UseBackColor = true;
+            this.btnIngresar.AppearanceHovered.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(40)))), ((int)(((byte)(29)))));
+            this.btnIngresar.AppearanceHovered.Options.UseBackColor = true;
+            this.btnIngresar.Location = new System.Drawing.Point(90, 423);
+            this.btnIngresar.Name = "btnIngresar";
+            this.btnIngresar.Size = new System.Drawing.Size(101, 29);
+            this.btnIngresar.TabIndex = 28;
+            this.btnIngresar.Text = "Ingresar";
+            this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(23)))), ((int)(((byte)(10)))));
+            this.btnCancelar.Appearance.Options.UseBackColor = true;
+            this.btnCancelar.AppearanceHovered.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
+            this.btnCancelar.AppearanceHovered.Options.UseBackColor = true;
+            this.btnCancelar.Location = new System.Drawing.Point(267, 423);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(101, 29);
+            this.btnCancelar.TabIndex = 29;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
             // 
             // LoginForm
             // 
@@ -209,28 +189,30 @@
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Iniciar Sesión";
+            this.Load += new System.EventHandler(this.LoginForm_Load);
             this.ultraPanel1.ClientArea.ResumeLayout(false);
             this.ultraPanel1.ClientArea.PerformLayout();
             this.ultraPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chkPagar.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUsuario.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
-
-        private Infragistics.Win.Misc.UltraButton btnPagar;
 
         #endregion
 
         private DevExpress.XtraBars.Docking.ControlContainer dockPanel1_Container;
         private Infragistics.Win.Misc.UltraPanel ultraPanel1;
         private DevExpress.XtraEditors.PictureEdit pictureEdit1;
-        private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField1;
         private DevExpress.XtraEditors.LabelControl labelControl2;
-        private MaterialSkin.Controls.MaterialFlatButton btnIngresar;
-        private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField2;
-        private MaterialSkin.Controls.MaterialFlatButton btnCancelar;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.CheckEdit chkPagar;
+        private DevExpress.XtraEditors.TextEdit txtPassword;
+        private DevExpress.XtraEditors.TextEdit txtUsuario;
+        private DevExpress.XtraEditors.SimpleButton btnCancelar;
+        private DevExpress.XtraEditors.SimpleButton btnIngresar;
+        private DevExpress.XtraEditors.SimpleButton btnPagar;
     }
 }

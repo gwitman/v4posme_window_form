@@ -34,5 +34,31 @@ namespace v4posme_window_form.views
                 btnPagar.Enabled = false;
             }
         }
+
+        private void btnCancelar_Click_1(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnIngresar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtUsuario.Text))
+            {
+                MessageBox.Show("Debe especificar un usuario para continuar", "Usuario",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                txtUsuario.Focus();
+                return;
+            }
+            if (string.IsNullOrEmpty(txtPassword.Text))
+            {
+                MessageBox.Show("Debe especificar una contraseña para continuar", "Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtPassword.Focus();
+                return;
+            }
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            txtUsuario.Focus();
+        }
     }
 }

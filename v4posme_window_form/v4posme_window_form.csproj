@@ -124,10 +124,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="views\LoginForm.cs">
+    <Compile Include="Views\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="views\LoginForm.Designer.cs">
+    <Compile Include="Views\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
@@ -144,7 +144,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="views\LoginForm.resx">
+    <EmbeddedResource Include="Views\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
@@ -160,7 +160,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="models\" />
+    <Folder Include="Domain\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logo\posMe Logo fondo blanco.jpg" />
