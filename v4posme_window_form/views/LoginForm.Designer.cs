@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.ultraPanel1 = new Infragistics.Win.Misc.UltraPanel();
+            this.btnPagar = new Infragistics.Win.Misc.UltraButton();
+            this.chkPagar = new DevExpress.XtraEditors.CheckEdit();
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
@@ -40,6 +43,7 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.ultraPanel1.ClientArea.SuspendLayout();
             this.ultraPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkPagar.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,6 +60,8 @@
             // 
             // ultraPanel1.ClientArea
             // 
+            this.ultraPanel1.ClientArea.Controls.Add(this.btnPagar);
+            this.ultraPanel1.ClientArea.Controls.Add(this.chkPagar);
             this.ultraPanel1.ClientArea.Controls.Add(this.pictureEdit1);
             this.ultraPanel1.ClientArea.Controls.Add(this.materialSingleLineTextField1);
             this.ultraPanel1.ClientArea.Controls.Add(this.labelControl2);
@@ -68,6 +74,32 @@
             this.ultraPanel1.Name = "ultraPanel1";
             this.ultraPanel1.Size = new System.Drawing.Size(507, 512);
             this.ultraPanel1.TabIndex = 16;
+            // 
+            // btnPagar
+            // 
+            appearance1.BackColor = System.Drawing.Color.Green;
+            appearance1.BackColor2 = System.Drawing.Color.Green;
+            appearance1.ForeColor = System.Drawing.Color.White;
+            this.btnPagar.Appearance = appearance1;
+            this.btnPagar.ButtonStyle = Infragistics.Win.UIElementButtonStyle.Office2010Button;
+            this.btnPagar.Enabled = false;
+            this.btnPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPagar.Location = new System.Drawing.Point(144, 354);
+            this.btnPagar.Name = "btnPagar";
+            this.btnPagar.Size = new System.Drawing.Size(190, 40);
+            this.btnPagar.TabIndex = 24;
+            this.btnPagar.Text = "Pagar";
+            this.btnPagar.UseOsThemes = Infragistics.Win.DefaultableBoolean.False;
+            this.btnPagar.Visible = false;
+            // 
+            // chkPagar
+            // 
+            this.chkPagar.Location = new System.Drawing.Point(184, 312);
+            this.chkPagar.Name = "chkPagar";
+            this.chkPagar.Properties.Caption = "Pagar";
+            this.chkPagar.Size = new System.Drawing.Size(111, 20);
+            this.chkPagar.TabIndex = 23;
+            this.chkPagar.CheckedChanged += new System.EventHandler(this.chkPagar_CheckedChanged);
             // 
             // pictureEdit1
             // 
@@ -84,7 +116,7 @@
             // 
             this.materialSingleLineTextField1.Depth = 0;
             this.materialSingleLineTextField1.Hint = "";
-            this.materialSingleLineTextField1.Location = new System.Drawing.Point(126, 235);
+            this.materialSingleLineTextField1.Location = new System.Drawing.Point(126, 190);
             this.materialSingleLineTextField1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField1.Name = "materialSingleLineTextField1";
             this.materialSingleLineTextField1.PasswordChar = '\0';
@@ -97,9 +129,11 @@
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(126, 310);
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.5F);
+            this.labelControl2.Appearance.Options.UseFont = true;
+            this.labelControl2.Location = new System.Drawing.Point(126, 234);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(56, 13);
+            this.labelControl2.Size = new System.Drawing.Size(65, 16);
             this.labelControl2.TabIndex = 21;
             this.labelControl2.Text = "Contraseña";
             // 
@@ -123,7 +157,7 @@
             // 
             this.materialSingleLineTextField2.Depth = 0;
             this.materialSingleLineTextField2.Hint = "";
-            this.materialSingleLineTextField2.Location = new System.Drawing.Point(126, 329);
+            this.materialSingleLineTextField2.Location = new System.Drawing.Point(126, 256);
             this.materialSingleLineTextField2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField2.Name = "materialSingleLineTextField2";
             this.materialSingleLineTextField2.PasswordChar = '\0';
@@ -152,9 +186,11 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(126, 216);
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.5F);
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Location = new System.Drawing.Point(126, 168);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(36, 13);
+            this.labelControl1.Size = new System.Drawing.Size(43, 16);
             this.labelControl1.TabIndex = 19;
             this.labelControl1.Text = "Usuario";
             // 
@@ -176,10 +212,13 @@
             this.ultraPanel1.ClientArea.ResumeLayout(false);
             this.ultraPanel1.ClientArea.PerformLayout();
             this.ultraPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chkPagar.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
+
+        private Infragistics.Win.Misc.UltraButton btnPagar;
 
         #endregion
 
@@ -192,5 +231,6 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField2;
         private MaterialSkin.Controls.MaterialFlatButton btnCancelar;
         private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.CheckEdit chkPagar;
     }
 }

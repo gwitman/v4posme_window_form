@@ -21,5 +21,18 @@ namespace v4posme_window_form.views
         {
             Close();
         }
+
+        private void chkPagar_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkPagar.Checked) {
+                btnPagar.Visible = true;
+                btnPagar.Enabled = true;
+            }
+            else
+            {
+                btnPagar.Visible = false;
+                btnPagar.Enabled = false;
+            }
+        }
     }
 }
