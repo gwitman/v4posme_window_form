@@ -52,7 +52,6 @@ E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\System.Threading.Task
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\DevExpress.Pdf.v23.1.Core.xml
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\DevExpress.Pdf.v23.1.Drawing.xml
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.csproj.AssemblyReference.cache
-E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.Form1.resources
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.Properties.Resources.resources
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.views.LoginForm.resources
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.csproj.GenerateResource.cache

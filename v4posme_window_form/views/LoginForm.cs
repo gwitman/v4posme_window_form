@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.XtraEditors.DXErrorProvider;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace v4posme_window_form.views
 {
-    public partial class LoginForm : Form
+    public partial class LoginForm : DevExpress.XtraBars.FluentDesignSystem.FluentDesignForm
     {
         public LoginForm()
         {
@@ -44,6 +45,22 @@ namespace v4posme_window_form.views
         {
             if (string.IsNullOrEmpty(txtUsuario.Text))
             {
+                dxErrorProvider.SetError(txtUsuario, "Debe especificar un usuario para continuar.");
+            }
+            else
+            {
+                dxErrorProvider.SetError(txtUsuario, "");
+            }
+            if (string.IsNullOrEmpty(txtPassword.Text))
+            {
+                dxErrorProvider.SetError(txtPassword, "Debe especificar una contraseña para continuar.");
+            }
+            else
+            {
+                dxErrorProvider.SetError(txtPassword, "");
+            }
+            if (string.IsNullOrEmpty(txtUsuario.Text))
+            {
                 MessageBox.Show("Debe especificar un usuario para continuar", "Usuario",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 txtUsuario.Focus();
                 return;
@@ -59,6 +76,22 @@ namespace v4posme_window_form.views
         private void LoginForm_Load(object sender, EventArgs e)
         {
             txtUsuario.Focus();
+        }
+
+        private void txtUsuario_EditValueChanged(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(txtUsuario.Text))
+            {
+                dxErrorProvider.SetError(txtUsuario, "");
+            }
+        }
+
+        private void txtPassword_EditValueChanged(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(txtPassword.Text))
+            {
+                dxErrorProvider.SetError(txtPassword, "");
+            }
         }
     }
 }
