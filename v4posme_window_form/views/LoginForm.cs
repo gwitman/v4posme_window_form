@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors.DXErrorProvider;
+﻿using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.DXErrorProvider;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -64,14 +65,14 @@ namespace v4posme_window_form.views
             }
             if (string.IsNullOrEmpty(txtUsuario.Text))
             {
-                MessageBox.Show("Debe especificar un usuario para continuar",
+                XtraMessageBox.Show("Debe especificar un usuario para continuar",
                     USUARIO_TITULO, MessageBoxButtons.OK,MessageBoxIcon.Error);
                 txtUsuario.Focus();
                 return;
             }
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
-                MessageBox.Show("Debe especificar una contraseña para continuar",
+                XtraMessageBox.Show("Debe especificar una contraseña para continuar",
                     USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPassword.Focus();
                 return;
@@ -82,14 +83,14 @@ namespace v4posme_window_form.views
             var usuario = validarUsuario.validarNickName(nickname);
             if(usuario == null)
             {
-                MessageBox.Show("Nombre de usuario no registrado, intente nuevamente",
+                XtraMessageBox.Show("Nombre de usuario no registrado, intente nuevamente",
                     USUARIO_TITULO, MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
-            usuario = validarUsuario.validarUsuario(nickname, password);
+            usuario = validarUsuario.validarUsuario(usuario, password);
             if(usuario == null)
             {
-                MessageBox.Show("Contraseña incorrecta, intente nuevamente",
+                XtraMessageBox.Show("Contraseña incorrecta, intente nuevamente",
                     USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }

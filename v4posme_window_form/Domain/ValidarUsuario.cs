@@ -62,5 +62,18 @@ namespace v4posme_window_form.Domain
                 }
             }
         }
+        public Usuario validarUsuario(Usuario usuario, string password)
+        {
+            if (string.IsNullOrEmpty(password)) { return null; }
+            if(usuario == null) {  return null; }
+            if(usuario.Password == password)
+            {
+                return usuario;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
