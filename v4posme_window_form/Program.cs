@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using v4posme_window_form.views;
+using v4posme_window_form.Views;
 
 namespace v4posme_window_form
 {
@@ -19,7 +20,15 @@ namespace v4posme_window_form
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            var loginForm = new LoginForm();
+            if(loginForm.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new PrincipalForm());
+            }
+            else
+            {
+                Application.Exit();
+            }            
         }
     }
 }

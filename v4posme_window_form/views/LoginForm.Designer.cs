@@ -88,6 +88,7 @@
             this.btnCancelar.Appearance.Options.UseBackColor = true;
             this.btnCancelar.AppearanceHovered.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
             this.btnCancelar.AppearanceHovered.Options.UseBackColor = true;
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Location = new System.Drawing.Point(301, 423);
             this.btnCancelar.LookAndFeel.SkinName = "Office 2016 Colorful";
             this.btnCancelar.LookAndFeel.UseDefaultLookAndFeel = false;
@@ -103,6 +104,7 @@
             this.btnIngresar.Appearance.Options.UseBackColor = true;
             this.btnIngresar.AppearanceHovered.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(40)))), ((int)(((byte)(29)))));
             this.btnIngresar.AppearanceHovered.Options.UseBackColor = true;
+            this.btnIngresar.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnIngresar.Location = new System.Drawing.Point(90, 423);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(101, 29);

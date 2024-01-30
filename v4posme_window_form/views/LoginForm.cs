@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using v4posme_window_form.Domain;
+using v4posme_window_form.Views;
 
 namespace v4posme_window_form.views
 {
@@ -80,22 +81,24 @@ namespace v4posme_window_form.views
             var nickname = txtUsuario.Text;
             var password = txtPassword.Text;
             var validarUsuario = new ValidarUsuario();
-            var usuario = validarUsuario.validarNickName(nickname);
-            if(usuario == null)
+            VariablesGlobales.Instance.Usuario = validarUsuario.validarNickName(nickname);
+            if(VariablesGlobales.Instance.Usuario == null)
             {
                 XtraMessageBox.Show("Nombre de usuario no registrado, intente nuevamente",
                     USUARIO_TITULO, MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
-            usuario = validarUsuario.validarUsuario(usuario, password);
-            if(usuario == null)
+            VariablesGlobales.Instance.Usuario = validarUsuario.validarUsuario(VariablesGlobales.Instance.Usuario, password);
+            if(VariablesGlobales.Instance.Usuario == null)
             {
                 XtraMessageBox.Show("Contraseña incorrecta, intente nuevamente",
                     USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            XtraMessageBox.Show("Credenciales ingresada correctamente.",
+                    USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Information);
             var logger = new Logger();
-            logger.Log("Usuario logeado al sistema: " + usuario.Nickname);
+            logger.Log("Usuario logeado al sistema: " + VariablesGlobales.Instance.Usuario.Nickname);
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
