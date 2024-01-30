@@ -72,3 +72,9 @@ E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\Infragistics4.Win.Ult
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\MaterialSkin.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\Infragistics4.Win.UltraWinEditors.v20.1.xml
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\System.Configuration.ConfigurationManager.xml
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\EntityFramework.dll
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\EntityFramework.SqlServer.dll
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\MySql.Data.EntityFramework.dll
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\EntityFramework.xml
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\EntityFramework.SqlServer.xml
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\MySql.Data.EntityFramework.xml

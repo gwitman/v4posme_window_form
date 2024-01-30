@@ -8,11 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using v4posme_window_form.Domain;
 
 namespace v4posme_window_form.views
 {
-    public partial class LoginForm : DevExpress.XtraBars.FluentDesignSystem.FluentDesignForm
+    public partial class LoginForm : DevExpress.XtraEditors.XtraForm
     {
+        private const string USUARIO_TITULO = "Usuario";
+
         public LoginForm()
         {
             InitializeComponent();
@@ -61,14 +64,33 @@ namespace v4posme_window_form.views
             }
             if (string.IsNullOrEmpty(txtUsuario.Text))
             {
-                MessageBox.Show("Debe especificar un usuario para continuar", "Usuario",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Debe especificar un usuario para continuar",
+                    USUARIO_TITULO, MessageBoxButtons.OK,MessageBoxIcon.Error);
                 txtUsuario.Focus();
                 return;
             }
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
-                MessageBox.Show("Debe especificar una contraseña para continuar", "Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe especificar una contraseña para continuar",
+                    USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPassword.Focus();
+                return;
+            }
+            var nickname = txtUsuario.Text;
+            var password = txtPassword.Text;
+            var validarUsuario = new ValidarUsuario();
+            var usuario = validarUsuario.validarNickName(nickname);
+            if(usuario == null)
+            {
+                MessageBox.Show("Nombre de usuario no registrado, intente nuevamente",
+                    USUARIO_TITULO, MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
+            usuario = validarUsuario.validarUsuario(nickname, password);
+            if(usuario == null)
+            {
+                MessageBox.Show("Contraseña incorrecta, intente nuevamente",
+                    USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }

@@ -88,7 +88,7 @@
             this.btnCancelar.Appearance.Options.UseBackColor = true;
             this.btnCancelar.AppearanceHovered.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
             this.btnCancelar.AppearanceHovered.Options.UseBackColor = true;
-            this.btnCancelar.Location = new System.Drawing.Point(267, 423);
+            this.btnCancelar.Location = new System.Drawing.Point(301, 423);
             this.btnCancelar.LookAndFeel.SkinName = "Office 2016 Colorful";
             this.btnCancelar.LookAndFeel.UseDefaultLookAndFeel = false;
             this.btnCancelar.Name = "btnCancelar";
@@ -117,7 +117,7 @@
             this.btnPagar.Appearance.Options.UseBackColor = true;
             this.btnPagar.AppearanceHovered.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(154)))), ((int)(((byte)(134)))));
             this.btnPagar.AppearanceHovered.Options.UseBackColor = true;
-            this.btnPagar.Location = new System.Drawing.Point(173, 349);
+            this.btnPagar.Location = new System.Drawing.Point(194, 349);
             this.btnPagar.Name = "btnPagar";
             this.btnPagar.Size = new System.Drawing.Size(101, 29);
             this.btnPagar.TabIndex = 27;
@@ -147,10 +147,10 @@
             // 
             // chkPagar
             // 
-            this.chkPagar.Location = new System.Drawing.Point(184, 312);
+            this.chkPagar.Location = new System.Drawing.Point(204, 309);
             this.chkPagar.Name = "chkPagar";
             this.chkPagar.Properties.Caption = "Pagar";
-            this.chkPagar.Size = new System.Drawing.Size(111, 20);
+            this.chkPagar.Size = new System.Drawing.Size(80, 18);
             this.chkPagar.TabIndex = 23;
             this.chkPagar.CheckedChanged += new System.EventHandler(this.chkPagar_CheckedChanged);
             // 
@@ -198,6 +198,8 @@
             this.Controls.Add(this.ultraPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("LoginForm.IconOptions.Icon")));
+            this.LookAndFeel.SkinName = "Office 2019 Colorful";
+            this.LookAndFeel.UseDefaultLookAndFeel = false;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoginForm";
