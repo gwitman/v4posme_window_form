@@ -94,6 +94,8 @@ namespace v4posme_window_form.views
                     USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            var logger = new Logger();
+            logger.Log("Usuario logeado al sistema: " + usuario.Nickname);
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
