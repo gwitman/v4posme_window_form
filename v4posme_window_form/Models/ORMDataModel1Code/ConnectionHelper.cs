@@ -13,7 +13,7 @@ using DevExpress.Data.Filtering;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
-namespace v4posme_window_form.Models.dbkroqnguhldo1
+namespace v4posme_window_form.Models.Tablas
 {
     public static class ConnectionHelper
     {
@@ -170,7 +170,7 @@ namespace v4posme_window_form.Models.dbkroqnguhldo1
             Array.Copy(nonPersistentTypes, copy, nonPersistentTypes.Length);
             return copy;
         }
-        public static string ConnectionString { get { return System.Configuration.ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; } }
+        public static string ConnectionString { get { return System.Configuration.ConfigurationManager.ConnectionStrings["posme.netdbkroqnguhldo1"].ConnectionString; } }
         public static void Connect(DevExpress.Xpo.DB.AutoCreateOption autoCreateOption, bool threadSafe = false)
         {
             if (threadSafe)

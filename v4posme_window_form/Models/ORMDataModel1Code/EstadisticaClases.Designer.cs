@@ -13,7 +13,7 @@ using DevExpress.Data.Filtering;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
-namespace v4posme_window_form.Models.dbkroqnguhldo1
+namespace v4posme_window_form.Models.Tablas
 {
 
     [Persistent(@"tb_estadistica_clases")]

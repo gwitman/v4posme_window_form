@@ -1,10 +1,7 @@
 ﻿using DevExpress.Xpo;
-using MySql.Data.MySqlClient;
 using System;
-using System.Configuration;
 using System.Linq;
-using v4posme_window_form.Models;
-using v4posme_window_form.Models.dbkroqnguhldo1;
+using v4posme_window_form.Models.Tablas;
 
 namespace v4posme_window_form.Domain
 {
