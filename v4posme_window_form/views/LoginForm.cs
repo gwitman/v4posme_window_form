@@ -1,23 +1,15 @@
 ﻿using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.DXErrorProvider;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using v4posme_window_form.Domain;
-using v4posme_window_form.Views;
 
 namespace v4posme_window_form.views
 {
-    public partial class LoginForm : DevExpress.XtraEditors.XtraForm
+    public partial class LoginForm : XtraForm
     {
         private const string USUARIO_TITULO = "Usuario";
 
+        public bool IsOk { get; set; }
         public LoginForm()
         {
             InitializeComponent();
@@ -81,24 +73,27 @@ namespace v4posme_window_form.views
             var nickname = txtUsuario.Text;
             var password = txtPassword.Text;
             var validarUsuario = new ValidarUsuario();
-            VariablesGlobales.Instance.Usuario = validarUsuario.validarNickName(nickname);
-            if(VariablesGlobales.Instance.Usuario == null)
+            VariablesGlobales.Instance.User = validarUsuario.validarNickName(nickname);
+            if(VariablesGlobales.Instance.User == null)
             {
                 XtraMessageBox.Show("Nombre de usuario no registrado, intente nuevamente",
                     USUARIO_TITULO, MessageBoxButtons.OK,MessageBoxIcon.Error);
+                IsOk=false;
                 return;
             }
-            VariablesGlobales.Instance.Usuario = validarUsuario.validarUsuario(VariablesGlobales.Instance.Usuario, password);
-            if(VariablesGlobales.Instance.Usuario == null)
+            VariablesGlobales.Instance.User = validarUsuario.validarUsuario(VariablesGlobales.Instance.User, password);
+            if(VariablesGlobales.Instance.User == null)
             {
                 XtraMessageBox.Show("Contraseña incorrecta, intente nuevamente",
                     USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                IsOk =false;
                 return;
             }
             XtraMessageBox.Show("Credenciales ingresada correctamente.",
                     USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Information);
             var logger = new Logger();
-            logger.Log("Usuario logeado al sistema: " + VariablesGlobales.Instance.Usuario.Nickname);
+            logger.Log("Usuario logeado al sistema: " + VariablesGlobales.Instance.User.Nickname);
+            DialogResult = DialogResult.OK;
         }
 
         private void LoginForm_Load(object sender, EventArgs e)

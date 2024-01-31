@@ -14,6 +14,26 @@
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <SupportUrl>http://www.posme.net</SupportUrl>
+    <ErrorReportUrl>http://www.posme.net</ErrorReportUrl>
+    <ProductName>Posme</ProductName>
+    <SuiteName>Posme</SuiteName>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -40,6 +60,18 @@
   <PropertyGroup>
     <StartupObject>v4posme_window_form.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>8B91FE7870FC8C462F73D92C588F99EB2862CE31</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>v4posme_window_form_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
       <HintPath>..\packages\BouncyCastle.Cryptography.2.2.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
@@ -49,6 +81,7 @@
     <Reference Include="DevExpress.Data.v23.1" />
     <Reference Include="DevExpress.Utils.v23.1" />
     <Reference Include="DevExpress.Sparkline.v23.1.Core" />
+    <Reference Include="DevExpress.Xpo.v23.1, Version=23.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraBars.v23.1, Version=23.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v23.1" />
     <Reference Include="DevExpress.Printing.v23.1.Core" />
@@ -75,48 +108,217 @@
     <Reference Include="K4os.Hash.xxHash, Version=1.0.8.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
       <HintPath>..\packages\K4os.Hash.xxHash.1.0.8\lib\net462\K4os.Hash.xxHash.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.1.1.1\lib\net451\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Relational.1.1.1\lib\net451\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational.Design, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Relational.Design.1.1.1\lib\net451\Microsoft.EntityFrameworkCore.Relational.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.1.1.1\lib\netstandard1.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.1.1.1\lib\net451\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.1.1.1\lib\netstandard1.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.1.1.0\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.1.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.1.1.1\lib\netstandard1.1\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.1.1.1\lib\netstandard1.1\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Console, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Console.1.1.1\lib\net451\Microsoft.Extensions.Logging.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.1.1.1\lib\netstandard1.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.1.1.0\lib\netstandard1.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.3.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.3.0\lib\net462\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data.EntityFramework, Version=8.3.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.EntityFramework.8.3.0\lib\net462\MySql.Data.EntityFramework.dll</HintPath>
+    <Reference Include="MySql.Data.EntityFramework, Version=8.0.22.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.EntityFramework.8.0.22\lib\net452\MySql.Data.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MySqlConnector, Version=0.19.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySqlConnector.0.19.2\lib\net451\MySqlConnector.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Pomelo.JsonObject, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pomelo.JsonObject.1.1.1\lib\net451\Pomelo.JsonObject.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.AppContext.4.3.0\lib\net463\System.AppContext.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.3.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Configuration.ConfigurationManager.8.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
+    <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.0\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.Diagnostics.Tracing, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.Tracing.4.3.0\lib\net462\System.Diagnostics.Tracing.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Interactive.Async, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.Async.3.0.0\lib\net45\System.Interactive.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.IO.Pipelines, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Pipelines.8.0.0\lib\net462\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq.Expressions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Expressions.4.3.0\lib\net463\System.Linq.Expressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.0\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Extensions.4.3.0\lib\net462\System.Runtime.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.4.3.0\lib\net463\System.Runtime.InteropServices.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.RegularExpressions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.RegularExpressions.4.3.0\lib\net463\System.Text.RegularExpressions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -129,6 +331,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
     <Reference Include="ZstdSharp, Version=0.7.4.0, Culture=neutral, PublicKeyToken=8d151af33a4ad5cf, processorArchitecture=MSIL">
@@ -140,6 +346,555 @@
     <Compile Include="Domain\PosmeContext.cs" />
     <Compile Include="Domain\ValidarUsuario.cs" />
     <Compile Include="Domain\VariablesGlobales.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Account.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Account.Designer.cs">
+      <DependentUpon>Account.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\AccountingBalance.cs" />
+    <Compile Include="Models\ORMDataModel1Code\AccountingBalance.Designer.cs">
+      <DependentUpon>AccountingBalance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\AccountingBalanceTemp.cs" />
+    <Compile Include="Models\ORMDataModel1Code\AccountingBalanceTemp.Designer.cs">
+      <DependentUpon>AccountingBalanceTemp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\AccountingCycle.cs" />
+    <Compile Include="Models\ORMDataModel1Code\AccountingCycle.Designer.cs">
+      <DependentUpon>AccountingCycle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\AccountingPeriod.cs" />
+    <Compile Include="Models\ORMDataModel1Code\AccountingPeriod.Designer.cs">
+      <DependentUpon>AccountingPeriod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\AccountLevel.cs" />
+    <Compile Include="Models\ORMDataModel1Code\AccountLevel.Designer.cs">
+      <DependentUpon>AccountLevel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\AccountTmp.cs" />
+    <Compile Include="Models\ORMDataModel1Code\AccountTmp.Designer.cs">
+      <DependentUpon>AccountTmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\AccountType.cs" />
+    <Compile Include="Models\ORMDataModel1Code\AccountType.Designer.cs">
+      <DependentUpon>AccountType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Bank.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Bank.Designer.cs">
+      <DependentUpon>Bank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Biblia.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Biblia.Designer.cs">
+      <DependentUpon>Biblia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Branch.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Branch.Designer.cs">
+      <DependentUpon>Branch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Caller.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Caller.Designer.cs">
+      <DependentUpon>Caller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CashBox.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CashBox.Designer.cs">
+      <DependentUpon>CashBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CashBoxSession.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CashBoxSession.Designer.cs">
+      <DependentUpon>CashBoxSession.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CashBoxSessionTransactionMaster.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CashBoxSessionTransactionMaster.Designer.cs">
+      <DependentUpon>CashBoxSessionTransactionMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CashBoxUser.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CashBoxUser.Designer.cs">
+      <DependentUpon>CashBoxUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Catalog.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Catalog.Designer.cs">
+      <DependentUpon>Catalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CatalogItem.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CatalogItem.Designer.cs">
+      <DependentUpon>CatalogItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CatalogItemConvertion.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CatalogItemConvertion.Designer.cs">
+      <DependentUpon>CatalogItemConvertion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CenterCost.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CenterCost.Designer.cs">
+      <DependentUpon>CenterCost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Company.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Company.Designer.cs">
+      <DependentUpon>Company.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CompanyComponent.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CompanyComponent.Designer.cs">
+      <DependentUpon>CompanyComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CompanyComponentConcept.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CompanyComponentConcept.Designer.cs">
+      <DependentUpon>CompanyComponentConcept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CompanyComponentFlavor.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CompanyComponentFlavor.Designer.cs">
+      <DependentUpon>CompanyComponentFlavor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CompanyComponentItemDataview.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CompanyComponentItemDataview.Designer.cs">
+      <DependentUpon>CompanyComponentItemDataview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CompanyCurrency.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CompanyCurrency.Designer.cs">
+      <DependentUpon>CompanyCurrency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CompanyDataview.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CompanyDataview.Designer.cs">
+      <DependentUpon>CompanyDataview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CompanyDefaultDataview.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CompanyDefaultDataview.Designer.cs">
+      <DependentUpon>CompanyDefaultDataview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CompanyParameter.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CompanyParameter.Designer.cs">
+      <DependentUpon>CompanyParameter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CompanySubelementAudit.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CompanySubelementAudit.Designer.cs">
+      <DependentUpon>CompanySubelementAudit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CompanySubelementObligatory.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CompanySubelementObligatory.Designer.cs">
+      <DependentUpon>CompanySubelementObligatory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Component.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Component.Designer.cs">
+      <DependentUpon>Component.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ComponentAudit.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ComponentAudit.Designer.cs">
+      <DependentUpon>ComponentAudit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ComponentAuditDetail.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ComponentAuditDetail.Designer.cs">
+      <DependentUpon>ComponentAuditDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ComponentAutorization.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ComponentAutorization.Designer.cs">
+      <DependentUpon>ComponentAutorization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ComponentAutorizationDetail.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ComponentAutorizationDetail.Designer.cs">
+      <DependentUpon>ComponentAutorizationDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ComponentElement.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ComponentElement.Designer.cs">
+      <DependentUpon>ComponentElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ConnectionHelper.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Counter.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Counter.Designer.cs">
+      <DependentUpon>Counter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CreditLine.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CreditLine.Designer.cs">
+      <DependentUpon>CreditLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Currency.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Currency.Designer.cs">
+      <DependentUpon>Currency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Customer.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Customer.Designer.cs">
+      <DependentUpon>Customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CustomerConsultasSinRiesgo.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CustomerConsultasSinRiesgo.Designer.cs">
+      <DependentUpon>CustomerConsultasSinRiesgo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CustomerCredit.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CustomerCredit.Designer.cs">
+      <DependentUpon>CustomerCredit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CustomerCreditAmoritization.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CustomerCreditAmoritization.Designer.cs">
+      <DependentUpon>CustomerCreditAmoritization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CustomerCreditClasification.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CustomerCreditClasification.Designer.cs">
+      <DependentUpon>CustomerCreditClasification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CustomerCreditDocument.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CustomerCreditDocument.Designer.cs">
+      <DependentUpon>CustomerCreditDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CustomerCreditDocumentEntityRelated.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CustomerCreditDocumentEntityRelated.Designer.cs">
+      <DependentUpon>CustomerCreditDocumentEntityRelated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\CustomerCreditLine.cs" />
+    <Compile Include="Models\ORMDataModel1Code\CustomerCreditLine.Designer.cs">
+      <DependentUpon>CustomerCreditLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Dataview.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Dataview.Designer.cs">
+      <DependentUpon>Dataview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Element.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Element.Designer.cs">
+      <DependentUpon>Element.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ElementType.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ElementType.Designer.cs">
+      <DependentUpon>ElementType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Employee.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Employee.Designer.cs">
+      <DependentUpon>Employee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\EmployeeCalendarPay.cs" />
+    <Compile Include="Models\ORMDataModel1Code\EmployeeCalendarPay.Designer.cs">
+      <DependentUpon>EmployeeCalendarPay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\EmployeeCalendarPayDetail.cs" />
+    <Compile Include="Models\ORMDataModel1Code\EmployeeCalendarPayDetail.Designer.cs">
+      <DependentUpon>EmployeeCalendarPayDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Entity.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Entity.Designer.cs">
+      <DependentUpon>Entity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\EntityAccount.cs" />
+    <Compile Include="Models\ORMDataModel1Code\EntityAccount.Designer.cs">
+      <DependentUpon>EntityAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\EntityEmail.cs" />
+    <Compile Include="Models\ORMDataModel1Code\EntityEmail.Designer.cs">
+      <DependentUpon>EntityEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\EntityPhone.cs" />
+    <Compile Include="Models\ORMDataModel1Code\EntityPhone.Designer.cs">
+      <DependentUpon>EntityPhone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Error.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Error.Designer.cs">
+      <DependentUpon>Error.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\EstadisticaCategorias.cs" />
+    <Compile Include="Models\ORMDataModel1Code\EstadisticaCategorias.Designer.cs">
+      <DependentUpon>EstadisticaCategorias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\EstadisticaClases.cs" />
+    <Compile Include="Models\ORMDataModel1Code\EstadisticaClases.Designer.cs">
+      <DependentUpon>EstadisticaClases.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ExchangeRate.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ExchangeRate.Designer.cs">
+      <DependentUpon>ExchangeRate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\FixedAssent.cs" />
+    <Compile Include="Models\ORMDataModel1Code\FixedAssent.Designer.cs">
+      <DependentUpon>FixedAssent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Indicator.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Indicator.Designer.cs">
+      <DependentUpon>Indicator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\IndicatorHistory.cs" />
+    <Compile Include="Models\ORMDataModel1Code\IndicatorHistory.Designer.cs">
+      <DependentUpon>IndicatorHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\IndicatorTmp.cs" />
+    <Compile Include="Models\ORMDataModel1Code\IndicatorTmp.Designer.cs">
+      <DependentUpon>IndicatorTmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Item.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Item.Designer.cs">
+      <DependentUpon>Item.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ItemCategory.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ItemCategory.Designer.cs">
+      <DependentUpon>ItemCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ItemConfigLoto.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ItemConfigLoto.Designer.cs">
+      <DependentUpon>ItemConfigLoto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ItemDataSheet.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ItemDataSheet.Designer.cs">
+      <DependentUpon>ItemDataSheet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ItemDataSheetDetail.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ItemDataSheetDetail.Designer.cs">
+      <DependentUpon>ItemDataSheetDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ItemSku.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ItemSku.Designer.cs">
+      <DependentUpon>ItemSku.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ItemWarehouse.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ItemWarehouse.Designer.cs">
+      <DependentUpon>ItemWarehouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ItemWarehouseExpired.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ItemWarehouseExpired.Designer.cs">
+      <DependentUpon>ItemWarehouseExpired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\JournalEntry.cs" />
+    <Compile Include="Models\ORMDataModel1Code\JournalEntry.Designer.cs">
+      <DependentUpon>JournalEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\JournalEntryDetail.cs" />
+    <Compile Include="Models\ORMDataModel1Code\JournalEntryDetail.Designer.cs">
+      <DependentUpon>JournalEntryDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\JournalEntryDetailSummary.cs" />
+    <Compile Include="Models\ORMDataModel1Code\JournalEntryDetailSummary.Designer.cs">
+      <DependentUpon>JournalEntryDetailSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Kardex.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Kardex.Designer.cs">
+      <DependentUpon>Kardex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Legal.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Legal.Designer.cs">
+      <DependentUpon>Legal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ListPrice.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ListPrice.Designer.cs">
+      <DependentUpon>ListPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Log.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Log.Designer.cs">
+      <DependentUpon>Log.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\LogMesseger.cs" />
+    <Compile Include="Models\ORMDataModel1Code\LogMesseger.Designer.cs">
+      <DependentUpon>LogMesseger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\LogSession.cs" />
+    <Compile Include="Models\ORMDataModel1Code\LogSession.Designer.cs">
+      <DependentUpon>LogSession.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\MasterKardexTemp.cs" />
+    <Compile Include="Models\ORMDataModel1Code\MasterKardexTemp.Designer.cs">
+      <DependentUpon>MasterKardexTemp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Membership.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Membership.Designer.cs">
+      <DependentUpon>Membership.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\MenuElement.cs" />
+    <Compile Include="Models\ORMDataModel1Code\MenuElement.Designer.cs">
+      <DependentUpon>MenuElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Naturales.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Naturales.Designer.cs">
+      <DependentUpon>Naturales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Notification.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Notification.Designer.cs">
+      <DependentUpon>Notification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Parameter.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Parameter.Designer.cs">
+      <DependentUpon>Parameter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Price.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Price.Designer.cs">
+      <DependentUpon>Price.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Provider.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Provider.Designer.cs">
+      <DependentUpon>Provider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\ProviderItem.cs" />
+    <Compile Include="Models\ORMDataModel1Code\ProviderItem.Designer.cs">
+      <DependentUpon>ProviderItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\PublicCatalog.cs" />
+    <Compile Include="Models\ORMDataModel1Code\PublicCatalog.Designer.cs">
+      <DependentUpon>PublicCatalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\PublicCatalogDetail.cs" />
+    <Compile Include="Models\ORMDataModel1Code\PublicCatalogDetail.Designer.cs">
+      <DependentUpon>PublicCatalogDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\RazonesFinancierasTmp.cs" />
+    <Compile Include="Models\ORMDataModel1Code\RazonesFinancierasTmp.Designer.cs">
+      <DependentUpon>RazonesFinancierasTmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Relationship.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Relationship.Designer.cs">
+      <DependentUpon>Relationship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Remember.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Remember.Designer.cs">
+      <DependentUpon>Remember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Role.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Role.Designer.cs">
+      <DependentUpon>Role.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\RoleAutorization.cs" />
+    <Compile Include="Models\ORMDataModel1Code\RoleAutorization.Designer.cs">
+      <DependentUpon>RoleAutorization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Subelement.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Subelement.Designer.cs">
+      <DependentUpon>Subelement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Tag.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Tag.Designer.cs">
+      <DependentUpon>Tag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Transaction.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Transaction.Designer.cs">
+      <DependentUpon>Transaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\TransactionCausal.cs" />
+    <Compile Include="Models\ORMDataModel1Code\TransactionCausal.Designer.cs">
+      <DependentUpon>TransactionCausal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\TransactionConcept.cs" />
+    <Compile Include="Models\ORMDataModel1Code\TransactionConcept.Designer.cs">
+      <DependentUpon>TransactionConcept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\TransactionMaster.cs" />
+    <Compile Include="Models\ORMDataModel1Code\TransactionMaster.Designer.cs">
+      <DependentUpon>TransactionMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterConcept.cs" />
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterConcept.Designer.cs">
+      <DependentUpon>TransactionMasterConcept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDenomination.cs" />
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDenomination.Designer.cs">
+      <DependentUpon>TransactionMasterDenomination.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDetail.cs" />
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDetail.Designer.cs">
+      <DependentUpon>TransactionMasterDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDetailCredit.cs" />
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDetailCredit.Designer.cs">
+      <DependentUpon>TransactionMasterDetailCredit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDetailTemp.cs" />
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDetailTemp.Designer.cs">
+      <DependentUpon>TransactionMasterDetailTemp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterInfo.cs" />
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterInfo.Designer.cs">
+      <DependentUpon>TransactionMasterInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterPurchase.cs" />
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterPurchase.Designer.cs">
+      <DependentUpon>TransactionMasterPurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterSummaryConceptTmp.cs" />
+    <Compile Include="Models\ORMDataModel1Code\TransactionMasterSummaryConceptTmp.Designer.cs">
+      <DependentUpon>TransactionMasterSummaryConceptTmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\TransactionProfileDetail.cs" />
+    <Compile Include="Models\ORMDataModel1Code\TransactionProfileDetail.Designer.cs">
+      <DependentUpon>TransactionProfileDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\TransactionProfileDetailTmp.cs" />
+    <Compile Include="Models\ORMDataModel1Code\TransactionProfileDetailTmp.Designer.cs">
+      <DependentUpon>TransactionProfileDetailTmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\TypeMenuElement.cs" />
+    <Compile Include="Models\ORMDataModel1Code\TypeMenuElement.Designer.cs">
+      <DependentUpon>TypeMenuElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\User.cs" />
+    <Compile Include="Models\ORMDataModel1Code\User.Designer.cs">
+      <DependentUpon>User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\UserPermission.cs" />
+    <Compile Include="Models\ORMDataModel1Code\UserPermission.Designer.cs">
+      <DependentUpon>UserPermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\UserTag.cs" />
+    <Compile Include="Models\ORMDataModel1Code\UserTag.Designer.cs">
+      <DependentUpon>UserTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\UserWarehouse.cs" />
+    <Compile Include="Models\ORMDataModel1Code\UserWarehouse.Designer.cs">
+      <DependentUpon>UserWarehouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\VwContabilidadComprobantes.cs" />
+    <Compile Include="Models\ORMDataModel1Code\VwContabilidadComprobantes.Designer.cs">
+      <DependentUpon>VwContabilidadComprobantes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\VwGerenciaBalance.cs" />
+    <Compile Include="Models\ORMDataModel1Code\VwGerenciaBalance.Designer.cs">
+      <DependentUpon>VwGerenciaBalance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\VwGerenciaCustomer.cs" />
+    <Compile Include="Models\ORMDataModel1Code\VwGerenciaCustomer.Designer.cs">
+      <DependentUpon>VwGerenciaCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\VwGerenciaDesembolsosDetalle.cs" />
+    <Compile Include="Models\ORMDataModel1Code\VwGerenciaDesembolsosDetalle.Designer.cs">
+      <DependentUpon>VwGerenciaDesembolsosDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\VwGerenciaDesembolsosResumen.cs" />
+    <Compile Include="Models\ORMDataModel1Code\VwGerenciaDesembolsosResumen.Designer.cs">
+      <DependentUpon>VwGerenciaDesembolsosResumen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\VwGerenciaEstadoResultado001.cs" />
+    <Compile Include="Models\ORMDataModel1Code\VwGerenciaEstadoResultado001.Designer.cs">
+      <DependentUpon>VwGerenciaEstadoResultado001.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\VwGerenciaEstadoResultado002.cs" />
+    <Compile Include="Models\ORMDataModel1Code\VwGerenciaEstadoResultado002.Designer.cs">
+      <DependentUpon>VwGerenciaEstadoResultado002.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\VwSalesInventory.cs" />
+    <Compile Include="Models\ORMDataModel1Code\VwSalesInventory.Designer.cs">
+      <DependentUpon>VwSalesInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\VwSinRiesgoReporteClientes.cs" />
+    <Compile Include="Models\ORMDataModel1Code\VwSinRiesgoReporteClientes.Designer.cs">
+      <DependentUpon>VwSinRiesgoReporteClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\VwSinRiesgoReporteCreditos.cs" />
+    <Compile Include="Models\ORMDataModel1Code\VwSinRiesgoReporteCreditos.Designer.cs">
+      <DependentUpon>VwSinRiesgoReporteCreditos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\VwSinRiesgoReporteCreditosToSystema.cs" />
+    <Compile Include="Models\ORMDataModel1Code\VwSinRiesgoReporteCreditosToSystema.Designer.cs">
+      <DependentUpon>VwSinRiesgoReporteCreditosToSystema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\VwTransaccionMasterConcept232425.cs" />
+    <Compile Include="Models\ORMDataModel1Code\VwTransaccionMasterConcept232425.Designer.cs">
+      <DependentUpon>VwTransaccionMasterConcept232425.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Warehouse.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Warehouse.Designer.cs">
+      <DependentUpon>Warehouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\Workflow.cs" />
+    <Compile Include="Models\ORMDataModel1Code\Workflow.Designer.cs">
+      <DependentUpon>Workflow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\WorkflowStage.cs" />
+    <Compile Include="Models\ORMDataModel1Code\WorkflowStage.Designer.cs">
+      <DependentUpon>WorkflowStage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\WorkflowStageChangeLog.cs" />
+    <Compile Include="Models\ORMDataModel1Code\WorkflowStageChangeLog.Designer.cs">
+      <DependentUpon>WorkflowStageChangeLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORMDataModel1Code\WorkflowStageRelation.cs" />
+    <Compile Include="Models\ORMDataModel1Code\WorkflowStageRelation.Designer.cs">
+      <DependentUpon>WorkflowStageRelation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -169,6 +924,13 @@
     <EmbeddedResource Include="Views\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\PrincipalForm.resx">
+      <DependentUpon>PrincipalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Models\ORMDataModel1.xpo" />
+    <None Include="Models\ORMDataModel1.xpo.diagram">
+      <DependentUpon>ORMDataModel1.xpo</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -179,6 +941,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="v4posme_window_form_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="299107_money_icon.ico" />
@@ -189,6 +952,18 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

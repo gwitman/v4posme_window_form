@@ -104,7 +104,6 @@
             this.btnIngresar.Appearance.Options.UseBackColor = true;
             this.btnIngresar.AppearanceHovered.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(40)))), ((int)(((byte)(29)))));
             this.btnIngresar.AppearanceHovered.Options.UseBackColor = true;
-            this.btnIngresar.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnIngresar.Location = new System.Drawing.Point(90, 423);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(101, 29);

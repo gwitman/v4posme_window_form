@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using v4posme_window_form.Models;
+using v4posme_window_form.Models.dbkroqnguhldo1;
 
 namespace v4posme_window_form.Domain
 {
@@ -24,5 +25,7 @@ namespace v4posme_window_form.Domain
         }
 
         public Usuario Usuario{ get; set; }
+
+        public User User { get; set; }
     }
 }

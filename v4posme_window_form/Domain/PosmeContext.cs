@@ -14,11 +14,16 @@ namespace v4posme_window_form.Domain
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class PosmeContext : DbContext
     {
+
         public PosmeContext(DbConnection existingConnection, bool contextOwnsConnection) : base(existingConnection, contextOwnsConnection)
         {
             
         }
 
+        public PosmeContext() { 
+            
+        }
+        
         public DbSet<Usuario> Usuarios{ get; set; }
         
     }

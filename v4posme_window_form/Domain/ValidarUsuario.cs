@@ -1,68 +1,54 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DevExpress.Xpo;
+using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using v4posme_window_form.Models;
-using ZstdSharp.Unsafe;
+using v4posme_window_form.Models.dbkroqnguhldo1;
 
 namespace v4posme_window_form.Domain
 {
     public class ValidarUsuario
     {
         public string Error { get; set; }
-        public Usuario validarNickName(string nickname)
+        public User validarNickName(string nickname)
         {
             if (string.IsNullOrEmpty(nickname))
             {
                 return null;
             }
-            using (var conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString))
+            try
             {
-                conn.Open();
-                using (var context = new PosmeContext(conn, false))
-                {
-                    try
-                    {
-                        var usuario = context.Usuarios.Where(u => u.Nickname == nickname).First();
-                        return usuario;
-                    }
-                    catch (InvalidOperationException ex)
-                    {
-                        Error = ex.Message;
-                        return null;
-                    }
-                }
+                XPQuery<User> users = Session.DefaultSession.Query<User>();
+                var usuario = (from u in users where u.Nickname == nickname select u).First();
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+                return null;
             }
         }
 
-        public Usuario validarUsuario(string nickname, string password)
+        public User validarUsuario(string nickname, string password)
         {
             if (string.IsNullOrEmpty(password))
             {
                 return null;
             }
-            using (var conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString))
+            try
             {
-                conn.Open();
-                using (var context = new PosmeContext(conn, false))
-                {
-                    try
-                    {
-                        var usuario = context.Usuarios.Where(u => u.Password == password && u.Nickname == nickname).First();
-                        return usuario;
-                    }
-                    catch (InvalidOperationException ex)
-                    {
-                        Error = ex.Message;
-                        return null;
-                    }
-                }
+                XPQuery<User> users = Session.DefaultSession.Query<User>();
+                var usuario = (from u in users where u.Nickname == nickname && u.Password==password select u).First();
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+                return null;
             }
         }
-        public Usuario validarUsuario(Usuario usuario, string password)
+        public User validarUsuario(User usuario, string password)
         {
             if (string.IsNullOrEmpty(password)) { return null; }
             if(usuario == null) {  return null; }
