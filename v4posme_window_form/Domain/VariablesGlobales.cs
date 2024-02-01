@@ -1,4 +1,5 @@
-﻿using v4posme_window_form.Models;
+﻿using System.Configuration;
+using v4posme_window_form.Models;
 using v4posme_window_form.Models.Tablas;
 
 namespace v4posme_window_form.Domain
@@ -7,6 +8,7 @@ namespace v4posme_window_form.Domain
     {
         private readonly static VariablesGlobales _instance = new VariablesGlobales();
 
+        private readonly static string _connectionString= ConfigurationManager.ConnectionStrings["posme.netdbkroqnguhldo1"].ConnectionString;
         private VariablesGlobales()
         {
         }
@@ -16,6 +18,14 @@ namespace v4posme_window_form.Domain
             get
             {
                 return _instance;
+            }
+        }
+
+        public static string ConnectionString
+        {
+            get
+            {
+                return _connectionString;
             }
         }
 

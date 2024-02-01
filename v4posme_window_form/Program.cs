@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using v4posme_window_form.views;
 using v4posme_window_form.Views;
 using System.Configuration;
+using v4posme_window_form.Domain;
 
 namespace v4posme_window_form
 {
@@ -19,7 +20,7 @@ namespace v4posme_window_form
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             string connectionString = ConfigurationManager.ConnectionStrings["posme.netdbkroqnguhldo1"].ConnectionString;
-            IDataLayer dataLayer = XpoDefault.GetDataLayer(connectionString, AutoCreateOption.DatabaseAndSchema);
+            IDataLayer dataLayer = XpoDefault.GetDataLayer(VariablesGlobales.ConnectionString, AutoCreateOption.None);
             XpoDefault.DataLayer = dataLayer;
             //Session session = new Session();
             var loginForm = new LoginForm();

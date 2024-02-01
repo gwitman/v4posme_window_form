@@ -2,12 +2,15 @@
 using System;
 using System.Windows.Forms;
 using v4posme_window_form.Domain;
+using v4posme_window_form.Domain.Services;
 
 namespace v4posme_window_form.views
 {
     public partial class LoginForm : XtraForm
     {
         private const string USUARIO_TITULO = "Usuario";
+
+        private IUsuarioService usuarioService = new UsuarioService();
 
         public bool IsOk { get; set; }
         public LoginForm()
@@ -72,8 +75,8 @@ namespace v4posme_window_form.views
             }
             var nickname = txtUsuario.Text;
             var password = txtPassword.Text;
-            var validarUsuario = new ValidarUsuario();
-            VariablesGlobales.Instance.User = validarUsuario.validarNickName(nickname);
+            //VariablesGlobales.Instance.User = validarUsuario.validarNickName(nickname);
+            VariablesGlobales.Instance.User = usuarioService.validarNickname(nickname);
             if(VariablesGlobales.Instance.User == null)
             {
                 XtraMessageBox.Show("Nombre de usuario no registrado, intente nuevamente",
@@ -81,7 +84,7 @@ namespace v4posme_window_form.views
                 IsOk=false;
                 return;
             }
-            VariablesGlobales.Instance.User = validarUsuario.validarUsuario(VariablesGlobales.Instance.User, password);
+            VariablesGlobales.Instance.User = usuarioService.validar(VariablesGlobales.Instance.User, password);
             if(VariablesGlobales.Instance.User == null)
             {
                 XtraMessageBox.Show("Contraseña incorrecta, intente nuevamente",

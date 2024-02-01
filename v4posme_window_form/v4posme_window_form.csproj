@@ -344,7 +344,8 @@
   <ItemGroup>
     <Compile Include="Domain\Logger.cs" />
     <Compile Include="Domain\PosmeContext.cs" />
-    <Compile Include="Domain\ValidarUsuario.cs" />
+    <Compile Include="Domain\Services\IUsuarioService.cs" />
+    <Compile Include="Domain\Services\UsuarioService.cs" />
     <Compile Include="Domain\VariablesGlobales.cs" />
     <Compile Include="Models\ORMDataModel1Code\Account.cs" />
     <Compile Include="Models\ORMDataModel1Code\Account.Designer.cs">
