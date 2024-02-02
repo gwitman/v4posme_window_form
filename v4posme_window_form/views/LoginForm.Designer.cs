@@ -33,6 +33,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.ultraPanel1 = new Infragistics.Win.Misc.UltraPanel();
+            this.progressPanel = new DevExpress.XtraWaitForm.ProgressPanel();
             this.btnCancelar = new DevExpress.XtraEditors.SimpleButton();
             this.btnIngresar = new DevExpress.XtraEditors.SimpleButton();
             this.btnPagar = new DevExpress.XtraEditors.SimpleButton();
@@ -67,6 +68,7 @@
             // 
             // ultraPanel1.ClientArea
             // 
+            this.ultraPanel1.ClientArea.Controls.Add(this.progressPanel);
             this.ultraPanel1.ClientArea.Controls.Add(this.btnCancelar);
             this.ultraPanel1.ClientArea.Controls.Add(this.btnIngresar);
             this.ultraPanel1.ClientArea.Controls.Add(this.btnPagar);
@@ -81,6 +83,19 @@
             this.ultraPanel1.Name = "ultraPanel1";
             this.ultraPanel1.Size = new System.Drawing.Size(507, 512);
             this.ultraPanel1.TabIndex = 16;
+            // 
+            // progressPanel
+            // 
+            this.progressPanel.AnimationSpeed = 2F;
+            this.progressPanel.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanel.Appearance.Options.UseBackColor = true;
+            this.progressPanel.Caption = "Cargando usuario";
+            this.progressPanel.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.progressPanel.Location = new System.Drawing.Point(126, 210);
+            this.progressPanel.Name = "progressPanel";
+            this.progressPanel.Size = new System.Drawing.Size(246, 66);
+            this.progressPanel.TabIndex = 30;
+            this.progressPanel.Visible = false;
             // 
             // btnCancelar
             // 
@@ -233,5 +248,6 @@
         private DevExpress.XtraEditors.SimpleButton btnIngresar;
         private DevExpress.XtraEditors.SimpleButton btnPagar;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanel;
     }
 }

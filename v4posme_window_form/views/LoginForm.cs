@@ -1,5 +1,7 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Utils.Extensions;
+using DevExpress.XtraEditors;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using v4posme_window_form.Domain;
 using v4posme_window_form.Domain.Services;
@@ -76,21 +78,36 @@ namespace v4posme_window_form.views
             var nickname = txtUsuario.Text;
             var password = txtPassword.Text;
             //VariablesGlobales.Instance.User = validarUsuario.validarNickName(nickname);
-            VariablesGlobales.Instance.User = usuarioService.validarNickname(nickname);
+            progressPanel.Visible = true;
+            var taskUser = usuarioService.validarNickname(nickname);
+            Task.Run(()=>
+            {
+                VariablesGlobales.Instance.User = taskUser.Result;
+            });
+            /*VariablesGlobales.Instance.User = usuarioService.validarNickname(nickname);*/
             if(VariablesGlobales.Instance.User == null)
             {
                 XtraMessageBox.Show("Nombre de usuario no registrado, intente nuevamente",
                     USUARIO_TITULO, MessageBoxButtons.OK,MessageBoxIcon.Error);
                 IsOk=false;
+                progressPanel.Visible = false;
                 return;
             }
-            VariablesGlobales.Instance.User = usuarioService.validar(VariablesGlobales.Instance.User, password);
-            if(VariablesGlobales.Instance.User == null)
+            Task.Run(() =>
+            {
+                VariablesGlobales.Instance.User = usuarioService.validar(taskUser, password).Result;
+            });
+            if (VariablesGlobales.Instance.User == null)
             {
                 XtraMessageBox.Show("Contraseña incorrecta, intente nuevamente",
                     USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 IsOk =false;
+                progressPanel.Visible = false;
                 return;
+            }
+            if (progressPanel.Visible)
+            {
+                progressPanel.Visible = false;
             }
             XtraMessageBox.Show("Credenciales ingresada correctamente.",
                     USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Information);
