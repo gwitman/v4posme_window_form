@@ -41,8 +41,6 @@
             this.txtUsuario = new DevExpress.XtraEditors.TextEdit();
             this.chkPagar = new DevExpress.XtraEditors.CheckEdit();
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             this.ultraPanel1.ClientArea.SuspendLayout();
             this.ultraPanel1.SuspendLayout();
@@ -76,13 +74,11 @@
             this.ultraPanel1.ClientArea.Controls.Add(this.txtUsuario);
             this.ultraPanel1.ClientArea.Controls.Add(this.chkPagar);
             this.ultraPanel1.ClientArea.Controls.Add(this.pictureEdit1);
-            this.ultraPanel1.ClientArea.Controls.Add(this.labelControl2);
-            this.ultraPanel1.ClientArea.Controls.Add(this.labelControl1);
             this.ultraPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ultraPanel1.Location = new System.Drawing.Point(0, 0);
             this.ultraPanel1.Name = "ultraPanel1";
             this.ultraPanel1.Size = new System.Drawing.Size(507, 512);
-            this.ultraPanel1.TabIndex = 16;
+            this.ultraPanel1.TabIndex = 25;
             // 
             // progressPanel
             // 
@@ -91,9 +87,9 @@
             this.progressPanel.Appearance.Options.UseBackColor = true;
             this.progressPanel.Caption = "Cargando usuario";
             this.progressPanel.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanel.Location = new System.Drawing.Point(126, 210);
+            this.progressPanel.Location = new System.Drawing.Point(122, 190);
             this.progressPanel.Name = "progressPanel";
-            this.progressPanel.Size = new System.Drawing.Size(246, 66);
+            this.progressPanel.Size = new System.Drawing.Size(246, 100);
             this.progressPanel.TabIndex = 30;
             this.progressPanel.Visible = false;
             // 
@@ -109,7 +105,7 @@
             this.btnCancelar.LookAndFeel.UseDefaultLookAndFeel = false;
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(101, 29);
-            this.btnCancelar.TabIndex = 29;
+            this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
             // 
@@ -122,7 +118,7 @@
             this.btnIngresar.Location = new System.Drawing.Point(90, 423);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(101, 29);
-            this.btnIngresar.TabIndex = 28;
+            this.btnIngresar.TabIndex = 3;
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
             // 
@@ -147,19 +143,29 @@
             this.txtPassword.EnterMoveNextControl = true;
             this.txtPassword.Location = new System.Drawing.Point(126, 256);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Properties.AdvancedModeOptions.AllowCaretAnimation = DevExpress.Utils.DefaultBoolean.True;
+            this.txtPassword.Properties.AdvancedModeOptions.Label = "Contraseña";
+            this.txtPassword.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+            this.txtPassword.Properties.LookAndFeel.SkinName = "WXI";
+            this.txtPassword.Properties.LookAndFeel.UseDefaultLookAndFeel = false;
             this.txtPassword.Properties.UseSystemPasswordChar = true;
-            this.txtPassword.Size = new System.Drawing.Size(242, 20);
-            this.txtPassword.TabIndex = 26;
+            this.txtPassword.Size = new System.Drawing.Size(242, 28);
+            this.txtPassword.TabIndex = 1;
             this.txtPassword.EditValueChanged += new System.EventHandler(this.txtPassword_EditValueChanged);
+            this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
             // 
             // txtUsuario
             // 
             this.txtUsuario.EnterMoveNextControl = true;
             this.txtUsuario.Location = new System.Drawing.Point(126, 191);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(242, 20);
-            this.txtUsuario.TabIndex = 25;
+            this.txtUsuario.Properties.AdvancedModeOptions.Label = "Usuario";
+            this.txtUsuario.Properties.LookAndFeel.SkinName = "WXI";
+            this.txtUsuario.Properties.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.txtUsuario.Size = new System.Drawing.Size(242, 28);
+            this.txtUsuario.TabIndex = 0;
             this.txtUsuario.EditValueChanged += new System.EventHandler(this.txtUsuario_EditValueChanged);
+            this.txtUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUsuario_KeyPress);
             // 
             // chkPagar
             // 
@@ -167,7 +173,7 @@
             this.chkPagar.Name = "chkPagar";
             this.chkPagar.Properties.Caption = "Pagar";
             this.chkPagar.Size = new System.Drawing.Size(80, 18);
-            this.chkPagar.TabIndex = 23;
+            this.chkPagar.TabIndex = 28;
             this.chkPagar.CheckedChanged += new System.EventHandler(this.chkPagar_CheckedChanged);
             // 
             // pictureEdit1
@@ -180,26 +186,6 @@
             this.pictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
             this.pictureEdit1.Size = new System.Drawing.Size(295, 128);
             this.pictureEdit1.TabIndex = 22;
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.5F);
-            this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(126, 234);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(65, 16);
-            this.labelControl2.TabIndex = 21;
-            this.labelControl2.Text = "Contraseña";
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.5F);
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(126, 168);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(43, 16);
-            this.labelControl1.TabIndex = 19;
-            this.labelControl1.Text = "Usuario";
             // 
             // dxErrorProvider
             // 
@@ -223,7 +209,6 @@
             this.Text = "Iniciar Sesión";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.ultraPanel1.ClientArea.ResumeLayout(false);
-            this.ultraPanel1.ClientArea.PerformLayout();
             this.ultraPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUsuario.Properties)).EndInit();
@@ -239,8 +224,6 @@
         private DevExpress.XtraBars.Docking.ControlContainer dockPanel1_Container;
         private Infragistics.Win.Misc.UltraPanel ultraPanel1;
         private DevExpress.XtraEditors.PictureEdit pictureEdit1;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.CheckEdit chkPagar;
         private DevExpress.XtraEditors.TextEdit txtPassword;
         private DevExpress.XtraEditors.TextEdit txtUsuario;

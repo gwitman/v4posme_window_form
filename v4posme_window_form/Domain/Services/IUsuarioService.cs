@@ -5,8 +5,8 @@ namespace v4posme_window_form.Domain.Services
 {
     public interface IUsuarioService
     {
-        Task<User> validarNickname(string nickname);
-        Task<User> validarPassword(string nickname, string password);
-        Task<User> validar(Task<User> user, string password);
+        User validarNickname(string nickname);
+        User validarPassword(string nickname, string password);
+        User validar(User user, string password);
     }
 }

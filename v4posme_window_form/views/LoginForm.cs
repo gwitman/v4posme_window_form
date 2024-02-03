@@ -1,5 +1,6 @@
 ﻿using DevExpress.Utils.Extensions;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,14 +21,10 @@ namespace v4posme_window_form.views
             InitializeComponent();
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void chkPagar_CheckedChanged(object sender, EventArgs e)
         {
-            if(chkPagar.Checked) {
+            if (chkPagar.Checked)
+            {
                 btnPagar.Visible = true;
                 btnPagar.Enabled = true;
             }
@@ -64,7 +61,7 @@ namespace v4posme_window_form.views
             if (string.IsNullOrEmpty(txtUsuario.Text))
             {
                 XtraMessageBox.Show("Debe especificar un usuario para continuar",
-                    USUARIO_TITULO, MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtUsuario.Focus();
                 return;
             }
@@ -77,53 +74,52 @@ namespace v4posme_window_form.views
             }
             var nickname = txtUsuario.Text;
             var password = txtPassword.Text;
-            //VariablesGlobales.Instance.User = validarUsuario.validarNickName(nickname);
             progressPanel.Visible = true;
-            var taskUser = usuarioService.validarNickname(nickname);
-            Task.Run(()=>
-            {
-                VariablesGlobales.Instance.User = taskUser.Result;
-            });
-            /*VariablesGlobales.Instance.User = usuarioService.validarNickname(nickname);*/
-            if(VariablesGlobales.Instance.User == null)
+            VariablesGlobales.Instance.User = usuarioService.validarNickname(nickname);
+            if (VariablesGlobales.Instance.User == null)
             {
                 XtraMessageBox.Show("Nombre de usuario no registrado, intente nuevamente",
-                    USUARIO_TITULO, MessageBoxButtons.OK,MessageBoxIcon.Error);
-                IsOk=false;
+                    USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                IsOk = false;
                 progressPanel.Visible = false;
+                txtUsuario.Focus();
                 return;
             }
-            Task.Run(() =>
-            {
-                VariablesGlobales.Instance.User = usuarioService.validar(taskUser, password).Result;
-            });
+            VariablesGlobales.Instance.User = usuarioService.validar(VariablesGlobales.Instance.User, password);
             if (VariablesGlobales.Instance.User == null)
             {
                 XtraMessageBox.Show("Contraseña incorrecta, intente nuevamente",
                     USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                IsOk =false;
+                IsOk = false;
                 progressPanel.Visible = false;
+                txtPassword.Focus();
                 return;
             }
-            if (progressPanel.Visible)
+            if (!VariablesGlobales.Instance.User.IsActive)
             {
+                XtraMessageBox.Show("Usuario no está activo, ingresar con usario activo o comunicarse con el administrador para activar usuario.",
+                    USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                IsOk = false;
                 progressPanel.Visible = false;
+                return;
             }
             XtraMessageBox.Show("Credenciales ingresada correctamente.",
                     USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Information);
             var logger = new Logger();
             logger.Log("Usuario logeado al sistema: " + VariablesGlobales.Instance.User.Nickname);
+            progressPanel.Visible = false;
             DialogResult = DialogResult.OK;
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
             txtUsuario.Focus();
+            txtUsuario.Properties.AdvancedModeOptions.Label = "Usuario";
         }
 
         private void txtUsuario_EditValueChanged(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(txtUsuario.Text))
+            if (!string.IsNullOrEmpty(txtUsuario.Text))
             {
                 dxErrorProvider.SetError(txtUsuario, "");
             }
@@ -131,9 +127,25 @@ namespace v4posme_window_form.views
 
         private void txtPassword_EditValueChanged(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(txtPassword.Text))
+            if (!string.IsNullOrEmpty(txtPassword.Text))
             {
                 dxErrorProvider.SetError(txtPassword, "");
+            }
+        }
+
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ((char)Keys.Enter))
+            {
+                txtPassword.Focus();
+            }
+        }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ((char)Keys.Enter))
+            {
+                btnIngresar.Focus();
             }
         }
     }

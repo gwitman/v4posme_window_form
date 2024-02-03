@@ -23,8 +23,6 @@ namespace v4posme_window_form.Domain
         public PosmeContext() { 
             
         }
-        
-        public DbSet<Usuario> Usuarios{ get; set; }
-        
+                
     }
 }

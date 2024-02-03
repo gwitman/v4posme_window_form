@@ -29,8 +29,10 @@ namespace v4posme_window_form.Domain
             }
         }
 
-        public Usuario Usuario{ get; set; }
-
         public User User { get; set; }
+
+        public Company Company { get; set; }
+
+        public Branch Branch { get; set; }
     }
 }
