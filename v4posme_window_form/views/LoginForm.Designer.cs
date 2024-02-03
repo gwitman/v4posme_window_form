@@ -87,7 +87,7 @@
             this.progressPanel.Appearance.Options.UseBackColor = true;
             this.progressPanel.Caption = "Cargando usuario";
             this.progressPanel.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanel.Location = new System.Drawing.Point(122, 190);
+            this.progressPanel.Location = new System.Drawing.Point(122, 194);
             this.progressPanel.Name = "progressPanel";
             this.progressPanel.Size = new System.Drawing.Size(246, 100);
             this.progressPanel.TabIndex = 30;
@@ -96,10 +96,15 @@
             // btnCancelar
             // 
             this.btnCancelar.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(23)))), ((int)(((byte)(10)))));
+            this.btnCancelar.Appearance.ForeColor = System.Drawing.Color.White;
             this.btnCancelar.Appearance.Options.UseBackColor = true;
+            this.btnCancelar.Appearance.Options.UseForeColor = true;
             this.btnCancelar.AppearanceHovered.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
             this.btnCancelar.AppearanceHovered.Options.UseBackColor = true;
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            this.btnCancelar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnCancelar.ImageOptions.SvgImage")));
+            this.btnCancelar.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
             this.btnCancelar.Location = new System.Drawing.Point(301, 423);
             this.btnCancelar.LookAndFeel.SkinName = "Office 2016 Colorful";
             this.btnCancelar.LookAndFeel.UseDefaultLookAndFeel = false;
@@ -112,12 +117,18 @@
             // btnIngresar
             // 
             this.btnIngresar.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(88)))), ((int)(((byte)(52)))));
+            this.btnIngresar.Appearance.ForeColor = System.Drawing.Color.White;
             this.btnIngresar.Appearance.Options.UseBackColor = true;
+            this.btnIngresar.Appearance.Options.UseForeColor = true;
             this.btnIngresar.AppearanceHovered.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(40)))), ((int)(((byte)(29)))));
             this.btnIngresar.AppearanceHovered.Options.UseBackColor = true;
+            this.btnIngresar.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            this.btnIngresar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnIngresar.ImageOptions.SvgImage")));
+            this.btnIngresar.ImageOptions.SvgImageColorizationMode = DevExpress.Utils.SvgImageColorizationMode.CommonPalette;
+            this.btnIngresar.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
             this.btnIngresar.Location = new System.Drawing.Point(90, 423);
             this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(101, 29);
+            this.btnIngresar.Size = new System.Drawing.Size(111, 29);
             this.btnIngresar.TabIndex = 3;
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
@@ -126,9 +137,14 @@
             // 
             this.btnPagar.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
             this.btnPagar.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(121)))), ((int)(((byte)(145)))));
+            this.btnPagar.Appearance.ForeColor = System.Drawing.Color.White;
             this.btnPagar.Appearance.Options.UseBackColor = true;
+            this.btnPagar.Appearance.Options.UseForeColor = true;
             this.btnPagar.AppearanceHovered.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(154)))), ((int)(((byte)(134)))));
             this.btnPagar.AppearanceHovered.Options.UseBackColor = true;
+            this.btnPagar.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            this.btnPagar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnPagar.ImageOptions.SvgImage")));
+            this.btnPagar.ImageOptions.SvgImageSize = new System.Drawing.Size(28, 28);
             this.btnPagar.Location = new System.Drawing.Point(194, 349);
             this.btnPagar.Name = "btnPagar";
             this.btnPagar.Size = new System.Drawing.Size(101, 29);
@@ -146,10 +162,11 @@
             this.txtPassword.Properties.AdvancedModeOptions.AllowCaretAnimation = DevExpress.Utils.DefaultBoolean.True;
             this.txtPassword.Properties.AdvancedModeOptions.Label = "Contraseña";
             this.txtPassword.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+            this.txtPassword.Properties.ContextImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("txtPassword.Properties.ContextImageOptions.SvgImage")));
             this.txtPassword.Properties.LookAndFeel.SkinName = "WXI";
             this.txtPassword.Properties.LookAndFeel.UseDefaultLookAndFeel = false;
             this.txtPassword.Properties.UseSystemPasswordChar = true;
-            this.txtPassword.Size = new System.Drawing.Size(242, 28);
+            this.txtPassword.Size = new System.Drawing.Size(242, 44);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.EditValueChanged += new System.EventHandler(this.txtPassword_EditValueChanged);
             this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
@@ -160,9 +177,10 @@
             this.txtUsuario.Location = new System.Drawing.Point(126, 191);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Properties.AdvancedModeOptions.Label = "Usuario";
+            this.txtUsuario.Properties.ContextImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("txtUsuario.Properties.ContextImageOptions.SvgImage")));
             this.txtUsuario.Properties.LookAndFeel.SkinName = "WXI";
             this.txtUsuario.Properties.LookAndFeel.UseDefaultLookAndFeel = false;
-            this.txtUsuario.Size = new System.Drawing.Size(242, 28);
+            this.txtUsuario.Size = new System.Drawing.Size(242, 44);
             this.txtUsuario.TabIndex = 0;
             this.txtUsuario.EditValueChanged += new System.EventHandler(this.txtUsuario_EditValueChanged);
             this.txtUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUsuario_KeyPress);

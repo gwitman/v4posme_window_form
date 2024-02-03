@@ -114,7 +114,6 @@ namespace v4posme_window_form.views
         private void LoginForm_Load(object sender, EventArgs e)
         {
             txtUsuario.Focus();
-            txtUsuario.Properties.AdvancedModeOptions.Label = "Usuario";
         }
 
         private void txtUsuario_EditValueChanged(object sender, EventArgs e)
