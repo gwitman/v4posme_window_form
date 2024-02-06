@@ -12,7 +12,7 @@ namespace v4posme_window_form.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.8.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -31,6 +31,339 @@ namespace v4posme_window_form.Properties {
         public string MySqlConnection {
             get {
                 return ((string)(this["MySqlConnection"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool APP_NEED_AUTHENTICATION {
+            get {
+                return ((bool)(this["APP_NEED_AUTHENTICATION"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("posme2022@gmail.com")]
+        public string EMAIL_APP {
+            get {
+                return ((string)(this["EMAIL_APP"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("tbxbdwxjcddqptxk")]
+        public string EMAIL_APP_PASSWORD {
+            get {
+                return ((string)(this["EMAIL_APP_PASSWORD"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("posme2022@gmail.com")]
+        public string EMAIL_APP_NOTIFICACION {
+            get {
+                return ((string)(this["EMAIL_APP_NOTIFICACION"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("www.witman@gmail.com")]
+        public string EMAIL_APP_COPY {
+            get {
+                return ((string)(this["EMAIL_APP_COPY"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:/xampp/teamds2/nsSystem/v4posme/public/resource/file_company")]
+        public string PATH_FILE_OF_APP {
+            get {
+                return ((string)(this["PATH_FILE_OF_APP"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:/xampp/teamds2/nsSystem/v4posme/public/resource")]
+        public string PATH_FILE_OF_APP_ROOT {
+            get {
+                return ((string)(this["PATH_FILE_OF_APP_ROOT"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:/xampp/teamds2/nsSystem/v4posme/")]
+        public string PATH_FILE_OF_APP_SYSTEM {
+            get {
+                return ((string)(this["PATH_FILE_OF_APP_SYSTEM"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:/xampp/teamds2/nsSystem/v4posme/writable/uploads")]
+        public string PATH_FILE_OF_UPLOAD_WRITE {
+            get {
+                return ((string)(this["PATH_FILE_OF_UPLOAD_WRITE"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:/xampp/tmp")]
+        public string PATH_FILE_OF_XAMPP_TMP {
+            get {
+                return ((string)(this["PATH_FILE_OF_XAMPP_TMP"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\xampp\\sendmail\\sendmail.exe -t")]
+        public string PATH_EMAIL {
+            get {
+                return ((string)(this["PATH_EMAIL"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("WSYSTEM")]
+        public string APP_NAME {
+            get {
+                return ((string)(this["APP_NAME"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("America/Managua")]
+        public string APP_TIMEZONE {
+            get {
+                return ((string)(this["APP_TIMEZONE"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int APP_COMPANY {
+            get {
+                return ((int)(this["APP_COMPANY"]));
+            }
+            set {
+                this["APP_COMPANY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int APP_USERADMIN {
+            get {
+                return ((int)(this["APP_USERADMIN"]));
+            }
+            set {
+                this["APP_USERADMIN"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int APP_ROL_SUPERADMIN {
+            get {
+                return ((int)(this["APP_ROL_SUPERADMIN"]));
+            }
+            set {
+                this["APP_ROL_SUPERADMIN"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("aspx")]
+        public string URL_SUFFIX_OLD {
+            get {
+                return ((string)(this["URL_SUFFIX_OLD"]));
+            }
+            set {
+                this["URL_SUFFIX_OLD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string URL_SUFFIX_NEW {
+            get {
+                return ((string)(this["URL_SUFFIX_NEW"]));
+            }
+            set {
+                this["URL_SUFFIX_NEW"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string URL_SUFFIX {
+            get {
+                return ((string)(this["URL_SUFFIX"]));
+            }
+            set {
+                this["URL_SUFFIX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public string TIME_CACHE_APP {
+            get {
+                return ((string)(this["TIME_CACHE_APP"]));
+            }
+            set {
+                this["TIME_CACHE_APP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
+        public string APP_IP_SERVER {
+            get {
+                return ((string)(this["APP_IP_SERVER"]));
+            }
+            set {
+                this["APP_IP_SERVER"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int APP_BRANCH {
+            get {
+                return ((int)(this["APP_BRANCH"]));
+            }
+            set {
+                this["APP_BRANCH"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("293")]
+        public int APP_PROVIDER {
+            get {
+                return ((int)(this["APP_PROVIDER"]));
+            }
+            set {
+                this["APP_PROVIDER"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("614")]
+        public int APP_EMPLOYEE {
+            get {
+                return ((int)(this["APP_EMPLOYEE"]));
+            }
+            set {
+                this["APP_EMPLOYEE"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("13")]
+        public int APP_CUSTOMER01 {
+            get {
+                return ((int)(this["APP_CUSTOMER01"]));
+            }
+            set {
+                this["APP_CUSTOMER01"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("309")]
+        public int APP_CUSTOMER02 {
+            get {
+                return ((int)(this["APP_CUSTOMER02"]));
+            }
+            set {
+                this["APP_CUSTOMER02"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:00")]
+        public string APP_HOUR_DIFERENCE_MYSQL {
+            get {
+                return ((string)(this["APP_HOUR_DIFERENCE_MYSQL"]));
+            }
+            set {
+                this["APP_HOUR_DIFERENCE_MYSQL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("+0 minutes")]
+        public string APP_HOUR_DIFERENCE_PHP {
+            get {
+                return ((string)(this["APP_HOUR_DIFERENCE_PHP"]));
+            }
+            set {
+                this["APP_HOUR_DIFERENCE_PHP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/posmev4")]
+        public string APP_URL_RESOURCE_CSS_J {
+            get {
+                return ((string)(this["APP_URL_RESOURCE_CSS_J"]));
+            }
+            set {
+                this["APP_URL_RESOURCE_CSS_J"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/posmev4/core_user/savepublicgooglereturn")]
+        public string URL_REDIRECT_CALENDAR_POSME {
+            get {
+                return ((string)(this["URL_REDIRECT_CALENDAR_POSME"]));
+            }
+            set {
+                this["URL_REDIRECT_CALENDAR_POSME"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://posme.net")]
+        public string APP_URL_WOOCOMERC {
+            get {
+                return ((string)(this["APP_URL_WOOCOMERC"]));
+            }
+            set {
+                this["APP_URL_WOOCOMERC"] = value;
             }
         }
     }

@@ -8,6 +8,8 @@ using System.Configuration;
 using v4posme_window_form.Domain;
 using DevExpress.XtraEditors;
 using DevExpress.XtraBars.Alerter;
+using DevExpress.Xpo.Logger.Transport;
+using Microsoft.Extensions.Logging;
 
 namespace v4posme_window_form
 {
@@ -19,7 +21,7 @@ namespace v4posme_window_form
         [STAThread]
         static void Main()
         {
-            DevExpress.XtraEditors.WindowsFormsSettings.UseAdvancedTextEdit = DevExpress.Utils.DefaultBoolean.True;
+            WindowsFormsSettings.UseAdvancedTextEdit = DevExpress.Utils.DefaultBoolean.True;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var loginForm = new LoginForm();

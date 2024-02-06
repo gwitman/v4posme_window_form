@@ -5,6 +5,7 @@ namespace v4posme_window_form.Domain.Services
 {
     public class CompanyService : ICompanyService
     {
+        //validar que este activa
         public Company findById(int id)
         {
             if (id == 0) return null;

@@ -15,6 +15,7 @@ namespace v4posme_window_form.Domain.Services
             return Session.DefaultSession.Query<Branch>().ToList();
         }
 
+        //id branch, id company y que este activa
         public Branch findById(int id)
         {
             return Session.DefaultSession.GetObjectByKey<Branch>(id);

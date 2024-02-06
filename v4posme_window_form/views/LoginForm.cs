@@ -4,6 +4,7 @@ using DevExpress.XtraEditors.Controls;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Unity;
 using v4posme_window_form.Domain;
 using v4posme_window_form.Domain.Services;
 
@@ -12,8 +13,6 @@ namespace v4posme_window_form.views
     public partial class LoginForm : XtraForm
     {
         private const string USUARIO_TITULO = "Usuario";
-
-        private IUsuarioService usuarioService = new UsuarioService();
 
         public bool IsOk { get; set; }
         public LoginForm()
@@ -42,6 +41,7 @@ namespace v4posme_window_form.views
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
+            var usuarioService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
             if (string.IsNullOrEmpty(txtUsuario.Text))
             {
                 dxErrorProvider.SetError(txtUsuario, "Debe especificar un usuario para continuar.");
@@ -75,7 +75,7 @@ namespace v4posme_window_form.views
             var nickname = txtUsuario.Text;
             var password = txtPassword.Text;
             progressPanel.Visible = true;
-            VariablesGlobales.Instance.User = usuarioService.validarNickname(nickname);
+            VariablesGlobales.Instance.User = usuarioService.getUserByNickname(nickname);
             if (VariablesGlobales.Instance.User == null)
             {
                 XtraMessageBox.Show("Nombre de usuario no registrado, intente nuevamente",
@@ -85,7 +85,7 @@ namespace v4posme_window_form.views
                 txtUsuario.Focus();
                 return;
             }
-            VariablesGlobales.Instance.User = usuarioService.validar(VariablesGlobales.Instance.User, password);
+            VariablesGlobales.Instance.User = usuarioService.getUserByPasswordAndNickname(nickname, password);
             if (VariablesGlobales.Instance.User == null)
             {
                 XtraMessageBox.Show("Contraseña incorrecta, intente nuevamente",
@@ -95,14 +95,7 @@ namespace v4posme_window_form.views
                 txtPassword.Focus();
                 return;
             }
-            if (!VariablesGlobales.Instance.User.IsActive)
-            {
-                XtraMessageBox.Show("Usuario no está activo, ingresar con usario activo o comunicarse con el administrador para activar usuario.",
-                    USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                IsOk = false;
-                progressPanel.Visible = false;
-                return;
-            }
+            //validar membership que exista
             XtraMessageBox.Show("Credenciales ingresada correctamente.",
                     USUARIO_TITULO, MessageBoxButtons.OK, MessageBoxIcon.Information);
             var logger = new Logger();

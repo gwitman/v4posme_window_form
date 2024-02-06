@@ -87,9 +87,9 @@
             this.progressPanel.Appearance.Options.UseBackColor = true;
             this.progressPanel.Caption = "Cargando usuario";
             this.progressPanel.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanel.Location = new System.Drawing.Point(122, 194);
+            this.progressPanel.Location = new System.Drawing.Point(107, 186);
             this.progressPanel.Name = "progressPanel";
-            this.progressPanel.Size = new System.Drawing.Size(246, 100);
+            this.progressPanel.Size = new System.Drawing.Size(274, 114);
             this.progressPanel.TabIndex = 30;
             this.progressPanel.Visible = false;
             // 
