@@ -4,6 +4,6 @@ namespace v4posme_window_form.Domain.Services
 {
     public interface ICoreMenu
     {
-        MenuElement getMenuTop();
+        MenuElement getMenuTop(int companyId, int branchId, int roleId);
     }
 }
