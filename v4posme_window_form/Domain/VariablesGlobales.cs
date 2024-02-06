@@ -21,6 +21,9 @@ namespace v4posme_window_form.Domain
             _unityContainer.RegisterType<ICompanyService,CompanyService>();
             _unityContainer.RegisterType<IMembershipService,MembershipService>();
             _unityContainer.RegisterType<IRoleService,RoleService>();
+            _unityContainer.RegisterType<IElementSevice,ElementService>();
+            _unityContainer.RegisterType<ICoreMenu,CoreMenuService>();
+            _unityContainer.RegisterType<IUserPermissionService,UserPermissionService>();
         }
 
         public static VariablesGlobales Instance

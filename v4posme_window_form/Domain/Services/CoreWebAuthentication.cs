@@ -15,11 +15,12 @@ namespace v4posme_window_form.Domain.Services
     {
         private IMembershipService membershipService;
         private IRoleService roleService;
-
+        private ICoreMenu coreMenu;
         public CoreWebAuthentication()
         {
             membershipService = VariablesGlobales.Instance.UnityContainer.Resolve<IMembershipService>();
             roleService = VariablesGlobales.Instance.UnityContainer.Resolve<IRoleService>();
+            coreMenu = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreMenu>();
         }
         public User validar(User user, string password)
         {
@@ -70,6 +71,7 @@ namespace v4posme_window_form.Domain.Services
                         XtraMessageBox.Show("El usuario no tiene asignado un rol, más información con el administrador de sistema.", "Usuario", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return null;
                     }
+                    coreMenu.getMenuTop();
                     return user;
                 }
                 else

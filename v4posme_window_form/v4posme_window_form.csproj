@@ -377,16 +377,20 @@
     <Compile Include="Domain\PosmeContext.cs" />
     <Compile Include="Domain\Services\BranchService.cs" />
     <Compile Include="Domain\Services\CompanyService.cs" />
-    <Compile Include="Domain\Services\CoreMenu.cs" />
+    <Compile Include="Domain\Services\CoreMenuService.cs" />
+    <Compile Include="Domain\Services\ElementService.cs" />
     <Compile Include="Domain\Services\IBranchService.cs" />
     <Compile Include="Domain\Services\ICompanyService.cs" />
     <Compile Include="Domain\Services\ICoreMenu.cs" />
     <Compile Include="Domain\Services\ICoreWebAuthentication.cs" />
     <Compile Include="Domain\Services\CoreWebAuthentication.cs" />
+    <Compile Include="Domain\Services\IElementSevice.cs" />
     <Compile Include="Domain\Services\IMembershipService.cs" />
     <Compile Include="Domain\Services\IRoleService.cs" />
+    <Compile Include="Domain\Services\IUserPermissionService.cs" />
     <Compile Include="Domain\Services\MembershipService.cs" />
     <Compile Include="Domain\Services\RoleService.cs" />
+    <Compile Include="Domain\Services\UserPermissionService.cs" />
     <Compile Include="Domain\VariablesGlobales.cs" />
     <Compile Include="Models\ORMDataModel1Code\Account.cs" />
     <Compile Include="Models\ORMDataModel1Code\Account.Designer.cs">
@@ -937,6 +941,7 @@
     <Compile Include="Models\ORMDataModel1Code\WorkflowStageRelation.Designer.cs">
       <DependentUpon>WorkflowStageRelation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserPermissionView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\LoginForm.cs">

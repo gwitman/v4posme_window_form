@@ -49,59 +49,86 @@
     <Setting Name="APP_TIMEZONE" Type="System.String" Scope="Application">
       <Value Profile="(Default)">America/Managua</Value>
     </Setting>
-    <Setting Name="APP_COMPANY" Type="System.Int32" Scope="User">
+    <Setting Name="APP_COMPANY" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">2</Value>
     </Setting>
-    <Setting Name="APP_USERADMIN" Type="System.Int32" Scope="User">
+    <Setting Name="APP_USERADMIN" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">2</Value>
     </Setting>
-    <Setting Name="APP_ROL_SUPERADMIN" Type="System.Int32" Scope="User">
+    <Setting Name="APP_ROL_SUPERADMIN" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">3</Value>
     </Setting>
-    <Setting Name="URL_SUFFIX_OLD" Type="System.String" Scope="User">
+    <Setting Name="URL_SUFFIX_OLD" Type="System.String" Scope="Application">
       <Value Profile="(Default)">aspx</Value>
     </Setting>
-    <Setting Name="URL_SUFFIX_NEW" Type="System.String" Scope="User">
+    <Setting Name="URL_SUFFIX_NEW" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="URL_SUFFIX" Type="System.String" Scope="User">
+    <Setting Name="URL_SUFFIX" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="TIME_CACHE_APP" Type="System.String" Scope="User">
+    <Setting Name="TIME_CACHE_APP" Type="System.String" Scope="Application">
       <Value Profile="(Default)">300</Value>
     </Setting>
-    <Setting Name="APP_IP_SERVER" Type="System.String" Scope="User">
+    <Setting Name="APP_IP_SERVER" Type="System.String" Scope="Application">
       <Value Profile="(Default)">localhost</Value>
     </Setting>
-    <Setting Name="APP_BRANCH" Type="System.Int32" Scope="User">
+    <Setting Name="APP_BRANCH" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">2</Value>
     </Setting>
-    <Setting Name="APP_PROVIDER" Type="System.Int32" Scope="User">
+    <Setting Name="APP_PROVIDER" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">293</Value>
     </Setting>
-    <Setting Name="APP_EMPLOYEE" Type="System.Int32" Scope="User">
+    <Setting Name="APP_EMPLOYEE" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">614</Value>
     </Setting>
-    <Setting Name="APP_CUSTOMER01" Type="System.Int32" Scope="User">
+    <Setting Name="APP_CUSTOMER01" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">13</Value>
     </Setting>
-    <Setting Name="APP_CUSTOMER02" Type="System.Int32" Scope="User">
+    <Setting Name="APP_CUSTOMER02" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">309</Value>
     </Setting>
-    <Setting Name="APP_HOUR_DIFERENCE_MYSQL" Type="System.String" Scope="User">
+    <Setting Name="APP_HOUR_DIFERENCE_MYSQL" Type="System.String" Scope="Application">
       <Value Profile="(Default)">00:00:00</Value>
     </Setting>
-    <Setting Name="APP_HOUR_DIFERENCE_PHP" Type="System.String" Scope="User">
+    <Setting Name="APP_HOUR_DIFERENCE_PHP" Type="System.String" Scope="Application">
       <Value Profile="(Default)">+0 minutes</Value>
     </Setting>
-    <Setting Name="APP_URL_RESOURCE_CSS_J" Type="System.String" Scope="User">
+    <Setting Name="APP_URL_RESOURCE_CSS_J" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://localhost/posmev4</Value>
     </Setting>
-    <Setting Name="URL_REDIRECT_CALENDAR_POSME" Type="System.String" Scope="User">
+    <Setting Name="URL_REDIRECT_CALENDAR_POSME" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://localhost/posmev4/core_user/savepublicgooglereturn</Value>
     </Setting>
-    <Setting Name="APP_URL_WOOCOMERC" Type="System.String" Scope="User">
+    <Setting Name="APP_URL_WOOCOMERC" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://posme.net</Value>
+    </Setting>
+    <Setting Name="MENU_TOP" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="MENU_LEFT" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="MENU_BODY" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">6</Value>
+    </Setting>
+    <Setting Name="MENU_TOP_BODY" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="MENU_HIDDEN_POPUP" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8</Value>
+    </Setting>
+    <Setting Name="ELEMENT_TYPE_PAGE" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="ELEMENT_TYPE_TABLE" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="CALLERID_LIST" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="CALLERID_SEARC" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">2</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -12,6 +12,7 @@ namespace v4posme_window_form.Views
         private ICompanyService companyService = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyService>();
         private IBranchService branchService = VariablesGlobales.Instance.UnityContainer.Resolve<IBranchService>();
         private IMembershipService membershipService = VariablesGlobales.Instance.UnityContainer.Resolve<IMembershipService>();
+        
         public PrincipalForm()
         {
             InitializeComponent();
