@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Configuration;
 using Unity;
 using v4posme_window_form.Domain.Services;
 using v4posme_window_form.Models;
@@ -24,6 +25,7 @@ namespace v4posme_window_form.Domain
             _unityContainer.RegisterType<IElementSevice,ElementService>();
             _unityContainer.RegisterType<ICoreMenu,CoreMenuService>();
             _unityContainer.RegisterType<IUserPermissionService,UserPermissionService>();
+            _unityContainer.RegisterType<IMenuElementService,MenuElementService>();
         }
 
         public static VariablesGlobales Instance
@@ -58,5 +60,6 @@ namespace v4posme_window_form.Domain
         public Membership Membership { get; set; }
 
         public Role Role { get; set; }
+        public List<MenuElement> ListMenuTop { get; set; }
     }
 }

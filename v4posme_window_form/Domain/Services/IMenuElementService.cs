@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using v4posme_window_form.Models.Tablas;
-
 namespace v4posme_window_form.Domain.Services
 {
-    public interface ICoreMenu
+    public interface IMenuElementService
     {
-        List<MenuElement> getMenuTop(int companyId, int branchId, int roleId);
+        List<MenuElement> GetRowByCompanyIdyElementId(int companyId, List<int> elementIdArray);
     }
 }

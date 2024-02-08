@@ -71,7 +71,7 @@ namespace v4posme_window_form.Domain.Services
                         XtraMessageBox.Show("El usuario no tiene asignado un rol, más información con el administrador de sistema.", "Usuario", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return null;
                     }
-                    coreMenu.getMenuTop(user.CompanyID, user.BranchID, VariablesGlobales.Instance.Role.RoleID);
+                    VariablesGlobales.Instance.ListMenuTop =coreMenu.getMenuTop(user.CompanyID, user.BranchID, VariablesGlobales.Instance.Role.RoleID);
                     return user;
                 }
                 else

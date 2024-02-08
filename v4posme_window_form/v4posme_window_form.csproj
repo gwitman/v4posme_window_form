@@ -386,12 +386,15 @@
     <Compile Include="Domain\Services\CoreWebAuthentication.cs" />
     <Compile Include="Domain\Services\IElementSevice.cs" />
     <Compile Include="Domain\Services\IMembershipService.cs" />
+    <Compile Include="Domain\Services\IMenuElementService.cs" />
     <Compile Include="Domain\Services\IRoleService.cs" />
     <Compile Include="Domain\Services\IUserPermissionService.cs" />
     <Compile Include="Domain\Services\MembershipService.cs" />
+    <Compile Include="Domain\Services\MenuElementService.cs" />
     <Compile Include="Domain\Services\RoleService.cs" />
     <Compile Include="Domain\Services\UserPermissionService.cs" />
     <Compile Include="Domain\VariablesGlobales.cs" />
+    <Compile Include="Models\MenuElementView.cs" />
     <Compile Include="Models\ORMDataModel1Code\Account.cs" />
     <Compile Include="Models\ORMDataModel1Code\Account.Designer.cs">
       <DependentUpon>Account.cs</DependentUpon>
