@@ -80,7 +80,7 @@ namespace v4posme_window_form.Domain.Services
                     return null;
                 }
             }
-            else { return null; }
+            return null;
         }
     }
 }

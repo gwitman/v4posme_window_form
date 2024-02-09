@@ -395,553 +395,553 @@
     <Compile Include="Domain\Services\UserPermissionService.cs" />
     <Compile Include="Domain\VariablesGlobales.cs" />
     <Compile Include="Models\MenuElementView.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Account.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Account.Designer.cs">
+    <Compile Include="Models\Tablas\Account.cs" />
+    <Compile Include="Models\Tablas\Account.Designer.cs">
       <DependentUpon>Account.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\AccountingBalance.cs" />
-    <Compile Include="Models\ORMDataModel1Code\AccountingBalance.Designer.cs">
+    <Compile Include="Models\Tablas\AccountingBalance.cs" />
+    <Compile Include="Models\Tablas\AccountingBalance.Designer.cs">
       <DependentUpon>AccountingBalance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\AccountingBalanceTemp.cs" />
-    <Compile Include="Models\ORMDataModel1Code\AccountingBalanceTemp.Designer.cs">
+    <Compile Include="Models\Tablas\AccountingBalanceTemp.cs" />
+    <Compile Include="Models\Tablas\AccountingBalanceTemp.Designer.cs">
       <DependentUpon>AccountingBalanceTemp.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\AccountingCycle.cs" />
-    <Compile Include="Models\ORMDataModel1Code\AccountingCycle.Designer.cs">
+    <Compile Include="Models\Tablas\AccountingCycle.cs" />
+    <Compile Include="Models\Tablas\AccountingCycle.Designer.cs">
       <DependentUpon>AccountingCycle.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\AccountingPeriod.cs" />
-    <Compile Include="Models\ORMDataModel1Code\AccountingPeriod.Designer.cs">
+    <Compile Include="Models\Tablas\AccountingPeriod.cs" />
+    <Compile Include="Models\Tablas\AccountingPeriod.Designer.cs">
       <DependentUpon>AccountingPeriod.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\AccountLevel.cs" />
-    <Compile Include="Models\ORMDataModel1Code\AccountLevel.Designer.cs">
+    <Compile Include="Models\Tablas\AccountLevel.cs" />
+    <Compile Include="Models\Tablas\AccountLevel.Designer.cs">
       <DependentUpon>AccountLevel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\AccountTmp.cs" />
-    <Compile Include="Models\ORMDataModel1Code\AccountTmp.Designer.cs">
+    <Compile Include="Models\Tablas\AccountTmp.cs" />
+    <Compile Include="Models\Tablas\AccountTmp.Designer.cs">
       <DependentUpon>AccountTmp.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\AccountType.cs" />
-    <Compile Include="Models\ORMDataModel1Code\AccountType.Designer.cs">
+    <Compile Include="Models\Tablas\AccountType.cs" />
+    <Compile Include="Models\Tablas\AccountType.Designer.cs">
       <DependentUpon>AccountType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Bank.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Bank.Designer.cs">
+    <Compile Include="Models\Tablas\Bank.cs" />
+    <Compile Include="Models\Tablas\Bank.Designer.cs">
       <DependentUpon>Bank.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Biblia.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Biblia.Designer.cs">
+    <Compile Include="Models\Tablas\Biblia.cs" />
+    <Compile Include="Models\Tablas\Biblia.Designer.cs">
       <DependentUpon>Biblia.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Branch.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Branch.Designer.cs">
+    <Compile Include="Models\Tablas\Branch.cs" />
+    <Compile Include="Models\Tablas\Branch.Designer.cs">
       <DependentUpon>Branch.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Caller.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Caller.Designer.cs">
+    <Compile Include="Models\Tablas\Caller.cs" />
+    <Compile Include="Models\Tablas\Caller.Designer.cs">
       <DependentUpon>Caller.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CashBox.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CashBox.Designer.cs">
+    <Compile Include="Models\Tablas\CashBox.cs" />
+    <Compile Include="Models\Tablas\CashBox.Designer.cs">
       <DependentUpon>CashBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CashBoxSession.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CashBoxSession.Designer.cs">
+    <Compile Include="Models\Tablas\CashBoxSession.cs" />
+    <Compile Include="Models\Tablas\CashBoxSession.Designer.cs">
       <DependentUpon>CashBoxSession.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CashBoxSessionTransactionMaster.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CashBoxSessionTransactionMaster.Designer.cs">
+    <Compile Include="Models\Tablas\CashBoxSessionTransactionMaster.cs" />
+    <Compile Include="Models\Tablas\CashBoxSessionTransactionMaster.Designer.cs">
       <DependentUpon>CashBoxSessionTransactionMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CashBoxUser.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CashBoxUser.Designer.cs">
+    <Compile Include="Models\Tablas\CashBoxUser.cs" />
+    <Compile Include="Models\Tablas\CashBoxUser.Designer.cs">
       <DependentUpon>CashBoxUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Catalog.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Catalog.Designer.cs">
+    <Compile Include="Models\Tablas\Catalog.cs" />
+    <Compile Include="Models\Tablas\Catalog.Designer.cs">
       <DependentUpon>Catalog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CatalogItem.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CatalogItem.Designer.cs">
+    <Compile Include="Models\Tablas\CatalogItem.cs" />
+    <Compile Include="Models\Tablas\CatalogItem.Designer.cs">
       <DependentUpon>CatalogItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CatalogItemConvertion.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CatalogItemConvertion.Designer.cs">
+    <Compile Include="Models\Tablas\CatalogItemConvertion.cs" />
+    <Compile Include="Models\Tablas\CatalogItemConvertion.Designer.cs">
       <DependentUpon>CatalogItemConvertion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CenterCost.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CenterCost.Designer.cs">
+    <Compile Include="Models\Tablas\CenterCost.cs" />
+    <Compile Include="Models\Tablas\CenterCost.Designer.cs">
       <DependentUpon>CenterCost.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Company.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Company.Designer.cs">
+    <Compile Include="Models\Tablas\Company.cs" />
+    <Compile Include="Models\Tablas\Company.Designer.cs">
       <DependentUpon>Company.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CompanyComponent.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CompanyComponent.Designer.cs">
+    <Compile Include="Models\Tablas\CompanyComponent.cs" />
+    <Compile Include="Models\Tablas\CompanyComponent.Designer.cs">
       <DependentUpon>CompanyComponent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CompanyComponentConcept.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CompanyComponentConcept.Designer.cs">
+    <Compile Include="Models\Tablas\CompanyComponentConcept.cs" />
+    <Compile Include="Models\Tablas\CompanyComponentConcept.Designer.cs">
       <DependentUpon>CompanyComponentConcept.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CompanyComponentFlavor.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CompanyComponentFlavor.Designer.cs">
+    <Compile Include="Models\Tablas\CompanyComponentFlavor.cs" />
+    <Compile Include="Models\Tablas\CompanyComponentFlavor.Designer.cs">
       <DependentUpon>CompanyComponentFlavor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CompanyComponentItemDataview.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CompanyComponentItemDataview.Designer.cs">
+    <Compile Include="Models\Tablas\CompanyComponentItemDataview.cs" />
+    <Compile Include="Models\Tablas\CompanyComponentItemDataview.Designer.cs">
       <DependentUpon>CompanyComponentItemDataview.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CompanyCurrency.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CompanyCurrency.Designer.cs">
+    <Compile Include="Models\Tablas\CompanyCurrency.cs" />
+    <Compile Include="Models\Tablas\CompanyCurrency.Designer.cs">
       <DependentUpon>CompanyCurrency.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CompanyDataview.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CompanyDataview.Designer.cs">
+    <Compile Include="Models\Tablas\CompanyDataview.cs" />
+    <Compile Include="Models\Tablas\CompanyDataview.Designer.cs">
       <DependentUpon>CompanyDataview.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CompanyDefaultDataview.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CompanyDefaultDataview.Designer.cs">
+    <Compile Include="Models\Tablas\CompanyDefaultDataview.cs" />
+    <Compile Include="Models\Tablas\CompanyDefaultDataview.Designer.cs">
       <DependentUpon>CompanyDefaultDataview.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CompanyParameter.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CompanyParameter.Designer.cs">
+    <Compile Include="Models\Tablas\CompanyParameter.cs" />
+    <Compile Include="Models\Tablas\CompanyParameter.Designer.cs">
       <DependentUpon>CompanyParameter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CompanySubelementAudit.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CompanySubelementAudit.Designer.cs">
+    <Compile Include="Models\Tablas\CompanySubelementAudit.cs" />
+    <Compile Include="Models\Tablas\CompanySubelementAudit.Designer.cs">
       <DependentUpon>CompanySubelementAudit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CompanySubelementObligatory.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CompanySubelementObligatory.Designer.cs">
+    <Compile Include="Models\Tablas\CompanySubelementObligatory.cs" />
+    <Compile Include="Models\Tablas\CompanySubelementObligatory.Designer.cs">
       <DependentUpon>CompanySubelementObligatory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Component.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Component.Designer.cs">
+    <Compile Include="Models\Tablas\Component.cs" />
+    <Compile Include="Models\Tablas\Component.Designer.cs">
       <DependentUpon>Component.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ComponentAudit.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ComponentAudit.Designer.cs">
+    <Compile Include="Models\Tablas\ComponentAudit.cs" />
+    <Compile Include="Models\Tablas\ComponentAudit.Designer.cs">
       <DependentUpon>ComponentAudit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ComponentAuditDetail.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ComponentAuditDetail.Designer.cs">
+    <Compile Include="Models\Tablas\ComponentAuditDetail.cs" />
+    <Compile Include="Models\Tablas\ComponentAuditDetail.Designer.cs">
       <DependentUpon>ComponentAuditDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ComponentAutorization.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ComponentAutorization.Designer.cs">
+    <Compile Include="Models\Tablas\ComponentAutorization.cs" />
+    <Compile Include="Models\Tablas\ComponentAutorization.Designer.cs">
       <DependentUpon>ComponentAutorization.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ComponentAutorizationDetail.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ComponentAutorizationDetail.Designer.cs">
+    <Compile Include="Models\Tablas\ComponentAutorizationDetail.cs" />
+    <Compile Include="Models\Tablas\ComponentAutorizationDetail.Designer.cs">
       <DependentUpon>ComponentAutorizationDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ComponentElement.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ComponentElement.Designer.cs">
+    <Compile Include="Models\Tablas\ComponentElement.cs" />
+    <Compile Include="Models\Tablas\ComponentElement.Designer.cs">
       <DependentUpon>ComponentElement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ConnectionHelper.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Counter.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Counter.Designer.cs">
+    <Compile Include="Models\Tablas\ConnectionHelper.cs" />
+    <Compile Include="Models\Tablas\Counter.cs" />
+    <Compile Include="Models\Tablas\Counter.Designer.cs">
       <DependentUpon>Counter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CreditLine.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CreditLine.Designer.cs">
+    <Compile Include="Models\Tablas\CreditLine.cs" />
+    <Compile Include="Models\Tablas\CreditLine.Designer.cs">
       <DependentUpon>CreditLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Currency.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Currency.Designer.cs">
+    <Compile Include="Models\Tablas\Currency.cs" />
+    <Compile Include="Models\Tablas\Currency.Designer.cs">
       <DependentUpon>Currency.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Customer.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Customer.Designer.cs">
+    <Compile Include="Models\Tablas\Customer.cs" />
+    <Compile Include="Models\Tablas\Customer.Designer.cs">
       <DependentUpon>Customer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CustomerConsultasSinRiesgo.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CustomerConsultasSinRiesgo.Designer.cs">
+    <Compile Include="Models\Tablas\CustomerConsultasSinRiesgo.cs" />
+    <Compile Include="Models\Tablas\CustomerConsultasSinRiesgo.Designer.cs">
       <DependentUpon>CustomerConsultasSinRiesgo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CustomerCredit.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CustomerCredit.Designer.cs">
+    <Compile Include="Models\Tablas\CustomerCredit.cs" />
+    <Compile Include="Models\Tablas\CustomerCredit.Designer.cs">
       <DependentUpon>CustomerCredit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CustomerCreditAmoritization.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CustomerCreditAmoritization.Designer.cs">
+    <Compile Include="Models\Tablas\CustomerCreditAmoritization.cs" />
+    <Compile Include="Models\Tablas\CustomerCreditAmoritization.Designer.cs">
       <DependentUpon>CustomerCreditAmoritization.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CustomerCreditClasification.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CustomerCreditClasification.Designer.cs">
+    <Compile Include="Models\Tablas\CustomerCreditClasification.cs" />
+    <Compile Include="Models\Tablas\CustomerCreditClasification.Designer.cs">
       <DependentUpon>CustomerCreditClasification.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CustomerCreditDocument.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CustomerCreditDocument.Designer.cs">
+    <Compile Include="Models\Tablas\CustomerCreditDocument.cs" />
+    <Compile Include="Models\Tablas\CustomerCreditDocument.Designer.cs">
       <DependentUpon>CustomerCreditDocument.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CustomerCreditDocumentEntityRelated.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CustomerCreditDocumentEntityRelated.Designer.cs">
+    <Compile Include="Models\Tablas\CustomerCreditDocumentEntityRelated.cs" />
+    <Compile Include="Models\Tablas\CustomerCreditDocumentEntityRelated.Designer.cs">
       <DependentUpon>CustomerCreditDocumentEntityRelated.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\CustomerCreditLine.cs" />
-    <Compile Include="Models\ORMDataModel1Code\CustomerCreditLine.Designer.cs">
+    <Compile Include="Models\Tablas\CustomerCreditLine.cs" />
+    <Compile Include="Models\Tablas\CustomerCreditLine.Designer.cs">
       <DependentUpon>CustomerCreditLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Dataview.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Dataview.Designer.cs">
+    <Compile Include="Models\Tablas\Dataview.cs" />
+    <Compile Include="Models\Tablas\Dataview.Designer.cs">
       <DependentUpon>Dataview.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Element.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Element.Designer.cs">
+    <Compile Include="Models\Tablas\Element.cs" />
+    <Compile Include="Models\Tablas\Element.Designer.cs">
       <DependentUpon>Element.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ElementType.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ElementType.Designer.cs">
+    <Compile Include="Models\Tablas\ElementType.cs" />
+    <Compile Include="Models\Tablas\ElementType.Designer.cs">
       <DependentUpon>ElementType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Employee.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Employee.Designer.cs">
+    <Compile Include="Models\Tablas\Employee.cs" />
+    <Compile Include="Models\Tablas\Employee.Designer.cs">
       <DependentUpon>Employee.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\EmployeeCalendarPay.cs" />
-    <Compile Include="Models\ORMDataModel1Code\EmployeeCalendarPay.Designer.cs">
+    <Compile Include="Models\Tablas\EmployeeCalendarPay.cs" />
+    <Compile Include="Models\Tablas\EmployeeCalendarPay.Designer.cs">
       <DependentUpon>EmployeeCalendarPay.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\EmployeeCalendarPayDetail.cs" />
-    <Compile Include="Models\ORMDataModel1Code\EmployeeCalendarPayDetail.Designer.cs">
+    <Compile Include="Models\Tablas\EmployeeCalendarPayDetail.cs" />
+    <Compile Include="Models\Tablas\EmployeeCalendarPayDetail.Designer.cs">
       <DependentUpon>EmployeeCalendarPayDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Entity.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Entity.Designer.cs">
+    <Compile Include="Models\Tablas\Entity.cs" />
+    <Compile Include="Models\Tablas\Entity.Designer.cs">
       <DependentUpon>Entity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\EntityAccount.cs" />
-    <Compile Include="Models\ORMDataModel1Code\EntityAccount.Designer.cs">
+    <Compile Include="Models\Tablas\EntityAccount.cs" />
+    <Compile Include="Models\Tablas\EntityAccount.Designer.cs">
       <DependentUpon>EntityAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\EntityEmail.cs" />
-    <Compile Include="Models\ORMDataModel1Code\EntityEmail.Designer.cs">
+    <Compile Include="Models\Tablas\EntityEmail.cs" />
+    <Compile Include="Models\Tablas\EntityEmail.Designer.cs">
       <DependentUpon>EntityEmail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\EntityPhone.cs" />
-    <Compile Include="Models\ORMDataModel1Code\EntityPhone.Designer.cs">
+    <Compile Include="Models\Tablas\EntityPhone.cs" />
+    <Compile Include="Models\Tablas\EntityPhone.Designer.cs">
       <DependentUpon>EntityPhone.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Error.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Error.Designer.cs">
+    <Compile Include="Models\Tablas\Error.cs" />
+    <Compile Include="Models\Tablas\Error.Designer.cs">
       <DependentUpon>Error.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\EstadisticaCategorias.cs" />
-    <Compile Include="Models\ORMDataModel1Code\EstadisticaCategorias.Designer.cs">
+    <Compile Include="Models\Tablas\EstadisticaCategorias.cs" />
+    <Compile Include="Models\Tablas\EstadisticaCategorias.Designer.cs">
       <DependentUpon>EstadisticaCategorias.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\EstadisticaClases.cs" />
-    <Compile Include="Models\ORMDataModel1Code\EstadisticaClases.Designer.cs">
+    <Compile Include="Models\Tablas\EstadisticaClases.cs" />
+    <Compile Include="Models\Tablas\EstadisticaClases.Designer.cs">
       <DependentUpon>EstadisticaClases.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ExchangeRate.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ExchangeRate.Designer.cs">
+    <Compile Include="Models\Tablas\ExchangeRate.cs" />
+    <Compile Include="Models\Tablas\ExchangeRate.Designer.cs">
       <DependentUpon>ExchangeRate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\FixedAssent.cs" />
-    <Compile Include="Models\ORMDataModel1Code\FixedAssent.Designer.cs">
+    <Compile Include="Models\Tablas\FixedAssent.cs" />
+    <Compile Include="Models\Tablas\FixedAssent.Designer.cs">
       <DependentUpon>FixedAssent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Indicator.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Indicator.Designer.cs">
+    <Compile Include="Models\Tablas\Indicator.cs" />
+    <Compile Include="Models\Tablas\Indicator.Designer.cs">
       <DependentUpon>Indicator.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\IndicatorHistory.cs" />
-    <Compile Include="Models\ORMDataModel1Code\IndicatorHistory.Designer.cs">
+    <Compile Include="Models\Tablas\IndicatorHistory.cs" />
+    <Compile Include="Models\Tablas\IndicatorHistory.Designer.cs">
       <DependentUpon>IndicatorHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\IndicatorTmp.cs" />
-    <Compile Include="Models\ORMDataModel1Code\IndicatorTmp.Designer.cs">
+    <Compile Include="Models\Tablas\IndicatorTmp.cs" />
+    <Compile Include="Models\Tablas\IndicatorTmp.Designer.cs">
       <DependentUpon>IndicatorTmp.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Item.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Item.Designer.cs">
+    <Compile Include="Models\Tablas\Item.cs" />
+    <Compile Include="Models\Tablas\Item.Designer.cs">
       <DependentUpon>Item.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ItemCategory.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ItemCategory.Designer.cs">
+    <Compile Include="Models\Tablas\ItemCategory.cs" />
+    <Compile Include="Models\Tablas\ItemCategory.Designer.cs">
       <DependentUpon>ItemCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ItemConfigLoto.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ItemConfigLoto.Designer.cs">
+    <Compile Include="Models\Tablas\ItemConfigLoto.cs" />
+    <Compile Include="Models\Tablas\ItemConfigLoto.Designer.cs">
       <DependentUpon>ItemConfigLoto.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ItemDataSheet.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ItemDataSheet.Designer.cs">
+    <Compile Include="Models\Tablas\ItemDataSheet.cs" />
+    <Compile Include="Models\Tablas\ItemDataSheet.Designer.cs">
       <DependentUpon>ItemDataSheet.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ItemDataSheetDetail.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ItemDataSheetDetail.Designer.cs">
+    <Compile Include="Models\Tablas\ItemDataSheetDetail.cs" />
+    <Compile Include="Models\Tablas\ItemDataSheetDetail.Designer.cs">
       <DependentUpon>ItemDataSheetDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ItemSku.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ItemSku.Designer.cs">
+    <Compile Include="Models\Tablas\ItemSku.cs" />
+    <Compile Include="Models\Tablas\ItemSku.Designer.cs">
       <DependentUpon>ItemSku.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ItemWarehouse.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ItemWarehouse.Designer.cs">
+    <Compile Include="Models\Tablas\ItemWarehouse.cs" />
+    <Compile Include="Models\Tablas\ItemWarehouse.Designer.cs">
       <DependentUpon>ItemWarehouse.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ItemWarehouseExpired.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ItemWarehouseExpired.Designer.cs">
+    <Compile Include="Models\Tablas\ItemWarehouseExpired.cs" />
+    <Compile Include="Models\Tablas\ItemWarehouseExpired.Designer.cs">
       <DependentUpon>ItemWarehouseExpired.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\JournalEntry.cs" />
-    <Compile Include="Models\ORMDataModel1Code\JournalEntry.Designer.cs">
+    <Compile Include="Models\Tablas\JournalEntry.cs" />
+    <Compile Include="Models\Tablas\JournalEntry.Designer.cs">
       <DependentUpon>JournalEntry.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\JournalEntryDetail.cs" />
-    <Compile Include="Models\ORMDataModel1Code\JournalEntryDetail.Designer.cs">
+    <Compile Include="Models\Tablas\JournalEntryDetail.cs" />
+    <Compile Include="Models\Tablas\JournalEntryDetail.Designer.cs">
       <DependentUpon>JournalEntryDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\JournalEntryDetailSummary.cs" />
-    <Compile Include="Models\ORMDataModel1Code\JournalEntryDetailSummary.Designer.cs">
+    <Compile Include="Models\Tablas\JournalEntryDetailSummary.cs" />
+    <Compile Include="Models\Tablas\JournalEntryDetailSummary.Designer.cs">
       <DependentUpon>JournalEntryDetailSummary.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Kardex.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Kardex.Designer.cs">
+    <Compile Include="Models\Tablas\Kardex.cs" />
+    <Compile Include="Models\Tablas\Kardex.Designer.cs">
       <DependentUpon>Kardex.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Legal.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Legal.Designer.cs">
+    <Compile Include="Models\Tablas\Legal.cs" />
+    <Compile Include="Models\Tablas\Legal.Designer.cs">
       <DependentUpon>Legal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ListPrice.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ListPrice.Designer.cs">
+    <Compile Include="Models\Tablas\ListPrice.cs" />
+    <Compile Include="Models\Tablas\ListPrice.Designer.cs">
       <DependentUpon>ListPrice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Log.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Log.Designer.cs">
+    <Compile Include="Models\Tablas\Log.cs" />
+    <Compile Include="Models\Tablas\Log.Designer.cs">
       <DependentUpon>Log.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\LogMesseger.cs" />
-    <Compile Include="Models\ORMDataModel1Code\LogMesseger.Designer.cs">
+    <Compile Include="Models\Tablas\LogMesseger.cs" />
+    <Compile Include="Models\Tablas\LogMesseger.Designer.cs">
       <DependentUpon>LogMesseger.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\LogSession.cs" />
-    <Compile Include="Models\ORMDataModel1Code\LogSession.Designer.cs">
+    <Compile Include="Models\Tablas\LogSession.cs" />
+    <Compile Include="Models\Tablas\LogSession.Designer.cs">
       <DependentUpon>LogSession.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\MasterKardexTemp.cs" />
-    <Compile Include="Models\ORMDataModel1Code\MasterKardexTemp.Designer.cs">
+    <Compile Include="Models\Tablas\MasterKardexTemp.cs" />
+    <Compile Include="Models\Tablas\MasterKardexTemp.Designer.cs">
       <DependentUpon>MasterKardexTemp.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Membership.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Membership.Designer.cs">
+    <Compile Include="Models\Tablas\Membership.cs" />
+    <Compile Include="Models\Tablas\Membership.Designer.cs">
       <DependentUpon>Membership.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\MenuElement.cs" />
-    <Compile Include="Models\ORMDataModel1Code\MenuElement.Designer.cs">
+    <Compile Include="Models\Tablas\MenuElement.cs" />
+    <Compile Include="Models\Tablas\MenuElement.Designer.cs">
       <DependentUpon>MenuElement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Naturales.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Naturales.Designer.cs">
+    <Compile Include="Models\Tablas\Naturales.cs" />
+    <Compile Include="Models\Tablas\Naturales.Designer.cs">
       <DependentUpon>Naturales.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Notification.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Notification.Designer.cs">
+    <Compile Include="Models\Tablas\Notification.cs" />
+    <Compile Include="Models\Tablas\Notification.Designer.cs">
       <DependentUpon>Notification.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Parameter.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Parameter.Designer.cs">
+    <Compile Include="Models\Tablas\Parameter.cs" />
+    <Compile Include="Models\Tablas\Parameter.Designer.cs">
       <DependentUpon>Parameter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Price.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Price.Designer.cs">
+    <Compile Include="Models\Tablas\Price.cs" />
+    <Compile Include="Models\Tablas\Price.Designer.cs">
       <DependentUpon>Price.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Provider.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Provider.Designer.cs">
+    <Compile Include="Models\Tablas\Provider.cs" />
+    <Compile Include="Models\Tablas\Provider.Designer.cs">
       <DependentUpon>Provider.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\ProviderItem.cs" />
-    <Compile Include="Models\ORMDataModel1Code\ProviderItem.Designer.cs">
+    <Compile Include="Models\Tablas\ProviderItem.cs" />
+    <Compile Include="Models\Tablas\ProviderItem.Designer.cs">
       <DependentUpon>ProviderItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\PublicCatalog.cs" />
-    <Compile Include="Models\ORMDataModel1Code\PublicCatalog.Designer.cs">
+    <Compile Include="Models\Tablas\PublicCatalog.cs" />
+    <Compile Include="Models\Tablas\PublicCatalog.Designer.cs">
       <DependentUpon>PublicCatalog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\PublicCatalogDetail.cs" />
-    <Compile Include="Models\ORMDataModel1Code\PublicCatalogDetail.Designer.cs">
+    <Compile Include="Models\Tablas\PublicCatalogDetail.cs" />
+    <Compile Include="Models\Tablas\PublicCatalogDetail.Designer.cs">
       <DependentUpon>PublicCatalogDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\RazonesFinancierasTmp.cs" />
-    <Compile Include="Models\ORMDataModel1Code\RazonesFinancierasTmp.Designer.cs">
+    <Compile Include="Models\Tablas\RazonesFinancierasTmp.cs" />
+    <Compile Include="Models\Tablas\RazonesFinancierasTmp.Designer.cs">
       <DependentUpon>RazonesFinancierasTmp.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Relationship.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Relationship.Designer.cs">
+    <Compile Include="Models\Tablas\Relationship.cs" />
+    <Compile Include="Models\Tablas\Relationship.Designer.cs">
       <DependentUpon>Relationship.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Remember.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Remember.Designer.cs">
+    <Compile Include="Models\Tablas\Remember.cs" />
+    <Compile Include="Models\Tablas\Remember.Designer.cs">
       <DependentUpon>Remember.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Role.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Role.Designer.cs">
+    <Compile Include="Models\Tablas\Role.cs" />
+    <Compile Include="Models\Tablas\Role.Designer.cs">
       <DependentUpon>Role.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\RoleAutorization.cs" />
-    <Compile Include="Models\ORMDataModel1Code\RoleAutorization.Designer.cs">
+    <Compile Include="Models\Tablas\RoleAutorization.cs" />
+    <Compile Include="Models\Tablas\RoleAutorization.Designer.cs">
       <DependentUpon>RoleAutorization.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Subelement.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Subelement.Designer.cs">
+    <Compile Include="Models\Tablas\Subelement.cs" />
+    <Compile Include="Models\Tablas\Subelement.Designer.cs">
       <DependentUpon>Subelement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Tag.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Tag.Designer.cs">
+    <Compile Include="Models\Tablas\Tag.cs" />
+    <Compile Include="Models\Tablas\Tag.Designer.cs">
       <DependentUpon>Tag.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Transaction.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Transaction.Designer.cs">
+    <Compile Include="Models\Tablas\Transaction.cs" />
+    <Compile Include="Models\Tablas\Transaction.Designer.cs">
       <DependentUpon>Transaction.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\TransactionCausal.cs" />
-    <Compile Include="Models\ORMDataModel1Code\TransactionCausal.Designer.cs">
+    <Compile Include="Models\Tablas\TransactionCausal.cs" />
+    <Compile Include="Models\Tablas\TransactionCausal.Designer.cs">
       <DependentUpon>TransactionCausal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\TransactionConcept.cs" />
-    <Compile Include="Models\ORMDataModel1Code\TransactionConcept.Designer.cs">
+    <Compile Include="Models\Tablas\TransactionConcept.cs" />
+    <Compile Include="Models\Tablas\TransactionConcept.Designer.cs">
       <DependentUpon>TransactionConcept.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\TransactionMaster.cs" />
-    <Compile Include="Models\ORMDataModel1Code\TransactionMaster.Designer.cs">
+    <Compile Include="Models\Tablas\TransactionMaster.cs" />
+    <Compile Include="Models\Tablas\TransactionMaster.Designer.cs">
       <DependentUpon>TransactionMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterConcept.cs" />
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterConcept.Designer.cs">
+    <Compile Include="Models\Tablas\TransactionMasterConcept.cs" />
+    <Compile Include="Models\Tablas\TransactionMasterConcept.Designer.cs">
       <DependentUpon>TransactionMasterConcept.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDenomination.cs" />
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDenomination.Designer.cs">
+    <Compile Include="Models\Tablas\TransactionMasterDenomination.cs" />
+    <Compile Include="Models\Tablas\TransactionMasterDenomination.Designer.cs">
       <DependentUpon>TransactionMasterDenomination.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDetail.cs" />
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDetail.Designer.cs">
+    <Compile Include="Models\Tablas\TransactionMasterDetail.cs" />
+    <Compile Include="Models\Tablas\TransactionMasterDetail.Designer.cs">
       <DependentUpon>TransactionMasterDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDetailCredit.cs" />
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDetailCredit.Designer.cs">
+    <Compile Include="Models\Tablas\TransactionMasterDetailCredit.cs" />
+    <Compile Include="Models\Tablas\TransactionMasterDetailCredit.Designer.cs">
       <DependentUpon>TransactionMasterDetailCredit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDetailTemp.cs" />
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterDetailTemp.Designer.cs">
+    <Compile Include="Models\Tablas\TransactionMasterDetailTemp.cs" />
+    <Compile Include="Models\Tablas\TransactionMasterDetailTemp.Designer.cs">
       <DependentUpon>TransactionMasterDetailTemp.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterInfo.cs" />
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterInfo.Designer.cs">
+    <Compile Include="Models\Tablas\TransactionMasterInfo.cs" />
+    <Compile Include="Models\Tablas\TransactionMasterInfo.Designer.cs">
       <DependentUpon>TransactionMasterInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterPurchase.cs" />
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterPurchase.Designer.cs">
+    <Compile Include="Models\Tablas\TransactionMasterPurchase.cs" />
+    <Compile Include="Models\Tablas\TransactionMasterPurchase.Designer.cs">
       <DependentUpon>TransactionMasterPurchase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterSummaryConceptTmp.cs" />
-    <Compile Include="Models\ORMDataModel1Code\TransactionMasterSummaryConceptTmp.Designer.cs">
+    <Compile Include="Models\Tablas\TransactionMasterSummaryConceptTmp.cs" />
+    <Compile Include="Models\Tablas\TransactionMasterSummaryConceptTmp.Designer.cs">
       <DependentUpon>TransactionMasterSummaryConceptTmp.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\TransactionProfileDetail.cs" />
-    <Compile Include="Models\ORMDataModel1Code\TransactionProfileDetail.Designer.cs">
+    <Compile Include="Models\Tablas\TransactionProfileDetail.cs" />
+    <Compile Include="Models\Tablas\TransactionProfileDetail.Designer.cs">
       <DependentUpon>TransactionProfileDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\TransactionProfileDetailTmp.cs" />
-    <Compile Include="Models\ORMDataModel1Code\TransactionProfileDetailTmp.Designer.cs">
+    <Compile Include="Models\Tablas\TransactionProfileDetailTmp.cs" />
+    <Compile Include="Models\Tablas\TransactionProfileDetailTmp.Designer.cs">
       <DependentUpon>TransactionProfileDetailTmp.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\TypeMenuElement.cs" />
-    <Compile Include="Models\ORMDataModel1Code\TypeMenuElement.Designer.cs">
+    <Compile Include="Models\Tablas\TypeMenuElement.cs" />
+    <Compile Include="Models\Tablas\TypeMenuElement.Designer.cs">
       <DependentUpon>TypeMenuElement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\User.cs" />
-    <Compile Include="Models\ORMDataModel1Code\User.Designer.cs">
+    <Compile Include="Models\Tablas\User.cs" />
+    <Compile Include="Models\Tablas\User.Designer.cs">
       <DependentUpon>User.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\UserPermission.cs" />
-    <Compile Include="Models\ORMDataModel1Code\UserPermission.Designer.cs">
+    <Compile Include="Models\Tablas\UserPermission.cs" />
+    <Compile Include="Models\Tablas\UserPermission.Designer.cs">
       <DependentUpon>UserPermission.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\UserTag.cs" />
-    <Compile Include="Models\ORMDataModel1Code\UserTag.Designer.cs">
+    <Compile Include="Models\Tablas\UserTag.cs" />
+    <Compile Include="Models\Tablas\UserTag.Designer.cs">
       <DependentUpon>UserTag.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\UserWarehouse.cs" />
-    <Compile Include="Models\ORMDataModel1Code\UserWarehouse.Designer.cs">
+    <Compile Include="Models\Tablas\UserWarehouse.cs" />
+    <Compile Include="Models\Tablas\UserWarehouse.Designer.cs">
       <DependentUpon>UserWarehouse.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\VwContabilidadComprobantes.cs" />
-    <Compile Include="Models\ORMDataModel1Code\VwContabilidadComprobantes.Designer.cs">
+    <Compile Include="Models\Tablas\VwContabilidadComprobantes.cs" />
+    <Compile Include="Models\Tablas\VwContabilidadComprobantes.Designer.cs">
       <DependentUpon>VwContabilidadComprobantes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\VwGerenciaBalance.cs" />
-    <Compile Include="Models\ORMDataModel1Code\VwGerenciaBalance.Designer.cs">
+    <Compile Include="Models\Tablas\VwGerenciaBalance.cs" />
+    <Compile Include="Models\Tablas\VwGerenciaBalance.Designer.cs">
       <DependentUpon>VwGerenciaBalance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\VwGerenciaCustomer.cs" />
-    <Compile Include="Models\ORMDataModel1Code\VwGerenciaCustomer.Designer.cs">
+    <Compile Include="Models\Tablas\VwGerenciaCustomer.cs" />
+    <Compile Include="Models\Tablas\VwGerenciaCustomer.Designer.cs">
       <DependentUpon>VwGerenciaCustomer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\VwGerenciaDesembolsosDetalle.cs" />
-    <Compile Include="Models\ORMDataModel1Code\VwGerenciaDesembolsosDetalle.Designer.cs">
+    <Compile Include="Models\Tablas\VwGerenciaDesembolsosDetalle.cs" />
+    <Compile Include="Models\Tablas\VwGerenciaDesembolsosDetalle.Designer.cs">
       <DependentUpon>VwGerenciaDesembolsosDetalle.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\VwGerenciaDesembolsosResumen.cs" />
-    <Compile Include="Models\ORMDataModel1Code\VwGerenciaDesembolsosResumen.Designer.cs">
+    <Compile Include="Models\Tablas\VwGerenciaDesembolsosResumen.cs" />
+    <Compile Include="Models\Tablas\VwGerenciaDesembolsosResumen.Designer.cs">
       <DependentUpon>VwGerenciaDesembolsosResumen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\VwGerenciaEstadoResultado001.cs" />
-    <Compile Include="Models\ORMDataModel1Code\VwGerenciaEstadoResultado001.Designer.cs">
+    <Compile Include="Models\Tablas\VwGerenciaEstadoResultado001.cs" />
+    <Compile Include="Models\Tablas\VwGerenciaEstadoResultado001.Designer.cs">
       <DependentUpon>VwGerenciaEstadoResultado001.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\VwGerenciaEstadoResultado002.cs" />
-    <Compile Include="Models\ORMDataModel1Code\VwGerenciaEstadoResultado002.Designer.cs">
+    <Compile Include="Models\Tablas\VwGerenciaEstadoResultado002.cs" />
+    <Compile Include="Models\Tablas\VwGerenciaEstadoResultado002.Designer.cs">
       <DependentUpon>VwGerenciaEstadoResultado002.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\VwSalesInventory.cs" />
-    <Compile Include="Models\ORMDataModel1Code\VwSalesInventory.Designer.cs">
+    <Compile Include="Models\Tablas\VwSalesInventory.cs" />
+    <Compile Include="Models\Tablas\VwSalesInventory.Designer.cs">
       <DependentUpon>VwSalesInventory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\VwSinRiesgoReporteClientes.cs" />
-    <Compile Include="Models\ORMDataModel1Code\VwSinRiesgoReporteClientes.Designer.cs">
+    <Compile Include="Models\Tablas\VwSinRiesgoReporteClientes.cs" />
+    <Compile Include="Models\Tablas\VwSinRiesgoReporteClientes.Designer.cs">
       <DependentUpon>VwSinRiesgoReporteClientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\VwSinRiesgoReporteCreditos.cs" />
-    <Compile Include="Models\ORMDataModel1Code\VwSinRiesgoReporteCreditos.Designer.cs">
+    <Compile Include="Models\Tablas\VwSinRiesgoReporteCreditos.cs" />
+    <Compile Include="Models\Tablas\VwSinRiesgoReporteCreditos.Designer.cs">
       <DependentUpon>VwSinRiesgoReporteCreditos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\VwSinRiesgoReporteCreditosToSystema.cs" />
-    <Compile Include="Models\ORMDataModel1Code\VwSinRiesgoReporteCreditosToSystema.Designer.cs">
+    <Compile Include="Models\Tablas\VwSinRiesgoReporteCreditosToSystema.cs" />
+    <Compile Include="Models\Tablas\VwSinRiesgoReporteCreditosToSystema.Designer.cs">
       <DependentUpon>VwSinRiesgoReporteCreditosToSystema.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\VwTransaccionMasterConcept232425.cs" />
-    <Compile Include="Models\ORMDataModel1Code\VwTransaccionMasterConcept232425.Designer.cs">
+    <Compile Include="Models\Tablas\VwTransaccionMasterConcept232425.cs" />
+    <Compile Include="Models\Tablas\VwTransaccionMasterConcept232425.Designer.cs">
       <DependentUpon>VwTransaccionMasterConcept232425.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Warehouse.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Warehouse.Designer.cs">
+    <Compile Include="Models\Tablas\Warehouse.cs" />
+    <Compile Include="Models\Tablas\Warehouse.Designer.cs">
       <DependentUpon>Warehouse.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\Workflow.cs" />
-    <Compile Include="Models\ORMDataModel1Code\Workflow.Designer.cs">
+    <Compile Include="Models\Tablas\Workflow.cs" />
+    <Compile Include="Models\Tablas\Workflow.Designer.cs">
       <DependentUpon>Workflow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\WorkflowStage.cs" />
-    <Compile Include="Models\ORMDataModel1Code\WorkflowStage.Designer.cs">
+    <Compile Include="Models\Tablas\WorkflowStage.cs" />
+    <Compile Include="Models\Tablas\WorkflowStage.Designer.cs">
       <DependentUpon>WorkflowStage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\WorkflowStageChangeLog.cs" />
-    <Compile Include="Models\ORMDataModel1Code\WorkflowStageChangeLog.Designer.cs">
+    <Compile Include="Models\Tablas\WorkflowStageChangeLog.cs" />
+    <Compile Include="Models\Tablas\WorkflowStageChangeLog.Designer.cs">
       <DependentUpon>WorkflowStageChangeLog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ORMDataModel1Code\WorkflowStageRelation.cs" />
-    <Compile Include="Models\ORMDataModel1Code\WorkflowStageRelation.Designer.cs">
+    <Compile Include="Models\Tablas\WorkflowStageRelation.cs" />
+    <Compile Include="Models\Tablas\WorkflowStageRelation.Designer.cs">
       <DependentUpon>WorkflowStageRelation.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\UserPermissionView.cs" />

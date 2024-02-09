@@ -1,6 +1,7 @@
 ﻿using DevExpress.Xpo;
 using System.Collections.Generic;
 using System.Linq;
+using v4posme_window_form.Models;
 using v4posme_window_form.Models.Tablas;
 namespace v4posme_window_form.Domain.Services
 {
@@ -9,31 +10,45 @@ namespace v4posme_window_form.Domain.Services
 
         public List<MenuElement> GetRowByCompanyIdyElementId(int companyId, List<int> elementIdArray)
         {
-            List<MenuElement> result;
-            var menuElement = Session.DefaultSession.Query<MenuElement>();
-            var element = Session.DefaultSession.Query<Element>();
-            var componentElement = Session.DefaultSession.Query<ComponentElement>();
-            var companyComponent = Session.DefaultSession.Query<CompanyComponent>();
-            var query = menuElement
-                .Join(element, menu=>menu.ElementID, ele=>ele.ElementID, (menu, ele)=>new {menu, ele})
-                .Join(componentElement, arg=>arg.ele.ElementID, comp=>comp.ElementID, (arg1, ce)=>new {arg1, ce})
-                .Join(companyComponent, arg=>arg.ce.ComponentID, cc=>cc.ComponentID, (arg1, component)=>new {arg1, component})
-                .Where(arg=>arg.arg1.arg1.menu.CompanyID == companyId && arg.arg1.arg1.menu.IsActive == 1 && arg.component.CompanyID == companyId);
+            var listMenuElement = new List<MenuElement>();
+            string sql = "select x.* " +
+                         " from tb_menu_element x" +
+                         " inner join  tb_element e on e.elementID = x.elementID" +
+                         " inner join  tb_component_element ce on e.elementID = ce.elementID" +
+                         " inner join  tb_company_component cco on ce.componentID = cco.componentID" +
+                         " where x.companyID = " + companyId +
+                         " and x.isActive = true" +
+                         " and cco.companyID = " + companyId;
             if (elementIdArray.Count > 0)
             {
-                var queryable = query.Where(arg=>elementIdArray.Contains(arg.arg1.arg1.menu.ElementID));
-                result = queryable
-                    .Select((arg, component)=>arg.arg1.arg1.menu)
-                    .ToList();
+                sql += " and x.elementID in ( -1 ";
+                foreach (var i in elementIdArray)
+                {
+                    sql += " , " + i;
+                }
+                sql += " ) ";
             }
-            else
+            sql += " order by x.orden asc";
+            var query = Session.DefaultSession.ExecuteQuery(sql);
+            // Retrieve data from a query into a collection of objects.
+            ICollection<MenuElementView> collection = Session.DefaultSession.GetObjectsFromQuery<MenuElementView>(sql);
+            foreach (MenuElementView menuElementView in collection)
             {
-                result = query
-                    .Select((arg, component)=>arg.arg1.arg1.menu)
-                    .ToList();
+                var menuElement = new MenuElement(Session.DefaultSession);
+                menuElement.ElementID = menuElementView.ElementId;
+                menuElement.MenuElementID = menuElementView.MenuElementId;
+                menuElement.TypeMenuElementID = menuElementView.TypeMenuElementID;
+                menuElement.Address = menuElementView.Address;
+                menuElement.Display = menuElementView.Display;
+                menuElement.Icon = menuElementView.Icon;
+                menuElement.Orden = menuElementView.Orden;
+                menuElement.Template = menuElementView.Template;
+                menuElement.IsActive = (sbyte)menuElementView.IsActive;
+                menuElement.CompanyID = menuElementView.CompanyId;
+                menuElement.ParentMenuElementID = menuElementView.ParentMenuElementId;
+                listMenuElement.Add(menuElement);
             }
-
-            return result;
+            return listMenuElement;
         }
     }
 }

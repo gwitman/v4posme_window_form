@@ -787,14 +787,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="v4posme_window_form.exe" size="652232">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="v4posme_window_form.exe" size="656328">
       <assemblyIdentity name="v4posme_window_form" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>KrdT3OrZW5AzjYvC0uAslkHKIqUrwywrPDx4w9by2zc=</dsig:DigestValue>
+        <dsig:DigestValue>39zfGYQkol8Rd/D2U4WR23ukFralWfP4c1jdX/lqrfw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

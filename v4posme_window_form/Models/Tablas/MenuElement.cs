@@ -11,7 +11,6 @@ namespace v4posme_window_form.Models.Tablas
     public partial class MenuElement
     {
         public MenuElement(Session session) : base(session) { }
-        public override void AfterConstruction() { base.AfterConstruction(); }
     }
 
 }
