@@ -79,11 +79,11 @@ namespace v4posme_window_form.Models
             set{SetPropertyValue(nameof(TypeMenuElementID), ref typeMenuElementID, value);}
         }
         private int typeMenuElementID;
-        public byte IsActive
+        public sbyte IsActive
         {
             get { return isActive; }
             set{SetPropertyValue(nameof(IsActive), ref isActive, value);}
         }
-        private byte isActive;
+        private sbyte isActive;
     }
 }

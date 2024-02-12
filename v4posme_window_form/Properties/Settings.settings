@@ -130,5 +130,86 @@
     <Setting Name="CALLERID_SEARC" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">2</Value>
     </Setting>
+    <Setting Name="PERMISSION_NONE" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="PERMISSION_ALL" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="PERMISSION_BRANCH" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="PERMISSION_ME" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="COMMAND_VINCULATE" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="COMMAND_EDITABLE" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="COMMAND_EDITABLE_TOTAL" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="COMMAND_ELIMINABLE" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="COMMAND_APLICABLE" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="PAGE_SIZE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">LETTER</Value>
+    </Setting>
+    <Setting Name="LEFT_MARGIN" Type="System.Single" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="RIGHT_MARGIN" Type="System.Single" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="BOTTOM_MARGIN" Type="System.Single" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="TOP_MARGIN" Type="System.Single" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="FONT_SIZE_SMALL" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="FONT_SIZE" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8</Value>
+    </Setting>
+    <Setting Name="FONT_SIZE_BOLD" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">9</Value>
+    </Setting>
+    <Setting Name="FONT_SIZE_TITLE" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="LOGO_SIZE_WIDTH" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">105</Value>
+    </Setting>
+    <Setting Name="LOGO_SIZE_HEIGTH" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="PAGE_INVOICE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">INVOICE_PRINTER_TERMICA_001</Value>
+    </Setting>
+    <Setting Name="LEFT_MARGIN_INVOICE" Type="System.Single" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RIGHT_MARGIN_INVOICE" Type="System.Single" Scope="Application">
+      <Value Profile="(Default)">0.9</Value>
+    </Setting>
+    <Setting Name="BOTTOM_MARGIN_INVOICE" Type="System.Single" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="TOP_MARGIN_INVOICE" Type="System.Single" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FONT_SIZE_TITLE_INVICE" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">12</Value>
+    </Setting>
+    <Setting Name="FONT_SIZE_BODY_INVICE" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

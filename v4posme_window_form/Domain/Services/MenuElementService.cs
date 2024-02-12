@@ -1,6 +1,5 @@
 ﻿using DevExpress.Xpo;
 using System.Collections.Generic;
-using System.Linq;
 using v4posme_window_form.Models;
 using v4posme_window_form.Models.Tablas;
 namespace v4posme_window_form.Domain.Services
@@ -29,23 +28,24 @@ namespace v4posme_window_form.Domain.Services
                 sql += " ) ";
             }
             sql += " order by x.orden asc";
-            var query = Session.DefaultSession.ExecuteQuery(sql);
             // Retrieve data from a query into a collection of objects.
             ICollection<MenuElementView> collection = Session.DefaultSession.GetObjectsFromQuery<MenuElementView>(sql);
             foreach (MenuElementView menuElementView in collection)
             {
-                var menuElement = new MenuElement(Session.DefaultSession);
-                menuElement.ElementID = menuElementView.ElementId;
-                menuElement.MenuElementID = menuElementView.MenuElementId;
-                menuElement.TypeMenuElementID = menuElementView.TypeMenuElementID;
-                menuElement.Address = menuElementView.Address;
-                menuElement.Display = menuElementView.Display;
-                menuElement.Icon = menuElementView.Icon;
-                menuElement.Orden = menuElementView.Orden;
-                menuElement.Template = menuElementView.Template;
-                menuElement.IsActive = (sbyte)menuElementView.IsActive;
-                menuElement.CompanyID = menuElementView.CompanyId;
-                menuElement.ParentMenuElementID = menuElementView.ParentMenuElementId;
+                var menuElement = new MenuElement(Session.DefaultSession)
+                {
+                    ElementID = menuElementView.ElementId,
+                    MenuElementID = menuElementView.MenuElementId,
+                    TypeMenuElementID = menuElementView.TypeMenuElementID,
+                    Address = menuElementView.Address,
+                    Display = menuElementView.Display,
+                    Icon = menuElementView.Icon,
+                    Orden = menuElementView.Orden,
+                    Template = menuElementView.Template,
+                    IsActive = menuElementView.IsActive,
+                    CompanyID = menuElementView.CompanyId,
+                    ParentMenuElementID = menuElementView.ParentMenuElementId
+                };
                 listMenuElement.Add(menuElement);
             }
             return listMenuElement;

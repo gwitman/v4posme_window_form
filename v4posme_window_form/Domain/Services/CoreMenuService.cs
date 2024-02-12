@@ -7,10 +7,27 @@ namespace v4posme_window_form.Domain.Services
 {
     public class CoreMenuService : ICoreMenu
     {
-        private IElementSevice elementSevice = VariablesGlobales.Instance.UnityContainer.Resolve<IElementSevice>();
-        private IUserPermissionService _userPermissionService = VariablesGlobales.Instance.UnityContainer.Resolve<IUserPermissionService>();
-        private IMenuElementService _menuElementService = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementService>();
-        public List<MenuElement> getMenuTop(int companyId, int branchId, int roleId)
+        private readonly IElementSevice _elementService = VariablesGlobales.Instance.UnityContainer.Resolve<IElementSevice>();
+        private readonly IUserPermissionService _userPermissionService = VariablesGlobales.Instance.UnityContainer.Resolve<IUserPermissionService>();
+        private readonly IMenuElementService _menuElementService = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementService>();
+        public List<MenuElement> GetMenuTop(int companyId, int branchId, int roleId)
+        {
+            return GetMenu(companyId, branchId, roleId, Settings.Default.MENU_TOP);
+        }
+        public List<MenuElement> GetMenuLeft(int companyId, int branchId, int roleId)
+        {
+            return GetMenu(companyId, branchId, roleId, Settings.Default.MENU_LEFT);
+        }
+        public List<MenuElement> GetMenuBodyReport(int companyId, int branchId, int roleId)
+        {
+            return GetMenu(companyId, branchId, roleId, Settings.Default.MENU_BODY);
+        }
+        public List<MenuElement> GetMenuHiddenPopup(int companyId, int branchId, int roleId)
+        {
+            return GetMenu(companyId, branchId, roleId, Settings.Default.MENU_HIDDEN_POPUP);
+        }
+
+        private List<MenuElement> GetMenu(int companyId, int branchId, int roleId, int menu)
         {
             var role = VariablesGlobales.Instance.Role;
             var listMenuElement = new List<MenuElement>();
@@ -19,7 +36,7 @@ namespace v4posme_window_form.Domain.Services
                 return null;
             }
             //Obtener la lista de elementos tipo pagina, que pertenescan al componente de seguridad
-            var listElementSeguridad = elementSevice.getRowByTypeAndLayout(Settings.Default.ELEMENT_TYPE_PAGE, Settings.Default.MENU_TOP);
+            var listElementSeguridad = _elementService.getRowByTypeAndLayout(Settings.Default.ELEMENT_TYPE_PAGE, menu);
             if (listElementSeguridad == null) return null;
             //Obtener la lista del elementos de tipo pagina a la cual el usuario tiene permiso , segun el rol del usuario
             var listElementPermitido = _userPermissionService.getRowByCompanyIDyBranchIDyRoleID(companyId, branchId, roleId);
@@ -35,10 +52,11 @@ namespace v4posme_window_form.Domain.Services
                 listElementIdPermitied.Add(userPermissionView.ElementId);
             }
             listElementIdPermitied = listElementIdPermitied.Intersect(listElementIdSeguridad).ToList();
-            if (role.IsAdmin && listElementIdSeguridad.Count() > 0)
+            if (role.IsAdmin && listElementIdSeguridad.Any())
             {
                 listMenuElement = _menuElementService.GetRowByCompanyIdyElementId(companyId, listElementIdSeguridad);
-            }else if (listElementIdPermitied.Count>0)
+            }
+            else if (listElementIdPermitied.Any())
             {
                 listMenuElement = _menuElementService.GetRowByCompanyIdyElementId(companyId, listElementIdPermitied);
             }
