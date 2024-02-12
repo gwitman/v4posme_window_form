@@ -30,7 +30,7 @@ namespace v4posme_window_form
                 IDataLayer dataLayer = XpoDefault.GetDataLayer(VariablesGlobales.ConnectionString, AutoCreateOption.None);
                 XpoDefault.DataLayer = dataLayer;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 var alert = new AlertControl();
                 alert.Show(loginForm, "Error", "No hay una conexión activa, revise su internet o solicite permiso para la conexion a la base de datos.");

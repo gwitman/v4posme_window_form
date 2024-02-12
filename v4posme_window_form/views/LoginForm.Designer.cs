@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(v4posme_window_form.views.LoginForm));
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.ultraPanel1 = new Infragistics.Win.Misc.UltraPanel();
             this.progressPanel = new DevExpress.XtraWaitForm.ProgressPanel();
@@ -42,6 +42,7 @@
             this.chkPagar = new DevExpress.XtraEditors.CheckEdit();
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
             this.ultraPanel1.ClientArea.SuspendLayout();
             this.ultraPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
@@ -49,23 +50,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkPagar.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dockPanel1_Container
-            // 
             this.dockPanel1_Container.Location = new System.Drawing.Point(3, 26);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
             this.dockPanel1_Container.Size = new System.Drawing.Size(552, 82);
             this.dockPanel1_Container.TabIndex = 0;
-            // 
-            // ultraPanel1
-            // 
             appearance1.BackColor = System.Drawing.Color.White;
             this.ultraPanel1.Appearance = appearance1;
             this.ultraPanel1.BorderStyle = Infragistics.Win.UIElementBorderStyle.Solid;
-            // 
-            // ultraPanel1.ClientArea
-            // 
             this.ultraPanel1.ClientArea.Controls.Add(this.progressPanel);
             this.ultraPanel1.ClientArea.Controls.Add(this.btnCancelar);
             this.ultraPanel1.ClientArea.Controls.Add(this.btnIngresar);
@@ -79,10 +72,7 @@
             this.ultraPanel1.Name = "ultraPanel1";
             this.ultraPanel1.Size = new System.Drawing.Size(507, 512);
             this.ultraPanel1.TabIndex = 25;
-            // 
-            // progressPanel
-            // 
-            this.progressPanel.AnimationSpeed = 2F;
+            this.progressPanel.AnimationSpeed = 2;
             this.progressPanel.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.progressPanel.Appearance.Options.UseBackColor = true;
             this.progressPanel.Caption = "Cargando usuario";
@@ -93,9 +83,6 @@
             this.progressPanel.Size = new System.Drawing.Size(312, 141);
             this.progressPanel.TabIndex = 30;
             this.progressPanel.Visible = false;
-            // 
-            // btnCancelar
-            // 
             this.btnCancelar.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(23)))), ((int)(((byte)(10)))));
             this.btnCancelar.Appearance.ForeColor = System.Drawing.Color.White;
             this.btnCancelar.Appearance.Options.UseBackColor = true;
@@ -114,9 +101,6 @@
             this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
-            // 
-            // btnIngresar
-            // 
             this.btnIngresar.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(88)))), ((int)(((byte)(52)))));
             this.btnIngresar.Appearance.ForeColor = System.Drawing.Color.White;
             this.btnIngresar.Appearance.Options.UseBackColor = true;
@@ -133,9 +117,6 @@
             this.btnIngresar.TabIndex = 3;
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
-            // 
-            // btnPagar
-            // 
             this.btnPagar.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
             this.btnPagar.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(121)))), ((int)(((byte)(145)))));
             this.btnPagar.Appearance.ForeColor = System.Drawing.Color.White;
@@ -154,9 +135,6 @@
             this.btnPagar.ToolTip = "Ir a pagar";
             this.btnPagar.ToolTipTitle = "Pagar";
             this.btnPagar.Visible = false;
-            // 
-            // txtPassword
-            // 
             this.txtPassword.EnterMoveNextControl = true;
             this.txtPassword.Location = new System.Drawing.Point(126, 256);
             this.txtPassword.Name = "txtPassword";
@@ -171,9 +149,6 @@
             this.txtPassword.TabIndex = 1;
             this.txtPassword.EditValueChanged += new System.EventHandler(this.txtPassword_EditValueChanged);
             this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
-            // 
-            // txtUsuario
-            // 
             this.txtUsuario.EnterMoveNextControl = true;
             this.txtUsuario.Location = new System.Drawing.Point(126, 191);
             this.txtUsuario.Name = "txtUsuario";
@@ -185,19 +160,12 @@
             this.txtUsuario.TabIndex = 0;
             this.txtUsuario.EditValueChanged += new System.EventHandler(this.txtUsuario_EditValueChanged);
             this.txtUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUsuario_KeyPress);
-            // 
-            // chkPagar
-            // 
             this.chkPagar.Location = new System.Drawing.Point(204, 309);
             this.chkPagar.Name = "chkPagar";
             this.chkPagar.Properties.Caption = "Pagar";
             this.chkPagar.Size = new System.Drawing.Size(80, 18);
             this.chkPagar.TabIndex = 28;
             this.chkPagar.CheckedChanged += new System.EventHandler(this.chkPagar_CheckedChanged);
-            // 
-            // pictureEdit1
-            // 
-            this.pictureEdit1.EditValue = global::v4posme_window_form.Properties.Resources.posMe_Logo_fondo_blanco;
             this.pictureEdit1.Location = new System.Drawing.Point(107, 11);
             this.pictureEdit1.Name = "pictureEdit1";
             this.pictureEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
@@ -205,14 +173,8 @@
             this.pictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
             this.pictureEdit1.Size = new System.Drawing.Size(295, 128);
             this.pictureEdit1.TabIndex = 22;
-            // 
-            // dxErrorProvider
-            // 
             this.dxErrorProvider.ContainerControl = this;
-            // 
-            // LoginForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6, 13);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 512);
             this.ControlBox = false;
@@ -234,9 +196,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkPagar.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             this.ResumeLayout(false);
-
         }
+        private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
 
         #endregion
 

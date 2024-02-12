@@ -7,7 +7,6 @@ namespace v4posme_window_form.Domain
 {
     public class VariablesGlobales
     {
-        private readonly static VariablesGlobales _instance = new VariablesGlobales();
 
         private readonly IUnityContainer _unityContainer;
 
@@ -29,13 +28,7 @@ namespace v4posme_window_form.Domain
             _unityContainer.RegisterType<ICoreWebPermission, CoreWebPermission>();
         }
 
-        public static VariablesGlobales Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
+        public static VariablesGlobales Instance { get; } = new VariablesGlobales();
 
         public static string ConnectionString
         {

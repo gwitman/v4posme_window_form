@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using System;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
@@ -106,6 +107,7 @@ namespace v4posme_window_form.views
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
+            pictureEdit1.Image = Properties.Resources.PosMeLogo;
             txtUsuario.Focus();
         }
 
