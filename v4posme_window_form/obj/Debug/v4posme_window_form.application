@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="v4posme_window_form.exe.manifest" size="49011">
+    <dependentAssembly dependencyType="install" codebase="v4posme_window_form.exe.manifest" size="48939">
       <assemblyIdentity name="v4posme_window_form.exe" version="1.0.0.2" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>cfdDfr8NZ5FbrXmXJ8VHJOi/4SlHsPk3hFXKBITmZXo=</dsig:DigestValue>
+        <dsig:DigestValue>tBFZ7PWkZzCwwPlPSLnTJLMdJksm+MentJvyWWTjRj8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -9,23 +9,16 @@ namespace v4posme_window_form.Domain.Services
 {
     public class CoreWebAuthentication : ICoreWebAuthentication
     {
-        private readonly IMembershipService _membershipService;
-        private readonly IRoleService _roleService;
-        private readonly ICoreMenu _coreMenu;
-        private readonly ICoreWebPermission _coreWebPermission;
-        public CoreWebAuthentication()
-        {
-            _membershipService = VariablesGlobales.Instance.UnityContainer.Resolve<IMembershipService>();
-            _roleService = VariablesGlobales.Instance.UnityContainer.Resolve<IRoleService>();
-            _coreMenu = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreMenu>();
-            _coreWebPermission = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebPermission>();
-        }
-        public User validar(User user, string password)
+        private readonly IMembershipService _membershipService = VariablesGlobales.Instance.UnityContainer.Resolve<IMembershipService>();
+        private readonly IRoleService _roleService = VariablesGlobales.Instance.UnityContainer.Resolve<IRoleService>();
+        private readonly ICoreMenuService _coreMenu = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreMenuService>();
+        private readonly ICoreWebPermission _coreWebPermission = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebPermission>();
+        private readonly ICoreWebParameter _coreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
+        public User Validar(User user, string password)
         {
             if (user == null) return null;
             if (string.IsNullOrEmpty(password)) return null;
-            if (user.Password == password) return user;
-            return null;
+            return user.Password == password ? user : null;
         }
 
         public User getUserByNickname(string nickname)
@@ -37,8 +30,7 @@ namespace v4posme_window_form.Domain.Services
             try
             {
                 XPQuery<User> users = Session.DefaultSession.Query<User>();
-                var usuario = (from u in users where u.Nickname == nickname select u).First();
-                return usuario;
+                return users.First(u=>u.Nickname==nickname);
             }
             catch (Exception)
             {
@@ -76,6 +68,8 @@ namespace v4posme_window_form.Domain.Services
             VariablesGlobales.Instance.ListMenuBodyReport = _coreMenu.GetMenuBodyReport(user.CompanyID, user.BranchID, VariablesGlobales.Instance.Role.RoleID);
             VariablesGlobales.Instance.ListMenuHiddenPopup = _coreMenu.GetMenuHiddenPopup(user.CompanyID, user.BranchID, VariablesGlobales.Instance.Role.RoleID);
             VariablesGlobales.Instance.MessageLogin = _coreWebPermission.GetLicenseMessage(user.CompanyID);
+            var parameter = _coreWebParameter.GetParameter("CORE_LABEL_SISTEMA_SUPLANTATION", VariablesGlobales.Instance.Membership.CompanyID);
+            VariablesGlobales.Instance.ParameterLabelSystem = parameter.Value;
             return user;
         }
     }

@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Utils.MVVM;
+using DevExpress.XtraEditors;
 using System;
 using System.Windows.Forms;
 using Unity;
@@ -12,6 +13,7 @@ namespace v4posme_window_form.Views
         private ICompanyService companyService = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyService>();
         private IBranchService branchService = VariablesGlobales.Instance.UnityContainer.Resolve<IBranchService>();
         private IMembershipService membershipService = VariablesGlobales.Instance.UnityContainer.Resolve<IMembershipService>();
+        private readonly ICoreMenuService coreMenuService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreMenuService>();
         
         public PrincipalForm()
         {
@@ -26,6 +28,16 @@ namespace v4posme_window_form.Views
                 membershipService.getRowByCompanyIDBranchIDUserID(VariablesGlobales.Instance.User.CompanyID, 
                 VariablesGlobales.Instance.User.BranchID, VariablesGlobales.Instance.User.UserID);
             barCompanyNane.Caption = "Compañía: " + VariablesGlobales.Instance.Company.Name + "-" + VariablesGlobales.Instance.Branch.Name;
+            foreach(var item in coreMenuService.RenderMenuLeft(VariablesGlobales.Instance.Company, VariablesGlobales.Instance.ListMenuLeft))
+            {
+                menuElement.Elements.Add(new DevExpress.XtraBars.Navigation.AccordionControlElement()
+                {
+                    Text = item,
+                    Style = DevExpress.XtraBars.Navigation.ElementStyle.Item
+                });
+            }
+            
         }
+
     }
 }

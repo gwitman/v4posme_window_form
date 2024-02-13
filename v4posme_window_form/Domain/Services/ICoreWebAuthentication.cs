@@ -7,6 +7,6 @@ namespace v4posme_window_form.Domain.Services
     {
         User getUserByNickname(string nickname);
         User getUserByPasswordAndNickname(string nickname, string password);
-        User validar(User user, string password);
+        User Validar(User user, string password);
     }
 }

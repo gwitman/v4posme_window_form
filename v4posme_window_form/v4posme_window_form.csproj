@@ -384,7 +384,7 @@
     <Compile Include="Domain\Services\ElementService.cs" />
     <Compile Include="Domain\Services\IBranchService.cs" />
     <Compile Include="Domain\Services\ICompanyService.cs" />
-    <Compile Include="Domain\Services\ICoreMenu.cs" />
+    <Compile Include="Domain\Services\ICoreMenuService.cs" />
     <Compile Include="Domain\Services\ICoreParameterService.cs" />
     <Compile Include="Domain\Services\ICoreWebAuthentication.cs" />
     <Compile Include="Domain\Services\CoreWebAuthentication.cs" />

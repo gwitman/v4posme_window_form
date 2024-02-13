@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using DevExpress.ClipboardSource.SpreadsheetML;
+using DevExpress.Utils;
+using System.Collections.Generic;
 using System.Linq;
 using Unity;
 using v4posme_window_form.Models.Tablas;
 using v4posme_window_form.Properties;
+using static DevExpress.XtraPrinting.Native.ExportOptionsPropertiesNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 namespace v4posme_window_form.Domain.Services
 {
-    public class CoreMenuService : ICoreMenu
+    public class CoreMenuService : ICoreMenuService
     {
         private readonly IElementSevice _elementService = VariablesGlobales.Instance.UnityContainer.Resolve<IElementSevice>();
         private readonly IUserPermissionService _userPermissionService = VariablesGlobales.Instance.UnityContainer.Resolve<IUserPermissionService>();
@@ -61,6 +65,38 @@ namespace v4posme_window_form.Domain.Services
                 listMenuElement = _menuElementService.GetRowByCompanyIdyElementId(companyId, listElementIdPermitied);
             }
             return listMenuElement;
+        }
+
+        public List<string> RenderMenuLeft(Company company, List<MenuElement> menuElements)
+        {
+            return RenderItemLeft(company, menuElements, 0);
+        }
+        private List<string> RenderItemLeft(Company company,List<MenuElement> data,int parent)
+        {
+            /*
+             * foreach ($data AS $obj){
+                if ($obj->parentMenuElementID == $parent){				
+			$x = self::render_item_left($company,$data,$obj->menuElementID);		
+			$data_["icon"] = $obj->icon;				
+			$data_["address"] = base_url()."/".str_replace(URL_SUFFIX_OLD, URL_SUFFIX_NEW,$obj->address);				
+			$data_["display"] = getBehavio(strtoupper($company->type), "core_web_menu",$obj->display, "");
+			$data_["submenu"] = $x;								
+			$template = view("core_template/".$obj->template,$data_);								
+			$html = $html. $template;
+                }
+            }
+            */
+            List<string> list = new List<string>();
+            foreach (var item in data)
+            {
+                if (item.ParentMenuElementID==parent) 
+                {
+                    var x = RenderItemLeft(company, data, parent);
+                    list.Add(item.Display);
+                    VariablesGlobales.Instance.SubMenu = x;
+                }
+            }
+            return list;
         }
     }
 }

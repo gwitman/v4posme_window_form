@@ -1,11 +1,11 @@
 ﻿using DevExpress.XtraEditors;
 using System;
-using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using v4posme_window_form.Domain;
 using v4posme_window_form.Domain.Services;
+using v4posme_window_form.Properties;
 namespace v4posme_window_form.views
 {
     public partial class LoginForm : XtraForm
@@ -23,11 +23,13 @@ namespace v4posme_window_form.views
             {
                 btnPagar.Visible = true;
                 btnPagar.Enabled = true;
+                cmbMontoPagar.Visible = true;
             }
             else
             {
                 btnPagar.Visible = false;
                 btnPagar.Enabled = false;
+                cmbMontoPagar.Visible = false;
             }
         }
 
@@ -96,18 +98,18 @@ namespace v4posme_window_form.views
                 {
                     XtraMessageBox.Show(VariablesGlobales.Instance.MessageLogin, "PosMe", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                XtraMessageBox.Show("Credenciales ingresada correctamente.",
-                    UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                /*XtraMessageBox.Show("Credenciales ingresada correctamente.",
+                    UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Information);*/
                 var logger = new Logger();
                 logger.Log("Usuario logeado al sistema: " + VariablesGlobales.Instance.User.Nickname);
-                progressPanel.Visible = false;
                 DialogResult = DialogResult.OK;
             });
+            progressPanel.Visible = false;
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            pictureEdit1.Image = Properties.Resources.PosMeLogo;
+            pictureEdit1.Image = Resources.PosMeLogo;
             txtUsuario.Focus();
         }
 

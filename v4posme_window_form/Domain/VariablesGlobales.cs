@@ -19,7 +19,7 @@ namespace v4posme_window_form.Domain
             _unityContainer.RegisterType<IMembershipService, MembershipService>();
             _unityContainer.RegisterType<IRoleService, RoleService>();
             _unityContainer.RegisterType<IElementSevice, ElementService>();
-            _unityContainer.RegisterType<ICoreMenu, CoreMenuService>();
+            _unityContainer.RegisterType<ICoreMenuService, CoreMenuService>();
             _unityContainer.RegisterType<IUserPermissionService, UserPermissionService>();
             _unityContainer.RegisterType<IMenuElementService, MenuElementService>();
             _unityContainer.RegisterType<ICoreParameterService, CoreParameterService>();
@@ -59,5 +59,7 @@ namespace v4posme_window_form.Domain
         public List<MenuElement> ListMenuBodyReport { get; set; }
         public List<MenuElement> ListMenuHiddenPopup { get; set; }
         public string MessageLogin { get; set; }
+        public string ParameterLabelSystem { get; set; }
+        public List<string> SubMenu { get; set; }
     }
 }
