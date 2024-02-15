@@ -7,7 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Drawing;
 namespace v4posme_window_form.Properties {
     using System;
     
@@ -63,10 +62,19 @@ namespace v4posme_window_form.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static Bitmap PosMeLogo {
+        internal static System.Drawing.Bitmap PosMeLogo {
             get {
                 object obj = ResourceManager.GetObject("PosMeLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compañía: .
+        /// </summary>
+        internal static string PrincipalForm_Compañía_Titulo {
+            get {
+                return ResourceManager.GetString("PrincipalForm_Compañía_Titulo", resourceCulture);
             }
         }
     }

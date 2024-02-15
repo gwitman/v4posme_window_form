@@ -121,4 +121,7 @@
   <data name="PosMeLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo\posMe Logo fondo blanco.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="PrincipalForm_Compañía_Titulo" xml:space="preserve">
+    <value>Compañía: </value>
+  </data>
 </root>
