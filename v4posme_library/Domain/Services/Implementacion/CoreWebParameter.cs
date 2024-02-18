@@ -1,8 +1,8 @@
-﻿using DevExpress.XtraEditors;
-using System.Windows.Forms;
-using Unity;
+﻿using Unity;
+using v4posme_library.Domain.Services.Interfaz;
 using v4posme_library.ModelsCode;
-namespace v4posme_library.Domain.Services
+
+namespace v4posme_library.Domain.Services.Implementacion
 {
     public class CoreWebParameter : ICoreWebParameter
     {

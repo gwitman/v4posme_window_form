@@ -1,6 +1,7 @@
 ﻿using System;
 using Unity;
-namespace v4posme_library.Domain.Services
+using v4posme_library.Domain.Services.Interfaz;
+namespace v4posme_library.Domain.Services.Implementacion
 {
     public class CoreWebPermission : ICoreWebPermission
     {

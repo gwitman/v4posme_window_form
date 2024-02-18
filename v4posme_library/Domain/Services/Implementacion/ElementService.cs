@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using DevExpress.Xpo;
+﻿using DevExpress.Xpo;
+using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
+using v4posme_library.Domain.Services.Interfaz;
 using v4posme_library.ModelsCode;
-
-namespace v4posme_library.Domain.Services
+namespace v4posme_library.Domain.Services.Implementacion
 {
     public class ElementService : IElementSevice
     {

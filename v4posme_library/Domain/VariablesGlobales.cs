@@ -3,7 +3,8 @@ using System.Configuration;
 using System.Net;
 using System.Net.Mail;
 using Unity;
-using v4posme_library.Domain.Services;
+using v4posme_library.Domain.Services.Implementacion;
+using v4posme_library.Domain.Services.Interfaz;
 using v4posme_library.ModelsCode;
 namespace v4posme_library.Domain
 {
@@ -23,7 +24,7 @@ namespace v4posme_library.Domain
             _unityContainer.RegisterType<IElementSevice, ElementService>();
             _unityContainer.RegisterType<ICoreMenuService, CoreMenuService>();
             _unityContainer.RegisterType<IUserPermissionService, UserPermissionService>();
-            _unityContainer.RegisterType<IMenuElementService, MenuElementService>();
+            _unityContainer.RegisterType<IMenuElementModelService, MenuElementModelService>();
             _unityContainer.RegisterType<ICoreParameterService, CoreParameterService>();
             _unityContainer.RegisterType<ICompanyParameterService, CompanyParamterService>();
             _unityContainer.RegisterType<ICoreWebParameter, CoreWebParameter>();

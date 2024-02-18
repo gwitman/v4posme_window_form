@@ -1,13 +1,13 @@
 ﻿using DevExpress.Xpo;
-using Microsoft.Extensions.Primitives;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using v4posme_library.Domain.Services.Interfaz;
 using v4posme_library.ModelsCode;
-using v4posme_library.ModelsViews;
-namespace v4posme_library.Domain.Services
+
+namespace v4posme_library.Domain.Services.Implementacion
 {
-    public class MenuElementService : IMenuElementService
+    public class MenuElementModelService : IMenuElementModelService
     {
 
         public List<MenuElement> GetRowByCompanyIdyElementId(int companyId, List<int> elementIdArray)
@@ -52,6 +52,16 @@ namespace v4posme_library.Domain.Services
                 listMenuElement.Add(menuElement);
             }
             return listMenuElement;
+        }
+        public List<MenuElement> GetRowByCompanyId(int companyId)
+        {
+            var queryMenuElement = Session.DefaultSession.Query<MenuElement>();
+            var queryElement = Session.DefaultSession.Query<Element>();
+            return queryMenuElement
+                .Join(queryElement, menu=>menu.ElementID, element=>element.ElementID, (menu, element)=>menu)
+                .Where(menu=>menu.CompanyID == companyId && menu.IsActive == 1)
+                .OrderBy(menu=>menu.Orden)
+                .ToList();
         }
     }
 

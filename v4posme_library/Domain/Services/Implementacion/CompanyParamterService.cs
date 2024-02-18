@@ -1,9 +1,9 @@
 ﻿using DevExpress.Xpo;
 using System;
 using System.Linq;
+using v4posme_library.Domain.Services.Interfaz;
 using v4posme_library.ModelsCode;
-
-namespace v4posme_library.Domain.Services
+namespace v4posme_library.Domain.Services.Implementacion
 {
     public class CompanyParamterService : ICompanyParameterService
     {

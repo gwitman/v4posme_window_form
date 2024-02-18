@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Unity;
+using v4posme_library.Domain.Services.Interfaz;
 using v4posme_library.ModelsCode;
-using System.Configuration;
-using System;
 using v4posme_library.Properties;
-
-namespace v4posme_library.Domain.Services
+namespace v4posme_library.Domain.Services.Implementacion
 {
     public class CoreMenuService : ICoreMenuService
     {
         private readonly IElementSevice _elementService = VariablesGlobales.Instance.UnityContainer.Resolve<IElementSevice>();
         private readonly IUserPermissionService _userPermissionService = VariablesGlobales.Instance.UnityContainer.Resolve<IUserPermissionService>();
-        private readonly IMenuElementService _menuElementService = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementService>();
+        private readonly IMenuElementModelService _menuElementModelService = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModelService>();
         public List<MenuElement> GetMenuTop(int companyId, int branchId, int roleId)
         {
             return GetMenu(companyId, branchId, roleId, Convert.ToInt32(Settings.Default.MENU_TOP));
@@ -57,11 +56,11 @@ namespace v4posme_library.Domain.Services
             listElementIdPermitied = listElementIdPermitied.Intersect(listElementIdSeguridad).ToList();
             if (role.IsAdmin && listElementIdSeguridad.Any())
             {
-                listMenuElement = _menuElementService.GetRowByCompanyIdyElementId(companyId, listElementIdSeguridad);
+                listMenuElement = _menuElementModelService.GetRowByCompanyIdyElementId(companyId, listElementIdSeguridad);
             }
             else if (listElementIdPermitied.Any())
             {
-                listMenuElement = _menuElementService.GetRowByCompanyIdyElementId(companyId, listElementIdPermitied);
+                listMenuElement = _menuElementModelService.GetRowByCompanyIdyElementId(companyId, listElementIdPermitied);
             }
             return listMenuElement;
         }

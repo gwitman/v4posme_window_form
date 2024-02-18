@@ -1,7 +1,5 @@
-﻿using System.Threading.Tasks;
-using v4posme_library.ModelsCode;
-
-namespace v4posme_library.Domain.Services
+﻿using v4posme_library.ModelsCode;
+namespace v4posme_library.Domain.Services.Interfaz
 {
     public interface ICoreWebAuthentication
     {

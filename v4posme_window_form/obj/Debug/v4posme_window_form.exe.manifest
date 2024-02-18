@@ -787,26 +787,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="v4posme_library.dll" size="341504">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="v4posme_library.dll" size="342528">
       <assemblyIdentity name="v4posme_library" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>UxQ4YXlG8Avq1W8u2JhZMNq3HUDXrsKVnlIBG/qT8Ec=</dsig:DigestValue>
+        <dsig:DigestValue>9/l/3NUUgv9aYzp2hWTm4EC0ldAM7z5B1crwR6EKqNQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="v4posme_window_form.exe" size="343496">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="v4posme_window_form.exe" size="344008">
       <assemblyIdentity name="v4posme_window_form" version="1.0.0.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>qv0I7ORAqbA9Xiu2kNZlFvwP6xXX+rdy714gGXF2Kv4=</dsig:DigestValue>
+        <dsig:DigestValue>tFpGMo5MUSyyoUSL/TyPi64WYLmtnVokMLJ4wlbRTeg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

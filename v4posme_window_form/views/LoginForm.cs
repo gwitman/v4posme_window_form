@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Unity;
 using v4posme_library.Domain;
 using v4posme_library.Domain.Services;
+using v4posme_library.Domain.Services.Interfaz;
 using v4posme_window_form.Properties;
 
 namespace v4posme_window_form.views

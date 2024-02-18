@@ -1,9 +1,10 @@
 ﻿using DevExpress.Xpo;
 using System.Collections.Generic;
 using System.Linq;
+using v4posme_library.Domain.Services.Interfaz;
 using v4posme_library.ModelsCode;
 using v4posme_library.ModelsViews;
-namespace v4posme_library.Domain.Services
+namespace v4posme_library.Domain.Services.Implementacion
 {
     public class UserPermissionService : IUserPermissionService
     {
@@ -22,16 +23,18 @@ namespace v4posme_library.Domain.Services
                 select new {up.CompanyID, up.BranchID, up.RoleID, up.ElementID, up.Selected, up.Inserted, up.Deleted, up.Edited, menu.Orden, menu.Display};
             foreach (var item in result)
             {
-                var up = new UserPermissionView();
-                up.Selected = item.Selected;
-                up.Deleted = item.Deleted;
-                up.Inserted = item.Inserted;
-                up.Edited = item.Edited;
-                up.Orden = item.Orden;
-                up.Display = item.Display;
-                up.BranchId = item.BranchID;
-                up.CompanyId = item.CompanyID;
-                up.ElementId = item.ElementID;
+                var up = new UserPermissionView
+                {
+                    Selected = item.Selected,
+                    Deleted = item.Deleted,
+                    Inserted = item.Inserted,
+                    Edited = item.Edited,
+                    Orden = item.Orden,
+                    Display = item.Display,
+                    BranchId = item.BranchID,
+                    CompanyId = item.CompanyID,
+                    ElementId = item.ElementID
+                };
                 list.Add(up);
             }
             return list;

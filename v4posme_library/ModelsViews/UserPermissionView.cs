@@ -2,7 +2,7 @@
 namespace v4posme_library.ModelsViews
 {
     [NonPersistent]
-    public class UserPermissionView
+    public class UserPermissionView: XPLiteObject
     {
         //up.CompanyID, up.BranchID, up.RoleID, up.ElementID, up.Selected, up.Inserted, up.Deleted, up.Edited, menu.Orden,menu.Display
         public int CompanyId { get; set; }

@@ -60,6 +60,9 @@
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -91,32 +94,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Logger.cs" />
-    <Compile Include="Domain\Services\BranchService.cs" />
-    <Compile Include="Domain\Services\CompanyParamterService.cs" />
-    <Compile Include="Domain\Services\CompanyService.cs" />
-    <Compile Include="Domain\Services\CoreMenuService.cs" />
-    <Compile Include="Domain\Services\CoreParameterService.cs" />
-    <Compile Include="Domain\Services\CoreWebAuthentication.cs" />
-    <Compile Include="Domain\Services\CoreWebParameter.cs" />
-    <Compile Include="Domain\Services\CoreWebPermission.cs" />
-    <Compile Include="Domain\Services\ElementService.cs" />
-    <Compile Include="Domain\Services\IBranchService.cs" />
-    <Compile Include="Domain\Services\ICompanyParameterService.cs" />
-    <Compile Include="Domain\Services\ICompanyService.cs" />
-    <Compile Include="Domain\Services\ICoreMenuService.cs" />
-    <Compile Include="Domain\Services\ICoreParameterService.cs" />
-    <Compile Include="Domain\Services\ICoreWebAuthentication.cs" />
-    <Compile Include="Domain\Services\ICoreWebParameter.cs" />
-    <Compile Include="Domain\Services\ICoreWebPermission.cs" />
-    <Compile Include="Domain\Services\IElementSevice.cs" />
-    <Compile Include="Domain\Services\IMembershipService.cs" />
-    <Compile Include="Domain\Services\IMenuElementService.cs" />
-    <Compile Include="Domain\Services\IRoleService.cs" />
-    <Compile Include="Domain\Services\IUserPermissionService.cs" />
-    <Compile Include="Domain\Services\MembershipService.cs" />
-    <Compile Include="Domain\Services\MenuElementService.cs" />
-    <Compile Include="Domain\Services\RoleService.cs" />
-    <Compile Include="Domain\Services\UserPermissionService.cs" />
+    <Compile Include="Domain\Services\Implementacion\BranchService.cs" />
+    <Compile Include="Domain\Services\Implementacion\CompanyParamterService.cs" />
+    <Compile Include="Domain\Services\Implementacion\CompanyService.cs" />
+    <Compile Include="Domain\Services\Implementacion\CoreMenuService.cs" />
+    <Compile Include="Domain\Services\Implementacion\CoreParameterService.cs" />
+    <Compile Include="Domain\Services\Implementacion\CoreWebAuthentication.cs" />
+    <Compile Include="Domain\Services\Implementacion\CoreWebParameter.cs" />
+    <Compile Include="Domain\Services\Implementacion\CoreWebPermission.cs" />
+    <Compile Include="Domain\Services\Implementacion\ElementService.cs" />
+    <Compile Include="Domain\Services\Implementacion\MembershipService.cs" />
+    <Compile Include="Domain\Services\Implementacion\MenuElementModelService.cs" />
+    <Compile Include="Domain\Services\Implementacion\RoleService.cs" />
+    <Compile Include="Domain\Services\Implementacion\UserPermissionService.cs" />
+    <Compile Include="Domain\Services\Interfaz\IBranchService.cs" />
+    <Compile Include="Domain\Services\Interfaz\ICompanyParameterService.cs" />
+    <Compile Include="Domain\Services\Interfaz\ICompanyService.cs" />
+    <Compile Include="Domain\Services\Interfaz\ICoreMenuService.cs" />
+    <Compile Include="Domain\Services\Interfaz\ICoreParameterService.cs" />
+    <Compile Include="Domain\Services\Interfaz\ICoreWebAuthentication.cs" />
+    <Compile Include="Domain\Services\Interfaz\ICoreWebParameter.cs" />
+    <Compile Include="Domain\Services\Interfaz\ICoreWebPermission.cs" />
+    <Compile Include="Domain\Services\Interfaz\IElementSevice.cs" />
+    <Compile Include="Domain\Services\Interfaz\IMembershipService.cs" />
+    <Compile Include="Domain\Services\Interfaz\IMenuElementModelService.cs" />
+    <Compile Include="Domain\Services\Interfaz\IRoleService.cs" />
+    <Compile Include="Domain\Services\Interfaz\IUserPermissionService.cs" />
     <Compile Include="Domain\VariablesGlobales.cs" />
     <Compile Include="ModelsCode\Account.cs" />
     <Compile Include="ModelsCode\Account.Designer.cs">

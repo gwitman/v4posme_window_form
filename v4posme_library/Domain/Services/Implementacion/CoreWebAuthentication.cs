@@ -1,11 +1,11 @@
 ﻿using DevExpress.Xpo;
-using DevExpress.XtraEditors;
 using System;
 using System.Linq;
-using System.Windows.Forms;
 using Unity;
+using v4posme_library.Domain.Services.Interfaz;
 using v4posme_library.ModelsCode;
-namespace v4posme_library.Domain.Services
+
+namespace v4posme_library.Domain.Services.Implementacion
 {
     public class CoreWebAuthentication : ICoreWebAuthentication
     {
@@ -14,7 +14,7 @@ namespace v4posme_library.Domain.Services
         private readonly ICoreMenuService _coreMenu = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreMenuService>();
         private readonly ICoreWebPermission _coreWebPermission = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebPermission>();
         private readonly ICoreWebParameter _coreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
-        
+
         public User Validar(User user, string password)
         {
             if (user == null) return null;
@@ -31,7 +31,7 @@ namespace v4posme_library.Domain.Services
             try
             {
                 XPQuery<User> users = Session.DefaultSession.Query<User>();
-                return users.First(u=>u.Nickname==nickname);
+                return users.First(u=>u.Nickname == nickname);
             }
             catch (Exception)
             {
