@@ -2,9 +2,10 @@
 using DevExpress.XtraBars.Navigation;
 using System;
 using Unity;
-using v4posme_window_form.Domain;
-using v4posme_window_form.Domain.Services;
+using v4posme_library.Domain;
+using v4posme_library.Domain.Services;
 using v4posme_window_form.Properties;
+
 namespace v4posme_window_form.Views
 {
     public partial class PrincipalForm : FluentDesignForm
@@ -21,9 +22,9 @@ namespace v4posme_window_form.Views
 
         private void PrincipalForm_Load(object sender, EventArgs e)
         {
-            VariablesGlobales.Instance.Company = _companyService.findById(VariablesGlobales.Instance.User.CompanyID);
+            VariablesGlobales.Instance.Company = _companyService.GetRowByPk(VariablesGlobales.Instance.User.CompanyID);
             VariablesGlobales.Instance.Branch = _branchService.findById(VariablesGlobales.Instance.User.BranchID);
-            VariablesGlobales.Instance.Membership = _membershipService.getRowByCompanyIDBranchIDUserID(VariablesGlobales.Instance.User.CompanyID,
+            VariablesGlobales.Instance.Membership = _membershipService.GetRowByCompanyIdBranchIdUserId(VariablesGlobales.Instance.User.CompanyID,
                 VariablesGlobales.Instance.User.BranchID, VariablesGlobales.Instance.User.UserID);
             barCompanyNane.Caption = Resources.PrincipalForm_Compañía_Titulo + VariablesGlobales.Instance.Company.Name + "-" + VariablesGlobales.Instance.Branch.Name;
             foreach (var item in _coreMenuService.RenderMenuLeft(VariablesGlobales.Instance.Company, VariablesGlobales.Instance.ListMenuLeft))

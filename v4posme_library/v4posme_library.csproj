@@ -1,0 +1,694 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A96828EA-ECD2-4E1C-A2B4-737EAD1729FD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>v4posme_library</RootNamespace>
+    <AssemblyName>v4posme_library</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.Desktop.v23.1, Version=23.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v23.1, Version=23.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Drawing.v23.1, Version=23.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v23.1, Version=23.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v23.1, Version=23.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v23.1, Version=23.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v23.1, Version=23.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.8.0.0\lib\net462\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.8.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domain\Logger.cs" />
+    <Compile Include="Domain\Services\BranchService.cs" />
+    <Compile Include="Domain\Services\CompanyParamterService.cs" />
+    <Compile Include="Domain\Services\CompanyService.cs" />
+    <Compile Include="Domain\Services\CoreMenuService.cs" />
+    <Compile Include="Domain\Services\CoreParameterService.cs" />
+    <Compile Include="Domain\Services\CoreWebAuthentication.cs" />
+    <Compile Include="Domain\Services\CoreWebParameter.cs" />
+    <Compile Include="Domain\Services\CoreWebPermission.cs" />
+    <Compile Include="Domain\Services\ElementService.cs" />
+    <Compile Include="Domain\Services\IBranchService.cs" />
+    <Compile Include="Domain\Services\ICompanyParameterService.cs" />
+    <Compile Include="Domain\Services\ICompanyService.cs" />
+    <Compile Include="Domain\Services\ICoreMenuService.cs" />
+    <Compile Include="Domain\Services\ICoreParameterService.cs" />
+    <Compile Include="Domain\Services\ICoreWebAuthentication.cs" />
+    <Compile Include="Domain\Services\ICoreWebParameter.cs" />
+    <Compile Include="Domain\Services\ICoreWebPermission.cs" />
+    <Compile Include="Domain\Services\IElementSevice.cs" />
+    <Compile Include="Domain\Services\IMembershipService.cs" />
+    <Compile Include="Domain\Services\IMenuElementService.cs" />
+    <Compile Include="Domain\Services\IRoleService.cs" />
+    <Compile Include="Domain\Services\IUserPermissionService.cs" />
+    <Compile Include="Domain\Services\MembershipService.cs" />
+    <Compile Include="Domain\Services\MenuElementService.cs" />
+    <Compile Include="Domain\Services\RoleService.cs" />
+    <Compile Include="Domain\Services\UserPermissionService.cs" />
+    <Compile Include="Domain\VariablesGlobales.cs" />
+    <Compile Include="ModelsCode\Account.cs" />
+    <Compile Include="ModelsCode\Account.Designer.cs">
+      <DependentUpon>Account.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\AccountingBalance.cs" />
+    <Compile Include="ModelsCode\AccountingBalance.Designer.cs">
+      <DependentUpon>AccountingBalance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\AccountingBalanceTemp.cs" />
+    <Compile Include="ModelsCode\AccountingBalanceTemp.Designer.cs">
+      <DependentUpon>AccountingBalanceTemp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\AccountingCycle.cs" />
+    <Compile Include="ModelsCode\AccountingCycle.Designer.cs">
+      <DependentUpon>AccountingCycle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\AccountingPeriod.cs" />
+    <Compile Include="ModelsCode\AccountingPeriod.Designer.cs">
+      <DependentUpon>AccountingPeriod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\AccountLevel.cs" />
+    <Compile Include="ModelsCode\AccountLevel.Designer.cs">
+      <DependentUpon>AccountLevel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\AccountTmp.cs" />
+    <Compile Include="ModelsCode\AccountTmp.Designer.cs">
+      <DependentUpon>AccountTmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\AccountType.cs" />
+    <Compile Include="ModelsCode\AccountType.Designer.cs">
+      <DependentUpon>AccountType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Bank.cs" />
+    <Compile Include="ModelsCode\Bank.Designer.cs">
+      <DependentUpon>Bank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Biblia.cs" />
+    <Compile Include="ModelsCode\Biblia.Designer.cs">
+      <DependentUpon>Biblia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Branch.cs" />
+    <Compile Include="ModelsCode\Branch.Designer.cs">
+      <DependentUpon>Branch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Caller.cs" />
+    <Compile Include="ModelsCode\Caller.Designer.cs">
+      <DependentUpon>Caller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CashBox.cs" />
+    <Compile Include="ModelsCode\CashBox.Designer.cs">
+      <DependentUpon>CashBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CashBoxSession.cs" />
+    <Compile Include="ModelsCode\CashBoxSession.Designer.cs">
+      <DependentUpon>CashBoxSession.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CashBoxSessionTransactionMaster.cs" />
+    <Compile Include="ModelsCode\CashBoxSessionTransactionMaster.Designer.cs">
+      <DependentUpon>CashBoxSessionTransactionMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CashBoxUser.cs" />
+    <Compile Include="ModelsCode\CashBoxUser.Designer.cs">
+      <DependentUpon>CashBoxUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Catalog.cs" />
+    <Compile Include="ModelsCode\Catalog.Designer.cs">
+      <DependentUpon>Catalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CatalogItem.cs" />
+    <Compile Include="ModelsCode\CatalogItem.Designer.cs">
+      <DependentUpon>CatalogItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CatalogItemConvertion.cs" />
+    <Compile Include="ModelsCode\CatalogItemConvertion.Designer.cs">
+      <DependentUpon>CatalogItemConvertion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CenterCost.cs" />
+    <Compile Include="ModelsCode\CenterCost.Designer.cs">
+      <DependentUpon>CenterCost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Company.cs" />
+    <Compile Include="ModelsCode\Company.Designer.cs">
+      <DependentUpon>Company.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CompanyComponent.cs" />
+    <Compile Include="ModelsCode\CompanyComponent.Designer.cs">
+      <DependentUpon>CompanyComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CompanyComponentConcept.cs" />
+    <Compile Include="ModelsCode\CompanyComponentConcept.Designer.cs">
+      <DependentUpon>CompanyComponentConcept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CompanyComponentFlavor.cs" />
+    <Compile Include="ModelsCode\CompanyComponentFlavor.Designer.cs">
+      <DependentUpon>CompanyComponentFlavor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CompanyComponentItemDataview.cs" />
+    <Compile Include="ModelsCode\CompanyComponentItemDataview.Designer.cs">
+      <DependentUpon>CompanyComponentItemDataview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CompanyCurrency.cs" />
+    <Compile Include="ModelsCode\CompanyCurrency.Designer.cs">
+      <DependentUpon>CompanyCurrency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CompanyDataview.cs" />
+    <Compile Include="ModelsCode\CompanyDataview.Designer.cs">
+      <DependentUpon>CompanyDataview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CompanyDefaultDataview.cs" />
+    <Compile Include="ModelsCode\CompanyDefaultDataview.Designer.cs">
+      <DependentUpon>CompanyDefaultDataview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CompanyParameter.cs" />
+    <Compile Include="ModelsCode\CompanyParameter.Designer.cs">
+      <DependentUpon>CompanyParameter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CompanySubelementAudit.cs" />
+    <Compile Include="ModelsCode\CompanySubelementAudit.Designer.cs">
+      <DependentUpon>CompanySubelementAudit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CompanySubelementObligatory.cs" />
+    <Compile Include="ModelsCode\CompanySubelementObligatory.Designer.cs">
+      <DependentUpon>CompanySubelementObligatory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Component.cs" />
+    <Compile Include="ModelsCode\Component.Designer.cs">
+      <DependentUpon>Component.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ComponentAudit.cs" />
+    <Compile Include="ModelsCode\ComponentAudit.Designer.cs">
+      <DependentUpon>ComponentAudit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ComponentAuditDetail.cs" />
+    <Compile Include="ModelsCode\ComponentAuditDetail.Designer.cs">
+      <DependentUpon>ComponentAuditDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ComponentAutorization.cs" />
+    <Compile Include="ModelsCode\ComponentAutorization.Designer.cs">
+      <DependentUpon>ComponentAutorization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ComponentAutorizationDetail.cs" />
+    <Compile Include="ModelsCode\ComponentAutorizationDetail.Designer.cs">
+      <DependentUpon>ComponentAutorizationDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ComponentElement.cs" />
+    <Compile Include="ModelsCode\ComponentElement.Designer.cs">
+      <DependentUpon>ComponentElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ConnectionHelper.cs" />
+    <Compile Include="ModelsCode\Counter.cs" />
+    <Compile Include="ModelsCode\Counter.Designer.cs">
+      <DependentUpon>Counter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CreditLine.cs" />
+    <Compile Include="ModelsCode\CreditLine.Designer.cs">
+      <DependentUpon>CreditLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Currency.cs" />
+    <Compile Include="ModelsCode\Currency.Designer.cs">
+      <DependentUpon>Currency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Customer.cs" />
+    <Compile Include="ModelsCode\Customer.Designer.cs">
+      <DependentUpon>Customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CustomerConsultasSinRiesgo.cs" />
+    <Compile Include="ModelsCode\CustomerConsultasSinRiesgo.Designer.cs">
+      <DependentUpon>CustomerConsultasSinRiesgo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CustomerCredit.cs" />
+    <Compile Include="ModelsCode\CustomerCredit.Designer.cs">
+      <DependentUpon>CustomerCredit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CustomerCreditAmoritization.cs" />
+    <Compile Include="ModelsCode\CustomerCreditAmoritization.Designer.cs">
+      <DependentUpon>CustomerCreditAmoritization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CustomerCreditClasification.cs" />
+    <Compile Include="ModelsCode\CustomerCreditClasification.Designer.cs">
+      <DependentUpon>CustomerCreditClasification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CustomerCreditDocument.cs" />
+    <Compile Include="ModelsCode\CustomerCreditDocument.Designer.cs">
+      <DependentUpon>CustomerCreditDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CustomerCreditDocumentEntityRelated.cs" />
+    <Compile Include="ModelsCode\CustomerCreditDocumentEntityRelated.Designer.cs">
+      <DependentUpon>CustomerCreditDocumentEntityRelated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\CustomerCreditLine.cs" />
+    <Compile Include="ModelsCode\CustomerCreditLine.Designer.cs">
+      <DependentUpon>CustomerCreditLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Dataview.cs" />
+    <Compile Include="ModelsCode\Dataview.Designer.cs">
+      <DependentUpon>Dataview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Element.cs" />
+    <Compile Include="ModelsCode\Element.Designer.cs">
+      <DependentUpon>Element.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ElementType.cs" />
+    <Compile Include="ModelsCode\ElementType.Designer.cs">
+      <DependentUpon>ElementType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Employee.cs" />
+    <Compile Include="ModelsCode\Employee.Designer.cs">
+      <DependentUpon>Employee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\EmployeeCalendarPay.cs" />
+    <Compile Include="ModelsCode\EmployeeCalendarPay.Designer.cs">
+      <DependentUpon>EmployeeCalendarPay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\EmployeeCalendarPayDetail.cs" />
+    <Compile Include="ModelsCode\EmployeeCalendarPayDetail.Designer.cs">
+      <DependentUpon>EmployeeCalendarPayDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Entity.cs" />
+    <Compile Include="ModelsCode\Entity.Designer.cs">
+      <DependentUpon>Entity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\EntityAccount.cs" />
+    <Compile Include="ModelsCode\EntityAccount.Designer.cs">
+      <DependentUpon>EntityAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\EntityEmail.cs" />
+    <Compile Include="ModelsCode\EntityEmail.Designer.cs">
+      <DependentUpon>EntityEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\EntityPhone.cs" />
+    <Compile Include="ModelsCode\EntityPhone.Designer.cs">
+      <DependentUpon>EntityPhone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Error.cs" />
+    <Compile Include="ModelsCode\Error.Designer.cs">
+      <DependentUpon>Error.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\EstadisticaCategorias.cs" />
+    <Compile Include="ModelsCode\EstadisticaCategorias.Designer.cs">
+      <DependentUpon>EstadisticaCategorias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\EstadisticaClases.cs" />
+    <Compile Include="ModelsCode\EstadisticaClases.Designer.cs">
+      <DependentUpon>EstadisticaClases.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ExchangeRate.cs" />
+    <Compile Include="ModelsCode\ExchangeRate.Designer.cs">
+      <DependentUpon>ExchangeRate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\FixedAssent.cs" />
+    <Compile Include="ModelsCode\FixedAssent.Designer.cs">
+      <DependentUpon>FixedAssent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Indicator.cs" />
+    <Compile Include="ModelsCode\Indicator.Designer.cs">
+      <DependentUpon>Indicator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\IndicatorHistory.cs" />
+    <Compile Include="ModelsCode\IndicatorHistory.Designer.cs">
+      <DependentUpon>IndicatorHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\IndicatorTmp.cs" />
+    <Compile Include="ModelsCode\IndicatorTmp.Designer.cs">
+      <DependentUpon>IndicatorTmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Item.cs" />
+    <Compile Include="ModelsCode\Item.Designer.cs">
+      <DependentUpon>Item.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ItemCategory.cs" />
+    <Compile Include="ModelsCode\ItemCategory.Designer.cs">
+      <DependentUpon>ItemCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ItemConfigLoto.cs" />
+    <Compile Include="ModelsCode\ItemConfigLoto.Designer.cs">
+      <DependentUpon>ItemConfigLoto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ItemDataSheet.cs" />
+    <Compile Include="ModelsCode\ItemDataSheet.Designer.cs">
+      <DependentUpon>ItemDataSheet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ItemDataSheetDetail.cs" />
+    <Compile Include="ModelsCode\ItemDataSheetDetail.Designer.cs">
+      <DependentUpon>ItemDataSheetDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ItemSku.cs" />
+    <Compile Include="ModelsCode\ItemSku.Designer.cs">
+      <DependentUpon>ItemSku.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ItemWarehouse.cs" />
+    <Compile Include="ModelsCode\ItemWarehouse.Designer.cs">
+      <DependentUpon>ItemWarehouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ItemWarehouseExpired.cs" />
+    <Compile Include="ModelsCode\ItemWarehouseExpired.Designer.cs">
+      <DependentUpon>ItemWarehouseExpired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\JournalEntry.cs" />
+    <Compile Include="ModelsCode\JournalEntry.Designer.cs">
+      <DependentUpon>JournalEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\JournalEntryDetail.cs" />
+    <Compile Include="ModelsCode\JournalEntryDetail.Designer.cs">
+      <DependentUpon>JournalEntryDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\JournalEntryDetailSummary.cs" />
+    <Compile Include="ModelsCode\JournalEntryDetailSummary.Designer.cs">
+      <DependentUpon>JournalEntryDetailSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Kardex.cs" />
+    <Compile Include="ModelsCode\Kardex.Designer.cs">
+      <DependentUpon>Kardex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Legal.cs" />
+    <Compile Include="ModelsCode\Legal.Designer.cs">
+      <DependentUpon>Legal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ListPrice.cs" />
+    <Compile Include="ModelsCode\ListPrice.Designer.cs">
+      <DependentUpon>ListPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Log.cs" />
+    <Compile Include="ModelsCode\Log.Designer.cs">
+      <DependentUpon>Log.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\LogMesseger.cs" />
+    <Compile Include="ModelsCode\LogMesseger.Designer.cs">
+      <DependentUpon>LogMesseger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\LogSession.cs" />
+    <Compile Include="ModelsCode\LogSession.Designer.cs">
+      <DependentUpon>LogSession.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\MasterKardexTemp.cs" />
+    <Compile Include="ModelsCode\MasterKardexTemp.Designer.cs">
+      <DependentUpon>MasterKardexTemp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Membership.cs" />
+    <Compile Include="ModelsCode\Membership.Designer.cs">
+      <DependentUpon>Membership.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\MenuElement.cs" />
+    <Compile Include="ModelsCode\MenuElement.Designer.cs">
+      <DependentUpon>MenuElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Naturales.cs" />
+    <Compile Include="ModelsCode\Naturales.Designer.cs">
+      <DependentUpon>Naturales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Notification.cs" />
+    <Compile Include="ModelsCode\Notification.Designer.cs">
+      <DependentUpon>Notification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Parameter.cs" />
+    <Compile Include="ModelsCode\Parameter.Designer.cs">
+      <DependentUpon>Parameter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Price.cs" />
+    <Compile Include="ModelsCode\Price.Designer.cs">
+      <DependentUpon>Price.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Provider.cs" />
+    <Compile Include="ModelsCode\Provider.Designer.cs">
+      <DependentUpon>Provider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\ProviderItem.cs" />
+    <Compile Include="ModelsCode\ProviderItem.Designer.cs">
+      <DependentUpon>ProviderItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\PublicCatalog.cs" />
+    <Compile Include="ModelsCode\PublicCatalog.Designer.cs">
+      <DependentUpon>PublicCatalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\PublicCatalogDetail.cs" />
+    <Compile Include="ModelsCode\PublicCatalogDetail.Designer.cs">
+      <DependentUpon>PublicCatalogDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\RazonesFinancierasTmp.cs" />
+    <Compile Include="ModelsCode\RazonesFinancierasTmp.Designer.cs">
+      <DependentUpon>RazonesFinancierasTmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Relationship.cs" />
+    <Compile Include="ModelsCode\Relationship.Designer.cs">
+      <DependentUpon>Relationship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Remember.cs" />
+    <Compile Include="ModelsCode\Remember.Designer.cs">
+      <DependentUpon>Remember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Role.cs" />
+    <Compile Include="ModelsCode\Role.Designer.cs">
+      <DependentUpon>Role.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\RoleAutorization.cs" />
+    <Compile Include="ModelsCode\RoleAutorization.Designer.cs">
+      <DependentUpon>RoleAutorization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Subelement.cs" />
+    <Compile Include="ModelsCode\Subelement.Designer.cs">
+      <DependentUpon>Subelement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Tag.cs" />
+    <Compile Include="ModelsCode\Tag.Designer.cs">
+      <DependentUpon>Tag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Transaction.cs" />
+    <Compile Include="ModelsCode\Transaction.Designer.cs">
+      <DependentUpon>Transaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\TransactionCausal.cs" />
+    <Compile Include="ModelsCode\TransactionCausal.Designer.cs">
+      <DependentUpon>TransactionCausal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\TransactionConcept.cs" />
+    <Compile Include="ModelsCode\TransactionConcept.Designer.cs">
+      <DependentUpon>TransactionConcept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\TransactionMaster.cs" />
+    <Compile Include="ModelsCode\TransactionMaster.Designer.cs">
+      <DependentUpon>TransactionMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\TransactionMasterConcept.cs" />
+    <Compile Include="ModelsCode\TransactionMasterConcept.Designer.cs">
+      <DependentUpon>TransactionMasterConcept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\TransactionMasterDenomination.cs" />
+    <Compile Include="ModelsCode\TransactionMasterDenomination.Designer.cs">
+      <DependentUpon>TransactionMasterDenomination.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\TransactionMasterDetail.cs" />
+    <Compile Include="ModelsCode\TransactionMasterDetail.Designer.cs">
+      <DependentUpon>TransactionMasterDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\TransactionMasterDetailCredit.cs" />
+    <Compile Include="ModelsCode\TransactionMasterDetailCredit.Designer.cs">
+      <DependentUpon>TransactionMasterDetailCredit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\TransactionMasterDetailTemp.cs" />
+    <Compile Include="ModelsCode\TransactionMasterDetailTemp.Designer.cs">
+      <DependentUpon>TransactionMasterDetailTemp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\TransactionMasterInfo.cs" />
+    <Compile Include="ModelsCode\TransactionMasterInfo.Designer.cs">
+      <DependentUpon>TransactionMasterInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\TransactionMasterPurchase.cs" />
+    <Compile Include="ModelsCode\TransactionMasterPurchase.Designer.cs">
+      <DependentUpon>TransactionMasterPurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\TransactionMasterSummaryConceptTmp.cs" />
+    <Compile Include="ModelsCode\TransactionMasterSummaryConceptTmp.Designer.cs">
+      <DependentUpon>TransactionMasterSummaryConceptTmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\TransactionProfileDetail.cs" />
+    <Compile Include="ModelsCode\TransactionProfileDetail.Designer.cs">
+      <DependentUpon>TransactionProfileDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\TransactionProfileDetailTmp.cs" />
+    <Compile Include="ModelsCode\TransactionProfileDetailTmp.Designer.cs">
+      <DependentUpon>TransactionProfileDetailTmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\TypeMenuElement.cs" />
+    <Compile Include="ModelsCode\TypeMenuElement.Designer.cs">
+      <DependentUpon>TypeMenuElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\User.cs" />
+    <Compile Include="ModelsCode\User.Designer.cs">
+      <DependentUpon>User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\UserPermission.cs" />
+    <Compile Include="ModelsCode\UserPermission.Designer.cs">
+      <DependentUpon>UserPermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\UserTag.cs" />
+    <Compile Include="ModelsCode\UserTag.Designer.cs">
+      <DependentUpon>UserTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\UserWarehouse.cs" />
+    <Compile Include="ModelsCode\UserWarehouse.Designer.cs">
+      <DependentUpon>UserWarehouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\VwContabilidadComprobantes.cs" />
+    <Compile Include="ModelsCode\VwContabilidadComprobantes.Designer.cs">
+      <DependentUpon>VwContabilidadComprobantes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\VwGerenciaBalance.cs" />
+    <Compile Include="ModelsCode\VwGerenciaBalance.Designer.cs">
+      <DependentUpon>VwGerenciaBalance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\VwGerenciaCustomer.cs" />
+    <Compile Include="ModelsCode\VwGerenciaCustomer.Designer.cs">
+      <DependentUpon>VwGerenciaCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\VwGerenciaDesembolsosDetalle.cs" />
+    <Compile Include="ModelsCode\VwGerenciaDesembolsosDetalle.Designer.cs">
+      <DependentUpon>VwGerenciaDesembolsosDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\VwGerenciaDesembolsosResumen.cs" />
+    <Compile Include="ModelsCode\VwGerenciaDesembolsosResumen.Designer.cs">
+      <DependentUpon>VwGerenciaDesembolsosResumen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\VwGerenciaEstadoResultado001.cs" />
+    <Compile Include="ModelsCode\VwGerenciaEstadoResultado001.Designer.cs">
+      <DependentUpon>VwGerenciaEstadoResultado001.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\VwGerenciaEstadoResultado002.cs" />
+    <Compile Include="ModelsCode\VwGerenciaEstadoResultado002.Designer.cs">
+      <DependentUpon>VwGerenciaEstadoResultado002.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\VwSalesInventory.cs" />
+    <Compile Include="ModelsCode\VwSalesInventory.Designer.cs">
+      <DependentUpon>VwSalesInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\VwSinRiesgoReporteClientes.cs" />
+    <Compile Include="ModelsCode\VwSinRiesgoReporteClientes.Designer.cs">
+      <DependentUpon>VwSinRiesgoReporteClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\VwSinRiesgoReporteCreditos.cs" />
+    <Compile Include="ModelsCode\VwSinRiesgoReporteCreditos.Designer.cs">
+      <DependentUpon>VwSinRiesgoReporteCreditos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\VwSinRiesgoReporteCreditosToSystema.cs" />
+    <Compile Include="ModelsCode\VwSinRiesgoReporteCreditosToSystema.Designer.cs">
+      <DependentUpon>VwSinRiesgoReporteCreditosToSystema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\VwTransaccionMasterConcept232425.cs" />
+    <Compile Include="ModelsCode\VwTransaccionMasterConcept232425.Designer.cs">
+      <DependentUpon>VwTransaccionMasterConcept232425.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Warehouse.cs" />
+    <Compile Include="ModelsCode\Warehouse.Designer.cs">
+      <DependentUpon>Warehouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\Workflow.cs" />
+    <Compile Include="ModelsCode\Workflow.Designer.cs">
+      <DependentUpon>Workflow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\WorkflowStage.cs" />
+    <Compile Include="ModelsCode\WorkflowStage.Designer.cs">
+      <DependentUpon>WorkflowStage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\WorkflowStageChangeLog.cs" />
+    <Compile Include="ModelsCode\WorkflowStageChangeLog.Designer.cs">
+      <DependentUpon>WorkflowStageChangeLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsCode\WorkflowStageRelation.cs" />
+    <Compile Include="ModelsCode\WorkflowStageRelation.Designer.cs">
+      <DependentUpon>WorkflowStageRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsViews\MenuElementView.cs" />
+    <Compile Include="ModelsViews\UserPermissionView.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Models.xpo" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models.xpo.diagram">
+      <DependentUpon>Models.xpo</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

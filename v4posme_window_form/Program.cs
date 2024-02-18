@@ -2,14 +2,11 @@
 using DevExpress.Xpo;
 using System;
 using System.Windows.Forms;
-using v4posme_window_form.views;
-using v4posme_window_form.Views;
-using System.Configuration;
-using v4posme_window_form.Domain;
 using DevExpress.XtraEditors;
 using DevExpress.XtraBars.Alerter;
-using DevExpress.Xpo.Logger.Transport;
-using Microsoft.Extensions.Logging;
+using v4posme_library.Domain;
+using v4posme_window_form.views;
+using v4posme_window_form.Views;
 
 namespace v4posme_window_form
 {

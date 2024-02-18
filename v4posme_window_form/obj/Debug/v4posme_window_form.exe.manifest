@@ -4,7 +4,7 @@
   <description asmv2:iconFile="299107_money_icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="v4posme_window_form" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="v4posme_window_form" version="1.0.0.1" language="neutral" processorArchitecture="msil" />
     <commandLine file="v4posme_window_form.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -787,14 +787,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="v4posme_window_form.exe" size="667080">
-      <assemblyIdentity name="v4posme_window_form" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="v4posme_library.dll" size="341504">
+      <assemblyIdentity name="v4posme_library" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>PwxBb+aiNO+Vs+2O/LYBSlytCWKgjJh6HZx5cEasX+A=</dsig:DigestValue>
+        <dsig:DigestValue>UxQ4YXlG8Avq1W8u2JhZMNq3HUDXrsKVnlIBG/qT8Ec=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="v4posme_window_form.exe" size="343496">
+      <assemblyIdentity name="v4posme_window_form" version="1.0.0.1" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>qv0I7ORAqbA9Xiu2kNZlFvwP6xXX+rdy714gGXF2Kv4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

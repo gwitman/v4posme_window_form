@@ -1,0 +1,210 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="v4posme_library.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Test" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Test</Value>
+    </Setting>
+    <Setting Name="APP_NEED_AUTHENTICATION" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EMAIL_APP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">posme2022@gmail.com</Value>
+    </Setting>
+    <Setting Name="EMAIL_APP_PASSWORD" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">tbxbdwxjcddqptxk</Value>
+    </Setting>
+    <Setting Name="EMAIL_APP_NOTIFICACION" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">posme2022@gmail.com</Value>
+    </Setting>
+    <Setting Name="EMAIL_APP_COPY" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">www.witman@gmail.com</Value>
+    </Setting>
+    <Setting Name="PATH_FILE_OF_APP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:/xampp/teamds2/nsSystem/v4posme/public/resource/file_company</Value>
+    </Setting>
+    <Setting Name="PATH_FILE_OF_APP_ROOT" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:/xampp/teamds2/nsSystem/v4posme/public/resource</Value>
+    </Setting>
+    <Setting Name="PATH_FILE_OF_APP_SYSTEM" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:/xampp/teamds2/nsSystem/v4posme/</Value>
+    </Setting>
+    <Setting Name="PATH_FILE_OF_UPLOAD_WRITE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:/xampp/teamds2/nsSystem/v4posme/writable/uploads</Value>
+    </Setting>
+    <Setting Name="PATH_FILE_OF_XAMPP_TMP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:/xampp/tmp</Value>
+    </Setting>
+    <Setting Name="PATH_EMAIL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\xampp\sendmail\sendmail.exe -t</Value>
+    </Setting>
+    <Setting Name="APP_NAME" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">WSYSTEM</Value>
+    </Setting>
+    <Setting Name="APP_TIMEZONE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">America/Managua</Value>
+    </Setting>
+    <Setting Name="APP_COMPANY" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="APP_USERADMIN" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="APP_ROL_SUPERADMIN" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="URL_SUFFIX_OLD" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">aspx</Value>
+    </Setting>
+    <Setting Name="URL_SUFFIX_NEW" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="URL_SUFFIX" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TIME_CACHE_APP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="APP_IP_SERVER" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">localhost</Value>
+    </Setting>
+    <Setting Name="APP_BRANCH" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="APP_PROVIDER" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">293</Value>
+    </Setting>
+    <Setting Name="APP_EMPLOYEE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">614</Value>
+    </Setting>
+    <Setting Name="APP_CUSTOMER01" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">13</Value>
+    </Setting>
+    <Setting Name="APP_CUSTOMER02" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">309</Value>
+    </Setting>
+    <Setting Name="APP_HOUR_DIFERENCE_MYSQL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">00:00:00</Value>
+    </Setting>
+    <Setting Name="APP_HOUR_DIFERENCE_PHP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">+0 minutes</Value>
+    </Setting>
+    <Setting Name="APP_URL_RESOURCE_CSS_J" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost/posmev4</Value>
+    </Setting>
+    <Setting Name="URL_REDIRECT_CALENDAR_POSME" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost/posmev4/core_user/savepublicgooglereturn</Value>
+    </Setting>
+    <Setting Name="APP_URL_WOOCOMERC" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://posme.net</Value>
+    </Setting>
+    <Setting Name="MENU_TOP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="MENU_LEFT" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="MENU_BODY" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">6</Value>
+    </Setting>
+    <Setting Name="MENU_TOP_BODY" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="MENU_HIDDEN_POPUP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">8</Value>
+    </Setting>
+    <Setting Name="ELEMENT_TYPE_PAGE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="ELEMENT_TYPE_TABLE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="CALLERID_LIST" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="CALLERID_SEARC" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="PERMISSION_NONE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="PERMISSION_ALL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="PERMISSION_BRANCH" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="PERMISSION_ME" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="COMMAND_VINCULATE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="COMMAND_EDITABLE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="COMMAND_EDITABLE_TOTAL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="COMMAND_ELIMINABLE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="COMMAND_APLICABLE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="PAGE_SIZE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">LETTER</Value>
+    </Setting>
+    <Setting Name="LEFT_MARGIN" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="RIGHT_MARGIN" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="BOTTOM_MARGIN" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="TOP_MARGIN" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="FONT_SIZE_SMALL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="FONT_SIZE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">8</Value>
+    </Setting>
+    <Setting Name="FONT_SIZE_BOLD" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">9</Value>
+    </Setting>
+    <Setting Name="FONT_SIZE_TITLE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="LOGO_SIZE_WIDTH" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">105</Value>
+    </Setting>
+    <Setting Name="LOGO_SIZE_HEIGTH" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="PAGE_INVOICE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">INVOICE_PRINTER_TERMICA_001</Value>
+    </Setting>
+    <Setting Name="LEFT_MARGIN_INVOICE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RIGHT_MARGIN_INVOICE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.9</Value>
+    </Setting>
+    <Setting Name="BOTTOM_MARGIN_INVOICE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="TOP_MARGIN_INVOICE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FONT_SIZE_TITLE_INVICE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">12</Value>
+    </Setting>
+    <Setting Name="FONT_SIZE_BODY_INVICE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

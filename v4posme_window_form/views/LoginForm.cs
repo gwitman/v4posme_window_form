@@ -1,11 +1,13 @@
 ﻿using DevExpress.XtraEditors;
 using System;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
-using v4posme_window_form.Domain;
-using v4posme_window_form.Domain.Services;
+using v4posme_library.Domain;
+using v4posme_library.Domain.Services;
 using v4posme_window_form.Properties;
+
 namespace v4posme_window_form.views
 {
     public partial class LoginForm : XtraForm
@@ -76,7 +78,7 @@ namespace v4posme_window_form.views
                 }
                 var nickname = txtUsuario.Text;
                 var password = txtPassword.Text;
-                VariablesGlobales.Instance.User = usuarioService.getUserByNickname(nickname);
+                VariablesGlobales.Instance.User = usuarioService.GetUserByNickname(nickname);
                 if (VariablesGlobales.Instance.User == null)
                 {
                     XtraMessageBox.Show("Nombre de usuario no registrado, intente nuevamente",
@@ -85,7 +87,7 @@ namespace v4posme_window_form.views
                     txtUsuario.Focus();
                     return;
                 }
-                VariablesGlobales.Instance.User = usuarioService.getUserByPasswordAndNickname(nickname, password);
+                VariablesGlobales.Instance.User = usuarioService.GetUserByPasswordAndNickname(nickname, password);
                 if (VariablesGlobales.Instance.User == null)
                 {
                     XtraMessageBox.Show("Contraseña incorrecta, intente nuevamente",

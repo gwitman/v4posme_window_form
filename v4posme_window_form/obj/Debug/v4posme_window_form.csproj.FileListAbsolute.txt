@@ -63,9 +63,12 @@ E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\System.Threading.Task
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\System.ValueTuple.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\Unity.Abstractions.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\Unity.Container.dll
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\v4posme_library.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\ZstdSharp.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\DevExpress.Pdf.v23.1.Core.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\DevExpress.Pdf.v23.1.Drawing.dll
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\v4posme_library.pdb
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\v4posme_library.dll.config
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\BouncyCastle.Cryptography.xml
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\DevExpress.Data.Desktop.v23.1.xml
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\DevExpress.Data.v23.1.xml
@@ -130,12 +133,11 @@ E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.c
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.Properties.Resources.resources
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.views.LoginForm.resources
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.Views.PrincipalForm.resources
-E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.Views.SelectBranchForm.resources
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.csproj.GenerateResource.cache
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.exe.licenses
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.csproj.CoreCompileInputs.cache
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.exe.manifest
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.application
-E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.csproj.CopyComplete
+E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_.321CC6EC.Up2Date
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.exe
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\v4posme_window_form.pdb
