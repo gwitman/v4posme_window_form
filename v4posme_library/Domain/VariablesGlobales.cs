@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using System.Net;
 using System.Net.Mail;
 using Unity;
 using v4posme_library.Domain.Services.Implementacion;
 using v4posme_library.Domain.Services.Interfaz;
-using v4posme_library.ModelsCode;
+using v4posme_library.Models;
 namespace v4posme_library.Domain
 {
     public class VariablesGlobales
@@ -31,13 +30,14 @@ namespace v4posme_library.Domain
             _unityContainer.RegisterType<ICoreWebPermission, CoreWebPermission>();
         }
 
-        public static VariablesGlobales Instance { get; } = new VariablesGlobales();
+        public static VariablesGlobales Instance { get; } = new();
 
-        public static string ConnectionString
+        public static string? ConnectionString
         {
             get
             {
-                return ConfigurationManager.ConnectionStrings["posme.netdbkroqnguhldo1"].ConnectionString;
+                var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+                return builder.GetConnectionString("ConnectionString");
             }
         }
 
@@ -48,19 +48,19 @@ namespace v4posme_library.Domain
                 return _unityContainer;
             }
         }
-        public User User { get; set; }
+        public TbUser User { get; set; }
 
-        public Company Company { get; set; }
+        public TbCompany Company { get; set; }
 
-        public Branch Branch { get; set; }
+        public TbBranch Branch { get; set; }
 
-        public Membership Membership { get; set; }
+        public TbMembership Membership { get; set; }
 
-        public Role Role { get; set; }
-        public List<MenuElement> ListMenuTop { get; set; }
-        public List<MenuElement> ListMenuLeft { get; set; }
-        public List<MenuElement> ListMenuBodyReport { get; set; }
-        public List<MenuElement> ListMenuHiddenPopup { get; set; }
+        public TbRole Role { get; set; }
+        public List<TbMenuElement> ListMenuTop { get; set; }
+        public List<TbMenuElement> ListMenuLeft { get; set; }
+        public List<TbMenuElement> ListMenuBodyReport { get; set; }
+        public List<TbMenuElement> ListMenuHiddenPopup { get; set; }
         public string MessageLogin { get; set; }
         public string ParameterLabelSystem { get; set; }
         public List<string> SubMenu { get; set; }

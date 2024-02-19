@@ -1,18 +1,14 @@
-﻿using DevExpress.Xpo;
-using v4posme_library.Domain.Services.Interfaz;
-using v4posme_library.ModelsCode;
+﻿using v4posme_library.Domain.Services.Interfaz;
+using v4posme_library.Models;
 namespace v4posme_library.Domain.Services.Implementacion
 {
     public class CompanyService : ICompanyService
     {
         //validar que este activa
-        public Company GetRowByPk(int id)
+        public TbCompany GetRowByPk(int id)
         {
-            if (id == 0) return null;
-            else
-            {
-                return Session.DefaultSession.GetObjectByKey<Company>(id,true);
-            }
+            using var context = new DataContext();
+            return context.TbCompanies.First(company=>company.CompanyId == id);
         }
     }
 }

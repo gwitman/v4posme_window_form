@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using v4posme_library.ModelsCode;
+﻿using v4posme_library.Models;
 namespace v4posme_library.Domain.Services.Interfaz
 {
     public interface IElementSevice
     {
-        List<Element> getRowByTypeAndLayout(int elementTypeId, int layoutId);
+        List<TbElement> getRowByTypeAndLayout(int elementTypeId, int layoutId);
     }
 }

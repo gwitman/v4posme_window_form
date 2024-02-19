@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace v4posme_window_form.Properties {
+namespace v4posme_window.Properties {
     using System;
     
     
@@ -38,7 +38,7 @@ namespace v4posme_window_form.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("v4posme_window_form.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("v4posme_window.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,15 +62,15 @@ namespace v4posme_window_form.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap PosMeLogo {
+        internal static System.Drawing.Bitmap posMe_Logo_fondo_blanco {
             get {
-                object obj = ResourceManager.GetObject("PosMeLogo", resourceCulture);
+                object obj = ResourceManager.GetObject("posMe Logo fondo blanco", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Compañía: .
+        ///   Looks up a localized string similar to Compañía:.
         /// </summary>
         internal static string PrincipalForm_Compañía_Titulo {
             get {

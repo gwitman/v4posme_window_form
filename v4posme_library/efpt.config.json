@@ -1,0 +1,590 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "DataContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "v4posme_library.Models",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 3,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "tb_account",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_account_level",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_account_tmp",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_account_type",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_accounting_balance",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_accounting_balance_temp",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_accounting_cycle",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_accounting_period",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_bank",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_biblia",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_branch",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_caller",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_cash_box",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_cash_box_session",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_cash_box_session_transaction_master",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_cash_box_user",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_catalog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_catalog_item",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_catalog_item_convertion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_center_cost",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_company",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_company_component",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_company_component_concept",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_company_component_flavor",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_company_component_item_dataview",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_company_currency",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_company_dataview",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_company_default_dataview",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_company_parameter",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_company_subelement_audit",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_company_subelement_obligatory",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_component",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_component_audit",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_component_audit_detail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_component_autorization",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_component_autorization_detail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_component_element",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_counter",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_credit_line",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_currency",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_customer",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_customer_consultas_sin_riesgo",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_customer_credit",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_customer_credit_amoritization",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_customer_credit_clasification",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_customer_credit_document",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_customer_credit_document_entity_related",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_customer_credit_line",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_dataview",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_element",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_element_type",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_employee",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_employee_calendar_pay",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_employee_calendar_pay_detail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_entity",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_entity_account",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_entity_email",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_entity_phone",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_error",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_estadistica_categorias",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_estadistica_clases",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_exchange_rate",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_fixed_assent",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_indicator",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_indicator_history",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_indicator_tmp",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_item",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_item_category",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_item_config_loto",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_item_data_sheet",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_item_data_sheet_detail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_item_sku",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_item_warehouse",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_item_warehouse_expired",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_journal_entry",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_journal_entry_detail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_journal_entry_detail_summary",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_kardex",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_legal",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_list_price",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_log",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_log_messeger",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_log_session",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_master_kardex_temp",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_membership",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_menu_element",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_naturales",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_notification",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_parameter",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_price",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_provider",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_provider_item",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_public_catalog",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_public_catalog_detail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_razones_financieras_tmp",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_relationship",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_remember",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_role",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_role_autorization",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_subelement",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_tag",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_transaction",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_transaction_causal",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_transaction_concept",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_transaction_master",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_transaction_master_concept",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_transaction_master_denomination",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_transaction_master_detail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_transaction_master_detail_credit",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_transaction_master_detail_temp",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_transaction_master_info",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_transaction_master_purchase",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_transaction_master_summary_concept_tmp",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_transaction_profile_detail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_transaction_profile_detail_tmp",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_type_menu_element",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_user",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_user_permission",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_user_tag",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_user_warehouse",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_warehouse",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_workflow",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_workflow_stage",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_workflow_stage_change_log",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_workflow_stage_relation",
+         "ObjectType": 0
+      },
+      {
+         "Name": "vw_contabilidad_comprobantes",
+         "ObjectType": 3
+      },
+      {
+         "Name": "vw_gerencia_balance",
+         "ObjectType": 3
+      },
+      {
+         "Name": "vw_gerencia_customer",
+         "ObjectType": 3
+      },
+      {
+         "Name": "vw_gerencia_desembolsos_detalle",
+         "ObjectType": 3
+      },
+      {
+         "Name": "vw_gerencia_desembolsos_resumen",
+         "ObjectType": 3
+      },
+      {
+         "Name": "vw_gerencia_estado_resultado_001",
+         "ObjectType": 3
+      },
+      {
+         "Name": "vw_gerencia_estado_resultado_002",
+         "ObjectType": 3
+      },
+      {
+         "Name": "vw_sales_inventory",
+         "ObjectType": 3
+      },
+      {
+         "Name": "vw_sin_riesgo_reporte_clientes",
+         "ObjectType": 3
+      },
+      {
+         "Name": "vw_sin_riesgo_reporte_creditos",
+         "ObjectType": 3
+      },
+      {
+         "Name": "vw_sin_riesgo_reporte_creditos_to_systema",
+         "ObjectType": 3
+      },
+      {
+         "Name": "vw_transaccion_master_concept_232425",
+         "ObjectType": 3
+      }
+   ],
+   "UiHint": "ConnectionString",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": true,
+   "UseManyToManyEntity": true,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": true,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": true
+}

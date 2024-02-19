@@ -1,44 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Extensions.Configuration;
 using Unity;
 using v4posme_library.Domain.Services.Interfaz;
-using v4posme_library.ModelsCode;
-using v4posme_library.Properties;
+using v4posme_library.Models;
 namespace v4posme_library.Domain.Services.Implementacion
 {
     public class CoreMenuService : ICoreMenuService
     {
+        IConfigurationSection section = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("globals");
         private readonly IElementSevice _elementService = VariablesGlobales.Instance.UnityContainer.Resolve<IElementSevice>();
         private readonly IUserPermissionService _userPermissionService = VariablesGlobales.Instance.UnityContainer.Resolve<IUserPermissionService>();
         private readonly IMenuElementModelService _menuElementModelService = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModelService>();
-        public List<MenuElement> GetMenuTop(int companyId, int branchId, int roleId)
+        public List<TbMenuElement> GetMenuTop(int companyId, int branchId, int roleId)
         {
-            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(Settings.Default.MENU_TOP));
+            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_TOP"]));
         }
-        public List<MenuElement> GetMenuLeft(int companyId, int branchId, int roleId)
+        public List<TbMenuElement> GetMenuLeft(int companyId, int branchId, int roleId)
         {
-            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(Settings.Default.MENU_LEFT));
+            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_LEFT"]));
         }
-        public List<MenuElement> GetMenuBodyReport(int companyId, int branchId, int roleId)
+        public List<TbMenuElement> GetMenuBodyReport(int companyId, int branchId, int roleId)
         {
-            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(Settings.Default.MENU_BODY));
+            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_BODY"]));
         }
-        public List<MenuElement> GetMenuHiddenPopup(int companyId, int branchId, int roleId)
+        public List<TbMenuElement> GetMenuHiddenPopup(int companyId, int branchId, int roleId)
         {
-            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(Settings.Default.MENU_HIDDEN_POPUP));
+            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_HIDDEN_POPUP"]));
         }
 
-        private List<MenuElement> GetMenu(int companyId, int branchId, int roleId, int menu)
+        private List<TbMenuElement> GetMenu(int companyId, int branchId, int roleId, int menu)
         {
             var role = VariablesGlobales.Instance.Role;
-            var listMenuElement = new List<MenuElement>();
-            if (role == null)
+            var listMenuElement = new List<TbMenuElement>();
+            if (role == null!)
             {
-                return null;
+                return null!;
             }
             //Obtener la lista de elementos tipo pagina, que pertenescan al componente de seguridad
-            var listElementSeguridad = _elementService.getRowByTypeAndLayout(Convert.ToInt16(Settings.Default.ELEMENT_TYPE_PAGE), menu);
+            var listElementSeguridad = _elementService.getRowByTypeAndLayout(Convert.ToInt16(section["ELEMENT_TYPE_PAGE"]), menu);
             if (listElementSeguridad == null) return null;
             //Obtener la lista del elementos de tipo pagina a la cual el usuario tiene permiso , segun el rol del usuario
             var listElementPermitido = _userPermissionService.GetRowByCompanyIDyBranchIDyRoleId(companyId, branchId, roleId);
@@ -47,14 +45,14 @@ namespace v4posme_library.Domain.Services.Implementacion
             List<int> listElementIdPermitied = new List<int>();
             foreach (var element in listElementSeguridad)
             {
-                listElementIdSeguridad.Add(element.ElementID);
+                listElementIdSeguridad.Add(element.ElementId);
             }
             foreach (var userPermissionView in listElementPermitido)
             {
                 listElementIdPermitied.Add(userPermissionView.ElementId);
             }
             listElementIdPermitied = listElementIdPermitied.Intersect(listElementIdSeguridad).ToList();
-            if (role.IsAdmin && listElementIdSeguridad.Any())
+            if (role.IsAdmin!.Value && listElementIdSeguridad.Any())
             {
                 listMenuElement = _menuElementModelService.GetRowByCompanyIdyElementId(companyId, listElementIdSeguridad);
             }
@@ -65,11 +63,11 @@ namespace v4posme_library.Domain.Services.Implementacion
             return listMenuElement;
         }
 
-        public List<string> RenderMenuLeft(Company company, List<MenuElement> menuElements)
+        public List<string> RenderMenuLeft(TbCompany company, List<TbMenuElement> menuElements)
         {
             return RenderItemLeft(company, menuElements, 0);
         }
-        private List<string> RenderItemLeft(Company company, List<MenuElement> data, int parent)
+        private List<string> RenderItemLeft(TbCompany company, List<TbMenuElement> data, int parent)
         {
             /*
              * foreach ($data AS $obj){
@@ -87,10 +85,10 @@ namespace v4posme_library.Domain.Services.Implementacion
             List<string> list = new List<string>();
             foreach (var item in data)
             {
-                if (item.ParentMenuElementID == parent)
+                if (item.ParentMenuElementId == parent)
                 {
                     var x = RenderItemLeft(company, data, parent);
-                    list.Add(item.Display);
+                    list.Add(item.Display!);
                     VariablesGlobales.Instance.SubMenu = x;
                 }
             }

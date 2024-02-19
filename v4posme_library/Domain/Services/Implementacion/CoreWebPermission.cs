@@ -19,7 +19,7 @@ namespace v4posme_library.Domain.Services.Implementacion
             var objParameterTipoPlan = getParameter3.Value;
 
             var getParameter4 = _coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId);
-            var objParameterCreditosId = getParameter4.ParameterID;
+            var objParameterCreditosId = getParameter4.ParameterId;
             var objParameterCreditos = getParameter4.Value;
 
             var getParameter5 = _coreWebParameter.GetParameter("CORE_CUST_PRICE_BY_INVOICE", companyId);

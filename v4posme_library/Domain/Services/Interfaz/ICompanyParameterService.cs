@@ -1,8 +1,8 @@
-﻿using v4posme_library.ModelsCode;
+﻿using v4posme_library.Models;
 namespace v4posme_library.Domain.Services.Interfaz
 {
     public interface ICompanyParameterService
     {
-        CompanyParameter GetRowByParameterIdCompanyId(int companyId,int parameterId);
+        TbCompanyParameter GetRowByParameterIdCompanyId(int companyId,int parameterId);
     }
 }

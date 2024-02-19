@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PosMeLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logo\posMe Logo fondo blanco.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="posMe Logo fondo blanco" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\posMe Logo fondo blanco.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PrincipalForm_Compañía_Titulo" xml:space="preserve">
-    <value>Compañía: </value>
+    <value>Compañía:</value>
   </data>
 </root>

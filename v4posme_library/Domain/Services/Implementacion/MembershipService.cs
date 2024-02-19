@@ -1,18 +1,18 @@
-﻿using DevExpress.Xpo;
-using System.Linq;
-using v4posme_library.Domain.Services.Interfaz;
-using v4posme_library.ModelsCode;
+﻿using v4posme_library.Domain.Services.Interfaz;
+using v4posme_library.Models;
 namespace v4posme_library.Domain.Services.Implementacion
 {
     internal class MembershipService : IMembershipService
     {
-        public Membership GetRowByCompanyIdBranchIdUserId(int companyId, int branchId, int userId)
+        public TbMembership GetRowByCompanyIdBranchIdUserId(int companyId, int branchId, int userId)
         {
-            if (companyId == 0) { return null; }
-            if (branchId == 0) { return null; }
-            if (userId == 0) { return null; }
-            var query = Session.DefaultSession.Query<Membership>();
-            return query.First(membership=>membership.CompanyID == companyId && membership.BranchID == branchId && membership.UserID == userId);
+            if (companyId == 0) { return null!; }
+            if (branchId == 0) { return null!; }
+            if (userId == 0) { return null!; }
+            using (var context = new DataContext())
+            {
+                return context.TbMemberships.First(membership=>membership.CompanyId == companyId && membership.BranchId == branchId && membership.UserId == userId);
+            }
         }
     }
 }

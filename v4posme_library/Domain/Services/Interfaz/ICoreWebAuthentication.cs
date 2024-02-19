@@ -1,10 +1,10 @@
-﻿using v4posme_library.ModelsCode;
+﻿using v4posme_library.Models;
 namespace v4posme_library.Domain.Services.Interfaz
 {
     public interface ICoreWebAuthentication
     {
-        User GetUserByNickname(string nickname);
-        User GetUserByPasswordAndNickname(string nickname, string password);
-        User Validar(User user, string password);
+        TbUser? GetUserByNickname(string nickname);
+        TbUser GetUserByPasswordAndNickname(string nickname, string password);
+        TbUser Validar(TbUser user, string password);
     }
 }

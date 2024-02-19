@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using v4posme_library.ModelsCode;
+﻿using v4posme_library.Models;
 namespace v4posme_library.Domain.Services.Interfaz
 {
     public interface IBranchService
     {
-        Branch findById(int id);
+        TbBranch findById(int id);
 
-        List<Branch> findAll();
+        List<TbBranch> findAll();
     }
 }

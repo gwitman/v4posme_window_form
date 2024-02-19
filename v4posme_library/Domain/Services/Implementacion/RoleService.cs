@@ -1,19 +1,13 @@
-﻿using DevExpress.Xpo;
-using System.Linq;
-using v4posme_library.Domain.Services.Interfaz;
-using v4posme_library.ModelsCode;
+﻿using v4posme_library.Domain.Services.Interfaz;
+using v4posme_library.Models;
 namespace v4posme_library.Domain.Services.Implementacion
 {
     public class RoleService : IRoleService
     {
-        public Role GetRowByPk(int companyId, int branchId, int roleId)
+        public TbRole GetRowByPk(int companyId, int branchId, int roleId)
         {
-            if (companyId == 0) { return null; }
-            if (branchId == 0) { return null; }
-            if (roleId == 0) { return null; }
-            var query = Session.DefaultSession.Query<Role>();
-            return query.First(r=>r.CompanyID == companyId && r.BranchID == branchId && r.RoleID == roleId && r.IsActive);
-            //throw new NotImplementedException();
+            using var context = new DataContext();
+            return context.TbRoles.First(role=>role.CompanyId == companyId && role.BranchId == branchId && role.RoleId == roleId && role.IsActive!.Value);
         }
     }
 }

@@ -1,25 +1,14 @@
-﻿using DevExpress.Xpo;
-using System;
-using System.Linq;
-using v4posme_library.Domain.Services.Interfaz;
-using v4posme_library.ModelsCode;
-
+﻿using v4posme_library.Domain.Services.Interfaz;
+using v4posme_library.Models;
 namespace v4posme_library.Domain.Services.Implementacion
 {
     public class CoreParameterService : ICoreParameterService
     {
 
-        public Parameter GetRowByName(string name)
+        public TbParameter GetRowByName(string name)
         {
-            try
-            {
-                var query = Session.DefaultSession.Query<Parameter>();
-                return query.First(p => p.Name.Equals(name));
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            using var context = new DataContext();
+            return context.TbParameters.First(parameter=>parameter.Name!.Contains(name));
         }
     }
 }

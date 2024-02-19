@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
-using v4posme_library.ModelsCode;
+﻿using v4posme_library.Models;
 namespace v4posme_library.Domain.Services.Interfaz
 {
     public interface ICoreMenuService
     {
-        List<MenuElement> GetMenuTop(int companyId, int branchId, int roleId);
+        List<TbMenuElement> GetMenuTop(int companyId, int branchId, int roleId);
 
-        List<MenuElement> GetMenuLeft(int companyId, int branchId, int roleId);
+        List<TbMenuElement> GetMenuLeft(int companyId, int branchId, int roleId);
         
-        List<MenuElement> GetMenuBodyReport(int companyId, int branchId, int roleId);
+        List<TbMenuElement> GetMenuBodyReport(int companyId, int branchId, int roleId);
 
-        List<MenuElement> GetMenuHiddenPopup(int companyId, int branchId, int roleId);
+        List<TbMenuElement> GetMenuHiddenPopup(int companyId, int branchId, int roleId);
 
-        List<string> RenderMenuLeft(Company company, List<MenuElement> menuElements);
+        List<string> RenderMenuLeft(TbCompany company, List<TbMenuElement> menuElements);
     }
 }

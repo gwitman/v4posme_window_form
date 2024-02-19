@@ -1,24 +1,14 @@
-﻿using DevExpress.Xpo;
-using System;
-using System.Linq;
-using v4posme_library.Domain.Services.Interfaz;
-using v4posme_library.ModelsCode;
+﻿using v4posme_library.Domain.Services.Interfaz;
+using v4posme_library.Models;
 namespace v4posme_library.Domain.Services.Implementacion
 {
     public class CompanyParamterService : ICompanyParameterService
     {
 
-        public CompanyParameter GetRowByParameterIdCompanyId(int companyId, int parameterId)
+        public TbCompanyParameter GetRowByParameterIdCompanyId(int companyId, int parameterId)
         {
-            try
-            {
-                var query = Session.DefaultSession.Query<CompanyParameter>();
-                return query.First(parameter => parameter.CompanyID == companyId && parameter.ParameterID == parameterId);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            using var context = new DataContext();
+            return context.TbCompanyParameters.First(parameter=>parameter.CompanyId == companyId && parameter.ParameterId == parameterId);
         }
     }
 }

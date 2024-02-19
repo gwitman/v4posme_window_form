@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using v4posme_library.ModelsCode;
+﻿using v4posme_library.Models;
 namespace v4posme_library.Domain.Services.Interfaz
 {
     public interface IMenuElementModelService
     {
-        List<MenuElement> GetRowByCompanyIdyElementId(int companyId, List<int> elementIdArray);
+        List<TbMenuElement> GetRowByCompanyIdyElementId(int companyId, List<int> elementIdArray);
 
-        List<MenuElement> GetRowByCompanyId(int companyId);
+        List<TbMenuElement> GetRowByCompanyId(int companyId);
     }
 }

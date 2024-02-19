@@ -7,7 +7,6 @@ using Unity;
 using v4posme_library.Domain;
 using v4posme_library.Domain.Services;
 using v4posme_library.Domain.Services.Interfaz;
-using v4posme_window_form.Properties;
 
 namespace v4posme_window_form.views
 {
@@ -44,7 +43,7 @@ namespace v4posme_window_form.views
         private async void btnIngresar_Click(object sender, EventArgs e)
         {
             progressPanel.Visible = true;
-            await Task.Run(()=>
+            await Task.Run(async ()=>
             {
                 var usuarioService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
                 if (string.IsNullOrEmpty(txtUsuario.Text))
@@ -84,8 +83,7 @@ namespace v4posme_window_form.views
                 {
                     XtraMessageBox.Show("Nombre de usuario no registrado, intente nuevamente",
                         UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    progressPanel.Visible = false;
-                    txtUsuario.Focus();
+                    //txtUsuario.Focus();
                     return;
                 }
                 VariablesGlobales.Instance.User = usuarioService.GetUserByPasswordAndNickname(nickname, password);
@@ -93,8 +91,8 @@ namespace v4posme_window_form.views
                 {
                     XtraMessageBox.Show("Contraseña incorrecta, intente nuevamente",
                         UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    progressPanel.Visible = false;
-                    txtPassword.Focus();
+                    /*progressPanel.Visible = false;
+                    txtPassword.Focus();*/
                     return;
                 }
                 if (VariablesGlobales.Instance.MessageLogin.Length > 0)
@@ -112,7 +110,7 @@ namespace v4posme_window_form.views
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            pictureEdit1.Image = Resources.PosMeLogo;
+            //pictureEdit1.Image = Resources.PosMeLogo;
             txtUsuario.Focus();
         }
 
