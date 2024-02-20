@@ -26,7 +26,7 @@ class AccountModel : IAccountModel
     public TbAccount InsertAppPosme(TbAccount data)
     {
         using var context = new DataContext();
-        var add = context.Add(data);
+        var add = context.TbAccounts.Add(data);
         context.SaveChanges();
         return add.Entity;
     }
