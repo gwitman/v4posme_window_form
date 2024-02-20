@@ -3,5 +3,12 @@ namespace v4posme_library.Libraries.ComponentModels;
 
 public interface IAccountModel
 {
-    TbAccount GetRowByPk(int companyId,int accountId);
+    TbAccount GetRowByPk(int companyId, int accountId);
+    void DeleteAppPosme(int companyId, int accountId);
+    void UpdateAppPosme(int companyId, int accountId, TbAccount data);
+    TbAccount InsertAppPosme(TbAccount data);
+    int GetIsParent(int companyId, int accountId);
+    TbAccount GetByAccountNumber(string accountNumber, int companyId);
+    List<TbAccount> GetByCompany(int companyId);
+    List<TbAccount> GetByCompanyOperative(int companyId);
 }
