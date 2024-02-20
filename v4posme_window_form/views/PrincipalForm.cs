@@ -2,8 +2,8 @@
 using DevExpress.XtraBars.Navigation;
 using Unity;
 using v4posme_library.Libraries;
-using v4posme_library.Libraries.ComponentModels;
-using v4posme_library.Libraries.Services.Interfaz;
+using v4posme_library.Libraries.CustomLibraries.Interfaz;
+using v4posme_library.Libraries.CustomModels;
 using v4posme_window.Properties;
 namespace v4posme_window_form.Views
 {

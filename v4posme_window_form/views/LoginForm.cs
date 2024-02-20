@@ -1,7 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using Unity;
 using v4posme_library.Libraries;
-using v4posme_library.Libraries.Services.Interfaz;
+using v4posme_library.Libraries.CustomLibraries.Interfaz;
 namespace v4posme_window_form.views
 {
     public partial class LoginForm : XtraForm

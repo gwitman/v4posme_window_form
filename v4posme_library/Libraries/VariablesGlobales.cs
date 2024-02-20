@@ -2,9 +2,9 @@
 using System.Net;
 using System.Net.Mail;
 using Unity;
-using v4posme_library.Libraries.ComponentModels;
-using v4posme_library.Libraries.Services.Implementacion;
-using v4posme_library.Libraries.Services.Interfaz;
+using v4posme_library.Libraries.CustomLibraries.Implementacion;
+using v4posme_library.Libraries.CustomLibraries.Interfaz;
+using v4posme_library.Libraries.CustomModels;
 using v4posme_library.Models;
 namespace v4posme_library.Libraries
 {
