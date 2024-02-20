@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DZbjjv46xxLu7wyPIN9DdL5A508Waf0EssppKLffFzpphAqliMXNv2m4A50FNV08jRXZkme02x2vSUajIWCpmw==",
+  "dgSpecHash": "aqI2OlwsfBtNyAJqT+Dot0HVXtwEUse9spODo7AwmyRxhhPgDYMc+xU11u0AvxkjqDi/B3v+z0hYi4pAGyduhw==",
   "success": true,
   "projectFilePath": "E:\\Repos\\v4posme_window_form\\v4posme_window_form\\v4posme_window_form.csproj",
   "expectedPackageFiles": [
@@ -145,6 +145,7 @@
     "C:\\Users\\jmigu\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\jmigu\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
     "C:\\Users\\jmigu\\.nuget\\packages\\unity\\5.11.10\\unity.5.11.10.nupkg.sha512",
+    "C:\\Users\\jmigu\\.nuget\\packages\\z.entityframework.extensions.efcore\\8.102.1\\z.entityframework.extensions.efcore.8.102.1.nupkg.sha512",
     "C:\\Users\\jmigu\\.nuget\\packages\\zstdsharp.port\\0.7.1\\zstdsharp.port.0.7.1.nupkg.sha512"
   ],
   "logs": []

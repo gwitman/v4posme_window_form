@@ -1,7 +1,5 @@
-﻿using DevExpress.Xpo;
-namespace v4posme_library.ModelsViews
+﻿namespace v4posme_library.ModelsViews
 {
-    [NonPersistent]
     public class UserPermissionView
     {
         /*tb_user_permission.companyID,tb_user_permission.branchID,tb_user_permission.roleID,tb_user_permission.elementID,

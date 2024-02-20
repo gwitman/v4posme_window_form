@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -14,7 +15,7 @@ class AccountModel : IAccountModel
         using var context = new DataContext();
         var find = GetRowByPk(companyId, accountId);
         find.IsActive = false;
-        context.SaveChanges();
+        context.BulkSaveChanges();
     }
 
     public void UpdateAppPosme(int companyId, int accountId, TbAccount data)
@@ -22,19 +23,20 @@ class AccountModel : IAccountModel
         using var context = new DataContext();
         var find = GetRowByPk(companyId, accountId);
         context.Entry(find).CurrentValues.SetValues(data);
-        context.SaveChanges();
+        context.BulkSaveChanges();
     }
-    public TbAccount InsertAppPosme(TbAccount data)
+    
+    public int InsertAppPosme(TbAccount data)
     {
         using var context = new DataContext();
-        var add = context.TbAccounts.Add(data);
-        context.SaveChanges();
-        return add.Entity;
+        EntityEntry<TbAccount> add = context.TbAccounts.Add(data);
+        context.BulkSaveChanges();
+        return add.Entity.AccountId;
     }
     public int GetIsParent(int companyId, int accountId)
     {
         using var context = new DataContext();
-        return context.TbAccounts.Count(account=>account.IsActive!.Value && account.AccountId == accountId && account.CompanyId == companyId);
+        return context.TbAccounts.Count(account=>account.IsActive!.Value && account.ParentAccountId == accountId && account.CompanyId == companyId);
     }
 
     public int GetCountAccount(int companyId)
