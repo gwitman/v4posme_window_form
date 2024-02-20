@@ -1,13 +1,7 @@
 ﻿using DevExpress.XtraEditors;
-using System;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Unity;
-using v4posme_library.Domain;
-using v4posme_library.Domain.Services;
-using v4posme_library.Domain.Services.Interfaz;
-
+using v4posme_library.Libraries;
+using v4posme_library.Libraries.Services.Interfaz;
 namespace v4posme_window_form.views
 {
     public partial class LoginForm : XtraForm

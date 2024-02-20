@@ -151,4 +151,85 @@ public partial class TbItem
 
     [Column("isInvoice", TypeName = "int(11)")]
     public int IsInvoice { get; set; }
+
+    [Column("realStateWallInCloset", TypeName = "tinyint(4)")]
+    public sbyte? RealStateWallInCloset { get; set; }
+
+    [Column("realStatePiscinaPrivate", TypeName = "tinyint(4)")]
+    public sbyte? RealStatePiscinaPrivate { get; set; }
+
+    [Column("realStateClubPiscina", TypeName = "tinyint(4)")]
+    public sbyte? RealStateClubPiscina { get; set; }
+
+    [Column("realStateAceptanMascota", TypeName = "tinyint(4)")]
+    public sbyte? RealStateAceptanMascota { get; set; }
+
+    [Column("realStateContractCorrentaje", TypeName = "tinyint(4)")]
+    public sbyte? RealStateContractCorrentaje { get; set; }
+
+    [Column("realStatePlanReference", TypeName = "tinyint(4)")]
+    public sbyte? RealStatePlanReference { get; set; }
+
+    [Column("realStateLinkYoutube")]
+    [StringLength(255)]
+    public string? RealStateLinkYoutube { get; set; }
+
+    [Column("realStateLinkPaginaWeb")]
+    [StringLength(255)]
+    public string? RealStateLinkPaginaWeb { get; set; }
+
+    [Column("realStateLinkPhontos")]
+    [StringLength(255)]
+    public string? RealStateLinkPhontos { get; set; }
+
+    [Column("realStateLinkGoogleMaps")]
+    [StringLength(255)]
+    public string? RealStateLinkGoogleMaps { get; set; }
+
+    [Column("realStateLinkOther")]
+    [StringLength(255)]
+    public string? RealStateLinkOther { get; set; }
+
+    [Column("realStateStyleKitchen")]
+    [StringLength(255)]
+    public string? RealStateStyleKitchen { get; set; }
+
+    [Column("realStateRoomServices", TypeName = "tinyint(4)")]
+    public sbyte? RealStateRoomServices { get; set; }
+
+    [Column("realStateRoomBatchServices", TypeName = "tinyint(4)")]
+    public sbyte? RealStateRoomBatchServices { get; set; }
+
+    [Column("realStateReferenceUbicacion")]
+    [StringLength(255)]
+    public string? RealStateReferenceUbicacion { get; set; }
+
+    [Column("realStateReferenceZone")]
+    [StringLength(255)]
+    public string? RealStateReferenceZone { get; set; }
+
+    [Column("realStateReferenceCondominio")]
+    [StringLength(255)]
+    public string? RealStateReferenceCondominio { get; set; }
+
+    [Column("realStateEmployerAgentID", TypeName = "int(11)")]
+    public int? RealStateEmployerAgentId { get; set; }
+
+    [Column("realStateCountryID", TypeName = "int(11)")]
+    public int? RealStateCountryId { get; set; }
+
+    [Column("realStateStateID", TypeName = "int(11)")]
+    public int? RealStateStateId { get; set; }
+
+    [Column("realStateCityID", TypeName = "int(11)")]
+    public int? RealStateCityId { get; set; }
+
+    [Column("modifiedOn", TypeName = "datetime")]
+    public DateTime? ModifiedOn { get; set; }
+
+    [Column("realStateRooBatchVisit", TypeName = "tinyint(4)")]
+    public sbyte? RealStateRooBatchVisit { get; set; }
+
+    [Column("realStateGerenciaExclusive", TypeName = "int(11)")]
+    public int? RealStateGerenciaExclusive { get; set; }
 }

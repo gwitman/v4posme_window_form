@@ -34,4 +34,7 @@ public partial class TbPublicCatalog
 
     [Column("isActive", TypeName = "bit(1)")]
     public ulong? IsActive { get; set; }
+
+    [Column("flavorID", TypeName = "int(11)")]
+    public int? FlavorId { get; set; }
 }

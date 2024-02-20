@@ -2,7 +2,7 @@ using DevExpress.Xpo;
 using DevExpress.Xpo.DB;
 using DevExpress.XtraBars.Alerter;
 using DevExpress.XtraEditors;
-using v4posme_library.Domain;
+using v4posme_library.Libraries;
 using v4posme_window_form.views;
 using v4posme_window_form.Views;
 namespace v4posme_window;

@@ -25,6 +25,7 @@ namespace v4posme_library.Models;
 [Index("PayConditionId", Name = "IDX_CUSTOMER_016")]
 [Index("SexoId", Name = "IDX_CUSTOMER_017")]
 [Index("TypeFirm", Name = "IDX_CUSTOMER_018")]
+[Index("EntityContactId", Name = "IDX_CUSTOMER_019")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbCustomer
@@ -137,4 +138,33 @@ public partial class TbCustomer
     [Column("phoneNumber")]
     [MaxLength(255)]
     public byte[]? PhoneNumber { get; set; }
+
+    [Column("dateContract")]
+    public DateOnly? DateContract { get; set; }
+
+    /// <summary>
+    /// Persona que contacto al cliente
+    /// </summary>
+    [Column("entityContactID", TypeName = "int(11)")]
+    public int? EntityContactId { get; set; }
+
+    [Column("reference3")]
+    [StringLength(255)]
+    public string? Reference3 { get; set; }
+
+    [Column("reference4")]
+    [StringLength(255)]
+    public string? Reference4 { get; set; }
+
+    [Column("reference5")]
+    [StringLength(255)]
+    public string? Reference5 { get; set; }
+
+    [Column("reference6")]
+    [StringLength(255)]
+    public string? Reference6 { get; set; }
+
+    [Column("budget")]
+    [Precision(10, 2)]
+    public decimal? Budget { get; set; }
 }
