@@ -42,11 +42,19 @@ class AccountLevelModel : IAccountLevelModel
 
     public List<TbAccountLevel> GetByCompany(int companyId)
     {
-        throw new NotImplementedException();
+        using var context = new DataContext();
+        return context.TbAccountLevels
+            .Where(account => account.IsActive
+                              && account.CompanyId == companyId)
+            .ToList();
     }
 
     public TbAccountLevel GetRowByPk(int companyId, int accountLevelId)
     {
-        throw new NotImplementedException();
+        using var context = new DataContext();
+        return context.TbAccountLevels
+            .Single(account => account.IsActive
+                               && account.CompanyId == companyId
+                               && account.AccountLevelId == accountLevelId);
     }
 }
