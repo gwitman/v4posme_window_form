@@ -3,7 +3,8 @@
   "WorkspaceRootPath": "E:\\Repos\\v4posme_window_form\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\jmigu\\AppData\\Local\\Temp\\PowerToolsReadMe.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+      "AbsoluteMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|e:\\repos\\v4posme_window_form\\v4posme_library\\libraries\\custommodels\\accountingbalancemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|solutionrelative:v4posme_library\\libraries\\custommodels\\accountingbalancemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -13,22 +14,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PowerToolsReadMe.md",
-              "DocumentMoniker": "C:\\Users\\jmigu\\AppData\\Local\\Temp\\PowerToolsReadMe.md",
-              "ToolTip": "C:\\Users\\jmigu\\AppData\\Local\\Temp\\PowerToolsReadMe.md",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2024-02-20T02:41:38.075Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountingBalanceModel.cs",
+              "DocumentMoniker": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\AccountingBalanceModel.cs",
+              "RelativeDocumentMoniker": "v4posme_library\\Libraries\\CustomModels\\AccountingBalanceModel.cs",
+              "ToolTip": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\AccountingBalanceModel.cs",
+              "RelativeToolTip": "v4posme_library\\Libraries\\CustomModels\\AccountingBalanceModel.cs",
+              "ViewState": "AQIAADAAAAAAAAAAAAAcwEkAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-20T23:24:27.009Z",
+              "EditorCaption": ""
             }
           ]
         }
