@@ -9,7 +9,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
         public List<UserPermissionView> GetRowByCompanyIDyBranchIDyRoleId(int companyId, int branchId, int roleId)
         {
-            if (companyId == 0 || branchId == 0 || roleId == 0) return [];
+            if (companyId == 0 || branchId == 0 || roleId == 0) return new List<UserPermissionView>();
             var sql = $$"""
                         select tb_user_permission.companyID,tb_user_permission.branchID,tb_user_permission.roleID,tb_user_permission.elementID,
                         tb_user_permission.selected,tb_user_permission.inserted,tb_user_permission.deleted,
