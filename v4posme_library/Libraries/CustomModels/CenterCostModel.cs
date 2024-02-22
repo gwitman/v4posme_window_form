@@ -23,8 +23,9 @@ class CenterCostModel : ICenterCostModel
     public int InsertAppPosme(TbCenterCost data)
     {
         using var context = new DataContext();
-        context.TbCenterCosts.Add(data);
+        var add =context.TbCenterCosts.Add(data);
         context.BulkSaveChanges();
+        return add.Entity.ClassId;
     }
 
     public TbCenterCost GetByClassNumber(string classNumber, int companyId)
