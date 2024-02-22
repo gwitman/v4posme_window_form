@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +11,7 @@ namespace v4posme_library.Models;
 [Index("FieldId", Name = "IDX_COMPONENT_AUDIT_DETAIL_004")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public partial class TbComponentAuditDetail
+public class TbComponentAuditDetail
 {
     [Key]
     [Column("componentAuditDetailID", TypeName = "int(11)")]

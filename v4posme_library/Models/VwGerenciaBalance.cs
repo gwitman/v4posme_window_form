@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace v4posme_library.Models;
 
 [Keyless]
-public partial class VwGerenciaBalance
+public class VwGerenciaBalance
 {
     [StringLength(250)]
     [MySqlCharSet("latin1")]

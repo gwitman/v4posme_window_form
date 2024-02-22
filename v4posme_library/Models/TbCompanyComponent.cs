@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +9,7 @@ namespace v4posme_library.Models;
 [Index("CompanyId", Name = "IDX_COMPANY_COMPONENT_002")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_general_ci")]
-public partial class TbCompanyComponent
+public class TbCompanyComponent
 {
     [Column("componentID", TypeName = "int(11)")]
     public int ComponentId { get; set; }

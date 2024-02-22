@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +11,7 @@ namespace v4posme_library.Models;
 [Index("StatusId", Name = "IDX_ACCOUNTING_CYCLE_004")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public partial class TbAccountingCycle
+public class TbAccountingCycle
 {
     [Key]
     [Column("componentCycleID", TypeName = "int(11)")]

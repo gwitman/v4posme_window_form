@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +7,7 @@ namespace v4posme_library.Models;
 [Table("tb_log_messeger")]
 [MySqlCharSet("utf8")]
 [MySqlCollation("utf8_general_ci")]
-public partial class TbLogMesseger
+public class TbLogMesseger
 {
     [Key]
     [Column("id", TypeName = "int(11)")]

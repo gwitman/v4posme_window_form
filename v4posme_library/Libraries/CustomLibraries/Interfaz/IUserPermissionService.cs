@@ -1,4 +1,5 @@
 ﻿using v4posme_library.ModelsViews;
+
 namespace v4posme_library.Libraries.CustomLibraries.Interfaz
 {
     public interface IUserPermissionService

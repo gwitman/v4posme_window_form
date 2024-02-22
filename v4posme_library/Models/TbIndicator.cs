@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +9,7 @@ namespace v4posme_library.Models;
 [Index("Code", Name = "IDX_INDICATOR_002")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public partial class TbIndicator
+public class TbIndicator
 {
     [Key]
     [Column("indicadorID", TypeName = "int(11)")]

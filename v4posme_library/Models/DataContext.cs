@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using v4posme_library.Models;
+
 namespace v4posme_library.Models;
 
 public partial class DataContext : DbContext

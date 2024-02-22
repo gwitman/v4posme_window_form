@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
 namespace v4posme_library.Models;
 
 [Keyless]
-public partial class VwContabilidadComprobante
+public class VwContabilidadComprobante
 {
     [StringLength(250)]
     [MySqlCharSet("latin1")]

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace v4posme_library.Models;
 
 [Keyless]
-public partial class VwGerenciaEstadoResultado002
+public class VwGerenciaEstadoResultado002
 {
     [StringLength(4)]
     public string? Ano { get; set; }

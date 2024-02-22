@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +14,7 @@ namespace v4posme_library.Models;
 [Index("TransactionDetailId", Name = "IDX_KARDEX_007")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public partial class TbKardex
+public class TbKardex
 {
     [Column("itemID", TypeName = "int(11)")]
     public int ItemId { get; set; }

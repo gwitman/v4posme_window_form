@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +16,7 @@ namespace v4posme_library.Models;
 [Index("PeriodPay", Name = "IDX_CUSTOMER_CREDIT_LINE_009")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public partial class TbCustomerCreditLine
+public class TbCustomerCreditLine
 {
     [Key]
     [Column("customerCreditLineID", TypeName = "int(11)")]

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +8,7 @@ namespace v4posme_library.Models;
 [Index("ItemId", Name = "IDX_ITEM_CONFIG_LOTO_001")]
 [MySqlCharSet("utf8")]
 [MySqlCollation("utf8_general_ci")]
-public partial class TbItemConfigLoto
+public class TbItemConfigLoto
 {
     [Key]
     [Column("itemConfigLotoID", TypeName = "int(11)")]

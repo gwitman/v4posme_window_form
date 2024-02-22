@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +15,7 @@ namespace v4posme_library.Models;
 [Index("CurrencyId", Name = "IDX_ACCOUNT_008")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public partial class TbAccount
+public class TbAccount
 {
     [Key]
     [Column("accountID", TypeName = "int(11)")]

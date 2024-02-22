@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+
 namespace v4posme_library;
 
 public class Startup

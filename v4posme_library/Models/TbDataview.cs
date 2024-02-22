@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +9,7 @@ namespace v4posme_library.Models;
 [Index("ComponentId", Name = "IDX_DATAVIEW_002")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_general_ci")]
-public partial class TbDataview
+public class TbDataview
 {
     [Key]
     [Column("dataViewID", TypeName = "int(11)")]

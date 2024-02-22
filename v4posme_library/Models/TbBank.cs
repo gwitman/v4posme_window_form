@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +8,7 @@ namespace v4posme_library.Models;
 [Index("AccountId", Name = "IDX_BANK_001")]
 [Index("CurrencyId", Name = "IDX_BANK_002")]
 [Index("CompanyId", Name = "IDX_BANK_003")]
-public partial class TbBank
+public class TbBank
 {
     [Key]
     [Column("bankID", TypeName = "int(11)")]

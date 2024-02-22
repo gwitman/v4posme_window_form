@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "E:\\Repos\\v4posme_window_form\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|e:\\repos\\v4posme_window_form\\v4posme_library\\libraries\\custommodels\\accountlevelmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|solutionrelative:v4posme_library\\libraries\\custommodels\\accountlevelmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|e:\\repos\\v4posme_window_form\\v4posme_library\\libraries\\custommodels\\biometricusermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|solutionrelative:v4posme_library\\libraries\\custommodels\\biometricusermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|e:\\repos\\v4posme_window_form\\v4posme_library\\libraries\\custommodels\\iaccountlevelmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|solutionrelative:v4posme_library\\libraries\\custommodels\\iaccountlevelmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|e:\\repos\\v4posme_window_form\\v4posme_library\\libraries\\custommodels\\ibiometricusermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|solutionrelative:v4posme_library\\libraries\\custommodels\\ibiometricusermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,36 +18,44 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AccountLevelModel.cs",
-              "DocumentMoniker": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\AccountLevelModel.cs",
-              "RelativeDocumentMoniker": "v4posme_library\\Libraries\\CustomModels\\AccountLevelModel.cs",
-              "ToolTip": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\AccountLevelModel.cs",
-              "RelativeToolTip": "v4posme_library\\Libraries\\CustomModels\\AccountLevelModel.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAQwCUAAAAeAAAA",
+              "Title": "BiometricUserModel.cs",
+              "DocumentMoniker": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\BiometricUserModel.cs",
+              "RelativeDocumentMoniker": "v4posme_library\\Libraries\\CustomModels\\BiometricUserModel.cs",
+              "ToolTip": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\BiometricUserModel.cs",
+              "RelativeToolTip": "v4posme_library\\Libraries\\CustomModels\\BiometricUserModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-21T20:56:09.118Z",
+              "WhenOpened": "2024-02-22T02:19:38.922Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "IAccountLevelModel.cs",
-              "DocumentMoniker": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\IAccountLevelModel.cs",
-              "RelativeDocumentMoniker": "v4posme_library\\Libraries\\CustomModels\\IAccountLevelModel.cs",
-              "ToolTip": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\IAccountLevelModel.cs",
-              "RelativeToolTip": "v4posme_library\\Libraries\\CustomModels\\IAccountLevelModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAABAAAA",
+              "Title": "IBiometricUserModel.cs",
+              "DocumentMoniker": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\IBiometricUserModel.cs",
+              "RelativeDocumentMoniker": "v4posme_library\\Libraries\\CustomModels\\IBiometricUserModel.cs",
+              "ToolTip": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\IBiometricUserModel.cs",
+              "RelativeToolTip": "v4posme_library\\Libraries\\CustomModels\\IBiometricUserModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-21T20:49:45.101Z",
+              "WhenOpened": "2024-02-22T02:18:06.775Z",
               "EditorCaption": ""
             }
           ]

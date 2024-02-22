@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace v4posme_library.Models;
 
 [Keyless]
-public partial class VwTransaccionMasterConcept232425
+public class VwTransaccionMasterConcept232425
 {
     [Column("transactionMasterID", TypeName = "int(11)")]
     public int TransactionMasterId { get; set; }

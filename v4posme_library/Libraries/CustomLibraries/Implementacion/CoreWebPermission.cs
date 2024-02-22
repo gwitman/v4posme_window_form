@@ -1,5 +1,6 @@
 ﻿using Unity;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
+
 namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 {
     public class CoreWebPermission : ICoreWebPermission

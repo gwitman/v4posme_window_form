@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +11,7 @@ namespace v4posme_library.Models;
 [Index("ComponentItemId", Name = "IDX_COUNTER_004")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_general_ci")]
-public partial class TbCounter
+public class TbCounter
 {
     [Key]
     [Column("counterID", TypeName = "int(11)")]

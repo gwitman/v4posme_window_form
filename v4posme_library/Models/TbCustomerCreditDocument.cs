@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +13,7 @@ namespace v4posme_library.Models;
 [Index("TypeAmortization", Name = "IDX_CUSTOMER_CREDIT_DOCUMENT_006")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public partial class TbCustomerCreditDocument
+public class TbCustomerCreditDocument
 {
     [Key]
     [Column("customerCreditDocumentID", TypeName = "int(11)")]

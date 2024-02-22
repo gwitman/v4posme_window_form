@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +9,7 @@ namespace v4posme_library.Models;
 [Index("FlavorId", Name = "IDX_PUBLIC_CATALOG_DETAIL_002")]
 [Index("ParentCatalogDetailId", Name = "IDX_PUBLIC_CATALOG_DETAIL_003")]
 [Index("IsActive", Name = "IDX_PUBLIC_CATALOG_DETAIL_004")]
-public partial class TbPublicCatalogDetail
+public class TbPublicCatalogDetail
 {
     [Key]
     [Column("publicCatalogDetailID", TypeName = "int(11)")]

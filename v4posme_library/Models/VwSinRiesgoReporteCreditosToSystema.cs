@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace v4posme_library.Models;
 
 [Keyless]
-public partial class VwSinRiesgoReporteCreditosToSystema
+public class VwSinRiesgoReporteCreditosToSystema
 {
     [Column("companyID", TypeName = "int(11)")]
     public int CompanyId { get; set; }

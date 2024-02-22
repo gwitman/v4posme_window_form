@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +10,7 @@ namespace v4posme_library.Models;
 [Index("CompanyId", Name = "IDX_ITEM_WAREHOUSE_EXPIRED_003")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public partial class TbItemWarehouseExpired
+public class TbItemWarehouseExpired
 {
     [Key]
     [Column("itemWarehouseExpiredID", TypeName = "int(11)")]

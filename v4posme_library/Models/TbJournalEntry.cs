@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +15,7 @@ namespace v4posme_library.Models;
 [Index("TransactionId", Name = "IDX_JOURNAL_ENTRY_008")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public partial class TbJournalEntry
+public class TbJournalEntry
 {
     [Key]
     [Column("journalEntryID", TypeName = "int(11)")]

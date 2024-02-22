@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +13,7 @@ namespace v4posme_library.Models;
 [Index("CurrencyId", Name = "IDX_TRANSACTION_MASTER_DENOMINATION_006")]
 [MySqlCharSet("utf8")]
 [MySqlCollation("utf8_general_ci")]
-public partial class TbTransactionMasterDenomination
+public class TbTransactionMasterDenomination
 {
     [Key]
     [Column("transactionMasterDenominationID", TypeName = "int(11)")]
