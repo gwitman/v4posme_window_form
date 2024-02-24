@@ -7,7 +7,10 @@ class CompanyCurrencyModel : ICompanyCurrencyModel
     public int DeleteAppPosme(int companyId, int currencyId)
     {
         using var context = new DataContext();
-        var find = GetRowByPk(companyId, currencyId);
+        var find = context.TbCompanyCurrencies
+            .Single(currency =>
+                currency.CompanyCurrencyId == currencyId
+                && currency.CompanyId == companyId);
         context.TbCompanyCurrencies.Remove(find);
         return context.SaveChanges();
     }
@@ -15,7 +18,10 @@ class CompanyCurrencyModel : ICompanyCurrencyModel
     public void UpdateAppPosme(int companyId, int currencyId, TbCompanyCurrency data)
     {
         using var context = new DataContext();
-        var find = GetRowByPk(companyId, currencyId);
+        var find = context.TbCompanyCurrencies
+            .Single(currency =>
+                currency.CompanyCurrencyId == currencyId
+                && currency.CompanyId == companyId);
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -32,6 +38,12 @@ class CompanyCurrencyModel : ICompanyCurrencyModel
     {
         using var context = new DataContext();
         return context.TbCompanyCurrencies
+            .Join(context.TbCurrencies,
+                currency => currency.CurrencyId,
+                tbCurrency => tbCurrency.CurrencyId,
+                (currency, tbCurrency) => new { currency, tbCurrency })
+            .Where(k => k.tbCurrency.IsActive!.Value)
+            .Select(k => k.currency)
             .Single(currency =>
                 currency.CompanyCurrencyId == currencyId
                 && currency.CompanyId == companyId);
