@@ -8,8 +8,10 @@ class AccountModel : IAccountModel
     public TbAccount GetRowByPk(int companyId, int accountId)
     {
         using var context = new DataContext();
-        return context.TbAccounts.Single(account=>account.IsActive!.Value && account.AccountId == accountId && account.CompanyId == companyId);
+        return context.TbAccounts.Single(account =>
+            account.IsActive!.Value && account.AccountId == accountId && account.CompanyId == companyId);
     }
+
     public void DeleteAppPosme(int companyId, int accountId)
     {
         using var context = new DataContext();
@@ -25,7 +27,7 @@ class AccountModel : IAccountModel
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
-    
+
     public int InsertAppPosme(TbAccount data)
     {
         using var context = new DataContext();
@@ -33,34 +35,41 @@ class AccountModel : IAccountModel
         context.BulkSaveChanges();
         return add.Entity.AccountId;
     }
+
     public int GetIsParent(int companyId, int accountId)
     {
         using var context = new DataContext();
-        return context.TbAccounts.Count(account=>account.IsActive!.Value && account.ParentAccountId == accountId && account.CompanyId == companyId);
+        return context.TbAccounts.Count(account =>
+            account.IsActive!.Value && account.ParentAccountId == accountId && account.CompanyId == companyId);
     }
 
     public int GetCountAccount(int companyId)
     {
         using var context = new DataContext();
-        return context.TbAccounts.Count(account=>account.IsActive!.Value && account.CompanyId == companyId);
+        return context.TbAccounts.Count(account => account.IsActive!.Value && account.CompanyId == companyId);
     }
+
     public TbAccount GetByAccountNumber(string accountNumber, int companyId)
     {
         using var context = new DataContext();
-        return context.TbAccounts.Single(account=>account.IsActive!.Value && account.CompanyId == companyId && account.AccountNumber.Equals(accountNumber));
+        return context.TbAccounts.Single(account =>
+            account.IsActive!.Value && account.CompanyId == companyId && account.AccountNumber.Equals(accountNumber));
     }
+
     public List<TbAccount> GetByCompany(int companyId)
     {
         using var context = new DataContext();
-        return context.TbAccounts.Where(account=>account.IsActive!.Value && account.CompanyId == companyId)
-            .OrderBy(account=>account.AccountNumber)
+        return context.TbAccounts.Where(account => account.IsActive!.Value && account.CompanyId == companyId)
+            .OrderBy(account => account.AccountNumber)
             .ToList();
     }
+
     public List<TbAccount> GetByCompanyOperative(int companyId)
     {
         using var context = new DataContext();
-        return context.TbAccounts.Where(account=>account.IsActive!.Value && account.CompanyId == companyId && account.IsOperative)
-            .OrderBy(account=>account.AccountNumber)
+        return context.TbAccounts.Where(account =>
+                account.IsActive!.Value && account.CompanyId == companyId && account.IsOperative)
+            .OrderBy(account => account.AccountNumber)
             .ToList();
     }
 }

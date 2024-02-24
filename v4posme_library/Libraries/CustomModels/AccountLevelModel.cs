@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;
 

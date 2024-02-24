@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;
@@ -21,7 +22,7 @@ public class ComponentCycleModel : IComponentCycleModel
             .Where(cycle => cycle.CompanyId == companyId)
             .Where(cycle => cycle.ComponentId == componentId)
             .Where(cycle => cycle.ComponentPeriodId == componentPeriodId)
-            .WhereBulkNotContains(array,cycle => cycle.ComponentCycleId)
+            .WhereBulkNotContains(array, cycle => cycle.ComponentCycleId)
             .Single();
         find.IsActive = false;
         context.SaveChanges();
@@ -104,12 +105,12 @@ public class ComponentCycleModel : IComponentCycleModel
                                && account.ComponentCycleId == cycleId);
     }
 
-    public List<TbAccountingCycle> GetRowByCycleNotIn(int companyId, int componentId, int componentPeriodId,
-        List<int> data)
+    public List<TbAccountingCycle> GetRowByCycleNotIn(int companyId, int componentId,
+        int componentPeriodId, List<int> data)
     {
         using var context = new DataContext();
         return context.TbAccountingCycles
-            .Where(cycle => cycle.CompanyId == companyId)
+            .Where(cycle => cycle.CompanyId != companyId)
             .Where(cycle => cycle.ComponentId == componentId)
             .Where(cycle => cycle.ComponentPeriodId == componentPeriodId)
             .Where(cycle => cycle.IsActive)
