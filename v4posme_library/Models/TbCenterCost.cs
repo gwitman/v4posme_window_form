@@ -39,7 +39,7 @@ public class TbCenterCost
     public string? Description { get; set; }
 
     [Column("isActive")]
-    public bool? IsActive { get; set; }
+    public bool IsActive { get; set; }
 
     [Column("createdBy", TypeName = "int(11)")]
     public int? CreatedBy { get; set; }

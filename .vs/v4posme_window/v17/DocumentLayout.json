@@ -1,20 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\Repos\\v4posme_window_form\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|e:\\repos\\v4posme_window_form\\v4posme_library\\libraries\\custommodels\\companycomponentconceptmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|solutionrelative:v4posme_library\\libraries\\custommodels\\companycomponentconceptmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|e:\\repos\\v4posme_window_form\\v4posme_library\\libraries\\custommodels\\accountlevelmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|solutionrelative:v4posme_library\\libraries\\custommodels\\accountlevelmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|e:\\repos\\v4posme_window_form\\v4posme_library\\libraries\\custommodels\\icompanycomponentconcept_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|solutionrelative:v4posme_library\\libraries\\custommodels\\icompanycomponentconcept_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -22,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -35,45 +22,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AccountLevelModel.cs",
-              "DocumentMoniker": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\AccountLevelModel.cs",
-              "RelativeDocumentMoniker": "v4posme_library\\Libraries\\CustomModels\\AccountLevelModel.cs",
-              "ToolTip": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\AccountLevelModel.cs",
-              "RelativeToolTip": "v4posme_library\\Libraries\\CustomModels\\AccountLevelModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-24T00:59:37.385Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CompanyComponentConceptModel.cs",
-              "DocumentMoniker": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\CompanyComponentConceptModel.cs",
-              "RelativeDocumentMoniker": "v4posme_library\\Libraries\\CustomModels\\CompanyComponentConceptModel.cs",
-              "ToolTip": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\CompanyComponentConceptModel.cs",
-              "RelativeToolTip": "v4posme_library\\Libraries\\CustomModels\\CompanyComponentConceptModel.cs",
-              "ViewState": "AQIAAB8AAAAAAAAAAAAwwEgAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-23T19:49:52.023Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ICompanyComponentConcept_Model.cs",
-              "DocumentMoniker": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\ICompanyComponentConcept_Model.cs",
-              "RelativeDocumentMoniker": "v4posme_library\\Libraries\\CustomModels\\ICompanyComponentConcept_Model.cs",
-              "ToolTip": "E:\\Repos\\v4posme_window_form\\v4posme_library\\Libraries\\CustomModels\\ICompanyComponentConcept_Model.cs",
-              "RelativeToolTip": "v4posme_library\\Libraries\\CustomModels\\ICompanyComponentConcept_Model.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-23T15:24:59.551Z",
-              "EditorCaption": ""
             }
           ]
         }

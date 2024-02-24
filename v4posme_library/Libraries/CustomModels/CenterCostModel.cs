@@ -23,7 +23,7 @@ class CenterCostModel : ICenterCostModel
     public int InsertAppPosme(TbCenterCost data)
     {
         using var context = new DataContext();
-        var add =context.TbCenterCosts.Add(data);
+        var add = context.TbCenterCosts.Add(data);
         context.BulkSaveChanges();
         return add.Entity.ClassId;
     }
@@ -32,26 +32,24 @@ class CenterCostModel : ICenterCostModel
     {
         using var context = new DataContext();
         return context.TbCenterCosts
-            .Single(center => center.IsActive != null
-                              && center.CompanyId == companyId
+            .Single(center => center.CompanyId == companyId
                               && center.Number == classNumber
-                              && center.IsActive.Value);
+                              && center.IsActive);
     }
 
     public TbCenterCost GetRowByPk(int companyId, int classId)
     {
         using var context = new DataContext();
         var find = FindByCompanyIdAndClassId(companyId, classId, context);
-        return find.IsActive != null && find.IsActive.Value ? find : new TbCenterCost();
+        return find.IsActive ? find : new TbCenterCost();
     }
 
     public List<TbCenterCost> GetByCompany(int companyId)
     {
         using var context = new DataContext();
         return context.TbCenterCosts
-            .Where(center => center.IsActive != null
-                             && center.CompanyId == companyId
-                             && center.IsActive.Value)
+            .Where(center => center.CompanyId == companyId
+                             && center.IsActive)
             .OrderBy(center => center.Number)
             .ToList();
     }
