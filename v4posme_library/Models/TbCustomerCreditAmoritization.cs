@@ -10,7 +10,7 @@ namespace v4posme_library.Models;
 [Index("StatusId", Name = "IDX_CUSTOMER_CREDIT_AMORITIZATION_003")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbCustomerCreditAmoritization
+public class TbCustomerCreditAmortization
 {
     [Key]
     [Column("creditAmortizationID", TypeName = "int(11)")]
@@ -20,7 +20,7 @@ public class TbCustomerCreditAmoritization
     public int CustomerCreditDocumentId { get; set; }
 
     [Column("dateApply")]
-    public DateOnly DateApply { get; set; }
+    public DateTime DateApply { get; set; }
 
     [Column("balanceStart")]
     [Precision(19, 9)]

@@ -15,6 +15,44 @@
           }
         }
       },
+      "Devart.Data/6.0.10": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Win32.Registry": "4.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Devart.Data.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Devart.Data.dll": {}
+        }
+      },
+      "Devart.Data.MySql/9.3.10": {
+        "type": "package",
+        "dependencies": {
+          "Devart.Data": "6.0.10",
+          "System.Diagnostics.PerformanceCounter": "4.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Devart.Data.MySql.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Devart.Data.MySql.dll": {}
+        }
+      },
+      "Devart.Data.MySql.EFCore/9.3.10.8": {
+        "type": "package",
+        "dependencies": {
+          "Devart.Data.MySql": "9.3.10",
+          "Microsoft.EntityFrameworkCore.Relational": "[8.0.0, 9.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/Devart.Data.MySql.Entity.EFCore.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/Devart.Data.MySql.Entity.EFCore.dll": {}
+        }
+      },
       "Google.Protobuf/3.25.1": {
         "type": "package",
         "compile": {
@@ -445,6 +483,31 @@
           "lib/netstandard1.0/_._": {}
         }
       },
+      "Microsoft.Win32.Registry/4.5.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Security.AccessControl": "4.5.0",
+          "System.Security.Principal.Windows": "4.5.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/Microsoft.Win32.Registry.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Win32.Registry.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.dll": {
+            "assetType": "runtime",
+            "rid": "unix"
+          },
+          "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "Microsoft.Win32.SystemEvents/4.7.0": {
         "type": "package",
         "dependencies": {
@@ -616,6 +679,29 @@
             "rid": "win"
           },
           "runtimes/win/lib/net8.0/System.Diagnostics.EventLog.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
+      "System.Diagnostics.PerformanceCounter/4.5.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "2.0.0",
+          "Microsoft.Win32.Registry": "4.5.0",
+          "System.Configuration.ConfigurationManager": "4.5.0",
+          "System.Security.Principal.Windows": "4.5.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Diagnostics.PerformanceCounter.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Diagnostics.PerformanceCounter.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netcoreapp2.0/System.Diagnostics.PerformanceCounter.dll": {
             "assetType": "runtime",
             "rid": "win"
           }
@@ -1015,6 +1101,49 @@
         "lib/netstandard2.0/BouncyCastle.Cryptography.dll",
         "lib/netstandard2.0/BouncyCastle.Cryptography.xml",
         "packageIcon.png"
+      ]
+    },
+    "Devart.Data/6.0.10": {
+      "sha512": "Hw7Ri/l40afgtnY3GMZjyd29iyKW9J3ySWRuuZgAS6Xh87FituDXj+Hobor5xN49QvCYDL+2DRhfFweMKpa57w==",
+      "type": "package",
+      "path": "devart.data/6.0.10",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dc.png",
+        "devart.data.6.0.10.nupkg.sha512",
+        "devart.data.nuspec",
+        "lib/netstandard1.3/Devart.Data.dll",
+        "lib/netstandard2.0/Devart.Data.dll"
+      ]
+    },
+    "Devart.Data.MySql/9.3.10": {
+      "sha512": "0bn6hKu3GCFoh0YH1SCXSn93G5l8W4zUMkWXlx6mubO4d1y9WN/oV856H19dpILIdax/kgZyQ9/heAjoQ2PJuA==",
+      "type": "package",
+      "path": "devart.data.mysql/9.3.10",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/app.config.transform",
+        "content/web.config.transform",
+        "devart.data.mysql.9.3.10.nupkg.sha512",
+        "devart.data.mysql.nuspec",
+        "lib/netstandard1.3/Devart.Data.MySql.dll",
+        "lib/netstandard2.0/Devart.Data.MySql.dll",
+        "mysql.png"
+      ]
+    },
+    "Devart.Data.MySql.EFCore/9.3.10.8": {
+      "sha512": "wotASOd0MigrCat8BFSQA6e3yNfJxr83mz8jjVeqaIfq+cU7X+bWhrW0ggSgQimjdkZuudzYDKR3s+4EKSLzZw==",
+      "type": "package",
+      "path": "devart.data.mysql.efcore/9.3.10.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "devart.data.mysql.efcore.9.3.10.8.nupkg.sha512",
+        "devart.data.mysql.efcore.nuspec",
+        "lib/net8.0/Devart.Data.MySql.Entity.EFCore.dll",
+        "mysql.png"
       ]
     },
     "Google.Protobuf/3.25.1": {
@@ -1707,6 +1836,46 @@
         "runtime.json"
       ]
     },
+    "Microsoft.Win32.Registry/4.5.0": {
+      "sha512": "+FWlwd//+Tt56316p00hVePBCouXyEzT86Jb3+AuRotTND0IYn0OO3obs1gnQEs/txEnt+rF2JBGLItTG+Be6A==",
+      "type": "package",
+      "path": "microsoft.win32.registry/4.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net46/Microsoft.Win32.Registry.dll",
+        "lib/net461/Microsoft.Win32.Registry.dll",
+        "lib/netstandard1.3/Microsoft.Win32.Registry.dll",
+        "lib/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "microsoft.win32.registry.4.5.0.nupkg.sha512",
+        "microsoft.win32.registry.nuspec",
+        "ref/net46/Microsoft.Win32.Registry.dll",
+        "ref/net461/Microsoft.Win32.Registry.dll",
+        "ref/net461/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/Microsoft.Win32.Registry.dll",
+        "ref/netstandard1.3/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/de/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/es/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/fr/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/it/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/ja/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/ko/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/ru/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/zh-hans/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/zh-hant/Microsoft.Win32.Registry.xml",
+        "ref/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "ref/netstandard2.0/Microsoft.Win32.Registry.xml",
+        "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/net46/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/net461/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/netstandard1.3/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "Microsoft.Win32.SystemEvents/4.7.0": {
       "sha512": "mtVirZr++rq+XCDITMUdnETD59XoeMxSpLRIII7JRI6Yj0LEDiO1pPn0ktlnIj12Ix8bfvQqQDMMIF9wC98oCA==",
       "type": "package",
@@ -1937,6 +2106,40 @@
         "system.diagnostics.eventlog.8.0.0.nupkg.sha512",
         "system.diagnostics.eventlog.nuspec",
         "useSharedDesignerContext.txt"
+      ]
+    },
+    "System.Diagnostics.PerformanceCounter/4.5.0": {
+      "sha512": "JUO5/moXgchWZBMBElgmPebZPKCgwW8kY3dFwVJavaNR2ftcc/YjXXGjOaCjly2KBXT7Ld5l/GTkMVzNv41yZA==",
+      "type": "package",
+      "path": "system.diagnostics.performancecounter/4.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net461/System.Diagnostics.PerformanceCounter.dll",
+        "lib/netstandard2.0/System.Diagnostics.PerformanceCounter.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net461/System.Diagnostics.PerformanceCounter.dll",
+        "ref/net461/System.Diagnostics.PerformanceCounter.xml",
+        "ref/netstandard2.0/System.Diagnostics.PerformanceCounter.dll",
+        "ref/netstandard2.0/System.Diagnostics.PerformanceCounter.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/win/lib/netcoreapp2.0/System.Diagnostics.PerformanceCounter.dll",
+        "system.diagnostics.performancecounter.4.5.0.nupkg.sha512",
+        "system.diagnostics.performancecounter.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Drawing.Common/4.7.0": {
@@ -2970,6 +3173,8 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Devart.Data.MySql >= 9.3.10",
+      "Devart.Data.MySql.EFCore >= 9.3.10.8",
       "Microsoft.Extensions.Configuration >= 8.0.0",
       "Microsoft.Extensions.Configuration.Abstractions >= 8.0.0",
       "Microsoft.Extensions.Configuration.Json >= 8.0.0",
@@ -3032,6 +3237,14 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "Devart.Data.MySql": {
+            "target": "Package",
+            "version": "[9.3.10, )"
+          },
+          "Devart.Data.MySql.EFCore": {
+            "target": "Package",
+            "version": "[9.3.10.8, )"
+          },
           "Microsoft.Extensions.Configuration": {
             "target": "Package",
             "version": "[8.0.0, )"

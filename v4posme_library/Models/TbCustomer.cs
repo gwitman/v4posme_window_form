@@ -85,7 +85,7 @@ public class TbCustomer
     public int? CustomerTypeId { get; set; }
 
     [Column("birthDate")]
-    public DateOnly? BirthDate { get; set; }
+    public DateTime? BirthDate { get; set; }
 
     [Column("statusID", TypeName = "int(11)")]
     public int? StatusId { get; set; }

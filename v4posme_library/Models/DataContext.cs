@@ -115,7 +115,7 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<TbCustomerCredit> TbCustomerCredits { get; set; }
 
-    public virtual DbSet<TbCustomerCreditAmoritization> TbCustomerCreditAmoritizations { get; set; }
+    public virtual DbSet<TbCustomerCreditAmortization> TbCustomerCreditAmortizations { get; set; }
 
     public virtual DbSet<TbCustomerCreditClasification> TbCustomerCreditClasifications { get; set; }
 
@@ -611,7 +611,7 @@ public partial class DataContext : DbContext
             entity.HasKey(e => e.CustomerCreditId).HasName("PRIMARY");
         });
 
-        modelBuilder.Entity<TbCustomerCreditAmoritization>(entity =>
+        modelBuilder.Entity<TbCustomerCreditAmortization>(entity =>
         {
             entity.HasKey(e => e.CreditAmortizationId).HasName("PRIMARY");
 

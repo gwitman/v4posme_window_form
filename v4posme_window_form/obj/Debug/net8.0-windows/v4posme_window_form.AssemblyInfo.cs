@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("v4posme_window_form")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+908313a11bd66bd697f553032c42148c660501f7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+beef06ab8256fa2560762e4d2506b28bb448120a")]
 [assembly: System.Reflection.AssemblyProductAttribute("v4posme_window_form")]
 [assembly: System.Reflection.AssemblyTitleAttribute("v4posme_window_form")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -15,6 +15,44 @@
           }
         }
       },
+      "Devart.Data/6.0.10": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Win32.Registry": "4.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Devart.Data.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Devart.Data.dll": {}
+        }
+      },
+      "Devart.Data.MySql/9.3.10": {
+        "type": "package",
+        "dependencies": {
+          "Devart.Data": "6.0.10",
+          "System.Diagnostics.PerformanceCounter": "4.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Devart.Data.MySql.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Devart.Data.MySql.dll": {}
+        }
+      },
+      "Devart.Data.MySql.EFCore/9.3.10.8": {
+        "type": "package",
+        "dependencies": {
+          "Devart.Data.MySql": "9.3.10",
+          "Microsoft.EntityFrameworkCore.Relational": "[8.0.0, 9.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/Devart.Data.MySql.Entity.EFCore.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/Devart.Data.MySql.Entity.EFCore.dll": {}
+        }
+      },
       "DevExpress.Charts/23.1.3": {
         "type": "package",
         "dependencies": {
@@ -2189,7 +2227,7 @@
           "System.Security.Principal.Windows": "4.6.0"
         },
         "compile": {
-          "ref/netstandard2.0/_._": {
+          "ref/netstandard2.0/System.Diagnostics.PerformanceCounter.dll": {
             "related": ".xml"
           }
         },
@@ -2849,6 +2887,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "Devart.Data.MySql": "9.3.10",
+          "Devart.Data.MySql.EFCore": "9.3.10.8",
           "Microsoft.Extensions.Configuration": "8.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
           "Microsoft.Extensions.Configuration.Json": "8.0.0",
@@ -2886,6 +2926,49 @@
         "lib/netstandard2.0/BouncyCastle.Cryptography.dll",
         "lib/netstandard2.0/BouncyCastle.Cryptography.xml",
         "packageIcon.png"
+      ]
+    },
+    "Devart.Data/6.0.10": {
+      "sha512": "Hw7Ri/l40afgtnY3GMZjyd29iyKW9J3ySWRuuZgAS6Xh87FituDXj+Hobor5xN49QvCYDL+2DRhfFweMKpa57w==",
+      "type": "package",
+      "path": "devart.data/6.0.10",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dc.png",
+        "devart.data.6.0.10.nupkg.sha512",
+        "devart.data.nuspec",
+        "lib/netstandard1.3/Devart.Data.dll",
+        "lib/netstandard2.0/Devart.Data.dll"
+      ]
+    },
+    "Devart.Data.MySql/9.3.10": {
+      "sha512": "0bn6hKu3GCFoh0YH1SCXSn93G5l8W4zUMkWXlx6mubO4d1y9WN/oV856H19dpILIdax/kgZyQ9/heAjoQ2PJuA==",
+      "type": "package",
+      "path": "devart.data.mysql/9.3.10",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/app.config.transform",
+        "content/web.config.transform",
+        "devart.data.mysql.9.3.10.nupkg.sha512",
+        "devart.data.mysql.nuspec",
+        "lib/netstandard1.3/Devart.Data.MySql.dll",
+        "lib/netstandard2.0/Devart.Data.MySql.dll",
+        "mysql.png"
+      ]
+    },
+    "Devart.Data.MySql.EFCore/9.3.10.8": {
+      "sha512": "wotASOd0MigrCat8BFSQA6e3yNfJxr83mz8jjVeqaIfq+cU7X+bWhrW0ggSgQimjdkZuudzYDKR3s+4EKSLzZw==",
+      "type": "package",
+      "path": "devart.data.mysql.efcore/9.3.10.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "devart.data.mysql.efcore.9.3.10.8.nupkg.sha512",
+        "devart.data.mysql.efcore.nuspec",
+        "lib/net8.0/Devart.Data.MySql.Entity.EFCore.dll",
+        "mysql.png"
       ]
     },
     "DevExpress.Charts/23.1.3": {
