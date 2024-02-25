@@ -26,5 +26,5 @@ public class TbCreditLine
     public string? Description { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
-    public ulong IsActive { get; set; }
+    public sbyte IsActive { get; set; }
 }
