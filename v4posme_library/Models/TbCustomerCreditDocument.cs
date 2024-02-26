@@ -90,4 +90,23 @@ public class TbCustomerCreditDocument
 
     [Column("reportSinRiesgo", TypeName = "int(11)")]
     public int ReportSinRiesgo { get; set; }
+
+    [NotMapped]
+    public string? CurrencyName { get; set; }
+    [NotMapped]
+    public string? CurrencySymbol { get; set; }
+    [NotMapped]
+    public decimal? BalanceNew { get; set; }
+    [NotMapped]
+    public decimal? Remaining { get; set; }
+    [NotMapped]
+    public DateTime? DateFinish { get; set; }
+    [NotMapped]
+    public int? CreditAmortizationId { get; set; }
+    [NotMapped]
+    public DateTime? DateApply { get; set; }
+    [NotMapped]
+    public int StatusAmotization { get; set; }
+    [NotMapped]
+    public string StatusAmortizatonName { get; set; }
 }

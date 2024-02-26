@@ -17,7 +17,7 @@ public class ComponentPeriodModel : IComponentPeriodModel
     public void DeleteAppPosme(int companyId, int componentId, int componentPeriodId)
     {
         using var context = new DataContext();
-        FindByCompanyIdAndComponentIdAndComponentPeriodId(companyId, companyId, componentPeriodId, context)
+        FindByCompanyIdAndComponentIdAndComponentPeriodId(companyId, componentId, componentPeriodId, context)
             .ExecuteUpdate(calls => calls.SetProperty(
                 period => period.IsActive,
                 period => false));
@@ -26,7 +26,7 @@ public class ComponentPeriodModel : IComponentPeriodModel
     public void UpdateAppPosme(int companyId, int componentId, int componentPeriodId, TbAccountingPeriod data)
     {
         using var context = new DataContext();
-        var find = FindByCompanyIdAndComponentIdAndComponentPeriodId(companyId, companyId, componentPeriodId, context)
+        var find = FindByCompanyIdAndComponentIdAndComponentPeriodId(companyId, componentId, componentPeriodId, context)
             .Single();
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
