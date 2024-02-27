@@ -48,9 +48,7 @@ public class TbCustomerCreditLine
     [Precision(19, 9)]
     public decimal LimitCredit { get; set; }
 
-    [Column("balance")]
-    [Precision(19, 9)]
-    public decimal Balance { get; set; }
+    [Column("balance")] [Precision(19, 9)] public decimal Balance { get; set; }
 
     [Column("interestYear")]
     [Precision(19, 9)]
@@ -68,25 +66,27 @@ public class TbCustomerCreditLine
     [Precision(19, 9)]
     public decimal TotalDefeated { get; set; }
 
-    [Column("dateOpen")]
-    public DateOnly DateOpen { get; set; }
+    [Column("dateOpen")] public DateOnly DateOpen { get; set; }
 
     [Column("periodPay", TypeName = "int(11)")]
     public int PeriodPay { get; set; }
 
-    [Column("dateLastPay")]
-    public DateOnly? DateLastPay { get; set; }
+    [Column("dateLastPay")] public DateOnly? DateLastPay { get; set; }
 
-    [Column("term", TypeName = "int(11)")]
-    public int? Term { get; set; }
+    [Column("term", TypeName = "int(11)")] public int? Term { get; set; }
 
-    [Column("note")]
-    [StringLength(550)]
-    public string? Note { get; set; }
+    [Column("note")] [StringLength(550)] public string? Note { get; set; }
 
     [Column("statusID", TypeName = "int(11)")]
     public int StatusId { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
-    public ulong IsActive { get; set; }
+    public sbyte IsActive { get; set; }
+
+    [NotMapped] public string? CurrencyName { get; set; }
+    [NotMapped] public string? CreditLineName { get; set; }
+    [NotMapped] public string? Line { get; set; }
+    [NotMapped] public string? StatusName { get; set; }
+    [NotMapped] public string? TypeAmortizationLabel { get; set; }
+    [NotMapped] public string? PeriodPayLabel { get; set; }
 }
