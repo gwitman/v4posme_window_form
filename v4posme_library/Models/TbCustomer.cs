@@ -84,8 +84,7 @@ public class TbCustomer
     [Column("customerTypeID", TypeName = "int(11)")]
     public int? CustomerTypeId { get; set; }
 
-    [Column("birthDate")]
-    public DateTime? BirthDate { get; set; }
+    [Column("birthDate")] public DateTime? BirthDate { get; set; }
 
     [Column("statusID", TypeName = "int(11)")]
     public int? StatusId { get; set; }
@@ -137,8 +136,7 @@ public class TbCustomer
     [MaxLength(255)]
     public byte[]? PhoneNumber { get; set; }
 
-    [Column("dateContract")]
-    public DateOnly? DateContract { get; set; }
+    [Column("dateContract")] public DateOnly? DateContract { get; set; }
 
     /// <summary>
     /// Persona que contacto al cliente
@@ -162,7 +160,8 @@ public class TbCustomer
     [StringLength(255)]
     public string? Reference6 { get; set; }
 
-    [Column("budget")]
-    [Precision(10, 2)]
-    public decimal? Budget { get; set; }
+    [Column("budget")] [Precision(10, 2)] public decimal? Budget { get; set; }
+
+    [NotMapped] public string? FirstName { get; set; }
+    [NotMapped] public string? LastName { get; set; }
 }
