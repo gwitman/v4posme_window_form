@@ -137,7 +137,7 @@ class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                 (t, ccaStatus) => new { t.cca, t.c, t.n, t.ccd, ccaStatus })
             .Join(dbContext.TbWorkflowStages, t => t.ccd.StatusId, ccdStatus => ccdStatus.WorkflowStageId,
                 (t, ccdStatus) => new { t.n, t.c, t.ccd, t.cca, ccdStatus })
-            .Where(t => t.ccdStatus.Vinculable!.Value && t.c.IsActive == 1 &&
+            .Where(t => t.ccdStatus.Vinculable!.Value && t.c.IsActive &&
                         t.cca.Remaining > 0 &&
                         t.cca.DateApply < DateTime.Now.Date &&
                         t.c.CompanyId == companyId)

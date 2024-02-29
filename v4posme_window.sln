@@ -1,8 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "v4posme_window_form", "v4posme_window_form\v4posme_window_form.csproj", "{35DB8AFD-6809-44B0-B158-D74A70DBA1B7}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "v4posme_window_form", "v4posme_window_form\v4posme_window_form.csproj", "{35DB8AFD-6809-44B0-B158-D74A70DBA1B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "v4posme_library", "v4posme_library\v4posme_library.csproj", "{62961A04-3F58-4A98-B542-CF6BBE0BB632}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "v4posme_library", "v4posme_library\v4posme_library.csproj", "{62961A04-3F58-4A98-B542-CF6BBE0BB632}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{96DEC9C5-587C-4D0D-87ED-AB341A8EF9E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +23,12 @@ Global
 		{62961A04-3F58-4A98-B542-CF6BBE0BB632}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62961A04-3F58-4A98-B542-CF6BBE0BB632}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62961A04-3F58-4A98-B542-CF6BBE0BB632}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96DEC9C5-587C-4D0D-87ED-AB341A8EF9E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96DEC9C5-587C-4D0D-87ED-AB341A8EF9E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96DEC9C5-587C-4D0D-87ED-AB341A8EF9E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96DEC9C5-587C-4D0D-87ED-AB341A8EF9E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

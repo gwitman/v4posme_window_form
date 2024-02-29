@@ -13,7 +13,7 @@ public interface ICustomerModel
 
     List<TbCustomer> GetHappyBirthDay(int companyId);
 
-    TbCustomer GetRowByCode(int companyId, int customerCode);
+    TbCustomer GetRowByCode(int companyId, string customerCode);
 
     TbCustomer GetRowByIdentification(int companyId, int identification);
 

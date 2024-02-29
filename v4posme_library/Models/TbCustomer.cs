@@ -126,7 +126,7 @@ public class TbCustomer
     public int? CreatedAt { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
-    public ulong? IsActive { get; set; }
+    public bool IsActive { get; set; }
 
     [Column("balancePoint")]
     [Precision(10, 2)]

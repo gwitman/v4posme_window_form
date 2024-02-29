@@ -3,7 +3,7 @@ using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;
 
-class AccountLevelModel : IAccountLevelModel
+public class AccountLevelModel : IAccountLevelModel
 {
     public void DeleteAppPosme(int companyId, int accountLevelId)
     {

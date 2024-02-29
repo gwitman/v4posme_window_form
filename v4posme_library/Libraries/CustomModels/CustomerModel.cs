@@ -2,7 +2,7 @@
 
 namespace v4posme_library.Libraries.CustomModels;
 
-class CustomerModel : ICustomerModel
+public class CustomerModel : ICustomerModel
 {
     public void UpdateAppPosme(int companyId, int branchId, int entityId, TbCustomer data)
     {
@@ -11,6 +11,7 @@ class CustomerModel : ICustomerModel
             .Single(customer => customer.CompanyId == companyId
                                 && customer.BranchId == branchId
                                 && customer.EntityId == entityId);
+        data.CustomerId = find.CustomerId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
@@ -22,7 +23,7 @@ class CustomerModel : ICustomerModel
             .Single(customer => customer.CompanyId == companyId
                                 && customer.BranchId == branchId
                                 && customer.EntityId == entityId);
-        find.IsActive = 0;
+        find.IsActive = false;
         context.BulkSaveChanges();
     }
 
@@ -40,7 +41,7 @@ class CustomerModel : ICustomerModel
         var result = from c in dbContext.TbCustomers
             join n in dbContext.TbNaturales on c.EntityId equals n.EntityId
             where c.CompanyId == companyId
-                  && c.IsActive == 1
+                  && c.IsActive
                   && c.BirthDate <= DateTime.Today
             select new TbCustomer
             {
@@ -62,12 +63,12 @@ class CustomerModel : ICustomerModel
         return result.ToList();
     }
 
-    public TbCustomer GetRowByCode(int companyId, int customerCode)
+    public TbCustomer GetRowByCode(int companyId, string customerCode)
     {
         using var dbContext = new DataContext();
         return dbContext.TbCustomers
             .Single(c => c.CompanyId == companyId
-                         && c.IsActive == 1
+                         && c.IsActive
                          && c.CustomerNumber.Equals(customerCode));
     }
 
@@ -76,7 +77,7 @@ class CustomerModel : ICustomerModel
         using var dbContext = new DataContext();
         return dbContext.TbCustomers
             .Single(c => c.CompanyId == companyId
-                         && c.IsActive == 1
+                         && c.IsActive
                          && c.Identification.Equals(identification));
     }
 
@@ -86,7 +87,7 @@ class CustomerModel : ICustomerModel
         var result = from i in dbContext.TbCustomers
             join nat in dbContext.TbNaturales on i.EntityId equals nat.EntityId
             where i.CompanyId == companyId
-                  && i.IsActive == 1
+                  && i.IsActive
             select new TbCustomer
             {
                 CompanyId = i.CompanyId,
@@ -139,7 +140,7 @@ class CustomerModel : ICustomerModel
         var result = from i in dbContext.TbCustomers
             join nat in dbContext.TbNaturales on i.EntityId equals nat.EntityId
             where i.CompanyId == companyId
-                  && i.IsActive == 1
+                  && i.IsActive
             select new TbCustomer
             {
                 CompanyId = i.CompanyId,
@@ -193,7 +194,7 @@ class CustomerModel : ICustomerModel
             join nat in dbContext.TbNaturales on i.EntityId equals nat.EntityId
             where i.CompanyId == companyId
                   && i.EntityId == entityId
-                  && i.IsActive == 1
+                  && i.IsActive
             select new TbCustomer
             {
                 CompanyId = i.CompanyId,
