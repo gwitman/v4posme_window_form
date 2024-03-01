@@ -4,8 +4,8 @@ namespace v4posme_library.Libraries.CustomModels
 {
     public interface IBranchModel
     {
-        TbBranch? findById(int id);
+        TbBranch FindById(int id, int idCompany);
 
-        List<TbBranch?> findAll();
+        List<TbBranch> findAll();
     }
 }

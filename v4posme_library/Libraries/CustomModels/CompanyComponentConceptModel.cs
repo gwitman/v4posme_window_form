@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;
@@ -23,6 +22,7 @@ class CompanyComponentConceptModel : ICompanyComponentConceptModel
                                 && concepts.ComponentId == componentId
                                 && concepts.ComponentItemId == componentItemId
                                 && concepts.Name.Equals(name));
+        data.CompanyComponentConceptId = find.CompanyComponentConceptId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }

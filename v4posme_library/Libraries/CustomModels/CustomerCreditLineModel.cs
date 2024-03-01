@@ -10,7 +10,9 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
         using var context = new DataContext();
         var find = context.TbCustomerCreditLines
             .Find(customerCreditLineId);
-        context.Entry(find!).CurrentValues.SetValues(data);
+        if (find == null) return;
+        data.CustomerCreditLineId = find.CustomerCreditLineId;
+        context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
 
@@ -219,7 +221,7 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
 
     public TbCustomerCreditLine GetRowByPk(int customerCreditLineId)
     {
-        using var context=new DataContext();
+        using var context = new DataContext();
         return context.TbCustomerCreditLines
             .Single(line => line.CustomerCreditLineId == customerCreditLineId
                             && line.IsActive == 1);

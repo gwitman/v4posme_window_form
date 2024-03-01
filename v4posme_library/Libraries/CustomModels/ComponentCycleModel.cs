@@ -33,6 +33,7 @@ public class ComponentCycleModel : IComponentCycleModel
         using var context = new DataContext();
         var find = context.TbAccountingCycles
             .Single(cycle => cycle.ComponentCycleId == componentCycleId);
+        data.ComponentCycleId = find.ComponentCycleId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }

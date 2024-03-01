@@ -19,6 +19,7 @@ public class AccountLevelModel : IAccountLevelModel
         using var context = new DataContext();
         var find = context.TbAccountLevels.Single(account =>
             account.CompanyId == companyId && account.AccountLevelId == accountLevelId);
+        data.AccountLevelId = find.AccountLevelId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }

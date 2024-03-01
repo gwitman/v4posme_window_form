@@ -28,6 +28,7 @@ public class ComponentPeriodModel : IComponentPeriodModel
         using var context = new DataContext();
         var find = FindByCompanyIdAndComponentIdAndComponentPeriodId(companyId, componentId, componentPeriodId, context)
             .Single();
+        data.ComponentPeriodId = find.ComponentPeriodId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }

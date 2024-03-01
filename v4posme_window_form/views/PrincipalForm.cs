@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraBars.FluentDesignSystem;
+﻿using System.Diagnostics;
+using DevExpress.XtraBars.FluentDesignSystem;
 using DevExpress.XtraBars.Navigation;
 using Unity;
 using v4posme_library.Libraries;
@@ -21,11 +22,12 @@ namespace v4posme_window_form.Views
 
         private void PrincipalForm_Load(object sender, EventArgs e)
         {
+            Debug.Assert(VariablesGlobales.Instance.User != null, "VariablesGlobales.Instance.User != null");
             VariablesGlobales.Instance.Company = _companyService.GetRowByPk(VariablesGlobales.Instance.User.CompanyId);
-            VariablesGlobales.Instance.Branch = _branchModel.findById(VariablesGlobales.Instance.User.BranchId);
+            VariablesGlobales.Instance.Branch = _branchModel.FindById(VariablesGlobales.Instance.User.BranchId, VariablesGlobales.Instance.User.CompanyId);
             VariablesGlobales.Instance.Membership = _membershipService.GetRowByCompanyIdBranchIdUserId(VariablesGlobales.Instance.User.CompanyId,
                 VariablesGlobales.Instance.User.BranchId, VariablesGlobales.Instance.User.UserId);
-            barCompanyNane.Caption = Resources.PrincipalForm_Compañía_Titulo + VariablesGlobales.Instance.Company.Name + "-" + VariablesGlobales.Instance.Branch.Name;
+            barCompanyNane.Caption = Resources.PrincipalForm_Compañía_Titulo + VariablesGlobales.Instance.Company!.Name + "-" + VariablesGlobales.Instance.Branch.Name;
             foreach (var item in _coreMenuService.RenderMenuLeft(VariablesGlobales.Instance.Company, VariablesGlobales.Instance.ListMenuLeft))
             {
                 menuElement.Elements.Add(new AccordionControlElement()

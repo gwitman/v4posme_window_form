@@ -20,6 +20,7 @@ class AccountTypeModel : IAccountTypeModel
         var find = context.TbAccountTypes
             .Single(account => account.CompanyId == companyId
                                && account.AccountTypeId == accountTypeId);
+        data.AccountTypeId = find.AccountTypeId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }

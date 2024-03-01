@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.Marshalling;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;
@@ -22,6 +21,7 @@ class CustomerConsultasSinRiesgoModel : ICustomerConsultasSinRiesgoModel
     {
         using var context = new DataContext();
         var find = FindByRequestId(requestId, context).Single();
+        data.RequestId = find.RequestId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }

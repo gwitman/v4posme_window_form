@@ -22,6 +22,7 @@ class CompanyCurrencyModel : ICompanyCurrencyModel
             .Single(currency =>
                 currency.CompanyCurrencyId == currencyId
                 && currency.CompanyId == companyId);
+        data.CompanyCurrencyId = find.CompanyCurrencyId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }

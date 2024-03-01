@@ -24,6 +24,7 @@ public class CreditLineModel : ICreditLineModel
     {
         using var context = new DataContext();
         var find = Find(companyId, creditLineId, context).Single();
+        data.CreditLineId = find.CreditLineId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }

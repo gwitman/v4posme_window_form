@@ -63,13 +63,13 @@ namespace v4posme_library.Libraries
         public TbMembership? Membership { get; set; }
 
         public TbRole? Role { get; set; }
-        public List<TbMenuElement>? ListMenuTop { get; set; }
-        public List<TbMenuElement>? ListMenuLeft { get; set; }
-        public List<TbMenuElement>? ListMenuBodyReport { get; set; }
-        public List<TbMenuElement>? ListMenuHiddenPopup { get; set; }
+        public List<TbMenuElement> ListMenuTop { get; set; }
+        public List<TbMenuElement> ListMenuLeft { get; set; }
+        public List<TbMenuElement> ListMenuBodyReport { get; set; }
+        public List<TbMenuElement> ListMenuHiddenPopup { get; set; }
         public string? MessageLogin { get; set; }
         public string? ParameterLabelSystem { get; set; }
-        public List<string>? SubMenu { get; set; }
+        public List<string> SubMenu { get; set; }
 
         public void sendEmail()
         {

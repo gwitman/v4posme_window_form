@@ -16,6 +16,7 @@ class CenterCostModel : ICenterCostModel
     {
         using var context = new DataContext();
         var find = FindByCompanyIdAndClassId(companyId, classId, context);
+        data.ClassId = find.ClassId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }

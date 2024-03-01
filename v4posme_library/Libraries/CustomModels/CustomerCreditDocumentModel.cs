@@ -14,6 +14,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
     {
         using var context = new DataContext();
         var find = FindDocuments(customerCreditDocumentId, context).Single();
+        data.CustomerCreditDocumentId = find.CustomerCreditDocumentId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }

@@ -7,7 +7,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
     public class MenuElementModelService : IMenuElementModelService
     {
 
-        public List<TbMenuElement>? GetRowByCompanyIdyElementId(int companyId, List<int> elementIdArray)
+        public List<TbMenuElement> GetRowByCompanyIdyElementId(int companyId, List<int> elementIdArray)
         {
             var listMenuElement = new List<TbMenuElement>();
             using var context = new DataContext();

@@ -24,6 +24,7 @@ class AccountModel : IAccountModel
     {
         using var context = new DataContext();
         var find = GetRowByPk(companyId, accountId);
+        data.AccountId = find.AccountId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }

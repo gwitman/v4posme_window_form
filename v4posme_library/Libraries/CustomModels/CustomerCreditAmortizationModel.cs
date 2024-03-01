@@ -12,6 +12,7 @@ class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
         var find = context.TbCustomerCreditAmortizations
             .Find(creditAmortizationId);
         if (find is null) return;
+        data.CreditAmortizationId = find.CreditAmortizationId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
@@ -192,7 +193,7 @@ class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                 on i.StatusId equals ws.WorkflowStageId
             join cd in dbContext.TbCustomerCreditDocuments
                 on i.CustomerCreditDocumentId equals cd.CustomerCreditDocumentId
-            join wsd in dbContext.TbWorkflowStages 
+            join wsd in dbContext.TbWorkflowStages
                 on cd.StatusId equals wsd.WorkflowStageId
             where i.IsActive == 1
                   && ws.Vinculable!.Value

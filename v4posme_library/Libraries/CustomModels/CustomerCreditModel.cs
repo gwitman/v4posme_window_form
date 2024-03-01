@@ -11,6 +11,7 @@ class CustomerCreditModel : ICustomerCreditModel
             .Single(credit => credit.CompanyId == companyId
                               && credit.EntityId == entityId
                               && credit.BranchId == branchId);
+        data.CustomerCreditId = find.CustomerCreditId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }

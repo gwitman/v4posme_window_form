@@ -16,6 +16,7 @@ class CustomerCreditDocumentEntityRelatedModel : ICustomerCreditDocumentEntityRe
     {
         using var context = new DataContext();
         var find = FindEntityRelateds(customerCreditDocumentId, entityId, context).Single();
+        data.CcEntityRelatedId = find.CcEntityRelatedId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
