@@ -21,9 +21,7 @@ public class TbEmployeeCalendarPayDetail
     [Column("employeeID", TypeName = "int(11)")]
     public int EmployeeId { get; set; }
 
-    [Column("salary")]
-    [Precision(18, 2)]
-    public decimal Salary { get; set; }
+    [Column("salary")] [Precision(18, 2)] public decimal Salary { get; set; }
 
     [Column("commission")]
     [Precision(18, 2)]
@@ -33,10 +31,14 @@ public class TbEmployeeCalendarPayDetail
     [Precision(18, 2)]
     public decimal Adelantos { get; set; }
 
-    [Column("neto")]
-    [Precision(18, 2)]
-    public decimal Neto { get; set; }
+    [Column("neto")] [Precision(18, 2)] public decimal Neto { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
     public ulong IsActive { get; set; }
+
+    [NotMapped] public string? FirstName { get; set; }
+    [NotMapped] public string? LastName { get; set; }
+    [NotMapped] public string? EmployeNumber { get; set; }
+    [NotMapped] public decimal? HourCost { get; set; }
+    [NotMapped] public decimal? ComissionPorcentage { get; set; }
 }

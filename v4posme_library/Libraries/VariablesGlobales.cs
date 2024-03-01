@@ -17,23 +17,46 @@ namespace v4posme_library.Libraries
         private VariablesGlobales()
         {
             _unityContainer = new UnityContainer();
-            _unityContainer.RegisterType<ICoreWebAuthentication, CoreWebAuthentication>();
+
+            #region CDI_MODELS
+            _unityContainer.RegisterType<IAccountingBalanceModel, AccountingBalanceModel>();
+            _unityContainer.RegisterType<IAccountLevelModel, AccountLevelModel>();
+            _unityContainer.RegisterType<IAccountModel, AccountModel>();
+            _unityContainer.RegisterType<IAccountTypeModel, AccountTypeModel>();
+            _unityContainer.RegisterType<IBibliaModel, BibliaModel>();
+            _unityContainer.RegisterType<IBiometricUserModel, BiometricUserModel>();
             _unityContainer.RegisterType<IBranchModel, BranchModel>();
-            _unityContainer.RegisterType<ICompanyService, CompanyService>();
+            _unityContainer.RegisterType<ICenterCostModel, CenterCostModel>();
+            _unityContainer.RegisterType<ICompanyComponentConceptModel, CompanyComponentConceptModel>();
+            _unityContainer.RegisterType<ICompanyCurrencyModel, CompanyCurrencyModel>();
+            _unityContainer.RegisterType<ICompanyParameterModel, CompanyParameterModel>();
+            _unityContainer.RegisterType<IComponentCycleModel, ComponentCycleModel>();
+            _unityContainer.RegisterType<IComponentPeriodModel, ComponentPeriodModel>();
+            _unityContainer.RegisterType<ICreditLineModel, CreditLineModel>();
+            _unityContainer.RegisterType<ICustomerConsultasSinRiesgoModel, CustomerConsultasSinRiesgoModel>();
+            _unityContainer.RegisterType<ICustomerCreditAmortizationModel, CustomerCreditAmortizationModel>();
+            _unityContainer.RegisterType<ICustomerCreditDocumentEntityRelatedModel, CustomerCreditDocumentEntityRelatedModel>();
+            _unityContainer.RegisterType<ICustomerCreditDocumentModel, CustomerCreditDocumentModel>();
+            _unityContainer.RegisterType<ICustomerCreditLineModel, CustomerCreditLineModel>();
+            _unityContainer.RegisterType<ICustomerCreditModel, CustomerCreditModel>();
+            _unityContainer.RegisterType<ICustomerModel, CustomerModel>();
+            _unityContainer.RegisterType<IParameterModel, ParameterModel>();
+            #endregion
+
+            #region CDI_LIBRARIES
+
             _unityContainer.RegisterType<IMembershipService, MembershipService>();
             _unityContainer.RegisterType<IRoleService, RoleService>();
             _unityContainer.RegisterType<IElementSevice, ElementService>();
             _unityContainer.RegisterType<ICoreMenuService, CoreMenuService>();
             _unityContainer.RegisterType<IUserPermissionService, UserPermissionService>();
             _unityContainer.RegisterType<IMenuElementModelService, MenuElementModelService>();
-            _unityContainer.RegisterType<IParameterModel, ParameterModel>();
+            _unityContainer.RegisterType<ICoreWebAuthentication, CoreWebAuthentication>();
+            _unityContainer.RegisterType<ICompanyService, CompanyService>();
             _unityContainer.RegisterType<ICompanyParameterModel, CompanyParameterModel>();
             _unityContainer.RegisterType<ICoreWebParameter, CoreWebParameter>();
             _unityContainer.RegisterType<ICoreWebPermission, CoreWebPermission>();
-            _unityContainer.RegisterType<IComponentCycleModel, ComponentCycleModel>();
-            _unityContainer.RegisterType<IComponentPeriodModel, ComponentPeriodModel>();
-            _unityContainer.RegisterType<IAccountModel, AccountModel>();
-            _unityContainer.RegisterType<IAccountingBalanceModel, AccountingBalanceModel>();
+            #endregion
         }
 
         public static VariablesGlobales Instance { get; } = new();

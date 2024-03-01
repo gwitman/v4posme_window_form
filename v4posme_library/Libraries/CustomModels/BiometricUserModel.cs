@@ -2,7 +2,7 @@
 
 namespace v4posme_library.Libraries.CustomModels;
 
-class BiometricUserModel : IBiometricUserModel
+public class BiometricUserModel : IBiometricUserModel
 {
     public void DeleteAppPosme(int userId)
     {

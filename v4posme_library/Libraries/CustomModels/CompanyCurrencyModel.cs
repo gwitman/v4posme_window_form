@@ -2,7 +2,7 @@
 
 namespace v4posme_library.Libraries.CustomModels;
 
-class CompanyCurrencyModel : ICompanyCurrencyModel
+public class CompanyCurrencyModel : ICompanyCurrencyModel
 {
     public int DeleteAppPosme(int companyId, int currencyId)
     {

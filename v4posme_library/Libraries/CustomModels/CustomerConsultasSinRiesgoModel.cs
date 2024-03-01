@@ -3,7 +3,7 @@ using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;
 
-class CustomerConsultasSinRiesgoModel : ICustomerConsultasSinRiesgoModel
+public class CustomerConsultasSinRiesgoModel : ICustomerConsultasSinRiesgoModel
 {
     private static IQueryable<TbCustomerConsultasSinRiesgo> FindByRequestId(int requestId, DataContext context)
     {

@@ -2,7 +2,7 @@
 
 namespace v4posme_library.Libraries.CustomModels;
 
-class CenterCostModel : ICenterCostModel
+public class CenterCostModel : ICenterCostModel
 {
     public void DeleteAppPosme(int companyId, int classId)
     {

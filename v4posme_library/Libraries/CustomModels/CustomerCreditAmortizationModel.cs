@@ -4,7 +4,7 @@ using v4posme_library.ModelsViews;
 
 namespace v4posme_library.Libraries.CustomModels;
 
-class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
+public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
 {
     public void UpdateAppPosme(int creditAmortizationId, TbCustomerCreditAmortization data)
     {
