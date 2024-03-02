@@ -175,6 +175,9 @@ E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\v4posm
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\v4posme_window_form.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\v4posme_window_form.pdb
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Devart.Data.dll
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Devart.Data.MySql.dll
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Devart.Data.MySql.Entity.EFCore.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\DevExpress.XtraCharts.v23.1.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\DevExpress.Charts.v23.1.Core.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\DevExpress.CodeParser.v23.1.dll
@@ -283,6 +286,7 @@ E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\System
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\System.ServiceProcess.ServiceController.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Unity.Abstractions.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Unity.Container.dll
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Z.EntityFramework.Extensions.EFCore.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\ZstdSharp.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\cs\System.Private.ServiceModel.resources.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\de\System.Private.ServiceModel.resources.dll

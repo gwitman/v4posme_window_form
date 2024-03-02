@@ -133,7 +133,7 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<TbEmployee> TbEmployees { get; set; }
 
-    public virtual DbSet<TbEmployeeCalendarPay> TbEmployeeCalendarPays { get; set; }
+    public virtual DbSet<TbEmployeeCalendarPay?> TbEmployeeCalendarPays { get; set; }
 
     public virtual DbSet<TbEmployeeCalendarPayDetail> TbEmployeeCalendarPayDetails { get; set; }
 

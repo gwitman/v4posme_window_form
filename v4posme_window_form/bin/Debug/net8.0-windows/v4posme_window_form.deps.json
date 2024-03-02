@@ -24,6 +24,41 @@
           }
         }
       },
+      "Devart.Data/6.0.10": {
+        "dependencies": {
+          "Microsoft.Win32.Registry": "4.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Devart.Data.dll": {
+            "assemblyVersion": "6.0.10.0",
+            "fileVersion": "6.0.10.0"
+          }
+        }
+      },
+      "Devart.Data.MySql/9.3.10": {
+        "dependencies": {
+          "Devart.Data": "6.0.10",
+          "System.Diagnostics.PerformanceCounter": "4.6.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Devart.Data.MySql.dll": {
+            "assemblyVersion": "9.3.10.0",
+            "fileVersion": "9.3.10.0"
+          }
+        }
+      },
+      "Devart.Data.MySql.EFCore/9.3.10.8": {
+        "dependencies": {
+          "Devart.Data.MySql": "9.3.10",
+          "Microsoft.EntityFrameworkCore.Relational": "8.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/Devart.Data.MySql.Entity.EFCore.dll": {
+            "assemblyVersion": "9.3.10.0",
+            "fileVersion": "9.3.10.0"
+          }
+        }
+      },
       "DevExpress.Charts/23.1.3": {
         "dependencies": {
           "DevExpress.Charts.Core": "23.1.3",
@@ -1870,6 +1905,18 @@
           }
         }
       },
+      "Z.EntityFramework.Extensions.EFCore/8.102.1": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": "8.0.0",
+          "System.Configuration.ConfigurationManager": "8.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/Z.EntityFramework.Extensions.EFCore.dll": {
+            "assemblyVersion": "8.102.1.0",
+            "fileVersion": "8.102.1.0"
+          }
+        }
+      },
       "ZstdSharp.Port/0.7.1": {
         "runtime": {
           "lib/net7.0/ZstdSharp.dll": {
@@ -1880,14 +1927,16 @@
       },
       "v4posme_library/1.0.0": {
         "dependencies": {
-          "DevExpress.Xpo": "23.1.3",
+          "Devart.Data.MySql": "9.3.10",
+          "Devart.Data.MySql.EFCore": "9.3.10.8",
           "Microsoft.Extensions.Configuration": "8.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
           "Microsoft.Extensions.Configuration.Json": "8.0.0",
           "MySql.Data": "8.3.0",
           "Pomelo.EntityFrameworkCore.MySql": "8.0.0",
           "System.Configuration.ConfigurationManager": "8.0.0",
-          "Unity": "5.11.10"
+          "Unity": "5.11.10",
+          "Z.EntityFramework.Extensions.EFCore": "8.102.1"
         },
         "runtime": {
           "v4posme_library.dll": {}
@@ -1907,6 +1956,27 @@
       "sha512": "sha512-A6Zr52zVqJKt18ZBsTnX0qhG0kwIQftVAjLmszmkiR/trSp8H+xj1gUOzk7XHwaKgyREMSV1v9XaKrBUeIOdvQ==",
       "path": "bouncycastle.cryptography/2.2.1",
       "hashPath": "bouncycastle.cryptography.2.2.1.nupkg.sha512"
+    },
+    "Devart.Data/6.0.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Hw7Ri/l40afgtnY3GMZjyd29iyKW9J3ySWRuuZgAS6Xh87FituDXj+Hobor5xN49QvCYDL+2DRhfFweMKpa57w==",
+      "path": "devart.data/6.0.10",
+      "hashPath": "devart.data.6.0.10.nupkg.sha512"
+    },
+    "Devart.Data.MySql/9.3.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0bn6hKu3GCFoh0YH1SCXSn93G5l8W4zUMkWXlx6mubO4d1y9WN/oV856H19dpILIdax/kgZyQ9/heAjoQ2PJuA==",
+      "path": "devart.data.mysql/9.3.10",
+      "hashPath": "devart.data.mysql.9.3.10.nupkg.sha512"
+    },
+    "Devart.Data.MySql.EFCore/9.3.10.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wotASOd0MigrCat8BFSQA6e3yNfJxr83mz8jjVeqaIfq+cU7X+bWhrW0ggSgQimjdkZuudzYDKR3s+4EKSLzZw==",
+      "path": "devart.data.mysql.efcore/9.3.10.8",
+      "hashPath": "devart.data.mysql.efcore.9.3.10.8.nupkg.sha512"
     },
     "DevExpress.Charts/23.1.3": {
       "type": "package",
@@ -2887,6 +2957,13 @@
       "sha512": "sha512-B4+Ps3oqI78hJ+dAFsJhPkJT6qycsNExgLbtw7CEHSzKc2ac3YyUR8SHQ+ZyTwld/y5IbDx/aNOHnKE9Em1zWA==",
       "path": "unity/5.11.10",
       "hashPath": "unity.5.11.10.nupkg.sha512"
+    },
+    "Z.EntityFramework.Extensions.EFCore/8.102.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CW0nZuIJRo0zX1U9sQP2s8IXNqL1ATsLe4rjLDdpCpHtqxzxIvnknft0YOndk40S2vKgICXrUl3kDT7TrxbLIg==",
+      "path": "z.entityframework.extensions.efcore/8.102.1",
+      "hashPath": "z.entityframework.extensions.efcore.8.102.1.nupkg.sha512"
     },
     "ZstdSharp.Port/0.7.1": {
       "type": "package",

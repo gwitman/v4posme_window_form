@@ -11,7 +11,6 @@ namespace v4posme_library.Libraries
 {
     public class VariablesGlobales
     {
-
         private readonly IUnityContainer _unityContainer;
 
         private VariablesGlobales()
@@ -19,6 +18,7 @@ namespace v4posme_library.Libraries
             _unityContainer = new UnityContainer();
 
             #region CDI_MODELS
+
             _unityContainer.RegisterType<IAccountingBalanceModel, AccountingBalanceModel>();
             _unityContainer.RegisterType<IAccountLevelModel, AccountLevelModel>();
             _unityContainer.RegisterType<IAccountModel, AccountModel>();
@@ -35,12 +35,16 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICreditLineModel, CreditLineModel>();
             _unityContainer.RegisterType<ICustomerConsultasSinRiesgoModel, CustomerConsultasSinRiesgoModel>();
             _unityContainer.RegisterType<ICustomerCreditAmortizationModel, CustomerCreditAmortizationModel>();
-            _unityContainer.RegisterType<ICustomerCreditDocumentEntityRelatedModel, CustomerCreditDocumentEntityRelatedModel>();
+            _unityContainer
+                .RegisterType<ICustomerCreditDocumentEntityRelatedModel, CustomerCreditDocumentEntityRelatedModel>();
             _unityContainer.RegisterType<ICustomerCreditDocumentModel, CustomerCreditDocumentModel>();
             _unityContainer.RegisterType<ICustomerCreditLineModel, CustomerCreditLineModel>();
             _unityContainer.RegisterType<ICustomerCreditModel, CustomerCreditModel>();
             _unityContainer.RegisterType<ICustomerModel, CustomerModel>();
+            _unityContainer.RegisterType<IEmployeeCalendarPayDetailModel, EmployeeCalendarPayDetailModel>();
+            _unityContainer.RegisterType<IEmployeeCalendarPayModel, EmployeeCalendarPayModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
+
             #endregion
 
             #region CDI_LIBRARIES
@@ -56,6 +60,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICompanyParameterModel, CompanyParameterModel>();
             _unityContainer.RegisterType<ICoreWebParameter, CoreWebParameter>();
             _unityContainer.RegisterType<ICoreWebPermission, CoreWebPermission>();
+
             #endregion
         }
 
@@ -72,11 +77,9 @@ namespace v4posme_library.Libraries
 
         public IUnityContainer UnityContainer
         {
-            get
-            {
-                return _unityContainer;
-            }
+            get { return _unityContainer; }
         }
+
         public TbUser? User { get; set; }
 
         public TbCompany? Company { get; set; }
@@ -86,13 +89,13 @@ namespace v4posme_library.Libraries
         public TbMembership? Membership { get; set; }
 
         public TbRole? Role { get; set; }
-        public List<TbMenuElement> ListMenuTop { get; set; }
-        public List<TbMenuElement> ListMenuLeft { get; set; }
-        public List<TbMenuElement> ListMenuBodyReport { get; set; }
-        public List<TbMenuElement> ListMenuHiddenPopup { get; set; }
+        public List<TbMenuElement>? ListMenuTop { get; set; }
+        public List<TbMenuElement>? ListMenuLeft { get; set; }
+        public List<TbMenuElement>? ListMenuBodyReport { get; set; }
+        public List<TbMenuElement>? ListMenuHiddenPopup { get; set; }
         public string? MessageLogin { get; set; }
         public string? ParameterLabelSystem { get; set; }
-        public List<string> SubMenu { get; set; }
+        public List<string>? SubMenu { get; set; }
 
         public void sendEmail()
         {

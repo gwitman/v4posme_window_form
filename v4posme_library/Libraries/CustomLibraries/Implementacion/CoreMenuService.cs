@@ -11,24 +11,24 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         private readonly IElementSevice _elementService = VariablesGlobales.Instance.UnityContainer.Resolve<IElementSevice>();
         private readonly IUserPermissionService _userPermissionService = VariablesGlobales.Instance.UnityContainer.Resolve<IUserPermissionService>();
         private readonly IMenuElementModelService _menuElementModelService = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModelService>();
-        public List<TbMenuElement> GetMenuTop(int companyId, int branchId, int roleId)
+        public List<TbMenuElement>? GetMenuTop(int companyId, int branchId, int roleId)
         {
             return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_TOP"]));
         }
-        public List<TbMenuElement> GetMenuLeft(int companyId, int branchId, int roleId)
+        public List<TbMenuElement>? GetMenuLeft(int companyId, int branchId, int roleId)
         {
             return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_LEFT"]));
         }
-        public List<TbMenuElement> GetMenuBodyReport(int companyId, int branchId, int roleId)
+        public List<TbMenuElement>? GetMenuBodyReport(int companyId, int branchId, int roleId)
         {
             return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_BODY"]));
         }
-        public List<TbMenuElement> GetMenuHiddenPopup(int companyId, int branchId, int roleId)
+        public List<TbMenuElement>? GetMenuHiddenPopup(int companyId, int branchId, int roleId)
         {
             return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_HIDDEN_POPUP"]));
         }
 
-        private List<TbMenuElement> GetMenu(int companyId, int branchId, int roleId, int menu)
+        private List<TbMenuElement>? GetMenu(int companyId, int branchId, int roleId, int menu)
         {
             var role = VariablesGlobales.Instance.Role;
             var listMenuElement = new List<TbMenuElement>();
@@ -64,11 +64,11 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             return listMenuElement;
         }
 
-        public List<string> RenderMenuLeft(TbCompany? company, List<TbMenuElement> menuElements)
+        public List<string>? RenderMenuLeft(TbCompany? company, List<TbMenuElement>? menuElements)
         {
             return RenderItemLeft(company, menuElements, 0);
         }
-        private List<string> RenderItemLeft(TbCompany? company, List<TbMenuElement> data, int parent)
+        private List<string>? RenderItemLeft(TbCompany? company, List<TbMenuElement>? data, int parent)
         {
             /*
              * foreach ($data AS $obj){
