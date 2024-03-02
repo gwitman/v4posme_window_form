@@ -43,6 +43,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICustomerModel, CustomerModel>();
             _unityContainer.RegisterType<IEmployeeCalendarPayDetailModel, EmployeeCalendarPayDetailModel>();
             _unityContainer.RegisterType<IEmployeeCalendarPayModel, EmployeeCalendarPayModel>();
+            _unityContainer.RegisterType<IEmployeeModel, EmployeeModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion

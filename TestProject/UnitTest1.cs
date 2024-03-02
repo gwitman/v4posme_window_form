@@ -48,5 +48,34 @@ namespace TestProject
                 Console.WriteLine(customer.Identification);
             }
         }
+        [Test]
+        public void Test4()
+        {
+            var employeeModel = VariablesGlobales.Instance.UnityContainer.Resolve<IEmployeeModel>();
+            var data = new TbEmployee
+            {
+                CompanyId = 2,
+                BranchId = 2,
+                EntityId = 664,
+                EmployeNumber = "EMP00000012",
+                NumberIdentification = "0013107870024J",
+                IdentificationTypeId = 85,
+                Address = "Urbanizacion San Miguel",
+                CountryId = 42,
+                StateId = 205,
+                CityId = 227,
+                DepartamentId = 121,
+                AreaId = 123,
+                ClasificationId = 126,
+                CategoryId = 128,
+                TypeEmployeeId = 130,
+                HourCost = 100,
+                StartOn = DateOnly.FromDateTime(DateTime.Now),
+                CreatedOn = DateTime.Now,
+                IsActive = true
+            };
+            var add = employeeModel.InsertAppPosme(data);
+            Console.WriteLine(@"Id del empleado ingresado: {0}",add);
+        }
     }
 }
