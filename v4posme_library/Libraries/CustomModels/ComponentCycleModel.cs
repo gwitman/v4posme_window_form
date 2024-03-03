@@ -23,9 +23,7 @@ public class ComponentCycleModel : IComponentCycleModel
             .Where(cycle => cycle.ComponentId == componentId)
             .Where(cycle => cycle.ComponentPeriodId == componentPeriodId)
             .WhereBulkNotContains(array, cycle => cycle.ComponentCycleId)
-            .Single();
-        find.IsActive = false;
-        context.SaveChanges();
+            .ExecuteUpdate(calls => calls.SetProperty(cycle => cycle.IsActive,false));
     }
 
     public void UpdateAppPosme(int componentCycleId, TbAccountingCycle data)

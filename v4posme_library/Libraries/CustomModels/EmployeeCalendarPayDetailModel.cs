@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -19,9 +20,7 @@ class EmployeeCalendarPayDetailModel : IEmployeeCalendarPayDetailModel
         using var context = new DataContext();
         var find = context.TbEmployeeCalendarPayDetails
             .WhereBulkNotContains(arrayId, detail => detail.CalendarDetailId)
-            .Single(detail => detail.CalendarId == calendarId);
-        find.IsActive = 0;
-        context.BulkSaveChanges();
+            .ExecuteUpdate(calls => calls.SetProperty(detail => detail.IsActive, (ulong)0));
     }
 
     public void DeleteAppPosme(int calendarDetailId)
