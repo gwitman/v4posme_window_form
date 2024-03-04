@@ -29,10 +29,10 @@ public class TbEntityPhone
     [Column("typeID", TypeName = "int(11)")]
     public int? TypeId { get; set; }
 
-    [Column("number")]
-    [StringLength(250)]
-    public string? Number { get; set; }
+    [Column("number")] [StringLength(250)] public string? Number { get; set; }
 
     [Column("isPrimary", TypeName = "tinyint(4)")]
     public sbyte? IsPrimary { get; set; }
+
+    [NotMapped] public string? TypeIdDescription { get; set; }
 }
