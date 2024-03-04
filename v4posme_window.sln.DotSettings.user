@@ -1,11 +1,10 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2986fda3_002Dc802_002D4906_002D9e07_002Dbcd5bac13d5c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a415eda1_002D4f17_002D47d4_002Da52e_002D927e4fc06bbc/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="EntityEmailModel" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::96DEC9C5-587C-4D0D-87ED-AB341A8EF9E1::net8.0::TestProject.Tests.Test3&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::96DEC9C5-587C-4D0D-87ED-AB341A8EF9E1::net8.0::TestProject.Tests.Test4&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::96DEC9C5-587C-4D0D-87ED-AB341A8EF9E1::net8.0::TestProject.Tests.Test5&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::96DEC9C5-587C-4D0D-87ED-AB341A8EF9E1::net8.0::TestProject.Tests.EntityEmailModel&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=v4posme_005Fwindow_005Fform_002FProperties_002FResources/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=v4posme_005Fwindow_005Fform_002FViews_002FPrincipalForm/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/Initialized/@EntryValue">True</s:Boolean>

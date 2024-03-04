@@ -4,9 +4,9 @@ namespace v4posme_library.Libraries.CustomModels;
 
 public interface IEntityEmailModel
 {
-    void DeleteAppPosme(int companyId, int branchId, int entityId, int entityEmailId);
+    int DeleteAppPosme(int companyId, int branchId, int entityId, int entityEmailId);
 
-    void DeleteByEntity(int companyId, int branchId, int entityId);
+    int DeleteByEntity(int companyId, int branchId, int entityId);
 
     long InsertAppPosme(TbEntityEmail data);
 

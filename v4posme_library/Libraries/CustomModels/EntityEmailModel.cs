@@ -5,10 +5,10 @@ namespace v4posme_library.Libraries.CustomModels;
 
 class EntityEmailModel : IEntityEmailModel
 {
-    public void DeleteAppPosme(int companyId, int branchId, int entityId, int entityEmailId)
+    public int DeleteAppPosme(int companyId, int branchId, int entityId, int entityEmailId)
     {
         using var context = new DataContext();
-        context.TbEntityEmails
+        return context.TbEntityEmails
             .Where(email => email.CompanyId == companyId
                             && email.BranchId == branchId
                             && email.EntityId == entityId
@@ -16,10 +16,10 @@ class EntityEmailModel : IEntityEmailModel
             .ExecuteDelete();
     }
 
-    public void DeleteByEntity(int companyId, int branchId, int entityId)
+    public int DeleteByEntity(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
-        context.TbEntityEmails
+        return context.TbEntityEmails
             .Where(email => email.CompanyId == companyId
                             && email.BranchId == branchId
                             && email.EntityId == entityId)

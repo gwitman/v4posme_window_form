@@ -88,5 +88,13 @@ namespace TestProject
             employeeCalendarPayDetailModel.DeleteWhereIdNotIn(1, [..array1]);
             Console.WriteLine("Ejecutado con exito");
         }
+
+        [Test]
+        public void EntityEmailModel()
+        {
+            var entityEmailModel = VariablesGlobales.Instance.UnityContainer.Resolve<IEntityEmailModel>();
+            var delete = entityEmailModel.DeleteAppPosme(2,2,11,36);
+            Console.WriteLine(@"Canitdad de filas afectadas: {0}", delete);
+        }
     }
 }
