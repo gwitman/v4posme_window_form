@@ -44,6 +44,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IEmployeeCalendarPayDetailModel, EmployeeCalendarPayDetailModel>();
             _unityContainer.RegisterType<IEmployeeCalendarPayModel, EmployeeCalendarPayModel>();
             _unityContainer.RegisterType<IEmployeeModel, EmployeeModel>();
+            _unityContainer.RegisterType<IEntityAccountModel, IEntityAccountModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion

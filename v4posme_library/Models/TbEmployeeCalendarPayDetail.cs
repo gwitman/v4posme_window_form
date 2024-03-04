@@ -34,7 +34,7 @@ public class TbEmployeeCalendarPayDetail
     [Column("neto")] [Precision(18, 2)] public decimal Neto { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
-    public ulong IsActive { get; set; }
+    public int IsActive { get; set; }
 
     [NotMapped] public string? FirstName { get; set; }
     [NotMapped] public string? LastName { get; set; }

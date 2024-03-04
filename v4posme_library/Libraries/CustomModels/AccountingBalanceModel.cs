@@ -43,14 +43,11 @@ public class AccountingBalanceModel : IAccountingBalanceModel
             .Select(balance => balance.AccountId)
             .ToList();
         var query = context.TbAccounts
-            .Where(account => account.CompanyId == companyId)
-            .WhereBulkNotContains(accountIds)
-            .Where(account => account.IsActive != null && account.IsActive.Value)
+            .Where(account => account.CompanyId == companyId
+                              && !accountIds.Contains(account.AccountId)
+                              && account.IsActive!.Value)
             .ToList();
-        var listAccountingBalance = new List<TbAccountingBalance>();
-        foreach (var tbAccount in query)
-        {
-            var accountingBalance = new TbAccountingBalance
+        var listAccountingBalance = query.Select(tbAccount => new TbAccountingBalance
             {
                 ComponentCycleId = cycleId,
                 ComponentPeriodId = periodId,
@@ -63,9 +60,8 @@ public class AccountingBalanceModel : IAccountingBalanceModel
                 Credit = Decimal.Zero,
                 ClassId = 0,
                 IsActive = true
-            };
-            listAccountingBalance.Add(accountingBalance);
-        }
+            })
+            .ToList();
 
         context.TbAccountingBalances.AddRange(listAccountingBalance);
         context.SaveChanges();

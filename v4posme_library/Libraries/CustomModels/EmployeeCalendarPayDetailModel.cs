@@ -19,8 +19,10 @@ class EmployeeCalendarPayDetailModel : IEmployeeCalendarPayDetailModel
     {
         using var context = new DataContext();
         var find = context.TbEmployeeCalendarPayDetails
-            .WhereBulkNotContains(arrayId, detail => detail.CalendarDetailId)
-            .ExecuteUpdate(calls => calls.SetProperty(detail => detail.IsActive, (ulong)0));
+            .Where(detail => detail.CalendarId == calendarId
+                             && !arrayId.Contains(detail.CalendarDetailId));
+        Console.WriteLine(find.ToQueryString());
+        find.ExecuteUpdate(calls => calls.SetProperty(detail => detail.IsActive, 0));
     }
 
     public void DeleteAppPosme(int calendarDetailId)

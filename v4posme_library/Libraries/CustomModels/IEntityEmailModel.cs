@@ -1,6 +1,20 @@
-﻿namespace v4posme_library.Libraries.CustomModels;
+﻿using v4posme_library.Models;
+
+namespace v4posme_library.Libraries.CustomModels;
 
 public interface IEntityEmailModel
 {
-    void delete_app_posme(int companyId,int branchId,int entityId,int entityEmailId);
+    void DeleteAppPosme(int companyId, int branchId, int entityId, int entityEmailId);
+
+    void DeleteByEntity(int companyId, int branchId, int entityId);
+
+    long InsertAppPosme(TbEntityEmail data);
+
+    void UpdateAppPosme(int companyId, int branchId, int entityId, int entityEmailId, TbEntityEmail data);
+
+    TbEntityEmail GetRowByPk(int companyId, int branchId, int entityId, int entityEmailId);
+    
+    List<TbEntityEmail> GetRowByEntity(int companyId,int branchId,int entityId);
+    
+    List<TbEntityEmail> GetRowByCompany(int companyId);
 }

@@ -39,8 +39,8 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
         context.TbCustomerCreditLines
             .Where(line => line.CompanyId == companyId
                            && line.BranchId == branchId
-                           && line.EntityId == entityId)
-            .WhereBulkNotContains(listCustomerCreditLineId, line => line.CustomerCreditLineId)
+                           && line.EntityId == entityId
+                           && !listCustomerCreditLineId.Contains(line.CustomerCreditLineId))
             .ExecuteUpdate(calls => calls.SetProperty(line => line.IsActive, 0));
     }
 

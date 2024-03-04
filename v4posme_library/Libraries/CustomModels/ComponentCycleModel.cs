@@ -19,11 +19,11 @@ public class ComponentCycleModel : IComponentCycleModel
     {
         using var context = new DataContext();
         var find = context.TbAccountingCycles
-            .Where(cycle => cycle.CompanyId == companyId)
-            .Where(cycle => cycle.ComponentId == componentId)
-            .Where(cycle => cycle.ComponentPeriodId == componentPeriodId)
-            .WhereBulkNotContains(array, cycle => cycle.ComponentCycleId)
-            .ExecuteUpdate(calls => calls.SetProperty(cycle => cycle.IsActive,false));
+            .Where(cycle => cycle.CompanyId == companyId
+                            && cycle.ComponentId == componentId
+                            && cycle.ComponentPeriodId == componentPeriodId
+                            && !array.Contains(cycle.ComponentCycleId))
+            .ExecuteUpdate(calls => calls.SetProperty(cycle => cycle.IsActive, false));
     }
 
     public void UpdateAppPosme(int componentCycleId, TbAccountingCycle data)
@@ -109,11 +109,11 @@ public class ComponentCycleModel : IComponentCycleModel
     {
         using var context = new DataContext();
         return context.TbAccountingCycles
-            .Where(cycle => cycle.CompanyId != companyId)
-            .Where(cycle => cycle.ComponentId == componentId)
-            .Where(cycle => cycle.ComponentPeriodId == componentPeriodId)
-            .Where(cycle => cycle.IsActive)
-            .WhereBulkNotContains(data, x => x.ComponentCycleId)
+            .Where(cycle => cycle.CompanyId != companyId
+                            && cycle.ComponentId == componentId
+                            && cycle.ComponentPeriodId == componentPeriodId
+                            && cycle.IsActive
+                            && !data.Contains(cycle.ComponentCycleId))
             .ToList();
     }
 

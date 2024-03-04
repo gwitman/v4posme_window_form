@@ -42,12 +42,13 @@ namespace TestProject
         {
             var customerModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerModel>();
             var lista = customerModel.GetRowByCompany(2);
-            Console.WriteLine(@"Count {0}",lista.Count);
+            Console.WriteLine(@"Count {0}", lista.Count);
             foreach (var customer in lista)
             {
                 Console.WriteLine(customer.Identification);
             }
         }
+
         [Test]
         public void Test4()
         {
@@ -75,7 +76,17 @@ namespace TestProject
                 IsActive = true
             };
             var add = employeeModel.InsertAppPosme(data);
-            Console.WriteLine(@"Id del empleado ingresado: {0}",add);
+            Console.WriteLine(@"Id del empleado ingresado: {0}", add);
+        }
+
+        [Test]
+        public void Test5()
+        {
+            var employeeCalendarPayDetailModel =
+                VariablesGlobales.Instance.UnityContainer.Resolve<IEmployeeCalendarPayDetailModel>();
+            int[] array1 = [ 2, 3, 4, 5, 6];
+            employeeCalendarPayDetailModel.DeleteWhereIdNotIn(1, [..array1]);
+            Console.WriteLine("Ejecutado con exito");
         }
     }
 }
