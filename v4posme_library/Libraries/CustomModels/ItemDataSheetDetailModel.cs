@@ -12,6 +12,8 @@ class ItemDataSheetDetailModel : IItemDataSheetDetailModel
             .Find(itemDataSheetDetailId);
         if (find is null) return;
         data.ItemDataSheetDetailId = find.ItemDataSheetDetailId;
+        context.Entry(find).CurrentValues.SetValues(data);
+        context.SaveChanges();
     }
 
     public void DeleteAppPosme(int itemDataSheetDetailId)
