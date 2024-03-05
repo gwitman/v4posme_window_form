@@ -31,4 +31,7 @@ public class TbItemDataSheetDetail
 
     [Column("isActive", TypeName = "tinyint(4)")]
     public sbyte IsActive { get; set; }
+
+    [NotMapped] public string? ItemNumber { get; set; }
+    [NotMapped] public string? Name { get; set; }
 }
