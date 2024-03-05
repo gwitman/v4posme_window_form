@@ -48,6 +48,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IEntityEmailModel, EntityEmailModel>();
             _unityContainer.RegisterType<IEntityModel, EntityModel>();
             _unityContainer.RegisterType<IEntityPhoneModel, EntityPhoneModel>();
+            _unityContainer.RegisterType<IErrorModel, ErrorModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
