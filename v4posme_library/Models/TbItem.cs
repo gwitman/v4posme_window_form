@@ -48,9 +48,7 @@ public class TbItem
     [MySqlCollation("latin1_swedish_ci")]
     public string? BarCode { get; set; }
 
-    [Column("name")]
-    [StringLength(250)]
-    public string Name { get; set; } = null!;
+    [Column("name")] [StringLength(250)] public string Name { get; set; } = null!;
 
     [Column("description")]
     [StringLength(1000)]
@@ -86,9 +84,7 @@ public class TbItem
     [Precision(18, 4)]
     public decimal QuantityMin { get; set; }
 
-    [Column("cost")]
-    [Precision(18, 4)]
-    public decimal Cost { get; set; }
+    [Column("cost")] [Precision(18, 4)] public decimal Cost { get; set; }
 
     [Column("reference1")]
     [StringLength(250)]
@@ -109,8 +105,7 @@ public class TbItem
     [Column("statusID", TypeName = "int(11)")]
     public int? StatusId { get; set; }
 
-    [Column("isPerishable")]
-    public bool? IsPerishable { get; set; }
+    [Column("isPerishable")] public bool? IsPerishable { get; set; }
 
     [Column("factorBox")]
     [Precision(18, 4)]
@@ -135,8 +130,7 @@ public class TbItem
     [Column("createdOn", TypeName = "datetime")]
     public DateTime? CreatedOn { get; set; }
 
-    [Column("isActive")]
-    public bool? IsActive { get; set; }
+    [Column("isActive")] public bool? IsActive { get; set; }
 
     [Column("isInvoiceQuantityZero", TypeName = "tinyint(4)")]
     public sbyte? IsInvoiceQuantityZero { get; set; }
@@ -230,4 +224,7 @@ public class TbItem
 
     [Column("realStateGerenciaExclusive", TypeName = "int(11)")]
     public int? RealStateGerenciaExclusive { get; set; }
+
+    [NotMapped] public string? UnitMeasureName { get; set; }
+    [NotMapped] public string? ItemNameLog { get; set; }
 }

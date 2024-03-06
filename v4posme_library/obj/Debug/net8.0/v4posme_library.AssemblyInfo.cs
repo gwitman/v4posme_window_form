@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("v4posme_library")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+40aa8b72cfa5884cc62e54411c1cef2e9275f2b8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0757524e7214f91b132a616e6613ba65070f902e")]
 [assembly: System.Reflection.AssemblyProductAttribute("v4posme_library")]
 [assembly: System.Reflection.AssemblyTitleAttribute("v4posme_library")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
