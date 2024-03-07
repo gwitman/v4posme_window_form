@@ -19,7 +19,7 @@ public class TbItemSku
     [Column("catalogItemID", TypeName = "int(11)")]
     public int CatalogItemId { get; set; }
 
-    [Column("value")]
-    [Precision(10, 2)]
-    public decimal Value { get; set; }
+    [Column("value")] [Precision(10, 2)] public decimal Value { get; set; }
+
+    [NotMapped] public string? Sku { get; set; }
 }
