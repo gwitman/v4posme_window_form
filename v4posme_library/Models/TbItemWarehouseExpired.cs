@@ -29,10 +29,13 @@ public class TbItemWarehouseExpired
     [Precision(10, 2)]
     public decimal? Quantity { get; set; }
 
-    [Column("lote")]
-    [StringLength(50)]
-    public string? Lote { get; set; }
+    [Column("lote")] [StringLength(50)] public string? Lote { get; set; }
 
     [Column("dateExpired", TypeName = "datetime")]
     public DateTime DateExpired { get; set; }
+
+    [NotMapped] public string? ItemNumber { get; set; }
+    [NotMapped] public string? ItemName { get; set; }
+    [NotMapped] public int WarehouseNumber { get; set; }
+    [NotMapped] public string? WarehouseName { get; set; }
 }
