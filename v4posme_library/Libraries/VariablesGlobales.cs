@@ -53,7 +53,9 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IItemDataSheetDetailModel, ItemDataSheetDetailModel>();
             _unityContainer.RegisterType<IItemDataSheetModel, ItemDataSheetModel>();
             _unityContainer.RegisterType<IItemModel, ItemModel>();
-            _unityContainer.RegisterType<ItemSkuModel, ItemSkuModel>();
+            _unityContainer.RegisterType<IItemSkuModel, ItemSkuModel>();
+            _unityContainer.RegisterType<IItemWarehouseExpiredModel, ItemWarehouseExpiredModel>();
+            _unityContainer.RegisterType<IItemCategoryModel, ItemCategoryModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
