@@ -28,8 +28,7 @@ public class TbJournalEntry
     [StringLength(250)]
     public string JournalNumber { get; set; } = null!;
 
-    [Column("journalDate")]
-    public DateOnly JournalDate { get; set; }
+    [Column("journalDate")] public DateOnly JournalDate { get; set; }
 
     [Column("tb_exchange_rate")]
     [Precision(18, 8)]
@@ -48,25 +47,20 @@ public class TbJournalEntry
     [Column("createdBy", TypeName = "int(11)")]
     public int? CreatedBy { get; set; }
 
-    [Column("isActive")]
-    public bool IsActive { get; set; }
+    [Column("isActive")] public bool IsActive { get; set; }
 
-    [Column("isApplied")]
-    public bool IsApplied { get; set; }
+    [Column("isApplied")] public bool IsApplied { get; set; }
 
     [Column("titleTemplated")]
     [StringLength(250)]
     public string TitleTemplated { get; set; } = null!;
 
-    [Column("isTemplated")]
-    public bool IsTemplated { get; set; }
+    [Column("isTemplated")] public bool IsTemplated { get; set; }
 
     [Column("statusID", TypeName = "int(11)")]
     public int StatusId { get; set; }
 
-    [Column("note")]
-    [StringLength(550)]
-    public string? Note { get; set; }
+    [Column("note")] [StringLength(550)] public string? Note { get; set; }
 
     [Column("reference1")]
     [StringLength(250)]
@@ -80,13 +74,9 @@ public class TbJournalEntry
     [StringLength(250)]
     public string? Reference3 { get; set; }
 
-    [Column("debit")]
-    [Precision(19, 2)]
-    public decimal Debit { get; set; }
+    [Column("debit")] [Precision(19, 2)] public decimal Debit { get; set; }
 
-    [Column("credit")]
-    [Precision(19, 2)]
-    public decimal Credit { get; set; }
+    [Column("credit")] [Precision(19, 2)] public decimal Credit { get; set; }
 
     [Column("journalTypeID", TypeName = "int(11)")]
     public int JournalTypeId { get; set; }
@@ -109,4 +99,8 @@ public class TbJournalEntry
 
     [Column("transactionID", TypeName = "int(11)")]
     public int TransactionId { get; set; }
+
+    [NotMapped] public string? WorkflowStageName { get; set; }
+    [NotMapped] public string? JournalTypeName { get; set; }
+    [NotMapped] public string? CurrencyName { get; set; }
 }
