@@ -11,7 +11,7 @@ class ItemWarehouseModel : IItemWarehouseModel
         context.TbItemWarehouses
             .Where(warehouse => warehouse.CompanyId == companyId
                                 && warehouse.ItemId == itemId
-                                && warehouse.Quantity > 0
+                                && warehouse.Quantity == decimal.Zero
                                 && !listWarehouseId.Contains(warehouse.WarehouseId))
             .ExecuteDelete();
     }
