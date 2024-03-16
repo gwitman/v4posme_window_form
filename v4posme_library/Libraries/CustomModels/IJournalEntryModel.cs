@@ -14,7 +14,7 @@ public interface IJournalEntryModel
 
     TbJournalEntry GetRowByPk(int companyId, int journalEntryId);
     
-    TbJournalEntry get_rowByPK_Next(int companyId,int journalEntryId);
+    TbJournalEntry GetRowByPkNext(int companyId,int journalEntryId);
 
     TbJournalEntry GetRowByPkBack(int companyId, int journalEntryId);
 }

@@ -116,14 +116,14 @@ class JournalEntryModel : IJournalEntryModel
         return result.Single();
     }
 
-    public TbJournalEntry get_rowByPK_Next(int companyId, int journalEntryId)
+    public TbJournalEntry GetRowByPkNext(int companyId, int journalEntryId)
     {
         using var context = new DataContext();
         return context.TbJournalEntries
             .Where(entry => entry.CompanyId == companyId
                             && entry.JournalEntryId >= journalEntryId
                             && entry.IsActive)
-            .OrderBy(entry => entry.JournalEntryId)
+            .OrderByDescending(entry => entry.JournalEntryId)
             .First();
     }
 
