@@ -67,8 +67,7 @@ public class TbProvider
     [Column("payConditionID", TypeName = "int(11)")]
     public int? PayConditionId { get; set; }
 
-    [Column("isLocal")]
-    public bool? IsLocal { get; set; }
+    [Column("isLocal")] public bool? IsLocal { get; set; }
 
     [Column("countryID", TypeName = "int(11)")]
     public int? CountryId { get; set; }
@@ -114,4 +113,7 @@ public class TbProvider
 
     [Column("isActive", TypeName = "bit(1)")]
     public ulong? IsActive { get; set; }
+
+    [NotMapped] public string? FirstName { get; set; }
+    [NotMapped] public string? LastName { get; set; }
 }

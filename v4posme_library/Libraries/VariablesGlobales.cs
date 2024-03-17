@@ -64,6 +64,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<INaturalModel, NaturalModel>();
             _unityContainer.RegisterType<INotificationModel, NotificationModel>();
             _unityContainer.RegisterType<IPriceModel, PriceModel>();
+            _unityContainer.RegisterType<IProviderModel, ProviderModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
