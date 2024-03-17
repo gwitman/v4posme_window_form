@@ -101,8 +101,10 @@ namespace TestProject
         public void NotificationModelTest()
         {
             var notificationModel = VariablesGlobales.Instance.UnityContainer.Resolve<INotificationModel>();
-            var list = notificationModel.GetRowsWhatsappPosMeCalendar(2);
-            Console.WriteLine(@"Cantidad de filas recuperadas: {0}", list.Count);
+            var data = notificationModel.GetRowByPk(5);
+            data.Message = "Nuevo mensaje";
+            notificationModel.UpdateAppPosmeBySumary("C000",data);
+            Console.WriteLine(@"Se han actulizado los datos de forma correcta");
         }
     }
 }

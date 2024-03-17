@@ -10,11 +10,16 @@ class NotificationModel : INotificationModel
     public void UpdateAppPosmeBySumary(string summary, TbNotification data)
     {
         using var context = new DataContext();
-        var find = context.TbNotifications.FirstOrDefault(notification => notification.Summary == summary);
-        if (find is null) return;
-        data.NotificationId = find.NotificationId;
-        context.Entry(find).CurrentValues.SetValues(data);
-        context.SaveChanges();
+        var notifications = context.TbNotifications
+            .Where(notification => notification.Summary == summary)
+            .ToList();
+        foreach (var notification in notifications)
+        {
+            data.NotificationId = notification.NotificationId;
+            context.Entry(notification).CurrentValues.SetValues(data);
+        }
+
+        context.BulkUpdate(notifications);
     }
 
     public void UpdateAppPosme(int notificationId, TbNotification data)
@@ -93,7 +98,6 @@ class NotificationModel : INotificationModel
                                       )
                                       )
                                   """;
-        Console.WriteLine(context.TbNotifications.FromSql(sql).ToQueryString());
         return context.TbNotifications.FromSql(sql).ToList();
     }
 
@@ -107,46 +111,46 @@ class NotificationModel : INotificationModel
                                    && notification.Summary!.Contains(business))
             .ToList();
     }
-    
+
     public List<TbNotification> GetRowsWhatsappPosMeSendMessage(int top)
     {
         using var context = new DataContext();
         var appHourDifference = VariablesGlobales.ConfigurationBuilder["APP_HOUR_DIFERENCE_MYSQL"];
         FormattableString query = $"""
-                                    select n.*
-                                    from tb_notification n
-                                             inner join tb_tag t on n.tagID = t.tagID
-                                    where n.isActive = 1
-                                      and t.sendSMS = 1
-                                      and n.sendWhatsappOn is null
-                                      and CAST(CONCAT(n.programDate, ' ', '00:00', ':00') AS DATETIME) >=
-                                          ADDTIME(ADDTIME(CURRENT_DATE(), '{appHourDifference}'), '-00:00:00')
-                                    
-                                      and CAST(CONCAT(n.programDate, ' ', '00:00', ':00') AS DATETIME) <=
-                                          ADDTIME(ADDTIME(CURRENT_DATE(), '{appHourDifference}'), '+23:59:59')
-                                    limit 0,{top}
-                                    """;
+                                   select n.*
+                                   from tb_notification n
+                                            inner join tb_tag t on n.tagID = t.tagID
+                                   where n.isActive = 1
+                                     and t.sendSMS = 1
+                                     and n.sendWhatsappOn is null
+                                     and CAST(CONCAT(n.programDate, ' ', '00:00', ':00') AS DATETIME) >=
+                                         ADDTIME(ADDTIME(CURRENT_DATE(), '{appHourDifference}'), '-00:00:00')
+                                   
+                                     and CAST(CONCAT(n.programDate, ' ', '00:00', ':00') AS DATETIME) <=
+                                         ADDTIME(ADDTIME(CURRENT_DATE(), '{appHourDifference}'), '+23:59:59')
+                                   limit 0,{top}
+                                   """;
         return context.TbNotifications.FromSql(query).ToList();
     }
+
     public List<TbNotification> GetRowsWhatsappPosMeCalendar(int top)
     {
         using var context = new DataContext();
         var appHourDifference = VariablesGlobales.ConfigurationBuilder["APP_HOUR_DIFERENCE_MYSQL"];
-        FormattableString sql=$"""
-                                select *
-                                from tb_notification n
-                                where n.isActive = 1
-                                  and n.sendWhatsappOn is null
-                                  and CAST(CONCAT(n.programDate, ' ', n.programHour, ':00') AS DATETIME) >
-                                      ADDTIME(ADDTIME(now(), '{appHourDifference}'), '-00:30:00')
-                                
-                                  and CAST(CONCAT(n.programDate, ' ', n.programHour, ':00') AS DATETIME) <=
-                                      ADDTIME(ADDTIME(now(), '{appHourDifference}'), '+00:30:00')
-                                
-                                limit 0,{top}
-                                """;
-        var result =  context.TbNotifications.FromSql(sql);
-        Console.WriteLine(result.ToQueryString());
+        FormattableString sql = $"""
+                                 select *
+                                 from tb_notification n
+                                 where n.isActive = 1
+                                   and n.sendWhatsappOn is null
+                                   and CAST(CONCAT(n.programDate, ' ', n.programHour, ':00') AS DATETIME) >
+                                       ADDTIME(ADDTIME(now(), '{appHourDifference}'), '-00:30:00')
+                                 
+                                   and CAST(CONCAT(n.programDate, ' ', n.programHour, ':00') AS DATETIME) <=
+                                       ADDTIME(ADDTIME(now(), '{appHourDifference}'), '+00:30:00')
+
+                                 limit 0,{top}
+                                 """;
+        var result = context.TbNotifications.FromSql(sql);
         return result.Take(top).ToList();
     }
 
