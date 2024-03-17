@@ -62,6 +62,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ILegalModel, LegalModel>();
             _unityContainer.RegisterType<IListPriceModel, ListPriceModel>();
             _unityContainer.RegisterType<INaturalModel, NaturalModel>();
+            _unityContainer.RegisterType<INotificationModel, NotificationModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
@@ -93,6 +94,8 @@ namespace v4posme_library.Libraries
                 return builder.GetConnectionString("ConnectionString");
             }
         }
+
+        public static IConfigurationSection ConfigurationBuilder => new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("globals");
 
         public IUnityContainer UnityContainer
         {
