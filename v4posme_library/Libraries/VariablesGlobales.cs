@@ -61,6 +61,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IJournalEntryModel, JournalEntryModel>();
             _unityContainer.RegisterType<ILegalModel, LegalModel>();
             _unityContainer.RegisterType<IListPriceModel, ListPriceModel>();
+            _unityContainer.RegisterType<INaturalModel, NaturalModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
