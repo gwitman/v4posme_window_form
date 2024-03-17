@@ -33,11 +33,15 @@ public class TbPrice
     [Precision(19, 8)]
     public decimal Percentage { get; set; }
 
-    [Column("price")]
-    [Precision(19, 8)]
-    public decimal Price { get; set; }
+    [Column("price")] [Precision(19, 8)] public decimal Price { get; set; }
 
     [Column("percentageCommision")]
     [Precision(19, 8)]
     public decimal PercentageCommision { get; set; }
+
+    [NotMapped] public string? TipoPrice { get; set; }
+    [NotMapped] public string? ItemNumber { get; set; }
+    [NotMapped] public string? ItemName { get; set; }
+    [NotMapped] public decimal? Cost { get; set; }
+    [NotMapped] public string? NameTypePrice { get; set; }
 }
