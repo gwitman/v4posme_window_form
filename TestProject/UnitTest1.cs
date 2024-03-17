@@ -84,7 +84,7 @@ namespace TestProject
         {
             var employeeCalendarPayDetailModel =
                 VariablesGlobales.Instance.UnityContainer.Resolve<IEmployeeCalendarPayDetailModel>();
-            int[] array1 = [ 2, 3, 4, 5, 6];
+            int[] array1 = [2, 3, 4, 5, 6];
             employeeCalendarPayDetailModel.DeleteWhereIdNotIn(1, [..array1]);
             Console.WriteLine("Ejecutado con exito");
         }
@@ -93,8 +93,16 @@ namespace TestProject
         public void EntityEmailModel()
         {
             var entityEmailModel = VariablesGlobales.Instance.UnityContainer.Resolve<IEntityEmailModel>();
-            var delete = entityEmailModel.DeleteAppPosme(2,2,11,36);
+            var delete = entityEmailModel.DeleteAppPosme(2, 2, 11, 36);
             Console.WriteLine(@"Canitdad de filas afectadas: {0}", delete);
+        }
+
+        [Test]
+        public void NotificationModelTest()
+        {
+            var notificationModel = VariablesGlobales.Instance.UnityContainer.Resolve<INotificationModel>();
+            var list = notificationModel.GetRowsWhatsappPosMeCalendar(2);
+            Console.WriteLine(@"Cantidad de filas recuperadas: {0}", list.Count);
         }
     }
 }

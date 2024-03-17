@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 
 namespace v4posme_library.Models;
@@ -20,13 +21,9 @@ public class TbNotification
     [Column("errorID", TypeName = "int(11)")]
     public int? ErrorId { get; set; }
 
-    [Column("from")]
-    [StringLength(500)]
-    public string? From { get; set; }
+    [Column("from")] [StringLength(500)] public string? From { get; set; }
 
-    [Column("to")]
-    [StringLength(500)]
-    public string? To { get; set; }
+    [Column("to")] [StringLength(500)] public string? To { get; set; }
 
     [Column("subject")]
     [StringLength(500)]
@@ -40,9 +37,7 @@ public class TbNotification
     [StringLength(500)]
     public string? Summary { get; set; }
 
-    [Column("title")]
-    [StringLength(500)]
-    public string? Title { get; set; }
+    [Column("title")] [StringLength(500)] public string? Title { get; set; }
 
     [Column("tagID", TypeName = "int(11)")]
     public int? TagId { get; set; }
