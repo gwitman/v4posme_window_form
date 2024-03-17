@@ -24,9 +24,7 @@ public class TbListPrice
     [Column("endOn", TypeName = "datetime")]
     public DateTime? EndOn { get; set; }
 
-    [Column("name")]
-    [StringLength(200)]
-    public string Name { get; set; } = null!;
+    [Column("name")] [StringLength(200)] public string Name { get; set; } = null!;
 
     [Column("description")]
     [StringLength(550)]
@@ -50,4 +48,6 @@ public class TbListPrice
 
     [Column("isActive", TypeName = "bit(1)")]
     public ulong IsActive { get; set; }
+
+    [NotMapped] public string? StatusName { get; set; }
 }
