@@ -28,4 +28,9 @@ public class TbProviderItem
     [Key]
     [Column("providerItemID", TypeName = "int(11)")]
     public int ProviderItemId { get; set; }
+
+    [NotMapped] public string? ProviderNumber { get; set; }
+    [NotMapped] public string? FirstName { get; set; }
+    [NotMapped] public string? LastName { get; set; }
+    [NotMapped] public string? ComercialName { get; set; }
 }

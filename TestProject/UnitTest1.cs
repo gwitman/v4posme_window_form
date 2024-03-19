@@ -13,7 +13,7 @@ namespace TestProject
         }
 
         [Test]
-        public void Test1()
+        public void CustomerModel0()
         {
             var customerModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerModel>();
             var x = customerModel.InsertAppPosme(new TbCustomer
@@ -28,7 +28,7 @@ namespace TestProject
         }
 
         [Test]
-        public void Test2()
+        public void CustomerModel1()
         {
             var customerModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerModel>();
             var model = customerModel.GetRowByCode(2, "CLI00000366");
@@ -38,7 +38,7 @@ namespace TestProject
         }
 
         [Test]
-        public void Test3()
+        public void CustomerModel2()
         {
             var customerModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerModel>();
             var lista = customerModel.GetRowByCompany(2);
@@ -50,7 +50,7 @@ namespace TestProject
         }
 
         [Test]
-        public void Test4()
+        public void EmployeeModel()
         {
             var employeeModel = VariablesGlobales.Instance.UnityContainer.Resolve<IEmployeeModel>();
             var data = new TbEmployee
@@ -80,7 +80,7 @@ namespace TestProject
         }
 
         [Test]
-        public void Test5()
+        public void EmployeeCalendarPayDetailModel()
         {
             var employeeCalendarPayDetailModel =
                 VariablesGlobales.Instance.UnityContainer.Resolve<IEmployeeCalendarPayDetailModel>();
