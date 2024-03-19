@@ -106,5 +106,14 @@ namespace TestProject
             notificationModel.UpdateAppPosmeBySumary("C000",data);
             Console.WriteLine(@"Se han actulizado los datos de forma correcta");
         }
+
+        [Test]
+        public void RememberModelTest()
+        {
+            var rememberModel = VariablesGlobales.Instance.UnityContainer.Resolve<IRememberModel>();
+            var fecha = DateTime.Now;
+            var processNotification = rememberModel.GetProcessNotification(1, fecha);
+            Console.WriteLine(@"Registro {0}", processNotification.Description);
+        }
     }
 }

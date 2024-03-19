@@ -77,14 +77,12 @@ class RememberModel : IRememberModel
         using var context = new DataContext();
         var result = from c in context.TbRemembers
             join ci in context.TbCatalogItems on c.Period equals ci.CatalogItemId
-            let diaProcesado = ci.Sequence.Value switch
-            {
-                30 => fechaProcess.Day,
-                15 => fechaProcess.Day <= 15 ? fechaProcess.Day : fechaProcess.Day - 15,
-                7 => fechaProcess.DayOfWeek == DayOfWeek.Sunday ? 7 : (int)fechaProcess.DayOfWeek,
-                365 => fechaProcess.DayOfYear,
-                _ => 0
-            }
+            let diaProcesado =
+                ci.Sequence == 30 ? fechaProcess.Day :
+                ci.Sequence == 15 ? (fechaProcess).Day <= 15 ? fechaProcess.Day : fechaProcess.Day - 15 :
+                ci.Sequence == 7 ? (int)fechaProcess.DayOfWeek :
+                ci.Sequence == 365 ? fechaProcess.DayOfYear :
+                0
             where c.RememberId == rememberId
             select new TbRemember
             {
