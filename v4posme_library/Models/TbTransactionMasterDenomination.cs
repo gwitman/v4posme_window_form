@@ -47,9 +47,7 @@ public class TbTransactionMasterDenomination
     [Column("quantity", TypeName = "int(11)")]
     public int Quantity { get; set; }
 
-    [Column("ratio")]
-    [Precision(19, 8)]
-    public decimal Ratio { get; set; }
+    [Column("ratio")] [Precision(19, 8)] public decimal Ratio { get; set; }
 
     [Column("reference1")]
     [StringLength(150)]
@@ -58,4 +56,6 @@ public class TbTransactionMasterDenomination
     [Column("reference2")]
     [StringLength(150)]
     public string? Reference2 { get; set; }
+
+    [NotMapped] public string? DenominationName { get; set; }
 }
