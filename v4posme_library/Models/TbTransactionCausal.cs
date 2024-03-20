@@ -27,9 +27,7 @@ public class TbTransactionCausal
     [Column("branchID", TypeName = "int(11)")]
     public int? BranchId { get; set; }
 
-    [Column("name")]
-    [StringLength(50)]
-    public string Name { get; set; } = null!;
+    [Column("name")] [StringLength(50)] public string Name { get; set; } = null!;
 
     [Column("warehouseSourceID", TypeName = "int(11)")]
     public int? WarehouseSourceId { get; set; }
@@ -42,4 +40,8 @@ public class TbTransactionCausal
 
     [Column("isActive", TypeName = "bit(1)")]
     public ulong IsActive { get; set; }
+
+    [NotMapped] public string? Branch { get; set; }
+    [NotMapped] public string? WarehouseSourceDescription { get; set; }
+    [NotMapped] public string? WarehouseTargetDescription { get; set; }
 }

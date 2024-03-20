@@ -69,6 +69,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IRelationshipModel, RelationshipModel>();
             _unityContainer.RegisterType<IRememberModel, RememberModel>();
             _unityContainer.RegisterType<ITagModel, TagModel>();
+            _unityContainer.RegisterType<ITransactionCausalModel, TransactionCausalModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
