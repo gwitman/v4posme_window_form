@@ -75,6 +75,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ITransactionMasterDetailCreditModel, TransactionMasterDetailCreditModel>();
             _unityContainer.RegisterType<ITransactionMasterDetailModel, TransactionMasterDetailModel>();
             _unityContainer.RegisterType<ITransactionMasterInfoModel, TransactionMasterInfoModel>();
+            _unityContainer.RegisterType<ITransactionMasterModel, TransactionMasterModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion

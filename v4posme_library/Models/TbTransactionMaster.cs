@@ -191,4 +191,7 @@ public class TbTransactionMaster
 
     [Column("entityIDSecondary", TypeName = "int(11)")]
     public int? EntityIdsecondary { get; set; }
+
+    [NotMapped]public string? WorkflowStageName { get; set; }
+    [NotMapped]public string? NameStatus { get; set; }
 }
