@@ -49,8 +49,8 @@ class TransactionCausalModel : ITransactionCausalModel
                 IsDefault = tc.IsDefault,
                 IsActive = tc.IsActive,
                 Branch = b.Name,
-                WarehouseSourceDescription = w?.Name,
-                WarehouseTargetDescription = w2?.Name
+                WarehouseSourceDescription = w.Name,
+                WarehouseTargetDescription = w2.Name
             };
         return result.ToList();
     }

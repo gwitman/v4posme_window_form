@@ -42,13 +42,9 @@ public class TbTransactionMasterDetail
     [Column("promotionID", TypeName = "int(11)")]
     public int? PromotionId { get; set; }
 
-    [Column("amount")]
-    [Precision(18, 4)]
-    public decimal? Amount { get; set; }
+    [Column("amount")] [Precision(18, 4)] public decimal? Amount { get; set; }
 
-    [Column("cost")]
-    [Precision(18, 4)]
-    public decimal? Cost { get; set; }
+    [Column("cost")] [Precision(18, 4)] public decimal? Cost { get; set; }
 
     [Column("quantity")]
     [Precision(18, 4)]
@@ -62,21 +58,13 @@ public class TbTransactionMasterDetail
     [Precision(18, 4)]
     public decimal? UnitaryAmount { get; set; }
 
-    [Column("tax1")]
-    [Precision(18, 4)]
-    public decimal? Tax1 { get; set; }
+    [Column("tax1")] [Precision(18, 4)] public decimal? Tax1 { get; set; }
 
-    [Column("tax2")]
-    [Precision(18, 4)]
-    public decimal? Tax2 { get; set; }
+    [Column("tax2")] [Precision(18, 4)] public decimal? Tax2 { get; set; }
 
-    [Column("tax3")]
-    [Precision(18, 4)]
-    public decimal? Tax3 { get; set; }
+    [Column("tax3")] [Precision(18, 4)] public decimal? Tax3 { get; set; }
 
-    [Column("tax4")]
-    [Precision(18, 4)]
-    public decimal? Tax4 { get; set; }
+    [Column("tax4")] [Precision(18, 4)] public decimal? Tax4 { get; set; }
 
     [Column("unitaryCost")]
     [Precision(18, 4)]
@@ -128,8 +116,7 @@ public class TbTransactionMasterDetail
     [Column("inventoryStatusID", TypeName = "int(11)")]
     public int? InventoryStatusId { get; set; }
 
-    [Column("isActive")]
-    public bool? IsActive { get; set; }
+    [Column("isActive")] public bool? IsActive { get; set; }
 
     [Column("quantityStock")]
     [Precision(18, 4)]
@@ -147,9 +134,7 @@ public class TbTransactionMasterDetail
     [Precision(18, 4)]
     public decimal? RemaingStock { get; set; }
 
-    [Column("lote")]
-    [StringLength(255)]
-    public string? Lote { get; set; }
+    [Column("lote")] [StringLength(255)] public string? Lote { get; set; }
 
     [Column("expirationDate", TypeName = "datetime")]
     public DateTime? ExpirationDate { get; set; }
@@ -160,8 +145,7 @@ public class TbTransactionMasterDetail
     [Column("inventoryWarehouseTargetID", TypeName = "int(11)")]
     public int? InventoryWarehouseTargetId { get; set; }
 
-    [Column("itemFormulatedApplied")]
-    public bool ItemFormulatedApplied { get; set; }
+    [Column("itemFormulatedApplied")] public bool ItemFormulatedApplied { get; set; }
 
     [Column("typePriceID", TypeName = "int(11)")]
     public int TypePriceId { get; set; }
@@ -188,4 +172,22 @@ public class TbTransactionMasterDetail
     [Column("amountCommision")]
     [Precision(19, 8)]
     public decimal AmountCommision { get; set; }
+
+    [NotMapped] public string? ItemNumber { get; set; }
+    [NotMapped] public string? ItemName { get; set; }
+    [NotMapped] public string? UnitMeasureName { get; set; }
+    [NotMapped] public string? BarCode { get; set; }
+    [NotMapped] public int BranchId { get; set; } = 0;
+    [NotMapped] public int WarehouseId { get; set; } = 0;
+    [NotMapped] public int ItemId { get; set; } = 0;
+    [NotMapped] public decimal? QuantityMax { get; set; } = decimal.Zero;
+    [NotMapped] public decimal? QuantityMin { get; set; } = decimal.Zero;
+    [NotMapped] public string? Description { get; set; }
+    [NotMapped] public string? Display { get; set; }
+    [NotMapped] public string? TipoFile { get; set; }
+    [NotMapped] public string? FirstName { get; set; }
+    [NotMapped] public decimal? Monto { get; set; }
+    [NotMapped] public string? Indicador { get; set; }
+    [NotMapped] public int? Cantidad { get; set; }
+    [NotMapped] public string? Agente { get; set; }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace v4posme_library.Models;
@@ -22,11 +23,10 @@ public partial class DataContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        if (!optionsBuilder.IsConfigured)
-        {
-            var connectionString = _configuration.GetConnectionString("PosmeConnectionString");
-            optionsBuilder.UseMySql(ServerVersion.AutoDetect(connectionString));
-        }
+        optionsBuilder.LogTo(Console.WriteLine);
+        if (optionsBuilder.IsConfigured) return;
+        var connectionString = _configuration.GetConnectionString("PosmeConnectionString");
+        optionsBuilder.UseMySql(ServerVersion.AutoDetect(connectionString));
     }
 
     public virtual DbSet<TbAccount> TbAccounts { get; set; }
