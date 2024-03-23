@@ -116,4 +116,7 @@ public class TbTransactionMasterInfo
     [Column("receiptAmountCardBankDolReference")]
     [StringLength(255)]
     public string? ReceiptAmountCardBankDolReference { get; set; }
+
+    [NotMapped]public string? ZonaName { get; set; }
+    [NotMapped]public string? MesaName { get; set; }
 }
