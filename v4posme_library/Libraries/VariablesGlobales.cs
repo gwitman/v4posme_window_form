@@ -26,7 +26,6 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IAccountTypeModel, AccountTypeModel>();
             _unityContainer.RegisterType<IBibliaModel, BibliaModel>();
             _unityContainer.RegisterType<IBiometricUserModel, BiometricUserModel>();
-            _unityContainer.RegisterType<IBranchModel, BranchModel>();
             _unityContainer.RegisterType<ICenterCostModel, CenterCostModel>();
             _unityContainer.RegisterType<ICompanyComponentConceptModel, CompanyComponentConceptModel>();
             _unityContainer.RegisterType<ICompanyCurrencyModel, CompanyCurrencyModel>();
@@ -82,6 +81,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IUserWarehouseModel, UserWarehouseModel>();
             _unityContainer.RegisterType<IWarehouseModel, WarehouseModel>();
             _unityContainer.RegisterType<IBankModel, BankModel>();
+            _unityContainer.RegisterType<IBranchModel, BranchModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
