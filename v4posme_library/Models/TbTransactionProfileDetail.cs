@@ -35,11 +35,11 @@ public class TbTransactionProfileDetail
     [StringLength(50)]
     public string AccountId { get; set; } = null!;
 
-    [Column("classID")]
-    [StringLength(50)]
-    public string? ClassId { get; set; }
+    [Column("classID")] [StringLength(50)] public string? ClassId { get; set; }
 
-    [Column("sign")]
-    [StringLength(1)]
-    public string Sign { get; set; } = null!;
+    [Column("sign")] [StringLength(1)] public string Sign { get; set; } = null!;
+
+    [NotMapped] public string? ConceptDescription { get; set; }
+    [NotMapped] public string? AccountDescription { get; set; }
+    [NotMapped] public string? CenterCostDescription { get; set; }
 }
