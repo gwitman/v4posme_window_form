@@ -28,4 +28,10 @@ public class TbUserWarehouse
     [Key]
     [Column("userWarehouseID", TypeName = "int(11)")]
     public int UserWarehouseId { get; set; }
+
+    [NotMapped]public string? Number { get; set; }
+    [NotMapped]public string? Name { get; set; }
+    [NotMapped]public int? StatusId { get; set; }
+    [NotMapped]public ulong? IsActive { get; set; }
+    [NotMapped]public int? TypeWarehouse { get; set; }
 }
