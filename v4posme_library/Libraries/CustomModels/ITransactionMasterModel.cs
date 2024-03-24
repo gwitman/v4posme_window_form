@@ -18,5 +18,5 @@ public interface ITransactionMasterModel
     
     List<TbTransactionMaster> GetRowByNotification(int companyId);
     
-    List<TbTransactionMaster> get_rowInStatusRegister(int companyId,int transactionMasterId);
+    List<TbTransactionMaster> GetRowInStatusRegister(int companyId,int transactionMasterId);
 }

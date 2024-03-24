@@ -82,6 +82,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IWarehouseModel, WarehouseModel>();
             _unityContainer.RegisterType<IBankModel, BankModel>();
             _unityContainer.RegisterType<IBranchModel, BranchModel>();
+            _unityContainer.RegisterType<ICatalogItemConvertionModel, CatalogItemConvertionModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion

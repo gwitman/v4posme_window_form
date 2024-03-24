@@ -114,7 +114,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         return result.First();
     }
 
-    public TbTransactionMasterDetail get_rowByTransactionAndItems(int companyId, int transactionId,
+    public TbTransactionMasterDetail GetRowByTransactionAndItems(int companyId, int transactionId,
         int transactionMasterId,
         List<int> listTmdId)
     {

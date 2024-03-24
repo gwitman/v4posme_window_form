@@ -128,7 +128,7 @@ class TransactionMasterModel : ITransactionMasterModel
             .ToList();
     }
 
-    public List<TbTransactionMaster> get_rowInStatusRegister(int companyId, int transactionMasterId)
+    public List<TbTransactionMaster> GetRowInStatusRegister(int companyId, int transactionMasterId)
     {
         using var context = new DataContext();
         var result = from tm in context.TbTransactionMasters
