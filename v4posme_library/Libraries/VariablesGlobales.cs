@@ -84,6 +84,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IBranchModel, BranchModel>();
             _unityContainer.RegisterType<ICatalogItemConvertionModel, CatalogItemConvertionModel>();
             _unityContainer.RegisterType<ICatalogItemModel, CatalogItemModel>();
+            _unityContainer.RegisterType<ICatalogModel, CatalogModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
