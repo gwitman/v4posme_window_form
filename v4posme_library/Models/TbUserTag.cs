@@ -28,4 +28,12 @@ public class TbUserTag
     [Key]
     [Column("userTagID", TypeName = "int(11)")]
     public int UserTagId { get; set; }
+
+    [NotMapped]public string? UserEmail { get; set; }
+    [NotMapped]public string? Name { get; set; }
+    [NotMapped]public string? Description { get; set; }
+    [NotMapped]public ulong? SendEmail { get; set; }
+    [NotMapped]public ulong? SendNotificationApp { get; set; }
+    [NotMapped]public ulong? SendSms { get; set; }
+    [NotMapped]public ulong? IsActive { get; set; }
 }
