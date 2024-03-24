@@ -5,6 +5,7 @@ using Unity;
 using v4posme_library.Libraries.CustomLibraries.Implementacion;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels;
+using v4posme_library.Libraries.CustomModels.Core;
 using v4posme_library.Models;
 
 namespace v4posme_library.Libraries
@@ -80,6 +81,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IUserTagModel, UserTagModel>();
             _unityContainer.RegisterType<IUserWarehouseModel, UserWarehouseModel>();
             _unityContainer.RegisterType<IWarehouseModel, WarehouseModel>();
+            _unityContainer.RegisterType<IBankModel, BankModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
