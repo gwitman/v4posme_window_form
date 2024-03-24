@@ -87,6 +87,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICatalogModel, CatalogModel>();
             _unityContainer.RegisterType<ICompanyComponentFlavorModel, CompanyComponentFlavorModel>();
             _unityContainer.RegisterType<ICompanyComponentModel, CompanyComponentModel>();
+            _unityContainer.RegisterType<ICompanyDataViewModel, CompanyDataViewModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
