@@ -79,6 +79,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ITransactionProfileDetailModel, TransactionProfileDetailModel>();
             _unityContainer.RegisterType<IUserTagModel, UserTagModel>();
             _unityContainer.RegisterType<IUserWarehouseModel, UserWarehouseModel>();
+            _unityContainer.RegisterType<IWarehouseModel, WarehouseModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
