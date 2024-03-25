@@ -1,6 +1,7 @@
 ﻿using Unity;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels;
+using v4posme_library.Libraries.CustomModels.Core;
 
 namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
 

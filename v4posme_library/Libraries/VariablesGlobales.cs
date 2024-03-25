@@ -105,7 +105,6 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IMenuElementModelService, MenuElementModelService>();
             _unityContainer.RegisterType<ICoreWebAuthentication, CoreWebAuthentication>();
             _unityContainer.RegisterType<ICompanyService, CompanyService>();
-            _unityContainer.RegisterType<ICompanyParameterModel, CompanyParameterModel>();
             _unityContainer.RegisterType<ICoreWebParameter, CoreWebParameter>();
             _unityContainer.RegisterType<ICoreWebPermission, CoreWebPermission>();
 
