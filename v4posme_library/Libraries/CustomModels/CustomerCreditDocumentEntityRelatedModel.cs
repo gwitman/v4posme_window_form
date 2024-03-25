@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -15,18 +16,22 @@ class CustomerCreditDocumentEntityRelatedModel : ICustomerCreditDocumentEntityRe
     public void UpdateAppPosme(int customerCreditDocumentId, int entityId, TbCustomerCreditDocumentEntityRelated data)
     {
         using var context = new DataContext();
-        var find = FindEntityRelateds(customerCreditDocumentId, entityId, context).Single();
-        data.CcEntityRelatedId = find.CcEntityRelatedId;
-        context.Entry(find).CurrentValues.SetValues(data);
+        var find = FindEntityRelateds(customerCreditDocumentId, entityId, context);
+        foreach (var entityRelated in find)
+        {
+            data.CcEntityRelatedId = entityRelated.CcEntityRelatedId;
+            context.Entry(entityRelated).CurrentValues.SetValues(data);
+        }
+
+        //salvar los datos
         context.BulkSaveChanges();
     }
 
     public void DeleteAppPosme(int customerCreditDocumentId, int entityId)
     {
         using var context = new DataContext();
-        var find = FindEntityRelateds(customerCreditDocumentId, entityId, context).Single();
-        find.IsActive = 0;
-        context.BulkSaveChanges();
+        FindEntityRelateds(customerCreditDocumentId, entityId, context)
+            .ExecuteUpdate(calls => calls.SetProperty(related => related.IsActive, (ulong)0));
     }
 
     public int InsertAppPosme(TbCustomerCreditDocumentEntityRelated data)
@@ -56,7 +61,8 @@ class CustomerCreditDocumentEntityRelatedModel : ICustomerCreditDocumentEntityRe
     {
         using var context = new DataContext();
         return context.TbCustomerCreditDocumentEntityRelateds
-            .Where(related => related.CustomerCreditDocumentId == customerCreditDocumentId)
+            .Where(related => related.CustomerCreditDocumentId == customerCreditDocumentId
+                              && related.IsActive == 1)
             .ToList();
     }
 }
