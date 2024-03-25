@@ -102,6 +102,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IElementModel, ElementModel>();
             _unityContainer.RegisterType<IExchangerateModel, ExchangerateModel>();
             _unityContainer.RegisterType<ILogModel, LogModel>();
+            _unityContainer.RegisterType<IMembershipModel, MembershipModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
