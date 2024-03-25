@@ -1,8 +1,8 @@
 ﻿using v4posme_library.Models;
 
-namespace v4posme_library.Libraries.CustomLibraries.Interfaz
+namespace v4posme_library.Libraries.CustomModels.Core
 {
-    public interface IMenuElementModelService
+    public interface IMenuElementModel
     {
         List<TbMenuElement>? GetRowByCompanyIdyElementId(int companyId, List<int> elementIdArray);
 

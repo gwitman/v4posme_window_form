@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Unity;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
+using v4posme_library.Libraries.CustomModels.Core;
 using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomLibraries.Implementacion
@@ -10,7 +11,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         IConfigurationSection section = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("globals");
         private readonly IElementSevice _elementService = VariablesGlobales.Instance.UnityContainer.Resolve<IElementSevice>();
         private readonly IUserPermissionService _userPermissionService = VariablesGlobales.Instance.UnityContainer.Resolve<IUserPermissionService>();
-        private readonly IMenuElementModelService _menuElementModelService = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModelService>();
+        private readonly IMenuElementModel _menuElementModelService = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
         public List<TbMenuElement>? GetMenuTop(int companyId, int branchId, int roleId)
         {
             return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_TOP"]));
