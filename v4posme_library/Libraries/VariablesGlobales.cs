@@ -92,6 +92,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICompanyDefaultDataViewModel, CompanyDefaultDataViewModel>();
             _unityContainer.RegisterType<ICompanyModel, CompanyModel>();
             _unityContainer.RegisterType<ICompanySubElementAuditModel, CompanySubElementAuditModel>();
+            _unityContainer.RegisterType<IComponentAuditDetailModel, ComponentAuditDetailModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
