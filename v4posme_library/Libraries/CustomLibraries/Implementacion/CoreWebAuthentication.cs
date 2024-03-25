@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Unity;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
+using v4posme_library.Libraries.CustomModels.Core;
 using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomLibraries.Implementacion
@@ -10,7 +11,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         private Logger _logger = new Logger();
 
         private readonly IMembershipService _membershipService = VariablesGlobales.Instance.UnityContainer.Resolve<IMembershipService>();
-        private readonly IRoleService _roleService = VariablesGlobales.Instance.UnityContainer.Resolve<IRoleService>();
+        private readonly IRoleModel _roleModel = VariablesGlobales.Instance.UnityContainer.Resolve<IRoleModel>();
         private readonly ICoreMenuService _coreMenu = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreMenuService>();
         private readonly ICoreWebPermission _coreWebPermission = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebPermission>();
         private readonly ICoreWebParameter _coreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
@@ -63,7 +64,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 //XtraMessageBox.Show("El usuario no tiene asignado un rol, más información con el administrador de sistema.", "Usuario", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return null;
             }
-            VariablesGlobales.Instance.Role = _roleService.GetRowByPk(user.CompanyId, user.BranchId, VariablesGlobales.Instance.Membership.RoleId);
+            VariablesGlobales.Instance.Role = _roleModel.GetRowByPk(user.CompanyId, user.BranchId, VariablesGlobales.Instance.Membership.RoleId);
             if (VariablesGlobales.Instance.Role == null!)
             {
                 //XtraMessageBox.Show("El usuario no tiene asignado un rol, más información con el administrador de sistema.", "Usuario");

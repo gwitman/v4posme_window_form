@@ -111,7 +111,7 @@ namespace v4posme_library.Libraries
             #region CDI_LIBRARIES
 
             _unityContainer.RegisterType<IMembershipService, MembershipService>();
-            _unityContainer.RegisterType<IRoleService, RoleService>();
+            _unityContainer.RegisterType<IRoleModel, RoleModel>();
             _unityContainer.RegisterType<IElementSevice, ElementService>();
             _unityContainer.RegisterType<ICoreMenuService, CoreMenuService>();
             _unityContainer.RegisterType<IUserPermissionService, UserPermissionService>();
