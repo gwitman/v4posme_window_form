@@ -25,5 +25,5 @@ public interface ICustomerCreditAmortizationModel
 
     CustomerCreditAmortizationView GetRowBySummaryInformationCredit(string documentNumber);
     
-    CustomerCreditAmortizationView GetRowByCreditDocumentAndBalanceMinim(int customerCreditDocumentId);
+    List<CustomerCreditAmortizationView> GetRowByCreditDocumentAndBalanceMinim(int customerCreditDocumentId);
 }
