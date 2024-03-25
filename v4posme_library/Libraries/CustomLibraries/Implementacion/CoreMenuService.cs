@@ -8,22 +8,33 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 {
     public class CoreMenuService : ICoreMenuService
     {
-        IConfigurationSection section = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("globals");
-        private readonly IElementSevice _elementService = VariablesGlobales.Instance.UnityContainer.Resolve<IElementSevice>();
-        private readonly IUserPermissionService _userPermissionService = VariablesGlobales.Instance.UnityContainer.Resolve<IUserPermissionService>();
-        private readonly IMenuElementModel _menuElementModelService = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
+        IConfigurationSection section =
+            new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("globals");
+
+        private readonly IElementSevice _elementService =
+            VariablesGlobales.Instance.UnityContainer.Resolve<IElementSevice>();
+
+        private readonly IUserPermissionModel _userPermissionModel =
+            VariablesGlobales.Instance.UnityContainer.Resolve<IUserPermissionModel>();
+
+        private readonly IMenuElementModel _menuElementModelService =
+            VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
+
         public List<TbMenuElement>? GetMenuTop(int companyId, int branchId, int roleId)
         {
             return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_TOP"]));
         }
+
         public List<TbMenuElement>? GetMenuLeft(int companyId, int branchId, int roleId)
         {
             return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_LEFT"]));
         }
+
         public List<TbMenuElement>? GetMenuBodyReport(int companyId, int branchId, int roleId)
         {
             return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_BODY"]));
         }
+
         public List<TbMenuElement>? GetMenuHiddenPopup(int companyId, int branchId, int roleId)
         {
             return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_HIDDEN_POPUP"]));
@@ -37,11 +48,14 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             {
                 return null!;
             }
+
             //Obtener la lista de elementos tipo pagina, que pertenescan al componente de seguridad
-            var listElementSeguridad = _elementService.getRowByTypeAndLayout(Convert.ToInt16(section["ELEMENT_TYPE_PAGE"]), menu);
+            var listElementSeguridad =
+                _elementService.getRowByTypeAndLayout(Convert.ToInt16(section["ELEMENT_TYPE_PAGE"]), menu);
             if (listElementSeguridad == null) return null;
             //Obtener la lista del elementos de tipo pagina a la cual el usuario tiene permiso , segun el rol del usuario
-            var listElementPermitido = _userPermissionService.GetRowByCompanyIDyBranchIDyRoleId(companyId, branchId, roleId);
+            var listElementPermitido =
+                _userPermissionModel.GetRowByCompanyIdyBranchIdyRoleId(companyId, branchId, roleId);
             //Obtener los id de los Elementos
             List<int> listElementIdSeguridad = new List<int>();
             List<int> listElementIdPermitied = new List<int>();
@@ -49,19 +63,24 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             {
                 listElementIdSeguridad.Add(element.ElementId);
             }
+
             foreach (var userPermissionView in listElementPermitido)
             {
-                listElementIdPermitied.Add(userPermissionView.ElementId);
+                listElementIdPermitied.Add(userPermissionView.ElementId!.Value);
             }
+
             listElementIdPermitied = listElementIdPermitied.Intersect(listElementIdSeguridad).ToList();
             if (role.IsAdmin!.Value && listElementIdSeguridad.Any())
             {
-                listMenuElement = _menuElementModelService.GetRowByCompanyIdyElementId(companyId, listElementIdSeguridad);
+                listMenuElement =
+                    _menuElementModelService.GetRowByCompanyIdyElementId(companyId, listElementIdSeguridad);
             }
             else if (listElementIdPermitied.Any())
             {
-                listMenuElement = _menuElementModelService.GetRowByCompanyIdyElementId(companyId, listElementIdPermitied);
+                listMenuElement =
+                    _menuElementModelService.GetRowByCompanyIdyElementId(companyId, listElementIdPermitied);
             }
+
             return listMenuElement;
         }
 
@@ -69,6 +88,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         {
             return RenderItemLeft(company, menuElements, 0);
         }
+
         private List<string>? RenderItemLeft(TbCompany? company, List<TbMenuElement>? data, int parent)
         {
             /*
@@ -94,6 +114,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                     VariablesGlobales.Instance.SubMenu = x;
                 }
             }
+
             return list;
         }
     }

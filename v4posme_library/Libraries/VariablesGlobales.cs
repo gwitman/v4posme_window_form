@@ -108,6 +108,9 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ITransactionConceptModel, TransactionConceptModel>();
             _unityContainer.RegisterType<ITransactionModel, TransactionModel>();
             _unityContainer.RegisterType<IUserModel, UserModel>();
+            _unityContainer.RegisterType<IRoleModel, RoleModel>();
+            _unityContainer.RegisterType<IUserPermissionModel, UserPermissionModel>();
+            _unityContainer.RegisterType<IMenuElementModel, MenuElementModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
@@ -115,11 +118,8 @@ namespace v4posme_library.Libraries
             #region CDI_LIBRARIES
 
             _unityContainer.RegisterType<IMembershipService, MembershipService>();
-            _unityContainer.RegisterType<IRoleModel, RoleModel>();
             _unityContainer.RegisterType<IElementSevice, ElementService>();
             _unityContainer.RegisterType<ICoreMenuService, CoreMenuService>();
-            _unityContainer.RegisterType<IUserPermissionService, UserPermissionService>();
-            _unityContainer.RegisterType<IMenuElementModel, MenuElementModel>();
             _unityContainer.RegisterType<ICoreWebAuthentication, CoreWebAuthentication>();
             _unityContainer.RegisterType<ICompanyService, CompanyService>();
             _unityContainer.RegisterType<ICoreWebParameter, CoreWebParameter>();
