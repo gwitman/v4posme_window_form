@@ -66,6 +66,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IPriceModel, PriceModel>();
             _unityContainer.RegisterType<IProviderModel, ProviderModel>();
             _unityContainer.RegisterType<IProviderItemModel, ProviderItemModel>();
+            _unityContainer.RegisterType<IPublicCatalogDetailModel, PublicCatalogDetailModel>();
             _unityContainer.RegisterType<IRelationshipModel, RelationshipModel>();
             _unityContainer.RegisterType<IRememberModel, RememberModel>();
             _unityContainer.RegisterType<ITagModel, TagModel>();
