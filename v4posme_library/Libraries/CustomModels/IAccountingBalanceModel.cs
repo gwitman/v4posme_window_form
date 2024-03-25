@@ -12,5 +12,5 @@ public interface IAccountingBalanceModel
     int? GetMinAccount(int companyId, int branchId, int loginId);
     int? GetMaxAccount(int companyId, int branchId, int loginId);
     TbJournalEntryDetailSummary GetInfoAccount(int companyId, int branchId, int loginId, int accountId);
-    int? GetMinAccountBy(int companyId, int branchId, int loginId, int minAccountId);
+    int? GetMinAccountBy(int companyId, int branchId, int loginId, int accountId);
 }
