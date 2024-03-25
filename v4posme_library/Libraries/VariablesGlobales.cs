@@ -95,6 +95,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IComponentAuditDetailModel, ComponentAuditDetailModel>();
             _unityContainer.RegisterType<IComponentAuditModel, ComponentAuditModel>();
             _unityContainer.RegisterType<IComponentAutorizationModel, ComponentAutorizationModel>();
+            _unityContainer.RegisterType<IComponentModel, ComponentModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
