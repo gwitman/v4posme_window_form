@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsViews;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -49,11 +50,23 @@ public class CompanyCurrencyModel : ICompanyCurrencyModel
                 && currency.CompanyId == companyId);
     }
 
-    public List<TbCompanyCurrency> GetByCompany(int companyId)
+    public List<TbCompanyCurrencyDto> GetByCompany(int companyId)
     {
         using var context = new DataContext();
         return context.TbCompanyCurrencies
-            .Where(currency => currency.CompanyId == companyId)
+            .Join(context.TbCurrencies, currency => currency.CurrencyId, 
+                currency => currency.CurrencyId, 
+                (currency, tbCurrency) => new {currency, tbCurrency})
+            .Where(key => key.currency.CompanyId==companyId
+            && key.tbCurrency.IsActive!.Value)
+            .Select(arg => new TbCompanyCurrencyDto
+            {
+                CompanyId = arg.currency.CompanyId,
+                CurrencyId = arg.currency.CurrencyId,
+                Simb = arg.currency.Simb,
+                Simbol = arg.tbCurrency.Simbol,
+                Name = arg.tbCurrency.Name
+            })
             .ToList();
     }
 }

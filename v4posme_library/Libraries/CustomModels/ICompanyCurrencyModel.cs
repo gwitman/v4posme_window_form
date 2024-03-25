@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsViews;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -12,5 +13,5 @@ public interface ICompanyCurrencyModel
 
     TbCompanyCurrency GetRowByPk(int companyId, int currencyId);
     
-    List<TbCompanyCurrency> GetByCompany(int companyId);
+    List<TbCompanyCurrencyDto> GetByCompany(int companyId);
 }
