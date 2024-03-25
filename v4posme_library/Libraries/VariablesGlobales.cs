@@ -99,6 +99,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICounterModel, CounterModel>();
             _unityContainer.RegisterType<ICurrencyModel, CurrencyModel>();
             _unityContainer.RegisterType<IDataViewModel, DataViewModel>();
+            _unityContainer.RegisterType<IElementModel, ElementModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
