@@ -1,24 +1,27 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;
 
 public class AccountingBalanceModel : IAccountingBalanceModel
 {
-    public TbAccountingBalance UpdateBalance(int companyId, int componentPeriodId, int componentCycleId, int accountId,
+    public void UpdateBalance(int companyId, int componentPeriodId, int componentCycleId, int accountId,
         decimal balance, decimal debit, decimal credit)
     {
         using var context = new DataContext();
-        var find = context.TbAccountingBalances
-            .Single(accountingBalance =>
-                accountingBalance.ComponentPeriodId == componentPeriodId &&
+        context.TbAccountingBalances
+            .Where(accountingBalance =>
                 accountingBalance.CompanyId == companyId &&
                 accountingBalance.AccountId == accountId &&
-                accountingBalance.ComponentCycleId == componentCycleId);
-        find.Balance = balance;
-        find.Debit = debit;
-        find.Credit = credit;
-        context.SaveChanges();
-        return find;
+                accountingBalance.ComponentPeriodId == componentPeriodId &&
+                accountingBalance.ComponentCycleId == componentCycleId)
+            .ExecuteUpdate(calls =>
+                calls.SetProperty(accountingBalance => accountingBalance.Balance,
+                        accountingBalance => accountingBalance.Balance + balance)
+                    .SetProperty(accountingBalance => accountingBalance.Debit,
+                        accountingBalance => accountingBalance.Debit + debit)
+                    .SetProperty(accountingBalance => accountingBalance.Credit,
+                        accountingBalance => accountingBalance.Credit + credit));
     }
 
     public int DeleteJournalEntryDetailSummary(int companyId, int branchId, int loginId)
