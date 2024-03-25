@@ -104,6 +104,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ILogModel, LogModel>();
             _unityContainer.RegisterType<IMembershipModel, MembershipModel>();
             _unityContainer.RegisterType<IRoleAutorizationModel, RoleAutorizationModel>();
+            _unityContainer.RegisterType<ISubElementModel, SubElementModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
