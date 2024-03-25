@@ -27,10 +27,11 @@ public class AccountingBalanceModel : IAccountingBalanceModel
     public int DeleteJournalEntryDetailSummary(int companyId, int branchId, int loginId)
     {
         using var context = new DataContext();
-        var find = context.TbJournalEntryDetailSummaries.Single(summary =>
-            summary.CompanyId == companyId && summary.BranchId == branchId && summary.LoginId == loginId);
-        context.TbJournalEntryDetailSummaries.Remove(find);
-        return context.SaveChanges();
+        return context.TbJournalEntryDetailSummaries
+            .Where(summary => summary.CompanyId == companyId
+                              && summary.BranchId == branchId
+                              && summary.LoginId == loginId)
+            .ExecuteDelete();
     }
 
     public void SetAccountBalance(int companyId, int branchId, int loginId, int cycleId, int periodId,
