@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -7,12 +8,10 @@ public class CompanyCurrencyModel : ICompanyCurrencyModel
     public int DeleteAppPosme(int companyId, int currencyId)
     {
         using var context = new DataContext();
-        var find = context.TbCompanyCurrencies
-            .Single(currency =>
-                currency.CompanyCurrencyId == currencyId
-                && currency.CompanyId == companyId);
-        context.TbCompanyCurrencies.Remove(find);
-        return context.SaveChanges();
+        return context.TbCompanyCurrencies
+            .Where(currency => currency.CurrencyId == currencyId
+                               && currency.CompanyId == companyId)
+            .ExecuteDelete();
     }
 
     public void UpdateAppPosme(int companyId, int currencyId, TbCompanyCurrency data)
@@ -20,7 +19,7 @@ public class CompanyCurrencyModel : ICompanyCurrencyModel
         using var context = new DataContext();
         var find = context.TbCompanyCurrencies
             .Single(currency =>
-                currency.CompanyCurrencyId == currencyId
+                currency.CurrencyId == currencyId
                 && currency.CompanyId == companyId);
         data.CompanyCurrencyId = find.CompanyCurrencyId;
         context.Entry(find).CurrentValues.SetValues(data);
@@ -46,7 +45,7 @@ public class CompanyCurrencyModel : ICompanyCurrencyModel
             .Where(k => k.tbCurrency.IsActive!.Value)
             .Select(k => k.currency)
             .Single(currency =>
-                currency.CompanyCurrencyId == currencyId
+                currency.CurrencyId == currencyId
                 && currency.CompanyId == companyId);
     }
 
