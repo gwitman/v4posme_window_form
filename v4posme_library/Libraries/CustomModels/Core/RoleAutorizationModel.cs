@@ -56,6 +56,32 @@ class RoleAutorizationModel : IRoleAutorizationModel
         return query.ToList();
     }
 
+    public List<TbRoleAutorizationDto> GetRowByRole(int companyId, int branchId, int roleId)
+    {
+        using var context = new DataContext();
+        var query = from ra in context.TbRoleAutorizations
+            join ca in context.TbComponentAutorizations
+                on new { ra.CompanyId, ra.ComponentAutorizationId } equals new
+                    { ca.CompanyId, ca.ComponentAutorizationId }
+            join cad in context.TbComponentAutorizationDetails
+                on new { ca.CompanyId, ca.ComponentAutorizationId } equals new
+                    { cad.CompanyId, cad.ComponentAutorizationId }
+            where ra.CompanyId == companyId
+                  && ra.BranchId == branchId
+                  && ra.RoleId == roleId
+            select new TbRoleAutorizationDto
+            {
+                CompanyId = ra.CompanyId,
+                BranchId = ra.BranchId,
+                RoleId = ra.RoleId,
+                ComponentAutorizationId = cad.ComponentAutorizationId,
+                ComponentId = cad.ComponentId,
+                WorkflowId = cad.WorkflowId,
+                WorkflowStageId = cad.WorkflowStageId
+            };
+        return query.ToList();
+    }
+
     public List<TbRoleAutorizationDto> GetRowByPk(int companyId, int branchId, int roleId, int componentAutorizationId)
     {
         using var context = new DataContext();
