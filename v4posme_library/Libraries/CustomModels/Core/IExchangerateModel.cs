@@ -11,5 +11,7 @@ public interface IExchangerateModel
 
     TbExchangeRate GetDefault(int companyId);
 
+    TbExchangeRate GetRowByPk(int companyId, DateOnly date, int currencyIdSource, int currencyIdTarget);
+
     List<TbExchangeRateDto> GetByCompanyAndDate(int companyId, DateOnly dateStartOn, DateOnly dateEndOn);
 }

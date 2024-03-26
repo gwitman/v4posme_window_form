@@ -36,6 +36,16 @@ class ExchangerateModel : IExchangerateModel
                            && rate.CompanyId == companyId);
     }
 
+    public TbExchangeRate GetRowByPk(int companyId, DateOnly date, int currencyIdSource, int currencyIdTarget)
+    {
+        using var context = new DataContext();
+        return context.TbExchangeRates
+            .First(rate => rate.CompanyId == companyId
+                           && rate.CurrencyId == currencyIdSource
+                           && rate.TargetCurrencyId == currencyIdTarget
+                           && rate.Date==date);
+    }
+
     public List<TbExchangeRateDto> GetByCompanyAndDate(int companyId, DateOnly dateStartOn, DateOnly dateEndOn)
     {
         using var context = new DataContext();
