@@ -21,11 +21,11 @@ class ElementModel : IElementModel
             }).ToList();
     }
 
-    public TbElement GetRowByName(string name, int elementTypeId)
+    public TbElement? GetRowByName(string name, int elementTypeId)
     {
         using var context = new DataContext();
         return context.TbElements
-            .First(element => element.Name == name
+            .FirstOrDefault(element => element.Name == name
                               && element.ElementTypeId == elementTypeId);
     }
 

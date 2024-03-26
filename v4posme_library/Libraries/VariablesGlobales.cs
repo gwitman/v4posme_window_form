@@ -127,6 +127,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICompanyService, CompanyService>();
             _unityContainer.RegisterType<ICoreWebParameter, CoreWebParameter>();
             _unityContainer.RegisterType<ICoreWebPermission, CoreWebPermission>();
+            _unityContainer.RegisterType<ICoreWebCatalog, CoreWebCatalog>();
 
             #endregion
         }

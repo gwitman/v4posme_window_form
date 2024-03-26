@@ -4,11 +4,11 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 class SubElementModel : ISubElementModel
 {
-    public TbSubelement GetRowByNameAndElementId(int elementId, string name)
+    public TbSubelement? GetRowByNameAndElementId(int elementId, string name)
     {
         using var context = new DataContext();
         return context.TbSubelements
-            .First(subelement => subelement.ElementId == elementId
-                                 && subelement.Name == name);
+            .FirstOrDefault(subelement => subelement!.ElementId == elementId
+                                          && subelement.Name == name);
     }
 }

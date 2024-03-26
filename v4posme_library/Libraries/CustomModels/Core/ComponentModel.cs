@@ -4,9 +4,9 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 class ComponentModel : IComponentModel
 {
-    public TbComponent GetRowByName(string name)
+    public TbComponent? GetRowByName(string name)
     {
         using var context = new DataContext();
-        return context.TbComponents.First(component => component.Name == name);
+        return context.TbComponents.FirstOrDefault(component => component != null && component.Name == name);
     }
 }

@@ -75,7 +75,7 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<TbCompanyComponentConcept> TbCompanyComponentConcepts { get; set; }
 
-    public virtual DbSet<TbCompanyComponentFlavor> TbCompanyComponentFlavors { get; set; }
+    public virtual DbSet<TbCompanyComponentFlavor?> TbCompanyComponentFlavors { get; set; }
 
     public virtual DbSet<TbCompanyComponentItemDataview> TbCompanyComponentItemDataviews { get; set; }
 
@@ -91,7 +91,7 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<TbCompanySubelementObligatory> TbCompanySubelementObligatories { get; set; }
 
-    public virtual DbSet<TbComponent> TbComponents { get; set; }
+    public virtual DbSet<TbComponent?> TbComponents { get; set; }
 
     public virtual DbSet<TbComponentAudit> TbComponentAudits { get; set; }
 
@@ -227,7 +227,7 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<TbRoleAutorization> TbRoleAutorizations { get; set; }
 
-    public virtual DbSet<TbSubelement> TbSubelements { get; set; }
+    public virtual DbSet<TbSubelement?> TbSubelements { get; set; }
 
     public virtual DbSet<TbTag> TbTags { get; set; }
 
