@@ -113,6 +113,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IMenuElementModel, MenuElementModel>();
             _unityContainer.RegisterType<IWorkflowModel, WorkflowModel>();
             _unityContainer.RegisterType<IWorkflowStageModel, WorkflowStageModel>();
+            _unityContainer.RegisterType<IWorkflowStageRelationModel, WorkflowStageRelationModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
 
             #endregion
