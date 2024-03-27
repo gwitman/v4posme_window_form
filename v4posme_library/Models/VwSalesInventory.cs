@@ -1,11 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace v4posme_library.Models;
 
 [Keyless]
-public class VwSalesInventory
+public partial class VwSalesInventory
 {
     [Column("createdOn", TypeName = "datetime")]
     public DateTime? CreatedOn { get; set; }

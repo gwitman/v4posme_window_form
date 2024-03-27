@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +13,7 @@ namespace v4posme_library.Models;
 [Index("ItemId", Name = "IDX_ITEM_WAREHOUSE_004")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbItemWarehouse
+public partial class TbItemWarehouse
 {
     [Key]
     [Column("itemWarehouseId", TypeName = "int(11)")]
@@ -33,7 +35,9 @@ public class TbItemWarehouse
     [Precision(18, 4)]
     public decimal Quantity { get; set; }
 
-    [Column("cost")] [Precision(18, 4)] public decimal Cost { get; set; }
+    [Column("cost")]
+    [Precision(18, 4)]
+    public decimal Cost { get; set; }
 
     [Column("quantityMax")]
     [Precision(18, 4)]
@@ -42,12 +46,4 @@ public class TbItemWarehouse
     [Column("quantityMin")]
     [Precision(18, 4)]
     public decimal QuantityMin { get; set; }
-
-    [NotMapped] public string? Codigo { get; set; }
-    [NotMapped] public string? Producto { get; set; }
-    [NotMapped] public string? UM { get; set; }
-    [NotMapped] public string? ItemNumber { get; set; }
-    [NotMapped] public string? ItemName { get; set; }
-    [NotMapped] public string? Number { get; set; }
-    [NotMapped] public string? WarehouseName { get; set; }
 }

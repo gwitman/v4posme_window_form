@@ -1,6 +1,6 @@
-﻿namespace v4posme_library.ModelsViews;
+﻿namespace v4posme_library.ModelsDto;
 
-public class CustomerCreditAmortizationView
+public class CustomerCreditAmortizationDto
 {
     public int? CreditAmortizationId { get; set; }
     

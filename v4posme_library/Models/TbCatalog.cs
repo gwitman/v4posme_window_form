@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +9,7 @@ namespace v4posme_library.Models;
 [Table("tb_catalog")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_general_ci")]
-public class TbCatalog
+public partial class TbCatalog
 {
     [Key]
     [Column("catalogID", TypeName = "int(11)")]

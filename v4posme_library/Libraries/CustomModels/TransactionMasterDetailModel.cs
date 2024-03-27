@@ -1,13 +1,19 @@
 ﻿using System.Globalization;
 using System.Reflection.Metadata.Ecma335;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
 class TransactionMasterDetailModel : ITransactionMasterDetailModel
 {
+    private readonly MapperConfiguration _mapperConfiguration = new(expression =>
+        expression.CreateMap<TbTransactionMasterDetail, TbTransactionMasterDetailDto>());
+    
+
     public int InsertAppPosme(TbTransactionMasterDetail data)
     {
         using var context = new DataContext();
@@ -31,10 +37,11 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         context.SaveChanges();
     }
 
-    public TbTransactionMasterDetail GetRowByPk(int companyId, int transactionId, int transactionMasterId,
+    public TbTransactionMasterDetailDto GetRowByPk(int companyId, int transactionId, int transactionMasterId,
         int transactionMasterDetailId, int componentId = 33)
     {
         using var context = new DataContext();
+        var mapper = new Mapper(_mapperConfiguration);
         var result = componentId switch
         {
             33 => from td in context.TbTransactionMasterDetails
@@ -46,7 +53,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                       && td.TransactionMasterId == transactionMasterId
                       && td.TransactionMasterDetailId == transactionMasterDetailId
                       && td.IsActive!.Value
-                select new TbTransactionMasterDetail
+                select new TbTransactionMasterDetailDto
                 {
                     CompanyId = td.CompanyId,
                     TransactionId = td.TransactionId,
@@ -102,19 +109,19 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                       && td.TransactionMasterId == transactionMasterId
                       && td.TransactionMasterDetailId == transactionMasterDetailId
                       && td.IsActive.Value
-                select td,
+                select mapper.Map<TbTransactionMasterDetailDto>(td),
             _ => from td in context.TbTransactionMasterDetails
                 where td.CompanyId == companyId
                       && td.TransactionId == transactionId
                       && td.TransactionMasterId == transactionMasterId
                       && td.TransactionMasterDetailId == transactionMasterDetailId
                       && td.IsActive.Value
-                select td
+                select mapper.Map<TbTransactionMasterDetailDto>(td)
         };
         return result.First();
     }
 
-    public TbTransactionMasterDetail GetRowByTransactionAndItems(int companyId, int transactionId,
+    public TbTransactionMasterDetailDto GetRowByTransactionAndItems(int companyId, int transactionId,
         int transactionMasterId,
         List<int> listTmdId)
     {
@@ -128,7 +135,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                   && td.TransactionMasterId == transactionMasterId
                   && td.IsActive.Value
                   && listTmdId.Contains(i.ItemId)
-            select new TbTransactionMasterDetail
+            select new TbTransactionMasterDetailDto
             {
                 CompanyId = td.CompanyId,
                 TransactionId = td.TransactionId,
@@ -179,7 +186,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         return result.First();
     }
 
-    public List<TbTransactionMasterDetail> GetRowByTransactionAndWarehouse(int companyId, int transactionId,
+    public List<TbTransactionMasterDetailDto> GetRowByTransactionAndWarehouse(int companyId, int transactionId,
         int transactionMasterId)
     {
         using var context = new DataContext();
@@ -197,7 +204,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                   td.TransactionId == transactionId &&
                   td.TransactionMasterId == transactionMasterId &&
                   td.IsActive.Value
-            select new TbTransactionMasterDetail
+            select new TbTransactionMasterDetailDto
             {
                 CompanyId = w.CompanyId,
                 BranchId = w.BranchId,
@@ -222,7 +229,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         return resultado.ToList();
     }
 
-    public List<TbTransactionMasterDetail> GetRowByTransactionAndComponent(int companyId, int transactionId,
+    public List<TbTransactionMasterDetailDto> GetRowByTransactionAndComponent(int companyId, int transactionId,
         int transactionMasterId, int componentId)
     {
         using var context = new DataContext();
@@ -238,7 +245,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                       td.TransactionId == transactionId &&
                       td.TransactionMasterId == transactionMasterId &&
                       td.IsActive.Value
-                select new TbTransactionMasterDetail
+                select new TbTransactionMasterDetailDto
                 {
                     CompanyId = tm.CompanyId,
                     TransactionId = tm.TransactionId,
@@ -265,7 +272,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                       td.TransactionId == transactionId &&
                       td.TransactionMasterId == transactionMasterId &&
                       td.IsActive.Value
-                select new TbTransactionMasterDetail
+                select new TbTransactionMasterDetailDto
                 {
                     CompanyId = tm.CompanyId,
                     TransactionId = tm.TransactionId,
@@ -294,7 +301,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                       td.TransactionId == transactionId &&
                       td.TransactionMasterId == transactionMasterId &&
                       td.IsActive.Value
-                select new TbTransactionMasterDetail
+                select new TbTransactionMasterDetailDto
                 {
                     CompanyId = tm.CompanyId,
                     TransactionId = tm.TransactionId,
@@ -312,7 +319,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         return resultado != null ? resultado.ToList() : [];
     }
 
-    public List<TbTransactionMasterDetail> GetRowByTransaction(int companyId, int transactionId,
+    public List<TbTransactionMasterDetailDto> GetRowByTransaction(int companyId, int transactionId,
         int transactionMasterId)
     {
         using var context = new DataContext();
@@ -324,7 +331,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                   td.TransactionId == transactionId &&
                   td.TransactionMasterId == transactionMasterId &&
                   td.IsActive.Value
-            select new TbTransactionMasterDetail
+            select new TbTransactionMasterDetailDto
             {
                 CompanyId = td.CompanyId,
                 TransactionId = td.TransactionId,
@@ -362,7 +369,9 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 InventoryWarehouseSourceId = td.InventoryWarehouseSourceId,
                 InventoryWarehouseTargetId = td.InventoryWarehouseTargetId,
                 ItemNumber = i.ItemNumber,
-                BarCode = i.BarCode.Contains(',') ? i.BarCode.Substring(0, i.BarCode.IndexOf(',') + 1) + "..." : i.BarCode,
+                BarCode = i.BarCode.Contains(',')
+                    ? i.BarCode.Substring(0, i.BarCode.IndexOf(',') + 1) + "..."
+                    : i.BarCode,
                 ItemName = i.Name,
                 UnitMeasureName = ci.Name,
                 DescriptionReference = td.DescriptionReference,
@@ -412,7 +421,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             .ExecuteUpdate(calls => calls.SetProperty(detail => detail.IsActive, false));
     }
 
-    public List<TbTransactionMasterDetail> GlobalProGetRowBySalesByEmployeerMonthOnlySales(int companyId,
+    public List<TbTransactionMasterDetailDto> GlobalProGetRowBySalesByEmployeerMonthOnlySales(int companyId,
         DateTime dateFirst, DateTime dateLast)
     {
         using var context = new DataContext();
@@ -431,7 +440,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                   !i.Name.ToLower().Contains("repara")
             group new { nat, td } by nat.FirstName
             into g
-            select new TbTransactionMasterDetail
+            select new TbTransactionMasterDetailDto
             {
                 FirstName = g.Key ?? "ND",
                 Monto = g.Sum(x => x.td.UnitaryPrice * x.td.Quantity)
@@ -439,7 +448,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         return result.ToList();
     }
 
-    public List<TbTransactionMasterDetail> GlobalProGetRowBySalesByEmployeerMonthOnlyTenico(int companyId,
+    public List<TbTransactionMasterDetailDto> GlobalProGetRowBySalesByEmployeerMonthOnlyTenico(int companyId,
         DateTime dateFirst, DateTime dateLast)
     {
         using var context = new DataContext();
@@ -458,7 +467,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                   i.Name.Contains("repara", StringComparison.CurrentCultureIgnoreCase)
             group td by i.Name
             into g
-            select new TbTransactionMasterDetail
+            select new TbTransactionMasterDetailDto
             {
                 FirstName = g.Key.Replace("Reparacion de Laptop", ""),
                 Monto = g.Sum(x => x.UnitaryPrice * x.Quantity)
@@ -466,7 +475,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         return result.ToList();
     }
 
-    public List<TbTransactionMasterDetail> GlobalProGetMonthOnlySales(int companyId, DateTime dateFirst,
+    public List<TbTransactionMasterDetailDto> GlobalProGetMonthOnlySales(int companyId, DateTime dateFirst,
         DateTime dateLast)
     {
         using var context = new DataContext();
@@ -483,7 +492,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                   ws.Aplicable.Value
             group t by t.TransactionOn.Value.Month
             into g
-            select new TbTransactionMasterDetail
+            select new TbTransactionMasterDetailDto
             {
                 FirstName = g.Key.ToString(),
                 Monto = g.Sum(x => x.SubAmount)
@@ -491,7 +500,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         return result.ToList();
     }
 
-    public List<TbTransactionMasterDetail> GlobalProGetDaySales(int companyId, DateTime dateFirst, DateTime dateLast)
+    public List<TbTransactionMasterDetailDto> GlobalProGetDaySales(int companyId, DateTime dateFirst, DateTime dateLast)
     {
         using var context = new DataContext();
         var result = from t in context.TbTransactionMasters
@@ -507,7 +516,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                   ws.Aplicable.Value
             group t by t.TransactionOn.Value.Day
             into g
-            select new TbTransactionMasterDetail
+            select new TbTransactionMasterDetailDto
             {
                 FirstName = g.Key.ToString(),
                 Monto = g.Sum(x => x.SubAmount)
@@ -515,7 +524,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         return result.ToList();
     }
 
-    public List<TbTransactionMasterDetail> RealStateGetClienteFuenteDeContacto(int companyId, DateTime dateFirst,
+    public List<TbTransactionMasterDetailDto> RealStateGetClienteFuenteDeContacto(int companyId, DateTime dateFirst,
         DateTime dateLast)
     {
         using var context = new DataContext();
@@ -528,14 +537,14 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                              && source.master.CreatedOn >= dateFirst
                              && source.master.CreatedOn <= dateLast)
             .GroupBy(arg => arg.detail.Name)
-            .Select(grouping => new TbTransactionMasterDetail
+            .Select(grouping => new TbTransactionMasterDetailDto
             {
                 Indicador = grouping.Key,
                 Cantidad = grouping.Count()
             }).ToList();
     }
 
-    public List<TbTransactionMasterDetail> RealStateGetClientesInteres(int companyId, DateTime dateFirst,
+    public List<TbTransactionMasterDetailDto> RealStateGetClientesInteres(int companyId, DateTime dateFirst,
         DateTime dateLast)
     {
         using var context = new DataContext();
@@ -547,14 +556,14 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             .Where(arg => arg.customer.CreatedOn >= dateFirst
                           && arg.customer.CreatedOn <= dateLast)
             .GroupBy(item => item.item.Name)
-            .Select(items => new TbTransactionMasterDetail
+            .Select(items => new TbTransactionMasterDetailDto
             {
                 Indicador = items.Key,
                 Cantidad = items.Count()
             }).ToList();
     }
 
-    public List<TbTransactionMasterDetail> RealStateGetClientesTipoPropiedad(int companyId, DateTime dateFirst,
+    public List<TbTransactionMasterDetailDto> RealStateGetClientesTipoPropiedad(int companyId, DateTime dateFirst,
         DateTime dateLast)
     {
         using var context = new DataContext();
@@ -566,14 +575,14 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             .Where(arg => arg.customer.CreatedOn >= dateFirst
                           && arg.customer.CreatedOn <= dateLast)
             .GroupBy(item => item.item.Name)
-            .Select(items => new TbTransactionMasterDetail
+            .Select(items => new TbTransactionMasterDetailDto
             {
                 Indicador = items.Key,
                 Cantidad = items.Count()
             }).ToList();
     }
 
-    public List<TbTransactionMasterDetail> RealStateGetClientesPorAgentes(int companyId, DateTime dateFirst,
+    public List<TbTransactionMasterDetailDto> RealStateGetClientesPorAgentes(int companyId, DateTime dateFirst,
         DateTime dateLast)
     {
         using var context = new DataContext();
@@ -585,14 +594,14 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             .Where(arg => arg.customer.CreatedOn >= dateFirst
                           && arg.customer.CreatedOn <= dateLast)
             .GroupBy(item => item.item.FirstName)
-            .Select(items => new TbTransactionMasterDetail
+            .Select(items => new TbTransactionMasterDetailDto
             {
                 Indicador = items.Key,
                 Cantidad = items.Count()
             }).ToList();
     }
 
-    public List<TbTransactionMasterDetail> RealStateGetClientesClasificacionPorAgentes(int companyId,
+    public List<TbTransactionMasterDetailDto> RealStateGetClientesClasificacionPorAgentes(int companyId,
         DateTime dateFirst, DateTime dateLast)
     {
         using var context = new DataContext();
@@ -606,7 +615,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             .Where(arg => arg.arg1.customer.CreatedOn >= dateFirst
                           && arg.arg1.customer.CreatedOn <= dateLast)
             .GroupBy(arg => new { arg.arg1.stage.Name, arg.naturale.FirstName })
-            .Select(items => new TbTransactionMasterDetail
+            .Select(items => new TbTransactionMasterDetailDto
             {
                 Indicador = items.Key.Name,
                 Agente = items.Key.FirstName,
@@ -614,7 +623,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             }).ToList();
     }
 
-    public List<TbTransactionMasterDetail> RealStateGetClientesCerrados(int companyId, DateTime dateFirst,
+    public List<TbTransactionMasterDetailDto> RealStateGetClientesCerrados(int companyId, DateTime dateFirst,
         DateTime dateLast)
     {
         using var context = new DataContext();
@@ -626,14 +635,14 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             .Where(arg => arg.customer.CreatedOn >= dateFirst
                           && arg.customer.CreatedOn <= dateLast)
             .GroupBy(arg => arg.stage.Name)
-            .Select(grouping => new TbTransactionMasterDetail
+            .Select(grouping => new TbTransactionMasterDetailDto
             {
                 Indicador = grouping.Key,
                 Cantidad = grouping.Count()
             }).ToList();
     }
 
-    public List<TbTransactionMasterDetail> RealStateGetAgenteEfectividad(int companyId, DateTime dateFirst,
+    public List<TbTransactionMasterDetailDto> RealStateGetAgenteEfectividad(int companyId, DateTime dateFirst,
         DateTime dateLast)
     {
         using var context = new DataContext();
@@ -650,7 +659,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                   && t.TransactionOn >= dateFirst && t.TransactionOn <= dateLast
             group t by new { Day = t.TransactionOn.Value.Day }
             into g
-            select new TbTransactionMasterDetail
+            select new TbTransactionMasterDetailDto
             {
                 FirstName = g.Key.ToString(),
                 Monto = g.Sum(t => t.SubAmount)
@@ -658,7 +667,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         return query.ToList();
     }
 
-    public List<TbTransactionMasterDetail> RealStateGetPropiedadesPorAgentes(int companyId, DateTime dateFirst,
+    public List<TbTransactionMasterDetailDto> RealStateGetPropiedadesPorAgentes(int companyId, DateTime dateFirst,
         DateTime dateLast)
     {
         using var context = new DataContext();
@@ -670,14 +679,14 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             .Where(arg => arg.item.CreatedOn >= dateFirst
                           && arg.item.CreatedOn <= dateLast)
             .GroupBy(arg => arg.naturale.FirstName)
-            .Select(grouping => new TbTransactionMasterDetail
+            .Select(grouping => new TbTransactionMasterDetailDto
             {
                 FirstName = grouping.Key,
                 Cantidad = grouping.Count()
             }).ToList();
     }
 
-    public List<TbTransactionMasterDetail> RealStateGetPropiedadesPorAgentesMetas(int companyId, DateTime dateFirst,
+    public List<TbTransactionMasterDetailDto> RealStateGetPropiedadesPorAgentesMetas(int companyId, DateTime dateFirst,
         DateTime dateLast)
     {
         using var context = new DataContext();
@@ -695,14 +704,14 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                           && arg.master.TransactionOn >= dateFirst
                           && arg.master.TransactionOn <= dateLast)
             .GroupBy(arg => arg.master.TransactionOn!.Value)
-            .Select(grouping => new TbTransactionMasterDetail
+            .Select(grouping => new TbTransactionMasterDetailDto
             {
                 FirstName = grouping.Key.Day.ToString(),
                 Monto = grouping.Sum(arg => arg.master.SubAmount)
             }).ToList();
     }
 
-    public List<TbTransactionMasterDetail> RealStateGetPropiedadesRendimientoAnualVentas(int companyId,
+    public List<TbTransactionMasterDetailDto> RealStateGetPropiedadesRendimientoAnualVentas(int companyId,
         DateTime dateFirst, DateTime dateLast)
     {
         using var context = new DataContext();
@@ -730,7 +739,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 });
 
         var result = query.GroupBy(x => x.FirstName)
-            .Select(g => new TbTransactionMasterDetail
+            .Select(g => new TbTransactionMasterDetailDto
             {
                 FirstName = g.Key.ToString(),
                 Monto = g.Sum(x => x.Monto)
@@ -738,7 +747,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         return result.ToList();
     }
 
-    public List<TbTransactionMasterDetail> RealStateGetPropiedadesRendimientoAnualEnlistamiento(int companyId,
+    public List<TbTransactionMasterDetailDto> RealStateGetPropiedadesRendimientoAnualEnlistamiento(int companyId,
         DateTime dateFirst, DateTime dateLast)
     {
         using var context = new DataContext();
@@ -755,7 +764,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                   && t.TransactionOn <= dateLast
             group t by t.TransactionOn!.Value.Day
             into g
-            select new TbTransactionMasterDetail
+            select new TbTransactionMasterDetailDto
             {
                 FirstName = g.Key.ToString(),
                 Monto = g.Sum(t => t.SubAmount)

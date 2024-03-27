@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +14,7 @@ namespace v4posme_library.Models;
 [Index("TargetCatalogItemId", Name = "IDX_CATALOG_ITEM_CONVERSATION_005")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbCatalogItemConvertion
+public partial class TbCatalogItemConvertion
 {
     [Key]
     [Column("catalogItemConvertionID", TypeName = "int(11)")]

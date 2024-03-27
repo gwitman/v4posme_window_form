@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -26,5 +27,5 @@ public interface IItemModel
     
     int GetCount(int companyId);
 
-    List<TbItem> GetRowByTransactionMasterId(int transactionMasterId);
+    List<TbItemDto> GetRowByTransactionMasterId(int transactionMasterId);
 }

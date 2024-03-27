@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -9,19 +10,19 @@ public interface ITransactionMasterDetailModel
     void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId,
         int transactionMasterDetailId, TbTransactionMasterDetail data);
 
-    TbTransactionMasterDetail GetRowByPk(int companyId, int transactionId, int transactionMasterId,
+    TbTransactionMasterDetailDto GetRowByPk(int companyId, int transactionId, int transactionMasterId,
         int transactionMasterDetailId, int componentId = 33);
 
-    TbTransactionMasterDetail GetRowByTransactionAndItems(int companyId, int transactionId,
+    TbTransactionMasterDetailDto GetRowByTransactionAndItems(int companyId, int transactionId,
         int transactionMasterId, List<int> listTmdId);
 
-    List<TbTransactionMasterDetail> GetRowByTransactionAndWarehouse(int companyId, int transactionId,
+    List<TbTransactionMasterDetailDto> GetRowByTransactionAndWarehouse(int companyId, int transactionId,
         int transactionMasterId);
 
-    List<TbTransactionMasterDetail> GetRowByTransactionAndComponent(int companyId, int transactionId,
+    List<TbTransactionMasterDetailDto> GetRowByTransactionAndComponent(int companyId, int transactionId,
         int transactionMasterId, int componentId);
 
-    List<TbTransactionMasterDetail> GetRowByTransaction(int companyId, int transactionId, int transactionMasterId);
+    List<TbTransactionMasterDetailDto> GetRowByTransaction(int companyId, int transactionId, int transactionMasterId);
 
     List<TbTransactionMasterDetail> GetRowByTransactionToShare(int companyId, int transactionId,
         int transactionMasterId);
@@ -30,34 +31,46 @@ public interface ITransactionMasterDetailModel
 
     void DeleteWhereIdNotIn(int companyId, int transactionId, int transactionMasterId, List<int> listTmdId);
 
-    List<TbTransactionMasterDetail> GlobalProGetRowBySalesByEmployeerMonthOnlySales(int companyId, DateTime dateFirst,
+    List<TbTransactionMasterDetailDto> GlobalProGetRowBySalesByEmployeerMonthOnlySales(int companyId,
+        DateTime dateFirst,
         DateTime dateLast);
     
-    List<TbTransactionMasterDetail> GlobalProGetRowBySalesByEmployeerMonthOnlyTenico(int companyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> GlobalProGetRowBySalesByEmployeerMonthOnlyTenico(int companyId,
+        DateTime dateFirst, DateTime dateLast);
     
-    List<TbTransactionMasterDetail>  GlobalProGetMonthOnlySales(int companyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> GlobalProGetMonthOnlySales(int companyId, DateTime dateFirst, DateTime dateLast);
     
-    List<TbTransactionMasterDetail>  GlobalProGetDaySales(int companyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> GlobalProGetDaySales(int companyId, DateTime dateFirst, DateTime dateLast);
     
-    List<TbTransactionMasterDetail>  RealStateGetClienteFuenteDeContacto(int companyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> RealStateGetClienteFuenteDeContacto(int companyId, DateTime dateFirst,
+        DateTime dateLast);
     
-    List<TbTransactionMasterDetail>  RealStateGetClientesInteres(int companyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> RealStateGetClientesInteres(int companyId, DateTime dateFirst, DateTime dateLast);
     
-    List<TbTransactionMasterDetail>  RealStateGetClientesTipoPropiedad(int companyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> RealStateGetClientesTipoPropiedad(int companyId, DateTime dateFirst,
+        DateTime dateLast);
     
-    List<TbTransactionMasterDetail>  RealStateGetClientesPorAgentes(int companyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> RealStateGetClientesPorAgentes(int companyId, DateTime dateFirst,
+        DateTime dateLast);
     
-    List<TbTransactionMasterDetail>  RealStateGetClientesClasificacionPorAgentes(int companyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> RealStateGetClientesClasificacionPorAgentes(int companyId, DateTime dateFirst,
+        DateTime dateLast);
     
-    List<TbTransactionMasterDetail>  RealStateGetClientesCerrados(int companyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> RealStateGetClientesCerrados(int companyId, DateTime dateFirst,
+        DateTime dateLast);
     
-    List<TbTransactionMasterDetail>  RealStateGetAgenteEfectividad(int companyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> RealStateGetAgenteEfectividad(int companyId, DateTime dateFirst,
+        DateTime dateLast);
     
-    List<TbTransactionMasterDetail>  RealStateGetPropiedadesPorAgentes(int companyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> RealStateGetPropiedadesPorAgentes(int companyId, DateTime dateFirst,
+        DateTime dateLast);
     
-    List<TbTransactionMasterDetail>  RealStateGetPropiedadesPorAgentesMetas(int companyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> RealStateGetPropiedadesPorAgentesMetas(int companyId, DateTime dateFirst,
+        DateTime dateLast);
     
-    List<TbTransactionMasterDetail>  RealStateGetPropiedadesRendimientoAnualVentas(int companyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> RealStateGetPropiedadesRendimientoAnualVentas(int companyId, DateTime dateFirst,
+        DateTime dateLast);
     
-    List<TbTransactionMasterDetail>  RealStateGetPropiedadesRendimientoAnualEnlistamiento(int companyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> RealStateGetPropiedadesRendimientoAnualEnlistamiento(int companyId,
+        DateTime dateFirst, DateTime dateLast);
 }

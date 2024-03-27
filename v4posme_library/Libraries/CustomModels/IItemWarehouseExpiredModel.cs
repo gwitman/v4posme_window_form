@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -20,5 +21,5 @@ public interface IItemWarehouseExpiredModel
     
     TbItemWarehouseExpired GetByPk(int companyId,int itemWarehouseExpiredId);
     
-    List<TbItemWarehouseExpired> GetByItemIdAproxVencimiento(int companyId);
+    List<TbItemWarehouseExpiredDto> GetByItemIdAproxVencimiento(int companyId);
 }

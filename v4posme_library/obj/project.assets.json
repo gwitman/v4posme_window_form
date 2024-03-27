@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "AutoMapper/13.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Options": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "BouncyCastle.Cryptography/2.2.1": {
         "type": "package",
         "compile": {
@@ -51,6 +67,18 @@
         },
         "runtime": {
           "lib/net8.0/Devart.Data.MySql.Entity.EFCore.dll": {}
+        }
+      },
+      "ErikEJ.EntityFrameworkCore.DgmlBuilder/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/ErikEJ.EntityFrameworkCore.6.DgmlBuilder.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/ErikEJ.EntityFrameworkCore.6.DgmlBuilder.dll": {}
         }
       },
       "Google.Protobuf/3.25.1": {
@@ -1083,6 +1111,21 @@
     }
   },
   "libraries": {
+    "AutoMapper/13.0.1": {
+      "sha512": "/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
+      "type": "package",
+      "path": "automapper/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.13.0.1.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/net6.0/AutoMapper.dll",
+        "lib/net6.0/AutoMapper.xml"
+      ]
+    },
     "BouncyCastle.Cryptography/2.2.1": {
       "sha512": "A6Zr52zVqJKt18ZBsTnX0qhG0kwIQftVAjLmszmkiR/trSp8H+xj1gUOzk7XHwaKgyREMSV1v9XaKrBUeIOdvQ==",
       "type": "package",
@@ -1144,6 +1187,18 @@
         "devart.data.mysql.efcore.nuspec",
         "lib/net8.0/Devart.Data.MySql.Entity.EFCore.dll",
         "mysql.png"
+      ]
+    },
+    "ErikEJ.EntityFrameworkCore.DgmlBuilder/6.0.0": {
+      "sha512": "hY2zpLvfMrpGuakjPAE8Zp6JcMdGg3+CqN1Vvp++iy4c15SI9CY/zIjTHfyGefa0IfSgk5TGRhVvBnhopddWIg==",
+      "type": "package",
+      "path": "erikej.entityframeworkcore.dgmlbuilder/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "erikej.entityframeworkcore.dgmlbuilder.6.0.0.nupkg.sha512",
+        "erikej.entityframeworkcore.dgmlbuilder.nuspec",
+        "lib/net6.0/ErikEJ.EntityFrameworkCore.6.DgmlBuilder.dll"
       ]
     },
     "Google.Protobuf/3.25.1": {
@@ -3173,8 +3228,10 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "AutoMapper >= 13.0.1",
       "Devart.Data.MySql >= 9.3.10",
       "Devart.Data.MySql.EFCore >= 9.3.10.8",
+      "ErikEJ.EntityFrameworkCore.DgmlBuilder >= 6.0.0",
       "Microsoft.Extensions.Configuration >= 8.0.0",
       "Microsoft.Extensions.Configuration.Abstractions >= 8.0.0",
       "Microsoft.Extensions.Configuration.Json >= 8.0.0",
@@ -3237,6 +3294,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[13.0.1, )"
+          },
           "Devart.Data.MySql": {
             "target": "Package",
             "version": "[9.3.10, )"
@@ -3244,6 +3305,10 @@
           "Devart.Data.MySql.EFCore": {
             "target": "Package",
             "version": "[9.3.10.8, )"
+          },
+          "ErikEJ.EntityFrameworkCore.DgmlBuilder": {
+            "target": "Package",
+            "version": "[6.0.0, )"
           },
           "Microsoft.Extensions.Configuration": {
             "target": "Package",
@@ -3294,7 +3359,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

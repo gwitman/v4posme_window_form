@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +15,7 @@ namespace v4posme_library.Models;
 [Index("CompanyId", "ComponentId", "CallerId", "TargetComponentId", Name = "IDX_COMPANY_DEFAULT_DATAVIEW_006")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_general_ci")]
-public class TbCompanyDefaultDataview
+public partial class TbCompanyDefaultDataview
 {
     [Column("companyID", TypeName = "int(11)")]
     public int CompanyId { get; set; }

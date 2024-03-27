@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -36,7 +37,7 @@ class TransactionMasterInfoModel : ITransactionMasterInfoModel
         context.SaveChanges();
     }
 
-    public TbTransactionMasterInfo GetRowByPk(int companyId, int transactionId, int transactionMasterId)
+    public TbTransactionMasterInfoDto GetRowByPk(int companyId, int transactionId, int transactionMasterId)
     {
         using var context = new DataContext();
         var result = from tm in context.TbTransactionMasterInfoes
@@ -47,7 +48,7 @@ class TransactionMasterInfoModel : ITransactionMasterInfoModel
             where tm.TransactionMasterId == transactionMasterId
                   && tm.TransactionId == transactionId
                   && tm.CompanyId == companyId
-            select new TbTransactionMasterInfo
+            select new TbTransactionMasterInfoDto
             {
                 TransactionMasterInfoId = tm.TransactionMasterInfoId,
                 CompanyId = tm.CompanyId,

@@ -1,6 +1,6 @@
-﻿namespace v4posme_library.ModelsViews
+﻿namespace v4posme_library.ModelsDto
 {
-    public class MenuElementView
+    public class MenuElementDto
     {
         //x.companyID,x.elementID,x.menuElementID,x.parentMenuElementID, x.display,x.address,x.orden,x.icon,x.template,x.nivel
         public int ElementId { get; set; }

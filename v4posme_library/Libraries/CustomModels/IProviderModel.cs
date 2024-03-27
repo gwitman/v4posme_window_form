@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -12,7 +13,7 @@ public interface IProviderModel
     
     TbProvider GetRowByEntity(int companyId,int entityId);
     
-    List<TbProvider>  GetRowByCompany(int companyId);
+    List<TbProviderDto> GetRowByCompany(int companyId);
     
     TbProvider GetRowByPk(int companyId,int branchId,int entityId);
     

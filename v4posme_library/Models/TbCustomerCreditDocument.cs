@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +15,7 @@ namespace v4posme_library.Models;
 [Index("TypeAmortization", Name = "IDX_CUSTOMER_CREDIT_DOCUMENT_006")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbCustomerCreditDocument
+public partial class TbCustomerCreditDocument
 {
     [Key]
     [Column("customerCreditDocumentID", TypeName = "int(11)")]
@@ -90,23 +92,4 @@ public class TbCustomerCreditDocument
 
     [Column("reportSinRiesgo", TypeName = "int(11)")]
     public int ReportSinRiesgo { get; set; }
-
-    [NotMapped]
-    public string? CurrencyName { get; set; }
-    [NotMapped]
-    public string? CurrencySymbol { get; set; }
-    [NotMapped]
-    public decimal? BalanceNew { get; set; }
-    [NotMapped]
-    public decimal? Remaining { get; set; }
-    [NotMapped]
-    public DateTime? DateFinish { get; set; }
-    [NotMapped]
-    public int? CreditAmortizationId { get; set; }
-    [NotMapped]
-    public DateTime? DateApply { get; set; }
-    [NotMapped]
-    public int StatusAmotization { get; set; }
-    [NotMapped]
-    public string StatusAmortizatonName { get; set; }
 }

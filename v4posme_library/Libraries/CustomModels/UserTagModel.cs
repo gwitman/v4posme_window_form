@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -30,14 +31,14 @@ class UserTagModel : IUserTagModel
         return add.Entity.UserTagId;
     }
 
-    public List<TbUserTag> GetRowByUser(int userId)
+    public List<TbUserTagDto> GetRowByUser(int userId)
     {
         using var context = new DataContext();
         var result = from ut in context.TbUserTags
             join u in context.TbUsers on ut.UserId equals u.UserId
             join t in context.TbTags on ut.TagId equals t.TagId
             where u.UserId == userId && t.IsActive!.Value == 1
-            select new TbUserTag
+            select new TbUserTagDto
             {
                 TagId = ut.TagId,
                 UserId = ut.UserId,
@@ -54,14 +55,14 @@ class UserTagModel : IUserTagModel
         return result.ToList();
     }
 
-    public List<TbUserTag> GetRowByPk(int tagId)
+    public List<TbUserTagDto> GetRowByPk(int tagId)
     {
         using var context = new DataContext();
         var result = from ut in context.TbUserTags
             join u in context.TbUsers on ut.UserId equals u.UserId
             join t in context.TbTags on ut.TagId equals t.TagId
             where ut.TagId == tagId && t.IsActive == 1
-            select new TbUserTag
+            select new TbUserTagDto
             {
                 TagId = ut.TagId,
                 UserId = ut.UserId,

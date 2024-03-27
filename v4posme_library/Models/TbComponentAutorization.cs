@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +10,7 @@ namespace v4posme_library.Models;
 [Index("CompanyId", Name = "IDX_COMPONENT_AUTORIZATION_001")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbComponentAutorization
+public partial class TbComponentAutorization
 {
     [Key]
     [Column("componentAutorizationID", TypeName = "int(11)")]

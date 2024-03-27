@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +14,7 @@ namespace v4posme_library.Models;
 [Index("UserId", Name = "IDX_USER")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbMasterKardexTemp
+public partial class TbMasterKardexTemp
 {
     [Column("userID", TypeName = "int(11)")]
     public int UserId { get; set; }

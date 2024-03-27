@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +10,7 @@ namespace v4posme_library.Models;
 [Index("Name", Name = "IDX_PARAMETER_001")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_general_ci")]
-public class TbParameter
+public partial class TbParameter
 {
     [Key]
     [Column("parameterID", TypeName = "int(11)")]

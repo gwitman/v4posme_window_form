@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -32,7 +33,7 @@ class ProviderItemModel : IProviderItemModel
         return add.Entity.ProviderItemId;
     }
 
-    public List<TbProviderItem> GetRowByItemId(int companyId, int itemId)
+    public List<TbProviderItemDto> GetRowByItemId(int companyId, int itemId)
     {
         using var context = new DataContext();
         var result = from ip in context.TbProviderItems
@@ -42,7 +43,7 @@ class ProviderItemModel : IProviderItemModel
             join l in context.TbLegals on p.EntityId equals l.EntityId into legales
             from l in legales.DefaultIfEmpty()
             where ip.CompanyId == companyId && ip.ItemId == itemId
-            select new TbProviderItem
+            select new TbProviderItemDto
             {
                 EntityId = ip.EntityId,
                 ProviderNumber = p.ProviderNumber,
@@ -53,7 +54,7 @@ class ProviderItemModel : IProviderItemModel
         return result.ToList();
     }
 
-    public TbProviderItem GetByPk(int companyId, int itemId, int providerId)
+    public TbProviderItemDto GetByPk(int companyId, int itemId, int providerId)
     {
         using var context = new DataContext();
         var result = from ip in context.TbProviderItems
@@ -63,7 +64,7 @@ class ProviderItemModel : IProviderItemModel
             join l in context.TbLegals on p.EntityId equals l.EntityId into legales
             from l in legales.DefaultIfEmpty()
             where ip.CompanyId == companyId && ip.ItemId == itemId && ip.EntityId == providerId
-            select new TbProviderItem
+            select new TbProviderItemDto
             {
                 EntityId = ip.EntityId,
                 ProviderNumber = p.ProviderNumber,

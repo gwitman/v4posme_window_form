@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +14,7 @@ namespace v4posme_library.Models;
 [Index("CompanyId", "DataViewId", "CallerId", "ComponentId", "IsActive", Name = "IDX_COMPANY_DATAVIEW_005")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_general_ci")]
-public class TbCompanyDataview
+public partial class TbCompanyDataview
 {
     [Column("companyID", TypeName = "int(11)")]
     public int CompanyId { get; set; }
@@ -63,4 +65,8 @@ public class TbCompanyDataview
     [Key]
     [Column("companyDataViewID", TypeName = "int(11)")]
     public int CompanyDataViewId { get; set; }
+
+    [Column("formatColumnsHeader")]
+    [StringLength(255)]
+    public string? FormatColumnsHeader { get; set; }
 }

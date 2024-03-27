@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +11,7 @@ namespace v4posme_library.Models;
 [Index("IsActive", "IsRead", "UserId", Name = "IDX_ERROR_003")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbError
+public partial class TbError
 {
     [Key]
     [Column("errorID", TypeName = "int(11)")]

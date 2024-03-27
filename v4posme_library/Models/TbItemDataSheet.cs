@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +11,7 @@ namespace v4posme_library.Models;
 [Index("StatusId", Name = "IDX_ITEM_DATASHEET_002")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbItemDataSheet
+public partial class TbItemDataSheet
 {
     [Key]
     [Column("itemDataSheetID", TypeName = "int(11)")]

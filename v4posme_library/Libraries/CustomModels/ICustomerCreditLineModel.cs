@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Design;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -13,13 +14,13 @@ public interface ICustomerCreditLineModel
 
     void DeleteWhereIdNotIn(int companyId,int branchId,int entityId,List<int> listCustomerCreditLineId);
     
-    List<TbCustomerCreditLine> GetRowByEntityAndLine(int companyId,int branchId,int entityId,int creditLineId);
+    List<TbCustomerCreditLineDto> GetRowByEntityAndLine(int companyId, int branchId, int entityId, int creditLineId);
     
-    List<TbCustomerCreditLine> GetRowByEntity(int companyId,int branchId,int entityId);
+    List<TbCustomerCreditLineDto> GetRowByEntity(int companyId, int branchId, int entityId);
     
-    List<TbCustomerCreditLine> GetRowByEntityBalanceMayorCero(int companyId,int branchId,int entityId);
+    List<TbCustomerCreditLineDto> GetRowByEntityBalanceMayorCero(int companyId, int branchId, int entityId);
     
-    List<TbCustomerCreditLine> GetRowByBranchId(int companyId,int branchId);
+    List<TbCustomerCreditLineDto> GetRowByBranchId(int companyId, int branchId);
     
     TbCustomerCreditLine GetRowByPk(int customerCreditLineId);
 }

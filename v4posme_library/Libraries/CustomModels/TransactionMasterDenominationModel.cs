@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -32,7 +33,7 @@ class TransactionMasterDenominationModel : ITransactionMasterDenominationModel
         context.SaveChanges();
     }
 
-    public List<TbTransactionMasterDenomination> GetRowByTransactionMaster(int companyId, int transactionId,
+    public List<TbTransactionMasterDenominationDto> GetRowByTransactionMaster(int companyId, int transactionId,
         int transactionMasterId)
     {
         using var context = new DataContext();
@@ -42,7 +43,7 @@ class TransactionMasterDenominationModel : ITransactionMasterDenominationModel
                                   && i.TransactionId == transactionId
                                   && i.TransactionMasterId == transactionMasterId
             orderby ci.Sequence
-            select new TbTransactionMasterDenomination
+            select new TbTransactionMasterDenominationDto
             {
                 CompanyId = i.CompanyId,
                 CatalogItemId = i.CatalogItemId,
@@ -62,7 +63,7 @@ class TransactionMasterDenominationModel : ITransactionMasterDenominationModel
         return result.ToList();
     }
 
-    public TbTransactionMasterDenomination GetRowByPk(int transactionMasterDenominationId)
+    public TbTransactionMasterDenominationDto GetRowByPk(int transactionMasterDenominationId)
     {
         using var context = new DataContext();
         var result = from i in context.TbTransactionMasterDenominations
@@ -70,7 +71,7 @@ class TransactionMasterDenominationModel : ITransactionMasterDenominationModel
             where i.IsActive == 1
                   && i.TransactionMasterDenominationId == transactionMasterDenominationId
             orderby ci.Sequence
-            select new TbTransactionMasterDenomination
+            select new TbTransactionMasterDenominationDto
             {
                 CompanyId = i.CompanyId,
                 CatalogItemId = i.CatalogItemId,

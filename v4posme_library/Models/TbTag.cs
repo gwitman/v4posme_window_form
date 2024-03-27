@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +13,7 @@ namespace v4posme_library.Models;
 [Index("Name", Name = "IDX_TAG_001")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbTag
+public partial class TbTag
 {
     [Key]
     [Column("tagID", TypeName = "int(11)")]

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +9,7 @@ namespace v4posme_library.Models;
 [Table("tb_accounting_balance_temp")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbAccountingBalanceTemp
+public partial class TbAccountingBalanceTemp
 {
     [Key]
     [Column("accountingBalanceTempID", TypeName = "int(11)")]

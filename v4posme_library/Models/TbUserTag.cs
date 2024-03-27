@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +13,7 @@ namespace v4posme_library.Models;
 [Index("UserId", Name = "IDX_USER_TAG_004")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbUserTag
+public partial class TbUserTag
 {
     [Column("tagID", TypeName = "int(11)")]
     public int TagId { get; set; }
@@ -28,12 +30,4 @@ public class TbUserTag
     [Key]
     [Column("userTagID", TypeName = "int(11)")]
     public int UserTagId { get; set; }
-
-    [NotMapped]public string? UserEmail { get; set; }
-    [NotMapped]public string? Name { get; set; }
-    [NotMapped]public string? Description { get; set; }
-    [NotMapped]public ulong? SendEmail { get; set; }
-    [NotMapped]public ulong? SendNotificationApp { get; set; }
-    [NotMapped]public ulong? SendSms { get; set; }
-    [NotMapped]public ulong? IsActive { get; set; }
 }

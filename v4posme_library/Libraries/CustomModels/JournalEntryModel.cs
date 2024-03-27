@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -34,7 +35,7 @@ class JournalEntryModel : IJournalEntryModel
         return add.Entity.JournalEntryId;
     }
 
-    public TbJournalEntry GetRowByCode(int companyId, string journalNumber)
+    public TbJournalEntryDto GetRowByCode(int companyId, string journalNumber)
     {
         using var context = new DataContext();
         var result = from je in context.TbJournalEntries
@@ -44,7 +45,7 @@ class JournalEntryModel : IJournalEntryModel
             where je.CompanyId == companyId
                   && je.JournalNumber == journalNumber
                   && je.IsActive
-            select new TbJournalEntry
+            select new TbJournalEntryDto
             {
                 JournalEntryId = je.JournalEntryId,
                 CompanyId = je.CompanyId,
@@ -75,7 +76,7 @@ class JournalEntryModel : IJournalEntryModel
         return result.Single();
     }
 
-    public TbJournalEntry GetRowByPk(int companyId, int journalEntryId)
+    public TbJournalEntryDto GetRowByPk(int companyId, int journalEntryId)
     {
         using var context = new DataContext();
         var result = from je in context.TbJournalEntries
@@ -83,7 +84,7 @@ class JournalEntryModel : IJournalEntryModel
             join ci in context.TbCatalogItems on je.JournalTypeId equals ci.CatalogItemId
             join cu in context.TbCurrencies on je.CurrencyId equals cu.CurrencyId
             where je.CompanyId == companyId && je.JournalEntryId == journalEntryId && je.IsActive
-            select new TbJournalEntry
+            select new TbJournalEntryDto
             {
                 JournalEntryId = je.JournalEntryId,
                 CompanyId = je.CompanyId,

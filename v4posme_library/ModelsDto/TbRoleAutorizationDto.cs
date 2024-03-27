@@ -1,4 +1,4 @@
-﻿namespace v4posme_library.ModelsViews;
+﻿namespace v4posme_library.ModelsDto;
 
 public class TbRoleAutorizationDto
 {

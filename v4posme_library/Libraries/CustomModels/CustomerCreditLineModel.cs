@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -41,10 +42,10 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
                            && line.BranchId == branchId
                            && line.EntityId == entityId
                            && !listCustomerCreditLineId.Contains(line.CustomerCreditLineId))
-            .ExecuteUpdate(calls => calls.SetProperty(line => line.IsActive, 0));
+            .ExecuteUpdate(calls => calls.SetProperty(line => line.IsActive, (ulong)0));
     }
 
-    public List<TbCustomerCreditLine> GetRowByEntityAndLine(int companyId, int branchId, int entityId, int creditLineId)
+    public List<TbCustomerCreditLineDto> GetRowByEntityAndLine(int companyId, int branchId, int entityId, int creditLineId)
     {
         using var context = new DataContext();
         var result = from i in context.TbCustomerCreditLines
@@ -55,7 +56,7 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
                   && i.EntityId == entityId
                   && i.CreditLineId == creditLineId
                   && i.IsActive == 1
-            select new TbCustomerCreditLine
+            select new TbCustomerCreditLineDto
             {
                 CustomerCreditLineId = i.CustomerCreditLineId,
                 CompanyId = i.CompanyId,
@@ -84,7 +85,7 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
         return result.ToList();
     }
 
-    public List<TbCustomerCreditLine> GetRowByEntity(int companyId, int branchId, int entityId)
+    public List<TbCustomerCreditLineDto> GetRowByEntity(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
         var result = from i in context.TbCustomerCreditLines
@@ -97,7 +98,7 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
                   && i.BranchId == branchId
                   && i.EntityId == entityId
                   && i.IsActive == 1
-            select new TbCustomerCreditLine
+            select new TbCustomerCreditLineDto
             {
                 CustomerCreditLineId = i.CustomerCreditLineId,
                 CompanyId = i.CompanyId,
@@ -129,7 +130,7 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
         return result.ToList();
     }
 
-    public List<TbCustomerCreditLine> GetRowByEntityBalanceMayorCero(int companyId, int branchId, int entityId)
+    public List<TbCustomerCreditLineDto> GetRowByEntityBalanceMayorCero(int companyId, int branchId, int entityId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbCustomerCreditLines
@@ -143,7 +144,7 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
                   && i.EntityId == entityId
                   && i.IsActive == 1
                   && i.Balance > 0
-            select new TbCustomerCreditLine
+            select new TbCustomerCreditLineDto
             {
                 CustomerCreditLineId = i.CustomerCreditLineId,
                 CompanyId = i.CompanyId,
@@ -175,7 +176,7 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
         return result.ToList();
     }
 
-    public List<TbCustomerCreditLine> GetRowByBranchId(int companyId, int branchId)
+    public List<TbCustomerCreditLineDto> GetRowByBranchId(int companyId, int branchId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbCustomerCreditLines
@@ -187,7 +188,7 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
             where i.CompanyId == companyId
                   && i.BranchId == branchId
                   && i.IsActive == 1
-            select new TbCustomerCreditLine
+            select new TbCustomerCreditLineDto
             {
                 CustomerCreditLineId = i.CustomerCreditLineId,
                 CompanyId = i.CompanyId,

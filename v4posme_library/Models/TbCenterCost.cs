@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +14,7 @@ namespace v4posme_library.Models;
 [Index("ParentClassId", Name = "IDX_CENTER_COST_005")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbCenterCost
+public partial class TbCenterCost
 {
     [Key]
     [Column("classID", TypeName = "int(11)")]
@@ -39,7 +41,7 @@ public class TbCenterCost
     public string? Description { get; set; }
 
     [Column("isActive")]
-    public bool IsActive { get; set; }
+    public bool? IsActive { get; set; }
 
     [Column("createdBy", TypeName = "int(11)")]
     public int? CreatedBy { get; set; }

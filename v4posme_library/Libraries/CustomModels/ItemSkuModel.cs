@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -31,13 +32,13 @@ class ItemSkuModel : IItemSkuModel
         return add.Entity.SkuId;
     }
 
-    public List<TbItemSku> GetRowByItemId(int itemId)
+    public List<TbItemSkuDto> GetRowByItemId(int itemId)
     {
         using var context = new DataContext();
         var result = from sku in context.TbItemSkus
             join w in context.TbCatalogItems on sku.CatalogItemId equals w.CatalogItemId
             where sku.ItemId == itemId
-            select new TbItemSku
+            select new TbItemSkuDto
             {
                 SkuId = sku.SkuId,
                 ItemId = sku.ItemId,
@@ -48,13 +49,13 @@ class ItemSkuModel : IItemSkuModel
         return result.ToList();
     }
 
-    public TbItemSku GetByPk(int itemId, int catalogItemId)
+    public TbItemSkuDto GetByPk(int itemId, int catalogItemId)
     {
         using var context = new DataContext();
         var result = from sku in context.TbItemSkus
             join w in context.TbCatalogItems on sku.CatalogItemId equals w.CatalogItemId
             where sku.ItemId == itemId && sku.CatalogItemId == catalogItemId
-            select new TbItemSku
+            select new TbItemSkuDto
             {
                 SkuId = sku.SkuId,
                 ItemId = sku.ItemId,
@@ -65,7 +66,7 @@ class ItemSkuModel : IItemSkuModel
         return result.Single();
     }
 
-    public List<TbItemSku> GetRowByTransactionMasterId(int companyId, int transactionMasterId)
+    public List<TbItemSkuDto> GetRowByTransactionMasterId(int companyId, int transactionMasterId)
     {
         using var context = new DataContext();
         var result = from tm in context.TbTransactionMasters
@@ -73,7 +74,7 @@ class ItemSkuModel : IItemSkuModel
             join i in context.TbItemSkus on tmd.ComponentItemId equals i.ItemId
             join w in context.TbCatalogItems on i.CatalogItemId equals w.CatalogItemId
             where tm.TransactionMasterId == transactionMasterId
-            select new TbItemSku
+            select new TbItemSkuDto
             {
                 SkuId = i.SkuId,
                 ItemId = i.ItemId,

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -12,7 +13,7 @@ class TransactionCausalModel : ITransactionCausalModel
             .Where(causal => causal.CompanyId == companyId
                              && causal.TransactionId == transactionId
                              && causal.BranchId == branchId
-                             && causal.IsActive == 1)
+                             && causal.IsActive )
             .ToList();
     }
 
@@ -22,10 +23,10 @@ class TransactionCausalModel : ITransactionCausalModel
         return context.TbTransactionCausals
             .Single(causal => causal.CompanyId == companyId
                               && causal.TransactionId == transactionId
-                              && causal.IsActive == 1 && causal.IsDefault == 1);
+                              && causal.IsActive  && causal.IsDefault );
     }
 
-    public List<TbTransactionCausal> GetByCompanyAndTransaction(int companyId, int transactionId)
+    public List<TbTransactionCausalDto> GetByCompanyAndTransaction(int companyId, int transactionId)
     {
         using var context = new DataContext();
         var result = from tc in context.TbTransactionCausals
@@ -36,8 +37,8 @@ class TransactionCausalModel : ITransactionCausalModel
             from w2 in w2Join.DefaultIfEmpty()
             where tc.CompanyId == companyId
                   && tc.TransactionId == transactionId
-                  && tc.IsActive == 1
-            select new TbTransactionCausal
+                  && tc.IsActive
+            select new TbTransactionCausalDto
             {
                 CompanyId = tc.CompanyId,
                 TransactionId = tc.TransactionId,
@@ -62,7 +63,7 @@ class TransactionCausalModel : ITransactionCausalModel
             .Single(causal => causal.CompanyId == companyId
                               && causal.TransactionId == transactionId
                               && causal.TransactionCausalId == causalId
-                              && causal.IsActive == 1);
+                              && causal.IsActive);
     }
 
     public void DeleteAppPosme(int companyId, int transactionId, List<int> listCausal)
@@ -72,7 +73,7 @@ class TransactionCausalModel : ITransactionCausalModel
             .Where(causal => causal.CompanyId == companyId
                              && causal.TransactionId == transactionId
                              && !listCausal.Contains(causal.TransactionCausalId))
-            .ExecuteUpdate(calls => calls.SetProperty(causal => causal.IsActive, (ulong)0));
+            .ExecuteUpdate(calls => calls.SetProperty(causal => causal.IsActive, false));
     }
 
     public int InsertAppPosme(TbTransactionCausal data)
@@ -101,7 +102,7 @@ class TransactionCausalModel : ITransactionCausalModel
         return context.TbTransactionCausals
             .Count(causal => causal.CompanyId == companyId
                              && causal.TransactionId == transactionId
-                             && causal.IsActive == 1
-                             && causal.IsDefault == 1);
+                             && causal.IsActive
+                             && causal.IsDefault);
     }
 }

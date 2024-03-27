@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -23,7 +24,7 @@ class EmployeeModel : IEmployeeModel
             .Single(employee => employee.CompanyId == companyId
                                 && employee.BranchId == branchId
                                 && employee.EntityId == entityId);
-        find.IsActive = false;
+        find.IsActive = 0;
         context.BulkSaveChanges();
     }
 
@@ -35,7 +36,7 @@ class EmployeeModel : IEmployeeModel
         return add.Entity.EmployeeId;
     }
 
-    public List<TbEmployee> GetRowByBranchIdAndType(int companyId, int branchId, int typeEmployer)
+    public List<TbEmployeeDto> GetRowByBranchIdAndType(int companyId, int branchId, int typeEmployer)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbEmployees
@@ -43,8 +44,8 @@ class EmployeeModel : IEmployeeModel
             where i.CompanyId == companyId
                   && i.BranchId == branchId
                   && i.DepartamentId == typeEmployer
-                  && i.IsActive.Value
-            select new TbEmployee
+                  && i.IsActive == 1
+            select new TbEmployeeDto
             {
                 CompanyId = i.CompanyId,
                 BranchId = i.BranchId,
@@ -80,15 +81,15 @@ class EmployeeModel : IEmployeeModel
         return result.ToList();
     }
 
-    public List<TbEmployee> GetRowByBranchId(int companyId, int branchId)
+    public List<TbEmployeeDto> GetRowByBranchId(int companyId, int branchId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbEmployees
             join n in dbContext.TbNaturales on i.EntityId equals n.EntityId
             where i.CompanyId == companyId
                   && i.BranchId == branchId
-                  && i.IsActive.Value
-            select new TbEmployee
+                  && i.IsActive == 1
+            select new TbEmployeeDto
             {
                 CompanyId = i.CompanyId,
                 BranchId = i.BranchId,
@@ -124,7 +125,7 @@ class EmployeeModel : IEmployeeModel
         return result.ToList();
     }
 
-    public TbEmployee GetRowByPk(int companyId, int branchId, int entityId)
+    public TbEmployeeDto GetRowByPk(int companyId, int branchId, int entityId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbEmployees
@@ -132,8 +133,8 @@ class EmployeeModel : IEmployeeModel
             where i.CompanyId == companyId
                   && i.BranchId == branchId
                   && i.EntityId == entityId
-                  && i.IsActive.Value
-            select new TbEmployee
+                  && i.IsActive==1
+            select new TbEmployeeDto
             {
                 CompanyId = i.CompanyId,
                 BranchId = i.BranchId,
@@ -169,15 +170,15 @@ class EmployeeModel : IEmployeeModel
         return result.Single();
     }
 
-    public TbEmployee GetRowByEntityId(int companyId, int entityId)
+    public TbEmployeeDto GetRowByEntityId(int companyId, int entityId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbEmployees
             join n in dbContext.TbNaturales on i.EntityId equals n.EntityId
             where i.CompanyId == companyId
                   && i.EntityId == entityId
-                  && i.IsActive.Value
-            select new TbEmployee
+                  && i.IsActive==1
+            select new TbEmployeeDto
             {
                 CompanyId = i.CompanyId,
                 BranchId = i.BranchId,

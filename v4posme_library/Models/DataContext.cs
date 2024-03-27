@@ -1,14 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace v4posme_library.Models;
 
-public sealed partial class DataContext : DbContext
+public partial class DataContext : DbContext
 {
     readonly IConfigurationRoot _configuration = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json")
-        .Build();
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
+    .Build();
 
     public DataContext(DbContextOptions<DataContext> options)
         : base(options)
@@ -30,279 +31,289 @@ public sealed partial class DataContext : DbContext
         optionsBuilder.UseMySql(ServerVersion.AutoDetect(connectionString));
     }
 
-    public DbSet<TbAccount> TbAccounts { get; set; } = null!;
+    public virtual DbSet<TbAccount> TbAccounts { get; set; }
 
-    public DbSet<TbAccountLevel> TbAccountLevels { get; set; } = null!;
+    public virtual DbSet<TbAccountLevel> TbAccountLevels { get; set; }
 
-    public DbSet<TbAccountTmp> TbAccountTmps { get; set; } = null!;
+    public virtual DbSet<TbAccountTmp> TbAccountTmps { get; set; }
 
-    public DbSet<TbAccountType> TbAccountTypes { get; set; } = null!;
+    public virtual DbSet<TbAccountType> TbAccountTypes { get; set; }
 
-    public DbSet<TbAccountingBalance> TbAccountingBalances { get; set; } = null!;
+    public virtual DbSet<TbAccountingBalance> TbAccountingBalances { get; set; }
 
-    public DbSet<TbAccountingBalanceTemp> TbAccountingBalanceTemps { get; set; } = null!;
+    public virtual DbSet<TbAccountingBalanceTemp> TbAccountingBalanceTemps { get; set; }
 
-    public DbSet<TbAccountingCycle> TbAccountingCycles { get; set; } = null!;
+    public virtual DbSet<TbAccountingCycle> TbAccountingCycles { get; set; }
 
-    public DbSet<TbAccountingPeriod> TbAccountingPeriods { get; set; } = null!;
+    public virtual DbSet<TbAccountingPeriod> TbAccountingPeriods { get; set; }
 
-    public DbSet<TbBank> TbBanks { get; set; } = null!;
+    public virtual DbSet<TbBank> TbBanks { get; set; }
 
-    public DbSet<TbBiblia> TbBiblias { get; set; } = null!;
+    public virtual DbSet<TbBiblia> TbBiblias { get; set; }
 
-    public DbSet<TbBranch> TbBranches { get; set; } = null!;
+    public virtual DbSet<TbBranch> TbBranches { get; set; }
 
-    public DbSet<TbCaller> TbCallers { get; set; } = null!;
+    public virtual DbSet<TbCaller> TbCallers { get; set; }
 
-    public DbSet<TbCashBox> TbCashBoxes { get; set; } = null!;
+    public virtual DbSet<TbCashBox> TbCashBoxes { get; set; }
 
-    public DbSet<TbCashBoxSession> TbCashBoxSessions { get; set; } = null!;
+    public virtual DbSet<TbCashBoxSession> TbCashBoxSessions { get; set; }
 
-    public DbSet<TbCashBoxSessionTransactionMaster> TbCashBoxSessionTransactionMasters { get; set; } = null!;
+    public virtual DbSet<TbCashBoxSessionTransactionMaster> TbCashBoxSessionTransactionMasters { get; set; }
 
-    public DbSet<TbCashBoxUser> TbCashBoxUsers { get; set; } = null!;
+    public virtual DbSet<TbCashBoxUser> TbCashBoxUsers { get; set; }
 
-    public DbSet<TbCatalog> TbCatalogs { get; set; } = null!;
+    public virtual DbSet<TbCatalog> TbCatalogs { get; set; }
 
-    public DbSet<TbCatalogItem> TbCatalogItems { get; set; } = null!;
+    public virtual DbSet<TbCatalogItem> TbCatalogItems { get; set; }
 
-    public DbSet<TbCatalogItemConvertion> TbCatalogItemConvertions { get; set; } = null!;
+    public virtual DbSet<TbCatalogItemConvertion> TbCatalogItemConvertions { get; set; }
 
-    public DbSet<TbCenterCost> TbCenterCosts { get; set; } = null!;
+    public virtual DbSet<TbCenterCost> TbCenterCosts { get; set; }
 
-    public DbSet<TbCompany> TbCompanies { get; set; } = null!;
+    public virtual DbSet<TbCompany> TbCompanies { get; set; }
 
-    public DbSet<TbCompanyComponent> TbCompanyComponents { get; set; } = null!;
+    public virtual DbSet<TbCompanyComponent> TbCompanyComponents { get; set; }
 
-    public DbSet<TbCompanyComponentConcept> TbCompanyComponentConcepts { get; set; } = null!;
+    public virtual DbSet<TbCompanyComponentConcept> TbCompanyComponentConcepts { get; set; }
 
-    public DbSet<TbCompanyComponentFlavor> TbCompanyComponentFlavors { get; set; } = null!;
+    public virtual DbSet<TbCompanyComponentFlavor> TbCompanyComponentFlavors { get; set; }
 
-    public DbSet<TbCompanyComponentItemDataview> TbCompanyComponentItemDataviews { get; set; } = null!;
+    public virtual DbSet<TbCompanyComponentItemDataview> TbCompanyComponentItemDataviews { get; set; }
 
-    public DbSet<TbCompanyCurrency> TbCompanyCurrencies { get; set; } = null!;
+    public virtual DbSet<TbCompanyCurrency> TbCompanyCurrencies { get; set; }
 
-    public DbSet<TbCompanyDataview> TbCompanyDataviews { get; set; } = null!;
+    public virtual DbSet<TbCompanyDataview> TbCompanyDataviews { get; set; }
 
-    public DbSet<TbCompanyDefaultDataview> TbCompanyDefaultDataviews { get; set; } = null!;
+    public virtual DbSet<TbCompanyDefaultDataview> TbCompanyDefaultDataviews { get; set; }
 
-    public DbSet<TbCompanyParameter> TbCompanyParameters { get; set; } = null!;
+    public virtual DbSet<TbCompanyParameter> TbCompanyParameters { get; set; }
 
-    public DbSet<TbCompanySubelementAudit> TbCompanySubelementAudits { get; set; } = null!;
+    public virtual DbSet<TbCompanySubelementAudit> TbCompanySubelementAudits { get; set; }
 
-    public DbSet<TbCompanySubelementObligatory> TbCompanySubelementObligatories { get; set; } = null!;
+    public virtual DbSet<TbCompanySubelementObligatory> TbCompanySubelementObligatories { get; set; }
 
-    public DbSet<TbComponent> TbComponents { get; set; } = null!;
+    public virtual DbSet<TbComponent> TbComponents { get; set; }
 
-    public DbSet<TbComponentAudit> TbComponentAudits { get; set; } = null!;
+    public virtual DbSet<TbComponentAudit> TbComponentAudits { get; set; }
 
-    public DbSet<TbComponentAuditDetail> TbComponentAuditDetails { get; set; } = null!;
+    public virtual DbSet<TbComponentAuditDetail> TbComponentAuditDetails { get; set; }
 
-    public DbSet<TbComponentAutorization> TbComponentAutorizations { get; set; } = null!;
+    public virtual DbSet<TbComponentAutorization> TbComponentAutorizations { get; set; }
 
-    public DbSet<TbComponentAutorizationDetail> TbComponentAutorizationDetails { get; set; } = null!;
+    public virtual DbSet<TbComponentAutorizationDetail> TbComponentAutorizationDetails { get; set; }
 
-    public DbSet<TbComponentElement> TbComponentElements { get; set; } = null!;
+    public virtual DbSet<TbComponentElement> TbComponentElements { get; set; }
 
-    public DbSet<TbCounter> TbCounters { get; set; } = null!;
+    public virtual DbSet<TbCounter> TbCounters { get; set; }
 
-    public DbSet<TbCreditLine> TbCreditLines { get; set; } = null!;
+    public virtual DbSet<TbCreditLine> TbCreditLines { get; set; }
 
-    public DbSet<TbCurrency> TbCurrencies { get; set; } = null!;
+    public virtual DbSet<TbCurrency> TbCurrencies { get; set; }
 
-    public DbSet<TbCustomer> TbCustomers { get; set; } = null!;
+    public virtual DbSet<TbCustomer> TbCustomers { get; set; }
 
-    public DbSet<TbCustomerConsultasSinRiesgo> TbCustomerConsultasSinRiesgoes { get; set; } = null!;
+    public virtual DbSet<TbCustomerConsultasSinRiesgo> TbCustomerConsultasSinRiesgoes { get; set; }
 
-    public DbSet<TbCustomerCredit> TbCustomerCredits { get; set; } = null!;
+    public virtual DbSet<TbCustomerCredit> TbCustomerCredits { get; set; }
 
-    public DbSet<TbCustomerCreditAmortization> TbCustomerCreditAmortizations { get; set; } = null!;
+    public virtual DbSet<TbCustomerCreditAmortization> TbCustomerCreditAmortizations { get; set; }
 
-    public DbSet<TbCustomerCreditClasification> TbCustomerCreditClasifications { get; set; } = null!;
+    public virtual DbSet<TbCustomerCreditClasification> TbCustomerCreditClasifications { get; set; }
 
-    public DbSet<TbCustomerCreditDocument> TbCustomerCreditDocuments { get; set; } = null!;
+    public virtual DbSet<TbCustomerCreditDocument> TbCustomerCreditDocuments { get; set; }
 
-    public DbSet<TbCustomerCreditDocumentEntityRelated> TbCustomerCreditDocumentEntityRelateds { get; set; } = null!;
+    public virtual DbSet<TbCustomerCreditDocumentEntityRelated> TbCustomerCreditDocumentEntityRelateds { get; set; }
 
-    public DbSet<TbCustomerCreditLine> TbCustomerCreditLines { get; set; } = null!;
+    public virtual DbSet<TbCustomerCreditExternalSharon> TbCustomerCreditExternalSharons { get; set; }
 
-    public DbSet<TbDataview> TbDataviews { get; set; } = null!;
+    public virtual DbSet<TbCustomerCreditExternalSharonTmp> TbCustomerCreditExternalSharonTmps { get; set; }
 
-    public DbSet<TbElement> TbElements { get; set; } = null!;
+    public virtual DbSet<TbCustomerCreditLine> TbCustomerCreditLines { get; set; }
 
-    public DbSet<TbElementType> TbElementTypes { get; set; } = null!;
+    public virtual DbSet<TbDataview> TbDataviews { get; set; }
 
-    public DbSet<TbEmployee> TbEmployees { get; set; } = null!;
+    public virtual DbSet<TbElement> TbElements { get; set; }
 
-    public DbSet<TbEmployeeCalendarPay> TbEmployeeCalendarPays { get; set; } = null!;
+    public virtual DbSet<TbElementType> TbElementTypes { get; set; }
 
-    public DbSet<TbEmployeeCalendarPayDetail> TbEmployeeCalendarPayDetails { get; set; } = null!;
+    public virtual DbSet<TbEmployee> TbEmployees { get; set; }
 
-    public DbSet<TbEntity> TbEntities { get; set; } = null!;
+    public virtual DbSet<TbEmployeeCalendarPay> TbEmployeeCalendarPays { get; set; }
 
-    public DbSet<TbEntityAccount> TbEntityAccounts { get; set; } = null!;
+    public virtual DbSet<TbEmployeeCalendarPayDetail> TbEmployeeCalendarPayDetails { get; set; }
 
-    public DbSet<TbEntityEmail> TbEntityEmails { get; set; } = null!;
+    public virtual DbSet<TbEntity> TbEntities { get; set; }
 
-    public DbSet<TbEntityPhone> TbEntityPhones { get; set; } = null!;
+    public virtual DbSet<TbEntityAccount> TbEntityAccounts { get; set; }
 
-    public DbSet<TbError> TbErrors { get; set; } = null!;
+    public virtual DbSet<TbEntityEmail> TbEntityEmails { get; set; }
 
-    public DbSet<TbEstadisticaCategoria> TbEstadisticaCategorias { get; set; } = null!;
+    public virtual DbSet<TbEntityPhone> TbEntityPhones { get; set; }
 
-    public DbSet<TbEstadisticaClas> TbEstadisticaClases { get; set; } = null!;
+    public virtual DbSet<TbError> TbErrors { get; set; }
 
-    public DbSet<TbExchangeRate> TbExchangeRates { get; set; } = null!;
+    public virtual DbSet<TbEstadisticaCategoria> TbEstadisticaCategorias { get; set; }
 
-    public DbSet<TbFixedAssent> TbFixedAssents { get; set; } = null!;
+    public virtual DbSet<TbEstadisticaClas> TbEstadisticaClases { get; set; }
 
-    public DbSet<TbIndicator> TbIndicators { get; set; } = null!;
+    public virtual DbSet<TbExchangeRate> TbExchangeRates { get; set; }
 
-    public DbSet<TbIndicatorHistory> TbIndicatorHistories { get; set; } = null!;
+    public virtual DbSet<TbFixedAssent> TbFixedAssents { get; set; }
 
-    public DbSet<TbIndicatorTmp> TbIndicatorTmps { get; set; } = null!;
+    public virtual DbSet<TbIndicator> TbIndicators { get; set; }
 
-    public DbSet<TbItem> TbItems { get; set; } = null!;
+    public virtual DbSet<TbIndicatorHistory> TbIndicatorHistories { get; set; }
 
-    public DbSet<TbItemCategory> TbItemCategories { get; set; } = null!;
+    public virtual DbSet<TbIndicatorTmp> TbIndicatorTmps { get; set; }
 
-    public DbSet<TbItemConfigLoto> TbItemConfigLotoes { get; set; } = null!;
+    public virtual DbSet<TbItem> TbItems { get; set; }
 
-    public DbSet<TbItemDataSheet> TbItemDataSheets { get; set; } = null!;
+    public virtual DbSet<TbItemCategory> TbItemCategories { get; set; }
 
-    public DbSet<TbItemDataSheetDetail> TbItemDataSheetDetails { get; set; } = null!;
+    public virtual DbSet<TbItemConfigLoto> TbItemConfigLotoes { get; set; }
 
-    public DbSet<TbItemSku> TbItemSkus { get; set; } = null!;
+    public virtual DbSet<TbItemDataSheet> TbItemDataSheets { get; set; }
 
-    public DbSet<TbItemWarehouse> TbItemWarehouses { get; set; } = null!;
+    public virtual DbSet<TbItemDataSheetDetail> TbItemDataSheetDetails { get; set; }
 
-    public DbSet<TbItemWarehouseExpired> TbItemWarehouseExpireds { get; set; } = null!;
+    public virtual DbSet<TbItemImport> TbItemImports { get; set; }
 
-    public DbSet<TbJournalEntry> TbJournalEntries { get; set; } = null!;
+    public virtual DbSet<TbItemSku> TbItemSkus { get; set; }
 
-    public DbSet<TbJournalEntryDetail> TbJournalEntryDetails { get; set; } = null!;
+    public virtual DbSet<TbItemWarehouse> TbItemWarehouses { get; set; }
 
-    public DbSet<TbJournalEntryDetailSummary> TbJournalEntryDetailSummaries { get; set; } = null!;
+    public virtual DbSet<TbItemWarehouseExpired> TbItemWarehouseExpireds { get; set; }
 
-    public DbSet<TbKardex> TbKardexes { get; set; } = null!;
+    public virtual DbSet<TbJournalEntry> TbJournalEntries { get; set; }
 
-    public DbSet<TbLegal> TbLegals { get; set; } = null!;
+    public virtual DbSet<TbJournalEntryDetail> TbJournalEntryDetails { get; set; }
 
-    public DbSet<TbListPrice> TbListPrices { get; set; } = null!;
+    public virtual DbSet<TbJournalEntryDetailSummary> TbJournalEntryDetailSummaries { get; set; }
 
-    public DbSet<TbLog> TbLogs { get; set; } = null!;
+    public virtual DbSet<TbKardex> TbKardexes { get; set; }
 
-    public DbSet<TbLogMesseger> TbLogMessegers { get; set; } = null!;
+    public virtual DbSet<TbLegal> TbLegals { get; set; }
 
-    public DbSet<TbLogSession> TbLogSessions { get; set; } = null!;
+    public virtual DbSet<TbListPrice> TbListPrices { get; set; }
 
-    public DbSet<TbMasterKardexTemp> TbMasterKardexTemps { get; set; } = null!;
+    public virtual DbSet<TbLog> TbLogs { get; set; }
 
-    public DbSet<TbMembership> TbMemberships { get; set; } = null!;
+    public virtual DbSet<TbLogMesseger> TbLogMessegers { get; set; }
 
-    public DbSet<TbMenuElement> TbMenuElements { get; set; } = null!;
+    public virtual DbSet<TbLogSession> TbLogSessions { get; set; }
 
-    public DbSet<TbNaturale> TbNaturales { get; set; } = null!;
+    public virtual DbSet<TbMasterKardexTemp> TbMasterKardexTemps { get; set; }
 
-    public DbSet<TbNotification> TbNotifications { get; set; } = null!;
+    public virtual DbSet<TbMembership> TbMemberships { get; set; }
 
-    public DbSet<TbParameter> TbParameters { get; set; } = null!;
+    public virtual DbSet<TbMenuElement> TbMenuElements { get; set; }
 
-    public DbSet<TbPrice> TbPrices { get; set; } = null!;
+    public virtual DbSet<TbNaturale> TbNaturales { get; set; }
 
-    public DbSet<TbProvider> TbProviders { get; set; } = null!;
+    public virtual DbSet<TbNotification> TbNotifications { get; set; }
 
-    public DbSet<TbProviderItem> TbProviderItems { get; set; } = null!;
+    public virtual DbSet<TbParameter> TbParameters { get; set; }
 
-    public DbSet<TbPublicCatalog> TbPublicCatalogs { get; set; } = null!;
+    public virtual DbSet<TbPrice> TbPrices { get; set; }
 
-    public DbSet<TbPublicCatalogDetail> TbPublicCatalogDetails { get; set; } = null!;
+    public virtual DbSet<TbProvider> TbProviders { get; set; }
 
-    public DbSet<TbRazonesFinancierasTmp> TbRazonesFinancierasTmps { get; set; } = null!;
+    public virtual DbSet<TbProviderItem> TbProviderItems { get; set; }
 
-    public DbSet<TbRelationship> TbRelationships { get; set; } = null!;
+    public virtual DbSet<TbPublicCatalog> TbPublicCatalogs { get; set; }
 
-    public DbSet<TbRemember> TbRemembers { get; set; } = null!;
+    public virtual DbSet<TbPublicCatalogDetail> TbPublicCatalogDetails { get; set; }
 
-    public DbSet<TbRole> TbRoles { get; set; } = null!;
+    public virtual DbSet<TbRazonesFinancierasTmp> TbRazonesFinancierasTmps { get; set; }
 
-    public DbSet<TbRoleAutorization> TbRoleAutorizations { get; set; } = null!;
+    public virtual DbSet<TbRelationship> TbRelationships { get; set; }
 
-    public DbSet<TbSubelement> TbSubelements { get; set; } = null!;
+    public virtual DbSet<TbRemember> TbRemembers { get; set; }
 
-    public DbSet<TbTag> TbTags { get; set; } = null!;
+    public virtual DbSet<TbRole> TbRoles { get; set; }
 
-    public DbSet<TbTransaction> TbTransactions { get; set; } = null!;
+    public virtual DbSet<TbRoleAutorization> TbRoleAutorizations { get; set; }
 
-    public DbSet<TbTransactionCausal> TbTransactionCausals { get; set; } = null!;
+    public virtual DbSet<TbSubelement> TbSubelements { get; set; }
 
-    public DbSet<TbTransactionConcept> TbTransactionConcepts { get; set; } = null!;
+    public virtual DbSet<TbTag> TbTags { get; set; }
 
-    public DbSet<TbTransactionMaster> TbTransactionMasters { get; set; } = null!;
+    public virtual DbSet<TbTransaction> TbTransactions { get; set; }
 
-    public DbSet<TbTransactionMasterConcept> TbTransactionMasterConcepts { get; set; } = null!;
+    public virtual DbSet<TbTransactionCausal> TbTransactionCausals { get; set; }
 
-    public DbSet<TbTransactionMasterDenomination> TbTransactionMasterDenominations { get; set; } = null!;
+    public virtual DbSet<TbTransactionConcept> TbTransactionConcepts { get; set; }
 
-    public DbSet<TbTransactionMasterDetail> TbTransactionMasterDetails { get; set; } = null!;
+    public virtual DbSet<TbTransactionMaster> TbTransactionMasters { get; set; }
 
-    public DbSet<TbTransactionMasterDetailCredit> TbTransactionMasterDetailCredits { get; set; } = null!;
+    public virtual DbSet<TbTransactionMasterConcept> TbTransactionMasterConcepts { get; set; }
 
-    public DbSet<TbTransactionMasterDetailTemp> TbTransactionMasterDetailTemps { get; set; } = null!;
+    public virtual DbSet<TbTransactionMasterDenomination> TbTransactionMasterDenominations { get; set; }
 
-    public DbSet<TbTransactionMasterInfo> TbTransactionMasterInfoes { get; set; } = null!;
+    public virtual DbSet<TbTransactionMasterDetail> TbTransactionMasterDetails { get; set; }
 
-    public DbSet<TbTransactionMasterPurchase> TbTransactionMasterPurchases { get; set; } = null!;
+    public virtual DbSet<TbTransactionMasterDetailCredit> TbTransactionMasterDetailCredits { get; set; }
 
-    public DbSet<TbTransactionMasterSummaryConceptTmp> TbTransactionMasterSummaryConceptTmps { get; set; } = null!;
+    public virtual DbSet<TbTransactionMasterDetailTemp> TbTransactionMasterDetailTemps { get; set; }
 
-    public DbSet<TbTransactionProfileDetail> TbTransactionProfileDetails { get; set; } = null!;
+    public virtual DbSet<TbTransactionMasterInfo> TbTransactionMasterInfoes { get; set; }
 
-    public DbSet<TbTransactionProfileDetailTmp> TbTransactionProfileDetailTmps { get; set; } = null!;
+    public virtual DbSet<TbTransactionMasterPurchase> TbTransactionMasterPurchases { get; set; }
 
-    public DbSet<TbTypeMenuElement> TbTypeMenuElements { get; set; } = null!;
+    public virtual DbSet<TbTransactionMasterSummaryConceptTmp> TbTransactionMasterSummaryConceptTmps { get; set; }
 
-    public DbSet<TbUser> TbUsers { get; set; } = null!;
+    public virtual DbSet<TbTransactionProfileDetail> TbTransactionProfileDetails { get; set; }
 
-    public DbSet<TbUserPermission> TbUserPermissions { get; set; } = null!;
+    public virtual DbSet<TbTransactionProfileDetailTmp> TbTransactionProfileDetailTmps { get; set; }
 
-    public DbSet<TbUserTag> TbUserTags { get; set; } = null!;
+    public virtual DbSet<TbTypeMenuElement> TbTypeMenuElements { get; set; }
 
-    public DbSet<TbUserWarehouse> TbUserWarehouses { get; set; } = null!;
+    public virtual DbSet<TbUser> TbUsers { get; set; }
 
-    public DbSet<TbWarehouse> TbWarehouses { get; set; } = null!;
+    public virtual DbSet<TbUserPermission> TbUserPermissions { get; set; }
 
-    public DbSet<TbWorkflow> TbWorkflows { get; set; } = null!;
+    public virtual DbSet<TbUserTag> TbUserTags { get; set; }
 
-    public DbSet<TbWorkflowStage> TbWorkflowStages { get; set; } = null!;
+    public virtual DbSet<TbUserWarehouse> TbUserWarehouses { get; set; }
 
-    public DbSet<TbWorkflowStageChangeLog> TbWorkflowStageChangeLogs { get; set; } = null!;
+    public virtual DbSet<TbWarehouse> TbWarehouses { get; set; }
 
-    public DbSet<TbWorkflowStageRelation> TbWorkflowStageRelations { get; set; } = null!;
+    public virtual DbSet<TbWorkflow> TbWorkflows { get; set; }
 
-    public DbSet<VwContabilidadComprobante> VwContabilidadComprobantes { get; set; } = null!;
+    public virtual DbSet<TbWorkflowStage> TbWorkflowStages { get; set; }
 
-    public DbSet<VwGerenciaBalance> VwGerenciaBalances { get; set; } = null!;
+    public virtual DbSet<TbWorkflowStageChangeLog> TbWorkflowStageChangeLogs { get; set; }
 
-    public DbSet<VwGerenciaCustomer> VwGerenciaCustomers { get; set; } = null!;
+    public virtual DbSet<TbWorkflowStageRelation> TbWorkflowStageRelations { get; set; }
 
-    public DbSet<VwGerenciaDesembolsosDetalle> VwGerenciaDesembolsosDetalles { get; set; } = null!;
+    public virtual DbSet<VwContabilidadComprobante> VwContabilidadComprobantes { get; set; }
 
-    public DbSet<VwGerenciaDesembolsosResuman> VwGerenciaDesembolsosResumen { get; set; } = null!;
+    public virtual DbSet<VwCxcCustomerListRealEstate> VwCxcCustomerListRealEstates { get; set; }
 
-    public DbSet<VwGerenciaEstadoResultado001> VwGerenciaEstadoResultado001 { get; set; } = null!;
+    public virtual DbSet<VwGerenciaBalance> VwGerenciaBalances { get; set; }
 
-    public DbSet<VwGerenciaEstadoResultado002> VwGerenciaEstadoResultado002 { get; set; } = null!;
+    public virtual DbSet<VwGerenciaCustomer> VwGerenciaCustomers { get; set; }
 
-    public DbSet<VwSalesInventory> VwSalesInventories { get; set; } = null!;
+    public virtual DbSet<VwGerenciaDesembolsosDetalle> VwGerenciaDesembolsosDetalles { get; set; }
 
-    public DbSet<VwSinRiesgoReporteCliente> VwSinRiesgoReporteClientes { get; set; } = null!;
+    public virtual DbSet<VwGerenciaDesembolsosResuman> VwGerenciaDesembolsosResumen { get; set; }
 
-    public DbSet<VwSinRiesgoReporteCredito> VwSinRiesgoReporteCreditos { get; set; } = null!;
+    public virtual DbSet<VwGerenciaEstadoResultado001> VwGerenciaEstadoResultado001 { get; set; }
 
-    public DbSet<VwSinRiesgoReporteCreditosToSystema> VwSinRiesgoReporteCreditosToSystemas { get; set; } = null!;
+    public virtual DbSet<VwGerenciaEstadoResultado002> VwGerenciaEstadoResultado002 { get; set; }
 
-    public DbSet<VwTransaccionMasterConcept232425> VwTransaccionMasterConcept232425 { get; set; } = null!;
+    public virtual DbSet<VwInventoryListItemRealEstate> VwInventoryListItemRealEstates { get; set; }
+
+    public virtual DbSet<VwSalesInventory> VwSalesInventories { get; set; }
+
+    public virtual DbSet<VwSinRiesgoReporteCliente> VwSinRiesgoReporteClientes { get; set; }
+
+    public virtual DbSet<VwSinRiesgoReporteCredito> VwSinRiesgoReporteCreditos { get; set; }
+
+    public virtual DbSet<VwSinRiesgoReporteCreditosToSystema> VwSinRiesgoReporteCreditosToSystemas { get; set; }
+
+    public virtual DbSet<VwTransaccionMasterConcept232425> VwTransaccionMasterConcept232425 { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -326,7 +337,10 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Split).IsFixedLength();
         });
 
-        modelBuilder.Entity<TbAccountTmp>(entity => { entity.HasKey(e => e.AccountId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbAccountTmp>(entity =>
+        {
+            entity.HasKey(e => e.AccountId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbAccountType>(entity =>
         {
@@ -400,7 +414,10 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Name).HasDefaultValueSql("'N/D'");
         });
 
-        modelBuilder.Entity<TbCaller>(entity => { entity.HasKey(e => e.CallerId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbCaller>(entity =>
+        {
+            entity.HasKey(e => e.CallerId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbCashBox>(entity =>
         {
@@ -424,9 +441,15 @@ public sealed partial class DataContext : DbContext
             entity.HasKey(e => e.CashBoxSessionTransactionMasterId).HasName("PRIMARY");
         });
 
-        modelBuilder.Entity<TbCashBoxUser>(entity => { entity.HasKey(e => e.CashBoxUserId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbCashBoxUser>(entity =>
+        {
+            entity.HasKey(e => e.CashBoxUserId).HasName("PRIMARY");
+        });
 
-        modelBuilder.Entity<TbCatalog>(entity => { entity.HasKey(e => e.CatalogId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbCatalog>(entity =>
+        {
+            entity.HasKey(e => e.CatalogId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbCatalogItem>(entity =>
         {
@@ -518,9 +541,15 @@ public sealed partial class DataContext : DbContext
             entity.HasKey(e => e.CompanySubelementObligatoryId).HasName("PRIMARY");
         });
 
-        modelBuilder.Entity<TbComponent>(entity => { entity.HasKey(e => e.ComponentId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbComponent>(entity =>
+        {
+            entity.HasKey(e => e.ComponentId).HasName("PRIMARY");
+        });
 
-        modelBuilder.Entity<TbComponentAudit>(entity => { entity.HasKey(e => e.ComponentAuditId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbComponentAudit>(entity =>
+        {
+            entity.HasKey(e => e.ComponentAuditId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbComponentAuditDetail>(entity =>
         {
@@ -542,7 +571,10 @@ public sealed partial class DataContext : DbContext
             entity.HasKey(e => e.ComponentElementId).HasName("PRIMARY");
         });
 
-        modelBuilder.Entity<TbCounter>(entity => { entity.HasKey(e => e.CounterId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbCounter>(entity =>
+        {
+            entity.HasKey(e => e.CounterId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbCreditLine>(entity =>
         {
@@ -567,6 +599,7 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Budget).HasDefaultValueSql("'0.00'");
             entity.Property(e => e.CustomerNumber).HasDefaultValueSql("'0'");
             entity.Property(e => e.EntityContactId).HasComment("Persona que contacto al cliente");
+            entity.Property(e => e.FormContactId).HasDefaultValueSql("'0'");
             entity.Property(e => e.Identification).HasDefaultValueSql("'0'");
             entity.Property(e => e.TypeFirm)
                 .HasDefaultValueSql("'0'")
@@ -586,7 +619,10 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Name).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbCustomerCredit>(entity => { entity.HasKey(e => e.CustomerCreditId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbCustomerCredit>(entity =>
+        {
+            entity.HasKey(e => e.CustomerCreditId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbCustomerCreditAmortization>(entity =>
         {
@@ -622,13 +658,10 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.CreatedIn).HasDefaultValueSql("'0'");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("CURRENT_TIMESTAMP");
             entity.Property(e => e.IsActive).HasDefaultValueSql("b'0'");
-            entity.Property(e => e.RatioBalance)
-                .HasComment("Para reportar a la sin riresgo se multiplica este valor po rel Saldo");
+            entity.Property(e => e.RatioBalance).HasComment("Para reportar a la sin riresgo se multiplica este valor po rel Saldo");
             entity.Property(e => e.RatioBalanceExpired).HasComment("Para reportar a la sin riesgo saldo vencido");
-            entity.Property(e => e.RatioDesembolso)
-                .HasComment("Para reportar a la sin riesgo se multiplica este valor por el desembolso");
-            entity.Property(e => e.RatioShare)
-                .HasComment("Para reportar a la sin riego se multiplica este valor por la cuota");
+            entity.Property(e => e.RatioDesembolso).HasComment("Para reportar a la sin riesgo se multiplica este valor por el desembolso");
+            entity.Property(e => e.RatioShare).HasComment("Para reportar a la sin riego se multiplica este valor por la cuota");
             entity.Property(e => e.StatusCredit)
                 .HasDefaultValueSql("'1'")
                 .HasComment("Estado del Credito , Saneado, Vigente, etc");
@@ -644,6 +677,38 @@ public sealed partial class DataContext : DbContext
                 .HasComment("Forma de Recuperacion Recuperacion Normal, Arreglo de pago, Cobro Extra judicial");
         });
 
+        modelBuilder.Entity<TbCustomerCreditExternalSharon>(entity =>
+        {
+            entity.Property(e => e.AntiguedadDeMora).HasDefaultValueSql("'0'");
+            entity.Property(e => e.Departamento).HasDefaultValueSql("'0'");
+            entity.Property(e => e.Estado).HasDefaultValueSql("'0'");
+            entity.Property(e => e.FechaDeDesembolso).HasDefaultValueSql("'0'");
+            entity.Property(e => e.FechaDeReporte).HasDefaultValueSql("'0'");
+            entity.Property(e => e.FormaDeRecuperacion).HasDefaultValueSql("'0'");
+            entity.Property(e => e.FrecuenciaDePago).HasDefaultValueSql("'0'");
+            entity.Property(e => e.IsActive).HasDefaultValueSql("b'1'");
+            entity.Property(e => e.NombreDePersona).HasDefaultValueSql("'0'");
+            entity.Property(e => e.NumeroDeCedulaORuc).HasDefaultValueSql("'0'");
+            entity.Property(e => e.NumeroDeCredito).HasDefaultValueSql("'0'");
+            entity.Property(e => e.TipoDeCredito).HasDefaultValueSql("'0'");
+            entity.Property(e => e.TipoDeGarantia).HasDefaultValueSql("'0'");
+            entity.Property(e => e.TipoDeObligacion).HasDefaultValueSql("'0'");
+        });
+
+        modelBuilder.Entity<TbCustomerCreditExternalSharonTmp>(entity =>
+        {
+            entity.Property(e => e.Address).HasDefaultValueSql("'0'");
+            entity.Property(e => e.CompanyName).HasDefaultValueSql("'0'");
+            entity.Property(e => e.CustomerIdentification).HasDefaultValueSql("'0'");
+            entity.Property(e => e.CustomerName).HasDefaultValueSql("'0'");
+            entity.Property(e => e.CustomerPhone).HasDefaultValueSql("'0'");
+            entity.Property(e => e.DayMora).HasDefaultValueSql("'0'");
+            entity.Property(e => e.DocumentNumber).HasDefaultValueSql("'0'");
+            entity.Property(e => e.FormPay).HasDefaultValueSql("'0'");
+            entity.Property(e => e.IsActive).HasDefaultValueSql("b'1'");
+            entity.Property(e => e.Plazo).HasDefaultValueSql("'0'");
+        });
+
         modelBuilder.Entity<TbCustomerCreditLine>(entity =>
         {
             entity.HasKey(e => e.CustomerCreditLineId).HasName("PRIMARY");
@@ -653,11 +718,20 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.IsActive).HasDefaultValueSql("b'0'");
         });
 
-        modelBuilder.Entity<TbDataview>(entity => { entity.HasKey(e => e.DataViewId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbDataview>(entity =>
+        {
+            entity.HasKey(e => e.DataViewId).HasName("PRIMARY");
+        });
 
-        modelBuilder.Entity<TbElement>(entity => { entity.HasKey(e => e.ElementId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbElement>(entity =>
+        {
+            entity.HasKey(e => e.ElementId).HasName("PRIMARY");
+        });
 
-        modelBuilder.Entity<TbElementType>(entity => { entity.HasKey(e => e.ElementTypeId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbElementType>(entity =>
+        {
+            entity.HasKey(e => e.ElementTypeId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbEmployee>(entity =>
         {
@@ -684,7 +758,10 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.IsActive).HasDefaultValueSql("b'0'");
         });
 
-        modelBuilder.Entity<TbEntity>(entity => { entity.HasKey(e => e.EntityId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbEntity>(entity =>
+        {
+            entity.HasKey(e => e.EntityId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbEntityAccount>(entity =>
         {
@@ -696,11 +773,20 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Name).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbEntityEmail>(entity => { entity.HasKey(e => e.EntityEmailId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbEntityEmail>(entity =>
+        {
+            entity.HasKey(e => e.EntityEmailId).HasName("PRIMARY");
+        });
 
-        modelBuilder.Entity<TbEntityPhone>(entity => { entity.HasKey(e => e.EntityPhoneId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbEntityPhone>(entity =>
+        {
+            entity.HasKey(e => e.EntityPhoneId).HasName("PRIMARY");
+        });
 
-        modelBuilder.Entity<TbError>(entity => { entity.HasKey(e => e.ErrorId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbError>(entity =>
+        {
+            entity.HasKey(e => e.ErrorId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbEstadisticaCategoria>(entity =>
         {
@@ -825,9 +911,15 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.IsActive).HasDefaultValueSql("'1'");
         });
 
-        modelBuilder.Entity<TbItemSku>(entity => { entity.HasKey(e => e.SkuId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbItemSku>(entity =>
+        {
+            entity.HasKey(e => e.SkuId).HasName("PRIMARY");
+        });
 
-        modelBuilder.Entity<TbItemWarehouse>(entity => { entity.HasKey(e => e.ItemWarehouseId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbItemWarehouse>(entity =>
+        {
+            entity.HasKey(e => e.ItemWarehouseId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbItemWarehouseExpired>(entity =>
         {
@@ -905,6 +997,7 @@ public sealed partial class DataContext : DbContext
 
             entity.Property(e => e.SessionId).HasDefaultValueSql("'0'");
             entity.Property(e => e.IpAddress).HasDefaultValueSql("'0'");
+            entity.Property(e => e.LastActivity).HasDefaultValueSql("'0'");
             entity.Property(e => e.UserAgent).HasDefaultValueSql("'0'");
         });
 
@@ -916,7 +1009,10 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.ItemNumber).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbMembership>(entity => { entity.HasKey(e => e.MembershipId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbMembership>(entity =>
+        {
+            entity.HasKey(e => e.MembershipId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbMenuElement>(entity =>
         {
@@ -945,9 +1041,15 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.QuantityOcupation).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbParameter>(entity => { entity.HasKey(e => e.ParameterId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbParameter>(entity =>
+        {
+            entity.HasKey(e => e.ParameterId).HasName("PRIMARY");
+        });
 
-        modelBuilder.Entity<TbPrice>(entity => { entity.HasKey(e => e.PriceId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbPrice>(entity =>
+        {
+            entity.HasKey(e => e.PriceId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbProvider>(entity =>
         {
@@ -956,7 +1058,10 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.ProviderNumber).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbProviderItem>(entity => { entity.HasKey(e => e.ProviderItemId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbProviderItem>(entity =>
+        {
+            entity.HasKey(e => e.ProviderItemId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbPublicCatalog>(entity =>
         {
@@ -1016,7 +1121,10 @@ public sealed partial class DataContext : DbContext
             entity.HasKey(e => e.RoleAurotizationId).HasName("PRIMARY");
         });
 
-        modelBuilder.Entity<TbSubelement>(entity => { entity.HasKey(e => e.SubElementId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbSubelement>(entity =>
+        {
+            entity.HasKey(e => e.SubElementId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbTag>(entity =>
         {
@@ -1041,7 +1149,10 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Name).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbTransactionConcept>(entity => { entity.HasKey(e => e.ConceptId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbTransactionConcept>(entity =>
+        {
+            entity.HasKey(e => e.ConceptId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbTransactionMaster>(entity =>
         {
@@ -1140,11 +1251,20 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Email).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbUserPermission>(entity => { entity.HasKey(e => e.UserPermissionId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbUserPermission>(entity =>
+        {
+            entity.HasKey(e => e.UserPermissionId).HasName("PRIMARY");
+        });
 
-        modelBuilder.Entity<TbUserTag>(entity => { entity.HasKey(e => e.UserTagId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbUserTag>(entity =>
+        {
+            entity.HasKey(e => e.UserTagId).HasName("PRIMARY");
+        });
 
-        modelBuilder.Entity<TbUserWarehouse>(entity => { entity.HasKey(e => e.UserWarehouseId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbUserWarehouse>(entity =>
+        {
+            entity.HasKey(e => e.UserWarehouseId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbWarehouse>(entity =>
         {
@@ -1157,15 +1277,16 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Number).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbWorkflow>(entity => { entity.HasKey(e => e.WorkflowId).HasName("PRIMARY"); });
+        modelBuilder.Entity<TbWorkflow>(entity =>
+        {
+            entity.HasKey(e => e.WorkflowId).HasName("PRIMARY");
+        });
 
         modelBuilder.Entity<TbWorkflowStage>(entity =>
         {
             entity.HasKey(e => e.WorkflowStageId).HasName("PRIMARY");
 
-            entity.Property(e => e.Aplicable)
-                .HasComment(
-                    "Este campo es util para saber si el documento debe de aumentar o disminuir inventario o para saver si el documento debe de ser contabilizado");
+            entity.Property(e => e.Aplicable).HasComment("Este campo es util para saber si el documento debe de aumentar o disminuir inventario o para saver si el documento debe de ser contabilizado");
         });
 
         modelBuilder.Entity<TbWorkflowStageChangeLog>(entity =>
@@ -1189,6 +1310,15 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.MonedaComprobante).HasDefaultValueSql("'0'");
             entity.Property(e => e.NombreCuenta).HasDefaultValueSql("'0'");
             entity.Property(e => e.TipoCuenta).HasDefaultValueSql("'0'");
+        });
+
+        modelBuilder.Entity<VwCxcCustomerListRealEstate>(entity =>
+        {
+            entity.ToView("vw_cxc_customer_list_real_estate");
+
+            entity.Property(e => e.Agente).HasDefaultValueSql("''");
+            entity.Property(e => e.Codigo).HasDefaultValueSql("'0'");
+            entity.Property(e => e.Presupuesto).HasDefaultValueSql("'0.00'");
         });
 
         modelBuilder.Entity<VwGerenciaBalance>(entity =>
@@ -1238,6 +1368,29 @@ public sealed partial class DataContext : DbContext
         modelBuilder.Entity<VwGerenciaEstadoResultado002>(entity =>
         {
             entity.ToView("vw_gerencia_estado_resultado_002");
+        });
+
+        modelBuilder.Entity<VwInventoryListItemRealEstate>(entity =>
+        {
+            entity.ToView("vw_inventory_list_item_real_estate");
+
+            entity.Property(e => e.AceptaMascota).HasDefaultValueSql("''");
+            entity.Property(e => e.Agente).HasDefaultValueSql("''");
+            entity.Property(e => e.Amueblado).HasDefaultValueSql("''");
+            entity.Property(e => e.AreaClubConPiscina).HasDefaultValueSql("''");
+            entity.Property(e => e.BañoDeServicio).HasDefaultValueSql("''");
+            entity.Property(e => e.BañoDeVisita).HasDefaultValueSql("''");
+            entity.Property(e => e.Codigo).HasDefaultValueSql("'0'");
+            entity.Property(e => e.Corretaje).HasDefaultValueSql("''");
+            entity.Property(e => e.CuartoDeServicio).HasDefaultValueSql("''");
+            entity.Property(e => e.DiseñoDePropiedad).HasDefaultValueSql("'0'");
+            entity.Property(e => e.Disponible).HasDefaultValueSql("''");
+            entity.Property(e => e.ItemId).HasDefaultValueSql("''");
+            entity.Property(e => e.Moneda).HasDefaultValueSql("'0'");
+            entity.Property(e => e.Nombre).HasDefaultValueSql("'0'");
+            entity.Property(e => e.PiscinaPrivada).HasDefaultValueSql("''");
+            entity.Property(e => e.PlanDeReferido).HasDefaultValueSql("''");
+            entity.Property(e => e.WalkInCloset).HasDefaultValueSql("''");
         });
 
         modelBuilder.Entity<VwSalesInventory>(entity =>
@@ -1314,6 +1467,5 @@ public sealed partial class DataContext : DbContext
         OnModelCreatingPartial(modelBuilder);
     }
 
-    // ReSharper disable once PartialMethodWithSinglePart
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -52,14 +53,14 @@ class ItemDataSheetDetailModel : IItemDataSheetDetailModel
         return add.Entity.ItemDataSheetDetailId;
     }
 
-    public TbItemDataSheetDetail GetRowByPk(int itemDataSheetDetailId)
+    public TbItemDataSheetDetailDto GetRowByPk(int itemDataSheetDetailId)
     {
         using var context = new DataContext();
         var result = from i in context.TbItemDataSheetDetails
             join tm in context.TbItems on i.ItemId equals tm.ItemId
             where i.ItemDataSheetDetailId == itemDataSheetDetailId
                   && i.IsActive == 1
-            select new TbItemDataSheetDetail
+            select new TbItemDataSheetDetailDto
             {
                 ItemDataSheetDetailId = i.ItemDataSheetDetailId,
                 ItemDataSheetId = i.ItemDataSheetId,
@@ -73,7 +74,7 @@ class ItemDataSheetDetailModel : IItemDataSheetDetailModel
         return result.Single();
     }
 
-    public TbItemDataSheetDetail GetRowByPkItemId(int itemDataSheetId, int itemId)
+    public TbItemDataSheetDetailDto GetRowByPkItemId(int itemDataSheetId, int itemId)
     {
         using var context = new DataContext();
         var result = from i in context.TbItemDataSheetDetails
@@ -81,7 +82,7 @@ class ItemDataSheetDetailModel : IItemDataSheetDetailModel
             where i.ItemDataSheetId == itemDataSheetId
                   && i.IsActive == 1
                   && tm.ItemId == itemId
-            select new TbItemDataSheetDetail
+            select new TbItemDataSheetDetailDto
             {
                 ItemDataSheetDetailId = i.ItemDataSheetDetailId,
                 ItemDataSheetId = i.ItemDataSheetId,
@@ -95,14 +96,14 @@ class ItemDataSheetDetailModel : IItemDataSheetDetailModel
         return result.Single();
     }
 
-    public List<TbItemDataSheetDetail> GetRowByItemDataSheet(int itemDataSheetId)
+    public List<TbItemDataSheetDetailDto> GetRowByItemDataSheet(int itemDataSheetId)
     {
         using var context = new DataContext();
         var result = from i in context.TbItemDataSheetDetails
             join tm in context.TbItems on i.ItemId equals tm.ItemId
             where i.ItemDataSheetId == itemDataSheetId
                   && i.IsActive == 1
-            select new TbItemDataSheetDetail
+            select new TbItemDataSheetDetailDto
             {
                 ItemDataSheetDetailId = i.ItemDataSheetDetailId,
                 ItemDataSheetId = i.ItemDataSheetId,

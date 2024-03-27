@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -34,14 +35,14 @@ class PriceModel : IPriceModel
                 .SetProperty(price => price.PercentageCommision, data.PercentageCommision));
     }
 
-    public List<TbPrice> GetRowByAll(int companyId, int listPriceId)
+    public List<TbPriceDto> GetRowByAll(int companyId, int listPriceId)
     {
         using var context = new DataContext();
         var result = from i in context.TbPrices
             join it in context.TbItems on i.ItemId equals it.ItemId
             join ci in context.TbCatalogItems on i.TypePriceId equals ci.CatalogItemId
             where i.CompanyId == companyId && i.ListPriceId == listPriceId
-            select new TbPrice
+            select new TbPriceDto
             {
                 CompanyId = i.CompanyId,
                 ListPriceId = i.ListPriceId,
@@ -101,7 +102,7 @@ class PriceModel : IPriceModel
             .First();
     }
 
-    public List<TbPrice> get_rowByItemID(int companyId, int listPriceId, int itemId)
+    public List<TbPriceDto> get_rowByItemID(int companyId, int listPriceId, int itemId)
     {
         using var context = new DataContext();
         return context.TbPrices
@@ -112,7 +113,7 @@ class PriceModel : IPriceModel
             .Where(t => t.i.CompanyId == companyId
                         && t.i.ListPriceId == listPriceId
                         && t.i.ItemId == itemId)
-            .Select(t => new TbPrice
+            .Select(t => new TbPriceDto
             {
                 CompanyId = t.i.CompanyId,
                 ListPriceId = t.i.ListPriceId,

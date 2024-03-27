@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -10,7 +11,7 @@ public interface IListPriceModel
 
     int InsertAppPosme(TbListPrice data);
 
-    TbListPrice GetRowByPk(int companyId, int listPriceId);
+    TbListPriceDto GetRowByPk(int companyId, int listPriceId);
 
     TbListPrice GetListPriceToApply(int companyId);
 }

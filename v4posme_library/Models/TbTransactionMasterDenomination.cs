@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +15,7 @@ namespace v4posme_library.Models;
 [Index("CurrencyId", Name = "IDX_TRANSACTION_MASTER_DENOMINATION_006")]
 [MySqlCharSet("utf8")]
 [MySqlCollation("utf8_general_ci")]
-public class TbTransactionMasterDenomination
+public partial class TbTransactionMasterDenomination
 {
     [Key]
     [Column("transactionMasterDenominationID", TypeName = "int(11)")]
@@ -47,7 +49,9 @@ public class TbTransactionMasterDenomination
     [Column("quantity", TypeName = "int(11)")]
     public int Quantity { get; set; }
 
-    [Column("ratio")] [Precision(19, 8)] public decimal Ratio { get; set; }
+    [Column("ratio")]
+    [Precision(19, 8)]
+    public decimal Ratio { get; set; }
 
     [Column("reference1")]
     [StringLength(150)]
@@ -56,6 +60,4 @@ public class TbTransactionMasterDenomination
     [Column("reference2")]
     [StringLength(150)]
     public string? Reference2 { get; set; }
-
-    [NotMapped] public string? DenominationName { get; set; }
 }

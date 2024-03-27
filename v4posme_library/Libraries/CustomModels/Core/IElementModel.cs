@@ -8,7 +8,7 @@ public interface IElementModel
     
     TbElement? GetRowByName(string name,int elementTypeId);
     
-    List<TbElement> GetRowByTypeAndLayout(int elementTypeId,int layoutId);
+    List<TbElement>? GetRowByTypeAndLayout(int elementTypeId,int layoutId);
     
     List<TbElement> GetRowByPk(int componentId,int elementTypeId);
 }

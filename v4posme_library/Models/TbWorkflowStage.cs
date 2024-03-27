@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +12,7 @@ namespace v4posme_library.Models;
 [Index("WorkflowStageId", Name = "IDX_WORKFLOW_STAGE_003")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_general_ci")]
-public class TbWorkflowStage
+public partial class TbWorkflowStage
 {
     [Column("componentID", TypeName = "int(11)")]
     public int ComponentId { get; set; }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +13,7 @@ namespace v4posme_library.Models;
 [Index("WarehouseId", Name = "IDX_USER_WAREHOUSE_004")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbUserWarehouse
+public partial class TbUserWarehouse
 {
     [Column("companyID", TypeName = "int(11)")]
     public int CompanyId { get; set; }
@@ -28,10 +30,4 @@ public class TbUserWarehouse
     [Key]
     [Column("userWarehouseID", TypeName = "int(11)")]
     public int UserWarehouseId { get; set; }
-
-    [NotMapped]public string? Number { get; set; }
-    [NotMapped]public string? Name { get; set; }
-    [NotMapped]public int? StatusId { get; set; }
-    [NotMapped]public ulong? IsActive { get; set; }
-    [NotMapped]public int? TypeWarehouse { get; set; }
 }

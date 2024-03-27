@@ -1,11 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace v4posme_library.Models;
 
 [Keyless]
-public class VwGerenciaEstadoResultado001
+public partial class VwGerenciaEstadoResultado001
 {
     [StringLength(503)]
     [MySqlCharSet("latin1")]

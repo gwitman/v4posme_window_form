@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +10,7 @@ namespace v4posme_library.Models;
 [Index("EntityId", Name = "IDX_CUSTOMER_CREDIT_CLASIFICATION_001")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbCustomerCreditClasification
+public partial class TbCustomerCreditClasification
 {
     [Key]
     [Column("clasificationID", TypeName = "int(11)")]

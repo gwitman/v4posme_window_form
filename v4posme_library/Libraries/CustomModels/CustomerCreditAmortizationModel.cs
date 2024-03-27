@@ -1,7 +1,7 @@
 ﻿using Devart.Data.MySql.Entity;
 using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
-using v4posme_library.ModelsViews;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -83,7 +83,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
             .ToList();
     }
 
-    public List<CustomerCreditAmortizationView> GetRowByCustomerId(int customerId)
+    public List<CustomerCreditAmortizationDto> GetRowByCustomerId(int customerId)
     {
         var container = new[] { 82, 83 };
         using var dbContext = new DataContext();
@@ -104,7 +104,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                         && t.t.t.ws.Vinculable!.Value == false
                         && t.t.cd.EntityId == customerId
                         && !container.Contains(t.t.cd.StatusId))
-            .Select(t => new CustomerCreditAmortizationView
+            .Select(t => new CustomerCreditAmortizationDto
             {
                 DocumentNumber = t.t.cd.DocumentNumber,
                 DateApply = DateTime.Parse(t.t.t.i.DateApply.ToShortDateString()),
@@ -117,22 +117,22 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
             .ToList();
     }
 
-    public List<CustomerCreditAmortizationView> GetRowShareLate(int companyId)
+    public List<CustomerCreditAmortizationDto> GetRowShareLate(int companyId)
     {
         using var dbContext = new DataContext();
         var result = from c in dbContext.TbCustomers
             join n in dbContext.TbNaturales on c.EntityId equals n.EntityId
             join ccd in dbContext.TbCustomerCreditDocuments on c.EntityId equals ccd.EntityId
-            join cca in dbContext.TbCustomerCreditAmortizations 
+            join cca in dbContext.TbCustomerCreditAmortizations
                 on ccd.CustomerCreditDocumentId equals cca.CustomerCreditDocumentId
             join ccaStatus in dbContext.TbWorkflowStages on cca.StatusId equals ccaStatus.WorkflowStageId
             join ccdStatus in dbContext.TbWorkflowStages on ccd.StatusId equals ccdStatus.WorkflowStageId
-            where c.CompanyId == companyId  
+            where c.CompanyId == companyId
                   && ccdStatus.Vinculable!.Value
-                  && c.IsActive
+                  && c.IsActive!.Value
                   && cca.Remaining > 0
-                  && cca.DateApply < DateTime.Today
-            select new CustomerCreditAmortizationView
+                  && cca.DateApply < DateTime.Now
+            select new CustomerCreditAmortizationDto
             {
                 CustomerNumber = c.CustomerNumber,
                 FirstName = n.FirstName,
@@ -148,13 +148,13 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
         return result.ToList();
     }
 
-    public CustomerCreditAmortizationView GetRowBySummaryInformationCredit(string documentNumber)
+    public CustomerCreditAmortizationDto GetRowBySummaryInformationCredit(string documentNumber)
     {
         using var dbContext = new DataContext();
         var customerCreditAmortizations = dbContext.TbCustomerCreditAmortizations;
         var result = dbContext.TbCustomerCreditDocuments
             .Where(c => c.DocumentNumber == documentNumber && c.IsActive == 1)
-            .Select(c => new CustomerCreditAmortizationView
+            .Select(c => new CustomerCreditAmortizationDto
             {
                 FechaVencimiento =
                     customerCreditAmortizations
@@ -176,7 +176,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
         return result.Single();
     }
 
-    public List<CustomerCreditAmortizationView> GetRowByCreditDocumentAndBalanceMinim(int customerCreditDocumentId)
+    public List<CustomerCreditAmortizationDto> GetRowByCreditDocumentAndBalanceMinim(int customerCreditDocumentId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbCustomerCreditAmortizations
@@ -190,7 +190,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                   && ws.Vinculable!.Value
                   && i.Remaining >= decimal.Zero && i.Remaining <= (decimal)0.2
                   && cd.CustomerCreditDocumentId == customerCreditDocumentId
-            select new CustomerCreditAmortizationView
+            select new CustomerCreditAmortizationDto
             {
                 CreditAmortizationId = i.CreditAmortizationId,
                 DocumentNumber = cd.DocumentNumber,

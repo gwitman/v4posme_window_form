@@ -9,7 +9,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         public TbCompany? GetRowByPk(int id)
         {
             using var context = new DataContext();
-            return context.TbCompanies.First(company=>company.CompanyId == id);
+            return context.TbCompanies.First(company => company.CompanyId == id);
         }
     }
 }

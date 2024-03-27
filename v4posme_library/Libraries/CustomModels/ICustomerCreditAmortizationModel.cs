@@ -1,5 +1,5 @@
 ﻿using v4posme_library.Models;
-using v4posme_library.ModelsViews;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -19,11 +19,11 @@ public interface ICustomerCreditAmortizationModel
     
     List<TbCustomerCreditAmortization> GetRowByDocumentAndNonVinculable(int customerCreditDocumentId);
     
-    List<CustomerCreditAmortizationView> GetRowByCustomerId(int customerId);
+    List<CustomerCreditAmortizationDto> GetRowByCustomerId(int customerId);
     
-    List<CustomerCreditAmortizationView> GetRowShareLate(int customerId);
+    List<CustomerCreditAmortizationDto> GetRowShareLate(int customerId);
 
-    CustomerCreditAmortizationView GetRowBySummaryInformationCredit(string documentNumber);
+    CustomerCreditAmortizationDto GetRowBySummaryInformationCredit(string documentNumber);
     
-    List<CustomerCreditAmortizationView> GetRowByCreditDocumentAndBalanceMinim(int customerCreditDocumentId);
+    List<CustomerCreditAmortizationDto> GetRowByCreditDocumentAndBalanceMinim(int customerCreditDocumentId);
 }

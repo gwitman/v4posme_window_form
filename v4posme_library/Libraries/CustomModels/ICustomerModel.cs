@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Design;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -11,17 +12,17 @@ public interface ICustomerModel
 
     int InsertAppPosme(TbCustomer data);
 
-    List<TbCustomer> GetHappyBirthDay(int companyId);
+    List<TbCustomerDto> GetHappyBirthDay(int companyId);
 
     TbCustomer GetRowByCode(int companyId, string customerCode);
 
     TbCustomer GetRowByIdentification(int companyId, int identification);
 
-    List<TbCustomer> GetRowByCompanyPhoneAndEmail(int companyId);
+    List<TbCustomerDto> GetRowByCompanyPhoneAndEmail(int companyId);
 
-    List<TbCustomer>  GetRowByCompany(int companyId);
+    List<TbCustomerDto> GetRowByCompany(int companyId);
 
-    TbCustomer GetRowByEntity(int companyId, int entityId);
+    TbCustomerDto GetRowByEntity(int companyId, int entityId);
 
     TbCustomer GetRowByPk(int companyId,int branchId,int entityId);
 }

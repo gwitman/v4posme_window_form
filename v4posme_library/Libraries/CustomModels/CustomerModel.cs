@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -35,15 +36,15 @@ public class CustomerModel : ICustomerModel
         return entityEntry.Entity.CustomerId;
     }
 
-    public List<TbCustomer> GetHappyBirthDay(int companyId)
+    public List<TbCustomerDto> GetHappyBirthDay(int companyId)
     {
         using var dbContext = new DataContext();
         var result = from c in dbContext.TbCustomers
             join n in dbContext.TbNaturales on c.EntityId equals n.EntityId
             where c.CompanyId == companyId
-                  && c.IsActive
+                  && c.IsActive!.Value
                   && c.BirthDate <= DateTime.Today
-            select new TbCustomer
+            select new TbCustomerDto
             {
                 CustomerNumber = c.CustomerNumber,
                 FirstName = n.FirstName,
@@ -68,7 +69,7 @@ public class CustomerModel : ICustomerModel
         using var dbContext = new DataContext();
         return dbContext.TbCustomers
             .Single(c => c.CompanyId == companyId
-                         && c.IsActive
+                         && c.IsActive!.Value
                          && c.CustomerNumber.Equals(customerCode));
     }
 
@@ -77,18 +78,18 @@ public class CustomerModel : ICustomerModel
         using var dbContext = new DataContext();
         return dbContext.TbCustomers
             .Single(c => c.CompanyId == companyId
-                         && c.IsActive
+                         && c.IsActive!.Value
                          && c.Identification.Equals(identification));
     }
 
-    public List<TbCustomer> GetRowByCompanyPhoneAndEmail(int companyId)
+    public List<TbCustomerDto> GetRowByCompanyPhoneAndEmail(int companyId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbCustomers
             join nat in dbContext.TbNaturales on i.EntityId equals nat.EntityId
             where i.CompanyId == companyId
-                  && i.IsActive
-            select new TbCustomer
+                  && i.IsActive!.Value
+            select new TbCustomerDto
             {
                 CompanyId = i.CompanyId,
                 BranchId = i.BranchId,
@@ -134,14 +135,14 @@ public class CustomerModel : ICustomerModel
         return result.ToList();
     }
 
-    public List<TbCustomer> GetRowByCompany(int companyId)
+    public List<TbCustomerDto> GetRowByCompany(int companyId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbCustomers
             join nat in dbContext.TbNaturales on i.EntityId equals nat.EntityId
             where i.CompanyId == companyId
-                  && i.IsActive
-            select new TbCustomer
+                  && i.IsActive!.Value
+            select new TbCustomerDto
             {
                 CompanyId = i.CompanyId,
                 BranchId = i.BranchId,
@@ -187,15 +188,15 @@ public class CustomerModel : ICustomerModel
         return result.ToList();
     }
 
-    public TbCustomer GetRowByEntity(int companyId, int entityId)
+    public TbCustomerDto GetRowByEntity(int companyId, int entityId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbCustomers
             join nat in dbContext.TbNaturales on i.EntityId equals nat.EntityId
             where i.CompanyId == companyId
                   && i.EntityId == entityId
-                  && i.IsActive
-            select new TbCustomer
+                  && i.IsActive!.Value
+            select new TbCustomerDto
             {
                 CompanyId = i.CompanyId,
                 BranchId = i.BranchId,

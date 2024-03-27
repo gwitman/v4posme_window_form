@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -18,5 +19,5 @@ public interface IRememberModel
 
     List<TbRemember> GetNotificationCompany(int companyId);
 
-    TbRemember GetProcessNotification(int rememberId, DateTime fechaProcess);
+    TbRememberDto GetProcessNotification(int rememberId, DateTime fechaProcess);
 }

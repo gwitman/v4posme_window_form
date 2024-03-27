@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,7 +30,7 @@ namespace v4posme_library.Models;
 [Index("CompanyId", "TransactionNumber", Name = "IDX_TRANSACTOIN_MASTER_021")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbTransactionMaster
+public partial class TbTransactionMaster
 {
     [Key]
     [Column("transactionMasterID", TypeName = "int(11)")]
@@ -191,7 +193,4 @@ public class TbTransactionMaster
 
     [Column("entityIDSecondary", TypeName = "int(11)")]
     public int? EntityIdsecondary { get; set; }
-
-    [NotMapped]public string? WorkflowStageName { get; set; }
-    [NotMapped]public string? NameStatus { get; set; }
 }

@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -72,7 +73,7 @@ class RememberModel : IRememberModel
         return result.ToList();
     }
 
-    public TbRemember GetProcessNotification(int rememberId, DateTime fechaProcess)
+    public TbRememberDto GetProcessNotification(int rememberId, DateTime fechaProcess)
     {
         using var context = new DataContext();
         var result = from c in context.TbRemembers
@@ -84,7 +85,7 @@ class RememberModel : IRememberModel
                 ci.Sequence == 365 ? fechaProcess.DayOfYear :
                 0
             where c.RememberId == rememberId
-            select new TbRemember
+            select new TbRememberDto
             {
                 DiaProcesado = diaProcesado,
                 Fecha = fechaProcess,

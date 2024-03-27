@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -10,7 +11,7 @@ public interface IPriceModel
 
     void UpdateAppPosme(int companyId, int listPriceId, int itemId, int typePriceId, TbPrice data);
     
-    List<TbPrice> GetRowByAll(int companyId,int listPriceId);
+    List<TbPriceDto> GetRowByAll(int companyId, int listPriceId);
     
     TbPrice GetRowByPk(int companyId,int listPriceId,int itemId,int typePriceId);
     
@@ -18,5 +19,5 @@ public interface IPriceModel
     
     TbPrice GetRowByItemIdAndAmountAndComission(int companyId,int listPriceId,int itemId,decimal amount);
     
-    List<TbPrice> get_rowByItemID(int companyId,int listPriceId,int itemId);
+    List<TbPriceDto> get_rowByItemID(int companyId, int listPriceId, int itemId);
 }

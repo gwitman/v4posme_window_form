@@ -74,7 +74,7 @@ namespace TestProject
                 HourCost = 100,
                 StartOn = DateOnly.FromDateTime(DateTime.Now),
                 CreatedOn = DateTime.Now,
-                IsActive = true
+                IsActive = 1
             };
             var add = employeeModel.InsertAppPosme(data);
             Console.WriteLine(@"Id del empleado ingresado: {0}", add);

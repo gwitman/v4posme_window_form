@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -10,7 +11,7 @@ public interface IUserTagModel
     
     int InsertAppPosme(TbUserTag data);
     
-    List<TbUserTag> GetRowByUser(int userId);
+    List<TbUserTagDto> GetRowByUser(int userId);
     
-    List<TbUserTag> GetRowByPk(int tagId);
+    List<TbUserTagDto> GetRowByPk(int tagId);
 }

@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -10,9 +11,9 @@ public interface IItemSkuModel
 
     int InsertAppPosme(TbItemSku data);
 
-    List<TbItemSku> GetRowByItemId(int itemId);
+    List<TbItemSkuDto> GetRowByItemId(int itemId);
 
-    TbItemSku GetByPk(int itemId, int catalogItemId);
+    TbItemSkuDto GetByPk(int itemId, int catalogItemId);
 
-    List<TbItemSku> GetRowByTransactionMasterId(int companyId, int transactionMasterId);
+    List<TbItemSkuDto> GetRowByTransactionMasterId(int companyId, int transactionMasterId);
 }

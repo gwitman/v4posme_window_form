@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +9,7 @@ namespace v4posme_library.Models;
 [Table("tb_log_session")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_general_ci")]
-public class TbLogSession
+public partial class TbLogSession
 {
     [Key]
     [Column("session_id")]
@@ -22,8 +24,9 @@ public class TbLogSession
     [StringLength(120)]
     public string UserAgent { get; set; } = null!;
 
-    [Column("last_activity", TypeName = "int(11)")]
-    public int LastActivity { get; set; }
+    [Column("last_activity")]
+    [StringLength(15)]
+    public string LastActivity { get; set; } = null!;
 
     [Column("user_data", TypeName = "text")]
     public string? UserData { get; set; }

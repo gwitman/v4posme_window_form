@@ -33,7 +33,7 @@ public class CreditLineModel : ICreditLineModel
     {
         using var context = new DataContext();
         Find(companyId, creditLineId, context)
-            .ExecuteUpdate(calls => calls.SetProperty(line => line.IsActive, 0));
+            .ExecuteUpdate(calls => calls.SetProperty(line => line.IsActive, (ulong)0));
     }
 
     public List<TbCreditLine> GetRowByCompany(int companyId)

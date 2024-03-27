@@ -204,6 +204,14 @@
          "ObjectType": 0
       },
       {
+         "Name": "tb_customer_credit_external_sharon",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_customer_credit_external_sharon_tmp",
+         "ObjectType": 0
+      },
+      {
          "Name": "tb_customer_credit_line",
          "ObjectType": 0
       },
@@ -297,6 +305,10 @@
       },
       {
          "Name": "tb_item_data_sheet_detail",
+         "ObjectType": 0
+      },
+      {
+         "Name": "tb_item_import",
          "ObjectType": 0
       },
       {
@@ -520,6 +532,10 @@
          "ObjectType": 3
       },
       {
+         "Name": "vw_cxc_customer_list_real_estate",
+         "ObjectType": 3
+      },
+      {
          "Name": "vw_gerencia_balance",
          "ObjectType": 3
       },
@@ -541,6 +557,10 @@
       },
       {
          "Name": "vw_gerencia_estado_resultado_002",
+         "ObjectType": 3
+      },
+      {
+         "Name": "vw_inventory_list_item_real_estate",
          "ObjectType": 3
       },
       {

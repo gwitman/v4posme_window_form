@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +12,7 @@ namespace v4posme_library.Models;
 [Index("CurrencyId", Name = "IDX_TRANSACTION_MASTER_DETAIL_CREDIT_003")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbTransactionMasterDetailCredit
+public partial class TbTransactionMasterDetailCredit
 {
     [Key]
     [Column("transactionMasterDetailCreditID", TypeName = "int(11)")]

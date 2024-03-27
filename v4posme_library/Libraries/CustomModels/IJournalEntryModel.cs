@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -10,9 +11,9 @@ public interface IJournalEntryModel
 
     int InsertAppPosme(TbJournalEntry data);
 
-    TbJournalEntry GetRowByCode(int companyId, string journalNumber);
+    TbJournalEntryDto GetRowByCode(int companyId, string journalNumber);
 
-    TbJournalEntry GetRowByPk(int companyId, int journalEntryId);
+    TbJournalEntryDto GetRowByPk(int companyId, int journalEntryId);
     
     TbJournalEntry GetRowByPkNext(int companyId,int journalEntryId);
 

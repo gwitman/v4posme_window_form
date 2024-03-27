@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -75,7 +76,7 @@ class ItemWarehouseExpiredModel : IItemWarehouseExpiredModel
                                && expired.ItemWarehouseExpiredId == itemWarehouseExpiredId);
     }
 
-    public List<TbItemWarehouseExpired> GetByItemIdAproxVencimiento(int companyId)
+    public List<TbItemWarehouseExpiredDto> GetByItemIdAproxVencimiento(int companyId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbItems
@@ -84,7 +85,7 @@ class ItemWarehouseExpiredModel : IItemWarehouseExpiredModel
             join e in dbContext.TbItemWarehouseExpireds on new { iw.ItemId, iw.WarehouseId } equals new { e.ItemId, e.WarehouseId }
             where i.CompanyId == companyId 
                   && DateTime.Now.AddMonths(6) > e.DateExpired
-            select new TbItemWarehouseExpired
+            select new TbItemWarehouseExpiredDto
             {
                 ItemNumber = i.ItemNumber,
                 ItemName = i.Name,

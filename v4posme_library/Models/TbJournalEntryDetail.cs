@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +14,7 @@ namespace v4posme_library.Models;
 [Index("BranchId", Name = "IDX_JOURNAL_ENTRY_DETAIL_005")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbJournalEntryDetail
+public partial class TbJournalEntryDetail
 {
     [Key]
     [Column("journalEntryDetailID", TypeName = "int(11)")]
@@ -27,18 +29,26 @@ public class TbJournalEntryDetail
     [Column("accountID", TypeName = "int(11)")]
     public int AccountId { get; set; }
 
-    [Column("isActive")] public bool IsActive { get; set; }
+    [Column("isActive")]
+    public bool IsActive { get; set; }
 
     [Column("classID", TypeName = "int(11)")]
     public int? ClassId { get; set; }
 
-    [Column("debit")] [Precision(18, 8)] public decimal Debit { get; set; }
+    [Column("debit")]
+    [Precision(18, 8)]
+    public decimal Debit { get; set; }
 
-    [Column("credit")] [Precision(18, 8)] public decimal Credit { get; set; }
+    [Column("credit")]
+    [Precision(18, 8)]
+    public decimal Credit { get; set; }
 
-    [Column("note")] [StringLength(250)] public string? Note { get; set; }
+    [Column("note")]
+    [StringLength(250)]
+    public string? Note { get; set; }
 
-    [Column("isApplied")] public bool? IsApplied { get; set; }
+    [Column("isApplied")]
+    public bool? IsApplied { get; set; }
 
     [Column("branchID", TypeName = "int(11)")]
     public int? BranchId { get; set; }
@@ -46,8 +56,4 @@ public class TbJournalEntryDetail
     [Column("tb_exchange_rate")]
     [Precision(18, 8)]
     public decimal TbExchangeRate { get; set; }
-
-    [NotMapped] public string? ClassNumber { get; set; }
-    [NotMapped] public string? AccountNumber { get; set; }
-    [NotMapped] public string? AccountName { get; set; }
 }

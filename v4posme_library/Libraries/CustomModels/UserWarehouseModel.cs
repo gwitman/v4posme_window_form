@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -22,7 +23,7 @@ class UserWarehouseModel : IUserWarehouseModel
         return add.Entity.UserWarehouseId;
     }
 
-    public List<TbUserWarehouse> GetRowByUserIdAndFacturable(int companyId, int userId)
+    public List<TbUserWarehouseDto> GetRowByUserIdAndFacturable(int companyId, int userId)
     {
         using var context = new DataContext();
         var result = from uw in context.TbUserWarehouses
@@ -31,7 +32,7 @@ class UserWarehouseModel : IUserWarehouseModel
                   && uw.UserId == userId
                   && w.IsActive == 1
                   && w.TypeWarehouse == 480 // Tipo despacho
-            select new TbUserWarehouse
+            select new TbUserWarehouseDto
             {
                 CompanyId = uw.CompanyId,
                 WarehouseId = uw.WarehouseId,
@@ -46,7 +47,7 @@ class UserWarehouseModel : IUserWarehouseModel
         return result.ToList();
     }
 
-    public List<TbUserWarehouse> GetRowByUserId(int companyId, int userId)
+    public List<TbUserWarehouseDto> GetRowByUserId(int companyId, int userId)
     {
         using var context = new DataContext();
         var result = from uw in context.TbUserWarehouses
@@ -54,7 +55,7 @@ class UserWarehouseModel : IUserWarehouseModel
             where uw.CompanyId == companyId
                   && uw.UserId == userId
                   && w.IsActive == 1
-            select new TbUserWarehouse
+            select new TbUserWarehouseDto
             {
                 CompanyId = uw.CompanyId,
                 WarehouseId = uw.WarehouseId,
@@ -69,7 +70,7 @@ class UserWarehouseModel : IUserWarehouseModel
         return result.ToList();
     }
 
-    public List<TbUserWarehouse> GetRowByBranchId(int companyId, int branchId)
+    public List<TbUserWarehouseDto> GetRowByBranchId(int companyId, int branchId)
     {
         using var context = new DataContext();
         var result = from uw in context.TbUserWarehouses
@@ -77,7 +78,7 @@ class UserWarehouseModel : IUserWarehouseModel
             where uw.CompanyId == companyId
                   && uw.BranchId == branchId
                   && w.IsActive == 1
-            select new TbUserWarehouse
+            select new TbUserWarehouseDto
             {
                 CompanyId = uw.CompanyId,
                 WarehouseId = uw.WarehouseId,

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +12,7 @@ namespace v4posme_library.Models;
 [Index("RoleId", "CompanyId", "BranchId", "IsActive", Name = "IDX_ROLE_003")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_general_ci")]
-public class TbRole
+public partial class TbRole
 {
     [Key]
     [Column("roleID", TypeName = "int(11)")]

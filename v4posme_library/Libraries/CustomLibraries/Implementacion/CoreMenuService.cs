@@ -8,11 +8,10 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 {
     public class CoreMenuService : ICoreMenuService
     {
-        IConfigurationSection section =
-            new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("globals");
+        private readonly IConfigurationSection _section = VariablesGlobales.ConfigurationBuilder;
 
-        private readonly IElementSevice _elementService =
-            VariablesGlobales.Instance.UnityContainer.Resolve<IElementSevice>();
+        private readonly IElementModel _elementService =
+            VariablesGlobales.Instance.UnityContainer.Resolve<IElementModel>();
 
         private readonly IUserPermissionModel _userPermissionModel =
             VariablesGlobales.Instance.UnityContainer.Resolve<IUserPermissionModel>();
@@ -22,22 +21,22 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
         public List<TbMenuElement>? GetMenuTop(int companyId, int branchId, int roleId)
         {
-            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_TOP"]));
+            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(_section["MENU_TOP"]));
         }
 
         public List<TbMenuElement>? GetMenuLeft(int companyId, int branchId, int roleId)
         {
-            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_LEFT"]));
+            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(_section["MENU_LEFT"]));
         }
 
         public List<TbMenuElement>? GetMenuBodyReport(int companyId, int branchId, int roleId)
         {
-            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_BODY"]));
+            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(_section["MENU_BODY"]));
         }
 
         public List<TbMenuElement>? GetMenuHiddenPopup(int companyId, int branchId, int roleId)
         {
-            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(section["MENU_HIDDEN_POPUP"]));
+            return GetMenu(companyId, branchId, roleId, Convert.ToInt32(_section["MENU_HIDDEN_POPUP"]));
         }
 
         private List<TbMenuElement>? GetMenu(int companyId, int branchId, int roleId, int menu)
@@ -51,23 +50,15 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
             //Obtener la lista de elementos tipo pagina, que pertenescan al componente de seguridad
             var listElementSeguridad =
-                _elementService.getRowByTypeAndLayout(Convert.ToInt16(section["ELEMENT_TYPE_PAGE"]), menu);
-            if (listElementSeguridad == null) return null;
+                _elementService.GetRowByTypeAndLayout(Convert.ToInt16(_section["ELEMENT_TYPE_PAGE"]), menu);
+            if (listElementSeguridad is null) return null;
             //Obtener la lista del elementos de tipo pagina a la cual el usuario tiene permiso , segun el rol del usuario
             var listElementPermitido =
                 _userPermissionModel.GetRowByCompanyIdyBranchIdyRoleId(companyId, branchId, roleId);
             //Obtener los id de los Elementos
-            List<int> listElementIdSeguridad = new List<int>();
-            List<int> listElementIdPermitied = new List<int>();
-            foreach (var element in listElementSeguridad)
-            {
-                listElementIdSeguridad.Add(element.ElementId);
-            }
+            var listElementIdSeguridad = listElementSeguridad.Select(element => element.ElementId).ToList();
 
-            foreach (var userPermissionView in listElementPermitido)
-            {
-                listElementIdPermitied.Add(userPermissionView.ElementId!.Value);
-            }
+            var listElementIdPermitied = listElementPermitido.Select(userPermissionView => userPermissionView.ElementId!.Value).ToList();
 
             listElementIdPermitied = listElementIdPermitied.Intersect(listElementIdSeguridad).ToList();
             if (role.IsAdmin!.Value && listElementIdSeguridad.Any())

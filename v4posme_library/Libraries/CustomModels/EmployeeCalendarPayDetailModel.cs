@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -22,7 +23,7 @@ class EmployeeCalendarPayDetailModel : IEmployeeCalendarPayDetailModel
             .Where(detail => detail.CalendarId == calendarId
                              && !arrayId.Contains(detail.CalendarDetailId));
         Console.WriteLine(find.ToQueryString());
-        find.ExecuteUpdate(calls => calls.SetProperty(detail => detail.IsActive, 0));
+        find.ExecuteUpdate(calls => calls.SetProperty(detail => detail.IsActive, (ulong)0));
     }
 
     public void DeleteAppPosme(int calendarDetailId)
@@ -42,7 +43,7 @@ class EmployeeCalendarPayDetailModel : IEmployeeCalendarPayDetailModel
         return add.Entity.CalendarDetailId;
     }
 
-    public TbEmployeeCalendarPayDetail GetRowByPk(int calendarDetailId)
+    public TbEmployeeCalendarPayDetailDto GetRowByPk(int calendarDetailId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbEmployeeCalendarPayDetails
@@ -50,7 +51,7 @@ class EmployeeCalendarPayDetailModel : IEmployeeCalendarPayDetailModel
             join n in dbContext.TbNaturales on i.EmployeeId equals n.EntityId
             where i.CalendarDetailId == calendarDetailId
                   && i.IsActive == 1
-            select new TbEmployeeCalendarPayDetail
+            select new TbEmployeeCalendarPayDetailDto
             {
                 CalendarDetailId = i.CalendarDetailId,
                 CalendarId = i.CalendarId,
@@ -69,7 +70,7 @@ class EmployeeCalendarPayDetailModel : IEmployeeCalendarPayDetailModel
         return result.Single();
     }
 
-    public List<TbEmployeeCalendarPayDetail> GetRowByCalendarId(int calendarId)
+    public List<TbEmployeeCalendarPayDetailDto> GetRowByCalendarId(int calendarId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbEmployeeCalendarPayDetails
@@ -77,7 +78,7 @@ class EmployeeCalendarPayDetailModel : IEmployeeCalendarPayDetailModel
             join n in dbContext.TbNaturales on i.EmployeeId equals n.EntityId
             where i.CalendarId == calendarId
                   && i.IsActive == 1
-            select new TbEmployeeCalendarPayDetail
+            select new TbEmployeeCalendarPayDetailDto
             {
                 CalendarDetailId = i.CalendarDetailId,
                 CalendarId = i.CalendarId,

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Design;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -11,17 +12,16 @@ public interface ICustomerCreditDocumentModel
 
     int InsertAppPosme(TbCustomerCreditDocument data);
 
-    TbCustomerCreditDocument GetRowByPk(int customerCreditDocumentId);
+    TbCustomerCreditDocumentDto GetRowByPk(int customerCreditDocumentId);
 
     List<TbCustomerCreditDocument> GetRowByEntity(int companyId,int entityId);
 
-    List<TbCustomerCreditDocument>  GetRowByEntityApplied(int companyId,int entityId,int currencyId );
+    List<TbCustomerCreditDocumentDto> GetRowByEntityApplied(int companyId, int entityId, int currencyId);
 
-    List<TbCustomerCreditDocument> GetRowByEntityCreditLine(int companyId,int entityId,int creditLineId);
-
-    TbCustomerCreditDocument GetRowByDocument(int companyId, int entityId, string documentNumber);
+    TbCustomerCreditDocumentDto GetRowByDocument(int companyId, int entityId, string documentNumber);
 
     List<TbCustomerCreditDocument> GetRowByBalanceBetweenCeroAndCeroPuntoCinco(int companyId);
 
-    List<TbCustomerCreditDocument> GetRowByBalancePending(int companyId,int entityId,int customerCreditDocumentId,int currencyId);
+    List<TbCustomerCreditDocumentDto> GetRowByBalancePending(int companyId, int entityId, int customerCreditDocumentId,
+        int currencyId);
 }

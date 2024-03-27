@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -106,7 +107,7 @@ class ItemModel : IItemModel
                            && item.IsActive!.Value);
     }
 
-    public List<TbItem> GetRowByTransactionMasterId(int transactionMasterId)
+    public List<TbItemDto> GetRowByTransactionMasterId(int transactionMasterId)
     {
         using var dbContext = new DataContext();
         var result = from tm in dbContext.TbTransactionMasters
@@ -115,7 +116,7 @@ class ItemModel : IItemModel
             join catalogItem in dbContext.TbCatalogItems on Convert.ToInt32(i.UnitMeasureId) equals catalogItem
                 .CatalogItemId
             where i.IsActive!.Value && tm.TransactionMasterId == transactionMasterId
-            select new TbItem
+            select new TbItemDto
             {
                 CompanyId = i.CompanyId,
                 BranchId = i.BranchId,

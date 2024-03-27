@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +14,7 @@ namespace v4posme_library.Models;
 [Index("TagId", Name = "IDX_REMEMBER_005")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbRemember
+public partial class TbRemember
 {
     [Key]
     [Column("rememberID", TypeName = "int(11)")]
@@ -21,7 +23,9 @@ public class TbRemember
     [Column("companyID", TypeName = "int(11)")]
     public int CompanyId { get; set; }
 
-    [Column("title")] [StringLength(250)] public string Title { get; set; } = null!;
+    [Column("title")]
+    [StringLength(250)]
+    public string Title { get; set; } = null!;
 
     [Column("description")]
     [StringLength(500)]
@@ -30,7 +34,8 @@ public class TbRemember
     [Column("period", TypeName = "int(11)")]
     public int Period { get; set; }
 
-    [Column("day", TypeName = "int(11)")] public int Day { get; set; }
+    [Column("day", TypeName = "int(11)")]
+    public int Day { get; set; }
 
     [Column("statusID", TypeName = "int(11)")]
     public int StatusId { get; set; }
@@ -62,7 +67,4 @@ public class TbRemember
 
     [Column("leerFile", TypeName = "int(11)")]
     public int? LeerFile { get; set; }
-
-    [NotMapped] public int? DiaProcesado { get; set; }
-    [NotMapped] public DateTime? Fecha { get; set; }
 }

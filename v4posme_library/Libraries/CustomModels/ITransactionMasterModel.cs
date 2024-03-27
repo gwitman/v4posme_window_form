@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -10,7 +11,7 @@ public interface ITransactionMasterModel
     
     void UpdateAppPosme(int companyId,int transactionId,int transactionMasterId,TbTransactionMaster data);
     
-    TbTransactionMaster GetRowByPk(int companyId,int transactionId,int transactionMasterId);
+    TbTransactionMasterDto GetRowByPk(int companyId, int transactionId, int transactionMasterId);
     
     TbTransactionMaster GetRowByTransactionMasterId(int companyId,int transactionMasterId);
     
@@ -18,5 +19,5 @@ public interface ITransactionMasterModel
     
     List<TbTransactionMaster> GetRowByNotification(int companyId);
     
-    List<TbTransactionMaster> GetRowInStatusRegister(int companyId,int transactionMasterId);
+    List<TbTransactionMasterDto> GetRowInStatusRegister(int companyId, int transactionMasterId);
 }

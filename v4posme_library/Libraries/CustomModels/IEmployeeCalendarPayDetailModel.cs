@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -12,7 +13,7 @@ public interface IEmployeeCalendarPayDetailModel
     
     int InsertAppPosme(TbEmployeeCalendarPayDetail data);
 
-    TbEmployeeCalendarPayDetail GetRowByPk(int calendarDetailId);
+    TbEmployeeCalendarPayDetailDto GetRowByPk(int calendarDetailId);
     
-    List<TbEmployeeCalendarPayDetail> GetRowByCalendarId(int calendarId);
+    List<TbEmployeeCalendarPayDetailDto> GetRowByCalendarId(int calendarId);
 }

@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -10,5 +11,5 @@ public interface ITransactionMasterInfoModel
     
     void UpdateAppPosme(int companyId,int transactionId,int transactionMasterId,TbTransactionMasterInfo data);
     
-    TbTransactionMasterInfo GetRowByPk(int companyId,int transactionId,int transactionMasterId);
+    TbTransactionMasterInfoDto GetRowByPk(int companyId, int transactionId, int transactionMasterId);
 }

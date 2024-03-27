@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -10,7 +11,7 @@ public interface IProviderItemModel
     
     int InsertAppPosme(TbProviderItem data);
     
-    List<TbProviderItem> GetRowByItemId(int companyId,int itemId);
+    List<TbProviderItemDto> GetRowByItemId(int companyId, int itemId);
     
-    TbProviderItem GetByPk(int companyId,int itemId,int providerId);
+    TbProviderItemDto GetByPk(int companyId, int itemId, int providerId);
 }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +18,7 @@ namespace v4posme_library.Models;
 [Index("StatusId", Name = "IDX_FIDEX_ASSENT_009")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbFixedAssent
+public partial class TbFixedAssent
 {
     [Column("companyID", TypeName = "int(11)")]
     public int? CompanyId { get; set; }

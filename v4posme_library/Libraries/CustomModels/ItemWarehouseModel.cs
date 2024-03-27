@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -38,14 +39,14 @@ class ItemWarehouseModel : IItemWarehouseModel
         return add.Entity.ItemWarehouseId;
     }
 
-    public List<TbItemWarehouse> GetByWarehouse(int companyId, int warehouseId)
+    public List<TbItemWarehouseDto> GetByWarehouse(int companyId, int warehouseId)
     {
         using var context = new DataContext();
         var result = from i in context.TbItems
             join w in context.TbItemWarehouses on i.ItemId equals w.ItemId
             join ci in context.TbCatalogItems on Convert.ToInt32(i.UnitMeasureId) equals ci.CatalogItemId
             where i.CompanyId == companyId && w.WarehouseId == warehouseId && i.IsActive.Value
-            select new TbItemWarehouse
+            select new TbItemWarehouseDto
             {
                 Codigo = i.ItemNumber,
                 Producto = i.Name,
@@ -57,7 +58,7 @@ class ItemWarehouseModel : IItemWarehouseModel
         return result.ToList();
     }
 
-    public List<TbItemWarehouse> GetRowLowMinimus(int companyId)
+    public List<TbItemWarehouseDto> GetRowLowMinimus(int companyId)
     {
         var dbContext = new DataContext();
         var result = from iw in dbContext.TbItemWarehouses
@@ -67,7 +68,7 @@ class ItemWarehouseModel : IItemWarehouseModel
                   && i.IsActive.Value
                   && w.IsActive == 1
                   && iw.Quantity < iw.QuantityMin
-            select new TbItemWarehouse
+            select new TbItemWarehouseDto
             {
                 ItemNumber = i.ItemNumber,
                 ItemName = i.Name,
@@ -79,13 +80,13 @@ class ItemWarehouseModel : IItemWarehouseModel
         return result.ToList();
     }
 
-    public List<TbItemWarehouse> GetRowByItemId(int companyId, int itemId)
+    public List<TbItemWarehouseDto> GetRowByItemId(int companyId, int itemId)
     {
         var dbContext = new DataContext();
         var result = from i in dbContext.TbItemWarehouses
             join w in dbContext.TbWarehouses on i.WarehouseId equals w.WarehouseId
             where i.CompanyId == companyId && i.ItemId == itemId
-            select new TbItemWarehouse
+            select new TbItemWarehouseDto
             {
                 CompanyId = i.CompanyId,
                 BranchId = i.BranchId,
@@ -99,13 +100,13 @@ class ItemWarehouseModel : IItemWarehouseModel
         return result.ToList();
     }
 
-    public TbItemWarehouse GetByPk(int companyId, int itemId, int warehouseId)
+    public TbItemWarehouseDto GetByPk(int companyId, int itemId, int warehouseId)
     {
         var dbContext = new DataContext();
         var result = from i in dbContext.TbItemWarehouses
             join w in dbContext.TbWarehouses on i.WarehouseId equals w.WarehouseId
             where i.CompanyId == companyId && i.ItemId == itemId && i.WarehouseId == warehouseId
-            select new TbItemWarehouse
+            select new TbItemWarehouseDto
             {
                 CompanyId = i.CompanyId,
                 BranchId = i.BranchId,

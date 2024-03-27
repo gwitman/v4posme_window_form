@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +14,7 @@ namespace v4posme_library.Models;
 [Index("WarehouseTargetId", Name = "IDX_TRANSACTION_CAUSAL_005")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbTransactionCausal
+public partial class TbTransactionCausal
 {
     [Column("companyID", TypeName = "int(11)")]
     public int CompanyId { get; set; }
@@ -27,7 +29,9 @@ public class TbTransactionCausal
     [Column("branchID", TypeName = "int(11)")]
     public int? BranchId { get; set; }
 
-    [Column("name")] [StringLength(50)] public string Name { get; set; } = null!;
+    [Column("name")]
+    [StringLength(50)]
+    public string Name { get; set; } = null!;
 
     [Column("warehouseSourceID", TypeName = "int(11)")]
     public int? WarehouseSourceId { get; set; }
@@ -36,12 +40,8 @@ public class TbTransactionCausal
     public int? WarehouseTargetId { get; set; }
 
     [Column("isDefault", TypeName = "bit(1)")]
-    public ulong IsDefault { get; set; }
+    public bool IsDefault { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
-    public ulong IsActive { get; set; }
-
-    [NotMapped] public string? Branch { get; set; }
-    [NotMapped] public string? WarehouseSourceDescription { get; set; }
-    [NotMapped] public string? WarehouseTargetDescription { get; set; }
+    public bool IsActive { get; set; }
 }

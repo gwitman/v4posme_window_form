@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -45,14 +46,14 @@ class ProviderModel : IProviderModel
                                 && provider.IsActive == 1);
     }
 
-    public List<TbProvider> GetRowByCompany(int companyId)
+    public List<TbProviderDto> GetRowByCompany(int companyId)
     {
         using var context = new DataContext();
         return context.TbProviders
             .Join(context.TbEntities, p => p.EntityId, e => e.EntityId, (p, e) => new { p, e })
             .Join(context.TbNaturales, t => t.p.EntityId, nat => nat.EntityId, (t, nat) => new { t, nat })
             .Where(t => t.t.p.CompanyId == companyId && t.t.p.IsActive == 1)
-            .Select(t => new TbProvider
+            .Select(t => new TbProviderDto
             {
                 EntityId = t.t.p.EntityId,
                 CompanyId = t.t.p.CompanyId,

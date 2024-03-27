@@ -1,5 +1,5 @@
 ﻿using v4posme_library.Models;
-using v4posme_library.ModelsViews;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 

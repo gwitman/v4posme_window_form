@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +13,7 @@ namespace v4posme_library.Models;
 [Index("ItemId", Name = "IDX_PROVIDER_ITEM_004")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbProviderItem
+public partial class TbProviderItem
 {
     [Column("companyID", TypeName = "int(11)")]
     public int CompanyId { get; set; }
@@ -28,9 +30,4 @@ public class TbProviderItem
     [Key]
     [Column("providerItemID", TypeName = "int(11)")]
     public int ProviderItemId { get; set; }
-
-    [NotMapped] public string? ProviderNumber { get; set; }
-    [NotMapped] public string? FirstName { get; set; }
-    [NotMapped] public string? LastName { get; set; }
-    [NotMapped] public string? ComercialName { get; set; }
 }

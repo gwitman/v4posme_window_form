@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -47,7 +48,7 @@ class EntityPhoneModel : IEntityPhoneModel
         context.SaveChanges();
     }
 
-    public TbEntityPhone GetRowByPk(int companyId, int branchId, int entityId, int entityPhoneId)
+    public TbEntityPhoneDto GetRowByPk(int companyId, int branchId, int entityId, int entityPhoneId)
     {
         using var context = new DataContext();
         var result = from tm in context.TbEntityPhones
@@ -56,7 +57,7 @@ class EntityPhoneModel : IEntityPhoneModel
                   && tm.EntityId == entityId
                   && tm.BranchId == branchId
                   && tm.CompanyId == companyId
-            select new TbEntityPhone
+            select new TbEntityPhoneDto
             {
                 CompanyId = tm.CompanyId,
                 BranchId = tm.BranchId,
@@ -70,7 +71,7 @@ class EntityPhoneModel : IEntityPhoneModel
         return result.Single();
     }
 
-    public List<TbEntityPhone> GetRowByEntity(int companyId, int branchId, int entityId)
+    public List<TbEntityPhoneDto> GetRowByEntity(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
         var result = from tm in context.TbEntityPhones
@@ -78,7 +79,7 @@ class EntityPhoneModel : IEntityPhoneModel
             where tm.EntityId == entityId
                   && tm.BranchId == branchId
                   && tm.CompanyId == companyId
-            select new TbEntityPhone
+            select new TbEntityPhoneDto
             {
                 CompanyId = tm.CompanyId,
                 BranchId = tm.BranchId,

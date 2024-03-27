@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +23,7 @@ namespace v4posme_library.Models;
 [Index("StatusId", Name = "IDX_PROVIDER_014")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbProvider
+public partial class TbProvider
 {
     [Key]
     [Column("providerID", TypeName = "int(11)")]
@@ -67,7 +69,8 @@ public class TbProvider
     [Column("payConditionID", TypeName = "int(11)")]
     public int? PayConditionId { get; set; }
 
-    [Column("isLocal")] public bool? IsLocal { get; set; }
+    [Column("isLocal")]
+    public bool? IsLocal { get; set; }
 
     [Column("countryID", TypeName = "int(11)")]
     public int? CountryId { get; set; }
@@ -113,7 +116,4 @@ public class TbProvider
 
     [Column("isActive", TypeName = "bit(1)")]
     public ulong? IsActive { get; set; }
-
-    [NotMapped] public string? FirstName { get; set; }
-    [NotMapped] public string? LastName { get; set; }
 }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +23,7 @@ namespace v4posme_library.Models;
 [Index("ParentEmployeeId", Name = "IDX_EMPLOYEE_014")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbEmployee
+public partial class TbEmployee
 {
     [Key]
     [Column("employeeID", TypeName = "int(11)")]
@@ -98,9 +100,11 @@ public class TbEmployee
     [Column("parentEmployeeID", TypeName = "int(11)")]
     public int? ParentEmployeeId { get; set; }
 
-    [Column("startOn")] public DateOnly? StartOn { get; set; }
+    [Column("startOn")]
+    public DateOnly? StartOn { get; set; }
 
-    [Column("endOn")] public DateOnly? EndOn { get; set; }
+    [Column("endOn")]
+    public DateOnly? EndOn { get; set; }
 
     [Column("statusID", TypeName = "int(11)")]
     public int? StatusId { get; set; }
@@ -119,8 +123,5 @@ public class TbEmployee
     public int? CreatedBy { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
-    public bool? IsActive { get; set; }
-
-    [NotMapped] public string? FirstName { get; set; }
-    [NotMapped] public string? LastName { get; set; }
+    public ulong? IsActive { get; set; }
 }

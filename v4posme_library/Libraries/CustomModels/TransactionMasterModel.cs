@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -36,7 +37,7 @@ class TransactionMasterModel : ITransactionMasterModel
         context.SaveChanges();
     }
 
-    public TbTransactionMaster GetRowByPk(int companyId, int transactionId, int transactionMasterId)
+    public TbTransactionMasterDto GetRowByPk(int companyId, int transactionId, int transactionMasterId)
     {
         using var context = new DataContext();
         var result = from tm in context.TbTransactionMasters
@@ -45,7 +46,7 @@ class TransactionMasterModel : ITransactionMasterModel
                   && tm.TransactionId == transactionId
                   && tm.CompanyId == companyId
                   && tm.IsActive.Value
-            select new TbTransactionMaster
+            select new TbTransactionMasterDto
             {
                 CompanyId = tm.CompanyId,
                 TransactionId = tm.TransactionId,
@@ -128,7 +129,7 @@ class TransactionMasterModel : ITransactionMasterModel
             .ToList();
     }
 
-    public List<TbTransactionMaster> GetRowInStatusRegister(int companyId, int transactionMasterId)
+    public List<TbTransactionMasterDto> GetRowInStatusRegister(int companyId, int transactionMasterId)
     {
         using var context = new DataContext();
         var result = from tm in context.TbTransactionMasters
@@ -137,7 +138,7 @@ class TransactionMasterModel : ITransactionMasterModel
                   && tm.CompanyId == companyId
                   && ws.EditableTotal.Value
                   && tm.TransactionMasterId != transactionMasterId
-            select new TbTransactionMaster
+            select new TbTransactionMasterDto
             {
                 TransactionNumber = tm.TransactionNumber,
                 NameStatus = ws.Name

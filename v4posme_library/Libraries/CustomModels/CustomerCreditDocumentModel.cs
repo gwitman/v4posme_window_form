@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -35,7 +36,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
         return add.Entity.CustomerCreditDocumentId;
     }
 
-    public TbCustomerCreditDocument GetRowByPk(int customerCreditDocumentId)
+    public TbCustomerCreditDocumentDto GetRowByPk(int customerCreditDocumentId)
     {
         using var context = new DataContext();
         var customerCreditDocuments = context.TbCustomerCreditDocuments;
@@ -43,7 +44,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
         var result = from i in customerCreditDocuments
             join cur in context.TbCurrencies on i.CurrencyId equals cur.CurrencyId
             where i.CustomerCreditDocumentId == customerCreditDocumentId && i.IsActive == 1
-            select new TbCustomerCreditDocument
+            select new TbCustomerCreditDocumentDto
             {
                 CustomerCreditDocumentId = i.CustomerCreditDocumentId,
                 CompanyId = i.CompanyId,
@@ -85,7 +86,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
             .ToList();
     }
 
-    public List<TbCustomerCreditDocument> GetRowByEntityApplied(int companyId, int entityId, int currencyId)
+    public List<TbCustomerCreditDocumentDto> GetRowByEntityApplied(int companyId, int entityId, int currencyId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbCustomerCreditDocuments
@@ -119,7 +120,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                 i.ReportSinRiesgo
             }
             into g
-            select new TbCustomerCreditDocument
+            select new TbCustomerCreditDocumentDto
             {
                 CustomerCreditDocumentId = g.Key.CustomerCreditDocumentId,
                 CompanyId = g.Key.CompanyId,
@@ -155,7 +156,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
             .ToList();
     }
 
-    public TbCustomerCreditDocument GetRowByDocument(int companyId, int entityId, string documentNumber)
+    public TbCustomerCreditDocumentDto GetRowByDocument(int companyId, int entityId, string documentNumber)
     {
         using var context = new DataContext();
         var creditDocuments = context.TbCustomerCreditDocuments;
@@ -165,7 +166,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                   && i.EntityId == entityId
                   && i.DocumentNumber == documentNumber
                   && i.IsActive == 1
-            select new TbCustomerCreditDocument
+            select new TbCustomerCreditDocumentDto
             {
                 CustomerCreditDocumentId = i.CustomerCreditDocumentId,
                 CompanyId = i.CompanyId,
@@ -205,7 +206,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
             .ToList();
     }
 
-    public List<TbCustomerCreditDocument> GetRowByBalancePending(int companyId, int entityId,
+    public List<TbCustomerCreditDocumentDto> GetRowByBalancePending(int companyId, int entityId,
         int customerCreditDocumentId, int currencyId)
     {
         using var dbContext = new DataContext();
@@ -233,7 +234,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                 d.CurrencyId,
                 d.StatusId
             } into g
-            select new TbCustomerCreditDocument
+            select new TbCustomerCreditDocumentDto
             {
                 EntityId = g.Key.EntityId,
                 CustomerCreditDocumentId = g.Key.CustomerCreditDocumentId,

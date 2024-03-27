@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +11,7 @@ namespace v4posme_library.Models;
 [Index("CalendarId", Name = "IDX_EMPLOYEE_CALENDAR_PAY_DETAIL_002")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbEmployeeCalendarPayDetail
+public partial class TbEmployeeCalendarPayDetail
 {
     [Key]
     [Column("calendarDetailID", TypeName = "int(11)")]
@@ -21,7 +23,9 @@ public class TbEmployeeCalendarPayDetail
     [Column("employeeID", TypeName = "int(11)")]
     public int EmployeeId { get; set; }
 
-    [Column("salary")] [Precision(18, 2)] public decimal Salary { get; set; }
+    [Column("salary")]
+    [Precision(18, 2)]
+    public decimal Salary { get; set; }
 
     [Column("commission")]
     [Precision(18, 2)]
@@ -31,14 +35,10 @@ public class TbEmployeeCalendarPayDetail
     [Precision(18, 2)]
     public decimal Adelantos { get; set; }
 
-    [Column("neto")] [Precision(18, 2)] public decimal Neto { get; set; }
+    [Column("neto")]
+    [Precision(18, 2)]
+    public decimal Neto { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
-    public int IsActive { get; set; }
-
-    [NotMapped] public string? FirstName { get; set; }
-    [NotMapped] public string? LastName { get; set; }
-    [NotMapped] public string? EmployeNumber { get; set; }
-    [NotMapped] public decimal? HourCost { get; set; }
-    [NotMapped] public decimal? ComissionPorcentage { get; set; }
+    public ulong IsActive { get; set; }
 }

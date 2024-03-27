@@ -4,14 +4,16 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 class CatalogModel : ICatalogModel
 {
-    public TbCatalog GetRowByCatalogId(int catalogId)
+    public TbCatalog? GetRowByCatalogId(int catalogId)
     {
         using var context = new DataContext();
         return context.TbCatalogs
-            .First(catalog => catalog.CatalogId == catalogId && catalog.IsActive!.Value);
+            .FirstOrDefault(catalog => catalog != null 
+                                       && catalog.CatalogId == catalogId 
+                                       && catalog.IsActive!.Value);
     }
 
-    public TbCatalog GetRowByName(string name)
+    public TbCatalog? GetRowByName(string name)
     {
         using var context = new DataContext();
         return context.TbCatalogs

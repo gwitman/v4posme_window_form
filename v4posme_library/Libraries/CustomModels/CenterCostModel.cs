@@ -35,14 +35,14 @@ public class CenterCostModel : ICenterCostModel
         return context.TbCenterCosts
             .Single(center => center.CompanyId == companyId
                               && center.Number == classNumber
-                              && center.IsActive);
+                              && center.IsActive!.Value);
     }
 
     public TbCenterCost GetRowByPk(int companyId, int classId)
     {
         using var context = new DataContext();
         var find = FindByCompanyIdAndClassId(companyId, classId, context);
-        return find.IsActive ? find : new TbCenterCost();
+        return find.IsActive!.Value ? find : new TbCenterCost();
     }
 
     public List<TbCenterCost> GetByCompany(int companyId)
@@ -50,7 +50,7 @@ public class CenterCostModel : ICenterCostModel
         using var context = new DataContext();
         return context.TbCenterCosts
             .Where(center => center.CompanyId == companyId
-                             && center.IsActive)
+                             && center.IsActive!.Value)
             .OrderBy(center => center.Number)
             .ToList();
     }

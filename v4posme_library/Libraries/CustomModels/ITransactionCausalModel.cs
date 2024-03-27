@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -8,7 +9,7 @@ public interface ITransactionCausalModel
 
     TbTransactionCausal GetCausalDefaultId(int companyId, int transactionId);
 
-    List<TbTransactionCausal> GetByCompanyAndTransaction(int companyId, int transactionId);
+    List<TbTransactionCausalDto> GetByCompanyAndTransaction(int companyId, int transactionId);
 
     TbTransactionCausal GetByCompanyAndTransactionAndCausal(int companyId, int transactionId, int causalId);
 

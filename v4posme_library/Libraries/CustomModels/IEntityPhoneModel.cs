@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -12,7 +13,7 @@ public interface IEntityPhoneModel
 
     void UpdateAppPosme(int companyId, int branchId, int entityId, int entityPhoneId, TbEntityPhone data);
 
-    TbEntityPhone GetRowByPk(int companyId, int branchId, int entityId, int entityPhoneId);
+    TbEntityPhoneDto GetRowByPk(int companyId, int branchId, int entityId, int entityPhoneId);
     
-    List<TbEntityPhone> GetRowByEntity(int companyId,int branchId,int entityId);
+    List<TbEntityPhoneDto> GetRowByEntity(int companyId, int branchId, int entityId);
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -43,7 +44,7 @@ class JournalEntryDetailModel : IJournalEntryDetailModel
         return add.Entity.JournalEntryDetailId;
     }
 
-    public List<TbJournalEntryDetail> GetRowByJournalEntryId(int companyId, int journalEntryId)
+    public List<TbJournalEntryDetailDto> GetRowByJournalEntryId(int companyId, int journalEntryId)
     {
         using var dbContext = new DataContext();
         var result = from jed in dbContext.TbJournalEntryDetails
@@ -51,7 +52,7 @@ class JournalEntryDetailModel : IJournalEntryDetailModel
             join cc in dbContext.TbCenterCosts on jed.ClassId equals cc.ClassId into ccGroup
             from cc in ccGroup.DefaultIfEmpty()
             where jed.CompanyId == companyId && jed.JournalEntryId == journalEntryId && jed.IsActive
-            select new TbJournalEntryDetail
+            select new TbJournalEntryDetailDto
             {
                 JournalEntryDetailId = jed.JournalEntryDetailId,
                 JournalEntryId = jed.JournalEntryId,
@@ -72,7 +73,7 @@ class JournalEntryDetailModel : IJournalEntryDetailModel
         return result.ToList();
     }
 
-    public TbJournalEntryDetail GetRowByPk(int companyId, int journalEntryId, int journalEntryDetailId)
+    public TbJournalEntryDetailDto GetRowByPk(int companyId, int journalEntryId, int journalEntryDetailId)
     {
         using var dbContext = new DataContext();
         var result = from jed in dbContext.TbJournalEntryDetails
@@ -81,7 +82,7 @@ class JournalEntryDetailModel : IJournalEntryDetailModel
             from cc in ccGroup.DefaultIfEmpty()
             where jed.CompanyId == companyId && jed.JournalEntryId == journalEntryId &&
                   jed.JournalEntryDetailId == journalEntryDetailId && jed.IsActive
-            select new TbJournalEntryDetail
+            select new TbJournalEntryDetailDto
             {
                 JournalEntryDetailId = jed.JournalEntryDetailId,
                 JournalEntryId = jed.JournalEntryId,

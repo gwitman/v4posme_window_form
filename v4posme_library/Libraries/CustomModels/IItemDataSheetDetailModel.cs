@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -14,9 +15,9 @@ public interface IItemDataSheetDetailModel
     
     int InsertAppPosme(TbItemDataSheetDetail data);
 
-    TbItemDataSheetDetail GetRowByPk(int itemDataSheetDetailId);
+    TbItemDataSheetDetailDto GetRowByPk(int itemDataSheetDetailId);
     
-    TbItemDataSheetDetail GetRowByPkItemId(int itemDataSheetId,int itemId);
+    TbItemDataSheetDetailDto GetRowByPkItemId(int itemDataSheetId, int itemId);
     
-    List<TbItemDataSheetDetail> GetRowByItemDataSheet(int itemDataSheetId);
+    List<TbItemDataSheetDetailDto> GetRowByItemDataSheet(int itemDataSheetId);
 }

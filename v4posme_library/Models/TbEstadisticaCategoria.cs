@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +10,7 @@ namespace v4posme_library.Models;
 [Index("ClaseId", Name = "IDX_ESTADISTICA_CATEGORIA_001")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbEstadisticaCategoria
+public partial class TbEstadisticaCategoria
 {
     [Column("claseID", TypeName = "int(11)")]
     public int ClaseId { get; set; }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +15,7 @@ namespace v4posme_library.Models;
 [Index("ClassId", Name = "IDX_TRANSACTION_PROFILE_DETAIL_006")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbTransactionProfileDetail
+public partial class TbTransactionProfileDetail
 {
     [Column("companyID", TypeName = "int(11)")]
     public int CompanyId { get; set; }
@@ -35,11 +37,11 @@ public class TbTransactionProfileDetail
     [StringLength(50)]
     public string AccountId { get; set; } = null!;
 
-    [Column("classID")] [StringLength(50)] public string? ClassId { get; set; }
+    [Column("classID")]
+    [StringLength(50)]
+    public string? ClassId { get; set; }
 
-    [Column("sign")] [StringLength(1)] public string Sign { get; set; } = null!;
-
-    [NotMapped] public string? ConceptDescription { get; set; }
-    [NotMapped] public string? AccountDescription { get; set; }
-    [NotMapped] public string? CenterCostDescription { get; set; }
+    [Column("sign")]
+    [StringLength(1)]
+    public string Sign { get; set; } = null!;
 }

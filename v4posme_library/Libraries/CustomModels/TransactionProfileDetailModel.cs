@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
 class TransactionProfileDetailModel : ITransactionProfileDetailModel
 {
-    public List<TbTransactionProfileDetail> GetByCompanyAndTransactionAndCausal(int companyId, int transactionId,
+    public List<TbTransactionProfileDetailDto> GetByCompanyAndTransactionAndCausal(int companyId, int transactionId,
         int causalId)
     {
         using var context = new DataContext();
@@ -20,7 +21,7 @@ class TransactionProfileDetailModel : ITransactionProfileDetailModel
             where tc.CompanyId == companyId
                   && tc.TransactionId == transactionId
                   && tc.TransactionCausalId == causalId
-            select new TbTransactionProfileDetail
+            select new TbTransactionProfileDetailDto
             {
                 CompanyId = tc.CompanyId,
                 TransactionId = tc.TransactionId,

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,9 +26,10 @@ namespace v4posme_library.Models;
 [Index("SexoId", Name = "IDX_CUSTOMER_017")]
 [Index("TypeFirm", Name = "IDX_CUSTOMER_018")]
 [Index("EntityContactId", Name = "IDX_CUSTOMER_019")]
+[Index("FormContactId", Name = "IDX_CUSTOMER_020")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbCustomer
+public partial class TbCustomer
 {
     [Key]
     [Column("customerID", TypeName = "int(11)")]
@@ -84,7 +87,8 @@ public class TbCustomer
     [Column("customerTypeID", TypeName = "int(11)")]
     public int? CustomerTypeId { get; set; }
 
-    [Column("birthDate")] public DateTime? BirthDate { get; set; }
+    [Column("birthDate")]
+    public DateTime? BirthDate { get; set; }
 
     [Column("statusID", TypeName = "int(11)")]
     public int? StatusId { get; set; }
@@ -126,7 +130,7 @@ public class TbCustomer
     public int? CreatedAt { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
-    public bool IsActive { get; set; }
+    public bool? IsActive { get; set; }
 
     [Column("balancePoint")]
     [Precision(10, 2)]
@@ -136,7 +140,8 @@ public class TbCustomer
     [MaxLength(255)]
     public byte[]? PhoneNumber { get; set; }
 
-    [Column("dateContract")] public DateOnly? DateContract { get; set; }
+    [Column("dateContract")]
+    public DateOnly? DateContract { get; set; }
 
     /// <summary>
     /// Persona que contacto al cliente
@@ -160,8 +165,13 @@ public class TbCustomer
     [StringLength(255)]
     public string? Reference6 { get; set; }
 
-    [Column("budget")] [Precision(10, 2)] public decimal? Budget { get; set; }
+    [Column("budget")]
+    [Precision(10, 2)]
+    public decimal? Budget { get; set; }
 
-    [NotMapped] public string? FirstName { get; set; }
-    [NotMapped] public string? LastName { get; set; }
+    [Column("modifiedOn")]
+    public DateOnly? ModifiedOn { get; set; }
+
+    [Column("formContactID", TypeName = "int(11)")]
+    public int? FormContactId { get; set; }
 }

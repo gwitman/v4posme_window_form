@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -34,13 +35,13 @@ class ListPriceModel : IListPriceModel
         return add.Entity.ListPriceId;
     }
 
-    public TbListPrice GetRowByPk(int companyId, int listPriceId)
+    public TbListPriceDto GetRowByPk(int companyId, int listPriceId)
     {
         using var context = new DataContext();
         var result = from i in context.TbListPrices
             join ws in context.TbWorkflowStages on i.StatusId equals ws.WorkflowStageId
             where i.CompanyId == companyId && i.ListPriceId == listPriceId && i.IsActive == 1
-            select new TbListPrice
+            select new TbListPriceDto
             {
                 CompanyId = i.CompanyId,
                 ListPriceId = i.ListPriceId,

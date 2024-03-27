@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,9 +9,11 @@ namespace v4posme_library.Models;
 [Table("tb_list_price")]
 [Index("CompanyId", Name = "IDX_LIST_PRICE_001")]
 [Index("StatusId", Name = "IDX_LIST_PRICE_002")]
+[Index("CompanyId", "StartOn", "EndOn", "IsActive", Name = "IDX_LIST_PRICE_003")]
+[Index("ListPriceId", Name = "IDX_LIST_PRICE_004")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbListPrice
+public partial class TbListPrice
 {
     [Column("companyID", TypeName = "int(11)")]
     public int CompanyId { get; set; }
@@ -24,7 +28,9 @@ public class TbListPrice
     [Column("endOn", TypeName = "datetime")]
     public DateTime? EndOn { get; set; }
 
-    [Column("name")] [StringLength(200)] public string Name { get; set; } = null!;
+    [Column("name")]
+    [StringLength(200)]
+    public string Name { get; set; } = null!;
 
     [Column("description")]
     [StringLength(550)]
@@ -48,6 +54,4 @@ public class TbListPrice
 
     [Column("isActive", TypeName = "bit(1)")]
     public ulong IsActive { get; set; }
-
-    [NotMapped] public string? StatusName { get; set; }
 }

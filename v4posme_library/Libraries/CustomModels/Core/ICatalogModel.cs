@@ -4,7 +4,7 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 public interface ICatalogModel
 {
-    TbCatalog GetRowByCatalogId(int catalogId);
+    TbCatalog? GetRowByCatalogId(int catalogId);
     
-    TbCatalog GetRowByName(string name);
+    TbCatalog? GetRowByName(string name);
 }

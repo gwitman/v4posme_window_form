@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +19,7 @@ namespace v4posme_library.Models;
 [Index("ReceiptAmountCardBankDolId", Name = "IDX_TRANSACTION_MASTER_INFO_010")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
-public class TbTransactionMasterInfo
+public partial class TbTransactionMasterInfo
 {
     [Key]
     [Column("transactionMasterInfoID", TypeName = "int(11)")]
@@ -116,7 +118,4 @@ public class TbTransactionMasterInfo
     [Column("receiptAmountCardBankDolReference")]
     [StringLength(255)]
     public string? ReceiptAmountCardBankDolReference { get; set; }
-
-    [NotMapped]public string? ZonaName { get; set; }
-    [NotMapped]public string? MesaName { get; set; }
 }

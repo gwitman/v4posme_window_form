@@ -1,4 +1,5 @@
 ﻿using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -10,13 +11,13 @@ public interface IItemWarehouseModel
 
     int InsertAppPosme(TbItemWarehouse data);
 
-    List<TbItemWarehouse> GetByWarehouse(int companyId, int warehouseId);
+    List<TbItemWarehouseDto> GetByWarehouse(int companyId, int warehouseId);
 
-    List<TbItemWarehouse> GetRowLowMinimus(int companyId);
+    List<TbItemWarehouseDto> GetRowLowMinimus(int companyId);
 
-    List<TbItemWarehouse> GetRowByItemId(int companyId, int itemId);
+    List<TbItemWarehouseDto> GetRowByItemId(int companyId, int itemId);
 
-    TbItemWarehouse GetByPk(int companyId, int itemId, int warehouseId);
+    TbItemWarehouseDto GetByPk(int companyId, int itemId, int warehouseId);
 
     int WarehouseIsEmpty(int companyId, int warehouseId);
 }

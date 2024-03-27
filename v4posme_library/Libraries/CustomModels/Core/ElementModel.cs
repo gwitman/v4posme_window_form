@@ -29,7 +29,7 @@ class ElementModel : IElementModel
                               && element.ElementTypeId == elementTypeId);
     }
 
-    public List<TbElement> GetRowByTypeAndLayout(int elementTypeId, int layoutId)
+    public List<TbElement>? GetRowByTypeAndLayout(int elementTypeId, int layoutId)
     {
         using var context = new DataContext();
         var result = from e in context.TbElements
