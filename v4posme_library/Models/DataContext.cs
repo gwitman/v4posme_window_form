@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace v4posme_library.Models;
@@ -10,16 +9,18 @@ public sealed partial class DataContext : DbContext
         .SetBasePath(Directory.GetCurrentDirectory())
         .AddJsonFile("appsettings.json")
         .Build();
+
     public DataContext(DbContextOptions<DataContext> options)
         : base(options)
     {
     }
+
     public DataContext()
     {
         var connectionString = _configuration.GetConnectionString("PosmeConnectionString");
         Database.SetConnectionString(connectionString);
     }
-    
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
@@ -75,7 +76,7 @@ public sealed partial class DataContext : DbContext
 
     public DbSet<TbCompanyComponentConcept> TbCompanyComponentConcepts { get; set; } = null!;
 
-    public DbSet<TbCompanyComponentFlavor?> TbCompanyComponentFlavors { get; set; } = null!;
+    public DbSet<TbCompanyComponentFlavor> TbCompanyComponentFlavors { get; set; } = null!;
 
     public DbSet<TbCompanyComponentItemDataview> TbCompanyComponentItemDataviews { get; set; } = null!;
 
@@ -91,7 +92,7 @@ public sealed partial class DataContext : DbContext
 
     public DbSet<TbCompanySubelementObligatory> TbCompanySubelementObligatories { get; set; } = null!;
 
-    public DbSet<TbComponent?> TbComponents { get; set; } = null!;
+    public DbSet<TbComponent> TbComponents { get; set; } = null!;
 
     public DbSet<TbComponentAudit> TbComponentAudits { get; set; } = null!;
 
@@ -133,7 +134,7 @@ public sealed partial class DataContext : DbContext
 
     public DbSet<TbEmployee> TbEmployees { get; set; } = null!;
 
-    public DbSet<TbEmployeeCalendarPay?> TbEmployeeCalendarPays { get; set; } = null!;
+    public DbSet<TbEmployeeCalendarPay> TbEmployeeCalendarPays { get; set; } = null!;
 
     public DbSet<TbEmployeeCalendarPayDetail> TbEmployeeCalendarPayDetails { get; set; } = null!;
 
@@ -325,10 +326,7 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Split).IsFixedLength();
         });
 
-        modelBuilder.Entity<TbAccountTmp>(entity =>
-        {
-            entity.HasKey(e => e.AccountId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbAccountTmp>(entity => { entity.HasKey(e => e.AccountId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbAccountType>(entity =>
         {
@@ -402,10 +400,7 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Name).HasDefaultValueSql("'N/D'");
         });
 
-        modelBuilder.Entity<TbCaller>(entity =>
-        {
-            entity.HasKey(e => e.CallerId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbCaller>(entity => { entity.HasKey(e => e.CallerId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbCashBox>(entity =>
         {
@@ -429,15 +424,9 @@ public sealed partial class DataContext : DbContext
             entity.HasKey(e => e.CashBoxSessionTransactionMasterId).HasName("PRIMARY");
         });
 
-        modelBuilder.Entity<TbCashBoxUser>(entity =>
-        {
-            entity.HasKey(e => e.CashBoxUserId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbCashBoxUser>(entity => { entity.HasKey(e => e.CashBoxUserId).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<TbCatalog>(entity =>
-        {
-            entity.HasKey(e => e.CatalogId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbCatalog>(entity => { entity.HasKey(e => e.CatalogId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbCatalogItem>(entity =>
         {
@@ -529,15 +518,9 @@ public sealed partial class DataContext : DbContext
             entity.HasKey(e => e.CompanySubelementObligatoryId).HasName("PRIMARY");
         });
 
-        modelBuilder.Entity<TbComponent>(entity =>
-        {
-            entity.HasKey(e => e.ComponentId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbComponent>(entity => { entity.HasKey(e => e.ComponentId).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<TbComponentAudit>(entity =>
-        {
-            entity.HasKey(e => e.ComponentAuditId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbComponentAudit>(entity => { entity.HasKey(e => e.ComponentAuditId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbComponentAuditDetail>(entity =>
         {
@@ -559,10 +542,7 @@ public sealed partial class DataContext : DbContext
             entity.HasKey(e => e.ComponentElementId).HasName("PRIMARY");
         });
 
-        modelBuilder.Entity<TbCounter>(entity =>
-        {
-            entity.HasKey(e => e.CounterId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbCounter>(entity => { entity.HasKey(e => e.CounterId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbCreditLine>(entity =>
         {
@@ -606,10 +586,7 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Name).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbCustomerCredit>(entity =>
-        {
-            entity.HasKey(e => e.CustomerCreditId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbCustomerCredit>(entity => { entity.HasKey(e => e.CustomerCreditId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbCustomerCreditAmortization>(entity =>
         {
@@ -645,10 +622,13 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.CreatedIn).HasDefaultValueSql("'0'");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("CURRENT_TIMESTAMP");
             entity.Property(e => e.IsActive).HasDefaultValueSql("b'0'");
-            entity.Property(e => e.RatioBalance).HasComment("Para reportar a la sin riresgo se multiplica este valor po rel Saldo");
+            entity.Property(e => e.RatioBalance)
+                .HasComment("Para reportar a la sin riresgo se multiplica este valor po rel Saldo");
             entity.Property(e => e.RatioBalanceExpired).HasComment("Para reportar a la sin riesgo saldo vencido");
-            entity.Property(e => e.RatioDesembolso).HasComment("Para reportar a la sin riesgo se multiplica este valor por el desembolso");
-            entity.Property(e => e.RatioShare).HasComment("Para reportar a la sin riego se multiplica este valor por la cuota");
+            entity.Property(e => e.RatioDesembolso)
+                .HasComment("Para reportar a la sin riesgo se multiplica este valor por el desembolso");
+            entity.Property(e => e.RatioShare)
+                .HasComment("Para reportar a la sin riego se multiplica este valor por la cuota");
             entity.Property(e => e.StatusCredit)
                 .HasDefaultValueSql("'1'")
                 .HasComment("Estado del Credito , Saneado, Vigente, etc");
@@ -673,20 +653,11 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.IsActive).HasDefaultValueSql("b'0'");
         });
 
-        modelBuilder.Entity<TbDataview>(entity =>
-        {
-            entity.HasKey(e => e.DataViewId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbDataview>(entity => { entity.HasKey(e => e.DataViewId).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<TbElement>(entity =>
-        {
-            entity.HasKey(e => e.ElementId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbElement>(entity => { entity.HasKey(e => e.ElementId).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<TbElementType>(entity =>
-        {
-            entity.HasKey(e => e.ElementTypeId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbElementType>(entity => { entity.HasKey(e => e.ElementTypeId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbEmployee>(entity =>
         {
@@ -713,10 +684,7 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.IsActive).HasDefaultValueSql("b'0'");
         });
 
-        modelBuilder.Entity<TbEntity>(entity =>
-        {
-            entity.HasKey(e => e.EntityId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbEntity>(entity => { entity.HasKey(e => e.EntityId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbEntityAccount>(entity =>
         {
@@ -728,20 +696,11 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Name).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbEntityEmail>(entity =>
-        {
-            entity.HasKey(e => e.EntityEmailId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbEntityEmail>(entity => { entity.HasKey(e => e.EntityEmailId).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<TbEntityPhone>(entity =>
-        {
-            entity.HasKey(e => e.EntityPhoneId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbEntityPhone>(entity => { entity.HasKey(e => e.EntityPhoneId).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<TbError>(entity =>
-        {
-            entity.HasKey(e => e.ErrorId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbError>(entity => { entity.HasKey(e => e.ErrorId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbEstadisticaCategoria>(entity =>
         {
@@ -866,15 +825,9 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.IsActive).HasDefaultValueSql("'1'");
         });
 
-        modelBuilder.Entity<TbItemSku>(entity =>
-        {
-            entity.HasKey(e => e.SkuId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbItemSku>(entity => { entity.HasKey(e => e.SkuId).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<TbItemWarehouse>(entity =>
-        {
-            entity.HasKey(e => e.ItemWarehouseId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbItemWarehouse>(entity => { entity.HasKey(e => e.ItemWarehouseId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbItemWarehouseExpired>(entity =>
         {
@@ -963,10 +916,7 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.ItemNumber).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbMembership>(entity =>
-        {
-            entity.HasKey(e => e.MembershipId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbMembership>(entity => { entity.HasKey(e => e.MembershipId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbMenuElement>(entity =>
         {
@@ -995,15 +945,9 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.QuantityOcupation).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbParameter>(entity =>
-        {
-            entity.HasKey(e => e.ParameterId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbParameter>(entity => { entity.HasKey(e => e.ParameterId).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<TbPrice>(entity =>
-        {
-            entity.HasKey(e => e.PriceId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbPrice>(entity => { entity.HasKey(e => e.PriceId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbProvider>(entity =>
         {
@@ -1012,10 +956,7 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.ProviderNumber).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbProviderItem>(entity =>
-        {
-            entity.HasKey(e => e.ProviderItemId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbProviderItem>(entity => { entity.HasKey(e => e.ProviderItemId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbPublicCatalog>(entity =>
         {
@@ -1075,10 +1016,7 @@ public sealed partial class DataContext : DbContext
             entity.HasKey(e => e.RoleAurotizationId).HasName("PRIMARY");
         });
 
-        modelBuilder.Entity<TbSubelement>(entity =>
-        {
-            entity.HasKey(e => e.SubElementId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbSubelement>(entity => { entity.HasKey(e => e.SubElementId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbTag>(entity =>
         {
@@ -1103,10 +1041,7 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Name).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbTransactionConcept>(entity =>
-        {
-            entity.HasKey(e => e.ConceptId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbTransactionConcept>(entity => { entity.HasKey(e => e.ConceptId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbTransactionMaster>(entity =>
         {
@@ -1205,20 +1140,11 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Email).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbUserPermission>(entity =>
-        {
-            entity.HasKey(e => e.UserPermissionId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbUserPermission>(entity => { entity.HasKey(e => e.UserPermissionId).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<TbUserTag>(entity =>
-        {
-            entity.HasKey(e => e.UserTagId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbUserTag>(entity => { entity.HasKey(e => e.UserTagId).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<TbUserWarehouse>(entity =>
-        {
-            entity.HasKey(e => e.UserWarehouseId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbUserWarehouse>(entity => { entity.HasKey(e => e.UserWarehouseId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbWarehouse>(entity =>
         {
@@ -1231,16 +1157,15 @@ public sealed partial class DataContext : DbContext
             entity.Property(e => e.Number).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<TbWorkflow>(entity =>
-        {
-            entity.HasKey(e => e.WorkflowId).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TbWorkflow>(entity => { entity.HasKey(e => e.WorkflowId).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TbWorkflowStage>(entity =>
         {
             entity.HasKey(e => e.WorkflowStageId).HasName("PRIMARY");
 
-            entity.Property(e => e.Aplicable).HasComment("Este campo es util para saber si el documento debe de aumentar o disminuir inventario o para saver si el documento debe de ser contabilizado");
+            entity.Property(e => e.Aplicable)
+                .HasComment(
+                    "Este campo es util para saber si el documento debe de aumentar o disminuir inventario o para saver si el documento debe de ser contabilizado");
         });
 
         modelBuilder.Entity<TbWorkflowStageChangeLog>(entity =>
@@ -1389,5 +1314,6 @@ public sealed partial class DataContext : DbContext
         OnModelCreatingPartial(modelBuilder);
     }
 
+    // ReSharper disable once PartialMethodWithSinglePart
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
