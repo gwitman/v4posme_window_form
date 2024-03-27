@@ -362,9 +362,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 InventoryWarehouseSourceId = td.InventoryWarehouseSourceId,
                 InventoryWarehouseTargetId = td.InventoryWarehouseTargetId,
                 ItemNumber = i.ItemNumber,
-                BarCode = i.BarCode.Contains(',') && i.BarCode.IndexOf(',') > 1
-                    ? string.Concat(i.BarCode.AsSpan(0, i.BarCode.IndexOf(',') + 1), "...")
-                    : i.BarCode,
+                BarCode = i.BarCode.Contains(',') ? i.BarCode.Substring(0, i.BarCode.IndexOf(',') + 1) + "..." : i.BarCode,
                 ItemName = i.Name,
                 UnitMeasureName = ci.Name,
                 DescriptionReference = td.DescriptionReference,
@@ -755,7 +753,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                   && t.CompanyId == companyId
                   && t.TransactionOn >= dateFirst
                   && t.TransactionOn <= dateLast
-            group t by t.TransactionOn.Value.Day
+            group t by t.TransactionOn!.Value.Day
             into g
             select new TbTransactionMasterDetail
             {

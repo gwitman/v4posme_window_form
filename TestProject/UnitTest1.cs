@@ -1,5 +1,6 @@
 using Unity;
 using v4posme_library.Libraries;
+using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels;
 using v4posme_library.Models;
 
@@ -103,7 +104,7 @@ namespace TestProject
             var notificationModel = VariablesGlobales.Instance.UnityContainer.Resolve<INotificationModel>();
             var data = notificationModel.GetRowByPk(5);
             data.Message = "Nuevo mensaje";
-            notificationModel.UpdateAppPosmeBySumary("C000",data);
+            notificationModel.UpdateAppPosmeBySumary("C000", data);
             Console.WriteLine(@"Se han actulizado los datos de forma correcta");
         }
 
@@ -114,6 +115,19 @@ namespace TestProject
             var fecha = DateTime.Now;
             var processNotification = rememberModel.GetProcessNotification(1, fecha);
             Console.WriteLine(@"Registro {0}", processNotification.Description);
+        }
+
+        [Test]
+        public void CoreWebCatalogTest()
+        {
+            var coreWebCatalog = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebCatalog>();
+            var catalogAllItem = coreWebCatalog.GetCatalogAllItem("tb_customer", "sexoID", 2);
+            foreach (var catalogItem in catalogAllItem)
+            {
+                Console.WriteLine($@"Dato recuperado de la consulta: {catalogItem.Name}");
+            }
+
+            Console.WriteLine($@"Tamaño de la lista o array: {catalogAllItem.Count}");
         }
     }
 }
