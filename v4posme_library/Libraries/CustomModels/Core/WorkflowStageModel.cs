@@ -19,7 +19,7 @@ class WorkflowStageModel : IWorkflowStageModel
         return query.ToList();
     }
 
-    public List<TbWorkflowStage> GetRowByWorkflowIdAndFlavorId(int workflowId, int flavorId)
+    public List<TbWorkflowStage>? GetRowByWorkflowIdAndFlavorId(int workflowId, int flavorId)
     {
         using var context = new DataContext();
         return context.TbWorkflowStages

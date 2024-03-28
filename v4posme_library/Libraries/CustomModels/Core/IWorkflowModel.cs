@@ -4,5 +4,5 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 public interface IWorkflowModel
 {
-    TbWorkflow GetRowByWorkflowId(int workflowId);
+    TbWorkflow? GetRowByWorkflowId(int workflowId);
 }

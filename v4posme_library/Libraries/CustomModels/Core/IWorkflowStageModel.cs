@@ -6,7 +6,7 @@ public interface IWorkflowStageModel
 {
     List<TbWorkflowStage> GetRowByPk(List<TbWorkflowStage> listWorkflowStageRole);
     
-    List<TbWorkflowStage> GetRowByWorkflowIdAndFlavorId(int workflowId,int flavorId);
+    List<TbWorkflowStage>? GetRowByWorkflowIdAndFlavorId(int workflowId,int flavorId);
     
     List<TbWorkflowStage> GetRowByWorkflowStageId(int workflowId,int flavorId,int workflowStageId);
     

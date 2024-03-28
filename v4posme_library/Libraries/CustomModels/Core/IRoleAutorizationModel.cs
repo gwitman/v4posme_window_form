@@ -13,7 +13,7 @@ public interface IRoleAutorizationModel
 
     List<TbRoleAutorizationDto> GetRowByRoleAutorization(int companyId, int branchId, int roleId);
     
-    List<TbRoleAutorizationDto> GetRowByRole(int companyId,int branchId,int roleId);
+    List<TbRoleAutorizationDto>? GetRowByRole(int companyId,int branchId,int roleId);
     
     List<TbRoleAutorizationDto> GetRowByPk(int companyId, int branchId, int roleId, int componentAutorizationId);
 }

@@ -6,7 +6,7 @@ using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 {
-    public class CoreMenuService : ICoreMenuService
+    public class CoreWebMenu : ICoreWebMenu
     {
         private readonly IConfigurationSection _section = VariablesGlobales.ConfigurationBuilder;
 

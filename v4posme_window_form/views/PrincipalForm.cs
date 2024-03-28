@@ -11,10 +11,12 @@ namespace v4posme_window_form.Views
 {
     public partial class PrincipalForm : FluentDesignForm
     {
-        private readonly ICompanyService _companyService = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyService>();
+        private readonly ICompanyModel _companyModel =
+            VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyModel>();
         private readonly IBranchModel _branchModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBranchModel>();
-        private readonly IMembershipService _membershipService = VariablesGlobales.Instance.UnityContainer.Resolve<IMembershipService>();
-        private readonly ICoreMenuService _coreMenuService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreMenuService>();
+        private readonly IMembershipModel _membershipModel =
+            VariablesGlobales.Instance.UnityContainer.Resolve<IMembershipModel>();
+        private readonly ICoreWebMenu _coreWebMenu = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebMenu>();
 
         public PrincipalForm()
         {
@@ -24,12 +26,12 @@ namespace v4posme_window_form.Views
         private void PrincipalForm_Load(object sender, EventArgs e)
         {
             Debug.Assert(VariablesGlobales.Instance.User != null, "VariablesGlobales.Instance.User != null");
-            VariablesGlobales.Instance.Company = _companyService.GetRowByPk(VariablesGlobales.Instance.User.CompanyId);
+            VariablesGlobales.Instance.Company = _companyModel.GetRowByPk(VariablesGlobales.Instance.User.CompanyId);
             VariablesGlobales.Instance.Branch = _branchModel.GetRowByPk(VariablesGlobales.Instance.User.BranchId, VariablesGlobales.Instance.User.CompanyId);
-            VariablesGlobales.Instance.Membership = _membershipService.GetRowByCompanyIdBranchIdUserId(VariablesGlobales.Instance.User.CompanyId,
+            VariablesGlobales.Instance.Membership = _membershipModel.GetRowByCompanyIdBranchIdUserId(VariablesGlobales.Instance.User.CompanyId,
                 VariablesGlobales.Instance.User.BranchId, VariablesGlobales.Instance.User.UserId);
             barCompanyNane.Caption = Resources.PrincipalForm_Compañía_Titulo + VariablesGlobales.Instance.Company!.Name + "-" + VariablesGlobales.Instance.Branch.Name;
-            foreach (var item in _coreMenuService.RenderMenuLeft(VariablesGlobales.Instance.Company, VariablesGlobales.Instance.ListMenuLeft))
+            foreach (var item in _coreWebMenu.RenderMenuLeft(VariablesGlobales.Instance.Company, VariablesGlobales.Instance.ListMenuLeft))
             {
                 menuElement.Elements.Add(new AccordionControlElement()
                 {

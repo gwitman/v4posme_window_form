@@ -120,13 +120,12 @@ namespace v4posme_library.Libraries
 
             #region CDI_LIBRARIES
 
-            _unityContainer.RegisterType<IMembershipService, MembershipService>();
-            _unityContainer.RegisterType<ICoreMenuService, CoreMenuService>();
+            _unityContainer.RegisterType<ICoreWebMenu, CoreWebMenu>();
             _unityContainer.RegisterType<ICoreWebAuthentication, CoreWebAuthentication>();
-            _unityContainer.RegisterType<ICompanyService, CompanyService>();
             _unityContainer.RegisterType<ICoreWebParameter, CoreWebParameter>();
             _unityContainer.RegisterType<ICoreWebPermission, CoreWebPermission>();
             _unityContainer.RegisterType<ICoreWebCatalog, CoreWebCatalog>();
+            _unityContainer.RegisterType<ICoreWebWorkflow, CoreWebWorkflow>();
 
             #endregion
         }

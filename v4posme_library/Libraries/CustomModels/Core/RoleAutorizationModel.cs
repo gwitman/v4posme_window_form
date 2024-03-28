@@ -56,7 +56,7 @@ class RoleAutorizationModel : IRoleAutorizationModel
         return query.ToList();
     }
 
-    public List<TbRoleAutorizationDto> GetRowByRole(int companyId, int branchId, int roleId)
+    public List<TbRoleAutorizationDto>? GetRowByRole(int companyId, int branchId, int roleId)
     {
         using var context = new DataContext();
         var query = from ra in context.TbRoleAutorizations

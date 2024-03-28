@@ -2,7 +2,7 @@
 
 namespace v4posme_library.Libraries.CustomLibraries.Interfaz
 {
-    public interface ICoreMenuService
+    public interface ICoreWebMenu
     {
         List<TbMenuElement>? GetMenuTop(int companyId, int branchId, int roleId);
 

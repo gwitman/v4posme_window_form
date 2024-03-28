@@ -279,7 +279,7 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<TbWarehouse> TbWarehouses { get; set; }
 
-    public virtual DbSet<TbWorkflow> TbWorkflows { get; set; }
+    public virtual DbSet<TbWorkflow?> TbWorkflows { get; set; }
 
     public virtual DbSet<TbWorkflowStage> TbWorkflowStages { get; set; }
 
