@@ -4,7 +4,7 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 public interface IParameterModel
 {
-    TbParameter GetRowByName(string name);
+    TbParameter? GetRowByName(string name);
 
-    List<TbParameter> GetAll();
+    List<TbParameter?>? GetAll();
 }

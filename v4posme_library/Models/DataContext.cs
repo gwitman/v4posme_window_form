@@ -213,7 +213,7 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<TbNotification> TbNotifications { get; set; }
 
-    public virtual DbSet<TbParameter> TbParameters { get; set; }
+    public virtual DbSet<TbParameter?> TbParameters { get; set; }
 
     public virtual DbSet<TbPrice> TbPrices { get; set; }
 

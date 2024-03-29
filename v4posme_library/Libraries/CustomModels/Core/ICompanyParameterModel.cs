@@ -6,5 +6,5 @@ public interface ICompanyParameterModel
 {
     void UpdateAppPosme(int companyId,int parameterId,TbCompanyParameter data);
     
-    TbCompanyParameter  GetRowByParameterIdCompanyId(int companyId,int parameterId);
+    TbCompanyParameter?  GetRowByParameterIdCompanyId(int companyId,int parameterId);
 }

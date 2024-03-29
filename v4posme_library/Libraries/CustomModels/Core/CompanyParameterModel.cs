@@ -16,11 +16,11 @@ class CompanyParameterModel : ICompanyParameterModel
         context.BulkSaveChanges();
     }
 
-    public TbCompanyParameter GetRowByParameterIdCompanyId(int companyId, int parameterId)
+    public TbCompanyParameter? GetRowByParameterIdCompanyId(int companyId, int parameterId)
     {
         using var context = new DataContext();
         return context.TbCompanyParameters
-            .First(parameter => parameter.CompanyId == companyId
-                                && parameter.ParameterId == parameterId);
+            .FirstOrDefault(parameter => parameter.CompanyId == companyId
+                                         && parameter.ParameterId == parameterId);
     }
 }

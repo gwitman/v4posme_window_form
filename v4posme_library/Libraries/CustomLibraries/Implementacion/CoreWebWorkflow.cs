@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Unity;
+﻿using Unity;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels.Core;
 using v4posme_library.Models;
@@ -117,12 +116,22 @@ class CoreWebWorkflow : ICoreWebWorkflow
             return new List<TbWorkflowStage>();
         }
 
-        var query = from i in objWorkflowStage
-            let exists = objWorkflowStageRole.Any(ii => ii.WorkflowStageId == i.WorkflowStageId)
-            where exists
-            select i;
+        var aux = new List<TbWorkflowStage>();
+        foreach (var stage in objWorkflowStage)
+        {
+            var exist = false;
+            foreach (var unused in objWorkflowStageRole.Where(dto => stage.WorkflowStageId == dto.WorkflowStageId))
+            {
+                exist = true;
+            }
 
-        return query.ToList();
+            if (exist)
+            {
+                aux.Add(stage);
+            }
+        }
+
+        return aux;
     }
 
     public List<TbWorkflowStage>? GetWorkflowInitStage(string table, string field, int companyId,
@@ -365,7 +374,7 @@ class CoreWebWorkflow : ICoreWebWorkflow
             exist = true;
         }
 
-        return !exist ? null : objWorkflowStage;
+        return exist ? objWorkflowStage : null;
     }
 
     public List<TbWorkflowStage> GetWorkflowStageByStageInit(string table, string field, int startStageId,
