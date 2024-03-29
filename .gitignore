@@ -363,6 +363,9 @@ MigrationBackup/
 FodyWeavers.xsd
 
 ./v4posme_window_form/bin/
+
 ./v4posme_window_form/obj/
+
 ./v4posme_library/bin/
+
 ./v4posme_library/obj/
