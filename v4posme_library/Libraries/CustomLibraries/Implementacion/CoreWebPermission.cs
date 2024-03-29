@@ -38,7 +38,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 {
                     return "CREDITOS PRONTO VENCERAN";
                 }
-
+                 
             }
             return "";
         }
