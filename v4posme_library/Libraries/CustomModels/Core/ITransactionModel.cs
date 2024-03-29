@@ -4,7 +4,7 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 public interface ITransactionModel
 {
-    TbTransaction GetRowByPk(int companyId, string name);
+    TbTransaction? GetRowByPk(int companyId, string name);
 
     int GetCounterTransactionMaster(int companyId, int transactionId, int statusId);
 
@@ -12,9 +12,9 @@ public interface ITransactionModel
 
     int GetCountOutput(int companyId);
 
-    TbTransaction GetByCompanyAndTransaction(int companyId, int transactionId);
+    TbTransaction? GetByCompanyAndTransaction(int companyId, int transactionId);
 
-    List<TbTransaction> GetTransactionContabilizable(int companyId);
+    List<TbTransaction?> GetTransactionContabilizable(int companyId);
 
     void UpdateAppPosme(int companyId, int transactionId, TbTransaction data);
 }

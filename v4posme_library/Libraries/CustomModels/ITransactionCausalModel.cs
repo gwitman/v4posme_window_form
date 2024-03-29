@@ -5,13 +5,13 @@ namespace v4posme_library.Libraries.CustomModels;
 
 public interface ITransactionCausalModel
 {
-    List<TbTransactionCausal> GetCausalByBranch(int companyId, int transactionId, int branchId);
+    List<TbTransactionCausal?> GetCausalByBranch(int companyId, int transactionId, int branchId);
 
-    TbTransactionCausal GetCausalDefaultId(int companyId, int transactionId);
+    TbTransactionCausal? GetCausalDefaultId(int companyId, int transactionId);
 
     List<TbTransactionCausalDto> GetByCompanyAndTransaction(int companyId, int transactionId);
 
-    TbTransactionCausal GetByCompanyAndTransactionAndCausal(int companyId, int transactionId, int causalId);
+    TbTransactionCausal? GetByCompanyAndTransactionAndCausal(int companyId, int transactionId, int causalId);
 
     void DeleteAppPosme(int companyId, int transactionId, List<int> listCausal);
 
