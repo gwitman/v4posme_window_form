@@ -4,5 +4,5 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 public interface IWorkflowStageRelationModel
 {
-    List<TbWorkflowStage> GetRowBySourceWorkflowStageId(int workflowId, int flavorId, int sourceStageId);
+    List<TbWorkflowStage>? GetRowBySourceWorkflowStageId(int workflowId, int flavorId, int sourceStageId);
 }

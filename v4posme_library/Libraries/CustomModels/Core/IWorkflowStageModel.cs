@@ -8,11 +8,11 @@ public interface IWorkflowStageModel
     
     List<TbWorkflowStage>? GetRowByWorkflowIdAndFlavorId(int workflowId,int flavorId);
     
-    List<TbWorkflowStage> GetRowByWorkflowStageId(int workflowId,int flavorId,int workflowStageId);
+    List<TbWorkflowStage>? GetRowByWorkflowStageId(int workflowId,int flavorId,int workflowStageId);
     
     List<TbWorkflowStage> GetRowByWorkflowStageIdOnly(int workflowStageId);
     
-    List<TbWorkflowStage> GetRowByWorkflowIdAndFlavorIdInit(int workflowId,int flavorId);
+    List<TbWorkflowStage>? GetRowByWorkflowIdAndFlavorIdInit(int workflowId,int flavorId);
     
-    List<TbWorkflowStage> GetRowByWorkflowIdAndFlavorIdApplyFirst(int workflowId,int flavorId);
+    List<TbWorkflowStage>? GetRowByWorkflowIdAndFlavorIdApplyFirst(int workflowId,int flavorId);
 }

@@ -129,11 +129,13 @@ namespace TestProject
 
             Console.WriteLine($@"Tamaño de la lista o array: {catalogAllItem.Count}");
         }
+
         [Test]
         public void CoreWebWorkflowTest()
         {
             var coreWebWorkflow = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebWorkflow>();
-            var coreWebWorkflowData = coreWebWorkflow.GetWorkflowAllStage("tb_customer", "statusID", 2,2,3);
+            var coreWebWorkflowData =
+                coreWebWorkflow.GetWorkflowAllStage("tb_transaction_master_billing", "statusID", 2, 2, 201);
 
             if (coreWebWorkflowData is not null)
             {

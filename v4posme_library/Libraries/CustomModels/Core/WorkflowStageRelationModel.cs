@@ -4,7 +4,7 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 class WorkflowStageRelationModel : IWorkflowStageRelationModel
 {
-    public List<TbWorkflowStage> GetRowBySourceWorkflowStageId(int workflowId, int flavorId, int sourceStageId)
+    public List<TbWorkflowStage>? GetRowBySourceWorkflowStageId(int workflowId, int flavorId, int sourceStageId)
     {
         using var context = new DataContext();
         var query = from w in context.TbWorkflows

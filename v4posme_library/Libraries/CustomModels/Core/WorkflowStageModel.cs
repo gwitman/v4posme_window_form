@@ -29,7 +29,7 @@ class WorkflowStageModel : IWorkflowStageModel
             .ToList();
     }
 
-    public List<TbWorkflowStage> GetRowByWorkflowStageId(int workflowId, int flavorId, int workflowStageId)
+    public List<TbWorkflowStage>? GetRowByWorkflowStageId(int workflowId, int flavorId, int workflowStageId)
     {
         using var context = new DataContext();
         return context.TbWorkflowStages
@@ -49,7 +49,7 @@ class WorkflowStageModel : IWorkflowStageModel
             .ToList();
     }
 
-    public List<TbWorkflowStage> GetRowByWorkflowIdAndFlavorIdInit(int workflowId, int flavorId)
+    public List<TbWorkflowStage>? GetRowByWorkflowIdAndFlavorIdInit(int workflowId, int flavorId)
     {
         using var context = new DataContext();
         return context.TbWorkflowStages
@@ -59,7 +59,7 @@ class WorkflowStageModel : IWorkflowStageModel
             .ToList();
     }
 
-    public List<TbWorkflowStage> GetRowByWorkflowIdAndFlavorIdApplyFirst(int workflowId, int flavorId)
+    public List<TbWorkflowStage>? GetRowByWorkflowIdAndFlavorIdApplyFirst(int workflowId, int flavorId)
     {
         using var context = new DataContext();
         return context.TbWorkflowStages
