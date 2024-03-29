@@ -126,6 +126,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICoreWebPermission, CoreWebPermission>();
             _unityContainer.RegisterType<ICoreWebCatalog, CoreWebCatalog>();
             _unityContainer.RegisterType<ICoreWebWorkflow, CoreWebWorkflow>();
+            _unityContainer.RegisterType<ICoreWebTools, CoreWebTools>();
 
             #endregion
         }
