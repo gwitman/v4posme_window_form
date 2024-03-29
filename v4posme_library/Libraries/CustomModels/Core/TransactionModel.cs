@@ -4,11 +4,11 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 class TransactionModel : ITransactionModel
 {
-    public TbTransaction GetRowByPk(int companyId, string name)
+    public TbTransaction? GetRowByPk(int companyId, string name)
     {
         using var context = new DataContext();
         return context.TbTransactions
-            .First(transaction => transaction.CompanyId == companyId
+            .FirstOrDefault(transaction => transaction!.CompanyId == companyId
                                   && transaction.Name == name
                                   && transaction.IsActive!.Value);
     }
@@ -44,7 +44,7 @@ class TransactionModel : ITransactionModel
         return query.Count();
     }
 
-    public TbTransaction GetByCompanyAndTransaction(int companyId, int transactionId)
+    public TbTransaction? GetByCompanyAndTransaction(int companyId, int transactionId)
     {
         using var context = new DataContext();
         return context.TbTransactions
@@ -53,7 +53,7 @@ class TransactionModel : ITransactionModel
                                   && transaction.IsActive!.Value);
     }
 
-    public List<TbTransaction> GetTransactionContabilizable(int companyId)
+    public List<TbTransaction?> GetTransactionContabilizable(int companyId)
     {
         using var context = new DataContext();
         return context.TbTransactions

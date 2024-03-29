@@ -6,7 +6,7 @@ namespace v4posme_library.Libraries.CustomModels;
 
 class TransactionCausalModel : ITransactionCausalModel
 {
-    public List<TbTransactionCausal> GetCausalByBranch(int companyId, int transactionId, int branchId)
+    public List<TbTransactionCausal?> GetCausalByBranch(int companyId, int transactionId, int branchId)
     {
         using var context = new DataContext();
         return context.TbTransactionCausals
@@ -17,11 +17,11 @@ class TransactionCausalModel : ITransactionCausalModel
             .ToList();
     }
 
-    public TbTransactionCausal GetCausalDefaultId(int companyId, int transactionId)
+    public TbTransactionCausal? GetCausalDefaultId(int companyId, int transactionId)
     {
         using var context = new DataContext();
         return context.TbTransactionCausals
-            .Single(causal => causal.CompanyId == companyId
+            .SingleOrDefault(causal => causal!.CompanyId == companyId
                               && causal.TransactionId == transactionId
                               && causal.IsActive  && causal.IsDefault );
     }
@@ -56,7 +56,7 @@ class TransactionCausalModel : ITransactionCausalModel
         return result.ToList();
     }
 
-    public TbTransactionCausal GetByCompanyAndTransactionAndCausal(int companyId, int transactionId, int causalId)
+    public TbTransactionCausal? GetByCompanyAndTransactionAndCausal(int companyId, int transactionId, int causalId)
     {
         using var context = new DataContext();
         return context.TbTransactionCausals
