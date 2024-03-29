@@ -57,6 +57,13 @@ public class CoreWebAccounting : ICoreWebAccounting
         var objPeriod = _componentPeriodModel.GetRowByPk(periodId);
         return objCompanyParameter != null && objPeriod.StatusId == Convert.ToInt32(objCompanyParameter.Value);
     }
+
+    public bool PeriodIsEmptyById(int companyId, int periodId)
+    {
+        var countJournal = _componentPeriodModel.CountJournalInPeriod(periodId, companyId);
+        return countJournal <= 0;
+    }
+
     public bool PeriodIsCloseByDate(int companyId, DateTime dateOn)
     {
         var objParameter = _parameterModel.GetRowByName("ACCOUNTING_PERIOD_WORKFLOWSTAGECLOSED");
