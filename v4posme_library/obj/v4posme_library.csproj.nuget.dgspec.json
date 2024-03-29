@@ -1,25 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\xampp\\teamds2\\nsSystem\\v4posme_window_form\\v4posme_library\\v4posme_library.csproj": {}
+    "E:\\Repos\\v4posme_window_form\\v4posme_library\\v4posme_library.csproj": {}
   },
   "projects": {
-    "C:\\xampp\\teamds2\\nsSystem\\v4posme_window_form\\v4posme_library\\v4posme_library.csproj": {
+    "E:\\Repos\\v4posme_window_form\\v4posme_library\\v4posme_library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\xampp\\teamds2\\nsSystem\\v4posme_window_form\\v4posme_library\\v4posme_library.csproj",
+        "projectUniqueName": "E:\\Repos\\v4posme_window_form\\v4posme_library\\v4posme_library.csproj",
         "projectName": "v4posme_library",
-        "projectPath": "C:\\xampp\\teamds2\\nsSystem\\v4posme_window_form\\v4posme_library\\v4posme_library.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\xampp\\teamds2\\nsSystem\\v4posme_window_form\\v4posme_library\\obj\\",
+        "projectPath": "E:\\Repos\\v4posme_window_form\\v4posme_library\\v4posme_library.csproj",
+        "packagesPath": "C:\\Users\\jmigu\\.nuget\\packages\\",
+        "outputPath": "E:\\Repos\\v4posme_window_form\\v4posme_library\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Program Files\\DevExpress23_2\\Components\\Offline Packages",
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 23.2.config",
+          "C:\\Users\\jmigu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 23.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -28,7 +29,9 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "D:\\Program Files\\DevExpress23_2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files\\DevExpress 23.1\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Users\\Public\\Documents\\Infragistics\\NuGet\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -41,11 +44,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {

@@ -7,6 +7,7 @@ public interface ICoreWebAccounting
     bool CycleIsCloseByDate(int companyId, DateTime dateOn);
     bool CycleIsEmptyByDate(int companyId, DateTime dateOn);
     bool PeriodIsCloseById(int companyId, int periodId);
+    bool PeriodIsEmptyById(int companyId,int periodId);
     bool PeriodIsEmptyByDate(int companyId, DateTime dateOn);
     bool PeriodIsCloseByDate(int companyId, DateTime dateOn);
     void MayorizateAccount(int companyId, int branchId, int loginId, int accountId, int componentPeriodId, int componentCycleId, decimal balance, decimal debit, decimal credit);
