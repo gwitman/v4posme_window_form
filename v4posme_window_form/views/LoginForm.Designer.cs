@@ -77,16 +77,19 @@ namespace v4posme_window_form.views
             ultraPanel1.Controls.Add(pictureEdit1);
             ultraPanel1.Dock = DockStyle.Fill;
             ultraPanel1.Location = new Point(0, 0);
+            ultraPanel1.Margin = new Padding(4, 4, 4, 4);
             ultraPanel1.Name = "ultraPanel1";
-            ultraPanel1.Size = new Size(507, 512);
+            ultraPanel1.Size = new Size(592, 630);
             ultraPanel1.TabIndex = 25;
+            ultraPanel1.Paint += ultraPanel1_Paint;
             // 
             // cmbMontoPagar
             // 
-            cmbMontoPagar.Location = new Point(179, 384);
+            cmbMontoPagar.Location = new Point(209, 473);
+            cmbMontoPagar.Margin = new Padding(4, 4, 4, 4);
             cmbMontoPagar.Name = "cmbMontoPagar";
             cmbMontoPagar.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            cmbMontoPagar.Size = new Size(130, 20);
+            cmbMontoPagar.Size = new Size(152, 22);
             cmbMontoPagar.TabIndex = 31;
             cmbMontoPagar.Visible = false;
             // 
@@ -98,9 +101,10 @@ namespace v4posme_window_form.views
             progressPanel.Caption = "Cargando usuario";
             progressPanel.ContentAlignment = ContentAlignment.MiddleCenter;
             progressPanel.Description = "Buscando recursos de usuario";
-            progressPanel.Location = new Point(90, 186);
+            progressPanel.Location = new Point(105, 229);
+            progressPanel.Margin = new Padding(4, 4, 4, 4);
             progressPanel.Name = "progressPanel";
-            progressPanel.Size = new Size(312, 141);
+            progressPanel.Size = new Size(364, 174);
             progressPanel.TabIndex = 30;
             progressPanel.Visible = false;
             // 
@@ -114,11 +118,12 @@ namespace v4posme_window_form.views
             btnCancelar.AppearanceHovered.Options.UseBackColor = true;
             btnCancelar.DialogResult = DialogResult.Cancel;
             btnCancelar.ImageOptions.SvgImageSize = new Size(24, 24);
-            btnCancelar.Location = new Point(301, 423);
+            btnCancelar.Location = new Point(351, 521);
             btnCancelar.LookAndFeel.SkinName = "Office 2016 Colorful";
             btnCancelar.LookAndFeel.UseDefaultLookAndFeel = false;
+            btnCancelar.Margin = new Padding(4, 4, 4, 4);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(101, 29);
+            btnCancelar.Size = new Size(118, 36);
             btnCancelar.TabIndex = 4;
             btnCancelar.Text = "Cancelar";
             btnCancelar.Click += btnCancelar_Click_1;
@@ -133,9 +138,10 @@ namespace v4posme_window_form.views
             btnIngresar.AppearanceHovered.Options.UseBackColor = true;
             btnIngresar.ImageOptions.SvgImageColorizationMode = DevExpress.Utils.SvgImageColorizationMode.CommonPalette;
             btnIngresar.ImageOptions.SvgImageSize = new Size(24, 24);
-            btnIngresar.Location = new Point(90, 423);
+            btnIngresar.Location = new Point(105, 521);
+            btnIngresar.Margin = new Padding(4, 4, 4, 4);
             btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(111, 29);
+            btnIngresar.Size = new Size(130, 36);
             btnIngresar.TabIndex = 3;
             btnIngresar.Text = "Ingresar";
             btnIngresar.Click += btnIngresar_Click;
@@ -150,9 +156,10 @@ namespace v4posme_window_form.views
             btnPagar.AppearanceHovered.Options.UseBackColor = true;
             btnPagar.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             btnPagar.ImageOptions.SvgImageSize = new Size(28, 28);
-            btnPagar.Location = new Point(194, 349);
+            btnPagar.Location = new Point(226, 430);
+            btnPagar.Margin = new Padding(4, 4, 4, 4);
             btnPagar.Name = "btnPagar";
-            btnPagar.Size = new Size(101, 29);
+            btnPagar.Size = new Size(118, 36);
             btnPagar.TabIndex = 27;
             btnPagar.Text = "Pagar";
             btnPagar.ToolTip = "Ir a pagar";
@@ -162,14 +169,15 @@ namespace v4posme_window_form.views
             // txtPassword
             // 
             txtPassword.EnterMoveNextControl = true;
-            txtPassword.Location = new Point(126, 256);
+            txtPassword.Location = new Point(147, 315);
+            txtPassword.Margin = new Padding(4, 4, 4, 4);
             txtPassword.Name = "txtPassword";
             txtPassword.Properties.AdvancedModeOptions.Label = "Contraseña";
             txtPassword.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("txtPassword.Properties.ContextImageOptions.SvgImage");
             txtPassword.Properties.LookAndFeel.SkinName = "WXI";
             txtPassword.Properties.LookAndFeel.UseDefaultLookAndFeel = false;
             txtPassword.Properties.UseSystemPasswordChar = true;
-            txtPassword.Size = new Size(242, 44);
+            txtPassword.Size = new Size(282, 56);
             txtPassword.TabIndex = 1;
             txtPassword.EditValueChanged += txtPassword_EditValueChanged;
             txtPassword.KeyPress += txtPassword_KeyPress;
@@ -177,36 +185,39 @@ namespace v4posme_window_form.views
             // txtUsuario
             // 
             txtUsuario.EnterMoveNextControl = true;
-            txtUsuario.Location = new Point(126, 191);
+            txtUsuario.Location = new Point(147, 235);
+            txtUsuario.Margin = new Padding(4, 4, 4, 4);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Properties.AdvancedModeOptions.AllowCaretAnimation = DevExpress.Utils.DefaultBoolean.True;
             txtUsuario.Properties.AdvancedModeOptions.Label = "Usuario";
             txtUsuario.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("txtUsuario.Properties.ContextImageOptions.SvgImage");
             txtUsuario.Properties.LookAndFeel.SkinName = "WXI";
             txtUsuario.Properties.LookAndFeel.UseDefaultLookAndFeel = false;
-            txtUsuario.Size = new Size(242, 44);
+            txtUsuario.Size = new Size(282, 56);
             txtUsuario.TabIndex = 0;
             txtUsuario.EditValueChanged += txtUsuario_EditValueChanged;
             txtUsuario.KeyPress += txtUsuario_KeyPress;
             // 
             // chkPagar
             // 
-            chkPagar.Location = new Point(204, 309);
+            chkPagar.Location = new Point(238, 380);
+            chkPagar.Margin = new Padding(4, 4, 4, 4);
             chkPagar.Name = "chkPagar";
             chkPagar.Properties.Caption = "Pagar";
-            chkPagar.Size = new Size(80, 18);
+            chkPagar.Size = new Size(93, 21);
             chkPagar.TabIndex = 28;
             chkPagar.CheckedChanged += chkPagar_CheckedChanged;
             // 
             // pictureEdit1
             // 
             pictureEdit1.EditValue = v4posme_window.Properties.Resources.posMe_Logo_fondo_blanco;
-            pictureEdit1.Location = new Point(107, 11);
+            pictureEdit1.Location = new Point(125, 14);
+            pictureEdit1.Margin = new Padding(4, 4, 4, 4);
             pictureEdit1.Name = "pictureEdit1";
             pictureEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             pictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            pictureEdit1.Size = new Size(295, 128);
+            pictureEdit1.Size = new Size(344, 158);
             pictureEdit1.TabIndex = 22;
             // 
             // dxErrorProvider
@@ -215,15 +226,16 @@ namespace v4posme_window_form.views
             // 
             // LoginForm
             // 
-            AutoScaleDimensions = new SizeF(6F, 13F);
+            AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(507, 512);
+            ClientSize = new Size(592, 630);
             ControlBox = false;
             Controls.Add(ultraPanel1);
             FormBorderStyle = FormBorderStyle.None;
             IconOptions.Icon = (Icon)resources.GetObject("LoginForm.IconOptions.Icon");
             LookAndFeel.SkinName = "Office 2019 Colorful";
             LookAndFeel.UseDefaultLookAndFeel = false;
+            Margin = new Padding(4, 4, 4, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "LoginForm";
