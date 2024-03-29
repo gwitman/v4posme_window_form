@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\xampp\\teamds2\\nsSystem\\v4posme_window_form\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|c:\\xampp\\teamds2\\nssystem\\v4posme_window_form\\v4posme_library\\libraries\\customlibraries\\implementacion\\corewebworkflow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|solutionrelative:v4posme_library\\libraries\\customlibraries\\implementacion\\corewebworkflow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|c:\\xampp\\teamds2\\nssystem\\v4posme_window_form\\v4posme_library\\libraries\\customlibraries\\implementacion\\corewebtools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|solutionrelative:v4posme_library\\libraries\\customlibraries\\implementacion\\corewebtools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|c:\\xampp\\teamds2\\nssystem\\v4posme_window_form\\v4posme_library\\libraries\\customlibraries\\implementacion\\corewebcatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62961A04-3F58-4A98-B542-CF6BBE0BB632}|v4posme_library\\v4posme_library.csproj|solutionrelative:v4posme_library\\libraries\\customlibraries\\implementacion\\corewebcatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{96DEC9C5-587C-4D0D-87ED-AB341A8EF9E1}|TestProject\\TestProject.csproj|c:\\xampp\\teamds2\\nssystem\\v4posme_window_form\\testproject\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{96DEC9C5-587C-4D0D-87ED-AB341A8EF9E1}|TestProject\\TestProject.csproj|solutionrelative:testproject\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -14,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -29,18 +41,57 @@
               "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
             },
             {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CoreWebTools.cs",
+              "DocumentMoniker": "C:\\xampp\\teamds2\\nsSystem\\v4posme_window_form\\v4posme_library\\Libraries\\CustomLibraries\\Implementacion\\CoreWebTools.cs",
+              "RelativeDocumentMoniker": "v4posme_library\\Libraries\\CustomLibraries\\Implementacion\\CoreWebTools.cs",
+              "ToolTip": "C:\\xampp\\teamds2\\nsSystem\\v4posme_window_form\\v4posme_library\\Libraries\\CustomLibraries\\Implementacion\\CoreWebTools.cs",
+              "RelativeToolTip": "v4posme_library\\Libraries\\CustomLibraries\\Implementacion\\CoreWebTools.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAQwDAAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-29T17:02:02.205Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CoreWebCatalog.cs",
+              "DocumentMoniker": "C:\\xampp\\teamds2\\nsSystem\\v4posme_window_form\\v4posme_library\\Libraries\\CustomLibraries\\Implementacion\\CoreWebCatalog.cs",
+              "RelativeDocumentMoniker": "v4posme_library\\Libraries\\CustomLibraries\\Implementacion\\CoreWebCatalog.cs",
+              "ToolTip": "C:\\xampp\\teamds2\\nsSystem\\v4posme_window_form\\v4posme_library\\Libraries\\CustomLibraries\\Implementacion\\CoreWebCatalog.cs",
+              "RelativeToolTip": "v4posme_library\\Libraries\\CustomLibraries\\Implementacion\\CoreWebCatalog.cs",
+              "ViewState": "AQIAAFoAAAAAAAAAAAAYwGgAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-29T17:01:37.731Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CoreWebWorkflow.cs",
+              "DocumentMoniker": "C:\\xampp\\teamds2\\nsSystem\\v4posme_window_form\\v4posme_library\\Libraries\\CustomLibraries\\Implementacion\\CoreWebWorkflow.cs",
+              "RelativeDocumentMoniker": "v4posme_library\\Libraries\\CustomLibraries\\Implementacion\\CoreWebWorkflow.cs",
+              "ToolTip": "C:\\xampp\\teamds2\\nsSystem\\v4posme_window_form\\v4posme_library\\Libraries\\CustomLibraries\\Implementacion\\CoreWebWorkflow.cs",
+              "RelativeToolTip": "v4posme_library\\Libraries\\CustomLibraries\\Implementacion\\CoreWebWorkflow.cs",
+              "ViewState": "AQIAAMIBAAAAAAAAAAAowOMBAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-29T17:01:35.163Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "UnitTest1.cs",
               "DocumentMoniker": "C:\\xampp\\teamds2\\nsSystem\\v4posme_window_form\\TestProject\\UnitTest1.cs",
               "RelativeDocumentMoniker": "TestProject\\UnitTest1.cs",
               "ToolTip": "C:\\xampp\\teamds2\\nsSystem\\v4posme_window_form\\TestProject\\UnitTest1.cs",
               "RelativeToolTip": "TestProject\\UnitTest1.cs",
-              "ViewState": "AQIAAGwAAAAAAAAAAAAewHgAAAANAAAA",
+              "ViewState": "AQIAAGwAAAAAAAAAAAAewIQAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-29T03:06:30.249Z",
               "EditorCaption": ""
