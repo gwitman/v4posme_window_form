@@ -28,7 +28,7 @@ class ExchangerateModel : IExchangerateModel
         return add.Entity.ExchangeRateId;
     }
 
-    public TbExchangeRate GetDefault(int companyId)
+    public TbExchangeRate? GetDefault(int companyId)
     {
         using var context = new DataContext();
         return context.TbExchangeRates
@@ -36,11 +36,11 @@ class ExchangerateModel : IExchangerateModel
                            && rate.CompanyId == companyId);
     }
 
-    public TbExchangeRate GetRowByPk(int companyId, DateOnly date, int currencyIdSource, int currencyIdTarget)
+    public TbExchangeRate? GetRowByPk(int companyId, DateOnly date, int currencyIdSource, int currencyIdTarget)
     {
         using var context = new DataContext();
         return context.TbExchangeRates
-            .First(rate => rate.CompanyId == companyId
+            .FirstOrDefault(rate => rate!.CompanyId == companyId
                            && rate.CurrencyId == currencyIdSource
                            && rate.TargetCurrencyId == currencyIdTarget
                            && rate.Date==date);

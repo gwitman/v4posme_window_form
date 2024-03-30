@@ -157,7 +157,7 @@ public sealed partial class DataContext : DbContext
 
     public DbSet<TbEstadisticaClas> TbEstadisticaClases { get; set; } = null!;
 
-    public DbSet<TbExchangeRate> TbExchangeRates { get; set; } = null!;
+    public DbSet<TbExchangeRate?> TbExchangeRates { get; set; } = null!;
 
     public DbSet<TbFixedAssent> TbFixedAssents { get; set; } = null!;
 

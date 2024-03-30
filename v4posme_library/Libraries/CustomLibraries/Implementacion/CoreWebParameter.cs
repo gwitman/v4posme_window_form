@@ -14,9 +14,13 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         private readonly ICompanyParameterModel _companyParameterModel =
             VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
 
-        public TbCompanyParameter GetParameter(string parameterName, int companyId)
+        public TbCompanyParameter? GetParameter(string parameterName, int companyId)
         {
             var parameter = _parameterModel.GetRowByName(parameterName);
+            if (parameter is null)
+            {
+                throw new Exception($"NO EXISTE EL PARAMETRO {parameterName} PARA LA COMPANY {companyId}");
+            }
             var companyParameter =
                 _companyParameterModel.GetRowByParameterIdCompanyId(companyId, parameter.ParameterId);
             if (companyParameter is null)

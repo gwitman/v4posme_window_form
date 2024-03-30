@@ -4,7 +4,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Interfaz
 {
     public interface ICoreWebParameter
     {
-        TbCompanyParameter GetParameter(string parameterName, int companyId);
+        TbCompanyParameter? GetParameter(string parameterName, int companyId);
 
         string? GetParameterValue(string parameterName, int companyId);
 

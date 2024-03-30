@@ -131,6 +131,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICoreWebTransaction, CoreWebTransaction>();
             _unityContainer.RegisterType<IBdModel, BdModel>();
             _unityContainer.RegisterType<ICoreWebInventory, CoreWebInventory>();
+            _unityContainer.RegisterType<ICoreWebCurrency, CoreWebCurrency>();
 
             #endregion
         }

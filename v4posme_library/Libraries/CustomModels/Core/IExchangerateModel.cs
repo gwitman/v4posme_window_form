@@ -9,9 +9,9 @@ public interface IExchangerateModel
 
     int InsertAppPosme(TbExchangeRate data);
 
-    TbExchangeRate GetDefault(int companyId);
+    TbExchangeRate? GetDefault(int companyId);
 
-    TbExchangeRate GetRowByPk(int companyId, DateOnly date, int currencyIdSource, int currencyIdTarget);
+    TbExchangeRate? GetRowByPk(int companyId, DateOnly date, int currencyIdSource, int currencyIdTarget);
 
     List<TbExchangeRateDto> GetByCompanyAndDate(int companyId, DateOnly dateStartOn, DateOnly dateEndOn);
 }
