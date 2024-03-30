@@ -105,7 +105,7 @@ public sealed partial class DataContext : DbContext
 
     public DbSet<TbComponentElement> TbComponentElements { get; set; } = null!;
 
-    public DbSet<TbCounter> TbCounters { get; set; } = null!;
+    public DbSet<TbCounter?> TbCounters { get; set; } = null!;
 
     public DbSet<TbCreditLine> TbCreditLines { get; set; } = null!;
 
