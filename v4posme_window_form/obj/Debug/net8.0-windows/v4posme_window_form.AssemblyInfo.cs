@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("v4posme_window_form")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b2e3f6e5ce595e19243add8403412a04d20922c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9bf2e5d130eff7d5444003c40ca5681c25572e41")]
 [assembly: System.Reflection.AssemblyProductAttribute("v4posme_window_form")]
 [assembly: System.Reflection.AssemblyTitleAttribute("v4posme_window_form")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
