@@ -13,7 +13,7 @@ class CoreWebTransaction : ICoreWebTransaction
     private readonly ICoreWebParameter _coreWebParameter =
         VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
 
-    private ITransactionModel _transactionModel =
+    private readonly ITransactionModel _transactionModel =
         VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionModel>();
 
     private readonly ICompanyComponentFlavorModel _companyComponentFlavor =

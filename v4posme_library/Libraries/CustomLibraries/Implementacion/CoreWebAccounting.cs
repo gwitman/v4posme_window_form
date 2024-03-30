@@ -156,9 +156,7 @@ public class CoreWebAccounting : ICoreWebAccounting
 
     public int MayorizateCycle(int companyId, int branchId, int loginId, int componentPeriodId, int componentCycleId)
     {
-        var debit = Decimal.Zero;
-        var credit = Decimal.Zero;
-        var balance = Decimal.Zero;
+        const decimal balance = decimal.Zero;
         const int componentAccountId = 4;
         var objCycle = _componentCycleModel.GetRowByPk(componentPeriodId, componentCycleId);
         var workflowStageCycleClose =
