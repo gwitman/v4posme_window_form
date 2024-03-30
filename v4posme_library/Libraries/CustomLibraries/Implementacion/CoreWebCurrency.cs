@@ -5,7 +5,7 @@ using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
 
-class CoreWebCurrency : ICoreWebCurrency
+public class CoreWebCurrency : ICoreWebCurrency
 {
     private readonly ICoreWebParameter _coreWebParameter =
         VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
