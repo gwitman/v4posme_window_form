@@ -37,7 +37,7 @@ namespace v4posme_window_form.views
         private async void btnIngresar_Click(object sender, EventArgs e)
         {
             progressPanel.Visible = true;
-            await Task.Run(async ()=>
+            await Task.Run(async () =>
             {
                 var usuarioService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
                 if (string.IsNullOrEmpty(txtUsuario.Text))
@@ -138,6 +138,11 @@ namespace v4posme_window_form.views
             {
                 btnIngresar.Focus();
             }
+        }
+
+        private void ultraPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
