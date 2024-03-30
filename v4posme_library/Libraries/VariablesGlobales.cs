@@ -134,6 +134,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICoreWebCurrency, CoreWebCurrency>();
             _unityContainer.RegisterType<ICoreWebCounter, CoreWebCounter>();
             _unityContainer.RegisterType<ICoreWebConvertion, CoreWebConvertion>();
+            _unityContainer.RegisterType<ICoreWebConcept, CoreWebConcept>();
 
             #endregion
         }
