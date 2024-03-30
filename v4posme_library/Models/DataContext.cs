@@ -43,7 +43,7 @@ public sealed partial class DataContext : DbContext
 
     public DbSet<TbAccountingBalanceTemp> TbAccountingBalanceTemps { get; set; } = null!;
 
-    public DbSet<TbAccountingCycle> TbAccountingCycles { get; set; } = null!;
+    public DbSet<TbAccountingCycle?> TbAccountingCycles { get; set; } = null!;
 
     public DbSet<TbAccountingPeriod> TbAccountingPeriods { get; set; } = null!;
 

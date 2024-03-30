@@ -122,6 +122,7 @@ namespace v4posme_library.Libraries
 
             _unityContainer.RegisterType<ICoreWebMenu, CoreWebMenu>();
             _unityContainer.RegisterType<ICoreWebAuthentication, CoreWebAuthentication>();
+            _unityContainer.RegisterType<ICoreWebAccounting, CoreWebAccounting>();
             _unityContainer.RegisterType<ICoreWebParameter, CoreWebParameter>();
             _unityContainer.RegisterType<ICoreWebPermission, CoreWebPermission>();
             _unityContainer.RegisterType<ICoreWebCatalog, CoreWebCatalog>();
@@ -129,6 +130,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICoreWebTools, CoreWebTools>();
             _unityContainer.RegisterType<ICoreWebTransaction, CoreWebTransaction>();
             _unityContainer.RegisterType<IBdModel, BdModel>();
+            _unityContainer.RegisterType<ICoreWebInventory, CoreWebInventory>();
 
             #endregion
         }
