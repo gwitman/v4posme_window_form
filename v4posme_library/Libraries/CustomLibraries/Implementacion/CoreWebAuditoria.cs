@@ -109,6 +109,10 @@ class CoreWebAuditoria : ICoreWebAuditoria
         if (listSubElementAuditables is null)
             return;
 
+        if (listSubElementAuditables.Count == 0)
+            return;
+
+
         if (oldObject.GetType() != newObject.GetType())
             throw new Exception("LOS OBJET. EN LA AUDITORIA NO SON DE IGUAL TIPO");
         var columnAutoIncrement = objElement.ColumnAutoIncrement;
