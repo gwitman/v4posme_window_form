@@ -53,7 +53,7 @@ class CoreWebAuditoria : ICoreWebAuditoria
 
     public void SetAuditCreatedAdmin<T>(T obj, string request)
     {
-        var appUseradmin = VariablesGlobales.ConfigurationBuilder["APP_USERADMIN"];
+        var appUserAdmin = VariablesGlobales.ConfigurationBuilder["APP_USERADMIN"];
         var appBranch = VariablesGlobales.ConfigurationBuilder["APP_BRANCH"];
         var ipAddresses = Dns.GetHostAddresses(Dns.GetHostName()).First();
         if (obj == null) return;
@@ -67,7 +67,7 @@ class CoreWebAuditoria : ICoreWebAuditoria
 
             if (property is { Name: "createdBy", CanWrite: true })
             {
-                property.SetValue(obj, appUseradmin);
+                property.SetValue(obj, appUserAdmin);
             }
 
             if (property is { Name: "createdIn", CanWrite: true })
@@ -106,7 +106,7 @@ class CoreWebAuditoria : ICoreWebAuditoria
         // Obtener subElementos Auditables
         var listSubElementAuditables =
             _companySubElementAuditModel.ListElementAudit(user.CompanyId, objElement.ElementId);
-        if (listSubElementAuditables is null || listSubElementAuditables.Count <= 0)
+        if (listSubElementAuditables is null)
             return;
 
         if (oldObject.GetType() != newObject.GetType())
