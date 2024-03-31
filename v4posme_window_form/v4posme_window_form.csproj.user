@@ -8,8 +8,5 @@
     <Compile Update="Views\PrincipalForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="XtraForm1.cs">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
 </Project>
