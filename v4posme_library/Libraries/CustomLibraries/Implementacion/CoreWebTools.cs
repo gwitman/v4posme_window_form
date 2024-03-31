@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
+using System.Net.Mail;
+using System.Net;
 using Unity;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels.Core;
@@ -8,6 +10,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
 
 class CoreWebTools : ICoreWebTools
 {
+    private const string Path = "C:\\logposme";
     /// <summary>
     /// Esta función recibe un objeto message y devuelve una cadena formateada.
     /// Si message es un array, concatena todos los elementos del array en una sola cadena.
@@ -49,6 +52,55 @@ class CoreWebTools : ICoreWebTools
         return result;
     }
 
+    public void Log(string logMessage)
+    {
+        CreateDirectory();
+        using (StreamWriter w = File.AppendText(Path + "\\log.txt"))
+        {
+            w.Write("\r\nLog Entry : ");
+            w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
+            w.WriteLine("  :");
+            w.WriteLine($"  :{logMessage}");
+            w.WriteLine("-------------------------------");
+        }
+
+    }
+    private void CreateDirectory()
+    {
+        try
+        {
+            if (!Directory.Exists(Path)) Directory.CreateDirectory(Path);
+        }
+        catch (DirectoryNotFoundException ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+    public void sendEmail()
+    {
+        var fromAddress = new MailAddress("from@gmail.com", "From Name");
+        var toAddress = new MailAddress("to@example.com", "To Name");
+        const string fromPassword = "fromPassword";
+        const string subject = "Subject";
+        const string body = "Body";
+
+        var smtp = new SmtpClient
+        {
+            Host = "smtp.gmail.com",
+            Port = 587,
+            EnableSsl = true,
+            DeliveryMethod = SmtpDeliveryMethod.Network,
+            UseDefaultCredentials = false,
+            Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+        };
+        using (var message = new MailMessage(fromAddress, toAddress))
+        {
+            message.Subject = subject;
+            message.Body = body;
+            smtp.Send(message);
+        }
+    }
     public TbComponent? GetComponentIdByComponentName(string componentName)
     {
         var componentModel = VariablesGlobales.Instance.UnityContainer.Resolve<IComponentModel>();

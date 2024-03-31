@@ -40,6 +40,7 @@ namespace v4posme_window_form.views
             await Task.Run(async () =>
             {
                 var usuarioService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
+                var usuarioToolse = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
                 if (string.IsNullOrEmpty(txtUsuario.Text))
                 {
                     dxErrorProvider.SetError(txtUsuario, "Debe especificar un usuario para continuar.");
@@ -89,14 +90,13 @@ namespace v4posme_window_form.views
                     txtPassword.Focus();*/
                     return;
                 }
-                if (VariablesGlobales.Instance.MessageLogin.Length > 0)
+                if (VariablesGlobales.Instance.MessageLogin!.Length > 0)
                 {
                     XtraMessageBox.Show(VariablesGlobales.Instance.MessageLogin, "PosMe", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 /*XtraMessageBox.Show("Credenciales ingresada correctamente.",
-                    UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Information);*/
-                var logger = new Logger();
-                logger.Log("Usuario logeado al sistema: " + VariablesGlobales.Instance.User.Nickname);
+               UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Information);*/                
+                usuarioToolse.Log("Usuario logeado al sistema: " + VariablesGlobales.Instance.User.Nickname);
                 DialogResult = DialogResult.OK;
             });
             progressPanel.Visible = false;
