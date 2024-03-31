@@ -135,6 +135,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICoreWebCounter, CoreWebCounter>();
             _unityContainer.RegisterType<ICoreWebConvertion, CoreWebConvertion>();
             _unityContainer.RegisterType<ICoreWebConcept, CoreWebConcept>();
+            _unityContainer.RegisterType<ICoreWebAuditoria, CoreWebAuditoria>();
 
             #endregion
         }

@@ -142,5 +142,32 @@ namespace TestProject
                 Console.WriteLine($@"Tamaño de la lista 1: {coreWebWorkflowData.Count}");
             }
         }
+
+        [Test]
+        public void ProbarDictionary()
+        {
+            var elementSalvar = new Dictionary<int, Dictionary<string, object>>();
+            for (var i = 0; i < 10; i++)
+            {
+                elementSalvar[i] = new Dictionary<string, object>
+                {
+                    { "subelementid", i },
+                    { "oldvalue", $"Test {i}" },
+                    { "newvalue", $"Probar {i}" }
+                };
+            }
+
+            foreach (var kvp in elementSalvar)
+            {
+                var key = kvp.Key;
+                var values = kvp.Value;
+                var aux = 0;
+                foreach (var (fieldName, value) in values)
+                {
+                    Console.WriteLine($@"Key: {key}, Field Name: {fieldName}, Value: {value} en la linea {aux}");
+                    aux++;
+                }
+            }
+        }
     }
 }

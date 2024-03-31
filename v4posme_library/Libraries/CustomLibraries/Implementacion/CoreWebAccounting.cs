@@ -160,14 +160,14 @@ public class CoreWebAccounting : ICoreWebAccounting
         const int componentAccountId = 4;
         var objCycle = _componentCycleModel.GetRowByPk(componentPeriodId, componentCycleId);
         var workflowStageCycleClose =
-            _coreWebParameter.GetParameter("ACCOUNTING_CYCLE_WORKFLOWSTAGECLOSED", companyId).Value;
+            _coreWebParameter.GetParameter("ACCOUNTING_CYCLE_WORKFLOWSTAGECLOSED", companyId)!.Value;
         if (objCycle.StatusId == Convert.ToInt32(workflowStageCycleClose))
         {
             return 1;
         }
 
         //Obtener el comprobante de Cierre
-        var journalTypeClosed = _coreWebParameter.GetParameter("ACCOUNTING_CYCLE_WORKFLOWSTAGECLOSED", companyId).Value;
+        var journalTypeClosed = _coreWebParameter.GetParameter("ACCOUNTING_CYCLE_WORKFLOWSTAGECLOSED", companyId)!.Value;
         //Limpiar la tabla Temporal
         _accountingBalanceModel.DeleteJournalEntryDetailSummary(companyId, branchId, loginId);
         //Obtener los comprobantes resumidos

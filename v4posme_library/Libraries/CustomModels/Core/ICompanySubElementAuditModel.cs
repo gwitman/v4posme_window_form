@@ -5,5 +5,5 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 public interface ICompanySubElementAuditModel
 {
-    List<TbCompanySubelementAuditDto> ListElementAudit(int companyId, int elementId);
+    List<TbCompanySubelementAuditDto>? ListElementAudit(int companyId, int elementId);
 }

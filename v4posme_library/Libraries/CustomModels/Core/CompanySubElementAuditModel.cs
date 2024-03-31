@@ -5,7 +5,7 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 class CompanySubElementAuditModel : ICompanySubElementAuditModel
 {
-    public List<TbCompanySubelementAuditDto> ListElementAudit(int companyId, int elementId)
+    public List<TbCompanySubelementAuditDto>? ListElementAudit(int companyId, int elementId)
     {
         using var context = new DataContext();
         return context.TbCompanySubelementAudits
