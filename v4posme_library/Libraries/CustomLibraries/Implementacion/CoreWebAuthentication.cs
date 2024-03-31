@@ -8,7 +8,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 {
     public class CoreWebAuthentication : ICoreWebAuthentication
     {
-        private Logger _logger = new Logger();
+        
 
         private readonly IMembershipModel _membershipModel =
             VariablesGlobales.Instance.UnityContainer.Resolve<IMembershipModel>();
@@ -23,6 +23,9 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
         private readonly ICoreWebParameter _coreWebParameter =
             VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
+
+        private readonly ICoreWebTools _coreWebToolser =
+            VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
 
         public TbUser Validar(TbUser user, string password)
         {
@@ -48,7 +51,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             }
             catch (Exception exception)
             {
-                _logger.Log(exception.Message);
+                _coreWebToolser.Log(exception.Message);
                 return null;
             }
         }

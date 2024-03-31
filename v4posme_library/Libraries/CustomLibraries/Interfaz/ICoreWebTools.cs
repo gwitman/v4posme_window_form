@@ -22,5 +22,9 @@ public interface ICoreWebTools
     /// <returns>Clave-Valor</returns>
     Dictionary<string, object> FormatParameter(string filter);
 
+    void Log(string logMessage);
+
+    
+
     TbComponent? GetComponentIdByComponentName(string componentName);
 }
