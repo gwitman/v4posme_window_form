@@ -1,6 +1,6 @@
 ﻿namespace v4posme_library.ModelsDto;
 
-public record SumaryDto()
+public record SumaryDto
 {
     public decimal TotalPay { get; set; }
     public decimal TotalIntest { get; set; }
