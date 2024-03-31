@@ -52,6 +52,12 @@ class CoreWebTools : ICoreWebTools
         return result;
     }
 
+    public TbComponent? GetComponentIdByComponentName(string componentName)
+    {
+        var componentModel = VariablesGlobales.Instance.UnityContainer.Resolve<IComponentModel>();
+        return componentModel.GetRowByName(componentName);
+    }
+
     public void Log(string logMessage)
     {
         CreateDirectory();
@@ -101,9 +107,5 @@ class CoreWebTools : ICoreWebTools
             smtp.Send(message);
         }
     }
-    public TbComponent? GetComponentIdByComponentName(string componentName)
-    {
-        var componentModel = VariablesGlobales.Instance.UnityContainer.Resolve<IComponentModel>();
-        return componentModel.GetRowByName(componentName);
-    }
+  
 }
