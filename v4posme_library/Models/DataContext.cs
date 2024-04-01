@@ -215,7 +215,7 @@ public sealed partial class DataContext : DbContext
 
     public DbSet<TbParameter?> TbParameters { get; set; } = null!;
 
-    public DbSet<TbPrice> TbPrices { get; set; } = null!;
+    public DbSet<TbPrice?> TbPrices { get; set; } = null!;
 
     public DbSet<TbProvider> TbProviders { get; set; } = null!;
 

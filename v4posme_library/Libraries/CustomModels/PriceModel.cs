@@ -60,7 +60,7 @@ class PriceModel : IPriceModel
         return result.ToList();
     }
 
-    public TbPrice GetRowByPk(int companyId, int listPriceId, int itemId, int typePriceId)
+    public TbPrice? GetRowByPk(int companyId, int listPriceId, int itemId, int typePriceId)
     {
         using var context = new DataContext();
         return context.TbPrices
@@ -89,20 +89,20 @@ class PriceModel : IPriceModel
             .ToList();
     }
 
-    public TbPrice GetRowByItemIdAndAmountAndComission(int companyId, int listPriceId, int itemId, decimal amount)
+    public TbPrice? GetRowByItemIdAndAmountAndComission(int companyId, int listPriceId, int itemId, decimal amount)
     {
         using var context = new DataContext();
         return context.TbPrices
-            .Where(price => price.CompanyId == companyId
+            .Where(price => price!.CompanyId == companyId
                             && price.ListPriceId == listPriceId
                             && price.ItemId == itemId
                             && price.PercentageCommision > decimal.Zero
                             && price.Price >= amount)
-            .OrderBy(price => price.Price)
-            .First();
+            .OrderBy(price => price!.Price)
+            .FirstOrDefault();
     }
 
-    public List<TbPriceDto> get_rowByItemID(int companyId, int listPriceId, int itemId)
+    public List<TbPriceDto> GetRowByItemId(int companyId, int listPriceId, int itemId)
     {
         using var context = new DataContext();
         return context.TbPrices

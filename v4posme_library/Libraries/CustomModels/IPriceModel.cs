@@ -13,11 +13,11 @@ public interface IPriceModel
     
     List<TbPriceDto> GetRowByAll(int companyId, int listPriceId);
     
-    TbPrice GetRowByPk(int companyId,int listPriceId,int itemId,int typePriceId);
+    TbPrice? GetRowByPk(int companyId,int listPriceId,int itemId,int typePriceId);
     
     List<TbPrice> GetRowByTransactionMasterId(int companyId, int listPriceId, int transactionMasterId);
     
-    TbPrice GetRowByItemIdAndAmountAndComission(int companyId,int listPriceId,int itemId,decimal amount);
+    TbPrice? GetRowByItemIdAndAmountAndComission(int companyId,int listPriceId,int itemId,decimal amount);
     
-    List<TbPriceDto> get_rowByItemID(int companyId, int listPriceId, int itemId);
+    List<TbPriceDto> GetRowByItemId(int companyId, int listPriceId, int itemId);
 }
