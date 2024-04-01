@@ -7,7 +7,7 @@ using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
 
-class CoreWebAmortization : ICoreWebAmortization
+public class CoreWebAmortization : ICoreWebAmortization
 {
     private static readonly string? AppTimezone = VariablesGlobales.ConfigurationBuilder["APP_TIMEZONE"];
 
