@@ -279,6 +279,7 @@ public class CoreWebAmortization : ICoreWebAmortization
                 amount = 0;
             }
         }
+
         //Actualizar Balance del Documento
         var objCustomerCreditDocumentNew = objCustomerCreditDocument!.Mapper(objCustomerCreditDocument);
         objCustomerCreditDocumentNew.Balance = objCustomerCreditDocument.Balance!.Value - capital;
