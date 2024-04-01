@@ -3,6 +3,7 @@ using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace TestProject
 {
@@ -146,28 +147,21 @@ namespace TestProject
         [Test]
         public void ProbarDictionary()
         {
-            var elementSalvar = new Dictionary<int, Dictionary<string, object>>();
-            for (var i = 0; i < 10; i++)
+            var lista = new List<DetailDto>();
+            var simpleDto = new SumaryDto(0, 0, 0, 0,lista);
+            //simpleDto.ListDetailDto = lista;
+            if (simpleDto.ListDetailDto is null)
             {
-                elementSalvar[i] = new Dictionary<string, object>
-                {
-                    { "subelementid", i },
-                    { "oldvalue", $"Test {i}" },
-                    { "newvalue", $"Probar {i}" }
-                };
+                Console.WriteLine(@"La lista es null");
             }
 
-            foreach (var kvp in elementSalvar)
-            {
-                var key = kvp.Key;
-                var values = kvp.Value;
-                var aux = 0;
-                foreach (var (fieldName, value) in values)
-                {
-                    Console.WriteLine($@"Key: {key}, Field Name: {fieldName}, Value: {value} en la linea {aux}");
-                    aux++;
-                }
-            }
+            lista.Add(new DetailDto(0,DateTime.Now, 0,0,0,0,0,0));
+            lista.Add(new DetailDto(0,DateTime.Now, 0,0,0,0,0,0));
+            lista.Add(new DetailDto(0,DateTime.Now, 0,0,0,0,0,0));
+            lista.Add(new DetailDto(0,DateTime.Now, 0,0,0,0,0,0));
+            lista.Add(new DetailDto(0,DateTime.Now, 0,0,0,0,0,0));
+            lista.Add(new DetailDto(0,DateTime.Now, 0,0,0,0,0,0));
+            Console.WriteLine($@"Tamaño de la list {simpleDto.ListDetailDto!.Count}");
         }
     }
 }

@@ -3,8 +3,9 @@ using DevExpress.Xpo.DB;
 using DevExpress.XtraBars.Alerter;
 using DevExpress.XtraEditors;
 using v4posme_library.Libraries;
-using v4posme_window_form.views;
 using v4posme_window_form.Views;
+using v4posme_window.Views;
+
 namespace v4posme_window;
 
 static class Program
