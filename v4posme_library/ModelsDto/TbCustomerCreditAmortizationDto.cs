@@ -1,6 +1,6 @@
 ﻿namespace v4posme_library.ModelsDto;
 
-public class CustomerCreditAmortizationDto
+public class TbCustomerCreditAmortizationDto
 {
     public int? CreditAmortizationId { get; set; }
     

@@ -19,11 +19,11 @@ public interface ICustomerCreditAmortizationModel
     
     List<TbCustomerCreditAmortization> GetRowByDocumentAndNonVinculable(int customerCreditDocumentId);
     
-    List<CustomerCreditAmortizationDto> GetRowByCustomerId(int customerId);
+    List<TbCustomerCreditAmortizationDto> GetRowByCustomerId(int customerId);
     
-    List<CustomerCreditAmortizationDto> GetRowShareLate(int customerId);
+    List<TbCustomerCreditAmortizationDto> GetRowShareLate(int customerId);
 
-    CustomerCreditAmortizationDto GetRowBySummaryInformationCredit(string documentNumber);
+    TbCustomerCreditAmortizationDto GetRowBySummaryInformationCredit(string documentNumber);
     
-    List<CustomerCreditAmortizationDto> GetRowByCreditDocumentAndBalanceMinim(int customerCreditDocumentId);
+    List<TbCustomerCreditAmortizationDto> GetRowByCreditDocumentAndBalanceMinim(int customerCreditDocumentId);
 }

@@ -147,20 +147,20 @@ namespace TestProject
         [Test]
         public void ProbarDictionary()
         {
-            var lista = new List<DetailDto>();
-            var simpleDto = new SumaryDto(0, 0, 0, 0,lista);
+            var lista = new List<TableAmortizationDetailDto>();
+            var simpleDto = new TableAmortizationDto(0, 0, 0, 0,lista);
             //simpleDto.ListDetailDto = lista;
             if (simpleDto.ListDetailDto is null)
             {
                 Console.WriteLine(@"La lista es null");
             }
 
-            lista.Add(new DetailDto(0,DateTime.Now, 0,0,0,0,0,0));
-            lista.Add(new DetailDto(0,DateTime.Now, 0,0,0,0,0,0));
-            lista.Add(new DetailDto(0,DateTime.Now, 0,0,0,0,0,0));
-            lista.Add(new DetailDto(0,DateTime.Now, 0,0,0,0,0,0));
-            lista.Add(new DetailDto(0,DateTime.Now, 0,0,0,0,0,0));
-            lista.Add(new DetailDto(0,DateTime.Now, 0,0,0,0,0,0));
+            lista.Add(new TableAmortizationDetailDto(0,DateTime.Now, 0,0,0,0,0,0));
+            lista.Add(new TableAmortizationDetailDto(0,DateTime.Now, 0,0,0,0,0,0));
+            lista.Add(new TableAmortizationDetailDto(0,DateTime.Now, 0,0,0,0,0,0));
+            lista.Add(new TableAmortizationDetailDto(0,DateTime.Now, 0,0,0,0,0,0));
+            lista.Add(new TableAmortizationDetailDto(0,DateTime.Now, 0,0,0,0,0,0));
+            lista.Add(new TableAmortizationDetailDto(0,DateTime.Now, 0,0,0,0,0,0));
             Console.WriteLine($@"Tamaño de la list {simpleDto.ListDetailDto!.Count}");
         }
     }
