@@ -67,7 +67,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
             .Select(k => k.amortization);
     }
 
-    public List<TbCustomerCreditAmortization> GetRowByDocumentAndVinculable(int customerCreditDocumentId)
+    public List<TbCustomerCreditAmortization>? GetRowByDocumentAndVinculable(int customerCreditDocumentId)
     {
         using var context = new DataContext();
         return FindCreditAmortizations(customerCreditDocumentId, context)

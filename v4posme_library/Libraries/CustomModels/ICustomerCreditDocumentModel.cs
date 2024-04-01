@@ -12,7 +12,7 @@ public interface ICustomerCreditDocumentModel
 
     int InsertAppPosme(TbCustomerCreditDocument data);
 
-    TbCustomerCreditDocumentDto GetRowByPk(int customerCreditDocumentId);
+    TbCustomerCreditDocumentDto? GetRowByPk(int customerCreditDocumentId);
 
     List<TbCustomerCreditDocument> GetRowByEntity(int companyId,int entityId);
 

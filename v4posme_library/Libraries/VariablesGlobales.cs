@@ -137,6 +137,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICoreWebConcept, CoreWebConcept>();
             _unityContainer.RegisterType<ICoreWebAuditoria, CoreWebAuditoria>();
             _unityContainer.RegisterType<ICoreWebFinancialAmort, CoreWebFinancialAmort>();
+            _unityContainer.RegisterType<ICoreWebAmortization, CoreWebAmortization>();
 
             #endregion
         }

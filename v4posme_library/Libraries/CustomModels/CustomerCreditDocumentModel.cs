@@ -14,7 +14,12 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
     public void UpdateAppPosme(int customerCreditDocumentId, TbCustomerCreditDocument data)
     {
         using var context = new DataContext();
-        var find = FindDocuments(customerCreditDocumentId, context).Single();
+        var find = FindDocuments(customerCreditDocumentId, context).SingleOrDefault();
+        if (find is null)
+        {
+            return;
+        }
+
         data.CustomerCreditDocumentId = find.CustomerCreditDocumentId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
@@ -36,7 +41,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
         return add.Entity.CustomerCreditDocumentId;
     }
 
-    public TbCustomerCreditDocumentDto GetRowByPk(int customerCreditDocumentId)
+    public TbCustomerCreditDocumentDto? GetRowByPk(int customerCreditDocumentId)
     {
         using var context = new DataContext();
         var customerCreditDocuments = context.TbCustomerCreditDocuments;
@@ -73,7 +78,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                     select ccda.Remaining).Sum(),
                 ReportSinRiesgo = i.ReportSinRiesgo
             };
-        return result.Single();
+        return result.SingleOrDefault();
     }
 
     public List<TbCustomerCreditDocument> GetRowByEntity(int companyId, int entityId)
@@ -201,7 +206,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
         return context.TbCustomerCreditDocuments
             .Where(document => document.CompanyId == companyId
                                && document.IsActive == 1
-                               && document.Balance > 0 
+                               && document.Balance > 0
                                && document.Balance <= (decimal)0.2)
             .ToList();
     }
@@ -211,9 +216,9 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
     {
         using var dbContext = new DataContext();
         var result = from d in dbContext.TbCustomerCreditDocuments
-            join a in dbContext.TbCustomerCreditAmortizations 
+            join a in dbContext.TbCustomerCreditAmortizations
                 on d.CustomerCreditDocumentId equals a.CustomerCreditDocumentId
-                     join wsa in dbContext.TbWorkflowStages on a.StatusId equals wsa.WorkflowStageId
+            join wsa in dbContext.TbWorkflowStages on a.StatusId equals wsa.WorkflowStageId
             join wsd in dbContext.TbWorkflowStages on d.StatusId equals wsd.WorkflowStageId
             where d.IsActive == 1
                   && d.CompanyId == companyId
@@ -233,7 +238,8 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                 d.Balance,
                 d.CurrencyId,
                 d.StatusId
-            } into g
+            }
+            into g
             select new TbCustomerCreditDocumentDto
             {
                 EntityId = g.Key.EntityId,

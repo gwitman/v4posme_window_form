@@ -15,7 +15,7 @@ public interface ICustomerCreditAmortizationModel
     
     List<TbCustomerCreditAmortization> GetRowByDocument(int customerCreditDocumentId);
     
-    List<TbCustomerCreditAmortization> GetRowByDocumentAndVinculable(int customerCreditDocumentId);
+    List<TbCustomerCreditAmortization>? GetRowByDocumentAndVinculable(int customerCreditDocumentId);
     
     List<TbCustomerCreditAmortization> GetRowByDocumentAndNonVinculable(int customerCreditDocumentId);
     

@@ -1,7 +1,17 @@
-﻿namespace v4posme_library.ModelsDto;
+﻿using AutoMapper;
+using Mysqlx.Crud;
+using v4posme_library.Models;
+
+namespace v4posme_library.ModelsDto;
 
 public class TbCustomerCreditDocumentDto
 {
+    public TbCustomerCreditDocument Mapper(TbCustomerCreditDocumentDto? creditDocumentDto)
+    {
+        var config = new MapperConfiguration(cfg => cfg.CreateMap<TbCustomerCreditDocument, TbCustomerCreditDocumentDto>());
+        var mapper = config.CreateMapper();
+        return mapper.Map<TbCustomerCreditDocument>(creditDocumentDto);
+    }
     public int? CustomerCreditDocumentId { get; set; }
     public int CompanyId { get; set; }
     public int EntityId { get; set; }
@@ -30,4 +40,6 @@ public class TbCustomerCreditDocumentDto
     public DateTime DateApply { get; set; }
     public int StatusAmotization { get; set; }
     public string? StatusAmortizatonName { get; set; }
+    
+    
 }

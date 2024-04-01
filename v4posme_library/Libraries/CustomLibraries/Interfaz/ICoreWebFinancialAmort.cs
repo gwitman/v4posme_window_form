@@ -5,7 +5,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Interfaz;
 
 public interface ICoreWebFinancialAmort
 {
-    void Amort(decimal? amount = 0M, int rate = 0, int numberPay = 0, int periodPay = 0,
+    void Amort(decimal? amount = 0M, decimal? rate = 0, int numberPay = 0, int periodPay = 0,
         DateTime? firstDate = null, int typeAmortization = 0,
         List<TbCatalogItem>? objCatalogItemsDiasNoCobrables = null,
         List<TbCatalogItem>? objCatalogItemsDiasFeridos365 = null,
