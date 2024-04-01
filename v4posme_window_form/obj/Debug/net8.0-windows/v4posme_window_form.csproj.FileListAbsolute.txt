@@ -495,7 +495,6 @@ C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\v4posme_library.dll.config
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.csproj.AssemblyReference.cache
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window.Properties.Resources.resources
-C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.views.LoginForm.resources
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.Views.PrincipalForm.resources
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.csproj.GenerateResource.cache
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.GeneratedMSBuildEditorConfig.editorconfig
@@ -509,3 +508,4 @@ C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.pdb
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.genruntimeconfig.cache
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\ref\v4posme_window_form.dll
+C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window.Views.LoginForm.resources

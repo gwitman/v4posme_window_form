@@ -1,4 +1,5 @@
-﻿using v4posme_library.Libraries.CustomLibraries.Interfaz;
+﻿using System.Numerics;
+using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Models;
 using v4posme_library.ModelsDto;
 
@@ -60,32 +61,45 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         var diaSemana = (int)fecha.DayOfWeek;
         var diaAno = fecha.DayOfYear;
         var diasTotalesDelAno = DateTime.IsLeapYear(fecha.Year) ? 366 : 365;
-        if (ObjCatalogItemsDiasNoCobrables is null)
+        if (ObjCatalogItemsDiasNoCobrables is not null)
         {
-            throw new Exception("ObjCatalogItemsDiasNoCobrables no se ha inicializado");
+            if (ObjCatalogItemsDiasNoCobrables.Any(catalogItem => catalogItem.Sequence == diaSemana))
+            {
+                return true;
+            }
         }
 
-        if (ObjCatalogItemsDiasNoCobrables.Any(catalogItem => catalogItem.Sequence == diaSemana))
-        {
-            return true;
-        }
 
         if (diasTotalesDelAno == 365)
         {
-            if (ObjCatalogItemsDiasFeridos365 is null)
+            if (ObjCatalogItemsDiasFeridos365 is not null)
             {
-                throw new Exception("ObjCatalogItemsDiasFeridos365 no se ha inicializado");
+                if (ObjCatalogItemsDiasFeridos365.Any(catalogItem => catalogItem.Sequence == diaAno))
+                {
+                    return true;
+                }
             }
-
-            return ObjCatalogItemsDiasFeridos365.Any(catalogItem => catalogItem.Sequence == diaAno);
         }
-
-        if (ObjCatalogItemsDiasFeridos366 is null)
+        else
         {
-            throw new Exception("ObjCatalogItemsDiasFeridos366 no se ha inicializado");
-        }
 
-        return ObjCatalogItemsDiasFeridos366.Any(catalogItem => catalogItem.Sequence == diaAno);
+            if (ObjCatalogItemsDiasFeridos366 is not null)
+            {
+                if (ObjCatalogItemsDiasFeridos366.Any(catalogItem => catalogItem.Sequence == diaAno))
+                {
+                    return true;
+                }
+
+            }
+        }
+        
+
+
+        return false;
+
+        
+
+       
     }
 
     public DateTime? GetNextDate(DateTime? date, int periodPay)
@@ -152,7 +166,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
                 return fechaReturn;
             }
             default:
-                return null;
+                return date;
         }
     }
 
@@ -165,7 +179,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
     /// <returns>Decimal</returns>
     public decimal GetPmtValueFrances(decimal pv, int n, decimal i)
     {
-        return pv * i * (decimal)(Math.Pow((double)(1 + i), n)) / (decimal)(Math.Pow((double)(1 + i), n) - 1);
+        return (pv * i * ((decimal)(Math.Pow((double)(1 + i), n))) / ((decimal)(Math.Pow((double)(1 + i), n) - 1)));
     }
 
     /// <summary>
@@ -204,7 +218,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         var montoPorCuota = Math.Round((decimal)(montoTotalApagar / NumberPay)!, 2);
         var listDetailDto = new List<DetailDto>();
         var result = new SumaryDto(montoPorCuota, montoTotalInteres, montoTotalApagar!.Value, 0, listDetailDto);
-        //result.ListDetailDto = listDetailDto;
+        
         var balanceInicial = capitalDesembolsado;
         var balance = capitalDesembolsado;
         var nextDate = FirstDate;
@@ -243,12 +257,10 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         var listaDetailDto = new List<DetailDto>();
         var result = new SumaryDto(pmt, (decimal)((pmt * n) - pv)!, pmt * n, 0, listaDetailDto);
         var amount = Amount;
-        var numpay = NumberPay;
-        //var rate = (Rate / GetBaseRatio(PeriodPay)) / 100;
+        var numpay = NumberPay;        
         var monthly = Rate;
         var payment = pmt;
-        //var total = payment * numpay;
-        //var interest = total - amount;
+        
         var balance = amount;
         var nextDate = FirstDate;
         for (var jIndex = 1; jIndex <= numpay; jIndex++)
@@ -275,10 +287,9 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         var result = new SumaryDto(pmt, (decimal)((pmt * n) - pv)!, (pmt * n), 0, listaDetailDto);
         var amount = Amount;
         var numPay = NumberPay;
-        var rate = (Rate / GetBaseRatio(PeriodPay)) / 100;
-        //rate = $rate / 100;
+        var rate = (Rate / GetBaseRatio(PeriodPay)) / 100;        
         var monthly = rate;
-        var payment = ((amount * monthly) / (decimal?)(1 - Math.Pow((double)(1 + monthly), -numPay)));
+        var payment = (((amount * monthly)) / ((decimal?)(1 - Math.Pow((double)(1 + monthly), -numPay))));
         var total = payment * numPay;
         var interest = total - amount;
         var balance = amount;
@@ -305,26 +316,27 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         var pmt = GetPmtValueAleman(pv, n, i);
         var interest = pv * i;
         var listaDetailDto = new List<DetailDto>();
-        var result = new SumaryDto(pmt, (decimal)((pmt * n) - pv)!, (pmt * n), 0, listaDetailDto);
+        var result = new SumaryDto(pmt, ((decimal)((pmt * n) + interest)!) - pv, ((decimal)((pmt * n) + interest)!), interest, listaDetailDto);
         var amount = Amount;
         var numPay = NumberPay;
-        var rate = (Rate / GetBaseRatio(PeriodPay)) / 100;
-        //rate = $rate / 100;
+        var rate = (Rate / GetBaseRatio(PeriodPay)) / 100;        
         var monthly = rate;
 
         var initInterest = monthly * amount;
         var initParcela = initInterest;
         var s = (1 - monthly);
         var payment = (amount * monthly) / (decimal?)(1 - (Math.Pow((double)s, numPay)));
-        decimal amort;
+        decimal amort = 0;
         var principal = payment;
         var saldo = amount;
         n = numPay;
         var total = payment * numPay;
-        //interest = total - amount;
+        interest = total - amount;
         var nextDate = FirstDate;
         i = 1;
-        var firstDetailDto = new DetailDto((int)i, nextDate, initInterest, initParcela, 0, amount, amount, 0);
+        
+
+        var firstDetailDto = new DetailDto((int)i-1, nextDate, initInterest, initParcela, 0, amount, amount, 0);
         listaDetailDto.Add(firstDetailDto);
         for (var index = 1; index <= numPay; index++)
         {
@@ -332,11 +344,12 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
             amort = (decimal)(payment * (decimal?)(Math.Pow((double)s, (double)(n - i))))!;
             saldo = saldo - amort;
             var newInterest = monthly * saldo;
-            //var newpayment = amort;
+            var newpayment = amount;               
             var saldoInicial = saldo + amort;
+
             if (index == numPay)
             {
-                newInterest = 0;
+                newInterest = 0;                
             }
 
             var detailDto = new DetailDto(index, nextDate, amort, newInterest, payment, saldo, saldoInicial, 0);
@@ -353,7 +366,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         var i = (Rate / GetBaseRatio(PeriodPay)) / 100;
         var interest = n * pv * i;
         var listaDetailDto = new List<DetailDto>();
-        var result = new SumaryDto(0, interest, (pv * interest), 0, listaDetailDto);
+        var result = new SumaryDto(0, interest, (pv + interest), 0, listaDetailDto);
         var amount = Amount;
         var numpay = NumberPay;
         var rate = (Rate / GetBaseRatio(PeriodPay));
@@ -371,6 +384,13 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         {
             var newInterest = monthly * amount;
             payment = newInterest;
+
+            if(index == numpay)
+            {
+                saldo = 0;                
+                payment = amount + (monthly * amount);
+            }
+
             var saldoInicial = saldo + amort;
             var detailDto = new DetailDto(index, nextDate, amort, newInterest, payment, saldo, saldoInicial, 0);
             listaDetailDto.Add(detailDto);
@@ -390,6 +410,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         decimal? npv = 0;
         decimal? newInterest = 0;
         decimal? totpay = 0;
+
         for (var t = 1; t <= n; t++)
         {
             npv = saldo - p;
@@ -398,23 +419,27 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
             totpay = totpay + npv;
         }
 
+
         var totint = newInterest; //total de intereses
         totpay = pv + totint; //total de pago
         var listaDetailDto = new List<DetailDto>();
         var result = new SumaryDto(0, totint, totpay, 0, listaDetailDto);
+
+
         var amount = Amount;
         var numpay = NumberPay;
         var rate = (Rate / GetBaseRatio(PeriodPay))/100;
-        //rate = rate / 100;
-        var baseMont = (1 - Math.Pow((double)(1 + rate), -numpay));
-        var payment = baseMont == 0 ? (amount / numpay) : ((amount * rate) / (decimal?)baseMont);
-        //var total = payment * numpay;
-        //var interest = total - amount;
+        var monthly = rate;
+        var bases = (1 - Math.Pow((double)(1 + rate), -numpay));
+        var payment = bases == 0 ? (amount / numpay) : ((amount * rate) / (decimal?)bases);
+        var total = payment * numpay;
+        var interest = total - amount;
         saldo = amount;
-        //totint = 0;
-        //i = 1;
+        totint = 0;
         var nextDate = FirstDate;
         decimal cuotaAcumulada = 0;
+
+
         for (var index = 1; index <= numpay; index++)
         {
             newInterest = Math.Round(Math.Round(rate, 2) * Math.Round(saldo!.Value, 2), 2);
@@ -423,6 +448,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
             saldo = Math.Round(saldo!.Value - principal, 2);
             var saldoInicial = saldo + principal;
             cuotaAcumulada = cuotaAcumulada + principal;
+
             DetailDto detailDto;
             if (index == numpay)
             {
