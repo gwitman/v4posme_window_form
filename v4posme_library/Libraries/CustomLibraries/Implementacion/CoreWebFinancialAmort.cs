@@ -221,6 +221,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         
         var balanceInicial = capitalDesembolsado;
         var balance = capitalDesembolsado;
+        var numpay = numeroDePagos;
         var nextDate = FirstDate;
 
         for (var i = 1; i <= numeroDePagos; i++)
@@ -257,12 +258,15 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         var listaDetailDto = new List<DetailDto>();
         var result = new SumaryDto(pmt, (decimal)((pmt * n) - pv)!, pmt * n, 0, listaDetailDto);
         var amount = Amount;
-        var numpay = NumberPay;        
-        var monthly = Rate;
+        var numpay = NumberPay;     
+        var rate = (Rate / GetBaseRatio(PeriodPay)) / 100;
+        var monthly = rate;
         var payment = pmt;
-        
+        var total = payment * numpay;
+        var interest = total - amount;
         var balance = amount;
         var nextDate = FirstDate;
+
         for (var jIndex = 1; jIndex <= numpay; jIndex++)
         {
             var newInterest = monthly * amount;
@@ -336,15 +340,15 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         i = 1;
         
 
-        var firstDetailDto = new DetailDto((int)i-1, nextDate, initInterest, initParcela, 0, amount, amount, 0);
+        var firstDetailDto = new DetailDto((int)i, nextDate, initInterest, initParcela, 0, amount, amount, 0);
         listaDetailDto.Add(firstDetailDto);
         for (var index = 1; index <= numPay; index++)
         {
             nextDate = GetNextDate(nextDate, PeriodPay);
-            amort = (decimal)(payment * (decimal?)(Math.Pow((double)s, (double)(n - i))))!;
+            amort = (decimal)(payment * (decimal?)(Math.Pow((double)s, (double)(n - index))))!;
             saldo = saldo - amort;
             var newInterest = monthly * saldo;
-            var newpayment = amount;               
+            var newpayment = amort;               
             var saldoInicial = saldo + amort;
 
             if (index == numPay)
@@ -373,7 +377,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         rate = rate / 100;
         var monthly = rate;
         decimal? payment = 0;
-        var amort = 0;
+        decimal? amort = 0;
         var saldo = amount;
         n = numpay;
         var total = payment * numpay;
@@ -387,7 +391,8 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
 
             if(index == numpay)
             {
-                saldo = 0;                
+                saldo = 0;
+                amort = amount;
                 payment = amount + (monthly * amount);
             }
 
