@@ -1,7 +1,6 @@
-﻿using DevExpress.Utils.Controls;
-using DevExpress.XtraEditors;
+﻿using DevExpress.XtraEditors;
 
-namespace v4posme_window_form.views
+namespace v4posme_window.Views
 {
     partial class LoginForm
     {

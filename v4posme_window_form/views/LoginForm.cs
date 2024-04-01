@@ -2,7 +2,8 @@
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
-namespace v4posme_window_form.views
+
+namespace v4posme_window.Views
 {
     public partial class LoginForm : XtraForm
     {
@@ -37,7 +38,7 @@ namespace v4posme_window_form.views
         private async void btnIngresar_Click(object sender, EventArgs e)
         {
             progressPanel.Visible = true;
-            await Task.Run(async () =>
+            await Task.Run(() =>
             {
                 var usuarioService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
                 var usuarioToolse = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
@@ -62,14 +63,14 @@ namespace v4posme_window_form.views
                     XtraMessageBox.Show("Debe especificar un usuario para continuar",
                         UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtUsuario.Focus();
-                    return;
+                    return Task.CompletedTask;
                 }
                 if (string.IsNullOrEmpty(txtPassword.Text))
                 {
                     XtraMessageBox.Show("Debe especificar una contraseña para continuar",
                         UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtPassword.Focus();
-                    return;
+                    return Task.CompletedTask;
                 }
                 var nickname = txtUsuario.Text;
                 var password = txtPassword.Text;
@@ -79,7 +80,7 @@ namespace v4posme_window_form.views
                     XtraMessageBox.Show("Nombre de usuario no registrado, intente nuevamente",
                         UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     //txtUsuario.Focus();
-                    return;
+                    return Task.CompletedTask;
                 }
                 VariablesGlobales.Instance.User = usuarioService.GetUserByPasswordAndNickname(nickname, password);
                 if (VariablesGlobales.Instance.User == null)
@@ -88,7 +89,7 @@ namespace v4posme_window_form.views
                         UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     /*progressPanel.Visible = false;
                     txtPassword.Focus();*/
-                    return;
+                    return Task.CompletedTask;
                 }
                 if (VariablesGlobales.Instance.MessageLogin!.Length > 0)
                 {
@@ -98,6 +99,7 @@ namespace v4posme_window_form.views
                UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Information);*/                
                 usuarioToolse.Log("Usuario logeado al sistema: " + VariablesGlobales.Instance.User.Nickname);
                 DialogResult = DialogResult.OK;
+                return Task.CompletedTask;
             });
             progressPanel.Visible = false;
         }
