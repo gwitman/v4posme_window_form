@@ -196,7 +196,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         return Math.Round((pv + (pv * i * n)) / n, 2, MidpointRounding.AwayFromZero);
     }
 
-    public SumaryDto GetTable()
+    public TableAmortizationDto GetTable()
     {
         return TypeAmortization switch
         {
@@ -209,15 +209,15 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         };
     }
 
-    public SumaryDto GetTableSimpleNotEmplementable()
+    public TableAmortizationDto GetTableSimpleNotEmplementable()
     {
         var capitalDesembolsado = Amount;
         var numeroDePagos = NumberPay;
         var montoTotalInteres = Math.Round((decimal)((Rate / 100) * Amount)!, 2);
         var montoTotalApagar = montoTotalInteres + capitalDesembolsado;
         var montoPorCuota = Math.Round((decimal)(montoTotalApagar / NumberPay)!, 2);
-        var listDetailDto = new List<DetailDto>();
-        var result = new SumaryDto(montoPorCuota, montoTotalInteres, montoTotalApagar!.Value, 0, listDetailDto);
+        var listDetailDto = new List<TableAmortizationDetailDto>();
+        var result = new TableAmortizationDto(montoPorCuota, montoTotalInteres, montoTotalApagar!.Value, 0, listDetailDto);
         
         var balanceInicial = capitalDesembolsado;
         var balance = capitalDesembolsado;
@@ -238,7 +238,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
                 balance = decimal.Zero;
             }
 
-            var paymentDetail = new DetailDto(i, nextDate, amortization, interest, payment,
+            var paymentDetail = new TableAmortizationDetailDto(i, nextDate, amortization, interest, payment,
                 balance!.Value, balanceInicial!.Value, 0);
             nextDate = GetNextDate(nextDate!.Value, PeriodPay);
             listDetailDto.Add(paymentDetail);
@@ -249,14 +249,14 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         return result;
     }
 
-    public SumaryDto GetTableSimple()
+    public TableAmortizationDto GetTableSimple()
     {
         var pv = Amount;
         var n = NumberPay;
         var i = (Rate / GetBaseRatio(PeriodPay)) / 100;
         var pmt = GetPmtValueSimple(pv!.Value, n, i);
-        var listaDetailDto = new List<DetailDto>();
-        var result = new SumaryDto(pmt, (decimal)((pmt * n) - pv)!, pmt * n, 0, listaDetailDto);
+        var listaDetailDto = new List<TableAmortizationDetailDto>();
+        var result = new TableAmortizationDto(pmt, (decimal)((pmt * n) - pv)!, pmt * n, 0, listaDetailDto);
         var amount = Amount;
         var numpay = NumberPay;     
         var rate = (Rate / GetBaseRatio(PeriodPay)) / 100;
@@ -273,7 +273,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
             var amort = payment - newInterest;
             balance = balance - amort;
             var balanceInicial = balance + amort;
-            var detailDto = new DetailDto(jIndex, nextDate, amort, newInterest, payment, balance, balanceInicial, 0);
+            var detailDto = new TableAmortizationDetailDto(jIndex, nextDate, amort, newInterest, payment, balance, balanceInicial, 0);
             listaDetailDto.Add(detailDto);
             nextDate = GetNextDate(nextDate, PeriodPay);
         }
@@ -281,14 +281,14 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         return result;
     }
 
-    public SumaryDto GetTableFrances()
+    public TableAmortizationDto GetTableFrances()
     {
         var pv = Amount;
         var n = NumberPay;
         var i = (Rate / GetBaseRatio(PeriodPay)) / 100;
         var pmt = GetPmtValueFrances(pv!.Value, n, i);
-        var listaDetailDto = new List<DetailDto>();
-        var result = new SumaryDto(pmt, (decimal)((pmt * n) - pv)!, (pmt * n), 0, listaDetailDto);
+        var listaDetailDto = new List<TableAmortizationDetailDto>();
+        var result = new TableAmortizationDto(pmt, (decimal)((pmt * n) - pv)!, (pmt * n), 0, listaDetailDto);
         var amount = Amount;
         var numPay = NumberPay;
         var rate = (Rate / GetBaseRatio(PeriodPay)) / 100;        
@@ -304,7 +304,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
             var amort = payment - newInterest;
             balance = balance - amort;
             var balanceInicial = balance + amort;
-            var detailDto = new DetailDto(index, nextDate, amort, newInterest, payment, balance, balanceInicial, 0);
+            var detailDto = new TableAmortizationDetailDto(index, nextDate, amort, newInterest, payment, balance, balanceInicial, 0);
             nextDate = GetNextDate(nextDate, PeriodPay);
             listaDetailDto.Add(detailDto);
         }
@@ -312,15 +312,15 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         return result;
     }
 
-    public SumaryDto GetTableAleman()
+    public TableAmortizationDto GetTableAleman()
     {
         var pv = Amount;
         var n = NumberPay;
         var i = (Rate / GetBaseRatio(PeriodPay)) / 100;
         var pmt = GetPmtValueAleman(pv, n, i);
         var interest = pv * i;
-        var listaDetailDto = new List<DetailDto>();
-        var result = new SumaryDto(pmt, ((decimal)((pmt * n) + interest)!) - pv, ((decimal)((pmt * n) + interest)!), interest, listaDetailDto);
+        var listaDetailDto = new List<TableAmortizationDetailDto>();
+        var result = new TableAmortizationDto(pmt, ((decimal)((pmt * n) + interest)!) - pv, ((decimal)((pmt * n) + interest)!), interest, listaDetailDto);
         var amount = Amount;
         var numPay = NumberPay;
         var rate = (Rate / GetBaseRatio(PeriodPay)) / 100;        
@@ -340,7 +340,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         i = 1;
         
 
-        var firstDetailDto = new DetailDto((int)i, nextDate, initInterest, initParcela, 0, amount, amount, 0);
+        var firstDetailDto = new TableAmortizationDetailDto((int)i, nextDate, initInterest, initParcela, 0, amount, amount, 0);
         listaDetailDto.Add(firstDetailDto);
         for (var index = 1; index <= numPay; index++)
         {
@@ -356,21 +356,21 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
                 newInterest = 0;                
             }
 
-            var detailDto = new DetailDto(index, nextDate, amort, newInterest, payment, saldo, saldoInicial, 0);
+            var detailDto = new TableAmortizationDetailDto(index, nextDate, amort, newInterest, payment, saldo, saldoInicial, 0);
             listaDetailDto.Add(detailDto);
         }
 
         return result;
     }
 
-    public SumaryDto GetTableAmericano()
+    public TableAmortizationDto GetTableAmericano()
     {
         var pv = Amount;
         var n = NumberPay;
         var i = (Rate / GetBaseRatio(PeriodPay)) / 100;
         var interest = n * pv * i;
-        var listaDetailDto = new List<DetailDto>();
-        var result = new SumaryDto(0, interest, (pv + interest), 0, listaDetailDto);
+        var listaDetailDto = new List<TableAmortizationDetailDto>();
+        var result = new TableAmortizationDto(0, interest, (pv + interest), 0, listaDetailDto);
         var amount = Amount;
         var numpay = NumberPay;
         var rate = (Rate / GetBaseRatio(PeriodPay));
@@ -397,7 +397,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
             }
 
             var saldoInicial = saldo + amort;
-            var detailDto = new DetailDto(index, nextDate, amort, newInterest, payment, saldo, saldoInicial, 0);
+            var detailDto = new TableAmortizationDetailDto(index, nextDate, amort, newInterest, payment, saldo, saldoInicial, 0);
             listaDetailDto.Add(detailDto);
             nextDate = GetNextDate(nextDate, PeriodPay);
         }
@@ -405,7 +405,7 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         return result;
     }
 
-    public SumaryDto GetTableConstante()
+    public TableAmortizationDto GetTableConstante()
     {
         var pv = Amount;
         var n = NumberPay;
@@ -427,8 +427,8 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
 
         var totint = newInterest; //total de intereses
         totpay = pv + totint; //total de pago
-        var listaDetailDto = new List<DetailDto>();
-        var result = new SumaryDto(0, totint, totpay, 0, listaDetailDto);
+        var listaDetailDto = new List<TableAmortizationDetailDto>();
+        var result = new TableAmortizationDto(0, totint, totpay, 0, listaDetailDto);
 
 
         var amount = Amount;
@@ -454,17 +454,17 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
             var saldoInicial = saldo + principal;
             cuotaAcumulada = cuotaAcumulada + principal;
 
-            DetailDto detailDto;
+            TableAmortizationDetailDto detailDto;
             if (index == numpay)
             {
                 var diferencia = Math.Round((decimal)(cuotaAcumulada - amount), 2);
                 principal = Math.Round(principal - diferencia, 2); //principal
                 parcela = Math.Round(parcela!.Value - diferencia, 2); //cuota
-                detailDto = new DetailDto(index, nextDate, principal, newInterest, parcela, 0, saldoInicial, 0);
+                detailDto = new TableAmortizationDetailDto(index, nextDate, principal, newInterest, parcela, 0, saldoInicial, 0);
             }
             else
             {
-                detailDto = new DetailDto(index, nextDate, principal, newInterest, parcela, saldo, saldoInicial, 0);
+                detailDto = new TableAmortizationDetailDto(index, nextDate, principal, newInterest, parcela, saldo, saldoInicial, 0);
             }
 
             listaDetailDto.Add(detailDto);

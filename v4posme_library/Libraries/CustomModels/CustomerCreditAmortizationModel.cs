@@ -83,7 +83,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
             .ToList();
     }
 
-    public List<CustomerCreditAmortizationDto> GetRowByCustomerId(int customerId)
+    public List<TbCustomerCreditAmortizationDto> GetRowByCustomerId(int customerId)
     {
         var container = new[] { 82, 83 };
         using var dbContext = new DataContext();
@@ -104,7 +104,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                         && t.t.t.ws.Vinculable!.Value == false
                         && t.t.cd.EntityId == customerId
                         && !container.Contains(t.t.cd.StatusId))
-            .Select(t => new CustomerCreditAmortizationDto
+            .Select(t => new TbCustomerCreditAmortizationDto
             {
                 DocumentNumber = t.t.cd.DocumentNumber,
                 DateApply = DateTime.Parse(t.t.t.i.DateApply.ToShortDateString()),
@@ -117,7 +117,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
             .ToList();
     }
 
-    public List<CustomerCreditAmortizationDto> GetRowShareLate(int companyId)
+    public List<TbCustomerCreditAmortizationDto> GetRowShareLate(int companyId)
     {
         using var dbContext = new DataContext();
         var result = from c in dbContext.TbCustomers
@@ -132,7 +132,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                   && c.IsActive!.Value
                   && cca.Remaining > 0
                   && cca.DateApply < DateTime.Now
-            select new CustomerCreditAmortizationDto
+            select new TbCustomerCreditAmortizationDto
             {
                 CustomerNumber = c.CustomerNumber,
                 FirstName = n.FirstName,
@@ -148,13 +148,13 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
         return result.ToList();
     }
 
-    public CustomerCreditAmortizationDto GetRowBySummaryInformationCredit(string documentNumber)
+    public TbCustomerCreditAmortizationDto GetRowBySummaryInformationCredit(string documentNumber)
     {
         using var dbContext = new DataContext();
         var customerCreditAmortizations = dbContext.TbCustomerCreditAmortizations;
         var result = dbContext.TbCustomerCreditDocuments
             .Where(c => c.DocumentNumber == documentNumber && c.IsActive == 1)
-            .Select(c => new CustomerCreditAmortizationDto
+            .Select(c => new TbCustomerCreditAmortizationDto
             {
                 FechaVencimiento =
                     customerCreditAmortizations
@@ -176,7 +176,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
         return result.Single();
     }
 
-    public List<CustomerCreditAmortizationDto> GetRowByCreditDocumentAndBalanceMinim(int customerCreditDocumentId)
+    public List<TbCustomerCreditAmortizationDto> GetRowByCreditDocumentAndBalanceMinim(int customerCreditDocumentId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbCustomerCreditAmortizations
@@ -190,7 +190,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                   && ws.Vinculable!.Value
                   && i.Remaining >= decimal.Zero && i.Remaining <= (decimal)0.2
                   && cd.CustomerCreditDocumentId == customerCreditDocumentId
-            select new CustomerCreditAmortizationDto
+            select new TbCustomerCreditAmortizationDto
             {
                 CreditAmortizationId = i.CreditAmortizationId,
                 DocumentNumber = cd.DocumentNumber,

@@ -39,12 +39,12 @@ public interface ICoreWebFinancialAmort
     /// <returns>Decimal</returns>
     decimal GetPmtValueSimple(decimal pv, int n, decimal i);
     
-    SumaryDto GetTable();
+    TableAmortizationDto GetTable();
     
-    SumaryDto GetTableSimpleNotEmplementable();
-    SumaryDto GetTableSimple();
-    SumaryDto GetTableFrances();
-    SumaryDto GetTableAleman();
-    SumaryDto GetTableAmericano();
-    SumaryDto GetTableConstante();
+    TableAmortizationDto GetTableSimpleNotEmplementable();
+    TableAmortizationDto GetTableSimple();
+    TableAmortizationDto GetTableFrances();
+    TableAmortizationDto GetTableAleman();
+    TableAmortizationDto GetTableAmericano();
+    TableAmortizationDto GetTableConstante();
 }

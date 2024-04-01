@@ -509,3 +509,5 @@ C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.genruntimeconfig.cache
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\ref\v4posme_window_form.dll
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window.Views.LoginForm.resources
+C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window.Views.FormInvoiceBillingEdit.resources
+C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window.Views.FormInvoiceBillingList.resources
