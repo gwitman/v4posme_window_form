@@ -140,6 +140,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICoreWebAmortization, CoreWebAmortization>();
             _unityContainer.RegisterType<ICoreWebTransactionMasterDetail, CoreWebTransactionMasterDetail>();
             _unityContainer.RegisterType<ICoreWebWhatsap, CoreWebWhatsap>();
+            _unityContainer.RegisterType<ICoreWebGoogle, CoreWebGoogle>();
 
             #endregion
         }
