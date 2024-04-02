@@ -23,15 +23,13 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             List<TbMenuElement> dataMenuBodyReport, List<TbMenuElement> dataMenuBodyTop,
             List<TbMenuElement> dataMenuHiddenPopup)
         {
-            var urlSuffixNew = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX_NEW"];
-            var urlSuffixOld = VariablesGlobales.ConfigurationBuilder["UrlSuffixOld"];
             var url = controller.ToLower().Replace("app\\controllers\\", "") + "/" + method + suffix;
             var urlIndex = controller.ToLower().Replace("app\\controllers\\", "") + "/index" + suffix;
             if (dataMenuHiddenPopup.Count > 0)
             {
                 foreach (var menuElement in dataMenuHiddenPopup)
                 {
-                    string urlCompare = menuElement.Address!.Replace(urlSuffixOld!, urlSuffixNew);
+                    string urlCompare = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(urlCompare, url, StringComparison.CurrentCultureIgnoreCase))
                     {
                         return menuElement.MenuElementId;
@@ -43,7 +41,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             {
                 foreach (var menuElement in dataMenuBodyTop)
                 {
-                    var urlCompare = menuElement.Address!.Replace(urlSuffixOld!, urlSuffixNew);
+                    var urlCompare = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(urlCompare, url, StringComparison.CurrentCultureIgnoreCase))
                     {
                         return menuElement.MenuElementId;
@@ -55,7 +53,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             {
                 foreach (var menuElement in dataMenuBodyReport)
                 {
-                    var urlCompare = menuElement.Address!.Replace(urlSuffixOld!, urlSuffixNew);
+                    var urlCompare = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(urlCompare, url, StringComparison.CurrentCultureIgnoreCase))
                     {
                         return menuElement.MenuElementId;
@@ -67,7 +65,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             {
                 foreach (var menuElement in dataMenuTop)
                 {
-                    var urlCompare = menuElement.Address!.Replace(urlSuffixOld!, urlSuffixNew);
+                    var urlCompare = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(urlCompare, url, StringComparison.CurrentCultureIgnoreCase))
                     {
                         return menuElement.MenuElementId;
@@ -79,7 +77,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             {
                 foreach (var menuElement in dataMenuLeft)
                 {
-                    var urlCompare = menuElement.Address!.Replace(urlSuffixOld!, urlSuffixNew);
+                    var urlCompare = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(urlCompare, url, StringComparison.CurrentCultureIgnoreCase))
                     {
                         return menuElement.MenuElementId;
@@ -195,7 +193,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             var elementId = 0;
             if (role.IsAdmin!.Value)
             {
-                return permissionAll == 1;
+                return true;
             }
 
             if (dataMenuTop.Count > 0)
@@ -203,7 +201,11 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 foreach (var menuElement in dataMenuTop)
                 {
                     var replace = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
-                    if (replace.ToUpper() == url.ToUpper() || replace.ToUpper() == url2.ToUpper())
+                    if (replace.ToUpper() == url.ToUpper())
+                    {
+                        elementId = menuElement.ElementId;
+                        break;
+                    }else if (replace.ToUpper() == url2.ToUpper())
                     {
                         elementId = menuElement.ElementId;
                         break;
