@@ -31,7 +31,7 @@ class CoreWebWhatsap : ICoreWebWhatsap
         var fechaNow = DateTime.Now;
         var fechaMonth = DateTime.Parse(objCpWhatsapMonth!.Value);
 
-        if (fechaNow.Month == fechaMonth.Month && int.Parse(objCpWhatsapCounterMessage!.Value) <=
+        if (fechaNow.Year == fechaMonth.Year && fechaNow.Month == fechaMonth.Month && int.Parse(objCpWhatsapCounterMessage!.Value) <=
             int.Parse(objCpWhatsapMessageByMonto!.Value))
         {
             var data = companyParameterModel.GetRowByParameterIdCompanyId(objCpWhatsapCounterMessage.CompanyId,
@@ -151,13 +151,16 @@ class CoreWebWhatsap : ICoreWebWhatsap
 
         // Realizar la solicitud HTTP
         var httpClient = new HttpClient();
-        var response =
-            await httpClient.PostAsync(objCpWhatsapUrlSendMessage.Value, new FormUrlEncodedContent(parameters));
-
+        using var requestMessage =
+            new HttpRequestMessage(HttpMethod.Post, objCpWhatsapUrlSendMessage!.Value);
+        requestMessage.Headers.Authorization =
+            new AuthenticationHeaderValue("Bearer", objCpWhatsapToken!.Value);
+        requestMessage.Content =  new FormUrlEncodedContent(parameters);
+       
         // Leer la respuesta
-        var responseContent = await response.Content.ReadAsStringAsync();
+        var responseContent = await  httpClient.SendAsync(requestMessage);
 
-        return responseContent;
+        return await responseContent.Content.ReadAsStringAsync();
     }
 
     public async Task<string> SendMessageTypeImageUltramsg(int companyId, string message, string title,
@@ -200,8 +203,12 @@ class CoreWebWhatsap : ICoreWebWhatsap
 
         // Realizar la solicitud HTTP
         var httpClient = new HttpClient();
-        var response =
-            await httpClient.PostAsync(objCpWhatsapUrlSendMessage!.Value, new FormUrlEncodedContent(parameters));
+        using var requestMessage =
+            new HttpRequestMessage(HttpMethod.Post, objCpWhatsapUrlSendMessage!.Value);
+        requestMessage.Headers.Authorization =
+            new AuthenticationHeaderValue("Bearer", objCpWhatsapToken!.Value);
+        requestMessage.Content =  new FormUrlEncodedContent(parameters);
+        var response =await  httpClient.SendAsync(requestMessage);
         // Leer la respuesta
         return await response.Content.ReadAsStringAsync();
     }
