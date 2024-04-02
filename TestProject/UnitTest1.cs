@@ -163,6 +163,7 @@ namespace TestProject
             lista.Add(new TableAmortizationDetailDto(0,DateTime.Now, 0,0,0,0,0,0));
             lista.Add(new TableAmortizationDetailDto(0,DateTime.Now, 0,0,0,0,0,0));
             lista.Add(new TableAmortizationDetailDto(0,DateTime.Now, 0,0,0,0,0,0));
+            lista.Add(new TableAmortizationDetailDto(0,DateTime.Now, 0,0,0,0,0,0));
             Console.WriteLine($@"Tamaño de la list {simpleDto.ListDetailDto!.Count}");
         }
     }
