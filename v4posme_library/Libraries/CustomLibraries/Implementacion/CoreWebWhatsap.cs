@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Net.Http.Headers;
+using Newtonsoft.Json;
 using Unity;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels.Core;
@@ -30,7 +31,7 @@ class CoreWebWhatsap : ICoreWebWhatsap
         var fechaNow = DateTime.Now;
         var fechaMonth = DateTime.Parse(objCpWhatsapMonth!.Value);
 
-        if (fechaNow == fechaMonth && int.Parse(objCpWhatsapCounterMessage!.Value) <=
+        if (fechaNow.Month == fechaMonth.Month && int.Parse(objCpWhatsapCounterMessage!.Value) <=
             int.Parse(objCpWhatsapMessageByMonto!.Value))
         {
             var data = companyParameterModel.GetRowByParameterIdCompanyId(objCpWhatsapCounterMessage.CompanyId,
@@ -41,7 +42,7 @@ class CoreWebWhatsap : ICoreWebWhatsap
             return true;
         }
 
-        if (fechaNow.Month > fechaMonth.Month && int.Parse(objCpWhatsapCounterMessage!.Value) > 0)
+        if (fechaNow > fechaMonth && int.Parse(objCpWhatsapCounterMessage!.Value) > 0)
         {
             var data = companyParameterModel
                 .GetRowByParameterIdCompanyId(objCpWhatsapMonth.CompanyId, objCpWhatsapMonth.ParameterId);
@@ -102,7 +103,13 @@ class CoreWebWhatsap : ICoreWebWhatsap
 
             var clientCurl2 = new HttpClient();
             var content = new FormUrlEncodedContent(sendWhatsapp);
-            var response2 = clientCurl2.PostAsync(objCpWhatsapUrlSendMessage!.Value, content).Result;
+            using var requestMessage =
+                new HttpRequestMessage(HttpMethod.Post, objCpWhatsapUrlSendMessage!.Value);
+            requestMessage.Headers.Authorization =
+                new AuthenticationHeaderValue("Bearer", objCpWhatsapToken!.Value);
+            requestMessage.Content = content;
+            clientCurl2.SendAsync(requestMessage);
+            //var response2 = clientCurl2.PostAsync(objCpWhatsapUrlSendMessage!.Value, content).Result;
         }
     }
 
