@@ -1,4 +1,5 @@
-﻿using Unity;
+﻿using System.Diagnostics.Eventing.Reader;
+using Unity;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels.Core;
 using v4posme_library.Models;
@@ -23,6 +24,11 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             List<TbMenuElement> dataMenuBodyReport, List<TbMenuElement> dataMenuBodyTop,
             List<TbMenuElement> dataMenuHiddenPopup)
         {
+<<<<<<< HEAD
+=======
+            var urlSuffixNew = UrlSuffixNew;
+            var urlSuffixOld = UrlSuffixNew;
+>>>>>>> 6f11a719f5dc7d4cd3afb3b54671aecf1db40a0f
             var url = controller.ToLower().Replace("app\\controllers\\", "") + "/" + method + suffix;
             var urlIndex = controller.ToLower().Replace("app\\controllers\\", "") + "/index" + suffix;
             if (dataMenuHiddenPopup.Count > 0)
@@ -205,7 +211,12 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                     {
                         elementId = menuElement.ElementId;
                         break;
+<<<<<<< HEAD
                     }else if (replace.ToUpper() == url2.ToUpper())
+=======
+                    }
+                    else if (replace.ToUpper() == url2.ToUpper())
+>>>>>>> 6f11a719f5dc7d4cd3afb3b54671aecf1db40a0f
                     {
                         elementId = menuElement.ElementId;
                         break;
@@ -287,14 +298,13 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
             if (elementId == 0)
             {
-                return permissionNone == 1;
+                return false;
             }
 
-            var rowRolePermission = userPermissionModel.GetRowByPk(user.CompanyId, user.BranchId,
-                role.RoleId, elementId);
+            var rowRolePermission = userPermissionModel.GetRowByPk(user.CompanyId, user.BranchId,role.RoleId, elementId);
             if (rowRolePermission == null)
             {
-                return permissionNone == 1;
+                return false;
             }
 
             return method switch
@@ -303,7 +313,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 "edit" => rowRolePermission.Edited!.Value,
                 "delete" => rowRolePermission.Deleted!.Value,
                 "add" => rowRolePermission.Inserted!.Value,
-                _ => permissionNone == 1
+                _ => false
             };
         }
 
@@ -367,23 +377,22 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                                                         
                                         """);
                 }
-
-                parameterCreditos -= objParameterPriceByInvoice;
-                var dataNewParameter =
-                    companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameterCreditosId);
-                dataNewParameter!.Value = parameterCreditos.ToString();
-                _companyParameterModel.UpdateAppPosme(companyId, objParameterCreditosId, dataNewParameter);
+            
             }
+
+            parameterCreditos -= objParameterPriceByInvoice;
+            var dataNewParameter = companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameterCreditosId);
+            dataNewParameter!.Value = parameterCreditos.ToString();
+            _companyParameterModel.UpdateAppPosme(companyId, objParameterCreditosId, dataNewParameter);
+
 
             var parameterCantiadTransacciones = _coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId);
             var parameterCantiadTransaccionesId = parameterCantiadTransacciones!.ParameterId;
             var parameterCantiadTransaccionesValue = int.Parse(parameterCantiadTransacciones.Value);
             var parameterCantiadTransaccionesNewValor = parameterCantiadTransaccionesValue + 1;
-            var dataNewParameterCantidadTransacciones =
-                companyParameterModel.GetRowByParameterIdCompanyId(companyId, parameterCantiadTransaccionesId);
+            var dataNewParameterCantidadTransacciones = companyParameterModel.GetRowByParameterIdCompanyId(companyId, parameterCantiadTransaccionesId);
             dataNewParameterCantidadTransacciones!.Value = parameterCantiadTransaccionesNewValor.ToString();
-            _companyParameterModel.UpdateAppPosme(companyId, parameterCantiadTransaccionesId,
-                dataNewParameterCantidadTransacciones);
+            _companyParameterModel.UpdateAppPosme(companyId, parameterCantiadTransaccionesId,dataNewParameterCantidadTransacciones);
 
             if (fechaNow > objParameterExpiredLicense && objParameterTipoPlan != "MEMBRESIA")
             {
@@ -402,41 +411,6 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         }
 
 
-        public string? GetLicenseMessage(int companyId)
-        {
-            var getParameter1 = _coreWebParameter.GetParameter("CORE_CUST_PRICE_LICENCES_EXPIRED", companyId);
-            var parameterFechaExpiration = getParameter1!.Value;
-
-            var getParameter2 = _coreWebParameter.GetParameter("CORE_CUST_PRICE_LICENCES_EXPIRED", companyId);
-            var objParameterExpiredLicense = getParameter2!.Value;
-
-            var getParameter3 = _coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId);
-            var objParameterTipoPlan = getParameter3!.Value;
-
-            var getParameter4 = _coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId);
-            var objParameterCreditosId = getParameter4!.ParameterId;
-            var objParameterCreditos = getParameter4.Value;
-
-            var getParameter5 = _coreWebParameter.GetParameter("CORE_CUST_PRICE_BY_INVOICE", companyId);
-            var objParameterPriceByInvoice = getParameter5!.Value;
-
-            var fechaNow = DateTime.Now.AddDays(7);
-            if (fechaNow > DateTime.Parse(parameterFechaExpiration))
-            {
-                //XtraMessageBox.Show("LICENCIA EXPIRA EN 7 DIAS", "Licencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return "LICENCIA EXPIRA EN 7 DIAS";
-            }
-
-            //Validar Saldo				
-            if (objParameterTipoPlan == "CONSUMIBLE")
-            {
-                if (int.Parse(objParameterCreditos) < (int.Parse(objParameterPriceByInvoice) * 30))
-                {
-                    return "CREDITOS PRONTO VENCERAN";
-                }
-            }
-
-            return "";
-        }
+        
     }
 }

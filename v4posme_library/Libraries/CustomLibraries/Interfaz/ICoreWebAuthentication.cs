@@ -7,5 +7,6 @@ namespace v4posme_library.Libraries.CustomLibraries.Interfaz
         TbUser? GetUserByNickname(string nickname);
         TbUser? GetUserByPasswordAndNickname(string nickname, string password);
         TbUser Validar(TbUser user, string password);
+        string? GetLicenseMessage(int companyId);
     }
 }

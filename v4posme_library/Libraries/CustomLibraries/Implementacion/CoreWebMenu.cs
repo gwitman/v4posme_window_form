@@ -82,19 +82,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
         private List<string>? RenderItemLeft(TbCompany? company, List<TbMenuElement>? data, int parent)
         {
-            /*
-             * foreach ($data AS $obj){
-                if ($obj->parentMenuElementID == $parent){
-            $x = self::render_item_left($company,$data,$obj->menuElementID);
-            $data_["icon"] = $obj->icon;
-            $data_["address"] = base_url()."/".str_replace(URL_SUFFIX_OLD, URL_SUFFIX_NEW,$obj->address);
-            $data_["display"] = getBehavio(strtoupper($company->type), "core_web_menu",$obj->display, "");
-            $data_["submenu"] = $x;
-            $template = view("core_template/".$obj->template,$data_);
-            $html = $html. $template;
-                }
-            }
-            */
+            
             List<string>? list = new List<string>();
             foreach (var item in data)
             {

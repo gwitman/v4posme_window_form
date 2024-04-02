@@ -21,6 +21,9 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         private readonly ICoreWebPermission _coreWebPermission =
             VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebPermission>();
 
+        private readonly ICoreWebAuthentication _coreWebAutentication =
+            VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
+
         private readonly ICoreWebParameter _coreWebParameter =
             VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
 
@@ -107,11 +110,48 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 VariablesGlobales.Instance.Role.RoleId);
             VariablesGlobales.Instance.ListMenuHiddenPopup = _coreWebMenu.GetMenuHiddenPopup(user.CompanyId, user.BranchId,
                 VariablesGlobales.Instance.Role.RoleId);
-            VariablesGlobales.Instance.MessageLogin = _coreWebPermission.GetLicenseMessage(user.CompanyId);
-            var parameter = _coreWebParameter.GetParameter("CORE_LABEL_SISTEMA_SUPLANTATION",
-                VariablesGlobales.Instance.Membership.CompanyId);
+            VariablesGlobales.Instance.MessageLogin = _coreWebAutentication.GetLicenseMessage(user.CompanyId);
+            var parameter = _coreWebParameter.GetParameter("CORE_LABEL_SISTEMA_SUPLANTATION",VariablesGlobales.Instance.Membership.CompanyId);
             VariablesGlobales.Instance.ParameterLabelSystem = parameter.Value;
             return user;
         }
+
+        public string? GetLicenseMessage(int companyId)
+        {
+            var getParameter1 = _coreWebParameter.GetParameter("CORE_CUST_PRICE_LICENCES_EXPIRED", companyId);
+            var parameterFechaExpiration = getParameter1!.Value;
+
+            var getParameter2 = _coreWebParameter.GetParameter("CORE_CUST_PRICE_LICENCES_EXPIRED", companyId);
+            var objParameterExpiredLicense = getParameter2!.Value;
+
+            var getParameter3 = _coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId);
+            var objParameterTipoPlan = getParameter3!.Value;
+
+            var getParameter4 = _coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId);
+            var objParameterCreditosId = getParameter4!.ParameterId;
+            var objParameterCreditos = getParameter4.Value;
+
+            var getParameter5 = _coreWebParameter.GetParameter("CORE_CUST_PRICE_BY_INVOICE", companyId);
+            var objParameterPriceByInvoice = getParameter5!.Value;
+
+            var fechaNow = DateTime.Now.AddDays(7);
+            if (fechaNow > DateTime.Parse(parameterFechaExpiration))
+            {
+                //XtraMessageBox.Show("LICENCIA EXPIRA EN 7 DIAS", "Licencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return "LICENCIA EXPIRA EN 7 DIAS";
+            }
+
+            //Validar Saldo				
+            if (objParameterTipoPlan == "CONSUMIBLE")
+            {
+                if (int.Parse(objParameterCreditos) < (int.Parse(objParameterPriceByInvoice) * 30))
+                {
+                    return "CREDITOS PRONTO VENCERAN";
+                }
+            }
+
+            return "";
+        }
+
     }
 }
