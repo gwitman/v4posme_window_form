@@ -271,7 +271,7 @@ public sealed partial class DataContext : DbContext
 
     public DbSet<TbUser> TbUsers { get; set; } = null!;
 
-    public DbSet<TbUserPermission> TbUserPermissions { get; set; } = null!;
+    public DbSet<TbUserPermission?> TbUserPermissions { get; set; } = null!;
 
     public DbSet<TbUserTag> TbUserTags { get; set; } = null!;
 

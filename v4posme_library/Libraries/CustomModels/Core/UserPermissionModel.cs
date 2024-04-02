@@ -52,14 +52,14 @@ namespace v4posme_library.Libraries.CustomModels.Core
             return query.ToList();
         }
 
-        public TbUserPermission get_rowByPK(int companyId, int branchId, int roleId, int elementId)
+        public TbUserPermission? GetRowByPk(int companyId, int branchId, int roleId, int elementId)
         {
             using var context = new DataContext();
             return context.TbUserPermissions
-                .First(permission => permission.CompanyId == companyId
-                                     && permission.BranchId == branchId
-                                     && permission.RoleId == roleId
-                                     && permission.ElementId == elementId);
+                .FirstOrDefault(permission => permission!.CompanyId == companyId
+                                              && permission.BranchId == branchId
+                                              && permission.RoleId == roleId
+                                              && permission.ElementId == elementId);
         }
     }
 }

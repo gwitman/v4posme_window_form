@@ -11,6 +11,6 @@ namespace v4posme_library.Libraries.CustomModels.Core
 
         List<TbUserPermissionDto> GetRowByCompanyIdyBranchIdyRoleId(int companyId, int branchId, int roleId);
         
-        TbUserPermission get_rowByPK(int companyId,int branchId,int roleId,int elementId);
+        TbUserPermission? GetRowByPk(int companyId,int branchId,int roleId,int elementId);
     }
 }
