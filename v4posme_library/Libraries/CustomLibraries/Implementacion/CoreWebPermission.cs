@@ -24,11 +24,9 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             List<TbMenuElement> dataMenuBodyReport, List<TbMenuElement> dataMenuBodyTop,
             List<TbMenuElement> dataMenuHiddenPopup)
         {
-<<<<<<< HEAD
-=======
             var urlSuffixNew = UrlSuffixNew;
             var urlSuffixOld = UrlSuffixNew;
->>>>>>> 6f11a719f5dc7d4cd3afb3b54671aecf1db40a0f
+
             var url = controller.ToLower().Replace("app\\controllers\\", "") + "/" + method + suffix;
             var urlIndex = controller.ToLower().Replace("app\\controllers\\", "") + "/index" + suffix;
             if (dataMenuHiddenPopup.Count > 0)
@@ -211,12 +209,9 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                     {
                         elementId = menuElement.ElementId;
                         break;
-<<<<<<< HEAD
-                    }else if (replace.ToUpper() == url2.ToUpper())
-=======
                     }
                     else if (replace.ToUpper() == url2.ToUpper())
->>>>>>> 6f11a719f5dc7d4cd3afb3b54671aecf1db40a0f
+
                     {
                         elementId = menuElement.ElementId;
                         break;
