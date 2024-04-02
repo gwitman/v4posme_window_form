@@ -10,7 +10,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
 
 class CoreWebTools : ICoreWebTools
 {
-    private const string Path = "C:\\logposme";
+    private static readonly string? Path = VariablesGlobales.ConfigurationBuilder["PATH_LOG_DB"];
     /// <summary>
     /// Esta función recibe un objeto message y devuelve una cadena formateada.
     /// Si message es un array, concatena todos los elementos del array en una sola cadena.

@@ -18,9 +18,10 @@ class CoreWebTransactionMasterDetail : ICoreWebTransactionMasterDetail
         var finalUnitaryCost = unitaryCost;
 
         // Obtener el costo global pro para ciertos productos.
-        if (objCompany.Type == "globalpro" &&
-            new[] { "ITT00000217", "ITT00000218", "ITT00000219", "ITT00000220", "ITT00000221" }.Contains(
-                objItem.BarCode))
+        if (
+            objCompany.Type == "globalpro" && 
+            new[] { "ITT00000217", "ITT00000218", "ITT00000219", "ITT00000220", "ITT00000221" }.Contains(objItem.BarCode)
+        )
         {
             finalUnitaryCost = unitaryPrice - (unitaryPrice * 0.35m);
         }

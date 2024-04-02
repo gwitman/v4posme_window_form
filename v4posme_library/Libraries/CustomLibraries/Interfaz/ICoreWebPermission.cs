@@ -17,7 +17,6 @@ namespace v4posme_library.Libraries.CustomLibraries.Interfaz
             List<TbMenuElement> dataMenuBodyTop, List<TbMenuElement> dataMenuHiddenPopup);
 
         void GetValueLicense(int companyId, string url);
-        
-        string? GetLicenseMessage(int companyId);
+       
     }
 }
