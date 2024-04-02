@@ -41,7 +41,7 @@ class CoreWebWhatsap : ICoreWebWhatsap
             return true;
         }
 
-        if (fechaNow > fechaMonth && int.Parse(objCpWhatsapCounterMessage!.Value) > 0)
+        if (fechaNow.Month > fechaMonth.Month && int.Parse(objCpWhatsapCounterMessage!.Value) > 0)
         {
             var data = companyParameterModel
                 .GetRowByParameterIdCompanyId(objCpWhatsapMonth.CompanyId, objCpWhatsapMonth.ParameterId);
@@ -144,13 +144,15 @@ class CoreWebWhatsap : ICoreWebWhatsap
 
         // Realizar la solicitud HTTP
         var httpClient = new HttpClient();
-        var response = await httpClient.PostAsync(objCpWhatsapUrlSendMessage.Value, new FormUrlEncodedContent(parameters));
+        var response =
+            await httpClient.PostAsync(objCpWhatsapUrlSendMessage.Value, new FormUrlEncodedContent(parameters));
 
         // Leer la respuesta
         var responseContent = await response.Content.ReadAsStringAsync();
 
         return responseContent;
     }
+
     public async Task<string> SendMessageTypeImageUltramsg(int companyId, string message, string title,
         string phoneDestino = "")
     {
@@ -191,7 +193,8 @@ class CoreWebWhatsap : ICoreWebWhatsap
 
         // Realizar la solicitud HTTP
         var httpClient = new HttpClient();
-        var response = await httpClient.PostAsync(objCpWhatsapUrlSendMessage!.Value, new FormUrlEncodedContent(parameters));
+        var response =
+            await httpClient.PostAsync(objCpWhatsapUrlSendMessage!.Value, new FormUrlEncodedContent(parameters));
         // Leer la respuesta
         return await response.Content.ReadAsStringAsync();
     }
