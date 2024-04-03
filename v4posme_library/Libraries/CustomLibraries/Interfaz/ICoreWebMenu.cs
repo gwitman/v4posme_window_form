@@ -12,6 +12,6 @@ namespace v4posme_library.Libraries.CustomLibraries.Interfaz
 
         List<TbMenuElement>? GetMenuHiddenPopup(int companyId, int branchId, int roleId);
 
-        List<string>? RenderMenuLeft(TbCompany? company, List<TbMenuElement>? menuElements);
+      
     }
 }

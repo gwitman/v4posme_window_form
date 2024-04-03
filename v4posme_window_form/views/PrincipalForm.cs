@@ -31,6 +31,8 @@ namespace v4posme_window_form.Views
             VariablesGlobales.Instance.Membership = _membershipModel.GetRowByCompanyIdBranchIdUserId(VariablesGlobales.Instance.User.CompanyId,
                 VariablesGlobales.Instance.User.BranchId, VariablesGlobales.Instance.User.UserId);
             barCompanyNane.Caption = Resources.PrincipalForm_Compañía_Titulo + VariablesGlobales.Instance.Company!.Name + "-" + VariablesGlobales.Instance.Branch.Name;
+            
+            /*
             foreach (var item in _coreWebMenu.RenderMenuLeft(VariablesGlobales.Instance.Company, VariablesGlobales.Instance.ListMenuLeft)!)
             {
                 menuElement.Elements.Add(new AccordionControlElement()
@@ -39,6 +41,7 @@ namespace v4posme_window_form.Views
                     Style = ElementStyle.Item
                 });
             }
+            */
 
         }
 

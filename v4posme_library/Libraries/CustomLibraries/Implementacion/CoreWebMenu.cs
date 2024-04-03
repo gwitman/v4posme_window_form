@@ -87,25 +87,5 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             return listMenuElement;
         }
 
-        public List<string>? RenderMenuLeft(TbCompany? company, List<TbMenuElement>? menuElements)
-        {
-            return RenderItemLeft(company, menuElements, 0);
-        }
-
-        private static List<string>? RenderItemLeft(TbCompany? company, List<TbMenuElement>? data, int parent)
-        {
-            var list = new List<string>();
-            foreach (var item in data!)
-            {
-                if (item.ParentMenuElementId == parent)
-                {
-                    var x = RenderItemLeft(company, data, parent);
-                    list.Add(item.Display!);
-                    VariablesGlobales.Instance.SubMenu = x;
-                }
-            }
-
-            return list;
-        }
     }
 }
