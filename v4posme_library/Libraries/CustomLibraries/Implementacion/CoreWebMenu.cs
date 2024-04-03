@@ -10,13 +10,15 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
     {
         private readonly IConfigurationSection _section = VariablesGlobales.ConfigurationBuilder;
 
-        private readonly IElementModel _elementService =
+        private readonly IRoleModel _roleModel = VariablesGlobales.Instance.UnityContainer.Resolve<IRoleModel>();
+
+        private readonly IElementModel _elementModel =
             VariablesGlobales.Instance.UnityContainer.Resolve<IElementModel>();
 
         private readonly IUserPermissionModel _userPermissionModel =
             VariablesGlobales.Instance.UnityContainer.Resolve<IUserPermissionModel>();
 
-        private readonly IMenuElementModel _menuElementModelService =
+        private readonly IMenuElementModel _menuElementModel =
             VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
 
         public List<TbMenuElement>? GetMenuTop(int companyId, int branchId, int roleId)
@@ -41,35 +43,45 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
         private List<TbMenuElement>? GetMenu(int companyId, int branchId, int roleId, int menu)
         {
-            var role = VariablesGlobales.Instance.Role;
-            var listMenuElement = new List<TbMenuElement>();
-            if (role == null!)
-            {
-                return null!;
-            }
+            var elementTypeId = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["ELEMENT_TYPE_PAGE"]);
+            // Obtener el rol del usuario
+            var objRole = _roleModel.GetRowByPk(companyId, branchId, roleId);
+            if (objRole is null)
+                throw new Exception("NO EXISTE EL ROL DEL USUARIO");
 
-            //Obtener la lista de elementos tipo pagina, que pertenescan al componente de seguridad
-            var listElementSeguridad =
-                _elementService.GetRowByTypeAndLayout(Convert.ToInt16(_section["ELEMENT_TYPE_PAGE"]), menu);
-            if (listElementSeguridad is null) return null;
-            //Obtener la lista del elementos de tipo pagina a la cual el usuario tiene permiso , segun el rol del usuario
+            // Obtener la lista de elementos tipo pagina, que pertenescan al componente de seguridad
+            var listElementSeguridad = _elementModel.GetRowByTypeAndLayout(elementTypeId, menu);
+            if (listElementSeguridad is null)
+                return null;
+
+            // Obtener la lista del elementos de tipo pagina a la cual el usuario tiene permiso, segun el rol del usuario
             var listElementPermitido =
                 _userPermissionModel.GetRowByCompanyIdyBranchIdyRoleId(companyId, branchId, roleId);
-            //Obtener los id de los Elementos
-            var listElementIdSeguridad = listElementSeguridad.Select(element => element.ElementId).ToList();
 
-            var listElementIdPermitied = listElementPermitido.Select(userPermissionView => userPermissionView.ElementId!.Value).ToList();
-
-            listElementIdPermitied = listElementIdPermitied.Intersect(listElementIdSeguridad).ToList();
-            if (role.IsAdmin!.Value && listElementIdSeguridad.Any())
+            // Obtener los id de los Elementos
+            var listElementIdSeguridad = listElementSeguridad.Select(i => i.ElementId).ToList();
+            List<int> listElementIdPermitied = [];
+            if (listElementPermitido.Count > 0)
             {
-                listMenuElement =
-                    _menuElementModelService.GetRowByCompanyIdyElementId(companyId, listElementIdSeguridad);
+                listElementIdPermitied = listElementPermitido
+                    .Select(i => i.ElementId!.Value)
+                    .Intersect(listElementIdSeguridad)
+                    .ToList();
             }
-            else if (listElementIdPermitied.Any())
+
+            // Obtener la lista de menu_element del componente de seguridad...
+            List<TbMenuElement>? listMenuElement;
+            if (objRole.IsAdmin!.Value && listElementIdSeguridad.Count > 0)
             {
-                listMenuElement =
-                    _menuElementModelService.GetRowByCompanyIdyElementId(companyId, listElementIdPermitied);
+                listMenuElement = _menuElementModel.GetRowByCompanyIdyElementId(companyId, listElementIdSeguridad);
+            }
+            else if (listElementIdPermitied.Count > 0)
+            {
+                listMenuElement = _menuElementModel.GetRowByCompanyIdyElementId(companyId, listElementIdPermitied);
+            }
+            else
+            {
+                return null;
             }
 
             return listMenuElement;
@@ -80,11 +92,10 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             return RenderItemLeft(company, menuElements, 0);
         }
 
-        private List<string>? RenderItemLeft(TbCompany? company, List<TbMenuElement>? data, int parent)
+        private static List<string>? RenderItemLeft(TbCompany? company, List<TbMenuElement>? data, int parent)
         {
-            
-            List<string>? list = new List<string>();
-            foreach (var item in data)
+            var list = new List<string>();
+            foreach (var item in data!)
             {
                 if (item.ParentMenuElementId == parent)
                 {
