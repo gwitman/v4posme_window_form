@@ -11,6 +11,6 @@ namespace v4posme_library.Libraries.CustomModels
     {
         void DeleteAppPosme(int userId);
 
-        int InsertAppPosme(TbUser data);
+        int InsertAppPosme(TbUser? data);
     }
 }

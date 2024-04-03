@@ -25,7 +25,7 @@ class UserModel : IUserModel
         context.SaveChanges();
     }
 
-    public List<TbUser> GetRowByComercio(string comercio)
+    public List<TbUser?> GetRowByComercio(string comercio)
     {
         using var context = new DataContext();
         return context.TbUsers
@@ -34,7 +34,7 @@ class UserModel : IUserModel
             .ToList();
     }
 
-    public List<TbUser> GetRowByFoto(string foto)
+    public List<TbUser?> GetRowByFoto(string foto)
     {
         using var context = new DataContext();
         return context.TbUsers
@@ -43,7 +43,7 @@ class UserModel : IUserModel
             .ToList();
     }
 
-    public TbUser GetRowByExistNickname(string nickname)
+    public TbUser? GetRowByExistNickname(string nickname)
     {
         using var context = new DataContext();
         return context.TbUsers
@@ -51,7 +51,7 @@ class UserModel : IUserModel
                             && user.IsActive!.Value);
     }
 
-    public TbUser GetRowByNiknamePassword(string nickname, string password)
+    public TbUser? GetRowByNiknamePassword(string nickname, string password)
     {
         using var context = new DataContext();
         return context.TbUsers
@@ -60,15 +60,15 @@ class UserModel : IUserModel
                             && user.IsActive!.Value);
     }
 
-    public TbUser GetRowByEmail(string email)
+    public TbUser? GetRowByEmail(string email)
     {
         using var context = new DataContext();
         return context.TbUsers
-            .Single(user => user.Email == email
-                            && user.IsActive!.Value);
+            .SingleOrDefault(user => user!.Email == email
+                                     && user.IsActive!.Value);
     }
 
-    public TbUser GetRowByPk(int companyId, int branchId, int userId)
+    public TbUser? GetRowByPk(int companyId, int branchId, int userId)
     {
         using var context = new DataContext();
         return context.TbUsers
@@ -78,7 +78,7 @@ class UserModel : IUserModel
                             && user.IsActive!.Value);
     }
 
-    public List<TbUser> GetAll(int companyId)
+    public List<TbUser?> GetAll(int companyId)
     {
         using var context = new DataContext();
         return context.TbUsers
@@ -87,7 +87,7 @@ class UserModel : IUserModel
             .ToList();
     }
 
-    public List<TbUser> GetUserByBussnes(int companyId, string bussines)
+    public List<TbUser?> GetUserByBussnes(int companyId, string bussines)
     {
         using var context = new DataContext();
         return context.TbUsers

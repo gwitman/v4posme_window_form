@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;
 
@@ -12,7 +13,7 @@ public class BiometricUserModel : IBiometricUserModel
         context.BulkSaveChanges();
     }
 
-    public int InsertAppPosme(TbUser data)
+    public int InsertAppPosme(TbUser? data)
     {
         using var context = new DataContext();
         var add = context.TbUsers.Add(data);

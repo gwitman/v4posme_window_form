@@ -8,21 +8,21 @@ public interface IUserModel
     
     void UpdateAppPosme(int companyId,int branchId,int userId,TbUser data);
     
-    List<TbUser> GetRowByComercio(string comercio);
+    List<TbUser?> GetRowByComercio(string comercio);
     
-    List<TbUser> GetRowByFoto(string foto);
+    List<TbUser?> GetRowByFoto(string foto);
     
-    TbUser GetRowByExistNickname(string nickname);
+    TbUser? GetRowByExistNickname(string nickname);
 
-    TbUser GetRowByNiknamePassword(string nickname, string password);
+    TbUser? GetRowByNiknamePassword(string nickname, string password);
     
-    TbUser GetRowByEmail(string email);
+    TbUser? GetRowByEmail(string email);
     
-    TbUser GetRowByPk(int companyId,int branchId,int userId);
+    TbUser? GetRowByPk(int companyId,int branchId,int userId);
     
-    List<TbUser> GetAll(int companyId);
+    List<TbUser?> GetAll(int companyId);
     
-    List<TbUser> GetUserByBussnes(int companyId,string bussines);
+    List<TbUser?> GetUserByBussnes(int companyId,string bussines);
     
     int  GetCountUser(int companyId);
     

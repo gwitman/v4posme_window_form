@@ -8,5 +8,5 @@ public interface IMembershipModel
     
     int InsertAppPosme(TbMembership data);
     
-    TbMembership GetRowByCompanyIdBranchIdUserId(int companyId,int branchId,int userId);
+    TbMembership? GetRowByCompanyIdBranchIdUserId(int companyId,int branchId,int userId);
 }

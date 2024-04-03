@@ -23,11 +23,11 @@ class MembershipModel : IMembershipModel
         return add.Entity.MembershipId;
     }
 
-    public TbMembership GetRowByCompanyIdBranchIdUserId(int companyId, int branchId, int userId)
+    public TbMembership? GetRowByCompanyIdBranchIdUserId(int companyId, int branchId, int userId)
     {
         using var context = new DataContext();
         return context.TbMemberships
-            .First(membership => membership.CompanyId == companyId
+            .SingleOrDefault(membership => membership!.CompanyId == companyId
                                  && membership.BranchId == branchId
                                  && membership.UserId == userId);
     }

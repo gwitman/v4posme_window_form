@@ -8,8 +8,6 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 {
     public class CoreWebAuthentication : ICoreWebAuthentication
     {
-        
-
         private readonly IMembershipModel _membershipModel =
             VariablesGlobales.Instance.UnityContainer.Resolve<IMembershipModel>();
 
@@ -30,6 +28,14 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         private readonly ICoreWebTools _coreWebToolser =
             VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
 
+        private readonly IUserModel _userModel = VariablesGlobales.Instance.UnityContainer.Resolve<IUserModel>();
+
+        private readonly ICompanyModel _companyModel =
+            VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyModel>();
+
+        private readonly IBranchModel _branchModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBranchModel>();
+
+
         public TbUser Validar(TbUser user, string password)
         {
             if (user == null!) return null!;
@@ -46,11 +52,9 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
             try
             {
-                using (var context = new DataContext())
-                {
-                    var user = from u in context.TbUsers where u.Nickname == nickname select u;
-                    return user.First();
-                }
+                using var context = new DataContext();
+                var user = from u in context.TbUsers where u.Nickname == nickname select u;
+                return user.FirstOrDefault();
             }
             catch (Exception exception)
             {
@@ -106,13 +110,65 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 VariablesGlobales.Instance.Role.RoleId);
             VariablesGlobales.Instance.ListMenuLeft = _coreWebMenu.GetMenuLeft(user.CompanyId, user.BranchId,
                 VariablesGlobales.Instance.Role.RoleId);
-            VariablesGlobales.Instance.ListMenuBodyReport = _coreWebMenu.GetMenuBodyReport(user.CompanyId, user.BranchId,
+            VariablesGlobales.Instance.ListMenuBodyReport = _coreWebMenu.GetMenuBodyReport(user.CompanyId,
+                user.BranchId,
                 VariablesGlobales.Instance.Role.RoleId);
-            VariablesGlobales.Instance.ListMenuHiddenPopup = _coreWebMenu.GetMenuHiddenPopup(user.CompanyId, user.BranchId,
+            VariablesGlobales.Instance.ListMenuHiddenPopup = _coreWebMenu.GetMenuHiddenPopup(user.CompanyId,
+                user.BranchId,
                 VariablesGlobales.Instance.Role.RoleId);
             VariablesGlobales.Instance.MessageLogin = _coreWebAutentication.GetLicenseMessage(user.CompanyId);
-            var parameter = _coreWebParameter.GetParameter("CORE_LABEL_SISTEMA_SUPLANTATION",VariablesGlobales.Instance.Membership.CompanyId);
-            VariablesGlobales.Instance.ParameterLabelSystem = parameter.Value;
+            var parameter = _coreWebParameter.GetParameter("CORE_LABEL_SISTEMA_SUPLANTATION",
+                VariablesGlobales.Instance.Membership.CompanyId);
+            VariablesGlobales.Instance.ParameterLabelSystem = parameter!.Value;
+            return user;
+        }
+
+        public TbUser? GetUserByEmail(string email)
+        {
+            var user = _userModel.GetRowByEmail(email);
+            if (user is null)
+            {
+                throw new Exception("EMAIL INCORRECTO...");
+            }
+
+            var objCompany = _companyModel.GetRowByPk(user.CompanyId);
+            if (objCompany is null)
+            {
+                throw new Exception("LA EMPREA NO FUE ENCONTRADA ....");
+            }
+
+            var objBranch = _branchModel.GetRowByPk(user.CompanyId, user.BranchId);
+            if (objBranch is null)
+            {
+                throw new Exception("LA SUCURSAL NO FUE ENCONTRADA ...");
+            }
+
+            var objMembership =
+                _membershipModel.GetRowByCompanyIdBranchIdUserId(user.CompanyId, user.BranchId, user.UserId);
+            if (objMembership is null)
+            {
+                throw new Exception("EL USUARIO NO TIENE ASIGNADO UN ROL...");
+            }
+
+            var objRole = _roleModel.GetRowByPk(user.CompanyId, user.BranchId, objMembership.RoleId);
+            if (objRole is null)
+            {
+                throw new Exception("EL ROL DEL USUARIO NO FUE ENCONTRADO...");
+            }
+
+            VariablesGlobales.Instance.Company = objCompany;
+            VariablesGlobales.Instance.Branch = objBranch;
+            VariablesGlobales.Instance.Role = objRole;
+            VariablesGlobales.Instance.User = user;
+            VariablesGlobales.Instance.ListMenuTop = _coreWebMenu.GetMenuTop(user.CompanyId, user.BranchId,
+                objRole.RoleId);
+            VariablesGlobales.Instance.ListMenuLeft = _coreWebMenu.GetMenuLeft(user.CompanyId, user.BranchId,
+                objRole.RoleId);
+            VariablesGlobales.Instance.ListMenuBodyReport = _coreWebMenu.GetMenuBodyReport(user.CompanyId,
+                user.BranchId, objRole.RoleId);
+            VariablesGlobales.Instance.ListMenuHiddenPopup = _coreWebMenu.GetMenuHiddenPopup(user.CompanyId,
+                user.BranchId, objRole.RoleId);
+
             return user;
         }
 
@@ -152,6 +208,5 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
             return "";
         }
-
     }
 }

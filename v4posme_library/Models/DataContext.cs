@@ -205,7 +205,7 @@ public sealed partial class DataContext : DbContext
 
     public DbSet<TbMasterKardexTemp> TbMasterKardexTemps { get; set; } = null!;
 
-    public DbSet<TbMembership> TbMemberships { get; set; } = null!;
+    public DbSet<TbMembership?> TbMemberships { get; set; } = null!;
 
     public DbSet<TbMenuElement> TbMenuElements { get; set; } = null!;
 
@@ -269,7 +269,7 @@ public sealed partial class DataContext : DbContext
 
     public DbSet<TbTypeMenuElement> TbTypeMenuElements { get; set; } = null!;
 
-    public DbSet<TbUser> TbUsers { get; set; } = null!;
+    public DbSet<TbUser?> TbUsers { get; set; } = null!;
 
     public DbSet<TbUserPermission?> TbUserPermissions { get; set; } = null!;
 
