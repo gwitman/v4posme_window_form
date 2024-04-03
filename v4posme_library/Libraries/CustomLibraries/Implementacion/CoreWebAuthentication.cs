@@ -76,50 +76,55 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 return null!;
             }
 
-            var user = GetUserByNickname(nickname);
-            if (user == null)
+            var user = _userModel.GetRowByNiknamePassword(nickname, password);
+            if (user is null)
             {
                 return null!;
             }
 
-            if (user.Password != password) return null!;
-            Debug.Assert(user.IsActive != null, "user.IsActive != null");
-            if (!user.IsActive.Value)
+            var objCompany = _companyModel.GetRowByPk(user.CompanyId);
+            if (objCompany is null)
             {
-                //XtraMessageBox.Show("Usuario no está activo, ingresar con usario activo o comunicarse con el administrador para activar usuario.", "Usuario", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null!;
+                throw new Exception("LA EMPREA NO FUE ENCONTRADA ....");
+            }
+
+            var objBranch = _branchModel.GetRowByPk(user.CompanyId, user.BranchId);
+            if (objBranch is null)
+            {
+                throw new Exception("LA SUCURSAL NO FUE ENCONTRADA ...");
             }
 
             VariablesGlobales.Instance.Membership =
                 _membershipModel.GetRowByCompanyIdBranchIdUserId(user.CompanyId, user.BranchId, user.UserId);
-            if (VariablesGlobales.Instance.Membership == null!)
+            if (VariablesGlobales.Instance.Membership is null)
             {
-                //XtraMessageBox.Show("El usuario no tiene asignado un rol, más información con el administrador de sistema.", "Usuario", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
+                throw new Exception("EL USUARIO NO TIENE ASIGNADO UN ROL...");
             }
 
-            VariablesGlobales.Instance.Role = _roleModel.GetRowByPk(user.CompanyId, user.BranchId,
+            var objRole = _roleModel.GetRowByPk(user.CompanyId, user.BranchId,
                 VariablesGlobales.Instance.Membership.RoleId);
-            if (VariablesGlobales.Instance.Role == null!)
+            if (objRole is null)
             {
-                //XtraMessageBox.Show("El usuario no tiene asignado un rol, más información con el administrador de sistema.", "Usuario");
-                return null;
+                throw new Exception("EL USUARIO NO TIENE ASIGNADO UN ROL...");
             }
 
+            VariablesGlobales.Instance.Company = objCompany;
+            VariablesGlobales.Instance.Branch = objBranch;
+            VariablesGlobales.Instance.Role = objRole;
+            VariablesGlobales.Instance.User = user;
             VariablesGlobales.Instance.ListMenuTop = _coreWebMenu.GetMenuTop(user.CompanyId, user.BranchId,
-                VariablesGlobales.Instance.Role.RoleId);
+                objRole.RoleId);
             VariablesGlobales.Instance.ListMenuLeft = _coreWebMenu.GetMenuLeft(user.CompanyId, user.BranchId,
-                VariablesGlobales.Instance.Role.RoleId);
+                objRole.RoleId);
             VariablesGlobales.Instance.ListMenuBodyReport = _coreWebMenu.GetMenuBodyReport(user.CompanyId,
-                user.BranchId,
-                VariablesGlobales.Instance.Role.RoleId);
+                user.BranchId, objRole.RoleId);
             VariablesGlobales.Instance.ListMenuHiddenPopup = _coreWebMenu.GetMenuHiddenPopup(user.CompanyId,
-                user.BranchId,
-                VariablesGlobales.Instance.Role.RoleId);
+                user.BranchId, objRole.RoleId);
             VariablesGlobales.Instance.MessageLogin = _coreWebAutentication.GetLicenseMessage(user.CompanyId);
             var parameter = _coreWebParameter.GetParameter("CORE_LABEL_SISTEMA_SUPLANTATION",
                 VariablesGlobales.Instance.Membership.CompanyId);
             VariablesGlobales.Instance.ParameterLabelSystem = parameter!.Value;
+
             return user;
         }
 
