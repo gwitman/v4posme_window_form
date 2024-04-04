@@ -174,5 +174,17 @@ namespace TestProject
             var helper = new WebToolsHelper();
             Console.WriteLine(helper.HelperGetDate());
         }
+
+        [Test]
+        public void TestWebToolsCustomizationViewHelper()
+        {
+            var path = "E:\\Repos\\v4posme_window_form\\v4posme_window_form\\Custom.xml";
+            var webTools = new WebToolsCustomizationViewHelper();
+            webTools.XmlFilePath = path;
+            foreach (var keyValuePair in webTools.ReadXmlFile(path))
+            {
+                Console.WriteLine($@"{keyValuePair.Key} {keyValuePair.Value}");
+            }
+        }
     }
 }
