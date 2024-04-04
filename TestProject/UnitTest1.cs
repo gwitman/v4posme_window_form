@@ -1,5 +1,6 @@
 using Unity;
 using v4posme_library.Libraries;
+using v4posme_library.Libraries.CustomHelper;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels;
 using v4posme_library.Models;
@@ -165,6 +166,13 @@ namespace TestProject
             lista.Add(new TableAmortizationDetailDto(0,DateTime.Now, 0,0,0,0,0,0));
             lista.Add(new TableAmortizationDetailDto(0,DateTime.Now, 0,0,0,0,0,0));
             Console.WriteLine($@"Tamaño de la list {simpleDto.ListDetailDto!.Count}");
+        }
+
+        [Test]
+        public void TestWebToolsHelper()
+        {
+            var helper = new WebToolsHelper();
+            Console.WriteLine(helper.HelperUltimoDiaDelYear());
         }
     }
 }
