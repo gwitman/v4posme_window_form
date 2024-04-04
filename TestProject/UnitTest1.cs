@@ -178,10 +178,8 @@ namespace TestProject
         [Test]
         public void TestWebToolsCustomizationViewHelper()
         {
-            var path = "E:\\Repos\\v4posme_window_form\\v4posme_window_form\\Custom.xml";
             var webTools = new WebToolsCustomizationViewHelper();
-            webTools.XmlFilePath = path;
-            foreach (var keyValuePair in webTools.ReadXmlFile(path))
+            foreach (var keyValuePair in webTools.ReadXmlFile())
             {
                 Console.WriteLine($@"{keyValuePair.Key} {keyValuePair.Value}");
             }

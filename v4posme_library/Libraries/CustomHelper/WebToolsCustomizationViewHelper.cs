@@ -4,16 +4,11 @@ namespace v4posme_library.Libraries.CustomHelper
 {
     public class WebToolsCustomizationViewHelper
     {
-        public string XmlFilePath { get; set; } = "";
+        private readonly string? _xmlFilePath  = VariablesGlobales.ConfigurationBuilder["PATH_CUSTOM_FILE"];
 
         public string? GetBehavior(string typeCompany, string keyController, string? keyElement, string? defaultValue)
         {
-            var divs = ReadXmlFile(XmlFilePath);
-            if (divs is null)
-            {
-                return string.Empty;
-            }
-
+            var divs = ReadXmlFile();
             if (keyController != "core_web_menu")
             {
                 var key = typeCompany.ToLower() + "_" + keyController.ToLower() + "_" + keyElement!.ToLower();
@@ -55,9 +50,9 @@ namespace v4posme_library.Libraries.CustomHelper
             }
         }
 
-        public Dictionary<string, string>? ReadXmlFile(string? xmlFilePath)
+        public Dictionary<string, string> ReadXmlFile()
         {
-            if (xmlFilePath is null)
+            if (_xmlFilePath is null)
             {
                 throw new Exception("Debe especificar la ruta para lerr el archivo");
             }
@@ -66,7 +61,7 @@ namespace v4posme_library.Libraries.CustomHelper
             var xmlData = new Dictionary<string, string>();
             try
             {
-                xmlDoc.Load(xmlFilePath);
+                xmlDoc.Load(_xmlFilePath);
                 var root = xmlDoc.DocumentElement;
                 if (root is null)
                 {
