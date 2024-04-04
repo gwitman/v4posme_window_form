@@ -7,7 +7,7 @@ using v4posme_library.Models;
 
 namespace v4posme_library.ModelsDto
 {
-    internal class TableCompanyDataView
+    public class TableCompanyDataViewDto
     {
         public TbCompanyDataview? config { get; set; }
         public object? data { get; set; }

@@ -31,13 +31,13 @@ class CoreWebView : ICoreWebView
 
     private readonly IBdModel _bdModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBdModel>();
 
-    public TableCompanyDataView GetViewByName(TbUser user, int componentId, string name, int callerId, int? permission = null,
+    public TableCompanyDataViewDto  GetViewByName(TbUser user, int componentId, string name, int callerId, int? permission = null,
         Dictionary<string, string>? parameter = null)
     {
         // Obtener la vista generica
         var dataView = _dataViewModel.GetViewByName(componentId, name, callerId);
         if (dataView is null)
-            return;
+            return new TableCompanyDataViewDto();
 
         // Obtener la compañia
         var objCompany = _companyModel.GetRowByPk(user.CompanyId);
@@ -53,7 +53,7 @@ class CoreWebView : ICoreWebView
             companyDataView =
                 _companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId, dataViewId, callerId, componentId);
             if (companyDataView is null)
-                return;
+                return null;
         }
 
         // EXECUTE
@@ -85,7 +85,7 @@ class CoreWebView : ICoreWebView
         queryFill = queryFill.Replace("{filterPermission}", filterPermission);
 
         // Ejecutar consulta
-        TableCompanyDataView objResult  = new TableCompanyDataView();
+        TableCompanyDataViewDto objResult  = new TableCompanyDataViewDto();
         objResult.config                = companyDataView;
         var dataRecordSet               = _bdModel.ExecuteRender<object>(queryFill);
         objResult.data = dataRecordSet;
