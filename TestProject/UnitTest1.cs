@@ -172,7 +172,7 @@ namespace TestProject
         public void TestWebToolsHelper()
         {
             var helper = new WebToolsHelper();
-            Console.WriteLine(helper.HelperUltimoDiaDelYear());
+            Console.WriteLine(helper.HelperGetDate());
         }
     }
 }

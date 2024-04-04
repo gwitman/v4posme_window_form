@@ -9,13 +9,12 @@ namespace v4posme_library.Libraries.CustomHelper
 {
     public class WebToolsHelper
     {
-        public DateOnly HelperGetDate()
+        public DateTime HelperGetDate()
         {
             var now = DateTime.Now;
-            //var appHourDiferencePhp = VariablesGlobales.ConfigurationBuilder["APP_HOUR_DIFERENCE_PHP"];
-            // Convertir la cadena a un TimeSpan
-            //var intervaloTiempo = TimeSpan.Parse(appHourDiferencePhp!);
-            return DateOnly.Parse(now.ToString("yyyy-MM-dd"));
+            var appHourDiferencePhp = VariablesGlobales.ConfigurationBuilder["APP_HOUR_DIFERENCE_PHP"];
+            return now.AddMinutes(ValidarCampo(appHourDiferencePhp!));
+            //return DateOnly.Parse(now.ToString("yyyy-MM-dd 00:00:00"));
         }
 
         public DateOnly HelperGetDateMoreOneMonth()
@@ -31,10 +30,8 @@ namespace v4posme_library.Libraries.CustomHelper
 
         public DateTime HelperGetDateTime()
         {
-            return DateTime.Now;
-            /*var appHourDiferencePhp = VariablesGlobales.ConfigurationBuilder["APP_HOUR_DIFERENCE_PHP"];
-            var intervaloTiempo = TimeSpan.Parse(appHourDiferencePhp!);
-            return DateTime.Parse(fechaActual.ToString("yyyy-MM-dd HH:mm:ss"));*/
+            var appHourDiferencePhp = VariablesGlobales.ConfigurationBuilder["APP_HOUR_DIFERENCE_PHP"];
+            return DateTime.Now.AddMinutes(ValidarCampo(appHourDiferencePhp!));
         }
 
         public DateOnly HelperPrimerDiaDelMes()
@@ -95,9 +92,10 @@ namespace v4posme_library.Libraries.CustomHelper
         {
             var fechaNacimiento = DateOnly.Parse(fecha, CultureInfo.InvariantCulture);
             var fechaActual = DateTime.Now;
-            var diff = fechaActual.Year-fechaNacimiento.Year;
+            var diff = fechaActual.Year - fechaNacimiento.Year;
             return diff;
         }
+
         public static void EmptyDir(string dir)
         {
             if (!Directory.Exists(dir)) return;
@@ -114,6 +112,7 @@ namespace v4posme_library.Libraries.CustomHelper
                 Directory.Delete(subDir);
             }
         }
+
         public static void DeleteDir(string dir)
         {
             if (!Directory.Exists(dir)) return;
@@ -126,8 +125,38 @@ namespace v4posme_library.Libraries.CustomHelper
             {
                 DeleteDir(subDir);
             }
-            
+
             Directory.Delete(dir);
+        }
+
+        private static int ValidarCampo(string input)
+        {
+            var isNegative = input.StartsWith("-");
+            var isPositive = input.StartsWith("+");
+
+            if (isNegative)
+            {
+                input = input.Substring(1);
+            }
+
+            if (isPositive)
+            {
+                input = input.Substring(1);
+            }
+
+            if (int.TryParse(input, out var result))
+            {
+                if (isNegative)
+                {
+                    result *= -1;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+
+            return result;
         }
     }
 }
