@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace v4posme_window.Libraries
 {
-    internal class CoreWebRenderInView
+    public class CoreWebRenderInView
     {
     }
 }

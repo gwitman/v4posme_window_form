@@ -85,10 +85,12 @@ class CoreWebView : ICoreWebView
         queryFill = queryFill.Replace("{filterPermission}", filterPermission);
 
         // Ejecutar consulta
-        TableCompanyDataViewDto objResult  = new TableCompanyDataViewDto();
-        objResult.config                = companyDataView;
+        var objResult  = new TableCompanyDataViewDto
+        {
+            Config = companyDataView
+        };
         var dataRecordSet               = _bdModel.ExecuteRender<dynamic>(queryFill);
-        objResult.data = dataRecordSet;
+        objResult.Data = dataRecordSet;
         return objResult;
     }
 
@@ -131,9 +133,9 @@ class CoreWebView : ICoreWebView
 
 
         TableCompanyDataViewDto objResult = new TableCompanyDataViewDto();
-        objResult.config = companyDataView;
+        objResult.Config = companyDataView;
         var dataRecordSet = _bdModel.ExecuteRender<dynamic>(queryFill);
-        objResult.data = dataRecordSet;
+        objResult.Data = dataRecordSet;
         return objResult;
 
       ;
@@ -184,10 +186,12 @@ class CoreWebView : ICoreWebView
         queryFill = queryFill.Replace("{filterPermission}", filterPermission);
 
 
-        TableCompanyDataViewDto objResult = new TableCompanyDataViewDto();
-        objResult.config = companyDataView;
+        var objResult = new TableCompanyDataViewDto
+        {
+            Config = companyDataView
+        };
         var dataRecordSet = _bdModel.ExecuteRender<dynamic>(queryFill);
-        objResult.data = dataRecordSet;
+        objResult.Data = dataRecordSet;
         return objResult;
 
 
@@ -242,9 +246,9 @@ class CoreWebView : ICoreWebView
         queryFill = queryFill.Replace("{filterPermission}", filterPermission);
 
         TableCompanyDataViewDto objResult = new TableCompanyDataViewDto();
-        objResult.config = companyDataView;
+        objResult.Config = companyDataView;
         var dataRecordSet = _bdModel.ExecuteRender<dynamic>(queryFill);
-        objResult.data = dataRecordSet;
+        objResult.Data = dataRecordSet;
         return objResult;
 
 

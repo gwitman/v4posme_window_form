@@ -9,7 +9,7 @@ namespace v4posme_library.ModelsDto
 {
     public class TableCompanyDataViewDto
     {
-        public TbCompanyDataview? config { get; set; }
-        public dynamic? data { get; set; }
+        public TbCompanyDataview? Config { get; set; }
+        public dynamic? Data { get; set; }
     }
 }
