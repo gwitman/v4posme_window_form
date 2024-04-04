@@ -83,9 +83,9 @@ public sealed partial class DataContext : DbContext
 
     public DbSet<TbCompanyCurrency> TbCompanyCurrencies { get; set; } = null!;
 
-    public DbSet<TbCompanyDataview> TbCompanyDataviews { get; set; } = null!;
+    public DbSet<TbCompanyDataview?> TbCompanyDataviews { get; set; } = null!;
 
-    public DbSet<TbCompanyDefaultDataview> TbCompanyDefaultDataviews { get; set; } = null!;
+    public DbSet<TbCompanyDefaultDataview?> TbCompanyDefaultDataviews { get; set; } = null!;
 
     public DbSet<TbCompanyParameter> TbCompanyParameters { get; set; } = null!;
 
@@ -131,7 +131,7 @@ public sealed partial class DataContext : DbContext
 
     public DbSet<TbCustomerCreditLine> TbCustomerCreditLines { get; set; } = null!;
 
-    public DbSet<TbDataview> TbDataviews { get; set; } = null!;
+    public DbSet<TbDataview?> TbDataviews { get; set; } = null!;
 
     public DbSet<TbElement> TbElements { get; set; } = null!;
 

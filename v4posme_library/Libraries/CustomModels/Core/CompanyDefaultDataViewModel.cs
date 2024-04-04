@@ -4,13 +4,13 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 class CompanyDefaultDataViewModel : ICompanyDefaultDataViewModel
 {
-    public TbCompanyDefaultDataview GetRowByCcct(int companyId, int componentId, int callerId, int targetComponentId)
+    public TbCompanyDefaultDataview? GetRowByCcct(int companyId, int componentId, int callerId, int targetComponentId)
     {
         using var context = new DataContext();
         return context.TbCompanyDefaultDataviews
-            .First(dataview => dataview.CompanyId == companyId
-                               && dataview.ComponentId == componentId
-                               && dataview.CallerId == callerId
-                               && dataview.TargetComponentId == targetComponentId);
+            .FirstOrDefault(dataview => dataview!.CompanyId == companyId
+                                        && dataview.ComponentId == componentId
+                                        && dataview.CallerId == callerId
+                                        && dataview.TargetComponentId == targetComponentId);
     }
 }

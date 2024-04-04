@@ -141,6 +141,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICoreWebTransactionMasterDetail, CoreWebTransactionMasterDetail>();
             _unityContainer.RegisterType<ICoreWebWhatsap, CoreWebWhatsap>();
             _unityContainer.RegisterType<ICoreWebGoogle, CoreWebGoogle>();
+            _unityContainer.RegisterType<ICoreWebView, CoreWebView>();
 
             #endregion
         }
@@ -156,7 +157,8 @@ namespace v4posme_library.Libraries
             }
         }
 
-        public static IConfigurationSection ConfigurationBuilder => new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("globals");
+        public static IConfigurationSection ConfigurationBuilder => new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json").Build().GetSection("globals");
 
         public IUnityContainer UnityContainer
         {
@@ -178,8 +180,14 @@ namespace v4posme_library.Libraries
         public List<TbMenuElement>? ListMenuHiddenPopup { get; set; }
         public string? MessageLogin { get; set; }
         public string? ParameterLabelSystem { get; set; }
+
         public List<string>? SubMenu { get; set; }
 
-        
+        /// <summary>
+        /// Clase con nombre de: view_config
+        /// </summary>
+        public TbCompanyDataview CompanyDataViewModel { get; set; }
+
+        public int ViewData { get; set; }
     }
 }
