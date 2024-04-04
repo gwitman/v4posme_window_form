@@ -10,6 +10,6 @@ namespace v4posme_library.ModelsDto
     public class TableCompanyDataViewDto
     {
         public TbCompanyDataview? config { get; set; }
-        public object? data { get; set; }
+        public dynamic? data { get; set; }
     }
 }

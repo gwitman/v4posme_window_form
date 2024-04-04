@@ -37,7 +37,7 @@ class CoreWebView : ICoreWebView
         // Obtener la vista generica
         var dataView = _dataViewModel.GetViewByName(componentId, name, callerId);
         if (dataView is null)
-            return new TableCompanyDataViewDto();
+            return null;
 
         // Obtener la compañia
         var objCompany = _companyModel.GetRowByPk(user.CompanyId);
@@ -87,12 +87,12 @@ class CoreWebView : ICoreWebView
         // Ejecutar consulta
         TableCompanyDataViewDto objResult  = new TableCompanyDataViewDto();
         objResult.config                = companyDataView;
-        var dataRecordSet               = _bdModel.ExecuteRender<object>(queryFill);
+        var dataRecordSet               = _bdModel.ExecuteRender<dynamic>(queryFill);
         objResult.data = dataRecordSet;
         return objResult;
     }
 
-    public void GetViewByDataViewId(TbUser user, int componentId, int dataviewId, int callerId, int? permission = null,
+    public TableCompanyDataViewDto GetViewByDataViewId(TbUser user, int componentId, int dataviewId, int callerId, int? permission = null,
         Dictionary<string, string>? parameter = null)
     {
         var companyDataView =
@@ -128,12 +128,18 @@ class CoreWebView : ICoreWebView
         }
 
         queryFill = queryFill.Replace("{filterPermission}", filterPermission);
-        var dataRecordSet = _bdModel.ExecuteRender<int>(queryFill);
-        VariablesGlobales.Instance.CompanyDataViewModel = companyDataView;
-        VariablesGlobales.Instance.ViewData = dataRecordSet;
+
+
+        TableCompanyDataViewDto objResult = new TableCompanyDataViewDto();
+        objResult.config = companyDataView;
+        var dataRecordSet = _bdModel.ExecuteRender<dynamic>(queryFill);
+        objResult.data = dataRecordSet;
+        return objResult;
+
+      ;
     }
 
-    public void GetView(TbUser user, int? componentId = null, int? callerId = null, int? permission = null,
+    public TableCompanyDataViewDto GetView(TbUser user, int? componentId = null, int? callerId = null, int? permission = null,
         Dictionary<string, string>? parameter = null)
     {
         var objListView = _dataViewModel.GetListByCompanyComponentCaller(componentId!.Value, callerId!.Value);
@@ -176,12 +182,18 @@ class CoreWebView : ICoreWebView
         }
 
         queryFill = queryFill.Replace("{filterPermission}", filterPermission);
-        var dataRecordSet = _bdModel.ExecuteRender<int>(queryFill);
-        VariablesGlobales.Instance.CompanyDataViewModel = companyDataView;
-        VariablesGlobales.Instance.ViewData = dataRecordSet;
+
+
+        TableCompanyDataViewDto objResult = new TableCompanyDataViewDto();
+        objResult.config = companyDataView;
+        var dataRecordSet = _bdModel.ExecuteRender<dynamic>(queryFill);
+        objResult.data = dataRecordSet;
+        return objResult;
+
+
     }
 
-    public void GetViewDefault(TbUser user, int? componentId = null, int? callerId = null,
+    public TableCompanyDataViewDto GetViewDefault(TbUser user, int? componentId = null, int? callerId = null,
         int? targetComponentId = null,
         int? permission = null, Dictionary<string, string>? parameter = null)
     {
@@ -228,9 +240,14 @@ class CoreWebView : ICoreWebView
         }
 
         queryFill = queryFill.Replace("{filterPermission}", filterPermission);
-        var dataRecordSet = _bdModel.ExecuteRender<int>(queryFill);
-        VariablesGlobales.Instance.CompanyDataViewModel = companyDataView;
-        VariablesGlobales.Instance.ViewData = dataRecordSet;
+
+        TableCompanyDataViewDto objResult = new TableCompanyDataViewDto();
+        objResult.config = companyDataView;
+        var dataRecordSet = _bdModel.ExecuteRender<dynamic>(queryFill);
+        objResult.data = dataRecordSet;
+        return objResult;
+
+
     }
 
     private static string ReplacePlaceholders(string input, Dictionary<string, string> parameter)
