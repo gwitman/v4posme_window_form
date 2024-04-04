@@ -3,6 +3,7 @@ using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels;
 using v4posme_library.Libraries.CustomModels.Core;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
 
@@ -30,7 +31,7 @@ class CoreWebView : ICoreWebView
 
     private readonly IBdModel _bdModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBdModel>();
 
-    public void GetViewByName(TbUser user, int componentId, string name, int callerId, int? permission = null,
+    public TableCompanyDataView GetViewByName(TbUser user, int componentId, string name, int callerId, int? permission = null,
         Dictionary<string, string>? parameter = null)
     {
         // Obtener la vista generica
@@ -84,9 +85,11 @@ class CoreWebView : ICoreWebView
         queryFill = queryFill.Replace("{filterPermission}", filterPermission);
 
         // Ejecutar consulta
-        var dataRecordSet = _bdModel.ExecuteRender<int>(queryFill);
-        VariablesGlobales.Instance.CompanyDataViewModel = companyDataView;
-        VariablesGlobales.Instance.ViewData = dataRecordSet;
+        TableCompanyDataView objResult  = new TableCompanyDataView();
+        objResult.config                = companyDataView;
+        var dataRecordSet               = _bdModel.ExecuteRender<object>(queryFill);
+        objResult.data = dataRecordSet;
+        return objResult;
     }
 
     public void GetViewByDataViewId(TbUser user, int componentId, int dataviewId, int callerId, int? permission = null,
