@@ -10,16 +10,21 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
     {
         private readonly IConfigurationSection _section = VariablesGlobales.ConfigurationBuilder;
 
-        private readonly IRoleModel _roleModel = VariablesGlobales.Instance.UnityContainer.Resolve<IRoleModel>();
+        private readonly IRoleModel _roleModel;
 
-        private readonly IElementModel _elementModel =
-            VariablesGlobales.Instance.UnityContainer.Resolve<IElementModel>();
+        private readonly IElementModel _elementModel;
 
-        private readonly IUserPermissionModel _userPermissionModel =
-            VariablesGlobales.Instance.UnityContainer.Resolve<IUserPermissionModel>();
+        private readonly IUserPermissionModel _userPermissionModel;
 
-        private readonly IMenuElementModel _menuElementModel =
-            VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
+        private readonly IMenuElementModel _menuElementModel;
+
+        public CoreWebMenu(IRoleModel roleModel, IElementModel elementModel, IUserPermissionModel userPermissionModel, IMenuElementModel menuElementModel)
+        {
+            _roleModel = roleModel;
+            _elementModel = elementModel;
+            _userPermissionModel = userPermissionModel;
+            _menuElementModel = menuElementModel;
+        }
 
         public List<TbMenuElement>? GetMenuTop(int companyId, int branchId, int roleId)
         {

@@ -2,6 +2,7 @@ using DevExpress.Xpo;
 using DevExpress.Xpo.DB;
 using DevExpress.XtraBars.Alerter;
 using DevExpress.XtraEditors;
+using Unity;
 using v4posme_library.Libraries;
 using v4posme_window_form.Views;
 using v4posme_window.Views;
@@ -37,7 +38,8 @@ static class Program
         }         
         if (loginForm.ShowDialog() == DialogResult.OK)
         {
-            Application.Run(new PrincipalForm());
+            //Application.Run(new PrincipalForm());
+            Application.Run(new XtraForm1());
         }
         else
         {

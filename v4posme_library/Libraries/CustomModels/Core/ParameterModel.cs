@@ -4,6 +4,7 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 class ParameterModel : IParameterModel
 {
+    
     public TbParameter? GetRowByName(string name)
     {
         using var context = new DataContext();

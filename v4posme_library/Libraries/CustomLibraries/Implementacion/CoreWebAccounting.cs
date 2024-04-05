@@ -8,25 +8,30 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
 
 public class CoreWebAccounting : ICoreWebAccounting
 {
-    private readonly ICompanyParameterModel _companyParameterModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
+    private readonly ICompanyParameterModel _companyParameterModel;
 
-    private readonly IComponentCycleModel _componentCycleModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<IComponentCycleModel>();
+    private readonly IComponentCycleModel _componentCycleModel;
 
-    private readonly IParameterModel _parameterModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<IParameterModel>();
+    private readonly IParameterModel _parameterModel;
 
-    private readonly IComponentPeriodModel _componentPeriodModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<IComponentPeriodModel>();
+    private readonly IComponentPeriodModel _componentPeriodModel;
 
-    private readonly IAccountModel _accountModel = VariablesGlobales.Instance.UnityContainer.Resolve<IAccountModel>();
+    private readonly IAccountModel _accountModel;
 
-    private readonly IAccountingBalanceModel _accountingBalanceModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<IAccountingBalanceModel>();
+    private readonly IAccountingBalanceModel _accountingBalanceModel;
 
-    private readonly ICoreWebParameter _coreWebParameter =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
+    private readonly ICoreWebParameter _coreWebParameter;
+
+    public CoreWebAccounting(ICompanyParameterModel companyParameterModel, IComponentCycleModel componentCycleModel, IParameterModel parameterModel, IComponentPeriodModel componentPeriodModel, IAccountModel accountModel, IAccountingBalanceModel accountingBalanceModel, ICoreWebParameter coreWebParameter)
+    {
+        _companyParameterModel = companyParameterModel;
+        _componentCycleModel = componentCycleModel;
+        _parameterModel = parameterModel;
+        _componentPeriodModel = componentPeriodModel;
+        _accountModel = accountModel;
+        _accountingBalanceModel = accountingBalanceModel;
+        _coreWebParameter = coreWebParameter;
+    }
 
     public bool CycleIsCloseById(int companyId, int cycleId)
     {

@@ -8,33 +8,33 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 {
     public class CoreWebAuthentication : ICoreWebAuthentication
     {
-        private readonly IMembershipModel _membershipModel =
-            VariablesGlobales.Instance.UnityContainer.Resolve<IMembershipModel>();
-
-        private readonly IRoleModel _roleModel = VariablesGlobales.Instance.UnityContainer.Resolve<IRoleModel>();
-
-        private readonly ICoreWebMenu _coreWebMenu =
-            VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebMenu>();
-
-        private readonly ICoreWebPermission _coreWebPermission =
-            VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebPermission>();
-
-        private readonly ICoreWebAuthentication _coreWebAutentication =
-            VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
-
-        private readonly ICoreWebParameter _coreWebParameter =
-            VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
-
-        private readonly ICoreWebTools _coreWebToolser =
-            VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
-
-        private readonly IUserModel _userModel = VariablesGlobales.Instance.UnityContainer.Resolve<IUserModel>();
-
-        private readonly ICompanyModel _companyModel =
-            VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyModel>();
-
-        private readonly IBranchModel _branchModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBranchModel>();
-
+        private readonly IMembershipModel _membershipModel;
+        private readonly IRoleModel _roleModel;
+        private readonly ICoreWebMenu _coreWebMenu;
+        private readonly ICoreWebParameter _coreWebParameter;
+        private readonly ICoreWebTools _coreWebToolser;
+        private readonly IUserModel _userModel;
+        private readonly ICompanyModel _companyModel;
+        private readonly IBranchModel _branchModel;
+        
+        public CoreWebAuthentication(IMembershipModel membershipModel,
+            IRoleModel roleModel,
+            ICoreWebMenu coreWebMenu,
+            ICoreWebParameter coreWebParameter,
+            ICoreWebTools coreWebToolser,
+            IUserModel userModel,
+            ICompanyModel companyModel,
+            IBranchModel branchModel)
+        {
+            _membershipModel = membershipModel;
+            _roleModel = roleModel;
+            _coreWebMenu = coreWebMenu;
+            _coreWebParameter = coreWebParameter;
+            _coreWebToolser = coreWebToolser;
+            _userModel = userModel;
+            _companyModel = companyModel;
+            _branchModel = branchModel;
+        }
 
         public TbUser Validar(TbUser user, string password)
         {
@@ -120,7 +120,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 user.BranchId, objRole.RoleId);
             VariablesGlobales.Instance.ListMenuHiddenPopup = _coreWebMenu.GetMenuHiddenPopup(user.CompanyId,
                 user.BranchId, objRole.RoleId);
-            VariablesGlobales.Instance.MessageLogin = _coreWebAutentication.GetLicenseMessage(user.CompanyId);
+            VariablesGlobales.Instance.MessageLogin = GetLicenseMessage(user.CompanyId);
             var parameter = _coreWebParameter.GetParameter("CORE_LABEL_SISTEMA_SUPLANTATION",
                 VariablesGlobales.Instance.Membership.CompanyId);
             VariablesGlobales.Instance.ParameterLabelSystem = parameter!.Value;

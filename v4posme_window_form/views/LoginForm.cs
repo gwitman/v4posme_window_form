@@ -37,69 +37,92 @@ namespace v4posme_window.Views
 
         private async void btnIngresar_Click(object sender, EventArgs e)
         {
+            var userService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
+            var userTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
             progressPanel.Visible = true;
+            if (string.IsNullOrEmpty(txtUsuario.Text))
+            {
+                dxErrorProvider.SetError(txtUsuario, "Debe especificar un usuario para continuar.");
+                if (progressPanel.Visible)
+                {
+                    progressPanel.Visible = false;
+                }
+            }
+            else
+            {
+                dxErrorProvider.SetError(txtUsuario, "");
+            }
+
+            if (string.IsNullOrEmpty(txtPassword.Text))
+            {
+                dxErrorProvider.SetError(txtPassword, "Debe especificar una contraseña para continuar.");
+                if (progressPanel.Visible)
+                {
+                    progressPanel.Visible = false;
+                }
+            }
+            else
+            {
+                dxErrorProvider.SetError(txtPassword, "");
+            }
+
+            if (string.IsNullOrEmpty(txtUsuario.Text))
+            {
+                XtraMessageBox.Show("Debe especificar un usuario para continuar",
+                    UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtUsuario.Focus();
+                if (progressPanel.Visible)
+                {
+                    progressPanel.Visible = false;
+                }
+                //return Task.CompletedTask;
+            }
+
+            if (string.IsNullOrEmpty(txtPassword.Text))
+            {
+                XtraMessageBox.Show("Debe especificar una contraseña para continuar",
+                    UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtPassword.Focus();
+                if (progressPanel.Visible)
+                {
+                    progressPanel.Visible = false;
+                }
+                //return Task.CompletedTask;
+            }
+            if (!progressPanel.Visible)
+            {
+                progressPanel.Visible = true;
+            }
             await Task.Run(() =>
             {
-                var usuarioService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
-                var usuarioToolse = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
-                if (string.IsNullOrEmpty(txtUsuario.Text))
-                {
-                    dxErrorProvider.SetError(txtUsuario, "Debe especificar un usuario para continuar.");
-                }
-                else
-                {
-                    dxErrorProvider.SetError(txtUsuario, "");
-                }
-                if (string.IsNullOrEmpty(txtPassword.Text))
-                {
-                    dxErrorProvider.SetError(txtPassword, "Debe especificar una contraseña para continuar.");
-                }
-                else
-                {
-                    dxErrorProvider.SetError(txtPassword, "");
-                }
-                if (string.IsNullOrEmpty(txtUsuario.Text))
-                {
-                    XtraMessageBox.Show("Debe especificar un usuario para continuar",
-                        UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtUsuario.Focus();
-                    return Task.CompletedTask;
-                }
-                if (string.IsNullOrEmpty(txtPassword.Text))
-                {
-                    XtraMessageBox.Show("Debe especificar una contraseña para continuar",
-                        UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtPassword.Focus();
-                    return Task.CompletedTask;
-                }
                 var nickname = txtUsuario.Text;
                 var password = txtPassword.Text;
-                VariablesGlobales.Instance.User = usuarioService.GetUserByNickname(nickname);
+                VariablesGlobales.Instance.User = userService.GetUserByNickname(nickname);
                 if (VariablesGlobales.Instance.User == null)
                 {
                     XtraMessageBox.Show("Nombre de usuario no registrado, intente nuevamente",
                         UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //txtUsuario.Focus();
-                    return Task.CompletedTask;
+                    return;
                 }
-                VariablesGlobales.Instance.User = usuarioService.GetUserByPasswordAndNickname(nickname, password);
-                if (VariablesGlobales.Instance.User == null)
+
+                VariablesGlobales.Instance.User = userService.GetUserByPasswordAndNickname(nickname, password);
+                if (VariablesGlobales.Instance.User is null)
                 {
                     XtraMessageBox.Show("Contraseña incorrecta, intente nuevamente",
                         UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    /*progressPanel.Visible = false;
-                    txtPassword.Focus();*/
-                    return Task.CompletedTask;
+                    return;
                 }
-                if (VariablesGlobales.Instance.MessageLogin!.Length > 0)
+
+                if (VariablesGlobales.Instance.MessageLogin is not null)
                 {
-                    XtraMessageBox.Show(VariablesGlobales.Instance.MessageLogin, "PosMe", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    XtraMessageBox.Show(VariablesGlobales.Instance.MessageLogin, "PosMe", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 }
-                /*XtraMessageBox.Show("Credenciales ingresada correctamente.",
-               UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Information);*/                
-                usuarioToolse.Log("Usuario logeado al sistema: " + VariablesGlobales.Instance.User.Nickname);
+
+                if (VariablesGlobales.Instance.User is null) return;
+                userTools.Log("Usuario logeado al sistema: " + VariablesGlobales.Instance.User.Nickname);
                 DialogResult = DialogResult.OK;
-                return Task.CompletedTask;
+                //return Task.CompletedTask;
             });
             progressPanel.Visible = false;
         }
@@ -144,7 +167,6 @@ namespace v4posme_window.Views
 
         private void ultraPanel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
     }
 }

@@ -6,25 +6,18 @@ using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
 
-class CoreWebTransaction : ICoreWebTransaction
+class CoreWebTransaction(
+    ICoreWebParameter coreWebParameter,
+    ITransactionModel transactionModel,
+    ICompanyComponentFlavorModel companyComponentFlavor,
+    IComponentModel componentModel)
+    : ICoreWebTransaction
 {
     private readonly ICoreWebTools _coreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
 
-    private readonly ICoreWebParameter _coreWebParameter =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
-
-    private readonly ITransactionModel _transactionModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionModel>();
-
-    private readonly ICompanyComponentFlavorModel _companyComponentFlavor =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyComponentFlavorModel>();
-
-    private readonly IComponentModel _componentModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<IComponentModel>();
-
     public int GetCountTransactionBillingAnuladas(int companyId)
     {
-        var invoiceAnuladasStatus = _coreWebParameter.GetParameter("INVOICE_BILLING_ANULADAS", companyId);
+        var invoiceAnuladasStatus = coreWebParameter.GetParameter("INVOICE_BILLING_ANULADAS", companyId);
         var objComponent = _coreWebTools.GetComponentIdByComponentName("tb_transaction_master_billing");
         if (objComponent is null)
         {
@@ -37,13 +30,13 @@ class CoreWebTransaction : ICoreWebTransaction
             throw new Exception("LA TRANSACCION  'tb_transaction_master_billing' NO EXISTE...");
         }
 
-        return _transactionModel.GetCounterTransactionMaster(companyId, transactionId!.Value,
+        return transactionModel.GetCounterTransactionMaster(companyId, transactionId!.Value,
             Convert.ToInt32(invoiceAnuladasStatus.Value));
     }
 
     public int GetCountTransactionBillingCancel(int companyId)
     {
-        var invoiceCancelStatus = _coreWebParameter.GetParameter("INVOICE_BILLING_CANCEL", companyId);
+        var invoiceCancelStatus = coreWebParameter.GetParameter("INVOICE_BILLING_CANCEL", companyId);
         var objComponent = _coreWebTools.GetComponentIdByComponentName("tb_transaction_master_billing");
         if (objComponent is null)
         {
@@ -56,7 +49,7 @@ class CoreWebTransaction : ICoreWebTransaction
             throw new Exception("LA TRANSACCION  'tb_transaction_master_billing' NO EXISTE...");
         }
 
-        return _transactionModel.GetCounterTransactionMaster(companyId, transactionId!.Value,
+        return transactionModel.GetCounterTransactionMaster(companyId, transactionId!.Value,
             Convert.ToInt32(invoiceCancelStatus.Value));
     }
 
@@ -88,13 +81,13 @@ class CoreWebTransaction : ICoreWebTransaction
 
     public int? GetTransactionId(int companyId, string componentName, int componentItemId)
     {
-        var objComponent = _componentModel.GetRowByName(componentName);
+        var objComponent = componentModel.GetRowByName(componentName);
         if (objComponent is null)
         {
             throw new Exception($"NO EXISTE EL COMPONENTE '{componentName}' DENTROS DE LOS REGISTROS DE 'Component' ");
         }
 
-        var objCompanyComponentFlavor = _companyComponentFlavor
+        var objCompanyComponentFlavor = companyComponentFlavor
             .GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentId, componentItemId);
         if (objCompanyComponentFlavor is null)
         {
@@ -106,13 +99,13 @@ class CoreWebTransaction : ICoreWebTransaction
 
     public TbTransaction? GetTransaction(int companyId, string name)
     {
-        return _transactionModel.GetRowByPk(companyId, name);
+        return transactionModel.GetRowByPk(companyId, name);
     }
 
     public TbTransactionConcept GetConcept(int companyId, string transactionName, string conceptName)
     {
         var transactionConceptModel = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionConceptModel>();
-        var objT = _transactionModel.GetRowByPk(companyId, transactionName);
+        var objT = transactionModel.GetRowByPk(companyId, transactionName);
         if (objT is null)
         {
             throw new Exception($"NO EXISTE LA TRANSACCION {transactionName}");

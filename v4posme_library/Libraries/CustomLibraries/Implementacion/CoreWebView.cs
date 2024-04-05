@@ -7,7 +7,12 @@ using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
 
-class CoreWebView : ICoreWebView
+class CoreWebView(
+    IDataViewModel dataViewModel,
+    ICompanyDataViewModel companyDataViewModel,
+    ICompanyModel companyModel,
+    IBdModel bdModel)
+    : ICoreWebView
 {
     private static readonly int PermissionAll =
         Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_ALL"]!);
@@ -21,37 +26,27 @@ class CoreWebView : ICoreWebView
     private static readonly int
         PermissionMe = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_ME"]!);
 
-    private readonly IDataViewModel
-        _dataViewModel = VariablesGlobales.Instance.UnityContainer.Resolve<IDataViewModel>();
-
-    private readonly ICompanyDataViewModel _companyDataViewModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyDataViewModel>();
-
-    private readonly ICompanyModel _companyModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyModel>();
-
-    private readonly IBdModel _bdModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBdModel>();
-
     public TableCompanyDataViewDto  GetViewByName(TbUser user, int componentId, string name, int callerId, int? permission = null,
         Dictionary<string, string>? parameter = null)
     {
         // Obtener la vista generica
-        var dataView = _dataViewModel.GetViewByName(componentId, name, callerId);
+        var dataView = dataViewModel.GetViewByName(componentId, name, callerId);
         if (dataView is null)
             return null;
 
         // Obtener la compañia
-        var objCompany = _companyModel.GetRowByPk(user.CompanyId);
+        var objCompany = companyModel.GetRowByPk(user.CompanyId);
 
         // Obtener la vista por el flavor
         var dataViewId = dataView.DataViewId;
 
-        var companyDataView = _companyDataViewModel.GetRowByCompanyIdDataViewIdAndFlavor(user.CompanyId, dataViewId,
+        var companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewIdAndFlavor(user.CompanyId, dataViewId,
             callerId, componentId, objCompany.FlavorId);
         if (companyDataView is null)
         {
             // Obtener la vista unica
             companyDataView =
-                _companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId, dataViewId, callerId, componentId);
+                companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId, dataViewId, callerId, componentId);
             if (companyDataView is null)
                 return null;
         }
@@ -89,7 +84,7 @@ class CoreWebView : ICoreWebView
         {
             Config = companyDataView
         };
-        var dataRecordSet               = _bdModel.ExecuteRender<dynamic>(queryFill);
+        var dataRecordSet               = bdModel.ExecuteRender<dynamic>(queryFill);
         objResult.Data = dataRecordSet;
         return objResult;
     }
@@ -98,7 +93,7 @@ class CoreWebView : ICoreWebView
         Dictionary<string, string>? parameter = null)
     {
         var companyDataView =
-            _companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId, dataviewId, callerId, componentId);
+            companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId, dataviewId, callerId, componentId);
         if (companyDataView is null)
         {
             throw new Exception("No existe el company data view");
@@ -134,7 +129,7 @@ class CoreWebView : ICoreWebView
 
         TableCompanyDataViewDto objResult = new TableCompanyDataViewDto();
         objResult.Config = companyDataView;
-        var dataRecordSet = _bdModel.ExecuteRender<dynamic>(queryFill);
+        var dataRecordSet = bdModel.ExecuteRender<dynamic>(queryFill);
         objResult.Data = dataRecordSet;
         return objResult;
 
@@ -144,14 +139,14 @@ class CoreWebView : ICoreWebView
     public TableCompanyDataViewDto GetView(TbUser user, int? componentId = null, int? callerId = null, int? permission = null,
         Dictionary<string, string>? parameter = null)
     {
-        var objListView = _dataViewModel.GetListByCompanyComponentCaller(componentId!.Value, callerId!.Value);
+        var objListView = dataViewModel.GetListByCompanyComponentCaller(componentId!.Value, callerId!.Value);
         if (objListView is null)
         {
             throw new Exception("No existe el data view");
         }
 
         var companyDataView =
-            _companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId, objListView.DataViewId, callerId!.Value,
+            companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId, objListView.DataViewId, callerId!.Value,
                 componentId!.Value);
         if (companyDataView is null)
         {
@@ -190,7 +185,7 @@ class CoreWebView : ICoreWebView
         {
             Config = companyDataView
         };
-        var dataRecordSet = _bdModel.ExecuteRender<dynamic>(queryFill);
+        var dataRecordSet = bdModel.ExecuteRender<dynamic>(queryFill);
         objResult.Data = dataRecordSet;
         return objResult;
 
@@ -211,7 +206,7 @@ class CoreWebView : ICoreWebView
             throw new Exception("No existe el company default data view");
         }
 
-        var companyDataView = _companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId,
+        var companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId,
             objCompanyDefaultDataView.DataViewId, callerId.Value, componentId.Value);
         if (companyDataView is null)
         {
@@ -247,7 +242,7 @@ class CoreWebView : ICoreWebView
 
         TableCompanyDataViewDto objResult = new TableCompanyDataViewDto();
         objResult.Config = companyDataView;
-        var dataRecordSet = _bdModel.ExecuteRender<dynamic>(queryFill);
+        var dataRecordSet = bdModel.ExecuteRender<dynamic>(queryFill);
         objResult.Data = dataRecordSet;
         return objResult;
 

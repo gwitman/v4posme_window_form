@@ -6,18 +6,14 @@ using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 {
-    public class CoreWebPermission : ICoreWebPermission
+    public class CoreWebPermission(
+        ICoreWebParameter coreWebParameter,
+        IUserModel userModel,
+        ICompanyParameterModel parameterModel)
+        : ICoreWebPermission
     {
-        private readonly ICoreWebParameter _coreWebParameter =
-            VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
-
         private static readonly string? UrlSuffixNew = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX_NEW"];
         private static readonly string? UrlSuffixOld = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX_OLD"];
-        
-        private readonly IUserModel _userModel = VariablesGlobales.Instance.UnityContainer.Resolve<IUserModel>();
-
-        private readonly ICompanyParameterModel _companyParameterModel =
-            VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
 
         public int GetElementId(string controller, string method, string suffix, List<TbMenuElement> dataMenuTop,
             List<TbMenuElement> dataMenuLeft,
@@ -315,23 +311,23 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         public void GetValueLicense(int companyId, string url)
         {
             var companyParameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
-            var objParameterMaxUser = _coreWebParameter.GetParameter("CORE_CUST_PRICE_MAX_USER", companyId);
+            var objParameterMaxUser = coreWebParameter.GetParameter("CORE_CUST_PRICE_MAX_USER", companyId);
             var parameterFechaExpiration =
-                DateTime.Parse(_coreWebParameter.GetParameter("CORE_CUST_PRICE_LICENCES_EXPIRED", companyId)!.Value);
+                DateTime.Parse(coreWebParameter.GetParameter("CORE_CUST_PRICE_LICENCES_EXPIRED", companyId)!.Value);
             var objParameterISleep =
-                int.Parse(_coreWebParameter.GetParameter("CORE_CUST_PRICE_SLEEP", companyId)!.Value);
-            var objParameterTipoPlan = _coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId)!.Value;
+                int.Parse(coreWebParameter.GetParameter("CORE_CUST_PRICE_SLEEP", companyId)!.Value);
+            var objParameterTipoPlan = coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId)!.Value;
             var objParameterExpiredLicense =
-                DateTime.Parse(_coreWebParameter.GetParameter("CORE_CUST_PRICE_LICENCES_EXPIRED", companyId)!.Value);
-            var objParameterCreditos = _coreWebParameter.GetParameter("CORE_CUST_PRICE_BALANCE", companyId);
+                DateTime.Parse(coreWebParameter.GetParameter("CORE_CUST_PRICE_LICENCES_EXPIRED", companyId)!.Value);
+            var objParameterCreditos = coreWebParameter.GetParameter("CORE_CUST_PRICE_BALANCE", companyId);
             var objParameterCreditosId = objParameterCreditos!.ParameterId;
             var parameterCreditos = int.Parse(objParameterCreditos.Value);
             var objParameterPriceByInvoice =
-                int.Parse(_coreWebParameter.GetParameter("CORE_CUST_PRICE_BY_INVOICE", companyId)!.Value);
+                int.Parse(coreWebParameter.GetParameter("CORE_CUST_PRICE_BY_INVOICE", companyId)!.Value);
             var parameterMaxUser = int.Parse(objParameterMaxUser!.Value);
             if (parameterMaxUser > 0)
             {
-                var count = _userModel.GetCount(companyId);
+                var count = userModel.GetCount(companyId);
                 if ((count + 1) > parameterMaxUser)
                 {
                     throw new Exception("""
@@ -378,16 +374,16 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             parameterCreditos -= objParameterPriceByInvoice;
             var dataNewParameter = companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameterCreditosId);
             dataNewParameter!.Value = parameterCreditos.ToString();
-            _companyParameterModel.UpdateAppPosme(companyId, objParameterCreditosId, dataNewParameter);
+            parameterModel.UpdateAppPosme(companyId, objParameterCreditosId, dataNewParameter);
 
 
-            var parameterCantiadTransacciones = _coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId);
+            var parameterCantiadTransacciones = coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId);
             var parameterCantiadTransaccionesId = parameterCantiadTransacciones!.ParameterId;
             var parameterCantiadTransaccionesValue = int.Parse(parameterCantiadTransacciones.Value);
             var parameterCantiadTransaccionesNewValor = parameterCantiadTransaccionesValue + 1;
             var dataNewParameterCantidadTransacciones = companyParameterModel.GetRowByParameterIdCompanyId(companyId, parameterCantiadTransaccionesId);
             dataNewParameterCantidadTransacciones!.Value = parameterCantiadTransaccionesNewValor.ToString();
-            _companyParameterModel.UpdateAppPosme(companyId, parameterCantiadTransaccionesId,dataNewParameterCantidadTransacciones);
+            parameterModel.UpdateAppPosme(companyId, parameterCantiadTransaccionesId,dataNewParameterCantidadTransacciones);
 
             if (fechaNow > objParameterExpiredLicense && objParameterTipoPlan != "MEMBRESIA")
             {

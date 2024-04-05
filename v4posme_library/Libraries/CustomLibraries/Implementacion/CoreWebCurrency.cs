@@ -5,21 +5,16 @@ using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
 
-public class CoreWebCurrency : ICoreWebCurrency
+public class CoreWebCurrency(ICoreWebParameter coreWebParameter, ICurrencyModel currencyModel)
+    : ICoreWebCurrency
 {
-    private readonly ICoreWebParameter _coreWebParameter =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
-
-    private readonly ICurrencyModel
-        _currencyModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICurrencyModel>();
-
     private readonly IExchangerateModel _exchangerateModel =
         VariablesGlobales.Instance.UnityContainer.Resolve<IExchangerateModel>();
 
     private TbCompanyParameter MoneyFuncionalName(string parameterName, int companyId)
     {
         var moneyFuncionalName =
-            _coreWebParameter.GetParameter(parameterName, companyId);
+            coreWebParameter.GetParameter(parameterName, companyId);
         if (moneyFuncionalName is null)
         {
             throw new Exception("NO EXISTE MONEY_FUNCIONAL_NAME");
@@ -48,7 +43,7 @@ public class CoreWebCurrency : ICoreWebCurrency
 
     public TbCurrency? GetCurrencyName(string name)
     {
-        return _currencyModel.GetRowName(name);
+        return currencyModel.GetRowName(name);
     }
 
     public int GetTarget(int companyId, int currencySourceId)

@@ -1,7 +1,6 @@
-﻿using System.Net;
-using System.Net.Mail;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Unity;
+using Unity.Lifetime;
 using v4posme_library.Libraries.CustomLibraries.Implementacion;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels;
@@ -12,11 +11,12 @@ namespace v4posme_library.Libraries
 {
     public class VariablesGlobales
     {
-        private readonly IUnityContainer _unityContainer;
+        private readonly IUnityContainer _unityContainer= new UnityContainer();
+
+        private static IConfigurationSection? _builderConfigurationSection;
 
         private VariablesGlobales()
         {
-            _unityContainer = new UnityContainer();
 
             #region CDI_MODELS
 
@@ -44,7 +44,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IEmployeeCalendarPayDetailModel, EmployeeCalendarPayDetailModel>();
             _unityContainer.RegisterType<IEmployeeCalendarPayModel, EmployeeCalendarPayModel>();
             _unityContainer.RegisterType<IEmployeeModel, EmployeeModel>();
-            _unityContainer.RegisterType<IEntityAccountModel, IEntityAccountModel>();
+            _unityContainer.RegisterType<IEntityAccountModel, EntityAccountModel>();
             _unityContainer.RegisterType<IEntityEmailModel, EntityEmailModel>();
             _unityContainer.RegisterType<IEntityModel, EntityModel>();
             _unityContainer.RegisterType<IEntityPhoneModel, EntityPhoneModel>();
@@ -157,13 +157,11 @@ namespace v4posme_library.Libraries
             }
         }
 
-        public static IConfigurationSection ConfigurationBuilder => new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json").Build().GetSection("globals");
+        public static IConfigurationSection ConfigurationBuilder =>
+            _builderConfigurationSection ?? (_builderConfigurationSection = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json").Build().GetSection("globals"));
 
-        public IUnityContainer UnityContainer
-        {
-            get { return _unityContainer; }
-        }
+        public IUnityContainer UnityContainer => _unityContainer;
 
         public TbUser? User { get; set; }
 
@@ -186,7 +184,7 @@ namespace v4posme_library.Libraries
         /// <summary>
         /// Clase con nombre de: view_config
         /// </summary>
-        public TbCompanyDataview CompanyDataViewModel { get; set; }
+        public TbCompanyDataview? CompanyDataViewModel { get; set; }
 
         public int ViewData { get; set; }
     }

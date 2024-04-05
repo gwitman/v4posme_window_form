@@ -55,9 +55,9 @@ class UserModel : IUserModel
     {
         using var context = new DataContext();
         return context.TbUsers
-            .Single(user => user.Nickname == nickname
-                            && user.Password == password
-                            && user.IsActive!.Value);
+            .SingleOrDefault(user => user!.Nickname == nickname
+                                     && user.Password == password
+                                     && user.IsActive!.Value);
     }
 
     public TbUser? GetRowByEmail(string email)

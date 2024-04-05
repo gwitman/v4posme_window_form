@@ -10,16 +10,21 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
 
 class CoreWebAuditoria : ICoreWebAuditoria
 {
-    private readonly IElementModel _elementModel = VariablesGlobales.Instance.UnityContainer.Resolve<IElementModel>();
+    private readonly IElementModel _elementModel;
 
-    private readonly IComponentAuditDetailModel _componentAuditDetailModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<IComponentAuditDetailModel>();
+    private readonly IComponentAuditDetailModel _componentAuditDetailModel;
 
-    private readonly ICompanySubElementAuditModel _companySubElementAuditModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICompanySubElementAuditModel>();
+    private readonly ICompanySubElementAuditModel _companySubElementAuditModel;
 
-    private readonly IComponentAuditModel _componentAuditModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<IComponentAuditModel>();
+    private readonly IComponentAuditModel _componentAuditModel;
+
+    public CoreWebAuditoria(IElementModel elementModel, IComponentAuditDetailModel componentAuditDetailModel, ICompanySubElementAuditModel companySubElementAuditModel, IComponentAuditModel componentAuditModel)
+    {
+        _elementModel = elementModel;
+        _componentAuditDetailModel = componentAuditDetailModel;
+        _companySubElementAuditModel = companySubElementAuditModel;
+        _componentAuditModel = componentAuditModel;
+    }
 
 
     public void SetAuditCreated<T>(T obj, TbUser dataUser, string request)

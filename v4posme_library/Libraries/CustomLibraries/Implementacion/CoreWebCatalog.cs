@@ -9,23 +9,30 @@ class CoreWebCatalog : ICoreWebCatalog
 {
     private static readonly string? ElementTypeTable = VariablesGlobales.ConfigurationBuilder["ELEMENT_TYPE_TABLE"];
 
-    private readonly ICompanyModel _companyModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyModel>();
+    private readonly ICompanyModel _companyModel;
 
-    private readonly IComponentModel _componentModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<IComponentModel>();
+    private readonly IComponentModel _componentModel;
 
-    private readonly IElementModel _elementModel = VariablesGlobales.Instance.UnityContainer.Resolve<IElementModel>();
+    private readonly IElementModel _elementModel;
 
-    private readonly ISubElementModel _subElementModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ISubElementModel>();
+    private readonly ISubElementModel _subElementModel;
 
-    private readonly ICompanyComponentFlavorModel _componentFlavor =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyComponentFlavorModel>();
+    private readonly ICompanyComponentFlavorModel _componentFlavor;
 
-    private readonly ICatalogModel _catalogModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICatalogModel>();
+    private readonly ICatalogModel _catalogModel;
 
-    private readonly ICatalogItemModel _catalogItemModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICatalogItemModel>();
+    private readonly ICatalogItemModel _catalogItemModel;
+
+    public CoreWebCatalog(ICompanyModel companyModel, IComponentModel componentModel, IElementModel elementModel, ISubElementModel subElementModel, ICompanyComponentFlavorModel componentFlavor, ICatalogModel catalogModel, ICatalogItemModel catalogItemModel)
+    {
+        _companyModel = companyModel;
+        _componentModel = componentModel;
+        _elementModel = elementModel;
+        _subElementModel = subElementModel;
+        _componentFlavor = componentFlavor;
+        _catalogModel = catalogModel;
+        _catalogItemModel = catalogItemModel;
+    }
 
     public List<TbCatalogItem> GetCatalogAllItem(string table, string field, int companyId)
     {

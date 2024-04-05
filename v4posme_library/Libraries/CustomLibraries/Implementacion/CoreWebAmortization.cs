@@ -11,26 +11,30 @@ public class CoreWebAmortization : ICoreWebAmortization
 {
     private static readonly string? AppTimezone = VariablesGlobales.ConfigurationBuilder["APP_TIMEZONE"];
 
-    private readonly ICoreWebParameter _coreWebParameter =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
+    private readonly ICoreWebParameter _coreWebParameter;
 
-    private readonly ICustomerCreditDocumentModel _customerCreditDocumentModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditDocumentModel>();
+    private readonly ICustomerCreditDocumentModel _customerCreditDocumentModel;
 
-    private readonly ICustomerCreditAmortizationModel _customerCreditAmortizationModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditAmortizationModel>();
+    private readonly ICustomerCreditAmortizationModel _customerCreditAmortizationModel;
 
-    private readonly ICustomerCreditLineModel _customerCreditLineModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditLineModel>();
+    private readonly ICustomerCreditLineModel _customerCreditLineModel;
 
-    private readonly ICatalogItemModel _catalogItemModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICatalogItemModel>();
+    private readonly ICatalogItemModel _catalogItemModel;
 
-    private readonly ICoreWebCatalog _coreWebCatalog =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebCatalog>();
+    private readonly ICoreWebCatalog _coreWebCatalog;
 
-    private readonly ICoreWebFinancialAmort _financialAmort =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebFinancialAmort>();
+    private readonly ICoreWebFinancialAmort _financialAmort;
+
+    public CoreWebAmortization(ICoreWebParameter coreWebParameter, ICustomerCreditDocumentModel customerCreditDocumentModel, ICustomerCreditAmortizationModel customerCreditAmortizationModel, ICustomerCreditLineModel customerCreditLineModel, ICatalogItemModel catalogItemModel, ICoreWebCatalog coreWebCatalog, ICoreWebFinancialAmort financialAmort)
+    {
+        _coreWebParameter = coreWebParameter;
+        _customerCreditDocumentModel = customerCreditDocumentModel;
+        _customerCreditAmortizationModel = customerCreditAmortizationModel;
+        _customerCreditLineModel = customerCreditLineModel;
+        _catalogItemModel = catalogItemModel;
+        _coreWebCatalog = coreWebCatalog;
+        _financialAmort = financialAmort;
+    }
 
     public void CancelDocument(int companyId, int customerCreditDocumentId, decimal amount)
     {

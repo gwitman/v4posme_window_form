@@ -4,23 +4,20 @@ using v4posme_library.Libraries.CustomModels.Core;
 
 namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
 
-class CoreWebConvertion : ICoreWebConvertion
+class CoreWebConvertion(ICatalogItemConvertionModel catalogItemConvertionModel) : ICoreWebConvertion
 {
-    private ICatalogItemConvertionModel _catalogItemConvertionModel =
-        VariablesGlobales.Instance.UnityContainer.Resolve<ICatalogItemConvertionModel>();
-
     public decimal Convert(int companyId, decimal quantity, int catalogId, int fromCatalogItemId, int toCatalogItemId)
     {
-        var objConvertionDefault = _catalogItemConvertionModel.GetDefault(companyId, catalogId);
+        var objConvertionDefault = catalogItemConvertionModel.GetDefault(companyId, catalogId);
         if (objConvertionDefault is null)
             throw new Exception("NO EXISTE EL CATALOGITEM DEFAULT EN EL CATALOGO");
 
-        var objConvertionSource = _catalogItemConvertionModel.GetRowByPk(companyId, catalogId, fromCatalogItemId,
+        var objConvertionSource = catalogItemConvertionModel.GetRowByPk(companyId, catalogId, fromCatalogItemId,
             objConvertionDefault.CatalogItemId);
         if (objConvertionSource is null)
             throw new Exception("NO EXISTE EL CATALOGITEM-SOURCE --> DEFAULT");
 
-        var objConvertionTarget = _catalogItemConvertionModel.GetRowByPk(companyId, catalogId, toCatalogItemId,
+        var objConvertionTarget = catalogItemConvertionModel.GetRowByPk(companyId, catalogId, toCatalogItemId,
             objConvertionDefault.CatalogItemId);
         if (objConvertionTarget is null)
             throw new Exception("NO EXISTE EL CATALOGITEM-TARGET --> DEFAULT");
