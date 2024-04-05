@@ -511,3 +511,5 @@ E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\refint
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.pdb
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.genruntimeconfig.cache
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\ref\v4posme_window_form.dll
+C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window.Views.PrincipalForm.resources
+C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window.Views.XtraForm1.resources
