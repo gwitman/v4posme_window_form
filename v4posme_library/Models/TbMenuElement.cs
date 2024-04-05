@@ -56,4 +56,12 @@ public partial class TbMenuElement
 
     [Column("isActive", TypeName = "tinyint(4)")]
     public sbyte IsActive { get; set; }
+    
+    [Column("iconWindowForm")]
+    [StringLength(1200)]
+    public string? IconWindowForm { get; set; }
+    
+    [Column("formRedirectWindowForm")]
+    [StringLength(1200)]
+    public string? FormRedirectWindowForm { get; set; }
 }

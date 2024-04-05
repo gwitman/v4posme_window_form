@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Unity;
+using v4posme_library.Libraries;
+using v4posme_library.Libraries.CustomModels.Core;
 using v4posme_library.Models;
 using v4posme_library.ModelsDto;
 using v4posme_window.Libraries;
@@ -19,11 +22,14 @@ namespace v4posme_window.Views
         public XtraForm1()
         {
             InitializeComponent();
+            var company = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyModel>();
             var coreWebRender = new CoreWebRenderInView();
-            var dto = new TableCompanyDataViewDto();
-            dto.Data = new List<TbEmployeeDto>();
-            dto.Config = new TbCompanyDataview();
-            var gridControl = coreWebRender.RenderGrid(dto, "grid", 0, this);
+            var dto = new TableCompanyDataViewDto
+            {
+                Data = company.GetRows(),
+                Config = new TbCompanyDataview()
+            };
+            coreWebRender.RenderGrid(dto, "grid", 0, this);
         }
     }
 }

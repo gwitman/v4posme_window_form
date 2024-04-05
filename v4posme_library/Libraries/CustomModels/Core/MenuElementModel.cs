@@ -27,7 +27,11 @@ namespace v4posme_library.Libraries.CustomModels.Core
                     Orden = x.Orden,
                     Icon = x.Icon,
                     Template = x.Template,
-                    Nivel = x.Nivel
+                    Nivel = x.Nivel,
+                    IsActive = x.IsActive,
+                    IconWindowForm = x.IconWindowForm,
+                    FormRedirectWindowForm = x.FormRedirectWindowForm,
+                    TypeMenuElementId = x.TypeMenuElementId
                 };
 
             if (elementIdArray.Count > 0)

@@ -497,7 +497,7 @@ E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posm
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window.Views.FormInvoiceBillingEdit.resources
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window.Views.FormInvoiceBillingList.resources
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window.Views.LoginForm.resources
-E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.Views.PrincipalForm.resources
+E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window.Views.PrincipalForm.resources
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window.Views.XtraForm1.resources
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.csproj.GenerateResource.cache
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.GeneratedMSBuildEditorConfig.editorconfig

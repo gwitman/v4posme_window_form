@@ -145,7 +145,6 @@ namespace v4posme_library.Libraries
 
             #endregion
         }
-
         public static VariablesGlobales Instance { get; } = new();
 
         public static string? ConnectionString
