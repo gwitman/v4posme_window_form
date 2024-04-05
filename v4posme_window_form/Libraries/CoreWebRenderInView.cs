@@ -107,51 +107,44 @@ namespace v4posme_window.Libraries
             toastNotificationsManager.ShowNotification(toastNotificationsManager.Notifications[0]);
         }
 
-        public void RenderMenuLeft(AccordionControl accordionControl, List<TbMenuElement> data)
+        public List<AccordionControlElement> RenderMenuLeft(TbCompany company, List<TbMenuElement> data)
         {
-            if (data.Count <= 0)
-            {
-                return;
-            }
-
-            foreach (var menuElement in data)
-            {
-                if (menuElement.ParentMenuElementId is not null) continue;
-                var element = new AccordionControlElement();
-                element.Text = menuElement.Display;
-                element.Style = ElementStyle.Group;
-                if (!string.IsNullOrEmpty(menuElement.IconWindowForm))
-                {
-                    element.Image = new Bitmap(menuElement.IconWindowForm!);
-                }
-
-                RenderMenuLeftChild(element, data, menuElement.MenuElementId);
-                accordionControl.Elements.Add(element);
-            }
+            return RenderItemLeft(company, data, null);
         }
 
-        private void RenderMenuLeftChild(AccordionControlElement accordionControlElement, List<TbMenuElement> data,
-            int parentMenu)
+        private List<AccordionControlElement> RenderItemLeft(TbCompany company, List<TbMenuElement> data,
+            int? parent=null)
         {
-            var forms = CoreFormList.Formularios();
+            var list = new List<AccordionControlElement>();
             foreach (var menuElement in data)
             {
-                if (menuElement.ParentMenuElementId != parentMenu) continue;
-                var element = new AccordionControlElement();
-                element.Text = menuElement.Display;
-                element.Style = ElementStyle.Item;
-                if (!string.IsNullOrEmpty(menuElement.IconWindowForm))
+                if (menuElement.ParentMenuElementId == parent)
                 {
-                    element.Image = new Bitmap(menuElement.IconWindowForm!);
-                }
+                    var x = RenderItemLeft(company, data, parent);
+                    var element = new AccordionControlElement();
+                    element.Text = menuElement.Display;
+                    //en este caso si no se sabe el nivel del menu, no le puedo asignar el tipo al elemento
+                    //existen dos tipos para el acordion
+                    //element.Style = ElementStyle.Item;
+                    //element.Style = ElementStyle.Group;
+                    element.Elements.AddRange(x.ToArray());
+                    if (!string.IsNullOrEmpty(menuElement.IconWindowForm))
+                    {
+                        element.Image = new Bitmap(menuElement.IconWindowForm!);
+                    }
 
-                if (!string.IsNullOrEmpty(menuElement.FormRedirectWindowForm))
-                {
-                    element.Name = menuElement.FormRedirectWindowForm;
-                }
+                    if (!string.IsNullOrEmpty(menuElement.FormRedirectWindowForm))
+                    {
+                        //en este caso este seria el View, se asigna el nombre del Form
+                        //luego se manda a llamar de una lista donde se agina la clase
+                        element.Name = menuElement.FormRedirectWindowForm;
+                    }
 
-                accordionControlElement.Elements.Add(element);
+                    list.Add(element);
+                }
             }
+
+            return list;
         }
     }
 }

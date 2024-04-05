@@ -41,8 +41,9 @@ namespace v4posme_window.Views
                                      VariablesGlobales.Instance.Branch.Name;
             var coreWebRender = new CoreWebRenderInView();
             var menuElementModel = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
-            coreWebRender.RenderMenuLeft(accordionControl1,
+            var menuLeft = coreWebRender.RenderMenuLeft(VariablesGlobales.Instance.Company,
                 menuElementModel.GetRowByCompanyId(VariablesGlobales.Instance.User.CompanyId));
+            accordionControl1.Elements.AddRange(menuLeft.ToArray());
             accordionControl1.ElementClick += accordionControl1_ElementClick;
         }
 
@@ -51,7 +52,9 @@ namespace v4posme_window.Views
         {
             if (e.Element.Style == DevExpress.XtraBars.Navigation.ElementStyle.Group) return;
             if (e.Element.Name == null) return;
-            foreach (var form in from keyValuePair in CoreFormList.Formularios() where e.Element.Name == keyValuePair.Key select keyValuePair.Value)
+            foreach (var form in from keyValuePair in CoreFormList.Formularios()
+                     where e.Element.Name == keyValuePair.Key
+                     select keyValuePair.Value)
             {
                 form.MdiParent = this;
                 form.Show();
