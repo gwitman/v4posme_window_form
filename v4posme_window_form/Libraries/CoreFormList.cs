@@ -8,9 +8,13 @@ public static class CoreFormList
     public static Dictionary<string, Form> Formularios()
     {
         var formInvoiceBillingEdit = new FormInvoiceBillingEdit();
+        var formInvoiceBillingList = new FormInvoiceBillingList();
+
         var forms = new Dictionary<string, Form>
         {
-            { formInvoiceBillingEdit.GetType().Name, formInvoiceBillingEdit }
+            { formInvoiceBillingEdit.GetType().Name, formInvoiceBillingEdit },
+            { "core_dashboards", formInvoiceBillingList }
+            
         };
         return forms;
     }

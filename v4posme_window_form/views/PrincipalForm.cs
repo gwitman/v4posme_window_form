@@ -29,24 +29,17 @@ namespace v4posme_window.Views
 
         private void PrincipalForm_Load(object sender, EventArgs e)
         {
-            Debug.Assert(VariablesGlobales.Instance.User != null, "VariablesGlobales.Instance.User != null");
+            
             VariablesGlobales.Instance.Company = _companyModel.GetRowByPk(VariablesGlobales.Instance.User.CompanyId);
-            VariablesGlobales.Instance.Branch = _branchModel.GetRowByPk(VariablesGlobales.Instance.User.BranchId,
-                VariablesGlobales.Instance.User.CompanyId);
-            VariablesGlobales.Instance.Membership = _membershipModel.GetRowByCompanyIdBranchIdUserId(
-                VariablesGlobales.Instance.User.CompanyId,
-                VariablesGlobales.Instance.User.BranchId, VariablesGlobales.Instance.User.UserId);
-            barCompanyNane.Caption = Resources.PrincipalForm_Compañía_Titulo +
-                                     VariablesGlobales.Instance.Company!.Name + "-" +
-                                     VariablesGlobales.Instance.Branch.Name;
-            var coreWebRender = new CoreWebRenderInView();
-            var menuElementModel = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
+            VariablesGlobales.Instance.Branch = _branchModel.GetRowByPk(VariablesGlobales.Instance.User.BranchId,VariablesGlobales.Instance.User.CompanyId);
+            VariablesGlobales.Instance.Membership = _membershipModel.GetRowByCompanyIdBranchIdUserId(VariablesGlobales.Instance.User.CompanyId,VariablesGlobales.Instance.User.BranchId, VariablesGlobales.Instance.User.UserId);
+            barCompanyNane.Caption  = Resources.PrincipalForm_Compañía_Titulo + VariablesGlobales.Instance.Company!.Name + "-" + VariablesGlobales.Instance.Branch.Name;
+            var coreWebRender       = new CoreWebRenderInView();
+            var menuElementModel    = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
 
             if (VariablesGlobales.Instance.ListMenuLeft is not null)
             {
-                CoreWebRenderInView.RenderMenuLeft(
-                    VariablesGlobales.Instance.ListMenuLeft, accordionControl1
-                );
+                CoreWebRenderInView.RenderMenuLeft(VariablesGlobales.Instance.ListMenuLeft, accordionControl1);
                 accordionControl1.ElementClick += accordionControl1_ElementClick;
             }
 
@@ -54,6 +47,13 @@ namespace v4posme_window.Views
             {                
                 CoreWebRenderInView.RenderMenuTop(VariablesGlobales.Instance.ListMenuTop,  ribbonControl1);
             }
+
+            //Abrir un formulario por defecto
+            var FormularioDefault = CoreFormList.Formularios().Where(c => c.Key == VariablesGlobales.Instance.Role.UrlDefault).FirstOrDefault().Value;
+            FormularioDefault.MdiParent = this;
+            FormularioDefault.Show();
+
+
         }
 
         private void accordionControl1_ElementClick(object sender,
