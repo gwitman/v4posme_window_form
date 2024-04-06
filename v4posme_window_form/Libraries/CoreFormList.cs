@@ -12,9 +12,11 @@ public static class CoreFormList
 
         var forms = new Dictionary<string, Form>
         {
-            { formInvoiceBillingEdit.GetType().Name, formInvoiceBillingEdit },
-            { "core_dashboards", formInvoiceBillingList }
             
+            { "core_dashboards", formInvoiceBillingList },
+            { "app_invoice_billing/index.aspx", formInvoiceBillingList }
+            
+
         };
         return forms;
     }
