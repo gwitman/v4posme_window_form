@@ -51,9 +51,8 @@ namespace v4posme_window.Views
             }
 
             if (VariablesGlobales.Instance.ListMenuTop is not null)
-            {
-                CoreWebRenderInView.RenderMenuTop(VariablesGlobales.Instance.ListMenuTop, menuTop);
-                CoreWebRenderInView.RenderMenuTop(VariablesGlobales.Instance.ListMenuTop, ribbonControl1);
+            {                
+                CoreWebRenderInView.RenderMenuTop(VariablesGlobales.Instance.ListMenuTop,  ribbonControl1);
             }
         }
 

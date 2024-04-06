@@ -37,8 +37,7 @@ static class Program
         }         
         if (loginForm.ShowDialog() == DialogResult.OK)
         {
-            Application.Run(new PrincipalForm());
-            //Application.Run(new XtraForm1());
+            Application.Run(new PrincipalForm());            
         }
         else
         {

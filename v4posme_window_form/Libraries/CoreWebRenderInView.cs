@@ -171,55 +171,9 @@ namespace v4posme_window.Libraries
             }
         }
 
-        public static void RenderMenuTop(List<TbMenuElement> data, MenuStrip menu)
-        {
-            // Llamada inicial a la función recursiva para agregar elementos al AccordionControl
-            foreach (var menuItem in data)
-            {
-                if (menuItem.ParentMenuElementId is null)
-                {
-                    var toolStripMenuItem = new ToolStripMenuItem();
-                    toolStripMenuItem.Text = menuItem.Display;
-                    if (!string.IsNullOrEmpty(menuItem.IconWindowForm))
-                    {
-                        toolStripMenuItem.Image = Image.FromFile(menuItem.IconWindowForm);
-                        toolStripMenuItem.Size = new Size(32, 32);
-                    }
-                    menu.Items.Add(toolStripMenuItem);
-                    RenderItemTop(toolStripMenuItem,
-                        data.Where(k => k.ParentMenuElementId == menuItem.MenuElementId).ToList());
-                }
-            }
-        }
+        
 
-        private static void RenderItemTop(ToolStripMenuItem parentElement, List<TbMenuElement> subItems)
-        {
-            foreach (var subItem in subItems)
-            {
-                var subElement = new ToolStripMenuItem();
-                subElement.Text = subItem.Display;
-                parentElement.DropDownItems.Add(subElement);
-                var subItemsInner = subItems.Where(k => k.ParentMenuElementId == subItem.MenuElementId).ToList();
-                // Si el elemento tiene subelementos, llamamos recursivamente a esta función
-                if (subItemsInner.Count > 0)
-                {
-                    RenderItemTop(subElement, subItemsInner);
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(subItem.IconWindowForm))
-                    {
-                        subElement.Image = Image.FromFile(subItem.IconWindowForm);
-                        subElement.Size = new Size(32, 32);
-                    }
-
-                    if (!string.IsNullOrEmpty(subItem.FormRedirectWindowForm))
-                    {
-                        subElement.Name = subItem.FormRedirectWindowForm;
-                    }
-                }
-            }
-        }
+        
 
         public static void RenderMenuTop(List<TbMenuElement> data, DevExpress.XtraBars.Ribbon.RibbonControl menu)
         {
