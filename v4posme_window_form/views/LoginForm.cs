@@ -1,7 +1,11 @@
-﻿using DevExpress.XtraEditors;
+﻿using System.Diagnostics;
+using DevExpress.XtraBars.Alerter;
+using DevExpress.XtraBars.ToastNotifications;
+using DevExpress.XtraEditors;
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
+using v4posme_window.Libraries;
 
 namespace v4posme_window.Views
 {
@@ -37,17 +41,23 @@ namespace v4posme_window.Views
 
         private async void btnIngresar_Click(object sender, EventArgs e)
         {
+            var coreWebRender = new CoreWebRenderInView();
             var userService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
             var userTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
+            var coreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
             progressPanel.Visible = true;
 
             if (string.IsNullOrEmpty(txtUsuario.Text))
             {
                 dxErrorProvider.SetError(txtUsuario, "Debe especificar un usuario para continuar.");
+                coreWebRender.GetMessageAlert(TypeMessage.Error, "Usuario",
+                    "Debe especificar un usuario para continuar.", this);
                 if (progressPanel.Visible)
                 {
                     progressPanel.Visible = false;
                 }
+
+                return;
             }
             else
             {
@@ -57,43 +67,26 @@ namespace v4posme_window.Views
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
                 dxErrorProvider.SetError(txtPassword, "Debe especificar una contraseña para continuar.");
+                coreWebRender.GetMessageAlert(TypeMessage.Error, "Usuario",
+                    "Debe especificar una contraseña para continuar.", this);
                 if (progressPanel.Visible)
                 {
                     progressPanel.Visible = false;
                 }
+
+                return;
             }
             else
             {
                 dxErrorProvider.SetError(txtPassword, "");
             }
 
-            if (string.IsNullOrEmpty(txtUsuario.Text))
-            {
-                XtraMessageBox.Show("Debe especificar un usuario para continuar",
-                    UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtUsuario.Focus();
-                if (progressPanel.Visible)
-                {
-                    progressPanel.Visible = false;
-                }
-                //return Task.CompletedTask;
-            }
-
-            if (string.IsNullOrEmpty(txtPassword.Text))
-            {
-                XtraMessageBox.Show("Debe especificar una contraseña para continuar",
-                    UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtPassword.Focus();
-                if (progressPanel.Visible)
-                {
-                    progressPanel.Visible = false;
-                }
-                //return Task.CompletedTask;
-            }
             if (!progressPanel.Visible)
             {
                 progressPanel.Visible = true;
             }
+
+            var validar = 0;
             await Task.Run(() =>
             {
                 var nickname = txtUsuario.Text;
@@ -101,31 +94,87 @@ namespace v4posme_window.Views
                 VariablesGlobales.Instance.User = userService.GetUserByNickname(nickname);
                 if (VariablesGlobales.Instance.User == null)
                 {
-                    XtraMessageBox.Show("Nombre de usuario no registrado, intente nuevamente",
-                        UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    validar = 1;
                     return;
                 }
 
                 VariablesGlobales.Instance.User = userService.GetUserByPasswordAndNickname(nickname, password);
                 if (VariablesGlobales.Instance.User is null)
                 {
-                    XtraMessageBox.Show("Contraseña incorrecta, intente nuevamente",
-                        UsuarioTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    validar = 2;
                     return;
                 }
 
-                if (VariablesGlobales.Instance.MessageLogin is not null)
+                if (VariablesGlobales.Instance.User is null) return;
+                
+                //si existe el usuario
+                userTools.Log($@"Usuario logeado al sistema: {VariablesGlobales.Instance.User.Nickname}, {DateTime.Now.ToLongDateString()}");
+
+                //Obtener Datos
+                var pagoCantidadDeMeses = decimal.Zero;
+                if (!string.IsNullOrEmpty(cmbMontoPagar.Text))
                 {
-                    XtraMessageBox.Show(VariablesGlobales.Instance.MessageLogin, "PosMe", MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                    pagoCantidadDeMeses = decimal.Parse(cmbMontoPagar.Text);
                 }
 
-                if (VariablesGlobales.Instance.User is null) return;
-                userTools.Log("Usuario logeado al sistema: " + VariablesGlobales.Instance.User.Nickname);
+                var companyId = VariablesGlobales.Instance.User.CompanyId;
+                var parameterCantidadTransacciones =
+                    coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId).Value;
+                var parameterBalance = coreWebParameter.GetParameter("CORE_CUST_PRICE_BALANCE", companyId).Value;
+                var parameterSendBox = coreWebParameter.GetParameter("CORE_PAYMENT_SENDBOX", companyId).Value;
+                var parameterSendBoxUsuario =
+                    coreWebParameter.GetParameter("CORE_PAYMENT_PRUEBA_USUARIO", companyId).Value;
+                var parameterSendBoxClave = coreWebParameter.GetParameter("CORE_PAYMENT_PRUEBA_CLAVE", companyId).Value;
+                var parameterProduccionUsuario =
+                    coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_USUARIO", companyId).Value;
+                var parameterProduccionClave =
+                    coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_CLAVE", companyId).Value;
+                var parameterPrice = coreWebParameter.GetParameter("CORE_CUST_PRICE", companyId).Value;
+                var parameterTipoPlan = coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId).Value;
+                var pagoCantidadMonto = pagoCantidadDeMeses * decimal.Parse(parameterPrice);
+                if (decimal.Compare(pagoCantidadMonto, decimal.Zero) > 0)
+                {
+                    var url = $@"https://posme.net/core_acount/payment/pagoCantidadDeMeses/{pagoCantidadDeMeses}";
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = url,
+                        UseShellExecute = true
+                    });
+                }
+
+                var subject = $@"Inicio de session: {nickname}";
+                var body = $@"""
+                    Estimados Señores de {VariablesGlobales.Instance.Company.Name}
+                    En sus manos:
+                    Su balance de uso es: {parameterBalance}, Cantidad de Transacciones: {parameterCantidadTransacciones}
+                    Fecha {DateTime.Now.ToLongDateString()}
+                 """;
+                userTools.SendEmail(subject, body);
                 DialogResult = DialogResult.OK;
-                //return Task.CompletedTask;
             });
-            progressPanel.Visible = false;
+            switch (validar)
+            {
+                case 1:
+                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error",
+                        "Nombre de usuario no registrado, intente nuevamente", this);
+                    break;
+                case 2:
+                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error",
+                        "Contraseña incorrecta, intente nuevamente", this);
+                    break;
+                case 0: break;
+            }
+
+            if (VariablesGlobales.Instance.MessageLogin is not null)
+            {
+                coreWebRender.GetMessageAlert(TypeMessage.Error, "posMe", VariablesGlobales.Instance.MessageLogin,
+                    this);
+            }
+
+            if (progressPanel.Visible)
+            {
+                progressPanel.Visible = false;
+            }
         }
 
         private void LoginForm_Load(object sender, EventArgs e)

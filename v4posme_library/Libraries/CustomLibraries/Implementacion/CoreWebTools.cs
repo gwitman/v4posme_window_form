@@ -83,13 +83,13 @@ class CoreWebTools : ICoreWebTools
         }
     }
 
-    public void sendEmail()
+    public void SendEmail(string subject, string body)
     {
-        var fromAddress = new MailAddress("from@gmail.com", "From Name");
-        var toAddress = new MailAddress("to@example.com", "To Name");
-        const string fromPassword = "fromPassword";
-        const string subject = "Subject";
-        const string body = "Body";
+        var emailFrom = VariablesGlobales.ConfigurationBuilder["EMAIL_APP"];
+        var emailCc = VariablesGlobales.ConfigurationBuilder["EMAIL_APP_COPY"];
+        var fromAddress = new MailAddress(emailFrom, "posMe");
+        var toAddress = new MailAddress(emailCc, "posMe");
+        var fromPassword = VariablesGlobales.ConfigurationBuilder["EMAIL_APP_PASSWORD"];
 
         var smtp = new SmtpClient
         {
@@ -100,12 +100,10 @@ class CoreWebTools : ICoreWebTools
             UseDefaultCredentials = false,
             Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
         };
-        using (var message = new MailMessage(fromAddress, toAddress))
-        {
-            message.Subject = subject;
-            message.Body = body;
-            smtp.Send(message);
-        }
+        using var message = new MailMessage(fromAddress, toAddress);
+        message.Subject = subject;
+        message.Body = body;
+        smtp.Send(message);
     }
   
 }

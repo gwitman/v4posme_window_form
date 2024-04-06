@@ -42,13 +42,19 @@ namespace v4posme_window.Views
             var coreWebRender = new CoreWebRenderInView();
             var menuElementModel = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
 
+            if (VariablesGlobales.Instance.ListMenuLeft is not null)
+            {
+                CoreWebRenderInView.RenderMenuLeft(
+                    VariablesGlobales.Instance.ListMenuLeft, accordionControl1
+                );
+                accordionControl1.ElementClick += accordionControl1_ElementClick;
+            }
 
-            coreWebRender.RenderMenuLeft(
-                    VariablesGlobales.Instance.Company,menuElementModel.GetRowByCompanyId(VariablesGlobales.Instance.User.CompanyId),
-                    accordionControl1
-            );
-            //accordionControl1.Elements.AddRange(menuLeft.ToArray());
-            accordionControl1.ElementClick += accordionControl1_ElementClick;
+            if (VariablesGlobales.Instance.ListMenuTop is not null)
+            {
+                CoreWebRenderInView.RenderMenuTop(VariablesGlobales.Instance.ListMenuTop, menuTop);
+                CoreWebRenderInView.RenderMenuTop(VariablesGlobales.Instance.ListMenuTop, ribbonControl1);
+            }
         }
 
         private void accordionControl1_ElementClick(object sender,

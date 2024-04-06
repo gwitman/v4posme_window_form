@@ -24,7 +24,7 @@ public interface ICoreWebTools
 
     void Log(string logMessage);
 
-    
+    void SendEmail(string subject, string body);
 
     TbComponent? GetComponentIdByComponentName(string componentName);
 }

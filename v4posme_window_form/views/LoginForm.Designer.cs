@@ -45,6 +45,7 @@ namespace v4posme_window.Views
             cmbMontoPagar = new ComboBoxEdit();
             dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(components);
             behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(components);
+            toastNotificationsManager = new DevExpress.XtraBars.ToastNotifications.ToastNotificationsManager(components);
             ((System.ComponentModel.ISupportInitialize)ultraPanel1).BeginInit();
             ultraPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtPassword.Properties).BeginInit();
@@ -54,6 +55,7 @@ namespace v4posme_window.Views
             ((System.ComponentModel.ISupportInitialize)cmbMontoPagar.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dxErrorProvider).BeginInit();
             ((System.ComponentModel.ISupportInitialize)behaviorManager1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)toastNotificationsManager).BeginInit();
             SuspendLayout();
             // 
             // dockPanel1_Container
@@ -207,6 +209,9 @@ namespace v4posme_window.Views
             cmbMontoPagar.Location = new Point(68, 307);
             cmbMontoPagar.Name = "cmbMontoPagar";
             cmbMontoPagar.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cmbMontoPagar.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            cmbMontoPagar.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            cmbMontoPagar.Properties.Items.AddRange(new object[] { "1", "5", "10", "15", "20", "25", "30", "50" });
             cmbMontoPagar.Size = new Size(242, 20);
             cmbMontoPagar.TabIndex = 31;
             cmbMontoPagar.Visible = false;
@@ -214,6 +219,10 @@ namespace v4posme_window.Views
             // dxErrorProvider
             // 
             dxErrorProvider.ContainerControl = this;
+            // 
+            // toastNotificationsManager
+            // 
+            toastNotificationsManager.ApplicationId = "f0a292da-e4c6-4f91-85c7-1fbdf0473140";
             // 
             // LoginForm
             // 
@@ -241,6 +250,7 @@ namespace v4posme_window.Views
             ((System.ComponentModel.ISupportInitialize)cmbMontoPagar.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)dxErrorProvider).EndInit();
             ((System.ComponentModel.ISupportInitialize)behaviorManager1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)toastNotificationsManager).EndInit();
             ResumeLayout(false);
         }
 
@@ -260,5 +270,6 @@ namespace v4posme_window.Views
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanel;
         private PanelControl ultraPanel1;
+        private DevExpress.XtraBars.ToastNotifications.ToastNotificationsManager toastNotificationsManager;
     }
 }

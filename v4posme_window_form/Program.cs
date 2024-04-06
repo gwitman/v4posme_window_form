@@ -27,7 +27,7 @@ static class Program
         var alert = new AlertControl();
         try
         {
-            IDataLayer dataLayer = XpoDefault.GetDataLayer(VariablesGlobales.ConnectionString, AutoCreateOption.None);
+            var dataLayer = XpoDefault.GetDataLayer(VariablesGlobales.ConnectionString, AutoCreateOption.None);
             XpoDefault.DataLayer = dataLayer;
         }
         catch (Exception exception)
