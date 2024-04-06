@@ -40,6 +40,7 @@ namespace v4posme_window.Views
             var userService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
             var userTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
             progressPanel.Visible = true;
+
             if (string.IsNullOrEmpty(txtUsuario.Text))
             {
                 dxErrorProvider.SetError(txtUsuario, "Debe especificar un usuario para continuar.");

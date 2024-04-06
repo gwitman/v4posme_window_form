@@ -41,9 +41,13 @@ namespace v4posme_window.Views
                                      VariablesGlobales.Instance.Branch.Name;
             var coreWebRender = new CoreWebRenderInView();
             var menuElementModel = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
-            var menuLeft = coreWebRender.RenderMenuLeft(VariablesGlobales.Instance.Company,
-                menuElementModel.GetRowByCompanyId(VariablesGlobales.Instance.User.CompanyId));
-            accordionControl1.Elements.AddRange(menuLeft.ToArray());
+
+
+            coreWebRender.RenderMenuLeft(
+                    VariablesGlobales.Instance.Company,menuElementModel.GetRowByCompanyId(VariablesGlobales.Instance.User.CompanyId),
+                    accordionControl1
+            );
+            //accordionControl1.Elements.AddRange(menuLeft.ToArray());
             accordionControl1.ElementClick += accordionControl1_ElementClick;
         }
 
