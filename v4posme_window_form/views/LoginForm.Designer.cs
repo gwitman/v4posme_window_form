@@ -153,6 +153,7 @@ namespace v4posme_window.Views
             btnPagar.ToolTip = "Ir a pagar";
             btnPagar.ToolTipTitle = "Pagar";
             btnPagar.Visible = false;
+            btnPagar.Click += btnPagar_Click;
             // 
             // txtPassword
             // 

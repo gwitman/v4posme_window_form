@@ -4,6 +4,7 @@ using DevExpress.XtraBars.ToastNotifications;
 using DevExpress.XtraEditors;
 using Unity;
 using v4posme_library.Libraries;
+using v4posme_library.Libraries.CustomLibraries.Implementacion;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_window.Libraries;
 
@@ -11,6 +12,10 @@ namespace v4posme_window.Views
 {
     public partial class LoginForm : XtraForm
     {
+        private decimal _pagoCantidadMonto=decimal.Zero;
+        private decimal _pagoCantidadDeMeses=Decimal.Zero;
+        private decimal _parameterPrice;
+
         private const string UsuarioTitulo = "Usuario";
 
         public LoginForm()
@@ -49,8 +54,8 @@ namespace v4posme_window.Views
 
             if (string.IsNullOrEmpty(txtUsuario.Text))
             {
-                dxErrorProvider.SetError(txtUsuario, "Debe especificar un usuario para continuar.");
-                coreWebRender.GetMessageAlert(TypeMessage.Error, "Usuario","Debe especificar un usuario para continuar.", this);
+                dxErrorProvider.SetError(txtUsuario, @"Debe especificar un usuario para continuar.");
+                coreWebRender.GetMessageAlert(TypeMessage.Error, @"Usuario", "Debe especificar un usuario para continuar.", this);
                 if (progressPanel.Visible)
                 {
                     progressPanel.Visible = false;
@@ -65,7 +70,7 @@ namespace v4posme_window.Views
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
                 dxErrorProvider.SetError(txtPassword, "Debe especificar una contraseña para continuar.");
-                coreWebRender.GetMessageAlert(TypeMessage.Error, "Usuario","Debe especificar una contraseña para continuar.", this);
+                coreWebRender.GetMessageAlert(TypeMessage.Error, "Usuario", "Debe especificar una contraseña para continuar.", this);
                 if (progressPanel.Visible)
                 {
                     progressPanel.Visible = false;
@@ -103,37 +108,23 @@ namespace v4posme_window.Views
                 }
 
                 if (VariablesGlobales.Instance.User is null) return;
-                
+
                 //si existe el usuario
                 userTools.Log($@"Usuario logeado al sistema: {VariablesGlobales.Instance.User.Nickname}, {DateTime.Now.ToLongDateString()}");
 
-                //Obtener Datos
-                var pagoCantidadDeMeses = decimal.Zero;
-                if (!string.IsNullOrEmpty(cmbMontoPagar.Text))
-                {
-                    pagoCantidadDeMeses = decimal.Parse(cmbMontoPagar.Text);
-                }
+                var companyId = VariablesGlobales.Instance.User.CompanyId;
+                var parameterCantidadTransacciones = coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId).Value;
+                var parameterBalance = coreWebParameter.GetParameter("CORE_CUST_PRICE_BALANCE", companyId).Value;
+                var parameterSendBox = coreWebParameter.GetParameter("CORE_PAYMENT_SENDBOX", companyId).Value;
+                var parameterSendBoxUsuario = coreWebParameter.GetParameter("CORE_PAYMENT_PRUEBA_USUARIO", companyId).Value;
+                var parameterSendBoxClave = coreWebParameter.GetParameter("CORE_PAYMENT_PRUEBA_CLAVE", companyId).Value;
+                var parameterProduccionUsuario = coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_USUARIO", companyId).Value;
+                var parameterProduccionClave = coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_CLAVE", companyId).Value;
+                _parameterPrice = Convert.ToDecimal(coreWebParameter.GetParameter("CORE_CUST_PRICE", companyId).Value);
+                var parameterTipoPlan = coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId).Value;
 
-                var companyId                       = VariablesGlobales.Instance.User.CompanyId;
-                var parameterCantidadTransacciones  = coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId).Value;
-                var parameterBalance                = coreWebParameter.GetParameter("CORE_CUST_PRICE_BALANCE", companyId).Value;
-                var parameterSendBox                = coreWebParameter.GetParameter("CORE_PAYMENT_SENDBOX", companyId).Value;
-                var parameterSendBoxUsuario         = coreWebParameter.GetParameter("CORE_PAYMENT_PRUEBA_USUARIO", companyId).Value;
-                var parameterSendBoxClave           = coreWebParameter.GetParameter("CORE_PAYMENT_PRUEBA_CLAVE", companyId).Value;
-                var parameterProduccionUsuario      = coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_USUARIO", companyId).Value;
-                var parameterProduccionClave        = coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_CLAVE", companyId).Value;
-                var parameterPrice                  = coreWebParameter.GetParameter("CORE_CUST_PRICE", companyId).Value;
-                var parameterTipoPlan               = coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId).Value;
-                var pagoCantidadMonto               = pagoCantidadDeMeses * decimal.Parse(parameterPrice);
-
-                if (decimal.Compare(pagoCantidadMonto, decimal.Zero) > 0)
-                {
-                    var url = $@"https://posme.net/core_acount/payment/pagoCantidadDeMeses/{pagoCantidadDeMeses}";
-                    Process.Start(new ProcessStartInfo{FileName = url,UseShellExecute = true});
-                }
-
-                var subject     = $@"Inicio de session: {nickname}";
-                var body        = $@"
+                var subject = $@"Inicio de session: {nickname}";
+                var body = $@"
                     Estimados Señores de {VariablesGlobales.Instance.Company.Name}
                     En sus manos:
                     Su balance de uso es: {parameterBalance}, Cantidad de Transacciones: {parameterCantidadTransacciones}
@@ -146,10 +137,10 @@ namespace v4posme_window.Views
             switch (validar)
             {
                 case 1:
-                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error","Nombre de usuario no registrado, intente nuevamente", this);
+                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error", "Nombre de usuario no registrado, intente nuevamente", this);
                     break;
                 case 2:
-                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error","Contraseña incorrecta, intente nuevamente", this);
+                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error", "Contraseña incorrecta, intente nuevamente", this);
                     break;
                 case 0: break;
             }
@@ -157,7 +148,7 @@ namespace v4posme_window.Views
 
             if (VariablesGlobales.Instance.MessageLogin is not null)
             {
-                coreWebRender.GetMessageAlert(TypeMessage.Error, "posMe", VariablesGlobales.Instance.MessageLogin,this);
+                coreWebRender.GetMessageAlert(TypeMessage.Error, "posMe", VariablesGlobales.Instance.MessageLogin, this);
             }
 
             if (progressPanel.Visible)
@@ -168,7 +159,7 @@ namespace v4posme_window.Views
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
-        {            
+        {
             txtUsuario.Focus();
         }
 
@@ -206,6 +197,30 @@ namespace v4posme_window.Views
 
         private void ultraPanel1_Paint(object sender, PaintEventArgs e)
         {
+        }
+
+        private void btnPagar_Click(object sender, EventArgs e)
+        {
+            //Obtener Datos
+            if (!string.IsNullOrEmpty(cmbMontoPagar.Text))
+            {
+                var coreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
+                if (VariablesGlobales.Instance.User is null)
+                {
+                    return;
+                }
+                var companyId = VariablesGlobales.Instance.User.CompanyId;
+                var parameter = coreWebParameter.GetParameter("CORE_CUST_PRICE", companyId);
+                if (parameter is null) return;
+                _parameterPrice = Convert.ToDecimal(parameter.Value);
+                _pagoCantidadDeMeses = decimal.Parse(cmbMontoPagar.Text);
+                _pagoCantidadMonto = _pagoCantidadDeMeses * _parameterPrice;
+            }
+            if (decimal.Compare(_pagoCantidadMonto, decimal.Zero) > 0)
+            {
+                var url = $@"https://posme.net/core_acount/payment/pagoCantidadDeMeses/{_pagoCantidadDeMeses}";
+                Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+            }
         }
     }
 }

@@ -35,7 +35,6 @@ namespace v4posme_window.Views
             accordionControl1 = new DevExpress.XtraBars.Navigation.AccordionControl();
             fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
             barCompanyNane = new DevExpress.XtraBars.BarStaticItem();
-            menuTop = new MenuStrip();
             applicationMenu1 = new DevExpress.XtraBars.Ribbon.ApplicationMenu(components);
             barManager1 = new DevExpress.XtraBars.BarManager(components);
             barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -45,6 +44,7 @@ namespace v4posme_window.Views
             ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             ribbonPageCategory1 = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
+            barStaticItemTitulo = new DevExpress.XtraBars.BarStaticItem();
             ((System.ComponentModel.ISupportInitialize)accordionControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)fluentDesignFormControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)applicationMenu1).BeginInit();
@@ -55,18 +55,18 @@ namespace v4posme_window.Views
             // accordionControl1
             // 
             accordionControl1.Dock = DockStyle.Left;
-            accordionControl1.Location = new Point(0, 24);
+            accordionControl1.Location = new Point(0, 0);
             accordionControl1.Name = "accordionControl1";
             accordionControl1.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Touch;
             accordionControl1.ShowFilterControl = DevExpress.XtraBars.Navigation.ShowFilterControl.Always;
-            accordionControl1.Size = new Size(260, 658);
+            accordionControl1.Size = new Size(260, 682);
             accordionControl1.TabIndex = 1;
             accordionControl1.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
             // 
             // fluentDesignFormControl1
             // 
             fluentDesignFormControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { barCompanyNane });
-            fluentDesignFormControl1.Location = new Point(0, 24);
+            fluentDesignFormControl1.Location = new Point(0, 0);
             fluentDesignFormControl1.Name = "fluentDesignFormControl1";
             fluentDesignFormControl1.Size = new Size(961, 0);
             fluentDesignFormControl1.TabIndex = 2;
@@ -78,15 +78,6 @@ namespace v4posme_window.Views
             barCompanyNane.Caption = "Company Name";
             barCompanyNane.Id = 0;
             barCompanyNane.Name = "barCompanyNane";
-            // 
-            // menuTop
-            // 
-            menuTop.Location = new Point(0, 0);
-            menuTop.Name = "menuTop";
-            menuTop.RightToLeft = RightToLeft.Yes;
-            menuTop.Size = new Size(961, 24);
-            menuTop.TabIndex = 4;
-            menuTop.Text = "menuStrip1";
             // 
             // applicationMenu1
             // 
@@ -135,11 +126,12 @@ namespace v4posme_window.Views
             // ribbonControl1
             // 
             ribbonControl1.ExpandCollapseItem.Id = 0;
-            ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbonControl1.ExpandCollapseItem, barButtonItem1 });
-            ribbonControl1.Location = new Point(260, 24);
-            ribbonControl1.MaxItemId = 2;
+            ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbonControl1.ExpandCollapseItem, barButtonItem1, barStaticItemTitulo });
+            ribbonControl1.Location = new Point(260, 0);
+            ribbonControl1.MaxItemId = 3;
             ribbonControl1.Name = "ribbonControl1";
             ribbonControl1.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] { ribbonPageCategory1 });
+            ribbonControl1.PageHeaderItemLinks.Add(barStaticItemTitulo);
             ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2019;
             ribbonControl1.Size = new Size(701, 82);
             // 
@@ -155,6 +147,14 @@ namespace v4posme_window.Views
             ribbonPageCategory1.Name = "ribbonPageCategory1";
             ribbonPageCategory1.Text = "ribbonPageCategory1";
             // 
+            // barStaticItemTitulo
+            // 
+            barStaticItemTitulo.Caption = "(Empresa)";
+            barStaticItemTitulo.Id = 2;
+            barStaticItemTitulo.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            barStaticItemTitulo.ImageOptions.SvgImage = Properties.Resources.bo_organization;
+            barStaticItemTitulo.Name = "barStaticItemTitulo";
+            // 
             // PrincipalForm
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
@@ -163,14 +163,12 @@ namespace v4posme_window.Views
             Controls.Add(ribbonControl1);
             Controls.Add(accordionControl1);
             Controls.Add(fluentDesignFormControl1);
-            Controls.Add(menuTop);
             Controls.Add(barDockControlLeft);
             Controls.Add(barDockControlRight);
             Controls.Add(barDockControlBottom);
             Controls.Add(barDockControlTop);
             IconOptions.Icon = (Icon)resources.GetObject("PrincipalForm.IconOptions.Icon");
             IsMdiContainer = true;
-            MainMenuStrip = menuTop;
             Name = "PrincipalForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "posMe";
@@ -189,7 +187,6 @@ namespace v4posme_window.Views
         private DevExpress.XtraBars.Navigation.AccordionControl accordionControl1;
         private DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl fluentDesignFormControl1;
         private DevExpress.XtraBars.BarStaticItem barCompanyNane;
-        private MenuStrip menuTop;
         private DevExpress.XtraBars.Ribbon.ApplicationMenu applicationMenu1;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
@@ -199,5 +196,6 @@ namespace v4posme_window.Views
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
         private DevExpress.XtraBars.Ribbon.RibbonPageCategory ribbonPageCategory1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarStaticItem barStaticItemTitulo;
     }
 }

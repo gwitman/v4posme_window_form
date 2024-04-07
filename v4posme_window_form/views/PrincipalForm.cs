@@ -29,13 +29,24 @@ namespace v4posme_window.Views
 
         private void PrincipalForm_Load(object sender, EventArgs e)
         {
-            
+            var coreWebRender = new CoreWebRenderInView();
+            if (VariablesGlobales.Instance.User is null)
+            {
+                coreWebRender.GetMessageAlert(TypeMessage.Error, "Error",
+                    "NO se pudo cargar los datos de usuario, inicie sesion nuevamente", this);
+                return;
+            }
+
             VariablesGlobales.Instance.Company = _companyModel.GetRowByPk(VariablesGlobales.Instance.User.CompanyId);
-            VariablesGlobales.Instance.Branch = _branchModel.GetRowByPk(VariablesGlobales.Instance.User.BranchId,VariablesGlobales.Instance.User.CompanyId);
-            VariablesGlobales.Instance.Membership = _membershipModel.GetRowByCompanyIdBranchIdUserId(VariablesGlobales.Instance.User.CompanyId,VariablesGlobales.Instance.User.BranchId, VariablesGlobales.Instance.User.UserId);
-            barCompanyNane.Caption  = Resources.PrincipalForm_Compañía_Titulo + VariablesGlobales.Instance.Company!.Name + "-" + VariablesGlobales.Instance.Branch.Name;
-            var coreWebRender       = new CoreWebRenderInView();
-            var menuElementModel    = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
+            VariablesGlobales.Instance.Branch = _branchModel.GetRowByPk(VariablesGlobales.Instance.User.BranchId,
+                VariablesGlobales.Instance.User.CompanyId);
+            VariablesGlobales.Instance.Membership = _membershipModel.GetRowByCompanyIdBranchIdUserId(
+                VariablesGlobales.Instance.User.CompanyId, VariablesGlobales.Instance.User.BranchId,
+                VariablesGlobales.Instance.User.UserId);
+            barStaticItemTitulo.Caption = VariablesGlobales.Instance.Company!.Name + "-" +
+                                          VariablesGlobales.Instance.Branch.Name +
+                                          $@"(Usuario: {VariablesGlobales.Instance.User.Nickname})";
+            var menuElementModel = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
 
             if (VariablesGlobales.Instance.ListMenuLeft is not null)
             {
@@ -44,16 +55,17 @@ namespace v4posme_window.Views
             }
 
             if (VariablesGlobales.Instance.ListMenuTop is not null)
-            {                
-                CoreWebRenderInView.RenderMenuTop(VariablesGlobales.Instance.ListMenuTop,  ribbonControl1);
+            {
+                CoreWebRenderInView.RenderMenuTop(VariablesGlobales.Instance.ListMenuTop, ribbonControl1);
             }
 
             //Abrir un formulario por defecto
-            var FormularioDefault = CoreFormList.Formularios().Where(c => c.Key == VariablesGlobales.Instance.Role.UrlDefault).FirstOrDefault().Value;
-            FormularioDefault.MdiParent = this;
-            FormularioDefault.Show();
-
-
+            var formularioDefaultValue = CoreFormList
+                .Formularios()
+                .FirstOrDefault(c => c.Key == VariablesGlobales.Instance.Role!.UrlDefault).Value;
+            if (formularioDefaultValue is null) return;
+            formularioDefaultValue.MdiParent = this;
+            formularioDefaultValue.Show();
         }
 
         private void accordionControl1_ElementClick(object sender,
@@ -61,13 +73,18 @@ namespace v4posme_window.Views
         {
             if (e.Element.Style == DevExpress.XtraBars.Navigation.ElementStyle.Group) return;
             if (e.Element.Name == null) return;
-            foreach (var form in from keyValuePair in CoreFormList.Formularios()
-                     where e.Element.Name == keyValuePair.Key
-                     select keyValuePair.Value)
-            {
-                form.MdiParent = this;
-                form.Show();
-            }
+            var filterForm = (from keyValuePair in CoreFormList.Formularios()
+                where e.Element.Name == keyValuePair.Key
+                select keyValuePair.Value).FirstOrDefault();
+            if (filterForm is null) return;
+            if (IsFormOpen(filterForm.GetType())) return;
+            filterForm.MdiParent = this;
+            filterForm.Show();
+        }
+
+        private static bool IsFormOpen(Type formType)
+        {
+            return Application.OpenForms.Cast<Form>().Any(form => form.GetType() == formType);
         }
     }
 }
