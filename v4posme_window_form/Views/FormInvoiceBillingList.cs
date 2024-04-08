@@ -78,13 +78,13 @@ namespace v4posme_window.Views
             }
 
             var calleridList = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["CALLERID_LIST"]);
-            if (dataViewId is null)
+            if (dataViewId  == 0 )
             {
                 var targetComponentId   = VariablesGlobales.Instance.Company.FlavorId;
                 var parameters          = new Dictionary<string, string>
                 {
                     { "companyID", VariablesGlobales.Instance.User.CompanyId.ToString() },
-                    { "companyID", fecha.Value.ToShortDateString() }
+                    { "fecha", fecha.Value.ToShortDateString() }
                 };
 
                 var dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User,objComponent.ComponentId, calleridList, targetComponentId, resultPermission ? 1 : -1, parameters);
@@ -94,10 +94,9 @@ namespace v4posme_window.Views
                     parameters          = new Dictionary<string, string>
                     {
                         { "companyID", VariablesGlobales.Instance.User.CompanyId.ToString() },
-                        { "companyID", fecha.Value.ToShortDateString() }
+                        { "fecha", fecha.Value.ToShortDateString() }
                     };
-                    dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User,
-                        objComponent.ComponentId, calleridList, targetComponentId, resultPermission ? 1 : -1, parameters);
+                    dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User,objComponent.ComponentId, calleridList, targetComponentId, resultPermission ? 1 : -1, parameters);
                 }
 
                 _coreWebRender.RenderGrid(dataViewData!, "invoice", 0, centerPane);
