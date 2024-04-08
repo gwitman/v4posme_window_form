@@ -237,7 +237,7 @@ namespace v4posme_window.Views
                 return;
             }
 
-            //VariablesGlobales.Instance.User = userService.GetUserByPasswordAndNickname(nickname, password);
+            
             if (VariablesGlobales.Instance.User.Password!.Equals(password))
             {
                 coreWebRender.GetMessageAlert(TypeMessage.Error, "Error", "Contraseña incorrecta, intente nuevamente", this);
@@ -255,9 +255,10 @@ namespace v4posme_window.Views
                 var companyId = VariablesGlobales.Instance.User.CompanyId;
                 var parameter = coreWebParameter.GetParameter("CORE_CUST_PRICE", companyId);
                 if (parameter is null) return;
-                _parameterPrice = Convert.ToDecimal(parameter.Value);
-                _pagoCantidadDeMeses = decimal.Parse(cmbMontoPagar.Text);
-                _pagoCantidadMonto = _pagoCantidadDeMeses * _parameterPrice;
+
+                _parameterPrice         = Convert.ToDecimal(parameter.Value);
+                _pagoCantidadDeMeses    = decimal.Parse(cmbMontoPagar.Text);
+                _pagoCantidadMonto      = _pagoCantidadDeMeses * _parameterPrice;
             }
             if (decimal.Compare(_pagoCantidadMonto, decimal.Zero) > 0)
             {
