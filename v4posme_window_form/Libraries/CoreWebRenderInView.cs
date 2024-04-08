@@ -44,6 +44,10 @@ namespace v4posme_window.Libraries
                 Parent = form,
                 Dock = DockStyle.Fill
             };
+
+
+
+            //
             var viewData = dataViewDto.Data;
             gridControl.DataSource = viewData;
             var gridView = gridControl.MainView as DevExpress.XtraGrid.Views.Grid.GridView;

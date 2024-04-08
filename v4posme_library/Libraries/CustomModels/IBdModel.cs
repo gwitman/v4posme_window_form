@@ -2,5 +2,7 @@
 
 public interface IBdModel
 {
-    T ExecuteRender<T>(string query, object[] parameter = null);
+    T ExecuteRenderWidthParameter<T>(string query, object[] parameter = null);
+
+    T ExecuteRender<T>(string query);
 }

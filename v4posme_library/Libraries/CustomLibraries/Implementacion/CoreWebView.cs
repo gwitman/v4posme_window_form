@@ -239,11 +239,8 @@ class CoreWebView(
         }
 
         queryFill = queryFill.Replace("{filterPermission}", filterPermission);
+        var objResult = new TableCompanyDataViewDto{Config = companyDataView};
 
-        var objResult = new TableCompanyDataViewDto
-        {
-            Config = companyDataView
-        };
         var dataRecordSet = bdModel.ExecuteRender<dynamic>(queryFill);
         if (dataRecordSet == null)
         {
