@@ -1,6 +1,6 @@
 ﻿namespace v4posme_window.Views
 {
-    partial class FormInvoiceBillingList
+    sealed partial class FormInvoiceBillingList
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "FormInvoiceBillingList";
+            SuspendLayout();
+            // 
+            // FormInvoiceBillingList
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(939, 546);
+            Name = "FormInvoiceBillingList";
+            Text = "FormInvoiceBillingList";
+            WindowState = FormWindowState.Maximized;
+            Load += FormInvoiceBillingList_Load;
+            ResumeLayout(false);
         }
 
         #endregion

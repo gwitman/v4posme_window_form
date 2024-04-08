@@ -27,8 +27,16 @@ public sealed partial class DataContext : DbContext
         base.OnConfiguring(optionsBuilder);
         //optionsBuilder.LogTo(Console.WriteLine);
         if (optionsBuilder.IsConfigured) return;
-        var connectionString = _configuration.GetConnectionString("PosmeConnectionString");
-        optionsBuilder.UseMySql(ServerVersion.AutoDetect(connectionString));
+        try
+        {
+            var connectionString = _configuration.GetConnectionString("PosmeConnectionString");
+            optionsBuilder.UseMySql(ServerVersion.AutoDetect(connectionString));
+        }
+        catch (Exception ex)
+        {
+            
+        }
+        
     }
 
     public DbSet<TbAccount> TbAccounts { get; set; } = null!;

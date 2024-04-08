@@ -14,6 +14,6 @@ public interface ICoreWebView
     TableCompanyDataViewDto GetView(TbUser user, int? componentId = null, int? callerId = null, int? permission = null,
         Dictionary<string, string>? parameter = null);
 
-    TableCompanyDataViewDto GetViewDefault(TbUser user, int? componentId = null, int? callerId = null, int? targetComponentId = null,
+    TableCompanyDataViewDto? GetViewDefault(TbUser user, int? componentId = null, int? callerId = null, int? targetComponentId = null,
         int? permission = null, Dictionary<string, string>? parameter = null);
 }

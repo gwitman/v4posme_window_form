@@ -174,6 +174,7 @@ namespace v4posme_library.Libraries
         public List<TbMenuElement>? ListMenuTop { get; set; }
         public List<TbMenuElement>? ListMenuLeft { get; set; }
         public List<TbMenuElement>? ListMenuBodyReport { get; set; }
+        public List<TbMenuElement>? ListMenuBodyTop { get; set; }
         public List<TbMenuElement>? ListMenuHiddenPopup { get; set; }
         public string? MessageLogin { get; set; }
         public string? ParameterLabelSystem { get; set; }

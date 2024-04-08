@@ -88,10 +88,10 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             return 0;
         }
 
-        public bool UrlPermited(string controller, string method, string suffix, List<TbMenuElement> dataMenuTop,
-            List<TbMenuElement> dataMenuLeft,
-            List<TbMenuElement> dataMenuBodyReport, List<TbMenuElement> dataMenuBodyTop,
-            List<TbMenuElement> dataMenuHiddenPopup)
+        public bool UrlPermited(string controller, string method, string suffix, List<TbMenuElement>? dataMenuTop,
+            List<TbMenuElement>? dataMenuLeft,
+            List<TbMenuElement>? dataMenuBodyReport, List<TbMenuElement>? dataMenuBodyTop,
+            List<TbMenuElement>? dataMenuHiddenPopup)
         {
             var url = controller.ToLower().Replace("app\\controllers\\", "") + "/" + method + suffix;
             var urlIndex = controller.ToLower().Replace("app\\controllers\\", "") + "/index" + suffix;
@@ -112,7 +112,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 }
             }
 
-            if (dataMenuBodyTop.Count > 0)
+            if (dataMenuBodyTop is not null && dataMenuBodyTop.Count > 0)
             {
                 foreach (var menuElement in dataMenuBodyTop)
                 {
@@ -128,7 +128,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 }
             }
 
-            if (dataMenuBodyReport.Count > 0)
+            if (dataMenuBodyReport is not null && dataMenuBodyReport.Count > 0)
             {
                 foreach (var menuElement in dataMenuBodyReport)
                 {
@@ -144,7 +144,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 }
             }
 
-            if (dataMenuLeft.Count > 0)
+            if (dataMenuLeft is not null && dataMenuLeft.Count > 0)
             {
                 foreach (var menuElement in dataMenuLeft)
                 {
@@ -160,7 +160,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 }
             }
 
-            if (dataMenuTop.Count > 0)
+            if (dataMenuTop is not null && dataMenuTop.Count > 0)
             {
                 foreach (var menuElement in dataMenuTop)
                 {
@@ -179,10 +179,10 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             return false;
         }
 
-        public bool UrlPermissionCmd(string controller, string method, string suffix, TbRole role,
-            TbUser user, List<TbMenuElement> dataMenuTop, List<TbMenuElement> dataMenuLeft,
-            List<TbMenuElement> dataMenuBodyReport, List<TbMenuElement> dataMenuBodyTop,
-            List<TbMenuElement> dataMenuHiddenPopup)
+        public bool UrlPermissionCmd(string controller, string method, string suffix, TbRole? role,
+            TbUser? user, List<TbMenuElement>? dataMenuTop, List<TbMenuElement>? dataMenuLeft,
+            List<TbMenuElement>? dataMenuBodyReport, List<TbMenuElement>? dataMenuBodyTop,
+            List<TbMenuElement>? dataMenuHiddenPopup)
         {
             var userPermissionModel = VariablesGlobales.Instance.UnityContainer.Resolve<IUserPermissionModel>();
             var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
@@ -196,7 +196,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 return true;
             }
 
-            if (dataMenuTop.Count > 0)
+            if (dataMenuTop is not null && dataMenuTop.Count > 0)
             {
                 foreach (var menuElement in dataMenuTop)
                 {
@@ -215,7 +215,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 }
             }
 
-            if (dataMenuLeft.Count > 0)
+            if (dataMenuLeft is not null && dataMenuLeft.Count > 0)
             {
                 foreach (var menuElement in dataMenuLeft)
                 {
@@ -233,7 +233,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 }
             }
 
-            if (dataMenuBodyReport.Count > 0)
+            if (dataMenuBodyReport is not null && dataMenuBodyReport.Count > 0)
             {
                 foreach (var menuElement in dataMenuBodyReport)
                 {
@@ -251,7 +251,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 }
             }
 
-            if (dataMenuBodyTop.Count > 0)
+            if (dataMenuBodyTop is not null && dataMenuBodyTop.Count > 0)
             {
                 foreach (var menuElement in dataMenuBodyTop)
                 {
@@ -269,7 +269,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 }
             }
 
-            if (dataMenuHiddenPopup.Count > 0)
+            if (dataMenuHiddenPopup is not null && dataMenuHiddenPopup.Count > 0)
             {
                 foreach (var menuElement in dataMenuHiddenPopup)
                 {
@@ -292,7 +292,8 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 return false;
             }
 
-            var rowRolePermission = userPermissionModel.GetRowByPk(user.CompanyId, user.BranchId,role.RoleId, elementId);
+            var rowRolePermission =
+                userPermissionModel.GetRowByPk(user.CompanyId, user.BranchId, role.RoleId, elementId);
             if (rowRolePermission == null)
             {
                 return false;
@@ -335,7 +336,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                                             Ha superado el número máximo de usuarios.
                                             Teléfono de contacto: 8712-5827 para activar licencia
                                             Realizar el pago de la licencia aquí o
-                                            Realizar la transferencia a la siguiente cuenta BAC Dólares: 366-577-484 
+                                            Realizar la transferencia a la siguiente cuenta BAC Dólares: 366-577-484
                                                                             
                                         """);
                 }
@@ -368,11 +369,11 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                                                         
                                         """);
                 }
-            
             }
 
             parameterCreditos -= objParameterPriceByInvoice;
-            var dataNewParameter = companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameterCreditosId);
+            var dataNewParameter =
+                companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameterCreditosId);
             dataNewParameter!.Value = parameterCreditos.ToString();
             parameterModel.UpdateAppPosme(companyId, objParameterCreditosId, dataNewParameter);
 
@@ -381,9 +382,11 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             var parameterCantiadTransaccionesId = parameterCantiadTransacciones!.ParameterId;
             var parameterCantiadTransaccionesValue = int.Parse(parameterCantiadTransacciones.Value);
             var parameterCantiadTransaccionesNewValor = parameterCantiadTransaccionesValue + 1;
-            var dataNewParameterCantidadTransacciones = companyParameterModel.GetRowByParameterIdCompanyId(companyId, parameterCantiadTransaccionesId);
+            var dataNewParameterCantidadTransacciones =
+                companyParameterModel.GetRowByParameterIdCompanyId(companyId, parameterCantiadTransaccionesId);
             dataNewParameterCantidadTransacciones!.Value = parameterCantiadTransaccionesNewValor.ToString();
-            parameterModel.UpdateAppPosme(companyId, parameterCantiadTransaccionesId,dataNewParameterCantidadTransacciones);
+            parameterModel.UpdateAppPosme(companyId, parameterCantiadTransaccionesId,
+                dataNewParameterCantidadTransacciones);
 
             if (fechaNow > objParameterExpiredLicense && objParameterTipoPlan != "MEMBRESIA")
             {
@@ -400,8 +403,5 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 }
             }
         }
-
-
-        
     }
 }
