@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using DevExpress.XtraBars.Alerter;
 using DevExpress.XtraBars.ToastNotifications;
 using DevExpress.XtraEditors;
@@ -201,6 +202,48 @@ namespace v4posme_window.Views
 
         private void btnPagar_Click(object sender, EventArgs e)
         {
+            var coreWebRender = new CoreWebRenderInView();
+            var userService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
+
+            if (string.IsNullOrEmpty(txtUsuario.Text))
+            {
+                dxErrorProvider.SetError(txtUsuario, @"Debe especificar un usuario para continuar.");
+                coreWebRender.GetMessageAlert(TypeMessage.Error, @"Usuario", "Debe especificar un usuario para continuar.", this);
+              
+                return;
+            }
+            else
+            {
+                dxErrorProvider.SetError(txtUsuario, "");
+            }
+
+            if (string.IsNullOrEmpty(txtPassword.Text))
+            {
+                dxErrorProvider.SetError(txtPassword, "Debe especificar una contraseña para continuar.");
+                coreWebRender.GetMessageAlert(TypeMessage.Error, "Usuario", "Debe especificar una contraseña para continuar.", this);
+
+                return;
+            }
+            else
+            {
+                dxErrorProvider.SetError(txtPassword, "");
+            }
+            var nickname = txtUsuario.Text;
+            var password = txtPassword.Text;
+            VariablesGlobales.Instance.User = userService.GetUserByNickname(nickname);
+            if (VariablesGlobales.Instance.User is null)
+            {
+                coreWebRender.GetMessageAlert(TypeMessage.Error, "Error", "Nombre de usuario no registrado, intente nuevamente", this);
+                return;
+            }
+
+            //VariablesGlobales.Instance.User = userService.GetUserByPasswordAndNickname(nickname, password);
+            if (VariablesGlobales.Instance.User.Password!.Equals(password))
+            {
+                coreWebRender.GetMessageAlert(TypeMessage.Error, "Error", "Contraseña incorrecta, intente nuevamente", this);
+                return;
+            }
+
             //Obtener Datos
             if (!string.IsNullOrEmpty(cmbMontoPagar.Text))
             {
@@ -218,7 +261,7 @@ namespace v4posme_window.Views
             }
             if (decimal.Compare(_pagoCantidadMonto, decimal.Zero) > 0)
             {
-                var url = $@"https://posme.net/core_acount/payment/pagoCantidadDeMeses/{_pagoCantidadDeMeses}";
+                var url = VariablesGlobales.ConfigurationBuilder["URL_PAGO_POSME"]+_pagoCantidadDeMeses;
                 Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
             }
         }
