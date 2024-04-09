@@ -1,33 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Data;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Controls.Ribbon;
-using System.Windows.Forms;
 using DevExpress.Data;
-using DevExpress.Utils;
-using DevExpress.Utils.Svg;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Alerter;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraBars.ToastNotifications;
 using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Grid;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using v4posme_library.Libraries;
 using v4posme_library.Models;
 using v4posme_library.ModelsDto;
-using v4posme_window.Views;
 using Control = System.Windows.Forms.Control;
 using GridView = DevExpress.XtraGrid.Views.Grid.GridView;
-using Guid = System.Guid;
 using Image = System.Drawing.Image;
 
 namespace v4posme_window.Libraries
@@ -231,7 +214,7 @@ namespace v4posme_window.Libraries
         }
 
 
-        public static void RenderMenuTop(List<TbMenuElement> data, DevExpress.XtraBars.Ribbon.RibbonControl menu)
+        public static void RenderMenuTop(List<TbMenuElement> data, RibbonControl menu)
         {
             // Llamada inicial a la función recursiva para agregar elementos al AccordionControl
             foreach (var menuItem in data)
