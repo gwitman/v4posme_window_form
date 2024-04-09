@@ -13,8 +13,8 @@ namespace v4posme_window.Views
 {
     public partial class LoginForm : XtraForm
     {
-        private decimal _pagoCantidadMonto=decimal.Zero;
-        private decimal _pagoCantidadDeMeses=Decimal.Zero;
+        private decimal _pagoCantidadMonto = decimal.Zero;
+        private decimal _pagoCantidadDeMeses = Decimal.Zero;
         private decimal _parameterPrice;
 
         private const string UsuarioTitulo = "Usuario";
@@ -56,11 +56,13 @@ namespace v4posme_window.Views
             if (string.IsNullOrEmpty(txtUsuario.Text))
             {
                 dxErrorProvider.SetError(txtUsuario, @"Debe especificar un usuario para continuar.");
-                coreWebRender.GetMessageAlert(TypeMessage.Error, @"Usuario", "Debe especificar un usuario para continuar.", this);
+                coreWebRender.GetMessageAlert(TypeMessage.Error, @"Usuario",
+                    "Debe especificar un usuario para continuar.", this);
                 if (progressPanel.Visible)
                 {
                     progressPanel.Visible = false;
                 }
+
                 return;
             }
             else
@@ -71,7 +73,8 @@ namespace v4posme_window.Views
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
                 dxErrorProvider.SetError(txtPassword, "Debe especificar una contraseña para continuar.");
-                coreWebRender.GetMessageAlert(TypeMessage.Error, "Usuario", "Debe especificar una contraseña para continuar.", this);
+                coreWebRender.GetMessageAlert(TypeMessage.Error, "Usuario",
+                    "Debe especificar una contraseña para continuar.", this);
                 if (progressPanel.Visible)
                 {
                     progressPanel.Visible = false;
@@ -111,16 +114,21 @@ namespace v4posme_window.Views
                 if (VariablesGlobales.Instance.User is null) return;
 
                 //si existe el usuario
-                userTools.Log($@"Usuario logeado al sistema: {VariablesGlobales.Instance.User.Nickname}, {DateTime.Now.ToLongDateString()}");
+                userTools.Log(
+                    $@"Usuario logeado al sistema: {VariablesGlobales.Instance.User.Nickname}, {DateTime.Now.ToLongDateString()}");
 
                 var companyId = VariablesGlobales.Instance.User.CompanyId;
-                var parameterCantidadTransacciones = coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId).Value;
+                var parameterCantidadTransacciones =
+                    coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId).Value;
                 var parameterBalance = coreWebParameter.GetParameter("CORE_CUST_PRICE_BALANCE", companyId).Value;
                 var parameterSendBox = coreWebParameter.GetParameter("CORE_PAYMENT_SENDBOX", companyId).Value;
-                var parameterSendBoxUsuario = coreWebParameter.GetParameter("CORE_PAYMENT_PRUEBA_USUARIO", companyId).Value;
+                var parameterSendBoxUsuario =
+                    coreWebParameter.GetParameter("CORE_PAYMENT_PRUEBA_USUARIO", companyId).Value;
                 var parameterSendBoxClave = coreWebParameter.GetParameter("CORE_PAYMENT_PRUEBA_CLAVE", companyId).Value;
-                var parameterProduccionUsuario = coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_USUARIO", companyId).Value;
-                var parameterProduccionClave = coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_CLAVE", companyId).Value;
+                var parameterProduccionUsuario =
+                    coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_USUARIO", companyId).Value;
+                var parameterProduccionClave =
+                    coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_CLAVE", companyId).Value;
                 _parameterPrice = Convert.ToDecimal(coreWebParameter.GetParameter("CORE_CUST_PRICE", companyId).Value);
                 var parameterTipoPlan = coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId).Value;
 
@@ -138,10 +146,12 @@ namespace v4posme_window.Views
             switch (validar)
             {
                 case 1:
-                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error", "Nombre de usuario no registrado, intente nuevamente", this);
+                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error",
+                        "Nombre de usuario no registrado, intente nuevamente", this);
                     break;
                 case 2:
-                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error", "Contraseña incorrecta, intente nuevamente", this);
+                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error",
+                        "Contraseña incorrecta, intente nuevamente", this);
                     break;
                 case 0: break;
             }
@@ -149,14 +159,14 @@ namespace v4posme_window.Views
 
             if (VariablesGlobales.Instance.MessageLogin is not null)
             {
-                coreWebRender.GetMessageAlert(TypeMessage.Error, "posMe", VariablesGlobales.Instance.MessageLogin, this);
+                coreWebRender.GetMessageAlert(TypeMessage.Error, "posMe", VariablesGlobales.Instance.MessageLogin,
+                    this);
             }
 
             if (progressPanel.Visible)
             {
                 progressPanel.Visible = false;
             }
-
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
@@ -200,7 +210,7 @@ namespace v4posme_window.Views
         {
         }
 
-        private void btnPagar_Click(object sender, EventArgs e)
+        private async void btnPagar_Click(object sender, EventArgs e)
         {
             var coreWebRender = new CoreWebRenderInView();
             var userService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
@@ -208,8 +218,9 @@ namespace v4posme_window.Views
             if (string.IsNullOrEmpty(txtUsuario.Text))
             {
                 dxErrorProvider.SetError(txtUsuario, @"Debe especificar un usuario para continuar.");
-                coreWebRender.GetMessageAlert(TypeMessage.Error, @"Usuario", "Debe especificar un usuario para continuar.", this);
-              
+                coreWebRender.GetMessageAlert(TypeMessage.Error, @"Usuario",
+                    "Debe especificar un usuario para continuar.", this);
+
                 return;
             }
             else
@@ -220,7 +231,8 @@ namespace v4posme_window.Views
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
                 dxErrorProvider.SetError(txtPassword, "Debe especificar una contraseña para continuar.");
-                coreWebRender.GetMessageAlert(TypeMessage.Error, "Usuario", "Debe especificar una contraseña para continuar.", this);
+                coreWebRender.GetMessageAlert(TypeMessage.Error, "Usuario",
+                    "Debe especificar una contraseña para continuar.", this);
 
                 return;
             }
@@ -228,22 +240,41 @@ namespace v4posme_window.Views
             {
                 dxErrorProvider.SetError(txtPassword, "");
             }
+
             var nickname = txtUsuario.Text;
             var password = txtPassword.Text;
-            VariablesGlobales.Instance.User = userService.GetUserByNickname(nickname);
-            if (VariablesGlobales.Instance.User is null)
+            var validar = 0;
+            if (!progressPanel.Visible)
             {
-                coreWebRender.GetMessageAlert(TypeMessage.Error, "Error", "Nombre de usuario no registrado, intente nuevamente", this);
-                return;
+                progressPanel.Visible = true;
             }
+            await Task.Run(() =>
+            {
+                VariablesGlobales.Instance.User = userService.GetUserByNickname(nickname);
+                if (VariablesGlobales.Instance.User is null)
+                {
+                    validar = 1;
+                    return;
+                }
 
+                if (VariablesGlobales.Instance.User.Password != password)
+                {
+                    validar = 2;
+                }
+            });
+            switch (validar)
+            {
+                case 1:
+                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error",
+                        "Nombre de usuario no registrado, intente nuevamente", this);
+                    break;
+                case 2:
+                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error",
+                        "Contraseña incorrecta, intente nuevamente", this);
+                    break;
+                case 0: break;
+            }
             
-            if (VariablesGlobales.Instance.User.Password!.Equals(password))
-            {
-                coreWebRender.GetMessageAlert(TypeMessage.Error, "Error", "Contraseña incorrecta, intente nuevamente", this);
-                return;
-            }
-
             //Obtener Datos
             if (!string.IsNullOrEmpty(cmbMontoPagar.Text))
             {
@@ -252,18 +283,24 @@ namespace v4posme_window.Views
                 {
                     return;
                 }
+
                 var companyId = VariablesGlobales.Instance.User.CompanyId;
                 var parameter = coreWebParameter.GetParameter("CORE_CUST_PRICE", companyId);
                 if (parameter is null) return;
 
-                _parameterPrice         = Convert.ToDecimal(parameter.Value);
-                _pagoCantidadDeMeses    = decimal.Parse(cmbMontoPagar.Text);
-                _pagoCantidadMonto      = _pagoCantidadDeMeses * _parameterPrice;
+                _parameterPrice = Convert.ToDecimal(parameter.Value);
+                _pagoCantidadDeMeses = decimal.Parse(cmbMontoPagar.Text);
+                _pagoCantidadMonto = _pagoCantidadDeMeses * _parameterPrice;
             }
+
             if (decimal.Compare(_pagoCantidadMonto, decimal.Zero) > 0)
             {
-                var url = VariablesGlobales.ConfigurationBuilder["URL_PAGO_POSME"]+_pagoCantidadDeMeses;
+                var url = VariablesGlobales.ConfigurationBuilder["URL_PAGO_POSME"] + _pagoCantidadDeMeses;
                 Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+            }
+            if (progressPanel.Visible)
+            {
+                progressPanel.Visible = false;
             }
         }
     }
