@@ -82,7 +82,7 @@
             panelControl1.Location = new Point(0, 67);
             panelControl1.Name = "panelControl1";
             panelControl1.Padding = new Padding(0, 5, 0, 5);
-            panelControl1.Size = new Size(1008, 62);
+            panelControl1.Size = new Size(1008, 56);
             panelControl1.TabIndex = 1;
             // 
             // stackPanel2
@@ -92,14 +92,14 @@
             stackPanel2.Dock = DockStyle.Left;
             stackPanel2.Location = new Point(2, 7);
             stackPanel2.Name = "stackPanel2";
-            stackPanel2.Size = new Size(393, 48);
+            stackPanel2.Size = new Size(393, 42);
             stackPanel2.TabIndex = 2;
             stackPanel2.UseSkinIndents = true;
             // 
             // dateEdit1
             // 
             dateEdit1.EditValue = null;
-            dateEdit1.Location = new Point(13, 13);
+            dateEdit1.Location = new Point(13, 10);
             dateEdit1.Name = "dateEdit1";
             dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -108,7 +108,7 @@
             // 
             // textEdit1
             // 
-            textEdit1.Location = new Point(204, 11);
+            textEdit1.Location = new Point(204, 9);
             textEdit1.Name = "textEdit1";
             textEdit1.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("textEdit1.Properties.ContextImageOptions.SvgImage");
             textEdit1.Properties.ContextImageOptions.SvgImageSize = new Size(20, 20);
@@ -124,7 +124,7 @@
             flowLayoutPanel1.Dock = DockStyle.Right;
             flowLayoutPanel1.Location = new Point(615, 7);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(391, 48);
+            flowLayoutPanel1.Size = new Size(391, 42);
             flowLayoutPanel1.TabIndex = 2;
             // 
             // btnVistas
@@ -168,9 +168,9 @@
             // centerPane
             // 
             centerPane.Dock = DockStyle.Fill;
-            centerPane.Location = new Point(0, 129);
+            centerPane.Location = new Point(0, 123);
             centerPane.Name = "centerPane";
-            centerPane.Size = new Size(1008, 493);
+            centerPane.Size = new Size(1008, 499);
             centerPane.TabIndex = 2;
             // 
             // FormTypeList

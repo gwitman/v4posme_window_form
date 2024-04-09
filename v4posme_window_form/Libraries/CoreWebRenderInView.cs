@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -214,10 +215,11 @@ namespace v4posme_window.Libraries
                     subElement.Style = ElementStyle.Item;
                     if (!string.IsNullOrEmpty(subItem.IconWindowForm))
                     {
-                        subElement.ImageOptions.Image = Image.FromFile(subItem.IconWindowForm);
-                        subElement.ImageOptions.ImageLayoutMode = ImageLayoutMode.Stretch;
-                        //subElement.ImageLayoutMode = ImageLayoutMode.Stretch;
-                        //subElement.Image = Image.FromFile(subItem.IconWindowForm!);
+                        if (File.Exists(subItem.IconWindowForm))
+                        {
+                            subElement.ImageOptions.Image = Image.FromFile(subItem.IconWindowForm);
+                            subElement.ImageOptions.ImageLayoutMode = ImageLayoutMode.Stretch;
+                        }
                     }
 
                     if (!string.IsNullOrEmpty(subItem.FormRedirectWindowForm))

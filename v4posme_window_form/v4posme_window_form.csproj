@@ -7,7 +7,7 @@
         <UseWindowsForms>true</UseWindowsForms>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>v4posme_window</RootNamespace>
-        <Title>Posme</Title>
+        <Title>posMe</Title>
     </PropertyGroup>
 
     <ItemGroup>
