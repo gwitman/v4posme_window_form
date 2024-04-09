@@ -9,8 +9,9 @@ namespace v4posme_window.Interfaz
 {
     internal interface InterfaceFormTypeList
     {
-        GridView objControlGridView { get; set; }
-
         void List();
+        void Delete();
+        void Edit();
+        void New();
     }
 }

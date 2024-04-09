@@ -48,11 +48,7 @@ namespace v4posme_window.Views
             Text = lblTitulo.Text;
         }
 
-        public void List()
-        {
-            throw new NotImplementedException();
-        }
-
+      
         private void FormInvoiceBillingList_Load(object sender, EventArgs e)
         {
             bool resultPermission = true;
@@ -117,6 +113,26 @@ namespace v4posme_window.Views
 
                 CoreWebRenderInView.RenderGrid(dataViewData!, "invoice", 0, centerPane);
             }
+        }
+
+        public void List()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void New()
+        {
+            throw new NotImplementedException();
         }
     }
 }
