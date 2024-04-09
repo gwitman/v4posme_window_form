@@ -40,7 +40,7 @@
             btnEditar = new DevExpress.XtraEditors.SimpleButton();
             btnEliminar = new DevExpress.XtraEditors.SimpleButton();
             btnNuevo = new DevExpress.XtraEditors.SimpleButton();
-            centerPane = new DevExpress.Utils.Layout.StackPanel();
+            centerPane = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)stackPanel1).BeginInit();
             stackPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
@@ -68,7 +68,7 @@
             // 
             lblTitulo.Appearance.Font = new Font("Tahoma", 10F);
             lblTitulo.Appearance.Options.UseFont = true;
-            lblTitulo.Location = new Point(17, 25);
+            lblTitulo.Location = new Point(13, 25);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(119, 16);
             lblTitulo.TabIndex = 0;
@@ -99,20 +99,20 @@
             // dateEdit1
             // 
             dateEdit1.EditValue = null;
-            dateEdit1.Location = new Point(17, 10);
+            dateEdit1.Location = new Point(13, 13);
             dateEdit1.Name = "dateEdit1";
             dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            dateEdit1.Size = new Size(187, 28);
+            dateEdit1.Size = new Size(187, 20);
             dateEdit1.TabIndex = 0;
             // 
             // textEdit1
             // 
-            textEdit1.Location = new Point(210, 8);
+            textEdit1.Location = new Point(204, 11);
             textEdit1.Name = "textEdit1";
             textEdit1.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("textEdit1.Properties.ContextImageOptions.SvgImage");
             textEdit1.Properties.ContextImageOptions.SvgImageSize = new Size(20, 20);
-            textEdit1.Size = new Size(164, 32);
+            textEdit1.Size = new Size(164, 24);
             textEdit1.TabIndex = 1;
             // 
             // flowLayoutPanel1
@@ -172,7 +172,6 @@
             centerPane.Name = "centerPane";
             centerPane.Size = new Size(1008, 493);
             centerPane.TabIndex = 2;
-            centerPane.UseSkinIndents = true;
             // 
             // FormTypeList
             // 
@@ -212,6 +211,6 @@
         internal DevExpress.XtraEditors.SimpleButton btnNuevo;
         internal DevExpress.XtraEditors.TextEdit textEdit1;
         internal DevExpress.XtraEditors.DateEdit dateEdit1;
-        internal DevExpress.Utils.Layout.StackPanel centerPane;
+        internal DevExpress.XtraEditors.PanelControl centerPane;
     }
 }

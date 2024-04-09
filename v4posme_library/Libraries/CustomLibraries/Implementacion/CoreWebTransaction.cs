@@ -69,7 +69,7 @@ class CoreWebTransaction(
         int transactionMasterIdOriginal, int transactionIdRevert, int transactionMasterIdRevert)
     {
         var bdModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBdModel>();
-        object[] param =
+        object[]? param =
         [
             companyIdOriginal, transactionIdOriginal, transactionMasterIdOriginal, transactionIdRevert,
             transactionMasterIdRevert

@@ -152,7 +152,7 @@ namespace v4posme_library.Libraries
             get
             {
                 var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-                return builder.GetConnectionString("ConnectionString");
+                return builder.GetConnectionString("PosmeConnectionString");
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -18,11 +19,13 @@ using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraBars.ToastNotifications;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using v4posme_library.Libraries;
 using v4posme_library.Models;
 using v4posme_library.ModelsDto;
 using v4posme_window.Views;
 using Control = System.Windows.Forms.Control;
+using GridView = DevExpress.XtraGrid.Views.Grid.GridView;
 using Guid = System.Guid;
 using Image = System.Drawing.Image;
 
@@ -31,7 +34,7 @@ namespace v4posme_window.Libraries
     public class CoreWebRenderInView
     {
         public void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, int displayLength,
-            System.Windows.Forms.Control form)
+            Control form)
         {
             if (dataViewDto.Config is null)
             {
@@ -44,19 +47,39 @@ namespace v4posme_window.Libraries
                 Parent = form,
                 Dock = DockStyle.Fill
             };
+            if (dataViewDto.Data is null)
+            {
+                return;
+            }
 
+            var viewData = (List<Dictionary<string, object>>)dataViewDto.Data;
+            //gridControl.DataSource = viewData;
+            var table = FillGridControl(viewData);
+            // Asignar el DataTable al GridControl
+            gridControl.DataSource = table;
 
+            // Ajustar la configuración del GridView
+            var gridView = (GridView)gridControl.MainView;
+            gridView.BestFitColumns();
 
-            //
-            var viewData = dataViewDto.Data;
-            gridControl.DataSource = viewData;
-            var gridView = gridControl.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
+            var summaryColumns = dataViewDto.Config.SummaryColumns is null
+                ? []
+                : dataViewDto.Config.SummaryColumns.Split(",");
 
-            var summaryColumns = dataViewDto.Config.SummaryColumns!.Split(",");
-            var formatColumns = dataViewDto.Config.FormatColumns!.Split("");
-            var noVisibleColumns = dataViewDto.Config.NonVisibleColumns!.Split(",");
-            var visibleColumns = dataViewDto.Config.VisibleColumns!.Split(",");
+            var formatColumns = dataViewDto.Config.FormatColumns is null
+                ? []
+                : dataViewDto.Config.FormatColumns.Split("");
+
+            var noVisibleColumns = dataViewDto.Config.NonVisibleColumns is null
+                ? []
+                : dataViewDto.Config.NonVisibleColumns.Split(",");
+
+            var visibleColumns = dataViewDto.Config.VisibleColumns is null
+                ? []
+                : dataViewDto.Config.VisibleColumns.Split(",");
+
             var columns = noVisibleColumns.Concat(visibleColumns).ToList();
+
             if (summaryColumns.Length > 0)
             {
                 gridView.OptionsView.ShowFooter = true;
@@ -79,12 +102,13 @@ namespace v4posme_window.Libraries
                 }
             }
 
+            noVisibleColumns = noVisibleColumns.Select(s => $"col{s}").ToArray();
+
             var columnsGrid = gridView.Columns.ToList();
             var aux = 0;
-            var noVisibleLowerCase = noVisibleColumns.Select(s => s.ToLowerInvariant()).ToList();
             foreach (var column in columnsGrid)
             {
-                if (noVisibleLowerCase.Contains(column.Name.ToLowerInvariant()))
+                if (noVisibleColumns.Contains(column.Name))
                 {
                     column.Visible = false;
                 }
@@ -104,6 +128,34 @@ namespace v4posme_window.Libraries
 
                 aux++;
             }
+        }
+
+        private static DataTable? FillGridControl(List<Dictionary<string, object>>? data)
+        {
+            if (data == null || data.Count == 0)
+                return null;
+
+            var table = new DataTable();
+
+            // Añadir columnas al DataTable basadas en las claves del primer diccionario
+            foreach (string key in data.First().Keys)
+            {
+                table.Columns.Add(key, typeof(object));
+            }
+
+            // Añadir filas al DataTable
+            foreach (var dict in data)
+            {
+                var row = table.NewRow();
+                foreach (KeyValuePair<string, object> kvp in dict)
+                {
+                    row[kvp.Key] = kvp.Value;
+                }
+
+                table.Rows.Add(row);
+            }
+
+            return table;
         }
 
         public void GetMessageAlert(TypeMessage type, string title, string body, Form form)
@@ -133,8 +185,9 @@ namespace v4posme_window.Libraries
                     if (!string.IsNullOrEmpty(menuItem.IconWindowForm))
                     {
                         accordionElement.ImageOptions.Image = Image.FromFile(menuItem.IconWindowForm);
-                        accordionElement.ImageOptions.ImageLayoutMode=ImageLayoutMode.Stretch;
+                        accordionElement.ImageOptions.ImageLayoutMode = ImageLayoutMode.Stretch;
                     }
+
                     menu.Elements.Add(accordionElement);
                     RenderItemLeft(accordionElement,
                         data.Where(k => k.ParentMenuElementId == menuItem.MenuElementId).ToList());
@@ -175,9 +228,6 @@ namespace v4posme_window.Libraries
             }
         }
 
-        
-
-        
 
         public static void RenderMenuTop(List<TbMenuElement> data, DevExpress.XtraBars.Ribbon.RibbonControl menu)
         {

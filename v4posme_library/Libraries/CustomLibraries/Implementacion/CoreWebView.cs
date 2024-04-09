@@ -1,4 +1,5 @@
-﻿using Unity;
+﻿using Microsoft.EntityFrameworkCore.Query.Internal;
+using Unity;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels;
 using v4posme_library.Libraries.CustomModels.Core;
@@ -239,13 +240,15 @@ class CoreWebView(
         }
 
         queryFill = queryFill.Replace("{filterPermission}", filterPermission);
-        var objResult = new TableCompanyDataViewDto{Config = companyDataView};
+        var objResult = new TableCompanyDataViewDto { Config = companyDataView };
 
-        var dataRecordSet = bdModel.ExecuteRender<dynamic>(queryFill);
-        if (dataRecordSet == null)
+        //var dataRecordSet = bdModel.ExecuteRender<dynamic>(queryFill);
+        var dataRecordSet = bdModel.ExecuteRenderQueryable(queryFill);
+        if (dataRecordSet is null)
         {
             return null;
         }
+
         objResult.Data = dataRecordSet;
         return objResult;
     }
