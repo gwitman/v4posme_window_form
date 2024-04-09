@@ -115,7 +115,7 @@ namespace v4posme_window.Views
                         parameters);
                 }
 
-                _coreWebRender.RenderGrid(dataViewData!, "invoice", 0, centerPane);
+                CoreWebRenderInView.RenderGrid(dataViewData!, "invoice", 0, centerPane);
             }
         }
     }

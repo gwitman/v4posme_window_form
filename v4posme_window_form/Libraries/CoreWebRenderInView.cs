@@ -33,7 +33,7 @@ namespace v4posme_window.Libraries
 {
     public class CoreWebRenderInView
     {
-        public void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, int displayLength,
+        public static void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, int displayLength,
             Control form)
         {
             if (dataViewDto.Config is null)
@@ -138,7 +138,7 @@ namespace v4posme_window.Libraries
             var table = new DataTable();
 
             // Añadir columnas al DataTable basadas en las claves del primer diccionario
-            foreach (string key in data.First().Keys)
+            foreach (var key in data.First().Keys)
             {
                 table.Columns.Add(key, typeof(object));
             }
@@ -147,7 +147,7 @@ namespace v4posme_window.Libraries
             foreach (var dict in data)
             {
                 var row = table.NewRow();
-                foreach (KeyValuePair<string, object> kvp in dict)
+                foreach (var kvp in dict)
                 {
                     row[kvp.Key] = kvp.Value;
                 }
