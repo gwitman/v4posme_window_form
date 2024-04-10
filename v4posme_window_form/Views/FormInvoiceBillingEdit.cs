@@ -50,5 +50,19 @@ namespace v4posme_window.Views
             throw new NotImplementedException();
         }
 
+        private void lblTitulo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateEdit1_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tablePanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
