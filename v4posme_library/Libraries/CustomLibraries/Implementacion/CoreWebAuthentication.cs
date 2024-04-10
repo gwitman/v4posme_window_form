@@ -108,22 +108,25 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 throw new Exception("EL USUARIO NO TIENE ASIGNADO UN ROL...");
             }
 
-            VariablesGlobales.Instance.Company = objCompany;
-            VariablesGlobales.Instance.Branch = objBranch;
-            VariablesGlobales.Instance.Role = objRole;
-            VariablesGlobales.Instance.User = user;
-            VariablesGlobales.Instance.ListMenuTop = _coreWebMenu.GetMenuTop(user.CompanyId, user.BranchId,
-                objRole.RoleId);
-            VariablesGlobales.Instance.ListMenuLeft = _coreWebMenu.GetMenuLeft(user.CompanyId, user.BranchId,
-                objRole.RoleId);
-            VariablesGlobales.Instance.ListMenuBodyReport = _coreWebMenu.GetMenuBodyReport(user.CompanyId,
-                user.BranchId, objRole.RoleId);
-            VariablesGlobales.Instance.ListMenuHiddenPopup = _coreWebMenu.GetMenuHiddenPopup(user.CompanyId,
-                user.BranchId, objRole.RoleId);
-            VariablesGlobales.Instance.MessageLogin = GetLicenseMessage(user.CompanyId);
-            var parameter = _coreWebParameter.GetParameter("CORE_LABEL_SISTEMA_SUPLANTATION",
-                VariablesGlobales.Instance.Membership.CompanyId);
-            VariablesGlobales.Instance.ParameterLabelSystem = parameter!.Value;
+            Task.Run(() =>
+            {
+                VariablesGlobales.Instance.Company = objCompany;
+                VariablesGlobales.Instance.Branch = objBranch;
+                VariablesGlobales.Instance.Role = objRole;
+                VariablesGlobales.Instance.User = user;
+                VariablesGlobales.Instance.ListMenuTop = _coreWebMenu.GetMenuTop(user.CompanyId, user.BranchId,
+                    objRole.RoleId);
+                VariablesGlobales.Instance.ListMenuLeft = _coreWebMenu.GetMenuLeft(user.CompanyId, user.BranchId,
+                    objRole.RoleId);
+                VariablesGlobales.Instance.ListMenuBodyReport = _coreWebMenu.GetMenuBodyReport(user.CompanyId,
+                    user.BranchId, objRole.RoleId);
+                VariablesGlobales.Instance.ListMenuHiddenPopup = _coreWebMenu.GetMenuHiddenPopup(user.CompanyId,
+                    user.BranchId, objRole.RoleId);
+                VariablesGlobales.Instance.MessageLogin = GetLicenseMessage(user.CompanyId);
+                var parameter = _coreWebParameter.GetParameter("CORE_LABEL_SISTEMA_SUPLANTATION",
+                    VariablesGlobales.Instance.Membership.CompanyId);
+                VariablesGlobales.Instance.ParameterLabelSystem = parameter!.Value;
+            });
 
             return user;
         }

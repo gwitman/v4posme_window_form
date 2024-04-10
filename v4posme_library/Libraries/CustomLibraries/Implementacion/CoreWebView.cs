@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Query.Internal;
-using Unity;
+﻿using Unity;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels;
 using v4posme_library.Libraries.CustomModels.Core;
@@ -214,6 +213,7 @@ class CoreWebView(
             throw new Exception("No existe el company data view");
         }
 
+        parameter ??= new Dictionary<string, string>();
         // EXECUTE
         var queryFill = ReplacePlaceholders(companyDataView.SqlScript!, parameter!);
         // Aplicar Filtros y Asignar Variables
@@ -255,8 +255,6 @@ class CoreWebView(
 
     private static string ReplacePlaceholders(string input, Dictionary<string, string> parameter)
     {
-        // Reemplazar los placeholders en la cadena de entrada con los valores del diccionario
-
         return parameter.Aggregate(input, (current, entry) => current.Replace(entry.Key, entry.Value));
     }
 }

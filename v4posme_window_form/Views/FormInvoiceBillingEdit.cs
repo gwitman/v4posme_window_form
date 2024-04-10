@@ -13,7 +13,7 @@ using v4posme_window.Template;
 
 namespace v4posme_window.Views
 {
-    public partial class FormInvoiceBillingEdit : Form, InterfaceFormTypeEdit
+    public partial class FormInvoiceBillingEdit : Form, IFormTypeEdit
     {
         public FormInvoiceBillingEdit()
         {
@@ -49,5 +49,6 @@ namespace v4posme_window.Views
         {
             throw new NotImplementedException();
         }
+
     }
 }

@@ -8,10 +8,10 @@
         public int? CompanyId { get; set; }
         public int? BranchId { get; set; }
         public int? ElementId { get; set; }
-        public bool? Selected { get; set; }
-        public bool? Inserted { get; set; }
-        public bool? Deleted { get; set; }
-        public bool? Edited { get; set; }
+        public int? Selected { get; set; }
+        public int? Inserted { get; set; }
+        public int? Deleted { get; set; }
+        public int? Edited { get; set; }
         public string? MenuElementOrden { get; set; }
         public string? MenuElementDisplay { get; set; }
         public int? RoleId { get; set; }

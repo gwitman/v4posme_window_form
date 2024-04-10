@@ -4,7 +4,7 @@ namespace v4posme_window.Libraries;
 
 public static class CoreFormList
 {
-    private static Form? _principal;
+    private static PrincipalForm? _principal;
     public static Dictionary<string, Form> Formularios()
     {
         var formInvoiceBillingEdit = new FormInvoiceBillingEdit();
@@ -21,7 +21,7 @@ public static class CoreFormList
         return forms;
     }
 
-    public static Form Principal()
+    public static PrincipalForm Principal()
     {
         return _principal ??= new PrincipalForm();
     }

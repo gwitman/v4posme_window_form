@@ -4,6 +4,7 @@ using DevExpress.XtraBars.Alerter;
 using DevExpress.XtraEditors;
 using Unity;
 using v4posme_library.Libraries;
+using v4posme_window.Properties;
 using v4posme_window.Views;
 
 namespace v4posme_window;
@@ -27,6 +28,7 @@ static class Program
         var alert = new AlertControl();
         try
         {
+            var defaultTest = Settings.Default.test;
             var dataLayer = XpoDefault.GetDataLayer("XpoProvider=MySql;"+VariablesGlobales.ConnectionString, AutoCreateOption.None);
             XpoDefault.DataLayer = dataLayer;
         }

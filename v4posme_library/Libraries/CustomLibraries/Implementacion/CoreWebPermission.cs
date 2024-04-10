@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Eventing.Reader;
-using Unity;
+﻿using Unity;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels.Core;
 using v4posme_library.Models;
@@ -114,9 +113,9 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
             if (dataMenuBodyTop is not null && dataMenuBodyTop.Count > 0)
             {
-                foreach (var menuElement in dataMenuBodyTop)
+                foreach (var url2 in dataMenuBodyTop.Select(menuElement =>
+                             menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew)))
                 {
-                    var url2 = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(url2, url, StringComparison.CurrentCultureIgnoreCase))
                     {
                         return true;
@@ -130,9 +129,9 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
             if (dataMenuBodyReport is not null && dataMenuBodyReport.Count > 0)
             {
-                foreach (var menuElement in dataMenuBodyReport)
+                foreach (var url2 in dataMenuBodyReport.Select(menuElement =>
+                             menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew)))
                 {
-                    var url2 = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(url2, url, StringComparison.CurrentCultureIgnoreCase))
                     {
                         return true;
@@ -146,9 +145,9 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
             if (dataMenuLeft is not null && dataMenuLeft.Count > 0)
             {
-                foreach (var menuElement in dataMenuLeft)
+                foreach (var url2 in dataMenuLeft.Select(menuElement =>
+                             menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew)))
                 {
-                    var url2 = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(url2, url, StringComparison.CurrentCultureIgnoreCase))
                     {
                         return true;
@@ -160,26 +159,25 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 }
             }
 
-            if (dataMenuTop is not null && dataMenuTop.Count > 0)
+            if (dataMenuTop is null || dataMenuTop.Count <= 0) return false;
+            foreach (var url2 in dataMenuTop.Select(menuElement =>
+                         menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew)))
             {
-                foreach (var menuElement in dataMenuTop)
+                if (string.Equals(url2, url, StringComparison.CurrentCultureIgnoreCase))
                 {
-                    var url2 = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
-                    if (string.Equals(url2, url, StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        return true;
-                    }
-                    else if (string.Equals(url2, urlIndex, StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        return true;
-                    }
+                    return true;
+                }
+
+                if (string.Equals(url2, urlIndex, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return true;
                 }
             }
 
             return false;
         }
 
-        public bool UrlPermissionCmd(string controller, string method, string suffix, TbRole? role,
+        public int UrlPermissionCmd(string controller, string method, string suffix, TbRole? role,
             TbUser? user, List<TbMenuElement>? dataMenuTop, List<TbMenuElement>? dataMenuLeft,
             List<TbMenuElement>? dataMenuBodyReport, List<TbMenuElement>? dataMenuBodyTop,
             List<TbMenuElement>? dataMenuHiddenPopup)
@@ -191,9 +189,14 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             var url2 = controller.ToLower().Replace("app\\controllers\\", "") + "/index" + suffix;
 
             var elementId = 0;
+            if (role is null)
+            {
+                throw new Exception("No Existe el rol a validar");
+            }
+
             if (role.IsAdmin!.Value)
             {
-                return true;
+                return permissionAll;
             }
 
             if (dataMenuTop is not null && dataMenuTop.Count > 0)
@@ -201,13 +204,13 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 foreach (var menuElement in dataMenuTop)
                 {
                     var replace = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
-                    if (replace.ToUpper() == url.ToUpper())
+                    if (string.Equals(replace, url, StringComparison.CurrentCultureIgnoreCase))
                     {
                         elementId = menuElement.ElementId;
                         break;
                     }
-                    else if (replace.ToUpper() == url2.ToUpper())
 
+                    if (string.Equals(replace, url2, StringComparison.CurrentCultureIgnoreCase))
                     {
                         elementId = menuElement.ElementId;
                         break;
@@ -225,7 +228,8 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                         elementId = menuElement.ElementId;
                         break;
                     }
-                    else if (string.Equals(replace, url2, StringComparison.CurrentCultureIgnoreCase))
+
+                    if (string.Equals(replace, url2, StringComparison.CurrentCultureIgnoreCase))
                     {
                         elementId = menuElement.ElementId;
                         break;
@@ -261,7 +265,8 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                         elementId = menuElement.ElementId;
                         break;
                     }
-                    else if (string.Equals(replace, url2, StringComparison.CurrentCultureIgnoreCase))
+
+                    if (string.Equals(replace, url2, StringComparison.CurrentCultureIgnoreCase))
                     {
                         elementId = menuElement.ElementId;
                         break;
@@ -279,7 +284,8 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                         elementId = menuElement.ElementId;
                         break;
                     }
-                    else if (string.Equals(replace, url2, StringComparison.CurrentCultureIgnoreCase))
+
+                    if (string.Equals(replace, url2, StringComparison.CurrentCultureIgnoreCase))
                     {
                         elementId = menuElement.ElementId;
                         break;
@@ -289,14 +295,14 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
             if (elementId == 0)
             {
-                return false;
+                return permissionNone;
             }
 
             var rowRolePermission =
                 userPermissionModel.GetRowByPk(user.CompanyId, user.BranchId, role.RoleId, elementId);
-            if (rowRolePermission == null)
+            if (rowRolePermission is null)
             {
-                return false;
+                return permissionNone;
             }
 
             return method switch
@@ -305,7 +311,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 "edit" => rowRolePermission.Edited!.Value,
                 "delete" => rowRolePermission.Deleted!.Value,
                 "add" => rowRolePermission.Inserted!.Value,
-                _ => false
+                _ => permissionNone
             };
         }
 

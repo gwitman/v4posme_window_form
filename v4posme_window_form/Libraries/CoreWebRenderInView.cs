@@ -17,7 +17,7 @@ namespace v4posme_window.Libraries
 {
     public class CoreWebRenderInView
     {
-        public static void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, int displayLength,
+        public GridView RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, int displayLength,
             Control form)
         {
             if (dataViewDto.Config is null)
@@ -33,7 +33,7 @@ namespace v4posme_window.Libraries
             };
             if (dataViewDto.Data is null)
             {
-                return;
+                return new GridView();
             }
 
             var viewData = (List<Dictionary<string, object>>)dataViewDto.Data;
@@ -70,7 +70,7 @@ namespace v4posme_window.Libraries
             }
 
             var agregarLineaSumaRow = summaryColumns;
-            for (int i = 0; i < summaryColumns.Length; i++)
+            for (var i = 0; i < summaryColumns.Length; i++)
             {
                 if (summaryColumns[i] == "true")
                 {
@@ -112,6 +112,8 @@ namespace v4posme_window.Libraries
 
                 aux++;
             }
+
+            return gridView;
         }
 
         private static DataTable? FillGridControl(List<Dictionary<string, object>>? data)

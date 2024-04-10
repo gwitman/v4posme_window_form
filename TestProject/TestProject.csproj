@@ -32,13 +32,4 @@
     <Using Include="NUnit.Framework" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="DevExpress.Data.v23.2">
-      
-    </Reference>
-    <Reference Include="DevExpress.Xpo.v23.2">
-      
-    </Reference>
-  </ItemGroup>
-
 </Project>

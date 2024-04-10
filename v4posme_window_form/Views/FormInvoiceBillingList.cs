@@ -1,25 +1,15 @@
-﻿using DevExpress.Utils.Filtering.Internal;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Forms;
-using Unity;
+﻿using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomHelper;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
+using GridView = DevExpress.XtraGrid.Views.Grid.GridView;
 
 namespace v4posme_window.Views
 {
-    public sealed partial class FormInvoiceBillingList : FormTypeList, InterfaceFormTypeList
+    public sealed partial class FormInvoiceBillingList : FormTypeList, IFormTypeList
     {
         private readonly CoreWebRenderInView _coreWebRender = new CoreWebRenderInView();
         private readonly WebToolsHelper _webToolsHelper = new WebToolsHelper();
@@ -35,24 +25,24 @@ namespace v4posme_window.Views
         private int? dataViewId = 0;
         private DateTime? fecha = DateTime.Now;
 
-        public GridView objControlGridView
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
+        public GridView ObjControlGridView { get; set; }
 
         public FormInvoiceBillingList()
         {
+            ObjControlGridView = new GridView();
             InitializeComponent();
             lblTitulo.Text = @"LISTA DE FACTURAS";
             Text = lblTitulo.Text;
+            btnEditar.Click += Edit;
         }
 
-      
+
         private void FormInvoiceBillingList_Load(object sender, EventArgs e)
         {
-            bool resultPermission = true;
+            var coreWebRenderInView = new CoreWebRenderInView();
+            var resultPermission = 0;
             var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+            var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
             var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
             if (appNeedAuthentication!.Equals("true"))
             {
@@ -72,7 +62,7 @@ namespace v4posme_window.Views
                     VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft,
                     VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop,
                     VariablesGlobales.Instance.ListMenuHiddenPopup);
-                if (!resultPermission)
+                if (resultPermission == permissionNone)
                 {
                     _coreWebRender.GetMessageAlert(TypeMessage.Error, "Permisos", "No se encontraron permisos", this);
                     return;
@@ -88,17 +78,17 @@ namespace v4posme_window.Views
             }
 
             var callerIdList = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["CALLERID_LIST"]);
+            Dictionary<string, string> parameters;
             if (dataViewId == 0)
             {
                 var targetComponentId = VariablesGlobales.Instance.Company.FlavorId;
-                var parameters = new Dictionary<string, string>
+                parameters = new Dictionary<string, string>
                 {
                     { "{companyID}", VariablesGlobales.Instance.User.CompanyId.ToString() },
                     { "{fecha}", fecha.Value.ToShortDateString() }
                 };
                 var dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User,
-                    objComponent.ComponentId, callerIdList, targetComponentId, resultPermission ? 1 : -1, parameters);
-                if (dataViewData is null)
+                    objComponent.ComponentId, callerIdList, targetComponentId, resultPermission);
                 {
                     targetComponentId = 0;
                     parameters = new Dictionary<string, string>
@@ -107,11 +97,10 @@ namespace v4posme_window.Views
                         { "{fecha}", fecha.Value.ToShortDateString() }
                     };
                     dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User,
-                        objComponent.ComponentId, callerIdList, targetComponentId, resultPermission ? 1 : -1,
-                        parameters);
+                        objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
                 }
 
-                CoreWebRenderInView.RenderGrid(dataViewData!, "invoice", 0, centerPane);
+                ObjControlGridView = coreWebRenderInView.RenderGrid(dataViewData!, "invoice", 0, centerPane);
             }
         }
 
@@ -125,9 +114,9 @@ namespace v4posme_window.Views
             throw new NotImplementedException();
         }
 
-        public void Edit()
+        public void Edit(object? sender, EventArgs? args)
         {
-            throw new NotImplementedException();
+            new FormInvoiceBillingEdit().ShowDialog();
         }
 
         public void New()

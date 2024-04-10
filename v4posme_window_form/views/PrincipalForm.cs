@@ -22,7 +22,7 @@ namespace v4posme_window.Views
             InitializeComponent();
         }
 
-        private void PrincipalForm_Load(object sender, EventArgs e)
+        private async void PrincipalForm_Load(object sender, EventArgs e)
         {
             var coreWebRender = new CoreWebRenderInView();
             if (VariablesGlobales.Instance.User is null)
@@ -37,16 +37,26 @@ namespace v4posme_window.Views
             barStaticItemTitulo.Caption                 = VariablesGlobales.Instance.Company!.Name + "-" + VariablesGlobales.Instance.Branch.Name + $@"(Usuario: {VariablesGlobales.Instance.User.Nickname})";
             var menuElementModel                        = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
 
-            if (VariablesGlobales.Instance.ListMenuLeft is not null)
+            await Task.Run(() =>
             {
-                CoreWebRenderInView.RenderMenuLeft(VariablesGlobales.Instance.ListMenuLeft, accordionControl1);
-                accordionControl1.ElementClick += accordionControl1_ElementClick;
-            }
+                if (VariablesGlobales.Instance.ListMenuLeft is not null)
+                {
+                    accordionControl1.Invoke((MethodInvoker)delegate
+                    {
+                        CoreWebRenderInView.RenderMenuLeft(VariablesGlobales.Instance.ListMenuLeft, accordionControl1);
+                        accordionControl1.ElementClick += accordionControl1_ElementClick;
+                    });
+                }
 
-            if (VariablesGlobales.Instance.ListMenuTop is not null)
-            {
-                CoreWebRenderInView.RenderMenuTop(VariablesGlobales.Instance.ListMenuTop, ribbonControl1);
-            }
+                if (VariablesGlobales.Instance.ListMenuTop is not null)
+                {
+                    ribbonControl1.Invoke((MethodInvoker)delegate
+                    {
+                        CoreWebRenderInView.RenderMenuTop(VariablesGlobales.Instance.ListMenuTop, ribbonControl1);
+                    });
+                    
+                }
+            });
 
             //Abrir un formulario por defecto
             var formularioDefaultValue = CoreFormList

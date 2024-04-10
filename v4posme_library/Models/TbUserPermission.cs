@@ -32,14 +32,14 @@ public partial class TbUserPermission
     public int UserPermissionId { get; set; }
 
     [Column("selected")]
-    public bool? Selected { get; set; }
+    public int? Selected { get; set; }
 
     [Column("inserted")]
-    public bool? Inserted { get; set; }
+    public int? Inserted { get; set; }
 
     [Column("deleted")]
-    public bool? Deleted { get; set; }
+    public int? Deleted { get; set; }
 
     [Column("edited")]
-    public bool? Edited { get; set; }
+    public int? Edited { get; set; }
 }

@@ -12,8 +12,9 @@ namespace v4posme_library.Libraries.CustomLibraries.Interfaz
             List<TbMenuElement>? dataMenuLeft, List<TbMenuElement>? dataMenuBodyReport,
             List<TbMenuElement>? dataMenuBodyTop, List<TbMenuElement>? dataMenuHiddenPopup);
 
-        bool UrlPermissionCmd(string controller, string method, string suffix, TbRole? role, TbUser? user,
-            List<TbMenuElement>? dataMenuTop, List<TbMenuElement>? dataMenuLeft, List<TbMenuElement>? dataMenuBodyReport,
+        int UrlPermissionCmd(string controller, string method, string suffix, TbRole? role, TbUser? user,
+            List<TbMenuElement>? dataMenuTop, List<TbMenuElement>? dataMenuLeft,
+            List<TbMenuElement>? dataMenuBodyReport,
             List<TbMenuElement>? dataMenuBodyTop, List<TbMenuElement>? dataMenuHiddenPopup);
 
         void GetValueLicense(int companyId, string url);
