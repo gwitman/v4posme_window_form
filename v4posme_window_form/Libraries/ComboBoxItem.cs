@@ -6,18 +6,12 @@ using System.Threading.Tasks;
 
 namespace v4posme_window.Libraries
 {
-    internal class ComboBoxItem
+    internal class ComboBoxItem(string? key, object? value)
     {
-        public string Key { get; set; }
-        public object Value { get; set; }
+        public string? Key { get; set; } = key;
+        public object? Value { get; set; } = value;
 
-        public ComboBoxItem(string key, object value)
-        {
-            Key = key;
-            Value = value;
-        }
-
-        public override string ToString()
+        public override string? ToString()
         {
             return Key;
         }
