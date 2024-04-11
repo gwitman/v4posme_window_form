@@ -36,20 +36,27 @@ class CoreWebTools : ICoreWebTools
     /// </summary>
     /// <param name="filter">Parametro a filtrar</param>
     /// <returns>Clave-Valor</returns>
-    public Dictionary<string, object> FormatParameter(string filter)
+    public Dictionary<string, object>? FormatParameter(string filter)
     {
-        filter = filter.Replace("|", ":");
-        filter = filter.Replace("{}", ",");
-        var json = filter.StartsWith("{") && filter.EndsWith("}") ? filter : "{" + filter + "}";
-        var jsonObject = JObject.Parse(json);
-
-        var result = new Dictionary<string, object>();
-        foreach (var item in jsonObject)
+        try
         {
-            result["{" + item.Key + "}"] = item.Value!.ToString();
-        }
+            filter = filter.Replace("|", ":");
+            filter = filter.Replace("{}", ",");
+            var json = filter.StartsWith("{") && filter.EndsWith("}") ? filter : "{" + filter + "}";
+            var jsonObject = JObject.Parse(json);
 
-        return result;
+            var result = new Dictionary<string, object>();
+            foreach (var item in jsonObject)
+            {
+                result["{" + item.Key + "}"] = item.Value!.ToString();
+            }
+
+            return result;
+        }
+        catch (Exception)
+        {
+            return null;
+        }
     }
 
     public TbComponent? GetComponentIdByComponentName(string componentName)
@@ -57,6 +64,26 @@ class CoreWebTools : ICoreWebTools
         var componentModel = VariablesGlobales.Instance.UnityContainer.Resolve<IComponentModel>();
         return componentModel.GetRowByName(componentName);
     }
+
+    public string HelperSegmentsByIndex(string[] objListSegments, int i, string variable)
+    {
+        var result = "";
+        var index = i + 1;
+        var count = objListSegments.Length;
+
+        // Si la variable es nula o vacía y el índice está dentro del rango
+        if ((string.IsNullOrEmpty(variable) || !string.IsNullOrWhiteSpace(variable)) && index < count)
+        {
+            result = objListSegments[index];
+        }
+        else
+        {
+            result = variable;
+        }
+
+        return result;
+    }
+
 
     public void Log(string logMessage)
     {

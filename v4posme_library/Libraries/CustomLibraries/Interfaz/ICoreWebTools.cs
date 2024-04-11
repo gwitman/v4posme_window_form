@@ -20,11 +20,13 @@ public interface ICoreWebTools
     /// </summary>
     /// <param name="filter">Parametro a filtrar</param>
     /// <returns>Clave-Valor</returns>
-    Dictionary<string, object> FormatParameter(string filter);
+    Dictionary<string, object>? FormatParameter(string filter);
 
     void Log(string logMessage);
 
     void SendEmail(string subject, string body);
 
     TbComponent? GetComponentIdByComponentName(string componentName);
+
+    string HelperSegmentsByIndex(string[] objListSegments, int i, string variable);
 }

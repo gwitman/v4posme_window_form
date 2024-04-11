@@ -20,7 +20,7 @@ namespace v4posme_window.Views
             InitializeComponent();
         }
 
-      
+
         public void ComandDelete()
         {
             throw new NotImplementedException();
@@ -69,6 +69,12 @@ namespace v4posme_window.Views
         private void tablePanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnAddProduct_Click(object sender, EventArgs e)
+        {
+            var formTypeListSearch = new FormTypeListSearch();
+            formTypeListSearch.ShowDialog(this);
         }
     }
 }
