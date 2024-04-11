@@ -5,6 +5,7 @@ using DevExpress.XtraBars;
 using DevExpress.XtraBars.Alerter;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraBars.Ribbon;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using v4posme_library.Libraries;
 using v4posme_library.Models;
@@ -17,6 +18,34 @@ namespace v4posme_window.Libraries
 {
     public class CoreWebRenderInView
     {
+        public static void LlenarComboBox(List<object> lista, ComboBoxEdit comboBox, string keyField, string valueField, object defaultValue, object selectedValue)
+        {
+            // Limpiar el combobox
+            comboBox.Properties.Items.Clear();
+
+            // Agregar los elementos de la lista al combobox
+            foreach (var item in lista)
+            {
+                // Obtener los valores de key y value de cada objeto
+                var key = item.GetType().GetProperty(keyField)?.GetValue(item)?.ToString();
+                var value = item.GetType().GetProperty(valueField)?.GetValue(item);
+
+                // Agregar al combobox
+                comboBox.Properties.Items.Add(new ComboBoxItem(key, value));
+            }
+
+            // Establecer el valor seleccionado
+            if (selectedValue != null)
+            {
+                comboBox.EditValue = selectedValue;
+            }
+            else
+            {
+                comboBox.EditValue = defaultValue;
+            }
+
+        }
+
         public GridView RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, int displayLength,
             Control form)
         {
