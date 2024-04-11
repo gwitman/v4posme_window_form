@@ -20,6 +20,7 @@ namespace v4posme_window.Views
             InitializeComponent();
         }
 
+      
         public void ComandDelete()
         {
             throw new NotImplementedException();
@@ -46,6 +47,11 @@ namespace v4posme_window.Views
         }
 
         public void SaveUpdate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void Delete(int transactionMasterID)
         {
             throw new NotImplementedException();
         }
