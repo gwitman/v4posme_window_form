@@ -19,6 +19,7 @@ using K4os.Hash.xxHash;
 using GridView = DevExpress.XtraGrid.Views.Grid.GridView;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraExport.Helpers;
 
 namespace v4posme_window.Template
 {
@@ -121,15 +122,30 @@ namespace v4posme_window.Template
 
             //aqui vamos a validar si seleccion multiple
             objGridView = coreWebRenderInView.RenderGrid(datos, "ListView", iDisplayLength, controlParent);
-            objGridView.OptionsView.ShowGroupPanel = true;
+            objGridView.KeyDown += GridView_KeyDown;
+            objGridView.OptionsView.ShowGroupPanel  = false;
+            objGridView.OptionsBehavior.Editable    = false;
 
 
 
         }
 
+        private void GridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Verificar si la tecla presionada es Enter
+            if (e.KeyCode == Keys.Enter)
+            {
+                fnSelectedRow();
+            }
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            fnSelectedRow();
+        }
 
+        void fnSelectedRow()
+        {
             // Verificar si se ha seleccionado alguna fila
             string resultJson = "{";
             if (objGridView.SelectedRowsCount > 0)
@@ -137,13 +153,13 @@ namespace v4posme_window.Template
 
                 // Obtener el índice de la fila seleccionada
                 List<int> rowIndex = objGridView.GetSelectedRows().ToList();
-                foreach(var indexRow in rowIndex)
+                foreach (var indexRow in rowIndex)
                 {
                     foreach (GridColumn column in objGridView.Columns)
                     {
-                        string nombreColumna    = column.FieldName;
-                        string valueColumn      = objGridView.GetRowCellValue(indexRow, nombreColumna).ToString();
-                        resultJson              = resultJson+""+nombreColumna + ":'"+valueColumn+"'";
+                        string nombreColumna = column.FieldName;
+                        string valueColumn = objGridView.GetRowCellValue(indexRow, nombreColumna).ToString();
+                        resultJson = resultJson + "" + nombreColumna + ":'" + valueColumn + "'";
 
                     }
                 }
@@ -154,9 +170,8 @@ namespace v4posme_window.Template
                 // No se ha seleccionado ninguna fila, maneja este caso según tus requerimientos
             }
 
-            resultJson              = resultJson+"}";
+            resultJson = resultJson + "}";
             EventoCallBackAceptar_?.Invoke(resultJson);
-
         }
     }
 }
