@@ -80,16 +80,15 @@ namespace v4posme_window.Template
             var usuario = VariablesGlobales.Instance.User;
 
 
+
             // Crear un diccionario para los parámetros staticos
             var parameter = new Dictionary<string, string>
             {
                 ["{companyID}"] = usuario!.CompanyId.ToString(),
                 ["{componentID}"] = componentID.ToString(),
-                ["{iDisplayStart}"] = iDisplayStart.ToString(),
-                ["{iDisplayStartDB}"] = (PageCurrent * iDisplayStart).ToString(),
                 ["{iDisplayLength}"] = iDisplayLength.ToString(),
+                ["{iDisplayStartDB}"] = (PageCurrent * iDisplayLength).ToString(),
                 ["{sSearchDB}"] = sSearch,
-                ["{sSearch}"] = sSearch,
                 ["{isWindowForm}"] = "1"
             };
 
@@ -115,9 +114,10 @@ namespace v4posme_window.Template
 
             //aqui vamos a validar si seleccion multiple
             ObjGridView = CoreWebRenderInView.RenderGrid(datos, "ListView", iDisplayLength, controlParent);
+            ObjGridView.RefreshData();
             ObjGridView.KeyDown += GridView_KeyDown!;
             ObjGridView.OptionsView.ShowGroupPanel  = false;
-            ObjGridView.OptionsBehavior.Editable    = false;
+            ObjGridView.OptionsBehavior.Editable    = false; 
             
         }
 
