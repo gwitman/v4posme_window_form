@@ -33,7 +33,7 @@
             stackPanel1 = new DevExpress.Utils.Layout.StackPanel();
             simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             btnAceptar = new DevExpress.XtraEditors.SimpleButton();
-            textEdit10 = new DevExpress.XtraEditors.TextEdit();
+            txtFilter = new DevExpress.XtraEditors.TextEdit();
             btnAtras = new DevExpress.XtraEditors.SimpleButton();
             btnSiguiente = new DevExpress.XtraEditors.SimpleButton();
             centerPane = new DevExpress.XtraEditors.PanelControl();
@@ -41,7 +41,7 @@
             panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)stackPanel1).BeginInit();
             stackPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)textEdit10.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtFilter.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)centerPane).BeginInit();
             SuspendLayout();
             // 
@@ -58,7 +58,7 @@
             // 
             stackPanel1.Controls.Add(simpleButton2);
             stackPanel1.Controls.Add(btnAceptar);
-            stackPanel1.Controls.Add(textEdit10);
+            stackPanel1.Controls.Add(txtFilter);
             stackPanel1.Controls.Add(btnAtras);
             stackPanel1.Controls.Add(btnSiguiente);
             stackPanel1.Location = new Point(0, 5);
@@ -99,12 +99,13 @@
             btnAceptar.Text = "Aceptar";
             btnAceptar.Click += btnAceptar_Click;
             // 
-            // textEdit10
+            // txtFilter
             // 
-            textEdit10.Location = new Point(187, 10);
-            textEdit10.Name = "textEdit10";
-            textEdit10.Size = new Size(239, 28);
-            textEdit10.TabIndex = 20;
+            txtFilter.Location = new Point(187, 10);
+            txtFilter.Name = "txtFilter";
+            txtFilter.Size = new Size(239, 28);
+            txtFilter.TabIndex = 20;
+            txtFilter.EditValueChanged += txtFilter_EditValueChanged;
             // 
             // btnAtras
             // 
@@ -143,14 +144,14 @@
             centerPane.Dock = DockStyle.Fill;
             centerPane.Location = new Point(0, 56);
             centerPane.Name = "centerPane";
-            centerPane.Size = new Size(686, 326);
+            centerPane.Size = new Size(686, 324);
             centerPane.TabIndex = 1;
             // 
             // FormTypeListSearch
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(686, 382);
+            ClientSize = new Size(686, 380);
             Controls.Add(centerPane);
             Controls.Add(panelControl1);
             IconOptions.Icon = (Icon)resources.GetObject("FormTypeListSearch.IconOptions.Icon");
@@ -165,7 +166,7 @@
             panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)stackPanel1).EndInit();
             stackPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)textEdit10.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtFilter.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)centerPane).EndInit();
             ResumeLayout(false);
         }
@@ -180,6 +181,6 @@
         private DevExpress.XtraEditors.PanelControl centerPane;
         private DevExpress.XtraEditors.SimpleButton btnSiguiente;
         private DevExpress.XtraEditors.SimpleButton btnAtras;
-        private DevExpress.XtraEditors.TextEdit textEdit10;
+        private DevExpress.XtraEditors.TextEdit txtFilter;
     }
 }

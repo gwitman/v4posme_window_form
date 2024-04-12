@@ -1,4 +1,6 @@
 ﻿using System.Data;
+using System.Text;
+using System.Windows.Forms;
 using DevExpress.DataAccess.Native.Data;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
@@ -6,7 +8,9 @@ using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_window.Libraries;
+using DataColumn = System.Data.DataColumn;
 using DataTable = System.Data.DataTable;
+using DataView = System.Data.DataView;
 using GridView = DevExpress.XtraGrid.Views.Grid.GridView;
 
 namespace v4posme_window.Template
@@ -178,7 +182,6 @@ namespace v4posme_window.Template
 
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
-            _dataSource = (DataTable)ObjGridView.GridControl.DataSource;
             if (_currentPage < (_dataSource.Rows.Count - 1) / PageSize)
             {
                 ChangePage(_currentPage + 1);
@@ -194,9 +197,30 @@ namespace v4posme_window.Template
 
         private void LoadData()
         {
-            
             var rows = _dataSource.AsEnumerable().Skip(_currentPage * PageSize).Take(PageSize).CopyToDataTable();
             ObjGridView.GridControl.DataSource = rows;
+        }
+
+        private void txtFilter_EditValueChanged(object sender, EventArgs e)
+        {
+            var filterText = txtFilter.Text;
+            var dataTable = _dataSource;
+            var dv = new DataView(dataTable);
+            var filterExpression = new StringBuilder();
+            var firstColumn = true;
+            foreach (DataColumn column in dataTable.Columns)
+            {
+                if (!firstColumn)
+                {
+                    filterExpression.Append(" OR ");
+                }
+
+                filterExpression.Append($"Convert({column.ColumnName}, 'System.String') LIKE '%{filterText}%'");
+                firstColumn = false;
+            }
+
+            dv.RowFilter = filterExpression.ToString();
+            ObjGridView.GridControl.DataSource=dv.ToTable();
         }
     }
 }
