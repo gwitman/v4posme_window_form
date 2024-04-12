@@ -232,9 +232,10 @@
             stackPanel1.Controls.Add(lblTitulo);
             stackPanel1.Dock = DockStyle.Top;
             stackPanel1.Location = new Point(0, 0);
+            stackPanel1.Margin = new Padding(3, 4, 3, 4);
             stackPanel1.Name = "stackPanel1";
-            stackPanel1.Padding = new Padding(2);
-            stackPanel1.Size = new Size(1329, 47);
+            stackPanel1.Padding = new Padding(2, 3, 2, 3);
+            stackPanel1.Size = new Size(1519, 63);
             stackPanel1.TabIndex = 1;
             stackPanel1.UseSkinIndents = true;
             // 
@@ -249,10 +250,11 @@
             lblTitulo.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             lblTitulo.ImageOptions.Alignment = ContentAlignment.MiddleLeft;
             lblTitulo.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("lblTitulo.ImageOptions.SvgImage");
-            lblTitulo.Location = new Point(4, 7);
+            lblTitulo.Location = new Point(5, 10);
+            lblTitulo.Margin = new Padding(3, 4, 3, 4);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Padding = new Padding(3, 0, 0, 0);
-            lblTitulo.Size = new Size(301, 32);
+            lblTitulo.Size = new Size(344, 43);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Editar Factura No. # FAC00000001";
             lblTitulo.UseMnemonic = false;
@@ -274,15 +276,17 @@
             barDockControlTop.Dock = DockStyle.Top;
             barDockControlTop.Location = new Point(0, 0);
             barDockControlTop.Manager = barManager1;
-            barDockControlTop.Size = new Size(1329, 0);
+            barDockControlTop.Margin = new Padding(3, 4, 3, 4);
+            barDockControlTop.Size = new Size(1519, 0);
             // 
             // barDockControlBottom
             // 
             barDockControlBottom.CausesValidation = false;
             barDockControlBottom.Dock = DockStyle.Bottom;
-            barDockControlBottom.Location = new Point(0, 735);
+            barDockControlBottom.Location = new Point(0, 929);
             barDockControlBottom.Manager = barManager1;
-            barDockControlBottom.Size = new Size(1329, 0);
+            barDockControlBottom.Margin = new Padding(3, 4, 3, 4);
+            barDockControlBottom.Size = new Size(1519, 0);
             // 
             // barDockControlLeft
             // 
@@ -290,15 +294,17 @@
             barDockControlLeft.Dock = DockStyle.Left;
             barDockControlLeft.Location = new Point(0, 0);
             barDockControlLeft.Manager = barManager1;
-            barDockControlLeft.Size = new Size(0, 735);
+            barDockControlLeft.Margin = new Padding(3, 4, 3, 4);
+            barDockControlLeft.Size = new Size(0, 929);
             // 
             // barDockControlRight
             // 
             barDockControlRight.CausesValidation = false;
             barDockControlRight.Dock = DockStyle.Right;
-            barDockControlRight.Location = new Point(1329, 0);
+            barDockControlRight.Location = new Point(1519, 0);
             barDockControlRight.Manager = barManager1;
-            barDockControlRight.Size = new Size(0, 735);
+            barDockControlRight.Margin = new Padding(3, 4, 3, 4);
+            barDockControlRight.Size = new Size(0, 929);
             // 
             // barButtonItem1
             // 
@@ -338,18 +344,20 @@
             // 
             // svgImageBox1
             // 
-            svgImageBox1.Location = new Point(6, 238);
+            svgImageBox1.Location = new Point(7, 317);
+            svgImageBox1.Margin = new Padding(3, 4, 3, 4);
             svgImageBox1.Name = "svgImageBox1";
-            svgImageBox1.Size = new Size(37, 28);
+            svgImageBox1.Size = new Size(42, 37);
             svgImageBox1.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("svgImageBox1.SvgImage");
             svgImageBox1.TabIndex = 40;
             svgImageBox1.Text = "svgImageBox1";
             // 
             // textEdit10
             // 
-            textEdit10.Location = new Point(58, 239);
+            textEdit10.Location = new Point(66, 319);
+            textEdit10.Margin = new Padding(3, 4, 3, 4);
             textEdit10.Name = "textEdit10";
-            textEdit10.Size = new Size(292, 20);
+            textEdit10.Size = new Size(334, 22);
             textEdit10.TabIndex = 37;
             // 
             // downButtonSeleccion
@@ -357,9 +365,10 @@
             downButtonSeleccion.Appearance.BackColor = Color.Gray;
             downButtonSeleccion.Appearance.Options.UseBackColor = true;
             downButtonSeleccion.DropDownControl = popupMenuSeleccion;
-            downButtonSeleccion.Location = new Point(630, 239);
+            downButtonSeleccion.Location = new Point(720, 319);
+            downButtonSeleccion.Margin = new Padding(3, 4, 3, 4);
             downButtonSeleccion.Name = "downButtonSeleccion";
-            downButtonSeleccion.Size = new Size(126, 30);
+            downButtonSeleccion.Size = new Size(144, 40);
             downButtonSeleccion.TabIndex = 34;
             downButtonSeleccion.Text = "SELECCIÓN";
             // 
@@ -368,9 +377,10 @@
             downButtonProducto.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Success;
             downButtonProducto.Appearance.Options.UseBackColor = true;
             downButtonProducto.DropDownControl = popupMenuProducto;
-            downButtonProducto.Location = new Point(761, 239);
+            downButtonProducto.Location = new Point(870, 319);
+            downButtonProducto.Margin = new Padding(3, 4, 3, 4);
             downButtonProducto.Name = "downButtonProducto";
-            downButtonProducto.Size = new Size(126, 30);
+            downButtonProducto.Size = new Size(144, 40);
             downButtonProducto.TabIndex = 33;
             downButtonProducto.Text = "PRODUCTO";
             // 
@@ -378,9 +388,10 @@
             // 
             simpleButton4.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
             simpleButton4.Appearance.Options.UseBackColor = true;
-            simpleButton4.Location = new Point(498, 239);
+            simpleButton4.Location = new Point(569, 319);
+            simpleButton4.Margin = new Padding(3, 4, 3, 4);
             simpleButton4.Name = "simpleButton4";
-            simpleButton4.Size = new Size(126, 30);
+            simpleButton4.Size = new Size(144, 40);
             simpleButton4.TabIndex = 32;
             simpleButton4.Text = "ELIMINAR PRO";
             // 
@@ -388,9 +399,10 @@
             // 
             btnAddProduct.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Primary;
             btnAddProduct.Appearance.Options.UseBackColor = true;
-            btnAddProduct.Location = new Point(368, 239);
+            btnAddProduct.Location = new Point(421, 319);
+            btnAddProduct.Margin = new Padding(3, 4, 3, 4);
             btnAddProduct.Name = "btnAddProduct";
-            btnAddProduct.Size = new Size(126, 30);
+            btnAddProduct.Size = new Size(144, 40);
             btnAddProduct.TabIndex = 31;
             btnAddProduct.Text = "AGREGAR PRO";
             // 
@@ -398,10 +410,11 @@
             // 
             xtraTabControl.Appearance.BackColor = Color.White;
             xtraTabControl.Appearance.Options.UseBackColor = true;
-            xtraTabControl.Location = new Point(0, 53);
+            xtraTabControl.Location = new Point(0, 71);
+            xtraTabControl.Margin = new Padding(3, 4, 3, 4);
             xtraTabControl.Name = "xtraTabControl";
             xtraTabControl.SelectedTabPage = tabInformacion;
-            xtraTabControl.Size = new Size(1205, 178);
+            xtraTabControl.Size = new Size(1377, 237);
             xtraTabControl.TabIndex = 29;
             xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { tabInformacion, tabReferencias, tabInfoCredito, tabMas });
             // 
@@ -429,25 +442,28 @@
             tabInformacion.Controls.Add(labelControl4);
             tabInformacion.Controls.Add(labelControl2);
             tabInformacion.Controls.Add(labelControl1);
+            tabInformacion.Margin = new Padding(3, 4, 3, 4);
             tabInformacion.Name = "tabInformacion";
-            tabInformacion.Size = new Size(1203, 151);
+            tabInformacion.Size = new Size(1375, 204);
             tabInformacion.Text = "Información";
             // 
             // comboBoxEdit14
             // 
-            comboBoxEdit14.Location = new Point(884, 44);
+            comboBoxEdit14.Location = new Point(1010, 59);
+            comboBoxEdit14.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit14.Name = "comboBoxEdit14";
             comboBoxEdit14.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit14.Size = new Size(295, 20);
+            comboBoxEdit14.Size = new Size(337, 22);
             comboBoxEdit14.TabIndex = 34;
             // 
             // labelControl26
             // 
             labelControl26.Appearance.Font = new Font("Tahoma", 9F);
             labelControl26.Appearance.Options.UseFont = true;
-            labelControl26.Location = new Point(830, 44);
+            labelControl26.Location = new Point(949, 59);
+            labelControl26.Margin = new Padding(3, 4, 3, 4);
             labelControl26.Name = "labelControl26";
-            labelControl26.Size = new Size(32, 14);
+            labelControl26.Size = new Size(38, 18);
             labelControl26.TabIndex = 33;
             labelControl26.Text = "Linea:";
             // 
@@ -460,9 +476,10 @@
             simpleButton1.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             simpleButton1.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton1.ImageOptions.SvgImage");
             simpleButton1.ImageOptions.SvgImageSize = new Size(16, 16);
-            simpleButton1.Location = new Point(733, 10);
+            simpleButton1.Location = new Point(838, 13);
+            simpleButton1.Margin = new Padding(3, 4, 3, 4);
             simpleButton1.Name = "simpleButton1";
-            simpleButton1.Size = new Size(65, 30);
+            simpleButton1.Size = new Size(74, 40);
             simpleButton1.TabIndex = 20;
             // 
             // simpleButton2
@@ -474,48 +491,54 @@
             simpleButton2.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             simpleButton2.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton2.ImageOptions.SvgImage");
             simpleButton2.ImageOptions.SvgImageSize = new Size(16, 16);
-            simpleButton2.Location = new Point(627, 10);
+            simpleButton2.Location = new Point(717, 13);
+            simpleButton2.Margin = new Padding(3, 4, 3, 4);
             simpleButton2.Name = "simpleButton2";
-            simpleButton2.Size = new Size(101, 30);
+            simpleButton2.Size = new Size(115, 40);
             simpleButton2.TabIndex = 21;
             simpleButton2.Text = "Buscar";
             // 
             // textEdit3
             // 
-            textEdit3.Location = new Point(479, 10);
+            textEdit3.Location = new Point(547, 13);
+            textEdit3.Margin = new Padding(3, 4, 3, 4);
             textEdit3.Name = "textEdit3";
-            textEdit3.Size = new Size(138, 20);
+            textEdit3.Size = new Size(158, 22);
             textEdit3.TabIndex = 19;
             // 
             // comboBoxEdit2
             // 
-            comboBoxEdit2.Location = new Point(884, 10);
+            comboBoxEdit2.Location = new Point(1010, 13);
+            comboBoxEdit2.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit2.Name = "comboBoxEdit2";
             comboBoxEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit2.Size = new Size(295, 20);
+            comboBoxEdit2.Size = new Size(337, 22);
             comboBoxEdit2.TabIndex = 15;
             // 
             // textEdit5
             // 
-            textEdit5.Location = new Point(479, 78);
+            textEdit5.Location = new Point(547, 104);
+            textEdit5.Margin = new Padding(3, 4, 3, 4);
             textEdit5.Name = "textEdit5";
-            textEdit5.Size = new Size(295, 20);
+            textEdit5.Size = new Size(337, 22);
             textEdit5.TabIndex = 14;
             // 
             // textEdit4
             // 
-            textEdit4.Location = new Point(479, 44);
+            textEdit4.Location = new Point(547, 59);
+            textEdit4.Margin = new Padding(3, 4, 3, 4);
             textEdit4.Name = "textEdit4";
-            textEdit4.Size = new Size(295, 20);
+            textEdit4.Size = new Size(337, 22);
             textEdit4.TabIndex = 13;
             // 
             // labelControl5
             // 
             labelControl5.Appearance.Font = new Font("Tahoma", 9F);
             labelControl5.Appearance.Options.UseFont = true;
-            labelControl5.Location = new Point(835, 10);
+            labelControl5.Location = new Point(954, 13);
+            labelControl5.Margin = new Padding(3, 4, 3, 4);
             labelControl5.Name = "labelControl5";
-            labelControl5.Size = new Size(28, 14);
+            labelControl5.Size = new Size(33, 18);
             labelControl5.TabIndex = 11;
             labelControl5.Text = "Tipo:";
             // 
@@ -523,9 +546,10 @@
             // 
             labelControl6.Appearance.Font = new Font("Tahoma", 9F);
             labelControl6.Appearance.Options.UseFont = true;
-            labelControl6.Location = new Point(417, 78);
+            labelControl6.Location = new Point(477, 104);
+            labelControl6.Margin = new Padding(3, 4, 3, 4);
             labelControl6.Name = "labelControl6";
-            labelControl6.Size = new Size(40, 14);
+            labelControl6.Size = new Size(48, 18);
             labelControl6.TabIndex = 10;
             labelControl6.Text = "Cedula:";
             // 
@@ -533,9 +557,10 @@
             // 
             labelControl7.Appearance.Font = new Font("Tahoma", 9F);
             labelControl7.Appearance.Options.UseFont = true;
-            labelControl7.Location = new Point(418, 44);
+            labelControl7.Location = new Point(478, 59);
+            labelControl7.Margin = new Padding(3, 4, 3, 4);
             labelControl7.Name = "labelControl7";
-            labelControl7.Size = new Size(41, 14);
+            labelControl7.Size = new Size(47, 18);
             labelControl7.TabIndex = 9;
             labelControl7.Text = "Cliente:";
             // 
@@ -543,53 +568,59 @@
             // 
             labelControl8.Appearance.Font = new Font("Tahoma", 9F);
             labelControl8.Appearance.Options.UseFont = true;
-            labelControl8.Location = new Point(388, 10);
+            labelControl8.Location = new Point(443, 13);
+            labelControl8.Margin = new Padding(3, 4, 3, 4);
             labelControl8.Name = "labelControl8";
-            labelControl8.Size = new Size(70, 14);
+            labelControl8.Size = new Size(82, 18);
             labelControl8.TabIndex = 8;
             labelControl8.Text = "Cod. Cliente:";
             // 
             // comboBoxEdit1
             // 
-            comboBoxEdit1.Location = new Point(884, 78);
+            comboBoxEdit1.Location = new Point(1010, 104);
+            comboBoxEdit1.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit1.Name = "comboBoxEdit1";
             comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit1.Size = new Size(295, 20);
+            comboBoxEdit1.Size = new Size(337, 22);
             comboBoxEdit1.TabIndex = 7;
             // 
             // textEdit2
             // 
-            textEdit2.Location = new Point(75, 78);
+            textEdit2.Location = new Point(86, 104);
+            textEdit2.Margin = new Padding(3, 4, 3, 4);
             textEdit2.Name = "textEdit2";
-            textEdit2.Size = new Size(295, 20);
+            textEdit2.Size = new Size(337, 22);
             textEdit2.TabIndex = 6;
             // 
             // textEdit1
             // 
-            textEdit1.Location = new Point(75, 44);
+            textEdit1.Location = new Point(86, 59);
+            textEdit1.Margin = new Padding(3, 4, 3, 4);
             textEdit1.Name = "textEdit1";
-            textEdit1.Size = new Size(77, 20);
+            textEdit1.Size = new Size(88, 22);
             textEdit1.TabIndex = 5;
             // 
             // dateEdit1
             // 
             dateEdit1.EditValue = null;
-            dateEdit1.Location = new Point(75, 10);
+            dateEdit1.Location = new Point(86, 13);
+            dateEdit1.Margin = new Padding(3, 4, 3, 4);
             dateEdit1.Name = "dateEdit1";
             dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit1.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("dateEdit1.Properties.ContextImageOptions.SvgImage");
             dateEdit1.Properties.ContextImageOptions.SvgImageSize = new Size(16, 16);
-            dateEdit1.Size = new Size(295, 20);
+            dateEdit1.Size = new Size(337, 24);
             dateEdit1.TabIndex = 4;
             // 
             // labelControl3
             // 
             labelControl3.Appearance.Font = new Font("Tahoma", 9F);
             labelControl3.Appearance.Options.UseFont = true;
-            labelControl3.Location = new Point(814, 78);
+            labelControl3.Location = new Point(930, 104);
+            labelControl3.Margin = new Padding(3, 4, 3, 4);
             labelControl3.Name = "labelControl3";
-            labelControl3.Size = new Size(47, 14);
+            labelControl3.Size = new Size(57, 18);
             labelControl3.TabIndex = 3;
             labelControl3.Text = "Moneda:";
             // 
@@ -597,9 +628,10 @@
             // 
             labelControl4.Appearance.Font = new Font("Tahoma", 9F);
             labelControl4.Appearance.Options.UseFont = true;
-            labelControl4.Location = new Point(3, 78);
+            labelControl4.Location = new Point(3, 104);
+            labelControl4.Margin = new Padding(3, 4, 3, 4);
             labelControl4.Name = "labelControl4";
-            labelControl4.Size = new Size(65, 14);
+            labelControl4.Size = new Size(77, 18);
             labelControl4.TabIndex = 2;
             labelControl4.Text = "Descripción:";
             // 
@@ -607,9 +639,10 @@
             // 
             labelControl2.Appearance.Font = new Font("Tahoma", 9F);
             labelControl2.Appearance.Options.UseFont = true;
-            labelControl2.Location = new Point(3, 44);
+            labelControl2.Location = new Point(3, 59);
+            labelControl2.Margin = new Padding(3, 4, 3, 4);
             labelControl2.Name = "labelControl2";
-            labelControl2.Size = new Size(43, 14);
+            labelControl2.Size = new Size(53, 18);
             labelControl2.TabIndex = 1;
             labelControl2.Text = "Cambio:";
             // 
@@ -617,9 +650,10 @@
             // 
             labelControl1.Appearance.Font = new Font("Tahoma", 9F);
             labelControl1.Appearance.Options.UseFont = true;
-            labelControl1.Location = new Point(3, 10);
+            labelControl1.Location = new Point(3, 13);
+            labelControl1.Margin = new Padding(3, 4, 3, 4);
             labelControl1.Name = "labelControl1";
-            labelControl1.Size = new Size(36, 14);
+            labelControl1.Size = new Size(44, 18);
             labelControl1.TabIndex = 0;
             labelControl1.Text = "Fecha:";
             // 
@@ -641,47 +675,53 @@
             tabReferencias.Controls.Add(labelControl10);
             tabReferencias.Controls.Add(labelControl11);
             tabReferencias.Controls.Add(labelControl12);
+            tabReferencias.Margin = new Padding(3, 4, 3, 4);
             tabReferencias.Name = "tabReferencias";
-            tabReferencias.Size = new Size(1203, 151);
+            tabReferencias.Size = new Size(1375, 204);
             tabReferencias.Text = "Referencias";
             // 
             // comboBoxEdit7
             // 
-            comboBoxEdit7.Location = new Point(461, 93);
+            comboBoxEdit7.Location = new Point(527, 124);
+            comboBoxEdit7.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit7.Name = "comboBoxEdit7";
             comboBoxEdit7.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit7.Size = new Size(242, 20);
+            comboBoxEdit7.Size = new Size(277, 22);
             comboBoxEdit7.TabIndex = 18;
             // 
             // textEdit7
             // 
-            textEdit7.Location = new Point(461, 62);
+            textEdit7.Location = new Point(527, 83);
+            textEdit7.Margin = new Padding(3, 4, 3, 4);
             textEdit7.Name = "textEdit7";
-            textEdit7.Size = new Size(242, 20);
+            textEdit7.Size = new Size(277, 22);
             textEdit7.TabIndex = 17;
             // 
             // comboBoxEdit6
             // 
-            comboBoxEdit6.Location = new Point(461, 34);
+            comboBoxEdit6.Location = new Point(527, 45);
+            comboBoxEdit6.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit6.Name = "comboBoxEdit6";
             comboBoxEdit6.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit6.Size = new Size(242, 20);
+            comboBoxEdit6.Size = new Size(277, 22);
             comboBoxEdit6.TabIndex = 16;
             // 
             // textEdit6
             // 
-            textEdit6.Location = new Point(461, 5);
+            textEdit6.Location = new Point(527, 7);
+            textEdit6.Margin = new Padding(3, 4, 3, 4);
             textEdit6.Name = "textEdit6";
-            textEdit6.Size = new Size(242, 20);
+            textEdit6.Size = new Size(277, 22);
             textEdit6.TabIndex = 15;
             // 
             // labelControl14
             // 
             labelControl14.Appearance.Font = new Font("Tahoma", 9F);
             labelControl14.Appearance.Options.UseFont = true;
-            labelControl14.Location = new Point(398, 96);
+            labelControl14.Location = new Point(455, 128);
+            labelControl14.Margin = new Padding(3, 4, 3, 4);
             labelControl14.Name = "labelControl14";
-            labelControl14.Size = new Size(31, 14);
+            labelControl14.Size = new Size(40, 18);
             labelControl14.TabIndex = 14;
             labelControl14.Text = "Mesa:";
             // 
@@ -689,9 +729,10 @@
             // 
             labelControl15.Appearance.Font = new Font("Tahoma", 9F);
             labelControl15.Appearance.Options.UseFont = true;
-            labelControl15.Location = new Point(376, 65);
+            labelControl15.Location = new Point(430, 87);
+            labelControl15.Margin = new Padding(3, 4, 3, 4);
             labelControl15.Name = "labelControl15";
-            labelControl15.Size = new Size(53, 14);
+            labelControl15.Size = new Size(62, 18);
             labelControl15.TabIndex = 13;
             labelControl15.Text = "Telefono:";
             // 
@@ -699,9 +740,10 @@
             // 
             labelControl16.Appearance.Font = new Font("Tahoma", 9F);
             labelControl16.Appearance.Options.UseFont = true;
-            labelControl16.Location = new Point(372, 37);
+            labelControl16.Location = new Point(425, 49);
+            labelControl16.Margin = new Padding(3, 4, 3, 4);
             labelControl16.Name = "labelControl16";
-            labelControl16.Size = new Size(58, 14);
+            labelControl16.Size = new Size(67, 18);
             labelControl16.TabIndex = 12;
             labelControl16.Text = "Vendedor:";
             // 
@@ -709,63 +751,70 @@
             // 
             labelControl17.Appearance.Font = new Font("Tahoma", 9F);
             labelControl17.Appearance.Options.UseFont = true;
-            labelControl17.Location = new Point(368, 8);
+            labelControl17.Location = new Point(421, 11);
+            labelControl17.Margin = new Padding(3, 4, 3, 4);
             labelControl17.Name = "labelControl17";
-            labelControl17.Size = new Size(61, 14);
+            labelControl17.Size = new Size(73, 18);
             labelControl17.TabIndex = 11;
             labelControl17.Text = "Referencia:";
             // 
             // dateEdit2
             // 
             dateEdit2.EditValue = null;
-            dateEdit2.Location = new Point(102, 93);
+            dateEdit2.Location = new Point(117, 124);
+            dateEdit2.Margin = new Padding(3, 4, 3, 4);
             dateEdit2.Name = "dateEdit2";
             dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            dateEdit2.Size = new Size(242, 20);
+            dateEdit2.Size = new Size(277, 22);
             dateEdit2.TabIndex = 10;
             // 
             // labelControl13
             // 
             labelControl13.Appearance.Font = new Font("Tahoma", 9F);
             labelControl13.Appearance.Options.UseFont = true;
-            labelControl13.Location = new Point(4, 96);
+            labelControl13.Location = new Point(5, 128);
+            labelControl13.Margin = new Padding(3, 4, 3, 4);
             labelControl13.Name = "labelControl13";
-            labelControl13.Size = new Size(85, 14);
+            labelControl13.Size = new Size(99, 18);
             labelControl13.TabIndex = 9;
             labelControl13.Text = "Siguiente visita:";
             // 
             // comboBoxEdit5
             // 
-            comboBoxEdit5.Location = new Point(102, 62);
+            comboBoxEdit5.Location = new Point(117, 83);
+            comboBoxEdit5.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit5.Name = "comboBoxEdit5";
             comboBoxEdit5.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit5.Size = new Size(242, 20);
+            comboBoxEdit5.Size = new Size(277, 22);
             comboBoxEdit5.TabIndex = 8;
             // 
             // comboBoxEdit4
             // 
-            comboBoxEdit4.Location = new Point(102, 34);
+            comboBoxEdit4.Location = new Point(117, 45);
+            comboBoxEdit4.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit4.Name = "comboBoxEdit4";
             comboBoxEdit4.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit4.Size = new Size(242, 20);
+            comboBoxEdit4.Size = new Size(277, 22);
             comboBoxEdit4.TabIndex = 7;
             // 
             // comboBoxEdit3
             // 
-            comboBoxEdit3.Location = new Point(102, 5);
+            comboBoxEdit3.Location = new Point(117, 7);
+            comboBoxEdit3.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit3.Name = "comboBoxEdit3";
             comboBoxEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit3.Size = new Size(242, 20);
+            comboBoxEdit3.Size = new Size(277, 22);
             comboBoxEdit3.TabIndex = 6;
             // 
             // labelControl10
             // 
             labelControl10.Appearance.Font = new Font("Tahoma", 9F);
             labelControl10.Appearance.Options.UseFont = true;
-            labelControl10.Location = new Point(4, 65);
+            labelControl10.Location = new Point(5, 87);
+            labelControl10.Margin = new Padding(3, 4, 3, 4);
             labelControl10.Name = "labelControl10";
-            labelControl10.Size = new Size(45, 14);
+            labelControl10.Size = new Size(54, 18);
             labelControl10.TabIndex = 5;
             labelControl10.Text = "Bodega:";
             // 
@@ -773,9 +822,10 @@
             // 
             labelControl11.Appearance.Font = new Font("Tahoma", 9F);
             labelControl11.Appearance.Options.UseFont = true;
-            labelControl11.Location = new Point(4, 37);
+            labelControl11.Location = new Point(5, 49);
+            labelControl11.Margin = new Padding(3, 4, 3, 4);
             labelControl11.Name = "labelControl11";
-            labelControl11.Size = new Size(37, 14);
+            labelControl11.Size = new Size(43, 18);
             labelControl11.TabIndex = 4;
             labelControl11.Text = "Precio:";
             // 
@@ -783,9 +833,10 @@
             // 
             labelControl12.Appearance.Font = new Font("Tahoma", 9F);
             labelControl12.Appearance.Options.UseFont = true;
-            labelControl12.Location = new Point(4, 8);
+            labelControl12.Location = new Point(5, 11);
+            labelControl12.Margin = new Padding(3, 4, 3, 4);
             labelControl12.Name = "labelControl12";
-            labelControl12.Size = new Size(31, 14);
+            labelControl12.Size = new Size(37, 18);
             labelControl12.TabIndex = 3;
             labelControl12.Text = "Zona:";
             // 
@@ -807,155 +858,172 @@
             tabInfoCredito.Controls.Add(labelControl19);
             tabInfoCredito.Controls.Add(comboBoxEdit8);
             tabInfoCredito.Controls.Add(labelControl18);
+            tabInfoCredito.Margin = new Padding(3, 4, 3, 4);
             tabInfoCredito.Name = "tabInfoCredito";
-            tabInfoCredito.Size = new Size(1203, 151);
+            tabInfoCredito.Size = new Size(1375, 204);
             tabInfoCredito.Text = "Info de Credito";
             // 
             // labelControl25
             // 
             labelControl25.Appearance.Font = new Font("Tahoma", 9F);
             labelControl25.Appearance.Options.UseFont = true;
-            labelControl25.Location = new Point(478, 68);
+            labelControl25.Location = new Point(546, 91);
+            labelControl25.Margin = new Padding(3, 4, 3, 4);
             labelControl25.Name = "labelControl25";
-            labelControl25.Size = new Size(62, 14);
+            labelControl25.Size = new Size(74, 18);
             labelControl25.TabIndex = 22;
             labelControl25.Text = "Frecuencia:";
             // 
             // comboBoxEdit9
             // 
-            comboBoxEdit9.Location = new Point(610, 64);
+            comboBoxEdit9.Location = new Point(697, 85);
+            comboBoxEdit9.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit9.Name = "comboBoxEdit9";
             comboBoxEdit9.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit9.Size = new Size(260, 20);
+            comboBoxEdit9.Size = new Size(297, 22);
             comboBoxEdit9.TabIndex = 21;
             // 
             // textEdit9
             // 
-            textEdit9.Location = new Point(610, 37);
+            textEdit9.Location = new Point(697, 49);
+            textEdit9.Margin = new Padding(3, 4, 3, 4);
             textEdit9.Name = "textEdit9";
-            textEdit9.Size = new Size(260, 20);
+            textEdit9.Size = new Size(297, 22);
             textEdit9.TabIndex = 20;
             // 
             // labelControl24
             // 
             labelControl24.Appearance.Font = new Font("Tahoma", 9F);
             labelControl24.Appearance.Options.UseFont = true;
-            labelControl24.Location = new Point(478, 40);
+            labelControl24.Location = new Point(546, 53);
+            labelControl24.Margin = new Padding(3, 4, 3, 4);
             labelControl24.Name = "labelControl24";
-            labelControl24.Size = new Size(103, 14);
+            labelControl24.Size = new Size(124, 18);
             labelControl24.TabIndex = 19;
             labelControl24.Text = "Plazo o Referencia:";
             // 
             // dateEdit3
             // 
             dateEdit3.EditValue = null;
-            dateEdit3.Location = new Point(610, 6);
+            dateEdit3.Location = new Point(697, 8);
+            dateEdit3.Margin = new Padding(3, 4, 3, 4);
             dateEdit3.Name = "dateEdit3";
             dateEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit3.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit3.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("dateEdit3.Properties.ContextImageOptions.SvgImage");
             dateEdit3.Properties.ContextImageOptions.SvgImageSize = new Size(16, 16);
-            dateEdit3.Size = new Size(260, 20);
+            dateEdit3.Size = new Size(297, 24);
             dateEdit3.TabIndex = 18;
             // 
             // labelControl23
             // 
             labelControl23.Appearance.Font = new Font("Tahoma", 9F);
             labelControl23.Appearance.Options.UseFont = true;
-            labelControl23.Location = new Point(478, 10);
+            labelControl23.Location = new Point(546, 13);
+            labelControl23.Margin = new Padding(3, 4, 3, 4);
             labelControl23.Name = "labelControl23";
-            labelControl23.Size = new Size(69, 14);
+            labelControl23.Size = new Size(83, 18);
             labelControl23.TabIndex = 17;
             labelControl23.Text = "Primer pago:";
             // 
             // toggleSwitch2
             // 
-            toggleSwitch2.Location = new Point(610, 92);
+            toggleSwitch2.Location = new Point(697, 123);
+            toggleSwitch2.Margin = new Padding(3, 4, 3, 4);
             toggleSwitch2.Name = "toggleSwitch2";
             toggleSwitch2.Properties.OffText = "";
             toggleSwitch2.Properties.OnText = "";
-            toggleSwitch2.Size = new Size(95, 18);
+            toggleSwitch2.Size = new Size(109, 24);
             toggleSwitch2.TabIndex = 16;
             // 
             // labelControl22
             // 
             labelControl22.Appearance.Font = new Font("Tahoma", 9F);
             labelControl22.Appearance.Options.UseFont = true;
-            labelControl22.Location = new Point(478, 97);
+            labelControl22.Location = new Point(546, 129);
+            labelControl22.Margin = new Padding(3, 4, 3, 4);
             labelControl22.Name = "labelControl22";
-            labelControl22.Size = new Size(120, 14);
+            labelControl22.Size = new Size(144, 18);
             labelControl22.TabIndex = 15;
             labelControl22.Text = "Reportar a Sin Riesgo:";
             // 
             // toggleSwitch1
             // 
-            toggleSwitch1.Location = new Point(201, 92);
+            toggleSwitch1.Location = new Point(230, 123);
+            toggleSwitch1.Margin = new Padding(3, 4, 3, 4);
             toggleSwitch1.Name = "toggleSwitch1";
             toggleSwitch1.Properties.OffText = "";
             toggleSwitch1.Properties.OnText = "";
-            toggleSwitch1.Size = new Size(95, 18);
+            toggleSwitch1.Size = new Size(109, 24);
             toggleSwitch1.TabIndex = 14;
             // 
             // labelControl21
             // 
             labelControl21.Appearance.Font = new Font("Tahoma", 9F);
             labelControl21.Appearance.Options.UseFont = true;
-            labelControl21.Location = new Point(3, 97);
+            labelControl21.Location = new Point(3, 129);
+            labelControl21.Margin = new Padding(3, 4, 3, 4);
             labelControl21.Name = "labelControl21";
-            labelControl21.Size = new Size(176, 14);
+            labelControl21.Size = new Size(209, 18);
             labelControl21.TabIndex = 13;
             labelControl21.Text = "¿Es un desembolso en efectivo?";
             // 
             // textEdit8
             // 
-            textEdit8.Location = new Point(201, 64);
+            textEdit8.Location = new Point(230, 85);
+            textEdit8.Margin = new Padding(3, 4, 3, 4);
             textEdit8.Name = "textEdit8";
-            textEdit8.Size = new Size(242, 20);
+            textEdit8.Size = new Size(277, 22);
             textEdit8.TabIndex = 12;
             // 
             // labelControl20
             // 
             labelControl20.Appearance.Font = new Font("Tahoma", 9F);
             labelControl20.Appearance.Options.UseFont = true;
-            labelControl20.Location = new Point(3, 68);
+            labelControl20.Location = new Point(3, 91);
+            labelControl20.Margin = new Padding(3, 4, 3, 4);
             labelControl20.Name = "labelControl20";
-            labelControl20.Size = new Size(69, 14);
+            labelControl20.Size = new Size(84, 18);
             labelControl20.TabIndex = 11;
             labelControl20.Text = "% de Gasto:";
             // 
             // checkEdit1
             // 
-            checkEdit1.Location = new Point(201, 35);
+            checkEdit1.Location = new Point(230, 47);
+            checkEdit1.Margin = new Padding(3, 4, 3, 4);
             checkEdit1.Name = "checkEdit1";
             checkEdit1.Properties.Caption = "";
-            checkEdit1.Size = new Size(41, 20);
+            checkEdit1.Size = new Size(47, 24);
             checkEdit1.TabIndex = 10;
             // 
             // labelControl19
             // 
             labelControl19.Appearance.Font = new Font("Tahoma", 9F);
             labelControl19.Appearance.Options.UseFont = true;
-            labelControl19.Location = new Point(3, 40);
+            labelControl19.Location = new Point(3, 53);
+            labelControl19.Margin = new Padding(3, 4, 3, 4);
             labelControl19.Name = "labelControl19";
-            labelControl19.Size = new Size(49, 14);
+            labelControl19.Size = new Size(57, 18);
             labelControl19.TabIndex = 9;
             labelControl19.Text = "Aplicado:";
             // 
             // comboBoxEdit8
             // 
-            comboBoxEdit8.Location = new Point(201, 8);
+            comboBoxEdit8.Location = new Point(230, 11);
+            comboBoxEdit8.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit8.Name = "comboBoxEdit8";
             comboBoxEdit8.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit8.Size = new Size(242, 20);
+            comboBoxEdit8.Size = new Size(277, 22);
             comboBoxEdit8.TabIndex = 8;
             // 
             // labelControl18
             // 
             labelControl18.Appearance.Font = new Font("Tahoma", 9F);
             labelControl18.Appearance.Options.UseFont = true;
-            labelControl18.Location = new Point(3, 10);
+            labelControl18.Location = new Point(3, 13);
+            labelControl18.Margin = new Padding(3, 4, 3, 4);
             labelControl18.Name = "labelControl18";
-            labelControl18.Size = new Size(120, 14);
+            labelControl18.Size = new Size(140, 18);
             labelControl18.TabIndex = 7;
             labelControl18.Text = "Proveedor de credito:";
             // 
@@ -963,35 +1031,40 @@
             // 
             tabMas.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("tabMas.ImageOptions.SvgImage");
             tabMas.ImageOptions.SvgImageSize = new Size(15, 15);
+            tabMas.Margin = new Padding(3, 4, 3, 4);
             tabMas.Name = "tabMas";
-            tabMas.Size = new Size(1203, 151);
+            tabMas.Size = new Size(1375, 204);
             tabMas.Text = "Mas";
             // 
             // colCantidad
             // 
             colCantidad.Caption = "Cantidad";
+            colCantidad.MinWidth = 23;
             colCantidad.Name = "colCantidad";
             colCantidad.Visible = true;
             colCantidad.VisibleIndex = 3;
+            colCantidad.Width = 86;
             // 
             // pictureEdit2
             // 
-            pictureEdit2.Location = new Point(722, 409);
+            pictureEdit2.Location = new Point(825, 513);
+            pictureEdit2.Margin = new Padding(3, 4, 3, 4);
             pictureEdit2.Name = "pictureEdit2";
             pictureEdit2.Properties.ErrorImageOptions.Image = (Image)resources.GetObject("pictureEdit2.Properties.ErrorImageOptions.Image");
             pictureEdit2.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             pictureEdit2.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            pictureEdit2.Size = new Size(220, 112);
+            pictureEdit2.Size = new Size(251, 149);
             pictureEdit2.TabIndex = 42;
             // 
             // pictureEdit1
             // 
-            pictureEdit1.Location = new Point(960, 409);
+            pictureEdit1.Location = new Point(1097, 513);
+            pictureEdit1.Margin = new Padding(3, 4, 3, 4);
             pictureEdit1.Name = "pictureEdit1";
             pictureEdit1.Properties.ErrorImageOptions.Image = (Image)resources.GetObject("pictureEdit1.Properties.ErrorImageOptions.Image");
             pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             pictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            pictureEdit1.Size = new Size(220, 112);
+            pictureEdit1.Size = new Size(251, 149);
             pictureEdit1.TabIndex = 41;
             // 
             // tablePanel2
@@ -1003,39 +1076,43 @@
             tablePanel2.Controls.Add(labelControl39);
             tablePanel2.Controls.Add(labelControl38);
             tablePanel2.Controls.Add(labelControl37);
-            tablePanel2.Location = new Point(460, 409);
+            tablePanel2.Location = new Point(526, 513);
+            tablePanel2.Margin = new Padding(3, 4, 3, 4);
             tablePanel2.Name = "tablePanel2";
-            tablePanel2.Padding = new Padding(3);
+            tablePanel2.Padding = new Padding(3, 4, 3, 4);
             tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F) });
-            tablePanel2.Size = new Size(240, 112);
+            tablePanel2.Size = new Size(274, 124);
             tablePanel2.TabIndex = 39;
             tablePanel2.UseSkinIndents = true;
             // 
             // textEdit25
             // 
             tablePanel2.SetColumn(textEdit25, 1);
-            textEdit25.Location = new Point(115, 83);
+            textEdit25.Location = new Point(132, 88);
+            textEdit25.Margin = new Padding(3, 4, 3, 4);
             textEdit25.Name = "textEdit25";
             tablePanel2.SetRow(textEdit25, 2);
-            textEdit25.Size = new Size(120, 20);
+            textEdit25.Size = new Size(136, 22);
             textEdit25.TabIndex = 38;
             // 
             // textEdit24
             // 
             tablePanel2.SetColumn(textEdit24, 1);
-            textEdit24.Location = new Point(115, 48);
+            textEdit24.Location = new Point(132, 48);
+            textEdit24.Margin = new Padding(3, 4, 3, 4);
             textEdit24.Name = "textEdit24";
             tablePanel2.SetRow(textEdit24, 1);
-            textEdit24.Size = new Size(120, 20);
+            textEdit24.Size = new Size(136, 22);
             textEdit24.TabIndex = 37;
             // 
             // textEdit23
             // 
             tablePanel2.SetColumn(textEdit23, 1);
-            textEdit23.Location = new Point(115, 11);
+            textEdit23.Location = new Point(132, 11);
+            textEdit23.Margin = new Padding(3, 4, 3, 4);
             textEdit23.Name = "textEdit23";
             tablePanel2.SetRow(textEdit23, 0);
-            textEdit23.Size = new Size(120, 20);
+            textEdit23.Size = new Size(136, 22);
             textEdit23.TabIndex = 34;
             // 
             // labelControl39
@@ -1043,10 +1120,11 @@
             labelControl39.Appearance.Font = new Font("Tahoma", 9F);
             labelControl39.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl39, 0);
-            labelControl39.Location = new Point(5, 85);
+            labelControl39.Location = new Point(6, 89);
+            labelControl39.Margin = new Padding(3, 4, 3, 4);
             labelControl39.Name = "labelControl39";
             tablePanel2.SetRow(labelControl39, 2);
-            labelControl39.Size = new Size(51, 14);
+            labelControl39.Size = new Size(60, 18);
             labelControl39.TabIndex = 36;
             labelControl39.Text = "03) Total";
             // 
@@ -1055,10 +1133,11 @@
             labelControl38.Appearance.Font = new Font("Tahoma", 9F);
             labelControl38.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl38, 0);
-            labelControl38.Location = new Point(5, 50);
+            labelControl38.Location = new Point(6, 49);
+            labelControl38.Margin = new Padding(3, 4, 3, 4);
             labelControl38.Name = "labelControl38";
             tablePanel2.SetRow(labelControl38, 1);
-            labelControl38.Size = new Size(39, 14);
+            labelControl38.Size = new Size(49, 18);
             labelControl38.TabIndex = 35;
             labelControl38.Text = "02) Iva";
             // 
@@ -1067,10 +1146,11 @@
             labelControl37.Appearance.Font = new Font("Tahoma", 9F);
             labelControl37.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl37, 0);
-            labelControl37.Location = new Point(5, 13);
+            labelControl37.Location = new Point(6, 12);
+            labelControl37.Margin = new Padding(3, 4, 3, 4);
             labelControl37.Name = "labelControl37";
             tablePanel2.SetRow(labelControl37, 0);
-            labelControl37.Size = new Size(76, 14);
+            labelControl37.Size = new Size(89, 18);
             labelControl37.TabIndex = 34;
             labelControl37.Text = "01) Sub Total";
             // 
@@ -1102,164 +1182,181 @@
             tablePanel1.Controls.Add(labelControl31);
             tablePanel1.Controls.Add(labelControl30);
             tablePanel1.Controls.Add(labelControl29);
-            tablePanel1.Location = new Point(8, 409);
+            tablePanel1.Location = new Point(9, 513);
+            tablePanel1.Margin = new Padding(3, 4, 3, 4);
             tablePanel1.Name = "tablePanel1";
-            tablePanel1.Padding = new Padding(3);
+            tablePanel1.Padding = new Padding(3, 4, 3, 4);
             tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F) });
-            tablePanel1.Size = new Size(446, 308);
+            tablePanel1.Size = new Size(510, 312);
             tablePanel1.TabIndex = 38;
             tablePanel1.UseSkinIndents = true;
             // 
             // textEdit22
             // 
             tablePanel1.SetColumn(textEdit22, 3);
-            textEdit22.Location = new Point(308, 196);
+            textEdit22.Location = new Point(353, 196);
+            textEdit22.Margin = new Padding(3, 4, 3, 4);
             textEdit22.Name = "textEdit22";
             tablePanel1.SetRow(textEdit22, 5);
-            textEdit22.Size = new Size(134, 20);
+            textEdit22.Size = new Size(152, 22);
             textEdit22.TabIndex = 33;
             // 
             // comboBoxEdit13
             // 
             tablePanel1.SetColumn(comboBoxEdit13, 2);
-            comboBoxEdit13.Location = new Point(228, 196);
+            comboBoxEdit13.Location = new Point(262, 196);
+            comboBoxEdit13.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit13.MenuManager = barManager1;
             comboBoxEdit13.Name = "comboBoxEdit13";
             comboBoxEdit13.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             tablePanel1.SetRow(comboBoxEdit13, 5);
-            comboBoxEdit13.Size = new Size(75, 20);
+            comboBoxEdit13.Size = new Size(85, 22);
             comboBoxEdit13.TabIndex = 32;
             // 
             // textEdit21
             // 
             tablePanel1.SetColumn(textEdit21, 3);
-            textEdit21.Location = new Point(308, 159);
+            textEdit21.Location = new Point(353, 159);
+            textEdit21.Margin = new Padding(3, 4, 3, 4);
             textEdit21.Name = "textEdit21";
             tablePanel1.SetRow(textEdit21, 4);
-            textEdit21.Size = new Size(134, 20);
+            textEdit21.Size = new Size(152, 22);
             textEdit21.TabIndex = 31;
             // 
             // textEdit20
             // 
             tablePanel1.SetColumn(textEdit20, 3);
-            textEdit20.Location = new Point(308, 122);
+            textEdit20.Location = new Point(353, 122);
+            textEdit20.Margin = new Padding(3, 4, 3, 4);
             textEdit20.Name = "textEdit20";
             tablePanel1.SetRow(textEdit20, 3);
-            textEdit20.Size = new Size(134, 20);
+            textEdit20.Size = new Size(152, 22);
             textEdit20.TabIndex = 30;
             // 
             // textEdit19
             // 
             tablePanel1.SetColumn(textEdit19, 3);
-            textEdit19.Location = new Point(308, 85);
+            textEdit19.Location = new Point(353, 85);
+            textEdit19.Margin = new Padding(3, 4, 3, 4);
             textEdit19.Name = "textEdit19";
             tablePanel1.SetRow(textEdit19, 2);
-            textEdit19.Size = new Size(134, 20);
+            textEdit19.Size = new Size(152, 22);
             textEdit19.TabIndex = 29;
             // 
             // comboBoxEdit12
             // 
             tablePanel1.SetColumn(comboBoxEdit12, 2);
-            comboBoxEdit12.Location = new Point(228, 159);
+            comboBoxEdit12.Location = new Point(262, 159);
+            comboBoxEdit12.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit12.MenuManager = barManager1;
             comboBoxEdit12.Name = "comboBoxEdit12";
             comboBoxEdit12.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             tablePanel1.SetRow(comboBoxEdit12, 4);
-            comboBoxEdit12.Size = new Size(75, 20);
+            comboBoxEdit12.Size = new Size(85, 22);
             comboBoxEdit12.TabIndex = 28;
             // 
             // comboBoxEdit11
             // 
             tablePanel1.SetColumn(comboBoxEdit11, 2);
-            comboBoxEdit11.Location = new Point(228, 122);
+            comboBoxEdit11.Location = new Point(262, 122);
+            comboBoxEdit11.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit11.MenuManager = barManager1;
             comboBoxEdit11.Name = "comboBoxEdit11";
             comboBoxEdit11.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             tablePanel1.SetRow(comboBoxEdit11, 3);
-            comboBoxEdit11.Size = new Size(75, 20);
+            comboBoxEdit11.Size = new Size(85, 22);
             comboBoxEdit11.TabIndex = 27;
             // 
             // comboBoxEdit10
             // 
             tablePanel1.SetColumn(comboBoxEdit10, 2);
-            comboBoxEdit10.Location = new Point(228, 85);
+            comboBoxEdit10.Location = new Point(262, 85);
+            comboBoxEdit10.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit10.MenuManager = barManager1;
             comboBoxEdit10.Name = "comboBoxEdit10";
             comboBoxEdit10.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             tablePanel1.SetRow(comboBoxEdit10, 2);
-            comboBoxEdit10.Size = new Size(75, 20);
+            comboBoxEdit10.Size = new Size(85, 22);
             comboBoxEdit10.TabIndex = 26;
             // 
             // textEdit18
             // 
             tablePanel1.SetColumn(textEdit18, 1);
-            textEdit18.Location = new Point(128, 273);
+            textEdit18.Location = new Point(147, 274);
+            textEdit18.Margin = new Padding(3, 4, 3, 4);
             textEdit18.Name = "textEdit18";
             tablePanel1.SetRow(textEdit18, 7);
-            textEdit18.Size = new Size(96, 20);
+            textEdit18.Size = new Size(108, 22);
             textEdit18.TabIndex = 25;
             // 
             // textEdit17
             // 
             tablePanel1.SetColumn(textEdit17, 1);
-            textEdit17.Location = new Point(128, 233);
+            textEdit17.Location = new Point(147, 233);
+            textEdit17.Margin = new Padding(3, 4, 3, 4);
             textEdit17.Name = "textEdit17";
             tablePanel1.SetRow(textEdit17, 6);
-            textEdit17.Size = new Size(96, 20);
+            textEdit17.Size = new Size(108, 22);
             textEdit17.TabIndex = 25;
             // 
             // textEdit16
             // 
             tablePanel1.SetColumn(textEdit16, 1);
-            textEdit16.Location = new Point(128, 196);
+            textEdit16.Location = new Point(147, 196);
+            textEdit16.Margin = new Padding(3, 4, 3, 4);
             textEdit16.Name = "textEdit16";
             tablePanel1.SetRow(textEdit16, 5);
-            textEdit16.Size = new Size(96, 20);
+            textEdit16.Size = new Size(108, 22);
             textEdit16.TabIndex = 25;
             // 
             // textEdit15
             // 
             tablePanel1.SetColumn(textEdit15, 1);
-            textEdit15.Location = new Point(128, 159);
+            textEdit15.Location = new Point(147, 159);
+            textEdit15.Margin = new Padding(3, 4, 3, 4);
             textEdit15.Name = "textEdit15";
             tablePanel1.SetRow(textEdit15, 4);
-            textEdit15.Size = new Size(96, 20);
+            textEdit15.Size = new Size(108, 22);
             textEdit15.TabIndex = 25;
             // 
             // textEdit14
             // 
             tablePanel1.SetColumn(textEdit14, 1);
-            textEdit14.Location = new Point(128, 122);
+            textEdit14.Location = new Point(147, 122);
+            textEdit14.Margin = new Padding(3, 4, 3, 4);
             textEdit14.Name = "textEdit14";
             tablePanel1.SetRow(textEdit14, 3);
-            textEdit14.Size = new Size(96, 20);
+            textEdit14.Size = new Size(108, 22);
             textEdit14.TabIndex = 25;
             // 
             // textEdit13
             // 
             tablePanel1.SetColumn(textEdit13, 1);
-            textEdit13.Location = new Point(128, 85);
+            textEdit13.Location = new Point(147, 85);
+            textEdit13.Margin = new Padding(3, 4, 3, 4);
             textEdit13.Name = "textEdit13";
             tablePanel1.SetRow(textEdit13, 2);
-            textEdit13.Size = new Size(96, 20);
+            textEdit13.Size = new Size(108, 22);
             textEdit13.TabIndex = 25;
             // 
             // textEdit12
             // 
             tablePanel1.SetColumn(textEdit12, 1);
-            textEdit12.Location = new Point(128, 48);
+            textEdit12.Location = new Point(147, 48);
+            textEdit12.Margin = new Padding(3, 4, 3, 4);
             textEdit12.Name = "textEdit12";
             tablePanel1.SetRow(textEdit12, 1);
-            textEdit12.Size = new Size(96, 20);
+            textEdit12.Size = new Size(108, 22);
             textEdit12.TabIndex = 25;
             // 
             // textEdit11
             // 
             tablePanel1.SetColumn(textEdit11, 1);
-            textEdit11.Location = new Point(128, 11);
+            textEdit11.Location = new Point(147, 11);
+            textEdit11.Margin = new Padding(3, 4, 3, 4);
             textEdit11.Name = "textEdit11";
             tablePanel1.SetRow(textEdit11, 0);
-            textEdit11.Size = new Size(96, 20);
+            textEdit11.Size = new Size(108, 22);
             textEdit11.TabIndex = 24;
             // 
             // labelControl36
@@ -1267,10 +1364,11 @@
             labelControl36.Appearance.Font = new Font("Tahoma", 9F);
             labelControl36.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl36, 0);
-            labelControl36.Location = new Point(5, 282);
+            labelControl36.Location = new Point(6, 276);
+            labelControl36.Margin = new Padding(3, 4, 3, 4);
             labelControl36.Name = "labelControl36";
             tablePanel1.SetRow(labelControl36, 7);
-            labelControl36.Size = new Size(39, 14);
+            labelControl36.Size = new Size(45, 18);
             labelControl36.TabIndex = 25;
             labelControl36.Text = "08) Pt.";
             // 
@@ -1279,10 +1377,11 @@
             labelControl35.Appearance.Font = new Font("Tahoma", 9F);
             labelControl35.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl35, 0);
-            labelControl35.Location = new Point(5, 235);
+            labelControl35.Location = new Point(6, 234);
+            labelControl35.Margin = new Padding(3, 4, 3, 4);
             labelControl35.Name = "labelControl35";
             tablePanel1.SetRow(labelControl35, 6);
-            labelControl35.Size = new Size(83, 14);
+            labelControl35.Size = new Size(101, 18);
             labelControl35.TabIndex = 25;
             labelControl35.Text = "07) Trans. Ext.";
             // 
@@ -1291,10 +1390,11 @@
             labelControl34.Appearance.Font = new Font("Tahoma", 9F);
             labelControl34.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl34, 0);
-            labelControl34.Location = new Point(5, 198);
+            labelControl34.Location = new Point(6, 197);
+            labelControl34.Margin = new Padding(3, 4, 3, 4);
             labelControl34.Name = "labelControl34";
             tablePanel1.SetRow(labelControl34, 5);
-            labelControl34.Size = new Size(85, 14);
+            labelControl34.Size = new Size(105, 18);
             labelControl34.TabIndex = 25;
             labelControl34.Text = "06) Trans. Nac.";
             // 
@@ -1303,10 +1403,11 @@
             labelControl33.Appearance.Font = new Font("Tahoma", 9F);
             labelControl33.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl33, 0);
-            labelControl33.Location = new Point(5, 161);
+            labelControl33.Location = new Point(6, 160);
+            labelControl33.Margin = new Padding(3, 4, 3, 4);
             labelControl33.Name = "labelControl33";
             tablePanel1.SetRow(labelControl33, 4);
-            labelControl33.Size = new Size(88, 14);
+            labelControl33.Size = new Size(106, 18);
             labelControl33.TabIndex = 25;
             labelControl33.Text = "05) Tarjeta Ext.";
             // 
@@ -1315,10 +1416,11 @@
             labelControl32.Appearance.Font = new Font("Tahoma", 9F);
             labelControl32.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl32, 0);
-            labelControl32.Location = new Point(5, 124);
+            labelControl32.Location = new Point(6, 123);
+            labelControl32.Margin = new Padding(3, 4, 3, 4);
             labelControl32.Name = "labelControl32";
             tablePanel1.SetRow(labelControl32, 3);
-            labelControl32.Size = new Size(90, 14);
+            labelControl32.Size = new Size(110, 18);
             labelControl32.TabIndex = 25;
             labelControl32.Text = "04) Tarjeta Nac.";
             // 
@@ -1327,10 +1429,11 @@
             labelControl31.Appearance.Font = new Font("Tahoma", 9F);
             labelControl31.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl31, 0);
-            labelControl31.Location = new Point(5, 87);
+            labelControl31.Location = new Point(6, 86);
+            labelControl31.Margin = new Padding(3, 4, 3, 4);
             labelControl31.Name = "labelControl31";
             tablePanel1.SetRow(labelControl31, 2);
-            labelControl31.Size = new Size(76, 14);
+            labelControl31.Size = new Size(91, 18);
             labelControl31.TabIndex = 25;
             labelControl31.Text = "03) Mon. Ext.";
             // 
@@ -1339,10 +1442,11 @@
             labelControl30.Appearance.Font = new Font("Tahoma", 9F);
             labelControl30.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl30, 0);
-            labelControl30.Location = new Point(5, 50);
+            labelControl30.Location = new Point(6, 49);
+            labelControl30.Margin = new Padding(3, 4, 3, 4);
             labelControl30.Name = "labelControl30";
             tablePanel1.SetRow(labelControl30, 1);
-            labelControl30.Size = new Size(50, 14);
+            labelControl30.Size = new Size(60, 18);
             labelControl30.TabIndex = 25;
             labelControl30.Text = "02) Mon.";
             // 
@@ -1351,10 +1455,11 @@
             labelControl29.Appearance.Font = new Font("Tahoma", 9F);
             labelControl29.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl29, 0);
-            labelControl29.Location = new Point(5, 13);
+            labelControl29.Location = new Point(6, 12);
+            labelControl29.Margin = new Padding(3, 4, 3, 4);
             labelControl29.Name = "labelControl29";
             tablePanel1.SetRow(labelControl29, 0);
-            labelControl29.Size = new Size(62, 14);
+            labelControl29.Size = new Size(75, 18);
             labelControl29.TabIndex = 24;
             labelControl29.Text = "01) Cambio";
             // 
@@ -1362,9 +1467,10 @@
             // 
             simpleButton5.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Warning;
             simpleButton5.Appearance.Options.UseBackColor = true;
-            simpleButton5.Location = new Point(470, 562);
+            simpleButton5.Location = new Point(537, 717);
+            simpleButton5.Margin = new Padding(3, 4, 3, 4);
             simpleButton5.Name = "simpleButton5";
-            simpleButton5.Size = new Size(148, 30);
+            simpleButton5.Size = new Size(169, 40);
             simpleButton5.TabIndex = 36;
             simpleButton5.Text = "REGISTRAR";
             // 
@@ -1372,101 +1478,128 @@
             // 
             simpleButton6.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Question;
             simpleButton6.Appearance.Options.UseBackColor = true;
-            simpleButton6.Location = new Point(470, 597);
+            simpleButton6.Location = new Point(537, 764);
+            simpleButton6.Margin = new Padding(3, 4, 3, 4);
             simpleButton6.Name = "simpleButton6";
-            simpleButton6.Size = new Size(148, 30);
+            simpleButton6.Size = new Size(169, 40);
             simpleButton6.TabIndex = 35;
             simpleButton6.Text = "NUEVA FAC";
             // 
             // gridControl1
             // 
-            gridControl1.Location = new Point(0, 285);
+            gridControl1.EmbeddedNavigator.Margin = new Padding(3, 4, 3, 4);
+            gridControl1.Location = new Point(0, 366);
             gridControl1.MainView = gridView1;
+            gridControl1.Margin = new Padding(3, 4, 3, 4);
             gridControl1.Name = "gridControl1";
-            gridControl1.Size = new Size(1205, 104);
+            gridControl1.Size = new Size(1377, 139);
             gridControl1.TabIndex = 30;
             gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
             // gridView1
             // 
             gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colCodigo, colDescripcion, colUM, colCantidad, colPrecio, colTotal, colAccion, colSkuQuantityBySku, colUnitaryPriceIndividual, colSkuFormatoDescripton, colPrecio2, colPrecio3 });
+            gridView1.DetailHeight = 467;
             gridView1.GridControl = gridControl1;
             gridView1.Name = "gridView1";
+            gridView1.OptionsEditForm.PopupEditFormWidth = 914;
             gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // colCodigo
             // 
             colCodigo.Caption = "Codigo";
+            colCodigo.MinWidth = 23;
             colCodigo.Name = "colCodigo";
             colCodigo.Visible = true;
             colCodigo.VisibleIndex = 0;
+            colCodigo.Width = 86;
             // 
             // colDescripcion
             // 
             colDescripcion.Caption = "Descripcion";
+            colDescripcion.MinWidth = 23;
             colDescripcion.Name = "colDescripcion";
             colDescripcion.Visible = true;
             colDescripcion.VisibleIndex = 1;
+            colDescripcion.Width = 86;
             // 
             // colUM
             // 
             colUM.Caption = "U/M";
+            colUM.MinWidth = 23;
             colUM.Name = "colUM";
             colUM.Visible = true;
             colUM.VisibleIndex = 2;
+            colUM.Width = 86;
             // 
             // colPrecio
             // 
             colPrecio.Caption = "Precio";
+            colPrecio.MinWidth = 23;
             colPrecio.Name = "colPrecio";
             colPrecio.Visible = true;
             colPrecio.VisibleIndex = 4;
+            colPrecio.Width = 86;
             // 
             // colTotal
             // 
             colTotal.Caption = "Total";
+            colTotal.MinWidth = 23;
             colTotal.Name = "colTotal";
             colTotal.Visible = true;
             colTotal.VisibleIndex = 5;
+            colTotal.Width = 86;
             // 
             // colAccion
             // 
             colAccion.Caption = "Accion";
+            colAccion.MinWidth = 23;
             colAccion.Name = "colAccion";
             colAccion.Visible = true;
             colAccion.VisibleIndex = 6;
+            colAccion.Width = 86;
             // 
             // colSkuQuantityBySku
             // 
             colSkuQuantityBySku.Caption = "Quantity";
+            colSkuQuantityBySku.MinWidth = 23;
             colSkuQuantityBySku.Name = "colSkuQuantityBySku";
+            colSkuQuantityBySku.Width = 86;
             // 
             // colUnitaryPriceIndividual
             // 
             colUnitaryPriceIndividual.Caption = "UnitaryPrice Individual";
+            colUnitaryPriceIndividual.MinWidth = 23;
             colUnitaryPriceIndividual.Name = "colUnitaryPriceIndividual";
+            colUnitaryPriceIndividual.Width = 86;
             // 
             // colSkuFormatoDescripton
             // 
             colSkuFormatoDescripton.Caption = "Sku Formato Descripcion";
+            colSkuFormatoDescripton.MinWidth = 23;
             colSkuFormatoDescripton.Name = "colSkuFormatoDescripton";
+            colSkuFormatoDescripton.Width = 86;
             // 
             // colPrecio2
             // 
             colPrecio2.Caption = "Precio 2";
+            colPrecio2.MinWidth = 23;
             colPrecio2.Name = "colPrecio2";
+            colPrecio2.Width = 86;
             // 
             // colPrecio3
             // 
             colPrecio3.Caption = "Precio 3";
+            colPrecio3.MinWidth = 23;
             colPrecio3.Name = "colPrecio3";
+            colPrecio3.Width = 86;
             // 
             // FormInvoiceBillingEdit
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1329, 735);
+            ClientSize = new Size(1519, 929);
             Controls.Add(svgImageBox1);
             Controls.Add(textEdit10);
             Controls.Add(downButtonSeleccion);
@@ -1487,6 +1620,7 @@
             Controls.Add(barDockControlBottom);
             Controls.Add(barDockControlTop);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormInvoiceBillingEdit";
