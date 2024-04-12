@@ -41,7 +41,8 @@ public class CoreWebRenderInView
         comboBox.EditValue = selectedValue ?? defaultValue;
     }
 
-    public GridView RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, int displayLength,Control form)
+    public static GridView RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, int displayLength,
+        Control form)
     {
         if (dataViewDto.Config is null)
         {
@@ -59,11 +60,25 @@ public class CoreWebRenderInView
             return new GridView();
         }
 
-        var viewData = (List<Dictionary<string, object>>)dataViewDto.Data;        
+        var viewData = (List<Dictionary<string, object>>)dataViewDto.Data;
+
+        if (displayLength > 0)
+        {
+            // Creating the paging tasks
+            const int rowsPerPage = 20;
+            if (viewData.Count % rowsPerPage > displayLength)
+            {
+                viewData = viewData.Take(rowsPerPage).ToList();
+            }
+        }
+
         var table = FillGridControl(viewData);
-        // Asignar el DataTable al GridControl
+        if (table is null)
+        {
+            return new GridView();
+        }
+
         gridControl.DataSource = table;
-        
 
         // Ajustar la configuración del GridView
         var gridView = (GridView)gridControl.MainView;
@@ -290,6 +305,4 @@ public class CoreWebRenderInView
             }
         }
     }
-
-    
 }

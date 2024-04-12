@@ -26,7 +26,7 @@ class CoreWebView(
     private static readonly int
         PermissionMe = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_ME"]!);
 
-    public TableCompanyDataViewDto GetViewByName(TbUser user, int componentId, string name, int callerId,
+    public TableCompanyDataViewDto? GetViewByName(TbUser user, int componentId, string name, int callerId,
         int? permission = null,
         Dictionary<string, string>? parameter = null)
     {
@@ -84,6 +84,10 @@ class CoreWebView(
             Config = companyDataView
         };
         var dataRecordSet = bdModel.ExecuteRenderQueryable(queryFill);
+        if (dataRecordSet is null)
+        {
+            return null;
+        }
         objResult.Data = dataRecordSet;
         return objResult;
     }

@@ -104,7 +104,7 @@ namespace v4posme_window.Views
                         objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
                 }
 
-                ObjControlGridView = coreWebRenderInView.RenderGrid(dataViewData!, "invoice", 0, centerPane);
+                ObjControlGridView = CoreWebRenderInView.RenderGrid(dataViewData!, "invoice", 0, centerPane);
             }
         }
 
@@ -120,7 +120,11 @@ namespace v4posme_window.Views
 
         public void Edit(object? sender, EventArgs? args)
         {
-            new FormInvoiceBillingEdit(TypeOpenForm.Init,0,0,0).ShowDialog();
+            var formInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.Init, 0, 0, 0)
+            {
+                MdiParent = CoreFormList.Principal()
+            };
+            formInvoiceBillingEdit.Show();
         }
 
         public void New(object? sender, EventArgs? args)

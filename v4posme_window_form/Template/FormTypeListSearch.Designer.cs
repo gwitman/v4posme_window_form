@@ -33,16 +33,16 @@
             stackPanel1 = new DevExpress.Utils.Layout.StackPanel();
             simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             btnAceptar = new DevExpress.XtraEditors.SimpleButton();
-            centerPane = new DevExpress.XtraEditors.PanelControl();
-            simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
-            simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
             textEdit10 = new DevExpress.XtraEditors.TextEdit();
+            btnAtras = new DevExpress.XtraEditors.SimpleButton();
+            btnSiguiente = new DevExpress.XtraEditors.SimpleButton();
+            centerPane = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
             panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)stackPanel1).BeginInit();
             stackPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)centerPane).BeginInit();
             ((System.ComponentModel.ISupportInitialize)textEdit10.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)centerPane).BeginInit();
             SuspendLayout();
             // 
             // panelControl1
@@ -50,9 +50,8 @@
             panelControl1.Controls.Add(stackPanel1);
             panelControl1.Dock = DockStyle.Top;
             panelControl1.Location = new Point(0, 0);
-            panelControl1.Margin = new Padding(4);
             panelControl1.Name = "panelControl1";
-            panelControl1.Size = new Size(800, 69);
+            panelControl1.Size = new Size(686, 56);
             panelControl1.TabIndex = 0;
             // 
             // stackPanel1
@@ -60,13 +59,12 @@
             stackPanel1.Controls.Add(simpleButton2);
             stackPanel1.Controls.Add(btnAceptar);
             stackPanel1.Controls.Add(textEdit10);
-            stackPanel1.Controls.Add(simpleButton4);
-            stackPanel1.Controls.Add(simpleButton3);
-            stackPanel1.Location = new Point(0, 6);
-            stackPanel1.Margin = new Padding(4);
+            stackPanel1.Controls.Add(btnAtras);
+            stackPanel1.Controls.Add(btnSiguiente);
+            stackPanel1.Location = new Point(0, 5);
             stackPanel1.Name = "stackPanel1";
             stackPanel1.Padding = new Padding(2);
-            stackPanel1.Size = new Size(787, 59);
+            stackPanel1.Size = new Size(675, 48);
             stackPanel1.TabIndex = 0;
             stackPanel1.UseSkinIndents = true;
             // 
@@ -79,10 +77,9 @@
             simpleButton2.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             simpleButton2.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton2.ImageOptions.SvgImage");
             simpleButton2.ImageOptions.SvgImageSize = new Size(16, 16);
-            simpleButton2.Location = new Point(6, 13);
-            simpleButton2.Margin = new Padding(4);
+            simpleButton2.Location = new Point(5, 11);
             simpleButton2.Name = "simpleButton2";
-            simpleButton2.Size = new Size(99, 32);
+            simpleButton2.Size = new Size(85, 26);
             simpleButton2.TabIndex = 1;
             simpleButton2.Text = "Cancelar";
             // 
@@ -95,72 +92,68 @@
             btnAceptar.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             btnAceptar.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnAceptar.ImageOptions.SvgImage");
             btnAceptar.ImageOptions.SvgImageSize = new Size(16, 16);
-            btnAceptar.Location = new Point(113, 13);
-            btnAceptar.Margin = new Padding(4);
+            btnAceptar.Location = new Point(96, 11);
             btnAceptar.Name = "btnAceptar";
-            btnAceptar.Size = new Size(99, 32);
+            btnAceptar.Size = new Size(85, 26);
             btnAceptar.TabIndex = 2;
             btnAceptar.Text = "Aceptar";
             btnAceptar.Click += btnAceptar_Click;
             // 
+            // textEdit10
+            // 
+            textEdit10.Location = new Point(187, 10);
+            textEdit10.Name = "textEdit10";
+            textEdit10.Size = new Size(239, 28);
+            textEdit10.TabIndex = 20;
+            // 
+            // btnAtras
+            // 
+            btnAtras.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
+            btnAtras.Appearance.ForeColor = Color.White;
+            btnAtras.Appearance.Options.UseBackColor = true;
+            btnAtras.Appearance.Options.UseForeColor = true;
+            btnAtras.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            btnAtras.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton4.ImageOptions.SvgImage");
+            btnAtras.ImageOptions.SvgImageSize = new Size(16, 16);
+            btnAtras.Location = new Point(432, 11);
+            btnAtras.Name = "btnAtras";
+            btnAtras.Size = new Size(85, 26);
+            btnAtras.TabIndex = 4;
+            btnAtras.Text = "Atras";
+            btnAtras.Click += btnAtras_Click;
+            // 
+            // btnSiguiente
+            // 
+            btnSiguiente.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
+            btnSiguiente.Appearance.ForeColor = Color.White;
+            btnSiguiente.Appearance.Options.UseBackColor = true;
+            btnSiguiente.Appearance.Options.UseForeColor = true;
+            btnSiguiente.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            btnSiguiente.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton3.ImageOptions.SvgImage");
+            btnSiguiente.ImageOptions.SvgImageSize = new Size(16, 16);
+            btnSiguiente.Location = new Point(523, 11);
+            btnSiguiente.Name = "btnSiguiente";
+            btnSiguiente.Size = new Size(85, 26);
+            btnSiguiente.TabIndex = 3;
+            btnSiguiente.Text = "Siguiente";
+            btnSiguiente.Click += btnSiguiente_Click;
+            // 
             // centerPane
             // 
             centerPane.Dock = DockStyle.Fill;
-            centerPane.Location = new Point(0, 69);
-            centerPane.Margin = new Padding(4);
+            centerPane.Location = new Point(0, 56);
             centerPane.Name = "centerPane";
-            centerPane.Size = new Size(800, 403);
+            centerPane.Size = new Size(686, 326);
             centerPane.TabIndex = 1;
-            // 
-            // simpleButton3
-            // 
-            simpleButton3.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
-            simpleButton3.Appearance.ForeColor = Color.White;
-            simpleButton3.Appearance.Options.UseBackColor = true;
-            simpleButton3.Appearance.Options.UseForeColor = true;
-            simpleButton3.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            simpleButton3.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton3.ImageOptions.SvgImage");
-            simpleButton3.ImageOptions.SvgImageSize = new Size(16, 16);
-            simpleButton3.Location = new Point(612, 13);
-            simpleButton3.Margin = new Padding(4);
-            simpleButton3.Name = "simpleButton3";
-            simpleButton3.Size = new Size(99, 32);
-            simpleButton3.TabIndex = 3;
-            simpleButton3.Text = "Siguiente";
-            // 
-            // simpleButton4
-            // 
-            simpleButton4.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
-            simpleButton4.Appearance.ForeColor = Color.White;
-            simpleButton4.Appearance.Options.UseBackColor = true;
-            simpleButton4.Appearance.Options.UseForeColor = true;
-            simpleButton4.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            simpleButton4.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton4.ImageOptions.SvgImage");
-            simpleButton4.ImageOptions.SvgImageSize = new Size(16, 16);
-            simpleButton4.Location = new Point(505, 13);
-            simpleButton4.Margin = new Padding(4);
-            simpleButton4.Name = "simpleButton4";
-            simpleButton4.Size = new Size(99, 32);
-            simpleButton4.TabIndex = 4;
-            simpleButton4.Text = "Atras";
-            // 
-            // textEdit10
-            // 
-            textEdit10.Location = new Point(219, 12);
-            textEdit10.Margin = new Padding(3, 4, 3, 4);
-            textEdit10.Name = "textEdit10";
-            textEdit10.Size = new Size(279, 34);
-            textEdit10.TabIndex = 20;
             // 
             // FormTypeListSearch
             // 
-            AutoScaleDimensions = new SizeF(7F, 16F);
+            AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 472);
+            ClientSize = new Size(686, 382);
             Controls.Add(centerPane);
             Controls.Add(panelControl1);
             IconOptions.Icon = (Icon)resources.GetObject("FormTypeListSearch.IconOptions.Icon");
-            Margin = new Padding(4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormTypeListSearch";
@@ -172,8 +165,8 @@
             panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)stackPanel1).EndInit();
             stackPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)centerPane).EndInit();
             ((System.ComponentModel.ISupportInitialize)textEdit10.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)centerPane).EndInit();
             ResumeLayout(false);
         }
 
@@ -185,8 +178,8 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private DevExpress.XtraEditors.SimpleButton btnAceptar;
         private DevExpress.XtraEditors.PanelControl centerPane;
-        private DevExpress.XtraEditors.SimpleButton simpleButton3;
-        private DevExpress.XtraEditors.SimpleButton simpleButton4;
+        private DevExpress.XtraEditors.SimpleButton btnSiguiente;
+        private DevExpress.XtraEditors.SimpleButton btnAtras;
         private DevExpress.XtraEditors.TextEdit textEdit10;
     }
 }

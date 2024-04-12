@@ -23,14 +23,14 @@ namespace v4posme_window.Views
         private int transactionID_ { get; set; }
         private int transactionMasterID_ { get; set; }
 
-        public FormInvoiceBillingEdit(TypeOpenForm typeOpen,int companyID,int transactionId,int transactionMasterID)
+        public FormInvoiceBillingEdit(TypeOpenForm typeOpen, int companyID, int transactionId, int transactionMasterID)
         {
             InitializeComponent();
             companyID_ = companyID;
             transactionID_ = transactionId;
             transactionMasterID_ = transactionMasterID;
 
-            if(typeOpen == TypeOpenForm.Init)
+            if (typeOpen == TypeOpenForm.Init)
             {
                 PreRender();
             }
@@ -44,7 +44,6 @@ namespace v4posme_window.Views
             {
                 LoadNew();
             }
-
         }
 
 
@@ -85,20 +84,17 @@ namespace v4posme_window.Views
 
         private void lblTitulo_Click(object sender, EventArgs e)
         {
-
         }
 
         private void dateEdit1_EditValueChanged(object sender, EventArgs e)
         {
-
         }
 
         private void tablePanel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
-     
+
         public void PreRender()
         {
             var i = 0;
@@ -106,8 +102,9 @@ namespace v4posme_window.Views
 
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            var formTypeListSearch                      = new FormTypeListSearch(33, "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true, "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
-            formTypeListSearch.EventoCallBackAceptar_   += EventoCallBackAceptar;
+            var formTypeListSearch = new FormTypeListSearch(33, "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
+                "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
+            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptar;
             formTypeListSearch.ShowDialog(this);
         }
 
@@ -115,8 +112,9 @@ namespace v4posme_window.Views
         private void EventoCallBackAceptar(dynamic mensaje)
         {
             // Realizar la lógica que desees en el formulario padre
-            WebToolsHelper objWebToolsHelper = new WebToolsHelper();            
-            MessageBox.Show("Evento en el formulario hijo: " + objWebToolsHelper.helper_RequestGetValueObjet(mensaje,"itemID","0"));
+            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
+            MessageBox.Show("Evento en el formulario hijo: " +
+                            objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
         }
     }
 }
