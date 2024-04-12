@@ -105,7 +105,7 @@
             txtFilter.Name = "txtFilter";
             txtFilter.Size = new Size(239, 28);
             txtFilter.TabIndex = 20;
-            txtFilter.EditValueChanged += txtFilter_EditValueChanged;
+            txtFilter.KeyPress += txtFilter_KeyPress;
             // 
             // btnAtras
             // 

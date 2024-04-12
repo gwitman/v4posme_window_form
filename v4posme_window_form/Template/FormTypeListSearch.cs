@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Dynamic;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.DataAccess.Native.Data;
@@ -18,13 +19,10 @@ namespace v4posme_window.Template
     public partial class FormTypeListSearch : XtraForm
     {
         // Declarar un delegado que represente la firma del método que quieres llamar en el formulario padre
-        public delegate void EventoCallBackAceptar(string mensaje);
+        public delegate void EventoCallBackAceptar(dynamic mensaje);
 
         // Declarar un evento que se disparará cuando ocurra el evento en el formulario hijo
         public event EventoCallBackAceptar EventoCallBackAceptar_;
-        private const int PageSize = 10; // Tamaño de página
-        private int _currentPage; // Página actual
-        private DataTable _dataSource;
         private int ComponentId { get; set; }
         private string ViewName { get; set; }
         private bool AutoClose { get; set; }
@@ -34,9 +32,10 @@ namespace v4posme_window.Template
         private int DisplayStart { get; set; }
         private int DisplayLength { get; set; }
         private string SSearch { get; set; }
+        private int PageCurrent { get; set; }
+        private string TitleWindow { get; set; }
         private GridView ObjGridView { get; set; }
-
-        public FormTypeListSearch(int componentId, string viewName, bool autoClose, string filter, bool multiSelect,
+        public FormTypeListSearch(string title,int componentId, string viewName, bool autoClose, string filter, bool multiSelect,
             string urlRedictWhenEmpty, int iDisplayStart, int iDisplayLength, string sSearch)
         {
             ComponentId = componentId;
@@ -48,23 +47,16 @@ namespace v4posme_window.Template
             DisplayStart = iDisplayStart;
             DisplayLength = iDisplayLength;
             SSearch = sSearch;
+            TitleWindow = title;
+            PageCurrent = 0;
             InitializeComponent();
         }
 
         private void FormTypeListSearch_Load(object sender, EventArgs e)
         {
-            var title = VariablesGlobales.ConfigurationBuilder["NAME_FORM_TYPE_LIST"];
-            Text = title;
-            ShowViewByNamePaginate();
-            if (_currentPage == 0)
-            {
-                btnAtras.Enabled = false;
-            }
-
-            if ((_dataSource.Rows.Count - 1) / PageSize < 1)
-            {
-                btnSiguiente.Enabled = false;
-            }
+            
+            Text = TitleWindow;
+            
         }
 
 
@@ -94,7 +86,7 @@ namespace v4posme_window.Template
                 ["{companyID}"] = usuario!.CompanyId.ToString(),
                 ["{componentID}"] = componentID.ToString(),
                 ["{iDisplayStart}"] = iDisplayStart.ToString(),
-                ["{iDisplayStartDB}"] = "0",
+                ["{iDisplayStartDB}"] = (PageCurrent * iDisplayStart).ToString(),
                 ["{iDisplayLength}"] = iDisplayLength.ToString(),
                 ["{sSearchDB}"] = sSearch,
                 ["{sSearch}"] = sSearch,
@@ -112,11 +104,9 @@ namespace v4posme_window.Template
             }
 
 
-            var datos = coreWebView.GetViewByName(usuario, componentID, viewName, calleridSearch, null, parameter);
-            var datosTotales = coreWebView.GetViewByName(usuario, componentID, viewName + "_TOTAL", calleridSearch,
-                null, parameter);
-            var datosDisplay = coreWebView.GetViewByName(usuario, componentID, viewName + "_DISPLAY", calleridSearch,
-                null, parameter);
+            var datos           = coreWebView.GetViewByName(usuario, componentID, viewName, calleridSearch, null, parameter);
+            //var datosTotales  = coreWebView.GetViewByName(usuario, componentID, viewName + "_TOTAL", calleridSearch,null, parameter);
+            //var datosDisplay  = coreWebView.GetViewByName(usuario, componentID, viewName + "_DISPLAY", calleridSearch,null, parameter);
 
 
             if (datos is null)
@@ -126,9 +116,9 @@ namespace v4posme_window.Template
             //aqui vamos a validar si seleccion multiple
             ObjGridView = CoreWebRenderInView.RenderGrid(datos, "ListView", iDisplayLength, controlParent);
             ObjGridView.KeyDown += GridView_KeyDown!;
-            ObjGridView.OptionsView.ShowGroupPanel = false;
-            ObjGridView.OptionsBehavior.Editable = false;
-            _dataSource = (DataTable)ObjGridView.GridControl.DataSource;
+            ObjGridView.OptionsView.ShowGroupPanel  = false;
+            ObjGridView.OptionsBehavior.Editable    = false;
+            
         }
 
         private void GridView_KeyDown(object sender, KeyEventArgs e)
@@ -148,79 +138,61 @@ namespace v4posme_window.Template
         private void FnSelectedRow()
         {
             // Verificar si se ha seleccionado alguna fila
-            var resultJson = "{";
+            dynamic dynamicObject = new ExpandoObject();
+            var dictionaryObject = (IDictionary<string, object>)dynamicObject;
             if (ObjGridView.SelectedRowsCount > 0)
             {
+
                 // Obtener el índice de la fila seleccionada
                 List<int> rowIndex = ObjGridView.GetSelectedRows().ToList();
                 foreach (var indexRow in rowIndex)
                 {
                     foreach (GridColumn column in ObjGridView.Columns)
                     {
-                        var nombreColumna = column.FieldName;
-                        var valueColumn = ObjGridView.GetRowCellValue(indexRow, nombreColumna).ToString();
-                        resultJson = resultJson + "" + nombreColumna + ":'" + valueColumn + "'";
+                        string nombreColumna = column.FieldName;
+                        string valueColumn = ObjGridView.GetRowCellValue(indexRow, nombreColumna).ToString();
+                        dictionaryObject[nombreColumna] = valueColumn;
+
                     }
                 }
+
             }
             else
             {
                 // No se ha seleccionado ninguna fila, maneja este caso según tus requerimientos
             }
 
-            resultJson += "}";
-            EventoCallBackAceptar_.Invoke(resultJson);
+            EventoCallBackAceptar_?.Invoke(dynamicObject);
         }
 
         private void btnAtras_Click(object sender, EventArgs e)
         {
-            if (_currentPage > 0)
-            {
-                ChangePage(_currentPage - 1);
-            }
+            if(PageCurrent >= 1)
+            PageCurrent--;
+
+            ShowViewByNamePaginate();
+
+
         }
 
         private void btnSiguiente_Click(object sender, EventArgs e)
+        {   
+            PageCurrent++;
+            ShowViewByNamePaginate();
+        }
+
+
+
+        private void txtFilter_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (_currentPage < (_dataSource.Rows.Count - 1) / PageSize)
+            // Verificar si se presionó la tecla "Enter"
+            if (e.KeyChar == (char)Keys.Enter)
             {
-                ChangePage(_currentPage + 1);
-                btnAtras.Enabled = true;
+                SSearch = txtFilter.Text;
+                ShowViewByNamePaginate();
             }
         }
 
-        private void ChangePage(int page)
-        {
-            _currentPage = page;
-            LoadData();
-        }
-
-        private void LoadData()
-        {
-            var rows = _dataSource.AsEnumerable().Skip(_currentPage * PageSize).Take(PageSize).CopyToDataTable();
-            ObjGridView.GridControl.DataSource = rows;
-        }
-
-        private void txtFilter_EditValueChanged(object sender, EventArgs e)
-        {
-            var filterText = txtFilter.Text;
-            var dataTable = _dataSource;
-            var dv = new DataView(dataTable);
-            var filterExpression = new StringBuilder();
-            var firstColumn = true;
-            foreach (DataColumn column in dataTable.Columns)
-            {
-                if (!firstColumn)
-                {
-                    filterExpression.Append(" OR ");
-                }
-
-                filterExpression.Append($"Convert({column.ColumnName}, 'System.String') LIKE '%{filterText}%'");
-                firstColumn = false;
-            }
-
-            dv.RowFilter = filterExpression.ToString();
-            ObjGridView.GridControl.DataSource=dv.ToTable();
-        }
+       
     }
 }

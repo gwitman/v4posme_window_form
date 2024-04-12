@@ -357,7 +357,7 @@
             textEdit10.Location = new Point(66, 319);
             textEdit10.Margin = new Padding(3, 4, 3, 4);
             textEdit10.Name = "textEdit10";
-            textEdit10.Size = new Size(334, 22);
+            textEdit10.Size = new Size(334, 34);
             textEdit10.TabIndex = 37;
             // 
             // downButtonSeleccion
@@ -405,6 +405,7 @@
             btnAddProduct.Size = new Size(144, 40);
             btnAddProduct.TabIndex = 31;
             btnAddProduct.Text = "AGREGAR PRO";
+            btnAddProduct.Click += btnAddProduct_Click;
             // 
             // xtraTabControl
             // 
@@ -444,7 +445,7 @@
             tabInformacion.Controls.Add(labelControl1);
             tabInformacion.Margin = new Padding(3, 4, 3, 4);
             tabInformacion.Name = "tabInformacion";
-            tabInformacion.Size = new Size(1375, 204);
+            tabInformacion.Size = new Size(1375, 199);
             tabInformacion.Text = "Información";
             // 
             // comboBoxEdit14
@@ -453,7 +454,7 @@
             comboBoxEdit14.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit14.Name = "comboBoxEdit14";
             comboBoxEdit14.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit14.Size = new Size(337, 22);
+            comboBoxEdit14.Size = new Size(337, 34);
             comboBoxEdit14.TabIndex = 34;
             // 
             // labelControl26
@@ -503,7 +504,7 @@
             textEdit3.Location = new Point(547, 13);
             textEdit3.Margin = new Padding(3, 4, 3, 4);
             textEdit3.Name = "textEdit3";
-            textEdit3.Size = new Size(158, 22);
+            textEdit3.Size = new Size(158, 34);
             textEdit3.TabIndex = 19;
             // 
             // comboBoxEdit2
@@ -512,7 +513,7 @@
             comboBoxEdit2.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit2.Name = "comboBoxEdit2";
             comboBoxEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit2.Size = new Size(337, 22);
+            comboBoxEdit2.Size = new Size(337, 34);
             comboBoxEdit2.TabIndex = 15;
             // 
             // textEdit5
@@ -520,7 +521,7 @@
             textEdit5.Location = new Point(547, 104);
             textEdit5.Margin = new Padding(3, 4, 3, 4);
             textEdit5.Name = "textEdit5";
-            textEdit5.Size = new Size(337, 22);
+            textEdit5.Size = new Size(337, 34);
             textEdit5.TabIndex = 14;
             // 
             // textEdit4
@@ -528,7 +529,7 @@
             textEdit4.Location = new Point(547, 59);
             textEdit4.Margin = new Padding(3, 4, 3, 4);
             textEdit4.Name = "textEdit4";
-            textEdit4.Size = new Size(337, 22);
+            textEdit4.Size = new Size(337, 34);
             textEdit4.TabIndex = 13;
             // 
             // labelControl5
@@ -581,7 +582,7 @@
             comboBoxEdit1.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit1.Name = "comboBoxEdit1";
             comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit1.Size = new Size(337, 22);
+            comboBoxEdit1.Size = new Size(337, 34);
             comboBoxEdit1.TabIndex = 7;
             // 
             // textEdit2
@@ -589,7 +590,7 @@
             textEdit2.Location = new Point(86, 104);
             textEdit2.Margin = new Padding(3, 4, 3, 4);
             textEdit2.Name = "textEdit2";
-            textEdit2.Size = new Size(337, 22);
+            textEdit2.Size = new Size(337, 34);
             textEdit2.TabIndex = 6;
             // 
             // textEdit1
@@ -597,7 +598,7 @@
             textEdit1.Location = new Point(86, 59);
             textEdit1.Margin = new Padding(3, 4, 3, 4);
             textEdit1.Name = "textEdit1";
-            textEdit1.Size = new Size(88, 22);
+            textEdit1.Size = new Size(88, 34);
             textEdit1.TabIndex = 5;
             // 
             // dateEdit1
@@ -610,7 +611,7 @@
             dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit1.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("dateEdit1.Properties.ContextImageOptions.SvgImage");
             dateEdit1.Properties.ContextImageOptions.SvgImageSize = new Size(16, 16);
-            dateEdit1.Size = new Size(337, 24);
+            dateEdit1.Size = new Size(337, 36);
             dateEdit1.TabIndex = 4;
             // 
             // labelControl3
@@ -677,7 +678,7 @@
             tabReferencias.Controls.Add(labelControl12);
             tabReferencias.Margin = new Padding(3, 4, 3, 4);
             tabReferencias.Name = "tabReferencias";
-            tabReferencias.Size = new Size(1375, 204);
+            tabReferencias.Size = new Size(1375, 199);
             tabReferencias.Text = "Referencias";
             // 
             // comboBoxEdit7
@@ -686,7 +687,7 @@
             comboBoxEdit7.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit7.Name = "comboBoxEdit7";
             comboBoxEdit7.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit7.Size = new Size(277, 22);
+            comboBoxEdit7.Size = new Size(277, 34);
             comboBoxEdit7.TabIndex = 18;
             // 
             // textEdit7
@@ -694,7 +695,7 @@
             textEdit7.Location = new Point(527, 83);
             textEdit7.Margin = new Padding(3, 4, 3, 4);
             textEdit7.Name = "textEdit7";
-            textEdit7.Size = new Size(277, 22);
+            textEdit7.Size = new Size(277, 34);
             textEdit7.TabIndex = 17;
             // 
             // comboBoxEdit6
@@ -703,7 +704,7 @@
             comboBoxEdit6.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit6.Name = "comboBoxEdit6";
             comboBoxEdit6.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit6.Size = new Size(277, 22);
+            comboBoxEdit6.Size = new Size(277, 34);
             comboBoxEdit6.TabIndex = 16;
             // 
             // textEdit6
@@ -711,7 +712,7 @@
             textEdit6.Location = new Point(527, 7);
             textEdit6.Margin = new Padding(3, 4, 3, 4);
             textEdit6.Name = "textEdit6";
-            textEdit6.Size = new Size(277, 22);
+            textEdit6.Size = new Size(277, 34);
             textEdit6.TabIndex = 15;
             // 
             // labelControl14
@@ -766,7 +767,7 @@
             dateEdit2.Name = "dateEdit2";
             dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            dateEdit2.Size = new Size(277, 22);
+            dateEdit2.Size = new Size(277, 34);
             dateEdit2.TabIndex = 10;
             // 
             // labelControl13
@@ -786,7 +787,7 @@
             comboBoxEdit5.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit5.Name = "comboBoxEdit5";
             comboBoxEdit5.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit5.Size = new Size(277, 22);
+            comboBoxEdit5.Size = new Size(277, 34);
             comboBoxEdit5.TabIndex = 8;
             // 
             // comboBoxEdit4
@@ -795,7 +796,7 @@
             comboBoxEdit4.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit4.Name = "comboBoxEdit4";
             comboBoxEdit4.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit4.Size = new Size(277, 22);
+            comboBoxEdit4.Size = new Size(277, 34);
             comboBoxEdit4.TabIndex = 7;
             // 
             // comboBoxEdit3
@@ -804,7 +805,7 @@
             comboBoxEdit3.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit3.Name = "comboBoxEdit3";
             comboBoxEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit3.Size = new Size(277, 22);
+            comboBoxEdit3.Size = new Size(277, 34);
             comboBoxEdit3.TabIndex = 6;
             // 
             // labelControl10
@@ -860,7 +861,7 @@
             tabInfoCredito.Controls.Add(labelControl18);
             tabInfoCredito.Margin = new Padding(3, 4, 3, 4);
             tabInfoCredito.Name = "tabInfoCredito";
-            tabInfoCredito.Size = new Size(1375, 204);
+            tabInfoCredito.Size = new Size(1375, 199);
             tabInfoCredito.Text = "Info de Credito";
             // 
             // labelControl25
@@ -880,7 +881,7 @@
             comboBoxEdit9.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit9.Name = "comboBoxEdit9";
             comboBoxEdit9.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit9.Size = new Size(297, 22);
+            comboBoxEdit9.Size = new Size(297, 34);
             comboBoxEdit9.TabIndex = 21;
             // 
             // textEdit9
@@ -888,7 +889,7 @@
             textEdit9.Location = new Point(697, 49);
             textEdit9.Margin = new Padding(3, 4, 3, 4);
             textEdit9.Name = "textEdit9";
-            textEdit9.Size = new Size(297, 22);
+            textEdit9.Size = new Size(297, 34);
             textEdit9.TabIndex = 20;
             // 
             // labelControl24
@@ -912,7 +913,7 @@
             dateEdit3.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit3.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("dateEdit3.Properties.ContextImageOptions.SvgImage");
             dateEdit3.Properties.ContextImageOptions.SvgImageSize = new Size(16, 16);
-            dateEdit3.Size = new Size(297, 24);
+            dateEdit3.Size = new Size(297, 36);
             dateEdit3.TabIndex = 18;
             // 
             // labelControl23
@@ -933,7 +934,7 @@
             toggleSwitch2.Name = "toggleSwitch2";
             toggleSwitch2.Properties.OffText = "";
             toggleSwitch2.Properties.OnText = "";
-            toggleSwitch2.Size = new Size(109, 24);
+            toggleSwitch2.Size = new Size(109, 29);
             toggleSwitch2.TabIndex = 16;
             // 
             // labelControl22
@@ -954,7 +955,7 @@
             toggleSwitch1.Name = "toggleSwitch1";
             toggleSwitch1.Properties.OffText = "";
             toggleSwitch1.Properties.OnText = "";
-            toggleSwitch1.Size = new Size(109, 24);
+            toggleSwitch1.Size = new Size(109, 29);
             toggleSwitch1.TabIndex = 14;
             // 
             // labelControl21
@@ -973,7 +974,7 @@
             textEdit8.Location = new Point(230, 85);
             textEdit8.Margin = new Padding(3, 4, 3, 4);
             textEdit8.Name = "textEdit8";
-            textEdit8.Size = new Size(277, 22);
+            textEdit8.Size = new Size(277, 34);
             textEdit8.TabIndex = 12;
             // 
             // labelControl20
@@ -993,7 +994,7 @@
             checkEdit1.Margin = new Padding(3, 4, 3, 4);
             checkEdit1.Name = "checkEdit1";
             checkEdit1.Properties.Caption = "";
-            checkEdit1.Size = new Size(47, 24);
+            checkEdit1.Size = new Size(47, 26);
             checkEdit1.TabIndex = 10;
             // 
             // labelControl19
@@ -1013,7 +1014,7 @@
             comboBoxEdit8.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit8.Name = "comboBoxEdit8";
             comboBoxEdit8.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit8.Size = new Size(277, 22);
+            comboBoxEdit8.Size = new Size(277, 34);
             comboBoxEdit8.TabIndex = 8;
             // 
             // labelControl18
@@ -1033,7 +1034,7 @@
             tabMas.ImageOptions.SvgImageSize = new Size(15, 15);
             tabMas.Margin = new Padding(3, 4, 3, 4);
             tabMas.Name = "tabMas";
-            tabMas.Size = new Size(1375, 204);
+            tabMas.Size = new Size(1375, 199);
             tabMas.Text = "Mas";
             // 
             // colCantidad
@@ -1088,31 +1089,31 @@
             // textEdit25
             // 
             tablePanel2.SetColumn(textEdit25, 1);
-            textEdit25.Location = new Point(132, 88);
+            textEdit25.Location = new Point(132, 82);
             textEdit25.Margin = new Padding(3, 4, 3, 4);
             textEdit25.Name = "textEdit25";
             tablePanel2.SetRow(textEdit25, 2);
-            textEdit25.Size = new Size(136, 22);
+            textEdit25.Size = new Size(136, 34);
             textEdit25.TabIndex = 38;
             // 
             // textEdit24
             // 
             tablePanel2.SetColumn(textEdit24, 1);
-            textEdit24.Location = new Point(132, 48);
+            textEdit24.Location = new Point(132, 45);
             textEdit24.Margin = new Padding(3, 4, 3, 4);
             textEdit24.Name = "textEdit24";
             tablePanel2.SetRow(textEdit24, 1);
-            textEdit24.Size = new Size(136, 22);
+            textEdit24.Size = new Size(136, 34);
             textEdit24.TabIndex = 37;
             // 
             // textEdit23
             // 
             tablePanel2.SetColumn(textEdit23, 1);
-            textEdit23.Location = new Point(132, 11);
+            textEdit23.Location = new Point(132, 8);
             textEdit23.Margin = new Padding(3, 4, 3, 4);
             textEdit23.Name = "textEdit23";
             tablePanel2.SetRow(textEdit23, 0);
-            textEdit23.Size = new Size(136, 22);
+            textEdit23.Size = new Size(136, 34);
             textEdit23.TabIndex = 34;
             // 
             // labelControl39
@@ -1133,7 +1134,7 @@
             labelControl38.Appearance.Font = new Font("Tahoma", 9F);
             labelControl38.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl38, 0);
-            labelControl38.Location = new Point(6, 49);
+            labelControl38.Location = new Point(6, 52);
             labelControl38.Margin = new Padding(3, 4, 3, 4);
             labelControl38.Name = "labelControl38";
             tablePanel2.SetRow(labelControl38, 1);
@@ -1146,7 +1147,7 @@
             labelControl37.Appearance.Font = new Font("Tahoma", 9F);
             labelControl37.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl37, 0);
-            labelControl37.Location = new Point(6, 12);
+            labelControl37.Location = new Point(6, 15);
             labelControl37.Margin = new Padding(3, 4, 3, 4);
             labelControl37.Name = "labelControl37";
             tablePanel2.SetRow(labelControl37, 0);
@@ -1194,169 +1195,169 @@
             // textEdit22
             // 
             tablePanel1.SetColumn(textEdit22, 3);
-            textEdit22.Location = new Point(353, 196);
+            textEdit22.Location = new Point(353, 193);
             textEdit22.Margin = new Padding(3, 4, 3, 4);
             textEdit22.Name = "textEdit22";
             tablePanel1.SetRow(textEdit22, 5);
-            textEdit22.Size = new Size(152, 22);
+            textEdit22.Size = new Size(152, 34);
             textEdit22.TabIndex = 33;
             // 
             // comboBoxEdit13
             // 
             tablePanel1.SetColumn(comboBoxEdit13, 2);
-            comboBoxEdit13.Location = new Point(262, 196);
+            comboBoxEdit13.Location = new Point(262, 193);
             comboBoxEdit13.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit13.MenuManager = barManager1;
             comboBoxEdit13.Name = "comboBoxEdit13";
             comboBoxEdit13.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             tablePanel1.SetRow(comboBoxEdit13, 5);
-            comboBoxEdit13.Size = new Size(85, 22);
+            comboBoxEdit13.Size = new Size(85, 34);
             comboBoxEdit13.TabIndex = 32;
             // 
             // textEdit21
             // 
             tablePanel1.SetColumn(textEdit21, 3);
-            textEdit21.Location = new Point(353, 159);
+            textEdit21.Location = new Point(353, 156);
             textEdit21.Margin = new Padding(3, 4, 3, 4);
             textEdit21.Name = "textEdit21";
             tablePanel1.SetRow(textEdit21, 4);
-            textEdit21.Size = new Size(152, 22);
+            textEdit21.Size = new Size(152, 34);
             textEdit21.TabIndex = 31;
             // 
             // textEdit20
             // 
             tablePanel1.SetColumn(textEdit20, 3);
-            textEdit20.Location = new Point(353, 122);
+            textEdit20.Location = new Point(353, 119);
             textEdit20.Margin = new Padding(3, 4, 3, 4);
             textEdit20.Name = "textEdit20";
             tablePanel1.SetRow(textEdit20, 3);
-            textEdit20.Size = new Size(152, 22);
+            textEdit20.Size = new Size(152, 34);
             textEdit20.TabIndex = 30;
             // 
             // textEdit19
             // 
             tablePanel1.SetColumn(textEdit19, 3);
-            textEdit19.Location = new Point(353, 85);
+            textEdit19.Location = new Point(353, 82);
             textEdit19.Margin = new Padding(3, 4, 3, 4);
             textEdit19.Name = "textEdit19";
             tablePanel1.SetRow(textEdit19, 2);
-            textEdit19.Size = new Size(152, 22);
+            textEdit19.Size = new Size(152, 34);
             textEdit19.TabIndex = 29;
             // 
             // comboBoxEdit12
             // 
             tablePanel1.SetColumn(comboBoxEdit12, 2);
-            comboBoxEdit12.Location = new Point(262, 159);
+            comboBoxEdit12.Location = new Point(262, 156);
             comboBoxEdit12.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit12.MenuManager = barManager1;
             comboBoxEdit12.Name = "comboBoxEdit12";
             comboBoxEdit12.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             tablePanel1.SetRow(comboBoxEdit12, 4);
-            comboBoxEdit12.Size = new Size(85, 22);
+            comboBoxEdit12.Size = new Size(85, 34);
             comboBoxEdit12.TabIndex = 28;
             // 
             // comboBoxEdit11
             // 
             tablePanel1.SetColumn(comboBoxEdit11, 2);
-            comboBoxEdit11.Location = new Point(262, 122);
+            comboBoxEdit11.Location = new Point(262, 119);
             comboBoxEdit11.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit11.MenuManager = barManager1;
             comboBoxEdit11.Name = "comboBoxEdit11";
             comboBoxEdit11.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             tablePanel1.SetRow(comboBoxEdit11, 3);
-            comboBoxEdit11.Size = new Size(85, 22);
+            comboBoxEdit11.Size = new Size(85, 34);
             comboBoxEdit11.TabIndex = 27;
             // 
             // comboBoxEdit10
             // 
             tablePanel1.SetColumn(comboBoxEdit10, 2);
-            comboBoxEdit10.Location = new Point(262, 85);
+            comboBoxEdit10.Location = new Point(262, 82);
             comboBoxEdit10.Margin = new Padding(3, 4, 3, 4);
             comboBoxEdit10.MenuManager = barManager1;
             comboBoxEdit10.Name = "comboBoxEdit10";
             comboBoxEdit10.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             tablePanel1.SetRow(comboBoxEdit10, 2);
-            comboBoxEdit10.Size = new Size(85, 22);
+            comboBoxEdit10.Size = new Size(85, 34);
             comboBoxEdit10.TabIndex = 26;
             // 
             // textEdit18
             // 
             tablePanel1.SetColumn(textEdit18, 1);
-            textEdit18.Location = new Point(147, 274);
+            textEdit18.Location = new Point(147, 268);
             textEdit18.Margin = new Padding(3, 4, 3, 4);
             textEdit18.Name = "textEdit18";
             tablePanel1.SetRow(textEdit18, 7);
-            textEdit18.Size = new Size(108, 22);
+            textEdit18.Size = new Size(108, 34);
             textEdit18.TabIndex = 25;
             // 
             // textEdit17
             // 
             tablePanel1.SetColumn(textEdit17, 1);
-            textEdit17.Location = new Point(147, 233);
+            textEdit17.Location = new Point(147, 230);
             textEdit17.Margin = new Padding(3, 4, 3, 4);
             textEdit17.Name = "textEdit17";
             tablePanel1.SetRow(textEdit17, 6);
-            textEdit17.Size = new Size(108, 22);
+            textEdit17.Size = new Size(108, 34);
             textEdit17.TabIndex = 25;
             // 
             // textEdit16
             // 
             tablePanel1.SetColumn(textEdit16, 1);
-            textEdit16.Location = new Point(147, 196);
+            textEdit16.Location = new Point(147, 193);
             textEdit16.Margin = new Padding(3, 4, 3, 4);
             textEdit16.Name = "textEdit16";
             tablePanel1.SetRow(textEdit16, 5);
-            textEdit16.Size = new Size(108, 22);
+            textEdit16.Size = new Size(108, 34);
             textEdit16.TabIndex = 25;
             // 
             // textEdit15
             // 
             tablePanel1.SetColumn(textEdit15, 1);
-            textEdit15.Location = new Point(147, 159);
+            textEdit15.Location = new Point(147, 156);
             textEdit15.Margin = new Padding(3, 4, 3, 4);
             textEdit15.Name = "textEdit15";
             tablePanel1.SetRow(textEdit15, 4);
-            textEdit15.Size = new Size(108, 22);
+            textEdit15.Size = new Size(108, 34);
             textEdit15.TabIndex = 25;
             // 
             // textEdit14
             // 
             tablePanel1.SetColumn(textEdit14, 1);
-            textEdit14.Location = new Point(147, 122);
+            textEdit14.Location = new Point(147, 119);
             textEdit14.Margin = new Padding(3, 4, 3, 4);
             textEdit14.Name = "textEdit14";
             tablePanel1.SetRow(textEdit14, 3);
-            textEdit14.Size = new Size(108, 22);
+            textEdit14.Size = new Size(108, 34);
             textEdit14.TabIndex = 25;
             // 
             // textEdit13
             // 
             tablePanel1.SetColumn(textEdit13, 1);
-            textEdit13.Location = new Point(147, 85);
+            textEdit13.Location = new Point(147, 82);
             textEdit13.Margin = new Padding(3, 4, 3, 4);
             textEdit13.Name = "textEdit13";
             tablePanel1.SetRow(textEdit13, 2);
-            textEdit13.Size = new Size(108, 22);
+            textEdit13.Size = new Size(108, 34);
             textEdit13.TabIndex = 25;
             // 
             // textEdit12
             // 
             tablePanel1.SetColumn(textEdit12, 1);
-            textEdit12.Location = new Point(147, 48);
+            textEdit12.Location = new Point(147, 45);
             textEdit12.Margin = new Padding(3, 4, 3, 4);
             textEdit12.Name = "textEdit12";
             tablePanel1.SetRow(textEdit12, 1);
-            textEdit12.Size = new Size(108, 22);
+            textEdit12.Size = new Size(108, 34);
             textEdit12.TabIndex = 25;
             // 
             // textEdit11
             // 
             tablePanel1.SetColumn(textEdit11, 1);
-            textEdit11.Location = new Point(147, 11);
+            textEdit11.Location = new Point(147, 8);
             textEdit11.Margin = new Padding(3, 4, 3, 4);
             textEdit11.Name = "textEdit11";
             tablePanel1.SetRow(textEdit11, 0);
-            textEdit11.Size = new Size(108, 22);
+            textEdit11.Size = new Size(108, 34);
             textEdit11.TabIndex = 24;
             // 
             // labelControl36
@@ -1364,7 +1365,7 @@
             labelControl36.Appearance.Font = new Font("Tahoma", 9F);
             labelControl36.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl36, 0);
-            labelControl36.Location = new Point(6, 276);
+            labelControl36.Location = new Point(6, 275);
             labelControl36.Margin = new Padding(3, 4, 3, 4);
             labelControl36.Name = "labelControl36";
             tablePanel1.SetRow(labelControl36, 7);
@@ -1377,7 +1378,7 @@
             labelControl35.Appearance.Font = new Font("Tahoma", 9F);
             labelControl35.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl35, 0);
-            labelControl35.Location = new Point(6, 234);
+            labelControl35.Location = new Point(6, 237);
             labelControl35.Margin = new Padding(3, 4, 3, 4);
             labelControl35.Name = "labelControl35";
             tablePanel1.SetRow(labelControl35, 6);
@@ -1390,7 +1391,7 @@
             labelControl34.Appearance.Font = new Font("Tahoma", 9F);
             labelControl34.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl34, 0);
-            labelControl34.Location = new Point(6, 197);
+            labelControl34.Location = new Point(6, 200);
             labelControl34.Margin = new Padding(3, 4, 3, 4);
             labelControl34.Name = "labelControl34";
             tablePanel1.SetRow(labelControl34, 5);
@@ -1403,7 +1404,7 @@
             labelControl33.Appearance.Font = new Font("Tahoma", 9F);
             labelControl33.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl33, 0);
-            labelControl33.Location = new Point(6, 160);
+            labelControl33.Location = new Point(6, 163);
             labelControl33.Margin = new Padding(3, 4, 3, 4);
             labelControl33.Name = "labelControl33";
             tablePanel1.SetRow(labelControl33, 4);
@@ -1416,7 +1417,7 @@
             labelControl32.Appearance.Font = new Font("Tahoma", 9F);
             labelControl32.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl32, 0);
-            labelControl32.Location = new Point(6, 123);
+            labelControl32.Location = new Point(6, 126);
             labelControl32.Margin = new Padding(3, 4, 3, 4);
             labelControl32.Name = "labelControl32";
             tablePanel1.SetRow(labelControl32, 3);
@@ -1429,7 +1430,7 @@
             labelControl31.Appearance.Font = new Font("Tahoma", 9F);
             labelControl31.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl31, 0);
-            labelControl31.Location = new Point(6, 86);
+            labelControl31.Location = new Point(6, 89);
             labelControl31.Margin = new Padding(3, 4, 3, 4);
             labelControl31.Name = "labelControl31";
             tablePanel1.SetRow(labelControl31, 2);
@@ -1442,7 +1443,7 @@
             labelControl30.Appearance.Font = new Font("Tahoma", 9F);
             labelControl30.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl30, 0);
-            labelControl30.Location = new Point(6, 49);
+            labelControl30.Location = new Point(6, 52);
             labelControl30.Margin = new Padding(3, 4, 3, 4);
             labelControl30.Name = "labelControl30";
             tablePanel1.SetRow(labelControl30, 1);
@@ -1455,7 +1456,7 @@
             labelControl29.Appearance.Font = new Font("Tahoma", 9F);
             labelControl29.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl29, 0);
-            labelControl29.Location = new Point(6, 12);
+            labelControl29.Location = new Point(6, 15);
             labelControl29.Margin = new Padding(3, 4, 3, 4);
             labelControl29.Name = "labelControl29";
             tablePanel1.SetRow(labelControl29, 0);

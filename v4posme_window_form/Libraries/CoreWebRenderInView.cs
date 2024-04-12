@@ -60,19 +60,8 @@ public class CoreWebRenderInView
             return new GridView();
         }
 
-        var viewData = (List<Dictionary<string, object>>)dataViewDto.Data;
-
-        if (displayLength > 0)
-        {
-            // Creating the paging tasks
-            const int rowsPerPage = 20;
-            if (viewData.Count % rowsPerPage > displayLength)
-            {
-                viewData = viewData.Take(rowsPerPage).ToList();
-            }
-        }
-
-        var table = FillGridControl(viewData);
+        var viewData    = (List<Dictionary<string, object>>)dataViewDto.Data;
+        var table       = FillGridControl(viewData);
         if (table is null)
         {
             return new GridView();

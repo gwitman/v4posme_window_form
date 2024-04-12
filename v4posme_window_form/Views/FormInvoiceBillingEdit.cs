@@ -122,7 +122,7 @@ namespace v4posme_window.Views
 
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            var formTypeListSearch = new FormTypeListSearch(33, "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true, "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
+            var formTypeListSearch = new FormTypeListSearch("Lista de Productos",33, "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true, "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
             formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptar;
             formTypeListSearch.ShowDialog(this);
         }
