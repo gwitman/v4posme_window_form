@@ -15,27 +15,35 @@ using v4posme_library.Libraries;
 using System.Windows.Controls;
 using Unity;
 using v4posme_window.Libraries;
-
+using K4os.Hash.xxHash;
+using GridView = DevExpress.XtraGrid.Views.Grid.GridView;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace v4posme_window.Template
 {
     public partial class FormTypeListSearch : XtraForm
     {
-        private int componentID_ { get; set; }
-        private EventHandler fnCollback_ { get; set; }
-        private string viewName_ { get; set; }
-        private bool autoClose_  { get; set; }
-        private string filter_  { get; set; }
-        private bool multiSelect_  { get; set; }
-        private string urlRedictWhenEmpty_  { get; set; }
-        private int iDisplayStart_  { get; set; }
-        private int iDisplayLength_  { get; set; }
-        private string sSearch_  { get; set; }
+        // Declarar un delegado que represente la firma del método que quieres llamar en el formulario padre
+        public delegate void EventoCallBackAceptar(string mensaje);
 
-        public FormTypeListSearch(int componentID,EventHandler fnCollback,string viewName,bool autoClose,string filter,bool multiSelect,string urlRedictWhenEmpty,int iDisplayStart,int iDisplayLength,string sSearch)
+        // Declarar un evento que se disparará cuando ocurra el evento en el formulario hijo
+        public event EventoCallBackAceptar EventoCallBackAceptar_;
+
+        private int componentID_ { get; set; }        
+        private string viewName_ { get; set; }
+        private bool autoClose_ { get; set; }
+        private string filter_ { get; set; }
+        private bool multiSelect_ { get; set; }
+        private string urlRedictWhenEmpty_ { get; set; }
+        private int iDisplayStart_ { get; set; }
+        private int iDisplayLength_ { get; set; }
+        private string sSearch_ { get; set; }
+        private GridView objGridView {  get; set; }
+
+        public FormTypeListSearch(int componentID, string viewName, bool autoClose, string filter, bool multiSelect, string urlRedictWhenEmpty, int iDisplayStart, int iDisplayLength, string sSearch)
         {
-            componentID_ = componentID;
-            fnCollback_ = fnCollback;
+            componentID_ = componentID;            
             viewName_ = viewName;
             autoClose_ = autoClose;
             filter_ = filter;
@@ -44,40 +52,49 @@ namespace v4posme_window.Template
             iDisplayStart_ = iDisplayStart;
             iDisplayLength_ = iDisplayLength;
             sSearch_ = sSearch;
-
             InitializeComponent();
 
         }
 
         private void FormTypeListSearch_Load(object sender, EventArgs e)
         {
-            this.ShowViewByNamePaginate(  componentID_ ,fnCollback_ ,viewName_ ,autoClose_ ,filter_ ,multiSelect_ ,urlRedictWhenEmpty_ ,iDisplayStart_ ,iDisplayLength_ ,sSearch_ );
+            this.ShowViewByNamePaginate();
         }
 
-        
-        public void ShowViewByNamePaginate(int componentID, EventHandler fnCollback, string viewName, bool autoClose, string filter, bool multiSelect, string urlRedictWhenEmpty, int iDisplayStart, int iDisplayLength, string sSearch)
+
+        public void ShowViewByNamePaginate()
         {
-            PanelControl controlParent  = this.centerPane;
-            var coreWebTools            = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
-            var coreWebView             = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
-            var calleridSearch          = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["CALLERID_SEARCH"]);
-            var coreWebRenderInView     = new CoreWebRenderInView();
+            PanelControl controlParent = this.centerPane;            
+            int componentID = componentID_;
+            string viewName = viewName_;
+            bool autoClose = autoClose_;
+            string filter = filter_;
+            bool multiSelect = multiSelect_;
+            string urlRedictWhenEmpty = urlRedictWhenEmpty_;
+            int iDisplayStart = iDisplayStart_;
+            int iDisplayLength = iDisplayLength_;
+            string sSearch = sSearch_;
+
+            var coreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
+            var coreWebView = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
+            var calleridSearch = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["CALLERID_SEARCH"]);
+            var coreWebRenderInView = new CoreWebRenderInView();
 
 
-            var usuario     = VariablesGlobales.Instance.User;
+            var usuario = VariablesGlobales.Instance.User;
 
 
             // Crear un diccionario para los parámetros staticos
-            var parameter   = new Dictionary<string, string>
+            var parameter = new Dictionary<string, string>
             {
-                
-                ["{companyID}"]         = usuario!.CompanyId.ToString(),
-                ["{componentID}"]       = componentID.ToString(),                
-                ["{iDisplayStart}"]     = iDisplayStart.ToString(),
-                ["{iDisplayStartDB}"]   = "0",
-                ["{iDisplayLength}"]    = iDisplayLength.ToString(),
-                ["{sSearchDB}"]         = sSearch,
-                ["{sSearch}"]           = sSearch
+
+                ["{companyID}"] = usuario!.CompanyId.ToString(),
+                ["{componentID}"] = componentID.ToString(),
+                ["{iDisplayStart}"] = iDisplayStart.ToString(),
+                ["{iDisplayStartDB}"] = "0",
+                ["{iDisplayLength}"] = iDisplayLength.ToString(),
+                ["{sSearchDB}"] = sSearch,
+                ["{sSearch}"] = sSearch
             };
 
             // Agregar al diccionarios los parametros dinamicos
@@ -93,21 +110,53 @@ namespace v4posme_window.Template
 
 
 
-            var datos               = coreWebView.GetViewByName(usuario, componentID, viewName, calleridSearch, null, parameter);
-            var datosTotales        = coreWebView.GetViewByName(usuario, componentID, viewName + "_TOTAL", calleridSearch, null, parameter);
-            var datosDisplay        = coreWebView.GetViewByName(usuario, componentID, viewName + "_DISPLAY", calleridSearch, null, parameter);
-            
+            var datos           = coreWebView.GetViewByName(usuario, componentID, viewName, calleridSearch, null, parameter);
+            var datosTotales    = coreWebView.GetViewByName(usuario, componentID, viewName + "_TOTAL", calleridSearch, null, parameter);
+            var datosDisplay    = coreWebView.GetViewByName(usuario, componentID, viewName + "_DISPLAY", calleridSearch, null, parameter);
+
 
             if (datos is null)
                 return;
-            
+
 
             //aqui vamos a validar si seleccion multiple
-            var objDataViewRender = coreWebRenderInView.RenderGrid(datos, "ListView",iDisplayLength, controlParent);
+            objGridView = coreWebRenderInView.RenderGrid(datos, "ListView", iDisplayLength, controlParent);
+            objGridView.OptionsView.ShowGroupPanel = true;
 
-            
-           
+
+
         }
-        
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+
+            // Verificar si se ha seleccionado alguna fila
+            string resultJson = "{";
+            if (objGridView.SelectedRowsCount > 0)
+            {
+
+                // Obtener el índice de la fila seleccionada
+                List<int> rowIndex = objGridView.GetSelectedRows().ToList();
+                foreach(var indexRow in rowIndex)
+                {
+                    foreach (GridColumn column in objGridView.Columns)
+                    {
+                        string nombreColumna    = column.FieldName;
+                        string valueColumn      = objGridView.GetRowCellValue(indexRow, nombreColumna).ToString();
+                        resultJson              = resultJson+""+nombreColumna + ":'"+valueColumn+"'";
+
+                    }
+                }
+
+            }
+            else
+            {
+                // No se ha seleccionado ninguna fila, maneja este caso según tus requerimientos
+            }
+
+            resultJson              = resultJson+"}";
+            EventoCallBackAceptar_?.Invoke(resultJson);
+
+        }
     }
 }

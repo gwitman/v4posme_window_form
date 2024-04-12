@@ -97,20 +97,24 @@ namespace v4posme_window.Views
 
         }
 
-        private void btnAddProduct_Click(object sender, EventArgs e)
-        {
-            var formTypeListSearch = new FormTypeListSearch(33 ,btnAceptRow,"SELECCIONAR_ITEM_BILLING_POPUP_INVOICE",true, "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false,"",0,20,"");            
-            formTypeListSearch.ShowDialog(this);
-        }
-
+     
         public void PreRender()
         {
             var i = 0;
         }
 
-        public void btnAceptRow(object? sender, EventArgs? args)
+        private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            var x = 0;
+            var formTypeListSearch = new FormTypeListSearch(33, "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true, "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
+            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptar;
+            formTypeListSearch.ShowDialog(this);
+        }
+
+
+        private void EventoCallBackAceptar(string mensaje)
+        {
+            // Realizar la lógica que desees en el formulario padre
+            MessageBox.Show($"Evento en el formulario hijo: {mensaje}");
         }
     }
 }
