@@ -24,6 +24,7 @@ namespace v4posme_window.Views
         private int CompanyId { get; set; }
         private int TransactionId { get; set; }
         private int TransactionMasterId { get; set; }
+        private TypeOpenForm TypeOpen { get; set; }
 
         public FormInvoiceBillingEdit(TypeOpenForm typeOpen, int companyId, int transactionId, int transactionMasterId)
         {
@@ -31,21 +32,9 @@ namespace v4posme_window.Views
             CompanyId = companyId;
             TransactionId = transactionId;
             TransactionMasterId = transactionMasterId;
+            TypeOpen = typeOpen;
 
-            if (typeOpen == TypeOpenForm.Init)
-            {
-                PreRender();
-            }
 
-            if (typeOpen == TypeOpenForm.Init && transactionMasterId > 0)
-            {
-                LoadEdit();
-            }
-
-            if (typeOpen == TypeOpenForm.Init && transactionMasterId == 0)
-            {
-                LoadNew();
-            }
         }
 
 
@@ -79,47 +68,10 @@ namespace v4posme_window.Views
             throw new NotImplementedException();
         }
 
-        public static void Delete(int transactionMasterID)
-        {
-            throw new NotImplementedException();
-        }
 
-        private void lblTitulo_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void dateEdit1_EditValueChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tablePanel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
 
 
         public void PreRender()
-        {
-            var i = 0;
-        }
-
-        private void btnAddProduct_Click(object sender, EventArgs e)
-        {
-            var formTypeListSearch = new FormTypeListSearch(33, "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
-                "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
-            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptar;
-            formTypeListSearch.ShowDialog(this);
-        }
-
-
-        private void EventoCallBackAceptar(dynamic mensaje)
-        {
-            // Realizar la lógica que desees en el formulario padre
-            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
-            MessageBox.Show("Evento en el formulario hijo: " +
-                            objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
-        }
-
-        private void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
         {
             var imagenInvoice = VariablesGlobales.ConfigurationBuilder["PATH_IMAGE_IN_INVOICE_POSME"];
             if (imagenInvoice is not null)
@@ -137,6 +89,60 @@ namespace v4posme_window.Views
                     pictureEdit1.Image = Image.FromFile(imageCustomer);
                 }
             }
+        }
+
+
+
+
+        private void EventoCallBackAceptar(dynamic mensaje)
+        {
+            // Realizar la lógica que desees en el formulario padre
+            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
+            MessageBox.Show("Evento en el formulario hijo: " + objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
+        }
+
+
+        private void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
+        {
+            if (TypeOpen == TypeOpenForm.Init)
+            {
+                PreRender();
+            }
+
+            if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
+            {
+                LoadEdit();
+            }
+
+            if (TypeOpen == TypeOpenForm.Init && TransactionMasterId == 0)
+            {
+                LoadNew();
+            }
+        }
+
+        private void btnAddProduct_Click(object sender, EventArgs e)
+        {
+            var formTypeListSearch = new FormTypeListSearch(33, "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true, "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
+            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptar;
+            formTypeListSearch.ShowDialog(this);
+        }
+
+
+        private void lblTitulo_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void dateEdit1_EditValueChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void tablePanel1_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        private void tablePanel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
