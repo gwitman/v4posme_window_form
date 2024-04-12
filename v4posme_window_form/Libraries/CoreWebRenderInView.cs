@@ -168,15 +168,15 @@ public class CoreWebRenderInView
         return table;
     }
 
-    public void GetMessageAlert(TypeMessage type, string title, string body, Form form)
+    public void GetMessageAlert(TypeError type, string title, string body, Form form)
     {
         var alert = new AlertControl();
         var image = type switch
         {
-            TypeMessage.Informacion => Image.FromFile(
+            TypeError.Informacion => Image.FromFile(
                 VariablesGlobales.ConfigurationBuilder["ICON_INFORMACION_PATH"]!),
-            TypeMessage.Error => Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_ERROR_PATH"]!),
-            TypeMessage.Warning => Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_WARNING_PATH"]!),
+            TypeError.Error => Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_ERROR_PATH"]!),
+            TypeError.Warning => Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_WARNING_PATH"]!),
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
         alert.Show(form, title, body, image);

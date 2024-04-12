@@ -10,6 +10,7 @@ namespace v4posme_window.Interfaz
 {
     public interface IFormTypeEdit
     {
+        void PreRender();
         void SaveInsert();
         void SaveUpdate();
         void LoadNew();

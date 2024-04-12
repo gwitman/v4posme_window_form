@@ -1,8 +1,15 @@
 ﻿namespace v4posme_window.Libraries;
 
-public enum TypeMessage
+public enum TypeError
 {
     Informacion,
     Error,
     Warning
+}
+
+
+public enum TypeOpenForm
+{
+    Init,
+    NotInit
 }

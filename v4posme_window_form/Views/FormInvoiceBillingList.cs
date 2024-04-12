@@ -52,7 +52,7 @@ namespace v4posme_window.Views
                     VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (!permited)
                 {
-                    _coreWebRender.GetMessageAlert(TypeMessage.Error, "Permisos", "No tiene acceso a los controles",
+                    _coreWebRender.GetMessageAlert(TypeError.Error, "Permisos", "No tiene acceso a los controles",
                         this);
                     return;
                 }
@@ -64,7 +64,7 @@ namespace v4posme_window.Views
                     VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (resultPermission == permissionNone)
                 {
-                    _coreWebRender.GetMessageAlert(TypeMessage.Error, "Permisos", "No se encontraron permisos", this);
+                    _coreWebRender.GetMessageAlert(TypeError.Error, "Permisos", "No se encontraron permisos", this);
                     return;
                 }
             }
@@ -72,7 +72,7 @@ namespace v4posme_window.Views
             var objComponent = _coreWebTools.GetComponentIdByComponentName("tb_transaction_master_billing");
             if (objComponent is null)
             {
-                _coreWebRender.GetMessageAlert(TypeMessage.Error, "Error",
+                _coreWebRender.GetMessageAlert(TypeError.Error, "Error",
                     "00409 EL COMPONENTE 'tb_transaction_master_billing' NO EXISTE...", this);
                 return;
             }

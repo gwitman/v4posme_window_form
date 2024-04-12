@@ -76,5 +76,10 @@ namespace v4posme_window.Views
             var formTypeListSearch = new FormTypeListSearch();
             formTypeListSearch.ShowDialog(this);
         }
+
+        public void PreRender()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

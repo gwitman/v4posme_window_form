@@ -56,7 +56,7 @@ namespace v4posme_window.Views
             if (string.IsNullOrEmpty(txtUsuario.Text))
             {
                 dxErrorProvider.SetError(txtUsuario, @"Debe especificar un usuario para continuar.");
-                coreWebRender.GetMessageAlert(TypeMessage.Error, @"Usuario",
+                coreWebRender.GetMessageAlert(TypeError.Error, @"Usuario",
                     "Debe especificar un usuario para continuar.", this);
                 if (progressPanel.Visible)
                 {
@@ -73,7 +73,7 @@ namespace v4posme_window.Views
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
                 dxErrorProvider.SetError(txtPassword, "Debe especificar una contraseña para continuar.");
-                coreWebRender.GetMessageAlert(TypeMessage.Error, "Usuario",
+                coreWebRender.GetMessageAlert(TypeError.Error, "Usuario",
                     "Debe especificar una contraseña para continuar.", this);
                 if (progressPanel.Visible)
                 {
@@ -146,11 +146,11 @@ namespace v4posme_window.Views
             switch (validar)
             {
                 case 1:
-                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error",
+                    coreWebRender.GetMessageAlert(TypeError.Error, "Error",
                         "Nombre de usuario no registrado, intente nuevamente", this);
                     break;
                 case 2:
-                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error",
+                    coreWebRender.GetMessageAlert(TypeError.Error, "Error",
                         "Contraseña incorrecta, intente nuevamente", this);
                     break;
                 case 0: break;
@@ -159,7 +159,7 @@ namespace v4posme_window.Views
 
             if (VariablesGlobales.Instance.MessageLogin is not null)
             {
-                coreWebRender.GetMessageAlert(TypeMessage.Error, "posMe", VariablesGlobales.Instance.MessageLogin,
+                coreWebRender.GetMessageAlert(TypeError.Error, "posMe", VariablesGlobales.Instance.MessageLogin,
                     this);
             }
 
@@ -218,7 +218,7 @@ namespace v4posme_window.Views
             if (string.IsNullOrEmpty(txtUsuario.Text))
             {
                 dxErrorProvider.SetError(txtUsuario, @"Debe especificar un usuario para continuar.");
-                coreWebRender.GetMessageAlert(TypeMessage.Error, @"Usuario",
+                coreWebRender.GetMessageAlert(TypeError.Error, @"Usuario",
                     "Debe especificar un usuario para continuar.", this);
 
                 return;
@@ -231,7 +231,7 @@ namespace v4posme_window.Views
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
                 dxErrorProvider.SetError(txtPassword, "Debe especificar una contraseña para continuar.");
-                coreWebRender.GetMessageAlert(TypeMessage.Error, "Usuario",
+                coreWebRender.GetMessageAlert(TypeError.Error, "Usuario",
                     "Debe especificar una contraseña para continuar.", this);
 
                 return;
@@ -265,11 +265,11 @@ namespace v4posme_window.Views
             switch (validar)
             {
                 case 1:
-                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error",
+                    coreWebRender.GetMessageAlert(TypeError.Error, "Error",
                         "Nombre de usuario no registrado, intente nuevamente", this);
                     break;
                 case 2:
-                    coreWebRender.GetMessageAlert(TypeMessage.Error, "Error",
+                    coreWebRender.GetMessageAlert(TypeError.Error, "Error",
                         "Contraseña incorrecta, intente nuevamente", this);
                     break;
                 case 0: break;

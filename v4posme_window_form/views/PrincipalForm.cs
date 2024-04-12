@@ -27,7 +27,7 @@ namespace v4posme_window.Views
             var coreWebRender = new CoreWebRenderInView();
             if (VariablesGlobales.Instance.User is null)
             {
-                coreWebRender.GetMessageAlert(TypeMessage.Error, "Error","NO se pudo cargar los datos de usuario, inicie sesion nuevamente", this);
+                coreWebRender.GetMessageAlert(TypeError.Error, "Error","NO se pudo cargar los datos de usuario, inicie sesion nuevamente", this);
                 return;
             }
 
