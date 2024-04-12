@@ -1,14 +1,34 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Dynamic;
+using System.Collections;
 
 namespace v4posme_library.Libraries.CustomHelper
 {
     public class WebToolsHelper
     {
+        public string helper_RequestGetValueObjet(dynamic data,string fieldData, string defaultValue)
+        {
+            //Validar data
+            if (data is null)
+                return defaultValue;
+
+            //Validar has
+            var dictionary  = (IDictionary<string, object>)data;
+            if (dictionary.ContainsKey(fieldData))
+                return defaultValue;
+
+
+            string value    = dictionary[fieldData].ToString();
+            return value;
+        }
+
         public DateTime HelperGetDate()
         {
             var now = DateTime.Now;

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
+using v4posme_library.Libraries.CustomHelper;
 using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
@@ -111,10 +112,11 @@ namespace v4posme_window.Views
         }
 
 
-        private void EventoCallBackAceptar(string mensaje)
+        private void EventoCallBackAceptar(dynamic mensaje)
         {
             // Realizar la lógica que desees en el formulario padre
-            MessageBox.Show($"Evento en el formulario hijo: {mensaje}");
+            WebToolsHelper objWebToolsHelper = new WebToolsHelper();            
+            MessageBox.Show("Evento en el formulario hijo: " + objWebToolsHelper.helper_RequestGetValueObjet(mensaje,"itemID","0"));
         }
     }
 }

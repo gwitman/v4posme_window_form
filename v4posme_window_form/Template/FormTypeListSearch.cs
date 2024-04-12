@@ -20,13 +20,14 @@ using GridView = DevExpress.XtraGrid.Views.Grid.GridView;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraExport.Helpers;
+using System.Dynamic;
 
 namespace v4posme_window.Template
 {
     public partial class FormTypeListSearch : XtraForm
     {
         // Declarar un delegado que represente la firma del método que quieres llamar en el formulario padre
-        public delegate void EventoCallBackAceptar(string mensaje);
+        public delegate void EventoCallBackAceptar(dynamic mensaje);
 
         // Declarar un evento que se disparará cuando ocurra el evento en el formulario hijo
         public event EventoCallBackAceptar EventoCallBackAceptar_;
@@ -146,7 +147,8 @@ namespace v4posme_window.Template
         void fnSelectedRow()
         {
             // Verificar si se ha seleccionado alguna fila
-            string resultJson = "{";
+            dynamic dynamicObject   = new ExpandoObject();
+            var dictionaryObject    = (IDictionary<string, object>)dynamicObject;
             if (objGridView.SelectedRowsCount > 0)
             {
 
@@ -156,9 +158,9 @@ namespace v4posme_window.Template
                 {
                     foreach (GridColumn column in objGridView.Columns)
                     {
-                        string nombreColumna = column.FieldName;
-                        string valueColumn = objGridView.GetRowCellValue(indexRow, nombreColumna).ToString();
-                        resultJson = resultJson + "" + nombreColumna + ":'" + valueColumn + "'";
+                        string nombreColumna                = column.FieldName;
+                        string valueColumn                  = objGridView.GetRowCellValue(indexRow, nombreColumna).ToString();
+                        dictionaryObject[nombreColumna]     = valueColumn;
 
                     }
                 }
@@ -169,8 +171,8 @@ namespace v4posme_window.Template
                 // No se ha seleccionado ninguna fila, maneja este caso según tus requerimientos
             }
 
-            resultJson = resultJson + "}";
-            EventoCallBackAceptar_?.Invoke(resultJson);
+            EventoCallBackAceptar_?.Invoke(dynamicObject);
+
         }
     }
 }
