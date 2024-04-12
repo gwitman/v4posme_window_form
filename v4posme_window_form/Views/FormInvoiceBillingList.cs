@@ -33,7 +33,11 @@ namespace v4posme_window.Views
             InitializeComponent();
             lblTitulo.Text = @"LISTA DE FACTURAS";
             Text = lblTitulo.Text;
+
+
             btnEditar.Click += Edit;
+            btnEliminar.Click += Delete;
+            btnNuevo.Click += New;
         }
 
 
@@ -109,19 +113,19 @@ namespace v4posme_window.Views
             throw new NotImplementedException();
         }
 
-        public void Delete()
+        public void Delete(object? sender, EventArgs? args)
         {
-            throw new NotImplementedException();
+            new FormInvoiceBillingEdit(TypeOpenForm.NotInit, 0, 0, 0).ComandDelete();
         }
 
         public void Edit(object? sender, EventArgs? args)
         {
-            new FormInvoiceBillingEdit().ShowDialog();
+            new FormInvoiceBillingEdit(TypeOpenForm.Init,0,0,0).ShowDialog();
         }
 
-        public void New()
+        public void New(object? sender, EventArgs? args)
         {
-            throw new NotImplementedException();
+            new FormInvoiceBillingEdit(TypeOpenForm.Init, 0, 0, 2).ShowDialog();
         }
     }
 }

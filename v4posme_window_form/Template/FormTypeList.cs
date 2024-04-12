@@ -12,12 +12,13 @@ using v4posme_window.Interfaz;
 
 namespace v4posme_window.Template
 {
-    public partial class FormTypeList : Form 
+    public partial class FormTypeList : Form
     {
         public FormTypeList()
         {
             InitializeComponent();
         }
-        
+
+     
     }
 }

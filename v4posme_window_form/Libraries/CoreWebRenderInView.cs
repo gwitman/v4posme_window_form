@@ -41,8 +41,7 @@ public class CoreWebRenderInView
         comboBox.EditValue = selectedValue ?? defaultValue;
     }
 
-    public GridView RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, int displayLength,
-        Control form)
+    public GridView RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, int displayLength,Control form)
     {
         if (dataViewDto.Config is null)
         {
@@ -292,78 +291,5 @@ public class CoreWebRenderInView
         }
     }
 
-    public GridView? ShowViewByNamePaginate(int componentId, string fnCallback, string viewname, string autoclose,
-        string filter, string multiselect, string urlRedictWhenEmpty, string sEcho, string iDisplayStart,
-        string iDisplayLength, string sSearch,Control form)
-    {
-        var coreWebAuthentication = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
-        var coreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
-        var coreWebView = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
-        var calleridSearch = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["CALLERID_SEARCH"]);
-        // Crear un diccionario para los parámetros
-        var parameter = new Dictionary<string, string>
-        {
-            ["{componentid}"] = componentId.ToString(),
-            ["{fnCallback}"] = fnCallback,
-            ["{viewname}"] = viewname,
-            ["{autoclose}"] = autoclose,
-            ["{filter}"] = filter,
-            ["{multiselect}"] = multiselect,
-            ["{urlRedictWhenEmpty}"] = urlRedictWhenEmpty,
-            ["{sEcho}"] = sEcho,
-            ["{iDisplayStart}"] = iDisplayStart,
-            ["{iDisplayStartDB}"] = iDisplayStart == "1"
-                ? "0"
-                : ((int.Parse(iDisplayStart) - 1) * int.Parse(iDisplayLength)).ToString(),
-            ["{iDisplayLength}"] = iDisplayLength,
-            ["{sSearchDB}"] = Uri.UnescapeDataString(sSearch),
-            ["{sSearch}"] = sSearch
-        };
-
-        try
-        {
-            // Validar autenticación
-            if (VariablesGlobales.Instance.User is null)
-                throw new Exception("User not authenticated");
-
-            var usuario = VariablesGlobales.Instance.User;
-
-            parameter["{companyID}"] = usuario.CompanyId.ToString();
-            parameter["{useMobile}"] = usuario.UseMobile.ToString();
-            parameter["{fnCallback}"] = fnCallback;
-            viewname = Uri.UnescapeDataString(viewname);
-            filter = Uri.UnescapeDataString(filter);
-            var result = coreWebTools.FormatParameter(filter);
-
-            if (result is not null)
-            {
-                foreach (var kvp in result)
-                {
-                    parameter[kvp.Key] = kvp.Value.ToString()!;
-                }
-            }
-
-            var dataViewData = usuario.UseMobile == 0
-                ? coreWebView.GetViewByName(usuario, componentId, viewname, calleridSearch, null,
-                    parameter)
-                : coreWebView.GetViewByName(usuario, componentId, viewname + "_MOBILE",
-                    calleridSearch, null, parameter);
-
-            var dataViewDataTotal = coreWebView.GetViewByName(usuario, componentId,
-                viewname + "_TOTAL", calleridSearch, null, parameter);
-            var dataViewDataDisplay = coreWebView.GetViewByName(usuario, componentId,
-                viewname + "_DISPLAY", calleridSearch, null, parameter);
-
-            //aqui vamos a validar si seleccion multiple
-            var dataViewRender = RenderGrid(dataViewData, "ListView", 
-                int.Parse(iDisplayLength), form);
-            
-
-            return dataViewRender;
-        }
-        catch (Exception)
-        {
-            return null;
-        }
-    }
+    
 }

@@ -40,10 +40,10 @@ class CoreWebTools : ICoreWebTools
     {
         try
         {
-            filter = filter.Replace("|", ":");
-            filter = filter.Replace("{}", ",");
-            var json = filter.StartsWith("{") && filter.EndsWith("}") ? filter : "{" + filter + "}";
-            var jsonObject = JObject.Parse(json);
+            filter          = filter.Replace("|", ":");
+            filter          = filter.Replace("{}", ",");
+            var json        = filter.StartsWith("{") && filter.EndsWith("}") ? filter : "{" + filter + "}";
+            var jsonObject  = JObject.Parse(json);
 
             var result = new Dictionary<string, object>();
             foreach (var item in jsonObject)

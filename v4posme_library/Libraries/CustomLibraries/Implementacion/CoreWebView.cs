@@ -85,7 +85,7 @@ class CoreWebView(
         {
             Config = companyDataView
         };
-        var dataRecordSet = bdModel.ExecuteRender<dynamic>(queryFill);
+        var dataRecordSet = bdModel.ExecuteRenderQueryable(queryFill);
         objResult.Data = dataRecordSet;
         return objResult;
     }

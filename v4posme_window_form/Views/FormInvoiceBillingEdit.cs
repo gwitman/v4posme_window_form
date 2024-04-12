@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DevExpress.XtraReports.Design.ParameterEditor;
+using DevExpress.XtraRichEdit.Layout;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
@@ -15,9 +18,32 @@ namespace v4posme_window.Views
 {
     public partial class FormInvoiceBillingEdit : Form, IFormTypeEdit
     {
-        public FormInvoiceBillingEdit()
+        private int companyID_ { get; set; }
+        private int transactionID_ { get; set; }
+        private int transactionMasterID_ { get; set; }
+
+        public FormInvoiceBillingEdit(TypeOpenForm typeOpen,int companyID,int transactionId,int transactionMasterID)
         {
             InitializeComponent();
+            companyID_ = companyID;
+            transactionID_ = transactionId;
+            transactionMasterID_ = transactionMasterID;
+
+            if(typeOpen == TypeOpenForm.Init)
+            {
+                PreRender();
+            }
+
+            if (typeOpen == TypeOpenForm.Init && transactionMasterID > 0)
+            {
+                LoadEdit();
+            }
+
+            if (typeOpen == TypeOpenForm.Init && transactionMasterID == 0)
+            {
+                LoadNew();
+            }
+
         }
 
 
@@ -33,12 +59,12 @@ namespace v4posme_window.Views
 
         public void LoadEdit()
         {
-            throw new NotImplementedException();
+            var c = 0;
         }
 
         public void LoadNew()
         {
-            throw new NotImplementedException();
+            var c = 0;
         }
 
         public void SaveInsert()
@@ -73,13 +99,18 @@ namespace v4posme_window.Views
 
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            var formTypeListSearch = new FormTypeListSearch();
+            var formTypeListSearch = new FormTypeListSearch(33 ,btnAceptRow,"SELECCIONAR_ITEM_BILLING_POPUP_INVOICE",true, "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false,"",0,20,"");            
             formTypeListSearch.ShowDialog(this);
         }
 
         public void PreRender()
         {
-            throw new NotImplementedException();
+            var i = 0;
+        }
+
+        public void btnAceptRow(object? sender, EventArgs? args)
+        {
+            var x = 0;
         }
     }
 }
