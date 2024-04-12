@@ -49,6 +49,8 @@ namespace v4posme_window.Template
 
         private void FormTypeListSearch_Load(object sender, EventArgs e)
         {
+            var title = VariablesGlobales.ConfigurationBuilder["NAME_FORM_TYPE_LIST"];
+            Text = title;
             ShowViewByNamePaginate();
             if (_currentPage == 0)
             {

@@ -108,12 +108,12 @@
             // 
             // btnAtras
             // 
-            btnAtras.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
+            btnAtras.Appearance.BackColor = Color.Salmon;
             btnAtras.Appearance.ForeColor = Color.White;
             btnAtras.Appearance.Options.UseBackColor = true;
             btnAtras.Appearance.Options.UseForeColor = true;
             btnAtras.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            btnAtras.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton4.ImageOptions.SvgImage");
+            btnAtras.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnAtras.ImageOptions.SvgImage");
             btnAtras.ImageOptions.SvgImageSize = new Size(16, 16);
             btnAtras.Location = new Point(432, 11);
             btnAtras.Name = "btnAtras";
@@ -124,12 +124,12 @@
             // 
             // btnSiguiente
             // 
-            btnSiguiente.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
+            btnSiguiente.Appearance.BackColor = Color.Salmon;
             btnSiguiente.Appearance.ForeColor = Color.White;
             btnSiguiente.Appearance.Options.UseBackColor = true;
             btnSiguiente.Appearance.Options.UseForeColor = true;
             btnSiguiente.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            btnSiguiente.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton3.ImageOptions.SvgImage");
+            btnSiguiente.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnSiguiente.ImageOptions.SvgImage");
             btnSiguiente.ImageOptions.SvgImageSize = new Size(16, 16);
             btnSiguiente.Location = new Point(523, 11);
             btnSiguiente.Name = "btnSiguiente";
