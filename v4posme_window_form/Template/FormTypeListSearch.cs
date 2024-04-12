@@ -74,7 +74,7 @@ namespace v4posme_window.Template
                 ["{companyID}"]         = usuario!.CompanyId.ToString(),
                 ["{componentID}"]       = componentID.ToString(),                
                 ["{iDisplayStart}"]     = iDisplayStart.ToString(),
-                ["{iDisplayStartDB}"]   = iDisplayStart.ToString() == "1" ? "0" : ((iDisplayStart - 1) * iDisplayLength).ToString(),
+                ["{iDisplayStartDB}"]   = "0",
                 ["{iDisplayLength}"]    = iDisplayLength.ToString(),
                 ["{sSearchDB}"]         = sSearch,
                 ["{sSearch}"]           = sSearch
@@ -93,9 +93,9 @@ namespace v4posme_window.Template
 
 
 
-            var datos           = coreWebView.GetViewByName(usuario, componentID, viewName, calleridSearch, null, parameter);
-            var datosTotales    = coreWebView.GetViewByName(usuario, componentID, viewName + "_TOTAL", calleridSearch, null, parameter);
-            var datosDisplay    = coreWebView.GetViewByName(usuario, componentID, viewName + "_DISPLAY", calleridSearch, null, parameter);
+            var datos               = coreWebView.GetViewByName(usuario, componentID, viewName, calleridSearch, null, parameter);
+            var datosTotales        = coreWebView.GetViewByName(usuario, componentID, viewName + "_TOTAL", calleridSearch, null, parameter);
+            var datosDisplay        = coreWebView.GetViewByName(usuario, componentID, viewName + "_DISPLAY", calleridSearch, null, parameter);
             
 
             if (datos is null)

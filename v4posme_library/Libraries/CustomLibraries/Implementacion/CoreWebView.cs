@@ -41,19 +41,17 @@ class CoreWebView(
         // Obtener la vista por el flavor
         var dataViewId = dataView.DataViewId;
 
-        var companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewIdAndFlavor(user.CompanyId, dataViewId,
-            callerId, componentId, objCompany.FlavorId);
+        var companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewIdAndFlavor(user.CompanyId, dataViewId,callerId, componentId, objCompany.FlavorId);
         if (companyDataView is null)
         {
             // Obtener la vista unica
-            companyDataView =
-                companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId, dataViewId, callerId, componentId);
+            companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId, dataViewId, callerId, componentId);
             if (companyDataView is null)
-                return null;
+            return null;
         }
 
         // EXECUTE
-        var queryFill = ReplacePlaceholders(dataView.SqlScript!, parameter!);
+        var queryFill = ReplacePlaceholders(companyDataView.SqlScript!, parameter!);
 
         // Aplicar Filtros y Asignar Variables
         var filterPermission = "";
