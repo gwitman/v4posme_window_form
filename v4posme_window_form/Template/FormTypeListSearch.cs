@@ -44,15 +44,15 @@ namespace v4posme_window.Template
 
         public FormTypeListSearch(int componentID, string viewName, bool autoClose, string filter, bool multiSelect, string urlRedictWhenEmpty, int iDisplayStart, int iDisplayLength, string sSearch)
         {
-            componentID_ = componentID;            
-            viewName_ = viewName;
-            autoClose_ = autoClose;
-            filter_ = filter;
-            multiSelect_ = multiSelect;
+            componentID_        = componentID;            
+            viewName_           = viewName;
+            autoClose_          = autoClose;
+            filter_             = filter;
+            multiSelect_        = multiSelect;
             urlRedictWhenEmpty_ = urlRedictWhenEmpty;
-            iDisplayStart_ = iDisplayStart;
-            iDisplayLength_ = iDisplayLength;
-            sSearch_ = sSearch;
+            iDisplayStart_      = iDisplayStart;
+            iDisplayLength_     = iDisplayLength;
+            sSearch_            = sSearch;
             InitializeComponent();
 
         }
@@ -65,37 +65,36 @@ namespace v4posme_window.Template
 
         public void ShowViewByNamePaginate()
         {
-            PanelControl controlParent = this.centerPane;            
-            int componentID = componentID_;
-            string viewName = viewName_;
-            bool autoClose = autoClose_;
-            string filter = filter_;
-            bool multiSelect = multiSelect_;
-            string urlRedictWhenEmpty = urlRedictWhenEmpty_;
-            int iDisplayStart = iDisplayStart_;
-            int iDisplayLength = iDisplayLength_;
-            string sSearch = sSearch_;
+            PanelControl controlParent  = this.centerPane;            
+            int componentID             = componentID_;
+            string viewName             = viewName_;
+            bool autoClose              = autoClose_;
+            string filter               = filter_;
+            bool multiSelect            = multiSelect_;
+            string urlRedictWhenEmpty   = urlRedictWhenEmpty_;
+            int iDisplayStart           = iDisplayStart_;
+            int iDisplayLength          = iDisplayLength_;
+            string sSearch              = sSearch_;
 
-            var coreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
-            var coreWebView = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
-            var calleridSearch = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["CALLERID_SEARCH"]);
+            var coreWebTools        = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
+            var coreWebView         = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
+            var calleridSearch      = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["CALLERID_SEARCH"]);
             var coreWebRenderInView = new CoreWebRenderInView();
-
-
-            var usuario = VariablesGlobales.Instance.User;
+            var usuario             = VariablesGlobales.Instance.User;
 
 
             // Crear un diccionario para los parámetros staticos
             var parameter = new Dictionary<string, string>
             {
 
-                ["{companyID}"] = usuario!.CompanyId.ToString(),
-                ["{componentID}"] = componentID.ToString(),
-                ["{iDisplayStart}"] = iDisplayStart.ToString(),
-                ["{iDisplayStartDB}"] = "0",
-                ["{iDisplayLength}"] = iDisplayLength.ToString(),
-                ["{sSearchDB}"] = sSearch,
-                ["{sSearch}"] = sSearch
+                ["{companyID}"]         = usuario!.CompanyId.ToString(),
+                ["{componentID}"]       = componentID.ToString(),
+                ["{iDisplayStart}"]     = iDisplayStart.ToString(),
+                ["{iDisplayStartDB}"]   = "0",
+                ["{iDisplayLength}"]    = iDisplayLength.ToString(),
+                ["{sSearchDB}"]         = sSearch,
+                ["{sSearch}"]           = sSearch,
+                ["{isWindowForm}"]      = "1"
             };
 
             // Agregar al diccionarios los parametros dinamicos
