@@ -41,30 +41,23 @@ public class CoreWebRenderInView
         comboBox.EditValue = selectedValue ?? defaultValue;
     }
 
-    public static GridView RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, int displayLength,
-        Control form)
+    public static void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView,GridControl gridControl)
     {
         if (dataViewDto.Config is null)
         {
             throw new Exception("Dto is null");
         }
 
-        var gridControl = new GridControl()
-        {
-            Name = nameGridView,
-            Parent = form,
-            Dock = DockStyle.Fill
-        };
         if (dataViewDto.Data is null)
         {
-            return new GridView();
+            return;
         }
 
         var viewData    = (List<Dictionary<string, object>>)dataViewDto.Data;
         var table       = FillGridControl(viewData);
         if (table is null)
         {
-            return new GridView();
+            return;
         }
 
         gridControl.DataSource = table;
@@ -140,7 +133,7 @@ public class CoreWebRenderInView
             aux++;
         }
 
-        return gridView;
+        return;
     }
 
     private static DataTable? FillGridControl(List<Dictionary<string, object>>? data)

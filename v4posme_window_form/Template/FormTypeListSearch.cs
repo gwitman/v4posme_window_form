@@ -4,7 +4,9 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.DataAccess.Native.Data;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraVerticalGrid;
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
@@ -33,8 +35,8 @@ namespace v4posme_window.Template
         private int DisplayLength { get; set; }
         private string SSearch { get; set; }
         private int PageCurrent { get; set; }
-        private string TitleWindow { get; set; }
-        private GridView ObjGridView { get; set; }
+        private string TitleWindow { get; set; }        
+        private GridControl ObjGridControl { get; set; }    
         public FormTypeListSearch(string title,int componentId, string viewName, bool autoClose, string filter, bool multiSelect,
             string urlRedictWhenEmpty, int iDisplayStart, int iDisplayLength, string sSearch)
         {
@@ -49,14 +51,23 @@ namespace v4posme_window.Template
             SSearch = sSearch;
             TitleWindow = title;
             PageCurrent = 0;
+            ObjGridControl = new GridControl();
             InitializeComponent();
         }
 
         private void FormTypeListSearch_Load(object sender, EventArgs e)
         {
-            
-            Text = TitleWindow;
-            
+
+            PanelControl controlParent  = this.centerPane;
+            Text                        = TitleWindow;
+            ObjGridControl.Name         = "ObjGridControl";
+            ObjGridControl.Parent       = controlParent;
+            ObjGridControl.Dock         = DockStyle.Fill;
+
+            ObjGridControl.KeyDown += GridView_KeyDown!;
+            ((GridView)ObjGridControl.MainView).OptionsView.ShowGroupPanel  = false;
+            ((GridView)ObjGridControl.MainView).OptionsBehavior.Editable    = false;
+
         }
 
 
@@ -112,12 +123,11 @@ namespace v4posme_window.Template
                 return;
 
 
-            //aqui vamos a validar si seleccion multiple
-            ObjGridView = CoreWebRenderInView.RenderGrid(datos, "ListView", iDisplayLength, controlParent);
-            ObjGridView.RefreshData();            
-            ObjGridView.KeyDown += GridView_KeyDown!;
-            ObjGridView.OptionsView.ShowGroupPanel  = false;
-            ObjGridView.OptionsBehavior.Editable    = false; 
+        
+
+            CoreWebRenderInView.RenderGrid(datos, "ListView",ObjGridControl );
+            ObjGridControl.Refresh();            
+          
             
         }
 
@@ -140,17 +150,17 @@ namespace v4posme_window.Template
             // Verificar si se ha seleccionado alguna fila
             dynamic dynamicObject = new ExpandoObject();
             var dictionaryObject = (IDictionary<string, object>)dynamicObject;
-            if (ObjGridView.SelectedRowsCount > 0)
+            if (((GridView)ObjGridControl.MainView).SelectedRowsCount > 0)
             {
 
                 // Obtener el índice de la fila seleccionada
-                List<int> rowIndex = ObjGridView.GetSelectedRows().ToList();
+                List<int> rowIndex = ((GridView)ObjGridControl.MainView).GetSelectedRows().ToList();
                 foreach (var indexRow in rowIndex)
                 {
-                    foreach (GridColumn column in ObjGridView.Columns)
+                    foreach (GridColumn column in ((GridView)ObjGridControl.MainView).Columns)
                     {
                         string nombreColumna = column.FieldName;
-                        string valueColumn = ObjGridView.GetRowCellValue(indexRow, nombreColumna).ToString();
+                        string valueColumn = ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, nombreColumna).ToString();
                         dictionaryObject[nombreColumna] = valueColumn;
 
                     }

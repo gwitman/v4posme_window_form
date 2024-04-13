@@ -1,4 +1,7 @@
-﻿using Unity;
+﻿using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
+using Mysqlx.Cursor;
+using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomHelper;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
@@ -21,43 +24,55 @@ namespace v4posme_window.Views
             VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
 
         private readonly ICoreWebView _coreWebView = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
-
-        private int? dataViewId = 0;
-        private DateTime? fecha = DateTime.Now;
-
-        public GridView ObjControlGridView { get; set; }
+        
+        public GridControl ObjGridControl { get ; set; }
+        public int? DataViewId { get; set; }
+        public DateTime? Fecha { get; set; }
 
         public FormInvoiceBillingList()
         {
-            ObjControlGridView = new GridView();
+
+            
             InitializeComponent();
-            lblTitulo.Text = @"LISTA DE FACTURAS";
-            Text = lblTitulo.Text;
+          
 
-
+            Fecha = DateTime.Now;
+            DataViewId = 0;
+            ObjGridControl = new GridControl();
             btnEditar.Click += Edit;
             btnEliminar.Click += Delete;
             btnNuevo.Click += New;
+
+          
         }
 
 
         private void FormInvoiceBillingList_Load(object sender, EventArgs e)
         {
-            var coreWebRenderInView = new CoreWebRenderInView();
-            var resultPermission = 0;
-            var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
-            var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
-            var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+
+            PreRender();
+            List();
+           
+        }
+
+     
+        public void List()
+        {
+            var coreWebRenderInView     = new CoreWebRenderInView();
+            var resultPermission        = 0;
+            var appNeedAuthentication   = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+            var permissionNone          = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
+            var urlSuffix               = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
             if (appNeedAuthentication!.Equals("true"))
             {
+
                 var permited = _coreWebPermission.UrlPermited("app_invoice_billing", "index", urlSuffix,
                     VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft,
                     VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop,
                     VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (!permited)
                 {
-                    _coreWebRender.GetMessageAlert(TypeError.Error, "Permisos", "No tiene acceso a los controles",
-                        this);
+                    _coreWebRender.GetMessageAlert(TypeError.Error, "Permisos", "No tiene acceso a los controles",this);
                     return;
                 }
 
@@ -83,34 +98,30 @@ namespace v4posme_window.Views
 
             var callerIdList = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["CALLERID_LIST"]);
             Dictionary<string, string> parameters;
-            if (dataViewId == 0)
+            if (DataViewId == 0)
             {
-                var targetComponentId = VariablesGlobales.Instance.Company.FlavorId;
-                parameters = new Dictionary<string, string>
+                var targetComponentId   = VariablesGlobales.Instance.Company.FlavorId;
+                parameters              = new Dictionary<string, string>
                 {
                     { "{companyID}", VariablesGlobales.Instance.User.CompanyId.ToString() },
-                    { "{fecha}", fecha.Value.ToShortDateString() }
+                    { "{fecha}", Fecha.Value.ToShortDateString() }
                 };
-                var dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User,
-                    objComponent.ComponentId, callerIdList, targetComponentId, resultPermission);
+                
+                var dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User,objComponent.ComponentId, callerIdList, targetComponentId, resultPermission);
                 {
-                    targetComponentId = 0;
-                    parameters = new Dictionary<string, string>
+                    targetComponentId   = 0;
+                    parameters          = new Dictionary<string, string>
                     {
                         { "{companyID}", VariablesGlobales.Instance.User.CompanyId.ToString() },
-                        { "{fecha}", fecha.Value.ToShortDateString() }
+                        { "{fecha}", Fecha.Value.ToShortDateString() }
                     };
-                    dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User,
-                        objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
+                    dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User,objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
                 }
 
-                ObjControlGridView = CoreWebRenderInView.RenderGrid(dataViewData!, "invoice", 0, centerPane);
-            }
-        }
 
-        public void List()
-        {
-            throw new NotImplementedException();
+                CoreWebRenderInView.RenderGrid(dataViewData!, "invoice", ObjGridControl);
+                ObjGridControl.Refresh();
+            }
         }
 
         public void Delete(object? sender, EventArgs? args)
@@ -130,6 +141,20 @@ namespace v4posme_window.Views
         public void New(object? sender, EventArgs? args)
         {
             new FormInvoiceBillingEdit(TypeOpenForm.Init, 0, 0, 2).ShowDialog();
+        }
+
+        public void PreRender()
+        {   
+            lblTitulo.Text  = @"LISTA DE FACTURAS";
+            Text            = lblTitulo.Text;
+
+
+            PanelControl controlParent  = this.centerPane;
+            ObjGridControl.Name         = "ObjGridControl";
+            ObjGridControl.Parent       = controlParent;
+            ObjGridControl.Dock         = DockStyle.Fill;
+
+
         }
     }
 }
