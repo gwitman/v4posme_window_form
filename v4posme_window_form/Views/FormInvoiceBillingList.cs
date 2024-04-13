@@ -1,6 +1,9 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Map.Native;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
 using Mysqlx.Cursor;
+using System.Dynamic;
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomHelper;
@@ -126,7 +129,30 @@ namespace v4posme_window.Views
 
         public void Delete(object? sender, EventArgs? args)
         {
-            new FormInvoiceBillingEdit(TypeOpenForm.NotInit, 0, 0, 0).ComandDelete();
+            
+            if (((GridView)ObjGridControl.MainView).SelectedRowsCount > 0)
+            {
+
+                // Obtener el índice de la fila seleccionada
+                List<int> rowIndex = ((GridView)ObjGridControl.MainView).GetSelectedRows().ToList();
+                foreach (var indexRow in rowIndex)
+                {   
+
+                    int companyID = Convert.ToInt32( ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "companyID").ToString());
+                    int transactionID = Convert.ToInt32( ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionID").ToString());
+                    int transactionMasterID = Convert.ToInt32( ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionMasterID").ToString());
+                    var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyID, transactionID, transactionMasterID);
+                    objFormInvoiceBillingEdit.ComandDelete();
+
+                }
+            
+            }
+            else
+            {
+                CoreWebRenderInView objCoreWebRenderInView = new CoreWebRenderInView();
+                objCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando","Debe seleccionar un registro", this);
+            }
+            
         }
 
         public void Edit(object? sender, EventArgs? args)
