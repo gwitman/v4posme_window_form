@@ -114,7 +114,7 @@ namespace v4posme_window.Template
 
             //aqui vamos a validar si seleccion multiple
             ObjGridView = CoreWebRenderInView.RenderGrid(datos, "ListView", iDisplayLength, controlParent);
-            ObjGridView.RefreshData();
+            ObjGridView.RefreshData();            
             ObjGridView.KeyDown += GridView_KeyDown!;
             ObjGridView.OptionsView.ShowGroupPanel  = false;
             ObjGridView.OptionsBehavior.Editable    = false; 
