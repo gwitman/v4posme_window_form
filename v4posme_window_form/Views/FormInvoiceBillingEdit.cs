@@ -37,11 +37,82 @@ namespace v4posme_window.Views
         public FormInvoiceBillingEdit(TypeOpenForm typeOpen, int companyId, int transactionId, int transactionMasterId)
         {
             InitializeComponent();
+
+            // Suscribir al manejador de excepciones global
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+
             CompanyId = companyId;
             TransactionId = transactionId;
             TransactionMasterId = transactionMasterId;
             TypeOpen = typeOpen;
 
+
+        }
+
+
+        
+
+        public void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            CustomException.LogException(e.Exception);
+        }
+
+        public void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            CustomException.LogException((Exception)e.ExceptionObject);
+        }
+
+      
+
+        private void EventoCallBackAceptar(dynamic mensaje)
+        {
+            // Realizar la lógica que desees en el formulario padre
+            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
+            MessageBox.Show("Evento en el formulario hijo: " + objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
+        }
+
+
+        private void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
+        {
+            if (TypeOpen == TypeOpenForm.Init)
+            {
+                PreRender();
+            }
+
+            if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
+            {
+                LoadEdit();
+            }
+
+            if (TypeOpen == TypeOpenForm.Init && TransactionMasterId == 0)
+            {
+                LoadNew();
+            }
+        }
+
+        private void btnAddProduct_Click(object sender, EventArgs e)
+        {
+            var formTypeListSearch = new FormTypeListSearch("Lista de Productos",33, "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true, "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
+            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptar;
+            formTypeListSearch.ShowDialog(this);
+        }
+
+
+        private void lblTitulo_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void dateEdit1_EditValueChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void tablePanel1_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        private void tablePanel2_Paint(object sender, PaintEventArgs e)
+        {
 
         }
 
@@ -116,7 +187,7 @@ namespace v4posme_window.Views
                 //Validacion
                 if (CompanyId == 0 && TransactionId == 0 && TransactionMasterId == 0)
                 {
-                    throw new  Exception (VariablesGlobales.ConfigurationBuilder["NOT_PARAMETER"]);
+                    throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_PARAMETER"]);
                 }
 
                 //Obtener registros
@@ -124,17 +195,17 @@ namespace v4posme_window.Views
                 var objCustomerCreditDocument = objInterfazCustomerCreditDocument.GetRowByDocument(objTm.CompanyId, objTm.EntityId!.Value, objTm.TransactionNumber!);
 
                 //Validaciones
-                if(resultPermission == permissionNone && (objTm.CreatedBy != objUser.UserId))
+                if (resultPermission == permissionNone && (objTm.CreatedBy != objUser.UserId))
                 {
                     throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_DELETE"]);
                 }
 
-                if(objInterfazCoreWebAccounting.CycleIsCloseByDate(objUser.CompanyId,objTm.CreatedOn!.Value))
+                if (objInterfazCoreWebAccounting.CycleIsCloseByDate(objUser.CompanyId, objTm.CreatedOn!.Value))
                 {
                     throw new Exception("EL DOCUMENTO NO PUEDE SE ELIMINADO, EL CICLO CONTABLE ESTA CERRADO");
                 }
 
-                if(!objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing","statusID",objTm.StatusId!.Value, commandEliminable, objUser.CompanyId,objUser.BranchId,objRole.RoleId)!.Value)
+                if (!objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing", "statusID", objTm.StatusId!.Value, commandEliminable, objUser.CompanyId, objUser.BranchId, objRole.RoleId)!.Value)
                 {
                     throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
                 }
@@ -142,19 +213,19 @@ namespace v4posme_window.Views
                 ////Validar si la factura es de credito y esta aplicada y tiene abono	
                 var parameterCausalTypeCredit = objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", objUser.CompanyId);
                 var causalIDTypeCredit = parameterCausalTypeCredit.Value.Split(",");
-                var exisCausalInCredit = causalIDTypeCredit.Any(elemento => elemento == objTm.TransactionCausalId.ToString()); 
+                var exisCausalInCredit = causalIDTypeCredit.Any(elemento => elemento == objTm.TransactionCausalId.ToString());
 
-                if(
+                if (
                         objInterfazCoreWebWorkflow.ValidateWorkflowStage(
-                            "tb_transaction_master_billing","statusID",objTm.StatusId!.Value, commandAplicable,
-                            objUser.CompanyId,objUser.BranchId,objRole.RoleId
+                            "tb_transaction_master_billing", "statusID", objTm.StatusId!.Value, commandAplicable,
+                            objUser.CompanyId, objUser.BranchId, objRole.RoleId
                         )!.Value &&
                         exisCausalInCredit &&
                         objCustomerCreditDocument.Amount != objCustomerCreditDocument.Balance &&
                         objCustomerCreditDocument.Balance > 0
                 )
                 {
-                        throw new Exception("Factura con abonos y balance mayor que 1");
+                    throw new Exception("Factura con abonos y balance mayor que 1");
                 }
 
                 if (
@@ -170,23 +241,23 @@ namespace v4posme_window.Views
                     dataNewTM.StatusIdchangeOn = DateTime.Now;
                     objInterfazTransactionMaster.UpdateAppPosme(dataNewTM.CompanyId, dataNewTM.TransactionId, dataNewTM.TransactionMasterId, dataNewTM);
 
-                    var transactionIDRevert         = objInterfazCoreWebParameter.GetParameter("INVOICE_TRANSACTION_REVERSION_TO_BILLING", objUser.CompanyId);
-                    var transactionIDRevertValue    = Convert.ToInt32(transactionIDRevert.Value);
-                    objInterfazCoreWebTransaction.CreateInverseDocumentByTransaccion(objTm.CompanyId,objTm.TransactionId,objTm.TransactionMasterId, transactionIDRevertValue,0);
+                    var transactionIDRevert = objInterfazCoreWebParameter.GetParameter("INVOICE_TRANSACTION_REVERSION_TO_BILLING", objUser.CompanyId);
+                    var transactionIDRevertValue = Convert.ToInt32(transactionIDRevert.Value);
+                    objInterfazCoreWebTransaction.CreateInverseDocumentByTransaccion(objTm.CompanyId, objTm.TransactionId, objTm.TransactionMasterId, transactionIDRevertValue, 0);
 
 
-                    if(exisCausalInCredit)
+                    if (exisCausalInCredit)
                     {
                         //Valores de tasa de cambio          
-                        var objCurrencyDolares  = objInterfazCoreWebCurrency.GetCurrencyExternal(objTm.CompanyId);
-                        var objCurrencyCordoba  = objInterfazCoreWebCurrency.GetCurrencyDefault(objTm.CompanyId);
-                        var dateOn              = DateOnly.FromDateTime(DateTime.Now);
-                        var exchangeRate        = objInterfazCoreWebCurrency.GetRatio(objTm.CompanyId, dateOn, 1, objCurrencyDolares.CurrencyId, objCurrencyCordoba.CurrencyId);
+                        var objCurrencyDolares = objInterfazCoreWebCurrency.GetCurrencyExternal(objTm.CompanyId);
+                        var objCurrencyCordoba = objInterfazCoreWebCurrency.GetCurrencyDefault(objTm.CompanyId);
+                        var dateOn = DateOnly.FromDateTime(DateTime.Now);
+                        var exchangeRate = objInterfazCoreWebCurrency.GetRatio(objTm.CompanyId, dateOn, 1, objCurrencyDolares.CurrencyId, objCurrencyCordoba.CurrencyId);
 
                         //cancelar el documento de credito					
-                        var shareDocumentAnuladoStatusID        = Convert.ToInt32(objInterfazCoreWebParameter.GetParameter("SHARE_DOCUMENT_ANULADO", objUser.CompanyId).Value);
-                        var objCustomerCredotDocumentNew        = objDataContext.TbCustomerCreditDocuments.First(u => u.CustomerCreditDocumentId == objCustomerCreditDocument.CustomerCreditDocumentId);
-                        objCustomerCredotDocumentNew.StatusId   = shareDocumentAnuladoStatusID;
+                        var shareDocumentAnuladoStatusID = Convert.ToInt32(objInterfazCoreWebParameter.GetParameter("SHARE_DOCUMENT_ANULADO", objUser.CompanyId).Value);
+                        var objCustomerCredotDocumentNew = objDataContext.TbCustomerCreditDocuments.First(u => u.CustomerCreditDocumentId == objCustomerCreditDocument.CustomerCreditDocumentId);
+                        objCustomerCredotDocumentNew.StatusId = shareDocumentAnuladoStatusID;
                         objInterfazCustomerCreditDocument.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value, objCustomerCredotDocumentNew);
 
                         var amountDol = objCustomerCreditDocument.Balance / exchangeRate;
@@ -194,15 +265,15 @@ namespace v4posme_window.Views
 
 
                         //aumentar el blance de la linea
-                        var objCustomerCreditLineNew = objDataContext.TbCustomerCreditLines.First( u => u.CustomerCreditLineId == objCustomerCreditDocument.CustomerCreditLineId  );
-                        objCustomerCreditLineNew.Balance = objCustomerCreditLineNew.Balance + (objCustomerCreditLineNew.CurrencyId == objCurrencyDolares.CurrencyId ? amountDol!.Value : amountCor!.Value );
+                        var objCustomerCreditLineNew = objDataContext.TbCustomerCreditLines.First(u => u.CustomerCreditLineId == objCustomerCreditDocument.CustomerCreditLineId);
+                        objCustomerCreditLineNew.Balance = objCustomerCreditLineNew.Balance + (objCustomerCreditLineNew.CurrencyId == objCurrencyDolares.CurrencyId ? amountDol!.Value : amountCor!.Value);
                         objInterfazCustomerCreditLine.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditLineId, objCustomerCreditLineNew);
 
 
                         //aumentar el balance de credito
-                        var objCustomerCredit           = objDataContext.TbCustomerCredits.First(u => u.CompanyId == objTm.CompanyId && u.BranchId == objTm.BranchId && u.EntityId == objTm.EntityId);
-                        objCustomerCredit.BalanceDol    = objCustomerCredit.BalanceDol + amountDol!.Value;
-                        objInterfazCustomerCredit.UpdateAppPosme(objCustomerCredit.CompanyId, objCustomerCredit.BranchId, objCustomerCredit.EntityId,objCustomerCredit);
+                        var objCustomerCredit = objDataContext.TbCustomerCredits.First(u => u.CompanyId == objTm.CompanyId && u.BranchId == objTm.BranchId && u.EntityId == objTm.EntityId);
+                        objCustomerCredit.BalanceDol = objCustomerCredit.BalanceDol + amountDol!.Value;
+                        objInterfazCustomerCredit.UpdateAppPosme(objCustomerCredit.CompanyId, objCustomerCredit.BranchId, objCustomerCredit.EntityId, objCustomerCredit);
                     }
 
                 }
@@ -218,9 +289,9 @@ namespace v4posme_window.Views
             {
                 var objCoreWebRenderInView = new CoreWebRenderInView();
                 Console.WriteLine(ex);
-                objCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando" , ex.ToString(), this);
+                objCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando", ex.ToString(), this);
             }
-            
+
         }
 
         public void ComandPrinter()
@@ -274,55 +345,6 @@ namespace v4posme_window.Views
 
 
 
-        private void EventoCallBackAceptar(dynamic mensaje)
-        {
-            // Realizar la lógica que desees en el formulario padre
-            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
-            MessageBox.Show("Evento en el formulario hijo: " + objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
-        }
 
-
-        private void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
-        {
-            if (TypeOpen == TypeOpenForm.Init)
-            {
-                PreRender();
-            }
-
-            if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
-            {
-                LoadEdit();
-            }
-
-            if (TypeOpen == TypeOpenForm.Init && TransactionMasterId == 0)
-            {
-                LoadNew();
-            }
-        }
-
-        private void btnAddProduct_Click(object sender, EventArgs e)
-        {
-            var formTypeListSearch = new FormTypeListSearch("Lista de Productos",33, "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true, "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
-            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptar;
-            formTypeListSearch.ShowDialog(this);
-        }
-
-
-        private void lblTitulo_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void dateEdit1_EditValueChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tablePanel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void tablePanel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

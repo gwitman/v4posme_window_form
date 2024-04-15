@@ -114,10 +114,6 @@ namespace v4posme_window.Template
 
 
             var datos = coreWebView.GetViewByName(usuario, componentId, viewName, calleridSearch, null, parameter);
-            //var datosTotales  = coreWebView.GetViewByName(usuario, componentID, viewName + "_TOTAL", calleridSearch,null, parameter);
-            //var datosDisplay  = coreWebView.GetViewByName(usuario, componentID, viewName + "_DISPLAY", calleridSearch,null, parameter);
-
-
             if (datos is null)
                 return;
 

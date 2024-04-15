@@ -17,5 +17,12 @@ namespace v4posme_window.Interfaz
         void LoadEdit();
         void ComandDelete();
         void ComandPrinter();
+
+        // Manejador de excepciones global para excepciones no controladas en subprocesos de la interfaz de usuario
+        void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e);
+
+        // Manejador de excepciones global para excepciones no controladas en subprocesos no manejados
+        void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e);
+
     }
 }
