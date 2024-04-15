@@ -26,6 +26,20 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
         context.BulkSaveChanges();
     }
 
+    public void UpdateAppPosme(int customerCreditDocumentId, TbCustomerCreditDocumentDto data)
+    {
+        using var context = new DataContext();
+        var find = FindDocuments(customerCreditDocumentId, context).SingleOrDefault();
+        if (find is null)
+        {
+            return;
+        }
+
+        data.CustomerCreditDocumentId = find.CustomerCreditDocumentId;
+        context.Entry(find).CurrentValues.SetValues(data);
+        context.BulkSaveChanges();
+    }
+
     public void DeleteAppPosme(int customerCreditDocumentId)
     {
         using var context = new DataContext();

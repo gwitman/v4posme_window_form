@@ -187,5 +187,7 @@ namespace v4posme_library.Libraries
         public TbCompanyDataview? CompanyDataViewModel { get; set; }
 
         public int ViewData { get; set; }
+
+        public DataContext DataContext => new();
     }
 }

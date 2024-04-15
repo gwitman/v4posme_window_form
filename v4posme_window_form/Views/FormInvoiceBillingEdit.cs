@@ -1,21 +1,7 @@
-﻿using DevExpress.Utils.Filtering.Internal;
-using DevExpress.XtraReports.Design.ParameterEditor;
-using DevExpress.XtraRichEdit.Layout;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
-using System.Windows.Forms;
+﻿using System.IO;
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomHelper;
-using v4posme_library.Libraries.CustomLibraries.Implementacion;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels;
 using v4posme_library.Models;
@@ -23,7 +9,6 @@ using v4posme_library.ModelsDto;
 using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
-
 
 namespace v4posme_window.Views
 {
@@ -39,8 +24,10 @@ namespace v4posme_window.Views
             InitializeComponent();
 
             // Suscribir al manejador de excepciones global
-            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+            Application.ThreadException +=
+                new ThreadExceptionEventHandler(Application_ThreadException);
+            AppDomain.CurrentDomain.UnhandledException +=
+                new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
             CompanyId = companyId;
             TransactionId = transactionId;
@@ -48,8 +35,6 @@ namespace v4posme_window.Views
             TypeOpen = typeOpen;
         }
 
-
-        
 
         public void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
@@ -61,13 +46,13 @@ namespace v4posme_window.Views
             CustomException.LogException((Exception)e.ExceptionObject);
         }
 
-      
 
         private void EventoCallBackAceptar(dynamic mensaje)
         {
             // Realizar la lógica que desees en el formulario padre
             WebToolsHelper objWebToolsHelper = new WebToolsHelper();
-            MessageBox.Show("Evento en el formulario hijo: " + objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
+            MessageBox.Show("Evento en el formulario hijo: " +
+                            objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
         }
 
 
@@ -91,11 +76,12 @@ namespace v4posme_window.Views
 
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            var formTypeListSearch = new FormTypeListSearch("Lista de Productos",33, "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true, "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
+            var formTypeListSearch = new FormTypeListSearch("Lista de Productos", 33,
+                "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
+                "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
             formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptar;
             formTypeListSearch.ShowDialog(this);
         }
-
 
 
         private void lblTitulo_Click(object sender, EventArgs e)
@@ -112,7 +98,6 @@ namespace v4posme_window.Views
 
         private void tablePanel2_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
 
@@ -156,7 +141,6 @@ namespace v4posme_window.Views
                 var objInterfazCustomer = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerModel>();
 
 
-                using DataContext objDataContext = new DataContext();
                 var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
                 var commandEliminable = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_ELIMINABLE"]);
                 var commandAplicable = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_APLICABLE"]);
@@ -206,7 +190,11 @@ namespace v4posme_window.Views
                 var objTm = objInterfazTransactionMaster.GetRowByPk(CompanyId, TransactionId, TransactionMasterId);
                 var objCustomerCreditDocument =
                     objInterfazCustomerCreditDocument.GetRowByDocument(objTm.CompanyId, objTm.EntityId!.Value,
-                        objTm.TransactionNumber!);
+                        objTm.TransactionNumber!) ?? new TbCustomerCreditDocumentDto
+                    {
+                        Balance = decimal.Zero,
+                        Amount = decimal.Zero
+                    };
 
                 //Validaciones
                 if (resultPermission == permissionNone && (objTm.CreatedBy != objUser.UserId))
@@ -251,20 +239,21 @@ namespace v4posme_window.Views
                 if (validateWorkflowStage)
                 {
                     //Actualizar fecha en la transacciones oroginal
-                    TbTransactionMaster dataNewTM = new TbTransactionMaster();
-                    dataNewTM = objDataContext.TbTransactionMasters.First(u =>
+                    var dataNewTm = objInterfazTransactionMaster.GetRowByPk(objTm.CompanyId, objTm.TransactionId,
+                        objTm.TransactionMasterId);
+                    /*var dataNewTm = objDataContext.TbTransactionMasters.First(u =>
                         u.CompanyId == objTm.CompanyId && u.TransactionId == objTm.TransactionId &&
-                        u.TransactionMasterId == objTm.TransactionMasterId);
-                    dataNewTM.StatusIdchangeOn = DateTime.Now;
-                    objInterfazTransactionMaster.UpdateAppPosme(dataNewTM.CompanyId, dataNewTM.TransactionId,
-                        dataNewTM.TransactionMasterId, dataNewTM);
+                        u.TransactionMasterId == objTm.TransactionMasterId);*/
+                    dataNewTm.StatusIdchangeOn = DateTime.Now;
+                    objInterfazTransactionMaster.UpdateAppPosme(dataNewTm.CompanyId, dataNewTm.TransactionId,
+                        dataNewTm.TransactionMasterId, dataNewTm);
 
-                    var transactionIDRevert =
+                    var transactionIdRevert =
                         objInterfazCoreWebParameter.GetParameter("INVOICE_TRANSACTION_REVERSION_TO_BILLING",
                             objUser.CompanyId);
-                    var transactionIDRevertValue = Convert.ToInt32(transactionIDRevert!.Value);
+                    var transactionIdRevertValue = Convert.ToInt32(transactionIdRevert!.Value);
                     objInterfazCoreWebTransaction.CreateInverseDocumentByTransaccion(objTm.CompanyId,
-                        objTm.TransactionId, objTm.TransactionMasterId, transactionIDRevertValue, 0);
+                        objTm.TransactionId, objTm.TransactionMasterId, transactionIdRevertValue, 0);
 
 
                     if (exisCausalInCredit)
@@ -279,32 +268,27 @@ namespace v4posme_window.Views
                         //cancelar el documento de credito					
                         var shareDocumentAnuladoStatusID = Convert.ToInt32(objInterfazCoreWebParameter
                             .GetParameter("SHARE_DOCUMENT_ANULADO", objUser!.CompanyId)!.Value);
-                        var objCustomerCredotDocumentNew = objDataContext.TbCustomerCreditDocuments.First(u =>
-                            u.CustomerCreditDocumentId == objCustomerCreditDocument.CustomerCreditDocumentId);
-                        objCustomerCredotDocumentNew.StatusId = shareDocumentAnuladoStatusID;
+                        var tbCustomerCreditDocumentDto = objInterfazCustomerCreditDocument.GetRowByPk(objCustomerCreditDocument.CustomerCreditDocumentId!.Value);
+                        tbCustomerCreditDocumentDto.StatusId = shareDocumentAnuladoStatusID;
                         objInterfazCustomerCreditDocument.UpdateAppPosme(
-                            objCustomerCreditDocument.CustomerCreditDocumentId!.Value, objCustomerCredotDocumentNew);
+                            objCustomerCreditDocument.CustomerCreditDocumentId!.Value, tbCustomerCreditDocumentDto);
 
                         var amountDol = objCustomerCreditDocument.Balance / exchangeRate;
                         var amountCor = objCustomerCreditDocument.Balance;
 
 
                         //aumentar el blance de la linea
-                        var objCustomerCreditLineNew = objDataContext.TbCustomerCreditLines.First(u =>
-                            u.CustomerCreditLineId == objCustomerCreditDocument.CustomerCreditLineId);
-                        objCustomerCreditLineNew.Balance = objCustomerCreditLineNew.Balance +
-                                                           (objCustomerCreditLineNew.CurrencyId ==
-                                                            objCurrencyDolares.CurrencyId
-                                                               ? amountDol!.Value
-                                                               : amountCor!.Value);
+                        var tbCustomerCreditLine = objInterfazCustomerCreditLine.GetRowByPk(objCustomerCreditDocument.CustomerCreditLineId);
+                        tbCustomerCreditLine.Balance = tbCustomerCreditLine.Balance +
+                                                       (tbCustomerCreditLine.CurrencyId ==
+                                                        objCurrencyDolares.CurrencyId
+                                                           ? amountDol!.Value
+                                                           : amountCor!.Value);
                         objInterfazCustomerCreditLine.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditLineId,
-                            objCustomerCreditLineNew);
-
+                            tbCustomerCreditLine);
 
                         //aumentar el balance de credito
-                        var objCustomerCredit = objDataContext.TbCustomerCredits.First(u =>
-                            u.CompanyId == objTm.CompanyId && u.BranchId == objTm.BranchId &&
-                            u.EntityId == objTm.EntityId);
+                        var objCustomerCredit =objInterfazCustomerCredit.GetRowByPk(objTm.CompanyId, objTm.BranchId!.Value, objTm.EntityId!.Value);
                         objCustomerCredit.BalanceDol = objCustomerCredit.BalanceDol + amountDol!.Value;
                         objInterfazCustomerCredit.UpdateAppPosme(objCustomerCredit.CompanyId,
                             objCustomerCredit.BranchId, objCustomerCredit.EntityId, objCustomerCredit);
@@ -373,12 +357,5 @@ namespace v4posme_window.Views
                 }
             }
         }
-
-
-       
-
-
-
-
     }
 }

@@ -8,6 +8,8 @@ public interface ICustomerCreditDocumentModel
 {
     void UpdateAppPosme(int customerCreditDocumentId,TbCustomerCreditDocument data);
 
+    void UpdateAppPosme(int customerCreditDocumentId, TbCustomerCreditDocumentDto tbCustomerCreditDocumentDto);
+    
     void DeleteAppPosme(int customerCreditDocumentId);
 
     int InsertAppPosme(TbCustomerCreditDocument data);

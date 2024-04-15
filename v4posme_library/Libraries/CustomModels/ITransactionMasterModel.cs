@@ -20,4 +20,5 @@ public interface ITransactionMasterModel
     List<TbTransactionMaster> GetRowByNotification(int companyId);
     
     List<TbTransactionMasterDto> GetRowInStatusRegister(int companyId, int transactionMasterId);
+    void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, TbTransactionMasterDto tbTransactionMasterDto);
 }
