@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace v4posme_library.Models;
 
-public sealed partial class DataContext : DbContext
+public partial class DataContext : DbContext
 {
     private IDbConnection _dbConnection = null;
 

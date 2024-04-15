@@ -134,7 +134,7 @@ namespace v4posme_window.Views
                     throw new Exception("EL DOCUMENTO NO PUEDE SE ELIMINADO, EL CICLO CONTABLE ESTA CERRADO");
                 }
 
-                if(objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing","statusID",objTm.StatusId!.Value, commandEliminable, objUser.CompanyId,objUser.BranchId,objRole.RoleId)!.Value)
+                if(!objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing","statusID",objTm.StatusId!.Value, commandEliminable, objUser.CompanyId,objUser.BranchId,objRole.RoleId)!.Value)
                 {
                     throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
                 }

@@ -449,7 +449,7 @@ class CoreWebWorkflow(
     public bool? ValidateWorkflowStage(string table, string field, int stageId, int cmd, int companyId, int branchId,
         int roleId)
     {
-        var objWorkflowStage = this.GetWorkflowStage(table, field, stageId, companyId, branchId, roleId);
+        var objWorkflowStage = GetWorkflowStage(table, field, stageId, companyId, branchId, roleId);
         if (objWorkflowStage.Count <= 0)
         {
             throw new Exception(
