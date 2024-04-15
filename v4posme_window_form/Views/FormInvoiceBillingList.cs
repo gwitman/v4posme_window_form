@@ -163,8 +163,10 @@ namespace v4posme_window.Views
                     var transactionMasterId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionMasterID").ToString());
                     var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
                     objFormInvoiceBillingEdit.ComandDelete();
-                    ObjGridControl.RefreshDataSource();
+                    
                 }
+                //Listar los registros nuevamente
+                List();
 
             }
             else

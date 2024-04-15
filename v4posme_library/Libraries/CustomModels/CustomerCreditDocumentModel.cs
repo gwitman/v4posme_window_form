@@ -26,19 +26,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
         context.BulkSaveChanges();
     }
 
-    public void UpdateAppPosme(int customerCreditDocumentId, TbCustomerCreditDocumentDto data)
-    {
-        using var context = new DataContext();
-        var find = FindDocuments(customerCreditDocumentId, context).SingleOrDefault();
-        if (find is null)
-        {
-            return;
-        }
-
-        data.CustomerCreditDocumentId = find.CustomerCreditDocumentId;
-        context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
-    }
+    
 
     public void DeleteAppPosme(int customerCreditDocumentId)
     {
@@ -213,15 +201,17 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                 };
 
             TbCustomerCreditDocumentDto objCustomerCreditDocumentDto = result.Single();
-            var objListCreditAmortiation = from ccd in  creditAmortizations
-                           where ccd.CustomerCreditDocumentId == objCustomerCreditDocumentDto.CustomerCreditDocumentId
-                           select new { ccd };
+            if (objCustomerCreditDocumentDto is null)
+                objCustomerCreditDocumentDto = new TbCustomerCreditDocumentDto();
+
+            var objListCreditAmortiation = from ccd 
+                                           in  creditAmortizations 
+                                           where ccd.CustomerCreditDocumentId == objCustomerCreditDocumentDto.CustomerCreditDocumentId 
+                                           select new { ccd };
 
 
             if(objListCreditAmortiation is not null )
-            {
                 objCustomerCreditDocumentDto.DateApply = objListCreditAmortiation.Max(u => u.ccd.DateApply);
-            }
 
             return objCustomerCreditDocumentDto;
 

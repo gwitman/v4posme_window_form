@@ -37,19 +37,6 @@ class TransactionMasterModel : ITransactionMasterModel
         context.SaveChanges();
     }
     
-    public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId,
-        TbTransactionMasterDto tbTransactionMasterDto)
-    {
-        using var context = new DataContext();
-        var find = context.TbTransactionMasters
-            .FirstOrDefault(master => master.CompanyId == companyId
-                                      && master.TransactionId == transactionId
-                                      && master.TransactionMasterId == transactionMasterId);
-        if (find is null) return;
-        tbTransactionMasterDto.TransactionMasterId = find.TransactionMasterId;
-        context.Entry(find).CurrentValues.SetValues(tbTransactionMasterDto);
-        context.SaveChanges();
-    }
 
     public TbTransactionMasterDto GetRowByPk(int companyId, int transactionId, int transactionMasterId)
     {
