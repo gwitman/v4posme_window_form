@@ -18,7 +18,7 @@ public interface ICustomerCreditDocumentModel
 
     List<TbCustomerCreditDocumentDto> GetRowByEntityApplied(int companyId, int entityId, int currencyId);
 
-    TbCustomerCreditDocumentDto GetRowByDocument(int companyId, int entityId, string documentNumber);
+    TbCustomerCreditDocumentDto? GetRowByDocument(int companyId, int entityId, string documentNumber);
 
     List<TbCustomerCreditDocument> GetRowByBalanceBetweenCeroAndCeroPuntoCinco(int companyId);
 

@@ -134,14 +134,13 @@ namespace v4posme_window.Views
             {
 
                 // Obtener el índice de la fila seleccionada
-                List<int> rowIndex = ((GridView)ObjGridControl.MainView).GetSelectedRows().ToList();
-                foreach (var indexRow in rowIndex)
-                {   
-
-                    int companyID = Convert.ToInt32( ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "companyID").ToString());
-                    int transactionID = Convert.ToInt32( ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionID").ToString());
-                    int transactionMasterID = Convert.ToInt32( ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionMasterID").ToString());
-                    var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyID, transactionID, transactionMasterID);
+                var rowIndex = ((GridView)ObjGridControl.MainView).GetSelectedRows().ToList();
+                foreach (var indexRow in rowIndex) {   
+    
+                    var companyId = Convert.ToInt32( ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "companyID").ToString());
+                    var transactionId = Convert.ToInt32( ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionID").ToString());
+                    var transactionMasterId = Convert.ToInt32( ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionMasterID").ToString());
+                    var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
                     objFormInvoiceBillingEdit.ComandDelete();
 
                 }

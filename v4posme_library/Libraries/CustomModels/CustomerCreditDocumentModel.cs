@@ -161,43 +161,53 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
             .ToList();
     }
 
-    public TbCustomerCreditDocumentDto GetRowByDocument(int companyId, int entityId, string documentNumber)
+    public TbCustomerCreditDocumentDto? GetRowByDocument(int companyId, int entityId, string documentNumber)
     {
         using var context = new DataContext();
         var creditDocuments = context.TbCustomerCreditDocuments;
         var creditAmortizations = context.TbCustomerCreditAmortizations;
-        var result = from i in creditDocuments
-            where i.CompanyId == companyId
-                  && i.EntityId == entityId
-                  && i.DocumentNumber == documentNumber
-                  && i.IsActive == 1
-            select new TbCustomerCreditDocumentDto
-            {
-                CustomerCreditDocumentId = i.CustomerCreditDocumentId,
-                CompanyId = i.CompanyId,
-                EntityId = i.EntityId,
-                CustomerCreditLineId = i.CustomerCreditLineId,
-                DocumentNumber = i.DocumentNumber,
-                DateOn = i.DateOn,
-                Amount = i.Amount,
-                Interes = i.Interes,
-                Term = i.Term,
-                ExchangeRate = i.ExchangeRate,
-                Reference1 = i.Reference1,
-                Reference2 = i.Reference2,
-                Reference3 = i.Reference3,
-                StatusId = i.StatusId,
-                IsActive = i.IsActive,
-                Balance = i.Balance,
-                CurrencyId = i.CurrencyId,
-                ReportSinRiesgo = i.ReportSinRiesgo,
-                DateFinish = (from ccd in creditDocuments
-                    join ccda in creditAmortizations
-                        on ccd.CustomerCreditDocumentId equals ccda.CustomerCreditDocumentId
-                    where ccd.CustomerCreditDocumentId == i.CustomerCreditDocumentId
-                    select ccda.DateApply).Max()
-            };
-        return result.Single();
+        var dateTime = from ccd in creditDocuments
+            join ccda in creditAmortizations
+                on ccd.CustomerCreditDocumentId equals ccda.CustomerCreditDocumentId
+            select new {ccda, ccd};
+        try
+        {
+            var result = from i in creditDocuments
+                where i.CompanyId == companyId
+                      && i.EntityId == entityId
+                      && i.DocumentNumber == documentNumber
+                      && i.IsActive == 1
+                select new TbCustomerCreditDocumentDto
+                {
+                    CustomerCreditDocumentId = i.CustomerCreditDocumentId,
+                    CompanyId = i.CompanyId,
+                    EntityId = i.EntityId,
+                    CustomerCreditLineId = i.CustomerCreditLineId,
+                    DocumentNumber = i.DocumentNumber,
+                    DateOn = i.DateOn,
+                    Amount = i.Amount,
+                    Interes = i.Interes,
+                    Term = i.Term,
+                    ExchangeRate = i.ExchangeRate,
+                    Reference1 = i.Reference1,
+                    Reference2 = i.Reference2,
+                    Reference3 = i.Reference3,
+                    StatusId = i.StatusId,
+                    IsActive = i.IsActive,
+                    Balance = i.Balance,
+                    CurrencyId = i.CurrencyId,
+                    ReportSinRiesgo = i.ReportSinRiesgo,
+                    DateFinish = dateTime
+                        .Where(x=> x.ccd.CustomerCreditDocumentId==i.CustomerCreditDocumentId)
+                        .Select(x=>x.ccda.DateApply).Max()
+                };
+            return result.Single();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return null;
+        }
     }
 
     public List<TbCustomerCreditDocument> GetRowByBalanceBetweenCeroAndCeroPuntoCinco(int companyId)

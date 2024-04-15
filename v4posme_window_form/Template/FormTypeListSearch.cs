@@ -35,9 +35,11 @@ namespace v4posme_window.Template
         private int DisplayLength { get; set; }
         private string SSearch { get; set; }
         private int PageCurrent { get; set; }
-        private string TitleWindow { get; set; }        
-        private GridControl ObjGridControl { get; set; }    
-        public FormTypeListSearch(string title,int componentId, string viewName, bool autoClose, string filter, bool multiSelect,
+        private string TitleWindow { get; set; }
+        private GridControl ObjGridControl { get; set; }
+
+        public FormTypeListSearch(string title, int componentId, string viewName, bool autoClose, string filter,
+            bool multiSelect,
             string urlRedictWhenEmpty, int iDisplayStart, int iDisplayLength, string sSearch)
         {
             ComponentId = componentId;
@@ -57,24 +59,22 @@ namespace v4posme_window.Template
 
         private void FormTypeListSearch_Load(object sender, EventArgs e)
         {
-
-            PanelControl controlParent  = this.centerPane;
-            Text                        = TitleWindow;
-            ObjGridControl.Name         = "ObjGridControl";
-            ObjGridControl.Parent       = controlParent;
-            ObjGridControl.Dock         = DockStyle.Fill;
+            PanelControl controlParent = this.centerPane;
+            Text = TitleWindow;
+            ObjGridControl.Name = "ObjGridControl";
+            ObjGridControl.Parent = controlParent;
+            ObjGridControl.Dock = DockStyle.Fill;
 
             ObjGridControl.KeyDown += GridView_KeyDown!;
-            ((GridView)ObjGridControl.MainView).OptionsView.ShowGroupPanel  = false;
-            ((GridView)ObjGridControl.MainView).OptionsBehavior.Editable    = false;
-
+            ((GridView)ObjGridControl.MainView).OptionsView.ShowGroupPanel = false;
+            ((GridView)ObjGridControl.MainView).OptionsBehavior.Editable = false;
+            ShowViewByNamePaginate();
         }
 
 
-        public void ShowViewByNamePaginate()
+        private void ShowViewByNamePaginate()
         {
-            PanelControl controlParent = this.centerPane;
-            int componentID = ComponentId;
+            int componentId = ComponentId;
             string viewName = ViewName;
             bool autoClose = AutoClose;
             string filter = Filter;
@@ -91,12 +91,11 @@ namespace v4posme_window.Template
             var usuario = VariablesGlobales.Instance.User;
 
 
-
             // Crear un diccionario para los parámetros staticos
             var parameter = new Dictionary<string, string>
             {
                 ["{companyID}"] = usuario!.CompanyId.ToString(),
-                ["{componentID}"] = componentID.ToString(),
+                ["{componentID}"] = componentId.ToString(),
                 ["{iDisplayLength}"] = iDisplayLength.ToString(),
                 ["{iDisplayStartDB}"] = (PageCurrent * iDisplayLength).ToString(),
                 ["{sSearchDB}"] = sSearch,
@@ -114,7 +113,7 @@ namespace v4posme_window.Template
             }
 
 
-            var datos           = coreWebView.GetViewByName(usuario, componentID, viewName, calleridSearch, null, parameter);
+            var datos = coreWebView.GetViewByName(usuario, componentId, viewName, calleridSearch, null, parameter);
             //var datosTotales  = coreWebView.GetViewByName(usuario, componentID, viewName + "_TOTAL", calleridSearch,null, parameter);
             //var datosDisplay  = coreWebView.GetViewByName(usuario, componentID, viewName + "_DISPLAY", calleridSearch,null, parameter);
 
@@ -123,12 +122,8 @@ namespace v4posme_window.Template
                 return;
 
 
-        
-
-            CoreWebRenderInView.RenderGrid(datos, "ListView",ObjGridControl );
-            ObjGridControl.Refresh();            
-          
-            
+            CoreWebRenderInView.RenderGrid(datos, "ListView", ObjGridControl);
+            ObjGridControl.Refresh();
         }
 
         private void GridView_KeyDown(object sender, KeyEventArgs e)
@@ -152,7 +147,6 @@ namespace v4posme_window.Template
             var dictionaryObject = (IDictionary<string, object>)dynamicObject;
             if (((GridView)ObjGridControl.MainView).SelectedRowsCount > 0)
             {
-
                 // Obtener el índice de la fila seleccionada
                 List<int> rowIndex = ((GridView)ObjGridControl.MainView).GetSelectedRows().ToList();
                 foreach (var indexRow in rowIndex)
@@ -160,12 +154,11 @@ namespace v4posme_window.Template
                     foreach (GridColumn column in ((GridView)ObjGridControl.MainView).Columns)
                     {
                         string nombreColumna = column.FieldName;
-                        string valueColumn = ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, nombreColumna).ToString();
+                        string valueColumn = ((GridView)ObjGridControl.MainView)
+                            .GetRowCellValue(indexRow, nombreColumna).ToString();
                         dictionaryObject[nombreColumna] = valueColumn;
-
                     }
                 }
-
             }
             else
             {
@@ -177,20 +170,23 @@ namespace v4posme_window.Template
 
         private void btnAtras_Click(object sender, EventArgs e)
         {
-            if(PageCurrent >= 1)
-            PageCurrent--;
-
-            ShowViewByNamePaginate();
-
-
+            if (PageCurrent >= 1)
+            {
+                PageCurrent--;
+                ShowViewByNamePaginate();
+            }
+            else
+            {
+                btnAtras.Enabled = false;
+            }
         }
 
         private void btnSiguiente_Click(object sender, EventArgs e)
-        {   
+        {
             PageCurrent++;
             ShowViewByNamePaginate();
+            btnAtras.Enabled = true;
         }
-
 
 
         private void txtFilter_KeyPress(object sender, KeyPressEventArgs e)
@@ -202,7 +198,5 @@ namespace v4posme_window.Template
                 ShowViewByNamePaginate();
             }
         }
-
-       
     }
 }

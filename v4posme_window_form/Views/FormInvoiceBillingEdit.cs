@@ -19,6 +19,7 @@ using v4posme_library.Libraries.CustomLibraries.Implementacion;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels;
 using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
@@ -47,44 +48,46 @@ namespace v4posme_window.Views
 
         public void ComandDelete()
         {
-           
+            if (VariablesGlobales.Instance.User is null)
+            {
+                return;
+            }
             try
             {
                 //Libreria Window
-                CoreWebRenderInView objInterfazCoreWebRenderInView = new CoreWebRenderInView();
-
+                var objInterfazCoreWebRenderInView = new CoreWebRenderInView();
                 //Helper Dll
-                WebToolsHelper objInterfazWebToolsHelper = new WebToolsHelper();
+                var objInterfazWebToolsHelper = new WebToolsHelper();
 
                 //Libreria DLL
-                ICoreWebPermission objInterfazCoreWebPermission = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebPermission>();
-                ICoreWebWorkflow objInterfazCoreWebWorkflow = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebWorkflow>();
-                ICoreWebParameter objInterfazCoreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
-                ICoreWebAccounting objInterfazCoreWebAccounting = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAccounting>();
-                ICoreWebTransaction objInterfazCoreWebTransaction = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTransaction>();
-                ICoreWebCurrency objInterfazCoreWebCurrency = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebCurrency>();
+                var objInterfazCoreWebPermission = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebPermission>();
+                var objInterfazCoreWebWorkflow = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebWorkflow>();
+                var objInterfazCoreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
+                var objInterfazCoreWebAccounting = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAccounting>();
+                var objInterfazCoreWebTransaction = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTransaction>();
+                var objInterfazCoreWebCurrency = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebCurrency>();
 
                 //Libreria Model Custom DLL
-                ITransactionMasterModel objInterfazTransactionMaster = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterModel>();
-                ITransactionMasterDetailModel objInterfazTransactionMasterDetail = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterDetailModel>();
-                ICustomerCreditDocumentModel objInterfazCustomerCreditDocument = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditDocumentModel>();
-                ICustomerCreditModel objInterfazCustomerCredit = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditModel>();
-                ICustomerCreditLineModel objInterfazCustomerCreditLine = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditLineModel>();
-                ICustomerModel objInterfazCustomer = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerModel>();
+                var objInterfazTransactionMaster = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterModel>();
+                var objInterfazTransactionMasterDetail = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterDetailModel>();
+                var objInterfazCustomerCreditDocument = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditDocumentModel>();
+                var objInterfazCustomerCredit = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditModel>();
+                var objInterfazCustomerCreditLine = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditLineModel>();
+                var objInterfazCustomer = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerModel>();
 
 
                 using DataContext objDataContext = new DataContext();
-                var PERMISSION_NONE = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
-                var COMMAND_ELIMINABLE = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_ELIMINABLE"]);
-                var COMMAND_APLICABLE = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_APLICABLE"]);
-                var URL_SUFFIX = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
-                var APP_NEED_AUTHENTICATION = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
-                int resultPermission = 0;
+                var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
+                var commandEliminable = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_ELIMINABLE"]);
+                var commandAplicable = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_APLICABLE"]);
+                var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+                var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+                var resultPermission = 0;
 
-                if (APP_NEED_AUTHENTICATION!.Equals("true"))
+                if (appNeedAuthentication == "true")
                 {
 
-                    var permited = objInterfazCoreWebPermission.UrlPermited("app_invoice_billing", "delete", URL_SUFFIX,
+                    var permited = objInterfazCoreWebPermission.UrlPermited("app_invoice_billing", "delete", urlSuffix!,
                         VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft,
                         VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop,
                         VariablesGlobales.Instance.ListMenuHiddenPopup);
@@ -94,13 +97,13 @@ namespace v4posme_window.Views
                         return;
                     }
 
-                    resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_invoice_billing", "delete", URL_SUFFIX,
+                    resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_invoice_billing", "delete", urlSuffix!,
                         VariablesGlobales.Instance.Role, VariablesGlobales.Instance.User,
                         VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft,
                         VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop,
                         VariablesGlobales.Instance.ListMenuHiddenPopup);
 
-                    if (resultPermission == PERMISSION_NONE)
+                    if (resultPermission == permissionNone)
                     {
                         objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Permisos", "No se encontraron permisos", this);
                         return;
@@ -117,21 +120,21 @@ namespace v4posme_window.Views
                 }
 
                 //Obtener registros
-                var objTM = objInterfazTransactionMaster.GetRowByPk(CompanyId, TransactionId, TransactionMasterId);
-                var objCustomerCreditDocument = objInterfazCustomerCreditDocument.GetRowByDocument(objTM.CompanyId, objTM.EntityId!.Value, objTM.TransactionNumber!);
+                var objTm = objInterfazTransactionMaster.GetRowByPk(CompanyId, TransactionId, TransactionMasterId);
+                var objCustomerCreditDocument = objInterfazCustomerCreditDocument.GetRowByDocument(objTm.CompanyId, objTm.EntityId!.Value, objTm.TransactionNumber!);
 
                 //Validaciones
-                if(resultPermission == PERMISSION_NONE && (objTM.CreatedBy != objUser.UserId))
+                if(resultPermission == permissionNone && (objTm.CreatedBy != objUser.UserId))
                 {
                     throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_DELETE"]);
                 }
 
-                if(objInterfazCoreWebAccounting.CycleIsCloseByDate(objUser.CompanyId,objTM.CreatedOn!.Value))
+                if(objInterfazCoreWebAccounting.CycleIsCloseByDate(objUser.CompanyId,objTm.CreatedOn!.Value))
                 {
                     throw new Exception("EL DOCUMENTO NO PUEDE SE ELIMINADO, EL CICLO CONTABLE ESTA CERRADO");
                 }
 
-                if(objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing","statusID",objTM.StatusId!.Value, COMMAND_ELIMINABLE, objUser.CompanyId,objUser.BranchId,objRole.RoleId)!.Value)
+                if(objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing","statusID",objTm.StatusId!.Value, commandEliminable, objUser.CompanyId,objUser.BranchId,objRole.RoleId)!.Value)
                 {
                     throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
                 }
@@ -139,11 +142,11 @@ namespace v4posme_window.Views
                 ////Validar si la factura es de credito y esta aplicada y tiene abono	
                 var parameterCausalTypeCredit = objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", objUser.CompanyId);
                 var causalIDTypeCredit = parameterCausalTypeCredit.Value.Split(",");
-                var exisCausalInCredit = causalIDTypeCredit.Any(elemento => elemento == objTM.TransactionCausalId.ToString()); 
+                var exisCausalInCredit = causalIDTypeCredit.Any(elemento => elemento == objTm.TransactionCausalId.ToString()); 
 
                 if(
                         objInterfazCoreWebWorkflow.ValidateWorkflowStage(
-                            "tb_transaction_master_billing","statusID",objTM.StatusId!.Value, COMMAND_APLICABLE,
+                            "tb_transaction_master_billing","statusID",objTm.StatusId!.Value, commandAplicable,
                             objUser.CompanyId,objUser.BranchId,objRole.RoleId
                         )!.Value &&
                         exisCausalInCredit &&
@@ -156,29 +159,29 @@ namespace v4posme_window.Views
 
                 if (
                     objInterfazCoreWebWorkflow.ValidateWorkflowStage(
-                            "tb_transaction_master_billing", "statusID", objTM.StatusId!.Value, COMMAND_APLICABLE,
+                            "tb_transaction_master_billing", "statusID", objTm.StatusId!.Value, commandAplicable,
                             objUser.CompanyId, objUser.BranchId, objRole.RoleId
                     )!.Value
                 )
                 {
                     //Actualizar fecha en la transacciones oroginal
                     TbTransactionMaster dataNewTM = new TbTransactionMaster();
-                    dataNewTM = objDataContext.TbTransactionMasters.First(u => u.CompanyId == objTM.CompanyId && u.TransactionId == objTM.TransactionId && u.TransactionMasterId == objTM.TransactionMasterId);
+                    dataNewTM = objDataContext.TbTransactionMasters.First(u => u.CompanyId == objTm.CompanyId && u.TransactionId == objTm.TransactionId && u.TransactionMasterId == objTm.TransactionMasterId);
                     dataNewTM.StatusIdchangeOn = DateTime.Now;
                     objInterfazTransactionMaster.UpdateAppPosme(dataNewTM.CompanyId, dataNewTM.TransactionId, dataNewTM.TransactionMasterId, dataNewTM);
 
                     var transactionIDRevert         = objInterfazCoreWebParameter.GetParameter("INVOICE_TRANSACTION_REVERSION_TO_BILLING", objUser.CompanyId);
                     var transactionIDRevertValue    = Convert.ToInt32(transactionIDRevert.Value);
-                    objInterfazCoreWebTransaction.CreateInverseDocumentByTransaccion(objTM.CompanyId,objTM.TransactionId,objTM.TransactionMasterId, transactionIDRevertValue,0);
+                    objInterfazCoreWebTransaction.CreateInverseDocumentByTransaccion(objTm.CompanyId,objTm.TransactionId,objTm.TransactionMasterId, transactionIDRevertValue,0);
 
 
                     if(exisCausalInCredit)
                     {
                         //Valores de tasa de cambio          
-                        var objCurrencyDolares  = objInterfazCoreWebCurrency.GetCurrencyExternal(objTM.CompanyId);
-                        var objCurrencyCordoba  = objInterfazCoreWebCurrency.GetCurrencyDefault(objTM.CompanyId);
+                        var objCurrencyDolares  = objInterfazCoreWebCurrency.GetCurrencyExternal(objTm.CompanyId);
+                        var objCurrencyCordoba  = objInterfazCoreWebCurrency.GetCurrencyDefault(objTm.CompanyId);
                         var dateOn              = DateOnly.FromDateTime(DateTime.Now);
-                        var exchangeRate        = objInterfazCoreWebCurrency.GetRatio(objTM.CompanyId, dateOn, 1, objCurrencyDolares.CurrencyId, objCurrencyCordoba.CurrencyId);
+                        var exchangeRate        = objInterfazCoreWebCurrency.GetRatio(objTm.CompanyId, dateOn, 1, objCurrencyDolares.CurrencyId, objCurrencyCordoba.CurrencyId);
 
                         //cancelar el documento de credito					
                         var shareDocumentAnuladoStatusID        = Convert.ToInt32(objInterfazCoreWebParameter.GetParameter("SHARE_DOCUMENT_ANULADO", objUser.CompanyId).Value);
@@ -197,7 +200,7 @@ namespace v4posme_window.Views
 
 
                         //aumentar el balance de credito
-                        var objCustomerCredit           = objDataContext.TbCustomerCredits.First(u => u.CompanyId == objTM.CompanyId && u.BranchId == objTM.BranchId && u.EntityId == objTM.EntityId);
+                        var objCustomerCredit           = objDataContext.TbCustomerCredits.First(u => u.CompanyId == objTm.CompanyId && u.BranchId == objTm.BranchId && u.EntityId == objTm.EntityId);
                         objCustomerCredit.BalanceDol    = objCustomerCredit.BalanceDol + amountDol!.Value;
                         objInterfazCustomerCredit.UpdateAppPosme(objCustomerCredit.CompanyId, objCustomerCredit.BranchId, objCustomerCredit.EntityId,objCustomerCredit);
                     }
@@ -206,18 +209,15 @@ namespace v4posme_window.Views
                 else
                 {
                     //	//Eliminar el Registro			
-                    objInterfazTransactionMaster.DeleteAppPosme(objUser.CompanyId, objTM.TransactionId, objTM.TransactionMasterId);
-                    objInterfazTransactionMasterDetail.DeleteWhereTm(objUser.CompanyId, objTM.TransactionId, objTM.TransactionMasterId);
+                    objInterfazTransactionMaster.DeleteAppPosme(objUser.CompanyId, objTm.TransactionId, objTm.TransactionMasterId);
+                    objInterfazTransactionMasterDetail.DeleteWhereTm(objUser.CompanyId, objTm.TransactionId, objTm.TransactionMasterId);
 
                 }
-                
-                return;
-
-
             }
             catch (Exception ex)
             {
-                CoreWebRenderInView objCoreWebRenderInView = new CoreWebRenderInView();
+                var objCoreWebRenderInView = new CoreWebRenderInView();
+                Console.WriteLine(ex);
                 objCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando" , ex.ToString(), this);
             }
             
