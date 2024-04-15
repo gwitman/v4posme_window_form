@@ -149,10 +149,9 @@ namespace v4posme_window.Template
                 {
                     foreach (GridColumn column in ((GridView)ObjGridControl.MainView).Columns)
                     {
-                        string nombreColumna = column.FieldName;
-                        string valueColumn = ((GridView)ObjGridControl.MainView)
-                            .GetRowCellValue(indexRow, nombreColumna).ToString();
-                        dictionaryObject[nombreColumna] = valueColumn;
+                        string nombreColumna    = column.FieldName == null ? "" : column.FieldName;
+                        var valueColumn         = ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, nombreColumna).ToString();
+                        dictionaryObject[nombreColumna] = valueColumn!;
                     }
                 }
             }

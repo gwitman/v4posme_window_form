@@ -76,7 +76,7 @@ namespace v4posme_window.Views
             var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
             if (appNeedAuthentication!.Equals("true"))
             {
-                var permited = _coreWebPermission.UrlPermited("app_invoice_billing", "index", urlSuffix,
+                var permited = _coreWebPermission.UrlPermited("app_invoice_billing", "index", urlSuffix!,
                     VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft,
                     VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop,
                     VariablesGlobales.Instance.ListMenuHiddenPopup);
@@ -86,7 +86,7 @@ namespace v4posme_window.Views
                     return;
                 }
 
-                resultPermission = _coreWebPermission.UrlPermissionCmd("app_invoice_billing", "index", urlSuffix,
+                resultPermission = _coreWebPermission.UrlPermissionCmd("app_invoice_billing", "index", urlSuffix!,
                     VariablesGlobales.Instance.Role, VariablesGlobales.Instance.User,
                     VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft,
                     VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop,
@@ -110,11 +110,11 @@ namespace v4posme_window.Views
             Dictionary<string, string> parameters;
             if (DataViewId == 0)
             {
-                var targetComponentId = VariablesGlobales.Instance.Company.FlavorId;
+                var targetComponentId = VariablesGlobales.Instance.Company!.FlavorId!;
                 parameters = new Dictionary<string, string>
                 {
-                    { "{companyID}", VariablesGlobales.Instance.User.CompanyId.ToString() },
-                    { "{fecha}", Fecha.Value.ToShortDateString() }
+                    { "{companyID}", VariablesGlobales.Instance.User!.CompanyId.ToString() },
+                    { "{fecha}", Fecha!.Value.ToShortDateString() }
                 };
 
                 var dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User, objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
@@ -137,7 +137,7 @@ namespace v4posme_window.Views
             {
                 parameters = new Dictionary<string, string>
                 {
-                    { "{companyID}", VariablesGlobales.Instance.User.CompanyId.ToString() }
+                    { "{companyID}", VariablesGlobales.Instance.User!.CompanyId.ToString() }
                 };
 
                 var dataViewData = _coreWebView.GetViewByDataViewId(VariablesGlobales.Instance.User, objComponent.ComponentId, DataViewId!.Value, callerIdList, resultPermission, parameters);
