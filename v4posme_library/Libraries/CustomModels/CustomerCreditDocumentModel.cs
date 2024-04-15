@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+using v4posme_library.Models;
 using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
@@ -166,10 +167,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
         using var context = new DataContext();
         var creditDocuments = context.TbCustomerCreditDocuments;
         var creditAmortizations = context.TbCustomerCreditAmortizations;
-        var dateTime = from ccd in creditDocuments
-            join ccda in creditAmortizations
-                on ccd.CustomerCreditDocumentId equals ccda.CustomerCreditDocumentId
-            select new {ccda, ccd};
+      
         try
         {
             var result = from i in creditDocuments
@@ -197,11 +195,22 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                     Balance = i.Balance,
                     CurrencyId = i.CurrencyId,
                     ReportSinRiesgo = i.ReportSinRiesgo,
-                    DateFinish = dateTime
-                        .Where(x=> x.ccd.CustomerCreditDocumentId==i.CustomerCreditDocumentId)
-                        .Select(x=>x.ccda.DateApply).Max()
+                    DateFinish = null 
                 };
-            return result.Single();
+
+            TbCustomerCreditDocumentDto objCustomerCreditDocumentDto = result.Single();
+            var objListCreditAmortiation = from ccd in  creditAmortizations
+                           where ccd.CustomerCreditDocumentId == objCustomerCreditDocumentDto.CustomerCreditDocumentId
+                           select new { ccd };
+
+
+            if(objListCreditAmortiation is not null )
+            {
+                objCustomerCreditDocumentDto.DateApply = objListCreditAmortiation.Max(u => u.ccd.DateApply);
+            }
+
+            return objCustomerCreditDocumentDto;
+
         }
         catch (Exception e)
         {

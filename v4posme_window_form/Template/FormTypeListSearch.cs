@@ -68,7 +68,7 @@ namespace v4posme_window.Template
             ObjGridControl.KeyDown += GridView_KeyDown!;
             ((GridView)ObjGridControl.MainView).OptionsView.ShowGroupPanel = false;
             ((GridView)ObjGridControl.MainView).OptionsBehavior.Editable = false;
-            ShowViewByNamePaginate();
+            
         }
 
 
@@ -175,17 +175,13 @@ namespace v4posme_window.Template
                 PageCurrent--;
                 ShowViewByNamePaginate();
             }
-            else
-            {
-                btnAtras.Enabled = false;
-            }
         }
 
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
             PageCurrent++;
             ShowViewByNamePaginate();
-            btnAtras.Enabled = true;
+           
         }
 
 
@@ -195,6 +191,7 @@ namespace v4posme_window.Template
             if (e.KeyChar == (char)Keys.Enter)
             {
                 SSearch = txtFilter.Text;
+                PageCurrent = 0;
                 ShowViewByNamePaginate();
             }
         }
