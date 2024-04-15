@@ -27,15 +27,13 @@ namespace v4posme_window.Views
             VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
 
         private readonly ICoreWebView _coreWebView = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
-        
-        public GridControl ObjGridControl { get ; set; }
+
+        public GridControl ObjGridControl { get; set; }
         public int? DataViewId { get; set; }
         public DateTime? Fecha { get; set; }
 
         public FormInvoiceBillingList()
         {
-
-            
             InitializeComponent();
 
             // Suscribir al manejador de excepciones global
@@ -48,8 +46,6 @@ namespace v4posme_window.Views
             btnEditar.Click += Edit;
             btnEliminar.Click += Delete;
             btnNuevo.Click += New;
-
-          
         }
 
 
@@ -80,7 +76,6 @@ namespace v4posme_window.Views
             var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
             if (appNeedAuthentication!.Equals("true"))
             {
-
                 var permited = _coreWebPermission.UrlPermited("app_invoice_billing", "index", urlSuffix,
                     VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft,
                     VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop,
@@ -158,7 +153,6 @@ namespace v4posme_window.Views
 
             if (((GridView)ObjGridControl.MainView).SelectedRowsCount > 0)
             {
-
                 // Obtener el índice de la fila seleccionada
                 var rowIndex = ((GridView)ObjGridControl.MainView).GetSelectedRows().ToList();
                 foreach (var indexRow in rowIndex)
@@ -169,7 +163,7 @@ namespace v4posme_window.Views
                     var transactionMasterId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionMasterID").ToString());
                     var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
                     objFormInvoiceBillingEdit.ComandDelete();
-
+                    ObjGridControl.RefreshDataSource();
                 }
 
             }
