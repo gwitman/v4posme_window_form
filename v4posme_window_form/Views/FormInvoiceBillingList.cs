@@ -27,17 +27,15 @@ namespace v4posme_window.Views
             VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
 
         private readonly ICoreWebView _coreWebView = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
-        
-        public GridControl ObjGridControl { get ; set; }
+
+        public GridControl ObjGridControl { get; set; }
         public int? DataViewId { get; set; }
         public DateTime? Fecha { get; set; }
 
         public FormInvoiceBillingList()
         {
-
-            
             InitializeComponent();
-          
+
 
             Fecha = DateTime.Now;
             DataViewId = 0;
@@ -45,37 +43,33 @@ namespace v4posme_window.Views
             btnEditar.Click += Edit;
             btnEliminar.Click += Delete;
             btnNuevo.Click += New;
-
-          
         }
 
 
         private void FormInvoiceBillingList_Load(object sender, EventArgs e)
         {
-
             PreRender();
             List();
-           
         }
 
-     
+
         public void List()
         {
-            var coreWebRenderInView     = new CoreWebRenderInView();
-            var resultPermission        = 0;
-            var appNeedAuthentication   = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
-            var permissionNone          = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
-            var urlSuffix               = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+            var coreWebRenderInView = new CoreWebRenderInView();
+            var resultPermission = 0;
+            var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+            var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
+            var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
             if (appNeedAuthentication!.Equals("true"))
             {
-
                 var permited = _coreWebPermission.UrlPermited("app_invoice_billing", "index", urlSuffix,
                     VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft,
                     VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop,
                     VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (!permited)
                 {
-                    _coreWebRender.GetMessageAlert(TypeError.Error, "Permisos", "No tiene acceso a los controles",this);
+                    _coreWebRender.GetMessageAlert(TypeError.Error, "Permisos", "No tiene acceso a los controles",
+                        this);
                     return;
                 }
 
@@ -103,22 +97,24 @@ namespace v4posme_window.Views
             Dictionary<string, string> parameters;
             if (DataViewId == 0)
             {
-                var targetComponentId   = VariablesGlobales.Instance.Company.FlavorId;
-                parameters              = new Dictionary<string, string>
+                var targetComponentId = VariablesGlobales.Instance.Company.FlavorId;
+                parameters = new Dictionary<string, string>
                 {
                     { "{companyID}", VariablesGlobales.Instance.User.CompanyId.ToString() },
                     { "{fecha}", Fecha.Value.ToShortDateString() }
                 };
-                
-                var dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User,objComponent.ComponentId, callerIdList, targetComponentId, resultPermission);
+
+                var dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User,
+                    objComponent.ComponentId, callerIdList, targetComponentId, resultPermission);
                 {
-                    targetComponentId   = 0;
-                    parameters          = new Dictionary<string, string>
+                    targetComponentId = 0;
+                    parameters = new Dictionary<string, string>
                     {
                         { "{companyID}", VariablesGlobales.Instance.User.CompanyId.ToString() },
                         { "{fecha}", Fecha.Value.ToShortDateString() }
                     };
-                    dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User,objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
+                    dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User,
+                        objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
                 }
 
 
@@ -129,29 +125,30 @@ namespace v4posme_window.Views
 
         public void Delete(object? sender, EventArgs? args)
         {
-            
             if (((GridView)ObjGridControl.MainView).SelectedRowsCount > 0)
             {
-
                 // Obtener el índice de la fila seleccionada
                 var rowIndex = ((GridView)ObjGridControl.MainView).GetSelectedRows().ToList();
-                foreach (var indexRow in rowIndex) {   
-    
-                    var companyId = Convert.ToInt32( ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "companyID").ToString());
-                    var transactionId = Convert.ToInt32( ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionID").ToString());
-                    var transactionMasterId = Convert.ToInt32( ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionMasterID").ToString());
-                    var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
+                foreach (var indexRow in rowIndex)
+                {
+                    var companyId = Convert.ToInt32(((GridView)ObjGridControl.MainView)
+                        .GetRowCellValue(indexRow, "companyID").ToString());
+                    var transactionId = Convert.ToInt32(((GridView)ObjGridControl.MainView)
+                        .GetRowCellValue(indexRow, "transactionID").ToString());
+                    var transactionMasterId = Convert.ToInt32(((GridView)ObjGridControl.MainView)
+                        .GetRowCellValue(indexRow, "transactionMasterID").ToString());
+                    var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId,
+                        transactionId, transactionMasterId);
                     objFormInvoiceBillingEdit.ComandDelete();
-
+                    ObjGridControl.RefreshDataSource();
                 }
-            
             }
             else
             {
                 CoreWebRenderInView objCoreWebRenderInView = new CoreWebRenderInView();
-                objCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando","Debe seleccionar un registro", this);
+                objCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando",
+                    "Debe seleccionar un registro", this);
             }
-            
         }
 
         public void Edit(object? sender, EventArgs? args)
@@ -169,17 +166,13 @@ namespace v4posme_window.Views
         }
 
         public void PreRender()
-        {   
-            lblTitulo.Text  = @"LISTA DE FACTURAS";
-            Text            = lblTitulo.Text;
-
-
-            PanelControl controlParent  = this.centerPane;
-            ObjGridControl.Name         = "ObjGridControl";
-            ObjGridControl.Parent       = controlParent;
-            ObjGridControl.Dock         = DockStyle.Fill;
-
-
+        {
+            lblTitulo.Text = @"LISTA DE FACTURAS";
+            Text = lblTitulo.Text;
+            var controlParent = centerPane;
+            ObjGridControl.Name = "ObjGridControl";
+            ObjGridControl.Parent = controlParent;
+            ObjGridControl.Dock = DockStyle.Fill;
         }
     }
 }
