@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using MySqlConnector;
 using Unity;
 using v4posme_library.Libraries;
@@ -189,15 +190,9 @@ namespace TestProject
         [Test]
         public void BdModelTest()
         {
+            var input = "CALL pr_transaction_revert (@companyIdOriginal,@transactionIdOriginal,@transactionMasterIdOriginal,@transactionIdRevert,@transactionMasterIdRevert)";
             var bdModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBdModel>();
-            var datos = bdModel.ExecuteRenderQueryable("select    x.companyID,   x.transactionID,   x.transactionMasterID,   x.transactionNumber AS Numero,   date_format(x.createdOn,'%Y-%m-%d') as Fecha,   ws.name as Estado,   substring(u.nickname,1,20) as 'Usuario',   case     when tmf.referenceClientName != '' then      tmf.referenceClientName     else       substring(nat.firstName,1,15)   end as Cliente ,    ct.name as Tipo,   cur.name as Moneda,    round(x.amount,2)  as Monto  from    tb_transaction_master x     inner join tb_transaction_causal ct on                      x.transactionCausalID = ct.transactionCausalID   inner join tb_transaction_master_info tmf on       x.transactionMasterID = tmf.transactionMasterID   inner join tb_workflow_stage ws on     x.statusID = ws.workflowStageID    inner join tb_user u on     x.createdBy = u.userID    inner join tb_naturales nat on     x.entityID = nat.entityID    inner join tb_currency cur on     x.currencyID = cur.currencyID    where   x.isActive = 1 and    x.transactionID = 19 and    x.companyID = 2   AND x.createdAt = 2   order by         x.transactionMasterID desc   limit 0,1200");
-            foreach (var dato in datos)
-            {
-                foreach (var value in dato)
-                {
-                    Console.WriteLine($"{value.Key} {value.Value}");
-                }
-            }
+            bdModel.ExecuteRenderWidthParameter(input, [2,0]);
         }
     }
 }

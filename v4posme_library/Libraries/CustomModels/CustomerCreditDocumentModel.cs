@@ -104,7 +104,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
             where i.CompanyId == companyId
                   && i.EntityId == entityId
                   && i.IsActive == 1
-                  && a.Aplicable!.Value
+                  && a.Aplicable!.Value>0
                   && i.CurrencyId == currencyId
             group new { i, cc } by new
             {
@@ -246,8 +246,8 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
             where d.IsActive == 1
                   && d.CompanyId == companyId
                   && a.IsActive == 1
-                  && wsa.Aplicable.Value
-                  && wsd.Aplicable.Value
+                  && wsa.Aplicable.Value>0
+                  && wsd.Aplicable.Value>0
                   && a.Remaining > 0
                   && d.EntityId == entityId
                   && a.CustomerCreditDocumentId >= customerCreditDocumentId

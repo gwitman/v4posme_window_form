@@ -74,7 +74,7 @@ class CoreWebTransaction(
             companyIdOriginal, transactionIdOriginal, transactionMasterIdOriginal, transactionIdRevert,
             transactionMasterIdRevert
         ];
-        bdModel.ExecuteRenderWidthParameter<object>(
+        bdModel.ExecuteRenderWidthParameter(
             "CALL pr_transaction_revert (@companyIdOriginal,@transactionIdOriginal,@transactionMasterIdOriginal, " +
             "@transactionIdRevert,@transactionMasterIdRevert);", param);
     }

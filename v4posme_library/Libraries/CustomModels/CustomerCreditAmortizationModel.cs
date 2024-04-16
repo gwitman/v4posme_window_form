@@ -63,7 +63,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                 (amortization, stage) => new { amortization, stage })
             .Where(key => key.amortization.CustomerCreditDocumentId == customerCreditDocumentId
                           && key.amortization.IsActive == 1
-                          && key.stage.Vinculable!.Value)
+                          && key.stage.Vinculable!.Value>0)
             .Select(k => k.amortization);
     }
 
@@ -101,7 +101,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                 wsd => wsd.WorkflowStageId,
                 (t, wsd) => new { t, wsd })
             .Where(t => t.t.t.i.IsActive == 1
-                        && t.t.t.ws.Vinculable!.Value == false
+                        && t.t.t.ws.Vinculable!.Value > 0
                         && t.t.cd.EntityId == customerId
                         && !container.Contains(t.t.cd.StatusId))
             .Select(t => new TbCustomerCreditAmortizationDto
@@ -128,7 +128,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
             join ccaStatus in dbContext.TbWorkflowStages on cca.StatusId equals ccaStatus.WorkflowStageId
             join ccdStatus in dbContext.TbWorkflowStages on ccd.StatusId equals ccdStatus.WorkflowStageId
             where c.CompanyId == companyId
-                  && ccdStatus.Vinculable!.Value
+                  && ccdStatus.Vinculable!.Value>0
                   && c.IsActive!.Value
                   && cca.Remaining > 0
                   && cca.DateApply < DateTime.Now
@@ -187,7 +187,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
             join wsd in dbContext.TbWorkflowStages
                 on cd.StatusId equals wsd.WorkflowStageId
             where i.IsActive == 1
-                  && ws.Vinculable!.Value
+                  && ws.Vinculable!.Value>0
                   && i.Remaining >= decimal.Zero && i.Remaining <= (decimal)0.2
                   && cd.CustomerCreditDocumentId == customerCreditDocumentId
             select new TbCustomerCreditAmortizationDto

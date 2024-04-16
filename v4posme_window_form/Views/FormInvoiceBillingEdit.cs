@@ -5,7 +5,6 @@ using v4posme_library.Libraries.CustomHelper;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels;
 using v4posme_library.Models;
-using v4posme_library.ModelsDto;
 using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
@@ -188,7 +187,9 @@ namespace v4posme_window.Views
 
                 //Obtener registros
                 var objTm = objInterfazTransactionMaster.GetRowByPk(CompanyId, TransactionId, TransactionMasterId);
-                var objCustomerCreditDocument = objInterfazCustomerCreditDocument.GetRowByDocument(objTm.CompanyId, objTm.EntityId!.Value,objTm.TransactionNumber!) ;
+                var objCustomerCreditDocument =
+                    objInterfazCustomerCreditDocument.GetRowByDocument(objTm.CompanyId, objTm.EntityId!.Value,
+                        objTm.TransactionNumber!);
 
                 //Validaciones
                 if (resultPermission == permissionNone && (objTm.CreatedBy != objUser.UserId))
@@ -201,14 +202,10 @@ namespace v4posme_window.Views
                     throw new Exception("EL DOCUMENTO NO PUEDE SE ELIMINADO, EL CICLO CONTABLE ESTA CERRADO");
                 }
 
-                if (!
-                    (
-                        objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing", "statusID",
-                            objTm.StatusId!.Value, commandEliminable, objUser.CompanyId, objUser.BranchId,
-                            objRole!.RoleId)!
-                        .Value
-                    )
-                )
+                var workflowStage = objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing",
+                    "statusID", objTm.StatusId!.Value, commandEliminable, objUser.CompanyId,
+                    objUser.BranchId, objRole!.RoleId);
+                if (workflowStage == 0)
                 {
                     throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
                 }
@@ -226,7 +223,7 @@ namespace v4posme_window.Views
                 )!.Value;
 
                 if (
-                    validateWorkflowStage &&
+                    validateWorkflowStage == 0 &&
                     exisCausalInCredit &&
                     objCustomerCreditDocument!.Amount != objCustomerCreditDocument.Balance &&
                     objCustomerCreditDocument.Balance > 0
@@ -235,7 +232,7 @@ namespace v4posme_window.Views
                     throw new Exception("Factura con abonos y balance mayor que 1");
                 }
 
-                if (validateWorkflowStage)
+                if (validateWorkflowStage > 0)
                 {
                     //Actualizar fecha en la transacciones oroginal
                     var dataContext = new DataContext();
@@ -246,13 +243,13 @@ namespace v4posme_window.Views
                     objInterfazTransactionMaster.UpdateAppPosme(dataNewTm.CompanyId, dataNewTm.TransactionId,
                         dataNewTm.TransactionMasterId, dataNewTm);
 
-                   //Ejecutar el procedimiento de reversion
-                   var transactionIdRevert =
-                       objInterfazCoreWebParameter.GetParameter("INVOICE_TRANSACTION_REVERSION_TO_BILLING",
-                           objUser.CompanyId);
-                   var transactionIdRevertValue = Convert.ToInt32(transactionIdRevert!.Value);
-                   objInterfazCoreWebTransaction.CreateInverseDocumentByTransaccion(objTm.CompanyId,
-                       objTm.TransactionId, objTm.TransactionMasterId, transactionIdRevertValue, 0);
+                    //Ejecutar el procedimiento de reversion
+                    var transactionIdRevert =
+                        objInterfazCoreWebParameter.GetParameter("INVOICE_TRANSACTION_REVERSION_TO_BILLING",
+                            objUser.CompanyId);
+                    var transactionIdRevertValue = Convert.ToInt32(transactionIdRevert!.Value);
+                    objInterfazCoreWebTransaction.CreateInverseDocumentByTransaccion(objTm.CompanyId,
+                        objTm.TransactionId, objTm.TransactionMasterId, transactionIdRevertValue, 0);
 
 
                     if (exisCausalInCredit)
@@ -263,24 +260,26 @@ namespace v4posme_window.Views
                         var dateOn = DateOnly.FromDateTime(DateTime.Now);
                         var exchangeRate = objInterfazCoreWebCurrency.GetRatio(objTm.CompanyId, dateOn, 1,
                             objCurrencyDolares!.CurrencyId, objCurrencyCordoba!.CurrencyId);
-                    
+
                         //cancelar el documento de credito					
                         var shareDocumentAnuladoStatusID = Convert.ToInt32(objInterfazCoreWebParameter
                             .GetParameter("SHARE_DOCUMENT_ANULADO", objUser!.CompanyId)!.Value);
-                    
+
                         var objCustomerCreditDocumentNew = dataContext.TbCustomerCreditDocuments.Where(
-                                c => c.CustomerCreditDocumentId  == objCustomerCreditDocument!.CustomerCreditDocumentId!.Value).FirstOrDefault();
-                    
+                            c => c.CustomerCreditDocumentId ==
+                                 objCustomerCreditDocument!.CustomerCreditDocumentId!.Value).FirstOrDefault();
+
                         objCustomerCreditDocumentNew!.StatusId = shareDocumentAnuladoStatusID;
                         objInterfazCustomerCreditDocument.UpdateAppPosme(
                             objCustomerCreditDocument!.CustomerCreditDocumentId!.Value, objCustomerCreditDocumentNew);
-                    
+
                         var amountDol = objCustomerCreditDocument.Balance / exchangeRate;
                         var amountCor = objCustomerCreditDocument.Balance;
-                    
-                    
+
+
                         //aumentar el blance de la linea
-                        var tbCustomerCreditLine = objInterfazCustomerCreditLine.GetRowByPk(objCustomerCreditDocument.CustomerCreditLineId);
+                        var tbCustomerCreditLine =
+                            objInterfazCustomerCreditLine.GetRowByPk(objCustomerCreditDocument.CustomerCreditLineId);
                         tbCustomerCreditLine.Balance = tbCustomerCreditLine.Balance +
                                                        (tbCustomerCreditLine.CurrencyId ==
                                                         objCurrencyDolares.CurrencyId
@@ -288,9 +287,10 @@ namespace v4posme_window.Views
                                                            : amountCor!.Value);
                         objInterfazCustomerCreditLine.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditLineId,
                             tbCustomerCreditLine);
-                    
+
                         //aumentar el balance de credito
-                        var objCustomerCredit =objInterfazCustomerCredit.GetRowByPk(objTm.CompanyId, objTm.BranchId!.Value, objTm.EntityId!.Value);
+                        var objCustomerCredit = objInterfazCustomerCredit.GetRowByPk(objTm.CompanyId,
+                            objTm.BranchId!.Value, objTm.EntityId!.Value);
                         objCustomerCredit.BalanceDol = objCustomerCredit.BalanceDol + amountDol!.Value;
                         objInterfazCustomerCredit.UpdateAppPosme(objCustomerCredit.CompanyId,
                             objCustomerCredit.BranchId, objCustomerCredit.EntityId, objCustomerCredit);

@@ -53,7 +53,7 @@ class RememberModel : IRememberModel
             join ci in context.TbCatalogItems on c.Period equals ci.CatalogItemId
             join ws in context.TbWorkflowStages on c.StatusId equals ws.WorkflowStageId
             where c.IsActive == 1 &&
-                  ws.Vinculable.Value &&
+                  ws.Vinculable.Value >0 &&
                   c.CompanyId == companyId &&
                   c.TagId == tagId
             select c;
@@ -67,7 +67,7 @@ class RememberModel : IRememberModel
             join ci in context.TbCatalogItems on c.Period equals ci.CatalogItemId
             join ws in context.TbWorkflowStages on c.StatusId equals ws.WorkflowStageId
             where c.IsActive == 1 &&
-                  ws.Vinculable.Value &&
+                  ws.Vinculable.Value>0 &&
                   c.CompanyId == companyId
             select c;
         return result.ToList();

@@ -40,26 +40,26 @@ public partial class TbWorkflowStage
     public int? FlavorId { get; set; }
 
     [Column("editableParcial")]
-    public bool? EditableParcial { get; set; }
+    public int? EditableParcial { get; set; }
 
     [Column("editableTotal")]
-    public bool? EditableTotal { get; set; }
+    public int? EditableTotal { get; set; }
 
     [Column("eliminable")]
-    public bool? Eliminable { get; set; }
+    public int? Eliminable { get; set; }
 
     /// <summary>
     /// Este campo es util para saber si el documento debe de aumentar o disminuir inventario o para saver si el documento debe de ser contabilizado
     /// </summary>
     [Column("aplicable")]
-    public bool? Aplicable { get; set; }
+    public int? Aplicable { get; set; }
 
     [Column("vinculable")]
-    public bool? Vinculable { get; set; }
+    public int? Vinculable { get; set; }
 
     [Column("isActive")]
     public bool IsActive { get; set; }
 
     [Column("isInit")]
-    public bool IsInit { get; set; }
+    public int IsInit { get; set; }
 }

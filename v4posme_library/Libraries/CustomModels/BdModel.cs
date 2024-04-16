@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Data;
+using System.Text.RegularExpressions;
+using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 using v4posme_library.Models;
 
@@ -6,9 +8,38 @@ namespace v4posme_library.Libraries.CustomModels;
 
 class BdModel : IBdModel
 {
+    public void ExecuteRenderWidthParameter(string query, object[] parameter)
+    {
+        var matches = Regex.Matches(query, @"@(\w+)");
+        using var connection = new MySqlConnection(VariablesGlobales.ConnectionString);
+        connection.Open();
+        // Utilizamos una expresión regular para encontrar la palabra después de "CALL" y antes de "("
+        var getProcedureName = Regex.Match(query, @"CALL\s+(\w+)\s+\(");
+        if (getProcedureName.Success)
+        {
+            var procedimientoAlmacenado = getProcedureName.Groups[1].Value;
+            using var command = new MySqlCommand(procedimientoAlmacenado, connection);
+            var aux = 0;
+            foreach (Match match in matches)
+            {
+                var nombreVariable = match.Groups[1].Value;
+                command.Parameters.AddWithValue($"@{nombreVariable}", parameter[aux]);
+                aux++;
+            }
+
+            command.ExecuteNonQuery();
+        }
+        else
+        {
+            Console.WriteLine("No se encontró un procedimiento almacenado en el formato esperado.");
+        }
+        
+        connection.Close();
+    }
+
     public T ExecuteRenderWidthParameter<T>(string query, object[] parameter)
     {
-        using var context = new DataContext();
+        var context = new DataContext();
         return (T)context.Database.SqlQueryRaw<T>(query, parameter);
     }
 
@@ -17,7 +48,7 @@ class BdModel : IBdModel
         var context = new DataContext();
         return (T)context.Database.SqlQueryRaw<T>(query);
     }
-    
+
     public List<Dictionary<string, object>>? ExecuteRenderQueryable(string query)
     {
         var conn = new MySqlConnection(VariablesGlobales.ConnectionString);
@@ -38,6 +69,7 @@ class BdModel : IBdModel
 
                 list.Add(dataRow);
             }
+
             reader.Close();
         }
         catch (Exception ex)
@@ -45,8 +77,8 @@ class BdModel : IBdModel
             Console.WriteLine(ex.ToString());
             return null;
         }
+
         conn.Close();
         return list;
     }
-
 }
