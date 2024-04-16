@@ -17,6 +17,6 @@ public interface ICoreWebWorkflow
     List<TbWorkflowStage> GetWorkflowStageByStageInit(string table, string field, int startStageId,
         int companyId, int branchId, int roleId);
     
-    int? ValidateWorkflowStage(string table, string field, int stageId, int cmd, int companyId, int branchId,
+    bool? ValidateWorkflowStage(string table, string field, int stageId, int cmd, int companyId, int branchId,
         int roleId);
 }

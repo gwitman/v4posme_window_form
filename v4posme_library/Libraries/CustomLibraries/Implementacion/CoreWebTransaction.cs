@@ -69,14 +69,8 @@ class CoreWebTransaction(
         int transactionMasterIdOriginal, int transactionIdRevert, int transactionMasterIdRevert)
     {
         var bdModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBdModel>();
-        object[]? param =
-        [
-            companyIdOriginal, transactionIdOriginal, transactionMasterIdOriginal, transactionIdRevert,
-            transactionMasterIdRevert
-        ];
-        bdModel.ExecuteProcedureWidthParameter(
-            "CALL pr_transaction_revert (@companyIdOriginal,@transactionIdOriginal,@transactionMasterIdOriginal, " +
-            "@transactionIdRevert,@transactionMasterIdRevert);", param);
+        bdModel.ExecuteProcedure("CALL pr_transaction_revert ("+companyIdOriginal+","+transactionIdOriginal+","+transactionMasterIdOriginal+","+transactionIdRevert+","+transactionMasterIdRevert+");");
+        
     }
 
     public int? GetTransactionId(int companyId, string componentName, int componentItemId)

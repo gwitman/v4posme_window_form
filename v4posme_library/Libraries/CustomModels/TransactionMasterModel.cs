@@ -135,9 +135,9 @@ class TransactionMasterModel : ITransactionMasterModel
         using var context = new DataContext();
         var result = from tm in context.TbTransactionMasters
             join ws in context.TbWorkflowStages on tm.StatusId equals ws.WorkflowStageId
-            where tm.IsActive.Value
+            where tm.IsActive!.Value
                   && tm.CompanyId == companyId
-                  && ws.EditableTotal.Value==1
+                  && ws.EditableTotal!.Value
                   && tm.TransactionMasterId != transactionMasterId
             select new TbTransactionMasterDto
             {

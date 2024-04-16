@@ -131,6 +131,7 @@ namespace v4posme_window.Views
 
 
                 CoreWebRenderInView.RenderGrid(dataViewData!, "invoice", ObjGridControl);
+                ObjGridControl.MainView.RefreshData();
                 ObjGridControl.Refresh();
             }
             else
@@ -142,6 +143,7 @@ namespace v4posme_window.Views
 
                 var dataViewData = _coreWebView.GetViewByDataViewId(VariablesGlobales.Instance.User, objComponent.ComponentId, DataViewId!.Value, callerIdList, resultPermission, parameters);
                 CoreWebRenderInView.RenderGrid(dataViewData!, "invoice", ObjGridControl);
+                ObjGridControl.MainView.RefreshData();
                 ObjGridControl.Refresh();
             }
 

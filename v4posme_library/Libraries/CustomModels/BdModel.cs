@@ -8,32 +8,12 @@ namespace v4posme_library.Libraries.CustomModels;
 
 class BdModel : IBdModel
 {
-    public void ExecuteProcedureWidthParameter(string query, object[] parameter)
+    public void ExecuteProcedure(string query)
     {
-        var matches = Regex.Matches(query, @"@(\w+)");
         using var connection = new MySqlConnection(VariablesGlobales.ConnectionString);
         connection.Open();
-        // Utilizamos una expresión regular para encontrar la palabra después de "CALL" y antes de "("
-        var getProcedureName = Regex.Match(query, @"CALL\s+(\w+)\s+\(");
-        if (getProcedureName.Success)
-        {
-            var procedimientoAlmacenado = getProcedureName.Groups[1].Value;
-            using var command = new MySqlCommand(procedimientoAlmacenado, connection);
-            var aux = 0;
-            foreach (Match match in matches)
-            {
-                var nombreVariable = match.Groups[1].Value;
-                command.Parameters.AddWithValue($"@{nombreVariable}", parameter[aux]);
-                aux++;
-            }
-
-            command.ExecuteNonQuery();
-        }
-        else
-        {
-            Console.WriteLine("No se encontró un procedimiento almacenado en el formato esperado.");
-        }
-        
+        MySqlCommand command = new MySqlCommand(query, connection);
+        command.ExecuteNonQuery(); 
         connection.Close();
     }
 

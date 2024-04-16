@@ -446,7 +446,7 @@ class CoreWebWorkflow(
         return aux;
     }
 
-    public int? ValidateWorkflowStage(string table, string field, int stageId, int cmd, int companyId, int branchId,
+    public bool? ValidateWorkflowStage(string table, string field, int stageId, int cmd, int companyId, int branchId,
         int roleId)
     {
         var objWorkflowStage = GetWorkflowStage(table, field, stageId, companyId, branchId, roleId);
@@ -483,7 +483,8 @@ class CoreWebWorkflow(
             return tbWorkflowStage.Aplicable;
         }
 
-        return -100;
+
+        return false;
 
     }
 }

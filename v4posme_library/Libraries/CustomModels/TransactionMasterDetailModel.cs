@@ -432,8 +432,8 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             join td in context.TbTransactionMasterDetails on t.TransactionMasterId equals td.TransactionMasterId
             join i in context.TbItems on td.ComponentItemId equals i.ItemId
             where t.TransactionId == 19 &&
-                  t.IsActive.Value &&
-                  ws.Aplicable.Value==1 &&
+                  t.IsActive!.Value! &&
+                  ws.Aplicable!.Value! &&
                   t.CompanyId == companyId &&
                   t.TransactionOn >= dateFirst &&
                   t.TransactionOn <= dateLast &&
@@ -459,8 +459,8 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             join td in context.TbTransactionMasterDetails on t.TransactionMasterId equals td.TransactionMasterId
             join i in context.TbItems on td.ComponentItemId equals i.ItemId
             where t.TransactionId == 19 &&
-                  t.IsActive.Value &&
-                  ws.Aplicable.Value==1 &&
+                  t.IsActive!.Value &&
+                  ws.Aplicable!.Value &&
                   t.CompanyId == companyId &&
                   t.TransactionOn >= dateFirst &&
                   t.TransactionOn <= dateLast &&
@@ -484,12 +484,12 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             join nat in context.TbNaturales on t.EntityIdsecondary equals nat.EntityId into natGroup
             from nat in natGroup.DefaultIfEmpty()
             where t.TransactionId == 19 &&
-                  t.IsActive.Value &&
-                  ws.Aplicable.Value==1 &&
+                  t.IsActive!.Value &&
+                  ws.Aplicable!.Value &&
                   t.CompanyId == companyId &&
                   t.TransactionOn >= dateFirst &&
                   t.TransactionOn <= dateLast &&
-                  ws.Aplicable.Value==1
+                  ws.Aplicable.Value
             group t by t.TransactionOn.Value.Month
             into g
             select new TbTransactionMasterDetailDto
@@ -508,13 +508,13 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             join nat in context.TbNaturales on t.EntityIdsecondary equals nat.EntityId into natGroup
             from nat in natGroup.DefaultIfEmpty()
             where t.TransactionId == 19 &&
-                  t.IsActive.Value &&
-                  ws.Aplicable.Value==1 &&
+                  t.IsActive!.Value &&
+                  ws.Aplicable!.Value &&
                   t.CompanyId == companyId &&
                   t.TransactionOn >= dateFirst &&
                   t.TransactionOn <= dateLast &&
-                  ws.Aplicable.Value==1
-            group t by t.TransactionOn.Value.Day
+                  ws.Aplicable.Value
+            group t by t.TransactionOn!.Value.Day
             into g
             select new TbTransactionMasterDetailDto
             {
@@ -653,11 +653,11 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             join nat in context.TbNaturales on t.EntityIdsecondary equals nat.EntityId into natJoin
             from nat in natJoin.DefaultIfEmpty()
             where list.Contains(t.TransactionId)
-                  && t.IsActive.Value
-                  && ws.Aplicable.Value==1
+                  && t.IsActive!.Value
+                  && ws.Aplicable!.Value
                   && t.CompanyId == companyId
                   && t.TransactionOn >= dateFirst && t.TransactionOn <= dateLast
-            group t by new { Day = t.TransactionOn.Value.Day }
+            group t by new { Day = t.TransactionOn!.Value.Day }
             into g
             select new TbTransactionMasterDetailDto
             {
@@ -699,7 +699,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 (master, stage) => new { master, stage })
             .Where(arg => list.Contains(arg.master.TransactionId)
                           && arg.master.IsActive!.Value
-                          && arg.stage.Aplicable!.Value==1
+                          && arg.stage.Aplicable!.Value
                           && arg.master.CompanyId == companyId
                           && arg.master.TransactionOn >= dateFirst
                           && arg.master.TransactionOn <= dateLast)
@@ -723,7 +723,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 (t, ws) => new { t, ws })
             .Where(t1 => list.Contains(t1.t.TransactionId)
                          && t1.t.IsActive!.Value
-                         && t1.ws.Aplicable!.Value==1
+                         && t1.ws.Aplicable!.Value
                          && t1.t.CompanyId == companyId
                          && t1.t.TransactionOn >= dateFirst
                          && t1.t.TransactionOn <= dateLast)
@@ -757,8 +757,8 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             join nat in context.TbNaturales on t.EntityIdsecondary equals nat.EntityId into natJoin
             from nat in natJoin.DefaultIfEmpty()
             where list.Contains(t.TransactionId)
-                  && t.IsActive.Value
-                  && ws.Aplicable.Value==1
+                  && t.IsActive!.Value
+                  && ws.Aplicable!.Value
                   && t.CompanyId == companyId
                   && t.TransactionOn >= dateFirst
                   && t.TransactionOn <= dateLast

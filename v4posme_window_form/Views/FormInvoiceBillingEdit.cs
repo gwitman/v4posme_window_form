@@ -205,7 +205,7 @@ namespace v4posme_window.Views
                 var workflowStage = objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing",
                     "statusID", objTm.StatusId!.Value, commandEliminable, objUser.CompanyId,
                     objUser.BranchId, objRole!.RoleId);
-                if (workflowStage == 0)
+                if (workflowStage == false)
                 {
                     throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
                 }
@@ -223,7 +223,7 @@ namespace v4posme_window.Views
                 )!.Value;
 
                 if (
-                    validateWorkflowStage == 1 &&
+                    validateWorkflowStage == true &&
                     exisCausalInCredit &&
                     objCustomerCreditDocument!.Amount != objCustomerCreditDocument.Balance &&
                     objCustomerCreditDocument.Balance > 0
@@ -232,7 +232,7 @@ namespace v4posme_window.Views
                     throw new Exception("Factura con abonos y balance mayor que 1");
                 }
 
-                if (validateWorkflowStage == 1)
+                if (validateWorkflowStage == true)
                 {
                     //Actualizar fecha en la transacciones oroginal
                     var dataContext = new DataContext();
