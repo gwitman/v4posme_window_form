@@ -190,9 +190,9 @@ namespace TestProject
         [Test]
         public void BdModelTest()
         {
-            var input = "CALL pr_transaction_revert (@companyIdOriginal,@transactionIdOriginal,@transactionMasterIdOriginal,@transactionIdRevert,@transactionMasterIdRevert)";
+            var input = "CALL pr_transaction_revert (2,2,2,2,2)";
             var bdModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBdModel>();
-            bdModel.ExecuteRenderWidthParameter(input, [2,0]);
+            bdModel.ExecuteProcedure(input);
         }
     }
 }

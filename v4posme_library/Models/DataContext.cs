@@ -204,7 +204,7 @@ public partial class DataContext : DbContext
 
     public DbSet<TbLegal> TbLegals { get; set; } = null!;
 
-    public DbSet<TbListPrice> TbListPrices { get; set; } = null!;
+    public DbSet<TbListPrice?> TbListPrices { get; set; } = null!;
 
     public DbSet<TbLog> TbLogs { get; set; } = null!;
 

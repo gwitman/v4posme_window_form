@@ -12,7 +12,7 @@ class BdModel : IBdModel
     {
         using var connection = new MySqlConnection(VariablesGlobales.ConnectionString);
         connection.Open();
-        MySqlCommand command = new MySqlCommand(query, connection);
+        var command = new MySqlCommand(query, connection);
         command.ExecuteNonQuery(); 
         connection.Close();
     }

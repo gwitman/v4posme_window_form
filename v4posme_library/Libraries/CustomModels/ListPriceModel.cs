@@ -60,15 +60,15 @@ class ListPriceModel : IListPriceModel
         return result.First();
     }
 
-    public TbListPrice GetListPriceToApply(int companyId)
+    public TbListPrice? GetListPriceToApply(int companyId)
     {
         using var context = new DataContext();
         return context.TbListPrices
-            .Where(price => price.CompanyId == companyId
+            .Where(price => price!.CompanyId == companyId
                             && DateTime.Now >= price.StartOn
                             && DateTime.Now <= price.EndOn
                             && price.IsActive == 1)
-            .OrderByDescending(price => price.ListPriceId)
-            .First();
+            .OrderByDescending(price => price!.ListPriceId)
+            .FirstOrDefault();
     }
 }

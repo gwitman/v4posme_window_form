@@ -36,7 +36,7 @@ class LegalModel : ILegalModel
         return add.Entity.LegalId;
     }
 
-    public TbLegal get_rowByPK(int companyId, int branchId, int entityId)
+    public TbLegal GetRowByPk(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
         return context.TbLegals

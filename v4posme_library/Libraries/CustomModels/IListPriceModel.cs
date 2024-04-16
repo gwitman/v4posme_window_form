@@ -13,5 +13,5 @@ public interface IListPriceModel
 
     TbListPriceDto GetRowByPk(int companyId, int listPriceId);
 
-    TbListPrice GetListPriceToApply(int companyId);
+    TbListPrice? GetListPriceToApply(int companyId);
 }
