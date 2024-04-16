@@ -64,7 +64,7 @@ public class CustomerModel : ICustomerModel
         return result.ToList();
     }
 
-    public TbCustomer GetRowByCode(int companyId, string customerCode)
+    public TbCustomer GetRowByCode(int companyId, string? customerCode)
     {
         using var dbContext = new DataContext();
         return dbContext.TbCustomers

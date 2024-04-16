@@ -61,7 +61,7 @@ class CoreWebWhatsap : ICoreWebWhatsap
         return false;
     }
 
-    public void SendMessage(int companyId, string message)
+    public void SendMessage(int companyId, string? message)
     {
         var parameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<IParameterModel>();
         var companyParameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
@@ -93,7 +93,7 @@ class CoreWebWhatsap : ICoreWebWhatsap
         if (jsonResponse!.Count > 0 && jsonResponse[0].ContainsKey("id"))
         {
             var sessionId = jsonResponse[0]["id"].ToString();
-            var sendWhatsapp = new Dictionary<string, string>
+            var sendWhatsapp = new Dictionary<string, string?>
             {
                 { "whatsappId", sessionId! },
                 { "number", objCpWhatsapPropertyNumber!.Value },
@@ -113,7 +113,7 @@ class CoreWebWhatsap : ICoreWebWhatsap
         }
     }
 
-    public async Task<string> SendMessageAsync(int companyId, string message, string phoneDestino = "")
+    public async Task<string> SendMessageAsync(int companyId, string? message, string? phoneDestino = "")
     {
         var parameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<IParameterModel>();
         var companyParameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
@@ -142,7 +142,7 @@ class CoreWebWhatsap : ICoreWebWhatsap
         phoneDestino = string.IsNullOrEmpty(phoneDestino) ? "" : phoneDestino;
 
         // Construir los parámetros para la solicitud HTTP
-        var parameters = new Dictionary<string, string>
+        var parameters = new Dictionary<string, string?>
         {
             { "token", objCpWhatsapUrlSendMessage!.Value },
             { "to", phoneDestino },
@@ -163,8 +163,8 @@ class CoreWebWhatsap : ICoreWebWhatsap
         return await responseContent.Content.ReadAsStringAsync();
     }
 
-    public async Task<string> SendMessageTypeImageUltramsg(int companyId, string message, string title,
-        string phoneDestino = "")
+    public async Task<string> SendMessageTypeImageUltramsg(int companyId, string? message, string? title,
+        string? phoneDestino = "")
     {
         var parameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<IParameterModel>();
         var companyParameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
@@ -193,7 +193,7 @@ class CoreWebWhatsap : ICoreWebWhatsap
         phoneDestino = !string.IsNullOrEmpty(phoneDestino) ? objCpWhatsapPropertyNumber!.Value : phoneDestino;
 
         // Construir los parámetros para la solicitud HTTP
-        var parameters = new Dictionary<string, string>
+        var parameters = new Dictionary<string, string?>
         {
             { "token", objCpWhatsapToken!.Value },
             { "to", phoneDestino },

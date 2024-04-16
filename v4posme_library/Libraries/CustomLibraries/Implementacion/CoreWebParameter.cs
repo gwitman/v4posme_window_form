@@ -55,12 +55,12 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         /// </summary>
         /// <param name="companyId">Company ID</param>
         /// <returns>Dictionary Clave-Valor</returns>
-        public Dictionary<string, string> GetParameterAll(int companyId)
+        public Dictionary<string, string?> GetParameterAll(int companyId)
         {
             var companyParameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
             var parameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<IParameterModel>();
             var objParameterList = parameterModel.GetAll();
-            var data = new Dictionary<string, string>();
+            var data = new Dictionary<string, string?>();
             if (objParameterList == null) return data;
             foreach (var objParameter in objParameterList)
             {

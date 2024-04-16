@@ -41,7 +41,7 @@ public class CoreWebCurrency(ICoreWebParameter coreWebParameter, ICurrencyModel 
         return GetCurrencyName(moneyFuncionalName.Value);
     }
 
-    public TbCurrency? GetCurrencyName(string name)
+    public TbCurrency? GetCurrencyName(string? name)
     {
         return currencyModel.GetRowName(name);
     }

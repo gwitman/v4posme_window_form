@@ -15,7 +15,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Interfaz
         /// </summary>
         /// <param name="companyId">Company ID</param>
         /// <returns>Dictionary Clave-Valor</returns>
-        Dictionary<string, string> GetParameterAll(int companyId);
+        Dictionary<string, string?> GetParameterAll(int companyId);
 
         /// <summary>
         /// Este método es útil para obtener el ID de un parámetro específico que está asociado con una compañía en un sistema.

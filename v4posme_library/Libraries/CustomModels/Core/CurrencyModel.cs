@@ -4,7 +4,7 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 class CurrencyModel : ICurrencyModel
 {
-    public TbCurrency GetRowName(string name)
+    public TbCurrency GetRowName(string? name)
     {
         using var context = new DataContext();
         return context.TbCurrencies

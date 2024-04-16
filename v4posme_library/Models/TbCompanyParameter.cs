@@ -30,7 +30,7 @@ public partial class TbCompanyParameter
 
     [Column("value")]
     [StringLength(300)]
-    public string Value { get; set; } = null!;
+    public string? Value { get; set; } = null!;
 
     [Column("customValue")]
     [StringLength(300)]

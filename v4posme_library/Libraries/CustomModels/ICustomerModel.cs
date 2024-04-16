@@ -14,7 +14,7 @@ public interface ICustomerModel
 
     List<TbCustomerDto> GetHappyBirthDay(int companyId);
 
-    TbCustomer GetRowByCode(int companyId, string customerCode);
+    TbCustomer GetRowByCode(int companyId, string? customerCode);
 
     TbCustomer GetRowByIdentification(int companyId, int identification);
 

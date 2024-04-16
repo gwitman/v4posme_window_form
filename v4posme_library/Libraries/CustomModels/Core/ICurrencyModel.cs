@@ -4,7 +4,7 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 public interface ICurrencyModel
 {
-    TbCurrency GetRowName(string name);
+    TbCurrency GetRowName(string? name);
     
     TbCurrency GetRowByPk(int currencyId);
 
