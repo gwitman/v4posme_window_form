@@ -2,6 +2,7 @@
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraWaitForm;
 using Mysqlx.Cursor;
 using System.Dynamic;
 using Unity;
@@ -69,6 +70,8 @@ namespace v4posme_window.Views
 
         public void List()
         {
+            
+            
             var coreWebRenderInView = new CoreWebRenderInView();
             var resultPermission = 0;
             var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];

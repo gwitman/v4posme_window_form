@@ -43,6 +43,7 @@ namespace v4posme_window.Template
             btnEliminar = new DevExpress.XtraEditors.SimpleButton();
             btnNuevo = new DevExpress.XtraEditors.SimpleButton();
             centerPane = new DevExpress.XtraEditors.PanelControl();
+            progressPanel = new DevExpress.XtraWaitForm.ProgressPanel();
             ((System.ComponentModel.ISupportInitialize)stackPanel1).BeginInit();
             stackPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
@@ -54,6 +55,7 @@ namespace v4posme_window.Template
             ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).BeginInit();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)centerPane).BeginInit();
+            centerPane.SuspendLayout();
             SuspendLayout();
             // 
             // stackPanel1
@@ -63,8 +65,9 @@ namespace v4posme_window.Template
             stackPanel1.Controls.Add(lblTitulo);
             stackPanel1.Dock = DockStyle.Top;
             stackPanel1.Location = new Point(0, 0);
+            stackPanel1.Margin = new Padding(3, 4, 3, 4);
             stackPanel1.Name = "stackPanel1";
-            stackPanel1.Size = new Size(1008, 47);
+            stackPanel1.Size = new Size(1152, 63);
             stackPanel1.TabIndex = 0;
             stackPanel1.UseSkinIndents = true;
             // 
@@ -74,9 +77,10 @@ namespace v4posme_window.Template
             lblTitulo.Appearance.ForeColor = Color.DimGray;
             lblTitulo.Appearance.Options.UseFont = true;
             lblTitulo.Appearance.Options.UseForeColor = true;
-            lblTitulo.Location = new Point(17, 15);
+            lblTitulo.Location = new Point(20, 20);
+            lblTitulo.Margin = new Padding(3, 4, 3, 4);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(129, 16);
+            lblTitulo.Size = new Size(178, 21);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Titulo del Formulario";
             // 
@@ -85,10 +89,11 @@ namespace v4posme_window.Template
             panelControl1.Controls.Add(stackPanel2);
             panelControl1.Controls.Add(flowLayoutPanel1);
             panelControl1.Dock = DockStyle.Top;
-            panelControl1.Location = new Point(0, 47);
+            panelControl1.Location = new Point(0, 63);
+            panelControl1.Margin = new Padding(3, 4, 3, 4);
             panelControl1.Name = "panelControl1";
-            panelControl1.Padding = new Padding(0, 5, 0, 5);
-            panelControl1.Size = new Size(1008, 62);
+            panelControl1.Padding = new Padding(0, 7, 0, 7);
+            panelControl1.Size = new Size(1152, 83);
             panelControl1.TabIndex = 1;
             // 
             // stackPanel2
@@ -96,16 +101,18 @@ namespace v4posme_window.Template
             stackPanel2.Controls.Add(txtFecha);
             stackPanel2.Controls.Add(textEdit1);
             stackPanel2.Dock = DockStyle.Left;
-            stackPanel2.Location = new Point(2, 7);
+            stackPanel2.Location = new Point(2, 9);
+            stackPanel2.Margin = new Padding(3, 4, 3, 4);
             stackPanel2.Name = "stackPanel2";
-            stackPanel2.Size = new Size(393, 48);
+            stackPanel2.Size = new Size(449, 65);
             stackPanel2.TabIndex = 2;
             stackPanel2.UseSkinIndents = true;
             // 
             // txtFecha
             // 
             txtFecha.EditValue = new DateTime(2024, 4, 8, 21, 9, 29, 0);
-            txtFecha.Location = new Point(17, 2);
+            txtFecha.Location = new Point(20, 4);
+            txtFecha.Margin = new Padding(3, 4, 3, 4);
             txtFecha.Name = "txtFecha";
             txtFecha.Properties.AdvancedModeOptions.AllowCaretAnimation = DevExpress.Utils.DefaultBoolean.True;
             txtFecha.Properties.AdvancedModeOptions.Label = "Fecha";
@@ -114,12 +121,13 @@ namespace v4posme_window.Template
             txtFecha.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtFecha.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtFecha.Properties.ContextImageOptions.SvgImage = (SvgImage)resources.GetObject("txtFecha.Properties.ContextImageOptions.SvgImage");
-            txtFecha.Size = new Size(187, 44);
+            txtFecha.Size = new Size(214, 56);
             txtFecha.TabIndex = 0;
             // 
             // textEdit1
             // 
-            textEdit1.Location = new Point(210, 3);
+            textEdit1.Location = new Point(240, 5);
+            textEdit1.Margin = new Padding(3, 4, 3, 4);
             textEdit1.Name = "textEdit1";
             textEdit1.Properties.AdvancedModeOptions.Label = "Filtrar";
             textEdit1.Properties.AdvancedModeOptions.LabelAppearance.ForeColor = Color.Silver;
@@ -129,7 +137,7 @@ namespace v4posme_window.Template
             textEdit1.Properties.ContextImageOptions.SvgImage = (SvgImage)resources.GetObject("textEdit1.Properties.ContextImageOptions.SvgImage");
             textEdit1.Properties.ContextImageOptions.SvgImageSize = new Size(20, 20);
             textEdit1.Properties.UseAdvancedMode = DevExpress.Utils.DefaultBoolean.True;
-            textEdit1.Size = new Size(163, 42);
+            textEdit1.Size = new Size(186, 54);
             textEdit1.TabIndex = 1;
             // 
             // flowLayoutPanel1
@@ -139,18 +147,20 @@ namespace v4posme_window.Template
             flowLayoutPanel1.Controls.Add(btnEliminar);
             flowLayoutPanel1.Controls.Add(btnNuevo);
             flowLayoutPanel1.Dock = DockStyle.Right;
-            flowLayoutPanel1.Location = new Point(615, 7);
+            flowLayoutPanel1.Location = new Point(703, 9);
+            flowLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(391, 48);
+            flowLayoutPanel1.Size = new Size(447, 65);
             flowLayoutPanel1.TabIndex = 2;
             // 
             // btnVistas
             // 
             btnVistas.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.False;
             btnVistas.ImageOptions.SvgImage = Properties.Resources.bo_appearance1;
-            btnVistas.Location = new Point(3, 3);
+            btnVistas.Location = new Point(3, 4);
+            btnVistas.Margin = new Padding(3, 4, 3, 4);
             btnVistas.Name = "btnVistas";
-            btnVistas.Size = new Size(89, 42);
+            btnVistas.Size = new Size(102, 56);
             btnVistas.TabIndex = 5;
             btnVistas.Text = "Vistas";
             // 
@@ -158,46 +168,67 @@ namespace v4posme_window.Template
             // 
             btnEditar.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.False;
             btnEditar.ImageOptions.SvgImage = (SvgImage)resources.GetObject("btnEditar.ImageOptions.SvgImage");
-            btnEditar.Location = new Point(98, 3);
+            btnEditar.Location = new Point(111, 4);
+            btnEditar.Margin = new Padding(3, 4, 3, 4);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(89, 42);
+            btnEditar.Size = new Size(102, 56);
             btnEditar.TabIndex = 2;
             btnEditar.Text = "Editar";
             // 
             // btnEliminar
             // 
             btnEliminar.ImageOptions.SvgImage = (SvgImage)resources.GetObject("btnEliminar.ImageOptions.SvgImage");
-            btnEliminar.Location = new Point(193, 3);
+            btnEliminar.Location = new Point(219, 4);
+            btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(89, 42);
+            btnEliminar.Size = new Size(102, 56);
             btnEliminar.TabIndex = 3;
             btnEliminar.Text = "Delete";
             // 
             // btnNuevo
             // 
             btnNuevo.ImageOptions.SvgImage = (SvgImage)resources.GetObject("btnNuevo.ImageOptions.SvgImage");
-            btnNuevo.Location = new Point(288, 3);
+            btnNuevo.Location = new Point(327, 4);
+            btnNuevo.Margin = new Padding(3, 4, 3, 4);
             btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(89, 42);
+            btnNuevo.Size = new Size(102, 56);
             btnNuevo.TabIndex = 4;
             btnNuevo.Text = "Nuevo";
             // 
             // centerPane
             // 
+            centerPane.Controls.Add(progressPanel);
             centerPane.Dock = DockStyle.Fill;
-            centerPane.Location = new Point(0, 109);
+            centerPane.Location = new Point(0, 146);
+            centerPane.Margin = new Padding(3, 4, 3, 4);
             centerPane.Name = "centerPane";
-            centerPane.Size = new Size(1008, 513);
+            centerPane.Size = new Size(1152, 683);
             centerPane.TabIndex = 2;
+            // 
+            // progressPanel
+            // 
+            progressPanel.AnimationSpeed = 2F;
+            progressPanel.Appearance.BackColor = Color.Transparent;
+            progressPanel.Appearance.Options.UseBackColor = true;
+            progressPanel.Caption = "Procesando";
+            progressPanel.ContentAlignment = ContentAlignment.MiddleCenter;
+            progressPanel.Description = "Buscando recursos de usuario";
+            progressPanel.Location = new Point(6, 8);
+            progressPanel.Margin = new Padding(4);
+            progressPanel.Name = "progressPanel";
+            progressPanel.Size = new Size(445, 149);
+            progressPanel.TabIndex = 31;
+            progressPanel.Visible = false;
             // 
             // FormTypeList
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1008, 622);
+            ClientSize = new Size(1152, 829);
             Controls.Add(centerPane);
             Controls.Add(panelControl1);
             Controls.Add(stackPanel1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "FormTypeList";
             Text = "FormTypeList";
             ((System.ComponentModel.ISupportInitialize)stackPanel1).EndInit();
@@ -212,6 +243,7 @@ namespace v4posme_window.Template
             ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).EndInit();
             flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)centerPane).EndInit();
+            centerPane.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -229,5 +261,6 @@ namespace v4posme_window.Template
         public DevExpress.XtraEditors.SimpleButton btnNuevo;
         public DevExpress.XtraEditors.TextEdit textEdit1;
         public DevExpress.XtraEditors.DateEdit txtFecha;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanel;
     }
 }
