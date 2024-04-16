@@ -52,14 +52,9 @@ public class CoreWebRenderInView
             return;
         }
 
-        var viewData    = (List<Dictionary<string, object>>)dataViewDto.Data;
-        var table       = FillGridControl(viewData);
-        if (table is null)
-        {
-            return;
-        }
-
-        gridControl.DataSource = table;
+        var viewData            = (List<Dictionary<string, object>>)dataViewDto.Data;
+        var table               = FillGridControl(viewData);
+        gridControl.DataSource  = table;
 
         // Ajustar la configuración del GridView
         var gridView = (GridView)gridControl.MainView;
