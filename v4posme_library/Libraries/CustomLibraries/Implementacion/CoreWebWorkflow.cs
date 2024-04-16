@@ -478,6 +478,12 @@ class CoreWebWorkflow(
             return tbWorkflowStage.Eliminable;
         }
 
-        return cmd == CommandAplicable ? tbWorkflowStage.Aplicable : 0;
+        if (cmd == CommandAplicable)
+        {
+            return tbWorkflowStage.Aplicable;
+        }
+
+        return -100;
+
     }
 }

@@ -8,7 +8,7 @@ namespace v4posme_library.Libraries.CustomModels;
 
 class BdModel : IBdModel
 {
-    public void ExecuteRenderWidthParameter(string query, object[] parameter)
+    public void ExecuteProcedureWidthParameter(string query, object[] parameter)
     {
         var matches = Regex.Matches(query, @"@(\w+)");
         using var connection = new MySqlConnection(VariablesGlobales.ConnectionString);

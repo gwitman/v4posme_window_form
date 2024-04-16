@@ -4,7 +4,7 @@ namespace v4posme_library.Libraries.CustomModels;
 
 public interface IBdModel
 {
-    void ExecuteRenderWidthParameter(string query, object[] parameter);
+    void ExecuteProcedureWidthParameter(string query, object[] parameter);
     
     T? ExecuteRenderWidthParameter<T>(string query, object[] parameter);
 

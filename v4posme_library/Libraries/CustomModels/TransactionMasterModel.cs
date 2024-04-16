@@ -137,7 +137,7 @@ class TransactionMasterModel : ITransactionMasterModel
             join ws in context.TbWorkflowStages on tm.StatusId equals ws.WorkflowStageId
             where tm.IsActive.Value
                   && tm.CompanyId == companyId
-                  && ws.EditableTotal.Value>0
+                  && ws.EditableTotal.Value==1
                   && tm.TransactionMasterId != transactionMasterId
             select new TbTransactionMasterDto
             {

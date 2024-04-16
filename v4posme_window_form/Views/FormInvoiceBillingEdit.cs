@@ -223,7 +223,7 @@ namespace v4posme_window.Views
                 )!.Value;
 
                 if (
-                    validateWorkflowStage == 0 &&
+                    validateWorkflowStage == 1 &&
                     exisCausalInCredit &&
                     objCustomerCreditDocument!.Amount != objCustomerCreditDocument.Balance &&
                     objCustomerCreditDocument.Balance > 0
@@ -232,7 +232,7 @@ namespace v4posme_window.Views
                     throw new Exception("Factura con abonos y balance mayor que 1");
                 }
 
-                if (validateWorkflowStage > 0)
+                if (validateWorkflowStage == 1)
                 {
                     //Actualizar fecha en la transacciones oroginal
                     var dataContext = new DataContext();
