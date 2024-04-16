@@ -253,7 +253,7 @@ namespace v4posme_window.Views
 
         #region Init
 
-        public FormInvoiceBillingEdit(TypeOpenForm typeOpen, int companyId, int transactionId, int transactionMasterId, List<TbTransactionMasterDetailDto> objTransactionMasterDetailWarehouse)
+        public FormInvoiceBillingEdit(TypeOpenForm typeOpen, int companyId, int transactionId, int transactionMasterId)
         {
             InitializeComponent();
 
@@ -266,7 +266,6 @@ namespace v4posme_window.Views
             CompanyId = companyId;
             TransactionId = transactionId;
             TransactionMasterId = transactionMasterId;
-            this.ObjTransactionMasterDetailWarehouse = objTransactionMasterDetailWarehouse;
             TypeOpen = typeOpen;
         }
 
