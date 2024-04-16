@@ -44,95 +44,95 @@
             popupMenuSeleccion = new DevExpress.XtraBars.PopupMenu(components);
             popupMenuProducto = new DevExpress.XtraBars.PopupMenu(components);
             svgImageBox1 = new DevExpress.XtraEditors.SvgImageBox();
-            textEdit10 = new DevExpress.XtraEditors.TextEdit();
+            txtScanerCodigo = new DevExpress.XtraEditors.TextEdit();
             downButtonSeleccion = new DevExpress.XtraEditors.DropDownButton();
             downButtonProducto = new DevExpress.XtraEditors.DropDownButton();
-            simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
+            btnDeleteItem = new DevExpress.XtraEditors.SimpleButton();
             btnAddProduct = new DevExpress.XtraEditors.SimpleButton();
             xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
             tabInformacion = new DevExpress.XtraTab.XtraTabPage();
-            comboBoxEdit14 = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtCustomerCreditLineID = new DevExpress.XtraEditors.ComboBoxEdit();
             labelControl26 = new DevExpress.XtraEditors.LabelControl();
-            simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            textEdit3 = new DevExpress.XtraEditors.TextEdit();
-            comboBoxEdit2 = new DevExpress.XtraEditors.ComboBoxEdit();
-            textEdit5 = new DevExpress.XtraEditors.TextEdit();
-            textEdit4 = new DevExpress.XtraEditors.TextEdit();
+            btnClearCustomer = new DevExpress.XtraEditors.SimpleButton();
+            btnSearchCustomer = new DevExpress.XtraEditors.SimpleButton();
+            txtCustomerDescription = new DevExpress.XtraEditors.TextEdit();
+            txtCausalID = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtReferenceClientIdentifier = new DevExpress.XtraEditors.TextEdit();
+            txtReferenceClientName = new DevExpress.XtraEditors.TextEdit();
             labelControl5 = new DevExpress.XtraEditors.LabelControl();
             labelControl6 = new DevExpress.XtraEditors.LabelControl();
             labelControl7 = new DevExpress.XtraEditors.LabelControl();
             labelControl8 = new DevExpress.XtraEditors.LabelControl();
-            comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
-            textEdit2 = new DevExpress.XtraEditors.TextEdit();
-            textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            dateEdit1 = new DevExpress.XtraEditors.DateEdit();
+            txtCurrencyID = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtNote = new DevExpress.XtraEditors.TextEdit();
+            txtExchangeRate = new DevExpress.XtraEditors.TextEdit();
+            txtDate = new DevExpress.XtraEditors.DateEdit();
             labelControl3 = new DevExpress.XtraEditors.LabelControl();
             labelControl4 = new DevExpress.XtraEditors.LabelControl();
             labelControl2 = new DevExpress.XtraEditors.LabelControl();
             labelControl1 = new DevExpress.XtraEditors.LabelControl();
             tabReferencias = new DevExpress.XtraTab.XtraTabPage();
-            comboBoxEdit7 = new DevExpress.XtraEditors.ComboBoxEdit();
-            textEdit7 = new DevExpress.XtraEditors.TextEdit();
-            comboBoxEdit6 = new DevExpress.XtraEditors.ComboBoxEdit();
-            textEdit6 = new DevExpress.XtraEditors.TextEdit();
+            txtMesaID = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtNumberPhone = new DevExpress.XtraEditors.TextEdit();
+            txtEmployeeID = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtReference3 = new DevExpress.XtraEditors.TextEdit();
             labelControl14 = new DevExpress.XtraEditors.LabelControl();
             labelControl15 = new DevExpress.XtraEditors.LabelControl();
             labelControl16 = new DevExpress.XtraEditors.LabelControl();
             labelControl17 = new DevExpress.XtraEditors.LabelControl();
-            dateEdit2 = new DevExpress.XtraEditors.DateEdit();
+            txtNextVisit = new DevExpress.XtraEditors.DateEdit();
             labelControl13 = new DevExpress.XtraEditors.LabelControl();
-            comboBoxEdit5 = new DevExpress.XtraEditors.ComboBoxEdit();
-            comboBoxEdit4 = new DevExpress.XtraEditors.ComboBoxEdit();
-            comboBoxEdit3 = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtWarehouseID = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtTypePriceID = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtZoneID = new DevExpress.XtraEditors.ComboBoxEdit();
             labelControl10 = new DevExpress.XtraEditors.LabelControl();
             labelControl11 = new DevExpress.XtraEditors.LabelControl();
             labelControl12 = new DevExpress.XtraEditors.LabelControl();
             tabInfoCredito = new DevExpress.XtraTab.XtraTabPage();
             labelControl25 = new DevExpress.XtraEditors.LabelControl();
-            comboBoxEdit9 = new DevExpress.XtraEditors.ComboBoxEdit();
-            textEdit9 = new DevExpress.XtraEditors.TextEdit();
+            txtPeriodPay = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtReference2 = new DevExpress.XtraEditors.TextEdit();
             labelControl24 = new DevExpress.XtraEditors.LabelControl();
-            dateEdit3 = new DevExpress.XtraEditors.DateEdit();
+            txtDateFirst = new DevExpress.XtraEditors.DateEdit();
             labelControl23 = new DevExpress.XtraEditors.LabelControl();
-            toggleSwitch2 = new DevExpress.XtraEditors.ToggleSwitch();
+            txtReportSinRiesgo = new DevExpress.XtraEditors.ToggleSwitch();
             labelControl22 = new DevExpress.XtraEditors.LabelControl();
-            toggleSwitch1 = new DevExpress.XtraEditors.ToggleSwitch();
+            txtDesembolsoEfectivo = new DevExpress.XtraEditors.ToggleSwitch();
             labelControl21 = new DevExpress.XtraEditors.LabelControl();
-            textEdit8 = new DevExpress.XtraEditors.TextEdit();
+            txtFixedExpenses = new DevExpress.XtraEditors.TextEdit();
             labelControl20 = new DevExpress.XtraEditors.LabelControl();
-            checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
+            txtIsApplied = new DevExpress.XtraEditors.CheckEdit();
             labelControl19 = new DevExpress.XtraEditors.LabelControl();
-            comboBoxEdit8 = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtReference1 = new DevExpress.XtraEditors.ComboBoxEdit();
             labelControl18 = new DevExpress.XtraEditors.LabelControl();
             tabMas = new DevExpress.XtraTab.XtraTabPage();
             colCantidad = new DevExpress.XtraGrid.Columns.GridColumn();
             pictureEdit2 = new DevExpress.XtraEditors.PictureEdit();
             pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
-            textEdit25 = new DevExpress.XtraEditors.TextEdit();
-            textEdit24 = new DevExpress.XtraEditors.TextEdit();
-            textEdit23 = new DevExpress.XtraEditors.TextEdit();
+            txtTotal = new DevExpress.XtraEditors.TextEdit();
+            txtIva = new DevExpress.XtraEditors.TextEdit();
+            txtSubTotal = new DevExpress.XtraEditors.TextEdit();
             labelControl39 = new DevExpress.XtraEditors.LabelControl();
             labelControl38 = new DevExpress.XtraEditors.LabelControl();
             labelControl37 = new DevExpress.XtraEditors.LabelControl();
             tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
-            textEdit22 = new DevExpress.XtraEditors.TextEdit();
-            comboBoxEdit13 = new DevExpress.XtraEditors.ComboBoxEdit();
-            textEdit21 = new DevExpress.XtraEditors.TextEdit();
-            textEdit20 = new DevExpress.XtraEditors.TextEdit();
-            textEdit19 = new DevExpress.XtraEditors.TextEdit();
-            comboBoxEdit12 = new DevExpress.XtraEditors.ComboBoxEdit();
-            comboBoxEdit11 = new DevExpress.XtraEditors.ComboBoxEdit();
-            comboBoxEdit10 = new DevExpress.XtraEditors.ComboBoxEdit();
-            textEdit18 = new DevExpress.XtraEditors.TextEdit();
-            textEdit17 = new DevExpress.XtraEditors.TextEdit();
-            textEdit16 = new DevExpress.XtraEditors.TextEdit();
-            textEdit15 = new DevExpress.XtraEditors.TextEdit();
-            textEdit14 = new DevExpress.XtraEditors.TextEdit();
-            textEdit13 = new DevExpress.XtraEditors.TextEdit();
-            textEdit12 = new DevExpress.XtraEditors.TextEdit();
-            textEdit11 = new DevExpress.XtraEditors.TextEdit();
+            txtReceiptAmountBank_Reference = new DevExpress.XtraEditors.TextEdit();
+            txtReceiptAmountBank_BankID = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtReceiptAmountTarjetaDol_Reference = new DevExpress.XtraEditors.TextEdit();
+            txtReceiptAmountTarjeta_Reference = new DevExpress.XtraEditors.TextEdit();
+            txtReceiptAmountBankDol_Reference = new DevExpress.XtraEditors.TextEdit();
+            txtReceiptAmountTarjetaDol_BankID = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtReceiptAmountTarjeta_BankID = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtReceiptAmountBankDol_BankID = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtReceiptAmountPoint = new DevExpress.XtraEditors.TextEdit();
+            txtReceiptAmountBankDol = new DevExpress.XtraEditors.TextEdit();
+            txtReceiptAmountBank = new DevExpress.XtraEditors.TextEdit();
+            txtReceiptAmountTarjetaDol = new DevExpress.XtraEditors.TextEdit();
+            txtReceiptAmountTarjeta = new DevExpress.XtraEditors.TextEdit();
+            txtReceiptAmountDol = new DevExpress.XtraEditors.TextEdit();
+            txtReceiptAmount = new DevExpress.XtraEditors.TextEdit();
+            txtChangeAmount = new DevExpress.XtraEditors.TextEdit();
             labelControl36 = new DevExpress.XtraEditors.LabelControl();
             labelControl35 = new DevExpress.XtraEditors.LabelControl();
             labelControl34 = new DevExpress.XtraEditors.LabelControl();
@@ -141,9 +141,9 @@
             labelControl31 = new DevExpress.XtraEditors.LabelControl();
             labelControl30 = new DevExpress.XtraEditors.LabelControl();
             labelControl29 = new DevExpress.XtraEditors.LabelControl();
-            simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
-            simpleButton6 = new DevExpress.XtraEditors.SimpleButton();
-            gridControl1 = new DevExpress.XtraGrid.GridControl();
+            btnBack = new DevExpress.XtraEditors.SimpleButton();
+            btnNew = new DevExpress.XtraEditors.SimpleButton();
+            gridViewTbTransactionMasterDetail = new DevExpress.XtraGrid.GridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             colCodigo = new DevExpress.XtraGrid.Columns.GridColumn();
             colDescripcion = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -162,66 +162,66 @@
             ((System.ComponentModel.ISupportInitialize)popupMenuSeleccion).BeginInit();
             ((System.ComponentModel.ISupportInitialize)popupMenuProducto).BeginInit();
             ((System.ComponentModel.ISupportInitialize)svgImageBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit10.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtScanerCodigo.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl).BeginInit();
             xtraTabControl.SuspendLayout();
             tabInformacion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit14.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit3.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit2.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit5.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit4.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit2.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dateEdit1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dateEdit1.Properties.CalendarTimeProperties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerCreditLineID.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerDescription.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtCausalID.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReferenceClientIdentifier.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReferenceClientName.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtCurrencyID.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtNote.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtExchangeRate.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtDate.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtDate.Properties.CalendarTimeProperties).BeginInit();
             tabReferencias.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit7.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit7.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit6.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit6.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dateEdit2.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dateEdit2.Properties.CalendarTimeProperties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit5.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit4.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit3.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtMesaID.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtNumberPhone.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtEmployeeID.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReference3.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtNextVisit.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtNextVisit.Properties.CalendarTimeProperties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtWarehouseID.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtTypePriceID.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtZoneID.Properties).BeginInit();
             tabInfoCredito.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit9.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit9.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dateEdit3.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dateEdit3.Properties.CalendarTimeProperties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)toggleSwitch2.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)toggleSwitch1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit8.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)checkEdit1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit8.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtPeriodPay.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReference2.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtDateFirst.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtDateFirst.Properties.CalendarTimeProperties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReportSinRiesgo.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtDesembolsoEfectivo.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtFixedExpenses.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtIsApplied.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReference1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureEdit2.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureEdit1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tablePanel2).BeginInit();
             tablePanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)textEdit25.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit24.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit23.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtTotal.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtIva.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtSubTotal.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tablePanel1).BeginInit();
             tablePanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)textEdit22.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit13.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit21.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit20.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit19.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit12.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit11.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit10.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit18.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit17.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit16.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit15.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit14.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit13.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit12.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit11.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountBank_Reference.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountBank_BankID.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountTarjetaDol_Reference.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountTarjeta_Reference.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountBankDol_Reference.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountTarjetaDol_BankID.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountTarjeta_BankID.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountBankDol_BankID.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountPoint.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountBankDol.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountBank.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountTarjetaDol.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountTarjeta.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountDol.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmount.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtChangeAmount.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewTbTransactionMasterDetail).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             SuspendLayout();
             // 
@@ -352,13 +352,13 @@
             svgImageBox1.TabIndex = 40;
             svgImageBox1.Text = "svgImageBox1";
             // 
-            // textEdit10
+            // txtScanerCodigo
             // 
-            textEdit10.Location = new Point(66, 319);
-            textEdit10.Margin = new Padding(3, 4, 3, 4);
-            textEdit10.Name = "textEdit10";
-            textEdit10.Size = new Size(334, 34);
-            textEdit10.TabIndex = 37;
+            txtScanerCodigo.Location = new Point(66, 319);
+            txtScanerCodigo.Margin = new Padding(3, 4, 3, 4);
+            txtScanerCodigo.Name = "txtScanerCodigo";
+            txtScanerCodigo.Size = new Size(334, 34);
+            txtScanerCodigo.TabIndex = 37;
             // 
             // downButtonSeleccion
             // 
@@ -384,16 +384,16 @@
             downButtonProducto.TabIndex = 33;
             downButtonProducto.Text = "PRODUCTO";
             // 
-            // simpleButton4
+            // btnDeleteItem
             // 
-            simpleButton4.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
-            simpleButton4.Appearance.Options.UseBackColor = true;
-            simpleButton4.Location = new Point(569, 319);
-            simpleButton4.Margin = new Padding(3, 4, 3, 4);
-            simpleButton4.Name = "simpleButton4";
-            simpleButton4.Size = new Size(144, 40);
-            simpleButton4.TabIndex = 32;
-            simpleButton4.Text = "ELIMINAR PRO";
+            btnDeleteItem.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
+            btnDeleteItem.Appearance.Options.UseBackColor = true;
+            btnDeleteItem.Location = new Point(569, 319);
+            btnDeleteItem.Margin = new Padding(3, 4, 3, 4);
+            btnDeleteItem.Name = "btnDeleteItem";
+            btnDeleteItem.Size = new Size(144, 40);
+            btnDeleteItem.TabIndex = 32;
+            btnDeleteItem.Text = "ELIMINAR PRO";
             // 
             // btnAddProduct
             // 
@@ -423,22 +423,22 @@
             // 
             tabInformacion.Appearance.PageClient.BackColor = Color.White;
             tabInformacion.Appearance.PageClient.Options.UseBackColor = true;
-            tabInformacion.Controls.Add(comboBoxEdit14);
+            tabInformacion.Controls.Add(txtCustomerCreditLineID);
             tabInformacion.Controls.Add(labelControl26);
-            tabInformacion.Controls.Add(simpleButton1);
-            tabInformacion.Controls.Add(simpleButton2);
-            tabInformacion.Controls.Add(textEdit3);
-            tabInformacion.Controls.Add(comboBoxEdit2);
-            tabInformacion.Controls.Add(textEdit5);
-            tabInformacion.Controls.Add(textEdit4);
+            tabInformacion.Controls.Add(btnClearCustomer);
+            tabInformacion.Controls.Add(btnSearchCustomer);
+            tabInformacion.Controls.Add(txtCustomerDescription);
+            tabInformacion.Controls.Add(txtCausalID);
+            tabInformacion.Controls.Add(txtReferenceClientIdentifier);
+            tabInformacion.Controls.Add(txtReferenceClientName);
             tabInformacion.Controls.Add(labelControl5);
             tabInformacion.Controls.Add(labelControl6);
             tabInformacion.Controls.Add(labelControl7);
             tabInformacion.Controls.Add(labelControl8);
-            tabInformacion.Controls.Add(comboBoxEdit1);
-            tabInformacion.Controls.Add(textEdit2);
-            tabInformacion.Controls.Add(textEdit1);
-            tabInformacion.Controls.Add(dateEdit1);
+            tabInformacion.Controls.Add(txtCurrencyID);
+            tabInformacion.Controls.Add(txtNote);
+            tabInformacion.Controls.Add(txtExchangeRate);
+            tabInformacion.Controls.Add(txtDate);
             tabInformacion.Controls.Add(labelControl3);
             tabInformacion.Controls.Add(labelControl4);
             tabInformacion.Controls.Add(labelControl2);
@@ -448,14 +448,14 @@
             tabInformacion.Size = new Size(1375, 199);
             tabInformacion.Text = "Información";
             // 
-            // comboBoxEdit14
+            // txtCustomerCreditLineID
             // 
-            comboBoxEdit14.Location = new Point(1010, 59);
-            comboBoxEdit14.Margin = new Padding(3, 4, 3, 4);
-            comboBoxEdit14.Name = "comboBoxEdit14";
-            comboBoxEdit14.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit14.Size = new Size(337, 34);
-            comboBoxEdit14.TabIndex = 34;
+            txtCustomerCreditLineID.Location = new Point(1010, 59);
+            txtCustomerCreditLineID.Margin = new Padding(3, 4, 3, 4);
+            txtCustomerCreditLineID.Name = "txtCustomerCreditLineID";
+            txtCustomerCreditLineID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtCustomerCreditLineID.Size = new Size(337, 34);
+            txtCustomerCreditLineID.TabIndex = 34;
             // 
             // labelControl26
             // 
@@ -468,69 +468,69 @@
             labelControl26.TabIndex = 33;
             labelControl26.Text = "Linea:";
             // 
-            // simpleButton1
+            // btnClearCustomer
             // 
-            simpleButton1.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
-            simpleButton1.Appearance.ForeColor = Color.White;
-            simpleButton1.Appearance.Options.UseBackColor = true;
-            simpleButton1.Appearance.Options.UseForeColor = true;
-            simpleButton1.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            simpleButton1.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton1.ImageOptions.SvgImage");
-            simpleButton1.ImageOptions.SvgImageSize = new Size(16, 16);
-            simpleButton1.Location = new Point(838, 13);
-            simpleButton1.Margin = new Padding(3, 4, 3, 4);
-            simpleButton1.Name = "simpleButton1";
-            simpleButton1.Size = new Size(74, 40);
-            simpleButton1.TabIndex = 20;
+            btnClearCustomer.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
+            btnClearCustomer.Appearance.ForeColor = Color.White;
+            btnClearCustomer.Appearance.Options.UseBackColor = true;
+            btnClearCustomer.Appearance.Options.UseForeColor = true;
+            btnClearCustomer.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            btnClearCustomer.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton1.ImageOptions.SvgImage");
+            btnClearCustomer.ImageOptions.SvgImageSize = new Size(16, 16);
+            btnClearCustomer.Location = new Point(838, 13);
+            btnClearCustomer.Margin = new Padding(3, 4, 3, 4);
+            btnClearCustomer.Name = "btnClearCustomer";
+            btnClearCustomer.Size = new Size(74, 40);
+            btnClearCustomer.TabIndex = 20;
             // 
-            // simpleButton2
+            // btnSearchCustomer
             // 
-            simpleButton2.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Primary;
-            simpleButton2.Appearance.ForeColor = Color.White;
-            simpleButton2.Appearance.Options.UseBackColor = true;
-            simpleButton2.Appearance.Options.UseForeColor = true;
-            simpleButton2.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            simpleButton2.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton2.ImageOptions.SvgImage");
-            simpleButton2.ImageOptions.SvgImageSize = new Size(16, 16);
-            simpleButton2.Location = new Point(717, 13);
-            simpleButton2.Margin = new Padding(3, 4, 3, 4);
-            simpleButton2.Name = "simpleButton2";
-            simpleButton2.Size = new Size(115, 40);
-            simpleButton2.TabIndex = 21;
-            simpleButton2.Text = "Buscar";
+            btnSearchCustomer.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Primary;
+            btnSearchCustomer.Appearance.ForeColor = Color.White;
+            btnSearchCustomer.Appearance.Options.UseBackColor = true;
+            btnSearchCustomer.Appearance.Options.UseForeColor = true;
+            btnSearchCustomer.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            btnSearchCustomer.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton2.ImageOptions.SvgImage");
+            btnSearchCustomer.ImageOptions.SvgImageSize = new Size(16, 16);
+            btnSearchCustomer.Location = new Point(717, 13);
+            btnSearchCustomer.Margin = new Padding(3, 4, 3, 4);
+            btnSearchCustomer.Name = "btnSearchCustomer";
+            btnSearchCustomer.Size = new Size(115, 40);
+            btnSearchCustomer.TabIndex = 21;
+            btnSearchCustomer.Text = "Buscar";
             // 
-            // textEdit3
+            // txtCustomerDescription
             // 
-            textEdit3.Location = new Point(547, 13);
-            textEdit3.Margin = new Padding(3, 4, 3, 4);
-            textEdit3.Name = "textEdit3";
-            textEdit3.Size = new Size(158, 34);
-            textEdit3.TabIndex = 19;
+            txtCustomerDescription.Location = new Point(547, 13);
+            txtCustomerDescription.Margin = new Padding(3, 4, 3, 4);
+            txtCustomerDescription.Name = "txtCustomerDescription";
+            txtCustomerDescription.Size = new Size(158, 34);
+            txtCustomerDescription.TabIndex = 19;
             // 
-            // comboBoxEdit2
+            // txtCausalID
             // 
-            comboBoxEdit2.Location = new Point(1010, 13);
-            comboBoxEdit2.Margin = new Padding(3, 4, 3, 4);
-            comboBoxEdit2.Name = "comboBoxEdit2";
-            comboBoxEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit2.Size = new Size(337, 34);
-            comboBoxEdit2.TabIndex = 15;
+            txtCausalID.Location = new Point(1010, 13);
+            txtCausalID.Margin = new Padding(3, 4, 3, 4);
+            txtCausalID.Name = "txtCausalID";
+            txtCausalID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtCausalID.Size = new Size(337, 34);
+            txtCausalID.TabIndex = 15;
             // 
-            // textEdit5
+            // txtReferenceClientIdentifier
             // 
-            textEdit5.Location = new Point(547, 104);
-            textEdit5.Margin = new Padding(3, 4, 3, 4);
-            textEdit5.Name = "textEdit5";
-            textEdit5.Size = new Size(337, 34);
-            textEdit5.TabIndex = 14;
+            txtReferenceClientIdentifier.Location = new Point(547, 104);
+            txtReferenceClientIdentifier.Margin = new Padding(3, 4, 3, 4);
+            txtReferenceClientIdentifier.Name = "txtReferenceClientIdentifier";
+            txtReferenceClientIdentifier.Size = new Size(337, 34);
+            txtReferenceClientIdentifier.TabIndex = 14;
             // 
-            // textEdit4
+            // txtReferenceClientName
             // 
-            textEdit4.Location = new Point(547, 59);
-            textEdit4.Margin = new Padding(3, 4, 3, 4);
-            textEdit4.Name = "textEdit4";
-            textEdit4.Size = new Size(337, 34);
-            textEdit4.TabIndex = 13;
+            txtReferenceClientName.Location = new Point(547, 59);
+            txtReferenceClientName.Margin = new Padding(3, 4, 3, 4);
+            txtReferenceClientName.Name = "txtReferenceClientName";
+            txtReferenceClientName.Size = new Size(337, 34);
+            txtReferenceClientName.TabIndex = 13;
             // 
             // labelControl5
             // 
@@ -576,43 +576,43 @@
             labelControl8.TabIndex = 8;
             labelControl8.Text = "Cod. Cliente:";
             // 
-            // comboBoxEdit1
+            // txtCurrencyID
             // 
-            comboBoxEdit1.Location = new Point(1010, 104);
-            comboBoxEdit1.Margin = new Padding(3, 4, 3, 4);
-            comboBoxEdit1.Name = "comboBoxEdit1";
-            comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit1.Size = new Size(337, 34);
-            comboBoxEdit1.TabIndex = 7;
+            txtCurrencyID.Location = new Point(1010, 104);
+            txtCurrencyID.Margin = new Padding(3, 4, 3, 4);
+            txtCurrencyID.Name = "txtCurrencyID";
+            txtCurrencyID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtCurrencyID.Size = new Size(337, 34);
+            txtCurrencyID.TabIndex = 7;
             // 
-            // textEdit2
+            // txtNote
             // 
-            textEdit2.Location = new Point(86, 104);
-            textEdit2.Margin = new Padding(3, 4, 3, 4);
-            textEdit2.Name = "textEdit2";
-            textEdit2.Size = new Size(337, 34);
-            textEdit2.TabIndex = 6;
+            txtNote.Location = new Point(86, 104);
+            txtNote.Margin = new Padding(3, 4, 3, 4);
+            txtNote.Name = "txtNote";
+            txtNote.Size = new Size(337, 34);
+            txtNote.TabIndex = 6;
             // 
-            // textEdit1
+            // txtExchangeRate
             // 
-            textEdit1.Location = new Point(86, 59);
-            textEdit1.Margin = new Padding(3, 4, 3, 4);
-            textEdit1.Name = "textEdit1";
-            textEdit1.Size = new Size(88, 34);
-            textEdit1.TabIndex = 5;
+            txtExchangeRate.Location = new Point(86, 59);
+            txtExchangeRate.Margin = new Padding(3, 4, 3, 4);
+            txtExchangeRate.Name = "txtExchangeRate";
+            txtExchangeRate.Size = new Size(88, 34);
+            txtExchangeRate.TabIndex = 5;
             // 
-            // dateEdit1
+            // txtDate
             // 
-            dateEdit1.EditValue = null;
-            dateEdit1.Location = new Point(86, 13);
-            dateEdit1.Margin = new Padding(3, 4, 3, 4);
-            dateEdit1.Name = "dateEdit1";
-            dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            dateEdit1.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("dateEdit1.Properties.ContextImageOptions.SvgImage");
-            dateEdit1.Properties.ContextImageOptions.SvgImageSize = new Size(16, 16);
-            dateEdit1.Size = new Size(337, 36);
-            dateEdit1.TabIndex = 4;
+            txtDate.EditValue = null;
+            txtDate.Location = new Point(86, 13);
+            txtDate.Margin = new Padding(3, 4, 3, 4);
+            txtDate.Name = "txtDate";
+            txtDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtDate.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("dateEdit1.Properties.ContextImageOptions.SvgImage");
+            txtDate.Properties.ContextImageOptions.SvgImageSize = new Size(16, 16);
+            txtDate.Size = new Size(337, 36);
+            txtDate.TabIndex = 4;
             // 
             // labelControl3
             // 
@@ -660,19 +660,19 @@
             // 
             // tabReferencias
             // 
-            tabReferencias.Controls.Add(comboBoxEdit7);
-            tabReferencias.Controls.Add(textEdit7);
-            tabReferencias.Controls.Add(comboBoxEdit6);
-            tabReferencias.Controls.Add(textEdit6);
+            tabReferencias.Controls.Add(txtMesaID);
+            tabReferencias.Controls.Add(txtNumberPhone);
+            tabReferencias.Controls.Add(txtEmployeeID);
+            tabReferencias.Controls.Add(txtReference3);
             tabReferencias.Controls.Add(labelControl14);
             tabReferencias.Controls.Add(labelControl15);
             tabReferencias.Controls.Add(labelControl16);
             tabReferencias.Controls.Add(labelControl17);
-            tabReferencias.Controls.Add(dateEdit2);
+            tabReferencias.Controls.Add(txtNextVisit);
             tabReferencias.Controls.Add(labelControl13);
-            tabReferencias.Controls.Add(comboBoxEdit5);
-            tabReferencias.Controls.Add(comboBoxEdit4);
-            tabReferencias.Controls.Add(comboBoxEdit3);
+            tabReferencias.Controls.Add(txtWarehouseID);
+            tabReferencias.Controls.Add(txtTypePriceID);
+            tabReferencias.Controls.Add(txtZoneID);
             tabReferencias.Controls.Add(labelControl10);
             tabReferencias.Controls.Add(labelControl11);
             tabReferencias.Controls.Add(labelControl12);
@@ -681,39 +681,39 @@
             tabReferencias.Size = new Size(1375, 199);
             tabReferencias.Text = "Referencias";
             // 
-            // comboBoxEdit7
+            // txtMesaID
             // 
-            comboBoxEdit7.Location = new Point(527, 124);
-            comboBoxEdit7.Margin = new Padding(3, 4, 3, 4);
-            comboBoxEdit7.Name = "comboBoxEdit7";
-            comboBoxEdit7.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit7.Size = new Size(277, 34);
-            comboBoxEdit7.TabIndex = 18;
+            txtMesaID.Location = new Point(527, 124);
+            txtMesaID.Margin = new Padding(3, 4, 3, 4);
+            txtMesaID.Name = "txtMesaID";
+            txtMesaID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtMesaID.Size = new Size(277, 34);
+            txtMesaID.TabIndex = 18;
             // 
-            // textEdit7
+            // txtNumberPhone
             // 
-            textEdit7.Location = new Point(527, 83);
-            textEdit7.Margin = new Padding(3, 4, 3, 4);
-            textEdit7.Name = "textEdit7";
-            textEdit7.Size = new Size(277, 34);
-            textEdit7.TabIndex = 17;
+            txtNumberPhone.Location = new Point(527, 83);
+            txtNumberPhone.Margin = new Padding(3, 4, 3, 4);
+            txtNumberPhone.Name = "txtNumberPhone";
+            txtNumberPhone.Size = new Size(277, 34);
+            txtNumberPhone.TabIndex = 17;
             // 
-            // comboBoxEdit6
+            // txtEmployeeID
             // 
-            comboBoxEdit6.Location = new Point(527, 45);
-            comboBoxEdit6.Margin = new Padding(3, 4, 3, 4);
-            comboBoxEdit6.Name = "comboBoxEdit6";
-            comboBoxEdit6.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit6.Size = new Size(277, 34);
-            comboBoxEdit6.TabIndex = 16;
+            txtEmployeeID.Location = new Point(527, 45);
+            txtEmployeeID.Margin = new Padding(3, 4, 3, 4);
+            txtEmployeeID.Name = "txtEmployeeID";
+            txtEmployeeID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtEmployeeID.Size = new Size(277, 34);
+            txtEmployeeID.TabIndex = 16;
             // 
-            // textEdit6
+            // txtReference3
             // 
-            textEdit6.Location = new Point(527, 7);
-            textEdit6.Margin = new Padding(3, 4, 3, 4);
-            textEdit6.Name = "textEdit6";
-            textEdit6.Size = new Size(277, 34);
-            textEdit6.TabIndex = 15;
+            txtReference3.Location = new Point(527, 7);
+            txtReference3.Margin = new Padding(3, 4, 3, 4);
+            txtReference3.Name = "txtReference3";
+            txtReference3.Size = new Size(277, 34);
+            txtReference3.TabIndex = 15;
             // 
             // labelControl14
             // 
@@ -759,16 +759,16 @@
             labelControl17.TabIndex = 11;
             labelControl17.Text = "Referencia:";
             // 
-            // dateEdit2
+            // txtNextVisit
             // 
-            dateEdit2.EditValue = null;
-            dateEdit2.Location = new Point(117, 124);
-            dateEdit2.Margin = new Padding(3, 4, 3, 4);
-            dateEdit2.Name = "dateEdit2";
-            dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            dateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            dateEdit2.Size = new Size(277, 34);
-            dateEdit2.TabIndex = 10;
+            txtNextVisit.EditValue = null;
+            txtNextVisit.Location = new Point(117, 124);
+            txtNextVisit.Margin = new Padding(3, 4, 3, 4);
+            txtNextVisit.Name = "txtNextVisit";
+            txtNextVisit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtNextVisit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtNextVisit.Size = new Size(277, 34);
+            txtNextVisit.TabIndex = 10;
             // 
             // labelControl13
             // 
@@ -781,32 +781,32 @@
             labelControl13.TabIndex = 9;
             labelControl13.Text = "Siguiente visita:";
             // 
-            // comboBoxEdit5
+            // txtWarehouseID
             // 
-            comboBoxEdit5.Location = new Point(117, 83);
-            comboBoxEdit5.Margin = new Padding(3, 4, 3, 4);
-            comboBoxEdit5.Name = "comboBoxEdit5";
-            comboBoxEdit5.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit5.Size = new Size(277, 34);
-            comboBoxEdit5.TabIndex = 8;
+            txtWarehouseID.Location = new Point(117, 83);
+            txtWarehouseID.Margin = new Padding(3, 4, 3, 4);
+            txtWarehouseID.Name = "txtWarehouseID";
+            txtWarehouseID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtWarehouseID.Size = new Size(277, 34);
+            txtWarehouseID.TabIndex = 8;
             // 
-            // comboBoxEdit4
+            // txtTypePriceID
             // 
-            comboBoxEdit4.Location = new Point(117, 45);
-            comboBoxEdit4.Margin = new Padding(3, 4, 3, 4);
-            comboBoxEdit4.Name = "comboBoxEdit4";
-            comboBoxEdit4.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit4.Size = new Size(277, 34);
-            comboBoxEdit4.TabIndex = 7;
+            txtTypePriceID.Location = new Point(117, 45);
+            txtTypePriceID.Margin = new Padding(3, 4, 3, 4);
+            txtTypePriceID.Name = "txtTypePriceID";
+            txtTypePriceID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtTypePriceID.Size = new Size(277, 34);
+            txtTypePriceID.TabIndex = 7;
             // 
-            // comboBoxEdit3
+            // txtZoneID
             // 
-            comboBoxEdit3.Location = new Point(117, 7);
-            comboBoxEdit3.Margin = new Padding(3, 4, 3, 4);
-            comboBoxEdit3.Name = "comboBoxEdit3";
-            comboBoxEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit3.Size = new Size(277, 34);
-            comboBoxEdit3.TabIndex = 6;
+            txtZoneID.Location = new Point(117, 7);
+            txtZoneID.Margin = new Padding(3, 4, 3, 4);
+            txtZoneID.Name = "txtZoneID";
+            txtZoneID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtZoneID.Size = new Size(277, 34);
+            txtZoneID.TabIndex = 6;
             // 
             // labelControl10
             // 
@@ -844,20 +844,20 @@
             // tabInfoCredito
             // 
             tabInfoCredito.Controls.Add(labelControl25);
-            tabInfoCredito.Controls.Add(comboBoxEdit9);
-            tabInfoCredito.Controls.Add(textEdit9);
+            tabInfoCredito.Controls.Add(txtPeriodPay);
+            tabInfoCredito.Controls.Add(txtReference2);
             tabInfoCredito.Controls.Add(labelControl24);
-            tabInfoCredito.Controls.Add(dateEdit3);
+            tabInfoCredito.Controls.Add(txtDateFirst);
             tabInfoCredito.Controls.Add(labelControl23);
-            tabInfoCredito.Controls.Add(toggleSwitch2);
+            tabInfoCredito.Controls.Add(txtReportSinRiesgo);
             tabInfoCredito.Controls.Add(labelControl22);
-            tabInfoCredito.Controls.Add(toggleSwitch1);
+            tabInfoCredito.Controls.Add(txtDesembolsoEfectivo);
             tabInfoCredito.Controls.Add(labelControl21);
-            tabInfoCredito.Controls.Add(textEdit8);
+            tabInfoCredito.Controls.Add(txtFixedExpenses);
             tabInfoCredito.Controls.Add(labelControl20);
-            tabInfoCredito.Controls.Add(checkEdit1);
+            tabInfoCredito.Controls.Add(txtIsApplied);
             tabInfoCredito.Controls.Add(labelControl19);
-            tabInfoCredito.Controls.Add(comboBoxEdit8);
+            tabInfoCredito.Controls.Add(txtReference1);
             tabInfoCredito.Controls.Add(labelControl18);
             tabInfoCredito.Margin = new Padding(3, 4, 3, 4);
             tabInfoCredito.Name = "tabInfoCredito";
@@ -875,22 +875,22 @@
             labelControl25.TabIndex = 22;
             labelControl25.Text = "Frecuencia:";
             // 
-            // comboBoxEdit9
+            // txtPeriodPay
             // 
-            comboBoxEdit9.Location = new Point(697, 85);
-            comboBoxEdit9.Margin = new Padding(3, 4, 3, 4);
-            comboBoxEdit9.Name = "comboBoxEdit9";
-            comboBoxEdit9.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit9.Size = new Size(297, 34);
-            comboBoxEdit9.TabIndex = 21;
+            txtPeriodPay.Location = new Point(697, 85);
+            txtPeriodPay.Margin = new Padding(3, 4, 3, 4);
+            txtPeriodPay.Name = "txtPeriodPay";
+            txtPeriodPay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtPeriodPay.Size = new Size(297, 34);
+            txtPeriodPay.TabIndex = 21;
             // 
-            // textEdit9
+            // txtReference2
             // 
-            textEdit9.Location = new Point(697, 49);
-            textEdit9.Margin = new Padding(3, 4, 3, 4);
-            textEdit9.Name = "textEdit9";
-            textEdit9.Size = new Size(297, 34);
-            textEdit9.TabIndex = 20;
+            txtReference2.Location = new Point(697, 49);
+            txtReference2.Margin = new Padding(3, 4, 3, 4);
+            txtReference2.Name = "txtReference2";
+            txtReference2.Size = new Size(297, 34);
+            txtReference2.TabIndex = 20;
             // 
             // labelControl24
             // 
@@ -903,18 +903,18 @@
             labelControl24.TabIndex = 19;
             labelControl24.Text = "Plazo o Referencia:";
             // 
-            // dateEdit3
+            // txtDateFirst
             // 
-            dateEdit3.EditValue = null;
-            dateEdit3.Location = new Point(697, 8);
-            dateEdit3.Margin = new Padding(3, 4, 3, 4);
-            dateEdit3.Name = "dateEdit3";
-            dateEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            dateEdit3.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            dateEdit3.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("dateEdit3.Properties.ContextImageOptions.SvgImage");
-            dateEdit3.Properties.ContextImageOptions.SvgImageSize = new Size(16, 16);
-            dateEdit3.Size = new Size(297, 36);
-            dateEdit3.TabIndex = 18;
+            txtDateFirst.EditValue = null;
+            txtDateFirst.Location = new Point(697, 8);
+            txtDateFirst.Margin = new Padding(3, 4, 3, 4);
+            txtDateFirst.Name = "txtDateFirst";
+            txtDateFirst.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtDateFirst.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtDateFirst.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("dateEdit3.Properties.ContextImageOptions.SvgImage");
+            txtDateFirst.Properties.ContextImageOptions.SvgImageSize = new Size(16, 16);
+            txtDateFirst.Size = new Size(297, 36);
+            txtDateFirst.TabIndex = 18;
             // 
             // labelControl23
             // 
@@ -927,15 +927,15 @@
             labelControl23.TabIndex = 17;
             labelControl23.Text = "Primer pago:";
             // 
-            // toggleSwitch2
+            // txtReportSinRiesgo
             // 
-            toggleSwitch2.Location = new Point(697, 123);
-            toggleSwitch2.Margin = new Padding(3, 4, 3, 4);
-            toggleSwitch2.Name = "toggleSwitch2";
-            toggleSwitch2.Properties.OffText = "";
-            toggleSwitch2.Properties.OnText = "";
-            toggleSwitch2.Size = new Size(109, 29);
-            toggleSwitch2.TabIndex = 16;
+            txtReportSinRiesgo.Location = new Point(697, 123);
+            txtReportSinRiesgo.Margin = new Padding(3, 4, 3, 4);
+            txtReportSinRiesgo.Name = "txtReportSinRiesgo";
+            txtReportSinRiesgo.Properties.OffText = "";
+            txtReportSinRiesgo.Properties.OnText = "";
+            txtReportSinRiesgo.Size = new Size(109, 29);
+            txtReportSinRiesgo.TabIndex = 16;
             // 
             // labelControl22
             // 
@@ -948,15 +948,15 @@
             labelControl22.TabIndex = 15;
             labelControl22.Text = "Reportar a Sin Riesgo:";
             // 
-            // toggleSwitch1
+            // txtDesembolsoEfectivo
             // 
-            toggleSwitch1.Location = new Point(230, 123);
-            toggleSwitch1.Margin = new Padding(3, 4, 3, 4);
-            toggleSwitch1.Name = "toggleSwitch1";
-            toggleSwitch1.Properties.OffText = "";
-            toggleSwitch1.Properties.OnText = "";
-            toggleSwitch1.Size = new Size(109, 29);
-            toggleSwitch1.TabIndex = 14;
+            txtDesembolsoEfectivo.Location = new Point(230, 123);
+            txtDesembolsoEfectivo.Margin = new Padding(3, 4, 3, 4);
+            txtDesembolsoEfectivo.Name = "txtDesembolsoEfectivo";
+            txtDesembolsoEfectivo.Properties.OffText = "";
+            txtDesembolsoEfectivo.Properties.OnText = "";
+            txtDesembolsoEfectivo.Size = new Size(109, 29);
+            txtDesembolsoEfectivo.TabIndex = 14;
             // 
             // labelControl21
             // 
@@ -969,13 +969,13 @@
             labelControl21.TabIndex = 13;
             labelControl21.Text = "¿Es un desembolso en efectivo?";
             // 
-            // textEdit8
+            // txtFixedExpenses
             // 
-            textEdit8.Location = new Point(230, 85);
-            textEdit8.Margin = new Padding(3, 4, 3, 4);
-            textEdit8.Name = "textEdit8";
-            textEdit8.Size = new Size(277, 34);
-            textEdit8.TabIndex = 12;
+            txtFixedExpenses.Location = new Point(230, 85);
+            txtFixedExpenses.Margin = new Padding(3, 4, 3, 4);
+            txtFixedExpenses.Name = "txtFixedExpenses";
+            txtFixedExpenses.Size = new Size(277, 34);
+            txtFixedExpenses.TabIndex = 12;
             // 
             // labelControl20
             // 
@@ -988,14 +988,14 @@
             labelControl20.TabIndex = 11;
             labelControl20.Text = "% de Gasto:";
             // 
-            // checkEdit1
+            // txtIsApplied
             // 
-            checkEdit1.Location = new Point(230, 47);
-            checkEdit1.Margin = new Padding(3, 4, 3, 4);
-            checkEdit1.Name = "checkEdit1";
-            checkEdit1.Properties.Caption = "";
-            checkEdit1.Size = new Size(47, 26);
-            checkEdit1.TabIndex = 10;
+            txtIsApplied.Location = new Point(230, 47);
+            txtIsApplied.Margin = new Padding(3, 4, 3, 4);
+            txtIsApplied.Name = "txtIsApplied";
+            txtIsApplied.Properties.Caption = "";
+            txtIsApplied.Size = new Size(47, 26);
+            txtIsApplied.TabIndex = 10;
             // 
             // labelControl19
             // 
@@ -1008,14 +1008,14 @@
             labelControl19.TabIndex = 9;
             labelControl19.Text = "Aplicado:";
             // 
-            // comboBoxEdit8
+            // txtReference1
             // 
-            comboBoxEdit8.Location = new Point(230, 11);
-            comboBoxEdit8.Margin = new Padding(3, 4, 3, 4);
-            comboBoxEdit8.Name = "comboBoxEdit8";
-            comboBoxEdit8.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit8.Size = new Size(277, 34);
-            comboBoxEdit8.TabIndex = 8;
+            txtReference1.Location = new Point(230, 11);
+            txtReference1.Margin = new Padding(3, 4, 3, 4);
+            txtReference1.Name = "txtReference1";
+            txtReference1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtReference1.Size = new Size(277, 34);
+            txtReference1.TabIndex = 8;
             // 
             // labelControl18
             // 
@@ -1071,9 +1071,9 @@
             // tablePanel2
             // 
             tablePanel2.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 28.24F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 31.76F) });
-            tablePanel2.Controls.Add(textEdit25);
-            tablePanel2.Controls.Add(textEdit24);
-            tablePanel2.Controls.Add(textEdit23);
+            tablePanel2.Controls.Add(txtTotal);
+            tablePanel2.Controls.Add(txtIva);
+            tablePanel2.Controls.Add(txtSubTotal);
             tablePanel2.Controls.Add(labelControl39);
             tablePanel2.Controls.Add(labelControl38);
             tablePanel2.Controls.Add(labelControl37);
@@ -1086,35 +1086,35 @@
             tablePanel2.TabIndex = 39;
             tablePanel2.UseSkinIndents = true;
             // 
-            // textEdit25
+            // txtTotal
             // 
-            tablePanel2.SetColumn(textEdit25, 1);
-            textEdit25.Location = new Point(132, 82);
-            textEdit25.Margin = new Padding(3, 4, 3, 4);
-            textEdit25.Name = "textEdit25";
-            tablePanel2.SetRow(textEdit25, 2);
-            textEdit25.Size = new Size(136, 34);
-            textEdit25.TabIndex = 38;
+            tablePanel2.SetColumn(txtTotal, 1);
+            txtTotal.Location = new Point(132, 82);
+            txtTotal.Margin = new Padding(3, 4, 3, 4);
+            txtTotal.Name = "txtTotal";
+            tablePanel2.SetRow(txtTotal, 2);
+            txtTotal.Size = new Size(136, 34);
+            txtTotal.TabIndex = 38;
             // 
-            // textEdit24
+            // txtIva
             // 
-            tablePanel2.SetColumn(textEdit24, 1);
-            textEdit24.Location = new Point(132, 45);
-            textEdit24.Margin = new Padding(3, 4, 3, 4);
-            textEdit24.Name = "textEdit24";
-            tablePanel2.SetRow(textEdit24, 1);
-            textEdit24.Size = new Size(136, 34);
-            textEdit24.TabIndex = 37;
+            tablePanel2.SetColumn(txtIva, 1);
+            txtIva.Location = new Point(132, 45);
+            txtIva.Margin = new Padding(3, 4, 3, 4);
+            txtIva.Name = "txtIva";
+            tablePanel2.SetRow(txtIva, 1);
+            txtIva.Size = new Size(136, 34);
+            txtIva.TabIndex = 37;
             // 
-            // textEdit23
+            // txtSubTotal
             // 
-            tablePanel2.SetColumn(textEdit23, 1);
-            textEdit23.Location = new Point(132, 8);
-            textEdit23.Margin = new Padding(3, 4, 3, 4);
-            textEdit23.Name = "textEdit23";
-            tablePanel2.SetRow(textEdit23, 0);
-            textEdit23.Size = new Size(136, 34);
-            textEdit23.TabIndex = 34;
+            tablePanel2.SetColumn(txtSubTotal, 1);
+            txtSubTotal.Location = new Point(132, 8);
+            txtSubTotal.Margin = new Padding(3, 4, 3, 4);
+            txtSubTotal.Name = "txtSubTotal";
+            tablePanel2.SetRow(txtSubTotal, 0);
+            txtSubTotal.Size = new Size(136, 34);
+            txtSubTotal.TabIndex = 34;
             // 
             // labelControl39
             // 
@@ -1159,22 +1159,22 @@
             // 
             tablePanel1.AutoSize = true;
             tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 44.9F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 36.22F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 28.88F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F) });
-            tablePanel1.Controls.Add(textEdit22);
-            tablePanel1.Controls.Add(comboBoxEdit13);
-            tablePanel1.Controls.Add(textEdit21);
-            tablePanel1.Controls.Add(textEdit20);
-            tablePanel1.Controls.Add(textEdit19);
-            tablePanel1.Controls.Add(comboBoxEdit12);
-            tablePanel1.Controls.Add(comboBoxEdit11);
-            tablePanel1.Controls.Add(comboBoxEdit10);
-            tablePanel1.Controls.Add(textEdit18);
-            tablePanel1.Controls.Add(textEdit17);
-            tablePanel1.Controls.Add(textEdit16);
-            tablePanel1.Controls.Add(textEdit15);
-            tablePanel1.Controls.Add(textEdit14);
-            tablePanel1.Controls.Add(textEdit13);
-            tablePanel1.Controls.Add(textEdit12);
-            tablePanel1.Controls.Add(textEdit11);
+            tablePanel1.Controls.Add(txtReceiptAmountBank_Reference);
+            tablePanel1.Controls.Add(txtReceiptAmountBank_BankID);
+            tablePanel1.Controls.Add(txtReceiptAmountTarjetaDol_Reference);
+            tablePanel1.Controls.Add(txtReceiptAmountTarjeta_Reference);
+            tablePanel1.Controls.Add(txtReceiptAmountBankDol_Reference);
+            tablePanel1.Controls.Add(txtReceiptAmountTarjetaDol_BankID);
+            tablePanel1.Controls.Add(txtReceiptAmountTarjeta_BankID);
+            tablePanel1.Controls.Add(txtReceiptAmountBankDol_BankID);
+            tablePanel1.Controls.Add(txtReceiptAmountPoint);
+            tablePanel1.Controls.Add(txtReceiptAmountBankDol);
+            tablePanel1.Controls.Add(txtReceiptAmountBank);
+            tablePanel1.Controls.Add(txtReceiptAmountTarjetaDol);
+            tablePanel1.Controls.Add(txtReceiptAmountTarjeta);
+            tablePanel1.Controls.Add(txtReceiptAmountDol);
+            tablePanel1.Controls.Add(txtReceiptAmount);
+            tablePanel1.Controls.Add(txtChangeAmount);
             tablePanel1.Controls.Add(labelControl36);
             tablePanel1.Controls.Add(labelControl35);
             tablePanel1.Controls.Add(labelControl34);
@@ -1192,173 +1192,173 @@
             tablePanel1.TabIndex = 38;
             tablePanel1.UseSkinIndents = true;
             // 
-            // textEdit22
+            // txtReceiptAmountBank_Reference
             // 
-            tablePanel1.SetColumn(textEdit22, 3);
-            textEdit22.Location = new Point(353, 193);
-            textEdit22.Margin = new Padding(3, 4, 3, 4);
-            textEdit22.Name = "textEdit22";
-            tablePanel1.SetRow(textEdit22, 5);
-            textEdit22.Size = new Size(152, 34);
-            textEdit22.TabIndex = 33;
+            tablePanel1.SetColumn(txtReceiptAmountBank_Reference, 3);
+            txtReceiptAmountBank_Reference.Location = new Point(353, 193);
+            txtReceiptAmountBank_Reference.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmountBank_Reference.Name = "txtReceiptAmountBank_Reference";
+            tablePanel1.SetRow(txtReceiptAmountBank_Reference, 5);
+            txtReceiptAmountBank_Reference.Size = new Size(152, 34);
+            txtReceiptAmountBank_Reference.TabIndex = 33;
             // 
-            // comboBoxEdit13
+            // txtReceiptAmountBank_BankID
             // 
-            tablePanel1.SetColumn(comboBoxEdit13, 2);
-            comboBoxEdit13.Location = new Point(262, 193);
-            comboBoxEdit13.Margin = new Padding(3, 4, 3, 4);
-            comboBoxEdit13.MenuManager = barManager1;
-            comboBoxEdit13.Name = "comboBoxEdit13";
-            comboBoxEdit13.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            tablePanel1.SetRow(comboBoxEdit13, 5);
-            comboBoxEdit13.Size = new Size(85, 34);
-            comboBoxEdit13.TabIndex = 32;
+            tablePanel1.SetColumn(txtReceiptAmountBank_BankID, 2);
+            txtReceiptAmountBank_BankID.Location = new Point(262, 193);
+            txtReceiptAmountBank_BankID.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmountBank_BankID.MenuManager = barManager1;
+            txtReceiptAmountBank_BankID.Name = "txtReceiptAmountBank_BankID";
+            txtReceiptAmountBank_BankID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            tablePanel1.SetRow(txtReceiptAmountBank_BankID, 5);
+            txtReceiptAmountBank_BankID.Size = new Size(85, 34);
+            txtReceiptAmountBank_BankID.TabIndex = 32;
             // 
-            // textEdit21
+            // txtReceiptAmountTarjetaDol_Reference
             // 
-            tablePanel1.SetColumn(textEdit21, 3);
-            textEdit21.Location = new Point(353, 156);
-            textEdit21.Margin = new Padding(3, 4, 3, 4);
-            textEdit21.Name = "textEdit21";
-            tablePanel1.SetRow(textEdit21, 4);
-            textEdit21.Size = new Size(152, 34);
-            textEdit21.TabIndex = 31;
+            tablePanel1.SetColumn(txtReceiptAmountTarjetaDol_Reference, 3);
+            txtReceiptAmountTarjetaDol_Reference.Location = new Point(353, 156);
+            txtReceiptAmountTarjetaDol_Reference.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmountTarjetaDol_Reference.Name = "txtReceiptAmountTarjetaDol_Reference";
+            tablePanel1.SetRow(txtReceiptAmountTarjetaDol_Reference, 4);
+            txtReceiptAmountTarjetaDol_Reference.Size = new Size(152, 34);
+            txtReceiptAmountTarjetaDol_Reference.TabIndex = 31;
             // 
-            // textEdit20
+            // txtReceiptAmountTarjeta_Reference
             // 
-            tablePanel1.SetColumn(textEdit20, 3);
-            textEdit20.Location = new Point(353, 119);
-            textEdit20.Margin = new Padding(3, 4, 3, 4);
-            textEdit20.Name = "textEdit20";
-            tablePanel1.SetRow(textEdit20, 3);
-            textEdit20.Size = new Size(152, 34);
-            textEdit20.TabIndex = 30;
+            tablePanel1.SetColumn(txtReceiptAmountTarjeta_Reference, 3);
+            txtReceiptAmountTarjeta_Reference.Location = new Point(353, 119);
+            txtReceiptAmountTarjeta_Reference.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmountTarjeta_Reference.Name = "txtReceiptAmountTarjeta_Reference";
+            tablePanel1.SetRow(txtReceiptAmountTarjeta_Reference, 3);
+            txtReceiptAmountTarjeta_Reference.Size = new Size(152, 34);
+            txtReceiptAmountTarjeta_Reference.TabIndex = 30;
             // 
-            // textEdit19
+            // txtReceiptAmountBankDol_Reference
             // 
-            tablePanel1.SetColumn(textEdit19, 3);
-            textEdit19.Location = new Point(353, 82);
-            textEdit19.Margin = new Padding(3, 4, 3, 4);
-            textEdit19.Name = "textEdit19";
-            tablePanel1.SetRow(textEdit19, 2);
-            textEdit19.Size = new Size(152, 34);
-            textEdit19.TabIndex = 29;
+            tablePanel1.SetColumn(txtReceiptAmountBankDol_Reference, 3);
+            txtReceiptAmountBankDol_Reference.Location = new Point(353, 230);
+            txtReceiptAmountBankDol_Reference.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmountBankDol_Reference.Name = "txtReceiptAmountBankDol_Reference";
+            tablePanel1.SetRow(txtReceiptAmountBankDol_Reference, 6);
+            txtReceiptAmountBankDol_Reference.Size = new Size(152, 34);
+            txtReceiptAmountBankDol_Reference.TabIndex = 29;
             // 
-            // comboBoxEdit12
+            // txtReceiptAmountTarjetaDol_BankID
             // 
-            tablePanel1.SetColumn(comboBoxEdit12, 2);
-            comboBoxEdit12.Location = new Point(262, 156);
-            comboBoxEdit12.Margin = new Padding(3, 4, 3, 4);
-            comboBoxEdit12.MenuManager = barManager1;
-            comboBoxEdit12.Name = "comboBoxEdit12";
-            comboBoxEdit12.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            tablePanel1.SetRow(comboBoxEdit12, 4);
-            comboBoxEdit12.Size = new Size(85, 34);
-            comboBoxEdit12.TabIndex = 28;
+            tablePanel1.SetColumn(txtReceiptAmountTarjetaDol_BankID, 2);
+            txtReceiptAmountTarjetaDol_BankID.Location = new Point(262, 156);
+            txtReceiptAmountTarjetaDol_BankID.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmountTarjetaDol_BankID.MenuManager = barManager1;
+            txtReceiptAmountTarjetaDol_BankID.Name = "txtReceiptAmountTarjetaDol_BankID";
+            txtReceiptAmountTarjetaDol_BankID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            tablePanel1.SetRow(txtReceiptAmountTarjetaDol_BankID, 4);
+            txtReceiptAmountTarjetaDol_BankID.Size = new Size(85, 34);
+            txtReceiptAmountTarjetaDol_BankID.TabIndex = 28;
             // 
-            // comboBoxEdit11
+            // txtReceiptAmountTarjeta_BankID
             // 
-            tablePanel1.SetColumn(comboBoxEdit11, 2);
-            comboBoxEdit11.Location = new Point(262, 119);
-            comboBoxEdit11.Margin = new Padding(3, 4, 3, 4);
-            comboBoxEdit11.MenuManager = barManager1;
-            comboBoxEdit11.Name = "comboBoxEdit11";
-            comboBoxEdit11.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            tablePanel1.SetRow(comboBoxEdit11, 3);
-            comboBoxEdit11.Size = new Size(85, 34);
-            comboBoxEdit11.TabIndex = 27;
+            tablePanel1.SetColumn(txtReceiptAmountTarjeta_BankID, 2);
+            txtReceiptAmountTarjeta_BankID.Location = new Point(262, 119);
+            txtReceiptAmountTarjeta_BankID.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmountTarjeta_BankID.MenuManager = barManager1;
+            txtReceiptAmountTarjeta_BankID.Name = "txtReceiptAmountTarjeta_BankID";
+            txtReceiptAmountTarjeta_BankID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            tablePanel1.SetRow(txtReceiptAmountTarjeta_BankID, 3);
+            txtReceiptAmountTarjeta_BankID.Size = new Size(85, 34);
+            txtReceiptAmountTarjeta_BankID.TabIndex = 27;
             // 
-            // comboBoxEdit10
+            // txtReceiptAmountBankDol_BankID
             // 
-            tablePanel1.SetColumn(comboBoxEdit10, 2);
-            comboBoxEdit10.Location = new Point(262, 82);
-            comboBoxEdit10.Margin = new Padding(3, 4, 3, 4);
-            comboBoxEdit10.MenuManager = barManager1;
-            comboBoxEdit10.Name = "comboBoxEdit10";
-            comboBoxEdit10.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            tablePanel1.SetRow(comboBoxEdit10, 2);
-            comboBoxEdit10.Size = new Size(85, 34);
-            comboBoxEdit10.TabIndex = 26;
+            tablePanel1.SetColumn(txtReceiptAmountBankDol_BankID, 2);
+            txtReceiptAmountBankDol_BankID.Location = new Point(262, 230);
+            txtReceiptAmountBankDol_BankID.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmountBankDol_BankID.MenuManager = barManager1;
+            txtReceiptAmountBankDol_BankID.Name = "txtReceiptAmountBankDol_BankID";
+            txtReceiptAmountBankDol_BankID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            tablePanel1.SetRow(txtReceiptAmountBankDol_BankID, 6);
+            txtReceiptAmountBankDol_BankID.Size = new Size(85, 34);
+            txtReceiptAmountBankDol_BankID.TabIndex = 26;
             // 
-            // textEdit18
+            // txtReceiptAmountPoint
             // 
-            tablePanel1.SetColumn(textEdit18, 1);
-            textEdit18.Location = new Point(147, 268);
-            textEdit18.Margin = new Padding(3, 4, 3, 4);
-            textEdit18.Name = "textEdit18";
-            tablePanel1.SetRow(textEdit18, 7);
-            textEdit18.Size = new Size(108, 34);
-            textEdit18.TabIndex = 25;
+            tablePanel1.SetColumn(txtReceiptAmountPoint, 1);
+            txtReceiptAmountPoint.Location = new Point(147, 268);
+            txtReceiptAmountPoint.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmountPoint.Name = "txtReceiptAmountPoint";
+            tablePanel1.SetRow(txtReceiptAmountPoint, 7);
+            txtReceiptAmountPoint.Size = new Size(108, 34);
+            txtReceiptAmountPoint.TabIndex = 25;
             // 
-            // textEdit17
+            // txtReceiptAmountBankDol
             // 
-            tablePanel1.SetColumn(textEdit17, 1);
-            textEdit17.Location = new Point(147, 230);
-            textEdit17.Margin = new Padding(3, 4, 3, 4);
-            textEdit17.Name = "textEdit17";
-            tablePanel1.SetRow(textEdit17, 6);
-            textEdit17.Size = new Size(108, 34);
-            textEdit17.TabIndex = 25;
+            tablePanel1.SetColumn(txtReceiptAmountBankDol, 1);
+            txtReceiptAmountBankDol.Location = new Point(147, 230);
+            txtReceiptAmountBankDol.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmountBankDol.Name = "txtReceiptAmountBankDol";
+            tablePanel1.SetRow(txtReceiptAmountBankDol, 6);
+            txtReceiptAmountBankDol.Size = new Size(108, 34);
+            txtReceiptAmountBankDol.TabIndex = 25;
             // 
-            // textEdit16
+            // txtReceiptAmountBank
             // 
-            tablePanel1.SetColumn(textEdit16, 1);
-            textEdit16.Location = new Point(147, 193);
-            textEdit16.Margin = new Padding(3, 4, 3, 4);
-            textEdit16.Name = "textEdit16";
-            tablePanel1.SetRow(textEdit16, 5);
-            textEdit16.Size = new Size(108, 34);
-            textEdit16.TabIndex = 25;
+            tablePanel1.SetColumn(txtReceiptAmountBank, 1);
+            txtReceiptAmountBank.Location = new Point(147, 193);
+            txtReceiptAmountBank.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmountBank.Name = "txtReceiptAmountBank";
+            tablePanel1.SetRow(txtReceiptAmountBank, 5);
+            txtReceiptAmountBank.Size = new Size(108, 34);
+            txtReceiptAmountBank.TabIndex = 25;
             // 
-            // textEdit15
+            // txtReceiptAmountTarjetaDol
             // 
-            tablePanel1.SetColumn(textEdit15, 1);
-            textEdit15.Location = new Point(147, 156);
-            textEdit15.Margin = new Padding(3, 4, 3, 4);
-            textEdit15.Name = "textEdit15";
-            tablePanel1.SetRow(textEdit15, 4);
-            textEdit15.Size = new Size(108, 34);
-            textEdit15.TabIndex = 25;
+            tablePanel1.SetColumn(txtReceiptAmountTarjetaDol, 1);
+            txtReceiptAmountTarjetaDol.Location = new Point(147, 156);
+            txtReceiptAmountTarjetaDol.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmountTarjetaDol.Name = "txtReceiptAmountTarjetaDol";
+            tablePanel1.SetRow(txtReceiptAmountTarjetaDol, 4);
+            txtReceiptAmountTarjetaDol.Size = new Size(108, 34);
+            txtReceiptAmountTarjetaDol.TabIndex = 25;
             // 
-            // textEdit14
+            // txtReceiptAmountTarjeta
             // 
-            tablePanel1.SetColumn(textEdit14, 1);
-            textEdit14.Location = new Point(147, 119);
-            textEdit14.Margin = new Padding(3, 4, 3, 4);
-            textEdit14.Name = "textEdit14";
-            tablePanel1.SetRow(textEdit14, 3);
-            textEdit14.Size = new Size(108, 34);
-            textEdit14.TabIndex = 25;
+            tablePanel1.SetColumn(txtReceiptAmountTarjeta, 1);
+            txtReceiptAmountTarjeta.Location = new Point(147, 119);
+            txtReceiptAmountTarjeta.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmountTarjeta.Name = "txtReceiptAmountTarjeta";
+            tablePanel1.SetRow(txtReceiptAmountTarjeta, 3);
+            txtReceiptAmountTarjeta.Size = new Size(108, 34);
+            txtReceiptAmountTarjeta.TabIndex = 25;
             // 
-            // textEdit13
+            // txtReceiptAmountDol
             // 
-            tablePanel1.SetColumn(textEdit13, 1);
-            textEdit13.Location = new Point(147, 82);
-            textEdit13.Margin = new Padding(3, 4, 3, 4);
-            textEdit13.Name = "textEdit13";
-            tablePanel1.SetRow(textEdit13, 2);
-            textEdit13.Size = new Size(108, 34);
-            textEdit13.TabIndex = 25;
+            tablePanel1.SetColumn(txtReceiptAmountDol, 1);
+            txtReceiptAmountDol.Location = new Point(147, 82);
+            txtReceiptAmountDol.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmountDol.Name = "txtReceiptAmountDol";
+            tablePanel1.SetRow(txtReceiptAmountDol, 2);
+            txtReceiptAmountDol.Size = new Size(108, 34);
+            txtReceiptAmountDol.TabIndex = 25;
             // 
-            // textEdit12
+            // txtReceiptAmount
             // 
-            tablePanel1.SetColumn(textEdit12, 1);
-            textEdit12.Location = new Point(147, 45);
-            textEdit12.Margin = new Padding(3, 4, 3, 4);
-            textEdit12.Name = "textEdit12";
-            tablePanel1.SetRow(textEdit12, 1);
-            textEdit12.Size = new Size(108, 34);
-            textEdit12.TabIndex = 25;
+            tablePanel1.SetColumn(txtReceiptAmount, 1);
+            txtReceiptAmount.Location = new Point(147, 45);
+            txtReceiptAmount.Margin = new Padding(3, 4, 3, 4);
+            txtReceiptAmount.Name = "txtReceiptAmount";
+            tablePanel1.SetRow(txtReceiptAmount, 1);
+            txtReceiptAmount.Size = new Size(108, 34);
+            txtReceiptAmount.TabIndex = 25;
             // 
-            // textEdit11
+            // txtChangeAmount
             // 
-            tablePanel1.SetColumn(textEdit11, 1);
-            textEdit11.Location = new Point(147, 8);
-            textEdit11.Margin = new Padding(3, 4, 3, 4);
-            textEdit11.Name = "textEdit11";
-            tablePanel1.SetRow(textEdit11, 0);
-            textEdit11.Size = new Size(108, 34);
-            textEdit11.TabIndex = 24;
+            tablePanel1.SetColumn(txtChangeAmount, 1);
+            txtChangeAmount.Location = new Point(147, 8);
+            txtChangeAmount.Margin = new Padding(3, 4, 3, 4);
+            txtChangeAmount.Name = "txtChangeAmount";
+            tablePanel1.SetRow(txtChangeAmount, 0);
+            txtChangeAmount.Size = new Size(108, 34);
+            txtChangeAmount.TabIndex = 24;
             // 
             // labelControl36
             // 
@@ -1464,44 +1464,44 @@
             labelControl29.TabIndex = 24;
             labelControl29.Text = "01) Cambio";
             // 
-            // simpleButton5
+            // btnBack
             // 
-            simpleButton5.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Warning;
-            simpleButton5.Appearance.Options.UseBackColor = true;
-            simpleButton5.Location = new Point(537, 717);
-            simpleButton5.Margin = new Padding(3, 4, 3, 4);
-            simpleButton5.Name = "simpleButton5";
-            simpleButton5.Size = new Size(169, 40);
-            simpleButton5.TabIndex = 36;
-            simpleButton5.Text = "REGISTRAR";
+            btnBack.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Warning;
+            btnBack.Appearance.Options.UseBackColor = true;
+            btnBack.Location = new Point(537, 717);
+            btnBack.Margin = new Padding(3, 4, 3, 4);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(169, 40);
+            btnBack.TabIndex = 36;
+            btnBack.Text = "REGISTRAR";
             // 
-            // simpleButton6
+            // btnNew
             // 
-            simpleButton6.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Question;
-            simpleButton6.Appearance.Options.UseBackColor = true;
-            simpleButton6.Location = new Point(537, 764);
-            simpleButton6.Margin = new Padding(3, 4, 3, 4);
-            simpleButton6.Name = "simpleButton6";
-            simpleButton6.Size = new Size(169, 40);
-            simpleButton6.TabIndex = 35;
-            simpleButton6.Text = "NUEVA FAC";
+            btnNew.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Question;
+            btnNew.Appearance.Options.UseBackColor = true;
+            btnNew.Location = new Point(537, 764);
+            btnNew.Margin = new Padding(3, 4, 3, 4);
+            btnNew.Name = "btnNew";
+            btnNew.Size = new Size(169, 40);
+            btnNew.TabIndex = 35;
+            btnNew.Text = "NUEVA FAC";
             // 
-            // gridControl1
+            // gridViewTbTransactionMasterDetail
             // 
-            gridControl1.EmbeddedNavigator.Margin = new Padding(3, 4, 3, 4);
-            gridControl1.Location = new Point(0, 366);
-            gridControl1.MainView = gridView1;
-            gridControl1.Margin = new Padding(3, 4, 3, 4);
-            gridControl1.Name = "gridControl1";
-            gridControl1.Size = new Size(1377, 139);
-            gridControl1.TabIndex = 30;
-            gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
+            gridViewTbTransactionMasterDetail.EmbeddedNavigator.Margin = new Padding(3, 4, 3, 4);
+            gridViewTbTransactionMasterDetail.Location = new Point(0, 366);
+            gridViewTbTransactionMasterDetail.MainView = gridView1;
+            gridViewTbTransactionMasterDetail.Margin = new Padding(3, 4, 3, 4);
+            gridViewTbTransactionMasterDetail.Name = "gridViewTbTransactionMasterDetail";
+            gridViewTbTransactionMasterDetail.Size = new Size(1377, 139);
+            gridViewTbTransactionMasterDetail.TabIndex = 30;
+            gridViewTbTransactionMasterDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
             // gridView1
             // 
             gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colCodigo, colDescripcion, colUM, colCantidad, colPrecio, colTotal, colAccion, colSkuQuantityBySku, colUnitaryPriceIndividual, colSkuFormatoDescripton, colPrecio2, colPrecio3 });
             gridView1.DetailHeight = 467;
-            gridView1.GridControl = gridControl1;
+            gridView1.GridControl = gridViewTbTransactionMasterDetail;
             gridView1.Name = "gridView1";
             gridView1.OptionsEditForm.PopupEditFormWidth = 914;
             gridView1.OptionsView.ShowGroupPanel = false;
@@ -1602,19 +1602,19 @@
             BackColor = Color.White;
             ClientSize = new Size(1519, 929);
             Controls.Add(svgImageBox1);
-            Controls.Add(textEdit10);
+            Controls.Add(txtScanerCodigo);
             Controls.Add(downButtonSeleccion);
             Controls.Add(downButtonProducto);
-            Controls.Add(simpleButton4);
+            Controls.Add(btnDeleteItem);
             Controls.Add(btnAddProduct);
             Controls.Add(xtraTabControl);
             Controls.Add(pictureEdit2);
             Controls.Add(pictureEdit1);
             Controls.Add(tablePanel2);
             Controls.Add(tablePanel1);
-            Controls.Add(simpleButton5);
-            Controls.Add(simpleButton6);
-            Controls.Add(gridControl1);
+            Controls.Add(btnBack);
+            Controls.Add(btnNew);
+            Controls.Add(gridViewTbTransactionMasterDetail);
             Controls.Add(stackPanel1);
             Controls.Add(barDockControlLeft);
             Controls.Add(barDockControlRight);
@@ -1635,71 +1635,71 @@
             ((System.ComponentModel.ISupportInitialize)popupMenuSeleccion).EndInit();
             ((System.ComponentModel.ISupportInitialize)popupMenuProducto).EndInit();
             ((System.ComponentModel.ISupportInitialize)svgImageBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit10.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtScanerCodigo.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl).EndInit();
             xtraTabControl.ResumeLayout(false);
             tabInformacion.ResumeLayout(false);
             tabInformacion.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit14.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit3.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit2.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit5.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit4.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit2.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dateEdit1.Properties.CalendarTimeProperties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dateEdit1.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerCreditLineID.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerDescription.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtCausalID.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReferenceClientIdentifier.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReferenceClientName.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtCurrencyID.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtNote.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtExchangeRate.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtDate.Properties.CalendarTimeProperties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtDate.Properties).EndInit();
             tabReferencias.ResumeLayout(false);
             tabReferencias.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit7.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit7.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit6.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit6.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dateEdit2.Properties.CalendarTimeProperties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dateEdit2.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit5.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit4.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit3.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtMesaID.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtNumberPhone.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtEmployeeID.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReference3.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtNextVisit.Properties.CalendarTimeProperties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtNextVisit.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtWarehouseID.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtTypePriceID.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtZoneID.Properties).EndInit();
             tabInfoCredito.ResumeLayout(false);
             tabInfoCredito.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit9.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit9.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dateEdit3.Properties.CalendarTimeProperties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dateEdit3.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)toggleSwitch2.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)toggleSwitch1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit8.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)checkEdit1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit8.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtPeriodPay.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReference2.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtDateFirst.Properties.CalendarTimeProperties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtDateFirst.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReportSinRiesgo.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtDesembolsoEfectivo.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtFixedExpenses.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtIsApplied.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReference1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureEdit2.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureEdit1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)tablePanel2).EndInit();
             tablePanel2.ResumeLayout(false);
             tablePanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)textEdit25.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit24.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit23.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtTotal.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtIva.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtSubTotal.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)tablePanel1).EndInit();
             tablePanel1.ResumeLayout(false);
             tablePanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)textEdit22.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit13.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit21.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit20.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit19.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit12.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit11.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit10.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit18.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit17.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit16.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit15.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit14.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit13.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit12.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit11.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountBank_Reference.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountBank_BankID.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountTarjetaDol_Reference.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountTarjeta_Reference.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountBankDol_Reference.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountTarjetaDol_BankID.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountTarjeta_BankID.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountBankDol_BankID.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountPoint.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountBankDol.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountBank.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountTarjetaDol.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountTarjeta.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmountDol.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmount.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtChangeAmount.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewTbTransactionMasterDetail).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -1721,94 +1721,94 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
         private DevExpress.XtraEditors.SvgImageBox svgImageBox1;
-        private DevExpress.XtraEditors.TextEdit textEdit10;
+        private DevExpress.XtraEditors.TextEdit txtScanerCodigo;
         private DevExpress.XtraEditors.DropDownButton downButtonSeleccion;
         private DevExpress.XtraEditors.DropDownButton downButtonProducto;
-        private DevExpress.XtraEditors.SimpleButton simpleButton4;
+        private DevExpress.XtraEditors.SimpleButton btnDeleteItem;
         private DevExpress.XtraEditors.SimpleButton btnAddProduct;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl;
         private DevExpress.XtraTab.XtraTabPage tabInformacion;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit14;
+        private DevExpress.XtraEditors.ComboBoxEdit txtCustomerCreditLineID;
         private DevExpress.XtraEditors.LabelControl labelControl26;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.TextEdit textEdit3;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit2;
-        private DevExpress.XtraEditors.TextEdit textEdit5;
-        private DevExpress.XtraEditors.TextEdit textEdit4;
+        private DevExpress.XtraEditors.SimpleButton btnClearCustomer;
+        private DevExpress.XtraEditors.SimpleButton btnSearchCustomer;
+        private DevExpress.XtraEditors.TextEdit txtCustomerDescription;
+        private DevExpress.XtraEditors.ComboBoxEdit txtCausalID;
+        private DevExpress.XtraEditors.TextEdit txtReferenceClientIdentifier;
+        private DevExpress.XtraEditors.TextEdit txtReferenceClientName;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.LabelControl labelControl6;
         private DevExpress.XtraEditors.LabelControl labelControl7;
         private DevExpress.XtraEditors.LabelControl labelControl8;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
-        private DevExpress.XtraEditors.DateEdit dateEdit1;
+        private DevExpress.XtraEditors.ComboBoxEdit txtCurrencyID;
+        private DevExpress.XtraEditors.TextEdit txtNote;
+        private DevExpress.XtraEditors.TextEdit txtExchangeRate;
+        private DevExpress.XtraEditors.DateEdit txtDate;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraTab.XtraTabPage tabReferencias;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit7;
-        private DevExpress.XtraEditors.TextEdit textEdit7;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit6;
-        private DevExpress.XtraEditors.TextEdit textEdit6;
+        private DevExpress.XtraEditors.ComboBoxEdit txtMesaID;
+        private DevExpress.XtraEditors.TextEdit txtNumberPhone;
+        private DevExpress.XtraEditors.ComboBoxEdit txtEmployeeID;
+        private DevExpress.XtraEditors.TextEdit txtReference3;
         private DevExpress.XtraEditors.LabelControl labelControl14;
         private DevExpress.XtraEditors.LabelControl labelControl15;
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.LabelControl labelControl17;
-        private DevExpress.XtraEditors.DateEdit dateEdit2;
+        private DevExpress.XtraEditors.DateEdit txtNextVisit;
         private DevExpress.XtraEditors.LabelControl labelControl13;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit5;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit4;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit3;
+        private DevExpress.XtraEditors.ComboBoxEdit txtWarehouseID;
+        private DevExpress.XtraEditors.ComboBoxEdit txtTypePriceID;
+        private DevExpress.XtraEditors.ComboBoxEdit txtZoneID;
         private DevExpress.XtraEditors.LabelControl labelControl10;
         private DevExpress.XtraEditors.LabelControl labelControl11;
         private DevExpress.XtraEditors.LabelControl labelControl12;
         private DevExpress.XtraTab.XtraTabPage tabInfoCredito;
         private DevExpress.XtraEditors.LabelControl labelControl25;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit9;
-        private DevExpress.XtraEditors.TextEdit textEdit9;
+        private DevExpress.XtraEditors.ComboBoxEdit txtPeriodPay;
+        private DevExpress.XtraEditors.TextEdit txtReference2;
         private DevExpress.XtraEditors.LabelControl labelControl24;
-        private DevExpress.XtraEditors.DateEdit dateEdit3;
+        private DevExpress.XtraEditors.DateEdit txtDateFirst;
         private DevExpress.XtraEditors.LabelControl labelControl23;
-        private DevExpress.XtraEditors.ToggleSwitch toggleSwitch2;
+        private DevExpress.XtraEditors.ToggleSwitch txtReportSinRiesgo;
         private DevExpress.XtraEditors.LabelControl labelControl22;
-        private DevExpress.XtraEditors.ToggleSwitch toggleSwitch1;
+        private DevExpress.XtraEditors.ToggleSwitch txtDesembolsoEfectivo;
         private DevExpress.XtraEditors.LabelControl labelControl21;
-        private DevExpress.XtraEditors.TextEdit textEdit8;
+        private DevExpress.XtraEditors.TextEdit txtFixedExpenses;
         private DevExpress.XtraEditors.LabelControl labelControl20;
-        private DevExpress.XtraEditors.CheckEdit checkEdit1;
+        private DevExpress.XtraEditors.CheckEdit txtIsApplied;
         private DevExpress.XtraEditors.LabelControl labelControl19;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit8;
+        private DevExpress.XtraEditors.ComboBoxEdit txtReference1;
         private DevExpress.XtraEditors.LabelControl labelControl18;
         private DevExpress.XtraTab.XtraTabPage tabMas;
         private DevExpress.XtraEditors.PictureEdit pictureEdit2;
         private DevExpress.XtraEditors.PictureEdit pictureEdit1;
         private DevExpress.Utils.Layout.TablePanel tablePanel2;
-        private DevExpress.XtraEditors.TextEdit textEdit25;
-        private DevExpress.XtraEditors.TextEdit textEdit24;
-        private DevExpress.XtraEditors.TextEdit textEdit23;
+        private DevExpress.XtraEditors.TextEdit txtTotal;
+        private DevExpress.XtraEditors.TextEdit txtIva;
+        private DevExpress.XtraEditors.TextEdit txtSubTotal;
         private DevExpress.XtraEditors.LabelControl labelControl39;
         private DevExpress.XtraEditors.LabelControl labelControl38;
         private DevExpress.XtraEditors.LabelControl labelControl37;
         private DevExpress.Utils.Layout.TablePanel tablePanel1;
-        private DevExpress.XtraEditors.TextEdit textEdit22;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit13;
-        private DevExpress.XtraEditors.TextEdit textEdit21;
-        private DevExpress.XtraEditors.TextEdit textEdit20;
-        private DevExpress.XtraEditors.TextEdit textEdit19;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit12;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit11;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit10;
-        private DevExpress.XtraEditors.TextEdit textEdit18;
-        private DevExpress.XtraEditors.TextEdit textEdit17;
-        private DevExpress.XtraEditors.TextEdit textEdit16;
-        private DevExpress.XtraEditors.TextEdit textEdit15;
-        private DevExpress.XtraEditors.TextEdit textEdit14;
-        private DevExpress.XtraEditors.TextEdit textEdit13;
-        private DevExpress.XtraEditors.TextEdit textEdit12;
-        private DevExpress.XtraEditors.TextEdit textEdit11;
+        private DevExpress.XtraEditors.TextEdit txtReceiptAmountBank_Reference;
+        private DevExpress.XtraEditors.ComboBoxEdit txtReceiptAmountBank_BankID;
+        private DevExpress.XtraEditors.TextEdit txtReceiptAmountTarjetaDol_Reference;
+        private DevExpress.XtraEditors.TextEdit txtReceiptAmountTarjeta_Reference;
+        private DevExpress.XtraEditors.TextEdit txtReceiptAmountBankDol_Reference;
+        private DevExpress.XtraEditors.ComboBoxEdit txtReceiptAmountTarjetaDol_BankID;
+        private DevExpress.XtraEditors.ComboBoxEdit txtReceiptAmountTarjeta_BankID;
+        private DevExpress.XtraEditors.ComboBoxEdit txtReceiptAmountBankDol_BankID;
+        private DevExpress.XtraEditors.TextEdit txtReceiptAmountPoint;
+        private DevExpress.XtraEditors.TextEdit txtReceiptAmountBankDol;
+        private DevExpress.XtraEditors.TextEdit txtReceiptAmountBank;
+        private DevExpress.XtraEditors.TextEdit txtReceiptAmountTarjetaDol;
+        private DevExpress.XtraEditors.TextEdit txtReceiptAmountTarjeta;
+        private DevExpress.XtraEditors.TextEdit txtReceiptAmountDol;
+        private DevExpress.XtraEditors.TextEdit txtReceiptAmount;
+        private DevExpress.XtraEditors.TextEdit txtChangeAmount;
         private DevExpress.XtraEditors.LabelControl labelControl36;
         private DevExpress.XtraEditors.LabelControl labelControl35;
         private DevExpress.XtraEditors.LabelControl labelControl34;
@@ -1817,9 +1817,9 @@
         private DevExpress.XtraEditors.LabelControl labelControl31;
         private DevExpress.XtraEditors.LabelControl labelControl30;
         private DevExpress.XtraEditors.LabelControl labelControl29;
-        private DevExpress.XtraEditors.SimpleButton simpleButton5;
-        private DevExpress.XtraEditors.SimpleButton simpleButton6;
-        private DevExpress.XtraGrid.GridControl gridControl1;
+        private DevExpress.XtraEditors.SimpleButton btnBack;
+        private DevExpress.XtraEditors.SimpleButton btnNew;
+        private DevExpress.XtraGrid.GridControl gridViewTbTransactionMasterDetail;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn colCodigo;
         private DevExpress.XtraGrid.Columns.GridColumn colDescripcion;

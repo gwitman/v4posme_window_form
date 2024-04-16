@@ -17,6 +17,10 @@ namespace v4posme_window.Views
         private int TransactionId { get; set; }
         private int TransactionMasterId { get; set; }
         private TypeOpenForm TypeOpen { get; set; }
+        private int txtCustomerID { get; set; }
+        private int txtStatusOldID { get; set; }
+        private int txtStatusID {  get; set; }  
+
 
         public FormInvoiceBillingEdit(TypeOpenForm typeOpen, int companyId, int transactionId, int transactionMasterId)
         {
