@@ -84,7 +84,7 @@ public partial class DataContext : DbContext
 
     public DbSet<TbCompanyComponent> TbCompanyComponents { get; set; } = null!;
 
-    public DbSet<TbCompanyComponentConcept> TbCompanyComponentConcepts { get; set; } = null!;
+    public DbSet<TbCompanyComponentConcept?> TbCompanyComponentConcepts { get; set; } = null!;
 
     public DbSet<TbCompanyComponentFlavor> TbCompanyComponentFlavors { get; set; } = null!;
 

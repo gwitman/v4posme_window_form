@@ -93,11 +93,30 @@ namespace v4posme_library.Libraries.CustomHelper
             return input.PadLeft(length, paddingChar);
         }
 
-        public string HelperStringToNumber(string input)
+        public static decimal HelperStringToNumber(string input)
         {
-            return input.Replace(",", "");
+            return Convert.ToDecimal(input.Replace(",", ""));
         }
 
+        public static T? ConvertToNumber<T>(string? input)
+        {
+            T? result = default(T);
+
+            try
+            {
+                result = (T)Convert.ChangeType(input, typeof(T));
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Error: La cadena no se puede convertir a un número del tipo " + typeof(T).Name);
+            }
+            catch (InvalidCastException)
+            {
+                Console.WriteLine("Error: No se puede convertir la cadena a un número del tipo " + typeof(T).Name);
+            }
+        
+            return result;
+        }
         public string HelperGetSr(string sexo)
         {
             return sexo == "FEMENINO" ? "Sra." : "Sr.";

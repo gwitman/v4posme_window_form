@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using System.Net;
+using System.Reflection;
 using DevExpress.XtraEditors;
 using Unity;
 using v4posme_library.Libraries;
@@ -44,6 +44,8 @@ namespace v4posme_window.Views
         private readonly ICoreWebCurrency _objInterfazCoreWebCurrency = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebCurrency>();
 
         private readonly ICoreWebTools _objInterfazCoreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
+
+        private readonly ICoreWebCounter _objInterfazCoreWebCounter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebCounter>();
 
         #endregion
 
@@ -188,7 +190,7 @@ namespace v4posme_window.Views
         public string? ObjParameterTipoWarehouseDespacho { get; private set; }
 
         public string? ObjParameterTypePreiceDefault { get; private set; }
-        
+
         public List<TbItemDto> ObjTransactionMasterItem { get; set; }
 
         public List<TbItemSkuDto> ObjTransactionMasterItemSku { get; set; }
@@ -210,7 +212,7 @@ namespace v4posme_window.Views
         public string? ObjParameterInvoiceOpenCashPassword { get; set; }
 
         public string? ObjParameterInvoiceOpenCashWhenPrinterInvoice { get; set; }
-        
+
 
         public List<TbCompanyComponentConcept> ObjTransactionMasterDetailConcept { get; set; }
 
@@ -241,9 +243,9 @@ namespace v4posme_window.Views
 
         #region Variables internas
 
-        private int CompanyId { get; set; }
-        private int TransactionId { get; set; }
-        private int TransactionMasterId { get; set; }
+        private int? CompanyId { get; set; }
+        private int? TransactionId { get; set; }
+        private int? TransactionMasterId { get; set; }
         private TypeOpenForm TypeOpen { get; set; }
         private int TxtCustomerId { get; set; }
         private int TxtStatusOldId { get; set; }
@@ -258,10 +260,8 @@ namespace v4posme_window.Views
             InitializeComponent();
 
             // Suscribir al manejador de excepciones global
-            Application.ThreadException +=
-                new ThreadExceptionEventHandler(Application_ThreadException);
-            AppDomain.CurrentDomain.UnhandledException +=
-                new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+            Application.ThreadException += Application_ThreadException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             CompanyId = companyId;
             TransactionId = transactionId;
@@ -280,8 +280,6 @@ namespace v4posme_window.Views
             CustomException.LogException((Exception)e.ExceptionObject);
         }
 
-
-       
 
         private void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
         {
@@ -313,6 +311,7 @@ namespace v4posme_window.Views
             MessageBox.Show("Evento en el formulario hijo: " +
                             objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
         }
+
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
             var formTypeListSearch = new FormTypeListSearch("Lista de Productos", 33,
@@ -398,7 +397,7 @@ namespace v4posme_window.Views
                 }
 
                 //Obtener registros
-                var objTm = _objInterfazTransactionMasterModel.GetRowByPk(CompanyId, TransactionId, TransactionMasterId);
+                var objTm = _objInterfazTransactionMasterModel.GetRowByPk(CompanyId!.Value, TransactionId!.Value, TransactionMasterId!.Value);
                 var objCustomerCreditDocument =
                     _objInterfazCustomerCreditDocument.GetRowByDocument(objTm.CompanyId, objTm.EntityId!.Value,
                         objTm.TransactionNumber!);
@@ -602,16 +601,16 @@ namespace v4posme_window.Views
                 ObjParameterPantallaParaFacturar = _objInterfazCoreWebParameter.GetParameter("INVOICE_PANTALLA_FACTURACION", user.CompanyId)!.Value;
                 UrlPrinterDocument = _objInterfazCoreWebParameter.GetParameter("INVOICE_URL_PRINTER", user.CompanyId)!.Value;
 
-                ObjTransactionMaster = _objInterfazTransactionMasterModel.GetRowByPk(user.CompanyId, TransactionId, TransactionMasterId);
-                ObjTransactionMasterInfo = _objInterfazTransactionMasterInfoModel.GetRowByPk(user.CompanyId, TransactionId, TransactionMasterId);
-                ObjTransactionMasterDetail = _objInterfazTransactionMasterDetailModel.GetRowByTransaction(user.CompanyId, TransactionId, TransactionMasterId);
-                ObjTransactionMasterDetailWarehouse = _objInterfazTransactionMasterDetailModel.GetRowByTransactionAndWarehouse(user.CompanyId, TransactionId, TransactionMasterId);
-                ObjTransactionMasterDetailConcept = _objInterfazTransactionMasterConceptModel.GetRowByTransactionMasterConcept(user.CompanyId, TransactionId, TransactionMasterId, ObjComponentItem.ComponentId);
+                ObjTransactionMaster = _objInterfazTransactionMasterModel.GetRowByPk(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value);
+                ObjTransactionMasterInfo = _objInterfazTransactionMasterInfoModel.GetRowByPk(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value);
+                ObjTransactionMasterDetail = _objInterfazTransactionMasterDetailModel.GetRowByTransaction(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value);
+                ObjTransactionMasterDetailWarehouse = _objInterfazTransactionMasterDetailModel.GetRowByTransactionAndWarehouse(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value);
+                ObjTransactionMasterDetailConcept = _objInterfazTransactionMasterConceptModel.GetRowByTransactionMasterConcept(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value, ObjComponentItem.ComponentId);
 
                 ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
                 ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(objParameterAll["INVOICE_TYPE_EMPLOYEER"]));
                 ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyId);
-                ObjCausal = _objInterfazTransactionCausalModel.GetCausalByBranch(user.CompanyId, TransactionId, user.BranchId);
+                ObjCausal = _objInterfazTransactionCausalModel.GetCausalByBranch(user.CompanyId, TransactionId!.Value, user.BranchId);
                 WarehouseId = ObjCausal.First()!.WarehouseSourceId;
                 ObjListWarehouse = _objInterfazUserWarehouseModel.GetRowByUserIdAndFacturable(user.CompanyId, user.UserId);
                 ObjCustomerDefault = _objInterfazCustomerModel.GetRowByCode(user.CompanyId, customerDefault!.Value);
@@ -646,7 +645,7 @@ namespace v4posme_window.Views
                 if (ObjTransactionMasterDetail.Count > 0)
                 {
                     foreach (var masterDetailDto in ObjTransactionMasterDetail)
-                    {   
+                    {
                         ObjTransactionMasterDetailCredit = _objInterfazTransactionMasterDetailCreditModel.GetRowByPk(masterDetailDto.TransactionMasterDetailId);
                     }
                 }
@@ -670,8 +669,7 @@ namespace v4posme_window.Views
                 XtraMessageBox.Show($"Se produjo el siguiente error: {ex.Message}");
             }
         }
-        
-        
+
 
         public void LoadNew()
         {
@@ -768,7 +766,7 @@ namespace v4posme_window.Views
                 ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
                 ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(ObjListParameterAll["INVOICE_TYPE_EMPLOYEER"]));
                 ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyId);
-                ObjCausal = _objInterfazTransactionCausalModel.GetCausalByBranch(user.CompanyId, this.TransactionId, user.BranchId);
+                ObjCausal = _objInterfazTransactionCausalModel.GetCausalByBranch(user.CompanyId, TransactionId.Value, user.BranchId);
                 WarehouseId = ObjCausal.First()!.WarehouseSourceId;
                 ObjListWarehouse = _objInterfazUserWarehouseModel.GetRowByUserIdAndFacturable(user.CompanyId, user.UserId);
                 ObjCustomerDefault = _objInterfazCustomerModel.GetRowByCode(user.CompanyId, customerDefault!.Value);
@@ -806,8 +804,6 @@ namespace v4posme_window.Views
                 ParameterCausalTypeCredit = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyId);
                 ObjCustomerCreditAmoritizationAll = _objInterfazCustomerCreditAmortizationModel.GetRowByCustomerId(ObjCustomerDefault.EntityId);
                 ObjListCustomerCreditLine = _objInterfazCustomerCreditLineModel.GetRowByEntityBalanceMayorCero(user.CompanyId, user.BranchId, this.ObjCustomerDefault.EntityId);
-
-
             }
             catch (Exception ex)
             {
@@ -818,8 +814,353 @@ namespace v4posme_window.Views
 
         public void SaveInsert()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
+                var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
+                var notAllInsert = VariablesGlobales.ConfigurationBuilder["NOT_ALL_INSERT"];
+                var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
+                var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+                var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+                var user = VariablesGlobales.Instance.User;
+                if (user is null)
+                {
+                    throw new Exception(userNotAutenticated);
+                }
+
+                var role = VariablesGlobales.Instance.Role;
+                if (appNeedAuthentication == "true")
+                {
+                    var permited = _objInterfazCoreWebPermission.UrlPermited("app_invoice_billing", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                    if (!permited)
+                    {
+                        throw new Exception(notAccessControl);
+                    }
+
+                    var resultPermission = _objInterfazCoreWebPermission.UrlPermissionCmd("app_invoice_billing", "add", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                    if (resultPermission == permissionNone)
+                    {
+                        throw new Exception(notAllInsert);
+                    }
+                }
+
+                //Obtener el Componente de Transacciones Facturacion
+                var objComponentBilling = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_billing");
+                if (objComponentBilling is null) throw new Exception("EL COMPONENTE 'tb_transaction_master_billing' NO EXISTE...");
+
+
+                var objComponentItem = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_item");
+                if (objComponentItem is null) throw new Exception("EL COMPONENTE 'tb_item' NO EXISTE...");
+
+                //Obtener transaccion
+                //txtCausalID")
+                var causalId = Convert.ToInt32(txtCausalID.Text);
+                TransactionId = _objInterfazCoreWebTransaction.GetTransactionId(user.CompanyId, "tb_transaction_master_billing", 0);
+                var objT = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionModel>().GetByCompanyAndTransaction(user.CompanyId, TransactionId!.Value);
+                var objTransactionCausal = _objInterfazTransactionCausalModel.GetByCompanyAndTransactionAndCausal(user.CompanyId, TransactionId!.Value, causalId);
+
+
+                //Valores de tasa de cambio
+                ObjCurrencyDolares = _objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyId);
+                ObjCurrencyCordoba = _objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyId);
+                ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), 1, ObjCurrencyDolares!.CurrencyId, ObjCurrencyCordoba!.CurrencyId);
+                var cycleIsCloseByDate = _objInterfazCoreWebAccounting.CycleIsCloseByDate(user.CompanyId, txtDate.DateTime);
+                if (cycleIsCloseByDate) throw new Exception("EL DOCUMENTO NO PUEDE INGRESAR, EL CICLO CONTABLE ESTA CERRADO");
+                _objInterfazCoreWebPermission.GetValueLicense(user.CompanyId, "app_invoice_billing/index");
+
+                ObjParameterInvoiceBillingQuantityZero = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_QUANTITY_ZERO", user.CompanyId)!.Value;
+
+                //obtener el primer estado  de la factura o el estado inicial.
+                ObjListWorkflowStage = _objInterfazCoreWebWorkflow.GetWorkflowAllStage("tb_transaction_master_billing", "statusID", user.CompanyId, user.BranchId, role.RoleId);
+                //Saber si se va autoaplicar
+                ObjParameterInvoiceAutoApply = _objInterfazCoreWebParameter.GetParameter("INVOICE_AUTOAPPLY_CASH", user.CompanyId)!.Value;
+                ObjParaemterStatusCanceled = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CANCEL", user.CompanyId)!.Value;
+                ObjParameterUrlPrinterDirect = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_URL", user.CompanyId)!.Value;
+                ObjParameterImprimirPorCadaFactura = _objInterfazCoreWebParameter.GetParameter("INVOICE_PRINT_BY_INVOICE", user.CompanyId)!.Value;
+
+                //Saber si es al credito
+                ParameterCausalTypeCredit = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyId);
+                var causalIdTypeCredit = ParameterCausalTypeCredit!.Value!.Split(',');
+                //$exisCausalInCredit						= null;
+                //$exisCausalInCredit						= array_search(txtCausalID"),$causalIDTypeCredit);
+                // Buscar el valor en la matriz
+                var exisCausalInCredit = Array.IndexOf(causalIdTypeCredit, txtCausalID.Text) > 0;
+                //Si esta configurado como auto aplicado
+                //y es al credito. cambiar el estado por el estado inicial, que es registrada
+                int? statusId = ObjParameterInvoiceAutoApply switch
+                {
+                    "true" when exisCausalInCredit => ObjListWorkflowStage?[0].WorkflowStageId,
+                    //si la factura es al contado, y esta como auto aplicada cambiar el estado
+                    "true" when !exisCausalInCredit => Convert.ToInt32(ObjParaemterStatusCanceled),
+                    _ => TxtStatusId
+                };
+                var currencyId = (txtCurrencyID.SelectedItem as TbCurrency)?.CurrencyId; //verificar valor
+                var objTm = new TbTransactionMaster
+                {
+                    CompanyId = user.CompanyId,
+                    TransactionId = TransactionId!.Value,
+                    BranchId = user.BranchId,
+                    TransactionNumber = _objInterfazCoreWebCounter.GoNextNumber(user.CompanyId, user.BranchId, "tb_transaction_master_proforma", 0),
+                    TransactionCausalId = Convert.ToInt32(txtCausalID.Text),
+                    EntityId = TxtCustomerId,
+                    TransactionOn = txtDate.DateTime,
+                    TransactionOn2 = txtDateFirst.DateTime,
+                    StatusIdchangeOn = DateTime.Now,
+                    ComponentId = objComponentBilling.ComponentId,
+                    Note = txtNote.Text,
+                    Sign = (short?)objT!.SignInventory,
+                    CurrencyId = currencyId, //validar este campo
+                    CurrencyId2 = _objInterfazCoreWebCurrency.GetTarget(user.CompanyId, currencyId!.Value),
+                    Reference1 = txtReference1.Text,
+                    DescriptionReference = "reference1:entityID del proveedor de credito para las facturas al credito,reference4: customerCreditLineID linea de credito del cliente",
+                    Reference2 = txtReference2.Text,
+                    Reference3 = txtReference3.Text,
+                    Reference4 = string.IsNullOrEmpty(txtCustomerCreditLineID.Text) ? "0" : txtCustomerCreditLineID.Text,
+                    StatusId = statusId,
+                    Amount = decimal.Zero,
+                    IsApplied = false,
+                    JournalEntryId = 0,
+                    ClassId = null,
+                    AreaId = null,
+                    SourceWarehouseId = Convert.ToInt32(txtWarehouseID.Text),
+                    TargetWarehouseId = null,
+                    IsActive = true,
+                    PeriodPay = Convert.ToInt32(txtPeriodPay.Text),
+                    NextVisit = txtNextVisit.DateTime,
+                    NumberPhone = txtNumberPhone.Text,
+                    EntityIdsecondary = Convert.ToInt32(txtEmployeeID.SelectedItem) //revisar el tipo de valores
+                };
+                objTm.ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), decimal.One, objTm.CurrencyId2!.Value, objTm.CurrencyId!.Value);
+                VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuditoria>().SetAuditCreated(objTm, user, "");
+                var objParameterAll = _objInterfazCoreWebParameter.GetParameterAll(user.CompanyId);
+                var transactionMasterId = _objInterfazTransactionMasterModel.InsertAppPosme(objTm);
+
+                var assembly = Assembly.GetEntryAssembly();
+                var documentoPath = "";
+                if (assembly is not null)
+                {
+                    //Crear la Carpeta para almacenar los Archivos del Documento
+                    documentoPath = $"{assembly.Location}/company_{user.CompanyId}/component_{objComponentBilling.ComponentId}/component_item_{transactionMasterId}";
+                }
+
+                var objTmInfo = new TbTransactionMasterInfo
+                {
+                    CompanyId = objTm.CompanyId,
+                    TransactionId = objTm.TransactionId,
+                    TransactionMasterId = TransactionMasterId!.Value,
+                    ZoneId = Convert.ToInt32(txtZoneID.SelectedItem), //Varificar valor
+                    MesaId = Convert.ToInt32(txtMesaID.Text),
+                    RouteId = 0,
+                    ReferenceClientName = txtReferenceClientName.Text,
+                    ReferenceClientIdentifier = txtReferenceClientIdentifier.Text,
+                    ReceiptAmount = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmount.Text),
+                    ReceiptAmountDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountDol.Text),
+                    ReceiptAmountPoint = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountPoint.Text),
+                    ReceiptAmountBank = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBank.Text),
+                    ReceiptAmountBankDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBankDol.Text),
+                    ReceiptAmountCardDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjetaDol.Text),
+                    ReceiptAmountCard = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjeta.Text),
+                    ChangeAmount = WebToolsHelper.ConvertToNumber<decimal>(txtChangeAmount.Text),
+                    ReceiptAmountBankReference = txtReceiptAmountBank_Reference.Text,
+                    ReceiptAmountBankDolReference = txtReceiptAmountBankDol_Reference.Text,
+                    ReceiptAmountCardBankReference = txtReceiptAmountTarjeta_Reference.Text,
+                    ReceiptAmountCardBankDolReference = txtReceiptAmountTarjetaDol_Reference.Text,
+                    ReceiptAmountBankId = WebToolsHelper.ConvertToNumber<int>(txtReceiptAmountBank_BankID.Text),
+                    ReceiptAmountBankDolId = WebToolsHelper.ConvertToNumber<int>(txtReceiptAmountBankDol_BankID.Text),
+                    ReceiptAmountCardBankId = WebToolsHelper.ConvertToNumber<int>(txtReceiptAmountTarjeta_BankID.Text),
+                    ReceiptAmountCardBankDolId = WebToolsHelper.ConvertToNumber<int>(txtReceiptAmountTarjetaDol_BankID.Text),
+                };
+
+                objTmInfo.TransactionMasterInfoId = _objInterfazTransactionMasterInfoModel.InsertAppPosme(objTmInfo);
+
+
+                //Ingresar la configuracion de precios		
+                var amountTotal = decimal.Zero;
+                var tax1Total = decimal.Zero;
+                var subAmountTotal = decimal.Zero;
+
+                //Tipo de precio seleccionado por el usuario,
+                //Actualmente no se esta usando
+                var typePriceId = txtTypePriceID.SelectedItem; //verificar valor
+                var objListPrice = _objInterfazListPriceModel.GetListPriceToApply(user.CompanyId);
+                //obtener la lista de precio por defecto
+                var objParameterPriceDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_DEFAULT_PRICELIST", user.CompanyId);
+                var listPriceId = objParameterPriceDefault!.Value;
+                //obener los tipos de precio de la lista de precio por defecto
+                var objTipePrice = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_price", "typePriceID", user.CompanyId);
+
+                //Parametro para validar si se cambian los precios en la facturacion
+                var objParameterUpdatePrice = _objInterfazCoreWebParameter.GetParameter("INVOICE_UPDATEPRICE_ONLINE", user.CompanyId);
+                var objUpdatePrice = objParameterUpdatePrice!.Value;
+
+                var rowCount = gridViewValues.RowCount;
+                for (var i = 0; i < rowCount; i++)
+                {
+                    //Recorrer la lista del detalle del documento
+                    var itemNameDetail = gridViewValues.GetRowCellValue(i, colTransactionDetailName.Name).ToString();
+                    var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colCantidad.Name).ToString());
+                    var listPrice = Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colPrecio.Name));
+                    var listLote = (string?)gridViewValues.GetRowCellValue(i, colDescripcion.Name);
+                    var listVencimiento = gridViewValues.GetRowCellValue(i, colDetailVencimiento.Name).ToString();
+                    var skuCatalogItemId = gridViewValues.GetRowCellValue(i, colSkuQuantityBySku.Name);
+                    var skuFormatoDescription = gridViewValues.GetRowCellValue(i, colSkuFormatoDescripton.Name).ToString();
+
+                    var itemId = (int)gridViewValues.GetRowCellValue(i, colCodigo.Name);
+                    var lote = string.IsNullOrEmpty(listLote) ? "" : listLote;
+                    var vencimiento = string.IsNullOrWhiteSpace(listVencimiento) ? "" : listVencimiento;
+                    var warehouseId = objTm.SourceWarehouseId;
+                    var objItem = _objInterfazItemModel.GetRowByPk(user.CompanyId, itemId);
+                    var objItemWarehouse = VariablesGlobales.Instance.UnityContainer.Resolve<IItemWarehouseModel>().GetByPk(user.CompanyId, itemId, warehouseId.Value);
+                    var objPrice = _objInterfazPriceModel.GetRowByPk(user.CompanyId, objListPrice!.ListPriceId, itemId, (int)typePriceId);
+                    var objCompanyComponentConcept = _objInterfazCompanyComponentConceptModel.GetRowByPk(user.CompanyId, objComponentItem.ComponentId, itemId, "IVA");
+                    itemNameDetail = itemNameDetail!.Replace("'", "");
+                    ;
+                    var objItemSku = _objInterfazItemSkuModel.GetByPk(itemId, (int)skuCatalogItemId);
+
+                    //price								= objItem->cost * ( 1 + (objPrice->percentage/100));
+                    var price = listPrice / objItemSku.Value;
+                    var ivaPercentage = (objCompanyComponentConcept is not null) ? objCompanyComponentConcept.ValueOut : decimal.Zero;
+                    var unitaryAmount = price * (1 + ivaPercentage);
+                    var tax1 = price * ivaPercentage;
+
+                    //Actualisar nombre 
+                    if (objParameterAll["INVOICE_UPDATENAME_IN_TRANSACTION_ONLY"] == "false")
+                    {
+                        var objItemNew = _objInterfazItemModel.GetRowByPk(user.CompanyId, itemId);
+                        objItemNew.Name = itemNameDetail;
+                        _objInterfazItemModel.UpdateAppPosme(user.CompanyId, itemId, objItemNew);
+                    }
+
+
+                    if (objItemWarehouse.Quantity < quantity && objItem.IsInvoiceQuantityZero == 0 && ObjParameterInvoiceBillingQuantityZero == "false")
+                    {
+                        throw new Exception($"La cantidad de '{objItem.ItemNumber} {objItem.Name}' es mayor que la disponible en bodega");
+                    }
+
+
+                    var objTmd = new TbTransactionMasterDetail
+                    {
+                        CompanyId = objTm.CompanyId,
+                        TransactionId = objTm.TransactionId,
+                        TransactionMasterId = transactionMasterId,
+                        ComponentId = objComponentItem.ComponentId,
+                        ComponentItemId = itemId,
+                        Quantity = quantity * objItemSku.Value,
+                        SkuQuantity = quantity,
+                        SkuQuantityBySku = objItemSku.Value,
+                        UnitaryCost = objItem.Cost,
+                        UnitaryPrice = price,
+                        Tax1 = tax1,
+                        Discount = 0,
+                        PromotionId = 0,
+                        Reference1 = lote,
+                        Reference2 = vencimiento,
+                        Reference3 = "0", // Asumiendo que Reference3 es una cadena
+                        ItemNameLog = itemNameDetail,
+                        CatalogStatusId = 0,
+                        InventoryStatusId = 0,
+                        IsActive = true,
+                        QuantityStock = 0,
+                        QuantiryStockInTraffic = 0,
+                        QuantityStockUnaswared = 0,
+                        RemaingStock = 0,
+                        ExpirationDate = null,
+                        InventoryWarehouseSourceId = (int)objTm.SourceWarehouseId,
+                        InventoryWarehouseTargetId = (int)objTm.TargetWarehouseId!,
+                        SkuCatalogItemId = (int)skuCatalogItemId,
+                        SkuFormatoDescription = skuFormatoDescription
+                    };
+                    objTmd.Cost = objTmd.Quantity * objItem.Cost;
+                    objTmd.Amount = objTmd.Quantity * unitaryAmount;
+                    objTmd.UnitaryAmount = unitaryAmount;
+
+
+                    tax1Total = decimal.Add(tax1Total, tax1!.Value);
+                    subAmountTotal = subAmountTotal + (quantity * price);
+                    amountTotal = decimal.Add(amountTotal, (decimal)objTmd.Amount!);
+
+                    var transactionMasterDetailId = _objInterfazTransactionMasterDetailModel.InsertAppPosme(objTmd);
+
+                    var objTmdc = new TbTransactionMasterDetailCredit();
+                    objTmdc.TransactionMasterId = transactionMasterId;
+                    objTmdc.TransactionMasterDetailId = transactionMasterDetailId;
+                    objTmdc.Reference1 = txtFixedExpenses.Text;
+                    objTmdc.Reference2 = txtReportSinRiesgo.IsOn.ToString();
+                    objTmdc.Reference3 = "txtLayFirstLineProtocolo";
+                    objTmdc.Reference4 = "";
+                    objTmdc.Reference5 = "";
+                    objTmdc.Reference9 = "reference1: Porcentaje de Gastos Fijo para las facturas de credito,reference2: Escritura Publica,reference3: Primer Linea del Protocolo";
+                    _objInterfazTransactionMasterDetailCreditModel.InsertAppPosme(objTmdc);
+                    //Actualizar tipo de precio
+                    if (objUpdatePrice == "true")
+                    {
+                        var dataUpdatePrice = _objInterfazPriceModel.GetRowByPk(user.CompanyId, Convert.ToInt32(listPriceId), itemId, (int)typePriceId);
+                        if (dataUpdatePrice is not null)
+                        {
+                            dataUpdatePrice.Price = price;
+                            dataUpdatePrice.Percentage = objItem.Cost == 0 ? (price / 100) : (((100 * price) / objItem.Cost) - 100);
+                            _objInterfazPriceModel.UpdateAppPosme(user.CompanyId, Convert.ToInt32(listPriceId), itemId, (int)typePriceId, dataUpdatePrice!);
+                        }
+                    }
+                }
+
+                //Actualizar Transaccion
+                objTm.Amount = amountTotal;
+                objTm.Tax1 = tax1Total;
+                objTm.SubAmount = subAmountTotal;
+                _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyId, TransactionId!.Value, transactionMasterId, objTm);
+
+                //Aplicar el Documento?
+                //Las factuas de credito no se auto aplican auque este el parametro, por que hay que crer el documento
+                //y esto debe ser revisado cuidadosamente
+                var commandAplicable = VariablesGlobales.ConfigurationBuilder["COMMAND_APLICABLE"];
+                var validateWorkflowStage = _objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing", "statusID", (int)objTm.StatusId!, Convert.ToInt32(commandAplicable), user.CompanyId, user.BranchId, role.RoleId);
+                if ( validateWorkflowStage!.Value){
+                    //Ingresar en Kardex.
+                    VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebInventory>().CalculateKardexNewOutput(user.CompanyId, TransactionId!.Value, transactionMasterId);
+
+                    //Crear Conceptos.
+                    VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebConcept>().Billing(user.CompanyId, TransactionId!.Value, transactionMasterId);
+                }
+
+
+                switch (ObjParameterInvoiceAutoApply)
+                {
+                    //No auto aplicar
+                    //Si auto aplicar
+                    case "false":
+                        return;
+                    case "true":
+                    {
+                        //si es auto aplicadao mandar a imprimir
+                        if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
+                        {
+                        }
+
+                        /*$this->core_web_notification->set_message(false, SUCCESS);
+                            $this->response->redirect(base_url()."/".'app_invoice_billing/add');*/
+                        break;
+                    }
+                    //Error 
+                    /*default:
+                        $ db->transRollback();
+                            $errorCode = $db->error()["code"];
+                            $errorMessage = $db->error()["message"];
+                            $this->core_web_notification->set_message(true,  $errorCode." ".$errorMessage );
+                        $this->response->redirect(base_url()."/".'app_invoice_billing/add');
+                        break;*/
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", $"Se produjo el siguiente error: {e.Message}", this);
+            }
         }
+
+        public string? ObjParameterUrlPrinterDirect { get; set; }
+
+        public string? ObjParaemterStatusCanceled { get; set; }
 
         public void SaveUpdate()
         {

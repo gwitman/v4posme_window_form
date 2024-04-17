@@ -10,7 +10,7 @@ class PriceModel : IPriceModel
     {
         using var context = new DataContext();
         context.TbPrices
-            .Where(price => price.CompanyId == companyId
+            .Where(price => price!.CompanyId == companyId
                             && price.ListPriceId == listPriceId)
             .ExecuteDelete();
     }
@@ -26,13 +26,13 @@ class PriceModel : IPriceModel
     public void UpdateAppPosme(int companyId, int listPriceId, int itemId, int typePriceId, TbPrice data)
     {
         using var context = new DataContext();
-        context.TbPrices.Where(price => price.CompanyId == companyId
+        context.TbPrices.Where(price => price!.CompanyId == companyId
                                         && price.ListPriceId == listPriceId && price.ItemId == itemId
                                         && price.TypePriceId == typePriceId)
             .ExecuteUpdate(calls => calls
-                .SetProperty(price => price.Percentage, data.Percentage)
-                .SetProperty(price => price.Price, data.Price)
-                .SetProperty(price => price.PercentageCommision, data.PercentageCommision));
+                .SetProperty(price => price!.Percentage, data.Percentage)
+                .SetProperty(price => price!.Price, data.Price)
+                .SetProperty(price => price!.PercentageCommision, data.PercentageCommision));
     }
 
     public List<TbPriceDto> GetRowByAll(int companyId, int listPriceId)
@@ -64,7 +64,7 @@ class PriceModel : IPriceModel
     {
         using var context = new DataContext();
         return context.TbPrices
-            .First(price => price.CompanyId == companyId
+            .FirstOrDefault(price => price!.CompanyId == companyId
                             && price.ListPriceId == listPriceId
                             && price.ItemId == itemId
                             && price.TypePriceId == typePriceId);

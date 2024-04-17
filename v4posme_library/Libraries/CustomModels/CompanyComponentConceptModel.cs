@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;
 
 public class CompanyComponentConceptModel : ICompanyComponentConceptModel
 {
-    public int InsertAppPosme(TbCompanyComponentConcept data)
+    public int InsertAppPosme(TbCompanyComponentConcept? data)
     {
         using var context = new DataContext();
         var add = context.TbCompanyComponentConcepts.Add(data);
@@ -37,18 +38,18 @@ public class CompanyComponentConceptModel : ICompanyComponentConceptModel
             .ExecuteDelete();
     }
 
-    public TbCompanyComponentConcept GetRowByPk(int companyId, int componentId, int componentItemId, string name)
+    public TbCompanyComponentConcept? GetRowByPk(int companyId, int componentId, int componentItemId, string name)
     {
         using var context = new DataContext();
         return context.TbCompanyComponentConcepts
-            .Single(concepts =>
-                concepts.CompanyId == companyId
+            .SingleOrDefault(concepts =>
+                concepts!.CompanyId == companyId
                 && concepts.ComponentId == componentId
                 && concepts.ComponentItemId == componentItemId
                 && concepts.Name.Equals(name));
     }
 
-    public List<TbCompanyComponentConcept> GetRowByComponentItemId(int companyId, int componentId, int componentItemId)
+    public List<TbCompanyComponentConcept?> GetRowByComponentItemId(int companyId, int componentId, int componentItemId)
     {
         using var context = new DataContext();
         return context.TbCompanyComponentConcepts
