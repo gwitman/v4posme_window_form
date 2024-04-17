@@ -183,6 +183,10 @@ namespace v4posme_window.Views
 
         public string? ObjParameterScanerProducto { get; private set; }
 
+        public string? ObjParameterUrlPrinterDirect { get; set; }
+
+        public string? ObjParaemterStatusCanceled { get; set; }
+
         public string? ObjParameterImprimirPorCadaFactura { get; private set; }
 
         public string? ObjParameterInvoiceAutoApply { get; private set; }
@@ -853,7 +857,6 @@ namespace v4posme_window.Views
                 if (objComponentItem is null) throw new Exception("EL COMPONENTE 'tb_item' NO EXISTE...");
 
                 //Obtener transaccion
-                //txtCausalID")
                 var causalId = Convert.ToInt32(txtCausalID.Text);
                 TransactionId = _objInterfazCoreWebTransaction.GetTransactionId(user.CompanyId, "tb_transaction_master_billing", 0);
                 var objT = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionModel>().GetByCompanyAndTransaction(user.CompanyId, TransactionId!.Value);
@@ -868,10 +871,11 @@ namespace v4posme_window.Views
                 if (cycleIsCloseByDate) throw new Exception("EL DOCUMENTO NO PUEDE INGRESAR, EL CICLO CONTABLE ESTA CERRADO");
                 _objInterfazCoreWebPermission.GetValueLicense(user.CompanyId, "app_invoice_billing/index");
 
-                ObjParameterInvoiceBillingQuantityZero = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_QUANTITY_ZERO", user.CompanyId)!.Value;
+
 
                 //obtener el primer estado  de la factura o el estado inicial.
-                ObjListWorkflowStage = _objInterfazCoreWebWorkflow.GetWorkflowAllStage("tb_transaction_master_billing", "statusID", user.CompanyId, user.BranchId, role.RoleId);
+                ObjParameterInvoiceBillingQuantityZero = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_QUANTITY_ZERO", user.CompanyId)!.Value;
+                ObjListWorkflowStage = _objInterfazCoreWebWorkflow.GetWorkflowAllStage("tb_transaction_master_billing", "statusID", user.CompanyId, user.BranchId, role!.RoleId);
                 //Saber si se va autoaplicar
                 ObjParameterInvoiceAutoApply = _objInterfazCoreWebParameter.GetParameter("INVOICE_AUTOAPPLY_CASH", user.CompanyId)!.Value;
                 ObjParaemterStatusCanceled = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CANCEL", user.CompanyId)!.Value;
@@ -881,20 +885,29 @@ namespace v4posme_window.Views
                 //Saber si es al credito
                 ParameterCausalTypeCredit = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyId);
                 var causalIdTypeCredit = ParameterCausalTypeCredit!.Value!.Split(',');
-                //$exisCausalInCredit						= null;
-                //$exisCausalInCredit						= array_search(txtCausalID"),$causalIDTypeCredit);
                 // Buscar el valor en la matriz
                 var exisCausalInCredit = Array.IndexOf(causalIdTypeCredit, txtCausalID.Text) > 0;
                 //Si esta configurado como auto aplicado
                 //y es al credito. cambiar el estado por el estado inicial, que es registrada
-                int? statusId = ObjParameterInvoiceAutoApply switch
+                int? statusId = 0;
+                
+
+                if(ObjParameterInvoiceAutoApply == "true" && exisCausalInCredit)
                 {
-                    "true" when exisCausalInCredit => ObjListWorkflowStage?[0].WorkflowStageId,
-                    //si la factura es al contado, y esta como auto aplicada cambiar el estado
-                    "true" when !exisCausalInCredit => Convert.ToInt32(ObjParaemterStatusCanceled),
-                    _ => TxtStatusId
-                };
-                var currencyId = (txtCurrencyID.SelectedItem as TbCurrency)?.CurrencyId; //verificar valor
+                    statusId = ObjListWorkflowStage?[0].WorkflowStageId;
+                }
+                if (ObjParameterInvoiceAutoApply == "true" && exisCausalInCredit == false)
+                {
+                    statusId = Convert.ToInt32(ObjParaemterStatusCanceled);
+                }
+                else
+                {
+                    statusId = TxtStatusId;
+                }
+
+             
+
+                var currencyId = (txtCurrencyID.SelectedItem as TbCurrency)?.CurrencyId; 
                 var objTm = new TbTransactionMaster
                 {
                     CompanyId = user.CompanyId,
@@ -928,7 +941,7 @@ namespace v4posme_window.Views
                     PeriodPay = Convert.ToInt32(txtPeriodPay.Text),
                     NextVisit = txtNextVisit.DateTime,
                     NumberPhone = txtNumberPhone.Text,
-                    EntityIdsecondary = Convert.ToInt32(txtEmployeeID.SelectedItem) //revisar el tipo de valores
+                    EntityIdsecondary = Convert.ToInt32(txtEmployeeID.SelectedItem)
                 };
                 objTm.ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), decimal.One, objTm.CurrencyId2!.Value, objTm.CurrencyId!.Value);
                 VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuditoria>().SetAuditCreated(objTm, user, "");
@@ -997,27 +1010,27 @@ namespace v4posme_window.Views
                 for (var i = 0; i < rowCount; i++)
                 {
                     //Recorrer la lista del detalle del documento
-                    var itemNameDetail = gridViewValues.GetRowCellValue(i, colTransactionDetailName.Name).ToString();
+                    var itemNameDetail = gridViewValues.GetRowCellValue(i, colTransactionDetailName.Name).ToString()!.Replace("'","");
                     var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colCantidad.Name).ToString());
                     var listPrice = Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colPrecio.Name));
                     var listLote = (string?)gridViewValues.GetRowCellValue(i, colDescripcion.Name);
                     var listVencimiento = gridViewValues.GetRowCellValue(i, colDetailVencimiento.Name).ToString();
                     var skuCatalogItemId = gridViewValues.GetRowCellValue(i, colSkuQuantityBySku.Name);
                     var skuFormatoDescription = gridViewValues.GetRowCellValue(i, colSkuFormatoDescripton.Name).ToString();
+                    var itemId = (int)gridViewValues.GetRowCellValue(i,  colCodigo.Name);
 
-                    var itemId = (int)gridViewValues.GetRowCellValue(i, colCodigo.Name);
+
+
                     var lote = string.IsNullOrEmpty(listLote) ? "" : listLote;
                     var vencimiento = string.IsNullOrWhiteSpace(listVencimiento) ? "" : listVencimiento;
                     var warehouseId = objTm.SourceWarehouseId;
                     var objItem = _objInterfazItemModel.GetRowByPk(user.CompanyId, itemId);
                     var objItemWarehouse = VariablesGlobales.Instance.UnityContainer.Resolve<IItemWarehouseModel>().GetByPk(user.CompanyId, itemId, warehouseId.Value);
                     var objPrice = _objInterfazPriceModel.GetRowByPk(user.CompanyId, objListPrice!.ListPriceId, itemId, (int)typePriceId);
-                    var objCompanyComponentConcept = _objInterfazCompanyComponentConceptModel.GetRowByPk(user.CompanyId, objComponentItem.ComponentId, itemId, "IVA");
-                    itemNameDetail = itemNameDetail!.Replace("'", "");
-                    ;
+                    var objCompanyComponentConcept = _objInterfazCompanyComponentConceptModel.GetRowByPk(user.CompanyId, objComponentItem.ComponentId, itemId, "IVA");                    
                     var objItemSku = _objInterfazItemSkuModel.GetByPk(itemId, (int)skuCatalogItemId);
 
-                    //price								= objItem->cost * ( 1 + (objPrice->percentage/100));
+                    
                     var price = listPrice / objItemSku.Value;
                     var ivaPercentage = (objCompanyComponentConcept is not null) ? objCompanyComponentConcept.ValueOut : decimal.Zero;
                     var unitaryAmount = price * (1 + ivaPercentage);
@@ -1048,8 +1061,9 @@ namespace v4posme_window.Views
                         Quantity = quantity * objItemSku.Value,
                         SkuQuantity = quantity,
                         SkuQuantityBySku = objItemSku.Value,
-                        UnitaryCost = objItem.Cost,
+                        UnitaryCost = objItem.Cost,                        
                         UnitaryPrice = price,
+                        UnitaryAmount = unitaryAmount,
                         Tax1 = tax1,
                         Discount = 0,
                         PromotionId = 0,
@@ -1070,9 +1084,9 @@ namespace v4posme_window.Views
                         SkuCatalogItemId = (int)skuCatalogItemId,
                         SkuFormatoDescription = skuFormatoDescription
                     };
-                    objTmd.Cost = objTmd.Quantity * objItem.Cost;
-                    objTmd.Amount = objTmd.Quantity * unitaryAmount;
-                    objTmd.UnitaryAmount = unitaryAmount;
+                    objTmd.Cost = objTmd.Quantity * objTmd.UnitaryCost;
+                    objTmd.Amount = objTmd.Quantity * objTmd.UnitaryAmount;
+                    
 
 
                     tax1Total = decimal.Add(tax1Total, tax1!.Value);
@@ -1135,20 +1149,12 @@ namespace v4posme_window.Views
                         //si es auto aplicadao mandar a imprimir
                         if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
                         {
+                                ComandPrinter();
                         }
-
-                        /*$this->core_web_notification->set_message(false, SUCCESS);
-                            $this->response->redirect(base_url()."/".'app_invoice_billing/add');*/
                         break;
                     }
                     //Error 
-                    /*default:
-                        $ db->transRollback();
-                            $errorCode = $db->error()["code"];
-                            $errorMessage = $db->error()["message"];
-                            $this->core_web_notification->set_message(true,  $errorCode." ".$errorMessage );
-                        $this->response->redirect(base_url()."/".'app_invoice_billing/add');
-                        break;*/
+                   
                 }
             }
             catch (Exception e)
@@ -1158,9 +1164,6 @@ namespace v4posme_window.Views
             }
         }
 
-        public string? ObjParameterUrlPrinterDirect { get; set; }
-
-        public string? ObjParaemterStatusCanceled { get; set; }
 
         public void SaveUpdate()
         {
