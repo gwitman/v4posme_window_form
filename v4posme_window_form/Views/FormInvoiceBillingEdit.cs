@@ -281,13 +281,7 @@ namespace v4posme_window.Views
         }
 
 
-        private void EventoCallBackAceptar(dynamic mensaje)
-        {
-            // Realizar la lógica que desees en el formulario padre
-            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
-            MessageBox.Show("Evento en el formulario hijo: " +
-                            objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
-        }
+       
 
         private void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
         {
@@ -312,6 +306,13 @@ namespace v4posme_window.Views
 
         #region Eventos Formulario
 
+        private void EventoCallBackAceptar(dynamic mensaje)
+        {
+            // Realizar la lógica que desees en el formulario padre
+            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
+            MessageBox.Show("Evento en el formulario hijo: " +
+                            objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
+        }
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
             var formTypeListSearch = new FormTypeListSearch("Lista de Productos", 33,
@@ -570,7 +571,7 @@ namespace v4posme_window.Views
 
                 TransactionId = _objInterfazCoreWebTransaction.GetTransactionId(user.CompanyId, "tb_transaction_master_billing", 0)!.Value;
                 ObjCurrency = _objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyId);
-                var targetCurrency = _objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyId);
+                ObjCurrencyDolares = _objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyId);
                 var customerDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CLIENTDEFAULT", user.CompanyId);
                 ObjListPrice = _objInterfazListPriceModel.GetListPriceToApply(user.CompanyId);
                 ObjListCurrency = _objInterfazCompanyCurrencyModel.GetByCompany(user.CompanyId);
@@ -581,7 +582,7 @@ namespace v4posme_window.Views
 
                 var objParameterAll = _objInterfazCoreWebParameter.GetParameterAll(user.CompanyId);
                 var parameterValue = _objInterfazCoreWebParameter.GetParameter("INVOICE_BUTTOM_PRINTER_FIDLOCAL_PAYMENT_AND_AMORTIZACION", user.CompanyId);
-                ObjParameterInvoiceButtomPrinterFidLocalPaymentAndAmortization = parameterValue.Value;
+                ObjParameterInvoiceButtomPrinterFidLocalPaymentAndAmortization = parameterValue!.Value;
 
                 ObjParameterInvoiceBillingQuantityZero = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_QUANTITY_ZERO", user.CompanyId)!.Value;
                 ObjParameterInvoiceBillingPrinterDirect = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT", user.CompanyId)!.Value;
@@ -599,15 +600,15 @@ namespace v4posme_window.Views
                 ObjParameterScrollDelModalDeSeleccionProducto = _objInterfazCoreWebParameter.GetParameter("INVOICE_SCROLL_DE_MODAL_EN_SELECCION_DE_PRODUTO_AL_FACTURAR", user.CompanyId)!.Value;
                 ObjParameterMostrarImagenEnSeleccion = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SHOW_IMAGE_IN_DETAIL_SELECTION", user.CompanyId)!.Value;
                 ObjParameterPantallaParaFacturar = _objInterfazCoreWebParameter.GetParameter("INVOICE_PANTALLA_FACTURACION", user.CompanyId)!.Value;
-
                 UrlPrinterDocument = _objInterfazCoreWebParameter.GetParameter("INVOICE_URL_PRINTER", user.CompanyId)!.Value;
+
                 ObjTransactionMaster = _objInterfazTransactionMasterModel.GetRowByPk(user.CompanyId, TransactionId, TransactionMasterId);
                 ObjTransactionMasterInfo = _objInterfazTransactionMasterInfoModel.GetRowByPk(user.CompanyId, TransactionId, TransactionMasterId);
                 ObjTransactionMasterDetail = _objInterfazTransactionMasterDetailModel.GetRowByTransaction(user.CompanyId, TransactionId, TransactionMasterId);
                 ObjTransactionMasterDetailWarehouse = _objInterfazTransactionMasterDetailModel.GetRowByTransactionAndWarehouse(user.CompanyId, TransactionId, TransactionMasterId);
                 ObjTransactionMasterDetailConcept = _objInterfazTransactionMasterConceptModel.GetRowByTransactionMasterConcept(user.CompanyId, TransactionId, TransactionMasterId, ObjComponentItem.ComponentId);
 
-                //ObjTransactionMasterDetailCredit= null;	
+                ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
                 ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(objParameterAll["INVOICE_TYPE_EMPLOYEER"]));
                 ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyId);
                 ObjCausal = _objInterfazTransactionCausalModel.GetCausalByBranch(user.CompanyId, TransactionId, user.BranchId);
@@ -619,6 +620,7 @@ namespace v4posme_window.Views
                 ObjListMesa = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_info_billing", "mesaID", user.CompanyId);
                 ObjListPay = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_customer_credit_line", "periodPay", user.CompanyId);
                 ListProvider = _objInterfazProviderModel.GetRowByCompany(user.CompanyId);
+                ObjListWorkflowStage = _objInterfazCoreWebWorkflow.GetWorkflowStageByStageInit("tb_transaction_master_billing", "statusID", ObjTransactionMaster.StatusId!.Value, role!.CompanyId, role.BranchId, role.RoleId);
 
                 ObjParameterInvoiceOpenCashWhenPrinterInvoice = _objInterfazCoreWebParameter.GetParameterValue("INVOICE_OPEN_CASH_WHEN_PRINTER_INVOICE", user.CompanyId);
                 ObjParameterInvoiceOpenCashPassword = _objInterfazCoreWebParameter.GetParameterValue("INVOICE_OPEN_CASH_PASSWORD", user.CompanyId);
@@ -644,8 +646,7 @@ namespace v4posme_window.Views
                 if (ObjTransactionMasterDetail.Count > 0)
                 {
                     foreach (var masterDetailDto in ObjTransactionMasterDetail)
-                    {
-                        masterDetailDto.ItemName = HtmlEncodeWithQuotes(masterDetailDto.ItemName!);
+                    {   
                         ObjTransactionMasterDetailCredit = _objInterfazTransactionMasterDetailCreditModel.GetRowByPk(masterDetailDto.TransactionMasterDetailId);
                     }
                 }
@@ -670,15 +671,7 @@ namespace v4posme_window.Views
             }
         }
         
-        private static string HtmlEncodeWithQuotes(string value)
-        {
-            // Codifica el valor HTML
-            string encodedValue = WebUtility.HtmlEncode(value);
-            // Reemplaza las comillas dobles y simples codificadas por sus entidades HTML
-            encodedValue = encodedValue.Replace("'", "&#39;").Replace("\"", "&quot;");
-            return encodedValue;
-        }
-
+        
 
         public void LoadNew()
         {
@@ -709,7 +702,7 @@ namespace v4posme_window.Views
                     }
 
                     var resultPermission = _objInterfazCoreWebPermission.UrlPermissionCmd("app_invoice_billing",
-                        "index", urlSuffix!, role, user,
+                        "add", urlSuffix!, role, user,
                         VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft,
                         VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop,
                         VariablesGlobales.Instance.ListMenuHiddenPopup);
@@ -738,12 +731,11 @@ namespace v4posme_window.Views
                     throw new Exception("EL COMPONENTE 'tb_transaction_master_billing' NO EXISTE...");
                 }
 
-                var transactionId =
-                    _objInterfazCoreWebTransaction.GetTransactionId(user.CompanyId, "tb_transaction_master_billing", 0);
+                this.TransactionId =
+                    _objInterfazCoreWebTransaction.GetTransactionId(user.CompanyId, "tb_transaction_master_billing", 0)!.Value;
                 ObjCurrency = _objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyId);
-                var targetCurrency = _objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyId);
-                var customerDefault =
-                    _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CLIENTDEFAULT", user.CompanyId);
+                ObjCurrencyDolares = _objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyId);
+                var customerDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CLIENTDEFAULT", user.CompanyId);
                 ObjListPrice = _objInterfazListPriceModel.GetListPriceToApply(user.CompanyId);
                 ObjListCurrency = _objInterfazCompanyCurrencyModel.GetByCompany(user.CompanyId);
                 if (ObjListPrice is null)
@@ -751,7 +743,7 @@ namespace v4posme_window.Views
                     throw new Exception("NO EXISTE UNA LISTA DE PRECIO PARA SER APLICADA");
                 }
 
-                var objParameterAll = _objInterfazCoreWebParameter.GetParameterAll(user.CompanyId);
+                ObjListParameterAll = _objInterfazCoreWebParameter.GetParameterAll(user.CompanyId);
                 ObjParameterInvoiceAutoApply = _objInterfazCoreWebParameter.GetParameter("INVOICE_AUTOAPPLY_CASH", user.CompanyId)!.Value;
                 ObjParameterTypePreiceDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_DEFAULT_TYPE_PRICE", user.CompanyId)!.Value;
                 ObjParameterTipoWarehouseDespacho = _objInterfazCoreWebParameter.GetParameter("INVOICE_TYPE_WAREHOUSE_DESPACHO", user.CompanyId)!.Value;
@@ -766,18 +758,17 @@ namespace v4posme_window.Views
                 if (ObjParameterInvoiceAutoApply == "true")
                 {
                     ObjListWorkflowStage = _objInterfazCoreWebWorkflow.GetWorkflowStageApplyFirst(
-                        "tb_transaction_master_billing", "statusID", user.CompanyId, user.BranchId, role.RoleId);
+                        "tb_transaction_master_billing", "statusID", user.CompanyId, user.BranchId, role!.RoleId);
                 }
                 else
                 {
                     ObjListWorkflowStage = _objInterfazCoreWebWorkflow.GetWorkflowInitStage("tb_transaction_master_billing", "statusID", user.CompanyId, user.BranchId, role.RoleId);
                 }
 
-                ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), decimal.One, targetCurrency.CurrencyId, ObjCurrency.CurrencyId);
-
-                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(objParameterAll["INVOICE_TYPE_EMPLOYEER"]));
+                ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
+                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(ObjListParameterAll["INVOICE_TYPE_EMPLOYEER"]));
                 ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyId);
-                ObjCausal = _objInterfazTransactionCausalModel.GetCausalByBranch(user.CompanyId, transactionId!.Value, user.BranchId);
+                ObjCausal = _objInterfazTransactionCausalModel.GetCausalByBranch(user.CompanyId, this.TransactionId, user.BranchId);
                 WarehouseId = ObjCausal.First()!.WarehouseSourceId;
                 ObjListWarehouse = _objInterfazUserWarehouseModel.GetRowByUserIdAndFacturable(user.CompanyId, user.UserId);
                 ObjCustomerDefault = _objInterfazCustomerModel.GetRowByCode(user.CompanyId, customerDefault!.Value);
@@ -794,14 +785,10 @@ namespace v4posme_window.Views
                 ObjParameterInvoiceBillingPrinterDirectNameDefaultBar = _objInterfazCoreWebParameter.GetParameterValue("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT_BAR", user.CompanyId);
                 ObjParameterInvoiceBillingPrinterDirectUrlBar = _objInterfazCoreWebParameter.GetParameterValue("INVOICE_BILLING_PRINTER_DIRECT_URL_BAR", user.CompanyId);
                 ObjParameterobjParameterInvoiceBillingPrinterUrlBar = _objInterfazCoreWebParameter.GetParameterValue("INVOICE_BILLING_PRINTER_URL_BAR", user.CompanyId);
-
-                ObjListParameterAll = _objInterfazCoreWebParameter.GetParameterAll(user.CompanyId);
                 ObjParameterInvoiceBillingSelectitem = _objInterfazCoreWebParameter.GetParameterValue("INVOICE_BILLING_SELECTITEM", user.CompanyId);
-
                 ObjParameterInvoiceBillingQuantityZero = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_QUANTITY_ZERO", user.CompanyId)!.Value;
                 ObjParameterRegresarAListaDespuesDeGuardar = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SAVE_AFTER_TO_LIST", user.CompanyId)!.Value;
                 ObjParameterMostrarImagenEnSeleccion = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SHOW_IMAGE_IN_DETAIL_SELECTION", user.CompanyId)!.Value;
-
                 ObjParameterPantallaParaFacturar = _objInterfazCoreWebParameter.GetParameter("INVOICE_PANTALLA_FACTURACION", user.CompanyId)!.Value;
 
                 if (ObjCustomerDefault is null)
@@ -819,6 +806,8 @@ namespace v4posme_window.Views
                 ParameterCausalTypeCredit = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyId);
                 ObjCustomerCreditAmoritizationAll = _objInterfazCustomerCreditAmortizationModel.GetRowByCustomerId(ObjCustomerDefault.EntityId);
                 ObjListCustomerCreditLine = _objInterfazCustomerCreditLineModel.GetRowByEntityBalanceMayorCero(user.CompanyId, user.BranchId, this.ObjCustomerDefault.EntityId);
+
+
             }
             catch (Exception ex)
             {
