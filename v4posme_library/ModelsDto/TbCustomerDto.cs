@@ -42,4 +42,5 @@ public record TbCustomerDto()
     public bool? IsActive { get; set; }
     public int? TypeFirm { get; set; }
     public byte[] PhoneNumber { get; set; }
+    public int CustomerId { get; set; }
 }

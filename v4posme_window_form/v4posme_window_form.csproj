@@ -8,6 +8,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>v4posme_window</RootNamespace>
         <Title>posMe</Title>
+        <Version>1.0.1</Version>
+        <PackageProjectUrl>https://posme.net</PackageProjectUrl>
+        <PackageIcon>PM-ico-36.ico</PackageIcon>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     </PropertyGroup>
 
     <ItemGroup>
@@ -44,6 +48,10 @@
       <None Update="appsettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="PM-ico-36.ico">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
@@ -52,6 +60,5 @@
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
-
 
 </Project>

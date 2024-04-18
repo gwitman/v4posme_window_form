@@ -145,6 +145,10 @@
             btnNew = new DevExpress.XtraEditors.SimpleButton();
             gridViewTbTransactionMasterDetail = new DevExpress.XtraGrid.GridControl();
             gridViewValues = new DevExpress.XtraGrid.Views.Grid.GridView();
+            colTransactionMasterDetailId = new DevExpress.XtraGrid.Columns.GridColumn();
+            colItemId = new DevExpress.XtraGrid.Columns.GridColumn();
+            colSeleccionar = new DevExpress.XtraGrid.Columns.GridColumn();
+            itemCheck = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             colCodigo = new DevExpress.XtraGrid.Columns.GridColumn();
             colDescripcion = new DevExpress.XtraGrid.Columns.GridColumn();
             colUM = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -159,6 +163,7 @@
             colDetailVencimiento = new DevExpress.XtraGrid.Columns.GridColumn();
             colTransactionDetailName = new DevExpress.XtraGrid.Columns.GridColumn();
             progressPanel = new DevExpress.XtraWaitForm.ProgressPanel();
+            colIva = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)stackPanel1).BeginInit();
             stackPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
@@ -226,6 +231,7 @@
             ((System.ComponentModel.ISupportInitialize)txtChangeAmount.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewTbTransactionMasterDetail).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewValues).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)itemCheck).BeginInit();
             SuspendLayout();
             // 
             // stackPanel1
@@ -976,7 +982,7 @@
             colCantidad.Caption = "Cantidad";
             colCantidad.Name = "colCantidad";
             colCantidad.Visible = true;
-            colCantidad.VisibleIndex = 3;
+            colCantidad.VisibleIndex = 4;
             // 
             // pictureEdit2
             // 
@@ -1387,58 +1393,85 @@
             gridViewTbTransactionMasterDetail.Location = new Point(0, 274);
             gridViewTbTransactionMasterDetail.MainView = gridViewValues;
             gridViewTbTransactionMasterDetail.Name = "gridViewTbTransactionMasterDetail";
+            gridViewTbTransactionMasterDetail.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { itemCheck });
             gridViewTbTransactionMasterDetail.Size = new Size(1205, 104);
             gridViewTbTransactionMasterDetail.TabIndex = 30;
             gridViewTbTransactionMasterDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewValues });
             // 
             // gridViewValues
             // 
-            gridViewValues.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colCodigo, colDescripcion, colUM, colCantidad, colPrecio, colTotal, colAccion, colSkuQuantityBySku, colUnitaryPriceIndividual, colSkuFormatoDescripton, colPrecio2, colPrecio3, colDetailVencimiento, colTransactionDetailName });
+            gridViewValues.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colTransactionMasterDetailId, colItemId, colSeleccionar, colCodigo, colDescripcion, colUM, colCantidad, colPrecio, colIva, colTotal, colAccion, colSkuQuantityBySku, colUnitaryPriceIndividual, colSkuFormatoDescripton, colPrecio2, colPrecio3, colDetailVencimiento, colTransactionDetailName });
             gridViewValues.GridControl = gridViewTbTransactionMasterDetail;
             gridViewValues.Name = "gridViewValues";
             gridViewValues.OptionsView.ShowGroupPanel = false;
+            // 
+            // colTransactionMasterDetailId
+            // 
+            colTransactionMasterDetailId.Caption = "TransactionMasterDetailId";
+            colTransactionMasterDetailId.Name = "colTransactionMasterDetailId";
+            // 
+            // colItemId
+            // 
+            colItemId.Caption = "ItemId";
+            colItemId.Name = "colItemId";
+            // 
+            // colSeleccionar
+            // 
+            colSeleccionar.Caption = "Seleccionar";
+            colSeleccionar.ColumnEdit = itemCheck;
+            colSeleccionar.FieldName = "chkSeleccionarItem";
+            colSeleccionar.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+            colSeleccionar.Name = "colSeleccionar";
+            colSeleccionar.Visible = true;
+            colSeleccionar.VisibleIndex = 0;
+            // 
+            // itemCheck
+            // 
+            itemCheck.AutoHeight = false;
+            itemCheck.Caption = "";
+            itemCheck.Name = "itemCheck";
             // 
             // colCodigo
             // 
             colCodigo.Caption = "Codigo";
             colCodigo.Name = "colCodigo";
             colCodigo.Visible = true;
-            colCodigo.VisibleIndex = 0;
+            colCodigo.VisibleIndex = 1;
             // 
             // colDescripcion
             // 
             colDescripcion.Caption = "Descripcion";
             colDescripcion.Name = "colDescripcion";
             colDescripcion.Visible = true;
-            colDescripcion.VisibleIndex = 1;
+            colDescripcion.VisibleIndex = 2;
             // 
             // colUM
             // 
             colUM.Caption = "U/M";
             colUM.Name = "colUM";
             colUM.Visible = true;
-            colUM.VisibleIndex = 2;
+            colUM.VisibleIndex = 3;
             // 
             // colPrecio
             // 
             colPrecio.Caption = "Precio";
             colPrecio.Name = "colPrecio";
             colPrecio.Visible = true;
-            colPrecio.VisibleIndex = 4;
+            colPrecio.VisibleIndex = 5;
             // 
             // colTotal
             // 
             colTotal.Caption = "Total";
             colTotal.Name = "colTotal";
             colTotal.Visible = true;
-            colTotal.VisibleIndex = 5;
+            colTotal.VisibleIndex = 6;
             // 
             // colAccion
             // 
             colAccion.Caption = "Accion";
             colAccion.Name = "colAccion";
             colAccion.Visible = true;
-            colAccion.VisibleIndex = 6;
+            colAccion.VisibleIndex = 7;
             // 
             // colSkuQuantityBySku
             // 
@@ -1470,14 +1503,14 @@
             colDetailVencimiento.Caption = "DetailVencimiento";
             colDetailVencimiento.Name = "colDetailVencimiento";
             colDetailVencimiento.Visible = true;
-            colDetailVencimiento.VisibleIndex = 7;
+            colDetailVencimiento.VisibleIndex = 8;
             // 
             // colTransactionDetailName
             // 
             colTransactionDetailName.Caption = "TransactionDetailName";
             colTransactionDetailName.Name = "colTransactionDetailName";
             colTransactionDetailName.Visible = true;
-            colTransactionDetailName.VisibleIndex = 8;
+            colTransactionDetailName.VisibleIndex = 9;
             // 
             // progressPanel
             // 
@@ -1493,6 +1526,11 @@
             progressPanel.Size = new Size(389, 93);
             progressPanel.TabIndex = 47;
             progressPanel.Visible = false;
+            // 
+            // colIva
+            // 
+            colIva.Caption = "Iva";
+            colIva.Name = "colIva";
             // 
             // FormInvoiceBillingEdit
             // 
@@ -1600,6 +1638,7 @@
             ((System.ComponentModel.ISupportInitialize)txtChangeAmount.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewTbTransactionMasterDetail).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewValues).EndInit();
+            ((System.ComponentModel.ISupportInitialize)itemCheck).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1735,5 +1774,10 @@
         private DevExpress.XtraWaitForm.ProgressPanel progressPanel;
         private DevExpress.XtraGrid.Columns.GridColumn colDetailVencimiento;
         private DevExpress.XtraGrid.Columns.GridColumn colTransactionDetailName;
+        private DevExpress.XtraGrid.Columns.GridColumn colTransactionMasterDetailId;
+        private DevExpress.XtraGrid.Columns.GridColumn colItemId;
+        private DevExpress.XtraGrid.Columns.GridColumn colSeleccionar;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit itemCheck;
+        private DevExpress.XtraGrid.Columns.GridColumn colIva;
     }
 }

@@ -7,7 +7,7 @@ namespace v4posme_library.Libraries.CustomModels;
 public interface ICustomerModel
 {
     void UpdateAppPosme(int companyId, int branchId, int entityId, TbCustomer data);
-
+    void UpdateAppPosme(int companyId, int branchId, int entityId, TbCustomerDto data);
     void DeleteAppPosme(int companyId, int branchId, int entityId);
 
     int InsertAppPosme(TbCustomer data);
