@@ -209,7 +209,9 @@ namespace v4posme_window.Views
 
 
         }
-
-
+        public void searchTransactionMaster()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1819,6 +1819,10 @@ namespace v4posme_window.Views
             }
         }
 
+        public void OpenCashbox()
+        {
+            throw new NotImplementedException();
+        }
 
         public void PreRender()
         {
