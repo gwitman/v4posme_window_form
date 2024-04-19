@@ -304,7 +304,7 @@ namespace v4posme_window.Views
                 LoadRender(TypeRender.New);
             }
 
-            
+
         }
 
         #endregion
@@ -313,6 +313,14 @@ namespace v4posme_window.Views
         #region Eventos Formulario
 
         private void EventoCallBackAceptar(dynamic mensaje)
+        {
+            // Realizar la lógica que desees en el formulario padre
+            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
+            MessageBox.Show("Evento en el formulario hijo: " +
+                            objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
+        }
+
+        private void EventoCallBackAceptarCusomter(dynamic mensaje)
         {
             // Realizar la lógica que desees en el formulario padre
             WebToolsHelper objWebToolsHelper = new WebToolsHelper();
@@ -624,7 +632,7 @@ namespace v4posme_window.Views
 
                 var detalle = new List<string[]> { (["PRODUCTO", "CANT", "TOTAL"]) };
 
-                detalle.AddRange(objTmd.Select(detail => (string[]) [detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
+                detalle.AddRange(objTmd.Select(detail => (string[])[detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
             }
             catch (Exception e)
             {
@@ -1254,16 +1262,16 @@ namespace v4posme_window.Views
                     case "false":
                         return;
                     case "true":
-                    {
-                        //si es auto aplicadao mandar a imprimir
-                        if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
                         {
-                            ComandPrinter();
-                        }
+                            //si es auto aplicadao mandar a imprimir
+                            if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
+                            {
+                                ComandPrinter();
+                            }
 
-                        break;
-                    }
-                    //Error 
+                            break;
+                        }
+                        //Error 
                 }
             }
             catch (Exception e)
@@ -1974,11 +1982,41 @@ namespace v4posme_window.Views
             }
         }
 
-        public void LoadRender(TypeRender typeRedner)
+        public void LoadRender(TypeRender typeRender)
         {
-            throw new NotImplementedException();
+            CoreWebRenderInView objCoreWebRenderInView = new CoreWebRenderInView();
+
+            CompanyId = ObjTransactionMaster.CompanyId;
+            TransactionId = ObjTransactionMaster.TransactionId;
+            TransactionMasterId = ObjTransactionMaster.TransactionMasterId;
+            txtDate.EditValue = typeRender == TypeRender.Edit ? ObjTransactionMaster.TransactionOn : DateTime.Now;
+            txtExchangeRate.EditValue = ExchangeRate;
+
+            if (typeRender == TypeRender.New)
+                objCoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "currencyID", "name", null, 0);
+
+            if (typeRender == TypeRender.Edit)
+                objCoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "currencyID", "name", ObjTransactionMaster.CurrencyId, 0);
+
+
+
+
         }
 
         #endregion
+
+        private void btnSearchCustomer_Click(object sender, EventArgs e)
+        {
+            
+
+
+            var formTypeListSearch = new FormTypeListSearch("Lista de Cliente", ObjComponentItem.ComponentId,
+               "SELECCIONAR_BILLING_REGISTER", true,
+               "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
+            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptarCusomter;
+            formTypeListSearch.ShowDialog(this);
+
+
+        }
     }
 }
