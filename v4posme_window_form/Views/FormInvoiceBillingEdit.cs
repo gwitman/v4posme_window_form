@@ -519,7 +519,114 @@ namespace v4posme_window.Views
 
         public void ComandPrinter()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var user = VariablesGlobales.Instance.User;
+                if (user is null)
+                {
+                    throw new Exception("Usuario no logeado");
+                }
+
+                var transactionID = TransactionId.Value;
+                var transactionMasterID = TransactionMasterId.Value;
+                var companyID = user.CompanyId;
+
+                //Get Component
+                var objComponent = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_company");
+                var objParameter = _objInterfazCoreWebParameter.GetParameter("CORE_COMPANY_LOGO", companyID);
+                var objParameterTelefono = _objInterfazCoreWebParameter.GetParameter("CORE_PHONE", companyID);
+                var objParameterRuc = _objInterfazCoreWebParameter.GetParameter("CORE_COMPANY_IDENTIFIER", companyID)!.Value;
+                var objCompany = VariablesGlobales.Instance.Company;
+                var spacing = 0.5;
+
+                // Obtener datos del documento
+                var objTm = _objInterfazTransactionMasterModel.GetRowByPk(companyID, transactionID, transactionMasterID) ?? throw new ArgumentNullException("_objInterfazTransactionMasterModel.GetRowByPk(companyID, transactionID, transactionMasterID)");
+                var objTmi = _objInterfazTransactionMasterInfoModel.GetRowByPk(companyID, transactionID, transactionMasterID);
+                var objTmd = _objInterfazTransactionMasterDetailModel.GetRowByTransaction(companyID, transactionID, transactionMasterID);
+                var objTc = _objInterfazTransactionCausalModel.GetByCompanyAndTransactionAndCausal(companyID, transactionID, objTm.TransactionCausalId!.Value);
+
+                // Formatear la fecha de la transacción
+                var transactionDate = objTm.TransactionOn;
+                string formattedTransactionDate = transactionDate!.Value.ToString("yyyy-M-d");
+
+                // Obtener el identificador de la empresa
+                var identifier = _objInterfazCoreWebParameter.GetParameter("CORE_COMPANY_IDENTIFIER", companyID);
+
+                // Obtener información de la sucursal
+                var objBranch = VariablesGlobales.Instance.UnityContainer.Resolve<IBranchModel>().GetRowByPk(objTm.CompanyId, objTm.BranchId!.Value);
+
+                // Obtener información de la etapa de flujo de trabajo
+                var objStage = _objInterfazCoreWebWorkflow.GetWorkflowStage("tb_transaction_master_billing", "statusID", objTm.StatusId!.Value, objTm.CompanyId, objTm.BranchId.Value, Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["APP_ROL_SUPERADMIN"]));
+
+                // Obtener el tipo de transacción
+                var objTipo = _objInterfazTransactionCausalModel.GetByCompanyAndTransactionAndCausal(companyID, objTm.TransactionId, objTm.TransactionCausalId!.Value);
+
+                // Obtener información del cliente
+                var objCustomer = _objInterfazCustomerModel.GetRowByEntity(companyID, objTm.EntityId!.Value);
+
+                // Obtener información de la moneda
+                var objCurrency = VariablesGlobales.Instance.UnityContainer.Resolve<ICurrencyModel>().GetRowByPk(objTm.CurrencyId!.Value);
+
+                // Obtener información del cliente natural
+                var objNatural = VariablesGlobales.Instance.UnityContainer.Resolve<INaturalModel>().GetRowByPk(companyID, objCustomer.BranchId, objCustomer.EntityId);
+
+                // Calcular el tipo de cambio
+                var exchangeSale = Convert.ToInt32(_objInterfazCoreWebParameter.GetParameter("ACCOUNTING_EXCHANGE_SALE", companyID)!.Value);
+                var tipoCambio = Math.Round(objTm.ExchangeRate!.Value + exchangeSale, 2);
+
+                // Obtener información del usuario que creó la transacción
+                var objUserCreated = VariablesGlobales.Instance.UnityContainer.Resolve<IUserModel>().GetRowByPk(companyID, objTm.CreatedAt!.Value, objTm.CreatedBy!.Value);
+
+                // Prefijo de la moneda
+                var prefixCurrency = objCurrency.Simbol + " ";
+
+                var confiDetalleHeader = new List<Dictionary<string, string>>();
+
+                var row1 = new Dictionary<string, string>
+                {
+                    { "style", "text-align:left;width:auto" },
+                    { "colspan", "1" },
+                    { "prefix", "" },
+                    { "style_row_data", "text-align:left;width:auto" },
+                    { "colspan_row_data", "3" },
+                    { "prefix_row_data", "" },
+                    { "nueva_fila_row_data", "1" }
+                };
+                confiDetalleHeader.Add(row1);
+
+                var row2 = new Dictionary<string, string>
+                {
+                    { "style", "text-align:left;width:50px" },
+                    { "colspan", "1" },
+                    { "prefix", "" },
+                    { "style_row_data", "text-align:right;width:auto" },
+                    { "colspan_row_data", "2" },
+                    { "prefix_row_data", "" },
+                    { "nueva_fila_row_data", "0" }
+                };
+                confiDetalleHeader.Add(row2);
+
+                var row3 = new Dictionary<string, string>
+                {
+                    { "style", "text-align:right;width:90px" },
+                    { "colspan", "1" },
+                    { "prefix", "datView[\"objCurrency\"]->simbol" },
+                    { "style_row_data", "text-align:right;width:90px" },
+                    { "colspan_row_data", "1" },
+                    { "prefix_row_data", "datView[\"objCurrency\"]->simbol" },
+                    { "nueva_fila_row_data", "0" }
+                };
+                confiDetalleHeader.Add(row3);
+
+                var detalle = new List<string[]> { (["PRODUCTO", "CANT", "TOTAL"]) };
+
+                detalle.AddRange(objTmd.Select(detail => (string[]) [detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public void LoadEdit()
@@ -1227,7 +1334,7 @@ namespace v4posme_window.Views
                 var commandEditableTotal = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_EDITABLE_TOTAL"]);
                 var commandEditable = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_EDITABLE"]);
                 var validateWorkflowStage = _objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing", "statusID", objTm.StatusId!.Value, commandEditableTotal, user.CompanyId, user.BranchId, role.RoleId);
-                if (validateWorkflowStage is null || !validateWorkflowStage.Value )
+                if (validateWorkflowStage is null || !validateWorkflowStage.Value)
                 {
                     throw new Exception(notWorkflowEdit);
                 }
@@ -1299,14 +1406,14 @@ namespace v4posme_window.Views
                 };
 
                 //El Estado solo permite editar el workflow
-                var dataContext = new DataContext();                
+                var dataContext = new DataContext();
                 if (_objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing", "statusID", objTm.StatusId!.Value, commandEditable, user.CompanyId, user.BranchId, role.RoleId)!.Value)
                 {
-                    var objTmFind = dataContext.TbTransactionMasters.First(u => 
-                                    u.CompanyId == user.CompanyId && 
-                                    u.TransactionId == TransactionId!.Value && 
-                                    u.TransactionMasterId == TransactionMasterId!.Value
-                                    );
+                    var objTmFind = dataContext.TbTransactionMasters.First(u =>
+                        u.CompanyId == user.CompanyId &&
+                        u.TransactionId == TransactionId!.Value &&
+                        u.TransactionMasterId == TransactionMasterId!.Value
+                    );
                     objTmFind.StatusId = TxtStatusId;
                     _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value, objTmFind);
                 }
@@ -1344,12 +1451,12 @@ namespace v4posme_window.Views
                     var characterSplie = objParameterDeliminterCsv!.Value!;
 
                     //Obtener los registro del archivo
-                    var csvReader       = new CsvReader();
+                    var csvReader = new CsvReader();
                     csvReader.Separator = Convert.ToChar(characterSplie);
-                    var table           = csvReader.ParseFile(path);
-                    var fila            = 0;
+                    var table = csvReader.ParseFile(path);
+                    var fila = 0;
                     File.Move(path, pathNew);
-                    
+
                     if (table.Count > 0)
                     {
                         foreach (var row in table)
@@ -1360,7 +1467,7 @@ namespace v4posme_window.Views
                             var cantidad = Convert.ToInt32(row["Cantidad"]);
                             var precio = Convert.ToDecimal(row["Precio"]);
 
-                            
+
                             var objItem = _objInterfazItemModel.GetRowByCode(user.CompanyId, codigo);
                             // Añadir los valores a las listas
                             listTransactionDetalId.Add(0);
@@ -1513,7 +1620,6 @@ namespace v4posme_window.Views
                                 SkuCatalogItemId = skuCatalogItemID,
                                 SkuFormatoDescription = skuFormatoDescription,
                                 AmountCommision = price * comisionPorcentage * quantity // impuesto de lista
-                                
                             };
                             objTmd.Cost = objTmd.Quantity * unitaryCost; // costo por unIdad
                             objTmd.Amount = objTmd.Quantity * unitaryAmount; // precio de lista con impuesto por cantIdad
@@ -1571,11 +1677,11 @@ namespace v4posme_window.Views
                             objTmdNew.ItemNameLog = itemNameDetail;
                             objTmdNew.SkuCatalogItemId = skuCatalogItemID;
                             objTmdNew.SkuFormatoDescription = skuFormatoDescription;
-                            objTmdNew.AmountCommision = price * comisionPorcentage * quantity;                            
+                            objTmdNew.AmountCommision = price * comisionPorcentage * quantity;
                             objTmdNew.Cost = objTmdNew.Quantity * unitaryCost; // costo por cantidad
                             objTmdNew.Amount = objTmdNew.Quantity * unitaryAmount; // precio de lista con impuesto por cantidad
-                            
-                            
+
+
                             tax1Total = decimal.Add(tax1Total, (decimal)tax1!);
                             subAmountTotal = subAmountTotal + (quantity * price);
                             amountTotal = amountTotal + objTmdNew.Amount;
@@ -1690,7 +1796,7 @@ namespace v4posme_window.Views
                                          Math.Round(objTmInfoNew.ReceiptAmountDol * objTmNew.ExchangeRate.Value, 2);
 
                             // Asignar el valor calculado a la propiedad Amount de objCustomerCreditDocument
-                            objCustomerCreditDocument.Amount  = amount.Value;
+                            objCustomerCreditDocument.Amount = amount.Value;
                             objCustomerCreditDocument.Balance = amount.Value;
                         }
 
@@ -1809,8 +1915,6 @@ namespace v4posme_window.Views
                         objCustomerCreditLineNew.Balance = balance;
                         _objInterfazCustomerCreditLineModel.UpdateAppPosme(objCustomerCreditLine.CustomerCreditLineId, objCustomerCreditLineNew);
                     }
-
-
                 }
             }
             catch (Exception e)
@@ -1821,7 +1925,28 @@ namespace v4posme_window.Views
 
         public void OpenCashbox()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var user = VariablesGlobales.Instance.User;
+                if (user is null)
+                {
+                    throw new Exception("No existe el usuario");
+                }
+
+                //obtener nombre de impresora por defecto
+                var objParameterPrinterName = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT", user.CompanyId)!.Value;
+                var coreWebPrinter = new CoreWebPrinterDirect();
+                var pd = coreWebPrinter.ConfigurationPrinter(objParameterPrinterName!);
+                //PrintDocument maneja el evento para imprimir
+                //pd.PrintPage + = new PrintPageEventHandler (pd_PrintPage);  
+
+                //Print the document  
+                //pd.Print();  
+            }
+            catch (Exception ex)
+            {
+                new CoreWebRenderInView().GetMessageAlert(TypeError.Error, "Error", $"Error al imprimir: {ex.Message}", this);
+            }
         }
 
         public void PreRender()

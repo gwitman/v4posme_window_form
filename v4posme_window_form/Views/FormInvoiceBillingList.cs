@@ -9,6 +9,8 @@ using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomHelper;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
+using v4posme_library.Libraries.CustomModels;
+using v4posme_library.Models;
 using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
@@ -33,6 +35,14 @@ namespace v4posme_window.Views
         public int? DataViewId { get; set; }
         public DateTime? Fecha { get; set; }
 
+        private static readonly string? UserNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
+        private static readonly string? NotParameter = VariablesGlobales.ConfigurationBuilder["NOT_PARAMETER"];
+        private static readonly string? AppNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+        private static readonly string? NotAccessFunction = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_FUNCTION"];
+        private static readonly string? NotAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
+        private static readonly int? PermissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
+        private static readonly string? UrlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+
         public FormInvoiceBillingList()
         {
             InitializeComponent();
@@ -56,7 +66,7 @@ namespace v4posme_window.Views
             List();
         }
 
-        
+
         public void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             CustomException.LogException(e.Exception);
@@ -70,16 +80,12 @@ namespace v4posme_window.Views
 
         public void List()
         {
-            
-            
             var coreWebRenderInView = new CoreWebRenderInView();
             var resultPermission = 0;
-            var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
-            var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
-            var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
-            if (appNeedAuthentication!.Equals("true"))
+
+            if (AppNeedAuthentication!.Equals("true"))
             {
-                var permited = _coreWebPermission.UrlPermited("app_invoice_billing", "index", urlSuffix!,
+                var permited = _coreWebPermission.UrlPermited("app_invoice_billing", "index", UrlSuffix!,
                     VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft,
                     VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop,
                     VariablesGlobales.Instance.ListMenuHiddenPopup);
@@ -89,12 +95,12 @@ namespace v4posme_window.Views
                     return;
                 }
 
-                resultPermission = _coreWebPermission.UrlPermissionCmd("app_invoice_billing", "index", urlSuffix!,
+                resultPermission = _coreWebPermission.UrlPermissionCmd("app_invoice_billing", "index", UrlSuffix!,
                     VariablesGlobales.Instance.Role, VariablesGlobales.Instance.User,
                     VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft,
                     VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop,
                     VariablesGlobales.Instance.ListMenuHiddenPopup);
-                if (resultPermission == permissionNone)
+                if (resultPermission == PermissionNone)
                 {
                     _coreWebRender.GetMessageAlert(TypeError.Error, "Permisos", "No se encontraron permisos", this);
                     return;
@@ -149,37 +155,31 @@ namespace v4posme_window.Views
                 ObjGridControl.MainView.RefreshData();
                 ObjGridControl.Refresh();
             }
-
-
         }
 
         public void Delete(object? sender, EventArgs? args)
         {
-
             if (((GridView)ObjGridControl.MainView).SelectedRowsCount > 0)
             {
                 // Obtener el índice de la fila seleccionada
                 var rowIndex = ((GridView)ObjGridControl.MainView).GetSelectedRows().ToList();
                 foreach (var indexRow in rowIndex)
                 {
-
                     var companyId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "companyID").ToString());
                     var transactionId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionID").ToString());
                     var transactionMasterId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionMasterID").ToString());
                     var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
                     objFormInvoiceBillingEdit.ComandDelete();
-                    
                 }
+
                 //Listar los registros nuevamente
                 List();
-
             }
             else
             {
                 CoreWebRenderInView objCoreWebRenderInView = new CoreWebRenderInView();
                 objCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando", "Debe seleccionar un registro", this);
             }
-
         }
 
         public void Edit(object? sender, EventArgs? args)
@@ -206,12 +206,56 @@ namespace v4posme_window.Views
             ObjGridControl.Name = "ObjGridControl";
             ObjGridControl.Parent = controlParent;
             ObjGridControl.Dock = DockStyle.Fill;
-
-
         }
+
         public void searchTransactionMaster()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var user = VariablesGlobales.Instance.User;
+                if (user is null)
+                {
+                    throw new Exception(UserNotAutenticated);
+                }
+
+                var role = VariablesGlobales.Instance.Role;
+                if (role is null)
+                {
+                    throw new Exception("No hay roles asignados");
+                }
+
+                // Permiso sobre la función
+                if (AppNeedAuthentication == "true")
+                {
+                    var menuTop = VariablesGlobales.Instance.ListMenuTop;
+                    var menuLeft = VariablesGlobales.Instance.ListMenuLeft;
+                    var menuBodyReport = VariablesGlobales.Instance.ListMenuBodyReport;
+                    var menuBodyTop = VariablesGlobales.Instance.ListMenuBodyTop;
+                    var menuHiddenPopup = VariablesGlobales.Instance.ListMenuHiddenPopup;
+                    var permited = _coreWebPermission.UrlPermited("app_invoice_billing", "index", UrlSuffix!, menuTop, menuLeft, menuBodyReport, menuBodyTop, menuHiddenPopup);
+
+                    if (!permited)
+                        throw new Exception(NotAccessControl);
+
+                    var resultPermission = _coreWebPermission.UrlPermissionCmd("app_invoice_billing", "index", UrlSuffix!, role, user, menuTop, menuLeft, menuBodyReport, menuBodyTop, menuHiddenPopup);
+                    if (resultPermission == PermissionNone)
+                        throw new Exception(NotAccessFunction);
+                }
+
+                var transactionNumber = txtFiltrar.Text;
+
+                if (string.IsNullOrEmpty(transactionNumber))
+                    throw new Exception(NotParameter);
+
+                var objTm = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterModel>().GetRowByTransactionNumber(user.CompanyId, transactionNumber);
+
+                if (objTm == null)
+                    throw new Exception("NO SE ENCONTRO EL DOCUMENTO");
+            }
+            catch (Exception ex)
+            {
+                new CoreWebRenderInView().GetMessageAlert(TypeError.Error, "Error", $"Se produjo un error en {ex.Source} {ex.Message}", this);
+            }
         }
     }
 }
