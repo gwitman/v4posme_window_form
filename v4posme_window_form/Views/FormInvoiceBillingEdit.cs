@@ -1225,8 +1225,9 @@ namespace v4posme_window.Views
                 //Validar si el estado permite editar
                 var notWorkflowEdit = VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_EDIT"];
                 var commandEditableTotal = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_EDITABLE_TOTAL"]);
+                var commandEditable = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_EDITABLE"]);
                 var validateWorkflowStage = _objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing", "statusID", objTm.StatusId!.Value, commandEditableTotal, user.CompanyId, user.BranchId, role.RoleId);
-                if (validateWorkflowStage is null || !validateWorkflowStage.Value)
+                if (validateWorkflowStage is null || !validateWorkflowStage.Value )
                 {
                     throw new Exception(notWorkflowEdit);
                 }
@@ -1298,9 +1299,14 @@ namespace v4posme_window.Views
                 };
 
                 //El Estado solo permite editar el workflow
-                if (_objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing", "statusID", objTm.StatusId!.Value, commandEditableTotal, user.CompanyId, user.BranchId, role.RoleId)!.Value)
+                var dataContext = new DataContext();                
+                if (_objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing", "statusID", objTm.StatusId!.Value, commandEditable, user.CompanyId, user.BranchId, role.RoleId)!.Value)
                 {
-                    var objTmFind = _objInterfazTransactionMasterModel.GetRowByPk(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value);
+                    var objTmFind = dataContext.TbTransactionMasters.First(u => 
+                                    u.CompanyId == user.CompanyId && 
+                                    u.TransactionId == TransactionId!.Value && 
+                                    u.TransactionMasterId == TransactionMasterId!.Value
+                                    );
                     objTmFind.StatusId = TxtStatusId;
                     _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value, objTmFind);
                 }
@@ -1315,7 +1321,7 @@ namespace v4posme_window.Views
                 var assembly = Assembly.GetEntryAssembly();
 
                 // Obtener la ruta del archivo ejecutable
-                var executablePath = assembly.Location;
+                var executablePath = assembly!.Location;
                 var path = $"{executablePath}/company_{user.CompanyId}/component_{objComponentBilling.ComponentId}/component_item_{TransactionMasterId}/procesar.csv";
                 var pathNew = $"{executablePath}/company_{user.CompanyId}/component_{objComponentBilling.ComponentId}/component_item_{TransactionMasterId}/procesado.csv";
                 var listTransactionDetalId = new List<int>();
@@ -1333,18 +1339,17 @@ namespace v4posme_window.Views
                 if (File.Exists(path))
                 {
                     //Actualizar Detalle
-                    // Declarar e inicializar las listas
-
-
+                    //Declarar e inicializar las listas
                     var objParameterDeliminterCsv = _objInterfazCoreWebParameter.GetParameter("CORE_CSV_SPLIT", user.CompanyId);
                     var characterSplie = objParameterDeliminterCsv!.Value!;
 
                     //Obtener los registro del archivo
-                    var csvReader = new CsvReader();
+                    var csvReader       = new CsvReader();
                     csvReader.Separator = Convert.ToChar(characterSplie);
-                    var table = csvReader.ParseFile(path);
+                    var table           = csvReader.ParseFile(path);
+                    var fila            = 0;
                     File.Move(path, pathNew);
-                    var fila = 0;
+                    
                     if (table.Count > 0)
                     {
                         foreach (var row in table)
@@ -1354,7 +1359,8 @@ namespace v4posme_window.Views
                             var description = row["Nombre"];
                             var cantidad = Convert.ToInt32(row["Cantidad"]);
                             var precio = Convert.ToDecimal(row["Precio"]);
-                            // Obtener el objeto Item del modelo (asumiendo que existe un método GetRowByCode en el Item_Model)
+
+                            
                             var objItem = _objInterfazItemModel.GetRowByCode(user.CompanyId, codigo);
                             // Añadir los valores a las listas
                             listTransactionDetalId.Add(0);
@@ -1405,37 +1411,30 @@ namespace v4posme_window.Views
                     for (var i = 0; i < arrayListItemId.Count; i++)
                     {
                         var itemID = arrayListItemId[i];
-                        var lote = arrayListLote == null ? "" : (i < arrayListLote.Count ? arrayListLote[i] : "");
-                        var vencimiento = arrayListVencimiento == null ? "" : (i < arrayListVencimiento.Count ? arrayListVencimiento[i] : "");
+                        var lote = arrayListLote == null ? "" : arrayListLote[i];
+                        var vencimiento = arrayListVencimiento == null ? "" : arrayListVencimiento[i];
                         var warehouseID = objTmNew.SourceWarehouseId;
                         var objItem = _objInterfazItemModel.GetRowByPk(user.CompanyId, itemID);
                         var objItemWarehouse = VariablesGlobales.Instance.UnityContainer.Resolve<IItemWarehouseModel>().GetByPk(user.CompanyId, itemID, warehouseID!.Value);
                         var quantity = WebToolsHelper.ConvertToNumber<int>(arrayListQuantity[i].ToString());
                         var unitaryCost = objItem.Cost;
-                        var objPrice = _objInterfazPriceModel.GetRowByPk(user.CompanyId, objListPrice.ListPriceId, itemID, (int)typePriceId);
+                        var objPrice = _objInterfazPriceModel.GetRowByPk(user.CompanyId, objListPrice!.ListPriceId, itemID, (int)typePriceId);
                         var objCompanyComponentConcept = _objInterfazCompanyComponentConceptModel.GetRowByPk(user.CompanyId, objComponentItem.ComponentId, itemID, "IVA");
                         var skuCatalogItemID = arrayListSku[i];
                         string itemNameDetail = arrayListItemName[i].Replace("\"", "").Replace("'", "");
-
-                        _objInterfazCoreWebTools.Log("error: >>>>>>>>>");
-                        _objInterfazCoreWebTools.Log($"error {itemID}");
-                        _objInterfazCoreWebTools.Log($"error {skuCatalogItemID}");
-
                         var objItemSku = _objInterfazItemSkuModel.GetByPk(itemID, skuCatalogItemID);
 
                         // Precio
                         var price = arrayListPrice[i] / objItemSku.Value;
-
                         var skuFormatoDescription = arrayListSkuFormatoDescription[i];
                         var ivaPercentage = (objCompanyComponentConcept != null ? objCompanyComponentConcept.ValueOut : decimal.Zero);
                         var unitaryAmount = price * (1 + ivaPercentage);
                         var tax1 = price * ivaPercentage;
-
                         int transactionMasterDetailID = listTransactionDetalId[i];
                         decimal comisionPorcentage = 0;
 
-                        var coreWebTransactionMasterDetail = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTransactionMasterDetail>();
                         // Obtener porcentaje de comisión
+                        var coreWebTransactionMasterDetail = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTransactionMasterDetail>();
                         comisionPorcentage = coreWebTransactionMasterDetail.GetPercentageCommission(user.CompanyId, Convert.ToInt32(listPriceId), itemID.ToString(), price);
 
                         // Obtener costo unitario del cliente
@@ -1457,7 +1456,6 @@ namespace v4posme_window.Views
                                 objItemNew.Name = itemNameDetail.Split("NC.")[0].Trim();
                                 objItemNew.BarCode = objItem.BarCode + "," + itemNameDetail.Split("NC.")[1].Trim();
                                 itemNameDetail = objItemNew.Name;
-
                                 _objInterfazItemModel.UpdateAppPosme(user.CompanyId, itemID, objItemNew);
                             }
 
@@ -1515,15 +1513,16 @@ namespace v4posme_window.Views
                                 SkuCatalogItemId = skuCatalogItemID,
                                 SkuFormatoDescription = skuFormatoDescription,
                                 AmountCommision = price * comisionPorcentage * quantity // impuesto de lista
-                                // costo
+                                
                             };
                             objTmd.Cost = objTmd.Quantity * unitaryCost; // costo por unIdad
                             objTmd.Amount = objTmd.Quantity * unitaryAmount; // precio de lista con impuesto por cantIdad
 
-                            tax1Total = decimal.Add(tax1Total, (decimal)tax1);
+                            tax1Total = decimal.Add(tax1Total, (decimal)tax1!);
                             subAmountTotal = subAmountTotal + (quantity * price);
                             amountTotal = amountTotal + objTmd.Amount;
                             transactionMasterDetailID = _objInterfazTransactionMasterDetailModel.InsertAppPosme(objTmd);
+
                             var objTmdc = new TbTransactionMasterDetailCredit();
                             objTmdc.TransactionMasterId = TransactionMasterId.Value;
                             objTmdc.TransactionMasterDetailId = transactionMasterDetailID;
@@ -1533,7 +1532,6 @@ namespace v4posme_window.Views
                             objTmdc.Reference4 = "";
                             objTmdc.Reference5 = "";
                             objTmdc.Reference9 = "reference1: Porcentaje de Gastos fijos para las facturas de credito,reference2: Escritura Publica,reference3: Primer Linea del Protocolo";
-
                             _objInterfazTransactionMasterDetailCreditModel.InsertAppPosme(objTmdc);
 
                             // Actualizar el Precio
@@ -1557,26 +1555,27 @@ namespace v4posme_window.Views
                         else
                         {
                             var objTmdc = _objInterfazTransactionMasterDetailCreditModel.GetRowByPk(transactionMasterDetailID);
-                            var objTmdNew = new TbTransactionMasterDetail
-                            {
-                                Quantity = quantity * objItemSku.Value, // cantidad
-                                SkuQuantity = quantity, // cantidad
-                                SkuQuantityBySku = objItemSku.Value, // cantidad
-                                UnitaryCost = unitaryCost, // costo
-                                UnitaryPrice = price, // precio de lista
-                                UnitaryAmount = unitaryAmount, // precio de lista con impuesto
-                                Tax1 = tax1, // impuesto de lista
-                                Reference1 = lote,
-                                Reference2 = vencimiento,
-                                Reference3 = "0",
-                                ItemNameLog = itemNameDetail,
-                                SkuCatalogItemId = skuCatalogItemID,
-                                SkuFormatoDescription = skuFormatoDescription,
-                                AmountCommision = price * comisionPorcentage * quantity
-                            };
-                            objTmdNew.Cost = objTmdNew.Quantity * unitaryCost; // costo por cantidad
+                            var objTmdNew = dataContext.TbTransactionMasterDetails.Where(u => u.TransactionMasterDetailId == transactionMasterDetailID).First();
+
+                            objTmdNew.Quantity = quantity * objItemSku.Value; // cantidad
+                            objTmdNew.SkuQuantity = quantity; // cantidad
+                            objTmdNew.SkuQuantityBySku = objItemSku.Value; // cantidad
+                            objTmdNew.UnitaryCost = unitaryCost; // costo
+                            objTmdNew.UnitaryPrice = price; // precio de lista
+                            objTmdNew.UnitaryAmount = unitaryAmount; // precio de lista con impuesto
+                            objTmdNew.Tax1 = tax1; // impuesto de lista
+                            objTmdNew.Reference1 = lote;
+                            objTmdNew.Reference2 = vencimiento;
+                            objTmdNew.Reference3 = "0";
                             objTmdNew.InventoryWarehouseSourceId = objTmNew.SourceWarehouseId;
+                            objTmdNew.ItemNameLog = itemNameDetail;
+                            objTmdNew.SkuCatalogItemId = skuCatalogItemID;
+                            objTmdNew.SkuFormatoDescription = skuFormatoDescription;
+                            objTmdNew.AmountCommision = price * comisionPorcentage * quantity;                            
+                            objTmdNew.Cost = objTmdNew.Quantity * unitaryCost; // costo por cantidad
                             objTmdNew.Amount = objTmdNew.Quantity * unitaryAmount; // precio de lista con impuesto por cantidad
+                            
+                            
                             tax1Total = decimal.Add(tax1Total, (decimal)tax1!);
                             subAmountTotal = subAmountTotal + (quantity * price);
                             amountTotal = amountTotal + objTmdNew.Amount;
@@ -1588,7 +1587,6 @@ namespace v4posme_window.Views
                             objTmdc.Reference4 = "";
                             objTmdc.Reference5 = "";
                             objTmdc.Reference9 = "reference1: Porcentaje de Gastos Fijos para las Facturas de Credito,reference2: Escritura Publica,reference3: Primer Linea del Protocolo";
-
                             _objInterfazTransactionMasterDetailCreditModel.UpdateAppPosme(transactionMasterDetailID, objTmdc);
 
                             //Actualizar el Precio
@@ -1599,7 +1597,6 @@ namespace v4posme_window.Views
                                 {
                                     dataUpdatePrice.Price = price;
                                     dataUpdatePrice.Percentage = unitaryCost == 0 ? (price / 100) : (((100 * price) / unitaryCost) - 100);
-
                                     _objInterfazPriceModel.UpdateAppPosme(user.CompanyId, Convert.ToInt32(listPriceId), itemID, (int)typePriceId, dataUpdatePrice);
                                 }
                             }
@@ -1629,7 +1626,7 @@ namespace v4posme_window.Views
                 )
                 {
                     //Actualizar el numero de factura
-                    var objTmNew003 = _objInterfazTransactionMasterModel.GetRowByPk(user.CompanyId, TransactionId.Value, TransactionMasterId.Value);
+                    var objTmNew003 = dataContext.TbTransactionMasters.Where(x => x.TransactionMasterId == TransactionMasterId.Value).First();
                     objTmNew003.TransactionNumber = _objInterfazCoreWebCounter.GoNextNumber(user.CompanyId, user.BranchId, "tb_transaction_master_billing", 0);
                     _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyId, TransactionId.Value, TransactionMasterId.Value, objTmNew003);
 
@@ -1637,7 +1634,7 @@ namespace v4posme_window.Views
                     //Acumular punto del cliente.
                     if (objTmInfoNew.ReceiptAmountPoint <= 0 && objTmNew.CurrencyId == ObjCurrencyCordoba.CurrencyId)
                     {
-                        var objCustomer = _objInterfazCustomerModel.GetRowByEntity(user.CompanyId, objTmNew.EntityId.Value);
+                        var objCustomer = dataContext.TbCustomers.Where(x => x.EntityId == objTmNew.EntityId.Value).First();
                         objCustomer.BalancePoint = objCustomer.BalancePoint + amountTotal;
                         _objInterfazCustomerModel.UpdateAppPosme(objCustomer.CompanyId, objCustomer.BranchId, objCustomer.EntityId, objCustomer);
                     }
@@ -1645,7 +1642,7 @@ namespace v4posme_window.Views
                     //Es pago con punto restar puntos
                     if (objTmInfoNew.ReceiptAmountPoint > 0 && objTmNew.CurrencyId == ObjCurrencyCordoba.CurrencyId)
                     {
-                        var objCustomer = _objInterfazCustomerModel.GetRowByEntity(user.CompanyId, objTmNew.EntityId.Value);
+                        var objCustomer = dataContext.TbCustomers.Where(x => x.EntityId == objTmNew.EntityId.Value).First();
                         objCustomer.BalancePoint = objCustomer.BalancePoint - objTmInfoNew.ReceiptAmountPoint;
                         _objInterfazCustomerModel.UpdateAppPosme(objCustomer.CompanyId, objCustomer.BranchId, objCustomer.EntityId, objCustomer);
                     }
@@ -1657,12 +1654,11 @@ namespace v4posme_window.Views
                     VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebConcept>().Billing(user.CompanyId, TransactionId.Value, TransactionMasterId.Value);
 
                     //Si es al credito crear tabla de amortizacion
-                    string[] causalIDTypeCredit = ParameterCausalTypeCredit.Value.Split(',');
-
+                    string[] causalIDTypeCredit = ParameterCausalTypeCredit!.Value!.Split(',');
                     var exisCausalInCredit = Array.IndexOf(causalIDTypeCredit, objTmNew.TransactionCausalId) > 0;
 
                     //si la factura es de credito
-                    if (exisCausalInCredit || exisCausalInCredit)
+                    if (exisCausalInCredit)
                     {
                         //Crear documento del modulo
                         var objCustomerCreditLine = _objInterfazCustomerCreditLineModel.GetRowByPk(Convert.ToInt32(objTmNew.Reference4));
@@ -1675,7 +1671,7 @@ namespace v4posme_window.Views
                             DateOn = DateOnly.FromDateTime(objTmNew.TransactionOn.Value),
                             ExchangeRate = objTmNew.ExchangeRate.Value,
                             Interes = objCustomerCreditLine.InterestYear,
-                            Term = objCustomerCreditLine!.Term.Value,
+                            Term = objCustomerCreditLine!.Term!.Value,
                             Amount = amountTotal!.Value,
                             Balance = amountTotal.Value
                         };
@@ -1693,8 +1689,9 @@ namespace v4posme_window.Views
                                          Math.Round(objTmInfoNew.ReceiptAmountCardDol * objTmNew.ExchangeRate.Value, 2) -
                                          Math.Round(objTmInfoNew.ReceiptAmountDol * objTmNew.ExchangeRate.Value, 2);
 
-// Asignar el valor calculado a la propiedad Amount de objCustomerCreditDocument
-                            objCustomerCreditDocument.Amount = amount.Value;
+                            // Asignar el valor calculado a la propiedad Amount de objCustomerCreditDocument
+                            objCustomerCreditDocument.Amount  = amount.Value;
+                            objCustomerCreditDocument.Balance = amount.Value;
                         }
 
                         if (objParameterAmortizationDuranteFactura == "true" && objTmNew.CurrencyId == 2 /*dolares*/)
@@ -1744,7 +1741,7 @@ namespace v4posme_window.Views
                             objCustomerCreditDocument.Amount, /*monto*/
                             objCustomerCreditDocument.Interes, /*interes anual*/
                             objCustomerCreditDocument.Term, /*numero de pagos*/
-                            periodPay.Sequence.Value, /*frecuencia de pago en dia*/
+                            periodPay.Sequence!.Value, /*frecuencia de pago en dia*/
                             objTmNew.TransactionOn2, /*fecha del credito*/
                             objCustomerCreditLine.TypeAmortization /*tipo de amortizacion*/,
                             objCatalogItem_DiasNoCobrables,
@@ -1796,10 +1793,12 @@ namespace v4posme_window.Views
                         var montoTotalDolaresCredit = objTmNew.CurrencyId == 2 ? objCustomerCreditDocument.Amount : Math.Round((objCustomerCreditDocument.Amount / objTmNew.ExchangeRate.Value), 2);
 
 
+                        //disminuir el balance de general	
                         var objCustomerCredit = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditModel>().GetRowByPk(objCustomerCreditLine.CompanyId, objCustomerCreditLine.BranchId, objCustomerCreditLine.EntityId);
                         objCustomerCredit.BalanceDol = objCustomerCredit.BalanceDol - montoTotalDolaresCredit;
                         VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditModel>().UpdateAppPosme(objCustomerCreditLine.CompanyId, objCustomerCreditLine.BranchId, objCustomerCreditLine.EntityId, objCustomerCredit);
 
+                        //disminuir el balance de linea
                         decimal balance;
                         if (objCustomerCreditLine.CurrencyId == ObjCurrencyCordoba.CurrencyId)
                             balance = objCustomerCreditLine.Balance - montoTotalCordobaCredit;
@@ -1810,6 +1809,8 @@ namespace v4posme_window.Views
                         objCustomerCreditLineNew.Balance = balance;
                         _objInterfazCustomerCreditLineModel.UpdateAppPosme(objCustomerCreditLine.CustomerCreditLineId, objCustomerCreditLineNew);
                     }
+
+
                 }
             }
             catch (Exception e)

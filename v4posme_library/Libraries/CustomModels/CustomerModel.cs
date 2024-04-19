@@ -16,17 +16,7 @@ public class CustomerModel : ICustomerModel
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
-    public void UpdateAppPosme(int companyId, int branchId, int entityId, TbCustomerDto data)
-    {
-        using var context = new DataContext();
-        var find = context.TbCustomers
-            .Single(customer => customer.CompanyId == companyId
-                                && customer.BranchId == branchId
-                                && customer.EntityId == entityId);
-        data.CustomerId = find.CustomerId;
-        context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
-    }
+ 
     public void DeleteAppPosme(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
