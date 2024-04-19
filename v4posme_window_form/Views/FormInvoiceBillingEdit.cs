@@ -295,12 +295,16 @@ namespace v4posme_window.Views
             if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
             {
                 LoadEdit();
+                LoadRender(TypeRender.Edit);
             }
 
             if (TypeOpen == TypeOpenForm.Init && TransactionMasterId == 0)
             {
                 LoadNew();
+                LoadRender(TypeRender.New);
             }
+
+            
         }
 
         #endregion
@@ -1968,6 +1972,11 @@ namespace v4posme_window.Views
                     pictureEdit1.Image = Image.FromFile(imageCustomer);
                 }
             }
+        }
+
+        public void LoadRender(TypeRender typeRedner)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

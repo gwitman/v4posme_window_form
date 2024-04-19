@@ -15,6 +15,7 @@ namespace v4posme_window.Interfaz
         void SaveUpdate();
         void LoadNew();
         void LoadEdit();
+        void LoadRender(TypeRender typeRedner);
         void ComandDelete();
         void ComandPrinter();
 

@@ -13,3 +13,8 @@ public enum TypeOpenForm
     Init,
     NotInit
 }
+public enum TypeRender
+{
+    New,
+    Edit
+}
