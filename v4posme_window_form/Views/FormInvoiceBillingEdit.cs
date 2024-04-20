@@ -1984,43 +1984,15 @@ namespace v4posme_window.Views
         public void LoadRender(TypeRender typeRender)
         {
             var objCoreWebRenderInView = new CoreWebRenderInView();
-            lblTitulo.Text = ObjTransactionMaster.TransactionNumber is not null ? $@"Factura: #{ObjTransactionMaster.TransactionNumber}" : @"Factura: #00000000";
-            txtExchangeRate.Text = ExchangeRate.ToString(CultureInfo.InvariantCulture);
-            string result;
-
-            if (ObjNaturalDefault is not null)
-            {
-                result = $"{ObjCustomerDefault.CustomerNumber} {ObjNaturalDefault!.FirstName!.ToUpper()} {ObjNaturalDefault!.LastName!.ToUpper()}";
-            }
-            else
-            {
-                result = $"{ObjCustomerDefault.CustomerNumber} {ObjLegalDefault!.ComercialName!.ToUpper()}";
-            }
-
-            txtCustomerDescription.Text = result;
-            //txtReferencia3
-            //txtEmployeID
-            //Montos Resumenes
-            //Detalle, de grid no se esta llenando.
-            txtReference3.Text = ObjEmployeeNatural is null ? "" : ObjEmployeeNatural.FirstName;
             switch (typeRender)
             {
                 case TypeRender.New:
-                    var employerDefault = ObjListParameterAll["INVOICE_BILLING_EMPLOYEE_DEFAULT"];
-                    string? defaultEmploye = null;
-                    var count = 0;
-                    foreach (var employeeDto in ObjListEmployee)
-                    {
-                        if (count == 0 && employerDefault == "true")
-                        {
-                            defaultEmploye = employeeDto.FirstName;
-                        }
-                        count++;
-                    }
-                    txtSubTotal.Text = string.Empty;
-                    txtIva.Text = string.Empty;
-                    txtTotal.Text = string.Empty;
-                    objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", defaultEmploye, 0);
+                    var employerDefault = ObjListParameterAll["INVOICE_BILLING_EMPLOYEE_DEFAULT"];                    
+                    if(employerDefault == "true")
+                    objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", null, 0);
+                    else 
+                    objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", null, null);
+
                     objCoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "currencyID", "name", null, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "catalogItemID", "name", null, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListWarehouse, txtWarehouseID, "warehouseID", "name", null, 0);
@@ -2034,22 +2006,30 @@ namespace v4posme_window.Views
                     objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "bankID", "name", null, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "bankID", "name", null, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "bankID", "name", null, 0);
+                    lblTitulo.Text = ObjTransactionMaster.TransactionNumber is not null ? $@"Factura: #{ObjTransactionMaster.TransactionNumber}" : @"Factura: #00000000";
+                    txtExchangeRate.Text = ExchangeRate.ToString(CultureInfo.InvariantCulture);
+                    txtCustomerDescription.Text = ObjNaturalDefault is not null ? 
+                                                    ($"{ObjCustomerDefault.CustomerNumber} {ObjNaturalDefault!.FirstName!.ToUpper()} {ObjNaturalDefault!.LastName!.ToUpper()}") : 
+                                                    ($"{ObjCustomerDefault.CustomerNumber} {ObjLegalDefault!.ComercialName!.ToUpper()}");
                     txtDate.DateTime = DateTime.Now;
                     txtNote.Text = string.Empty;
                     TxtCustomerId = ObjCustomerDefault.EntityId;
                     txtReferenceClientName.Text = string.Empty;
-                    txtReferenceClientIdentifier.Text = string.Empty;
-                    txtReference3.Text = string.Empty;
+                    txtReferenceClientIdentifier.Text = string.Empty;                    
                     txtNumberPhone.Text = string.Empty;
                     txtNextVisit.Text = string.Empty;
                     txtFixedExpenses.Text = string.Empty;
                     txtReference2.Text = ObjParameterCxcPlazoDefault;
+                    txtReference3.Text = ObjEmployeeNatural is null ? "N/D" : ObjEmployeeNatural.FirstName;
                     txtIsApplied.Checked = false;
                     txtDateFirst.DateTime = DateTime.Now;
                     txtDesembolsoEfectivo.IsOn = true;
                     txtReportSinRiesgo.IsOn = true;
                     TxtStatusOldId = ObjListWorkflowStage!.ElementAt(0).WorkflowStageId;
                     TxtStatusId = ObjListWorkflowStage!.ElementAt(0).WorkflowStageId;
+                    txtSubTotal.Text = @"0.0";
+                    txtIva.Text = @"0.0";
+                    txtTotal.Text = @"0.0";
                     txtChangeAmount.Text = @"0.0";
                     txtReceiptAmount.Text = @"0.0";
                     txtReceiptAmountDol.Text = @"0.0";
@@ -2078,6 +2058,11 @@ namespace v4posme_window.Views
                     objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "bankID", "name", ObjTransactionMasterInfo.ReceiptAmountCardBankDolId, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "bankID", "name", ObjTransactionMasterInfo.ReceiptAmountBankId, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "bankID", "name", ObjTransactionMasterInfo.ReceiptAmountBankDolId, 0);
+                    lblTitulo.Text = @"Factura: #00000000";
+                    txtExchangeRate.Text = ExchangeRate.ToString(CultureInfo.InvariantCulture);
+                    txtCustomerDescription.Text = ObjNaturalDefault is not null ?
+                                                   ($"{ObjCustomerDefault.CustomerNumber} {ObjNaturalDefault!.FirstName!.ToUpper()} {ObjNaturalDefault!.LastName!.ToUpper()}") :
+                                                   ($"{ObjCustomerDefault.CustomerNumber} {ObjLegalDefault!.ComercialName!.ToUpper()}");
                     CompanyId = ObjTransactionMaster.CompanyId;
                     TransactionId = ObjTransactionMaster.TransactionId;
                     TransactionMasterId = ObjTransactionMaster.TransactionMasterId;
@@ -2109,7 +2094,10 @@ namespace v4posme_window.Views
                     txtReceiptAmountBankDol.Text = ObjTransactionMasterInfo.ReceiptAmountBankDol.ToString("#0,000.00");
                     txtReceiptAmountBankDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
                     txtReceiptAmountPoint.Text = ObjTransactionMasterInfo.ReceiptAmountPoint!.Value.ToString("#0,000.00");
-                    
+                    txtSubTotal.Text = @"0.0";
+                    txtIva.Text = @"0.0";
+                    txtTotal.Text = @"0.0";
+
                     break;
             }
         }
