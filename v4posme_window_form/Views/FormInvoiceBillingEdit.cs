@@ -308,9 +308,6 @@ namespace v4posme_window.Views
 
         #endregion
 
-
-       
-
         #region Metodos
 
         public void ComandDelete()
@@ -2079,12 +2076,13 @@ namespace v4posme_window.Views
             formTypeListSearch.ShowDialog(this);
         }
 
-        private void EventoCallBackAceptar(dynamic mensaje)
+        private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            // Realizar la lógica que desees en el formulario padre
-            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
-            MessageBox.Show("Evento en el formulario hijo: " +
-                            objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
+            var formTypeListSearch = new FormTypeListSearch("Lista de Productos", 33,
+                "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
+                "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
+            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptarItem;
+            formTypeListSearch.ShowDialog(this);
         }
 
         private void EventoCallBackAceptarCusomter(dynamic mensaje)
@@ -2095,14 +2093,17 @@ namespace v4posme_window.Views
                             objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
         }
 
-        private void btnAddProduct_Click(object sender, EventArgs e)
+
+        private void EventoCallBackAceptarItem(dynamic mensaje)
         {
-            var formTypeListSearch = new FormTypeListSearch("Lista de Productos", 33,
-                "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
-                "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
-            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptar;
-            formTypeListSearch.ShowDialog(this);
+            // Realizar la lógica que desees en el formulario padre
+            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
+            MessageBox.Show("Evento en el formulario hijo: " +
+                            objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
         }
+
+        
+        
 
         private void lblTitulo_Click(object sender, EventArgs e)
         {
