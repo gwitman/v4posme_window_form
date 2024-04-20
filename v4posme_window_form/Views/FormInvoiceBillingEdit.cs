@@ -2007,7 +2007,7 @@ namespace v4posme_window.Views
             {
                 case TypeRender.New:
                     var employerDefault = ObjListParameterAll["INVOICE_BILLING_EMPLOYEE_DEFAULT"];
-                    var defaultEmploye = "";
+                    string? defaultEmploye = null;
                     var count = 0;
                     foreach (var employeeDto in ObjListEmployee)
                     {
@@ -2015,11 +2015,6 @@ namespace v4posme_window.Views
                         {
                             defaultEmploye = employeeDto.FirstName;
                         }
-                        else
-                        {
-                            defaultEmploye = employeeDto.FirstName;
-                        }
-
                         count++;
                     }
                     txtSubTotal.Text = string.Empty;
