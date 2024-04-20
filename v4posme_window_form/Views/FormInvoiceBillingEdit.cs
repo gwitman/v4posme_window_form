@@ -309,50 +309,7 @@ namespace v4posme_window.Views
         #endregion
 
 
-        #region Eventos Formulario
-
-        private void EventoCallBackAceptar(dynamic mensaje)
-        {
-            // Realizar la lógica que desees en el formulario padre
-            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
-            MessageBox.Show("Evento en el formulario hijo: " +
-                            objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
-        }
-
-        private void EventoCallBackAceptarCusomter(dynamic mensaje)
-        {
-            // Realizar la lógica que desees en el formulario padre
-            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
-            MessageBox.Show("Evento en el formulario hijo: " +
-                            objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
-        }
-
-        private void btnAddProduct_Click(object sender, EventArgs e)
-        {
-            var formTypeListSearch = new FormTypeListSearch("Lista de Productos", 33,
-                "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
-                "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
-            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptar;
-            formTypeListSearch.ShowDialog(this);
-        }
-
-        private void lblTitulo_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void dateEdit1_EditValueChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tablePanel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void tablePanel2_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        #endregion
+       
 
         #region Metodos
 
@@ -2104,6 +2061,10 @@ namespace v4posme_window.Views
 
         #endregion
 
+
+
+        #region Eventos Formulario
+
         private void btnSearchCustomer_Click(object sender, EventArgs e)
         {
             if (ObjComponentItem is null)
@@ -2117,5 +2078,49 @@ namespace v4posme_window.Views
             formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptarCusomter;
             formTypeListSearch.ShowDialog(this);
         }
+
+        private void EventoCallBackAceptar(dynamic mensaje)
+        {
+            // Realizar la lógica que desees en el formulario padre
+            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
+            MessageBox.Show("Evento en el formulario hijo: " +
+                            objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
+        }
+
+        private void EventoCallBackAceptarCusomter(dynamic mensaje)
+        {
+            // Realizar la lógica que desees en el formulario padre
+            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
+            MessageBox.Show("Evento en el formulario hijo: " +
+                            objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
+        }
+
+        private void btnAddProduct_Click(object sender, EventArgs e)
+        {
+            var formTypeListSearch = new FormTypeListSearch("Lista de Productos", 33,
+                "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
+                "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
+            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptar;
+            formTypeListSearch.ShowDialog(this);
+        }
+
+        private void lblTitulo_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void dateEdit1_EditValueChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void tablePanel1_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        private void tablePanel2_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        #endregion
+
     }
 }
