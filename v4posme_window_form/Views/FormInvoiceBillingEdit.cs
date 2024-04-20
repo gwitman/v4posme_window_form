@@ -1,7 +1,12 @@
-﻿using System.Globalization;
+﻿using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Windows.Controls;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraVerticalGrid;
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomHelper;
@@ -1082,13 +1087,13 @@ namespace v4posme_window.Views
                 {
                     //Recorrer la lista del detalle del documento
                     var itemNameDetail = gridViewValues.GetRowCellValue(i, colTransactionDetailName.Name).ToString()!.Replace("'", "");
-                    var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colCantidad.Name).ToString());
-                    var listPrice = Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colPrecio.Name));
-                    var listLote = (string?)gridViewValues.GetRowCellValue(i, colDescripcion.Name);
+                    var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity.Name).ToString());
+                    var listPrice = Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colPrice.Name));
+                    var listLote = (string?)gridViewValues.GetRowCellValue(i, colTransactionDetailName.Name);
                     var listVencimiento = gridViewValues.GetRowCellValue(i, colDetailVencimiento.Name).ToString();
                     var skuCatalogItemId = gridViewValues.GetRowCellValue(i, colSkuQuantityBySku.Name);
                     var skuFormatoDescription = gridViewValues.GetRowCellValue(i, colSkuFormatoDescripton.Name).ToString();
-                    var itemId = (int)gridViewValues.GetRowCellValue(i, colCodigo.Name);
+                    var itemId = (int)gridViewValues.GetRowCellValue(i, colItemNumber.Name);
 
 
                     var lote = string.IsNullOrEmpty(listLote) ? "" : listLote;
@@ -1452,16 +1457,16 @@ namespace v4posme_window.Views
                     //Actualizar Detalle
                     for (var i = 0; i < gridViewValues.RowCount; i++)
                     {
-                        listTransactionDetalId.Add((int)gridViewValues.GetRowCellValue(i, colCodigo.Name));
+                        listTransactionDetalId.Add((int)gridViewValues.GetRowCellValue(i, colItemNumber.Name));
                         arrayListItemId.Add(Convert.ToInt32(gridViewValues.GetRowCellValue(i, colItemId)));
                         arrayListItemName.Add(gridViewValues.GetRowCellValue(i, colTransactionDetailName.Name).ToString()!);
-                        arrayListQuantity.Add(Convert.ToInt32(gridViewValues.GetRowCellValue(i, colCantidad)));
-                        arrayListPrice.Add(Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colPrecio)));
-                        arrayListSubTotal.Add(Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colTotal)));
+                        arrayListQuantity.Add(Convert.ToInt32(gridViewValues.GetRowCellValue(i, colQuantity)));
+                        arrayListPrice.Add(Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colPrice)));
+                        arrayListSubTotal.Add(Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colSubTotal)));
                         arrayListIva.Add(Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colIva)));
                         arrayListLote.Add("");
                         arrayListVencimiento.Add("");
-                        arrayListSku.Add((int)gridViewValues.GetRowCellValue(i, colUM));
+                        arrayListSku.Add((int)gridViewValues.GetRowCellValue(i, colSku));
                         arrayListSkuFormatoDescription.Add(gridViewValues.GetRowCellValue(i, colSkuFormatoDescripton).ToString()!);
                     }
                 }
@@ -2052,15 +2057,63 @@ namespace v4posme_window.Views
                     txtIva.Text = @"0.0";
                     txtTotal.Text = @"0.0";
 
+
+
+                    if (ObjTransactionMasterDetail is not null)
+                    {
+                        foreach(var itemDto in ObjTransactionMasterDetail)
+                        {
+                            var Precio2     = ObjTransactionMasterItemPrice.Where(c => c.ItemId == itemDto.ComponentItemId && c.TypePriceId == (int)TypePrice.PorMayor).First().Price;
+                            var Precio3     = ObjTransactionMasterItemPrice.Where(c => c.ItemId == itemDto.ComponentItemId && c.TypePriceId == (int)TypePrice.Credito).First().Price;
+                            var ObjConcept  = ObjTransactionMasterDetailConcept.Where(c => c.ComponentItemId == itemDto.ComponentItemId && c.Name == "IVA").ToList();
+                            var Iva         = ObjConcept.Count == 0 ? 0 : ObjConcept.ElementAt(0).ValueOut;
+
+                            gridViewValues.AddNewRow();
+                            var handle = gridViewValues.FocusedRowHandle;
+                            gridViewValues.SetRowCellValue(handle, colCheckDetail,false);
+                            gridViewValues.SetRowCellValue(handle, colTransactionMasterDetailId, itemDto.TransactionMasterDetailId);
+                            gridViewValues.SetRowCellValue(handle, colItemId, itemDto.ComponentItemId);
+                            gridViewValues.SetRowCellValue(handle, colItemNumber, itemDto.ItemNumber);
+                            gridViewValues.SetRowCellValue(handle, colTransactionDetailName, itemDto.ItemNameLog);
+                            gridViewValues.SetRowCellValue(handle, colSku, itemDto.SkuCatalogItemId);
+                            gridViewValues.SetRowCellValue(handle, colQuantity, itemDto.SkuQuantity);
+                            gridViewValues.SetRowCellValue(handle, colPrice, itemDto.UnitaryPrice * itemDto.SkuQuantityBySku);
+                            gridViewValues.SetRowCellValue(handle, colSubTotal, itemDto.UnitaryPrice * itemDto.SkuQuantityBySku * itemDto.SkuQuantity );
+                            gridViewValues.SetRowCellValue(handle, colIva, Iva);
+                            gridViewValues.SetRowCellValue(handle, colSkuQuantityBySku, itemDto.SkuQuantityBySku);
+                            gridViewValues.SetRowCellValue(handle, colUnitaryPriceIndividual, itemDto.UnitaryPrice);
+                            gridViewValues.SetRowCellValue(handle, colAccion, "");
+                            gridViewValues.SetRowCellValue(handle, colSkuFormatoDescripton, itemDto.SkuFormatoDescription );                                                        
+                            gridViewValues.SetRowCellValue(handle, colItemPrecio2, Precio2);
+                            gridViewValues.SetRowCellValue(handle, colItemPrecio3, Precio3);
+                            gridViewValues.UpdateCurrentRow();
+                            
+
+                            
+                        }
+                    }
+
                     break;
             }
+
+
+            //Incializar Focos
+            if(ObjParameterScanerProducto  == "true")
+            {
+                txtScanerCodigo.Focus();
+            }            
+
         }
+
+
+
 
         #endregion
 
 
 
         #region Eventos Formulario
+
 
         private void btnSearchCustomer_Click(object sender, EventArgs e)
         {

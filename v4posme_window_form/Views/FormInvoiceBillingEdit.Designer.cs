@@ -106,7 +106,7 @@
             txtReference1 = new DevExpress.XtraEditors.ComboBoxEdit();
             labelControl18 = new DevExpress.XtraEditors.LabelControl();
             tabMas = new DevExpress.XtraTab.XtraTabPage();
-            colCantidad = new DevExpress.XtraGrid.Columns.GridColumn();
+            colQuantity = new DevExpress.XtraGrid.Columns.GridColumn();
             pictureEdit2 = new DevExpress.XtraEditors.PictureEdit();
             pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
@@ -145,25 +145,24 @@
             btnNew = new DevExpress.XtraEditors.SimpleButton();
             gridViewTbTransactionMasterDetail = new DevExpress.XtraGrid.GridControl();
             gridViewValues = new DevExpress.XtraGrid.Views.Grid.GridView();
+            colCheckDetail = new DevExpress.XtraGrid.Columns.GridColumn();
+            itemCheck = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             colTransactionMasterDetailId = new DevExpress.XtraGrid.Columns.GridColumn();
             colItemId = new DevExpress.XtraGrid.Columns.GridColumn();
-            colSeleccionar = new DevExpress.XtraGrid.Columns.GridColumn();
-            itemCheck = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            colCodigo = new DevExpress.XtraGrid.Columns.GridColumn();
-            colDescripcion = new DevExpress.XtraGrid.Columns.GridColumn();
-            colUM = new DevExpress.XtraGrid.Columns.GridColumn();
-            colPrecio = new DevExpress.XtraGrid.Columns.GridColumn();
+            colItemNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            colTransactionDetailName = new DevExpress.XtraGrid.Columns.GridColumn();
+            colSku = new DevExpress.XtraGrid.Columns.GridColumn();
+            colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            colSubTotal = new DevExpress.XtraGrid.Columns.GridColumn();
             colIva = new DevExpress.XtraGrid.Columns.GridColumn();
-            colTotal = new DevExpress.XtraGrid.Columns.GridColumn();
             colAccion = new DevExpress.XtraGrid.Columns.GridColumn();
             colSkuQuantityBySku = new DevExpress.XtraGrid.Columns.GridColumn();
             colUnitaryPriceIndividual = new DevExpress.XtraGrid.Columns.GridColumn();
             colSkuFormatoDescripton = new DevExpress.XtraGrid.Columns.GridColumn();
-            colPrecio2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            colPrecio3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            colDetailVencimiento = new DevExpress.XtraGrid.Columns.GridColumn();
-            colTransactionDetailName = new DevExpress.XtraGrid.Columns.GridColumn();
+            colItemPrecio2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            colItemPrecio3 = new DevExpress.XtraGrid.Columns.GridColumn();
             progressPanel = new DevExpress.XtraWaitForm.ProgressPanel();
+            colDetailVencimiento = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)stackPanel1).BeginInit();
             stackPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
@@ -688,7 +687,7 @@
             tabReferencias.Controls.Add(labelControl12);
             tabReferencias.Margin = new Padding(3, 4, 3, 4);
             tabReferencias.Name = "tabReferencias";
-            tabReferencias.Size = new Size(1375, 204);
+            tabReferencias.Size = new Size(1375, 199);
             tabReferencias.Text = "Referencias";
             // 
             // txtMesaID
@@ -871,7 +870,7 @@
             tabInfoCredito.Controls.Add(labelControl18);
             tabInfoCredito.Margin = new Padding(3, 4, 3, 4);
             tabInfoCredito.Name = "tabInfoCredito";
-            tabInfoCredito.Size = new Size(1375, 204);
+            tabInfoCredito.Size = new Size(1375, 199);
             tabInfoCredito.Text = "Info de Credito";
             // 
             // labelControl25
@@ -1044,17 +1043,17 @@
             tabMas.ImageOptions.SvgImageSize = new Size(15, 15);
             tabMas.Margin = new Padding(3, 4, 3, 4);
             tabMas.Name = "tabMas";
-            tabMas.Size = new Size(1375, 204);
+            tabMas.Size = new Size(1375, 199);
             tabMas.Text = "Mas";
             // 
-            // colCantidad
+            // colQuantity
             // 
-            colCantidad.Caption = "Cantidad";
-            colCantidad.MinWidth = 23;
-            colCantidad.Name = "colCantidad";
-            colCantidad.Visible = true;
-            colCantidad.VisibleIndex = 4;
-            colCantidad.Width = 86;
+            colQuantity.Caption = "Cantidad";
+            colQuantity.MinWidth = 23;
+            colQuantity.Name = "colQuantity";
+            colQuantity.Visible = true;
+            colQuantity.VisibleIndex = 4;
+            colQuantity.Width = 86;
             // 
             // pictureEdit2
             // 
@@ -1099,7 +1098,7 @@
             // txtTotal
             // 
             tablePanel2.SetColumn(txtTotal, 1);
-            txtTotal.Location = new Point(132, 108);
+            txtTotal.Location = new Point(132, 94);
             txtTotal.Margin = new Padding(3, 4, 3, 4);
             txtTotal.Name = "txtTotal";
             tablePanel2.SetRow(txtTotal, 2);
@@ -1109,7 +1108,7 @@
             // txtIva
             // 
             tablePanel2.SetColumn(txtIva, 1);
-            txtIva.Location = new Point(132, 62);
+            txtIva.Location = new Point(132, 45);
             txtIva.Margin = new Padding(3, 4, 3, 4);
             txtIva.Name = "txtIva";
             tablePanel2.SetRow(txtIva, 1);
@@ -1119,7 +1118,7 @@
             // txtSubTotal
             // 
             tablePanel2.SetColumn(txtSubTotal, 1);
-            txtSubTotal.Location = new Point(132, 12);
+            txtSubTotal.Location = new Point(132, 8);
             txtSubTotal.Margin = new Padding(3, 4, 3, 4);
             txtSubTotal.Name = "txtSubTotal";
             tablePanel2.SetRow(txtSubTotal, 0);
@@ -1131,7 +1130,7 @@
             labelControl39.Appearance.Font = new Font("Tahoma", 9F);
             labelControl39.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl39, 0);
-            labelControl39.Location = new Point(6, 115);
+            labelControl39.Location = new Point(6, 101);
             labelControl39.Margin = new Padding(3, 4, 3, 4);
             labelControl39.Name = "labelControl39";
             tablePanel2.SetRow(labelControl39, 2);
@@ -1144,7 +1143,7 @@
             labelControl38.Appearance.Font = new Font("Tahoma", 9F);
             labelControl38.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl38, 0);
-            labelControl38.Location = new Point(6, 69);
+            labelControl38.Location = new Point(6, 52);
             labelControl38.Margin = new Padding(3, 4, 3, 4);
             labelControl38.Name = "labelControl38";
             tablePanel2.SetRow(labelControl38, 1);
@@ -1157,7 +1156,7 @@
             labelControl37.Appearance.Font = new Font("Tahoma", 9F);
             labelControl37.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl37, 0);
-            labelControl37.Location = new Point(6, 19);
+            labelControl37.Location = new Point(6, 15);
             labelControl37.Margin = new Padding(3, 4, 3, 4);
             labelControl37.Name = "labelControl37";
             tablePanel2.SetRow(labelControl37, 0);
@@ -1205,7 +1204,7 @@
             // txtReceiptAmountBank_Reference
             // 
             tablePanel1.SetColumn(txtReceiptAmountBank_Reference, 3);
-            txtReceiptAmountBank_Reference.Location = new Point(353, 262);
+            txtReceiptAmountBank_Reference.Location = new Point(353, 193);
             txtReceiptAmountBank_Reference.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmountBank_Reference.Name = "txtReceiptAmountBank_Reference";
             tablePanel1.SetRow(txtReceiptAmountBank_Reference, 5);
@@ -1215,7 +1214,7 @@
             // txtReceiptAmountBank_BankID
             // 
             tablePanel1.SetColumn(txtReceiptAmountBank_BankID, 2);
-            txtReceiptAmountBank_BankID.Location = new Point(262, 262);
+            txtReceiptAmountBank_BankID.Location = new Point(262, 193);
             txtReceiptAmountBank_BankID.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmountBank_BankID.MenuManager = barManager1;
             txtReceiptAmountBank_BankID.Name = "txtReceiptAmountBank_BankID";
@@ -1227,7 +1226,7 @@
             // txtReceiptAmountTarjetaDol_Reference
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjetaDol_Reference, 3);
-            txtReceiptAmountTarjetaDol_Reference.Location = new Point(353, 212);
+            txtReceiptAmountTarjetaDol_Reference.Location = new Point(353, 156);
             txtReceiptAmountTarjetaDol_Reference.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmountTarjetaDol_Reference.Name = "txtReceiptAmountTarjetaDol_Reference";
             tablePanel1.SetRow(txtReceiptAmountTarjetaDol_Reference, 4);
@@ -1237,7 +1236,7 @@
             // txtReceiptAmountTarjeta_Reference
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjeta_Reference, 3);
-            txtReceiptAmountTarjeta_Reference.Location = new Point(353, 162);
+            txtReceiptAmountTarjeta_Reference.Location = new Point(353, 119);
             txtReceiptAmountTarjeta_Reference.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmountTarjeta_Reference.Name = "txtReceiptAmountTarjeta_Reference";
             tablePanel1.SetRow(txtReceiptAmountTarjeta_Reference, 3);
@@ -1247,7 +1246,7 @@
             // txtReceiptAmountBankDol_Reference
             // 
             tablePanel1.SetColumn(txtReceiptAmountBankDol_Reference, 3);
-            txtReceiptAmountBankDol_Reference.Location = new Point(353, 312);
+            txtReceiptAmountBankDol_Reference.Location = new Point(353, 230);
             txtReceiptAmountBankDol_Reference.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmountBankDol_Reference.Name = "txtReceiptAmountBankDol_Reference";
             tablePanel1.SetRow(txtReceiptAmountBankDol_Reference, 6);
@@ -1257,7 +1256,7 @@
             // txtReceiptAmountTarjetaDol_BankID
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjetaDol_BankID, 2);
-            txtReceiptAmountTarjetaDol_BankID.Location = new Point(262, 212);
+            txtReceiptAmountTarjetaDol_BankID.Location = new Point(262, 156);
             txtReceiptAmountTarjetaDol_BankID.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmountTarjetaDol_BankID.MenuManager = barManager1;
             txtReceiptAmountTarjetaDol_BankID.Name = "txtReceiptAmountTarjetaDol_BankID";
@@ -1269,7 +1268,7 @@
             // txtReceiptAmountTarjeta_BankID
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjeta_BankID, 2);
-            txtReceiptAmountTarjeta_BankID.Location = new Point(262, 162);
+            txtReceiptAmountTarjeta_BankID.Location = new Point(262, 119);
             txtReceiptAmountTarjeta_BankID.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmountTarjeta_BankID.MenuManager = barManager1;
             txtReceiptAmountTarjeta_BankID.Name = "txtReceiptAmountTarjeta_BankID";
@@ -1281,7 +1280,7 @@
             // txtReceiptAmountBankDol_BankID
             // 
             tablePanel1.SetColumn(txtReceiptAmountBankDol_BankID, 2);
-            txtReceiptAmountBankDol_BankID.Location = new Point(262, 312);
+            txtReceiptAmountBankDol_BankID.Location = new Point(262, 230);
             txtReceiptAmountBankDol_BankID.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmountBankDol_BankID.MenuManager = barManager1;
             txtReceiptAmountBankDol_BankID.Name = "txtReceiptAmountBankDol_BankID";
@@ -1293,7 +1292,7 @@
             // txtReceiptAmountPoint
             // 
             tablePanel1.SetColumn(txtReceiptAmountPoint, 1);
-            txtReceiptAmountPoint.Location = new Point(147, 366);
+            txtReceiptAmountPoint.Location = new Point(147, 320);
             txtReceiptAmountPoint.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmountPoint.Name = "txtReceiptAmountPoint";
             tablePanel1.SetRow(txtReceiptAmountPoint, 7);
@@ -1303,7 +1302,7 @@
             // txtReceiptAmountBankDol
             // 
             tablePanel1.SetColumn(txtReceiptAmountBankDol, 1);
-            txtReceiptAmountBankDol.Location = new Point(147, 312);
+            txtReceiptAmountBankDol.Location = new Point(147, 230);
             txtReceiptAmountBankDol.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmountBankDol.Name = "txtReceiptAmountBankDol";
             tablePanel1.SetRow(txtReceiptAmountBankDol, 6);
@@ -1313,7 +1312,7 @@
             // txtReceiptAmountBank
             // 
             tablePanel1.SetColumn(txtReceiptAmountBank, 1);
-            txtReceiptAmountBank.Location = new Point(147, 262);
+            txtReceiptAmountBank.Location = new Point(147, 193);
             txtReceiptAmountBank.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmountBank.Name = "txtReceiptAmountBank";
             tablePanel1.SetRow(txtReceiptAmountBank, 5);
@@ -1323,7 +1322,7 @@
             // txtReceiptAmountTarjetaDol
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjetaDol, 1);
-            txtReceiptAmountTarjetaDol.Location = new Point(147, 212);
+            txtReceiptAmountTarjetaDol.Location = new Point(147, 156);
             txtReceiptAmountTarjetaDol.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmountTarjetaDol.Name = "txtReceiptAmountTarjetaDol";
             tablePanel1.SetRow(txtReceiptAmountTarjetaDol, 4);
@@ -1333,7 +1332,7 @@
             // txtReceiptAmountTarjeta
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjeta, 1);
-            txtReceiptAmountTarjeta.Location = new Point(147, 162);
+            txtReceiptAmountTarjeta.Location = new Point(147, 119);
             txtReceiptAmountTarjeta.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmountTarjeta.Name = "txtReceiptAmountTarjeta";
             tablePanel1.SetRow(txtReceiptAmountTarjeta, 3);
@@ -1343,7 +1342,7 @@
             // txtReceiptAmountDol
             // 
             tablePanel1.SetColumn(txtReceiptAmountDol, 1);
-            txtReceiptAmountDol.Location = new Point(147, 112);
+            txtReceiptAmountDol.Location = new Point(147, 82);
             txtReceiptAmountDol.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmountDol.Name = "txtReceiptAmountDol";
             tablePanel1.SetRow(txtReceiptAmountDol, 2);
@@ -1353,7 +1352,7 @@
             // txtReceiptAmount
             // 
             tablePanel1.SetColumn(txtReceiptAmount, 1);
-            txtReceiptAmount.Location = new Point(147, 62);
+            txtReceiptAmount.Location = new Point(147, 45);
             txtReceiptAmount.Margin = new Padding(3, 4, 3, 4);
             txtReceiptAmount.Name = "txtReceiptAmount";
             tablePanel1.SetRow(txtReceiptAmount, 1);
@@ -1363,7 +1362,7 @@
             // txtChangeAmount
             // 
             tablePanel1.SetColumn(txtChangeAmount, 1);
-            txtChangeAmount.Location = new Point(147, 12);
+            txtChangeAmount.Location = new Point(147, 8);
             txtChangeAmount.Margin = new Padding(3, 4, 3, 4);
             txtChangeAmount.Name = "txtChangeAmount";
             tablePanel1.SetRow(txtChangeAmount, 0);
@@ -1375,7 +1374,7 @@
             labelControl36.Appearance.Font = new Font("Tahoma", 9F);
             labelControl36.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl36, 0);
-            labelControl36.Location = new Point(6, 373);
+            labelControl36.Location = new Point(6, 327);
             labelControl36.Margin = new Padding(3, 4, 3, 4);
             labelControl36.Name = "labelControl36";
             tablePanel1.SetRow(labelControl36, 7);
@@ -1388,7 +1387,7 @@
             labelControl35.Appearance.Font = new Font("Tahoma", 9F);
             labelControl35.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl35, 0);
-            labelControl35.Location = new Point(6, 319);
+            labelControl35.Location = new Point(6, 237);
             labelControl35.Margin = new Padding(3, 4, 3, 4);
             labelControl35.Name = "labelControl35";
             tablePanel1.SetRow(labelControl35, 6);
@@ -1401,7 +1400,7 @@
             labelControl34.Appearance.Font = new Font("Tahoma", 9F);
             labelControl34.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl34, 0);
-            labelControl34.Location = new Point(6, 269);
+            labelControl34.Location = new Point(6, 200);
             labelControl34.Margin = new Padding(3, 4, 3, 4);
             labelControl34.Name = "labelControl34";
             tablePanel1.SetRow(labelControl34, 5);
@@ -1414,7 +1413,7 @@
             labelControl33.Appearance.Font = new Font("Tahoma", 9F);
             labelControl33.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl33, 0);
-            labelControl33.Location = new Point(6, 219);
+            labelControl33.Location = new Point(6, 163);
             labelControl33.Margin = new Padding(3, 4, 3, 4);
             labelControl33.Name = "labelControl33";
             tablePanel1.SetRow(labelControl33, 4);
@@ -1427,7 +1426,7 @@
             labelControl32.Appearance.Font = new Font("Tahoma", 9F);
             labelControl32.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl32, 0);
-            labelControl32.Location = new Point(6, 169);
+            labelControl32.Location = new Point(6, 126);
             labelControl32.Margin = new Padding(3, 4, 3, 4);
             labelControl32.Name = "labelControl32";
             tablePanel1.SetRow(labelControl32, 3);
@@ -1440,7 +1439,7 @@
             labelControl31.Appearance.Font = new Font("Tahoma", 9F);
             labelControl31.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl31, 0);
-            labelControl31.Location = new Point(6, 119);
+            labelControl31.Location = new Point(6, 89);
             labelControl31.Margin = new Padding(3, 4, 3, 4);
             labelControl31.Name = "labelControl31";
             tablePanel1.SetRow(labelControl31, 2);
@@ -1453,7 +1452,7 @@
             labelControl30.Appearance.Font = new Font("Tahoma", 9F);
             labelControl30.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl30, 0);
-            labelControl30.Location = new Point(6, 69);
+            labelControl30.Location = new Point(6, 52);
             labelControl30.Margin = new Padding(3, 4, 3, 4);
             labelControl30.Name = "labelControl30";
             tablePanel1.SetRow(labelControl30, 1);
@@ -1466,7 +1465,7 @@
             labelControl29.Appearance.Font = new Font("Tahoma", 9F);
             labelControl29.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl29, 0);
-            labelControl29.Location = new Point(6, 19);
+            labelControl29.Location = new Point(6, 15);
             labelControl29.Margin = new Padding(3, 4, 3, 4);
             labelControl29.Name = "labelControl29";
             tablePanel1.SetRow(labelControl29, 0);
@@ -1510,12 +1509,30 @@
             // 
             // gridViewValues
             // 
-            gridViewValues.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colTransactionMasterDetailId, colItemId, colSeleccionar, colCodigo, colDescripcion, colUM, colCantidad, colPrecio, colIva, colTotal, colAccion, colSkuQuantityBySku, colUnitaryPriceIndividual, colSkuFormatoDescripton, colPrecio2, colPrecio3, colDetailVencimiento, colTransactionDetailName });
+            gridViewValues.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colCheckDetail, colTransactionMasterDetailId, colItemId, colItemNumber, colTransactionDetailName, colSku, colQuantity, colPrice, colSubTotal, colAccion, colIva, colSkuQuantityBySku, colUnitaryPriceIndividual, colSkuFormatoDescripton, colItemPrecio2, colItemPrecio3, colDetailVencimiento });
             gridViewValues.DetailHeight = 467;
             gridViewValues.GridControl = gridViewTbTransactionMasterDetail;
             gridViewValues.Name = "gridViewValues";
             gridViewValues.OptionsEditForm.PopupEditFormWidth = 914;
             gridViewValues.OptionsView.ShowGroupPanel = false;
+            // 
+            // colCheckDetail
+            // 
+            colCheckDetail.Caption = "Seleccionar";
+            colCheckDetail.ColumnEdit = itemCheck;
+            colCheckDetail.FieldName = "colCheckDetail";
+            colCheckDetail.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+            colCheckDetail.MinWidth = 23;
+            colCheckDetail.Name = "colCheckDetail";
+            colCheckDetail.Visible = true;
+            colCheckDetail.VisibleIndex = 0;
+            colCheckDetail.Width = 86;
+            // 
+            // itemCheck
+            // 
+            itemCheck.AutoHeight = false;
+            itemCheck.Caption = "";
+            itemCheck.Name = "itemCheck";
             // 
             // colTransactionMasterDetailId
             // 
@@ -1531,59 +1548,50 @@
             colItemId.Name = "colItemId";
             colItemId.Width = 86;
             // 
-            // colSeleccionar
+            // colItemNumber
             // 
-            colSeleccionar.Caption = "Seleccionar";
-            colSeleccionar.ColumnEdit = itemCheck;
-            colSeleccionar.FieldName = "chkSeleccionarItem";
-            colSeleccionar.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-            colSeleccionar.MinWidth = 23;
-            colSeleccionar.Name = "colSeleccionar";
-            colSeleccionar.Visible = true;
-            colSeleccionar.VisibleIndex = 0;
-            colSeleccionar.Width = 86;
+            colItemNumber.Caption = "Codigo";
+            colItemNumber.MinWidth = 23;
+            colItemNumber.Name = "colItemNumber";
+            colItemNumber.Visible = true;
+            colItemNumber.VisibleIndex = 1;
+            colItemNumber.Width = 86;
             // 
-            // itemCheck
+            // colTransactionDetailName
             // 
-            itemCheck.AutoHeight = false;
-            itemCheck.Caption = "";
-            itemCheck.Name = "itemCheck";
+            colTransactionDetailName.Caption = "Descripcion";
+            colTransactionDetailName.MinWidth = 23;
+            colTransactionDetailName.Name = "colTransactionDetailName";
+            colTransactionDetailName.Visible = true;
+            colTransactionDetailName.VisibleIndex = 2;
+            colTransactionDetailName.Width = 86;
             // 
-            // colCodigo
+            // colSku
             // 
-            colCodigo.Caption = "Codigo";
-            colCodigo.MinWidth = 23;
-            colCodigo.Name = "colCodigo";
-            colCodigo.Visible = true;
-            colCodigo.VisibleIndex = 1;
-            colCodigo.Width = 86;
+            colSku.Caption = "U/M";
+            colSku.MinWidth = 23;
+            colSku.Name = "colSku";
+            colSku.Visible = true;
+            colSku.VisibleIndex = 3;
+            colSku.Width = 86;
             // 
-            // colDescripcion
+            // colPrice
             // 
-            colDescripcion.Caption = "Descripcion";
-            colDescripcion.MinWidth = 23;
-            colDescripcion.Name = "colDescripcion";
-            colDescripcion.Visible = true;
-            colDescripcion.VisibleIndex = 2;
-            colDescripcion.Width = 86;
+            colPrice.Caption = "Precio";
+            colPrice.MinWidth = 23;
+            colPrice.Name = "colPrice";
+            colPrice.Visible = true;
+            colPrice.VisibleIndex = 5;
+            colPrice.Width = 86;
             // 
-            // colUM
+            // colSubTotal
             // 
-            colUM.Caption = "U/M";
-            colUM.MinWidth = 23;
-            colUM.Name = "colUM";
-            colUM.Visible = true;
-            colUM.VisibleIndex = 3;
-            colUM.Width = 86;
-            // 
-            // colPrecio
-            // 
-            colPrecio.Caption = "Precio";
-            colPrecio.MinWidth = 23;
-            colPrecio.Name = "colPrecio";
-            colPrecio.Visible = true;
-            colPrecio.VisibleIndex = 5;
-            colPrecio.Width = 86;
+            colSubTotal.Caption = "Total";
+            colSubTotal.MinWidth = 23;
+            colSubTotal.Name = "colSubTotal";
+            colSubTotal.Visible = true;
+            colSubTotal.VisibleIndex = 6;
+            colSubTotal.Width = 86;
             // 
             // colIva
             // 
@@ -1591,15 +1599,6 @@
             colIva.MinWidth = 23;
             colIva.Name = "colIva";
             colIva.Width = 86;
-            // 
-            // colTotal
-            // 
-            colTotal.Caption = "Total";
-            colTotal.MinWidth = 23;
-            colTotal.Name = "colTotal";
-            colTotal.Visible = true;
-            colTotal.VisibleIndex = 6;
-            colTotal.Width = 86;
             // 
             // colAccion
             // 
@@ -1612,56 +1611,33 @@
             // 
             // colSkuQuantityBySku
             // 
-            colSkuQuantityBySku.Caption = "Quantity";
             colSkuQuantityBySku.MinWidth = 23;
             colSkuQuantityBySku.Name = "colSkuQuantityBySku";
             colSkuQuantityBySku.Width = 86;
             // 
             // colUnitaryPriceIndividual
             // 
-            colUnitaryPriceIndividual.Caption = "UnitaryPrice Individual";
             colUnitaryPriceIndividual.MinWidth = 23;
             colUnitaryPriceIndividual.Name = "colUnitaryPriceIndividual";
             colUnitaryPriceIndividual.Width = 86;
             // 
             // colSkuFormatoDescripton
             // 
-            colSkuFormatoDescripton.Caption = "Sku Formato Descripcion";
             colSkuFormatoDescripton.MinWidth = 23;
             colSkuFormatoDescripton.Name = "colSkuFormatoDescripton";
             colSkuFormatoDescripton.Width = 86;
             // 
-            // colPrecio2
+            // colItemPrecio2
             // 
-            colPrecio2.Caption = "Precio 2";
-            colPrecio2.MinWidth = 23;
-            colPrecio2.Name = "colPrecio2";
-            colPrecio2.Width = 86;
+            colItemPrecio2.MinWidth = 23;
+            colItemPrecio2.Name = "colItemPrecio2";
+            colItemPrecio2.Width = 86;
             // 
-            // colPrecio3
+            // colItemPrecio3
             // 
-            colPrecio3.Caption = "Precio 3";
-            colPrecio3.MinWidth = 23;
-            colPrecio3.Name = "colPrecio3";
-            colPrecio3.Width = 86;
-            // 
-            // colDetailVencimiento
-            // 
-            colDetailVencimiento.Caption = "DetailVencimiento";
-            colDetailVencimiento.MinWidth = 23;
-            colDetailVencimiento.Name = "colDetailVencimiento";
-            colDetailVencimiento.Visible = true;
-            colDetailVencimiento.VisibleIndex = 8;
-            colDetailVencimiento.Width = 86;
-            // 
-            // colTransactionDetailName
-            // 
-            colTransactionDetailName.Caption = "TransactionDetailName";
-            colTransactionDetailName.MinWidth = 23;
-            colTransactionDetailName.Name = "colTransactionDetailName";
-            colTransactionDetailName.Visible = true;
-            colTransactionDetailName.VisibleIndex = 9;
-            colTransactionDetailName.Width = 86;
+            colItemPrecio3.MinWidth = 23;
+            colItemPrecio3.Name = "colItemPrecio3";
+            colItemPrecio3.Width = 86;
             // 
             // progressPanel
             // 
@@ -1677,6 +1653,13 @@
             progressPanel.Size = new Size(445, 124);
             progressPanel.TabIndex = 47;
             progressPanel.Visible = false;
+            // 
+            // colDetailVencimiento
+            // 
+            colDetailVencimiento.Caption = "colDetailVencimiento";
+            colDetailVencimiento.MinWidth = 25;
+            colDetailVencimiento.Name = "colDetailVencimiento";
+            colDetailVencimiento.Width = 94;
             // 
             // FormInvoiceBillingEdit
             // 
@@ -1906,25 +1889,24 @@
         private DevExpress.XtraEditors.SimpleButton btnNew;
         private DevExpress.XtraGrid.GridControl gridViewTbTransactionMasterDetail;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewValues;
-        private DevExpress.XtraGrid.Columns.GridColumn colCodigo;
-        private DevExpress.XtraGrid.Columns.GridColumn colDescripcion;
-        private DevExpress.XtraGrid.Columns.GridColumn colUM;
-        private DevExpress.XtraGrid.Columns.GridColumn colCantidad;
-        private DevExpress.XtraGrid.Columns.GridColumn colPrecio;
-        private DevExpress.XtraGrid.Columns.GridColumn colTotal;
+        private DevExpress.XtraGrid.Columns.GridColumn colItemNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colSku;
+        private DevExpress.XtraGrid.Columns.GridColumn colQuantity;
+        private DevExpress.XtraGrid.Columns.GridColumn colPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn colSubTotal;
         private DevExpress.XtraGrid.Columns.GridColumn colAccion;
         private DevExpress.XtraGrid.Columns.GridColumn colSkuQuantityBySku;
         private DevExpress.XtraGrid.Columns.GridColumn colUnitaryPriceIndividual;
         private DevExpress.XtraGrid.Columns.GridColumn colSkuFormatoDescripton;
-        private DevExpress.XtraGrid.Columns.GridColumn colPrecio2;
-        private DevExpress.XtraGrid.Columns.GridColumn colPrecio3;
+        private DevExpress.XtraGrid.Columns.GridColumn colItemPrecio2;
+        private DevExpress.XtraGrid.Columns.GridColumn colItemPrecio3;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanel;
-        private DevExpress.XtraGrid.Columns.GridColumn colDetailVencimiento;
         private DevExpress.XtraGrid.Columns.GridColumn colTransactionDetailName;
         private DevExpress.XtraGrid.Columns.GridColumn colTransactionMasterDetailId;
         private DevExpress.XtraGrid.Columns.GridColumn colItemId;
-        private DevExpress.XtraGrid.Columns.GridColumn colSeleccionar;
+        private DevExpress.XtraGrid.Columns.GridColumn colCheckDetail;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit itemCheck;
         private DevExpress.XtraGrid.Columns.GridColumn colIva;
+        private DevExpress.XtraGrid.Columns.GridColumn colDetailVencimiento;
     }
 }
