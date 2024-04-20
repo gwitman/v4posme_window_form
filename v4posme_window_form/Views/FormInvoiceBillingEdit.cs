@@ -2002,50 +2002,75 @@ namespace v4posme_window.Views
             //txtEmployeID
             //Montos Resumenes
             //Detalle, de grid no se esta llenando.
-
+            txtReference3.Text = ObjEmployeeNatural is null ? "" : ObjEmployeeNatural.FirstName;
             switch (typeRender)
             {
                 case TypeRender.New:
-                    txtDate.DateTime = DateTime.Now;
-                    txtNote.Text = string.Empty;
-                    TxtCustomerId = ObjCustomerDefault.EntityId;
+                    var employerDefault = ObjListParameterAll["INVOICE_BILLING_EMPLOYEE_DEFAULT"];
+                    var defaultEmploye = "";
+                    var count = 0;
+                    foreach (var employeeDto in ObjListEmployee)
+                    {
+                        if (count == 0 && employerDefault == "true")
+                        {
+                            defaultEmploye = employeeDto.FirstName;
+                        }
+                        else
+                        {
+                            defaultEmploye = employeeDto.FirstName;
+                        }
+
+                        count++;
+                    }
+                    txtSubTotal.Text = string.Empty;
+                    txtIva.Text = string.Empty;
+                    txtTotal.Text = string.Empty;
+                    objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", defaultEmploye, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "currencyID", "name", null, 0);
-                    txtReferenceClientName.Text = string.Empty;
-                    txtReferenceClientIdentifier.Text = string.Empty;
                     objCoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "catalogItemID", "name", null, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListWarehouse, txtWarehouseID, "warehouseID", "name", null, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", null, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "catalogItemID", "name", null, 0);
                     objCoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "entityID", "firstName", null, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "catalogItemID", "name", null, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "catalogItemID", "name", ObjParameterCxcFrecuenciaPayDefault, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "transactionCausalID", "name", null, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "customerCreditLineID", "accountNumber", null, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "catalogItemID", "display", null, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "bankID", "name", null, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "bankID", "name", null, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "bankID", "name", null, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "bankID", "name", null, 0);
+                    txtDate.DateTime = DateTime.Now;
+                    txtNote.Text = string.Empty;
+                    TxtCustomerId = ObjCustomerDefault.EntityId;
+                    txtReferenceClientName.Text = string.Empty;
+                    txtReferenceClientIdentifier.Text = string.Empty;
                     txtReference3.Text = string.Empty;
                     txtNumberPhone.Text = string.Empty;
                     txtNextVisit.Text = string.Empty;
                     txtFixedExpenses.Text = string.Empty;
-                    txtReference2.Text = string.Empty;
+                    txtReference2.Text = ObjParameterCxcPlazoDefault;
                     txtIsApplied.Checked = false;
                     txtDateFirst.DateTime = DateTime.Now;
                     txtDesembolsoEfectivo.IsOn = true;
                     txtReportSinRiesgo.IsOn = true;
                     TxtStatusOldId = ObjListWorkflowStage!.ElementAt(0).WorkflowStageId;
                     TxtStatusId = ObjListWorkflowStage!.ElementAt(0).WorkflowStageId;
-                    txtChangeAmount.Text = "0";
-                    
+                    txtChangeAmount.Text = @"0.0";
+                    txtReceiptAmount.Text = @"0.0";
+                    txtReceiptAmountDol.Text = @"0.0";
+                    txtReceiptAmountTarjeta.Text = @"0.0";
+                    txtReceiptAmountTarjeta_Reference.Text = @"0.0";
+                    txtReceiptAmountTarjetaDol.Text = @"0.0";
+                    txtReceiptAmountTarjetaDol_Reference.Text = string.Empty;
+                    txtReceiptAmountBank.Text = @"0.0";
+                    txtReceiptAmountBank_Reference.Text = string.Empty;
+                    txtReceiptAmountBankDol.Text = @"0.0";
+                    txtReceiptAmountBankDol_Reference.Text = string.Empty;
+                    txtReceiptAmountPoint.Text = @"0.0";
                     break;
                 case TypeRender.Edit:
-                    CompanyId = ObjTransactionMaster.CompanyId;
-                    TransactionId = ObjTransactionMaster.TransactionId;
-                    TransactionMasterId = ObjTransactionMaster.TransactionMasterId;
-                    TxtCustomerId = ObjTransactionMaster.EntityId!.Value;
-                    txtDate.EditValue = ObjTransactionMaster.TransactionOn;
                     objCoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "currencyID", "name", ObjTransactionMaster.CurrencyId, 0);
-                    txtNote.Text = ObjTransactionMaster.Note;
-                    txtReferenceClientName.Text = ObjTransactionMasterInfo.ReferenceClientName;
-                    txtReferenceClientIdentifier.Text = ObjTransactionMasterInfo.ReferenceClientIdentifier;
-                    objCoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "catalogItemID", "name", ObjTransactionMasterInfo.ZoneId, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "catalogItemID", "display", ObjTransactionMasterInfo.ZoneId, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListWarehouse, txtWarehouseID, "warehouseID", "name", ObjTransactionMaster.SourceWarehouseId, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", ObjTransactionMaster.EntityIdsecondary, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "catalogItemID", "name", ObjTransactionMasterInfo.MesaId, 0);
@@ -2054,6 +2079,18 @@ namespace v4posme_window.Views
                     objCoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "transactionCausalID", "name", ObjTransactionMaster.TransactionCausalId, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "customerCreditLineID", "accountNumber", ObjTransactionMaster.Reference4, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "catalogItemID", "display", null, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "catalogItemID", "display", ObjTransactionMasterInfo.ReceiptAmountCardBankId, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "bankID", "name", ObjTransactionMasterInfo.ReceiptAmountCardBankDolId, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "bankID", "name", ObjTransactionMasterInfo.ReceiptAmountBankId, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "bankID", "name", ObjTransactionMasterInfo.ReceiptAmountBankDolId, 0);
+                    CompanyId = ObjTransactionMaster.CompanyId;
+                    TransactionId = ObjTransactionMaster.TransactionId;
+                    TransactionMasterId = ObjTransactionMaster.TransactionMasterId;
+                    TxtCustomerId = ObjTransactionMaster.EntityId!.Value;
+                    txtDate.EditValue = ObjTransactionMaster.TransactionOn;
+                    txtNote.Text = ObjTransactionMaster.Note;
+                    txtReferenceClientName.Text = ObjTransactionMasterInfo.ReferenceClientName;
+                    txtReferenceClientIdentifier.Text = ObjTransactionMasterInfo.ReferenceClientIdentifier;
                     txtReference3.Text = ObjTransactionMaster.Reference3;
                     txtNumberPhone.Text = ObjTransactionMaster.NumberPhone;
                     txtNextVisit.DateTime = ObjTransactionMaster.NextVisit!.Value;
@@ -2061,14 +2098,23 @@ namespace v4posme_window.Views
                     txtIsApplied.Checked = ObjTransactionMaster.IsApplied!.Value;
                     txtDateFirst.DateTime = ObjTransactionMaster.TransactionOn2!.Value;
                     txtReference2.Text = ObjTransactionMaster.Reference2;
-                    txtDesembolsoEfectivo.IsOn = true;
+                    txtDesembolsoEfectivo.IsOn = true; //txtCheckDeEfectivo
                     txtReportSinRiesgo.IsOn = Convert.ToInt32(ObjTransactionMasterDetailCredit.Reference2) == 1;
                     TxtStatusOldId = ObjTransactionMaster.StatusId;
                     TxtStatusId = ObjTransactionMaster.StatusId;
-                    txtChangeAmount.Text = ObjTransactionMasterInfo.ReceiptAmount.ToString();
-
-
-
+                    txtChangeAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString("#0,000.00");
+                    txtReceiptAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString("#0,000.00");
+                    txtReceiptAmountDol.Text = ObjTransactionMasterInfo.ReceiptAmountDol.ToString("#0,000.00");
+                    txtReceiptAmountTarjeta.Text = ObjTransactionMasterInfo.ReceiptAmountCard.ToString("#0,000.00");
+                    txtReceiptAmountTarjeta_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountCardBankReference;
+                    txtReceiptAmountTarjetaDol.Text = ObjTransactionMasterInfo.ReceiptAmountCardDol.ToString("#0,000.00");
+                    txtReceiptAmountTarjetaDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
+                    txtReceiptAmountBank.Text = ObjTransactionMasterInfo.ReceiptAmountBank.ToString("#0,000.00");
+                    txtReceiptAmountBank_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankReference;
+                    txtReceiptAmountBankDol.Text = ObjTransactionMasterInfo.ReceiptAmountBankDol.ToString("#0,000.00");
+                    txtReceiptAmountBankDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
+                    txtReceiptAmountPoint.Text = ObjTransactionMasterInfo.ReceiptAmountPoint!.Value.ToString("#0,000.00");
+                    
                     break;
             }
         }
