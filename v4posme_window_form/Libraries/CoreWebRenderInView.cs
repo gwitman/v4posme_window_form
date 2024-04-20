@@ -20,7 +20,7 @@ namespace v4posme_window.Libraries;
 
 public class CoreWebRenderInView
 {
-    public static void LlenarComboBox(List<object> lista, ComboBoxEdit comboBox, string keyField, string valueField,object? defaultValue, object? selectedValue)
+    public void LlenarComboBox<T>(List<T> lista, ComboBoxEdit comboBox, string keyField, string valueField,object? defaultValue, object? selectedValue)
     {
         // Limpiar el combobox
         comboBox.Properties.Items.Clear();
