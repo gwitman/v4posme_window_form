@@ -1990,17 +1990,19 @@ namespace v4posme_window.Views
 
             if (ObjNaturalDefault is not null)
             {
-                result = $"{ObjCustomerDefault.CustomerNumber} {ObjNaturalDefault.FirstName.ToUpper()} {ObjNaturalDefault.LastName.ToUpper()}";
+                result = $"{ObjCustomerDefault.CustomerNumber} {ObjNaturalDefault!.FirstName!.ToUpper()} {ObjNaturalDefault!.LastName!.ToUpper()}";
             }
             else
             {
-                result = $"{ObjCustomerDefault.CustomerNumber} {ObjLegalDefault.ComercialName.ToUpper()}";
+                result = $"{ObjCustomerDefault.CustomerNumber} {ObjLegalDefault!.ComercialName!.ToUpper()}";
             }
 
             txtCustomerDescription.Text = result;
-            objCoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "transactionCausalID", "name", null, 0);
-            objCoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "customerCreditLineID", "accountNumber", null, 0);
-            objCoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "catalogItemID", "display", null, 0);
+            //txtReferencia3
+            //txtEmployeID
+            //Montos Resumenes
+            //Detalle, de grid no se esta llenando.
+
             switch (typeRender)
             {
                 case TypeRender.New:
@@ -2016,6 +2018,9 @@ namespace v4posme_window.Views
                     objCoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "catalogItemID", "name", null, 0);
                     objCoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "entityID", "firstName", null, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "catalogItemID", "name", null, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "transactionCausalID", "name", null, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "customerCreditLineID", "accountNumber", null, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "catalogItemID", "display", null, 0);
                     txtReference3.Text = string.Empty;
                     txtNumberPhone.Text = string.Empty;
                     txtNextVisit.Text = string.Empty;
@@ -2025,14 +2030,16 @@ namespace v4posme_window.Views
                     txtDateFirst.DateTime = DateTime.Now;
                     txtDesembolsoEfectivo.IsOn = true;
                     txtReportSinRiesgo.IsOn = true;
-                    TxtStatusOldId = null;
-                    TxtStatusId= null;
-                    //txtLayFirstLineProtocolo no existe este campo
+                    TxtStatusOldId = ObjListWorkflowStage!.ElementAt(0).WorkflowStageId;
+                    TxtStatusId = ObjListWorkflowStage!.ElementAt(0).WorkflowStageId;
+                    txtChangeAmount.Text = "0";
+                    
                     break;
                 case TypeRender.Edit:
                     CompanyId = ObjTransactionMaster.CompanyId;
                     TransactionId = ObjTransactionMaster.TransactionId;
                     TransactionMasterId = ObjTransactionMaster.TransactionMasterId;
+                    TxtCustomerId = ObjTransactionMaster.EntityId!.Value;
                     txtDate.EditValue = ObjTransactionMaster.TransactionOn;
                     objCoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "currencyID", "name", ObjTransactionMaster.CurrencyId, 0);
                     txtNote.Text = ObjTransactionMaster.Note;
@@ -2044,6 +2051,9 @@ namespace v4posme_window.Views
                     objCoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "catalogItemID", "name", ObjTransactionMasterInfo.MesaId, 0);
                     objCoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "entityID", "firstName", ObjTransactionMaster.Reference1, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "catalogItemID", "name", ObjTransactionMaster.PeriodPay, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "transactionCausalID", "name", ObjTransactionMaster.TransactionCausalId, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "customerCreditLineID", "accountNumber", ObjTransactionMaster.Reference4, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "catalogItemID", "display", null, 0);
                     txtReference3.Text = ObjTransactionMaster.Reference3;
                     txtNumberPhone.Text = ObjTransactionMaster.NumberPhone;
                     txtNextVisit.DateTime = ObjTransactionMaster.NextVisit!.Value;
@@ -2051,9 +2061,14 @@ namespace v4posme_window.Views
                     txtIsApplied.Checked = ObjTransactionMaster.IsApplied!.Value;
                     txtDateFirst.DateTime = ObjTransactionMaster.TransactionOn2!.Value;
                     txtReference2.Text = ObjTransactionMaster.Reference2;
+                    txtDesembolsoEfectivo.IsOn = true;
                     txtReportSinRiesgo.IsOn = Convert.ToInt32(ObjTransactionMasterDetailCredit.Reference2) == 1;
                     TxtStatusOldId = ObjTransactionMaster.StatusId;
                     TxtStatusId = ObjTransactionMaster.StatusId;
+                    txtChangeAmount.Text = ObjTransactionMasterInfo.ReceiptAmount.ToString();
+
+
+
                     break;
             }
         }
