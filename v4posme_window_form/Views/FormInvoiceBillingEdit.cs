@@ -1949,23 +1949,23 @@ namespace v4posme_window.Views
                 case TypeRender.New:
                     var employerDefault = ObjListParameterAll["INVOICE_BILLING_EMPLOYEE_DEFAULT"];
                     if (employerDefault == "true")
-                        objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", ObjListEmployee.ElementAt(0).EntityId, null);
+                        objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", ObjListEmployee.ElementAt(0).FirstName, null);
                     else
-                        objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", null, null);
+                        objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", null, null);
 
-                    objCoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "currencyID", "name", null, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "catalogItemID", "name", null, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListWarehouse, txtWarehouseID, "warehouseID", "name", null, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "catalogItemID", "name", null, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "entityID", "firstName", null, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "catalogItemID", "name", ObjParameterCxcFrecuenciaPayDefault, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "transactionCausalID", "name", null, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "customerCreditLineID", "accountNumber", null, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "catalogItemID", "display", null, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "bankID", "name", null, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "bankID", "name", null, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "bankID", "name", null, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "bankID", "name", null, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjListCurrency.ElementAt(0).CurrencyId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "CatalogItemId", "Name", ObjListZone.ElementAt(0).CatalogItemId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListWarehouse, txtWarehouseID, "WarehouseId", "Name", ObjListWarehouse.ElementAt(0).WarehouseId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "CatalogItemId", "Name", ObjListMesa.ElementAt(0).Name, null);
+                    objCoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "EntityId", "FirstName", ListProvider.ElementAt(0).EntityId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "CatalogItemId", "Name", ObjParameterCxcFrecuenciaPayDefault, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "TransactionCausalId", "Name", ObjCausal!.ElementAt(0)!.TransactionCausalId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "CustomerCreditLineId", "AccountNumber", ObjListCustomerCreditLine.ElementAt(0).CustomerCreditLineId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "CatalogItemId", "Name", ObjListTypePrice.ElementAt(0).CatalogItemId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId, null);
                     lblTitulo.Text = @"Factura: #00000000";                    
                     txtExchangeRate.Text = ExchangeRate.ToString(CultureInfo.InvariantCulture);
                     txtCustomerDescription.Text = ObjNaturalDefault is not null ?
@@ -2004,20 +2004,20 @@ namespace v4posme_window.Views
                     txtReceiptAmountPoint.Text = @"0.0";
                     break;
                 case TypeRender.Edit:
-                    objCoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "currencyID", "name", ObjTransactionMaster.CurrencyId, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "catalogItemID", "display", ObjTransactionMasterInfo.ZoneId, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListWarehouse, txtWarehouseID, "warehouseID", "name", ObjTransactionMaster.SourceWarehouseId, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", ObjTransactionMaster.EntityIdsecondary, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "catalogItemID", "name", ObjTransactionMasterInfo.MesaId, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "entityID", "firstName", ObjTransactionMaster.Reference1, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "catalogItemID", "name", ObjTransactionMaster.PeriodPay, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "transactionCausalID", "name", ObjTransactionMaster.TransactionCausalId, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "customerCreditLineID", "accountNumber", ObjTransactionMaster.Reference4, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "catalogItemID", "display", null, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "catalogItemID", "display", ObjTransactionMasterInfo.ReceiptAmountCardBankId, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "bankID", "name", ObjTransactionMasterInfo.ReceiptAmountCardBankDolId, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "bankID", "name", ObjTransactionMasterInfo.ReceiptAmountBankId, 0);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "bankID", "name", ObjTransactionMasterInfo.ReceiptAmountBankDolId, 0);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjTransactionMaster.CurrencyId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "CatalogItemId", "Name", ObjTransactionMasterInfo.ZoneId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListWarehouse, txtWarehouseID, "WarehouseId", "Name", ObjTransactionMaster.SourceWarehouseId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", ObjTransactionMaster.EntityIdsecondary, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "CatalogItemId", "Name", ObjTransactionMasterInfo.MesaId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "EntityId", "FirstName", ObjTransactionMaster.Reference1, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "CatalogItemId", "Name", ObjTransactionMaster.PeriodPay, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "TransactionCausalId", "Name", ObjTransactionMaster.TransactionCausalId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "CustomerCreditLineId", "AccountNumber", ObjTransactionMaster.Reference4, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "CatalogItemId", "Name", ObjListTypePrice.ElementAt(0).CatalogItemId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountCardBankId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountCardBankDolId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountBankId, null);
+                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountBankDolId, null);
                     lblTitulo.Text = ObjTransactionMaster.TransactionNumber is not null ? $@"Factura: #{ObjTransactionMaster.TransactionNumber}" : @"Factura: #00000000";
                     txtExchangeRate.Text = ExchangeRate.ToString(CultureInfo.InvariantCulture);
                     txtCustomerDescription.Text = ObjNaturalDefault is not null ?
