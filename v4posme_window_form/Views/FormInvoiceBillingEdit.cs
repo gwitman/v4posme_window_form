@@ -247,6 +247,7 @@ namespace v4posme_window.Views
         public string? ObjParameterInvoiceBillingPrinterDirectUrl { get; set; }
 
         public string? ObjParameterInvoiceBillingPrinterDirect { get; set; }
+        public DataTable? ObjSELECCIONAR_ITEM_BILLING_BACKGROUND { get; set; }
 
         #endregion
 
@@ -588,9 +589,9 @@ namespace v4posme_window.Views
                 };
                 confiDetalleHeader.Add(row3);
 
-                var detalle = new List<string[]> { ( ["PRODUCTO", "CANT", "TOTAL"]) };
+                var detalle = new List<string[]> { (["PRODUCTO", "CANT", "TOTAL"]) };
 
-                detalle.AddRange(objTmd.Select(detail => (string[]) [detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
+                detalle.AddRange(objTmd.Select(detail => (string[])[detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
             }
             catch (Exception e)
             {
@@ -1220,16 +1221,16 @@ namespace v4posme_window.Views
                     case "false":
                         return;
                     case "true":
-                    {
-                        //si es auto aplicadao mandar a imprimir
-                        if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
                         {
-                            ComandPrinter();
-                        }
+                            //si es auto aplicadao mandar a imprimir
+                            if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
+                            {
+                                ComandPrinter();
+                            }
 
-                        break;
-                    }
-                    //Error 
+                            break;
+                        }
+                        //Error 
                 }
             }
             catch (Exception e)
@@ -1926,7 +1927,7 @@ namespace v4posme_window.Views
             {
                 if (File.Exists(imagenInvoice))
                 {
-                    pictureEdit2.Image = Image.FromFile(imagenInvoice);
+                    pictureEdit2.Image = System.Drawing.Image.FromFile(imagenInvoice);
                 }
             }
 
@@ -1935,7 +1936,7 @@ namespace v4posme_window.Views
             {
                 if (File.Exists(imageCustomer))
                 {
-                    pictureEdit1.Image = Image.FromFile(imageCustomer);
+                    pictureEdit1.Image = System.Drawing.Image.FromFile(imageCustomer);
                 }
             }
         }
@@ -1946,11 +1947,11 @@ namespace v4posme_window.Views
             switch (typeRender)
             {
                 case TypeRender.New:
-                    var employerDefault = ObjListParameterAll["INVOICE_BILLING_EMPLOYEE_DEFAULT"];                    
-                    if(employerDefault == "true")
-                    objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", null, 0);
-                    else 
-                    objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", null, null);
+                    var employerDefault = ObjListParameterAll["INVOICE_BILLING_EMPLOYEE_DEFAULT"];
+                    if (employerDefault == "true")
+                        objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", null, 0);
+                    else
+                        objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", null, null);
 
                     objCoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "currencyID", "name", null, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "catalogItemID", "name", null, 0);
@@ -1967,14 +1968,14 @@ namespace v4posme_window.Views
                     objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "bankID", "name", null, 0);
                     lblTitulo.Text = ObjTransactionMaster.TransactionNumber is not null ? $@"Factura: #{ObjTransactionMaster.TransactionNumber}" : @"Factura: #00000000";
                     txtExchangeRate.Text = ExchangeRate.ToString(CultureInfo.InvariantCulture);
-                    txtCustomerDescription.Text = ObjNaturalDefault is not null ? 
-                                                    ($"{ObjCustomerDefault.CustomerNumber} {ObjNaturalDefault!.FirstName!.ToUpper()} {ObjNaturalDefault!.LastName!.ToUpper()}") : 
+                    txtCustomerDescription.Text = ObjNaturalDefault is not null ?
+                                                    ($"{ObjCustomerDefault.CustomerNumber} {ObjNaturalDefault!.FirstName!.ToUpper()} {ObjNaturalDefault!.LastName!.ToUpper()}") :
                                                     ($"{ObjCustomerDefault.CustomerNumber} {ObjLegalDefault!.ComercialName!.ToUpper()}");
                     txtDate.DateTime = DateTime.Now;
                     txtNote.Text = string.Empty;
                     TxtCustomerId = ObjCustomerDefault.EntityId;
                     txtReferenceClientName.Text = string.Empty;
-                    txtReferenceClientIdentifier.Text = string.Empty;                    
+                    txtReferenceClientIdentifier.Text = string.Empty;
                     txtNumberPhone.Text = string.Empty;
                     txtNextVisit.Text = string.Empty;
                     txtFixedExpenses.Text = string.Empty;
@@ -2061,16 +2062,16 @@ namespace v4posme_window.Views
 
                     if (ObjTransactionMasterDetail is not null)
                     {
-                        foreach(var itemDto in ObjTransactionMasterDetail)
+                        foreach (var itemDto in ObjTransactionMasterDetail)
                         {
-                            var Precio2     = ObjTransactionMasterItemPrice.Where(c => c.ItemId == itemDto.ComponentItemId && c.TypePriceId == (int)TypePrice.PorMayor).First().Price;
-                            var Precio3     = ObjTransactionMasterItemPrice.Where(c => c.ItemId == itemDto.ComponentItemId && c.TypePriceId == (int)TypePrice.Credito).First().Price;
-                            var ObjConcept  = ObjTransactionMasterDetailConcept.Where(c => c.ComponentItemId == itemDto.ComponentItemId && c.Name == "IVA").ToList();
-                            var Iva         = ObjConcept.Count == 0 ? 0 : ObjConcept.ElementAt(0).ValueOut;
+                            var Precio2 = ObjTransactionMasterItemPrice.Where(c => c.ItemId == itemDto.ComponentItemId && c.TypePriceId == (int)TypePrice.PorMayor).First().Price;
+                            var Precio3 = ObjTransactionMasterItemPrice.Where(c => c.ItemId == itemDto.ComponentItemId && c.TypePriceId == (int)TypePrice.Credito).First().Price;
+                            var ObjConcept = ObjTransactionMasterDetailConcept.Where(c => c.ComponentItemId == itemDto.ComponentItemId && c.Name == "IVA").ToList();
+                            var Iva = ObjConcept.Count == 0 ? 0 : ObjConcept.ElementAt(0).ValueOut;
 
                             gridViewValues.AddNewRow();
                             var handle = gridViewValues.FocusedRowHandle;
-                            gridViewValues.SetRowCellValue(handle, colCheckDetail,false);
+                            gridViewValues.SetRowCellValue(handle, colCheckDetail, false);
                             gridViewValues.SetRowCellValue(handle, colTransactionMasterDetailId, itemDto.TransactionMasterDetailId);
                             gridViewValues.SetRowCellValue(handle, colItemId, itemDto.ComponentItemId);
                             gridViewValues.SetRowCellValue(handle, colItemNumber, itemDto.ItemNumber);
@@ -2078,18 +2079,18 @@ namespace v4posme_window.Views
                             gridViewValues.SetRowCellValue(handle, colSku, itemDto.SkuCatalogItemId);
                             gridViewValues.SetRowCellValue(handle, colQuantity, itemDto.SkuQuantity);
                             gridViewValues.SetRowCellValue(handle, colPrice, itemDto.UnitaryPrice * itemDto.SkuQuantityBySku);
-                            gridViewValues.SetRowCellValue(handle, colSubTotal, itemDto.UnitaryPrice * itemDto.SkuQuantityBySku * itemDto.SkuQuantity );
+                            gridViewValues.SetRowCellValue(handle, colSubTotal, itemDto.UnitaryPrice * itemDto.SkuQuantityBySku * itemDto.SkuQuantity);
                             gridViewValues.SetRowCellValue(handle, colIva, Iva);
                             gridViewValues.SetRowCellValue(handle, colSkuQuantityBySku, itemDto.SkuQuantityBySku);
                             gridViewValues.SetRowCellValue(handle, colUnitaryPriceIndividual, itemDto.UnitaryPrice);
                             gridViewValues.SetRowCellValue(handle, colAccion, "");
-                            gridViewValues.SetRowCellValue(handle, colSkuFormatoDescripton, itemDto.SkuFormatoDescription );                                                        
+                            gridViewValues.SetRowCellValue(handle, colSkuFormatoDescripton, itemDto.SkuFormatoDescription);
                             gridViewValues.SetRowCellValue(handle, colItemPrecio2, Precio2);
                             gridViewValues.SetRowCellValue(handle, colItemPrecio3, Precio3);
                             gridViewValues.UpdateCurrentRow();
-                            
 
-                            
+
+
                         }
                     }
 
@@ -2098,15 +2099,285 @@ namespace v4posme_window.Views
 
 
             //Incializar Focos
-            if(ObjParameterScanerProducto  == "true")
+            if (ObjParameterScanerProducto == "true")
             {
                 txtScanerCodigo.Focus();
-            }            
+            }
+
+        }
+
+        public string FnDeleteCerosIzquierdos(string Texto)
+        {
+
+            var array = Texto.Split("");
+            var newTexto = "";
+            var encontradoPrimerElemento = false;
+
+            for (var i = 0; i < array.Length; i++)
+            {
+                if (array[i] != "0" && encontradoPrimerElemento == false)
+                {
+                    newTexto = newTexto + array[i];
+                    encontradoPrimerElemento = true;
+                }
+                else
+                {
+                    if (encontradoPrimerElemento == true)
+                    {
+                        newTexto = newTexto + array[i];
+                    }
+                }
+            }
+
+            return newTexto;
+
+        }
+
+        public void FnCalculateAmountPay()
+        {
+            if(Convert.ToInt32( txtCurrencyID.EditValue)  == 1 /*cordoba*/ )
+            {
+
+                var ingresoCordoba = Convert.ToDecimal(txtReceiptAmount.Text);
+                var bancoCordoba = Convert.ToDecimal(txtReceiptAmountBank.Text);
+                var puntoCordoba = Convert.ToDecimal(txtReceiptAmountPoint.Text);
+
+                var tarjetaCordoba = Convert.ToDecimal(txtReceiptAmountTarjeta.Text);
+                var tarejtaDolares = Convert.ToDecimal(txtReceiptAmountTarjetaDol.Text);
+                var bancoDolares = Convert.ToDecimal(txtReceiptAmountBankDol.Text);
+
+                var ingresoDol = Convert.ToDecimal(txtReceiptAmountDol.Text);
+                var tipoCambio = Convert.ToDecimal(txtExchangeRate.Text);
+                var total = Convert.ToDecimal( txtTotal.Text);
+
+
+                var resultTotal = (ingresoCordoba + bancoCordoba + puntoCordoba + tarjetaCordoba + (bancoDolares / tipoCambio) + (tarejtaDolares / tipoCambio) + (ingresoDol / tipoCambio)) - total;
+                txtChangeAmount.Text = resultTotal.ToString();
+            }
+            if (Convert.ToInt32(txtCurrencyID.EditValue) ==2  /*dolar*/ )
+            {
+
+                var ingresoCordoba = Convert.ToDecimal(txtReceiptAmount.Text);
+                var bancoCordoba = Convert.ToDecimal(txtReceiptAmountBank.Text);
+                var puntoCordoba = Convert.ToDecimal(txtReceiptAmountPoint.Text);
+
+                var tarjetaCordoba = Convert.ToDecimal(txtReceiptAmountTarjeta.Text);
+                var tarejtaDolares = Convert.ToDecimal(txtReceiptAmountTarjetaDol.Text);
+                var bancoDolares = Convert.ToDecimal(txtReceiptAmountBankDol.Text);
+
+                var ingresoDol = Convert.ToDecimal(txtReceiptAmountDol.Text);
+                var tipoCambio = Convert.ToDecimal(txtExchangeRate.Text);
+                var total = Convert.ToDecimal(txtTotal.Text);
+
+                var resultTotal = (ingresoCordoba + bancoCordoba + puntoCordoba + tarjetaCordoba + (bancoDolares * tipoCambio) + (tarejtaDolares * tipoCambio) + (ingresoDol * tipoCambio)) - total;
+                txtChangeAmount.Text = resultTotal.ToString();
+
+            }
+
+
+        }
+
+        public void FnCreateTableSearchProductos()
+        {
+            var warehouseID_ = Convert.ToInt32(txtWarehouseID.EditValue);
+            var listPrice_ = ObjListPrice!.ListPriceId;
+            var typePrice_ = Convert.ToInt32(txtTypePriceID.EditValue);
+            var currencyID_ = Convert.ToInt32(txtCurrencyID.EditValue);
+
+
+            var formTypeListSearch = new FormTypeListSearch("Lista de Productos", 33,
+                "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
+                 @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}",
+                 false, "", 0, 5, "");
+            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptarItem;
+            formTypeListSearch.ShowDialog(this);
+        }
+
+        public void FnClearData()
+        {
+
+            gridViewTbTransactionMasterDetail.DataSource = null;
+            gridViewValues.RefreshData();
+            gridViewTbTransactionMasterDetail.RefreshDataSource();
+
+            txtReceiptAmount.Text = "0";
+			txtReceiptAmountDol.Text = "0";
+            txtReceiptAmountBank.Text = "0";
+            txtReceiptAmountPoint.Text = "0";
+            txtChangeAmount.Text = "0";
+            txtSubTotal.Text = "0";
+            txtIva.Text = "0";
+            txtTotal.Text = "0";
+            txtReceiptAmountTarjeta.Text = "0";
+            txtReceiptAmountTarjetaDol.Text = "0";
+            txtReceiptAmountBankDol.Text = "0";
+        }
+
+        public void FnRecalculateDetail(bool clearRecibo, string sourceEvent)
+        {
+
+            var typePriceID = Convert.ToInt32(txtTypePriceID.EditValue);
+            var cantidad = 0.0m;
+            var iva = 0.0m;
+            var precio = 0.0m;
+            var subtotal = 0.0m;
+            var total = 0.0m;
+
+            var cantidadGeneral = 0.0m;
+            var ivaGeneral = 0.0m;
+            var precioGeneral = 0.0m;
+            var subtotalGeneral = 0.0m;
+            var totalGeneral = 0.0m;
+
+            var priceTemporal = 0.0m;
+            var cantidadTemporal = 0.0m;
+
+
+            var NSSystemDetailInvoice = gridViewValues;
+            for (var i = 0; i < NSSystemDetailInvoice.RowCount; i++)
+            {
+
+                var skuSelecte = Convert.ToInt32( NSSystemDetailInvoice.GetRowCellValue(i,colSku));
+                var skuCatalogItemID = skuSelecte;
+                var skuSelecteOption = 25;
+                var skuValue = 30;
+                var skuValuePrimceUnit = 25; //uniary price
+                var skuValueDescription = "Litro , Unidad";
+
+
+                cantidadTemporal =  Convert.ToInt32( NSSystemDetailInvoice.GetRowCellValue(i,colQuantity)); 
+                priceTemporal = Convert.ToDecimal(NSSystemDetailInvoice.GetRowCellValue(i, colPrice));
+
+
+                
+                NSSystemDetailInvoice.SetRowCellValue(i, colQuantity, cantidadTemporal);
+                NSSystemDetailInvoice.SetRowCellValue(i, colPrice, priceTemporal);
+                NSSystemDetailInvoice.SetRowCellValue(i, colSkuFormatoDescripton, skuValueDescription);
+                
+                cantidad = Convert.ToInt32(NSSystemDetailInvoice.GetRowCellValue(i, colQuantity));
+                precio = Convert.ToDecimal(NSSystemDetailInvoice.GetRowCellValue(i, colPrice));
+                iva = Convert.ToDecimal(NSSystemDetailInvoice.GetRowCellValue(i, colIva));
+
+
+                subtotal = precio * cantidad;
+                iva = (precio * cantidad) * iva;
+                total = iva + subtotal;
+                
+                
+                cantidadGeneral = cantidadGeneral + cantidad;
+                precioGeneral = precioGeneral + precio;
+                ivaGeneral = ivaGeneral + iva;
+                subtotalGeneral = subtotalGeneral + subtotal;
+                totalGeneral = totalGeneral + total;
+                
+                NSSystemDetailInvoice.SetRowCellValue(i, colSubTotal, subtotal);
+            }
+
+            txtSubTotal.Text = subtotalGeneral.ToString();
+            txtIva.Text = ivaGeneral.ToString();
+            txtTotal.Text = totalGeneral.ToString();
+
+            txtReceiptAmount.Text = "0";
+            txtReceiptAmountDol.Text = "0";
+            txtChangeAmount.Text = "0";
+            txtReceiptAmountBank.Text = "0";
+            txtReceiptAmountPoint.Text = "0";
+            txtReceiptAmountTarjeta.Text = "0";
+            txtReceiptAmountTarjetaDol.Text = "0";
+            txtReceiptAmountBankDol.Text = "0";
+
 
         }
 
 
+        public void FnGetConcept(int itemID, string concepName)
+        {
 
+
+            //Recalculoa el concepto via AJAX 2023-12-05 Inicio		
+            DataContext dataContext = new DataContext();
+            var index = 0;
+            var encontrado = false;
+            var objConcept = dataContext.TbCompanyComponentConcepts.Where(c =>
+                    c.ComponentItemId == itemID &&
+                    c.Name == concepName &&
+                    c.ComponentId == ObjComponentItem!.ComponentId
+            ).FirstOrDefault();
+
+            for (index = 0; index < gridViewValues.RowCount; index++)
+            {
+                if (itemID == Convert.ToInt32(gridViewValues.GetRowCellValue(index, colItemId)))
+                {
+                    encontrado = true;
+                    break;
+                }
+            }
+
+            if (encontrado == false)
+                return;
+
+            if (objConcept != null)
+            {
+                gridViewValues.SetRowCellValue(index, colIva, objConcept.ValueOut);
+            }
+
+            FnRecalculateDetail(true, "");
+
+        }
+
+
+        public void FnOnCompleteNewItem(Dictionary<string, string> diccionario , bool sumar)
+        {
+            txtScanerCodigo.Focus();
+            var index       = 0;
+            var encontrado  = false;
+            var itemID = Convert.ToInt32(diccionario["itemID"]);
+
+            //Buscar Item
+            for(index = 0; index < gridViewValues.RowCount; index++)
+            {
+                if(itemID == Convert.ToInt32( gridViewValues.GetRowCellValue(index,colItemId)))
+                {
+                    encontrado = true;
+                    break;
+                }
+            }
+
+            //Actualizar
+            if (encontrado)
+            {
+                var quantity = Convert.ToInt32( gridViewValues.GetRowCellValue(index, colQuantity));
+                gridViewValues.SetRowCellValue(index, colQuantity, (quantity + 1 ));
+
+            }
+            //Nuevo
+            else
+            {
+
+                gridViewValues.AddNewRow();
+                var handle = gridViewValues.FocusedRowHandle;
+                gridViewValues.SetRowCellValue(handle, colCheckDetail, false);
+                gridViewValues.SetRowCellValue(handle, colTransactionMasterDetailId, 0);
+                gridViewValues.SetRowCellValue(handle, colItemId, diccionario["itemID"]);
+                gridViewValues.SetRowCellValue(handle, colItemNumber, diccionario["Codigo"]);
+                gridViewValues.SetRowCellValue(handle, colTransactionDetailName, diccionario["Nombre"] );
+                gridViewValues.SetRowCellValue(handle, colSku, diccionario["unitMeasureID"]);
+                gridViewValues.SetRowCellValue(handle, colQuantity,1);
+                gridViewValues.SetRowCellValue(handle, colPrice, diccionario["Precio"]);
+                gridViewValues.SetRowCellValue(handle, colSubTotal, 1 * Convert.ToInt32( diccionario["Precio"]) );
+                gridViewValues.SetRowCellValue(handle, colIva, 0);
+                gridViewValues.SetRowCellValue(handle, colSkuQuantityBySku, 1 );
+                gridViewValues.SetRowCellValue(handle, colUnitaryPriceIndividual, Convert.ToInt32(diccionario["Precio"] ));
+                gridViewValues.SetRowCellValue(handle, colAccion, "");
+                gridViewValues.SetRowCellValue(handle, colSkuFormatoDescripton, "");
+                gridViewValues.SetRowCellValue(handle, colItemPrecio2, diccionario["Precio2"]);
+                gridViewValues.SetRowCellValue(handle, colItemPrecio3, diccionario["Precio3"]);
+                gridViewValues.UpdateCurrentRow();
+
+            }		
+		
+		    FnGetConcept(itemID, "IVA");		
+        }
 
         #endregion
 
@@ -2131,9 +2402,17 @@ namespace v4posme_window.Views
 
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
+            
+            var warehouseID_ = Convert.ToInt32(txtWarehouseID.EditValue);
+            var listPrice_ = ObjListPrice!.ListPriceId;
+            var typePrice_ = Convert.ToInt32(txtTypePriceID.EditValue);
+            var currencyID_ = Convert.ToInt32(txtCurrencyID.EditValue);
+
+
             var formTypeListSearch = new FormTypeListSearch("Lista de Productos", 33,
                 "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
-                "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
+                 @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}", 
+                 false, "", 0, 5, "");
             formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptarItem;
             formTypeListSearch.ShowDialog(this);
         }
@@ -2155,8 +2434,8 @@ namespace v4posme_window.Views
                             objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
         }
 
-        
-        
+
+
 
         private void lblTitulo_Click(object sender, EventArgs e)
         {
@@ -2176,5 +2455,163 @@ namespace v4posme_window.Views
 
         #endregion
 
+        private void txtScanerCodigo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.M)
+            {
+                // La tecla presionada es la letra "M"
+                // Aquí puedes agregar la lógica que deseas ejecutar
+                ComandPrinter();
+
+            }
+            if (e.KeyCode == Keys.K)
+            {
+                // La tecla presionada es la letra "M"
+                // Aquí puedes agregar la lógica que deseas ejecutar
+                LoadNew();
+                LoadRender(TypeRender.New);
+
+            }
+            if (e.KeyCode == Keys.I)
+            {
+                OpenCashbox();
+
+            }
+
+        }
+
+        private void txtScanerCodigo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != (char)Keys.Enter)
+            {
+                return;
+            }
+
+            var currencyID_ = Convert.ToInt32(txtCurrencyID.EditValue);
+            var codigoABuscar = txtScanerCodigo.Text.ToUpper();
+            txtScanerCodigo.Text = "";
+
+
+            //++Abrir popup de productos
+            if (codigoABuscar == "++")
+            {
+                FnCreateTableSearchProductos();
+                return;
+            }
+
+            if (codigoABuscar == "")
+            {
+                txtReceiptAmount.Focus();
+            }
+
+
+            if (ObjSELECCIONAR_ITEM_BILLING_BACKGROUND is null)
+                return;
+
+
+            bool encontrado = false;
+            int i           = 0;
+            for ( i = 0; i < ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows.Count; i++ )
+            {
+                if (encontrado == true)
+                {
+                    i--;
+                    break;
+                }
+
+                //buscar por codigo de sistema					
+                var currencyTemp = Convert.ToInt32( ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows[i]["currencyID"]);
+                var currencyID = Convert.ToInt32( txtCurrencyID.EditValue);
+
+                var warehouseIDTemp = Convert.ToInt32(ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows[i]["warehouseID"]);
+                var warehouseID = Convert.ToInt32(txtWarehouseID.EditValue);
+                var codigoTable = ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows[i]["Codigo"].ToString();
+
+                if (
+                    currencyID == currencyTemp &&
+                    FnDeleteCerosIzquierdos(codigoABuscar) == FnDeleteCerosIzquierdos(codigoTable!.Replace("BITT", "").Replace("ITT", "").ToUpper()) &&
+                    warehouseID == warehouseIDTemp
+                )
+                {
+                    encontrado = true;
+                    break;
+                }
+
+
+                //buscar por codigo de barra
+                var listCodigTmp = ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows[i]["Barra"].ToString();
+                currencyTemp = Convert.ToInt32(ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows[i]["currencyID"]);
+                currencyID = Convert.ToInt32(txtCurrencyID.EditValue);
+                encontrado = false;
+
+                if (encontrado == false)
+                {
+                    for (var ii = 0; ii < listCodigTmp!.Length; ii++)
+                    {
+                        if (
+                            FnDeleteCerosIzquierdos(listCodigTmp[ii].ToString().ToUpper()) == FnDeleteCerosIzquierdos(codigoABuscar) &&
+                            currencyID == currencyTemp &&
+                            warehouseID == warehouseIDTemp
+                        )
+                        {
+                            encontrado = true;
+                            break;
+                        }
+                    }
+                }
+
+            }
+
+            if (encontrado == true)
+            {
+                var sumar                               = true;
+                var filterResult                        = ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows[i];
+                Dictionary<string, string> diccionario  = new Dictionary<string, string>();
+
+                diccionario.Add("itemID", filterResult["itemID"].ToString()!);
+                diccionario.Add("Codigo", filterResult["Codigo"].ToString()!);
+                diccionario.Add("Nombre", filterResult["Nombre"].ToString()!);
+                diccionario.Add("Medida", filterResult["Medida"].ToString()!);
+                diccionario.Add("Cantidad", filterResult["Cantidad"].ToString()!);
+                diccionario.Add("unitMeasureID", filterResult["unitMeasureID"].ToString()!);
+                diccionario.Add("Nombre", filterResult["Nombre"].ToString()!);
+                diccionario.Add("Precio", filterResult["Precio"].ToString()!);
+                diccionario.Add("Precio2", filterResult["Precio2"].ToString()!);
+                diccionario.Add("Precio3", filterResult["Precio3"].ToString()!);
+
+                //Agregar el Item a la Fila
+                FnOnCompleteNewItem(diccionario, sumar);
+            }
+
+
+
+
+        }
+
+        private void downButtonProducto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void barManager1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (e.Item.Name == btnActualizarCatalogo.Name )
+            {
+                var formInvoiceApi = new FormInvoiceApi();
+                var warehouseID_ = Convert.ToInt32(txtWarehouseID.EditValue);
+                var listPrice_ = ObjListPrice!.ListPriceId;
+                var typePrice_ = Convert.ToInt32(txtTypePriceID.EditValue);
+                var currencyID_ = Convert.ToInt32(txtCurrencyID.EditValue);
+
+                ObjSELECCIONAR_ITEM_BILLING_BACKGROUND   = 
+                        formInvoiceApi.getViewApi(
+                            ObjComponentItem!.ComponentId, 
+                            @"SELECCIONAR_ITEM_BILLING_BACKGROUND", 
+                            @"{warehouseID:"+ warehouseID_+", listPriceID:"+listPrice_+",typePriceID:" + typePrice_ + ",currencyID:"+ currencyID_ + "}"
+                );
+
+
+            }
+        }
     }
 }

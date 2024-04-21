@@ -130,7 +130,7 @@ public class CoreWebRenderInView
         return;
     }
 
-    private static DataTable? FillGridControl(List<Dictionary<string, object>>? data)
+    public static DataTable? FillGridControl(List<Dictionary<string, object>>? data)
     {
         if (data == null || data.Count == 0)
             return null;
