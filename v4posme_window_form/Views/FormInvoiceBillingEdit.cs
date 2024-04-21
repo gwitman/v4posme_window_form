@@ -1950,18 +1950,21 @@ namespace v4posme_window.Views
                 case TypeRender.New:
                     var employerDefault = ObjListParameterAll["INVOICE_BILLING_EMPLOYEE_DEFAULT"];
                     if (employerDefault == "true")
-                        CoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", ObjListEmployee.ElementAt(0).FirstName);
+                        CoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", ObjListEmployee.ElementAt(0).EntityId);
                     else
                         CoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", null);
 
                     CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjListCurrency.ElementAt(0).CurrencyId);
                     CoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "CatalogItemId", "Name", ObjListZone.ElementAt(0).CatalogItemId);
                     CoreWebRenderInView.LlenarComboBox(ObjListWarehouse, txtWarehouseID, "WarehouseId", "Name", ObjListWarehouse.ElementAt(0).WarehouseId);
-                    CoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "CatalogItemId", "Name", ObjListMesa.ElementAt(0).Name);
+                    CoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "CatalogItemId", "Name", ObjListMesa.ElementAt(0).CatalogItemId);
                     CoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "EntityId", "FirstName", ListProvider.ElementAt(0).EntityId);
                     CoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "CatalogItemId", "Name", ObjParameterCxcFrecuenciaPayDefault);
                     CoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "TransactionCausalId", "Name", ObjCausal!.ElementAt(0)!.TransactionCausalId);
+
+                    if(ObjListCustomerCreditLine.Count > 0 )
                     CoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "CustomerCreditLineId", "AccountNumber", ObjListCustomerCreditLine.ElementAt(0).CustomerCreditLineId);
+
                     CoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "CatalogItemId", "Name", ObjListTypePrice.ElementAt(0).CatalogItemId);
                     CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId);
                     CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId);
@@ -1972,18 +1975,18 @@ namespace v4posme_window.Views
                     txtCustomerDescription.Text = ObjNaturalDefault is not null ?
                                                     ($"{ObjCustomerDefault.CustomerNumber} {ObjNaturalDefault!.FirstName!.ToUpper()} {ObjNaturalDefault!.LastName!.ToUpper()}") :
                                                     ($"{ObjCustomerDefault.CustomerNumber} {ObjLegalDefault!.ComercialName!.ToUpper()}");
-                    txtDate.DateTime = DateTime.Now;
+                    txtDate.DateTime = DateTime.Today;
                     txtNote.Text = string.Empty;
                     TxtCustomerId = ObjCustomerDefault.EntityId;
                     txtReferenceClientName.Text = string.Empty;
                     txtReferenceClientIdentifier.Text = string.Empty;
                     txtNumberPhone.Text = string.Empty;
-                    txtNextVisit.Text = string.Empty;
+                    txtNextVisit.Text = DateTime.Today.ToString();
                     txtFixedExpenses.Text = string.Empty;
                     txtReference2.Text = ObjParameterCxcPlazoDefault;
                     txtReference3.Text = ObjEmployeeNatural is null ? "N/D" : ObjEmployeeNatural.FirstName;
                     txtIsApplied.Checked = false;
-                    txtDateFirst.DateTime = DateTime.Now;
+                    txtDateFirst.DateTime =  DateTime.Today;
                     txtDesembolsoEfectivo.IsOn = true;
                     txtReportSinRiesgo.IsOn = true;
                     TxtStatusOldId = ObjListWorkflowStage!.ElementAt(0).WorkflowStageId;
@@ -2005,15 +2008,18 @@ namespace v4posme_window.Views
                     txtReceiptAmountPoint.Text = @"0.0";
                     break;
                 case TypeRender.Edit:
-                    CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjTransactionMaster.CurrencyId);
-                    CoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "CatalogItemId", "Name", ObjTransactionMasterInfo.ZoneId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjTransactionMaster!.CurrencyId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "CatalogItemId", "Name", ObjTransactionMasterInfo!.ZoneId);
                     CoreWebRenderInView.LlenarComboBox(ObjListWarehouse, txtWarehouseID, "WarehouseId", "Name", ObjTransactionMaster.SourceWarehouseId);
                     CoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", ObjTransactionMaster.EntityIdsecondary);
                     CoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "CatalogItemId", "Name", ObjTransactionMasterInfo.MesaId);
                     CoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "EntityId", "FirstName", ObjTransactionMaster.Reference1);
                     CoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "CatalogItemId", "Name", ObjTransactionMaster.PeriodPay);
                     CoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "TransactionCausalId", "Name", ObjTransactionMaster.TransactionCausalId);
+
+                    if (ObjListCustomerCreditLine.Count > 0)
                     CoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "CustomerCreditLineId", "AccountNumber", ObjTransactionMaster.Reference4);
+
                     CoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "CatalogItemId", "Name", ObjListTypePrice.ElementAt(0).CatalogItemId);
                     CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountCardBankId);
                     CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountCardBankDolId);

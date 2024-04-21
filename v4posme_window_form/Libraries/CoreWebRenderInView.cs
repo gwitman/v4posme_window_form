@@ -34,17 +34,12 @@ public class CoreWebRenderInView
             var comboBoxItem = new ComboBoxItem(key, value);
             comboBox.Properties.Items.Add(comboBoxItem);
             if (defaultValue is null) continue;
+
             if (Convert.ToInt32(key) == Convert.ToInt32(defaultValue))
             {
                 comboBox.EditValue = comboBoxItem;
             }
         }
-
-        if (defaultValue is null)
-        {
-            comboBox.SelectedIndex = 0;
-        }
-
         
     }
 
