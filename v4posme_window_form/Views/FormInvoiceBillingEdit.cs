@@ -2244,37 +2244,45 @@ namespace v4posme_window.Views
             if (Convert.ToInt32(currencyId) == 1 /*cordoba*/ )
             {
 
-                var ingresoCordoba = Convert.ToDecimal(txtReceiptAmount.Text);
-                var bancoCordoba = Convert.ToDecimal(txtReceiptAmountBank.Text);
-                var puntoCordoba = Convert.ToDecimal(txtReceiptAmountPoint.Text);
+                var ingresoCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmount.Text);
+                var bancoCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBank.Text);
+                var puntoCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountPoint.Text);
 
-                var tarjetaCordoba = Convert.ToDecimal(txtReceiptAmountTarjeta.Text);
-                var tarejtaDolares = Convert.ToDecimal(txtReceiptAmountTarjetaDol.Text);
-                var bancoDolares = Convert.ToDecimal(txtReceiptAmountBankDol.Text);
+                var tarjetaCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjeta.Text);
+                var tarejtaDolares = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjetaDol.Text);
+                var bancoDolares = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBankDol.Text);
 
-                var ingresoDol = Convert.ToDecimal(txtReceiptAmountDol.Text);
-                var tipoCambio = Convert.ToDecimal(txtExchangeRate.Text);
-                var total = Convert.ToDecimal(txtTotal.Text);
+                var ingresoDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountDol.Text);
+                var tipoCambio = WebToolsHelper.ConvertToNumber<decimal>(txtExchangeRate.Text);
+                var total = WebToolsHelper.ConvertToNumber<decimal>(txtTotal.Text);
 
-
-                var resultTotal = (ingresoCordoba + bancoCordoba + puntoCordoba + tarjetaCordoba + (bancoDolares / tipoCambio) + (tarejtaDolares / tipoCambio) + (ingresoDol / tipoCambio)) - total;
-                txtChangeAmount.Text = resultTotal.ToString("#0,000.00");
+                if(tipoCambio == 0)
+                {
+                    var resultTotal = 0;
+                    txtChangeAmount.Text = resultTotal.ToString("#0,000.00");
+                }
+                else
+                {
+                    var resultTotal = (ingresoCordoba + bancoCordoba + puntoCordoba + tarjetaCordoba + (bancoDolares / tipoCambio) + (tarejtaDolares / tipoCambio) + (ingresoDol / tipoCambio)) - total;
+                    txtChangeAmount.Text = resultTotal.ToString("#0,000.00");
+                }
+                
             }
 
             if (Convert.ToInt32(currencyId) == 2  /*dolar*/ )
             {
 
-                var ingresoCordoba = Convert.ToDecimal(txtReceiptAmount.Text);
-                var bancoCordoba = Convert.ToDecimal(txtReceiptAmountBank.Text);
-                var puntoCordoba = Convert.ToDecimal(txtReceiptAmountPoint.Text);
+                var ingresoCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmount.Text);
+                var bancoCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBank.Text);
+                var puntoCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountPoint.Text);
 
-                var tarjetaCordoba = Convert.ToDecimal(txtReceiptAmountTarjeta.Text);
-                var tarejtaDolares = Convert.ToDecimal(txtReceiptAmountTarjetaDol.Text);
-                var bancoDolares = Convert.ToDecimal(txtReceiptAmountBankDol.Text);
+                var tarjetaCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjeta.Text);
+                var tarejtaDolares = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjetaDol.Text);
+                var bancoDolares = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBankDol.Text);
 
-                var ingresoDol = Convert.ToDecimal(txtReceiptAmountDol.Text);
-                var tipoCambio = Convert.ToDecimal(txtExchangeRate.Text);
-                var total = Convert.ToDecimal(txtTotal.Text);
+                var ingresoDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountDol.Text);
+                var tipoCambio = WebToolsHelper.ConvertToNumber<decimal>(txtExchangeRate.Text);
+                var total = WebToolsHelper.ConvertToNumber<decimal>(txtTotal.Text);
 
                 var resultTotal = (ingresoCordoba + bancoCordoba + puntoCordoba + tarjetaCordoba + (bancoDolares * tipoCambio) + (tarejtaDolares * tipoCambio) + (ingresoDol * tipoCambio)) - total;
                 txtChangeAmount.Text = resultTotal.ToString();

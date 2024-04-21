@@ -13,6 +13,7 @@ namespace v4posme_library.Libraries.CustomHelper
 {
     public class WebToolsHelper
     {
+        
         public string helper_RequestGetValueObjet(dynamic data,string fieldData, string defaultValue)
         {
             //Validar data
@@ -104,7 +105,7 @@ namespace v4posme_library.Libraries.CustomHelper
 
             try
             {
-                result = (T)Convert.ChangeType(input, typeof(T));
+                result = (T)Convert.ChangeType(input!, typeof(T));
             }
             catch (FormatException)
             {
