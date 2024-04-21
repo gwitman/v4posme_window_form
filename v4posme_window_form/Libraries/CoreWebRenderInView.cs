@@ -20,7 +20,7 @@ namespace v4posme_window.Libraries;
 
 public class CoreWebRenderInView
 {
-    public void LlenarComboBox<T>(List<T> lista, ComboBoxEdit comboBox, string keyField, string valueField,object? defaultValue, object? selectedValue)
+    public void LlenarComboBox<T>(List<T> lista, ComboBoxEdit comboBox, string keyField, string descripcionField,object? defaultValue, object? selectedValue)
     {
         // Limpiar el combobox
         comboBox.Properties.Items.Clear();
@@ -29,15 +29,54 @@ public class CoreWebRenderInView
         foreach (var item in lista)
         {
             // Obtener los valores de key y value de cada objeto
-            var key = item.GetType().GetProperty(keyField)?.GetValue(item)?.ToString();
-            var value = item.GetType().GetProperty(valueField)?.GetValue(item);
+            var key = item!.GetType().GetProperty(keyField)?.GetValue(item)?.ToString();
+            var value = item.GetType().GetProperty(descripcionField)?.GetValue(item);
 
             // Agregar al combobox
             comboBox.Properties.Items.Add(new ComboBoxItem(key, value));
         }
 
-        // Establecer el valor seleccionado
-        comboBox.EditValue = selectedValue ?? defaultValue;
+        //Buscar indexDefault
+        var indexDefault  = -1;
+        var indexSelected = -1;
+        if (comboBox.Properties.Items.Count > 0 )
+        {
+            for ( indexDefault = 0; indexDefault < comboBox.Properties.Items.Count; indexDefault++ )
+            {
+                if (comboBox.Properties.Items[indexDefault].ToString() == defaultValue!.ToString())
+                {
+                    break;
+                }
+            }
+            if (indexDefault >= comboBox.Properties.Items.Count)
+                indexDefault = -1;
+        }
+
+        //Buscar indexSelected
+        if (comboBox.Properties.Items.Count > 0)
+        {
+            for (indexSelected = 0; indexSelected < comboBox.Properties.Items.Count; indexSelected++)
+            {
+                if (comboBox.Properties.Items[indexSelected].ToString() == selectedValue!.ToString())
+                {
+                    break;
+                }
+            }
+            if (indexSelected >= comboBox.Properties.Items.Count)
+                indexSelected = -1;
+        }
+
+        //Establecer valores
+        if (selectedValue != null)
+        {
+            comboBox.SelectedIndex = indexSelected;
+        }
+        else if (defaultValue != null)
+        {
+            comboBox.SelectedIndex = indexDefault;
+        }
+
+
     }
 
     public static void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView,GridControl gridControl)

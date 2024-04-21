@@ -12,8 +12,8 @@ namespace v4posme_window.Interfaz
         void Delete(object? sender, EventArgs? args);
         void Edit(object? sender, EventArgs? args);
         void New(object? sender, EventArgs? args);
-        void PreRender();
-        void searchTransactionMaster();
+        void SearchTransactionMaster(object? sender, EventArgs? args);
+        void PreRender();        
 
         // Manejador de excepciones global para excepciones no controladas en subprocesos de la interfaz de usuario
         void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e);

@@ -1949,7 +1949,7 @@ namespace v4posme_window.Views
                 case TypeRender.New:
                     var employerDefault = ObjListParameterAll["INVOICE_BILLING_EMPLOYEE_DEFAULT"];
                     if (employerDefault == "true")
-                        objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", null, 0);
+                        objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", ObjListEmployee.ElementAt(0).EntityId, null);
                     else
                         objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "entityID", "firstName", null, null);
 

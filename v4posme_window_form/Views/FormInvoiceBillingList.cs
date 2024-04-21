@@ -29,6 +29,9 @@ namespace v4posme_window.Views
         private readonly ICoreWebTools _coreWebTools =
             VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
 
+        private readonly ICoreWebTransaction _coreWebTransaction = 
+            VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTransaction>();
+
         private readonly ICoreWebView _coreWebView = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
 
         public GridControl ObjGridControl { get; set; }
@@ -218,12 +221,15 @@ namespace v4posme_window.Views
 
         public void New(object? sender, EventArgs? args)
         {
+            var objTransaction = _coreWebTransaction.GetTransaction(VariablesGlobales.Instance.User!.CompanyId, "tb_transaction_master_billing");
 
-            new FormInvoiceBillingEdit(
-                TypeOpenForm.Init, 
-                VariablesGlobales.Instance.User!.CompanyId  , 
-                19 /*tb_transaction_master_billing*/,
-                0).ShowDialog();
+            var objFormInvoiceList = new FormInvoiceBillingEdit(
+                TypeOpenForm.Init,
+                VariablesGlobales.Instance.User!.CompanyId,
+                objTransaction!.TransactionId,
+                0
+            ){ MdiParent = CoreFormList.Principal() };
+            objFormInvoiceList.Show();
         }
 
         public void PreRender()
@@ -238,7 +244,7 @@ namespace v4posme_window.Views
             ObjGridControl.Dock = DockStyle.Fill;
         }
 
-        public void searchTransactionMaster()
+        public void SearchTransactionMaster(object? sender, EventArgs? args)
         {
             try
             {
@@ -275,12 +281,22 @@ namespace v4posme_window.Views
                 var transactionNumber = txtFiltrar.Text;
 
                 if (string.IsNullOrEmpty(transactionNumber))
-                    throw new Exception(NotParameter);
+                throw new Exception(NotParameter);
 
                 var objTm = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterModel>().GetRowByTransactionNumber(user.CompanyId, transactionNumber);
 
                 if (objTm == null)
-                    throw new Exception("NO SE ENCONTRO EL DOCUMENTO");
+                throw new Exception("NO SE ENCONTRO EL DOCUMENTO");
+
+
+                var formInvoiceBillingEdit = new FormInvoiceBillingEdit(
+                      TypeOpenForm.Init, objTm.CompanyId, objTm.TransactionId,
+                      objTm.TransactionMasterId
+                )
+                { MdiParent = CoreFormList.Principal() };
+                formInvoiceBillingEdit.Show();
+
+
             }
             catch (Exception ex)
             {
