@@ -2528,7 +2528,7 @@ namespace v4posme_window.Views
             var currencyIdKey = Convert.ToInt32(currency.Key);
 
 
-            var formTypeListSearch = new FormTypeListSearch("Lista de Productos", 33,
+            var formTypeListSearch = new FormTypeListSearch("Lista de Productos", ObjComponentItem!.ComponentId,
                 "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
                  @"{warehouseID:" + warehouseId + ", listPriceID:" + listPrice + ",typePriceID:" + typePriceId + ",currencyID:" + currencyIdKey + "}",
                  false, "", 0, 5, "");
@@ -2553,8 +2553,9 @@ namespace v4posme_window.Views
         {
             // Realizar la lógica que desees en el formulario padre
             WebToolsHelper objWebToolsHelper = new WebToolsHelper();
-            MessageBox.Show("Evento en el formulario hijo: " +
-                            objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
+
+
+            
         }
 
 
