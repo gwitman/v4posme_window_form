@@ -1966,7 +1966,7 @@ namespace v4posme_window.Views
                     objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "bankID", "name", null, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "bankID", "name", null, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "bankID", "name", null, 0);
-                    lblTitulo.Text = ObjTransactionMaster.TransactionNumber is not null ? $@"Factura: #{ObjTransactionMaster.TransactionNumber}" : @"Factura: #00000000";
+                    lblTitulo.Text = @"Factura: #00000000";                    
                     txtExchangeRate.Text = ExchangeRate.ToString(CultureInfo.InvariantCulture);
                     txtCustomerDescription.Text = ObjNaturalDefault is not null ?
                                                     ($"{ObjCustomerDefault.CustomerNumber} {ObjNaturalDefault!.FirstName!.ToUpper()} {ObjNaturalDefault!.LastName!.ToUpper()}") :
@@ -2018,7 +2018,7 @@ namespace v4posme_window.Views
                     objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "bankID", "name", ObjTransactionMasterInfo.ReceiptAmountCardBankDolId, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "bankID", "name", ObjTransactionMasterInfo.ReceiptAmountBankId, 0);
                     objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "bankID", "name", ObjTransactionMasterInfo.ReceiptAmountBankDolId, 0);
-                    lblTitulo.Text = @"Factura: #00000000";
+                    lblTitulo.Text = ObjTransactionMaster.TransactionNumber is not null ? $@"Factura: #{ObjTransactionMaster.TransactionNumber}" : @"Factura: #00000000";
                     txtExchangeRate.Text = ExchangeRate.ToString(CultureInfo.InvariantCulture);
                     txtCustomerDescription.Text = ObjNaturalDefault is not null ?
                                                    ($"{ObjCustomerDefault.CustomerNumber} {ObjNaturalDefault!.FirstName!.ToUpper()} {ObjNaturalDefault!.LastName!.ToUpper()}") :

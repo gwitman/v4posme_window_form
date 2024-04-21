@@ -184,16 +184,46 @@ namespace v4posme_window.Views
 
         public void Edit(object? sender, EventArgs? args)
         {
-            var formInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.Init, 0, 0, 0)
+            if (((GridView)ObjGridControl.MainView).SelectedRowsCount > 0)
             {
-                MdiParent = CoreFormList.Principal()
-            };
-            formInvoiceBillingEdit.Show();
+                
+                var rowIndex = ((GridView)ObjGridControl.MainView).GetSelectedRows().ToList();
+                foreach (var indexRow in rowIndex)
+                {
+                    var companyId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "companyID").ToString());
+                    var transactionId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionID").ToString());
+                    var transactionMasterId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionMasterID").ToString());
+                    var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
+                    
+
+                    var formInvoiceBillingEdit = new FormInvoiceBillingEdit(
+                        TypeOpenForm.Init, companyId, transactionId, 
+                        transactionMasterId){MdiParent = CoreFormList.Principal()};
+                    formInvoiceBillingEdit.Show();
+                    break;
+
+                }
+
+                
+            }
+            else
+            {
+                CoreWebRenderInView objCoreWebRenderInView = new CoreWebRenderInView();
+                objCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error editando", "Debe seleccionar un registro", this);
+            }
+
+
+            
         }
 
         public void New(object? sender, EventArgs? args)
         {
-            new FormInvoiceBillingEdit(TypeOpenForm.Init, 0, 0, 2).ShowDialog();
+
+            new FormInvoiceBillingEdit(
+                TypeOpenForm.Init, 
+                VariablesGlobales.Instance.User!.CompanyId  , 
+                19 /*tb_transaction_master_billing*/,
+                0).ShowDialog();
         }
 
         public void PreRender()
