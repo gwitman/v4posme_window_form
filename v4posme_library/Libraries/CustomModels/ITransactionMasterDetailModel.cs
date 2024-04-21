@@ -22,7 +22,7 @@ public interface ITransactionMasterDetailModel
     List<TbTransactionMasterDetailDto> GetRowByTransactionAndComponent(int companyId, int transactionId,
         int transactionMasterId, int componentId);
 
-    List<TbTransactionMasterDetailDto> GetRowByTransaction(int companyId, int transactionId, int transactionMasterId);
+    List<TbTransactionMasterDetailDto>? GetRowByTransaction(int companyId, int transactionId, int transactionMasterId);
 
     List<TbTransactionMasterDetail> GetRowByTransactionToShare(int companyId, int transactionId,
         int transactionMasterId);

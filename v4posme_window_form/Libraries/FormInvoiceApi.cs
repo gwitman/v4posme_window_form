@@ -1,24 +1,13 @@
-﻿using DevExpress.XtraReports.Design.ParameterEditor;
-using DevExpress.XtraTreeList.Data;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using v4posme_library.Libraries.CustomLibraries.Interfaz;
-using v4posme_library.Libraries;
+﻿using System.Data;
 using Unity;
-using DevExpress.XtraGrid;
-using v4posme_window.Libraries;
-using System.Data;
+using v4posme_library.Libraries;
+using v4posme_library.Libraries.CustomLibraries.Interfaz;
 
-namespace v4posme_window.Views
+namespace v4posme_window.Libraries
 {
     public class FormInvoiceApi
     {
-        public DataTable? getViewApi(int componentId,string viewName = "",string filter = "")
+        public DataTable? GetViewApi(int componentId,string viewName = "",string filter = "")
         {
             
             var coreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();

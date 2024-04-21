@@ -18,6 +18,7 @@ using v4posme_library.ModelsDto;
 using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
+using ComboBoxItem = v4posme_window.Libraries.ComboBoxItem;
 
 namespace v4posme_window.Views
 {
@@ -228,11 +229,11 @@ namespace v4posme_window.Views
 
         public List<TbTransactionMasterDetailDto> ObjTransactionMasterDetailWarehouse { get; set; }
 
-        public List<TbTransactionMasterDetailDto> ObjTransactionMasterDetail { get; set; }
+        public List<TbTransactionMasterDetailDto>? ObjTransactionMasterDetail { get; set; }
 
-        public TbTransactionMasterInfoDto ObjTransactionMasterInfo { get; set; }
+        public TbTransactionMasterInfoDto? ObjTransactionMasterInfo { get; set; }
 
-        public TbTransactionMasterDto ObjTransactionMaster { get; set; }
+        public TbTransactionMasterDto? ObjTransactionMaster { get; set; }
 
         public string? UrlPrinterDocument { get; set; }
 
@@ -1949,23 +1950,23 @@ namespace v4posme_window.Views
                 case TypeRender.New:
                     var employerDefault = ObjListParameterAll["INVOICE_BILLING_EMPLOYEE_DEFAULT"];
                     if (employerDefault == "true")
-                        objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", ObjListEmployee.ElementAt(0).FirstName, null);
+                        CoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", ObjListEmployee.ElementAt(0).FirstName);
                     else
-                        objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", null, null);
+                        CoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", null);
 
-                    objCoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjListCurrency.ElementAt(0).CurrencyId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "CatalogItemId", "Name", ObjListZone.ElementAt(0).CatalogItemId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListWarehouse, txtWarehouseID, "WarehouseId", "Name", ObjListWarehouse.ElementAt(0).WarehouseId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "CatalogItemId", "Name", ObjListMesa.ElementAt(0).Name, null);
-                    objCoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "EntityId", "FirstName", ListProvider.ElementAt(0).EntityId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "CatalogItemId", "Name", ObjParameterCxcFrecuenciaPayDefault, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "TransactionCausalId", "Name", ObjCausal!.ElementAt(0)!.TransactionCausalId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "CustomerCreditLineId", "AccountNumber", ObjListCustomerCreditLine.ElementAt(0).CustomerCreditLineId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "CatalogItemId", "Name", ObjListTypePrice.ElementAt(0).CatalogItemId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId, null);
+                    CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjListCurrency.ElementAt(0).CurrencyId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "CatalogItemId", "Name", ObjListZone.ElementAt(0).CatalogItemId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListWarehouse, txtWarehouseID, "WarehouseId", "Name", ObjListWarehouse.ElementAt(0).WarehouseId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "CatalogItemId", "Name", ObjListMesa.ElementAt(0).Name);
+                    CoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "EntityId", "FirstName", ListProvider.ElementAt(0).EntityId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "CatalogItemId", "Name", ObjParameterCxcFrecuenciaPayDefault);
+                    CoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "TransactionCausalId", "Name", ObjCausal!.ElementAt(0)!.TransactionCausalId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "CustomerCreditLineId", "AccountNumber", ObjListCustomerCreditLine.ElementAt(0).CustomerCreditLineId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "CatalogItemId", "Name", ObjListTypePrice.ElementAt(0).CatalogItemId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId);
                     lblTitulo.Text = @"Factura: #00000000";                    
                     txtExchangeRate.Text = ExchangeRate.ToString(CultureInfo.InvariantCulture);
                     txtCustomerDescription.Text = ObjNaturalDefault is not null ?
@@ -2004,20 +2005,20 @@ namespace v4posme_window.Views
                     txtReceiptAmountPoint.Text = @"0.0";
                     break;
                 case TypeRender.Edit:
-                    objCoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjTransactionMaster.CurrencyId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "CatalogItemId", "Name", ObjTransactionMasterInfo.ZoneId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListWarehouse, txtWarehouseID, "WarehouseId", "Name", ObjTransactionMaster.SourceWarehouseId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", ObjTransactionMaster.EntityIdsecondary, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "CatalogItemId", "Name", ObjTransactionMasterInfo.MesaId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "EntityId", "FirstName", ObjTransactionMaster.Reference1, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "CatalogItemId", "Name", ObjTransactionMaster.PeriodPay, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "TransactionCausalId", "Name", ObjTransactionMaster.TransactionCausalId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "CustomerCreditLineId", "AccountNumber", ObjTransactionMaster.Reference4, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "CatalogItemId", "Name", ObjListTypePrice.ElementAt(0).CatalogItemId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountCardBankId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountCardBankDolId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountBankId, null);
-                    objCoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountBankDolId, null);
+                    CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjTransactionMaster.CurrencyId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "CatalogItemId", "Name", ObjTransactionMasterInfo.ZoneId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListWarehouse, txtWarehouseID, "WarehouseId", "Name", ObjTransactionMaster.SourceWarehouseId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", ObjTransactionMaster.EntityIdsecondary);
+                    CoreWebRenderInView.LlenarComboBox(ObjListMesa, txtMesaID, "CatalogItemId", "Name", ObjTransactionMasterInfo.MesaId);
+                    CoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "EntityId", "FirstName", ObjTransactionMaster.Reference1);
+                    CoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "CatalogItemId", "Name", ObjTransactionMaster.PeriodPay);
+                    CoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "TransactionCausalId", "Name", ObjTransactionMaster.TransactionCausalId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "CustomerCreditLineId", "AccountNumber", ObjTransactionMaster.Reference4);
+                    CoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "CatalogItemId", "Name", ObjListTypePrice.ElementAt(0).CatalogItemId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountCardBankId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountCardBankDolId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountBankId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountBankDolId);
                     lblTitulo.Text = ObjTransactionMaster.TransactionNumber is not null ? $@"Factura: #{ObjTransactionMaster.TransactionNumber}" : @"Factura: #00000000";
                     txtExchangeRate.Text = ExchangeRate.ToString(CultureInfo.InvariantCulture);
                     txtCustomerDescription.Text = ObjNaturalDefault is not null ?
@@ -2106,10 +2107,10 @@ namespace v4posme_window.Views
 
         }
 
-        public string FnDeleteCerosIzquierdos(string Texto)
+        public string FnDeleteCerosIzquierdos(string texto)
         {
 
-            var array = Texto.Split("");
+            var array = texto.Split("");
             var newTexto = "";
             var encontradoPrimerElemento = false;
 
@@ -2135,7 +2136,8 @@ namespace v4posme_window.Views
 
         public void FnCalculateAmountPay()
         {
-            if(Convert.ToInt32( txtCurrencyID.EditValue)  == 1 /*cordoba*/ )
+            var currencyId = ((ComboBoxItem)txtCurrencyID.EditValue).Key;
+            if(Convert.ToInt32( currencyId)  == 1 /*cordoba*/ )
             {
 
                 var ingresoCordoba = Convert.ToDecimal(txtReceiptAmount.Text);
@@ -2152,9 +2154,10 @@ namespace v4posme_window.Views
 
 
                 var resultTotal = (ingresoCordoba + bancoCordoba + puntoCordoba + tarjetaCordoba + (bancoDolares / tipoCambio) + (tarejtaDolares / tipoCambio) + (ingresoDol / tipoCambio)) - total;
-                txtChangeAmount.Text = resultTotal.ToString();
+                txtChangeAmount.Text = resultTotal.ToString("#0,000.00");
             }
-            if (Convert.ToInt32(txtCurrencyID.EditValue) ==2  /*dolar*/ )
+
+            if (Convert.ToInt32(currencyId) ==2  /*dolar*/ )
             {
 
                 var ingresoCordoba = Convert.ToDecimal(txtReceiptAmount.Text);
@@ -2179,10 +2182,13 @@ namespace v4posme_window.Views
 
         public void FnCreateTableSearchProductos()
         {
-            var warehouseID_ = Convert.ToInt32(txtWarehouseID.EditValue);
+            var warehouse = (ComboBoxItem)txtWarehouseID.EditValue;
+            var typePrice = (ComboBoxItem)txtTypePriceID.EditValue;
+            var currency = (ComboBoxItem)txtCurrencyID.EditValue;
             var listPrice_ = ObjListPrice!.ListPriceId;
-            var typePrice_ = Convert.ToInt32(txtTypePriceID.EditValue);
-            var currencyID_ = Convert.ToInt32(txtCurrencyID.EditValue);
+            var warehouseID_ = Convert.ToInt32(warehouse.Key);
+            var typePrice_ = Convert.ToInt32(typePrice.Key);
+            var currencyID_ = Convert.ToInt32(currency.Key);
 
 
             var formTypeListSearch = new FormTypeListSearch("Lista de Productos", 33,
@@ -2298,11 +2304,11 @@ namespace v4posme_window.Views
             DataContext dataContext = new DataContext();
             var index = 0;
             var encontrado = false;
-            var objConcept = dataContext.TbCompanyComponentConcepts.Where(c =>
-                    c.ComponentItemId == itemID &&
-                    c.Name == concepName &&
-                    c.ComponentId == ObjComponentItem!.ComponentId
-            ).FirstOrDefault();
+            var objConcept = dataContext.TbCompanyComponentConcepts.FirstOrDefault(c =>
+                c!.ComponentItemId == itemID &&
+                c.Name == concepName &&
+                c.ComponentId == ObjComponentItem!.ComponentId
+            );
 
             for (index = 0; index < gridViewValues.RowCount; index++)
             {
@@ -2402,16 +2408,18 @@ namespace v4posme_window.Views
 
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            
-            var warehouseID_ = Convert.ToInt32(txtWarehouseID.EditValue);
-            var listPrice_ = ObjListPrice!.ListPriceId;
-            var typePrice_ = Convert.ToInt32(txtTypePriceID.EditValue);
-            var currencyID_ = Convert.ToInt32(txtCurrencyID.EditValue);
+            var warehouse = (ComboBoxItem)txtWarehouseID.EditValue;
+            var typePrice = (ComboBoxItem)txtTypePriceID.EditValue;
+            var currency = (ComboBoxItem)txtCurrencyID.EditValue;
+            var listPrice = ObjListPrice!.ListPriceId;
+            var warehouseId = Convert.ToInt32(warehouse.Key);
+            var typePriceId = Convert.ToInt32(typePrice.Key);
+            var currencyIdKey = Convert.ToInt32(currency.Key);
 
 
             var formTypeListSearch = new FormTypeListSearch("Lista de Productos", 33,
                 "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
-                 @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}", 
+                 @"{warehouseID:" + warehouseId + ", listPriceID:" + listPrice + ",typePriceID:" + typePriceId + ",currencyID:" + currencyIdKey + "}", 
                  false, "", 0, 5, "");
             formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptarItem;
             formTypeListSearch.ShowDialog(this);
@@ -2604,7 +2612,7 @@ namespace v4posme_window.Views
                 var currencyID_ = Convert.ToInt32(txtCurrencyID.EditValue);
 
                 ObjSELECCIONAR_ITEM_BILLING_BACKGROUND   = 
-                        formInvoiceApi.getViewApi(
+                        formInvoiceApi.GetViewApi(
                             ObjComponentItem!.ComponentId, 
                             @"SELECCIONAR_ITEM_BILLING_BACKGROUND", 
                             @"{warehouseID:"+ warehouseID_+", listPriceID:"+listPrice_+",typePriceID:" + typePrice_ + ",currencyID:"+ currencyID_ + "}"

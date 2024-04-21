@@ -12,7 +12,7 @@ public interface ITransactionMasterModel
     void UpdateAppPosme(int companyId,int transactionId,int transactionMasterId,TbTransactionMaster data);
     
     
-    TbTransactionMasterDto GetRowByPk(int companyId, int transactionId, int transactionMasterId);
+    TbTransactionMasterDto? GetRowByPk(int companyId, int transactionId, int transactionMasterId);
     
     TbTransactionMaster GetRowByTransactionMasterId(int companyId,int transactionMasterId);
     

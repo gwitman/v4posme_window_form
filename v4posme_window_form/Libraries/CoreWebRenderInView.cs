@@ -20,7 +20,7 @@ namespace v4posme_window.Libraries;
 
 public class CoreWebRenderInView
 {
-    public void LlenarComboBox<T>(List<T> lista, ComboBoxEdit comboBox, string keyField, string descripcionField,object? defaultValue, object? selectedValue)
+    public static void LlenarComboBox<T>(List<T> lista, ComboBoxEdit comboBox, string keyField, string descripcionField, object? defaultValue)
     {
         // Limpiar el combobox
         comboBox.Properties.Items.Clear();
@@ -31,55 +31,63 @@ public class CoreWebRenderInView
             // Obtener los valores de key y value de cada objeto
             var key = item!.GetType().GetProperty(keyField)?.GetValue(item)?.ToString();
             var value = item.GetType().GetProperty(descripcionField)?.GetValue(item);
-
-            // Agregar al combobox
-            comboBox.Properties.Items.Add(new ComboBoxItem(key, value));
+            var comboBoxItem = new ComboBoxItem(key, value);
+            comboBox.Properties.Items.Add(comboBoxItem);
+            if (defaultValue is null) continue;
+            if (Convert.ToInt32(key) == Convert.ToInt32(defaultValue))
+            {
+                comboBox.EditValue = comboBoxItem;
+            }
         }
 
-        //Buscar indexDefault
-        var indexDefault  = -1;
+        if (defaultValue is null)
+        {
+            comboBox.SelectedIndex = 0;
+        }
+
+        /*var indexDefault  = -1;
         var indexSelected = -1;
         if (comboBox.Properties.Items.Count > 0 )
         {
-            for ( indexDefault = 0; indexDefault < comboBox.Properties.Items.Count; indexDefault++ )
+            if (defaultValue is not null)
             {
-                if (comboBox.Properties.Items[indexDefault].ToString() == defaultValue!.ToString())
+                for ( indexDefault = 0; indexDefault < comboBox.Properties.Items.Count; indexDefault++ )
                 {
-                    break;
+                    if (comboBox.Properties.Items[indexDefault].ToString() == defaultValue!.ToString())
+                    {
+                        break;
+                    }
                 }
+                if (indexDefault >= comboBox.Properties.Items.Count)
+                    indexDefault = -1;
             }
-            if (indexDefault >= comboBox.Properties.Items.Count)
-                indexDefault = -1;
+
+            if (selectedValue is not null)
+            {
+                for (indexSelected = 0; indexSelected < comboBox.Properties.Items.Count; indexSelected++)
+                {
+                    if (comboBox.Properties.Items[indexSelected].ToString() == selectedValue!.ToString())
+                    {
+                        break;
+                    }
+                }
+                if (indexSelected >= comboBox.Properties.Items.Count)
+                    indexSelected = -1;
+            }
+
         }
 
-        //Buscar indexSelected
-        if (comboBox.Properties.Items.Count > 0)
-        {
-            for (indexSelected = 0; indexSelected < comboBox.Properties.Items.Count; indexSelected++)
-            {
-                if (comboBox.Properties.Items[indexSelected].ToString() == selectedValue!.ToString())
-                {
-                    break;
-                }
-            }
-            if (indexSelected >= comboBox.Properties.Items.Count)
-                indexSelected = -1;
-        }
-
-        //Establecer valores
-        if (selectedValue != null)
+        if (selectedValue is not null)
         {
             comboBox.SelectedIndex = indexSelected;
         }
-        else if (defaultValue != null)
+        else if (defaultValue is not null)
         {
             comboBox.SelectedIndex = indexDefault;
-        }
-
-
+        }*/
     }
 
-    public static void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView,GridControl gridControl)
+    public static void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, GridControl gridControl)
     {
         if (dataViewDto.Config is null)
         {
@@ -91,9 +99,9 @@ public class CoreWebRenderInView
             return;
         }
 
-        var viewData            = (List<Dictionary<string, object>>)dataViewDto.Data;
-        var table               = FillGridControl(viewData);
-        gridControl.DataSource  = table;
+        var viewData = (List<Dictionary<string, object>>)dataViewDto.Data;
+        var table = FillGridControl(viewData);
+        gridControl.DataSource = table;
 
         // Ajustar la configuración del GridView
         var gridView = (GridView)gridControl.MainView;

@@ -24,23 +24,22 @@ namespace v4posme_window.Template
         public delegate void EventoCallBackAceptar(dynamic mensaje);
 
         // Declarar un evento que se disparará cuando ocurra el evento en el formulario hijo
-        public event EventoCallBackAceptar EventoCallBackAceptar_;
-        private int ComponentId { get; set; }
-        private string ViewName { get; set; }
-        private bool AutoClose { get; set; }
-        private string Filter { get; set; }
-        private bool MultiSelect { get; set; }
-        private string UrlRedictWhenEmpty { get; set; }
-        private int DisplayStart { get; set; }
-        private int DisplayLength { get; set; }
-        private string SSearch { get; set; }
-        private int PageCurrent { get; set; }
-        private string TitleWindow { get; set; }
+        public event EventoCallBackAceptar? EventoCallBackAceptar_;
+        private int? ComponentId { get; set; }
+        private string? ViewName { get; set; }
+        private bool? AutoClose { get; set; }
+        private string? Filter { get; set; }
+        private bool? MultiSelect { get; set; }
+        private string? UrlRedictWhenEmpty { get; set; }
+        private int? DisplayStart { get; set; }
+        private int? DisplayLength { get; set; }
+        private string? SSearch { get; set; }
+        private int? PageCurrent { get; set; }
+        private string? TitleWindow { get; set; }
         private GridControl ObjGridControl { get; set; }
 
         public FormTypeListSearch(string title, int componentId, string viewName, bool autoClose, string filter,
-            bool multiSelect,
-            string urlRedictWhenEmpty, int iDisplayStart, int iDisplayLength, string sSearch)
+            bool multiSelect, string urlRedictWhenEmpty, int iDisplayStart, int iDisplayLength, string sSearch)
         {
             ComponentId = componentId;
             ViewName = viewName;
@@ -64,7 +63,7 @@ namespace v4posme_window.Template
             ObjGridControl.Name = "ObjGridControl";
             ObjGridControl.Parent = controlParent;
             ObjGridControl.Dock = DockStyle.Fill;
-
+            ShowViewByNamePaginate();
             ObjGridControl.KeyDown += GridView_KeyDown!;
             ((GridView)ObjGridControl.MainView).OptionsView.ShowGroupPanel = false;
             ((GridView)ObjGridControl.MainView).OptionsBehavior.Editable = false;
@@ -74,15 +73,15 @@ namespace v4posme_window.Template
 
         private void ShowViewByNamePaginate()
         {
-            int componentId = ComponentId;
-            string viewName = ViewName;
-            bool autoClose = AutoClose;
-            string filter = Filter;
-            bool multiSelect = MultiSelect;
-            string urlRedictWhenEmpty = UrlRedictWhenEmpty;
-            int iDisplayStart = DisplayStart;
-            int iDisplayLength = DisplayLength;
-            string sSearch = SSearch;
+            var componentId = ComponentId!.Value;
+            var viewName = ViewName!;
+            var autoClose = AutoClose!.Value;
+            var filter = Filter;
+            var multiSelect = MultiSelect!.Value;
+            var urlRedictWhenEmpty = UrlRedictWhenEmpty;
+            var iDisplayStart = DisplayStart;
+            var iDisplayLength = DisplayLength;
+            var sSearch = SSearch;
 
             var coreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
             var coreWebView = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
@@ -96,14 +95,14 @@ namespace v4posme_window.Template
             {
                 ["{companyID}"] = usuario!.CompanyId.ToString(),
                 ["{componentID}"] = componentId.ToString(),
-                ["{iDisplayLength}"] = iDisplayLength.ToString(),
-                ["{iDisplayStartDB}"] = (PageCurrent * iDisplayLength).ToString(),
-                ["{sSearchDB}"] = sSearch,
+                ["{iDisplayLength}"] = iDisplayLength!.Value.ToString(),
+                ["{iDisplayStartDB}"] = (PageCurrent * iDisplayLength.Value).ToString()!,
+                ["{sSearchDB}"] = sSearch!,
                 ["{isWindowForm}"] = "1"
             };
 
             // Agregar al diccionarios los parametros dinamicos
-            var result = coreWebTools.FormatParameter(filter);
+            var result = coreWebTools.FormatParameter(filter!);
             if (result is not null)
             {
                 foreach (var kvp in result)

@@ -38,7 +38,7 @@ class TransactionMasterModel : ITransactionMasterModel
     }
  
 
-    public TbTransactionMasterDto GetRowByPk(int companyId, int transactionId, int transactionMasterId)
+    public TbTransactionMasterDto? GetRowByPk(int companyId, int transactionId, int transactionMasterId)
     {
         using var context = new DataContext();
         var result = from tm in context.TbTransactionMasters
