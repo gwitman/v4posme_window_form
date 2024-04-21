@@ -2094,6 +2094,7 @@ namespace v4posme_window.Views
                         }
                     }
 
+                    FnRecalculateDetail(false,"");
                     break;
             }
 
