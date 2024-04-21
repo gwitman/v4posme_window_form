@@ -2127,13 +2127,13 @@ namespace v4posme_window.Views
 
             if (isCredit)
             {
-                txtCustomerCreditLineID.Visible = false;
-                labelCustomerCreditLineID.Visible = false;
+                txtCustomerCreditLineID.Visible = true;
+                labelCustomerCreditLineID.Visible = true;
             }
             else
             {
-                txtCustomerCreditLineID.Visible = true;
-                labelCustomerCreditLineID.Visible = true;
+                txtCustomerCreditLineID.Visible = false;
+                labelCustomerCreditLineID.Visible = false;
             }
 
 
@@ -2147,8 +2147,8 @@ namespace v4posme_window.Views
             {
                 for (var i = 0; i < objCustomerCreditLine.Count; i++)
                 {
-                    CoreWebRenderInView.LlenarComboBoxAddItem(objCustomerCreditLine[i], txtCustomerCreditLineID, "CustomerCreditLineId", "CreditLineName");
-                    if (i == 0 && ObjTransactionMaster!.Reference4 == "0")
+                    CoreWebRenderInView.LlenarComboBoxAddItem(objCustomerCreditLine[i], txtCustomerCreditLineID, "CustomerCreditLineId", "AccountNumber");
+                    if (i == 0 && ObjTransactionMaster is null)
                     {
                         CoreWebRenderInView.LlenarComboBoxSetItem(txtCustomerCreditLineID, objCustomerCreditLine[i].CustomerCreditLineId.ToString());
                     }
@@ -2156,11 +2156,19 @@ namespace v4posme_window.Views
                     {
                         CoreWebRenderInView.LlenarComboBoxSetItem(txtCustomerCreditLineID, objCustomerCreditLine[i].CustomerCreditLineId.ToString());
                     }
+
                 }
             }
 
 
-            //Si no tiene linea de credito,  no permite que se haga una factura de credito
+            //Agregar los causales de la transaccione
+            txtCausalID.Properties.Items.Clear();
+            for (var i = 0; i < ObjCausal.Count; i++)
+            {
+                CoreWebRenderInView.LlenarComboBoxAddItem(ObjCausal[i], txtCausalID, "TransactionCausalId", "Name");
+            }
+
+            //Buscar los causales a eliminar
             var causalesTipoCredito = causalTypeCredit!.Value!.Split(",");
             List<string> indexEliminate = new List<string>();
 
@@ -2179,12 +2187,13 @@ namespace v4posme_window.Views
 
             }
 
+            //Eliminar los causales
             for (var i = 0; i < indexEliminate.Count; i++)
             {
                 CoreWebRenderInView.LlenarComboBoxRemoveItem(txtCausalID, indexEliminate[i]);
             }
 
-            //Llenar el causal de la factura
+            //Establecer el causal
             if (ObjTransactionMaster is not null)
             {
                 if (ObjTransactionMaster.TransactionCausalId is not null)
@@ -2428,9 +2437,9 @@ namespace v4posme_window.Views
 
         public void FnGetCustomerClient(int entityID)
         {
-            var objForm         = new FormInvoiceApi();
-            var dataForm        = objForm.GetLineByCustomer(entityID);
-            FnRenderLineaCredit(dataForm!.ObjListCustomerCreditLine!,dataForm.ParameterCausalTypeCredit!);
+            var objForm = new FormInvoiceApi();
+            var dataForm = objForm.GetLineByCustomer(entityID);
+            FnRenderLineaCredit(dataForm!.ObjListCustomerCreditLine!, dataForm.ParameterCausalTypeCredit!);
 
         }
 
@@ -2531,7 +2540,7 @@ namespace v4posme_window.Views
         {
             // Realizar la lógica que desees en el formulario padre
             WebToolsHelper objWebToolsHelper = new WebToolsHelper();
-            TxtCustomerId =  Convert.ToInt32( objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "entityID", "0"));
+            TxtCustomerId = Convert.ToInt32(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "entityID", "0"));
             txtCustomerDescription.Text = objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Codigo", "0");
             txtCustomerDescription.Text = txtCustomerDescription.Text + "/" + objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Nombre", "N/D");
 
@@ -2732,6 +2741,112 @@ namespace v4posme_window.Views
         {
             TxtCustomerId = 0;
             txtCustomerDescription.Text = "";
+        }
+
+
+
+        private void txtTypePriceID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCausalID_SelectedValueChanged(object sender, EventArgs e)
+        {
+            FnClearData();
+            FnRenderLineaCreditoDiv();
+        }
+
+        private void txtCustomerCreditLineID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FnClearData();
+        }
+
+        private void txtCurrencyID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FnClearData();
+        }
+
+        private void txtWarehouseID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FnClearData();
+        }
+
+        private void txtReceiptAmount_EditValueChanged(object sender, EventArgs e)
+        {
+            FnCalculateAmountPay();
+        }
+
+        private void txtReceiptAmount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtReceiptAmount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+            {
+                return;
+            }
+
+            txtReceiptAmountDol.Focus();
+
+        }
+
+        private void txtReceiptAmountDol_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+            {
+                return;
+            }
+
+            //FnEnviarFactura();
+        }
+
+        private void txtReceiptAmountDol_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                var workflowStage = ObjListWorkflowStage!.Where(c => c.Aplicable!.Value).FirstOrDefault();
+                TxtStatusId = workflowStage!.WorkflowStageId;
+                //FnEnviarFactura();
+            }
+
+            if (e.Control && e.KeyCode == Keys.B)
+            {
+                // Realizar la acción deseada al presionar Control + A
+                txtScanerCodigo.Focus();
+            }
+
+        }
+
+        private void txtReceiptAmountDol_EditValueChanged(object sender, EventArgs e)
+        {
+            FnCalculateAmountPay();
+        }
+
+        private void txtReceiptAmountTarjeta_EditValueChanged(object sender, EventArgs e)
+        {
+            FnCalculateAmountPay();
+        }
+
+        private void txtReceiptAmountTarjetaDol_EditValueChanged(object sender, EventArgs e)
+        {
+            FnCalculateAmountPay();
+        }
+
+        private void txtReceiptAmountPoint_EditValueChanged(object sender, EventArgs e)
+        {
+            FnCalculateAmountPay();
+        }
+
+        private void txtReceiptAmountBank_EditValueChanged(object sender, EventArgs e)
+        {
+            FnCalculateAmountPay();
+        }
+
+        private void txtReceiptAmountBankDol_EditValueChanged(object sender, EventArgs e)
+        {
+            FnCalculateAmountPay();
         }
     }
 }
