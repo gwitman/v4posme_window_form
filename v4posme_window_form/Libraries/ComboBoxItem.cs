@@ -13,7 +13,7 @@ namespace v4posme_window.Libraries
 
         public override string? ToString()
         {
-            return Key;
+            return Value is null ? "" : Value.ToString();
         }
     }
 }

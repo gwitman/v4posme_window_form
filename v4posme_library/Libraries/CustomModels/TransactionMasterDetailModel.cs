@@ -319,7 +319,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         return resultado != null ? resultado.ToList() : [];
     }
 
-    public List<TbTransactionMasterDetailDto> GetRowByTransaction(int companyId, int transactionId,
+    public List<TbTransactionMasterDetailDto>? GetRowByTransaction(int companyId, int transactionId,
         int transactionMasterId)
     {
         using var context = new DataContext();
