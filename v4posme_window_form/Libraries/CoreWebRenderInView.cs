@@ -5,6 +5,7 @@ using DevExpress.XtraBars;
 using DevExpress.XtraBars.Alerter;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraBars.Ribbon;
+using DevExpress.XtraCharts.Sankey;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using Unity;
@@ -20,6 +21,54 @@ namespace v4posme_window.Libraries;
 
 public class CoreWebRenderInView
 {
+    public static void LlenarComboBoxSetIndex(ComboBoxEdit comboBox, int indexValue)
+    {
+        for (var i = 0; i < comboBox.Properties.Items.Count; i++)
+        {
+            var comboboxIem = (ComboBoxItem)comboBox.Properties.Items[i];
+            if (i == indexValue)
+            {
+                comboBox.SelectedItem = comboboxIem;
+            }
+        }
+    }
+    public static void LlenarComboBoxSetItem(ComboBoxEdit comboBox,string value)
+    {
+        for (var i = 0; i < comboBox.Properties.Items.Count; i++)
+        {
+            var comboboxIem = (ComboBoxItem)comboBox.Properties.Items[i];
+            if (comboboxIem.Key == value)
+            {
+                comboBox.SelectedItem = comboboxIem;
+            }
+        }
+    }
+    public static void LlenarComboBoxRemoveItem(ComboBoxEdit comboBox , string value)
+    {
+        // Iteramos sobre todos los elementos del ComboBoxEdit
+        for (int i = 0; i < comboBox.Properties.Items.Count; i++)
+        {
+            // Verificamos si el elemento es una instancia de la clase que tiene la propiedad Key
+            if (comboBox.Properties.Items[i] is ComboBoxItem)
+            {
+                // Si la clave del elemento coincide con la clave proporcionada, lo eliminamos
+                if (((ComboBoxItem)comboBox.Properties.Items[i]).Key == value)
+                {
+                    comboBox.Properties.Items.RemoveAt(i);
+                    return; // Terminamos el bucle después de eliminar el elemento
+                }
+            }
+        }
+    }
+    
+    public static void LlenarComboBoxAddItem<T>(T itemElement,ComboBoxEdit comboBox, string keyField, string descripcionField)
+    {
+        var key = itemElement!.GetType().GetProperty(keyField)?.GetValue(itemElement)?.ToString();
+        var value = itemElement.GetType().GetProperty(descripcionField)?.GetValue(itemElement);
+        var comboBoxItem = new ComboBoxItem(key, value);
+        comboBox.Properties.Items.Add(comboBoxItem);
+
+    }
     public static void LlenarComboBox<T>(List<T> lista, ComboBoxEdit comboBox, string keyField, string descripcionField, object? defaultValue)
     {
         // Limpiar el combobox

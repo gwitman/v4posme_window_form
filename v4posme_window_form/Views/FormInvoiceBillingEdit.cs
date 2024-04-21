@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraRichEdit.Import.OpenXml;
 using DevExpress.XtraVerticalGrid;
 using Unity;
 using v4posme_library.Libraries;
@@ -18,6 +19,8 @@ using v4posme_library.ModelsDto;
 using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
+using v4posme_window.Api;
+using v4posme_window.Dto;
 using ComboBoxItem = v4posme_window.Libraries.ComboBoxItem;
 
 namespace v4posme_window.Views
@@ -1961,16 +1964,12 @@ namespace v4posme_window.Views
                     CoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "EntityId", "FirstName", ListProvider.ElementAt(0).EntityId);
                     CoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "CatalogItemId", "Name", ObjParameterCxcFrecuenciaPayDefault);
                     CoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "TransactionCausalId", "Name", ObjCausal!.ElementAt(0)!.TransactionCausalId);
-
-                    if(ObjListCustomerCreditLine.Count > 0 )
-                    CoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "CustomerCreditLineId", "AccountNumber", ObjListCustomerCreditLine.ElementAt(0).CustomerCreditLineId);
-
                     CoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "CatalogItemId", "Name", ObjListTypePrice.ElementAt(0).CatalogItemId);
                     CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId);
                     CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId);
                     CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId);
                     CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "BankId", "Name", ObjListBank.ElementAt(0).BankId);
-                    lblTitulo.Text = @"Factura: #00000000";                    
+                    lblTitulo.Text = @"Factura: #00000000";
                     txtExchangeRate.Text = ExchangeRate.ToString(CultureInfo.InvariantCulture);
                     txtCustomerDescription.Text = ObjNaturalDefault is not null ?
                                                     ($"{ObjCustomerDefault.CustomerNumber} {ObjNaturalDefault!.FirstName!.ToUpper()} {ObjNaturalDefault!.LastName!.ToUpper()}") :
@@ -1986,7 +1985,7 @@ namespace v4posme_window.Views
                     txtReference2.Text = ObjParameterCxcPlazoDefault;
                     txtReference3.Text = ObjEmployeeNatural is null ? "N/D" : ObjEmployeeNatural.FirstName;
                     txtIsApplied.Checked = false;
-                    txtDateFirst.DateTime =  DateTime.Today;
+                    txtDateFirst.DateTime = DateTime.Today;
                     txtDesembolsoEfectivo.IsOn = true;
                     txtReportSinRiesgo.IsOn = true;
                     TxtStatusOldId = ObjListWorkflowStage!.ElementAt(0).WorkflowStageId;
@@ -2016,10 +2015,6 @@ namespace v4posme_window.Views
                     CoreWebRenderInView.LlenarComboBox(ListProvider, txtReference1, "EntityId", "FirstName", ObjTransactionMaster.Reference1);
                     CoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "CatalogItemId", "Name", ObjTransactionMaster.PeriodPay);
                     CoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "TransactionCausalId", "Name", ObjTransactionMaster.TransactionCausalId);
-
-                    if (ObjListCustomerCreditLine.Count > 0)
-                    CoreWebRenderInView.LlenarComboBox(ObjListCustomerCreditLine, txtCustomerCreditLineID, "CustomerCreditLineId", "AccountNumber", ObjTransactionMaster.Reference4);
-
                     CoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "CatalogItemId", "Name", ObjListTypePrice.ElementAt(0).CatalogItemId);
                     CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountCardBankId);
                     CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "BankId", "Name", ObjTransactionMasterInfo.ReceiptAmountCardBankDolId);
@@ -2101,10 +2096,12 @@ namespace v4posme_window.Views
                         }
                     }
 
-                    FnRecalculateDetail(false,"");
+                    FnRecalculateDetail(false, "");
                     break;
             }
 
+            //Llenar Linea de Credito
+            FnRenderLineaCredit(ObjListCustomerCreditLine, ParameterCausalTypeCredit!);
 
             //Incializar Focos
             if (ObjParameterScanerProducto == "true")
@@ -2112,8 +2109,99 @@ namespace v4posme_window.Views
                 txtScanerCodigo.Focus();
             }
 
+
+
         }
 
+        public void FnRenderLineaCreditoDiv()
+        {
+            var causalID = ((ComboBoxItem)txtCausalID.EditValue).Key!.ToString();
+            var causalTypeCredit = ParameterCausalTypeCredit!.Value!.Split(",");
+            var isCredit = false;
+
+            for (var i = 0; i < causalTypeCredit.Length; i++)
+            {
+                if (causalTypeCredit[i] == causalID)
+                    isCredit = true;
+            }
+
+            if (isCredit)
+            {
+                txtCustomerCreditLineID.Visible = false;
+                labelCustomerCreditLineID.Visible = false;
+            }
+            else
+            {
+                txtCustomerCreditLineID.Visible = true;
+                labelCustomerCreditLineID.Visible = true;
+            }
+
+
+
+        }
+        public void FnRenderLineaCredit(List<TbCustomerCreditLineDto> objCustomerCreditLine, TbCompanyParameter causalTypeCredit)
+        {
+            //Llenar el combobox de Linea de Credito
+            txtCustomerCreditLineID.Properties.Items.Clear();
+            if (objCustomerCreditLine.Count() > 0)
+            {
+                for (var i = 0; i < objCustomerCreditLine.Count; i++)
+                {
+                    CoreWebRenderInView.LlenarComboBoxAddItem(objCustomerCreditLine[i], txtCustomerCreditLineID, "CustomerCreditLineId", "CreditLineName");
+                    if (i == 0 && ObjTransactionMaster!.Reference4 == "0")
+                    {
+                        CoreWebRenderInView.LlenarComboBoxSetItem(txtCustomerCreditLineID, objCustomerCreditLine[i].CustomerCreditLineId.ToString());
+                    }
+                    else if (ObjTransactionMaster!.Reference4 == objCustomerCreditLine[i].CustomerCreditLineId.ToString())
+                    {
+                        CoreWebRenderInView.LlenarComboBoxSetItem(txtCustomerCreditLineID, objCustomerCreditLine[i].CustomerCreditLineId.ToString());
+                    }
+                }
+            }
+
+
+            //Si no tiene linea de credito,  no permite que se haga una factura de credito
+            var causalesTipoCredito = causalTypeCredit!.Value!.Split(",");
+            List<string> indexEliminate = new List<string>();
+
+            for (var i = 0; i < causalesTipoCredito.Length; i++)
+            {
+                for (var ii = 0; ii < txtCausalID.Properties.Items.Count; ii++)
+                {
+                    var causalIDCredit = causalesTipoCredito[i];
+                    var comboboxIem = (ComboBoxItem)txtCausalID.Properties.Items[ii];
+                    if (comboboxIem!.Key!.ToString() == causalIDCredit && objCustomerCreditLine!.Count == 0)
+                    {
+                        indexEliminate.Add(comboboxIem!.Key!.ToString());
+                    }
+
+                }
+
+            }
+
+            for (var i = 0; i < indexEliminate.Count; i++)
+            {
+                CoreWebRenderInView.LlenarComboBoxRemoveItem(txtCausalID, indexEliminate[i]);
+            }
+
+            //Llenar el causal de la factura
+            if (ObjTransactionMaster is not null)
+            {
+                if (ObjTransactionMaster.TransactionCausalId is not null)
+                {
+                    CoreWebRenderInView.LlenarComboBoxSetItem(txtCausalID, ObjTransactionMaster!.TransactionCausalId!.Value.ToString());
+                }
+            }
+            else
+            {
+                CoreWebRenderInView.LlenarComboBoxSetIndex(txtCausalID, 0);
+            }
+
+
+            FnRenderLineaCreditoDiv();
+
+
+        }
         public string FnDeleteCerosIzquierdos(string texto)
         {
 
@@ -2144,7 +2232,7 @@ namespace v4posme_window.Views
         public void FnCalculateAmountPay()
         {
             var currencyId = ((ComboBoxItem)txtCurrencyID.EditValue).Key;
-            if(Convert.ToInt32( currencyId)  == 1 /*cordoba*/ )
+            if (Convert.ToInt32(currencyId) == 1 /*cordoba*/ )
             {
 
                 var ingresoCordoba = Convert.ToDecimal(txtReceiptAmount.Text);
@@ -2157,14 +2245,14 @@ namespace v4posme_window.Views
 
                 var ingresoDol = Convert.ToDecimal(txtReceiptAmountDol.Text);
                 var tipoCambio = Convert.ToDecimal(txtExchangeRate.Text);
-                var total = Convert.ToDecimal( txtTotal.Text);
+                var total = Convert.ToDecimal(txtTotal.Text);
 
 
                 var resultTotal = (ingresoCordoba + bancoCordoba + puntoCordoba + tarjetaCordoba + (bancoDolares / tipoCambio) + (tarejtaDolares / tipoCambio) + (ingresoDol / tipoCambio)) - total;
                 txtChangeAmount.Text = resultTotal.ToString("#0,000.00");
             }
 
-            if (Convert.ToInt32(currencyId) ==2  /*dolar*/ )
+            if (Convert.ToInt32(currencyId) == 2  /*dolar*/ )
             {
 
                 var ingresoCordoba = Convert.ToDecimal(txtReceiptAmount.Text);
@@ -2214,7 +2302,7 @@ namespace v4posme_window.Views
             gridViewTbTransactionMasterDetail.RefreshDataSource();
 
             txtReceiptAmount.Text = "0";
-			txtReceiptAmountDol.Text = "0";
+            txtReceiptAmountDol.Text = "0";
             txtReceiptAmountBank.Text = "0";
             txtReceiptAmountPoint.Text = "0";
             txtChangeAmount.Text = "0";
@@ -2250,7 +2338,7 @@ namespace v4posme_window.Views
             for (var i = 0; i < NSSystemDetailInvoice.RowCount; i++)
             {
 
-                var skuSelecte = Convert.ToInt32( NSSystemDetailInvoice.GetRowCellValue(i,colSku));
+                var skuSelecte = Convert.ToInt32(NSSystemDetailInvoice.GetRowCellValue(i, colSku));
                 var skuCatalogItemID = skuSelecte;
                 var skuSelecteOption = 25;
                 var skuValue = 30;
@@ -2258,15 +2346,15 @@ namespace v4posme_window.Views
                 var skuValueDescription = "Litro , Unidad";
 
 
-                cantidadTemporal =  Convert.ToInt32( NSSystemDetailInvoice.GetRowCellValue(i,colQuantity)); 
+                cantidadTemporal = Convert.ToInt32(NSSystemDetailInvoice.GetRowCellValue(i, colQuantity));
                 priceTemporal = Convert.ToDecimal(NSSystemDetailInvoice.GetRowCellValue(i, colPrice));
 
 
-                
+
                 NSSystemDetailInvoice.SetRowCellValue(i, colQuantity, cantidadTemporal);
                 NSSystemDetailInvoice.SetRowCellValue(i, colPrice, priceTemporal);
                 NSSystemDetailInvoice.SetRowCellValue(i, colSkuFormatoDescripton, skuValueDescription);
-                
+
                 cantidad = Convert.ToInt32(NSSystemDetailInvoice.GetRowCellValue(i, colQuantity));
                 precio = Convert.ToDecimal(NSSystemDetailInvoice.GetRowCellValue(i, colPrice));
                 iva = Convert.ToDecimal(NSSystemDetailInvoice.GetRowCellValue(i, colIva));
@@ -2275,14 +2363,14 @@ namespace v4posme_window.Views
                 subtotal = precio * cantidad;
                 iva = (precio * cantidad) * iva;
                 total = iva + subtotal;
-                
-                
+
+
                 cantidadGeneral = cantidadGeneral + cantidad;
                 precioGeneral = precioGeneral + precio;
                 ivaGeneral = ivaGeneral + iva;
                 subtotalGeneral = subtotalGeneral + subtotal;
                 totalGeneral = totalGeneral + total;
-                
+
                 NSSystemDetailInvoice.SetRowCellValue(i, colSubTotal, subtotal);
             }
 
@@ -2338,18 +2426,25 @@ namespace v4posme_window.Views
 
         }
 
+        public void FnGetCustomerClient(int entityID)
+        {
+            var objForm         = new FormInvoiceApi();
+            var dataForm        = objForm.GetLineByCustomer(entityID);
+            FnRenderLineaCredit(dataForm!.ObjListCustomerCreditLine!,dataForm.ParameterCausalTypeCredit!);
 
-        public void FnOnCompleteNewItem(Dictionary<string, string> diccionario , bool sumar)
+        }
+
+        public void FnOnCompleteNewItem(Dictionary<string, string> diccionario, bool sumar)
         {
             txtScanerCodigo.Focus();
-            var index       = 0;
-            var encontrado  = false;
+            var index = 0;
+            var encontrado = false;
             var itemID = Convert.ToInt32(diccionario["itemID"]);
 
             //Buscar Item
-            for(index = 0; index < gridViewValues.RowCount; index++)
+            for (index = 0; index < gridViewValues.RowCount; index++)
             {
-                if(itemID == Convert.ToInt32( gridViewValues.GetRowCellValue(index,colItemId)))
+                if (itemID == Convert.ToInt32(gridViewValues.GetRowCellValue(index, colItemId)))
                 {
                     encontrado = true;
                     break;
@@ -2359,8 +2454,8 @@ namespace v4posme_window.Views
             //Actualizar
             if (encontrado)
             {
-                var quantity = Convert.ToInt32( gridViewValues.GetRowCellValue(index, colQuantity));
-                gridViewValues.SetRowCellValue(index, colQuantity, (quantity + 1 ));
+                var quantity = Convert.ToInt32(gridViewValues.GetRowCellValue(index, colQuantity));
+                gridViewValues.SetRowCellValue(index, colQuantity, (quantity + 1));
 
             }
             //Nuevo
@@ -2373,23 +2468,23 @@ namespace v4posme_window.Views
                 gridViewValues.SetRowCellValue(handle, colTransactionMasterDetailId, 0);
                 gridViewValues.SetRowCellValue(handle, colItemId, diccionario["itemID"]);
                 gridViewValues.SetRowCellValue(handle, colItemNumber, diccionario["Codigo"]);
-                gridViewValues.SetRowCellValue(handle, colTransactionDetailName, diccionario["Nombre"] );
+                gridViewValues.SetRowCellValue(handle, colTransactionDetailName, diccionario["Nombre"]);
                 gridViewValues.SetRowCellValue(handle, colSku, diccionario["unitMeasureID"]);
-                gridViewValues.SetRowCellValue(handle, colQuantity,1);
+                gridViewValues.SetRowCellValue(handle, colQuantity, 1);
                 gridViewValues.SetRowCellValue(handle, colPrice, diccionario["Precio"]);
-                gridViewValues.SetRowCellValue(handle, colSubTotal, 1 * Convert.ToInt32( diccionario["Precio"]) );
+                gridViewValues.SetRowCellValue(handle, colSubTotal, 1 * Convert.ToInt32(diccionario["Precio"]));
                 gridViewValues.SetRowCellValue(handle, colIva, 0);
-                gridViewValues.SetRowCellValue(handle, colSkuQuantityBySku, 1 );
-                gridViewValues.SetRowCellValue(handle, colUnitaryPriceIndividual, Convert.ToInt32(diccionario["Precio"] ));
+                gridViewValues.SetRowCellValue(handle, colSkuQuantityBySku, 1);
+                gridViewValues.SetRowCellValue(handle, colUnitaryPriceIndividual, Convert.ToInt32(diccionario["Precio"]));
                 gridViewValues.SetRowCellValue(handle, colAccion, "");
                 gridViewValues.SetRowCellValue(handle, colSkuFormatoDescripton, "");
                 gridViewValues.SetRowCellValue(handle, colItemPrecio2, diccionario["Precio2"]);
                 gridViewValues.SetRowCellValue(handle, colItemPrecio3, diccionario["Precio3"]);
                 gridViewValues.UpdateCurrentRow();
 
-            }		
-		
-		    FnGetConcept(itemID, "IVA");		
+            }
+
+            FnGetConcept(itemID, "IVA");
         }
 
         #endregion
@@ -2406,8 +2501,8 @@ namespace v4posme_window.Views
                 return;
             }
 
-            var formTypeListSearch = new FormTypeListSearch("Lista de Cliente", ObjComponentItem.ComponentId,
-                "SELECCIONAR_BILLING_REGISTER", true,
+            var formTypeListSearch = new FormTypeListSearch("Lista de Cliente", ObjComponentCustomer!.ComponentId,
+                "SELECCIONAR_CLIENTES_BILLING", true,
                 "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
             formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptarCusomter;
             formTypeListSearch.ShowDialog(this);
@@ -2426,7 +2521,7 @@ namespace v4posme_window.Views
 
             var formTypeListSearch = new FormTypeListSearch("Lista de Productos", 33,
                 "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
-                 @"{warehouseID:" + warehouseId + ", listPriceID:" + listPrice + ",typePriceID:" + typePriceId + ",currencyID:" + currencyIdKey + "}", 
+                 @"{warehouseID:" + warehouseId + ", listPriceID:" + listPrice + ",typePriceID:" + typePriceId + ",currencyID:" + currencyIdKey + "}",
                  false, "", 0, 5, "");
             formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptarItem;
             formTypeListSearch.ShowDialog(this);
@@ -2436,8 +2531,12 @@ namespace v4posme_window.Views
         {
             // Realizar la lógica que desees en el formulario padre
             WebToolsHelper objWebToolsHelper = new WebToolsHelper();
-            MessageBox.Show("Evento en el formulario hijo: " +
-                            objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
+            TxtCustomerId =  Convert.ToInt32( objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "entityID", "0"));
+            txtCustomerDescription.Text = objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Codigo", "0");
+            txtCustomerDescription.Text = txtCustomerDescription.Text + "/" + objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Nombre", "N/D");
+
+            FnClearData();
+            FnGetCustomerClient(TxtCustomerId);
         }
 
 
@@ -2525,8 +2624,8 @@ namespace v4posme_window.Views
 
 
             bool encontrado = false;
-            int i           = 0;
-            for ( i = 0; i < ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows.Count; i++ )
+            int i = 0;
+            for (i = 0; i < ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows.Count; i++)
             {
                 if (encontrado == true)
                 {
@@ -2535,8 +2634,8 @@ namespace v4posme_window.Views
                 }
 
                 //buscar por codigo de sistema					
-                var currencyTemp = Convert.ToInt32( ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows[i]["currencyID"]);
-                var currencyID = Convert.ToInt32( txtCurrencyID.EditValue);
+                var currencyTemp = Convert.ToInt32(ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows[i]["currencyID"]);
+                var currencyID = Convert.ToInt32(txtCurrencyID.EditValue);
 
                 var warehouseIDTemp = Convert.ToInt32(ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows[i]["warehouseID"]);
                 var warehouseID = Convert.ToInt32(txtWarehouseID.EditValue);
@@ -2579,9 +2678,9 @@ namespace v4posme_window.Views
 
             if (encontrado == true)
             {
-                var sumar                               = true;
-                var filterResult                        = ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows[i];
-                Dictionary<string, string> diccionario  = new Dictionary<string, string>();
+                var sumar = true;
+                var filterResult = ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows[i];
+                Dictionary<string, string> diccionario = new Dictionary<string, string>();
 
                 diccionario.Add("itemID", filterResult["itemID"].ToString()!);
                 diccionario.Add("Codigo", filterResult["Codigo"].ToString()!);
@@ -2610,7 +2709,7 @@ namespace v4posme_window.Views
 
         private void barManager1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (e.Item.Name == btnActualizarCatalogo.Name )
+            if (e.Item.Name == btnActualizarCatalogo.Name)
             {
                 var formInvoiceApi = new FormInvoiceApi();
                 var warehouseID_ = Convert.ToInt32(txtWarehouseID.EditValue);
@@ -2618,15 +2717,21 @@ namespace v4posme_window.Views
                 var typePrice_ = Convert.ToInt32(txtTypePriceID.EditValue);
                 var currencyID_ = Convert.ToInt32(txtCurrencyID.EditValue);
 
-                ObjSELECCIONAR_ITEM_BILLING_BACKGROUND   = 
+                ObjSELECCIONAR_ITEM_BILLING_BACKGROUND =
                         formInvoiceApi.GetViewApi(
-                            ObjComponentItem!.ComponentId, 
-                            @"SELECCIONAR_ITEM_BILLING_BACKGROUND", 
-                            @"{warehouseID:"+ warehouseID_+", listPriceID:"+listPrice_+",typePriceID:" + typePrice_ + ",currencyID:"+ currencyID_ + "}"
+                            ObjComponentItem!.ComponentId,
+                            @"SELECCIONAR_ITEM_BILLING_BACKGROUND",
+                            @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}"
                 );
 
 
             }
+        }
+
+        private void btnClearCustomer_Click(object sender, EventArgs e)
+        {
+            TxtCustomerId = 0;
+            txtCustomerDescription.Text = "";
         }
     }
 }

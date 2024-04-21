@@ -21,7 +21,7 @@ namespace v4posme_library.Libraries.CustomHelper
 
             //Validar has
             var dictionary  = (IDictionary<string, object>)data;
-            if (dictionary.ContainsKey(fieldData))
+            if (!dictionary.ContainsKey(fieldData))
                 return defaultValue;
 
 

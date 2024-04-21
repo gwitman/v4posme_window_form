@@ -15,6 +15,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Libraries\FormInvoiceApi.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
       <PackageReference Include="DevExpress.Data" Version="23.2.5" />
       <PackageReference Include="DevExpress.Utils" Version="23.2.5" />
       <PackageReference Include="DevExpress.Win.Design" Version="23.2.5" />
@@ -59,6 +63,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Api\" />
     </ItemGroup>
 
 </Project>

@@ -16,10 +16,12 @@ class DataViewModel : IDataViewModel
     public TbDataview? GetViewByName(int componentId, string name, int callerId)
     {
         using var context = new DataContext();
-        return context.TbDataviews
-            .SingleOrDefault(dataview => dataview!.ComponentId == componentId
+        var resultado =  context.TbDataviews.FirstOrDefault(dataview => dataview!.ComponentId == componentId
                                          && dataview.CallerId == callerId
                                          && dataview.Name == name
                                          && dataview.IsActive!.Value);
+
+        return resultado;
+
     }
 }
