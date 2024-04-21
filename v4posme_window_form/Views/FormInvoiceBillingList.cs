@@ -221,7 +221,7 @@ namespace v4posme_window.Views
 
         public void New(object? sender, EventArgs? args)
         {
-            var objTransaction = _coreWebTransaction.GetTransaction(VariablesGlobales.Instance.User!.CompanyId, "tb_transaction_master_billing");
+            var objTransaction = _coreWebTransaction.GetTransaction(VariablesGlobales.Instance.User!.CompanyId, "tb_transaction_master_billing",0);
 
             var objFormInvoiceList = new FormInvoiceBillingEdit(
                 TypeOpenForm.Init,

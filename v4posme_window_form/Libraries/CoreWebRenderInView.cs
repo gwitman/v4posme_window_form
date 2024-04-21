@@ -45,46 +45,7 @@ public class CoreWebRenderInView
             comboBox.SelectedIndex = 0;
         }
 
-        /*var indexDefault  = -1;
-        var indexSelected = -1;
-        if (comboBox.Properties.Items.Count > 0 )
-        {
-            if (defaultValue is not null)
-            {
-                for ( indexDefault = 0; indexDefault < comboBox.Properties.Items.Count; indexDefault++ )
-                {
-                    if (comboBox.Properties.Items[indexDefault].ToString() == defaultValue!.ToString())
-                    {
-                        break;
-                    }
-                }
-                if (indexDefault >= comboBox.Properties.Items.Count)
-                    indexDefault = -1;
-            }
-
-            if (selectedValue is not null)
-            {
-                for (indexSelected = 0; indexSelected < comboBox.Properties.Items.Count; indexSelected++)
-                {
-                    if (comboBox.Properties.Items[indexSelected].ToString() == selectedValue!.ToString())
-                    {
-                        break;
-                    }
-                }
-                if (indexSelected >= comboBox.Properties.Items.Count)
-                    indexSelected = -1;
-            }
-
-        }
-
-        if (selectedValue is not null)
-        {
-            comboBox.SelectedIndex = indexSelected;
-        }
-        else if (defaultValue is not null)
-        {
-            comboBox.SelectedIndex = indexDefault;
-        }*/
+        
     }
 
     public static void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, GridControl gridControl)
