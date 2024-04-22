@@ -22,7 +22,7 @@ namespace v4posme_window.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace v4posme_window.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("v4posme_window.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace v4posme_window.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace v4posme_window.Properties {
         /// <summary>
         ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
         /// </summary>
-        internal static DevExpress.Utils.Svg.SvgImage actions_edit {
+        public static DevExpress.Utils.Svg.SvgImage actions_edit {
             get {
                 object obj = ResourceManager.GetObject("actions_edit", resourceCulture);
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
@@ -73,7 +73,7 @@ namespace v4posme_window.Properties {
         /// <summary>
         ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
         /// </summary>
-        internal static DevExpress.Utils.Svg.SvgImage actions_trash {
+        public static DevExpress.Utils.Svg.SvgImage actions_trash {
             get {
                 object obj = ResourceManager.GetObject("actions_trash", resourceCulture);
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
@@ -83,7 +83,7 @@ namespace v4posme_window.Properties {
         /// <summary>
         ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
         /// </summary>
-        internal static DevExpress.Utils.Svg.SvgImage bo_appearance {
+        public static DevExpress.Utils.Svg.SvgImage bo_appearance {
             get {
                 object obj = ResourceManager.GetObject("bo_appearance", resourceCulture);
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
@@ -93,7 +93,7 @@ namespace v4posme_window.Properties {
         /// <summary>
         ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
         /// </summary>
-        internal static DevExpress.Utils.Svg.SvgImage bo_appearance1 {
+        public static DevExpress.Utils.Svg.SvgImage bo_appearance1 {
             get {
                 object obj = ResourceManager.GetObject("bo_appearance1", resourceCulture);
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
@@ -103,7 +103,7 @@ namespace v4posme_window.Properties {
         /// <summary>
         ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
         /// </summary>
-        internal static DevExpress.Utils.Svg.SvgImage bo_organization {
+        public static DevExpress.Utils.Svg.SvgImage bo_organization {
             get {
                 object obj = ResourceManager.GetObject("bo_organization", resourceCulture);
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
@@ -111,9 +111,19 @@ namespace v4posme_window.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Image1 {
+            get {
+                object obj = ResourceManager.GetObject("Image1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
         /// </summary>
-        internal static DevExpress.Utils.Svg.SvgImage markcomplete {
+        public static DevExpress.Utils.Svg.SvgImage markcomplete {
             get {
                 object obj = ResourceManager.GetObject("markcomplete", resourceCulture);
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
@@ -123,7 +133,27 @@ namespace v4posme_window.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap posMe_Logo_fondo_blanco {
+        public static System.Drawing.Bitmap minus_icon {
+            get {
+                object obj = ResourceManager.GetObject("minus_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap minus_icon_16 {
+            get {
+                object obj = ResourceManager.GetObject("minus_icon_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap posMe_Logo_fondo_blanco {
             get {
                 object obj = ResourceManager.GetObject("posMe Logo fondo blanco", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -133,7 +163,7 @@ namespace v4posme_window.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Compañía:.
         /// </summary>
-        internal static string PrincipalForm_Compañía_Titulo {
+        public static string PrincipalForm_Compañía_Titulo {
             get {
                 return ResourceManager.GetString("PrincipalForm_Compañía_Titulo", resourceCulture);
             }

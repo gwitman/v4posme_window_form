@@ -5,6 +5,8 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraWaitForm;
 using Mysqlx.Cursor;
 using System.Dynamic;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomHelper;
@@ -154,10 +156,15 @@ namespace v4posme_window.Views
                 };
 
                 var dataViewData = _coreWebView.GetViewByDataViewId(VariablesGlobales.Instance.User, objComponent.ComponentId, DataViewId!.Value, callerIdList, resultPermission, parameters);
-                CoreWebRenderInView.RenderGrid(dataViewData!, "invoice", ObjGridControl);
+                CoreWebRenderInView.RenderGrid(dataViewData, "invoice", ObjGridControl);
                 ObjGridControl.MainView.RefreshData();
                 ObjGridControl.Refresh();
             }
+        }
+
+        private void RepositoryItemButtonEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public void Delete(object? sender, EventArgs? args)
