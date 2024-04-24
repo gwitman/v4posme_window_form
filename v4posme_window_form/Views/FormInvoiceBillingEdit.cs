@@ -3,9 +3,13 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Windows.Controls;
+using DevExpress.Utils.Layout;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using Unity;
 using v4posme_library.Libraries;
@@ -21,6 +25,9 @@ using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
 using ComboBoxItem = v4posme_window.Libraries.ComboBoxItem;
+using Control = System.Windows.Forms.Control;
+using Image = System.Drawing.Image;
+using StackPanel = DevExpress.Utils.Layout.StackPanel;
 
 namespace v4posme_window.Views
 {
@@ -113,7 +120,13 @@ namespace v4posme_window.Views
         #endregion
 
         #region Properties
+
         public IBindingList _bindingListTransactionMasterDetail = new BindingList<FormInvoiceBillingEditDetailDTO>();
+        private bool varPermisosEsPermitidoModificarPrecio;
+        private bool varPermisosEsPermitidoModificarNombre;
+        private bool varPermisosEsPermitidoSeleccionarPrecioPublico;
+        private bool varPermisosEsPermitidoSeleccionarPrecioMayor;
+        private bool varPermisosEsPermitidoSeleccionarPrecioCredito;
         public List<TbWorkflowStage>? ObjListWorkflowStage { get; private set; }
         public TbComponent? ObjComponentTransactionBilling { get; private set; }
         public decimal ExchangeRate { get; private set; }
@@ -281,7 +294,6 @@ namespace v4posme_window.Views
             TransactionId = transactionId;
             TransactionMasterId = transactionMasterId;
             TypeOpen = typeOpen;
-
         }
 
 
@@ -315,7 +327,26 @@ namespace v4posme_window.Views
                 LoadRender(TypeRender.New);
             }
 
+            ObjListPermisos = VariablesGlobales.Instance.ListMenuHiddenPopup;
+            varPermisosEsPermitidoModificarPrecio = ObjListPermisos.Count(element => element.Display == "ES_PERMITIDO_MODIFICAR_PRECIO_EN_FACTURACION") > 0;
+            varPermisosEsPermitidoModificarNombre = ObjListPermisos.Count(element => element.Display == "ES_PERMITIDO_MODIFICAR_NOMBRE_EN_FACTURACION") > 0;
+            varPermisosEsPermitidoSeleccionarPrecioPublico = ObjListPermisos.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PUBLICO") > 0;
+            varPermisosEsPermitidoSeleccionarPrecioMayor = ObjListPermisos.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PORMAYOR") > 0;
+            varPermisosEsPermitidoSeleccionarPrecioCredito = ObjListPermisos.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_CREDITO") > 0;
 
+            // Asignar el RepositoryItemImageComboBox a la celda específica
+            /*var editorButton1 = new EditorButton();
+            var editorButton2 = new EditorButton();
+            var editorButton3 = new EditorButton();
+            editorButton3.Kind = ButtonPredefines.Minus;
+            editorButton2.Kind = ButtonPredefines.Plus;
+            editorButton1.Kind = ButtonPredefines.DropDown;
+            repositoryItemComboBox1.Buttons.AddRange([editorButton1, editorButton2, editorButton3]);
+            repositoryItemComboBox1.TextEditStyle = TextEditStyles.HideTextEditor;
+            repositoryItemComboBox1.ButtonClick += RepositoryItemButtonEdit_ButtonClick;
+            gridViewTbTransactionMasterDetail.RepositoryItems.Add(repositoryItemComboBox1);
+            colAccion.ColumnEdit = repositoryItemComboBox1;
+            colAccion.ShowButtonMode = ShowButtonModeEnum.ShowAlways;*/
         }
 
         #endregion
@@ -595,9 +626,9 @@ namespace v4posme_window.Views
                 };
                 confiDetalleHeader.Add(row3);
 
-                var detalle = new List<string[]> { (["PRODUCTO", "CANT", "TOTAL"]) };
+                var detalle = new List<string[]> { ( ["PRODUCTO", "CANT", "TOTAL"]) };
 
-                detalle.AddRange(objTmd.Select(detail => (string[])[detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
+                detalle.AddRange(objTmd.Select(detail => (string[]) [detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
             }
             catch (Exception e)
             {
@@ -751,7 +782,6 @@ namespace v4posme_window.Views
                 ObjTransactionMasterItemConcepto = _objInterfazCompanyComponentConceptModel.GetRowByTransactionMasterId(user.CompanyId, ObjComponentItem.ComponentId, ObjTransactionMaster.TransactionMasterId);
                 ObjTransactionMasterItemSku = _objInterfazItemSkuModel.GetRowByTransactionMasterId(user.CompanyId, ObjTransactionMaster.TransactionMasterId);
                 ObjTransactionMasterItem = _objInterfazItemModel.GetRowByTransactionMasterId(ObjTransactionMaster.TransactionMasterId);
-
             }
             catch (Exception ex)
             {
@@ -1228,16 +1258,16 @@ namespace v4posme_window.Views
                     case "false":
                         return;
                     case "true":
+                    {
+                        //si es auto aplicadao mandar a imprimir
+                        if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
                         {
-                            //si es auto aplicadao mandar a imprimir
-                            if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
-                            {
-                                ComandPrinter();
-                            }
-
-                            break;
+                            ComandPrinter();
                         }
-                        //Error 
+
+                        break;
+                    }
+                    //Error 
                 }
             }
             catch (Exception e)
@@ -1948,30 +1978,14 @@ namespace v4posme_window.Views
             }
 
 
-            //Enlazar el bindg
             _bindingListTransactionMasterDetail = new BindingList<FormInvoiceBillingEditDetailDTO>();
             gridViewTbTransactionMasterDetail.DataSource = _bindingListTransactionMasterDetail;
 
-            //Configurar las columnas del grid  de acciones       
-            repositoryItemComboBox1.Buttons.Clear();
-            repositoryItemComboBox1.Items.Clear();
-            var comboBoxEditor = new ComboBoxItem("Example", "Value");
-            var editorButton1 = new EditorButton();
-            var editorButton2 = new EditorButton();
-            var editorButton3 = new EditorButton();
-            editorButton3.Kind = ButtonPredefines.Minus;
-            editorButton2.Kind = ButtonPredefines.Plus;
-            editorButton1.Kind = ButtonPredefines.DropDown;
-            repositoryItemComboBox1.Items.Add(comboBoxEditor);
-            repositoryItemComboBox1.Buttons.AddRange([editorButton1, editorButton2, editorButton3]);
-            repositoryItemComboBox1.TextEditStyle = TextEditStyles.HideTextEditor;
-            repositoryItemComboBox1.ButtonClick += RepositoryItemButtonEdit_ButtonClick;
-            gridViewTbTransactionMasterDetail.RepositoryItems.Add(repositoryItemComboBox1);
-            colAccion.ColumnEdit = repositoryItemComboBox1;
-            colAccion.ShowButtonMode = ShowButtonModeEnum.ShowAlways;
-
-
+            colTransactionDetailName.OptionsColumn.AllowEdit = varPermisosEsPermitidoModificarNombre;
+            colPrice.OptionsColumn.AllowEdit = varPermisosEsPermitidoModificarPrecio;
         }
+
+        public List<TbMenuElement>? ObjListPermisos { get; set; }
 
         private void RepositoryItemButtonEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
         {
@@ -2325,6 +2339,7 @@ namespace v4posme_window.Views
             gridViewValues.RefreshData();
             gridViewTbTransactionMasterDetail.RefreshDataSource();
         }
+
         public void FnClearData()
         {
             gridViewTbTransactionMasterDetail.DataSource = null;
@@ -2345,7 +2360,6 @@ namespace v4posme_window.Views
         }
 
 
-
         public void FnOnCompleteNewItemPopPub(dynamic mensaje)
         {
             Dictionary<string, string> diccionario = new Dictionary<string, string>();
@@ -2357,7 +2371,7 @@ namespace v4posme_window.Views
             diccionario.Add("Medida", objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Medida", "0"));
 
             diccionario.Add("Cantidad", "1");
-            diccionario.Add("BCantiad", objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Cantidad", "0"));//Cantidad en bodega
+            diccionario.Add("BCantiad", objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Cantidad", "0")); //Cantidad en bodega
             diccionario.Add("Precio", objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Precio", "0"));
             diccionario.Add("Total", Convert.ToString(1 * Convert.ToDecimal(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Precio", "0"))));
             diccionario.Add("Iva", "0");
@@ -2367,6 +2381,7 @@ namespace v4posme_window.Views
             diccionario.Add("Precio3", objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Precio3", "0"));
             FnOnCompleteNewItem(diccionario, true);
         }
+
         public void FnOnCompleteNewItem(Dictionary<string, string> diccionario, bool sumar)
         {
             txtScanerCodigo.Focus();
@@ -2383,6 +2398,7 @@ namespace v4posme_window.Views
                     encontrado = true;
                     break;
                 }
+
                 indexEncontrado++;
             }
 
@@ -2397,7 +2413,6 @@ namespace v4posme_window.Views
             {
                 var billingEdit = new FormInvoiceBillingEditDetailDTO
                 {
-
                     ItemId = Convert.ToInt32(diccionario["itemID"]),
                     ItemNumber = diccionario["Codigo"],
                     TransactionDetailName = diccionario["Nombre"],
@@ -2412,10 +2427,33 @@ namespace v4posme_window.Views
                     ItemPrecio2 = WebToolsHelper.ConvertToNumber<decimal>(diccionario["Precio2"]),
                     ItemPrecio3 = WebToolsHelper.ConvertToNumber<decimal>(diccionario["Precio3"])
                 };
+
+                var itemPrecio = new ComboBoxItem("Price", billingEdit.Price);
+                var itemPrecio2 = new ComboBoxItem("ItemPrecio2", billingEdit.ItemPrecio2);
+                var itemPrecio3 = new ComboBoxItem("ItemPrecio3", billingEdit.ItemPrecio3);
+
+                // Crear ComboBoxEdit
+                ComboBoxEdit comboBoxEdit = new ComboBoxEdit();
+                comboBoxEdit.Properties.TextEditStyle = TextEditStyles.DisableTextEditor;
+
+
+                // Crear un repositorio de ComboBoxItem
+                RepositoryItemComboBox repositoryItemComboBox = new RepositoryItemComboBox();
+
+                // Agregar elementos al repositorio
+                repositoryItemComboBox.Items.AddRange([itemPrecio, itemPrecio2, itemPrecio3]);
+
+                // Asignar el repositorio al ComboBoxEdit
+                comboBoxEdit.Properties.Assign(repositoryItemComboBox);
+                // Crear un RepositoryItem para el StackPanel
+                var repositoryItemCustomEdit = new RepositoryItemCustomEdit();
+                var stackPanel = new StackPanel();
+                stackPanel.Height = 25;
+                repositoryItemCustomEdit.CustomHeight = stackPanel.Height;
+                repositoryItemCustomEdit.CustomControl = stackPanel;
+                colAccion.ColumnEdit = repositoryItemCustomEdit;
                 _bindingListTransactionMasterDetail.Add(billingEdit);
                 FnRefrechDetail();
-
-
             }
 
             FnGetConcept(itemID, "IVA");
@@ -2531,8 +2569,6 @@ namespace v4posme_window.Views
             FnRenderLineaCredit(dataForm!.ObjListCustomerCreditLine!, dataForm.ParameterCausalTypeCredit!);
         }
 
-
-
         #endregion
 
 
@@ -2589,23 +2625,6 @@ namespace v4posme_window.Views
             // Realizar la lógica que desees en el formulario padre
             var objWebToolsHelper = new WebToolsHelper();
             FnOnCompleteNewItemPopPub(mensaje);
-        }
-
-
-        private void lblTitulo_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void dateEdit1_EditValueChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tablePanel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void tablePanel2_Paint(object sender, PaintEventArgs e)
-        {
         }
 
         #endregion
@@ -2871,10 +2890,8 @@ namespace v4posme_window.Views
 
         private void btnDeleteItem_Click(object sender, EventArgs e)
         {
-             
             if (gridViewValues.SelectedRowsCount > 0)
             {
-
                 var rowIndex = gridViewValues.GetSelectedRows().ToList();
                 foreach (var indexRow in rowIndex)
                 {
@@ -2884,9 +2901,54 @@ namespace v4posme_window.Views
 
                 FnRefrechDetail();
                 FnRecalculateDetail(true, "");
-
             }
+        }
 
+        private void gridViewValues_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            //XtraMessageBox.Show($"{e.Column.Name} {e.OldValue}->{e.Value}", "Cambio Valores");
+            if (e.Value == null) return;
+
+            if (e.Column.Name == colQuantity.Name)
+            {
+                if (e.Value.ToString() == e.OldValue.ToString()) return;
+                //gridViewValues.SetRowCellValue(e.RowHandle, colQuantity, e.Value);
+                FnRecalculateDetail(true, "");
+            }
+        }
+
+        private void gridViewValues_CustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
+        {
+        }
+    }
+
+    public class RepositoryItemCustomEdit:RepositoryItem
+    {
+        private Control customControl;
+
+        public Control CustomControl
+        {
+            get { return customControl; }
+            set { customControl = value; }
+        }
+
+        public int CustomHeight
+        {
+            get { return customControl.Height; }
+            set { customControl.Height = value; }
+        }
+
+        public RepositoryItemCustomEdit()
+        {
+            customControl = new Control(); // Puedes inicializar con cualquier control que necesites aquí
+        }
+
+        // Método para clonar el objeto
+        public override RepositoryItem Clone()
+        {
+            RepositoryItemCustomEdit repositoryItem = base.Clone() as RepositoryItemCustomEdit;
+            repositoryItem.CustomControl = customControl; // Clonar el control personalizado
+            return repositoryItem;
         }
     }
 }
