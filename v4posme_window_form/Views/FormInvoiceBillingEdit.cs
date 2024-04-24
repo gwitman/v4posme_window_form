@@ -2004,10 +2004,6 @@ namespace v4posme_window.Views
         }
 
 
-        private void RepositoryItemButtonEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
-        {
-        }
-
         public void LoadRender(TypeRender typeRender)
         {
             var objCoreWebRenderInView = new CoreWebRenderInView();
@@ -2508,7 +2504,7 @@ namespace v4posme_window.Views
 
 
             var NSSystemDetailInvoice = gridViewValues;
-            for (var i = 0; i < NSSystemDetailInvoice.RowCount; i++)
+            for (var i = 0; i < (NSSystemDetailInvoice.RowCount - 1); i++)
             {
                 var skuSelecte = Convert.ToInt32(NSSystemDetailInvoice.GetRowCellValue(i, colSku));
                 var skuCatalogItemID = skuSelecte;                
