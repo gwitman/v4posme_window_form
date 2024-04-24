@@ -2511,11 +2511,10 @@ namespace v4posme_window.Views
             for (var i = 0; i < NSSystemDetailInvoice.RowCount; i++)
             {
                 var skuSelecte = Convert.ToInt32(NSSystemDetailInvoice.GetRowCellValue(i, colSku));
-                var skuCatalogItemID = skuSelecte;
-                var skuSelecteOption = 25;
-                var skuValue = 30;
-                var skuValuePrimceUnit = 25; //uniary price
-                var skuValueDescription = "Litro , Unidad";
+                var skuCatalogItemID = skuSelecte;                
+                var skuValue = 1;/*configuracion del sku a cuantas unidades contiene por ejemplo sku 1 quintal = 100 unidades, pero en nuestro caso siempre va ha ser 1*/
+                var skuValuePrimceUnit = WebToolsHelper.ConvertToNumber<decimal>(NSSystemDetailInvoice.GetRowCellValue(i, colPrice).ToString());//precio por unidad de sku
+                var skuValueDescription = NSSystemDetailInvoice.GetRowCellValue(i, colSkuFormatoDescripton).ToString();
 
 
                 cantidadTemporal = Convert.ToInt32(NSSystemDetailInvoice.GetRowCellValue(i, colQuantity));
@@ -2911,34 +2910,59 @@ namespace v4posme_window.Views
                 if (e.Value.ToString() == e.OldValue.ToString()) return;
                 FnRecalculateDetail(true, "");
             }
+
+            if (e.Column.Name == colPrice.Name)
+            {
+                if (e.Value.ToString() == e.OldValue.ToString()) return;
+                FnRecalculateDetail(true, "txtPrice");
+            }
+
+
         }
 
 
+
+     
+
+        private void repositoryItemButtonEdit1_Click(object sender, EventArgs e)
+        {
+            
+
+            var quantity        = gridViewValues.GetRowCellValue(gridViewValues.FocusedRowHandle, colQuantity).ToString();
+            var quantityDecimal = WebToolsHelper.ConvertToNumber<decimal>(quantity);
+            quantityDecimal     = quantityDecimal + 1;
+            gridViewValues.SetRowCellValue(gridViewValues.FocusedRowHandle, colQuantity, quantityDecimal);
+            FnRecalculateDetail(true,"");
+
+
+        }
+
+        private void repositoryItemButtonEdit2_Click(object sender, EventArgs e)
+        {
+            var quantity = gridViewValues.GetRowCellValue(gridViewValues.FocusedRowHandle, colQuantity).ToString();
+            var quantityDecimal = WebToolsHelper.ConvertToNumber<decimal>(quantity);
+            quantityDecimal = quantityDecimal - 1;
+            gridViewValues.SetRowCellValue(gridViewValues.FocusedRowHandle, colQuantity, quantityDecimal);
+            FnRecalculateDetail(true, "");
+        }
 
         private void gridViewValues_CustomRowCellEditForEditing(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
         {
             if (e.Column.Caption == "Precios")
             {
-                RepositoryItemComboBox buttonEdit = e.RepositoryItem as RepositoryItemComboBox;
+                RepositoryItemComboBox? buttonEdit = e.RepositoryItem as RepositoryItemComboBox;
                 if (buttonEdit != null)
                 {
-                    // Limpia los elementos actuales y agrega los nuevos elementos
+
                     buttonEdit.Items.Clear();
-                    buttonEdit.Items.AddRange(new string[] { "Precio A", "Precio B", "Precio C" });
+                    var precio1 = gridViewValues.GetRowCellValue(gridViewValues.FocusedRowHandle, colPrice).ToString();
+                    var precio2 = gridViewValues.GetRowCellValue(gridViewValues.FocusedRowHandle, colItemPrecio2).ToString();
+                    var precio3 = gridViewValues.GetRowCellValue(gridViewValues.FocusedRowHandle, colItemPrecio3).ToString();
+                    buttonEdit.Items.AddRange(new string[] { "C$ " + precio1, "C$ " + precio2, "C$ " + precio3 });
                     e.RepositoryItem = buttonEdit;
 
                 }
             }
-        }
-
-        private void repositoryItemButtonEdit1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Botón clickeado en fila " + (gridViewValues.FocusedRowHandle + 1));
-        }
-
-        private void repositoryItemButtonEdit2_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Botón clickeado en fila " + (gridViewValues.FocusedRowHandle + 1));
         }
 
         private void repositoryItemComboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -2947,10 +2971,11 @@ namespace v4posme_window.Views
             int fila = gridViewValues.FocusedRowHandle;
 
             // Obtiene el valor seleccionado del RepositoryItemComboBox
-            string itemSeleccionado = (sender as ComboBoxEdit).SelectedItem.ToString();
-
-            // Muestra un mensaje con la información seleccionada
-            MessageBox.Show($"Elemento '{itemSeleccionado}' seleccionado en la fila {fila}");
+            string? itemSeleccionado    = (sender as ComboBoxEdit)?.SelectedItem.ToString();
+            itemSeleccionado            = itemSeleccionado!.Replace("C$ ","");
+            decimal priceSeleccionado   = WebToolsHelper.ConvertToNumber<decimal>(itemSeleccionado);
+            gridViewValues.SetRowCellValue(fila, colPrice, itemSeleccionado);
+            FnRecalculateDetail(true, "txtPrice");
 
         }
     }
