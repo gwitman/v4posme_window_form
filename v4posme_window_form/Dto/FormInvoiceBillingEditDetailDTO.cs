@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DevExpress.Utils.Layout;
+using DevExpress.XtraEditors;
 
 namespace v4posme_window.Dto
 {
@@ -24,6 +25,9 @@ namespace v4posme_window.Dto
         public decimal ItemPrecio2 { get; set; }
         public decimal ItemPrecio3 { get; set; }
         public string DetailVencimiento { get; set; }
-        public StackPanel AccionPanel { get; set; }
+        public string AccionMenos { get; set; }
+        public string AccionMas { get; set; }
+        public string AccionPrecios { get; set; }
+
     }
 }

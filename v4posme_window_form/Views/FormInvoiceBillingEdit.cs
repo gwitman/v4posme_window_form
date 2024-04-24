@@ -5,12 +5,15 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Controls;
 using DevExpress.Utils.Layout;
+using DevExpress.Utils.Menu;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraVerticalGrid.Native;
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomHelper;
@@ -122,11 +125,13 @@ namespace v4posme_window.Views
         #region Properties
 
         public IBindingList _bindingListTransactionMasterDetail = new BindingList<FormInvoiceBillingEditDetailDTO>();
+
         private bool varPermisosEsPermitidoModificarPrecio;
         private bool varPermisosEsPermitidoModificarNombre;
         private bool varPermisosEsPermitidoSeleccionarPrecioPublico;
         private bool varPermisosEsPermitidoSeleccionarPrecioMayor;
         private bool varPermisosEsPermitidoSeleccionarPrecioCredito;
+        public List<TbMenuElement>? ObjListPermisos { get; set; }
         public List<TbWorkflowStage>? ObjListWorkflowStage { get; private set; }
         public TbComponent? ObjComponentTransactionBilling { get; private set; }
         public decimal ExchangeRate { get; private set; }
@@ -327,32 +332,7 @@ namespace v4posme_window.Views
                 LoadRender(TypeRender.New);
             }
 
-            ObjListPermisos = VariablesGlobales.Instance.ListMenuHiddenPopup;
-            varPermisosEsPermitidoModificarPrecio = ObjListPermisos.Count(element => element.Display == "ES_PERMITIDO_MODIFICAR_PRECIO_EN_FACTURACION") > 0;
-            varPermisosEsPermitidoModificarNombre = ObjListPermisos.Count(element => element.Display == "ES_PERMITIDO_MODIFICAR_NOMBRE_EN_FACTURACION") > 0;
-            varPermisosEsPermitidoSeleccionarPrecioPublico = ObjListPermisos.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PUBLICO") > 0;
-            varPermisosEsPermitidoSeleccionarPrecioMayor = ObjListPermisos.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PORMAYOR") > 0;
-            varPermisosEsPermitidoSeleccionarPrecioCredito = ObjListPermisos.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_CREDITO") > 0;
 
-            // Asignar el RepositoryItemImageComboBox a la celda específica
-
-            var editorButton1 = new EditorButton();
-            var editorButton2 = new EditorButton();
-            var editorButton3 = new EditorButton();
-            editorButton3.Kind = ButtonPredefines.Minus;
-            editorButton2.Kind = ButtonPredefines.Plus;
-            editorButton1.Kind = ButtonPredefines.DropDown;
-            var precio1 = new ComboBoxItem("Precio1", "Precio 1");
-            var precio2 = new ComboBoxItem("Precio2", "Precio 2");
-            var precio3 = new ComboBoxItem("Precio3", "Precio 3");
-            repositoryItemComboBox1.Items.Clear();
-            repositoryItemComboBox1.Items.AddRange([precio1,precio2,precio3]);
-            repositoryItemComboBox1.Buttons.AddRange([editorButton1, editorButton2, editorButton3]);
-            repositoryItemComboBox1.TextEditStyle = TextEditStyles.HideTextEditor;
-            repositoryItemComboBox1.ButtonClick += RepositoryItemButtonEdit_ButtonClick;
-            gridViewTbTransactionMasterDetail.RepositoryItems.Add(repositoryItemComboBox1);
-            colAccion.ColumnEdit = repositoryItemComboBox1;
-            colAccion.ShowButtonMode = ShowButtonModeEnum.ShowAlways;
         }
 
         #endregion
@@ -632,9 +612,9 @@ namespace v4posme_window.Views
                 };
                 confiDetalleHeader.Add(row3);
 
-                var detalle = new List<string[]> { ( ["PRODUCTO", "CANT", "TOTAL"]) };
+                var detalle = new List<string[]> { (["PRODUCTO", "CANT", "TOTAL"]) };
 
-                detalle.AddRange(objTmd.Select(detail => (string[]) [detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
+                detalle.AddRange(objTmd.Select(detail => (string[])[detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
             }
             catch (Exception e)
             {
@@ -757,6 +737,12 @@ namespace v4posme_window.Views
                 ObjParameterInvoiceBillingPrinterUrlBar = _objInterfazCoreWebParameter.GetParameterValue("INVOICE_BILLING_PRINTER_URL_BAR", user.CompanyId);
                 ObjParameterInvoiceBillingSelectitem = _objInterfazCoreWebParameter.GetParameterValue("INVOICE_BILLING_SELECTITEM", user.CompanyId);
 
+                ObjListPermisos = VariablesGlobales.Instance.ListMenuHiddenPopup;
+                varPermisosEsPermitidoModificarPrecio = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_MODIFICAR_PRECIO_EN_FACTURACION") > 0;
+                varPermisosEsPermitidoModificarNombre = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_MODIFICAR_NOMBRE_EN_FACTURACION") > 0;
+                varPermisosEsPermitidoSeleccionarPrecioPublico = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PUBLICO") > 0;
+                varPermisosEsPermitidoSeleccionarPrecioMayor = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PORMAYOR") > 0;
+                varPermisosEsPermitidoSeleccionarPrecioCredito = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_CREDITO") > 0;
 
                 if (ObjCustomerDefault is null)
                 {
@@ -788,6 +774,18 @@ namespace v4posme_window.Views
                 ObjTransactionMasterItemConcepto = _objInterfazCompanyComponentConceptModel.GetRowByTransactionMasterId(user.CompanyId, ObjComponentItem.ComponentId, ObjTransactionMaster.TransactionMasterId);
                 ObjTransactionMasterItemSku = _objInterfazItemSkuModel.GetRowByTransactionMasterId(user.CompanyId, ObjTransactionMaster.TransactionMasterId);
                 ObjTransactionMasterItem = _objInterfazItemModel.GetRowByTransactionMasterId(ObjTransactionMaster.TransactionMasterId);
+
+
+
+
+
+
+
+
+
+
+
+
             }
             catch (Exception ex)
             {
@@ -929,6 +927,15 @@ namespace v4posme_window.Views
                 ParameterCausalTypeCredit = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyId);
                 ObjCustomerCreditAmoritizationAll = _objInterfazCustomerCreditAmortizationModel.GetRowByCustomerId(ObjCustomerDefault.EntityId);
                 ObjListCustomerCreditLine = _objInterfazCustomerCreditLineModel.GetRowByEntityBalanceMayorCero(user.CompanyId, user.BranchId, this.ObjCustomerDefault.EntityId);
+
+
+                ObjListPermisos = VariablesGlobales.Instance.ListMenuHiddenPopup;
+                varPermisosEsPermitidoModificarPrecio = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_MODIFICAR_PRECIO_EN_FACTURACION") > 0;
+                varPermisosEsPermitidoModificarNombre = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_MODIFICAR_NOMBRE_EN_FACTURACION") > 0;
+                varPermisosEsPermitidoSeleccionarPrecioPublico = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PUBLICO") > 0;
+                varPermisosEsPermitidoSeleccionarPrecioMayor = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PORMAYOR") > 0;
+                varPermisosEsPermitidoSeleccionarPrecioCredito = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_CREDITO") > 0;
+
             }
             catch (Exception ex)
             {
@@ -1264,16 +1271,16 @@ namespace v4posme_window.Views
                     case "false":
                         return;
                     case "true":
-                    {
-                        //si es auto aplicadao mandar a imprimir
-                        if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
                         {
-                            ComandPrinter();
-                        }
+                            //si es auto aplicadao mandar a imprimir
+                            if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
+                            {
+                                ComandPrinter();
+                            }
 
-                        break;
-                    }
-                    //Error 
+                            break;
+                        }
+                        //Error 
                 }
             }
             catch (Exception e)
@@ -1989,9 +1996,13 @@ namespace v4posme_window.Views
 
             colTransactionDetailName.OptionsColumn.AllowEdit = varPermisosEsPermitidoModificarNombre;
             colPrice.OptionsColumn.AllowEdit = varPermisosEsPermitidoModificarPrecio;
+
+            colAccionMas.Caption = "Mas";
+            colAccionMenos.Caption = "Menos";
+            colAccionPrecios.Caption = "Precios";
+
         }
 
-        public List<TbMenuElement>? ObjListPermisos { get; set; }
 
         private void RepositoryItemButtonEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
         {
@@ -2133,7 +2144,7 @@ namespace v4posme_window.Views
                             gridViewValues.SetRowCellValue(handle, colIva, Iva);
                             gridViewValues.SetRowCellValue(handle, colSkuQuantityBySku, itemDto.SkuQuantityBySku);
                             gridViewValues.SetRowCellValue(handle, colUnitaryPriceIndividual, itemDto.UnitaryPrice);
-                            gridViewValues.SetRowCellValue(handle, colAccion, "");
+                            gridViewValues.SetRowCellValue(handle, colAccionMas, "");
                             gridViewValues.SetRowCellValue(handle, colSkuFormatoDescripton, itemDto.SkuFormatoDescription);
                             gridViewValues.SetRowCellValue(handle, colItemPrecio2, Precio2);
                             gridViewValues.SetRowCellValue(handle, colItemPrecio3, Precio3);
@@ -2431,29 +2442,15 @@ namespace v4posme_window.Views
                     UnitaryPriceIndividual = 0,
                     SkuFormatoDescription = diccionario["Medida"],
                     ItemPrecio2 = WebToolsHelper.ConvertToNumber<decimal>(diccionario["Precio2"]),
-                    ItemPrecio3 = WebToolsHelper.ConvertToNumber<decimal>(diccionario["Precio3"])
+                    ItemPrecio3 = WebToolsHelper.ConvertToNumber<decimal>(diccionario["Precio3"]),
+                    AccionMas = "",
+                    AccionMenos = "",
+                    AccionPrecios = ""
                 };
 
-                var itemPrecio = new ComboBoxItem("Price", billingEdit.Price);
-                var itemPrecio2 = new ComboBoxItem("ItemPrecio2", billingEdit.ItemPrecio2);
-                var itemPrecio3 = new ComboBoxItem("ItemPrecio3", billingEdit.ItemPrecio3);
-
-                // Crear ComboBoxEdit
-                ComboBoxEdit comboBoxEdit = new ComboBoxEdit();
-                comboBoxEdit.Properties.TextEditStyle = TextEditStyles.DisableTextEditor;
-
-
-                // Crear un repositorio de ComboBoxItem
-                RepositoryItemComboBox repositoryItemComboBox = new RepositoryItemComboBox();
-
-                // Agregar elementos al repositorio
-                repositoryItemComboBox.Items.AddRange([itemPrecio, itemPrecio2, itemPrecio3]);
-
-                // Asignar el repositorio al ComboBoxEdit
-                comboBoxEdit.Properties.Assign(repositoryItemComboBox);
-                // Crear un RepositoryItem para el StackPanel
                 _bindingListTransactionMasterDetail.Add(billingEdit);
                 FnRefrechDetail();
+
             }
 
             FnGetConcept(itemID, "IVA");
@@ -2906,7 +2903,7 @@ namespace v4posme_window.Views
 
         private void gridViewValues_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
-            //XtraMessageBox.Show($"{e.Column.Name} {e.OldValue}->{e.Value}", "Cambio Valores");
+
             if (e.Value == null) return;
 
             if (e.Column.Name == colQuantity.Name)
@@ -2916,8 +2913,45 @@ namespace v4posme_window.Views
             }
         }
 
-        private void gridViewValues_CustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
+
+
+        private void gridViewValues_CustomRowCellEditForEditing(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
         {
+            if (e.Column.Caption == "Precios")
+            {
+                RepositoryItemComboBox buttonEdit = e.RepositoryItem as RepositoryItemComboBox;
+                if (buttonEdit != null)
+                {
+                    // Limpia los elementos actuales y agrega los nuevos elementos
+                    buttonEdit.Items.Clear();
+                    buttonEdit.Items.AddRange(new string[] { "Precio A", "Precio B", "Precio C" });
+                    e.RepositoryItem = buttonEdit;
+
+                }
+            }
+        }
+
+        private void repositoryItemButtonEdit1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Botón clickeado en fila " + (gridViewValues.FocusedRowHandle + 1));
+        }
+
+        private void repositoryItemButtonEdit2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Botón clickeado en fila " + (gridViewValues.FocusedRowHandle + 1));
+        }
+
+        private void repositoryItemComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Obtiene el índice de la fila actualmente enfocada
+            int fila = gridViewValues.FocusedRowHandle;
+
+            // Obtiene el valor seleccionado del RepositoryItemComboBox
+            string itemSeleccionado = (sender as ComboBoxEdit).SelectedItem.ToString();
+
+            // Muestra un mensaje con la información seleccionada
+            MessageBox.Show($"Elemento '{itemSeleccionado}' seleccionado en la fila {fila}");
+
         }
     }
 
