@@ -335,18 +335,24 @@ namespace v4posme_window.Views
             varPermisosEsPermitidoSeleccionarPrecioCredito = ObjListPermisos.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_CREDITO") > 0;
 
             // Asignar el RepositoryItemImageComboBox a la celda específica
-            /*var editorButton1 = new EditorButton();
+
+            var editorButton1 = new EditorButton();
             var editorButton2 = new EditorButton();
             var editorButton3 = new EditorButton();
             editorButton3.Kind = ButtonPredefines.Minus;
             editorButton2.Kind = ButtonPredefines.Plus;
             editorButton1.Kind = ButtonPredefines.DropDown;
+            var precio1 = new ComboBoxItem("Precio1", "Precio 1");
+            var precio2 = new ComboBoxItem("Precio2", "Precio 2");
+            var precio3 = new ComboBoxItem("Precio3", "Precio 3");
+            repositoryItemComboBox1.Items.Clear();
+            repositoryItemComboBox1.Items.AddRange([precio1,precio2,precio3]);
             repositoryItemComboBox1.Buttons.AddRange([editorButton1, editorButton2, editorButton3]);
             repositoryItemComboBox1.TextEditStyle = TextEditStyles.HideTextEditor;
             repositoryItemComboBox1.ButtonClick += RepositoryItemButtonEdit_ButtonClick;
             gridViewTbTransactionMasterDetail.RepositoryItems.Add(repositoryItemComboBox1);
             colAccion.ColumnEdit = repositoryItemComboBox1;
-            colAccion.ShowButtonMode = ShowButtonModeEnum.ShowAlways;*/
+            colAccion.ShowButtonMode = ShowButtonModeEnum.ShowAlways;
         }
 
         #endregion
@@ -2446,12 +2452,6 @@ namespace v4posme_window.Views
                 // Asignar el repositorio al ComboBoxEdit
                 comboBoxEdit.Properties.Assign(repositoryItemComboBox);
                 // Crear un RepositoryItem para el StackPanel
-                var repositoryItemCustomEdit = new RepositoryItemCustomEdit();
-                var stackPanel = new StackPanel();
-                stackPanel.Height = 25;
-                repositoryItemCustomEdit.CustomHeight = stackPanel.Height;
-                repositoryItemCustomEdit.CustomControl = stackPanel;
-                colAccion.ColumnEdit = repositoryItemCustomEdit;
                 _bindingListTransactionMasterDetail.Add(billingEdit);
                 FnRefrechDetail();
             }
@@ -2912,7 +2912,6 @@ namespace v4posme_window.Views
             if (e.Column.Name == colQuantity.Name)
             {
                 if (e.Value.ToString() == e.OldValue.ToString()) return;
-                //gridViewValues.SetRowCellValue(e.RowHandle, colQuantity, e.Value);
                 FnRecalculateDetail(true, "");
             }
         }
@@ -2922,33 +2921,4 @@ namespace v4posme_window.Views
         }
     }
 
-    public class RepositoryItemCustomEdit:RepositoryItem
-    {
-        private Control customControl;
-
-        public Control CustomControl
-        {
-            get { return customControl; }
-            set { customControl = value; }
-        }
-
-        public int CustomHeight
-        {
-            get { return customControl.Height; }
-            set { customControl.Height = value; }
-        }
-
-        public RepositoryItemCustomEdit()
-        {
-            customControl = new Control(); // Puedes inicializar con cualquier control que necesites aquí
-        }
-
-        // Método para clonar el objeto
-        public override RepositoryItem Clone()
-        {
-            RepositoryItemCustomEdit repositoryItem = base.Clone() as RepositoryItemCustomEdit;
-            repositoryItem.CustomControl = customControl; // Clonar el control personalizado
-            return repositoryItem;
-        }
-    }
 }

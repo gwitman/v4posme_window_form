@@ -1492,7 +1492,6 @@
             // colAccion
             // 
             colAccion.Caption = "Accion";
-            colAccion.FieldName = "AccionPanel";
             colAccion.Name = "colAccion";
             colAccion.Visible = true;
             colAccion.VisibleIndex = 6;
@@ -1546,7 +1545,6 @@
             // repositoryItemComboBox1
             // 
             repositoryItemComboBox1.AutoHeight = false;
-            repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Minus), new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus) });
             repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             // 
             // progressPanel
