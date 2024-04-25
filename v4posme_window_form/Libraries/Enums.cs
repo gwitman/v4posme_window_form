@@ -27,3 +27,9 @@ public enum TypePrice
     CreditoPorMayor = 477,
     Especial = 478
 }
+
+public enum WorkflowStatus
+{    
+    FacturaStatusAplicado = 67,
+    FacturaStatusAnulado = 68
+}

@@ -126,6 +126,8 @@ namespace v4posme_window.Views
 
         public IBindingList _bindingListTransactionMasterDetail = new BindingList<FormInvoiceBillingEditDetailDTO>();
         public string? ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE { get; set; }
+        public string? objCompanyParameter_Key_INVOICE_BILLING_CREDIT { get; set; }
+
         private bool varPermisosEsPermitidoModificarPrecio;
         private bool varPermisosEsPermitidoModificarNombre;
         private bool varPermisosEsPermitidoSeleccionarPrecioPublico;
@@ -610,9 +612,9 @@ namespace v4posme_window.Views
                 };
                 confiDetalleHeader.Add(row3);
 
-                var detalle = new List<string[]> { ( ["PRODUCTO", "CANT", "TOTAL"]) };
+                var detalle = new List<string[]> { (["PRODUCTO", "CANT", "TOTAL"]) };
 
-                detalle.AddRange(objTmd.Select(detail => (string[]) [detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
+                detalle.AddRange(objTmd.Select(detail => (string[])[detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
             }
             catch (Exception e)
             {
@@ -703,6 +705,8 @@ namespace v4posme_window.Views
                 ObjParameterMostrarImagenEnSeleccion = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SHOW_IMAGE_IN_DETAIL_SELECTION", user.CompanyId)!.Value;
                 ObjParameterPantallaParaFacturar = _objInterfazCoreWebParameter.GetParameter("INVOICE_PANTALLA_FACTURACION", user.CompanyId)!.Value;
                 UrlPrinterDocument = _objInterfazCoreWebParameter.GetParameter("INVOICE_URL_PRINTER", user.CompanyId)!.Value;
+                ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE = _objInterfazCoreWebParameter.GetParameter("INVOICE_VALIDATE_BALANCE", user.CompanyId)!.Value;
+                objCompanyParameter_Key_INVOICE_BILLING_CREDIT = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyId)!.Value;
 
                 ObjTransactionMaster = _objInterfazTransactionMasterModel.GetRowByPk(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value);
                 ObjTransactionMasterInfo = _objInterfazTransactionMasterInfoModel.GetRowByPk(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value);
@@ -852,6 +856,7 @@ namespace v4posme_window.Views
 
                 ObjListParameterAll = _objInterfazCoreWebParameter.GetParameterAll(user.CompanyId);
                 ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE = _objInterfazCoreWebParameter.GetParameter("INVOICE_VALIDATE_BALANCE", user.CompanyId)!.Value;
+                objCompanyParameter_Key_INVOICE_BILLING_CREDIT = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyId)!.Value;
                 ObjParameterInvoiceAutoApply = _objInterfazCoreWebParameter.GetParameter("INVOICE_AUTOAPPLY_CASH", user.CompanyId)!.Value;
                 ObjParameterTypePreiceDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_DEFAULT_TYPE_PRICE", user.CompanyId)!.Value;
                 ObjParameterTipoWarehouseDespacho = _objInterfazCoreWebParameter.GetParameter("INVOICE_TYPE_WAREHOUSE_DESPACHO", user.CompanyId)!.Value;
@@ -1256,16 +1261,16 @@ namespace v4posme_window.Views
                     case "false":
                         return;
                     case "true":
-                    {
-                        //si es auto aplicadao mandar a imprimir
-                        if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
                         {
-                            ComandPrinter();
-                        }
+                            //si es auto aplicadao mandar a imprimir
+                            if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
+                            {
+                                ComandPrinter();
+                            }
 
-                        break;
-                    }
-                    //Error 
+                            break;
+                        }
+                        //Error 
                 }
             }
             catch (Exception e)
@@ -2146,14 +2151,225 @@ namespace v4posme_window.Views
             }
         }
 
-        public async void FnValidateFormAndSubmit()
+        public void FnEnviarFactura()
         {
-            await Task.Run(() =>
+            FnValidateFormAndSubmit();
+        }
+        public bool FnValidateFormAndSubmit()
+        {
+            //Validar desembolso
+            var switchDesembolso = txtDesembolsoEfectivo.IsOn;
+
+
+            //Validar Bodega
+            if (txtWarehouseID.SelectedIndex == -1)
             {
-                var switchDesembolso = txtDesembolsoEfectivo.IsOn;
-               
-                
-            });
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                           "Debe seleccionar una bodega.", this);
+                return false;
+            }
+
+            if (txtDate.EditValue != null)
+            {
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                           "Debe seleccionar una fecha.", this);
+                return false;
+            }
+
+            if (TxtCustomerId <= 0)
+            {
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                           "Debe seleccionar un cliente.", this);
+                return false;
+            }
+
+            if (txtReference1.SelectedIndex == -1 && switchDesembolso)
+            {
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                           "Debe seleccionar un proveedor de credito.", this);
+                return false;
+            }
+
+            if (txtZoneID.SelectedIndex == -1 && switchDesembolso)
+            {
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                           "Debe seleccionar una zona de factura.", this);
+                return false;
+            }
+
+            if (txtEmployeeID.SelectedIndex == -1 && switchDesembolso)
+            {
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                           "Debe seleccionar una colaborador.", this);
+                return false;
+            }
+
+
+            if (TxtStatusOldId == (int)WorkflowStatus.FacturaStatusAplicado)
+            {
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                           "Debe crear una factura nueva la actual ya esta aplicada.", this);
+                return false;
+            }
+
+            if (TxtStatusId == (int)WorkflowStatus.FacturaStatusAnulado)
+            {
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                           "No puede pasar a estado anulado.", this);
+                return false;
+            }
+
+            //Validar cantidades en el detalle
+            for (var i = 0; i < gridViewValues.RowCount; i++)
+            {
+                var total = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colSubTotal).ToString());
+                if (total == 0)
+                {
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                          "No puede haber totales en  0.", this);
+                    return false;
+                }
+            }
+
+
+            for (var i = 0; i < gridViewValues.RowCount; i++)
+            {
+                var total = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity).ToString());
+                if (total == 0)
+                {
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                          "No puede haber cantidades en  0.", this);
+                    return false;
+                }
+            }
+
+
+            //Validar Linea de Credito
+            var causalId = Convert.ToInt32(((ComboBoxItem)txtCausalID.SelectedItem).Key);
+            var lineaCreditoId = Convert.ToInt32(((ComboBoxItem)txtCustomerCreditLineID.SelectedItem).Key);
+            var causalCredit = objCompanyParameter_Key_INVOICE_BILLING_CREDIT!.Split(",");
+            var objCustomerCreditLine = new TbCustomerCreditLineDto();
+            var invoiceTypeCredit = false;
+
+            if (ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE == "true")
+            {
+                objCustomerCreditLine = ObjListCustomerCreditLine.Where(c => c.CustomerCreditLineId == lineaCreditoId).FirstOrDefault();
+            }
+            else
+            {
+                objCustomerCreditLine = null;
+            }
+
+            invoiceTypeCredit = causalCredit.Any(c => Convert.ToInt32(c) == causalId);
+
+            //Validar la amortizacion durante la factura
+            if (ObjParameterAmortizationDuranteFactura!.ToUpper() == "true".ToUpper() && txtReference2.EditValue.ToString() == "" && invoiceTypeCredit)
+            {
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                          "Seleccionar el plazo.", this);
+                return false;
+            }
+
+            if (WebToolsHelper.ConvertToNumber<decimal>(txtChangeAmount.EditValue.ToString()) > 0 && invoiceTypeCredit)
+            {
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                          "No puede haber cambios si la factura es de credito.", this);
+
+                return false;
+            }
+
+
+            if (invoiceTypeCredit)
+            {
+                if (txtDateFirst.EditValue != null && switchDesembolso)
+                {
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                         "Seleccione la fecha del primer pago.", this);
+
+                    return false;
+                }
+
+                if (txtNote.EditValue.ToString() == "" && switchDesembolso)
+                {
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                         "Asignarle una nota al documento.", this);
+
+                    return false;
+                }
+
+                if (txtFixedExpenses.EditValue.ToString() == "" && switchDesembolso)
+                {
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                         "Ingresar el porcentaje de gastos fijos por desembolso.", this);
+
+                    return false;
+                }
+
+                var montoTotalInvoice = WebToolsHelper.ConvertToNumber<decimal>(txtTotal.EditValue.ToString());
+                decimal? balanceCredit = 0.0m;
+
+                if (ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE!.ToUpper() == "true".ToUpper())
+                {
+                    if (ObjCurrencyCordoba!.CurrencyId == objCustomerCreditLine!.CurrencyId)
+                    {
+                        balanceCredit = ObjListCustomerCreditLine.ElementAt(0).Balance;
+                    }
+                    else
+                    {
+                        balanceCredit = ObjListCustomerCreditLine.ElementAt(0).Balance * ExchangeRate;
+                    }
+
+                    if (balanceCredit < montoTotalInvoice && balanceCredit != 0)
+                    {
+                        _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                         "Cliente sin balance suficiente.", this);
+
+                        return false;
+                    }
+                }
+
+
+            }
+            else
+            {
+                if (WebToolsHelper.ConvertToNumber<decimal>(txtChangeAmount.EditValue.ToString()) < 0)
+                {
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                          "El cambio de la factura no puede ser menor que 0.", this);
+
+                    return false;
+                }
+            }
+
+
+            if (ObjParameterInvoiceBillingQuantityZero!.ToUpper() == "true".ToUpper())
+            {
+                return true;
+            }
+
+
+            //Validar Cantidades
+            var objFormInvoiceApi = new FormInvoiceApi();
+            for (var i = 0; i < gridViewValues.RowCount; i++)
+            {
+                var itemID = WebToolsHelper.ConvertToNumber<int>(gridViewValues.GetRowCellValue(i, colItemId).ToString());
+                var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity).ToString());
+                var resultValid = objFormInvoiceApi.GetValidExistencia(
+                    Convert.ToInt32(((ComboBoxItem)txtWarehouseID.SelectedItem).Key),
+                    itemID,
+                    quantity
+                );
+
+                if (resultValid.Mensaje == "Existencia agotada")
+                {
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
+                          "No existe suficiente cantidad en bodega, del producto " + resultValid.Nombre, this);
+
+                    return false;
+                }
+            }
+
+
         }
         public void FnRenderLineaCreditoDiv()
         {
@@ -2772,27 +2988,7 @@ namespace v4posme_window.Views
         {
         }
 
-        private void barManager1_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            if (e.Item.Name == btnActualizarCatalogo.Name)
-            {
-                var formInvoiceApi = new FormInvoiceApi();
-                var warehouseComboBoxItem = (ComboBoxItem)txtWarehouseID.EditValue;
-                var typePriceComboBoxItem = (ComboBoxItem)txtWarehouseID.EditValue;
-                var currencyIdComboBoxItem = (ComboBoxItem)txtWarehouseID.EditValue;
-                var listPrice_ = ObjListPrice!.ListPriceId;
-                var warehouseID_ = Convert.ToInt32(warehouseComboBoxItem.Key);
-                var typePrice_ = Convert.ToInt32(typePriceComboBoxItem.Key);
-                var currencyID_ = Convert.ToInt32(currencyIdComboBoxItem.Key);
-
-                ObjSELECCIONAR_ITEM_BILLING_BACKGROUND =
-                    formInvoiceApi.GetViewApi(
-                        ObjComponentItem!.ComponentId,
-                        @"SELECCIONAR_ITEM_BILLING_BACKGROUND",
-                        @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}"
-                    );
-            }
-        }
+        
 
         private void btnClearCustomer_Click(object sender, EventArgs e)
         {
@@ -2984,6 +3180,53 @@ namespace v4posme_window.Views
             decimal priceSeleccionado = WebToolsHelper.ConvertToNumber<decimal>(itemSeleccionado);
             gridViewValues.SetRowCellValue(fila, colPrice, itemSeleccionado);
             FnRecalculateDetail(true, "txtPrice");
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            LoadNew();
+            LoadRender(TypeRender.New);
+        }
+
+        private void barManager1_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.Item.Name == btnActualizarCatalogo.Name)
+            {
+                var formInvoiceApi = new FormInvoiceApi();
+                var warehouseComboBoxItem = (ComboBoxItem)txtWarehouseID.EditValue;
+                var typePriceComboBoxItem = (ComboBoxItem)txtWarehouseID.EditValue;
+                var currencyIdComboBoxItem = (ComboBoxItem)txtWarehouseID.EditValue;
+                var listPrice_ = ObjListPrice!.ListPriceId;
+                var warehouseID_ = Convert.ToInt32(warehouseComboBoxItem.Key);
+                var typePrice_ = Convert.ToInt32(typePriceComboBoxItem.Key);
+                var currencyID_ = Convert.ToInt32(currencyIdComboBoxItem.Key);
+
+                ObjSELECCIONAR_ITEM_BILLING_BACKGROUND =
+                    formInvoiceApi.GetViewApi(
+                        ObjComponentItem!.ComponentId,
+                        @"SELECCIONAR_ITEM_BILLING_BACKGROUND",
+                        @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}"
+                    );
+            }
+            if (e.Item.Name == btnRegresar.Name)
+            {
+                this.Close();
+
+                // Mostrar el formulario anterior
+                FormInvoiceBillingList formularioAnterior = new FormInvoiceBillingList();
+                formularioAnterior.Show();
+
+            }
+        }
+
+        private void downButtonSeleccion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRegistrar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -4,6 +4,8 @@ using System.Data;
 using System.Printing;
 using Unity;
 using v4posme_library.Libraries;
+using v4posme_library.Libraries.CustomHelper;
+using v4posme_library.Libraries.CustomLibraries.Implementacion;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels;
 using v4posme_library.Models;
@@ -23,6 +25,48 @@ namespace v4posme_window.Api
         private readonly ICustomerCreditAmortizationModel _objInterfazCustomerCreditAmortizationModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditAmortizationModel>();
 
 
+
+
+
+
+        public FormInvoiceApiGetValidExistenciaDTO GetValidExistencia(int warehouseID , int itemID,decimal quantity)
+        {
+            
+            var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
+            var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
+            var notAllEdit = VariablesGlobales.ConfigurationBuilder["NOT_ALL_EDIT"];
+            var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
+            var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+            var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+            var user = VariablesGlobales.Instance.User;
+            FormInvoiceApiGetValidExistenciaDTO result = new FormInvoiceApiGetValidExistenciaDTO();
+
+            if (user is null)
+            {
+                throw new Exception(userNotAutenticated);
+            }
+
+            var ParametroFacturacionZero = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_QUANTITY_ZERO", user.CompanyId);
+            IItemModel _objItemModel = VariablesGlobales.Instance.UnityContainer.Resolve<IItemModel>();
+            IItemWarehouseModel _objItemWarehouseModel = VariablesGlobales.Instance.UnityContainer.Resolve<IItemWarehouseModel>();
+            var objItemModel = _objItemModel.GetRowByPk(user.CompanyId, itemID);
+            var objItemWarehouseModel = _objItemWarehouseModel.GetByPk(user.CompanyId, itemID, warehouseID);
+
+            if (
+                objItemWarehouseModel.Quantity < quantity &&
+                objItemModel.IsInvoiceQuantityZero == 0 &&
+                ParametroFacturacionZero!.Value!.ToUpper() == "false".ToUpper()
+            )
+            {
+                result.Codigo = objItemModel.ItemNumber;
+                result.Nombre = objItemModel.Name;
+                result.Mensaje = "Existencia agotada";
+                result.QuantityInWarehouse = objItemWarehouseModel.Quantity;
+            }
+            
+            return result;
+
+        }
         public FormInvoiceApiGetLineByCustomerDTO? GetLineByCustomer(int entityID)
         {
             try
