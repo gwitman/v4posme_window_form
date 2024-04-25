@@ -21,13 +21,14 @@ namespace v4posme_window.Dto
         public decimal Iva { get; set; }
         public decimal SkuQuantityBySku { get; set; }
         public decimal UnitaryPriceIndividual { get; set; }
-        public string SkuFormatoDescription { get; set; }
+        public string? SkuFormatoDescription { get; set; }
         public decimal ItemPrecio2 { get; set; }
         public decimal ItemPrecio3 { get; set; }
-        public string DetailVencimiento { get; set; }
-        public string AccionMenos { get; set; }
-        public string AccionMas { get; set; }
-        public string AccionPrecios { get; set; }
+        
+        public string? DetailVencimiento { get; set; }
+        public string? AccionMenos { get; set; }
+        public string? AccionMas { get; set; }
+        public string? AccionPrecios { get; set; }
 
     }
 }

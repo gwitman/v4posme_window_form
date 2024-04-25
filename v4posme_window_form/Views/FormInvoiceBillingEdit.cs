@@ -125,7 +125,7 @@ namespace v4posme_window.Views
         #region Properties
 
         public IBindingList _bindingListTransactionMasterDetail = new BindingList<FormInvoiceBillingEditDetailDTO>();
-
+        public string? ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE { get; set; }
         private bool varPermisosEsPermitidoModificarPrecio;
         private bool varPermisosEsPermitidoModificarNombre;
         private bool varPermisosEsPermitidoSeleccionarPrecioPublico;
@@ -331,8 +331,6 @@ namespace v4posme_window.Views
                 LoadNew();
                 LoadRender(TypeRender.New);
             }
-
-
         }
 
         #endregion
@@ -612,9 +610,9 @@ namespace v4posme_window.Views
                 };
                 confiDetalleHeader.Add(row3);
 
-                var detalle = new List<string[]> { (["PRODUCTO", "CANT", "TOTAL"]) };
+                var detalle = new List<string[]> { ( ["PRODUCTO", "CANT", "TOTAL"]) };
 
-                detalle.AddRange(objTmd.Select(detail => (string[])[detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
+                detalle.AddRange(objTmd.Select(detail => (string[]) [detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
             }
             catch (Exception e)
             {
@@ -774,18 +772,6 @@ namespace v4posme_window.Views
                 ObjTransactionMasterItemConcepto = _objInterfazCompanyComponentConceptModel.GetRowByTransactionMasterId(user.CompanyId, ObjComponentItem.ComponentId, ObjTransactionMaster.TransactionMasterId);
                 ObjTransactionMasterItemSku = _objInterfazItemSkuModel.GetRowByTransactionMasterId(user.CompanyId, ObjTransactionMaster.TransactionMasterId);
                 ObjTransactionMasterItem = _objInterfazItemModel.GetRowByTransactionMasterId(ObjTransactionMaster.TransactionMasterId);
-
-
-
-
-
-
-
-
-
-
-
-
             }
             catch (Exception ex)
             {
@@ -865,6 +851,7 @@ namespace v4posme_window.Views
                 }
 
                 ObjListParameterAll = _objInterfazCoreWebParameter.GetParameterAll(user.CompanyId);
+                ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE = _objInterfazCoreWebParameter.GetParameter("INVOICE_VALIDATE_BALANCE", user.CompanyId)!.Value;
                 ObjParameterInvoiceAutoApply = _objInterfazCoreWebParameter.GetParameter("INVOICE_AUTOAPPLY_CASH", user.CompanyId)!.Value;
                 ObjParameterTypePreiceDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_DEFAULT_TYPE_PRICE", user.CompanyId)!.Value;
                 ObjParameterTipoWarehouseDespacho = _objInterfazCoreWebParameter.GetParameter("INVOICE_TYPE_WAREHOUSE_DESPACHO", user.CompanyId)!.Value;
@@ -935,14 +922,12 @@ namespace v4posme_window.Views
                 varPermisosEsPermitidoSeleccionarPrecioPublico = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PUBLICO") > 0;
                 varPermisosEsPermitidoSeleccionarPrecioMayor = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PORMAYOR") > 0;
                 varPermisosEsPermitidoSeleccionarPrecioCredito = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_CREDITO") > 0;
-
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show($"Se produjo el siguiente error: {ex.Message}");
             }
         }
-
 
         public void SaveInsert()
         {
@@ -1271,16 +1256,16 @@ namespace v4posme_window.Views
                     case "false":
                         return;
                     case "true":
+                    {
+                        //si es auto aplicadao mandar a imprimir
+                        if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
                         {
-                            //si es auto aplicadao mandar a imprimir
-                            if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
-                            {
-                                ComandPrinter();
-                            }
-
-                            break;
+                            ComandPrinter();
                         }
-                        //Error 
+
+                        break;
+                    }
+                    //Error 
                 }
             }
             catch (Exception e)
@@ -2000,7 +1985,6 @@ namespace v4posme_window.Views
             colAccionMas.Caption = "Mas";
             colAccionMenos.Caption = "Menos";
             colAccionPrecios.Caption = "Precios";
-
         }
 
 
@@ -2162,6 +2146,15 @@ namespace v4posme_window.Views
             }
         }
 
+        public async void FnValidateFormAndSubmit()
+        {
+            await Task.Run(() =>
+            {
+                var switchDesembolso = txtDesembolsoEfectivo.IsOn;
+               
+                
+            });
+        }
         public void FnRenderLineaCreditoDiv()
         {
             var causalID = ((ComboBoxItem)txtCausalID.EditValue).Key!.ToString();
@@ -2277,6 +2270,35 @@ namespace v4posme_window.Views
             }
 
             return newTexto;
+        }
+
+        private void FnActualizarPrecio()
+        {
+            if (txtTypePriceID.SelectedItem is null)
+            {
+                return;
+            }
+
+            var typePriceId = Convert.ToInt32(((ComboBoxItem)txtTypePriceID.SelectedItem).Key);
+            //Actualizar Precio
+            for (var i = 0; i < gridViewValues.RowCount; i++)
+            {
+                var typePriceValue = typePriceId switch
+                {
+                    (int)TypePrice.Publico =>
+                        //precio 1 ---> 154 --> precio publico
+                        (decimal)gridViewValues.GetRowCellValue(i, colPrice),
+                    (int)TypePrice.PorMayor =>
+                        //precio 2 ---> 155 --> precio mayorista
+                        (decimal)gridViewValues.GetRowCellValue(i, colItemPrecio2),
+                    (int)TypePrice.Credito =>
+                        //precio 3 ---> 156 --> precio credito
+                        (decimal)gridViewValues.GetRowCellValue(i, colItemPrecio3),
+                    _ => decimal.Zero
+                };
+                gridViewValues.SetRowCellValue(i, colPrice, typePriceValue);
+            }
+            FnRecalculateDetail(true, "");
         }
 
         public void FnCalculateAmountPay()
@@ -2446,7 +2468,6 @@ namespace v4posme_window.Views
 
                 _bindingListTransactionMasterDetail.Add(billingEdit);
                 FnRefrechDetail();
-
             }
 
             FnGetConcept(itemID, "IVA");
@@ -2507,9 +2528,9 @@ namespace v4posme_window.Views
             for (var i = 0; i < (NSSystemDetailInvoice.RowCount - 1); i++)
             {
                 var skuSelecte = Convert.ToInt32(NSSystemDetailInvoice.GetRowCellValue(i, colSku));
-                var skuCatalogItemID = skuSelecte;                
-                var skuValue = 1;/*configuracion del sku a cuantas unidades contiene por ejemplo sku 1 quintal = 100 unidades, pero en nuestro caso siempre va ha ser 1*/
-                var skuValuePrimceUnit = WebToolsHelper.ConvertToNumber<decimal>(NSSystemDetailInvoice.GetRowCellValue(i, colPrice).ToString());//precio por unidad de sku
+                var skuCatalogItemID = skuSelecte;
+                var skuValue = 1; /*configuracion del sku a cuantas unidades contiene por ejemplo sku 1 quintal = 100 unidades, pero en nuestro caso siempre va ha ser 1*/
+                var skuValuePrimceUnit = WebToolsHelper.ConvertToNumber<decimal>(NSSystemDetailInvoice.GetRowCellValue(i, colPrice).ToString()); //precio por unidad de sku
                 var skuValueDescription = NSSystemDetailInvoice.GetRowCellValue(i, colSkuFormatoDescripton).ToString();
 
 
@@ -2782,6 +2803,7 @@ namespace v4posme_window.Views
 
         private void txtTypePriceID_SelectedIndexChanged(object sender, EventArgs e)
         {
+            FnActualizarPrecio();
         }
 
         private void txtCausalID_SelectedValueChanged(object sender, EventArgs e)
@@ -2898,7 +2920,6 @@ namespace v4posme_window.Views
 
         private void gridViewValues_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
-
             if (e.Value == null) return;
 
             if (e.Column.Name == colQuantity.Name)
@@ -2912,25 +2933,16 @@ namespace v4posme_window.Views
                 if (e.Value.ToString() == e.OldValue.ToString()) return;
                 FnRecalculateDetail(true, "txtPrice");
             }
-
-
         }
 
 
-
-     
-
         private void repositoryItemButtonEdit1_Click(object sender, EventArgs e)
         {
-            
-
-            var quantity        = gridViewValues.GetRowCellValue(gridViewValues.FocusedRowHandle, colQuantity).ToString();
+            var quantity = gridViewValues.GetRowCellValue(gridViewValues.FocusedRowHandle, colQuantity).ToString();
             var quantityDecimal = WebToolsHelper.ConvertToNumber<decimal>(quantity);
-            quantityDecimal     = quantityDecimal + 1;
+            quantityDecimal = quantityDecimal + 1;
             gridViewValues.SetRowCellValue(gridViewValues.FocusedRowHandle, colQuantity, quantityDecimal);
-            FnRecalculateDetail(true,"");
-
-
+            FnRecalculateDetail(true, "");
         }
 
         private void repositoryItemButtonEdit2_Click(object sender, EventArgs e)
@@ -2942,22 +2954,22 @@ namespace v4posme_window.Views
             FnRecalculateDetail(true, "");
         }
 
-        private void gridViewValues_CustomRowCellEditForEditing(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
+        private void gridViewValues_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)
         {
             if (e.Column.Caption == "Precios")
             {
                 RepositoryItemComboBox? buttonEdit = e.RepositoryItem as RepositoryItemComboBox;
-                if (buttonEdit != null)
-                {
-
-                    buttonEdit.Items.Clear();
-                    var precio1 = gridViewValues.GetRowCellValue(gridViewValues.FocusedRowHandle, colPrice).ToString();
-                    var precio2 = gridViewValues.GetRowCellValue(gridViewValues.FocusedRowHandle, colItemPrecio2).ToString();
-                    var precio3 = gridViewValues.GetRowCellValue(gridViewValues.FocusedRowHandle, colItemPrecio3).ToString();
-                    buttonEdit.Items.AddRange(new string[] { "C$ " + precio1, "C$ " + precio2, "C$ " + precio3 });
-                    e.RepositoryItem = buttonEdit;
-
-                }
+                if (buttonEdit == null) return;
+                if (gridViewValues.RowCount <= 0) return;
+                buttonEdit.Items.Clear();
+                var precio1 = gridViewValues.GetRowCellValue(e.RowHandle, colPrice).ToString();
+                var precio2 = gridViewValues.GetRowCellValue(e.RowHandle, colItemPrecio2).ToString();
+                var precio3 = gridViewValues.GetRowCellValue(e.RowHandle, colItemPrecio3).ToString();
+                var comboBoxItem1 = new ComboBoxItem("1", $"C$ {precio1}");
+                var comboBoxItem2 = new ComboBoxItem("1", $"C$ {precio2}");
+                var comboBoxItem3 = new ComboBoxItem("1", $"C$ {precio3}");
+                buttonEdit.Items.AddRange([comboBoxItem1, comboBoxItem2, comboBoxItem3]);
+                e.RepositoryItem = buttonEdit;
             }
         }
 
@@ -2967,13 +2979,11 @@ namespace v4posme_window.Views
             int fila = gridViewValues.FocusedRowHandle;
 
             // Obtiene el valor seleccionado del RepositoryItemComboBox
-            string? itemSeleccionado    = (sender as ComboBoxEdit)?.SelectedItem.ToString();
-            itemSeleccionado            = itemSeleccionado!.Replace("C$ ","");
-            decimal priceSeleccionado   = WebToolsHelper.ConvertToNumber<decimal>(itemSeleccionado);
+            string? itemSeleccionado = (sender as ComboBoxEdit)?.SelectedItem.ToString();
+            itemSeleccionado = itemSeleccionado!.Replace("C$ ", "");
+            decimal priceSeleccionado = WebToolsHelper.ConvertToNumber<decimal>(itemSeleccionado);
             gridViewValues.SetRowCellValue(fila, colPrice, itemSeleccionado);
             FnRecalculateDetail(true, "txtPrice");
-
         }
     }
-
 }
