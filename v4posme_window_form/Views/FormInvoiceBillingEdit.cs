@@ -2721,6 +2721,7 @@ namespace v4posme_window.Views
             FnRecalculateDetail(true, "");
         }
 
+
         public void FnRecalculateDetail(bool clearRecibo, string sourceEvent)
         {
             var typePriceID = Convert.ToInt32(((ComboBoxItem)txtTypePriceID.EditValue).Key);
