@@ -47,9 +47,9 @@
             barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            btnNuevoProducto = new DevExpress.XtraBars.BarButtonItem();
             btnActualizarCatalogo = new DevExpress.XtraBars.BarButtonItem();
-            barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            btnSeleccionarFactura = new DevExpress.XtraBars.BarButtonItem();
             btnRegresar = new DevExpress.XtraBars.BarButtonItem();
             popupMenuSeleccion = new DevExpress.XtraBars.PopupMenu(components);
             popupMenuProducto = new DevExpress.XtraBars.PopupMenu(components);
@@ -179,6 +179,14 @@
             repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             progressPanel = new DevExpress.XtraWaitForm.ProgressPanel();
+            btnOpenCashdrawer = new DevExpress.XtraBars.BarButtonItem();
+            dropDownButton1 = new DevExpress.XtraEditors.DropDownButton();
+            popupImprimir = new DevExpress.XtraBars.PopupMenu(components);
+            btnPrinterInvoice = new DevExpress.XtraBars.BarButtonItem();
+            btnPrinterBar = new DevExpress.XtraBars.BarButtonItem();
+            btnPrinterFooter = new DevExpress.XtraBars.BarButtonItem();
+            btnInvoiceDelete = new DevExpress.XtraBars.BarButtonItem();
+            btnAplicar = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)stackPanel1).BeginInit();
             stackPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
@@ -252,6 +260,7 @@
             ((System.ComponentModel.ISupportInitialize)itemCheck).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemPictureEdit1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)popupImprimir).BeginInit();
             SuspendLayout();
             // 
             // stackPanel1
@@ -295,8 +304,8 @@
             barManager1.DockControls.Add(barDockControlLeft);
             barManager1.DockControls.Add(barDockControlRight);
             barManager1.Form = this;
-            barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { barButtonItem1, btnActualizarCatalogo, barButtonItem3, btnRegresar });
-            barManager1.MaxItemId = 4;
+            barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { btnNuevoProducto, btnActualizarCatalogo, btnSeleccionarFactura, btnRegresar, btnOpenCashdrawer, btnPrinterInvoice, btnPrinterBar, btnPrinterFooter, btnInvoiceDelete });
+            barManager1.MaxItemId = 9;
             barManager1.ItemClick += barManager1_ItemClick;
             // 
             // barDockControlTop
@@ -335,11 +344,11 @@
             barDockControlRight.Margin = new Padding(3, 4, 3, 4);
             barDockControlRight.Size = new Size(0, 929);
             // 
-            // barButtonItem1
+            // btnNuevoProducto
             // 
-            barButtonItem1.Caption = "Nuevo Producto";
-            barButtonItem1.Id = 0;
-            barButtonItem1.Name = "barButtonItem1";
+            btnNuevoProducto.Caption = "Nuevo Producto";
+            btnNuevoProducto.Id = 0;
+            btnNuevoProducto.Name = "btnNuevoProducto";
             // 
             // btnActualizarCatalogo
             // 
@@ -347,11 +356,11 @@
             btnActualizarCatalogo.Id = 1;
             btnActualizarCatalogo.Name = "btnActualizarCatalogo";
             // 
-            // barButtonItem3
+            // btnSeleccionarFactura
             // 
-            barButtonItem3.Caption = "Seleccionar";
-            barButtonItem3.Id = 2;
-            barButtonItem3.Name = "barButtonItem3";
+            btnSeleccionarFactura.Caption = "Seleccionar Factura";
+            btnSeleccionarFactura.Id = 2;
+            btnSeleccionarFactura.Name = "btnSeleccionarFactura";
             // 
             // btnRegresar
             // 
@@ -361,13 +370,13 @@
             // 
             // popupMenuSeleccion
             // 
-            popupMenuSeleccion.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(barButtonItem3), new DevExpress.XtraBars.LinkPersistInfo(btnRegresar) });
+            popupMenuSeleccion.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(btnSeleccionarFactura), new DevExpress.XtraBars.LinkPersistInfo(btnRegresar), new DevExpress.XtraBars.LinkPersistInfo(btnOpenCashdrawer), new DevExpress.XtraBars.LinkPersistInfo(btnInvoiceDelete) });
             popupMenuSeleccion.Manager = barManager1;
             popupMenuSeleccion.Name = "popupMenuSeleccion";
             // 
             // popupMenuProducto
             // 
-            popupMenuProducto.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(barButtonItem1), new DevExpress.XtraBars.LinkPersistInfo(btnActualizarCatalogo) });
+            popupMenuProducto.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(btnNuevoProducto), new DevExpress.XtraBars.LinkPersistInfo(btnActualizarCatalogo) });
             popupMenuProducto.Manager = barManager1;
             popupMenuProducto.Name = "popupMenuProducto";
             // 
@@ -1769,12 +1778,73 @@
             progressPanel.TabIndex = 47;
             progressPanel.Visible = false;
             // 
+            // btnOpenCashdrawer
+            // 
+            btnOpenCashdrawer.Caption = "Abrir Caja";
+            btnOpenCashdrawer.Id = 4;
+            btnOpenCashdrawer.Name = "btnOpenCashdrawer";
+            // 
+            // dropDownButton1
+            // 
+            dropDownButton1.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Success;
+            dropDownButton1.Appearance.Options.UseBackColor = true;
+            dropDownButton1.DropDownControl = popupImprimir;
+            dropDownButton1.Location = new Point(1020, 319);
+            dropDownButton1.Margin = new Padding(3, 4, 3, 4);
+            dropDownButton1.Name = "dropDownButton1";
+            dropDownButton1.Size = new Size(144, 40);
+            dropDownButton1.TabIndex = 52;
+            dropDownButton1.Text = "IMPRIMIR";
+            // 
+            // popupImprimir
+            // 
+            popupImprimir.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(btnPrinterInvoice), new DevExpress.XtraBars.LinkPersistInfo(btnPrinterBar), new DevExpress.XtraBars.LinkPersistInfo(btnPrinterFooter) });
+            popupImprimir.Manager = barManager1;
+            popupImprimir.Name = "popupImprimir";
+            // 
+            // btnPrinterInvoice
+            // 
+            btnPrinterInvoice.Caption = "Imprimir Factura";
+            btnPrinterInvoice.Id = 5;
+            btnPrinterInvoice.Name = "btnPrinterInvoice";
+            // 
+            // btnPrinterBar
+            // 
+            btnPrinterBar.Caption = "Imprimir Bar";
+            btnPrinterBar.Id = 6;
+            btnPrinterBar.Name = "btnPrinterBar";
+            // 
+            // btnPrinterFooter
+            // 
+            btnPrinterFooter.Caption = "Imprimir Cocina";
+            btnPrinterFooter.Id = 7;
+            btnPrinterFooter.Name = "btnPrinterFooter";
+            // 
+            // btnInvoiceDelete
+            // 
+            btnInvoiceDelete.Caption = "Eliminar Factura";
+            btnInvoiceDelete.Id = 8;
+            btnInvoiceDelete.Name = "btnInvoiceDelete";
+            // 
+            // btnAplicar
+            // 
+            btnAplicar.Appearance.BackColor = Color.FromArgb(128, 255, 128);
+            btnAplicar.Appearance.Options.UseBackColor = true;
+            btnAplicar.Location = new Point(537, 670);
+            btnAplicar.Margin = new Padding(3, 4, 3, 4);
+            btnAplicar.Name = "btnAplicar";
+            btnAplicar.Size = new Size(169, 40);
+            btnAplicar.TabIndex = 53;
+            btnAplicar.Text = "APLICAR";
+            // 
             // FormInvoiceBillingEdit
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1519, 929);
+            Controls.Add(btnAplicar);
+            Controls.Add(dropDownButton1);
             Controls.Add(progressPanel);
             Controls.Add(svgImageBox1);
             Controls.Add(txtScanerCodigo);
@@ -1882,6 +1952,7 @@
             ((System.ComponentModel.ISupportInitialize)itemCheck).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemPictureEdit1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)popupImprimir).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1891,7 +1962,7 @@
         private DevExpress.Utils.Layout.StackPanel stackPanel1;
         internal DevExpress.XtraEditors.LabelControl lblTitulo;
         private DevExpress.XtraBars.PopupMenu popupMenuProducto;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem btnNuevoProducto;
         private DevExpress.XtraBars.BarButtonItem btnActualizarCatalogo;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
@@ -1899,7 +1970,7 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraBars.PopupMenu popupMenuSeleccion;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem btnSeleccionarFactura;
         private DevExpress.XtraBars.BarButtonItem btnRegresar;
         private DevExpress.XtraEditors.SvgImageBox svgImageBox1;
         private DevExpress.XtraEditors.TextEdit txtScanerCodigo;
@@ -2027,5 +2098,13 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit2;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
+        private DevExpress.XtraEditors.DropDownButton dropDownButton1;
+        private DevExpress.XtraBars.BarButtonItem btnOpenCashdrawer;
+        private DevExpress.XtraBars.BarButtonItem btnPrinterInvoice;
+        private DevExpress.XtraBars.PopupMenu popupImprimir;
+        private DevExpress.XtraEditors.SimpleButton btnAplicar;
+        private DevExpress.XtraBars.BarButtonItem btnPrinterBar;
+        private DevExpress.XtraBars.BarButtonItem btnPrinterFooter;
+        private DevExpress.XtraBars.BarButtonItem btnInvoiceDelete;
     }
 }
