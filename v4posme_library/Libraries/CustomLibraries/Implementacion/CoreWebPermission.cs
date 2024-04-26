@@ -1,4 +1,6 @@
-﻿using Unity;
+﻿using System.Globalization;
+using Unity;
+using v4posme_library.Libraries.CustomHelper;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels.Core;
 using v4posme_library.Models;
@@ -319,19 +321,15 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         {
             var companyParameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
             var objParameterMaxUser = coreWebParameter.GetParameter("CORE_CUST_PRICE_MAX_USER", companyId);
-            var parameterFechaExpiration =
-                DateTime.Parse(coreWebParameter.GetParameter("CORE_CUST_PRICE_LICENCES_EXPIRED", companyId)!.Value);
-            var objParameterISleep =
-                int.Parse(coreWebParameter.GetParameter("CORE_CUST_PRICE_SLEEP", companyId)!.Value);
+            var parameterFechaExpiration = DateTime.Parse(coreWebParameter.GetParameter("CORE_CUST_PRICE_LICENCES_EXPIRED", companyId)!.Value);
+            var objParameterISleep = int.Parse(coreWebParameter.GetParameter("CORE_CUST_PRICE_SLEEP", companyId)!.Value);
             var objParameterTipoPlan = coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId)!.Value;
-            var objParameterExpiredLicense =
-                DateTime.Parse(coreWebParameter.GetParameter("CORE_CUST_PRICE_LICENCES_EXPIRED", companyId)!.Value);
+            var objParameterExpiredLicense = DateTime.Parse(coreWebParameter.GetParameter("CORE_CUST_PRICE_LICENCES_EXPIRED", companyId)!.Value);
             var objParameterCreditos = coreWebParameter.GetParameter("CORE_CUST_PRICE_BALANCE", companyId);
             var objParameterCreditosId = objParameterCreditos!.ParameterId;
-            var parameterCreditos = int.Parse(objParameterCreditos.Value);
-            var objParameterPriceByInvoice =
-                int.Parse(coreWebParameter.GetParameter("CORE_CUST_PRICE_BY_INVOICE", companyId)!.Value);
-            var parameterMaxUser = int.Parse(objParameterMaxUser!.Value);
+            var parameterCreditos = (int)Math.Floor(Convert.ToDouble(objParameterCreditos.Value));
+            var objParameterPriceByInvoice = (int)Math.Floor(Convert.ToDouble(coreWebParameter.GetParameter("CORE_CUST_PRICE_BY_INVOICE", companyId)!.Value));
+            var parameterMaxUser = Convert.ToInt32(objParameterMaxUser!.Value);
             if (parameterMaxUser > 0)
             {
                 var count = userModel.GetCount(companyId);
@@ -378,8 +376,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             }
 
             parameterCreditos -= objParameterPriceByInvoice;
-            var dataNewParameter =
-                companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameterCreditosId);
+            var dataNewParameter = companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameterCreditosId);
             dataNewParameter!.Value = parameterCreditos.ToString();
             parameterModel.UpdateAppPosme(companyId, objParameterCreditosId, dataNewParameter);
 
@@ -388,11 +385,9 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             var parameterCantiadTransaccionesId = parameterCantiadTransacciones!.ParameterId;
             var parameterCantiadTransaccionesValue = int.Parse(parameterCantiadTransacciones.Value);
             var parameterCantiadTransaccionesNewValor = parameterCantiadTransaccionesValue + 1;
-            var dataNewParameterCantidadTransacciones =
-                companyParameterModel.GetRowByParameterIdCompanyId(companyId, parameterCantiadTransaccionesId);
+            var dataNewParameterCantidadTransacciones = companyParameterModel.GetRowByParameterIdCompanyId(companyId, parameterCantiadTransaccionesId);
             dataNewParameterCantidadTransacciones!.Value = parameterCantiadTransaccionesNewValor.ToString();
-            parameterModel.UpdateAppPosme(companyId, parameterCantiadTransaccionesId,
-                dataNewParameterCantidadTransacciones);
+            parameterModel.UpdateAppPosme(companyId, parameterCantiadTransaccionesId, dataNewParameterCantidadTransacciones);
 
             if (fechaNow > objParameterExpiredLicense && objParameterTipoPlan != "MEMBRESIA")
             {

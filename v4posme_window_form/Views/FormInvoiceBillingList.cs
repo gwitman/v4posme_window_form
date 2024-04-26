@@ -62,6 +62,7 @@ namespace v4posme_window.Views
             btnEditar.Click += Edit;
             btnEliminar.Click += Delete;
             btnNuevo.Click += New;
+            btnSearchTransaction.Click += SearchTransactionMaster;
         }
 
 

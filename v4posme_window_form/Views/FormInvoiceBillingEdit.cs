@@ -975,7 +975,7 @@ namespace v4posme_window.Views
                 if (objComponentItem is null) throw new Exception("EL COMPONENTE 'tb_item' NO EXISTE...");
 
                 //Obtener transaccion
-                var causalId = Convert.ToInt32(txtCausalID.Text);
+                var causalId = Convert.ToInt32(((ComboBoxItem)txtCausalID.EditValue).Key);
                 TransactionId = _objInterfazCoreWebTransaction.GetTransactionId(user.CompanyId, "tb_transaction_master_billing", 0);
                 var objT = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionModel>().GetByCompanyAndTransaction(user.CompanyId, TransactionId!.Value);
                 var objTransactionCausal = _objInterfazTransactionCausalModel.GetByCompanyAndTransactionAndCausal(user.CompanyId, TransactionId!.Value, causalId);
@@ -1003,7 +1003,7 @@ namespace v4posme_window.Views
                 ParameterCausalTypeCredit = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyId);
                 var causalIdTypeCredit = ParameterCausalTypeCredit!.Value!.Split(',');
                 // Buscar el valor en la matriz
-                var exisCausalInCredit = Array.IndexOf(causalIdTypeCredit, txtCausalID.Text) > 0;
+                var exisCausalInCredit = Array.IndexOf(causalIdTypeCredit, ((ComboBoxItem)txtCausalID.SelectedItem).Key) > 0;
                 //Si esta configurado como auto aplicado
                 //y es al credito. cambiar el estado por el estado inicial, que es registrada
                 int? statusId = 0;
@@ -1024,14 +1024,14 @@ namespace v4posme_window.Views
                 }
 
 
-                var currencyId = Convert.ToInt32(((ComboBoxItem)txtCurrencyID.SelectedItem)?.Key);
+                var currencyId = Convert.ToInt32(((ComboBoxItem)txtCurrencyID.EditValue).Key);
                 var objTm = new TbTransactionMaster
                 {
                     CompanyId = user.CompanyId,
                     TransactionId = TransactionId!.Value,
                     BranchId = user.BranchId,
                     TransactionNumber = _objInterfazCoreWebCounter.GoNextNumber(user.CompanyId, user.BranchId, "tb_transaction_master_proforma", 0),
-                    TransactionCausalId = Convert.ToInt32(txtCausalID.Text),
+                    TransactionCausalId = Convert.ToInt32(((ComboBoxItem)txtCausalID.EditValue).Key),
                     EntityId = TxtCustomerId,
                     TransactionOn = txtDate.DateTime,
                     TransactionOn2 = txtDateFirst.DateTime,
@@ -1045,20 +1045,20 @@ namespace v4posme_window.Views
                     DescriptionReference = "reference1:entityID del proveedor de credito para las facturas al credito,reference4: customerCreditLineID linea de credito del cliente",
                     Reference2 = txtReference2.Text,
                     Reference3 = txtReference3.Text,
-                    Reference4 = string.IsNullOrEmpty(txtCustomerCreditLineID.Text) ? "0" : txtCustomerCreditLineID.Text,
+                    Reference4 = txtCustomerCreditLineID.EditValue is null ? "0" : ((ComboBoxItem)txtCustomerCreditLineID.EditValue).Key,
                     StatusId = statusId,
                     Amount = decimal.Zero,
                     IsApplied = false,
                     JournalEntryId = 0,
                     ClassId = null,
                     AreaId = null,
-                    SourceWarehouseId = Convert.ToInt32(txtWarehouseID.Text),
+                    SourceWarehouseId = Convert.ToInt32(((ComboBoxItem)txtWarehouseID.EditValue).Key),
                     TargetWarehouseId = null,
                     IsActive = true,
-                    PeriodPay = Convert.ToInt32(txtPeriodPay.Text),
+                    PeriodPay = Convert.ToInt32(((ComboBoxItem)txtPeriodPay.EditValue).Key),
                     NextVisit = txtNextVisit.DateTime,
                     NumberPhone = txtNumberPhone.Text,
-                    EntityIdsecondary = Convert.ToInt32(txtEmployeeID.SelectedItem)
+                    EntityIdsecondary = Convert.ToInt32(((ComboBoxItem)txtEmployeeID.EditValue).Key)
                 };
                 objTm.ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), decimal.One, objTm.CurrencyId2!.Value, objTm.CurrencyId!.Value);
                 VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuditoria>().SetAuditCreated(objTm, user, "");
@@ -1078,8 +1078,8 @@ namespace v4posme_window.Views
                     CompanyId = objTm.CompanyId,
                     TransactionId = objTm.TransactionId,
                     TransactionMasterId = TransactionMasterId!.Value,
-                    ZoneId = Convert.ToInt32(txtZoneID.SelectedItem), //Varificar valor
-                    MesaId = Convert.ToInt32(txtMesaID.Text),
+                    ZoneId = Convert.ToInt32(((ComboBoxItem)txtZoneID.EditValue).Key), //Varificar valor
+                    MesaId = Convert.ToInt32(((ComboBoxItem)txtMesaID.EditValue).Key),
                     RouteId = 0,
                     ReferenceClientName = txtReferenceClientName.Text,
                     ReferenceClientIdentifier = txtReferenceClientIdentifier.Text,
@@ -1361,7 +1361,7 @@ namespace v4posme_window.Views
                 var objParameterRegrearANuevo = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SAVE_AFTER_TO_ADD", user.CompanyId)!.Value;
 
                 //Actualizar Maestro
-                var typePriceId = txtTypePriceID.SelectedItem ?? throw new ArgumentNullException("txtTypePriceID.SelectedItem");
+                var typePriceId = Convert.ToInt32(((ComboBoxItem)txtTypePriceID.SelectedItem).Key);
                 var objListPrice = _objInterfazListPriceModel.GetListPriceToApply(user.CompanyId);
                 var objTmNew = new TbTransactionMaster
                 {
@@ -1496,7 +1496,7 @@ namespace v4posme_window.Views
                 else
                 {
                     //Actualizar Detalle
-                    for (var i = 0; i < gridViewValues.RowCount; i++)
+                    for (var i = 0; i < gridViewValues.RowCount-1; i++)
                     {
                         listTransactionDetalId.Add((int)gridViewValues.GetRowCellValue(i, colItemNumber.Name));
                         arrayListItemId.Add(Convert.ToInt32(gridViewValues.GetRowCellValue(i, colItemId)));
@@ -2169,7 +2169,7 @@ namespace v4posme_window.Views
                 return false;
             }
 
-            if (txtDate.EditValue != null)
+            if (txtDate.EditValue is null)
             {
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
                            "Debe seleccionar una fecha.", this);
@@ -2220,7 +2220,7 @@ namespace v4posme_window.Views
             }
 
             //Validar cantidades en el detalle
-            for (var i = 0; i < gridViewValues.RowCount; i++)
+            for (var i = 0; i < gridViewValues.RowCount-1; i++)
             {
                 var total = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colSubTotal).ToString());
                 if (total == 0)
@@ -2232,7 +2232,7 @@ namespace v4posme_window.Views
             }
 
 
-            for (var i = 0; i < gridViewValues.RowCount; i++)
+            for (var i = 0; i < gridViewValues.RowCount-1; i++)
             {
                 var total = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity).ToString());
                 if (total == 0)
@@ -2245,8 +2245,13 @@ namespace v4posme_window.Views
 
 
             //Validar Linea de Credito
+            var lineaCreditoId = 0;
             var causalId = Convert.ToInt32(((ComboBoxItem)txtCausalID.SelectedItem).Key);
-            var lineaCreditoId = Convert.ToInt32(((ComboBoxItem)txtCustomerCreditLineID.SelectedItem).Key);
+            if (txtCustomerCreditLineID.SelectedIndex != -1 && txtCustomerCreditLineID.SelectedItem is not null)
+            {
+                lineaCreditoId = Convert.ToInt32(((ComboBoxItem)txtCustomerCreditLineID.SelectedItem).Key);
+            }
+
             var causalCredit = objCompanyParameter_Key_INVOICE_BILLING_CREDIT!.Split(",");
             var objCustomerCreditLine = new TbCustomerCreditLineDto();
             var invoiceTypeCredit = false;
@@ -2350,7 +2355,7 @@ namespace v4posme_window.Views
 
             //Validar Cantidades
             var objFormInvoiceApi = new FormInvoiceApi();
-            for (var i = 0; i < gridViewValues.RowCount; i++)
+            for (var i = 0; i < gridViewValues.RowCount-1; i++)
             {
                 var itemID = WebToolsHelper.ConvertToNumber<int>(gridViewValues.GetRowCellValue(i, colItemId).ToString());
                 var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity).ToString());
@@ -2369,7 +2374,7 @@ namespace v4posme_window.Views
                 }
             }
 
-
+            return false;
         }
         public void FnRenderLineaCreditoDiv()
         {
@@ -2495,9 +2500,15 @@ namespace v4posme_window.Views
                 return;
             }
 
+            var rowCount = gridViewValues.RowCount;
+            if (rowCount<=0)
+            {
+                return;
+            }
+
             var typePriceId = Convert.ToInt32(((ComboBoxItem)txtTypePriceID.SelectedItem).Key);
             //Actualizar Precio
-            for (var i = 0; i < gridViewValues.RowCount; i++)
+            for (var i = 0; i < rowCount-1; i++)
             {
                 var typePriceValue = typePriceId switch
                 {
@@ -3227,7 +3238,10 @@ namespace v4posme_window.Views
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-
+            if (FnValidateFormAndSubmit())
+            {
+                SaveInsert();
+            }
         }
     }
 }
