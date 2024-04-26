@@ -13,7 +13,7 @@ public interface IItemSkuModel
 
     List<TbItemSkuDto> GetRowByItemId(int itemId);
 
-    TbItemSkuDto GetByPk(int itemId, int catalogItemId);
+    TbItemSkuDto? GetByPk(int itemId, int catalogItemId);
 
     List<TbItemSkuDto> GetRowByTransactionMasterId(int companyId, int transactionMasterId);
 }

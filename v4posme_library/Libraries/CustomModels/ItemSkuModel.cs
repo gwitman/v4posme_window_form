@@ -49,7 +49,7 @@ class ItemSkuModel : IItemSkuModel
         return result.ToList();
     }
 
-    public TbItemSkuDto GetByPk(int itemId, int catalogItemId)
+    public TbItemSkuDto? GetByPk(int itemId, int catalogItemId)
     {
         using var context = new DataContext();
         var result = from sku in context.TbItemSkus
@@ -63,7 +63,7 @@ class ItemSkuModel : IItemSkuModel
                 Value = sku.Value,
                 Sku = w.Display
             };
-        return result.Single();
+        return result.SingleOrDefault();
     }
 
     public List<TbItemSkuDto> GetRowByTransactionMasterId(int companyId, int transactionMasterId)

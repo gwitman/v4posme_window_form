@@ -612,9 +612,9 @@ namespace v4posme_window.Views
                 };
                 confiDetalleHeader.Add(row3);
 
-                var detalle = new List<string[]> { (["PRODUCTO", "CANT", "TOTAL"]) };
+                var detalle = new List<string[]> { ( ["PRODUCTO", "CANT", "TOTAL"]) };
 
-                detalle.AddRange(objTmd.Select(detail => (string[])[detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
+                detalle.AddRange(objTmd.Select(detail => (string[]) [detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
             }
             catch (Exception e)
             {
@@ -975,7 +975,8 @@ namespace v4posme_window.Views
                 if (objComponentItem is null) throw new Exception("EL COMPONENTE 'tb_item' NO EXISTE...");
 
                 //Obtener transaccion
-                var causalId = Convert.ToInt32(((ComboBoxItem)txtCausalID.EditValue).Key);
+                var causalIdEditValue = (ComboBoxItem)txtCausalID.EditValue;
+                var causalId = Convert.ToInt32(causalIdEditValue.Key);
                 TransactionId = _objInterfazCoreWebTransaction.GetTransactionId(user.CompanyId, "tb_transaction_master_billing", 0);
                 var objT = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionModel>().GetByCompanyAndTransaction(user.CompanyId, TransactionId!.Value);
                 var objTransactionCausal = _objInterfazTransactionCausalModel.GetByCompanyAndTransactionAndCausal(user.CompanyId, TransactionId!.Value, causalId);
@@ -1025,13 +1026,14 @@ namespace v4posme_window.Views
 
 
                 var currencyId = Convert.ToInt32(((ComboBoxItem)txtCurrencyID.EditValue).Key);
+                var goNextNumber = _objInterfazCoreWebCounter.GoNextNumber(user.CompanyId, user.BranchId, "tb_transaction_master_proforma", 0);
                 var objTm = new TbTransactionMaster
                 {
                     CompanyId = user.CompanyId,
                     TransactionId = TransactionId!.Value,
                     BranchId = user.BranchId,
-                    TransactionNumber = _objInterfazCoreWebCounter.GoNextNumber(user.CompanyId, user.BranchId, "tb_transaction_master_proforma", 0),
-                    TransactionCausalId = Convert.ToInt32(((ComboBoxItem)txtCausalID.EditValue).Key),
+                    TransactionNumber = string.IsNullOrEmpty(goNextNumber) ? "" : goNextNumber,
+                    TransactionCausalId = Convert.ToInt32(causalIdEditValue.Key),
                     EntityId = TxtCustomerId,
                     TransactionOn = txtDate.DateTime,
                     TransactionOn2 = txtDateFirst.DateTime,
@@ -1045,7 +1047,7 @@ namespace v4posme_window.Views
                     DescriptionReference = "reference1:entityID del proveedor de credito para las facturas al credito,reference4: customerCreditLineID linea de credito del cliente",
                     Reference2 = txtReference2.Text,
                     Reference3 = txtReference3.Text,
-                    Reference4 = txtCustomerCreditLineID.EditValue is null ? "0" : ((ComboBoxItem)txtCustomerCreditLineID.EditValue).Key,
+                    Reference4 = txtCustomerCreditLineID.EditValue is null ? "" : ((ComboBoxItem)txtCustomerCreditLineID.EditValue).Key,
                     StatusId = statusId,
                     Amount = decimal.Zero,
                     IsApplied = false,
@@ -1062,6 +1064,7 @@ namespace v4posme_window.Views
                 };
                 objTm.ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), decimal.One, objTm.CurrencyId2!.Value, objTm.CurrencyId!.Value);
                 VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuditoria>().SetAuditCreated(objTm, user, "");
+                //retorna 187 parametros
                 var objParameterAll = _objInterfazCoreWebParameter.GetParameterAll(user.CompanyId);
                 var transactionMasterId = _objInterfazTransactionMasterModel.InsertAppPosme(objTm);
 
@@ -1111,7 +1114,7 @@ namespace v4posme_window.Views
 
                 //Tipo de precio seleccionado por el usuario,
                 //Actualmente no se esta usando
-                var typePriceId = txtTypePriceID.SelectedItem; //verificar valor
+                var typePriceId = ((ComboBoxItem)txtTypePriceID.SelectedItem).Key; //verificar valor
                 var objListPrice = _objInterfazListPriceModel.GetListPriceToApply(user.CompanyId);
                 //obtener la lista de precio por defecto
                 var objParameterPriceDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_DEFAULT_PRICELIST", user.CompanyId);
@@ -1123,18 +1126,20 @@ namespace v4posme_window.Views
                 var objParameterUpdatePrice = _objInterfazCoreWebParameter.GetParameter("INVOICE_UPDATEPRICE_ONLINE", user.CompanyId);
                 var objUpdatePrice = objParameterUpdatePrice!.Value;
 
-                var rowCount = gridViewValues.RowCount;
+                var rowCount = gridViewValues.RowCount-1;
                 for (var i = 0; i < rowCount; i++)
                 {
                     //Recorrer la lista del detalle del documento
-                    var itemNameDetail = gridViewValues.GetRowCellValue(i, colTransactionDetailName.Name).ToString()!.Replace("'", "");
-                    var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity.Name).ToString());
-                    var listPrice = Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colPrice.Name));
-                    var listLote = (string?)gridViewValues.GetRowCellValue(i, colTransactionDetailName.Name);
-                    var listVencimiento = gridViewValues.GetRowCellValue(i, colDetailVencimiento.Name).ToString();
-                    var skuCatalogItemId = gridViewValues.GetRowCellValue(i, colSkuQuantityBySku.Name);
-                    var skuFormatoDescription = gridViewValues.GetRowCellValue(i, colSkuFormatoDescripton.Name).ToString();
-                    var itemId = (int)gridViewValues.GetRowCellValue(i, colItemNumber.Name);
+                    var transactionDetailName = gridViewValues.GetRowCellValue(i, colTransactionDetailName).ToString();
+                    var itemNameDetail = transactionDetailName is null? "": transactionDetailName.Replace("'", "");
+                    var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity).ToString());
+                    var listPrice = Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colPrice));
+                    var listLote = gridViewValues.GetRowCellValue(i, colTransactionDetailName).ToString();
+                    var rowCellValueDetalilVencimiento = gridViewValues.GetRowCellValue(i, colDetailVencimiento);
+                    var listVencimiento = rowCellValueDetalilVencimiento is null ? "": rowCellValueDetalilVencimiento.ToString();
+                    var skuCatalogItemId = Convert.ToInt32(gridViewValues.GetRowCellValue(i, colSkuQuantityBySku));
+                    var skuFormatoDescription = gridViewValues.GetRowCellValue(i, colSkuFormatoDescripton).ToString();
+                    var itemId =Convert.ToInt32(gridViewValues.GetRowCellValue(i, colItemId));
 
 
                     var lote = string.IsNullOrEmpty(listLote) ? "" : listLote;
@@ -1142,12 +1147,15 @@ namespace v4posme_window.Views
                     var warehouseId = objTm.SourceWarehouseId;
                     var objItem = _objInterfazItemModel.GetRowByPk(user.CompanyId, itemId);
                     var objItemWarehouse = VariablesGlobales.Instance.UnityContainer.Resolve<IItemWarehouseModel>().GetByPk(user.CompanyId, itemId, warehouseId.Value);
-                    var objPrice = _objInterfazPriceModel.GetRowByPk(user.CompanyId, objListPrice!.ListPriceId, itemId, (int)typePriceId);
+                    var objPrice = _objInterfazPriceModel.GetRowByPk(user.CompanyId, objListPrice!.ListPriceId, itemId, Convert.ToInt32(typePriceId));
                     var objCompanyComponentConcept = _objInterfazCompanyComponentConceptModel.GetRowByPk(user.CompanyId, objComponentItem.ComponentId, itemId, "IVA");
-                    var objItemSku = _objInterfazItemSkuModel.GetByPk(itemId, (int)skuCatalogItemId);
-
-
-                    var price = listPrice / objItemSku.Value;
+                    var objItemSku = _objInterfazItemSkuModel.GetByPk(itemId, skuCatalogItemId);
+                    var price = decimal.Zero;
+                    if (objItemSku is not null)
+                    {
+                        price= listPrice / objItemSku.Value;
+                    }
+                    
                     var ivaPercentage = (objCompanyComponentConcept is not null) ? objCompanyComponentConcept.ValueOut : decimal.Zero;
                     var unitaryAmount = price * (1 + ivaPercentage);
                     var tax1 = price * ivaPercentage;
@@ -1223,12 +1231,12 @@ namespace v4posme_window.Views
                     //Actualizar tipo de precio
                     if (objUpdatePrice == "true")
                     {
-                        var dataUpdatePrice = _objInterfazPriceModel.GetRowByPk(user.CompanyId, Convert.ToInt32(listPriceId), itemId, (int)typePriceId);
+                        var dataUpdatePrice = _objInterfazPriceModel.GetRowByPk(user.CompanyId, Convert.ToInt32(listPriceId), itemId, Convert.ToInt32(typePriceId));
                         if (dataUpdatePrice is not null)
                         {
                             dataUpdatePrice.Price = price;
                             dataUpdatePrice.Percentage = objItem.Cost == 0 ? (price / 100) : (((100 * price) / objItem.Cost) - 100);
-                            _objInterfazPriceModel.UpdateAppPosme(user.CompanyId, Convert.ToInt32(listPriceId), itemId, (int)typePriceId, dataUpdatePrice!);
+                            _objInterfazPriceModel.UpdateAppPosme(user.CompanyId, Convert.ToInt32(listPriceId), itemId, Convert.ToInt32(typePriceId), dataUpdatePrice!);
                         }
                     }
                 }
@@ -1261,16 +1269,16 @@ namespace v4posme_window.Views
                     case "false":
                         return;
                     case "true":
+                    {
+                        //si es auto aplicadao mandar a imprimir
+                        if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
                         {
-                            //si es auto aplicadao mandar a imprimir
-                            if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
-                            {
-                                ComandPrinter();
-                            }
-
-                            break;
+                            ComandPrinter();
                         }
-                        //Error 
+
+                        break;
+                    }
+                    //Error 
                 }
             }
             catch (Exception e)
@@ -1496,7 +1504,7 @@ namespace v4posme_window.Views
                 else
                 {
                     //Actualizar Detalle
-                    for (var i = 0; i < gridViewValues.RowCount-1; i++)
+                    for (var i = 0; i < gridViewValues.RowCount - 1; i++)
                     {
                         listTransactionDetalId.Add((int)gridViewValues.GetRowCellValue(i, colItemNumber.Name));
                         arrayListItemId.Add(Convert.ToInt32(gridViewValues.GetRowCellValue(i, colItemId)));
@@ -1507,7 +1515,7 @@ namespace v4posme_window.Views
                         arrayListIva.Add(Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colIva)));
                         arrayListLote.Add("");
                         arrayListVencimiento.Add("");
-                        arrayListSku.Add((int)gridViewValues.GetRowCellValue(i, colSku));
+                        arrayListSku.Add(Convert.ToInt32(gridViewValues.GetRowCellValue(i, colSku)));
                         arrayListSkuFormatoDescription.Add(gridViewValues.GetRowCellValue(i, colSkuFormatoDescripton).ToString()!);
                     }
                 }
@@ -2155,6 +2163,7 @@ namespace v4posme_window.Views
         {
             FnValidateFormAndSubmit();
         }
+
         public bool FnValidateFormAndSubmit()
         {
             //Validar desembolso
@@ -2165,42 +2174,42 @@ namespace v4posme_window.Views
             if (txtWarehouseID.SelectedIndex == -1)
             {
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                           "Debe seleccionar una bodega.", this);
+                    "Debe seleccionar una bodega.", this);
                 return false;
             }
 
             if (txtDate.EditValue is null)
             {
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                           "Debe seleccionar una fecha.", this);
+                    "Debe seleccionar una fecha.", this);
                 return false;
             }
 
             if (TxtCustomerId <= 0)
             {
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                           "Debe seleccionar un cliente.", this);
+                    "Debe seleccionar un cliente.", this);
                 return false;
             }
 
             if (txtReference1.SelectedIndex == -1 && switchDesembolso)
             {
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                           "Debe seleccionar un proveedor de credito.", this);
+                    "Debe seleccionar un proveedor de credito.", this);
                 return false;
             }
 
             if (txtZoneID.SelectedIndex == -1 && switchDesembolso)
             {
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                           "Debe seleccionar una zona de factura.", this);
+                    "Debe seleccionar una zona de factura.", this);
                 return false;
             }
 
             if (txtEmployeeID.SelectedIndex == -1 && switchDesembolso)
             {
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                           "Debe seleccionar una colaborador.", this);
+                    "Debe seleccionar una colaborador.", this);
                 return false;
             }
 
@@ -2208,37 +2217,37 @@ namespace v4posme_window.Views
             if (TxtStatusOldId == (int)WorkflowStatus.FacturaStatusAplicado)
             {
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                           "Debe crear una factura nueva la actual ya esta aplicada.", this);
+                    "Debe crear una factura nueva la actual ya esta aplicada.", this);
                 return false;
             }
 
             if (TxtStatusId == (int)WorkflowStatus.FacturaStatusAnulado)
             {
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                           "No puede pasar a estado anulado.", this);
+                    "No puede pasar a estado anulado.", this);
                 return false;
             }
 
             //Validar cantidades en el detalle
-            for (var i = 0; i < gridViewValues.RowCount-1; i++)
+            for (var i = 0; i < gridViewValues.RowCount - 1; i++)
             {
                 var total = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colSubTotal).ToString());
                 if (total == 0)
                 {
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                          "No puede haber totales en  0.", this);
+                        "No puede haber totales en  0.", this);
                     return false;
                 }
             }
 
 
-            for (var i = 0; i < gridViewValues.RowCount-1; i++)
+            for (var i = 0; i < gridViewValues.RowCount - 1; i++)
             {
                 var total = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity).ToString());
                 if (total == 0)
                 {
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                          "No puede haber cantidades en  0.", this);
+                        "No puede haber cantidades en  0.", this);
                     return false;
                 }
             }
@@ -2271,14 +2280,14 @@ namespace v4posme_window.Views
             if (ObjParameterAmortizationDuranteFactura!.ToUpper() == "true".ToUpper() && txtReference2.EditValue.ToString() == "" && invoiceTypeCredit)
             {
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                          "Seleccionar el plazo.", this);
+                    "Seleccionar el plazo.", this);
                 return false;
             }
 
             if (WebToolsHelper.ConvertToNumber<decimal>(txtChangeAmount.EditValue.ToString()) > 0 && invoiceTypeCredit)
             {
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                          "No puede haber cambios si la factura es de credito.", this);
+                    "No puede haber cambios si la factura es de credito.", this);
 
                 return false;
             }
@@ -2289,7 +2298,7 @@ namespace v4posme_window.Views
                 if (txtDateFirst.EditValue != null && switchDesembolso)
                 {
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                         "Seleccione la fecha del primer pago.", this);
+                        "Seleccione la fecha del primer pago.", this);
 
                     return false;
                 }
@@ -2297,7 +2306,7 @@ namespace v4posme_window.Views
                 if (txtNote.EditValue.ToString() == "" && switchDesembolso)
                 {
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                         "Asignarle una nota al documento.", this);
+                        "Asignarle una nota al documento.", this);
 
                     return false;
                 }
@@ -2305,7 +2314,7 @@ namespace v4posme_window.Views
                 if (txtFixedExpenses.EditValue.ToString() == "" && switchDesembolso)
                 {
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                         "Ingresar el porcentaje de gastos fijos por desembolso.", this);
+                        "Ingresar el porcentaje de gastos fijos por desembolso.", this);
 
                     return false;
                 }
@@ -2327,20 +2336,18 @@ namespace v4posme_window.Views
                     if (balanceCredit < montoTotalInvoice && balanceCredit != 0)
                     {
                         _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                         "Cliente sin balance suficiente.", this);
+                            "Cliente sin balance suficiente.", this);
 
                         return false;
                     }
                 }
-
-
             }
             else
             {
                 if (WebToolsHelper.ConvertToNumber<decimal>(txtChangeAmount.EditValue.ToString()) < 0)
                 {
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                          "El cambio de la factura no puede ser menor que 0.", this);
+                        "El cambio de la factura no puede ser menor que 0.", this);
 
                     return false;
                 }
@@ -2355,7 +2362,7 @@ namespace v4posme_window.Views
 
             //Validar Cantidades
             var objFormInvoiceApi = new FormInvoiceApi();
-            for (var i = 0; i < gridViewValues.RowCount-1; i++)
+            for (var i = 0; i < gridViewValues.RowCount - 1; i++)
             {
                 var itemID = WebToolsHelper.ConvertToNumber<int>(gridViewValues.GetRowCellValue(i, colItemId).ToString());
                 var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity).ToString());
@@ -2368,7 +2375,7 @@ namespace v4posme_window.Views
                 if (resultValid.Mensaje == "Existencia agotada")
                 {
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                          "No existe suficiente cantidad en bodega, del producto " + resultValid.Nombre, this);
+                        "No existe suficiente cantidad en bodega, del producto " + resultValid.Nombre, this);
 
                     return false;
                 }
@@ -2376,6 +2383,7 @@ namespace v4posme_window.Views
 
             return false;
         }
+
         public void FnRenderLineaCreditoDiv()
         {
             var causalID = ((ComboBoxItem)txtCausalID.EditValue).Key!.ToString();
@@ -2501,14 +2509,14 @@ namespace v4posme_window.Views
             }
 
             var rowCount = gridViewValues.RowCount;
-            if (rowCount<=0)
+            if (rowCount <= 0)
             {
                 return;
             }
 
             var typePriceId = Convert.ToInt32(((ComboBoxItem)txtTypePriceID.SelectedItem).Key);
             //Actualizar Precio
-            for (var i = 0; i < rowCount-1; i++)
+            for (var i = 0; i < rowCount - 1; i++)
             {
                 var typePriceValue = typePriceId switch
                 {
@@ -2525,6 +2533,7 @@ namespace v4posme_window.Views
                 };
                 gridViewValues.SetRowCellValue(i, colPrice, typePriceValue);
             }
+
             FnRecalculateDetail(true, "");
         }
 
@@ -3000,7 +3009,6 @@ namespace v4posme_window.Views
         {
         }
 
-        
 
         private void btnClearCustomer_Click(object sender, EventArgs e)
         {
@@ -3220,6 +3228,7 @@ namespace v4posme_window.Views
                         @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}"
                     );
             }
+
             if (e.Item.Name == btnRegresar.Name)
             {
                 this.Close();
@@ -3227,13 +3236,11 @@ namespace v4posme_window.Views
                 // Mostrar el formulario anterior
                 FormInvoiceBillingList formularioAnterior = new FormInvoiceBillingList();
                 formularioAnterior.Show();
-
             }
         }
 
         private void downButtonSeleccion_Click(object sender, EventArgs e)
         {
-
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
