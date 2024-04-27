@@ -1137,7 +1137,7 @@ namespace v4posme_window.Views
                     var listLote = gridViewValues.GetRowCellValue(i, colTransactionDetailName).ToString();
                     var rowCellValueDetalilVencimiento = gridViewValues.GetRowCellValue(i, colDetailVencimiento);
                     var listVencimiento = rowCellValueDetalilVencimiento is null ? "": rowCellValueDetalilVencimiento.ToString();
-                    var skuCatalogItemId = Convert.ToInt32(gridViewValues.GetRowCellValue(i, colSkuQuantityBySku));
+                    var skuCatalogItemId = Convert.ToInt32(gridViewValues.GetRowCellValue(i, colSku));
                     var skuFormatoDescription = gridViewValues.GetRowCellValue(i, colSkuFormatoDescripton).ToString();
                     var itemId =Convert.ToInt32(gridViewValues.GetRowCellValue(i, colItemId));
 
@@ -1150,7 +1150,7 @@ namespace v4posme_window.Views
                     var objPrice = _objInterfazPriceModel.GetRowByPk(user.CompanyId, objListPrice!.ListPriceId, itemId, Convert.ToInt32(typePriceId));
                     var objCompanyComponentConcept = _objInterfazCompanyComponentConceptModel.GetRowByPk(user.CompanyId, objComponentItem.ComponentId, itemId, "IVA");
                     var objItemSku = _objInterfazItemSkuModel.GetByPk(itemId, skuCatalogItemId);
-                    var price = decimal.Zero;
+                    var price = listPrice;
                     if (objItemSku is not null)
                     {
                         price= listPrice / objItemSku.Value;
@@ -2036,7 +2036,7 @@ namespace v4posme_window.Views
                     txtReferenceClientName.Text = string.Empty;
                     txtReferenceClientIdentifier.Text = string.Empty;
                     txtNumberPhone.Text = string.Empty;
-                    txtNextVisit.Text = DateTime.Today.ToString();
+                    txtNextVisit.DateTime = DateTime.Today;
                     txtFixedExpenses.Text = string.Empty;
                     txtReference2.Text = ObjParameterCxcPlazoDefault;
                     txtReference3.Text = ObjEmployeeNatural is null ? "N/D" : ObjEmployeeNatural.FirstName;
@@ -2600,7 +2600,7 @@ namespace v4posme_window.Views
                 "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
                 @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}",
                 false, "", 0, Convert.ToInt32(ObjParameterCantidadItemPoup!), "");
-            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptarItem;
+            formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarItem;
             formTypeListSearch.ShowDialog(this);
         }
 
@@ -2662,7 +2662,7 @@ namespace v4posme_window.Views
             var itemID = Convert.ToInt32(diccionario["itemID"]);
 
             //Buscar Item
-            for (index = 0; index < gridViewValues.RowCount; index++)
+            for (index = 0; index < gridViewValues.RowCount-1; index++)
             {
                 if (itemID == Convert.ToInt32(gridViewValues.GetRowCellValue(index, colItemId)))
                 {
@@ -2834,7 +2834,7 @@ namespace v4posme_window.Views
             var formTypeListSearch = new FormTypeListSearch("Lista de Cliente", ObjComponentCustomer!.ComponentId,
                 "SELECCIONAR_CLIENTES_BILLING", true,
                 "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
-            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptarCusomter;
+            formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarCusomter;
             formTypeListSearch.ShowDialog(this);
         }
 
@@ -2853,7 +2853,7 @@ namespace v4posme_window.Views
                 "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
                 @"{warehouseID:" + warehouseId + ", listPriceID:" + listPrice + ",typePriceID:" + typePriceId + ",currencyID:" + currencyIdKey + "}",
                 false, "", 0, 5, "");
-            formTypeListSearch.EventoCallBackAceptar_ += EventoCallBackAceptarItem;
+            formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarItem;
             formTypeListSearch.ShowDialog(this);
         }
 

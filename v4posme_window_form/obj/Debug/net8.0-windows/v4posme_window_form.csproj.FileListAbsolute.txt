@@ -418,6 +418,7 @@ E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\DevExp
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\DevExpress.XtraVerticalGrid.v23.2.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\DevExpress.Xpo.v23.2.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\ErikEJ.EntityFrameworkCore.6.DgmlBuilder.dll
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\ESC-POS-USB-NET.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Google.Protobuf.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\K4os.Compression.LZ4.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\K4os.Compression.LZ4.Streams.dll
@@ -518,4 +519,3 @@ E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\refint
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.pdb
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.genruntimeconfig.cache
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\ref\v4posme_window_form.dll
-E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\ESC-POS-USB-NET.dll

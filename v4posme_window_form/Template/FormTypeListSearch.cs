@@ -24,7 +24,7 @@ namespace v4posme_window.Template
         public delegate void EventoCallBackAceptar(dynamic mensaje);
 
         // Declarar un evento que se disparará cuando ocurra el evento en el formulario hijo
-        public event EventoCallBackAceptar? EventoCallBackAceptar_;
+        public event EventoCallBackAceptar? EventoCallBackAceptarEvent;
         private int? ComponentId { get; set; }
         private string? ViewName { get; set; }
         private bool? AutoClose { get; set; }
@@ -58,8 +58,8 @@ namespace v4posme_window.Template
 
         private void FormTypeListSearch_Load(object sender, EventArgs e)
         {
-            PanelControl controlParent = this.centerPane;
-            Text = TitleWindow;
+            var controlParent = centerPane;
+            if (TitleWindow != null) Text = TitleWindow;
             ObjGridControl.Name = "ObjGridControl";
             ObjGridControl.Parent = controlParent;
             ObjGridControl.Dock = DockStyle.Fill;
@@ -159,7 +159,7 @@ namespace v4posme_window.Template
                 // No se ha seleccionado ninguna fila, maneja este caso según tus requerimientos
             }
 
-            EventoCallBackAceptar_?.Invoke(dynamicObject);
+            EventoCallBackAceptarEvent?.Invoke(dynamicObject);
         }
 
         private void btnAtras_Click(object sender, EventArgs e)
