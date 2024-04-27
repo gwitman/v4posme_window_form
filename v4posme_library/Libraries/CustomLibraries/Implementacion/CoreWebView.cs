@@ -26,9 +26,7 @@ class CoreWebView(
     private static readonly int
         PermissionMe = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_ME"]!);
 
-    public TableCompanyDataViewDto? GetViewByName(TbUser user, int componentId, string name, int callerId,
-        int? permission = null,
-        Dictionary<string, string>? parameter = null)
+    public TableCompanyDataViewDto? GetViewByName(TbUser user, int componentId, string name, int callerId, int? permission = null, Dictionary<string, string>? parameter = null)
     {
         // Obtener la vista generica
         var dataView = dataViewModel.GetViewByName(componentId, name, callerId);

@@ -1126,20 +1126,20 @@ namespace v4posme_window.Views
                 var objParameterUpdatePrice = _objInterfazCoreWebParameter.GetParameter("INVOICE_UPDATEPRICE_ONLINE", user.CompanyId);
                 var objUpdatePrice = objParameterUpdatePrice!.Value;
 
-                var rowCount = gridViewValues.RowCount-1;
+                var rowCount = gridViewValues.RowCount - 1;
                 for (var i = 0; i < rowCount; i++)
                 {
                     //Recorrer la lista del detalle del documento
                     var transactionDetailName = gridViewValues.GetRowCellValue(i, colTransactionDetailName).ToString();
-                    var itemNameDetail = transactionDetailName is null? "": transactionDetailName.Replace("'", "");
+                    var itemNameDetail = transactionDetailName is null ? "" : transactionDetailName.Replace("'", "");
                     var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity).ToString());
                     var listPrice = Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colPrice));
                     var listLote = gridViewValues.GetRowCellValue(i, colTransactionDetailName).ToString();
                     var rowCellValueDetalilVencimiento = gridViewValues.GetRowCellValue(i, colDetailVencimiento);
-                    var listVencimiento = rowCellValueDetalilVencimiento is null ? "": rowCellValueDetalilVencimiento.ToString();
+                    var listVencimiento = rowCellValueDetalilVencimiento is null ? "" : rowCellValueDetalilVencimiento.ToString();
                     var skuCatalogItemId = Convert.ToInt32(gridViewValues.GetRowCellValue(i, colSku));
                     var skuFormatoDescription = gridViewValues.GetRowCellValue(i, colSkuFormatoDescripton).ToString();
-                    var itemId =Convert.ToInt32(gridViewValues.GetRowCellValue(i, colItemId));
+                    var itemId = Convert.ToInt32(gridViewValues.GetRowCellValue(i, colItemId));
 
 
                     var lote = string.IsNullOrEmpty(listLote) ? "" : listLote;
@@ -1150,12 +1150,13 @@ namespace v4posme_window.Views
                     var objPrice = _objInterfazPriceModel.GetRowByPk(user.CompanyId, objListPrice!.ListPriceId, itemId, Convert.ToInt32(typePriceId));
                     var objCompanyComponentConcept = _objInterfazCompanyComponentConceptModel.GetRowByPk(user.CompanyId, objComponentItem.ComponentId, itemId, "IVA");
                     var objItemSku = _objInterfazItemSkuModel.GetByPk(itemId, skuCatalogItemId);
-                    var price = listPrice;
-                    if (objItemSku is not null)
+                    decimal price;
+                    if (objItemSku is null)
                     {
-                        price= listPrice / objItemSku.Value;
+                        throw new Exception("No hay un objeto del tipo item sku");
                     }
-                    
+
+                    price = listPrice / objItemSku.Value;
                     var ivaPercentage = (objCompanyComponentConcept is not null) ? objCompanyComponentConcept.ValueOut : decimal.Zero;
                     var unitaryAmount = price * (1 + ivaPercentage);
                     var tax1 = price * ivaPercentage;
@@ -1203,11 +1204,12 @@ namespace v4posme_window.Views
                         QuantityStockUnaswared = 0,
                         RemaingStock = 0,
                         ExpirationDate = null,
-                        InventoryWarehouseSourceId = (int)objTm.SourceWarehouseId,
-                        InventoryWarehouseTargetId = (int)objTm.TargetWarehouseId!,
-                        SkuCatalogItemId = (int)skuCatalogItemId,
+                        InventoryWarehouseSourceId = objTm.SourceWarehouseId,
+                        InventoryWarehouseTargetId = objTm.TargetWarehouseId,
+                        SkuCatalogItemId = skuCatalogItemId,
                         SkuFormatoDescription = skuFormatoDescription
                     };
+
                     objTmd.Cost = objTmd.Quantity * objTmd.UnitaryCost;
                     objTmd.Amount = objTmd.Quantity * objTmd.UnitaryAmount;
 
@@ -2662,7 +2664,7 @@ namespace v4posme_window.Views
             var itemID = Convert.ToInt32(diccionario["itemID"]);
 
             //Buscar Item
-            for (index = 0; index < gridViewValues.RowCount-1; index++)
+            for (index = 0; index < gridViewValues.RowCount - 1; index++)
             {
                 if (itemID == Convert.ToInt32(gridViewValues.GetRowCellValue(index, colItemId)))
                 {
