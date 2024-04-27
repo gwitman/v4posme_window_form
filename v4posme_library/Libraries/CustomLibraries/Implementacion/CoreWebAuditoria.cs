@@ -34,22 +34,22 @@ class CoreWebAuditoria : ICoreWebAuditoria
         var properties = obj.GetType().GetProperties();
         foreach (var property in properties)
         {
-            if (property is { Name: "createdOn", CanWrite: true })
+            if (property is { Name: "CreatedOn", CanWrite: true })
             {
                 property.SetValue(obj, DateTime.Now);
             }
 
-            if (property is { Name: "createdBy", CanWrite: true })
+            if (property is { Name: "CreatedBy", CanWrite: true })
             {
                 property.SetValue(obj, dataUser.UserId);
             }
 
-            if (property is { Name: "createdIn", CanWrite: true })
+            if (property is { Name: "CreatedIn", CanWrite: true })
             {
                 property.SetValue(obj, ipAddresses.ToString());
             }
 
-            if (property is { Name: "createdAt", CanWrite: true })
+            if (property is { Name: "CreatedAt", CanWrite: true })
             {
                 property.SetValue(obj, dataUser.BranchId);
             }

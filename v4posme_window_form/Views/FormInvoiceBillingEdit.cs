@@ -938,6 +938,7 @@ namespace v4posme_window.Views
         {
             try
             {
+                var coreWebAuditoria = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuditoria>();
                 var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
                 var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
                 var notAllInsert = VariablesGlobales.ConfigurationBuilder["NOT_ALL_INSERT"];
@@ -1043,11 +1044,11 @@ namespace v4posme_window.Views
                     Sign = (short?)objT!.SignInventory,
                     CurrencyId = currencyId, //validar este campo
                     CurrencyId2 = _objInterfazCoreWebCurrency.GetTarget(user.CompanyId, currencyId),
-                    Reference1 = txtReference1.Text,
+                    Reference1 = ((ComboBoxItem)txtReference1.EditValue).Key,
                     DescriptionReference = "reference1:entityID del proveedor de credito para las facturas al credito,reference4: customerCreditLineID linea de credito del cliente",
                     Reference2 = txtReference2.Text,
                     Reference3 = txtReference3.Text,
-                    Reference4 = txtCustomerCreditLineID.EditValue is null ? "" : ((ComboBoxItem)txtCustomerCreditLineID.EditValue).Key,
+                    Reference4 = txtCustomerCreditLineID.EditValue is null ? "0" : ((ComboBoxItem)txtCustomerCreditLineID.EditValue).Key,
                     StatusId = statusId,
                     Amount = decimal.Zero,
                     IsApplied = false,
@@ -1063,24 +1064,24 @@ namespace v4posme_window.Views
                     EntityIdsecondary = Convert.ToInt32(((ComboBoxItem)txtEmployeeID.EditValue).Key)
                 };
                 objTm.ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), decimal.One, objTm.CurrencyId2!.Value, objTm.CurrencyId!.Value);
-                VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuditoria>().SetAuditCreated(objTm, user, "");
+                coreWebAuditoria.SetAuditCreated(objTm, user, "");
                 //retorna 187 parametros
                 var objParameterAll = _objInterfazCoreWebParameter.GetParameterAll(user.CompanyId);
-                var transactionMasterId = _objInterfazTransactionMasterModel.InsertAppPosme(objTm);
+                TransactionMasterId = _objInterfazTransactionMasterModel.InsertAppPosme(objTm);
 
                 var assembly = Assembly.GetEntryAssembly();
                 var documentoPath = "";
                 if (assembly is not null)
                 {
                     //Crear la Carpeta para almacenar los Archivos del Documento
-                    documentoPath = $"{assembly.Location}/company_{user.CompanyId}/component_{objComponentBilling.ComponentId}/component_item_{transactionMasterId}";
+                    documentoPath = $"{assembly.Location}/company_{user.CompanyId}/component_{objComponentBilling.ComponentId}/component_item_{TransactionMasterId.Value}";
                 }
 
                 var objTmInfo = new TbTransactionMasterInfo
                 {
                     CompanyId = objTm.CompanyId,
                     TransactionId = objTm.TransactionId,
-                    TransactionMasterId = TransactionMasterId!.Value,
+                    TransactionMasterId = TransactionMasterId.Value,
                     ZoneId = Convert.ToInt32(((ComboBoxItem)txtZoneID.EditValue).Key), //Varificar valor
                     MesaId = Convert.ToInt32(((ComboBoxItem)txtMesaID.EditValue).Key),
                     RouteId = 0,
@@ -1180,7 +1181,7 @@ namespace v4posme_window.Views
                     {
                         CompanyId = objTm.CompanyId,
                         TransactionId = objTm.TransactionId,
-                        TransactionMasterId = transactionMasterId,
+                        TransactionMasterId = TransactionMasterId.Value,
                         ComponentId = objComponentItem.ComponentId,
                         ComponentItemId = itemId,
                         Quantity = quantity * objItemSku.Value,
@@ -1221,7 +1222,7 @@ namespace v4posme_window.Views
                     var transactionMasterDetailId = _objInterfazTransactionMasterDetailModel.InsertAppPosme(objTmd);
 
                     var objTmdc = new TbTransactionMasterDetailCredit();
-                    objTmdc.TransactionMasterId = transactionMasterId;
+                    objTmdc.TransactionMasterId = TransactionMasterId.Value;
                     objTmdc.TransactionMasterDetailId = transactionMasterDetailId;
                     objTmdc.Reference1 = txtFixedExpenses.Text;
                     objTmdc.Reference2 = txtReportSinRiesgo.IsOn.ToString();
@@ -1247,7 +1248,7 @@ namespace v4posme_window.Views
                 objTm.Amount = amountTotal;
                 objTm.Tax1 = tax1Total;
                 objTm.SubAmount = subAmountTotal;
-                _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyId, TransactionId!.Value, transactionMasterId, objTm);
+                _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyId, TransactionId!.Value, TransactionMasterId.Value, objTm);
 
                 //Aplicar el Documento?
                 //Las factuas de credito no se auto aplican auque este el parametro, por que hay que crer el documento
@@ -1257,10 +1258,10 @@ namespace v4posme_window.Views
                 if (validateWorkflowStage!.Value)
                 {
                     //Ingresar en Kardex.
-                    VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebInventory>().CalculateKardexNewOutput(user.CompanyId, TransactionId!.Value, transactionMasterId);
+                    VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebInventory>().CalculateKardexNewOutput(user.CompanyId, TransactionId!.Value, TransactionMasterId.Value);
 
                     //Crear Conceptos.
-                    VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebConcept>().Billing(user.CompanyId, TransactionId!.Value, transactionMasterId);
+                    VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebConcept>().Billing(user.CompanyId, TransactionId!.Value, TransactionMasterId.Value);
                 }
 
 
@@ -2097,7 +2098,7 @@ namespace v4posme_window.Views
                     txtDateFirst.DateTime = ObjTransactionMaster.TransactionOn2!.Value;
                     txtReference2.Text = ObjTransactionMaster.Reference2;
                     txtDesembolsoEfectivo.IsOn = true; //txtCheckDeEfectivo
-                    txtReportSinRiesgo.IsOn = Convert.ToInt32(ObjTransactionMasterDetailCredit.Reference2) == 1;
+                    txtReportSinRiesgo.IsOn = ObjTransactionMasterDetailCredit.Reference2 == "True";
                     TxtStatusOldId = ObjTransactionMaster.StatusId;
                     TxtStatusId = ObjTransactionMaster.StatusId;
                     txtChangeAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString("#0,000.00");
