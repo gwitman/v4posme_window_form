@@ -1099,10 +1099,10 @@ namespace v4posme_window.Views
                     ReceiptAmountBankDolReference = txtReceiptAmountBankDol_Reference.Text,
                     ReceiptAmountCardBankReference = txtReceiptAmountTarjeta_Reference.Text,
                     ReceiptAmountCardBankDolReference = txtReceiptAmountTarjetaDol_Reference.Text,
-                    ReceiptAmountBankId = WebToolsHelper.ConvertToNumber<int>(txtReceiptAmountBank_BankID.Text),
-                    ReceiptAmountBankDolId = WebToolsHelper.ConvertToNumber<int>(txtReceiptAmountBankDol_BankID.Text),
-                    ReceiptAmountCardBankId = WebToolsHelper.ConvertToNumber<int>(txtReceiptAmountTarjeta_BankID.Text),
-                    ReceiptAmountCardBankDolId = WebToolsHelper.ConvertToNumber<int>(txtReceiptAmountTarjetaDol_BankID.Text),
+                    ReceiptAmountBankId = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)txtReceiptAmountBank_BankID.EditValue).Key),
+                    ReceiptAmountBankDolId = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)txtReceiptAmountBankDol_BankID.EditValue).Key),
+                    ReceiptAmountCardBankId = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)txtReceiptAmountTarjeta_BankID.EditValue).Key),
+                    ReceiptAmountCardBankDolId = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)txtReceiptAmountTarjetaDol_BankID.EditValue).Key)
                 };
 
                 objTmInfo.TransactionMasterInfoId = _objInterfazTransactionMasterInfoModel.InsertAppPosme(objTmInfo);
@@ -2098,7 +2098,7 @@ namespace v4posme_window.Views
                     txtDateFirst.DateTime = ObjTransactionMaster.TransactionOn2!.Value;
                     txtReference2.Text = ObjTransactionMaster.Reference2;
                     txtDesembolsoEfectivo.IsOn = true; //txtCheckDeEfectivo
-                    txtReportSinRiesgo.IsOn = ObjTransactionMasterDetailCredit.Reference2 == "True";
+                    txtReportSinRiesgo.IsOn = ObjTransactionMasterDetailCredit.Reference2!.ToLowerInvariant() == "true";
                     TxtStatusOldId = ObjTransactionMaster.StatusId;
                     TxtStatusId = ObjTransactionMaster.StatusId;
                     txtChangeAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString("#0,000.00");
