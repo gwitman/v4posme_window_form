@@ -10,10 +10,10 @@ namespace v4posme_window.Dto
 {
     public  class FormInvoiceBillingEditDetailDTO
     {
-        public int TransactionMasterDetailId { get; set; }
-        public int ItemId { get; set; }
-        public string ItemNumber { get; set; }
-        public string TransactionDetailName { get; set; }
+        public int? TransactionMasterDetailId { get; set; }
+        public int? ItemId { get; set; }
+        public string? ItemNumber { get; set; }
+        public string? TransactionDetailName { get; set; }
         public int Sku { get; set; }
         public decimal Quantity { get; set; }
         public decimal Price { get; set; }

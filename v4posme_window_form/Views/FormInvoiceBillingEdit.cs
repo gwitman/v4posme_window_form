@@ -124,9 +124,9 @@ namespace v4posme_window.Views
 
         #region Properties
 
-        public IBindingList _bindingListTransactionMasterDetail = new BindingList<FormInvoiceBillingEditDetailDTO>();
-        public string? ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE { get; set; }
-        public string? objCompanyParameter_Key_INVOICE_BILLING_CREDIT { get; set; }
+        private IBindingList _bindingListTransactionMasterDetail = new BindingList<FormInvoiceBillingEditDetailDTO>();
+        private string? ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE { get; set; }
+        private string? objCompanyParameter_Key_INVOICE_BILLING_CREDIT { get; set; }
 
         private bool varPermisosEsPermitidoModificarPrecio;
         private bool varPermisosEsPermitidoModificarNombre;
@@ -755,7 +755,7 @@ namespace v4posme_window.Views
                 ObjLegalDefault = _objInterfazLegalModel.GetRowByPk(user.CompanyId, ObjCustomerDefault.BranchId, ObjCustomerDefault.EntityId);
 
                 //Procesar Datos
-                if (ObjTransactionMasterDetail.Count > 0)
+                if (ObjTransactionMasterDetail is not null && ObjTransactionMasterDetail.Count > 0)
                 {
                     foreach (var masterDetailDto in ObjTransactionMasterDetail)
                     {
@@ -2098,7 +2098,7 @@ namespace v4posme_window.Views
                     txtDateFirst.DateTime = ObjTransactionMaster.TransactionOn2!.Value;
                     txtReference2.Text = ObjTransactionMaster.Reference2;
                     txtDesembolsoEfectivo.IsOn = true; //txtCheckDeEfectivo
-                    txtReportSinRiesgo.IsOn = ObjTransactionMasterDetailCredit.Reference2!.ToLowerInvariant() == "true";
+                    txtReportSinRiesgo.IsOn = ObjTransactionMasterDetailCredit.Reference2!.Equals("true", StringComparison.InvariantCultureIgnoreCase);
                     TxtStatusOldId = ObjTransactionMaster.StatusId;
                     TxtStatusId = ObjTransactionMaster.StatusId;
                     txtChangeAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString("#0,000.00");
@@ -2117,37 +2117,56 @@ namespace v4posme_window.Views
                     txtIva.Text = @"0.0";
                     txtTotal.Text = @"0.0";
 
-
                     if (ObjTransactionMasterDetail is not null)
                     {
+                        _bindingListTransactionMasterDetail.Clear();
+                        var aux = 0;
                         foreach (var itemDto in ObjTransactionMasterDetail)
                         {
-                            var Precio2 = ObjTransactionMasterItemPrice.First(c => c.ItemId == itemDto.ComponentItemId && c.TypePriceId == (int)TypePrice.PorMayor).Price;
-                            var Precio3 = ObjTransactionMasterItemPrice.First(c => c.ItemId == itemDto.ComponentItemId && c.TypePriceId == (int)TypePrice.Credito).Price;
-                            var ObjConcept = ObjTransactionMasterDetailConcept.Where(c => c.ComponentItemId == itemDto.ComponentItemId && c.Name == "IVA").ToList();
-                            var Iva = ObjConcept.Count == 0 ? 0 : ObjConcept.ElementAt(0).ValueOut;
+                            var precio2 = ObjTransactionMasterItemPrice.First(c => c.ItemId == itemDto.ComponentItemId && c.TypePriceId == (int)TypePrice.PorMayor).Price;
+                            var precio3 = ObjTransactionMasterItemPrice.First(c => c.ItemId == itemDto.ComponentItemId && c.TypePriceId == (int)TypePrice.Credito).Price;
+                            var objConcept = ObjTransactionMasterDetailConcept.Where(c => c.ComponentItemId == itemDto.ComponentItemId && c.Name == "IVA").ToList();
+                            var Iva = objConcept.Count == 0 ? decimal.Zero : objConcept.ElementAt(0).ValueOut;
+                            var billingEdit = new FormInvoiceBillingEditDetailDTO
+                            {
+                                TransactionMasterDetailId = itemDto.TransactionMasterDetailId,
+                                ItemId =  itemDto.ComponentItemId,
+                                ItemNumber = itemDto.ItemNumber,
+                                TransactionDetailName = itemDto.ItemNameLog,
+                                Sku = itemDto.SkuCatalogItemId,
+                                Quantity = itemDto.SkuCatalogItemId,
+                                Price = itemDto.UnitaryPrice!.Value * itemDto.SkuQuantityBySku,
+                                SubTotal = itemDto.UnitaryPrice.Value * itemDto.SkuQuantityBySku * itemDto.SkuQuantity,
+                                Iva = Iva!.Value,
+                                SkuQuantityBySku = itemDto.SkuQuantityBySku,
+                                UnitaryPriceIndividual = itemDto.UnitaryPrice!.Value,
+                                SkuFormatoDescription = itemDto.SkuFormatoDescription,
+                                ItemPrecio2 =precio2,
+                                ItemPrecio3 = precio3,
+                                AccionMas = "",
+                                AccionMenos = "",
+                                AccionPrecios = ""
+                            };
 
+                            _bindingListTransactionMasterDetail.Add(billingEdit);
                             gridViewValues.AddNewRow();
-                            var handle = gridViewValues.FocusedRowHandle;
-                            gridViewValues.SetRowCellValue(handle, colTransactionMasterDetailId, itemDto.TransactionMasterDetailId);
-                            gridViewValues.SetRowCellValue(handle, colItemId, itemDto.ComponentItemId);
-                            gridViewValues.SetRowCellValue(handle, colItemNumber, itemDto.ItemNumber);
-                            gridViewValues.SetRowCellValue(handle, colTransactionDetailName, itemDto.ItemNameLog);
-                            gridViewValues.SetRowCellValue(handle, colSku, itemDto.SkuCatalogItemId);
-                            gridViewValues.SetRowCellValue(handle, colQuantity, itemDto.SkuQuantity);
-                            gridViewValues.SetRowCellValue(handle, colPrice, itemDto.UnitaryPrice * itemDto.SkuQuantityBySku);
-                            gridViewValues.SetRowCellValue(handle, colSubTotal, itemDto.UnitaryPrice * itemDto.SkuQuantityBySku * itemDto.SkuQuantity);
-                            gridViewValues.SetRowCellValue(handle, colIva, Iva);
-                            gridViewValues.SetRowCellValue(handle, colSkuQuantityBySku, itemDto.SkuQuantityBySku);
-                            gridViewValues.SetRowCellValue(handle, colUnitaryPriceIndividual, itemDto.UnitaryPrice);
-                            gridViewValues.SetRowCellValue(handle, colAccionMas, "");
-                            gridViewValues.SetRowCellValue(handle, colSkuFormatoDescripton, itemDto.SkuFormatoDescription);
-                            gridViewValues.SetRowCellValue(handle, colItemPrecio2, Precio2);
-                            gridViewValues.SetRowCellValue(handle, colItemPrecio3, Precio3);
+                            gridViewValues.SetRowCellValue(aux, colItemNumber, itemDto.ItemNumber);
+                            gridViewValues.SetRowCellValue(aux, colTransactionDetailName, itemDto.ItemNameLog);
+                            gridViewValues.SetRowCellValue(aux, colSku, itemDto.SkuCatalogItemId);
+                            gridViewValues.SetRowCellValue(aux, colQuantity, itemDto.SkuQuantity);
+                            gridViewValues.SetRowCellValue(aux, colPrice, itemDto.UnitaryPrice * itemDto.SkuQuantityBySku);
+                            gridViewValues.SetRowCellValue(aux, colSubTotal, itemDto.UnitaryPrice * itemDto.SkuQuantityBySku * itemDto.SkuQuantity);
+                            gridViewValues.SetRowCellValue(aux, colIva, Iva);
+                            gridViewValues.SetRowCellValue(aux, colSkuQuantityBySku, itemDto.SkuQuantityBySku);
+                            gridViewValues.SetRowCellValue(aux, colUnitaryPriceIndividual, itemDto.UnitaryPrice);
+                            gridViewValues.SetRowCellValue(aux, colSkuFormatoDescripton, itemDto.SkuFormatoDescription);
+                            gridViewValues.SetRowCellValue(aux, colItemPrecio2, precio2);
+                            gridViewValues.SetRowCellValue(aux, colItemPrecio3, precio3);
                             gridViewValues.UpdateCurrentRow();
+                            aux++;
                         }
                     }
-
+                    FnRefrechDetail();
                     FnRecalculateDetail(false, "");
                     break;
             }
