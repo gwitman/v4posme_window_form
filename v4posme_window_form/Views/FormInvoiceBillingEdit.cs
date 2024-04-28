@@ -612,9 +612,9 @@ namespace v4posme_window.Views
                 };
                 confiDetalleHeader.Add(row3);
 
-                var detalle = new List<string[]> { ( ["PRODUCTO", "CANT", "TOTAL"]) };
+                var detalle = new List<string[]> { (["PRODUCTO", "CANT", "TOTAL"]) };
 
-                detalle.AddRange(objTmd.Select(detail => (string[]) [detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
+                detalle.AddRange(objTmd.Select(detail => (string[])[detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
             }
             catch (Exception e)
             {
@@ -1272,16 +1272,16 @@ namespace v4posme_window.Views
                     case "false":
                         return;
                     case "true":
-                    {
-                        //si es auto aplicadao mandar a imprimir
-                        if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
                         {
-                            ComandPrinter();
-                        }
+                            //si es auto aplicadao mandar a imprimir
+                            if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
+                            {
+                                ComandPrinter();
+                            }
 
-                        break;
-                    }
-                    //Error 
+                            break;
+                        }
+                        //Error 
                 }
             }
             catch (Exception e)
@@ -2064,6 +2064,10 @@ namespace v4posme_window.Views
                     txtReceiptAmountBankDol.Text = @"0.0";
                     txtReceiptAmountBankDol_Reference.Text = string.Empty;
                     txtReceiptAmountPoint.Text = @"0.0";
+
+                    //Llenar Linea de Credito
+                    FnRenderLineaCredit(ObjListCustomerCreditLine, ParameterCausalTypeCredit!);
+
                     break;
                 case TypeRender.Edit:
                     CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjTransactionMaster!.CurrencyId);
@@ -2101,18 +2105,6 @@ namespace v4posme_window.Views
                     txtReportSinRiesgo.IsOn = ObjTransactionMasterDetailCredit.Reference2!.Equals("true", StringComparison.InvariantCultureIgnoreCase);
                     TxtStatusOldId = ObjTransactionMaster.StatusId;
                     TxtStatusId = ObjTransactionMaster.StatusId;
-                    txtChangeAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString("#0,000.00");
-                    txtReceiptAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString("#0,000.00");
-                    txtReceiptAmountDol.Text = ObjTransactionMasterInfo.ReceiptAmountDol.ToString("#0,000.00");
-                    txtReceiptAmountTarjeta.Text = ObjTransactionMasterInfo.ReceiptAmountCard.ToString("#0,000.00");
-                    txtReceiptAmountTarjeta_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountCardBankReference;
-                    txtReceiptAmountTarjetaDol.Text = ObjTransactionMasterInfo.ReceiptAmountCardDol.ToString("#0,000.00");
-                    txtReceiptAmountTarjetaDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
-                    txtReceiptAmountBank.Text = ObjTransactionMasterInfo.ReceiptAmountBank.ToString("#0,000.00");
-                    txtReceiptAmountBank_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankReference;
-                    txtReceiptAmountBankDol.Text = ObjTransactionMasterInfo.ReceiptAmountBankDol.ToString("#0,000.00");
-                    txtReceiptAmountBankDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
-                    txtReceiptAmountPoint.Text = ObjTransactionMasterInfo.ReceiptAmountPoint!.Value.ToString("#0,000.00");
                     txtSubTotal.Text = @"0.0";
                     txtIva.Text = @"0.0";
                     txtTotal.Text = @"0.0";
@@ -2130,18 +2122,18 @@ namespace v4posme_window.Views
                             var billingEdit = new FormInvoiceBillingEditDetailDTO
                             {
                                 TransactionMasterDetailId = itemDto.TransactionMasterDetailId,
-                                ItemId =  itemDto.ComponentItemId,
-                                ItemNumber = itemDto.ItemNumber,
-                                TransactionDetailName = itemDto.ItemNameLog,
+                                ItemId = itemDto.ComponentItemId!.Value,
+                                ItemNumber = itemDto.ItemNumber!,
+                                TransactionDetailName = itemDto.ItemNameLog!,
                                 Sku = itemDto.SkuCatalogItemId,
-                                Quantity = itemDto.SkuCatalogItemId,
+                                Quantity = itemDto.SkuQuantity,
                                 Price = itemDto.UnitaryPrice!.Value * itemDto.SkuQuantityBySku,
                                 SubTotal = itemDto.UnitaryPrice.Value * itemDto.SkuQuantityBySku * itemDto.SkuQuantity,
                                 Iva = Iva!.Value,
                                 SkuQuantityBySku = itemDto.SkuQuantityBySku,
                                 UnitaryPriceIndividual = itemDto.UnitaryPrice!.Value,
                                 SkuFormatoDescription = itemDto.SkuFormatoDescription,
-                                ItemPrecio2 =precio2,
+                                ItemPrecio2 = precio2,
                                 ItemPrecio3 = precio3,
                                 AccionMas = "",
                                 AccionMenos = "",
@@ -2149,36 +2141,42 @@ namespace v4posme_window.Views
                             };
 
                             _bindingListTransactionMasterDetail.Add(billingEdit);
-                            gridViewValues.AddNewRow();
-                            gridViewValues.SetRowCellValue(aux, colItemNumber, itemDto.ItemNumber);
-                            gridViewValues.SetRowCellValue(aux, colTransactionDetailName, itemDto.ItemNameLog);
-                            gridViewValues.SetRowCellValue(aux, colSku, itemDto.SkuCatalogItemId);
-                            gridViewValues.SetRowCellValue(aux, colQuantity, itemDto.SkuQuantity);
-                            gridViewValues.SetRowCellValue(aux, colPrice, itemDto.UnitaryPrice * itemDto.SkuQuantityBySku);
-                            gridViewValues.SetRowCellValue(aux, colSubTotal, itemDto.UnitaryPrice * itemDto.SkuQuantityBySku * itemDto.SkuQuantity);
-                            gridViewValues.SetRowCellValue(aux, colIva, Iva);
-                            gridViewValues.SetRowCellValue(aux, colSkuQuantityBySku, itemDto.SkuQuantityBySku);
-                            gridViewValues.SetRowCellValue(aux, colUnitaryPriceIndividual, itemDto.UnitaryPrice);
-                            gridViewValues.SetRowCellValue(aux, colSkuFormatoDescripton, itemDto.SkuFormatoDescription);
-                            gridViewValues.SetRowCellValue(aux, colItemPrecio2, precio2);
-                            gridViewValues.SetRowCellValue(aux, colItemPrecio3, precio3);
-                            gridViewValues.UpdateCurrentRow();
-                            aux++;
                         }
                     }
+
+                    //Llenar Linea de Credito
+                    FnRenderLineaCredit(ObjListCustomerCreditLine, ParameterCausalTypeCredit!);
+
+                    //Refrescar
                     FnRefrechDetail();
                     FnRecalculateDetail(false, "");
+
+                    //Renderizar Pagos
+                    txtChangeAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString("#0,000.00");
+                    txtReceiptAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString("#0,000.00");
+                    txtReceiptAmountDol.Text = ObjTransactionMasterInfo.ReceiptAmountDol.ToString("#0,000.00");
+                    txtReceiptAmountTarjeta.Text = ObjTransactionMasterInfo.ReceiptAmountCard.ToString("#0,000.00");
+                    txtReceiptAmountTarjeta_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountCardBankReference;
+                    txtReceiptAmountTarjetaDol.Text = ObjTransactionMasterInfo.ReceiptAmountCardDol.ToString("#0,000.00");
+                    txtReceiptAmountTarjetaDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
+                    txtReceiptAmountBank.Text = ObjTransactionMasterInfo.ReceiptAmountBank.ToString("#0,000.00");
+                    txtReceiptAmountBank_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankReference;
+                    txtReceiptAmountBankDol.Text = ObjTransactionMasterInfo.ReceiptAmountBankDol.ToString("#0,000.00");
+                    txtReceiptAmountBankDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
+                    txtReceiptAmountPoint.Text = ObjTransactionMasterInfo.ReceiptAmountPoint!.Value.ToString("#0,000.00");
+
                     break;
             }
 
-            //Llenar Linea de Credito
-            FnRenderLineaCredit(ObjListCustomerCreditLine, ParameterCausalTypeCredit!);
+
 
             //Incializar Focos
             if (ObjParameterScanerProducto == "true")
             {
                 txtScanerCodigo.Focus();
             }
+
+
         }
 
         public void FnEnviarFactura()
@@ -2498,29 +2496,16 @@ namespace v4posme_window.Views
             FnRenderLineaCreditoDiv();
         }
 
-        public string FnDeleteCerosIzquierdos(string texto)
+        public string FnDeleteCerosIzquierdos(string input)
         {
-            var array = texto.Split("");
-            var newTexto = "";
-            var encontradoPrimerElemento = false;
-
-            for (var i = 0; i < array.Length; i++)
+            int indice = 0;
+            // Buscar el índice del primer carácter que no sea '0'
+            while (indice < input.Length && input[indice] == '0')
             {
-                if (array[i] != "0" && encontradoPrimerElemento == false)
-                {
-                    newTexto = newTexto + array[i];
-                    encontradoPrimerElemento = true;
-                }
-                else
-                {
-                    if (encontradoPrimerElemento == true)
-                    {
-                        newTexto = newTexto + array[i];
-                    }
-                }
+                indice++;
             }
-
-            return newTexto;
+            // Retornar la cadena a partir de ese índice
+            return input.Substring(indice);
         }
 
         private void FnActualizarPrecio()
@@ -2667,6 +2652,7 @@ namespace v4posme_window.Views
             diccionario.Add("BCantiad", objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Cantidad", "0")); //Cantidad en bodega
             diccionario.Add("Precio", objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Precio", "0"));
             diccionario.Add("Total", Convert.ToString(1 * Convert.ToDecimal(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Precio", "0"))));
+
             diccionario.Add("Iva", "0");
             diccionario.Add("Lote", "");
             diccionario.Add("Vencimiento", "");
@@ -2983,17 +2969,16 @@ namespace v4posme_window.Views
 
 
                 //buscar por codigo de barra
-                var listCodigTmp = ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows[i]["Barra"].ToString();
-                currencyTemp = Convert.ToInt32(ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows[i]["currencyID"]);
-                currencyID = Convert.ToInt32(((ComboBoxItem)txtCurrencyID.EditValue).Key);
+                var listCodigTmp        = ObjSELECCIONAR_ITEM_BILLING_BACKGROUND.Rows[i]["Barra"].ToString();
+                var listCodigoTmpArray  = listCodigTmp!.Split(",");
                 encontrado = false;
 
                 if (!encontrado)
                 {
-                    for (var ii = 0; ii < listCodigTmp!.Length; ii++)
+                    for (var ii = 0; ii < listCodigoTmpArray.Length; ii++)
                     {
                         if (
-                            FnDeleteCerosIzquierdos(listCodigTmp[ii].ToString().ToUpper()) == FnDeleteCerosIzquierdos(codigoABuscar) &&
+                            FnDeleteCerosIzquierdos(listCodigoTmpArray[ii].ToString().ToUpper()) == FnDeleteCerosIzquierdos(codigoABuscar) &&
                             currencyID == currencyTemp &&
                             warehouseID == warehouseIDTemp
                         )
@@ -3014,11 +2999,15 @@ namespace v4posme_window.Views
                 diccionario.Add("itemID", filterResult["itemID"].ToString()!);
                 diccionario.Add("Codigo", filterResult["Codigo"].ToString()!);
                 diccionario.Add("Nombre", filterResult["Nombre"].ToString()!);
+                diccionario.Add("MedidaID", filterResult["unitMeasureID"].ToString()!);
                 diccionario.Add("Medida", filterResult["Medida"].ToString()!);
-                diccionario.Add("Cantidad", filterResult["Cantidad"].ToString()!);
-                diccionario.Add("unitMeasureID", filterResult["unitMeasureID"].ToString()!);
-                diccionario.Add("Nombre", filterResult["Nombre"].ToString()!);
+                diccionario.Add("Cantidad", "1");                
+                diccionario.Add("BMedida", filterResult["Cantidad"].ToString()!);
                 diccionario.Add("Precio", filterResult["Precio"].ToString()!);
+                diccionario.Add("Total", filterResult["Precio"].ToString()!);
+                diccionario.Add("Iva", "0");
+                diccionario.Add("Lote", "");
+                diccionario.Add("Vencimiento", "");                
                 diccionario.Add("Precio2", filterResult["Precio2"].ToString()!);
                 diccionario.Add("Precio3", filterResult["Precio3"].ToString()!);
 
@@ -3269,7 +3258,21 @@ namespace v4posme_window.Views
         {
             if (FnValidateFormAndSubmit())
             {
-                SaveInsert();
+                if (TransactionMasterId == 0)
+                    SaveInsert();
+                else
+                    SaveUpdate();
+            }
+        }
+
+        private void btnAplicar_Click(object sender, EventArgs e)
+        {
+            if (FnValidateFormAndSubmit())
+            {
+                if (TransactionMasterId == 0)
+                    SaveInsert();
+                else
+                    SaveUpdate();
             }
         }
     }
