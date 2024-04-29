@@ -1,7 +1,19 @@
-﻿namespace v4posme_library.ModelsDto;
+﻿using AutoMapper;
+using v4posme_library.Models;
 
-public record TbTransactionMasterDetailDto()
+namespace v4posme_library.ModelsDto;
+
+public class TbTransactionMasterDetailDto
 {
+    public TbTransactionMasterDetail TransactionMasterDetail()
+    {
+        var config = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<TbTransactionMasterDetailDto, TbTransactionMasterDetail>();
+        });
+        var mapper = config.CreateMapper();
+        return mapper.Map<TbTransactionMasterDetail>(this);
+    }
     public int CompanyId { get; set; }
     public int TransactionId { get; set; }
     public int TransactionMasterId { get; set; }
