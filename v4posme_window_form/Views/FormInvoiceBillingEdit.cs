@@ -2080,7 +2080,7 @@ namespace v4posme_window.Views
 
                     //Llenar Linea de Credito
                     FnRenderLineaCredit(ObjListCustomerCreditLine, ParameterCausalTypeCredit!);
-
+                    btnAplicar.Visible = false;
                     break;
                 case TypeRender.Edit:
                     CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjTransactionMaster!.CurrencyId);
