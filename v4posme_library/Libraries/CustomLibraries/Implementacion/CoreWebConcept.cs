@@ -24,9 +24,9 @@ class CoreWebConcept(IBdModel bdModel) : ICoreWebConcept
             $"CALL pr_concept_helper_other_output({companyId},{transactionId},{transactionMasterId}); ");
     }
 
-    public int ReturnsProvider(int companyId, int transactionId, int transactionMasterId)
+    public void ReturnsProvider(int companyId, int transactionId, int transactionMasterId)
     {
-        return bdModel.ExecuteRender<int>(
+        bdModel.ExecuteProcedure(
             $"CALL pr_concept_helper_returns_provider({companyId},{transactionId},{transactionMasterId}); ");
     }
 

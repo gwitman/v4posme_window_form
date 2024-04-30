@@ -5,7 +5,7 @@ public interface ICoreWebConcept
     int OtherInput(int companyId,int transactionId,int transactionMasterId);
     int InputUnPost(int companyId,int transactionId,int transactionMasterId);
     int OtherOutPut(int companyId,int transactionId,int transactionMasterId);
-    int ReturnsProvider(int companyId,int transactionId,int transactionMasterId);
+    void ReturnsProvider(int companyId, int transactionId, int transactionMasterId);
     int Billing(int companyId,int transactionId,int transactionMasterId);
     int Share(int companyId,int transactionId,int transactionMasterId);
     int Provider(int companyId,int transactionId,int transactionMasterId);
