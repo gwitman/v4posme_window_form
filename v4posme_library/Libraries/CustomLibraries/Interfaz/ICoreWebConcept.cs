@@ -2,15 +2,15 @@
 
 public interface ICoreWebConcept
 {
-    int OtherInput(int companyId,int transactionId,int transactionMasterId);
-    int InputUnPost(int companyId,int transactionId,int transactionMasterId);
-    int OtherOutPut(int companyId,int transactionId,int transactionMasterId);
-    void ReturnsProvider(int companyId, int transactionId, int transactionMasterId);
-    int Billing(int companyId,int transactionId,int transactionMasterId);
-    int Share(int companyId,int transactionId,int transactionMasterId);
-    int Provider(int companyId,int transactionId,int transactionMasterId);
-    int CancelInvoice(int companyId,int transactionId,int transactionMasterId);
-    int ShareCapital(int companyId,int transactionId,int transactionMasterId);
-    int CalendarPay(int companyId,int transactionId,int transactionMasterId);
-    int SalaryAdvance(int companyId,int transactionId,int transactionMasterId);
+    void OtherInput(int companyId,int transactionId,int transactionMasterId);
+    void InputUnPost(int companyId,int transactionId,int transactionMasterId);
+    void OtherOutPut(int companyId,int transactionId,int transactionMasterId);
+    
+    void Billing(int companyId,int transactionId,int transactionMasterId);
+    void Share(int companyId,int transactionId,int transactionMasterId);
+    void Provider(int companyId,int transactionId,int transactionMasterId);
+    void CancelInvoice(int companyId,int transactionId,int transactionMasterId);
+    void ShareCapital(int companyId,int transactionId,int transactionMasterId);
+    void CalendarPay(int companyId,int transactionId,int transactionMasterId);
+    void SalaryAdvance(int companyId,int transactionId,int transactionMasterId);
 }
