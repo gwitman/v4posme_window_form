@@ -572,50 +572,10 @@ namespace v4posme_window.Views
                 // Obtener información del usuario que creó la transacción
                 var objUserCreated = VariablesGlobales.Instance.UnityContainer.Resolve<IUserModel>().GetRowByPk(companyID, objTm.CreatedAt!.Value, objTm.CreatedBy!.Value);
 
-                // Prefijo de la moneda
-                var prefixCurrency = objCurrency.Simbol + " ";
+                // Imprimir el documento
+                
 
-                var confiDetalleHeader = new List<Dictionary<string, string>>();
-
-                var row1 = new Dictionary<string, string>
-                {
-                    { "style", "text-align:left;width:auto" },
-                    { "colspan", "1" },
-                    { "prefix", "" },
-                    { "style_row_data", "text-align:left;width:auto" },
-                    { "colspan_row_data", "3" },
-                    { "prefix_row_data", "" },
-                    { "nueva_fila_row_data", "1" }
-                };
-                confiDetalleHeader.Add(row1);
-
-                var row2 = new Dictionary<string, string>
-                {
-                    { "style", "text-align:left;width:50px" },
-                    { "colspan", "1" },
-                    { "prefix", "" },
-                    { "style_row_data", "text-align:right;width:auto" },
-                    { "colspan_row_data", "2" },
-                    { "prefix_row_data", "" },
-                    { "nueva_fila_row_data", "0" }
-                };
-                confiDetalleHeader.Add(row2);
-
-                var row3 = new Dictionary<string, string>
-                {
-                    { "style", "text-align:right;width:90px" },
-                    { "colspan", "1" },
-                    { "prefix", "datView[\"objCurrency\"]->simbol" },
-                    { "style_row_data", "text-align:right;width:90px" },
-                    { "colspan_row_data", "1" },
-                    { "prefix_row_data", "datView[\"objCurrency\"]->simbol" },
-                    { "nueva_fila_row_data", "0" }
-                };
-                confiDetalleHeader.Add(row3);
-
-                var detalle = new List<string[]> { ( ["PRODUCTO", "CANT", "TOTAL"]) };
-
-                detalle.AddRange(objTmd.Select(detail => (string[]) [detail.ItemName + " " + detail.SkuFormatoDescription, $"{Math.Round(detail.Quantity!.Value, 2):0.00}", $"{Math.Round(detail.Amount!.Value, 2):0.00}"]));
+                
             }
             catch (Exception e)
             {
