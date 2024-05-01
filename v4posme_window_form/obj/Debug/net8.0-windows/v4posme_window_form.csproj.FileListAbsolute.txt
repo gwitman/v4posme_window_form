@@ -190,9 +190,6 @@ C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\v4posme_window_form.pdb
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\AutoMapper.dll
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
-C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Devart.Data.dll
-C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Devart.Data.MySql.dll
-C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Devart.Data.MySql.Entity.EFCore.dll
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\DevExpress.XtraCharts.v23.2.dll
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\DevExpress.Charts.v23.2.Core.dll
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\DevExpress.CodeParser.v23.2.dll
@@ -521,3 +518,6 @@ E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\refint
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.pdb
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\v4posme_window_form.genruntimeconfig.cache
 E:\Repos\v4posme_window_form\v4posme_window_form\obj\Debug\net8.0-windows\ref\v4posme_window_form.dll
+C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\MySql.Data.EntityFrameworkCore.dll
+C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\MySql.EntityFrameworkCore.dll
+C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\System.Drawing.Common.dll

@@ -616,8 +616,8 @@ namespace v4posme_window.Views
                 printer.CondensedMode(PrinterModeState.Off);
                 printer.Separator();
                 printer.Append($"TOTAL: {objTm.Amount}");
-                printer.Append($"RECIBIDO: {objTm.Amount}");
-                printer.Append($"CAMBIO: {objTm.Amount}");
+                printer.Append($"RECIBIDO: {objTmi.ReceiptAmount}");
+                printer.Append($"CAMBIO: {objTmi.ChangeAmount}");
                 printer.Separator();
                 printer.AlignCenter();
                 printer.Append(objCompany.Address);
@@ -1982,10 +1982,12 @@ namespace v4posme_window.Views
                 var coreWebPrinter = new CoreWebPrinterDirect();
                 var pd = coreWebPrinter.ConfigurationPrinter(objParameterPrinterName!);
                 //PrintDocument maneja el evento para imprimir
-                //pd.PrintPage + = new PrintPageEventHandler (pd_PrintPage);  
+                var printer = new Printer("Adobe PDF");
+                printer.OpenDrawer();
+                printer.PrintDocument();
+                //https://github.com/mtmsuhail/ESC-POS-USB-NET
 
-                //Print the document  
-                //pd.Print();  
+
             }
             catch (Exception ex)
             {
