@@ -13,16 +13,16 @@ namespace v4posme_library.Models;
 public partial class TbElement
 {
     [Key]
-    [Column("elementID", TypeName = "int(11)")]
+    [Column("elementID")]
     public int ElementId { get; set; }
 
-    [Column("elementTypeID", TypeName = "int(11)")]
+    [Column("elementTypeID")]
     public int ElementTypeId { get; set; }
 
     [Column("name")]
     [StringLength(250)]
     public string? Name { get; set; }
 
-    [Column("columnAutoIncrement", TypeName = "int(11)")]
+    [Column("columnAutoIncrement")]
     public int? ColumnAutoIncrement { get; set; }
 }

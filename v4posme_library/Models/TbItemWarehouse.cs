@@ -16,19 +16,19 @@ namespace v4posme_library.Models;
 public partial class TbItemWarehouse
 {
     [Key]
-    [Column("itemWarehouseId", TypeName = "int(11)")]
+    [Column("itemWarehouseId")]
     public int ItemWarehouseId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("warehouseID", TypeName = "int(11)")]
+    [Column("warehouseID")]
     public int WarehouseId { get; set; }
 
-    [Column("itemID", TypeName = "int(11)")]
+    [Column("itemID")]
     public int ItemId { get; set; }
 
     [Column("quantity")]

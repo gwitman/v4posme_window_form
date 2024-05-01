@@ -5,7 +5,7 @@ public record TbCustomerDto()
     public string? CustomerNumber { get; set; }
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
-    public DateTime? BirthDate { get; set; }
+    public DateOnly? BirthDate { get; set; }
     public decimal? BalancePoint { get; set; }
     public DateOnly? DateContract { get; set; }
     public int? EntityContactId { get; set; }

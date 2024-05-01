@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
@@ -14,15 +13,15 @@ namespace v4posme_library.Models;
 [Index("ParentCatalogItemId", Name = "IDX_CATALOG_ITEM_004")]
 [Index("CatalogItemId", Name = "IDX_CATALOG_ITEM_005")]
 [Index("CatalogId", "CatalogItemId", Name = "IDX_CATALOG_ITEM_006")]
-[MySQLCharset("latin1")]
+[MySqlCharSet("latin1")]
 [MySqlCollation("latin1_general_ci")]
 public partial class TbCatalogItem
 {
-    [Column("catalogID", TypeName = "int(11)")]
+    [Column("catalogID")]
     public int CatalogId { get; set; }
 
     [Key]
-    [Column("catalogItemID", TypeName = "int(11)")]
+    [Column("catalogItemID")]
     public int CatalogItemId { get; set; }
 
     [Column("name")]
@@ -33,20 +32,20 @@ public partial class TbCatalogItem
     [StringLength(250)]
     public string? Display { get; set; }
 
-    [Column("flavorID", TypeName = "int(11)")]
+    [Column("flavorID")]
     public int? FlavorId { get; set; }
 
     [Column("description")]
     [StringLength(250)]
     public string? Description { get; set; }
 
-    [Column("sequence", TypeName = "int(11)")]
+    [Column("sequence")]
     public int? Sequence { get; set; }
 
-    [Column("parentCatalogID", TypeName = "int(11)")]
+    [Column("parentCatalogID")]
     public int? ParentCatalogId { get; set; }
 
-    [Column("parentCatalogItemID", TypeName = "int(11)")]
+    [Column("parentCatalogItemID")]
     public int? ParentCatalogItemId { get; set; }
 
     [Column("ratio")]

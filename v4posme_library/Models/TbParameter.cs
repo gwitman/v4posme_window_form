@@ -13,7 +13,7 @@ namespace v4posme_library.Models;
 public partial class TbParameter
 {
     [Key]
-    [Column("parameterID", TypeName = "int(11)")]
+    [Column("parameterID")]
     public int ParameterId { get; set; }
 
     [Column("name")]

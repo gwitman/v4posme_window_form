@@ -14,23 +14,23 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_general_ci")]
 public partial class TbEntity
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
     [Key]
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int EntityId { get; set; }
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int? CreatedAt { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
     public DateTime? CreatedOn { get; set; }
 
-    [Column("createdBy", TypeName = "bigint(20)")]
+    [Column("createdBy")]
     public long? CreatedBy { get; set; }
 
     [Column("createdIn")]

@@ -15,13 +15,13 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_general_ci")]
 public partial class TbCompanyComponentFlavor
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
-    [Column("componentItemID", TypeName = "int(11)")]
+    [Column("componentItemID")]
     public int ComponentItemId { get; set; }
 
     [Column("flavorID")]
@@ -29,6 +29,6 @@ public partial class TbCompanyComponentFlavor
     public string FlavorId { get; set; } = null!;
 
     [Key]
-    [Column("companyComponentFlavorID", TypeName = "int(11)")]
+    [Column("companyComponentFlavorID")]
     public int CompanyComponentFlavorId { get; set; }
 }

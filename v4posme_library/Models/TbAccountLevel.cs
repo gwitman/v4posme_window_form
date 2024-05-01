@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.EntityFrameworkCore.DataAnnotations;
-using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
 [Table("tb_account_level")]
 [Index("CompanyId", Name = "IDX_ACCOUNT_LEVEL_001")]
-[MySQLCharset("latin1")]
-[Microsoft.EntityFrameworkCore.MySqlCollation("latin1_swedish_ci")]
+[MySqlCharSet("latin1")]
+[MySqlCollation("latin1_swedish_ci")]
 public partial class TbAccountLevel
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Key]
-    [Column("accountLevelID", TypeName = "int(11)")]
+    [Column("accountLevelID")]
     public int AccountLevelId { get; set; }
 
     [Column("name")]
@@ -29,20 +27,20 @@ public partial class TbAccountLevel
     [StringLength(250)]
     public string? Description { get; set; }
 
-    [Column("lengthTotal", TypeName = "int(11)")]
+    [Column("lengthTotal")]
     public int LengthTotal { get; set; }
 
     [Column("split")]
     [StringLength(1)]
     public string? Split { get; set; }
 
-    [Column("lengthGroup", TypeName = "int(11)")]
+    [Column("lengthGroup")]
     public int? LengthGroup { get; set; }
 
     [Column("isOperative")]
     public bool IsOperative { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int? CreatedBy { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
@@ -52,7 +50,7 @@ public partial class TbAccountLevel
     [StringLength(250)]
     public string? CreatedIn { get; set; }
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int? CreatedAt { get; set; }
 
     [Column("isActive")]

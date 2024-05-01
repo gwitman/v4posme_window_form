@@ -17,26 +17,26 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbJournalEntryDetailSummary
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int? CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int? BranchId { get; set; }
 
-    [Column("loginID", TypeName = "int(11)")]
+    [Column("loginID")]
     public int? LoginId { get; set; }
 
     [Column("tocken")]
     [StringLength(250)]
     public string? Tocken { get; set; }
 
-    [Column("journalEntryID", TypeName = "int(11)")]
+    [Column("journalEntryID")]
     public int? JournalEntryId { get; set; }
 
-    [Column("accountID", TypeName = "int(11)")]
+    [Column("accountID")]
     public int? AccountId { get; set; }
 
-    [Column("parentAccountID", TypeName = "int(11)")]
+    [Column("parentAccountID")]
     public int? ParentAccountId { get; set; }
 
     [Column("debit")]
@@ -48,6 +48,6 @@ public partial class TbJournalEntryDetailSummary
     public decimal? Credit { get; set; }
 
     [Key]
-    [Column("journalEntryDetailSummaryID", TypeName = "int(11)")]
+    [Column("journalEntryDetailSummaryID")]
     public int JournalEntryDetailSummaryId { get; set; }
 }

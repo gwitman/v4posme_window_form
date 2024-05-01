@@ -13,10 +13,10 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbCompanyCurrency
 {
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int CurrencyId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Column("simb")]
@@ -24,6 +24,6 @@ public partial class TbCompanyCurrency
     public string? Simb { get; set; }
 
     [Key]
-    [Column("companyCurrencyID", TypeName = "int(11)")]
+    [Column("companyCurrencyID")]
     public int CompanyCurrencyId { get; set; }
 }

@@ -12,7 +12,7 @@ namespace v4posme_library.Models;
 public partial class TbTypeMenuElement
 {
     [Key]
-    [Column("typeMenuElementID", TypeName = "int(11)")]
+    [Column("typeMenuElementID")]
     public int TypeMenuElementId { get; set; }
 
     [Column("name")]

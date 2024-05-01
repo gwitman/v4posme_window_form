@@ -9,7 +9,7 @@ namespace v4posme_library.Models;
 [Keyless]
 public partial class VwCxcCustomerListRealEstate
 {
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int EntityId { get; set; }
 
     [StringLength(250)]

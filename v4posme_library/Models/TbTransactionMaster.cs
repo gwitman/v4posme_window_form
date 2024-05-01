@@ -33,26 +33,26 @@ namespace v4posme_library.Models;
 public partial class TbTransactionMaster
 {
     [Key]
-    [Column("transactionMasterID", TypeName = "int(11)")]
+    [Column("transactionMasterID")]
     public int TransactionMasterId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Column("transactionNumber")]
     [StringLength(250)]
     public string TransactionNumber { get; set; } = null!;
 
-    [Column("transactionID", TypeName = "int(11)")]
+    [Column("transactionID")]
     public int TransactionId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int? BranchId { get; set; }
 
-    [Column("transactionCausalID", TypeName = "int(11)")]
+    [Column("transactionCausalID")]
     public int? TransactionCausalId { get; set; }
 
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int? EntityId { get; set; }
 
     [Column("transactionOn", TypeName = "datetime")]
@@ -64,20 +64,20 @@ public partial class TbTransactionMaster
     [Column("statusIDChangeOn", TypeName = "datetime")]
     public DateTime? StatusIdchangeOn { get; set; }
 
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int? ComponentId { get; set; }
 
     [Column("note")]
     [StringLength(3500)]
     public string? Note { get; set; }
 
-    [Column("sign", TypeName = "smallint(6)")]
+    [Column("sign")]
     public short? Sign { get; set; }
 
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int? CurrencyId { get; set; }
 
-    [Column("currencyID2", TypeName = "int(11)")]
+    [Column("currencyID2")]
     public int? CurrencyId2 { get; set; }
 
     [Column("exchangeRate")]
@@ -104,7 +104,7 @@ public partial class TbTransactionMaster
     [StringLength(4000)]
     public string DescriptionReference { get; set; } = null!;
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int? StatusId { get; set; }
 
     [Column("amount")]
@@ -138,28 +138,28 @@ public partial class TbTransactionMaster
     [Column("isApplied")]
     public bool? IsApplied { get; set; }
 
-    [Column("journalEntryID", TypeName = "int(11)")]
+    [Column("journalEntryID")]
     public int? JournalEntryId { get; set; }
 
-    [Column("classID", TypeName = "int(11)")]
+    [Column("classID")]
     public int? ClassId { get; set; }
 
-    [Column("areaID", TypeName = "int(11)")]
+    [Column("areaID")]
     public int? AreaId { get; set; }
 
-    [Column("priorityID", TypeName = "int(11)")]
+    [Column("priorityID")]
     public int? PriorityId { get; set; }
 
-    [Column("sourceWarehouseID", TypeName = "int(11)")]
+    [Column("sourceWarehouseID")]
     public int? SourceWarehouseId { get; set; }
 
-    [Column("targetWarehouseID", TypeName = "int(11)")]
+    [Column("targetWarehouseID")]
     public int? TargetWarehouseId { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int? CreatedBy { get; set; }
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int? CreatedAt { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
@@ -172,10 +172,10 @@ public partial class TbTransactionMaster
     [Column("isActive")]
     public bool? IsActive { get; set; }
 
-    [Column("isTemplate", TypeName = "int(11)")]
+    [Column("isTemplate")]
     public int? IsTemplate { get; set; }
 
-    [Column("periodPay", TypeName = "int(11)")]
+    [Column("periodPay")]
     public int? PeriodPay { get; set; }
 
     [Column("nextVisit", TypeName = "datetime")]
@@ -185,12 +185,12 @@ public partial class TbTransactionMaster
     [StringLength(250)]
     public string? NumberPhone { get; set; }
 
-    [Column("notificationID", TypeName = "int(11)")]
+    [Column("notificationID")]
     public int? NotificationId { get; set; }
 
-    [Column("printerQuantity", TypeName = "int(11)")]
+    [Column("printerQuantity")]
     public int? PrinterQuantity { get; set; }
 
-    [Column("entityIDSecondary", TypeName = "int(11)")]
+    [Column("entityIDSecondary")]
     public int? EntityIdsecondary { get; set; }
 }

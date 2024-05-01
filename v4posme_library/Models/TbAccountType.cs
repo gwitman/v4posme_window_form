@@ -3,23 +3,21 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.EntityFrameworkCore.DataAnnotations;
-using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
 [Table("tb_account_type")]
 [Index("AccountTypeId", Name = "IDX_ACCOUNT_TYPE_001")]
 [Index("CompanyId", Name = "IDX_ACCOUNT_TYPE_002")]
-[MySQLCharset("latin1")]
-[Microsoft.EntityFrameworkCore.MySqlCollation("latin1_swedish_ci")]
+[MySqlCharSet("latin1")]
+[MySqlCollation("latin1_swedish_ci")]
 public partial class TbAccountType
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Key]
-    [Column("accountTypeID", TypeName = "int(11)")]
+    [Column("accountTypeID")]
     public int AccountTypeId { get; set; }
 
     [Column("name")]
@@ -34,7 +32,7 @@ public partial class TbAccountType
     [StringLength(500)]
     public string? Description { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int CreatedBy { get; set; }
 
     [Column("createdAt")]

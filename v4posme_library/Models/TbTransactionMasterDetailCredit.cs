@@ -15,13 +15,13 @@ namespace v4posme_library.Models;
 public partial class TbTransactionMasterDetailCredit
 {
     [Key]
-    [Column("transactionMasterDetailCreditID", TypeName = "int(11)")]
+    [Column("transactionMasterDetailCreditID")]
     public int TransactionMasterDetailCreditId { get; set; }
 
-    [Column("transactionMasterID", TypeName = "int(11)")]
+    [Column("transactionMasterID")]
     public int TransactionMasterId { get; set; }
 
-    [Column("transactionMasterDetailID", TypeName = "int(11)")]
+    [Column("transactionMasterDetailID")]
     public int TransactionMasterDetailId { get; set; }
 
     [Column("capital")]
@@ -32,14 +32,14 @@ public partial class TbTransactionMasterDetailCredit
     [Precision(19, 8)]
     public decimal Interest { get; set; }
 
-    [Column("dayDalay", TypeName = "int(11)")]
+    [Column("dayDalay")]
     public int DayDalay { get; set; }
 
     [Column("interestMora")]
     [Precision(19, 8)]
     public decimal InterestMora { get; set; }
 
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int CurrencyId { get; set; }
 
     [Column("exchangeRate")]

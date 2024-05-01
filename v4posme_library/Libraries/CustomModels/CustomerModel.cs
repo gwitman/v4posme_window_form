@@ -43,7 +43,7 @@ public class CustomerModel : ICustomerModel
             join n in dbContext.TbNaturales on c.EntityId equals n.EntityId
             where c.CompanyId == companyId
                   && c.IsActive!.Value
-                  && c.BirthDate <= DateTime.Today
+                  && c.BirthDate <= DateOnly.FromDateTime(DateTime.Today)
             select new TbCustomerDto
             {
                 CustomerNumber = c.CustomerNumber,

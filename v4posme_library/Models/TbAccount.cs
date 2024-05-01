@@ -15,25 +15,27 @@ namespace v4posme_library.Models;
 [Index("AccountNumber", Name = "IDX_ACCOUNT_006")]
 [Index("StatusId", Name = "IDX_ACCOUNT_007")]
 [Index("CurrencyId", Name = "IDX_ACCOUNT_008")]
+[MySqlCharSet("latin1")]
+[MySqlCollation("latin1_swedish_ci")]
 public partial class TbAccount
 {
     [Key]
-    [Column("accountID", TypeName = "int(11)")]
+    [Column("accountID")]
     public int AccountId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("accountTypeID", TypeName = "int(11)")]
+    [Column("accountTypeID")]
     public int AccountTypeId { get; set; }
 
-    [Column("accountLevelID", TypeName = "int(11)")]
+    [Column("accountLevelID")]
     public int AccountLevelId { get; set; }
 
-    [Column("parentAccountID", TypeName = "int(11)")]
+    [Column("parentAccountID")]
     public int? ParentAccountId { get; set; }
 
-    [Column("classID", TypeName = "int(11)")]
+    [Column("classID")]
     public int? ClassId { get; set; }
 
     [Column("accountNumber")]
@@ -51,13 +53,13 @@ public partial class TbAccount
     [Column("isOperative")]
     public bool IsOperative { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int CurrencyId { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int? CreatedBy { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]

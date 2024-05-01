@@ -16,34 +16,34 @@ namespace v4posme_library.Models;
 public partial class TbCounter
 {
     [Key]
-    [Column("counterID", TypeName = "int(11)")]
+    [Column("counterID")]
     public int CounterId { get; set; }
 
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("componentItemID", TypeName = "int(11)")]
+    [Column("componentItemID")]
     public int? ComponentItemId { get; set; }
 
-    [Column("initialValue", TypeName = "int(11)")]
+    [Column("initialValue")]
     public int? InitialValue { get; set; }
 
-    [Column("currentValue", TypeName = "int(11)")]
+    [Column("currentValue")]
     public int? CurrentValue { get; set; }
 
-    [Column("seed", TypeName = "int(11)")]
+    [Column("seed")]
     public int? Seed { get; set; }
 
     [Column("serie")]
     [StringLength(10)]
     public string? Serie { get; set; }
 
-    [Column("length", TypeName = "int(11)")]
+    [Column("length")]
     public int? Length { get; set; }
 }

@@ -14,10 +14,10 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbCompanyParameter
 {
-    [Column("parameterID", TypeName = "int(11)")]
+    [Column("parameterID")]
     public int ParameterId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Column("display")]
@@ -30,13 +30,13 @@ public partial class TbCompanyParameter
 
     [Column("value")]
     [StringLength(300)]
-    public string? Value { get; set; } = null!;
+    public string Value { get; set; } = null!;
 
     [Column("customValue")]
     [StringLength(300)]
     public string CustomValue { get; set; } = null!;
 
     [Key]
-    [Column("companyParameterID", TypeName = "int(11)")]
+    [Column("companyParameterID")]
     public int CompanyParameterId { get; set; }
 }

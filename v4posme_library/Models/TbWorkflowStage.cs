@@ -14,14 +14,14 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_general_ci")]
 public partial class TbWorkflowStage
 {
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
-    [Column("workflowID", TypeName = "int(11)")]
+    [Column("workflowID")]
     public int WorkflowId { get; set; }
 
     [Key]
-    [Column("workflowStageID", TypeName = "int(11)")]
+    [Column("workflowStageID")]
     public int WorkflowStageId { get; set; }
 
     [Column("name")]
@@ -36,7 +36,7 @@ public partial class TbWorkflowStage
     [StringLength(250)]
     public string? Display { get; set; }
 
-    [Column("flavorID", TypeName = "int(11)")]
+    [Column("flavorID")]
     public int? FlavorId { get; set; }
 
     [Column("editableParcial")]
@@ -61,5 +61,5 @@ public partial class TbWorkflowStage
     public bool IsActive { get; set; }
 
     [Column("isInit")]
-    public bool? IsInit { get; set; }
+    public bool IsInit { get; set; }
 }

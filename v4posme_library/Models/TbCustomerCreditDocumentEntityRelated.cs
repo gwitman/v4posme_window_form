@@ -14,43 +14,43 @@ namespace v4posme_library.Models;
 public partial class TbCustomerCreditDocumentEntityRelated
 {
     [Key]
-    [Column("ccEntityRelatedID", TypeName = "int(11)")]
+    [Column("ccEntityRelatedID")]
     public int CcEntityRelatedId { get; set; }
 
-    [Column("customerCreditDocumentID", TypeName = "int(11)")]
+    [Column("customerCreditDocumentID")]
     public int CustomerCreditDocumentId { get; set; }
 
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int EntityId { get; set; }
 
     /// <summary>
     /// Permite saber el tipo de obligacion, DEUDOR O FIADOR
     /// </summary>
-    [Column("type", TypeName = "int(11)")]
+    [Column("type")]
     public int Type { get; set; }
 
     /// <summary>
     /// Tipo de Credito, Consumo, Vivienda
     /// </summary>
-    [Column("typeCredit", TypeName = "int(11)")]
+    [Column("typeCredit")]
     public int TypeCredit { get; set; }
 
     /// <summary>
     /// Estado del Credito , Saneado, Vigente, etc
     /// </summary>
-    [Column("statusCredit", TypeName = "int(11)")]
+    [Column("statusCredit")]
     public int StatusCredit { get; set; }
 
     /// <summary>
     /// Aval, Fiduciario, Pagare, etc
     /// </summary>
-    [Column("typeGarantia", TypeName = "int(11)")]
+    [Column("typeGarantia")]
     public int TypeGarantia { get; set; }
 
     /// <summary>
     /// Forma de Recuperacion Recuperacion Normal, Arreglo de pago, Cobro Extra judicial
     /// </summary>
-    [Column("typeRecuperation", TypeName = "int(11)")]
+    [Column("typeRecuperation")]
     public int TypeRecuperation { get; set; }
 
     /// <summary>
@@ -84,14 +84,14 @@ public partial class TbCustomerCreditDocumentEntityRelated
     [Column("createdOn", TypeName = "datetime")]
     public DateTime CreatedOn { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int CreatedBy { get; set; }
 
     [Column("createdIn")]
     [StringLength(120)]
     public string CreatedIn { get; set; } = null!;
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int CreatedAt { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]

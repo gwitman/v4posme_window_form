@@ -14,16 +14,16 @@ namespace v4posme_library.Models;
 public partial class TbItemDataSheet
 {
     [Key]
-    [Column("itemDataSheetID", TypeName = "int(11)")]
+    [Column("itemDataSheetID")]
     public int ItemDataSheetId { get; set; }
 
-    [Column("itemID", TypeName = "int(11)")]
+    [Column("itemID")]
     public int ItemId { get; set; }
 
-    [Column("version", TypeName = "int(11)")]
+    [Column("version")]
     public int Version { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
     [Column("name")]
@@ -37,14 +37,14 @@ public partial class TbItemDataSheet
     [Column("createdOn", TypeName = "datetime")]
     public DateTime CreatedOn { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int CreatedBy { get; set; }
 
     [Column("createdIn")]
     [StringLength(25)]
     public string CreatedIn { get; set; } = null!;
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int CreatedAt { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]

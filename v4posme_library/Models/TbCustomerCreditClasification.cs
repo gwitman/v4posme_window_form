@@ -13,16 +13,16 @@ namespace v4posme_library.Models;
 public partial class TbCustomerCreditClasification
 {
     [Key]
-    [Column("clasificationID", TypeName = "int(11)")]
+    [Column("clasificationID")]
     public int ClasificationId { get; set; }
 
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int EntityId { get; set; }
 
     [Column("dateHistory")]
     public DateOnly DateHistory { get; set; }
 
-    [Column("numberShareLate", TypeName = "int(11)")]
+    [Column("numberShareLate")]
     public int NumberShareLate { get; set; }
 
     [Column("amountCapitalLate")]
@@ -33,16 +33,16 @@ public partial class TbCustomerCreditClasification
     [Precision(18, 8)]
     public decimal AmountInterestLate { get; set; }
 
-    [Column("maxDayMora", TypeName = "int(11)")]
+    [Column("maxDayMora")]
     public int MaxDayMora { get; set; }
 
-    [Column("numberCreditAbiertos", TypeName = "int(11)")]
+    [Column("numberCreditAbiertos")]
     public int NumberCreditAbiertos { get; set; }
 
-    [Column("numberCreditSaneados", TypeName = "int(11)")]
+    [Column("numberCreditSaneados")]
     public int NumberCreditSaneados { get; set; }
 
-    [Column("numberCreditCancelados", TypeName = "int(11)")]
+    [Column("numberCreditCancelados")]
     public int NumberCreditCancelados { get; set; }
 
     [Column("amountCapitalAbierto")]
@@ -57,6 +57,6 @@ public partial class TbCustomerCreditClasification
     [Precision(18, 8)]
     public decimal AmountCapitalCancelado { get; set; }
 
-    [Column("summary", TypeName = "int(11)")]
+    [Column("summary")]
     public int Summary { get; set; }
 }

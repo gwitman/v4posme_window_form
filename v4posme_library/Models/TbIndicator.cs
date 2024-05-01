@@ -14,10 +14,10 @@ namespace v4posme_library.Models;
 public partial class TbIndicator
 {
     [Key]
-    [Column("indicadorID", TypeName = "int(11)")]
+    [Column("indicadorID")]
     public int IndicadorId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Column("code")]
@@ -36,7 +36,7 @@ public partial class TbIndicator
     [StringLength(500)]
     public string Description { get; set; } = null!;
 
-    [Column("order", TypeName = "int(11)")]
+    [Column("order")]
     public int Order { get; set; }
 
     [Column("script")]

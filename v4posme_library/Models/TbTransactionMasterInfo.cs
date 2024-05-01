@@ -22,25 +22,25 @@ namespace v4posme_library.Models;
 public partial class TbTransactionMasterInfo
 {
     [Key]
-    [Column("transactionMasterInfoID", TypeName = "int(11)")]
+    [Column("transactionMasterInfoID")]
     public int TransactionMasterInfoId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("transactionID", TypeName = "int(11)")]
+    [Column("transactionID")]
     public int TransactionId { get; set; }
 
-    [Column("transactionMasterID", TypeName = "int(11)")]
+    [Column("transactionMasterID")]
     public int TransactionMasterId { get; set; }
 
-    [Column("zoneID", TypeName = "int(11)")]
+    [Column("zoneID")]
     public int? ZoneId { get; set; }
 
-    [Column("routeID", TypeName = "int(11)")]
+    [Column("routeID")]
     public int? RouteId { get; set; }
 
-    [Column("mesaID", TypeName = "int(11)")]
+    [Column("mesaID")]
     public int MesaId { get; set; }
 
     [Column("referenceClientName")]
@@ -79,7 +79,7 @@ public partial class TbTransactionMasterInfo
     [Precision(10, 2)]
     public decimal ReceiptAmountBank { get; set; }
 
-    [Column("receiptAmountBankID", TypeName = "int(11)")]
+    [Column("receiptAmountBankID")]
     public int? ReceiptAmountBankId { get; set; }
 
     [Column("receiptAmountBankReference")]
@@ -90,7 +90,7 @@ public partial class TbTransactionMasterInfo
     [Precision(10, 0)]
     public decimal ReceiptAmountBankDol { get; set; }
 
-    [Column("receiptAmountBankDolID", TypeName = "int(11)")]
+    [Column("receiptAmountBankDolID")]
     public int? ReceiptAmountBankDolId { get; set; }
 
     [Column("receiptAmountBankDolReference")]
@@ -101,7 +101,7 @@ public partial class TbTransactionMasterInfo
     [Precision(10, 0)]
     public decimal ReceiptAmountCard { get; set; }
 
-    [Column("receiptAmountCardBankID", TypeName = "int(11)")]
+    [Column("receiptAmountCardBankID")]
     public int? ReceiptAmountCardBankId { get; set; }
 
     [Column("receiptAmountCardBankReference")]
@@ -112,7 +112,7 @@ public partial class TbTransactionMasterInfo
     [Precision(10, 0)]
     public decimal ReceiptAmountCardDol { get; set; }
 
-    [Column("receiptAmountCardBankDolID", TypeName = "int(11)")]
+    [Column("receiptAmountCardBankDolID")]
     public int? ReceiptAmountCardBankDolId { get; set; }
 
     [Column("receiptAmountCardBankDolReference")]

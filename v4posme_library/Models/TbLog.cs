@@ -15,16 +15,16 @@ namespace v4posme_library.Models;
 public partial class TbLog
 {
     [Key]
-    [Column("logID", TypeName = "int(11)")]
+    [Column("logID")]
     public int LogId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("loginID", TypeName = "int(11)")]
+    [Column("loginID")]
     public int LoginId { get; set; }
 
     [Column("token")]
@@ -35,7 +35,7 @@ public partial class TbLog
     [StringLength(150)]
     public string ProcedureName { get; set; } = null!;
 
-    [Column("code", TypeName = "int(11)")]
+    [Column("code")]
     public int Code { get; set; }
 
     [Column("description")]

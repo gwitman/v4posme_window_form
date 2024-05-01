@@ -15,13 +15,13 @@ namespace v4posme_library.Models;
 public partial class TbRole
 {
     [Key]
-    [Column("roleID", TypeName = "int(11)")]
+    [Column("roleID")]
     public int RoleId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
     [Column("name")]
@@ -45,6 +45,6 @@ public partial class TbRole
     [Column("isActive")]
     public bool? IsActive { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int CreatedBy { get; set; }
 }

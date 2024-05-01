@@ -14,13 +14,13 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbCustomerCredit
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int EntityId { get; set; }
 
     [Column("limitCreditDol")]
@@ -36,6 +36,6 @@ public partial class TbCustomerCredit
     public decimal IncomeDol { get; set; }
 
     [Key]
-    [Column("customerCreditID", TypeName = "int(11)")]
+    [Column("customerCreditID")]
     public int CustomerCreditId { get; set; }
 }

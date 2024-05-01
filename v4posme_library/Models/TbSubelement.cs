@@ -14,18 +14,18 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_general_ci")]
 public partial class TbSubelement
 {
-    [Column("elementID", TypeName = "int(11)")]
+    [Column("elementID")]
     public int ElementId { get; set; }
 
     [Key]
-    [Column("subElementID", TypeName = "int(11)")]
+    [Column("subElementID")]
     public int SubElementId { get; set; }
 
     [Column("name")]
     [StringLength(250)]
     public string? Name { get; set; }
 
-    [Column("workflowID", TypeName = "int(11)")]
+    [Column("workflowID")]
     public int? WorkflowId { get; set; }
 
     [Column("catalogID")]

@@ -12,7 +12,7 @@ public partial class VwSalesInventory
     [Column("createdOn", TypeName = "datetime")]
     public DateTime? CreatedOn { get; set; }
 
-    [Column("createdOnDay", TypeName = "int(2)")]
+    [Column("createdOnDay")]
     public int? CreatedOnDay { get; set; }
 
     [Column("currency")]
@@ -77,8 +77,8 @@ public partial class VwSalesInventory
 
     [Column("name")]
     [StringLength(250)]
-    [MySqlCharSet("utf8")]
-    [MySqlCollation("utf8_general_ci")]
+    [MySqlCharSet("utf8mb3")]
+    [MySqlCollation("utf8mb3_general_ci")]
     public string Name { get; set; } = null!;
 
     [Column("categoryName")]

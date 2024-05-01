@@ -17,13 +17,13 @@ namespace v4posme_library.Models;
 public partial class TbEmployeeCalendarPay
 {
     [Key]
-    [Column("calendarID", TypeName = "int(11)")]
+    [Column("calendarID")]
     public int CalendarId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("accountingCycleID", TypeName = "int(11)")]
+    [Column("accountingCycleID")]
     public int AccountingCycleId { get; set; }
 
     [Column("name")]
@@ -34,23 +34,23 @@ public partial class TbEmployeeCalendarPay
     [StringLength(15)]
     public string Number { get; set; } = null!;
 
-    [Column("typeID", TypeName = "int(11)")]
+    [Column("typeID")]
     public int TypeId { get; set; }
 
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int CurrencyId { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
     [Column("description")]
     [StringLength(1500)]
     public string? Description { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int CreatedBy { get; set; }
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int CreatedAt { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]

@@ -16,22 +16,22 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbComponentAutorizationDetail
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("componentAutorizationID", TypeName = "int(11)")]
+    [Column("componentAutorizationID")]
     public int ComponentAutorizationId { get; set; }
 
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
-    [Column("workflowID", TypeName = "int(11)")]
+    [Column("workflowID")]
     public int WorkflowId { get; set; }
 
-    [Column("workflowStageID", TypeName = "int(11)")]
+    [Column("workflowStageID")]
     public int WorkflowStageId { get; set; }
 
     [Key]
-    [Column("componentAurotizationDetailID", TypeName = "int(11)")]
+    [Column("componentAurotizationDetailID")]
     public int ComponentAurotizationDetailId { get; set; }
 }

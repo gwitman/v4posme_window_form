@@ -13,13 +13,13 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_general_ci")]
 public partial class TbCompanyComponent
 {
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Key]
-    [Column("companyComponentID", TypeName = "int(11)")]
+    [Column("companyComponentID")]
     public int CompanyComponentId { get; set; }
 }

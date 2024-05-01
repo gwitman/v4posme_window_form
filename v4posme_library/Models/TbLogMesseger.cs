@@ -7,15 +7,15 @@ using Microsoft.EntityFrameworkCore;
 namespace v4posme_library.Models;
 
 [Table("tb_log_messeger")]
-[MySqlCharSet("utf8")]
-[MySqlCollation("utf8_general_ci")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class TbLogMesseger
 {
     [Key]
-    [Column("id", TypeName = "int(11)")]
+    [Column("id")]
     public int Id { get; set; }
 
-    [Column("errno", TypeName = "int(11)")]
+    [Column("errno")]
     public int Errno { get; set; }
 
     [Column("errtype")]
@@ -29,7 +29,7 @@ public partial class TbLogMesseger
     [StringLength(255)]
     public string Errfile { get; set; } = null!;
 
-    [Column("errline", TypeName = "int(11)")]
+    [Column("errline")]
     public int Errline { get; set; }
 
     [Column("user_agent")]

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,14 +16,14 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_general_ci")]
 public partial class TbUser
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
     [Key]
-    [Column("userID", TypeName = "int(11)")]
+    [Column("userID")]
     public int UserId { get; set; }
 
     [Column("nickname")]
@@ -43,13 +45,13 @@ public partial class TbUser
     [StringLength(250)]
     public string Email { get; set; } = null!;
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int CreatedBy { get; set; }
 
-    [Column("employeeID", TypeName = "int(11)")]
+    [Column("employeeID")]
     public int EmployeeId { get; set; }
 
-    [Column("useMobile", TypeName = "int(11)")]
+    [Column("useMobile")]
     public int UseMobile { get; set; }
 
     [Column("phone")]

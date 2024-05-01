@@ -12,10 +12,10 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbCustomerCreditExternalSharon
 {
-    [Column("customerID", TypeName = "int(11)")]
+    [Column("customerID")]
     public int CustomerId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int? CompanyId { get; set; }
 
     [Column("TIPO_DE_ENTIDAD")]
@@ -58,7 +58,7 @@ public partial class TbCustomerCreditExternalSharon
     [Precision(19, 2)]
     public decimal MontoAutorizado { get; set; }
 
-    [Column("PLAZO", TypeName = "int(11)")]
+    [Column("PLAZO")]
     public int? Plazo { get; set; }
 
     [Column("FRECUENCIA_DE_PAGO")]

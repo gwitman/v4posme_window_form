@@ -14,7 +14,7 @@ namespace v4posme_library.Models;
 public partial class TbCompany
 {
     [Key]
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Column("name")]
@@ -31,7 +31,7 @@ public partial class TbCompany
     [Column("isActive")]
     public bool? IsActive { get; set; }
 
-    [Column("flavorID", TypeName = "int(11)")]
+    [Column("flavorID")]
     public int FlavorId { get; set; }
 
     [Column("type")]

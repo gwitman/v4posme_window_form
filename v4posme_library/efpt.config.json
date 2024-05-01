@@ -9,7 +9,7 @@
    "OutputContextPath": null,
    "OutputPath": "Models",
    "PreserveCasingWithRegex": true,
-   "ProjectRootNamespace": "v4posme_library.Models",
+   "ProjectRootNamespace": "v4posme_library",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 3,
    "SelectedToBeGenerated": 0,

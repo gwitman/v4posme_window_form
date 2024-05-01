@@ -20,14 +20,14 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbFixedAssent
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int? CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int? BranchId { get; set; }
 
     [Key]
-    [Column("fixedAssentID", TypeName = "int(11)")]
+    [Column("fixedAssentID")]
     public int FixedAssentId { get; set; }
 
     [Column("fixedAssentCode")]
@@ -50,7 +50,7 @@ public partial class TbFixedAssent
     [StringLength(50)]
     public string? Marca { get; set; }
 
-    [Column("colorID", TypeName = "int(11)")]
+    [Column("colorID")]
     public int? ColorId { get; set; }
 
     [Column("chasisNumber")]
@@ -65,22 +65,22 @@ public partial class TbFixedAssent
     [StringLength(250)]
     public string? Reference2 { get; set; }
 
-    [Column("year", TypeName = "int(11)")]
+    [Column("year")]
     public int? Year { get; set; }
 
-    [Column("asignedEmployeeID", TypeName = "int(11)")]
+    [Column("asignedEmployeeID")]
     public int? AsignedEmployeeId { get; set; }
 
-    [Column("categoryID", TypeName = "int(11)")]
+    [Column("categoryID")]
     public int? CategoryId { get; set; }
 
-    [Column("typeID", TypeName = "int(11)")]
+    [Column("typeID")]
     public int? TypeId { get; set; }
 
-    [Column("typeDepresiationID", TypeName = "int(11)")]
+    [Column("typeDepresiationID")]
     public int? TypeDepresiationId { get; set; }
 
-    [Column("yearOfUtility", TypeName = "int(11)")]
+    [Column("yearOfUtility")]
     public int? YearOfUtility { get; set; }
 
     [Column("priceStart")]
@@ -90,7 +90,7 @@ public partial class TbFixedAssent
     [Column("isForaneo")]
     public bool IsForaneo { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
     [Column("createdIn")]
@@ -100,10 +100,10 @@ public partial class TbFixedAssent
     [Column("createdOn", TypeName = "datetime")]
     public DateTime CreatedOn { get; set; }
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int CreatedAt { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int CreatedBy { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]

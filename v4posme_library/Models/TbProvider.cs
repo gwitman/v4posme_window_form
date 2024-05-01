@@ -26,16 +26,16 @@ namespace v4posme_library.Models;
 public partial class TbProvider
 {
     [Key]
-    [Column("providerID", TypeName = "int(11)")]
+    [Column("providerID")]
     public int ProviderId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int EntityId { get; set; }
 
     [Column("providerNumber")]
@@ -46,16 +46,16 @@ public partial class TbProvider
     [StringLength(250)]
     public string? NumberIdentification { get; set; }
 
-    [Column("identificationTypeID", TypeName = "int(11)")]
+    [Column("identificationTypeID")]
     public int? IdentificationTypeId { get; set; }
 
-    [Column("providerType", TypeName = "int(11)")]
+    [Column("providerType")]
     public int? ProviderType { get; set; }
 
-    [Column("providerCategoryID", TypeName = "int(11)")]
+    [Column("providerCategoryID")]
     public int? ProviderCategoryId { get; set; }
 
-    [Column("providerClasificationID", TypeName = "int(11)")]
+    [Column("providerClasificationID")]
     public int? ProviderClasificationId { get; set; }
 
     [Column("reference1")]
@@ -66,35 +66,35 @@ public partial class TbProvider
     [StringLength(250)]
     public string? Reference2 { get; set; }
 
-    [Column("payConditionID", TypeName = "int(11)")]
+    [Column("payConditionID")]
     public int? PayConditionId { get; set; }
 
     [Column("isLocal")]
     public bool? IsLocal { get; set; }
 
-    [Column("countryID", TypeName = "int(11)")]
+    [Column("countryID")]
     public int? CountryId { get; set; }
 
-    [Column("stateID", TypeName = "int(11)")]
+    [Column("stateID")]
     public int? StateId { get; set; }
 
-    [Column("cityID", TypeName = "int(11)")]
+    [Column("cityID")]
     public int? CityId { get; set; }
 
     [Column("address")]
     [StringLength(250)]
     public string? Address { get; set; }
 
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int? CurrencyId { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int? StatusId { get; set; }
 
-    [Column("deleveryDay", TypeName = "int(11)")]
+    [Column("deleveryDay")]
     public int? DeleveryDay { get; set; }
 
-    [Column("deleveryDayReal", TypeName = "int(11)")]
+    [Column("deleveryDayReal")]
     public int? DeleveryDayReal { get; set; }
 
     [Column("distancia")]
@@ -105,10 +105,10 @@ public partial class TbProvider
     [StringLength(250)]
     public string? CreatedIn { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int? CreatedBy { get; set; }
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int? CreatedAt { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]

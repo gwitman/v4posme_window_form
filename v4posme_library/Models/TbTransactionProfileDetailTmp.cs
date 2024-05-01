@@ -13,31 +13,31 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbTransactionProfileDetailTmp
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int? CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int? BranchId { get; set; }
 
-    [Column("loginID", TypeName = "int(11)")]
+    [Column("loginID")]
     public int? LoginId { get; set; }
 
-    [Column("transactionID", TypeName = "int(11)")]
+    [Column("transactionID")]
     public int? TransactionId { get; set; }
 
-    [Column("transactionMasterID", TypeName = "int(11)")]
+    [Column("transactionMasterID")]
     public int? TransactionMasterId { get; set; }
 
-    [Column("transactionCausalID", TypeName = "int(11)")]
+    [Column("transactionCausalID")]
     public int? TransactionCausalId { get; set; }
 
-    [Column("conceptID", TypeName = "int(11)")]
+    [Column("conceptID")]
     public int? ConceptId { get; set; }
 
-    [Column("accountID", TypeName = "int(11)")]
+    [Column("accountID")]
     public int? AccountId { get; set; }
 
-    [Column("classID", TypeName = "int(11)")]
+    [Column("classID")]
     public int? ClassId { get; set; }
 
     [Column("debit")]
@@ -49,6 +49,6 @@ public partial class TbTransactionProfileDetailTmp
     public decimal? Credit { get; set; }
 
     [Key]
-    [Column("transactionProfileDetailTmpID", TypeName = "int(11)")]
+    [Column("transactionProfileDetailTmpID")]
     public int TransactionProfileDetailTmpId { get; set; }
 }

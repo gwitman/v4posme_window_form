@@ -16,22 +16,22 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbTransactionMasterPurchase
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("transactionID", TypeName = "int(11)")]
+    [Column("transactionID")]
     public int TransactionId { get; set; }
 
-    [Column("transactionMasterID", TypeName = "int(11)")]
+    [Column("transactionMasterID")]
     public int TransactionMasterId { get; set; }
 
-    [Column("purchaseTypeID", TypeName = "int(11)")]
+    [Column("purchaseTypeID")]
     public int PurchaseTypeId { get; set; }
 
-    [Column("transportTypeID", TypeName = "int(11)")]
+    [Column("transportTypeID")]
     public int TransportTypeId { get; set; }
 
     [Key]
-    [Column("transactionMasterPurchaseID", TypeName = "int(11)")]
+    [Column("transactionMasterPurchaseID")]
     public int TransactionMasterPurchaseId { get; set; }
 }

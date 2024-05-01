@@ -16,19 +16,19 @@ namespace v4posme_library.Models;
 public partial class TbComponentAuditDetail
 {
     [Key]
-    [Column("componentAuditDetailID", TypeName = "int(11)")]
+    [Column("componentAuditDetailID")]
     public int ComponentAuditDetailId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("componentAuditID", TypeName = "int(11)")]
+    [Column("componentAuditID")]
     public int ComponentAuditId { get; set; }
 
-    [Column("fieldID", TypeName = "int(11)")]
+    [Column("fieldID")]
     public int? FieldId { get; set; }
 
     [Column("oldValue")]

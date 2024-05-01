@@ -16,10 +16,10 @@ namespace v4posme_library.Models;
 public partial class TbNotification
 {
     [Key]
-    [Column("notificationID", TypeName = "int(11)")]
+    [Column("notificationID")]
     public int NotificationId { get; set; }
 
-    [Column("errorID", TypeName = "int(11)")]
+    [Column("errorID")]
     public int? ErrorId { get; set; }
 
     [Column("from")]
@@ -46,7 +46,7 @@ public partial class TbNotification
     [StringLength(500)]
     public string? Title { get; set; }
 
-    [Column("tagID", TypeName = "int(11)")]
+    [Column("tagID")]
     public int? TagId { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
@@ -83,10 +83,10 @@ public partial class TbNotification
     [Column("addedCalendarGoogle", TypeName = "bit(1)")]
     public ulong? AddedCalendarGoogle { get; set; }
 
-    [Column("quantityOcupation", TypeName = "int(11)")]
+    [Column("quantityOcupation")]
     public int? QuantityOcupation { get; set; }
 
-    [Column("quantityDisponible", TypeName = "int(11)")]
+    [Column("quantityDisponible")]
     public int? QuantityDisponible { get; set; }
 
     [Column("googleCalendarEventID")]

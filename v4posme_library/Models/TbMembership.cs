@@ -17,18 +17,18 @@ namespace v4posme_library.Models;
 public partial class TbMembership
 {
     [Key]
-    [Column("membershipID", TypeName = "int(11)")]
+    [Column("membershipID")]
     public int MembershipId { get; set; }
 
-    [Column("roleID", TypeName = "int(11)")]
+    [Column("roleID")]
     public int RoleId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("userID", TypeName = "int(11)")]
+    [Column("userID")]
     public int UserId { get; set; }
 }

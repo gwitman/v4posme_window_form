@@ -13,10 +13,10 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbIndicatorHistory
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("indicatorID", TypeName = "int(11)")]
+    [Column("indicatorID")]
     public int IndicatorId { get; set; }
 
     [Column("dateOn")]
@@ -27,6 +27,6 @@ public partial class TbIndicatorHistory
     public decimal Value { get; set; }
 
     [Key]
-    [Column("indicatorHistoryID", TypeName = "int(11)")]
+    [Column("indicatorHistoryID")]
     public int IndicatorHistoryId { get; set; }
 }

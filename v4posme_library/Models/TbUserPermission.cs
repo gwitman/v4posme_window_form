@@ -15,20 +15,20 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_general_ci")]
 public partial class TbUserPermission
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("elementID", TypeName = "int(11)")]
+    [Column("elementID")]
     public int ElementId { get; set; }
 
-    [Column("roleID", TypeName = "int(11)")]
+    [Column("roleID")]
     public int RoleId { get; set; }
 
     [Key]
-    [Column("userPermissionID", TypeName = "int(11)")]
+    [Column("userPermissionID")]
     public int UserPermissionId { get; set; }
 
     [Column("selected")]

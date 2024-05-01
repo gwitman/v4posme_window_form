@@ -18,29 +18,29 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbTransactionMasterConcept
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("transactionID", TypeName = "int(11)")]
+    [Column("transactionID")]
     public int TransactionId { get; set; }
 
-    [Column("transactionMasterID", TypeName = "int(11)")]
+    [Column("transactionMasterID")]
     public int TransactionMasterId { get; set; }
 
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int? ComponentId { get; set; }
 
-    [Column("componentItemID", TypeName = "int(11)")]
+    [Column("componentItemID")]
     public int? ComponentItemId { get; set; }
 
-    [Column("conceptID", TypeName = "int(11)")]
+    [Column("conceptID")]
     public int? ConceptId { get; set; }
 
     [Column("value")]
     [Precision(18, 4)]
     public decimal? Value { get; set; }
 
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int? CurrencyId { get; set; }
 
     [Column("exchangeRate")]
@@ -48,6 +48,6 @@ public partial class TbTransactionMasterConcept
     public decimal? ExchangeRate { get; set; }
 
     [Key]
-    [Column("transactionMasterConceptID", TypeName = "int(11)")]
+    [Column("transactionMasterConceptID")]
     public int TransactionMasterConceptId { get; set; }
 }

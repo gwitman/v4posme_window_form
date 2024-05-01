@@ -9,7 +9,7 @@ namespace v4posme_library.Models;
 [Keyless]
 public partial class VwTransaccionMasterConcept232425
 {
-    [Column("transactionMasterID", TypeName = "int(11)")]
+    [Column("transactionMasterID")]
     public int TransactionMasterId { get; set; }
 
     [StringLength(250)]
@@ -43,7 +43,7 @@ public partial class VwTransaccionMasterConcept232425
     [MySqlCollation("latin1_general_ci")]
     public string? Componente { get; set; }
 
-    [Column("componentItemID", TypeName = "int(11)")]
+    [Column("componentItemID")]
     public int? ComponentItemId { get; set; }
 
     [StringLength(250)]

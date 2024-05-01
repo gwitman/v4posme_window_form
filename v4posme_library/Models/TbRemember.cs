@@ -17,10 +17,10 @@ namespace v4posme_library.Models;
 public partial class TbRemember
 {
     [Key]
-    [Column("rememberID", TypeName = "int(11)")]
+    [Column("rememberID")]
     public int RememberId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Column("title")]
@@ -31,13 +31,13 @@ public partial class TbRemember
     [StringLength(500)]
     public string Description { get; set; } = null!;
 
-    [Column("period", TypeName = "int(11)")]
+    [Column("period")]
     public int Period { get; set; }
 
-    [Column("day", TypeName = "int(11)")]
+    [Column("day")]
     public int Day { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
     [Column("lastNotificationOn", TypeName = "datetime")]
@@ -46,7 +46,7 @@ public partial class TbRemember
     [Column("isTemporal", TypeName = "bit(1)")]
     public ulong IsTemporal { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int CreatedBy { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
@@ -56,15 +56,15 @@ public partial class TbRemember
     [StringLength(50)]
     public string CreatedIn { get; set; } = null!;
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int CreatedAt { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
     public ulong IsActive { get; set; }
 
-    [Column("tagID", TypeName = "int(11)")]
+    [Column("tagID")]
     public int? TagId { get; set; }
 
-    [Column("leerFile", TypeName = "int(11)")]
+    [Column("leerFile")]
     public int? LeerFile { get; set; }
 }

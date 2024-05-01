@@ -3,28 +3,26 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.EntityFrameworkCore.DataAnnotations;
-using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
 [Table("tb_biblia")]
 [Index("Dia", Name = "IDX_BIBLIA_001")]
-[MySQLCharset("latin1")]
-[Microsoft.EntityFrameworkCore.MySqlCollation("latin1_swedish_ci")]
+[MySqlCharSet("latin1")]
+[MySqlCollation("latin1_swedish_ci")]
 public partial class TbBiblia
 {
     [Key]
-    [Column("versiculoID", TypeName = "int(11)")]
+    [Column("versiculoID")]
     public int VersiculoId { get; set; }
 
-    [Column("orden", TypeName = "int(11)")]
+    [Column("orden")]
     public int Orden { get; set; }
 
-    [Column("dia", TypeName = "int(11)")]
+    [Column("dia")]
     public int Dia { get; set; }
 
-    [Column("capitulo", TypeName = "int(11)")]
+    [Column("capitulo")]
     public int Capitulo { get; set; }
 
     [Column("libro")]

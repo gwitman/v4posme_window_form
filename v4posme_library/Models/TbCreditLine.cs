@@ -13,10 +13,10 @@ namespace v4posme_library.Models;
 public partial class TbCreditLine
 {
     [Key]
-    [Column("creditLineID", TypeName = "int(11)")]
+    [Column("creditLineID")]
     public int CreditLineId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Column("name")]

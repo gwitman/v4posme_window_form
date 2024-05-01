@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.EntityFrameworkCore.DataAnnotations;
-using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
@@ -15,21 +13,21 @@ namespace v4posme_library.Models;
 [Index("CashBoxSessionId", Name = "IDX_CASH_BOX_SESSION_004")]
 [Index("StatusId", Name = "IDX_CASH_BOX_SESSION_005")]
 [Index("UserId", Name = "IDX_CASH_BOX_SESSION_006")]
-[MySQLCharset("latin1")]
-[Microsoft.EntityFrameworkCore.MySqlCollation("latin1_swedish_ci")]
+[MySqlCharSet("latin1")]
+[MySqlCollation("latin1_swedish_ci")]
 public partial class TbCashBoxSession
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("cashBoxID", TypeName = "int(11)")]
+    [Column("cashBoxID")]
     public int CashBoxId { get; set; }
 
     [Key]
-    [Column("cashBoxSessionID", TypeName = "int(11)")]
+    [Column("cashBoxSessionID")]
     public int CashBoxSessionId { get; set; }
 
     [Column("startOn", TypeName = "datetime")]
@@ -38,12 +36,12 @@ public partial class TbCashBoxSession
     [Column("endOn", TypeName = "datetime")]
     public DateTime? EndOn { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
     public ulong IsActive { get; set; }
 
-    [Column("userID", TypeName = "int(11)")]
+    [Column("userID")]
     public int? UserId { get; set; }
 }

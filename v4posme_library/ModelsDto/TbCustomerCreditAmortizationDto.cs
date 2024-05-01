@@ -32,7 +32,7 @@ public class TbCustomerCreditAmortizationDto
     
     public string? LastName { get; set; }
     
-    public DateTime? BirthDate { get; set; }
+    public DateOnly? BirthDate { get; set; }
 
     public int? CurrencyId { get; set; }
     

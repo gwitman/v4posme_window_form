@@ -14,10 +14,10 @@ namespace v4posme_library.Models;
 public partial class TbPublicCatalogDetail
 {
     [Key]
-    [Column("publicCatalogDetailID", TypeName = "int(11)")]
+    [Column("publicCatalogDetailID")]
     public int PublicCatalogDetailId { get; set; }
 
-    [Column("publicCatalogID", TypeName = "int(11)")]
+    [Column("publicCatalogID")]
     public int? PublicCatalogId { get; set; }
 
     [Column("name")]
@@ -28,7 +28,7 @@ public partial class TbPublicCatalogDetail
     [StringLength(255)]
     public string? Display { get; set; }
 
-    [Column("flavorID", TypeName = "int(11)")]
+    [Column("flavorID")]
     public int? FlavorId { get; set; }
 
     [Column("description")]
@@ -39,7 +39,7 @@ public partial class TbPublicCatalogDetail
     [StringLength(255)]
     public string? Sequence { get; set; }
 
-    [Column("parentCatalogDetailID", TypeName = "int(11)")]
+    [Column("parentCatalogDetailID")]
     public int? ParentCatalogDetailId { get; set; }
 
     [Column("ratio")]

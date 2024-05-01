@@ -15,19 +15,19 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbUserTag
 {
-    [Column("tagID", TypeName = "int(11)")]
+    [Column("tagID")]
     public int TagId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("userID", TypeName = "int(11)")]
+    [Column("userID")]
     public int UserId { get; set; }
 
     [Key]
-    [Column("userTagID", TypeName = "int(11)")]
+    [Column("userTagID")]
     public int UserTagId { get; set; }
 }

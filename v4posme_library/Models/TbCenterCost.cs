@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.EntityFrameworkCore.DataAnnotations;
-using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
@@ -14,24 +12,24 @@ namespace v4posme_library.Models;
 [Index("AccountLevelId", Name = "IDX_CENTER_COST_003")]
 [Index("ParentAccountId", Name = "IDX_CENTER_COST_004")]
 [Index("ParentClassId", Name = "IDX_CENTER_COST_005")]
-[MySQLCharset("latin1")]
-[MySql.Data.EntityFrameworkCore.DataAnnotations.MySqlCollation("latin1_swedish_ci")]
+[MySqlCharSet("latin1")]
+[MySqlCollation("latin1_swedish_ci")]
 public partial class TbCenterCost
 {
     [Key]
-    [Column("classID", TypeName = "int(11)")]
+    [Column("classID")]
     public int ClassId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("accountLevelID", TypeName = "int(11)")]
+    [Column("accountLevelID")]
     public int AccountLevelId { get; set; }
 
-    [Column("parentAccountID", TypeName = "int(11)")]
+    [Column("parentAccountID")]
     public int? ParentAccountId { get; set; }
 
-    [Column("parentClassID", TypeName = "int(11)")]
+    [Column("parentClassID")]
     public int? ParentClassId { get; set; }
 
     [Column("number")]
@@ -45,13 +43,13 @@ public partial class TbCenterCost
     [Column("isActive")]
     public bool? IsActive { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int? CreatedBy { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
     public DateTime? CreatedOn { get; set; }
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int? CreatedAt { get; set; }
 
     [Column("createdIn")]

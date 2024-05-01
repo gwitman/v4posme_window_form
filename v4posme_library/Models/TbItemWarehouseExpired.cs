@@ -15,16 +15,16 @@ namespace v4posme_library.Models;
 public partial class TbItemWarehouseExpired
 {
     [Key]
-    [Column("itemWarehouseExpiredID", TypeName = "int(11)")]
+    [Column("itemWarehouseExpiredID")]
     public int ItemWarehouseExpiredId { get; set; }
 
-    [Column("warehouseID", TypeName = "int(11)")]
+    [Column("warehouseID")]
     public int WarehouseId { get; set; }
 
-    [Column("itemID", TypeName = "int(11)")]
+    [Column("itemID")]
     public int ItemId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Column("quantity")]

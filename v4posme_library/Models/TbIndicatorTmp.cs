@@ -11,20 +11,20 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbIndicatorTmp
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("loginID", TypeName = "int(11)")]
+    [Column("loginID")]
     public int LoginId { get; set; }
 
     [Column("tokenID")]
     [StringLength(250)]
     public string TokenId { get; set; } = null!;
 
-    [Column("indicadorID", TypeName = "int(11)")]
+    [Column("indicadorID")]
     public int IndicadorId { get; set; }
 
     [Column("value")]
@@ -32,6 +32,6 @@ public partial class TbIndicatorTmp
     public decimal Value { get; set; }
 
     [Key]
-    [Column("indicatorTmpID", TypeName = "int(11)")]
+    [Column("indicatorTmpID")]
     public int IndicatorTmpId { get; set; }
 }

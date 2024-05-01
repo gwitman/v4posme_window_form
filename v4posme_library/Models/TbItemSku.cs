@@ -12,13 +12,13 @@ namespace v4posme_library.Models;
 public partial class TbItemSku
 {
     [Key]
-    [Column("skuID", TypeName = "int(11)")]
+    [Column("skuID")]
     public int SkuId { get; set; }
 
-    [Column("itemID", TypeName = "int(11)")]
+    [Column("itemID")]
     public int ItemId { get; set; }
 
-    [Column("catalogItemID", TypeName = "int(11)")]
+    [Column("catalogItemID")]
     public int CatalogItemId { get; set; }
 
     [Column("value")]

@@ -14,13 +14,13 @@ namespace v4posme_library.Models;
 public partial class TbEmployeeCalendarPayDetail
 {
     [Key]
-    [Column("calendarDetailID", TypeName = "int(11)")]
+    [Column("calendarDetailID")]
     public int CalendarDetailId { get; set; }
 
-    [Column("calendarID", TypeName = "int(11)")]
+    [Column("calendarID")]
     public int CalendarId { get; set; }
 
-    [Column("employeeID", TypeName = "int(11)")]
+    [Column("employeeID")]
     public int EmployeeId { get; set; }
 
     [Column("salary")]

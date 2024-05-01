@@ -12,7 +12,7 @@ namespace v4posme_library.Models;
 public partial class TbCurrency
 {
     [Key]
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int CurrencyId { get; set; }
 
     [Column("simbol")]

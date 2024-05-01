@@ -15,20 +15,20 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbPrice
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("listPriceID", TypeName = "int(11)")]
+    [Column("listPriceID")]
     public int ListPriceId { get; set; }
 
-    [Column("itemID", TypeName = "int(11)")]
+    [Column("itemID")]
     public int ItemId { get; set; }
 
     [Key]
-    [Column("priceID", TypeName = "int(11)")]
+    [Column("priceID")]
     public int PriceId { get; set; }
 
-    [Column("typePriceID", TypeName = "int(11)")]
+    [Column("typePriceID")]
     public int TypePriceId { get; set; }
 
     [Column("percentage")]

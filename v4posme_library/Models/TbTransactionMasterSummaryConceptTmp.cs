@@ -14,31 +14,31 @@ namespace v4posme_library.Models;
 public partial class TbTransactionMasterSummaryConceptTmp
 {
     [Key]
-    [Column("ID", TypeName = "int(11)")]
+    [Column("ID")]
     public int Id { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int? CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int? BranchId { get; set; }
 
-    [Column("loginID", TypeName = "int(11)")]
+    [Column("loginID")]
     public int? LoginId { get; set; }
 
-    [Column("transactionID", TypeName = "int(11)")]
+    [Column("transactionID")]
     public int? TransactionId { get; set; }
 
-    [Column("transactionMasterID", TypeName = "int(11)")]
+    [Column("transactionMasterID")]
     public int? TransactionMasterId { get; set; }
 
-    [Column("transactionMasterCausalID", TypeName = "int(11)")]
+    [Column("transactionMasterCausalID")]
     public int? TransactionMasterCausalId { get; set; }
 
-    [Column("journalEntryID", TypeName = "int(11)")]
+    [Column("journalEntryID")]
     public int? JournalEntryId { get; set; }
 
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int? CurrencyId { get; set; }
 
     [Column("transactionNumber")]
@@ -52,7 +52,7 @@ public partial class TbTransactionMasterSummaryConceptTmp
     [Precision(26, 8)]
     public decimal? ExchangeRate { get; set; }
 
-    [Column("conceptID", TypeName = "int(11)")]
+    [Column("conceptID")]
     public int? ConceptId { get; set; }
 
     [Column("value")]

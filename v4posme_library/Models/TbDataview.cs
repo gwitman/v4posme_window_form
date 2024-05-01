@@ -14,7 +14,7 @@ namespace v4posme_library.Models;
 public partial class TbDataview
 {
     [Key]
-    [Column("dataViewID", TypeName = "int(11)")]
+    [Column("dataViewID")]
     public int DataViewId { get; set; }
 
     [Column("name")]
@@ -40,9 +40,9 @@ public partial class TbDataview
     [Column("isActive")]
     public bool? IsActive { get; set; }
 
-    [Column("callerID", TypeName = "int(11)")]
+    [Column("callerID")]
     public int CallerId { get; set; }
 
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 }

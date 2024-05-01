@@ -13,14 +13,14 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbItemCategory
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
     [Key]
-    [Column("inventoryCategoryID", TypeName = "int(11)")]
+    [Column("inventoryCategoryID")]
     public int InventoryCategoryId { get; set; }
 
     [Column("name")]
@@ -38,12 +38,12 @@ public partial class TbItemCategory
     [StringLength(250)]
     public string? CreatedIn { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int? CreatedBy { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
     public DateTime? CreatedOn { get; set; }
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int? CreatedAt { get; set; }
 }

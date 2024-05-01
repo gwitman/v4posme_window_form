@@ -13,11 +13,11 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbEstadisticaClas
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Key]
-    [Column("claseID", TypeName = "int(11)")]
+    [Column("claseID")]
     public int ClaseId { get; set; }
 
     [Column("name")]

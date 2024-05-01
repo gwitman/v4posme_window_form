@@ -55,7 +55,7 @@ class WorkflowStageModel : IWorkflowStageModel
         return context.TbWorkflowStages
             .Where(stage => stage.WorkflowId == workflowId
                             && stage.FlavorId == flavorId
-                            && stage.IsActive && stage.IsInit!.Value)
+                            && stage.IsActive && stage.IsInit)
             .ToList();
     }
 

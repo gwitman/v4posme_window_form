@@ -14,26 +14,26 @@ namespace v4posme_library.Models;
 public partial class TbTransactionConcept
 {
     [Key]
-    [Column("conceptID", TypeName = "int(11)")]
+    [Column("conceptID")]
     public int ConceptId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("transactionID", TypeName = "int(11)")]
+    [Column("transactionID")]
     public int TransactionId { get; set; }
 
     [Column("name")]
     [StringLength(250)]
     public string? Name { get; set; }
 
-    [Column("orden", TypeName = "int(11)")]
+    [Column("orden")]
     public int? Orden { get; set; }
 
-    [Column("sign", TypeName = "int(11)")]
+    [Column("sign")]
     public int? Sign { get; set; }
 
-    [Column("visible", TypeName = "int(11)")]
+    [Column("visible")]
     public int? Visible { get; set; }
 
     [Column("base")]

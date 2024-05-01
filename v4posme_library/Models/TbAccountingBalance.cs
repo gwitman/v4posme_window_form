@@ -14,28 +14,30 @@ namespace v4posme_library.Models;
 [Index("AccountId", Name = "IDX_ACCOUNTING_BALANCE_005")]
 [Index("BranchId", Name = "IDX_ACCOUNTING_BALANCE_006")]
 [Index("ClassId", Name = "IDX_ACCOUNTING_BALANCE_007")]
+[MySqlCharSet("latin1")]
+[MySqlCollation("latin1_swedish_ci")]
 public partial class TbAccountingBalance
 {
     [Key]
-    [Column("accountBalanceID", TypeName = "int(11)")]
+    [Column("accountBalanceID")]
     public int AccountBalanceId { get; set; }
 
-    [Column("componentCycleID", TypeName = "int(11)")]
+    [Column("componentCycleID")]
     public int ComponentCycleId { get; set; }
 
-    [Column("componentPeriodID", TypeName = "int(11)")]
+    [Column("componentPeriodID")]
     public int ComponentPeriodId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
-    [Column("accountID", TypeName = "int(11)")]
+    [Column("accountID")]
     public int AccountId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
     [Column("balance")]
@@ -50,7 +52,7 @@ public partial class TbAccountingBalance
     [Precision(18, 8)]
     public decimal Credit { get; set; }
 
-    [Column("classID", TypeName = "int(11)")]
+    [Column("classID")]
     public int? ClassId { get; set; }
 
     [Column("isActive")]

@@ -16,13 +16,13 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_general_ci")]
 public partial class TbNaturale
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int EntityId { get; set; }
 
     [Column("firstName")]
@@ -40,19 +40,19 @@ public partial class TbNaturale
     /// <summary>
     /// Catalogo de Estado Civil
     /// </summary>
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
     /// <summary>
     /// Catalogo de Profesion u Oficio
     /// </summary>
-    [Column("profesionID", TypeName = "int(11)")]
+    [Column("profesionID")]
     public int ProfesionId { get; set; }
 
     [Column("isActive")]
     public bool? IsActive { get; set; }
 
     [Key]
-    [Column("naturalesID", TypeName = "int(11)")]
+    [Column("naturalesID")]
     public int NaturalesId { get; set; }
 }

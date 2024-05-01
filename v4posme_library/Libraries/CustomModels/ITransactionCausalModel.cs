@@ -5,7 +5,7 @@ namespace v4posme_library.Libraries.CustomModels;
 
 public interface ITransactionCausalModel
 {
-    List<TbTransactionCausal?> GetCausalByBranch(int companyId, int transactionId, int branchId);
+    List<TbTransactionCausal> GetCausalByBranch(int companyId, int transactionId, int branchId);
 
     TbTransactionCausal? GetCausalDefaultId(int companyId, int transactionId);
 

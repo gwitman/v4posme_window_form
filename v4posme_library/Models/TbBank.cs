@@ -13,26 +13,26 @@ namespace v4posme_library.Models;
 public partial class TbBank
 {
     [Key]
-    [Column("bankID", TypeName = "int(11)")]
+    [Column("bankID")]
     public int BankId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int? CompanyId { get; set; }
 
     [Column("name")]
     [StringLength(255)]
     public string? Name { get; set; }
 
-    [Column("accountID", TypeName = "int(11)")]
+    [Column("accountID")]
     public int? AccountId { get; set; }
 
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int? CurrencyId { get; set; }
 
     [Column("balance")]
     [Precision(19, 8)]
     public decimal? Balance { get; set; }
 
-    [Column("isActive", TypeName = "int(11)")]
+    [Column("isActive")]
     public int? IsActive { get; set; }
 }

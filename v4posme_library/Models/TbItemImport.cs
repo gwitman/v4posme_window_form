@@ -16,9 +16,9 @@ public partial class TbItemImport
     [StringLength(255)]
     public string? ItemNumber { get; set; }
 
-    [Column("fisico", TypeName = "int(11)")]
+    [Column("fisico")]
     public int? Fisico { get; set; }
 
-    [Column("sistema", TypeName = "int(11)")]
+    [Column("sistema")]
     public int? Sistema { get; set; }
 }

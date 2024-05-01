@@ -15,17 +15,17 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_general_ci")]
 public partial class TbMenuElement
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("elementID", TypeName = "int(11)")]
+    [Column("elementID")]
     public int ElementId { get; set; }
 
     [Key]
-    [Column("menuElementID", TypeName = "int(11)")]
+    [Column("menuElementID")]
     public int MenuElementId { get; set; }
 
-    [Column("parentMenuElementID", TypeName = "int(11)")]
+    [Column("parentMenuElementID")]
     public int? ParentMenuElementId { get; set; }
 
     [Column("display")]
@@ -48,20 +48,24 @@ public partial class TbMenuElement
     [StringLength(250)]
     public string Template { get; set; } = null!;
 
-    [Column("nivel", TypeName = "int(11)")]
+    [Column("nivel")]
     public int Nivel { get; set; }
 
-    [Column("typeMenuElementID", TypeName = "int(11)")]
+    [Column("typeMenuElementID")]
     public int TypeMenuElementId { get; set; }
 
-    [Column("isActive", TypeName = "tinyint(4)")]
+    [Column("isActive")]
     public sbyte IsActive { get; set; }
-    
+
     [Column("iconWindowForm")]
     [StringLength(1200)]
     public string? IconWindowForm { get; set; }
-    
+
     [Column("formRedirectWindowForm")]
-    [StringLength(1200)]
+    [StringLength(500)]
     public string? FormRedirectWindowForm { get; set; }
+
+    [Column("typeUrlRedirect")]
+    [StringLength(255)]
+    public string? TypeUrlRedirect { get; set; }
 }

@@ -11,20 +11,20 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_general_ci")]
 public partial class TbWorkflowStageChangeLog
 {
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
-    [Column("workflowID", TypeName = "int(11)")]
+    [Column("workflowID")]
     public int WorkflowId { get; set; }
 
-    [Column("workflowStageID", TypeName = "int(11)")]
+    [Column("workflowStageID")]
     public int WorkflowStageId { get; set; }
 
     [Key]
-    [Column("workflowStageChangeLogID", TypeName = "int(11)")]
+    [Column("workflowStageChangeLogID")]
     public int WorkflowStageChangeLogId { get; set; }
 
-    [Column("componentItemID", TypeName = "int(11)")]
+    [Column("componentItemID")]
     public int? ComponentItemId { get; set; }
 
     [Column("description")]
@@ -34,6 +34,6 @@ public partial class TbWorkflowStageChangeLog
     [Column("createdOn", TypeName = "datetime")]
     public DateTime? CreatedOn { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int? CreatedBy { get; set; }
 }

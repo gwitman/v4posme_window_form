@@ -26,16 +26,16 @@ namespace v4posme_library.Models;
 public partial class TbEmployee
 {
     [Key]
-    [Column("employeeID", TypeName = "int(11)")]
+    [Column("employeeID")]
     public int EmployeeId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int EntityId { get; set; }
 
     [Column("employeNumber")]
@@ -46,7 +46,7 @@ public partial class TbEmployee
     [StringLength(250)]
     public string? NumberIdentification { get; set; }
 
-    [Column("identificationTypeID", TypeName = "int(11)")]
+    [Column("identificationTypeID")]
     public int? IdentificationTypeId { get; set; }
 
     [Column("socialSecurityNumber")]
@@ -57,25 +57,25 @@ public partial class TbEmployee
     [StringLength(250)]
     public string? Address { get; set; }
 
-    [Column("countryID", TypeName = "int(11)")]
+    [Column("countryID")]
     public int? CountryId { get; set; }
 
-    [Column("stateID", TypeName = "int(11)")]
+    [Column("stateID")]
     public int? StateId { get; set; }
 
-    [Column("cityID", TypeName = "int(11)")]
+    [Column("cityID")]
     public int? CityId { get; set; }
 
-    [Column("departamentID", TypeName = "int(11)")]
+    [Column("departamentID")]
     public int? DepartamentId { get; set; }
 
-    [Column("areaID", TypeName = "int(11)")]
+    [Column("areaID")]
     public int? AreaId { get; set; }
 
-    [Column("clasificationID", TypeName = "int(11)")]
+    [Column("clasificationID")]
     public int? ClasificationId { get; set; }
 
-    [Column("categoryID", TypeName = "int(11)")]
+    [Column("categoryID")]
     public int? CategoryId { get; set; }
 
     [Column("reference1")]
@@ -86,7 +86,7 @@ public partial class TbEmployee
     [StringLength(250)]
     public string? Reference2 { get; set; }
 
-    [Column("typeEmployeeID", TypeName = "int(11)")]
+    [Column("typeEmployeeID")]
     public int? TypeEmployeeId { get; set; }
 
     [Column("hourCost")]
@@ -97,7 +97,7 @@ public partial class TbEmployee
     [Precision(18, 4)]
     public decimal ComissionPorcentage { get; set; }
 
-    [Column("parentEmployeeID", TypeName = "int(11)")]
+    [Column("parentEmployeeID")]
     public int? ParentEmployeeId { get; set; }
 
     [Column("startOn")]
@@ -106,7 +106,7 @@ public partial class TbEmployee
     [Column("endOn")]
     public DateOnly? EndOn { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int? StatusId { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
@@ -116,10 +116,10 @@ public partial class TbEmployee
     [StringLength(250)]
     public string? CreatedIn { get; set; }
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int? CreatedAt { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int? CreatedBy { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]

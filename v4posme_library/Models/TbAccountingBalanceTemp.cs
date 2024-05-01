@@ -3,37 +3,35 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.EntityFrameworkCore.DataAnnotations;
-using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
 [Table("tb_accounting_balance_temp")]
-[MySQLCharset("latin1")]
-[MySql.Data.EntityFrameworkCore.DataAnnotations.MySqlCollation("latin1_swedish_ci")]
+[MySqlCharSet("latin1")]
+[MySqlCollation("latin1_swedish_ci")]
 public partial class TbAccountingBalanceTemp
 {
     [Key]
-    [Column("accountingBalanceTempID", TypeName = "int(11)")]
+    [Column("accountingBalanceTempID")]
     public int AccountingBalanceTempId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("loginID", TypeName = "int(11)")]
+    [Column("loginID")]
     public int LoginId { get; set; }
 
     [Column("tocken")]
     [StringLength(500)]
     public string? Tocken { get; set; }
 
-    [Column("accountID", TypeName = "int(11)")]
+    [Column("accountID")]
     public int AccountId { get; set; }
 
-    [Column("parentAccountID", TypeName = "int(11)")]
+    [Column("parentAccountID")]
     public int? ParentAccountId { get; set; }
 
     [Column("accountNumber")]
@@ -47,10 +45,10 @@ public partial class TbAccountingBalanceTemp
     [Column("isOperative", TypeName = "bit(18)")]
     public ulong IsOperative { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
-    [Column("accountTypeID", TypeName = "int(11)")]
+    [Column("accountTypeID")]
     public int AccountTypeId { get; set; }
 
     [Column("naturaleza")]

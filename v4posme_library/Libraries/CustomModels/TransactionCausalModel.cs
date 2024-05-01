@@ -6,7 +6,7 @@ namespace v4posme_library.Libraries.CustomModels;
 
 class TransactionCausalModel : ITransactionCausalModel
 {
-    public List<TbTransactionCausal?> GetCausalByBranch(int companyId, int transactionId, int branchId)
+    public List<TbTransactionCausal> GetCausalByBranch(int companyId, int transactionId, int branchId)
     {
         using var context = new DataContext();
         return context.TbTransactionCausals

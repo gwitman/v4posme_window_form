@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.EntityFrameworkCore.DataAnnotations;
-using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
 [Table("tb_account_tmp")]
-[MySQLCharset("latin1")]
-[Microsoft.EntityFrameworkCore.MySqlCollation("latin1_swedish_ci")]
+[MySqlCharSet("latin1")]
+[MySqlCollation("latin1_swedish_ci")]
 public partial class TbAccountTmp
 {
     [Key]
-    [Column("accountID", TypeName = "int(11)")]
+    [Column("accountID")]
     public int AccountId { get; set; }
 
-    [Column("accountParentID", TypeName = "int(11)")]
+    [Column("accountParentID")]
     public int? AccountParentId { get; set; }
 
     [Column("n1")]
@@ -44,7 +42,7 @@ public partial class TbAccountTmp
     [StringLength(250)]
     public string? Name { get; set; }
 
-    [Column("nivel", TypeName = "int(11)")]
+    [Column("nivel")]
     public int? Nivel { get; set; }
 
     [Column("operative", TypeName = "bit(1)")]

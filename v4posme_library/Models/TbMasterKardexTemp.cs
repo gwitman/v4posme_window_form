@@ -16,17 +16,17 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbMasterKardexTemp
 {
-    [Column("userID", TypeName = "int(11)")]
+    [Column("userID")]
     public int UserId { get; set; }
 
     [Column("tokenID")]
     [StringLength(50)]
     public string? TokenId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("itemID", TypeName = "int(11)")]
+    [Column("itemID")]
     public int ItemId { get; set; }
 
     [Column("itemNumber")]
@@ -37,7 +37,7 @@ public partial class TbMasterKardexTemp
     [StringLength(50)]
     public string ItemName { get; set; } = null!;
 
-    [Column("minKardexID", TypeName = "int(11)")]
+    [Column("minKardexID")]
     public int MinKardexId { get; set; }
 
     [Column("quantityInicial")]
@@ -65,7 +65,7 @@ public partial class TbMasterKardexTemp
     public decimal CostOutput { get; set; }
 
     [Key]
-    [Column("masterKardexTempID", TypeName = "int(11)")]
+    [Column("masterKardexTempID")]
     public int MasterKardexTempId { get; set; }
 
     [Column("itemCategoryName")]

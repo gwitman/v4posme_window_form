@@ -15,11 +15,11 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbListPrice
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Key]
-    [Column("listPriceID", TypeName = "int(11)")]
+    [Column("listPriceID")]
     public int ListPriceId { get; set; }
 
     [Column("startOn", TypeName = "datetime")]
@@ -36,7 +36,7 @@ public partial class TbListPrice
     [StringLength(550)]
     public string? Description { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
@@ -46,10 +46,10 @@ public partial class TbListPrice
     [StringLength(50)]
     public string CreatedIn { get; set; } = null!;
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int CreatedBy { get; set; }
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int CreatedAt { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]

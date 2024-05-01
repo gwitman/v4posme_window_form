@@ -14,16 +14,16 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbCompanySubelementAudit
 {
-    [Column("elementID", TypeName = "int(11)")]
+    [Column("elementID")]
     public int ElementId { get; set; }
 
-    [Column("subElementID", TypeName = "int(11)")]
+    [Column("subElementID")]
     public int SubElementId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Key]
-    [Column("companySubelementAudiID", TypeName = "int(11)")]
+    [Column("companySubelementAudiID")]
     public int CompanySubelementAudiId { get; set; }
 }

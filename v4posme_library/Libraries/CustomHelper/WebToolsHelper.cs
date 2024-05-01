@@ -11,7 +11,12 @@ namespace v4posme_library.Libraries.CustomHelper
             var unixTime = dateTime - epoch;
             return (long)unixTime.TotalSeconds;
         }
-
+        public static long ToUnixTimestamp(DateOnly dateTime)
+        {
+            var epoch = new DateOnly(1970, 1, 1);
+            var unixTime = dateTime.DayNumber - epoch.DayNumber;
+            return unixTime;
+        }
         
         public string helper_RequestGetValueObjet(dynamic data,string fieldData, string defaultValue)
         {

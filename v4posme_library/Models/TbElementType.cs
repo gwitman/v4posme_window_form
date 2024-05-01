@@ -12,7 +12,7 @@ namespace v4posme_library.Models;
 public partial class TbElementType
 {
     [Key]
-    [Column("elementTypeID", TypeName = "int(11)")]
+    [Column("elementTypeID")]
     public int ElementTypeId { get; set; }
 
     [Column("name")]

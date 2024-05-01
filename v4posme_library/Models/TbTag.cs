@@ -16,7 +16,7 @@ namespace v4posme_library.Models;
 public partial class TbTag
 {
     [Key]
-    [Column("tagID", TypeName = "int(11)")]
+    [Column("tagID")]
     public int TagId { get; set; }
 
     [Column("name")]

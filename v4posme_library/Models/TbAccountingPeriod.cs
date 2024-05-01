@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.EntityFrameworkCore.DataAnnotations;
-using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
@@ -12,18 +10,18 @@ namespace v4posme_library.Models;
 [Index("CompanyId", Name = "IDX_ACCOUNTING_PERIOD_001")]
 [Index("ComponentId", Name = "IDX_ACCOUNTING_PERIOD_002")]
 [Index("StatusId", Name = "IDX_ACCOUNTING_PERIOD_003")]
-[MySQLCharset("latin1")]
-[Microsoft.EntityFrameworkCore.MySqlCollation("latin1_swedish_ci")]
+[MySqlCharSet("latin1")]
+[MySqlCollation("latin1_swedish_ci")]
 public partial class TbAccountingPeriod
 {
     [Key]
-    [Column("componentPeriodID", TypeName = "int(11)")]
+    [Column("componentPeriodID")]
     public int ComponentPeriodId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
     [Column("number")]
@@ -44,19 +42,19 @@ public partial class TbAccountingPeriod
     [Column("endOn", TypeName = "datetime")]
     public DateTime EndOn { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
     [Column("isActive")]
     public bool IsActive { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int? CreatedBy { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
     public DateTime? CreatedOn { get; set; }
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int? CreatedAt { get; set; }
 
     [Column("createdIn")]

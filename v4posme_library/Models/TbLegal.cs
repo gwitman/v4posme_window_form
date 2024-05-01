@@ -14,13 +14,13 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_general_ci")]
 public partial class TbLegal
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int EntityId { get; set; }
 
     [Column("comercialName")]
@@ -39,6 +39,6 @@ public partial class TbLegal
     public bool? IsActive { get; set; }
 
     [Key]
-    [Column("legalID", TypeName = "int(11)")]
+    [Column("legalID")]
     public int LegalId { get; set; }
 }

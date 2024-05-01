@@ -15,22 +15,22 @@ namespace v4posme_library.Models;
 public partial class TbItemDataSheetDetail
 {
     [Key]
-    [Column("itemDataSheetDetailID", TypeName = "int(11)")]
+    [Column("itemDataSheetDetailID")]
     public int ItemDataSheetDetailId { get; set; }
 
-    [Column("itemDataSheetID", TypeName = "int(11)")]
+    [Column("itemDataSheetID")]
     public int ItemDataSheetId { get; set; }
 
-    [Column("itemID", TypeName = "int(11)")]
+    [Column("itemID")]
     public int ItemId { get; set; }
 
     [Column("quantity")]
     [Precision(19, 9)]
     public decimal Quantity { get; set; }
 
-    [Column("relatedItemID", TypeName = "int(11)")]
+    [Column("relatedItemID")]
     public int RelatedItemId { get; set; }
 
-    [Column("isActive", TypeName = "tinyint(4)")]
+    [Column("isActive")]
     public sbyte IsActive { get; set; }
 }

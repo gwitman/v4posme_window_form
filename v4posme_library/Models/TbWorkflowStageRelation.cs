@@ -16,25 +16,25 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_general_ci")]
 public partial class TbWorkflowStageRelation
 {
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
-    [Column("workflowID", TypeName = "int(11)")]
+    [Column("workflowID")]
     public int WorkflowId { get; set; }
 
-    [Column("workflowStageID", TypeName = "int(11)")]
+    [Column("workflowStageID")]
     public int WorkflowStageId { get; set; }
 
-    [Column("workflowStageTargetID", TypeName = "int(11)")]
+    [Column("workflowStageTargetID")]
     public int WorkflowStageTargetId { get; set; }
 
     [Key]
-    [Column("workflowStageRelationID", TypeName = "int(11)")]
+    [Column("workflowStageRelationID")]
     public int WorkflowStageRelationId { get; set; }
 
     [Column("necesitaAuth")]
     public bool? NecesitaAuth { get; set; }
 
-    [Column("AuthRolID", TypeName = "int(11)")]
+    [Column("AuthRolID")]
     public int? AuthRolId { get; set; }
 }

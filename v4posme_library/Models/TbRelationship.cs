@@ -14,13 +14,13 @@ namespace v4posme_library.Models;
 public partial class TbRelationship
 {
     [Key]
-    [Column("relationshipID", TypeName = "int(11)")]
+    [Column("relationshipID")]
     public int RelationshipId { get; set; }
 
-    [Column("employeeID", TypeName = "int(11)")]
+    [Column("employeeID")]
     public int EmployeeId { get; set; }
 
-    [Column("customerID", TypeName = "int(11)")]
+    [Column("customerID")]
     public int CustomerId { get; set; }
 
     [Column("startOn")]

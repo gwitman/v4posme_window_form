@@ -20,10 +20,10 @@ namespace v4posme_library.Models;
 public partial class TbJournalEntry
 {
     [Key]
-    [Column("journalEntryID", TypeName = "int(11)")]
+    [Column("journalEntryID")]
     public int JournalEntryId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Column("journalNumber")]
@@ -44,10 +44,10 @@ public partial class TbJournalEntry
     [StringLength(250)]
     public string? CreatedIn { get; set; }
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int? CreatedAt { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int? CreatedBy { get; set; }
 
     [Column("isActive")]
@@ -63,7 +63,7 @@ public partial class TbJournalEntry
     [Column("isTemplated")]
     public bool IsTemplated { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
     [Column("note")]
@@ -90,13 +90,13 @@ public partial class TbJournalEntry
     [Precision(19, 2)]
     public decimal Credit { get; set; }
 
-    [Column("journalTypeID", TypeName = "int(11)")]
+    [Column("journalTypeID")]
     public int JournalTypeId { get; set; }
 
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int CurrencyId { get; set; }
 
-    [Column("accountingCycleID", TypeName = "int(11)")]
+    [Column("accountingCycleID")]
     public int AccountingCycleId { get; set; }
 
     [Column("entryName")]
@@ -106,9 +106,9 @@ public partial class TbJournalEntry
     [Column("isModule", TypeName = "bit(1)")]
     public ulong IsModule { get; set; }
 
-    [Column("transactionMasterID", TypeName = "int(11)")]
+    [Column("transactionMasterID")]
     public int TransactionMasterId { get; set; }
 
-    [Column("transactionID", TypeName = "int(11)")]
+    [Column("transactionID")]
     public int TransactionId { get; set; }
 }

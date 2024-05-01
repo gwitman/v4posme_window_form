@@ -16,10 +16,10 @@ namespace v4posme_library.Models;
 public partial class TbCustomerConsultasSinRiesgo
 {
     [Key]
-    [Column("requestID", TypeName = "int(11)")]
+    [Column("requestID")]
     public int RequestId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Column("name")]
@@ -34,20 +34,20 @@ public partial class TbCustomerConsultasSinRiesgo
     [StringLength(150)]
     public string File { get; set; } = null!;
 
-    [Column("userID", TypeName = "int(11)")]
+    [Column("userID")]
     public int UserId { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
     public DateTime CreatedOn { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int CreatedBy { get; set; }
 
     [Column("createdIn")]
     [StringLength(50)]
     public string CreatedIn { get; set; } = null!;
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int CreatedAt { get; set; }
 
     [Column("modifiedOn", TypeName = "datetime")]

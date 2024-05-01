@@ -14,10 +14,10 @@ namespace v4posme_library.Models;
 public partial class TbError
 {
     [Key]
-    [Column("errorID", TypeName = "int(11)")]
+    [Column("errorID")]
     public int ErrorId { get; set; }
 
-    [Column("tagID", TypeName = "int(11)")]
+    [Column("tagID")]
     public int? TagId { get; set; }
 
     [Column("notificated")]
@@ -28,13 +28,13 @@ public partial class TbError
     [StringLength(500)]
     public string? Message { get; set; }
 
-    [Column("isActive", TypeName = "tinyint(4)")]
+    [Column("isActive")]
     public sbyte? IsActive { get; set; }
 
-    [Column("isRead", TypeName = "tinyint(4)")]
+    [Column("isRead")]
     public sbyte? IsRead { get; set; }
 
-    [Column("userID", TypeName = "int(11)")]
+    [Column("userID")]
     public int? UserId { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]

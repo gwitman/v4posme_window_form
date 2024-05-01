@@ -16,7 +16,7 @@ public partial class TbCustomerCreditExternalSharonTmp
     [StringLength(50)]
     public string CompanyName { get; set; } = null!;
 
-    [Column("customerID", TypeName = "int(11)")]
+    [Column("customerID")]
     public int CustomerId { get; set; }
 
     [Column("dateCredit")]

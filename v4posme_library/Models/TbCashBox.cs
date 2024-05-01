@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.EntityFrameworkCore.DataAnnotations;
-using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
@@ -14,18 +12,18 @@ namespace v4posme_library.Models;
 [Index("CashBoxCode", Name = "IDX_CASH_BOX_003")]
 [Index("StatusId", Name = "IDX_CASH_BOX_004")]
 [Index("CashBoxId", Name = "IDX_CASH_BOX_005")]
-[MySQLCharset("latin1")]
-[Microsoft.EntityFrameworkCore.MySqlCollation("latin1_swedish_ci")]
+[MySqlCharSet("latin1")]
+[MySqlCollation("latin1_swedish_ci")]
 public partial class TbCashBox
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
     [Key]
-    [Column("cashBoxID", TypeName = "int(11)")]
+    [Column("cashBoxID")]
     public int CashBoxId { get; set; }
 
     [Column("cashBoxCode")]
@@ -40,7 +38,7 @@ public partial class TbCashBox
     [StringLength(550)]
     public string? Description { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]

@@ -15,19 +15,19 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbRoleAutorization
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("componentAutorizationID", TypeName = "int(11)")]
+    [Column("componentAutorizationID")]
     public int ComponentAutorizationId { get; set; }
 
-    [Column("roleID", TypeName = "int(11)")]
+    [Column("roleID")]
     public int RoleId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
     [Key]
-    [Column("roleAurotizationID", TypeName = "int(11)")]
+    [Column("roleAurotizationID")]
     public int RoleAurotizationId { get; set; }
 }

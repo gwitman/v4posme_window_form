@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
@@ -13,27 +12,27 @@ namespace v4posme_library.Models;
 [Index("CatalogId", Name = "IDX_CATALOG_ITEM_CONVERSATION_003")]
 [Index("CatalogItemId", Name = "IDX_CATALOG_ITEM_CONVERSATION_004")]
 [Index("TargetCatalogItemId", Name = "IDX_CATALOG_ITEM_CONVERSATION_005")]
-[MySQLCharset("latin1")]
+[MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbCatalogItemConvertion
 {
     [Key]
-    [Column("catalogItemConvertionID", TypeName = "int(11)")]
+    [Column("catalogItemConvertionID")]
     public int CatalogItemConvertionId { get; set; }
 
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("catalogID", TypeName = "int(11)")]
+    [Column("catalogID")]
     public int CatalogId { get; set; }
 
-    [Column("catalogItemID", TypeName = "int(11)")]
+    [Column("catalogItemID")]
     public int CatalogItemId { get; set; }
 
-    [Column("targetCatalogItemID", TypeName = "int(11)")]
+    [Column("targetCatalogItemID")]
     public int? TargetCatalogItemId { get; set; }
 
     [Column("ratio")]

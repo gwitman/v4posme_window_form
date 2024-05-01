@@ -14,13 +14,13 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbCompanyComponentConcept
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
-    [Column("componentItemID", TypeName = "int(11)")]
+    [Column("componentItemID")]
     public int ComponentItemId { get; set; }
 
     [Column("name")]
@@ -36,6 +36,6 @@ public partial class TbCompanyComponentConcept
     public decimal? ValueOut { get; set; }
 
     [Key]
-    [Column("companyComponentConceptID", TypeName = "int(11)")]
+    [Column("companyComponentConceptID")]
     public int CompanyComponentConceptId { get; set; }
 }

@@ -17,20 +17,20 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbTransactionProfileDetail
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("transactionID", TypeName = "int(11)")]
+    [Column("transactionID")]
     public int TransactionId { get; set; }
 
-    [Column("transactionCausalID", TypeName = "int(11)")]
+    [Column("transactionCausalID")]
     public int TransactionCausalId { get; set; }
 
     [Key]
-    [Column("profileDetailID", TypeName = "int(11)")]
+    [Column("profileDetailID")]
     public int ProfileDetailId { get; set; }
 
-    [Column("conceptID", TypeName = "int(11)")]
+    [Column("conceptID")]
     public int ConceptId { get; set; }
 
     [Column("accountID")]

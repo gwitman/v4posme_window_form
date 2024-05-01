@@ -22,26 +22,26 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbTransactionMasterDetail
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("transactionID", TypeName = "int(11)")]
+    [Column("transactionID")]
     public int TransactionId { get; set; }
 
-    [Column("transactionMasterID", TypeName = "int(11)")]
+    [Column("transactionMasterID")]
     public int TransactionMasterId { get; set; }
 
     [Key]
-    [Column("transactionMasterDetailID", TypeName = "int(11)")]
+    [Column("transactionMasterDetailID")]
     public int TransactionMasterDetailId { get; set; }
 
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int? ComponentId { get; set; }
 
-    [Column("componentItemID", TypeName = "int(11)")]
+    [Column("componentItemID")]
     public int? ComponentItemId { get; set; }
 
-    [Column("promotionID", TypeName = "int(11)")]
+    [Column("promotionID")]
     public int? PromotionId { get; set; }
 
     [Column("amount")]
@@ -124,10 +124,10 @@ public partial class TbTransactionMasterDetail
     [Precision(18, 8)]
     public decimal? ExchangeRateReference { get; set; }
 
-    [Column("catalogStatusID", TypeName = "int(11)")]
+    [Column("catalogStatusID")]
     public int? CatalogStatusId { get; set; }
 
-    [Column("inventoryStatusID", TypeName = "int(11)")]
+    [Column("inventoryStatusID")]
     public int? InventoryStatusId { get; set; }
 
     [Column("isActive")]
@@ -156,19 +156,19 @@ public partial class TbTransactionMasterDetail
     [Column("expirationDate", TypeName = "datetime")]
     public DateTime? ExpirationDate { get; set; }
 
-    [Column("inventoryWarehouseSourceID", TypeName = "int(11)")]
+    [Column("inventoryWarehouseSourceID")]
     public int? InventoryWarehouseSourceId { get; set; }
 
-    [Column("inventoryWarehouseTargetID", TypeName = "int(11)")]
+    [Column("inventoryWarehouseTargetID")]
     public int? InventoryWarehouseTargetId { get; set; }
 
     [Column("itemFormulatedApplied")]
     public bool ItemFormulatedApplied { get; set; }
 
-    [Column("typePriceID", TypeName = "int(11)")]
+    [Column("typePriceID")]
     public int TypePriceId { get; set; }
 
-    [Column("skuCatalogItemID", TypeName = "int(11)")]
+    [Column("skuCatalogItemID")]
     public int SkuCatalogItemId { get; set; }
 
     [Column("skuQuantity")]

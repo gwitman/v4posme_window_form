@@ -15,12 +15,15 @@ public partial class VwGerenciaEstadoResultado001
     public string Cuenta { get; set; } = null!;
 
     [StringLength(4)]
+    [MySqlCollation("utf8mb4_0900_ai_ci")]
     public string? Ano { get; set; }
 
     [StringLength(7)]
+    [MySqlCollation("utf8mb4_0900_ai_ci")]
     public string? Mes { get; set; }
 
     [StringLength(2)]
+    [MySqlCollation("utf8mb4_0900_ai_ci")]
     public string? MesOnly { get; set; }
 
     [Column("C$saldoInicial")]

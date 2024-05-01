@@ -17,22 +17,22 @@ namespace v4posme_library.Models;
 public partial class TbJournalEntryDetail
 {
     [Key]
-    [Column("journalEntryDetailID", TypeName = "int(11)")]
+    [Column("journalEntryDetailID")]
     public int JournalEntryDetailId { get; set; }
 
-    [Column("journalEntryID", TypeName = "int(11)")]
+    [Column("journalEntryID")]
     public int JournalEntryId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("accountID", TypeName = "int(11)")]
+    [Column("accountID")]
     public int AccountId { get; set; }
 
     [Column("isActive")]
     public bool IsActive { get; set; }
 
-    [Column("classID", TypeName = "int(11)")]
+    [Column("classID")]
     public int? ClassId { get; set; }
 
     [Column("debit")]
@@ -50,7 +50,7 @@ public partial class TbJournalEntryDetail
     [Column("isApplied")]
     public bool? IsApplied { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int? BranchId { get; set; }
 
     [Column("tb_exchange_rate")]

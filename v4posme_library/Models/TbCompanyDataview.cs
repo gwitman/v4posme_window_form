@@ -16,16 +16,16 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_general_ci")]
 public partial class TbCompanyDataview
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("dataViewID", TypeName = "int(11)")]
+    [Column("dataViewID")]
     public int DataViewId { get; set; }
 
-    [Column("callerID", TypeName = "int(11)")]
+    [Column("callerID")]
     public int CallerId { get; set; }
 
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
     [Column("name")]
@@ -59,11 +59,11 @@ public partial class TbCompanyDataview
     [Column("isActive")]
     public bool? IsActive { get; set; }
 
-    [Column("flavorID", TypeName = "int(11)")]
+    [Column("flavorID")]
     public int? FlavorId { get; set; }
 
     [Key]
-    [Column("companyDataViewID", TypeName = "int(11)")]
+    [Column("companyDataViewID")]
     public int CompanyDataViewId { get; set; }
 
     [Column("formatColumnsHeader")]

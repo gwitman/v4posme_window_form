@@ -21,29 +21,29 @@ namespace v4posme_library.Models;
 public partial class TbCustomerCreditLine
 {
     [Key]
-    [Column("customerCreditLineID", TypeName = "int(11)")]
+    [Column("customerCreditLineID")]
     public int CustomerCreditLineId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int EntityId { get; set; }
 
-    [Column("creditLineID", TypeName = "int(11)")]
+    [Column("creditLineID")]
     public int CreditLineId { get; set; }
 
     [Column("accountNumber")]
     [StringLength(25)]
     public string AccountNumber { get; set; } = null!;
 
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int CurrencyId { get; set; }
 
-    [Column("typeAmortization", TypeName = "int(11)")]
+    [Column("typeAmortization")]
     public int TypeAmortization { get; set; }
 
     [Column("limitCredit")]
@@ -73,20 +73,20 @@ public partial class TbCustomerCreditLine
     [Column("dateOpen")]
     public DateOnly DateOpen { get; set; }
 
-    [Column("periodPay", TypeName = "int(11)")]
+    [Column("periodPay")]
     public int PeriodPay { get; set; }
 
     [Column("dateLastPay")]
     public DateOnly? DateLastPay { get; set; }
 
-    [Column("term", TypeName = "int(11)")]
+    [Column("term")]
     public int? Term { get; set; }
 
     [Column("note")]
     [StringLength(550)]
     public string? Note { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]

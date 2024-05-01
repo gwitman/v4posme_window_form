@@ -24,7 +24,6 @@ public partial class VwGerenciaDesembolsosResuman
     [MySqlCollation("latin1_swedish_ci")]
     public string Moneda { get; set; } = null!;
 
-    [Column(TypeName = "int(5)")]
     public int? Edad { get; set; }
 
     [Column("C$Monto")]
@@ -47,7 +46,6 @@ public partial class VwGerenciaDesembolsosResuman
     [Precision(19, 9)]
     public decimal Interes { get; set; }
 
-    [Column(TypeName = "int(11)")]
     public int Plazo { get; set; }
 
     [Precision(18, 4)]
@@ -66,12 +64,15 @@ public partial class VwGerenciaDesembolsosResuman
     public string? PeriodoPago { get; set; }
 
     [StringLength(4)]
+    [MySqlCollation("utf8mb4_0900_ai_ci")]
     public string? Anio { get; set; }
 
     [StringLength(7)]
+    [MySqlCollation("utf8mb4_0900_ai_ci")]
     public string? Mes { get; set; }
 
     [StringLength(2)]
+    [MySqlCollation("utf8mb4_0900_ai_ci")]
     public string? MesUnicamente { get; set; }
 
     [StringLength(50)]

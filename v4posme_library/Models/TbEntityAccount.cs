@@ -20,16 +20,16 @@ namespace v4posme_library.Models;
 public partial class TbEntityAccount
 {
     [Key]
-    [Column("entityAccountID", TypeName = "int(11)")]
+    [Column("entityAccountID")]
     public int EntityAccountId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
-    [Column("componentItemID", TypeName = "int(11)")]
+    [Column("componentItemID")]
     public int ComponentItemId { get; set; }
 
     [Column("name")]
@@ -40,13 +40,13 @@ public partial class TbEntityAccount
     [StringLength(250)]
     public string? Description { get; set; }
 
-    [Column("accountTypeID", TypeName = "int(11)")]
+    [Column("accountTypeID")]
     public int AccountTypeId { get; set; }
 
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int CurrencyId { get; set; }
 
-    [Column("classID", TypeName = "int(11)")]
+    [Column("classID")]
     public int? ClassId { get; set; }
 
     [Column("balance")]
@@ -69,13 +69,13 @@ public partial class TbEntityAccount
     [Precision(19, 9)]
     public decimal MaxDebit { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
-    [Column("accountID", TypeName = "int(11)")]
+    [Column("accountID")]
     public int? AccountId { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int CreatedBy { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
@@ -85,7 +85,7 @@ public partial class TbEntityAccount
     [StringLength(50)]
     public string CreatedIn { get; set; } = null!;
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int CreatedAt { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]

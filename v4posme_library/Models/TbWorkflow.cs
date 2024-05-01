@@ -14,10 +14,10 @@ namespace v4posme_library.Models;
 public partial class TbWorkflow
 {
     [Key]
-    [Column("workflowID", TypeName = "int(11)")]
+    [Column("workflowID")]
     public int WorkflowId { get; set; }
 
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
     [Column("name")]

@@ -13,7 +13,7 @@ namespace v4posme_library.Models;
 public partial class TbComponent
 {
     [Key]
-    [Column("componentID", TypeName = "int(11)")]
+    [Column("componentID")]
     public int ComponentId { get; set; }
 
     [Column("name")]

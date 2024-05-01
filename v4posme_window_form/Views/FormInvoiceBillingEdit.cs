@@ -582,13 +582,13 @@ namespace v4posme_window.Views
                 //$objParameterPrinterName = $this->core_web_parameter->getParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT",$companyID); 
                 //$objParameterPrinterName = $objParameterPrinterName->value;  ???  
                 //PATH_FILE_OF_APP_ROOT.\img\logos\xxxxxxxx 
-
-
-                var printer = new Printer("Adobe PDF");
+                var printerName = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT", companyID);
+                var pathOfLogo = VariablesGlobales.ConfigurationBuilder["PATH_FILE_OF_APP_ROOT"];
+                var printer = new Printer(printerName!.Value);
                 printer.AlignCenter();
                 if (objParameterCompanyLogo is not null) 
                 {
-                    var imagePath = $"c:\\logo\\{objParameterCompanyLogo.Value!}";
+                    var imagePath = $"{pathOfLogo}\\{objParameterCompanyLogo.Value!}";
                     if (File.Exists(imagePath))
                     {
                         var logoCompany = new Bitmap(Image.FromFile(imagePath));
@@ -1985,16 +1985,13 @@ namespace v4posme_window.Views
                 //obtener nombre de impresora por defecto
                 var objParameterPrinterName = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT", user.CompanyId)!.Value;
                 var coreWebPrinter = new CoreWebPrinterDirect();
-                var pd = coreWebPrinter.ConfigurationPrinter(objParameterPrinterName!);
+                var pd = coreWebPrinter.ConfigurationPrinter(objParameterPrinterName);
                 //PrintDocument maneja el evento para imprimir
                 //$objParameterPrinterName = $this->core_web_parameter->getParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT",$companyID);
                 //$objParameterPrinterName = $objParameterPrinterName->value;  ???  
-                var printer = new Printer("Adobe PDF");
+                var printer = new Printer(objParameterPrinterName);
                 printer.OpenDrawer();
                 printer.PrintDocument();
-                //https://github.com/mtmsuhail/ESC-POS-USB-NET
-
-
             }
             catch (Exception ex)
             {

@@ -12,16 +12,16 @@ namespace v4posme_library.Models;
 public partial class TbRazonesFinancierasTmp
 {
     [Key]
-    [Column("rzID", TypeName = "int(11)")]
+    [Column("rzID")]
     public int RzId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("loginID", TypeName = "int(11)")]
+    [Column("loginID")]
     public int LoginId { get; set; }
 
     [Column("token")]

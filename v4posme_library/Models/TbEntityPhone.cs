@@ -15,26 +15,26 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbEntityPhone
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int EntityId { get; set; }
 
     [Key]
-    [Column("entityPhoneID", TypeName = "bigint(20)")]
+    [Column("entityPhoneID")]
     public long EntityPhoneId { get; set; }
 
-    [Column("typeID", TypeName = "int(11)")]
+    [Column("typeID")]
     public int? TypeId { get; set; }
 
     [Column("number")]
     [StringLength(250)]
     public string? Number { get; set; }
 
-    [Column("isPrimary", TypeName = "tinyint(4)")]
+    [Column("isPrimary")]
     public sbyte? IsPrimary { get; set; }
 }

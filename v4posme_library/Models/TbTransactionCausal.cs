@@ -16,27 +16,27 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbTransactionCausal
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("transactionID", TypeName = "int(11)")]
+    [Column("transactionID")]
     public int TransactionId { get; set; }
 
     [Key]
-    [Column("transactionCausalID", TypeName = "int(11)")]
+    [Column("transactionCausalID")]
     public int TransactionCausalId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int? BranchId { get; set; }
 
     [Column("name")]
     [StringLength(50)]
     public string Name { get; set; } = null!;
 
-    [Column("warehouseSourceID", TypeName = "int(11)")]
+    [Column("warehouseSourceID")]
     public int? WarehouseSourceId { get; set; }
 
-    [Column("warehouseTargetID", TypeName = "int(11)")]
+    [Column("warehouseTargetID")]
     public int? WarehouseTargetId { get; set; }
 
     [Column("isDefault", TypeName = "bit(1)")]

@@ -32,36 +32,36 @@ namespace v4posme_library.Models;
 public partial class TbCustomer
 {
     [Key]
-    [Column("customerID", TypeName = "int(11)")]
+    [Column("customerID")]
     public int CustomerId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int EntityId { get; set; }
 
     [Column("customerNumber")]
     [StringLength(250)]
     public string CustomerNumber { get; set; } = null!;
 
-    [Column("identificationType", TypeName = "int(11)")]
+    [Column("identificationType")]
     public int? IdentificationType { get; set; }
 
     [Column("identification")]
     [StringLength(250)]
     public string Identification { get; set; } = null!;
 
-    [Column("countryID", TypeName = "int(11)")]
+    [Column("countryID")]
     public int? CountryId { get; set; }
 
-    [Column("stateID", TypeName = "int(11)")]
+    [Column("stateID")]
     public int? StateId { get; set; }
 
-    [Column("cityID", TypeName = "int(11)")]
+    [Column("cityID")]
     public int? CityId { get; set; }
 
     [Column("location")]
@@ -72,40 +72,40 @@ public partial class TbCustomer
     [StringLength(250)]
     public string? Address { get; set; }
 
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int? CurrencyId { get; set; }
 
-    [Column("clasificationID", TypeName = "int(11)")]
+    [Column("clasificationID")]
     public int? ClasificationId { get; set; }
 
-    [Column("categoryID", TypeName = "int(11)")]
+    [Column("categoryID")]
     public int? CategoryId { get; set; }
 
-    [Column("subCategoryID", TypeName = "int(11)")]
+    [Column("subCategoryID")]
     public int? SubCategoryId { get; set; }
 
-    [Column("customerTypeID", TypeName = "int(11)")]
+    [Column("customerTypeID")]
     public int? CustomerTypeId { get; set; }
 
     [Column("birthDate")]
-    public DateTime? BirthDate { get; set; }
+    public DateOnly? BirthDate { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int? StatusId { get; set; }
 
-    [Column("typePay", TypeName = "int(11)")]
+    [Column("typePay")]
     public int? TypePay { get; set; }
 
-    [Column("payConditionID", TypeName = "int(11)")]
+    [Column("payConditionID")]
     public int? PayConditionId { get; set; }
 
-    [Column("sexoID", TypeName = "int(11)")]
+    [Column("sexoID")]
     public int? SexoId { get; set; }
 
     /// <summary>
     /// Tipo de Firma
     /// </summary>
-    [Column("typeFirm", TypeName = "int(11)")]
+    [Column("typeFirm")]
     public int? TypeFirm { get; set; }
 
     [Column("reference1")]
@@ -120,13 +120,13 @@ public partial class TbCustomer
     [StringLength(250)]
     public string? CreatedIn { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int? CreatedBy { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
     public DateTime? CreatedOn { get; set; }
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int? CreatedAt { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
@@ -146,7 +146,7 @@ public partial class TbCustomer
     /// <summary>
     /// Persona que contacto al cliente
     /// </summary>
-    [Column("entityContactID", TypeName = "int(11)")]
+    [Column("entityContactID")]
     public int? EntityContactId { get; set; }
 
     [Column("reference3")]
@@ -172,6 +172,6 @@ public partial class TbCustomer
     [Column("modifiedOn")]
     public DateOnly? ModifiedOn { get; set; }
 
-    [Column("formContactID", TypeName = "int(11)")]
+    [Column("formContactID")]
     public int? FormContactId { get; set; }
 }

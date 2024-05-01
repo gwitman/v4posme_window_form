@@ -13,10 +13,10 @@ namespace v4posme_library.Models;
 public partial class TbComponentAutorization
 {
     [Key]
-    [Column("componentAutorizationID", TypeName = "int(11)")]
+    [Column("componentAutorizationID")]
     public int ComponentAutorizationId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Column("name")]

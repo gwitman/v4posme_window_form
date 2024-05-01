@@ -18,24 +18,24 @@ namespace v4posme_library.Models;
 [Index("DefaultWarehouseId", Name = "IDX_ITEM_010")]
 [Index("StatusId", Name = "IDX_ITEM_011")]
 [Index("CurrencyId", Name = "IDX_ITEM_012")]
-[MySqlCharSet("utf8")]
-[MySqlCollation("utf8_general_ci")]
+[MySqlCharSet("utf8mb3")]
+[MySqlCollation("utf8mb3_general_ci")]
 public partial class TbItem
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("inventoryCategoryID", TypeName = "int(11)")]
+    [Column("inventoryCategoryID")]
     public int InventoryCategoryId { get; set; }
 
     [Key]
-    [Column("itemID", TypeName = "int(11)")]
+    [Column("itemID")]
     public int ItemId { get; set; }
 
-    [Column("familyID", TypeName = "int(11)")]
+    [Column("familyID")]
     public int? FamilyId { get; set; }
 
     [Column("itemNumber")]
@@ -64,16 +64,16 @@ public partial class TbItem
     [MySqlCollation("latin1_swedish_ci")]
     public string? UnitMeasureId { get; set; }
 
-    [Column("displayID", TypeName = "int(11)")]
+    [Column("displayID")]
     public int? DisplayId { get; set; }
 
-    [Column("capacity", TypeName = "int(11)")]
+    [Column("capacity")]
     public int? Capacity { get; set; }
 
-    [Column("displayUnitMeasureID", TypeName = "int(11)")]
+    [Column("displayUnitMeasureID")]
     public int? DisplayUnitMeasureId { get; set; }
 
-    [Column("defaultWarehouseID", TypeName = "int(11)")]
+    [Column("defaultWarehouseID")]
     public int? DefaultWarehouseId { get; set; }
 
     [Column("quantity")]
@@ -108,7 +108,7 @@ public partial class TbItem
     [StringLength(255)]
     public string? Reference3 { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int? StatusId { get; set; }
 
     [Column("isPerishable")]
@@ -128,10 +128,10 @@ public partial class TbItem
     [MySqlCollation("latin1_swedish_ci")]
     public string? CreatedIn { get; set; }
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int? CreatedAt { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int? CreatedBy { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
@@ -140,34 +140,34 @@ public partial class TbItem
     [Column("isActive")]
     public bool? IsActive { get; set; }
 
-    [Column("isInvoiceQuantityZero", TypeName = "tinyint(4)")]
+    [Column("isInvoiceQuantityZero")]
     public sbyte? IsInvoiceQuantityZero { get; set; }
 
-    [Column("isServices", TypeName = "tinyint(4)")]
+    [Column("isServices")]
     public sbyte? IsServices { get; set; }
 
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int CurrencyId { get; set; }
 
-    [Column("isInvoice", TypeName = "int(11)")]
+    [Column("isInvoice")]
     public int IsInvoice { get; set; }
 
-    [Column("realStateWallInCloset", TypeName = "tinyint(4)")]
+    [Column("realStateWallInCloset")]
     public sbyte? RealStateWallInCloset { get; set; }
 
-    [Column("realStatePiscinaPrivate", TypeName = "tinyint(4)")]
+    [Column("realStatePiscinaPrivate")]
     public sbyte? RealStatePiscinaPrivate { get; set; }
 
-    [Column("realStateClubPiscina", TypeName = "tinyint(4)")]
+    [Column("realStateClubPiscina")]
     public sbyte? RealStateClubPiscina { get; set; }
 
-    [Column("realStateAceptanMascota", TypeName = "tinyint(4)")]
+    [Column("realStateAceptanMascota")]
     public sbyte? RealStateAceptanMascota { get; set; }
 
-    [Column("realStateContractCorrentaje", TypeName = "tinyint(4)")]
+    [Column("realStateContractCorrentaje")]
     public sbyte? RealStateContractCorrentaje { get; set; }
 
-    [Column("realStatePlanReference", TypeName = "tinyint(4)")]
+    [Column("realStatePlanReference")]
     public sbyte? RealStatePlanReference { get; set; }
 
     [Column("realStateLinkYoutube")]
@@ -194,10 +194,10 @@ public partial class TbItem
     [StringLength(255)]
     public string? RealStateStyleKitchen { get; set; }
 
-    [Column("realStateRoomServices", TypeName = "tinyint(4)")]
+    [Column("realStateRoomServices")]
     public sbyte? RealStateRoomServices { get; set; }
 
-    [Column("realStateRoomBatchServices", TypeName = "tinyint(4)")]
+    [Column("realStateRoomBatchServices")]
     public sbyte? RealStateRoomBatchServices { get; set; }
 
     [Column("realStateReferenceUbicacion")]
@@ -212,24 +212,24 @@ public partial class TbItem
     [StringLength(255)]
     public string? RealStateReferenceCondominio { get; set; }
 
-    [Column("realStateEmployerAgentID", TypeName = "int(11)")]
+    [Column("realStateEmployerAgentID")]
     public int? RealStateEmployerAgentId { get; set; }
 
-    [Column("realStateCountryID", TypeName = "int(11)")]
+    [Column("realStateCountryID")]
     public int? RealStateCountryId { get; set; }
 
-    [Column("realStateStateID", TypeName = "int(11)")]
+    [Column("realStateStateID")]
     public int? RealStateStateId { get; set; }
 
-    [Column("realStateCityID", TypeName = "int(11)")]
+    [Column("realStateCityID")]
     public int? RealStateCityId { get; set; }
 
     [Column("modifiedOn", TypeName = "datetime")]
     public DateTime? ModifiedOn { get; set; }
 
-    [Column("realStateRooBatchVisit", TypeName = "tinyint(4)")]
+    [Column("realStateRooBatchVisit")]
     public sbyte? RealStateRooBatchVisit { get; set; }
 
-    [Column("realStateGerenciaExclusive", TypeName = "int(11)")]
+    [Column("realStateGerenciaExclusive")]
     public int? RealStateGerenciaExclusive { get; set; }
 }

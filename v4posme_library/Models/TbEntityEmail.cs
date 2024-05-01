@@ -14,23 +14,23 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbEntityEmail
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int EntityId { get; set; }
 
     [Key]
-    [Column("entityEmailID", TypeName = "bigint(20)")]
+    [Column("entityEmailID")]
     public long EntityEmailId { get; set; }
 
     [Column("email")]
     [StringLength(250)]
     public string? Email { get; set; }
 
-    [Column("isPrimary", TypeName = "tinyint(4)")]
+    [Column("isPrimary")]
     public sbyte? IsPrimary { get; set; }
 }

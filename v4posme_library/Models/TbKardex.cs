@@ -18,38 +18,38 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbKardex
 {
-    [Column("itemID", TypeName = "int(11)")]
+    [Column("itemID")]
     public int ItemId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
-    [Column("warehouseID", TypeName = "int(11)")]
+    [Column("warehouseID")]
     public int WarehouseId { get; set; }
 
     [Key]
-    [Column("kardexID", TypeName = "int(11)")]
+    [Column("kardexID")]
     public int KardexId { get; set; }
 
-    [Column("kardexCode", TypeName = "int(11)")]
+    [Column("kardexCode")]
     public int? KardexCode { get; set; }
 
     [Column("kardexDate", TypeName = "datetime")]
     public DateTime? KardexDate { get; set; }
 
-    [Column("sign", TypeName = "int(11)")]
+    [Column("sign")]
     public int Sign { get; set; }
 
-    [Column("transactionID", TypeName = "int(11)")]
+    [Column("transactionID")]
     public int? TransactionId { get; set; }
 
-    [Column("transactionMasterID", TypeName = "int(11)")]
+    [Column("transactionMasterID")]
     public int? TransactionMasterId { get; set; }
 
-    [Column("transactionDetailID", TypeName = "int(11)")]
+    [Column("transactionDetailID")]
     public int? TransactionDetailId { get; set; }
 
     [Column("movementOn", TypeName = "datetime")]

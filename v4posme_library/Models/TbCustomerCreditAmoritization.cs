@@ -15,10 +15,10 @@ namespace v4posme_library.Models;
 public partial class TbCustomerCreditAmortization
 {
     [Key]
-    [Column("creditAmortizationID", TypeName = "int(11)")]
+    [Column("creditAmortizationID")]
     public int CreditAmortizationId { get; set; }
 
-    [Column("customerCreditDocumentID", TypeName = "int(11)")]
+    [Column("customerCreditDocumentID")]
     public int CustomerCreditDocumentId { get; set; }
 
     [Column("dateApply")]
@@ -52,14 +52,14 @@ public partial class TbCustomerCreditAmortization
     [Precision(19, 9)]
     public decimal ShareCapital { get; set; }
 
-    [Column("dayDelay", TypeName = "int(11)")]
+    [Column("dayDelay")]
     public int DayDelay { get; set; }
 
     [Column("note")]
     [StringLength(350)]
     public string? Note { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]

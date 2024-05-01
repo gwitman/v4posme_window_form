@@ -11,7 +11,7 @@ namespace v4posme_library.Models;
 public partial class TbPublicCatalog
 {
     [Key]
-    [Column("publicCatalogID", TypeName = "int(11)")]
+    [Column("publicCatalogID")]
     public int PublicCatalogId { get; set; }
 
     [Column("name")]
@@ -22,10 +22,10 @@ public partial class TbPublicCatalog
     [StringLength(255)]
     public string? SystemName { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int? StatusId { get; set; }
 
-    [Column("orden", TypeName = "int(11)")]
+    [Column("orden")]
     public int? Orden { get; set; }
 
     [Column("description")]
@@ -35,6 +35,6 @@ public partial class TbPublicCatalog
     [Column("isActive", TypeName = "bit(1)")]
     public ulong? IsActive { get; set; }
 
-    [Column("flavorID", TypeName = "int(11)")]
+    [Column("flavorID")]
     public int? FlavorId { get; set; }
 }

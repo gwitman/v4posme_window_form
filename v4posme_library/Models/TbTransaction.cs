@@ -15,10 +15,10 @@ namespace v4posme_library.Models;
 public partial class TbTransaction
 {
     [Key]
-    [Column("transactionID", TypeName = "int(11)")]
+    [Column("transactionID")]
     public int TransactionId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Column("name")]
@@ -29,7 +29,7 @@ public partial class TbTransaction
     [StringLength(250)]
     public string? Description { get; set; }
 
-    [Column("workflowID", TypeName = "int(11)")]
+    [Column("workflowID")]
     public int? WorkflowId { get; set; }
 
     [Column("isCountable")]
@@ -50,13 +50,13 @@ public partial class TbTransaction
     [Column("generateTransactionNumber")]
     public bool? GenerateTransactionNumber { get; set; }
 
-    [Column("decimalPlaces", TypeName = "int(11)")]
+    [Column("decimalPlaces")]
     public int? DecimalPlaces { get; set; }
 
-    [Column("journalTypeID", TypeName = "int(11)")]
+    [Column("journalTypeID")]
     public int? JournalTypeId { get; set; }
 
-    [Column("signInventory", TypeName = "int(11)")]
+    [Column("signInventory")]
     public int? SignInventory { get; set; }
 
     [Column("isRevert")]

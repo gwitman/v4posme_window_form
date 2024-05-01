@@ -18,16 +18,16 @@ namespace v4posme_library.Models;
 public partial class TbCustomerCreditDocument
 {
     [Key]
-    [Column("customerCreditDocumentID", TypeName = "int(11)")]
+    [Column("customerCreditDocumentID")]
     public int CustomerCreditDocumentId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
-    [Column("entityID", TypeName = "int(11)")]
+    [Column("entityID")]
     public int EntityId { get; set; }
 
-    [Column("customerCreditLineID", TypeName = "int(11)")]
+    [Column("customerCreditLineID")]
     public int CustomerCreditLineId { get; set; }
 
     [Column("documentNumber")]
@@ -45,7 +45,7 @@ public partial class TbCustomerCreditDocument
     [Precision(19, 9)]
     public decimal Interes { get; set; }
 
-    [Column("term", TypeName = "int(11)")]
+    [Column("term")]
     public int Term { get; set; }
 
     [Column("balance")]
@@ -60,7 +60,7 @@ public partial class TbCustomerCreditDocument
     [Precision(18, 4)]
     public decimal ExchangeRate { get; set; }
 
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int CurrencyId { get; set; }
 
     [Column("reference1")]
@@ -75,21 +75,21 @@ public partial class TbCustomerCreditDocument
     [StringLength(50)]
     public string? Reference3 { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
     public ulong IsActive { get; set; }
 
-    [Column("typeAmortization", TypeName = "int(11)")]
+    [Column("typeAmortization")]
     public int TypeAmortization { get; set; }
 
-    [Column("periodPay", TypeName = "int(11)")]
+    [Column("periodPay")]
     public int PeriodPay { get; set; }
 
-    [Column("providerIDCredit", TypeName = "int(11)")]
+    [Column("providerIDCredit")]
     public int ProviderIdcredit { get; set; }
 
-    [Column("reportSinRiesgo", TypeName = "int(11)")]
+    [Column("reportSinRiesgo")]
     public int ReportSinRiesgo { get; set; }
 }

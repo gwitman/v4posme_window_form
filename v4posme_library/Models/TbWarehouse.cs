@@ -15,14 +15,14 @@ namespace v4posme_library.Models;
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbWarehouse
 {
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Key]
-    [Column("warehouseID", TypeName = "int(11)")]
+    [Column("warehouseID")]
     public int WarehouseId { get; set; }
 
-    [Column("branchID", TypeName = "int(11)")]
+    [Column("branchID")]
     public int BranchId { get; set; }
 
     [Column("number")]
@@ -37,13 +37,13 @@ public partial class TbWarehouse
     [StringLength(250)]
     public string? Address { get; set; }
 
-    [Column("statusID", TypeName = "int(11)")]
+    [Column("statusID")]
     public int StatusId { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
     public ulong IsActive { get; set; }
 
-    [Column("createdBy", TypeName = "int(11)")]
+    [Column("createdBy")]
     public int CreatedBy { get; set; }
 
     [Column("createdOn", TypeName = "datetime")]
@@ -53,10 +53,10 @@ public partial class TbWarehouse
     [StringLength(50)]
     public string CreatedIn { get; set; } = null!;
 
-    [Column("createdAt", TypeName = "int(11)")]
+    [Column("createdAt")]
     public int CreatedAt { get; set; }
 
-    [Column("typeWarehouse", TypeName = "int(11)")]
+    [Column("typeWarehouse")]
     public int TypeWarehouse { get; set; }
 
     [Column("emailResponsability")]

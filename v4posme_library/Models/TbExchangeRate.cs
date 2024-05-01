@@ -11,18 +11,20 @@ namespace v4posme_library.Models;
 [Index("CompanyId", Name = "IDX_EXCHANGE_RATE_002")]
 [Index("TargetCurrencyId", Name = "IDX_EXCHANGE_RATE_003")]
 [Index("Date", Name = "IDX_EXCHANGE_RATE_004")]
+[MySqlCharSet("latin1")]
+[MySqlCollation("latin1_swedish_ci")]
 public partial class TbExchangeRate
 {
-    [Column("currencyID", TypeName = "int(11)")]
+    [Column("currencyID")]
     public int CurrencyId { get; set; }
 
-    [Column("companyID", TypeName = "int(11)")]
+    [Column("companyID")]
     public int CompanyId { get; set; }
 
     [Column("date")]
     public DateOnly Date { get; set; }
 
-    [Column("targetCurrencyID", TypeName = "int(11)")]
+    [Column("targetCurrencyID")]
     public int TargetCurrencyId { get; set; }
 
     [Column("ratio")]
@@ -33,6 +35,6 @@ public partial class TbExchangeRate
     public decimal Value { get; set; }
 
     [Key]
-    [Column("exchangeRateID", TypeName = "int(11)")]
+    [Column("exchangeRateID")]
     public int ExchangeRateId { get; set; }
 }
