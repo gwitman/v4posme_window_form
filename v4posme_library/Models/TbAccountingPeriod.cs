@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.EntityFrameworkCore.DataAnnotations;
+using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
@@ -10,8 +12,8 @@ namespace v4posme_library.Models;
 [Index("CompanyId", Name = "IDX_ACCOUNTING_PERIOD_001")]
 [Index("ComponentId", Name = "IDX_ACCOUNTING_PERIOD_002")]
 [Index("StatusId", Name = "IDX_ACCOUNTING_PERIOD_003")]
-[MySqlCharSet("latin1")]
-[MySqlCollation("latin1_swedish_ci")]
+[MySQLCharset("latin1")]
+[Microsoft.EntityFrameworkCore.MySqlCollation("latin1_swedish_ci")]
 public partial class TbAccountingPeriod
 {
     [Key]

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.EntityFrameworkCore.DataAnnotations;
+using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
 [Table("tb_biblia")]
 [Index("Dia", Name = "IDX_BIBLIA_001")]
-[MySqlCharSet("latin1")]
-[MySqlCollation("latin1_swedish_ci")]
+[MySQLCharset("latin1")]
+[Microsoft.EntityFrameworkCore.MySqlCollation("latin1_swedish_ci")]
 public partial class TbBiblia
 {
     [Key]

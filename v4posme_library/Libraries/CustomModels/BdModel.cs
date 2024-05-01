@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
-using MySqlConnector;
+using MySql.Data.MySqlClient;
 using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;

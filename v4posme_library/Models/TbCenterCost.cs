@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.EntityFrameworkCore.DataAnnotations;
+using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
@@ -12,8 +14,8 @@ namespace v4posme_library.Models;
 [Index("AccountLevelId", Name = "IDX_CENTER_COST_003")]
 [Index("ParentAccountId", Name = "IDX_CENTER_COST_004")]
 [Index("ParentClassId", Name = "IDX_CENTER_COST_005")]
-[MySqlCharSet("latin1")]
-[MySqlCollation("latin1_swedish_ci")]
+[MySQLCharset("latin1")]
+[MySql.Data.EntityFrameworkCore.DataAnnotations.MySqlCollation("latin1_swedish_ci")]
 public partial class TbCenterCost
 {
     [Key]

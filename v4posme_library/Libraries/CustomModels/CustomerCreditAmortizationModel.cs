@@ -1,5 +1,5 @@
-﻿using Devart.Data.MySql.Entity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Libraries.CustomHelper;
 using v4posme_library.Models;
 using v4posme_library.ModelsDto;
 
@@ -63,7 +63,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                 (amortization, stage) => new { amortization, stage })
             .Where(key => key.amortization.CustomerCreditDocumentId == customerCreditDocumentId
                           && key.amortization.IsActive == 1
-                          && key.stage.Vinculable!.Value )
+                          && key.stage.Vinculable!.Value)
             .Select(k => k.amortization);
     }
 
@@ -109,8 +109,8 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                 DocumentNumber = t.t.cd.DocumentNumber,
                 DateApply = DateTime.Parse(t.t.t.i.DateApply.ToShortDateString()),
                 Remaining = t.t.t.i.Remaining,
-                Orden = MySqlFunctions.UnixTimestamp(t.t.t.i.DateApply.ToShortDateString()),
-                Mora = MySqlFunctions.Datediff(DateTime.Now, DateTime.Parse(t.t.t.i.DateApply.ToShortDateString())),
+                Orden = WebToolsHelper.ToUnixTimestamp(t.t.t.i.DateApply),
+                Mora =  EF.Functions.DateDiffDay(DateTime.Now, DateTime.Parse(t.t.t.i.DateApply.ToShortDateString())),
                 StageCuota = t.t.t.ws.Name,
                 StageDocumento = t.wsd.Name
             })
@@ -170,7 +170,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                         u.CreditAmortizationId == c.CustomerCreditDocumentId
                         && u.Remaining > 0
                         && u.IsActive == 1
-                        && u.DateApply < MySqlFunctions.Now())
+                        && u.DateApply < DateTime.Now)
                     .Select(u => u.Remaining).Sum()
             });
         return result.Single();
@@ -197,7 +197,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                 DateApply = i.DateApply,
                 Remaining = i.Remaining,
                 Orden = Convert.ToUInt32(i.DateApply),
-                Mora = MySqlFunctions.Datediff(MySqlFunctions.Now(), i.DateApply),
+                Mora = EF.Functions.DateDiffDay(DateTime.Now, i.DateApply),
                 StageCuota = ws.Name,
                 StageDocumento = wsd.Name
             };

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.EntityFrameworkCore.DataAnnotations;
+using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
 [Table("tb_caller")]
-[MySqlCharSet("latin1")]
-[MySqlCollation("latin1_general_ci")]
+[MySQLCharset("latin1")]
+[Microsoft.EntityFrameworkCore.MySqlCollation("latin1_general_ci")]
 public partial class TbCaller
 {
     [Key]

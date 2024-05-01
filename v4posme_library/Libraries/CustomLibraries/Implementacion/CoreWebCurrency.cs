@@ -63,8 +63,7 @@ public class CoreWebCurrency(ICoreWebParameter coreWebParameter, ICurrencyModel 
             throw new Exception("NO EXISTE LA MONEDA POR DEFECTO");
 
         // Cuantos CORDOBAS son en tantos CORDOBAS
-        var objConvertionSource = _exchangerateModel.GetRowByPk(companyId, dateRatio,
-            objConvertionDefault.CurrencyId, currencyId);
+        var objConvertionSource = _exchangerateModel.GetRowByPk(companyId, dateRatio, objConvertionDefault.CurrencyId, currencyId);
         if (currencyId != objConvertionDefault.CurrencyId)
         {
             if (objConvertionSource is null)

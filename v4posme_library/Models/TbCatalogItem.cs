@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
@@ -13,7 +14,7 @@ namespace v4posme_library.Models;
 [Index("ParentCatalogItemId", Name = "IDX_CATALOG_ITEM_004")]
 [Index("CatalogItemId", Name = "IDX_CATALOG_ITEM_005")]
 [Index("CatalogId", "CatalogItemId", Name = "IDX_CATALOG_ITEM_006")]
-[MySqlCharSet("latin1")]
+[MySQLCharset("latin1")]
 [MySqlCollation("latin1_general_ci")]
 public partial class TbCatalogItem
 {

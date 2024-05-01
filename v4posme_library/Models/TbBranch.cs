@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.EntityFrameworkCore.DataAnnotations;
+using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
 [Table("tb_branch")]
 [Index("CompanyId", Name = "IDX_BRANCH_001")]
 [Index("CompanyId", "BranchId", "IsActive", Name = "IDX_BRANCH_002")]
-[MySqlCharSet("latin1")]
-[MySqlCollation("latin1_general_ci")]
+[MySQLCharset("latin1")]
+[Microsoft.EntityFrameworkCore.MySqlCollation("latin1_general_ci")]
 public partial class TbBranch
 {
     [Column("companyID", TypeName = "int(11)")]

@@ -1,27 +1,22 @@
 ﻿using System.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using v4posme_library.Libraries;
 
 namespace v4posme_library.Models;
+
 
 public partial class DataContext : DbContext
 {
     private IDbConnection _dbConnection = null;
 
-    readonly IConfigurationRoot _configuration = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json")
-        .Build();
-
-    public DataContext(DbContextOptions<DataContext> options)
+  public DataContext(DbContextOptions<DataContext> options)
         : base(options)
     {
     }
 
     public DataContext()
     {
-        var connectionString = _configuration.GetConnectionString("PosmeConnectionString");
-        Database.SetConnectionString(connectionString);
+        //Database.SetConnectionString($"{VariablesGlobales.ConnectionString}");
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -31,8 +26,9 @@ public partial class DataContext : DbContext
         if (optionsBuilder.IsConfigured) return;
         try
         {
-            var connectionString = _configuration.GetConnectionString("PosmeConnectionString");
-            optionsBuilder.UseMySql(ServerVersion.AutoDetect(connectionString));
+            var connectionString = VariablesGlobales.ConnectionString;
+            //optionsBuilder.UseMySQL(connectionString);
+            optionsBuilder.UseMySql(connectionString,MariaDbServerVersion.LatestSupportedServerVersion);
         }
         catch (Exception ex)
         {
@@ -327,8 +323,7 @@ public partial class DataContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
-            .UseCollation("utf8mb4_general_ci")
-            .HasCharSet("utf8mb4");
+            .UseCollation("utf8mb4_general_ci");
 
         modelBuilder.Entity<TbAccount>(entity =>
         {

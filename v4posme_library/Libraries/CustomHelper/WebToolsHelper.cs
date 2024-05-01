@@ -1,18 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Dynamic;
-using System.Collections;
+﻿using System.Globalization;
+
 
 namespace v4posme_library.Libraries.CustomHelper
 {
     public class WebToolsHelper
     {
+        public static long ToUnixTimestamp(DateTime dateTime)
+        {
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            var unixTime = dateTime - epoch;
+            return (long)unixTime.TotalSeconds;
+        }
+
         
         public string helper_RequestGetValueObjet(dynamic data,string fieldData, string defaultValue)
         {

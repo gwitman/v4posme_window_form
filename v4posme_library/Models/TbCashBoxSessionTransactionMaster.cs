@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.EntityFrameworkCore.DataAnnotations;
+using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace v4posme_library.Models;
 
@@ -13,8 +15,8 @@ namespace v4posme_library.Models;
 [Index("CashBoxSessionId", Name = "IDX_CASH_BOX_SESSION_TRANSACTION_MASTER_004")]
 [Index("TransactionId", Name = "IDX_CASH_BOX_SESSION_TRANSACTION_MASTER_005")]
 [Index("TransactionMasterId", Name = "IDX_CASH_BOX_SESSION_TRANSACTION_MASTER_006")]
-[MySqlCharSet("latin1")]
-[MySqlCollation("latin1_swedish_ci")]
+[MySQLCharset("latin1")]
+[Microsoft.EntityFrameworkCore.MySqlCollation("latin1_swedish_ci")]
 public partial class TbCashBoxSessionTransactionMaster
 {
     [Column("companyID", TypeName = "int(11)")]

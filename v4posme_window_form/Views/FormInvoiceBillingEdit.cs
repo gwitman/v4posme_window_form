@@ -674,8 +674,9 @@ namespace v4posme_window.Views
                 ObjTransactionMasterDetail = _objInterfazTransactionMasterDetailModel.GetRowByTransaction(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value);
                 ObjTransactionMasterDetailWarehouse = _objInterfazTransactionMasterDetailModel.GetRowByTransactionAndWarehouse(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value);
                 ObjTransactionMasterDetailConcept = _objInterfazTransactionMasterConceptModel.GetRowByTransactionMasterConcept(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value, ObjComponentItem.ComponentId);
-
-                ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
+                DateTime dateTimeNow = DateTime.Now;
+                var dateRatio = new DateOnly(dateTimeNow.Year, dateTimeNow.Month, dateTimeNow.Day);
+                ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, dateRatio, decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
                 ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(objParameterAll["INVOICE_TYPE_EMPLOYEER"]));
                 ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyId);
                 ObjCausal = _objInterfazTransactionCausalModel.GetCausalByBranch(user.CompanyId, TransactionId!.Value, user.BranchId);

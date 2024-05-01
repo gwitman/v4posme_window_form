@@ -353,9 +353,6 @@ E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\v4posm
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\v4posme_window_form.pdb
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\AutoMapper.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
-E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Devart.Data.dll
-E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Devart.Data.MySql.dll
-E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Devart.Data.MySql.Entity.EFCore.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\DevExpress.XtraCharts.v23.2.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\DevExpress.Charts.v23.2.Core.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\DevExpress.CodeParser.v23.2.dll
@@ -445,6 +442,8 @@ E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Micros
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Microsoft.Extensions.Options.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Microsoft.Extensions.Primitives.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\MySql.Data.dll
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\MySql.Data.EntityFrameworkCore.dll
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\MySql.EntityFrameworkCore.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\MySqlConnector.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Pomelo.EntityFrameworkCore.MySql.dll
@@ -452,6 +451,7 @@ E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\System
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\System.Data.Odbc.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\System.Data.OleDb.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\System.Data.SqlClient.dll
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\System.Drawing.Common.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\System.IO.Pipelines.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\System.IO.Ports.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\System.Private.ServiceModel.dll
@@ -495,6 +495,7 @@ E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\runtim
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\runtimes\win\lib\netstandard2.0\System.IO.Ports.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\runtimes\win\lib\netstandard2.0\System.ServiceProcess.ServiceController.dll
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\CommandLine.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\v4posme_library.dll
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\v4posme_library.pdb
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\v4posme_library.dll.config

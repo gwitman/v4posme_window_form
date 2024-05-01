@@ -15,8 +15,6 @@ namespace v4posme_library.Models;
 [Index("AccountNumber", Name = "IDX_ACCOUNT_006")]
 [Index("StatusId", Name = "IDX_ACCOUNT_007")]
 [Index("CurrencyId", Name = "IDX_ACCOUNT_008")]
-[MySqlCharSet("latin1")]
-[MySqlCollation("latin1_swedish_ci")]
 public partial class TbAccount
 {
     [Key]
