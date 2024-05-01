@@ -14,6 +14,8 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraVerticalGrid.Native;
+using ESC_POS_USB_NET.Enums;
+using ESC_POS_USB_NET.Printer;
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomHelper;
@@ -528,7 +530,7 @@ namespace v4posme_window.Views
 
                 //Get Component
                 var objComponent = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_company");
-                var objParameter = _objInterfazCoreWebParameter.GetParameter("CORE_COMPANY_LOGO", companyID);
+                var objParameterCompanyLogo = _objInterfazCoreWebParameter.GetParameter("CORE_COMPANY_LOGO", companyID);
                 var objParameterTelefono = _objInterfazCoreWebParameter.GetParameter("CORE_PHONE", companyID);
                 var objParameterRuc = _objInterfazCoreWebParameter.GetParameter("CORE_COMPANY_IDENTIFIER", companyID)!.Value;
                 var objCompany = VariablesGlobales.Instance.Company;
@@ -539,7 +541,10 @@ namespace v4posme_window.Views
                 var objTmi = _objInterfazTransactionMasterInfoModel.GetRowByPk(companyID, transactionID, transactionMasterID);
                 var objTmd = _objInterfazTransactionMasterDetailModel.GetRowByTransaction(companyID, transactionID, transactionMasterID);
                 var objTc = _objInterfazTransactionCausalModel.GetByCompanyAndTransactionAndCausal(companyID, transactionID, objTm.TransactionCausalId!.Value);
-
+                if (objTmd is null || objCompany is null)
+                {
+                    return;
+                }
                 // Formatear la fecha de la transacción
                 var transactionDate = objTm.TransactionOn;
                 string formattedTransactionDate = transactionDate!.Value.ToString("yyyy-M-d");
@@ -573,8 +578,45 @@ namespace v4posme_window.Views
                 var objUserCreated = VariablesGlobales.Instance.UnityContainer.Resolve<IUserModel>().GetRowByPk(companyID, objTm.CreatedAt!.Value, objTm.CreatedBy!.Value);
 
                 // Imprimir el documento
-                
-
+                var printer = new Printer("Printer Name");
+                printer.AlignCenter();
+                if (objParameterCompanyLogo is not null)
+                {
+                    var logoCompany =new Bitmap ( Image.FromFile(objParameterCompanyLogo.Value!));
+                    printer.Image(logoCompany);
+                }
+                printer.Append(objCompany.Name);
+                printer.Append($"RUC: {objParameterRuc}");
+                printer.BoldMode("FACTURA");
+                printer.Append(objTm.TransactionNumber);
+                printer.Append($"FECHA: {objTm.CreatedOn.Value:yyyy-M-d hh:mm:ss t z} ");
+                printer.Separator();
+                printer.AlignLeft();
+                printer.Append($"Vendedor: {objUserCreated.Nickname}");
+                printer.Append($"Codigo: {objCustomer.CustomerNumber}");
+                printer.Append($"Tipo: {objTipo.Name}");
+                printer.Append($"Estado: {objStage.First().Name}");
+                printer.Append($"Moneda: {objCurrency.Name}");
+                printer.Append("Cliente");
+                printer.Append($"{objCustomer.FirstName} {objCustomer.LastName}");
+                printer.Append($"{objTm.Note}");
+                printer.Append("PRODUCTO           CANT            TOTAL");
+                printer.CondensedMode(PrinterModeState.On);
+                foreach (var detailDto in objTmd)
+                {
+                 printer.Append($"{detailDto.ItemNameLog}  {detailDto.Quantity}   {detailDto.Quantity*detailDto.UnitaryAmount}");   
+                }
+                printer.CondensedMode(PrinterModeState.Off);
+                printer.Separator();
+                printer.Append($"TOTAL: {objTm.Amount}");
+                printer.Append($"RECIBIDO: {objTm.Amount}");
+                printer.Append($"CAMBIO: {objTm.Amount}");
+                printer.Separator();
+                printer.AlignCenter();
+                printer.Append(objCompany.Address);
+                printer.Append($"Tel.: {objParameterTelefono.Value}");
+                printer.FullPaperCut();
+                printer.PrintDocument();
                 
             }
             catch (Exception e)
