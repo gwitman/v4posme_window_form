@@ -545,6 +545,7 @@ namespace v4posme_window.Views
                 {
                     return;
                 }
+
                 // Formatear la fecha de la transacción
                 var transactionDate = objTm.TransactionOn;
                 string formattedTransactionDate = transactionDate!.Value.ToString("yyyy-M-d");
@@ -571,20 +572,25 @@ namespace v4posme_window.Views
                 var objNatural = VariablesGlobales.Instance.UnityContainer.Resolve<INaturalModel>().GetRowByPk(companyID, objCustomer.BranchId, objCustomer.EntityId);
 
                 // Calcular el tipo de cambio
-                var exchangeSale = Convert.ToInt32(_objInterfazCoreWebParameter.GetParameter("ACCOUNTING_EXCHANGE_SALE", companyID)!.Value);
+                var exchangeSale = WebToolsHelper.ConvertToNumber<decimal>(_objInterfazCoreWebParameter.GetParameter("ACCOUNTING_EXCHANGE_SALE", companyID)!.Value);
                 var tipoCambio = Math.Round(objTm.ExchangeRate!.Value + exchangeSale, 2);
 
                 // Obtener información del usuario que creó la transacción
                 var objUserCreated = VariablesGlobales.Instance.UnityContainer.Resolve<IUserModel>().GetRowByPk(companyID, objTm.CreatedAt!.Value, objTm.CreatedBy!.Value);
 
                 // Imprimir el documento
-                var printer = new Printer("Printer Name");
+                var printer = new Printer("Adobe PDF");
                 printer.AlignCenter();
                 if (objParameterCompanyLogo is not null)
                 {
-                    var logoCompany =new Bitmap ( Image.FromFile(objParameterCompanyLogo.Value!));
-                    printer.Image(logoCompany);
+                    var imagePath = $"c:\\logo\\{objParameterCompanyLogo.Value!}";
+                    if (File.Exists(imagePath))
+                    {
+                        var logoCompany = new Bitmap(Image.FromFile(imagePath));
+                        printer.Image(logoCompany);
+                    }
                 }
+
                 printer.Append(objCompany.Name);
                 printer.Append($"RUC: {objParameterRuc}");
                 printer.BoldMode("FACTURA");
@@ -604,8 +610,9 @@ namespace v4posme_window.Views
                 printer.CondensedMode(PrinterModeState.On);
                 foreach (var detailDto in objTmd)
                 {
-                 printer.Append($"{detailDto.ItemNameLog}  {detailDto.Quantity}   {detailDto.Quantity*detailDto.UnitaryAmount}");   
+                    printer.Append($"{detailDto.ItemNameLog}  {detailDto.Quantity}   {detailDto.Quantity * detailDto.UnitaryAmount}");
                 }
+
                 printer.CondensedMode(PrinterModeState.Off);
                 printer.Separator();
                 printer.Append($"TOTAL: {objTm.Amount}");
@@ -617,7 +624,6 @@ namespace v4posme_window.Views
                 printer.Append($"Tel.: {objParameterTelefono.Value}");
                 printer.FullPaperCut();
                 printer.PrintDocument();
-                
             }
             catch (Exception e)
             {
@@ -871,7 +877,7 @@ namespace v4posme_window.Views
                 ObjParameterAmortizationDuranteFactura = _objInterfazCoreWebParameter.GetParameter("INVOICE_PARAMTER_AMORITZATION_DURAN_INVOICE", user.CompanyId)!.Value;
                 ObjParameterAlturaDelModalDeSeleccionProducto = _objInterfazCoreWebParameter.GetParameter("INVOICE_ALTO_MODAL_DE_SELECCION_DE_PRODUCTO_AL_FACTURAR", user.CompanyId)!.Value;
                 ObjParameterScrollDelModalDeSeleccionProducto = _objInterfazCoreWebParameter.GetParameter("INVOICE_SCROLL_DE_MODAL_EN_SELECCION_DE_PRODUTO_AL_FACTURAR", user.CompanyId)!.Value;
-                
+
                 //Obtener la lista de estados
                 if (ObjParameterInvoiceAutoApply == "true")
                 {
@@ -1833,7 +1839,7 @@ namespace v4posme_window.Views
                                          Math.Round(objTmInfoNew.ReceiptAmountCardDol * objTmNew.ExchangeRate.Value, 2) -
                                          Math.Round(objTmInfoNew.ReceiptAmountDol * objTmNew.ExchangeRate.Value, 2);
 
-                            
+
                             objCustomerCreditDocument.Amount = amount.Value;
                             objCustomerCreditDocument.Balance = amount.Value;
                         }
@@ -3150,7 +3156,7 @@ namespace v4posme_window.Views
                 var rowIndex = gridViewValues.GetSelectedRows().ToList();
                 foreach (var indexRow in rowIndex)
                 {
-                    var itemID = Convert.ToInt32(gridViewValues.GetRowCellValue(indexRow, colItemId).ToString());
+                    //var itemID = Convert.ToInt32(gridViewValues.GetRowCellValue(indexRow, colItemId).ToString());
                     gridViewValues.DeleteRow(indexRow);
                 }
 
@@ -3252,6 +3258,11 @@ namespace v4posme_window.Views
                         @"SELECCIONAR_ITEM_BILLING_BACKGROUND",
                         @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}"
                     );
+            }
+
+            if (e.Item.Name == btnPrinterInvoice.Name)
+            {
+                ComandPrinter();
             }
 
             if (e.Item.Name == btnRegresar.Name)
