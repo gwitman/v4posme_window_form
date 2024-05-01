@@ -578,15 +578,15 @@ namespace v4posme_window.Views
                 // Obtener información del usuario que creó la transacción
                 var objUserCreated = VariablesGlobales.Instance.UnityContainer.Resolve<IUserModel>().GetRowByPk(companyID, objTm.CreatedAt!.Value, objTm.CreatedBy!.Value);
 
-                // Imprimir el documento
-                //$objParameterPrinterName = $this->core_web_parameter->getParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT",$companyID);
-                //$objParameterPrinterName = $objParameterPrinterName->value;  ??? 
-                //PATH_FILE_OF_APP_ROOT.\img\logos\xxxxxxxx
+                // Imprimir el documento 
+                //$objParameterPrinterName = $this->core_web_parameter->getParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT",$companyID); 
+                //$objParameterPrinterName = $objParameterPrinterName->value;  ???  
+                //PATH_FILE_OF_APP_ROOT.\img\logos\xxxxxxxx 
 
 
                 var printer = new Printer("Adobe PDF");
                 printer.AlignCenter();
-                if (objParameterCompanyLogo is not null)
+                if (objParameterCompanyLogo is not null) 
                 {
                     var imagePath = $"c:\\logo\\{objParameterCompanyLogo.Value!}";
                     if (File.Exists(imagePath))
