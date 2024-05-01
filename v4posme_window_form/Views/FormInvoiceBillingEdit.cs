@@ -579,6 +579,11 @@ namespace v4posme_window.Views
                 var objUserCreated = VariablesGlobales.Instance.UnityContainer.Resolve<IUserModel>().GetRowByPk(companyID, objTm.CreatedAt!.Value, objTm.CreatedBy!.Value);
 
                 // Imprimir el documento
+                //$objParameterPrinterName = $this->core_web_parameter->getParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT",$companyID);
+                //$objParameterPrinterName = $objParameterPrinterName->value;  ??? 
+                //PATH_FILE_OF_APP_ROOT.\img\logos\xxxxxxxx
+
+
                 var printer = new Printer("Adobe PDF");
                 printer.AlignCenter();
                 if (objParameterCompanyLogo is not null)
@@ -1982,6 +1987,8 @@ namespace v4posme_window.Views
                 var coreWebPrinter = new CoreWebPrinterDirect();
                 var pd = coreWebPrinter.ConfigurationPrinter(objParameterPrinterName!);
                 //PrintDocument maneja el evento para imprimir
+                //$objParameterPrinterName = $this->core_web_parameter->getParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT",$companyID);
+                //$objParameterPrinterName = $objParameterPrinterName->value;  ???  
                 var printer = new Printer("Adobe PDF");
                 printer.OpenDrawer();
                 printer.PrintDocument();
