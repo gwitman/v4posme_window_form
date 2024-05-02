@@ -196,11 +196,8 @@ class CoreWebView(
     public TableCompanyDataViewDto? GetViewDefault(TbUser user, int? componentId = null, int? callerId = null,
         int? targetComponentId = null, int? permission = null, Dictionary<string, string>? parameter = null)
     {
-        var companyDefaultDataViewModel =
-            VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyDefaultDataViewModel>();
-        var objCompanyDefaultDataView =
-            companyDefaultDataViewModel.GetRowByCcct(user.CompanyId, componentId!.Value,
-                callerId!.Value, targetComponentId!.Value);
+        var companyDefaultDataViewModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyDefaultDataViewModel>();
+        var objCompanyDefaultDataView = companyDefaultDataViewModel.GetRowByCcct(user.CompanyId, componentId!.Value, callerId!.Value, targetComponentId!.Value);
         if (objCompanyDefaultDataView is null)
         {
             throw new Exception("No existe el company default data view");

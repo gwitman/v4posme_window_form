@@ -13,7 +13,7 @@ class ParameterModel : IParameterModel
                                          && parameter.Name.Contains(name));
     }
 
-    public List<TbParameter?>? GetAll()
+    public List<TbParameter> GetAll()
     {
         using var context = new DataContext();
         return context.TbParameters.ToList();

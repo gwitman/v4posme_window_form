@@ -20,7 +20,7 @@ public partial class DataContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        //optionsBuilder.LogTo(Console.WriteLine);
+        optionsBuilder.LogTo(Console.WriteLine);
         if (optionsBuilder.IsConfigured) return;
         try
         {

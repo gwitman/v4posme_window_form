@@ -6,5 +6,5 @@ public interface IParameterModel
 {
     TbParameter? GetRowByName(string name);
 
-    List<TbParameter?>? GetAll();
+    List<TbParameter> GetAll();
 }

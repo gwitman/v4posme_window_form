@@ -288,6 +288,8 @@ namespace v4posme_window.Views
         private int? TxtStatusOldId { get; set; }
         private int? TxtStatusId { get; set; }
 
+        private const string FormatDecimal = "#,###.00";
+        
         #endregion
 
         #region Init
@@ -2182,18 +2184,19 @@ namespace v4posme_window.Views
                     FnRecalculateDetail(false, "");
 
                     //Renderizar Pagos
-                    txtChangeAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString("#0,000.00");
-                    txtReceiptAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString("#0,000.00");
-                    txtReceiptAmountDol.Text = ObjTransactionMasterInfo.ReceiptAmountDol.ToString("#0,000.00");
-                    txtReceiptAmountTarjeta.Text = ObjTransactionMasterInfo.ReceiptAmountCard.ToString("#0,000.00");
+                    
+                    txtChangeAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString(FormatDecimal);
+                    txtReceiptAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString(FormatDecimal);
+                    txtReceiptAmountDol.Text = ObjTransactionMasterInfo.ReceiptAmountDol.ToString(FormatDecimal);
+                    txtReceiptAmountTarjeta.Text = ObjTransactionMasterInfo.ReceiptAmountCard.ToString(FormatDecimal);
                     txtReceiptAmountTarjeta_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountCardBankReference;
-                    txtReceiptAmountTarjetaDol.Text = ObjTransactionMasterInfo.ReceiptAmountCardDol.ToString("#0,000.00");
+                    txtReceiptAmountTarjetaDol.Text = ObjTransactionMasterInfo.ReceiptAmountCardDol.ToString(FormatDecimal);
                     txtReceiptAmountTarjetaDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
-                    txtReceiptAmountBank.Text = ObjTransactionMasterInfo.ReceiptAmountBank.ToString("#0,000.00");
+                    txtReceiptAmountBank.Text = ObjTransactionMasterInfo.ReceiptAmountBank.ToString(FormatDecimal);
                     txtReceiptAmountBank_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankReference;
-                    txtReceiptAmountBankDol.Text = ObjTransactionMasterInfo.ReceiptAmountBankDol.ToString("#0,000.00");
+                    txtReceiptAmountBankDol.Text = ObjTransactionMasterInfo.ReceiptAmountBankDol.ToString(FormatDecimal);
                     txtReceiptAmountBankDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
-                    txtReceiptAmountPoint.Text = ObjTransactionMasterInfo.ReceiptAmountPoint!.Value.ToString("#0,000.00");
+                    txtReceiptAmountPoint.Text = ObjTransactionMasterInfo.ReceiptAmountPoint!.Value.ToString(FormatDecimal);
 
                     break;
             }
@@ -2594,12 +2597,12 @@ namespace v4posme_window.Views
                 if (tipoCambio == 0)
                 {
                     var resultTotal = 0;
-                    txtChangeAmount.Text = resultTotal.ToString("#0,000.00");
+                    txtChangeAmount.Text = resultTotal.ToString(FormatDecimal);
                 }
                 else
                 {
                     var resultTotal = (ingresoCordoba + bancoCordoba + puntoCordoba + tarjetaCordoba + (bancoDolares / tipoCambio) + (tarejtaDolares / tipoCambio) + (ingresoDol / tipoCambio)) - total;
-                    txtChangeAmount.Text = resultTotal.ToString("#0,000.00");
+                    txtChangeAmount.Text = resultTotal.ToString(FormatDecimal);
                 }
             }
 
@@ -2618,7 +2621,7 @@ namespace v4posme_window.Views
                 var total = WebToolsHelper.ConvertToNumber<decimal>(txtTotal.Text);
 
                 var resultTotal = (ingresoCordoba + bancoCordoba + puntoCordoba + tarjetaCordoba + (bancoDolares * tipoCambio) + (tarejtaDolares * tipoCambio) + (ingresoDol * tipoCambio)) - total;
-                txtChangeAmount.Text = resultTotal.ToString("#0,000.00");
+                txtChangeAmount.Text = resultTotal.ToString(FormatDecimal);
             }
         }
 
@@ -2861,61 +2864,6 @@ namespace v4posme_window.Views
 
 
         #region Eventos Formulario
-
-        private void btnSearchCustomer_Click(object sender, EventArgs e)
-        {
-            if (ObjComponentItem is null)
-            {
-                return;
-            }
-
-            var formTypeListSearch = new FormTypeListSearch("Lista de Cliente", ObjComponentCustomer!.ComponentId,
-                "SELECCIONAR_CLIENTES_BILLING", true,
-                "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
-            formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarCusomter;
-            formTypeListSearch.ShowDialog(this);
-        }
-
-        private void btnAddProduct_Click(object sender, EventArgs e)
-        {
-            var warehouse = (ComboBoxItem)txtWarehouseID.SelectedItem;
-            var typePrice = (ComboBoxItem)txtTypePriceID.SelectedItem;
-            var currency = (ComboBoxItem)txtCurrencyID.SelectedItem;
-            var listPrice = ObjListPrice!.ListPriceId;
-            var warehouseId = Convert.ToInt32(warehouse.Key);
-            var typePriceId = Convert.ToInt32(typePrice.Key);
-            var currencyIdKey = Convert.ToInt32(currency.Key);
-
-
-            var formTypeListSearch = new FormTypeListSearch("Lista de Productos", ObjComponentItem!.ComponentId,
-                "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
-                @"{warehouseID:" + warehouseId + ", listPriceID:" + listPrice + ",typePriceID:" + typePriceId + ",currencyID:" + currencyIdKey + "}",
-                false, "", 0, 5, "");
-            formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarItem;
-            formTypeListSearch.ShowDialog(this);
-        }
-
-        private void EventoCallBackAceptarCusomter(dynamic mensaje)
-        {
-            // Realizar la lógica que desees en el formulario padre
-            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
-            TxtCustomerId = Convert.ToInt32(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "entityID", "0"));
-            txtCustomerDescription.Text = objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Codigo", "0");
-            txtCustomerDescription.Text = txtCustomerDescription.Text + "/" + objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Nombre", "N/D");
-
-            FnClearData();
-            FnGetCustomerClient(TxtCustomerId);
-        }
-
-
-        private void EventoCallBackAceptarItem(dynamic mensaje)
-        {
-            // Realizar la lógica que desees en el formulario padre
-            var objWebToolsHelper = new WebToolsHelper();
-            FnOnCompleteNewItemPopPub(mensaje);
-        }
-
-        #endregion
 
         private void txtScanerCodigo_KeyDown(object sender, KeyEventArgs e)
         {
@@ -3313,5 +3261,62 @@ namespace v4posme_window.Views
                 }
             }
         }
+        
+        private void btnSearchCustomer_Click(object sender, EventArgs e)
+        {
+            if (ObjComponentItem is null)
+            {
+                return;
+            }
+
+            var formTypeListSearch = new FormTypeListSearch("Lista de Cliente", ObjComponentCustomer!.ComponentId,
+                "SELECCIONAR_CLIENTES_BILLING", true,
+                "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
+            formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarCusomter;
+            formTypeListSearch.ShowDialog(this);
+        }
+
+        private void btnAddProduct_Click(object sender, EventArgs e)
+        {
+            var warehouse = (ComboBoxItem)txtWarehouseID.SelectedItem;
+            var typePrice = (ComboBoxItem)txtTypePriceID.SelectedItem;
+            var currency = (ComboBoxItem)txtCurrencyID.SelectedItem;
+            var listPrice = ObjListPrice!.ListPriceId;
+            var warehouseId = Convert.ToInt32(warehouse.Key);
+            var typePriceId = Convert.ToInt32(typePrice.Key);
+            var currencyIdKey = Convert.ToInt32(currency.Key);
+
+
+            var formTypeListSearch = new FormTypeListSearch("Lista de Productos", ObjComponentItem!.ComponentId,
+                "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
+                @"{warehouseID:" + warehouseId + ", listPriceID:" + listPrice + ",typePriceID:" + typePriceId + ",currencyID:" + currencyIdKey + "}",
+                false, "", 0, 5, "");
+            formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarItem;
+            formTypeListSearch.ShowDialog(this);
+        }
+
+        private void EventoCallBackAceptarCusomter(dynamic mensaje)
+        {
+            // Realizar la lógica que desees en el formulario padre
+            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
+            TxtCustomerId = Convert.ToInt32(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "entityID", "0"));
+            txtCustomerDescription.Text = objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Codigo", "0");
+            txtCustomerDescription.Text = txtCustomerDescription.Text + "/" + objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Nombre", "N/D");
+
+            FnClearData();
+            FnGetCustomerClient(TxtCustomerId);
+        }
+
+
+        private void EventoCallBackAceptarItem(dynamic mensaje)
+        {
+            // Realizar la lógica que desees en el formulario padre
+            var objWebToolsHelper = new WebToolsHelper();
+            FnOnCompleteNewItemPopPub(mensaje);
+        }
+
+        #endregion
+
+        
     }
 }
