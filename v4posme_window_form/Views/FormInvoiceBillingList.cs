@@ -17,6 +17,8 @@ using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
 using GridView = DevExpress.XtraGrid.Views.Grid.GridView;
+using System.ComponentModel;
+using v4posme_library.ModelsDto;
 
 namespace v4posme_window.Views
 {
@@ -31,7 +33,7 @@ namespace v4posme_window.Views
         private readonly ICoreWebTools _coreWebTools =
             VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
 
-        private readonly ICoreWebTransaction _coreWebTransaction = 
+        private readonly ICoreWebTransaction _coreWebTransaction =
             VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTransaction>();
 
         private readonly ICoreWebView _coreWebView = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
@@ -47,6 +49,8 @@ namespace v4posme_window.Views
         private static readonly string? NotAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
         private static readonly int? PermissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
         private static readonly string? UrlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+        private BackgroundWorker backgroundWorker;
+        private TableCompanyDataViewDto? _dataViewData;
 
         public FormInvoiceBillingList()
         {
@@ -68,7 +72,48 @@ namespace v4posme_window.Views
 
         private void FormInvoiceBillingList_Load(object sender, EventArgs e)
         {
+            backgroundWorker = new BackgroundWorker();
+            backgroundWorker.DoWork += BackgroundWorker_DoWork;
+            backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
+            progressPanel.Size = Size;
+            if (!progressPanel.Visible)
+            {
+                progressPanel.Visible = true;
+            }
+
+            backgroundWorker.RunWorkerAsync();
+        }
+
+        private void BackgroundWorker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
+        {
+            // Ocultar el mensaje de carga
+            if (progressPanel.Visible)
+            {
+                progressPanel.Visible = false;
+            }
+
+            // Verificar si hubo algún error durante la carga de datos
+            if (e.Error != null)
+            {
+                MessageBox.Show($"Error al cargar datos: {e.Error.Message}");
+                return;
+            }
+
+            // Actualizar la interfaz de usuario con los datos cargados
+            if (progressPanel.Visible)
+            {
+                progressPanel.Visible = false;
+            }
+
+            // Aquí puedes actualizar otros controles con los datos cargados
             PreRender();
+            CoreWebRenderInView.RenderGrid(_dataViewData!, "invoice", ObjGridControl);
+            ObjGridControl.MainView.RefreshData();
+            ObjGridControl.Refresh();
+        }
+
+        private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs args)
+        {
             List();
         }
 
@@ -132,8 +177,8 @@ namespace v4posme_window.Views
                     { "{fecha}", Fecha!.Value.ToShortDateString() }
                 };
 
-                var dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User, objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
-                if (dataViewData is null)
+                _dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User, objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
+                if (_dataViewData is null)
                 {
                     targetComponentId = 0;
                     parameters = new Dictionary<string, string>
@@ -141,13 +186,8 @@ namespace v4posme_window.Views
                         { "{companyID}", VariablesGlobales.Instance.User.CompanyId.ToString() },
                         { "{fecha}", Fecha.Value.ToShortDateString() }
                     };
-                    dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User, objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
+                    _dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User, objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
                 }
-
-
-                CoreWebRenderInView.RenderGrid(dataViewData!, "invoice", ObjGridControl);
-                ObjGridControl.MainView.RefreshData();
-                ObjGridControl.Refresh();
             }
             else
             {
@@ -156,10 +196,7 @@ namespace v4posme_window.Views
                     { "{companyID}", VariablesGlobales.Instance.User!.CompanyId.ToString() }
                 };
 
-                var dataViewData = _coreWebView.GetViewByDataViewId(VariablesGlobales.Instance.User, objComponent.ComponentId, DataViewId!.Value, callerIdList, resultPermission, parameters);
-                CoreWebRenderInView.RenderGrid(dataViewData, "invoice", ObjGridControl);
-                ObjGridControl.MainView.RefreshData();
-                ObjGridControl.Refresh();
+                _dataViewData = _coreWebView.GetViewByDataViewId(VariablesGlobales.Instance.User, objComponent.ComponentId, DataViewId!.Value, callerIdList, resultPermission, parameters);
             }
         }
 
@@ -197,7 +234,6 @@ namespace v4posme_window.Views
         {
             if (((GridView)ObjGridControl.MainView).SelectedRowsCount > 0)
             {
-                
                 var rowIndex = ((GridView)ObjGridControl.MainView).GetSelectedRows().ToList();
                 foreach (var indexRow in rowIndex)
                 {
@@ -205,38 +241,34 @@ namespace v4posme_window.Views
                     var transactionId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionID").ToString());
                     var transactionMasterId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionMasterID").ToString());
                     var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
-                    
+
 
                     var formInvoiceBillingEdit = new FormInvoiceBillingEdit(
-                        TypeOpenForm.Init, companyId, transactionId, 
-                        transactionMasterId){MdiParent = CoreFormList.Principal()};
+                        TypeOpenForm.Init, companyId, transactionId,
+                        transactionMasterId)
+                    { MdiParent = CoreFormList.Principal() };
                     formInvoiceBillingEdit.Show();
                     break;
-
                 }
-
-                
             }
             else
             {
                 CoreWebRenderInView objCoreWebRenderInView = new CoreWebRenderInView();
                 objCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error editando", "Debe seleccionar un registro", this);
             }
-
-
-            
         }
 
         public void New(object? sender, EventArgs? args)
         {
-            var transactionID = _coreWebTransaction.GetTransactionId(VariablesGlobales.Instance.User!.CompanyId, "tb_transaction_master_billing",0);
+            var transactionID = _coreWebTransaction.GetTransactionId(VariablesGlobales.Instance.User!.CompanyId, "tb_transaction_master_billing", 0);
 
             var objFormInvoiceList = new FormInvoiceBillingEdit(
                 TypeOpenForm.Init,
                 VariablesGlobales.Instance.User!.CompanyId,
                 transactionID!.Value,
                 0
-            ){ MdiParent = CoreFormList.Principal() };
+            )
+            { MdiParent = CoreFormList.Principal() };
             objFormInvoiceList.Show();
         }
 
@@ -244,8 +276,6 @@ namespace v4posme_window.Views
         {
             lblTitulo.Text = @"LISTA DE FACTURAS";
             Text = lblTitulo.Text;
-
-
             PanelControl controlParent = this.centerPane;
             ObjGridControl.Name = "ObjGridControl";
             ObjGridControl.Parent = controlParent;
@@ -289,27 +319,30 @@ namespace v4posme_window.Views
                 var transactionNumber = txtFiltrar.Text;
 
                 if (string.IsNullOrEmpty(transactionNumber))
-                throw new Exception(NotParameter);
+                    throw new Exception(NotParameter);
 
                 var objTm = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterModel>().GetRowByTransactionNumber(user.CompanyId, transactionNumber);
 
                 if (objTm == null)
-                throw new Exception("NO SE ENCONTRO EL DOCUMENTO");
+                    throw new Exception("NO SE ENCONTRO EL DOCUMENTO");
 
 
                 var formInvoiceBillingEdit = new FormInvoiceBillingEdit(
-                      TypeOpenForm.Init, objTm.CompanyId, objTm.TransactionId,
-                      objTm.TransactionMasterId
-                )
+                        TypeOpenForm.Init, objTm.CompanyId, objTm.TransactionId,
+                        objTm.TransactionMasterId
+                    )
                 { MdiParent = CoreFormList.Principal() };
                 formInvoiceBillingEdit.Show();
-
-
             }
             catch (Exception ex)
             {
                 new CoreWebRenderInView().GetMessageAlert(TypeError.Error, "Error", $"Se produjo un error en {ex.Source} {ex.Message}", this);
             }
+        }
+
+        private void FormInvoiceBillingList_Resize(object sender, EventArgs e)
+        {
+            progressPanel.Size = Size;
         }
     }
 }

@@ -56,7 +56,6 @@ namespace v4posme_window.Template
             ((System.ComponentModel.ISupportInitialize)txtFiltrar.Properties).BeginInit();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)centerPane).BeginInit();
-            centerPane.SuspendLayout();
             SuspendLayout();
             // 
             // stackPanel1
@@ -104,48 +103,50 @@ namespace v4posme_window.Template
             stackPanel2.Location = new Point(2, 6);
             stackPanel2.Name = "stackPanel2";
             stackPanel2.Padding = new Padding(2);
-            stackPanel2.Size = new Size(439, 54);
+            stackPanel2.Size = new Size(444, 54);
             stackPanel2.TabIndex = 2;
             stackPanel2.UseSkinIndents = true;
             // 
             // txtFecha
             // 
             txtFecha.EditValue = new DateTime(2024, 4, 8, 21, 9, 29, 0);
-            txtFecha.Location = new Point(5, 5);
+            txtFecha.Location = new Point(5, 4);
             txtFecha.Name = "txtFecha";
             txtFecha.Properties.AdvancedModeOptions.AllowCaretAnimation = DevExpress.Utils.DefaultBoolean.True;
             txtFecha.Properties.AdvancedModeOptions.Label = "Fecha";
             txtFecha.Properties.AdvancedModeOptions.LabelAppearance.ForeColor = Color.Silver;
             txtFecha.Properties.AdvancedModeOptions.LabelAppearance.Options.UseForeColor = true;
+            txtFecha.Properties.AutoHeight = false;
             txtFecha.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtFecha.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtFecha.Properties.ContextImageOptions.SvgImage = (SvgImage)resources.GetObject("txtFecha.Properties.ContextImageOptions.SvgImage");
-            txtFecha.Size = new Size(160, 44);
+            txtFecha.Size = new Size(160, 45);
             txtFecha.TabIndex = 0;
             // 
             // txtFiltrar
             // 
-            txtFiltrar.Location = new Point(171, 6);
+            txtFiltrar.Location = new Point(171, 4);
             txtFiltrar.Name = "txtFiltrar";
             txtFiltrar.Properties.AdvancedModeOptions.Label = "Filtrar";
             txtFiltrar.Properties.AdvancedModeOptions.LabelAppearance.ForeColor = Color.Silver;
             txtFiltrar.Properties.AdvancedModeOptions.LabelAppearance.Options.UseForeColor = true;
             txtFiltrar.Properties.Appearance.Font = new Font("Tahoma", 8.5F);
             txtFiltrar.Properties.Appearance.Options.UseFont = true;
+            txtFiltrar.Properties.AutoHeight = false;
             txtFiltrar.Properties.ContextImageOptions.SvgImageSize = new Size(20, 20);
             txtFiltrar.Properties.UseAdvancedMode = DevExpress.Utils.DefaultBoolean.True;
-            txtFiltrar.Size = new Size(169, 42);
+            txtFiltrar.Size = new Size(169, 45);
             txtFiltrar.TabIndex = 1;
             // 
             // btnSearchTransaction
             // 
             btnSearchTransaction.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.False;
             btnSearchTransaction.ImageOptions.SvgImage = (SvgImage)resources.GetObject("btnSearchTransaction.ImageOptions.SvgImage");
-            btnSearchTransaction.Location = new Point(346, 5);
+            btnSearchTransaction.Location = new Point(346, 4);
             btnSearchTransaction.LookAndFeel.SkinName = "WXI";
             btnSearchTransaction.LookAndFeel.UseDefaultLookAndFeel = false;
             btnSearchTransaction.Name = "btnSearchTransaction";
-            btnSearchTransaction.Size = new Size(88, 44);
+            btnSearchTransaction.Size = new Size(93, 45);
             btnSearchTransaction.TabIndex = 6;
             btnSearchTransaction.Text = "Buscar";
             // 
@@ -167,7 +168,7 @@ namespace v4posme_window.Template
             btnVistas.ImageOptions.SvgImage = Properties.Resources.bo_appearance1;
             btnVistas.Location = new Point(3, 3);
             btnVistas.Name = "btnVistas";
-            btnVistas.Size = new Size(89, 49);
+            btnVistas.Size = new Size(89, 45);
             btnVistas.TabIndex = 5;
             btnVistas.Text = "Vistas";
             // 
@@ -177,7 +178,7 @@ namespace v4posme_window.Template
             btnEditar.ImageOptions.SvgImage = (SvgImage)resources.GetObject("btnEditar.ImageOptions.SvgImage");
             btnEditar.Location = new Point(98, 3);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(89, 49);
+            btnEditar.Size = new Size(89, 45);
             btnEditar.TabIndex = 2;
             btnEditar.Text = "Editar";
             // 
@@ -186,7 +187,7 @@ namespace v4posme_window.Template
             btnEliminar.ImageOptions.SvgImage = (SvgImage)resources.GetObject("btnEliminar.ImageOptions.SvgImage");
             btnEliminar.Location = new Point(193, 3);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(89, 49);
+            btnEliminar.Size = new Size(89, 45);
             btnEliminar.TabIndex = 3;
             btnEliminar.Text = "Delete";
             // 
@@ -195,17 +196,16 @@ namespace v4posme_window.Template
             btnNuevo.ImageOptions.SvgImage = (SvgImage)resources.GetObject("btnNuevo.ImageOptions.SvgImage");
             btnNuevo.Location = new Point(288, 3);
             btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(89, 49);
+            btnNuevo.Size = new Size(89, 45);
             btnNuevo.TabIndex = 4;
             btnNuevo.Text = "Nuevo";
             // 
             // centerPane
             // 
-            centerPane.Controls.Add(progressPanel);
             centerPane.Dock = DockStyle.Fill;
             centerPane.Location = new Point(0, 107);
             centerPane.Name = "centerPane";
-            centerPane.Size = new Size(1129, 428);
+            centerPane.Size = new Size(1129, 426);
             centerPane.TabIndex = 2;
             // 
             // progressPanel
@@ -216,9 +216,9 @@ namespace v4posme_window.Template
             progressPanel.Caption = "Procesando";
             progressPanel.ContentAlignment = ContentAlignment.MiddleCenter;
             progressPanel.Description = "Buscando recursos de usuario";
-            progressPanel.Location = new Point(4, 5);
+            progressPanel.Location = new Point(0, 0);
             progressPanel.Name = "progressPanel";
-            progressPanel.Size = new Size(333, 97);
+            progressPanel.Size = new Size(333, 45);
             progressPanel.TabIndex = 31;
             progressPanel.Visible = false;
             // 
@@ -226,7 +226,8 @@ namespace v4posme_window.Template
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1129, 535);
+            ClientSize = new Size(1129, 533);
+            Controls.Add(progressPanel);
             Controls.Add(centerPane);
             Controls.Add(panelControl1);
             Controls.Add(stackPanel1);
@@ -246,7 +247,6 @@ namespace v4posme_window.Template
             ((System.ComponentModel.ISupportInitialize)txtFiltrar.Properties).EndInit();
             flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)centerPane).EndInit();
-            centerPane.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -264,7 +264,7 @@ namespace v4posme_window.Template
         public DevExpress.XtraEditors.SimpleButton btnNuevo;
         public DevExpress.XtraEditors.TextEdit txtFiltrar;
         public DevExpress.XtraEditors.DateEdit txtFecha;
-        private DevExpress.XtraWaitForm.ProgressPanel progressPanel;
         public DevExpress.XtraEditors.SimpleButton btnSearchTransaction;
+        public DevExpress.XtraWaitForm.ProgressPanel progressPanel;
     }
 }

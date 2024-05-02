@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DevExpress.Utils.Layout;
 using DevExpress.XtraEditors;
+using Microsoft.EntityFrameworkCore;
 
 namespace v4posme_window.Dto
 {
@@ -15,9 +16,13 @@ namespace v4posme_window.Dto
         public string? ItemNumber { get; set; }
         public string? TransactionDetailName { get; set; }
         public int Sku { get; set; }
+        [Precision(18,2)]
         public decimal Quantity { get; set; }
+        [Precision(18,2)]
         public decimal Price { get; set; }
+        [Precision(18,2)]
         public decimal SubTotal { get; set; }
+        [Precision(18,2)]
         public decimal Iva { get; set; }
         public decimal SkuQuantityBySku { get; set; }
         public decimal UnitaryPriceIndividual { get; set; }

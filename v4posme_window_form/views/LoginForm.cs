@@ -114,21 +114,16 @@ namespace v4posme_window.Views
                 if (VariablesGlobales.Instance.User is null) return;
 
                 //si existe el usuario
-                userTools.Log(
-                    $@"Usuario logeado al sistema: {VariablesGlobales.Instance.User.Nickname}, {DateTime.Now.ToLongDateString()}");
+                userTools.Log($@"Usuario logeado al sistema: {VariablesGlobales.Instance.User.Nickname}, {DateTime.Now.ToLongDateString()}");
 
                 var companyId = VariablesGlobales.Instance.User.CompanyId;
-                var parameterCantidadTransacciones =
-                    coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId).Value;
+                var parameterCantidadTransacciones = coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId).Value;
                 var parameterBalance = coreWebParameter.GetParameter("CORE_CUST_PRICE_BALANCE", companyId).Value;
                 var parameterSendBox = coreWebParameter.GetParameter("CORE_PAYMENT_SENDBOX", companyId).Value;
-                var parameterSendBoxUsuario =
-                    coreWebParameter.GetParameter("CORE_PAYMENT_PRUEBA_USUARIO", companyId).Value;
+                var parameterSendBoxUsuario = coreWebParameter.GetParameter("CORE_PAYMENT_PRUEBA_USUARIO", companyId).Value;
                 var parameterSendBoxClave = coreWebParameter.GetParameter("CORE_PAYMENT_PRUEBA_CLAVE", companyId).Value;
-                var parameterProduccionUsuario =
-                    coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_USUARIO", companyId).Value;
-                var parameterProduccionClave =
-                    coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_CLAVE", companyId).Value;
+                var parameterProduccionUsuario = coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_USUARIO", companyId).Value;
+                var parameterProduccionClave = coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_CLAVE", companyId).Value;
                 _parameterPrice = Convert.ToDecimal(coreWebParameter.GetParameter("CORE_CUST_PRICE", companyId).Value);
                 var parameterTipoPlan = coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId).Value;
 
@@ -157,10 +152,9 @@ namespace v4posme_window.Views
             }
 
 
-            if (VariablesGlobales.Instance.MessageLogin is not null)
+            if (!string.IsNullOrEmpty(VariablesGlobales.Instance.MessageLogin))
             {
-                coreWebRender.GetMessageAlert(TypeError.Error, "posMe", VariablesGlobales.Instance.MessageLogin,
-                    this);
+                coreWebRender.GetMessageAlert(TypeError.Error, "posMe", VariablesGlobales.Instance.MessageLogin, this);
             }
 
             if (progressPanel.Visible)

@@ -30,15 +30,22 @@
         {
             SuspendLayout();
             // 
+            // progressPanel
+            // 
+            progressPanel.Appearance.BackColor = Color.Transparent;
+            progressPanel.Appearance.Options.UseBackColor = true;
+            progressPanel.Size = new Size(285, 39);
+            // 
             // FormInvoiceBillingList
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(939, 546);
+            ClientSize = new Size(805, 471);
             Name = "FormInvoiceBillingList";
             Text = "FormInvoiceBillingList";
             WindowState = FormWindowState.Maximized;
             Load += FormInvoiceBillingList_Load;
+            Resize += FormInvoiceBillingList_Resize;
             ResumeLayout(false);
         }
 

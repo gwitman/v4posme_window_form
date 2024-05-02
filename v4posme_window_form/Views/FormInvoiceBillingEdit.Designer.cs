@@ -271,7 +271,7 @@
             stackPanel1.Dock = DockStyle.Top;
             stackPanel1.Location = new Point(0, 0);
             stackPanel1.Name = "stackPanel1";
-            stackPanel1.Padding = new Padding(2, 2, 2, 2);
+            stackPanel1.Padding = new Padding(2);
             stackPanel1.Size = new Size(1329, 47);
             stackPanel1.TabIndex = 1;
             stackPanel1.UseSkinIndents = true;
@@ -318,7 +318,7 @@
             // 
             barDockControlBottom.CausesValidation = false;
             barDockControlBottom.Dock = DockStyle.Bottom;
-            barDockControlBottom.Location = new Point(0, 697);
+            barDockControlBottom.Location = new Point(0, 707);
             barDockControlBottom.Manager = barManager1;
             barDockControlBottom.Size = new Size(1329, 0);
             // 
@@ -328,7 +328,7 @@
             barDockControlLeft.Dock = DockStyle.Left;
             barDockControlLeft.Location = new Point(0, 0);
             barDockControlLeft.Manager = barManager1;
-            barDockControlLeft.Size = new Size(0, 697);
+            barDockControlLeft.Size = new Size(0, 707);
             // 
             // barDockControlRight
             // 
@@ -336,7 +336,7 @@
             barDockControlRight.Dock = DockStyle.Right;
             barDockControlRight.Location = new Point(1329, 0);
             barDockControlRight.Manager = barManager1;
-            barDockControlRight.Size = new Size(0, 697);
+            barDockControlRight.Size = new Size(0, 707);
             // 
             // btnNuevoProducto
             // 
@@ -1050,7 +1050,11 @@
             // 
             // colQuantity
             // 
+            colQuantity.AppearanceCell.Options.UseTextOptions = true;
+            colQuantity.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             colQuantity.Caption = "Cantidad";
+            colQuantity.DisplayFormat.FormatString = "N2";
+            colQuantity.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             colQuantity.FieldName = "Quantity";
             colQuantity.Name = "colQuantity";
             colQuantity.Visible = true;
@@ -1088,7 +1092,7 @@
             tablePanel2.Controls.Add(labelControl37);
             tablePanel2.Location = new Point(460, 385);
             tablePanel2.Name = "tablePanel2";
-            tablePanel2.Padding = new Padding(3, 3, 3, 3);
+            tablePanel2.Padding = new Padding(3);
             tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F) });
             tablePanel2.Size = new Size(240, 112);
             tablePanel2.TabIndex = 39;
@@ -1097,7 +1101,7 @@
             // txtTotal
             // 
             tablePanel2.SetColumn(txtTotal, 1);
-            txtTotal.Location = new Point(116, 70);
+            txtTotal.Location = new Point(116, 80);
             txtTotal.Name = "txtTotal";
             tablePanel2.SetRow(txtTotal, 2);
             txtTotal.Size = new Size(118, 28);
@@ -1106,7 +1110,7 @@
             // txtIva
             // 
             tablePanel2.SetColumn(txtIva, 1);
-            txtIva.Location = new Point(116, 34);
+            txtIva.Location = new Point(116, 44);
             txtIva.Name = "txtIva";
             tablePanel2.SetRow(txtIva, 1);
             txtIva.Size = new Size(118, 28);
@@ -1115,7 +1119,7 @@
             // txtSubTotal
             // 
             tablePanel2.SetColumn(txtSubTotal, 1);
-            txtSubTotal.Location = new Point(116, 6);
+            txtSubTotal.Location = new Point(116, 7);
             txtSubTotal.Name = "txtSubTotal";
             tablePanel2.SetRow(txtSubTotal, 0);
             txtSubTotal.Size = new Size(118, 28);
@@ -1126,7 +1130,7 @@
             labelControl39.Appearance.Font = new Font("Tahoma", 9F);
             labelControl39.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl39, 0);
-            labelControl39.Location = new Point(6, 76);
+            labelControl39.Location = new Point(6, 86);
             labelControl39.Name = "labelControl39";
             tablePanel2.SetRow(labelControl39, 2);
             labelControl39.Size = new Size(51, 14);
@@ -1138,7 +1142,7 @@
             labelControl38.Appearance.Font = new Font("Tahoma", 9F);
             labelControl38.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl38, 0);
-            labelControl38.Location = new Point(6, 40);
+            labelControl38.Location = new Point(6, 50);
             labelControl38.Name = "labelControl38";
             tablePanel2.SetRow(labelControl38, 1);
             labelControl38.Size = new Size(39, 14);
@@ -1150,7 +1154,7 @@
             labelControl37.Appearance.Font = new Font("Tahoma", 9F);
             labelControl37.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl37, 0);
-            labelControl37.Location = new Point(6, 12);
+            labelControl37.Location = new Point(6, 13);
             labelControl37.Name = "labelControl37";
             tablePanel2.SetRow(labelControl37, 0);
             labelControl37.Size = new Size(76, 14);
@@ -1187,16 +1191,16 @@
             tablePanel1.Controls.Add(labelControl29);
             tablePanel1.Location = new Point(8, 385);
             tablePanel1.Name = "tablePanel1";
-            tablePanel1.Padding = new Padding(3, 3, 3, 3);
+            tablePanel1.Padding = new Padding(3);
             tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 44.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F) });
-            tablePanel1.Size = new Size(446, 319);
+            tablePanel1.Size = new Size(446, 315);
             tablePanel1.TabIndex = 38;
             tablePanel1.UseSkinIndents = true;
             // 
             // txtReceiptAmountBank_Reference
             // 
             tablePanel1.SetColumn(txtReceiptAmountBank_Reference, 3);
-            txtReceiptAmountBank_Reference.Location = new Point(309, 146);
+            txtReceiptAmountBank_Reference.Location = new Point(309, 192);
             txtReceiptAmountBank_Reference.Name = "txtReceiptAmountBank_Reference";
             tablePanel1.SetRow(txtReceiptAmountBank_Reference, 5);
             txtReceiptAmountBank_Reference.Size = new Size(132, 28);
@@ -1205,7 +1209,7 @@
             // txtReceiptAmountBank_BankID
             // 
             tablePanel1.SetColumn(txtReceiptAmountBank_BankID, 2);
-            txtReceiptAmountBank_BankID.Location = new Point(229, 146);
+            txtReceiptAmountBank_BankID.Location = new Point(229, 192);
             txtReceiptAmountBank_BankID.MenuManager = barManager1;
             txtReceiptAmountBank_BankID.Name = "txtReceiptAmountBank_BankID";
             txtReceiptAmountBank_BankID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -1216,7 +1220,7 @@
             // txtReceiptAmountTarjetaDol_Reference
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjetaDol_Reference, 3);
-            txtReceiptAmountTarjetaDol_Reference.Location = new Point(309, 118);
+            txtReceiptAmountTarjetaDol_Reference.Location = new Point(309, 155);
             txtReceiptAmountTarjetaDol_Reference.Name = "txtReceiptAmountTarjetaDol_Reference";
             tablePanel1.SetRow(txtReceiptAmountTarjetaDol_Reference, 4);
             txtReceiptAmountTarjetaDol_Reference.Size = new Size(132, 28);
@@ -1225,7 +1229,7 @@
             // txtReceiptAmountTarjeta_Reference
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjeta_Reference, 3);
-            txtReceiptAmountTarjeta_Reference.Location = new Point(309, 90);
+            txtReceiptAmountTarjeta_Reference.Location = new Point(309, 118);
             txtReceiptAmountTarjeta_Reference.Name = "txtReceiptAmountTarjeta_Reference";
             tablePanel1.SetRow(txtReceiptAmountTarjeta_Reference, 3);
             txtReceiptAmountTarjeta_Reference.Size = new Size(132, 28);
@@ -1234,7 +1238,7 @@
             // txtReceiptAmountBankDol_Reference
             // 
             tablePanel1.SetColumn(txtReceiptAmountBankDol_Reference, 3);
-            txtReceiptAmountBankDol_Reference.Location = new Point(309, 174);
+            txtReceiptAmountBankDol_Reference.Location = new Point(309, 233);
             txtReceiptAmountBankDol_Reference.Name = "txtReceiptAmountBankDol_Reference";
             tablePanel1.SetRow(txtReceiptAmountBankDol_Reference, 6);
             txtReceiptAmountBankDol_Reference.Size = new Size(132, 28);
@@ -1243,7 +1247,7 @@
             // txtReceiptAmountTarjetaDol_BankID
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjetaDol_BankID, 2);
-            txtReceiptAmountTarjetaDol_BankID.Location = new Point(229, 118);
+            txtReceiptAmountTarjetaDol_BankID.Location = new Point(229, 155);
             txtReceiptAmountTarjetaDol_BankID.MenuManager = barManager1;
             txtReceiptAmountTarjetaDol_BankID.Name = "txtReceiptAmountTarjetaDol_BankID";
             txtReceiptAmountTarjetaDol_BankID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -1254,7 +1258,7 @@
             // txtReceiptAmountTarjeta_BankID
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjeta_BankID, 2);
-            txtReceiptAmountTarjeta_BankID.Location = new Point(229, 90);
+            txtReceiptAmountTarjeta_BankID.Location = new Point(229, 118);
             txtReceiptAmountTarjeta_BankID.MenuManager = barManager1;
             txtReceiptAmountTarjeta_BankID.Name = "txtReceiptAmountTarjeta_BankID";
             txtReceiptAmountTarjeta_BankID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -1265,7 +1269,7 @@
             // txtReceiptAmountBankDol_BankID
             // 
             tablePanel1.SetColumn(txtReceiptAmountBankDol_BankID, 2);
-            txtReceiptAmountBankDol_BankID.Location = new Point(229, 174);
+            txtReceiptAmountBankDol_BankID.Location = new Point(229, 233);
             txtReceiptAmountBankDol_BankID.MenuManager = barManager1;
             txtReceiptAmountBankDol_BankID.Name = "txtReceiptAmountBankDol_BankID";
             txtReceiptAmountBankDol_BankID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -1276,7 +1280,7 @@
             // txtReceiptAmountPoint
             // 
             tablePanel1.SetColumn(txtReceiptAmountPoint, 1);
-            txtReceiptAmountPoint.Location = new Point(129, 246);
+            txtReceiptAmountPoint.Location = new Point(129, 276);
             txtReceiptAmountPoint.Name = "txtReceiptAmountPoint";
             tablePanel1.SetRow(txtReceiptAmountPoint, 7);
             txtReceiptAmountPoint.Size = new Size(94, 28);
@@ -1286,7 +1290,7 @@
             // txtReceiptAmountBankDol
             // 
             tablePanel1.SetColumn(txtReceiptAmountBankDol, 1);
-            txtReceiptAmountBankDol.Location = new Point(129, 174);
+            txtReceiptAmountBankDol.Location = new Point(129, 233);
             txtReceiptAmountBankDol.Name = "txtReceiptAmountBankDol";
             tablePanel1.SetRow(txtReceiptAmountBankDol, 6);
             txtReceiptAmountBankDol.Size = new Size(94, 28);
@@ -1296,7 +1300,7 @@
             // txtReceiptAmountBank
             // 
             tablePanel1.SetColumn(txtReceiptAmountBank, 1);
-            txtReceiptAmountBank.Location = new Point(129, 146);
+            txtReceiptAmountBank.Location = new Point(129, 192);
             txtReceiptAmountBank.Name = "txtReceiptAmountBank";
             tablePanel1.SetRow(txtReceiptAmountBank, 5);
             txtReceiptAmountBank.Size = new Size(94, 28);
@@ -1306,7 +1310,7 @@
             // txtReceiptAmountTarjetaDol
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjetaDol, 1);
-            txtReceiptAmountTarjetaDol.Location = new Point(129, 118);
+            txtReceiptAmountTarjetaDol.Location = new Point(129, 155);
             txtReceiptAmountTarjetaDol.Name = "txtReceiptAmountTarjetaDol";
             tablePanel1.SetRow(txtReceiptAmountTarjetaDol, 4);
             txtReceiptAmountTarjetaDol.Size = new Size(94, 28);
@@ -1316,7 +1320,7 @@
             // txtReceiptAmountTarjeta
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjeta, 1);
-            txtReceiptAmountTarjeta.Location = new Point(129, 90);
+            txtReceiptAmountTarjeta.Location = new Point(129, 118);
             txtReceiptAmountTarjeta.Name = "txtReceiptAmountTarjeta";
             tablePanel1.SetRow(txtReceiptAmountTarjeta, 3);
             txtReceiptAmountTarjeta.Size = new Size(94, 28);
@@ -1326,7 +1330,7 @@
             // txtReceiptAmountDol
             // 
             tablePanel1.SetColumn(txtReceiptAmountDol, 1);
-            txtReceiptAmountDol.Location = new Point(129, 62);
+            txtReceiptAmountDol.Location = new Point(129, 81);
             txtReceiptAmountDol.Name = "txtReceiptAmountDol";
             tablePanel1.SetRow(txtReceiptAmountDol, 2);
             txtReceiptAmountDol.Size = new Size(94, 28);
@@ -1338,7 +1342,7 @@
             // txtReceiptAmount
             // 
             tablePanel1.SetColumn(txtReceiptAmount, 1);
-            txtReceiptAmount.Location = new Point(129, 34);
+            txtReceiptAmount.Location = new Point(129, 44);
             txtReceiptAmount.Name = "txtReceiptAmount";
             tablePanel1.SetRow(txtReceiptAmount, 1);
             txtReceiptAmount.Size = new Size(94, 28);
@@ -1350,7 +1354,7 @@
             // txtChangeAmount
             // 
             tablePanel1.SetColumn(txtChangeAmount, 1);
-            txtChangeAmount.Location = new Point(129, 6);
+            txtChangeAmount.Location = new Point(129, 7);
             txtChangeAmount.Name = "txtChangeAmount";
             tablePanel1.SetRow(txtChangeAmount, 0);
             txtChangeAmount.Size = new Size(94, 28);
@@ -1361,7 +1365,7 @@
             labelControl36.Appearance.Font = new Font("Tahoma", 9F);
             labelControl36.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl36, 0);
-            labelControl36.Location = new Point(6, 252);
+            labelControl36.Location = new Point(6, 282);
             labelControl36.Name = "labelControl36";
             tablePanel1.SetRow(labelControl36, 7);
             labelControl36.Size = new Size(39, 14);
@@ -1373,7 +1377,7 @@
             labelControl35.Appearance.Font = new Font("Tahoma", 9F);
             labelControl35.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl35, 0);
-            labelControl35.Location = new Point(6, 180);
+            labelControl35.Location = new Point(6, 239);
             labelControl35.Name = "labelControl35";
             tablePanel1.SetRow(labelControl35, 6);
             labelControl35.Size = new Size(83, 14);
@@ -1385,7 +1389,7 @@
             labelControl34.Appearance.Font = new Font("Tahoma", 9F);
             labelControl34.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl34, 0);
-            labelControl34.Location = new Point(6, 152);
+            labelControl34.Location = new Point(6, 198);
             labelControl34.Name = "labelControl34";
             tablePanel1.SetRow(labelControl34, 5);
             labelControl34.Size = new Size(85, 14);
@@ -1397,7 +1401,7 @@
             labelControl33.Appearance.Font = new Font("Tahoma", 9F);
             labelControl33.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl33, 0);
-            labelControl33.Location = new Point(6, 124);
+            labelControl33.Location = new Point(6, 161);
             labelControl33.Name = "labelControl33";
             tablePanel1.SetRow(labelControl33, 4);
             labelControl33.Size = new Size(88, 14);
@@ -1409,7 +1413,7 @@
             labelControl32.Appearance.Font = new Font("Tahoma", 9F);
             labelControl32.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl32, 0);
-            labelControl32.Location = new Point(6, 96);
+            labelControl32.Location = new Point(6, 124);
             labelControl32.Name = "labelControl32";
             tablePanel1.SetRow(labelControl32, 3);
             labelControl32.Size = new Size(90, 14);
@@ -1421,7 +1425,7 @@
             labelControl31.Appearance.Font = new Font("Tahoma", 9F);
             labelControl31.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl31, 0);
-            labelControl31.Location = new Point(6, 68);
+            labelControl31.Location = new Point(6, 87);
             labelControl31.Name = "labelControl31";
             tablePanel1.SetRow(labelControl31, 2);
             labelControl31.Size = new Size(76, 14);
@@ -1433,7 +1437,7 @@
             labelControl30.Appearance.Font = new Font("Tahoma", 9F);
             labelControl30.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl30, 0);
-            labelControl30.Location = new Point(6, 40);
+            labelControl30.Location = new Point(6, 50);
             labelControl30.Name = "labelControl30";
             tablePanel1.SetRow(labelControl30, 1);
             labelControl30.Size = new Size(50, 14);
@@ -1445,7 +1449,7 @@
             labelControl29.Appearance.Font = new Font("Tahoma", 9F);
             labelControl29.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl29, 0);
-            labelControl29.Location = new Point(6, 12);
+            labelControl29.Location = new Point(6, 13);
             labelControl29.Name = "labelControl29";
             tablePanel1.SetRow(labelControl29, 0);
             labelControl29.Size = new Size(62, 14);
@@ -1511,6 +1515,7 @@
             colItemNumber.Caption = "Codigo";
             colItemNumber.FieldName = "ItemNumber";
             colItemNumber.Name = "colItemNumber";
+            colItemNumber.OptionsColumn.AllowEdit = false;
             colItemNumber.Visible = true;
             colItemNumber.VisibleIndex = 0;
             colItemNumber.Width = 146;
@@ -1529,13 +1534,18 @@
             colSku.Caption = "U/M";
             colSku.FieldName = "Sku";
             colSku.Name = "colSku";
+            colSku.OptionsColumn.AllowEdit = false;
             colSku.Visible = true;
             colSku.VisibleIndex = 2;
             colSku.Width = 146;
             // 
             // colPrice
             // 
+            colPrice.AppearanceCell.Options.UseTextOptions = true;
+            colPrice.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             colPrice.Caption = "Precio";
+            colPrice.DisplayFormat.FormatString = "N2";
+            colPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             colPrice.FieldName = "Price";
             colPrice.Name = "colPrice";
             colPrice.Visible = true;
@@ -1544,9 +1554,14 @@
             // 
             // colSubTotal
             // 
+            colSubTotal.AppearanceCell.Options.UseTextOptions = true;
+            colSubTotal.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             colSubTotal.Caption = "Total";
+            colSubTotal.DisplayFormat.FormatString = "N2";
+            colSubTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             colSubTotal.FieldName = "SubTotal";
             colSubTotal.Name = "colSubTotal";
+            colSubTotal.OptionsColumn.AllowEdit = false;
             colSubTotal.Visible = true;
             colSubTotal.VisibleIndex = 5;
             colSubTotal.Width = 146;
@@ -1610,6 +1625,8 @@
             // colIva
             // 
             colIva.Caption = "Iva";
+            colIva.DisplayFormat.FormatString = "N2";
+            colIva.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             colIva.FieldName = "Iva";
             colIva.Name = "colIva";
             // 
@@ -1630,11 +1647,15 @@
             // 
             // colItemPrecio2
             // 
+            colItemPrecio2.DisplayFormat.FormatString = "N2";
+            colItemPrecio2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             colItemPrecio2.FieldName = "ItemPrecio2";
             colItemPrecio2.Name = "colItemPrecio2";
             // 
             // colItemPrecio3
             // 
+            colItemPrecio3.DisplayFormat.FormatString = "N2";
+            colItemPrecio3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             colItemPrecio3.FieldName = "ItemPrecio3";
             colItemPrecio3.Name = "colItemPrecio3";
             // 
@@ -1669,10 +1690,10 @@
             progressPanel.Caption = "Procesando";
             progressPanel.ContentAlignment = ContentAlignment.MiddleCenter;
             progressPanel.Description = "Buscando recursos de usuario";
-            progressPanel.Location = new Point(761, 394);
+            progressPanel.Location = new Point(0, 0);
             progressPanel.Margin = new Padding(4, 3, 4, 3);
             progressPanel.Name = "progressPanel";
-            progressPanel.Size = new Size(389, 93);
+            progressPanel.Size = new Size(389, 8);
             progressPanel.TabIndex = 47;
             progressPanel.Visible = false;
             // 
@@ -1709,10 +1730,10 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1329, 697);
+            ClientSize = new Size(1329, 707);
+            Controls.Add(progressPanel);
             Controls.Add(btnAplicar);
             Controls.Add(dropDownButton1);
-            Controls.Add(progressPanel);
             Controls.Add(svgImageBox1);
             Controls.Add(txtScanerCodigo);
             Controls.Add(downButtonSeleccion);

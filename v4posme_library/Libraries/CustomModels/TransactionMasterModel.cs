@@ -114,7 +114,7 @@ class TransactionMasterModel : ITransactionMasterModel
         using var context = new DataContext();
         return context.TbTransactionMasters
             .First(master => master.CompanyId == companyId
-                             && master.TransactionNumber == transactionNumber
+                             && master.TransactionNumber.Contains(transactionNumber)
                              && master.IsActive!.Value);
     }
 
