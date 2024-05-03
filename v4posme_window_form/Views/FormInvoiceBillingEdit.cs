@@ -3289,16 +3289,14 @@ namespace v4posme_window.Views
 
             if (e.Item.Name==btnSeleccionarFactura.Name)
             {
-                var objComponent = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_billing");
-                if (objComponent is null)
-                {
-                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error",
-                        "00409 EL COMPONENTE 'tb_transaction_master_billing' NO EXISTE...", this);
-                    return;
-                }
 
-                var callerIdList = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["CALLERID_LIST"]);
-                //var formTypeListSearch = new FormTypeListSearch("Lista de Facturas",objComponent.ComponentId,"billing_invoice");
+                
+                var formTypeListSearch = new FormTypeListSearch("Lista de Facturas", ObjComponentTransactionBilling!.ComponentId,
+                    "SELECCIONAR_BILLING_REGISTER", true,
+                    "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
+                formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarSeleccoinDeFactura;
+                formTypeListSearch.ShowDialog(this);
+
             }
 
             if (e.Item.Name == btnRegresar.Name)
@@ -3391,6 +3389,18 @@ namespace v4posme_window.Views
             FnClearData();
             FnGetCustomerClient(TxtCustomerId);
         }
+
+        private void EventoCallBackAceptarSeleccoinDeFactura(dynamic mensaje)
+        {
+            
+            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
+            CompanyId = Convert.ToInt32(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "companyID", "0"));
+            TransactionId = Convert.ToInt32(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "transactionID", "0"));
+            TransactionMasterId = Convert.ToInt32(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "transactionMasterID", "0"));
+            LoadEdit();
+            LoadRender(TypeRender.Edit);
+        }
+
 
 
         private void EventoCallBackAceptarItem(dynamic mensaje)
