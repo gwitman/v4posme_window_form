@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace v4posme_window.Dto
 {
-    public  class FormInvoiceBillingEditDetailDTO
+    public  class FormInvoiceBillingEditDetailDTO 
     {
         public int? TransactionMasterDetailId { get; set; }
         public int? ItemId { get; set; }
@@ -33,7 +33,6 @@ namespace v4posme_window.Dto
         public string? DetailVencimiento { get; set; }
         public string? AccionMenos { get; set; }
         public string? AccionMas { get; set; }
-        public string? AccionPrecios { get; set; }
-
+        public decimal? AccionPrecios { get; set; }
     }
 }

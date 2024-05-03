@@ -164,19 +164,19 @@
             colItemId = new DevExpress.XtraGrid.Columns.GridColumn();
             colItemNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             colTransactionDetailName = new DevExpress.XtraGrid.Columns.GridColumn();
+            colSkuFormatoDescripton = new DevExpress.XtraGrid.Columns.GridColumn();
             colSku = new DevExpress.XtraGrid.Columns.GridColumn();
             colPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             colSubTotal = new DevExpress.XtraGrid.Columns.GridColumn();
-            colAccionPrecios = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            colAccionMenos = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             colAccionMas = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            colAccionMenos = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            colAccionPrecios = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             colIva = new DevExpress.XtraGrid.Columns.GridColumn();
             colSkuQuantityBySku = new DevExpress.XtraGrid.Columns.GridColumn();
             colUnitaryPriceIndividual = new DevExpress.XtraGrid.Columns.GridColumn();
-            colSkuFormatoDescripton = new DevExpress.XtraGrid.Columns.GridColumn();
             colItemPrecio2 = new DevExpress.XtraGrid.Columns.GridColumn();
             colItemPrecio3 = new DevExpress.XtraGrid.Columns.GridColumn();
             colDetailVencimiento = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -254,9 +254,9 @@
             ((System.ComponentModel.ISupportInitialize)txtChangeAmount.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewTbTransactionMasterDetail).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewValues).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)itemCheck).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemPictureEdit1).BeginInit();
@@ -272,7 +272,7 @@
             stackPanel1.Location = new Point(0, 0);
             stackPanel1.Name = "stackPanel1";
             stackPanel1.Padding = new Padding(2);
-            stackPanel1.Size = new Size(1329, 47);
+            stackPanel1.Size = new Size(1139, 41);
             stackPanel1.TabIndex = 1;
             stackPanel1.UseSkinIndents = true;
             // 
@@ -287,10 +287,10 @@
             lblTitulo.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             lblTitulo.ImageOptions.Alignment = ContentAlignment.MiddleLeft;
             lblTitulo.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("lblTitulo.ImageOptions.SvgImage");
-            lblTitulo.Location = new Point(5, 7);
+            lblTitulo.Location = new Point(5, 6);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Padding = new Padding(3, 0, 0, 0);
-            lblTitulo.Size = new Size(301, 32);
+            lblTitulo.Size = new Size(258, 28);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Editar Factura No. # FAC00000001";
             lblTitulo.UseMnemonic = false;
@@ -312,15 +312,15 @@
             barDockControlTop.Dock = DockStyle.Top;
             barDockControlTop.Location = new Point(0, 0);
             barDockControlTop.Manager = barManager1;
-            barDockControlTop.Size = new Size(1329, 0);
+            barDockControlTop.Size = new Size(1139, 0);
             // 
             // barDockControlBottom
             // 
             barDockControlBottom.CausesValidation = false;
             barDockControlBottom.Dock = DockStyle.Bottom;
-            barDockControlBottom.Location = new Point(0, 707);
+            barDockControlBottom.Location = new Point(0, 701);
             barDockControlBottom.Manager = barManager1;
-            barDockControlBottom.Size = new Size(1329, 0);
+            barDockControlBottom.Size = new Size(1139, 0);
             // 
             // barDockControlLeft
             // 
@@ -328,15 +328,15 @@
             barDockControlLeft.Dock = DockStyle.Left;
             barDockControlLeft.Location = new Point(0, 0);
             barDockControlLeft.Manager = barManager1;
-            barDockControlLeft.Size = new Size(0, 707);
+            barDockControlLeft.Size = new Size(0, 701);
             // 
             // barDockControlRight
             // 
             barDockControlRight.CausesValidation = false;
             barDockControlRight.Dock = DockStyle.Right;
-            barDockControlRight.Location = new Point(1329, 0);
+            barDockControlRight.Location = new Point(1139, 0);
             barDockControlRight.Manager = barManager1;
-            barDockControlRight.Size = new Size(0, 707);
+            barDockControlRight.Size = new Size(0, 701);
             // 
             // btnNuevoProducto
             // 
@@ -406,18 +406,18 @@
             // 
             // svgImageBox1
             // 
-            svgImageBox1.Location = new Point(6, 238);
+            svgImageBox1.Location = new Point(5, 206);
             svgImageBox1.Name = "svgImageBox1";
-            svgImageBox1.Size = new Size(37, 28);
+            svgImageBox1.Size = new Size(32, 24);
             svgImageBox1.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("svgImageBox1.SvgImage");
             svgImageBox1.TabIndex = 40;
             svgImageBox1.Text = "svgImageBox1";
             // 
             // txtScanerCodigo
             // 
-            txtScanerCodigo.Location = new Point(58, 239);
+            txtScanerCodigo.Location = new Point(50, 207);
             txtScanerCodigo.Name = "txtScanerCodigo";
-            txtScanerCodigo.Size = new Size(292, 28);
+            txtScanerCodigo.Size = new Size(250, 28);
             txtScanerCodigo.TabIndex = 37;
             txtScanerCodigo.KeyDown += txtScanerCodigo_KeyDown;
             txtScanerCodigo.KeyPress += txtScanerCodigo_KeyPress;
@@ -427,9 +427,9 @@
             downButtonSeleccion.Appearance.BackColor = Color.Gray;
             downButtonSeleccion.Appearance.Options.UseBackColor = true;
             downButtonSeleccion.DropDownControl = popupMenuSeleccion;
-            downButtonSeleccion.Location = new Point(630, 239);
+            downButtonSeleccion.Location = new Point(540, 207);
             downButtonSeleccion.Name = "downButtonSeleccion";
-            downButtonSeleccion.Size = new Size(126, 30);
+            downButtonSeleccion.Size = new Size(108, 26);
             downButtonSeleccion.TabIndex = 34;
             downButtonSeleccion.Text = "SELECCIÓN";
             downButtonSeleccion.Click += downButtonSeleccion_Click;
@@ -439,9 +439,9 @@
             downButtonProducto.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Success;
             downButtonProducto.Appearance.Options.UseBackColor = true;
             downButtonProducto.DropDownControl = popupMenuProducto;
-            downButtonProducto.Location = new Point(761, 239);
+            downButtonProducto.Location = new Point(652, 207);
             downButtonProducto.Name = "downButtonProducto";
-            downButtonProducto.Size = new Size(126, 30);
+            downButtonProducto.Size = new Size(108, 26);
             downButtonProducto.TabIndex = 33;
             downButtonProducto.Text = "PRODUCTO";
             downButtonProducto.Click += downButtonProducto_Click;
@@ -450,9 +450,9 @@
             // 
             btnDeleteItem.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
             btnDeleteItem.Appearance.Options.UseBackColor = true;
-            btnDeleteItem.Location = new Point(498, 239);
+            btnDeleteItem.Location = new Point(427, 207);
             btnDeleteItem.Name = "btnDeleteItem";
-            btnDeleteItem.Size = new Size(126, 30);
+            btnDeleteItem.Size = new Size(108, 26);
             btnDeleteItem.TabIndex = 32;
             btnDeleteItem.Text = "ELIMINAR PRO";
             btnDeleteItem.Click += btnDeleteItem_Click;
@@ -461,9 +461,9 @@
             // 
             btnAddProduct.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Primary;
             btnAddProduct.Appearance.Options.UseBackColor = true;
-            btnAddProduct.Location = new Point(368, 239);
+            btnAddProduct.Location = new Point(315, 207);
             btnAddProduct.Name = "btnAddProduct";
-            btnAddProduct.Size = new Size(126, 30);
+            btnAddProduct.Size = new Size(108, 26);
             btnAddProduct.TabIndex = 31;
             btnAddProduct.Text = "AGREGAR PRO";
             btnAddProduct.Click += btnAddProduct_Click;
@@ -472,10 +472,10 @@
             // 
             xtraTabControl.Appearance.BackColor = Color.White;
             xtraTabControl.Appearance.Options.UseBackColor = true;
-            xtraTabControl.Location = new Point(0, 53);
+            xtraTabControl.Location = new Point(0, 46);
             xtraTabControl.Name = "xtraTabControl";
             xtraTabControl.SelectedTabPage = tabInformacion;
-            xtraTabControl.Size = new Size(1205, 178);
+            xtraTabControl.Size = new Size(1033, 154);
             xtraTabControl.TabIndex = 29;
             xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { tabInformacion, tabReferencias, tabInfoCredito, tabMas });
             // 
@@ -504,15 +504,15 @@
             tabInformacion.Controls.Add(labelControl2);
             tabInformacion.Controls.Add(labelControl1);
             tabInformacion.Name = "tabInformacion";
-            tabInformacion.Size = new Size(1203, 147);
+            tabInformacion.Size = new Size(1031, 123);
             tabInformacion.Text = "Información";
             // 
             // txtCustomerCreditLineID
             // 
-            txtCustomerCreditLineID.Location = new Point(884, 44);
+            txtCustomerCreditLineID.Location = new Point(758, 36);
             txtCustomerCreditLineID.Name = "txtCustomerCreditLineID";
             txtCustomerCreditLineID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            txtCustomerCreditLineID.Size = new Size(295, 28);
+            txtCustomerCreditLineID.Size = new Size(253, 28);
             txtCustomerCreditLineID.TabIndex = 34;
             txtCustomerCreditLineID.SelectedIndexChanged += txtCustomerCreditLineID_SelectedIndexChanged;
             // 
@@ -520,7 +520,7 @@
             // 
             labelCustomerCreditLineID.Appearance.Font = new Font("Tahoma", 9F);
             labelCustomerCreditLineID.Appearance.Options.UseFont = true;
-            labelCustomerCreditLineID.Location = new Point(830, 44);
+            labelCustomerCreditLineID.Location = new Point(711, 38);
             labelCustomerCreditLineID.Name = "labelCustomerCreditLineID";
             labelCustomerCreditLineID.Size = new Size(32, 14);
             labelCustomerCreditLineID.TabIndex = 33;
@@ -535,9 +535,9 @@
             btnClearCustomer.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             btnClearCustomer.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnClearCustomer.ImageOptions.SvgImage");
             btnClearCustomer.ImageOptions.SvgImageSize = new Size(16, 16);
-            btnClearCustomer.Location = new Point(733, 10);
+            btnClearCustomer.Location = new Point(626, 9);
             btnClearCustomer.Name = "btnClearCustomer";
-            btnClearCustomer.Size = new Size(65, 30);
+            btnClearCustomer.Size = new Size(56, 26);
             btnClearCustomer.TabIndex = 20;
             btnClearCustomer.Click += btnClearCustomer_Click;
             // 
@@ -550,48 +550,48 @@
             btnSearchCustomer.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             btnSearchCustomer.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnSearchCustomer.ImageOptions.SvgImage");
             btnSearchCustomer.ImageOptions.SvgImageSize = new Size(16, 16);
-            btnSearchCustomer.Location = new Point(627, 10);
+            btnSearchCustomer.Location = new Point(537, 9);
             btnSearchCustomer.Name = "btnSearchCustomer";
-            btnSearchCustomer.Size = new Size(101, 30);
+            btnSearchCustomer.Size = new Size(87, 26);
             btnSearchCustomer.TabIndex = 21;
             btnSearchCustomer.Text = "Buscar";
             btnSearchCustomer.Click += btnSearchCustomer_Click;
             // 
             // txtCustomerDescription
             // 
-            txtCustomerDescription.Location = new Point(479, 10);
+            txtCustomerDescription.Location = new Point(411, 9);
             txtCustomerDescription.Name = "txtCustomerDescription";
-            txtCustomerDescription.Size = new Size(138, 28);
+            txtCustomerDescription.Size = new Size(118, 28);
             txtCustomerDescription.TabIndex = 19;
             // 
             // txtCausalID
             // 
-            txtCausalID.Location = new Point(884, 10);
+            txtCausalID.Location = new Point(758, 9);
             txtCausalID.Name = "txtCausalID";
             txtCausalID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            txtCausalID.Size = new Size(295, 28);
+            txtCausalID.Size = new Size(253, 28);
             txtCausalID.TabIndex = 15;
             txtCausalID.SelectedValueChanged += txtCausalID_SelectedValueChanged;
             // 
             // txtReferenceClientIdentifier
             // 
-            txtReferenceClientIdentifier.Location = new Point(479, 78);
+            txtReferenceClientIdentifier.Location = new Point(411, 63);
             txtReferenceClientIdentifier.Name = "txtReferenceClientIdentifier";
-            txtReferenceClientIdentifier.Size = new Size(295, 28);
+            txtReferenceClientIdentifier.Size = new Size(253, 28);
             txtReferenceClientIdentifier.TabIndex = 14;
             // 
             // txtReferenceClientName
             // 
-            txtReferenceClientName.Location = new Point(479, 44);
+            txtReferenceClientName.Location = new Point(411, 36);
             txtReferenceClientName.Name = "txtReferenceClientName";
-            txtReferenceClientName.Size = new Size(295, 28);
+            txtReferenceClientName.Size = new Size(253, 28);
             txtReferenceClientName.TabIndex = 13;
             // 
             // labelControl5
             // 
             labelControl5.Appearance.Font = new Font("Tahoma", 9F);
             labelControl5.Appearance.Options.UseFont = true;
-            labelControl5.Location = new Point(835, 10);
+            labelControl5.Location = new Point(716, 9);
             labelControl5.Name = "labelControl5";
             labelControl5.Size = new Size(28, 14);
             labelControl5.TabIndex = 11;
@@ -601,7 +601,7 @@
             // 
             labelControl6.Appearance.Font = new Font("Tahoma", 9F);
             labelControl6.Appearance.Options.UseFont = true;
-            labelControl6.Location = new Point(417, 78);
+            labelControl6.Location = new Point(357, 68);
             labelControl6.Name = "labelControl6";
             labelControl6.Size = new Size(40, 14);
             labelControl6.TabIndex = 10;
@@ -611,7 +611,7 @@
             // 
             labelControl7.Appearance.Font = new Font("Tahoma", 9F);
             labelControl7.Appearance.Options.UseFont = true;
-            labelControl7.Location = new Point(418, 44);
+            labelControl7.Location = new Point(358, 38);
             labelControl7.Name = "labelControl7";
             labelControl7.Size = new Size(41, 14);
             labelControl7.TabIndex = 9;
@@ -621,7 +621,7 @@
             // 
             labelControl8.Appearance.Font = new Font("Tahoma", 9F);
             labelControl8.Appearance.Options.UseFont = true;
-            labelControl8.Location = new Point(388, 10);
+            labelControl8.Location = new Point(333, 9);
             labelControl8.Name = "labelControl8";
             labelControl8.Size = new Size(70, 14);
             labelControl8.TabIndex = 8;
@@ -629,44 +629,44 @@
             // 
             // txtCurrencyID
             // 
-            txtCurrencyID.Location = new Point(884, 78);
+            txtCurrencyID.Location = new Point(758, 63);
             txtCurrencyID.Name = "txtCurrencyID";
             txtCurrencyID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            txtCurrencyID.Size = new Size(295, 28);
+            txtCurrencyID.Size = new Size(253, 28);
             txtCurrencyID.TabIndex = 7;
             txtCurrencyID.SelectedIndexChanged += txtCurrencyID_SelectedIndexChanged;
             // 
             // txtNote
             // 
-            txtNote.Location = new Point(75, 78);
+            txtNote.Location = new Point(76, 63);
             txtNote.Name = "txtNote";
-            txtNote.Size = new Size(295, 28);
+            txtNote.Size = new Size(242, 28);
             txtNote.TabIndex = 6;
             // 
             // txtExchangeRate
             // 
-            txtExchangeRate.Location = new Point(75, 44);
+            txtExchangeRate.Location = new Point(76, 36);
             txtExchangeRate.Name = "txtExchangeRate";
-            txtExchangeRate.Size = new Size(77, 28);
+            txtExchangeRate.Size = new Size(55, 28);
             txtExchangeRate.TabIndex = 5;
             // 
             // txtDate
             // 
             txtDate.EditValue = null;
-            txtDate.Location = new Point(75, 10);
+            txtDate.Location = new Point(76, 9);
             txtDate.Name = "txtDate";
             txtDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtDate.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("txtDate.Properties.ContextImageOptions.SvgImage");
             txtDate.Properties.ContextImageOptions.SvgImageSize = new Size(16, 16);
-            txtDate.Size = new Size(295, 28);
+            txtDate.Size = new Size(242, 28);
             txtDate.TabIndex = 4;
             // 
             // labelControl3
             // 
             labelControl3.Appearance.Font = new Font("Tahoma", 9F);
             labelControl3.Appearance.Options.UseFont = true;
-            labelControl3.Location = new Point(814, 78);
+            labelControl3.Location = new Point(698, 68);
             labelControl3.Name = "labelControl3";
             labelControl3.Size = new Size(47, 14);
             labelControl3.TabIndex = 3;
@@ -676,7 +676,7 @@
             // 
             labelControl4.Appearance.Font = new Font("Tahoma", 9F);
             labelControl4.Appearance.Options.UseFont = true;
-            labelControl4.Location = new Point(3, 78);
+            labelControl4.Location = new Point(3, 68);
             labelControl4.Name = "labelControl4";
             labelControl4.Size = new Size(65, 14);
             labelControl4.TabIndex = 2;
@@ -686,7 +686,7 @@
             // 
             labelControl2.Appearance.Font = new Font("Tahoma", 9F);
             labelControl2.Appearance.Options.UseFont = true;
-            labelControl2.Location = new Point(3, 44);
+            labelControl2.Location = new Point(25, 41);
             labelControl2.Name = "labelControl2";
             labelControl2.Size = new Size(43, 14);
             labelControl2.TabIndex = 1;
@@ -696,7 +696,7 @@
             // 
             labelControl1.Appearance.Font = new Font("Tahoma", 9F);
             labelControl1.Appearance.Options.UseFont = true;
-            labelControl1.Location = new Point(3, 10);
+            labelControl1.Location = new Point(32, 14);
             labelControl1.Name = "labelControl1";
             labelControl1.Size = new Size(36, 14);
             labelControl1.TabIndex = 0;
@@ -721,44 +721,44 @@
             tabReferencias.Controls.Add(labelControl11);
             tabReferencias.Controls.Add(labelControl12);
             tabReferencias.Name = "tabReferencias";
-            tabReferencias.Size = new Size(1203, 151);
+            tabReferencias.Size = new Size(1031, 123);
             tabReferencias.Text = "Referencias";
             // 
             // txtMesaID
             // 
-            txtMesaID.Location = new Point(461, 93);
+            txtMesaID.Location = new Point(440, 81);
             txtMesaID.Name = "txtMesaID";
             txtMesaID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            txtMesaID.Size = new Size(242, 28);
+            txtMesaID.Size = new Size(207, 28);
             txtMesaID.TabIndex = 18;
             // 
             // txtNumberPhone
             // 
-            txtNumberPhone.Location = new Point(461, 62);
+            txtNumberPhone.Location = new Point(440, 54);
             txtNumberPhone.Name = "txtNumberPhone";
-            txtNumberPhone.Size = new Size(242, 28);
+            txtNumberPhone.Size = new Size(207, 28);
             txtNumberPhone.TabIndex = 17;
             // 
             // txtEmployeeID
             // 
-            txtEmployeeID.Location = new Point(461, 34);
+            txtEmployeeID.Location = new Point(440, 29);
             txtEmployeeID.Name = "txtEmployeeID";
             txtEmployeeID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            txtEmployeeID.Size = new Size(242, 28);
+            txtEmployeeID.Size = new Size(207, 28);
             txtEmployeeID.TabIndex = 16;
             // 
             // txtReference3
             // 
-            txtReference3.Location = new Point(461, 5);
+            txtReference3.Location = new Point(440, 4);
             txtReference3.Name = "txtReference3";
-            txtReference3.Size = new Size(242, 28);
+            txtReference3.Size = new Size(207, 28);
             txtReference3.TabIndex = 15;
             // 
             // labelControl14
             // 
             labelControl14.Appearance.Font = new Font("Tahoma", 9F);
             labelControl14.Appearance.Options.UseFont = true;
-            labelControl14.Location = new Point(398, 96);
+            labelControl14.Location = new Point(386, 83);
             labelControl14.Name = "labelControl14";
             labelControl14.Size = new Size(31, 14);
             labelControl14.TabIndex = 14;
@@ -768,7 +768,7 @@
             // 
             labelControl15.Appearance.Font = new Font("Tahoma", 9F);
             labelControl15.Appearance.Options.UseFont = true;
-            labelControl15.Location = new Point(376, 65);
+            labelControl15.Location = new Point(367, 56);
             labelControl15.Name = "labelControl15";
             labelControl15.Size = new Size(53, 14);
             labelControl15.TabIndex = 13;
@@ -778,7 +778,7 @@
             // 
             labelControl16.Appearance.Font = new Font("Tahoma", 9F);
             labelControl16.Appearance.Options.UseFont = true;
-            labelControl16.Location = new Point(372, 37);
+            labelControl16.Location = new Point(364, 32);
             labelControl16.Name = "labelControl16";
             labelControl16.Size = new Size(58, 14);
             labelControl16.TabIndex = 12;
@@ -788,7 +788,7 @@
             // 
             labelControl17.Appearance.Font = new Font("Tahoma", 9F);
             labelControl17.Appearance.Options.UseFont = true;
-            labelControl17.Location = new Point(368, 8);
+            labelControl17.Location = new Point(360, 7);
             labelControl17.Name = "labelControl17";
             labelControl17.Size = new Size(61, 14);
             labelControl17.TabIndex = 11;
@@ -797,18 +797,18 @@
             // txtNextVisit
             // 
             txtNextVisit.EditValue = null;
-            txtNextVisit.Location = new Point(102, 93);
+            txtNextVisit.Location = new Point(94, 81);
             txtNextVisit.Name = "txtNextVisit";
             txtNextVisit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtNextVisit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            txtNextVisit.Size = new Size(242, 28);
+            txtNextVisit.Size = new Size(207, 28);
             txtNextVisit.TabIndex = 10;
             // 
             // labelControl13
             // 
             labelControl13.Appearance.Font = new Font("Tahoma", 9F);
             labelControl13.Appearance.Options.UseFont = true;
-            labelControl13.Location = new Point(4, 96);
+            labelControl13.Location = new Point(3, 83);
             labelControl13.Name = "labelControl13";
             labelControl13.Size = new Size(85, 14);
             labelControl13.TabIndex = 9;
@@ -816,35 +816,35 @@
             // 
             // txtWarehouseID
             // 
-            txtWarehouseID.Location = new Point(102, 62);
+            txtWarehouseID.Location = new Point(94, 54);
             txtWarehouseID.Name = "txtWarehouseID";
             txtWarehouseID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            txtWarehouseID.Size = new Size(242, 28);
+            txtWarehouseID.Size = new Size(207, 28);
             txtWarehouseID.TabIndex = 8;
             txtWarehouseID.SelectedIndexChanged += txtWarehouseID_SelectedIndexChanged;
             // 
             // txtTypePriceID
             // 
-            txtTypePriceID.Location = new Point(102, 34);
+            txtTypePriceID.Location = new Point(94, 29);
             txtTypePriceID.Name = "txtTypePriceID";
             txtTypePriceID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            txtTypePriceID.Size = new Size(242, 28);
+            txtTypePriceID.Size = new Size(207, 28);
             txtTypePriceID.TabIndex = 7;
             txtTypePriceID.SelectedIndexChanged += txtTypePriceID_SelectedIndexChanged;
             // 
             // txtZoneID
             // 
-            txtZoneID.Location = new Point(102, 5);
+            txtZoneID.Location = new Point(94, 4);
             txtZoneID.Name = "txtZoneID";
             txtZoneID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            txtZoneID.Size = new Size(242, 28);
+            txtZoneID.Size = new Size(207, 28);
             txtZoneID.TabIndex = 6;
             // 
             // labelControl10
             // 
             labelControl10.Appearance.Font = new Font("Tahoma", 9F);
             labelControl10.Appearance.Options.UseFont = true;
-            labelControl10.Location = new Point(4, 65);
+            labelControl10.Location = new Point(43, 56);
             labelControl10.Name = "labelControl10";
             labelControl10.Size = new Size(45, 14);
             labelControl10.TabIndex = 5;
@@ -854,7 +854,7 @@
             // 
             labelControl11.Appearance.Font = new Font("Tahoma", 9F);
             labelControl11.Appearance.Options.UseFont = true;
-            labelControl11.Location = new Point(4, 37);
+            labelControl11.Location = new Point(51, 32);
             labelControl11.Name = "labelControl11";
             labelControl11.Size = new Size(37, 14);
             labelControl11.TabIndex = 4;
@@ -864,7 +864,7 @@
             // 
             labelControl12.Appearance.Font = new Font("Tahoma", 9F);
             labelControl12.Appearance.Options.UseFont = true;
-            labelControl12.Location = new Point(4, 8);
+            labelControl12.Location = new Point(57, 7);
             labelControl12.Name = "labelControl12";
             labelControl12.Size = new Size(31, 14);
             labelControl12.TabIndex = 3;
@@ -889,14 +889,14 @@
             tabInfoCredito.Controls.Add(txtReference1);
             tabInfoCredito.Controls.Add(labelControl18);
             tabInfoCredito.Name = "tabInfoCredito";
-            tabInfoCredito.Size = new Size(1203, 151);
+            tabInfoCredito.Size = new Size(1031, 123);
             tabInfoCredito.Text = "Info de Credito";
             // 
             // labelControl25
             // 
             labelControl25.Appearance.Font = new Font("Tahoma", 9F);
             labelControl25.Appearance.Options.UseFont = true;
-            labelControl25.Location = new Point(478, 68);
+            labelControl25.Location = new Point(484, 56);
             labelControl25.Name = "labelControl25";
             labelControl25.Size = new Size(62, 14);
             labelControl25.TabIndex = 22;
@@ -904,24 +904,24 @@
             // 
             // txtPeriodPay
             // 
-            txtPeriodPay.Location = new Point(610, 64);
+            txtPeriodPay.Location = new Point(557, 52);
             txtPeriodPay.Name = "txtPeriodPay";
             txtPeriodPay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            txtPeriodPay.Size = new Size(260, 28);
+            txtPeriodPay.Size = new Size(223, 28);
             txtPeriodPay.TabIndex = 21;
             // 
             // txtReference2
             // 
-            txtReference2.Location = new Point(610, 37);
+            txtReference2.Location = new Point(557, 29);
             txtReference2.Name = "txtReference2";
-            txtReference2.Size = new Size(260, 28);
+            txtReference2.Size = new Size(223, 28);
             txtReference2.TabIndex = 20;
             // 
             // labelControl24
             // 
             labelControl24.Appearance.Font = new Font("Tahoma", 9F);
             labelControl24.Appearance.Options.UseFont = true;
-            labelControl24.Location = new Point(478, 40);
+            labelControl24.Location = new Point(443, 32);
             labelControl24.Name = "labelControl24";
             labelControl24.Size = new Size(103, 14);
             labelControl24.TabIndex = 19;
@@ -930,20 +930,20 @@
             // txtDateFirst
             // 
             txtDateFirst.EditValue = null;
-            txtDateFirst.Location = new Point(610, 6);
+            txtDateFirst.Location = new Point(557, 2);
             txtDateFirst.Name = "txtDateFirst";
             txtDateFirst.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtDateFirst.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtDateFirst.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("txtDateFirst.Properties.ContextImageOptions.SvgImage");
             txtDateFirst.Properties.ContextImageOptions.SvgImageSize = new Size(16, 16);
-            txtDateFirst.Size = new Size(260, 28);
+            txtDateFirst.Size = new Size(223, 28);
             txtDateFirst.TabIndex = 18;
             // 
             // labelControl23
             // 
             labelControl23.Appearance.Font = new Font("Tahoma", 9F);
             labelControl23.Appearance.Options.UseFont = true;
-            labelControl23.Location = new Point(478, 10);
+            labelControl23.Location = new Point(477, 6);
             labelControl23.Name = "labelControl23";
             labelControl23.Size = new Size(69, 14);
             labelControl23.TabIndex = 17;
@@ -951,18 +951,18 @@
             // 
             // txtReportSinRiesgo
             // 
-            txtReportSinRiesgo.Location = new Point(610, 92);
+            txtReportSinRiesgo.Location = new Point(557, 79);
             txtReportSinRiesgo.Name = "txtReportSinRiesgo";
             txtReportSinRiesgo.Properties.OffText = "";
             txtReportSinRiesgo.Properties.OnText = "";
-            txtReportSinRiesgo.Size = new Size(95, 24);
+            txtReportSinRiesgo.Size = new Size(81, 24);
             txtReportSinRiesgo.TabIndex = 16;
             // 
             // labelControl22
             // 
             labelControl22.Appearance.Font = new Font("Tahoma", 9F);
             labelControl22.Appearance.Options.UseFont = true;
-            labelControl22.Location = new Point(478, 97);
+            labelControl22.Location = new Point(426, 81);
             labelControl22.Name = "labelControl22";
             labelControl22.Size = new Size(120, 14);
             labelControl22.TabIndex = 15;
@@ -970,18 +970,18 @@
             // 
             // txtDesembolsoEfectivo
             // 
-            txtDesembolsoEfectivo.Location = new Point(201, 92);
+            txtDesembolsoEfectivo.Location = new Point(186, 81);
             txtDesembolsoEfectivo.Name = "txtDesembolsoEfectivo";
             txtDesembolsoEfectivo.Properties.OffText = "";
             txtDesembolsoEfectivo.Properties.OnText = "";
-            txtDesembolsoEfectivo.Size = new Size(95, 24);
+            txtDesembolsoEfectivo.Size = new Size(81, 24);
             txtDesembolsoEfectivo.TabIndex = 14;
             // 
             // labelControl21
             // 
             labelControl21.Appearance.Font = new Font("Tahoma", 9F);
             labelControl21.Appearance.Options.UseFont = true;
-            labelControl21.Location = new Point(3, 97);
+            labelControl21.Location = new Point(3, 84);
             labelControl21.Name = "labelControl21";
             labelControl21.Size = new Size(176, 14);
             labelControl21.TabIndex = 13;
@@ -989,16 +989,16 @@
             // 
             // txtFixedExpenses
             // 
-            txtFixedExpenses.Location = new Point(201, 64);
+            txtFixedExpenses.Location = new Point(186, 52);
             txtFixedExpenses.Name = "txtFixedExpenses";
-            txtFixedExpenses.Size = new Size(242, 28);
+            txtFixedExpenses.Size = new Size(207, 28);
             txtFixedExpenses.TabIndex = 12;
             // 
             // labelControl20
             // 
             labelControl20.Appearance.Font = new Font("Tahoma", 9F);
             labelControl20.Appearance.Options.UseFont = true;
-            labelControl20.Location = new Point(3, 68);
+            labelControl20.Location = new Point(110, 59);
             labelControl20.Name = "labelControl20";
             labelControl20.Size = new Size(69, 14);
             labelControl20.TabIndex = 11;
@@ -1006,17 +1006,17 @@
             // 
             // txtIsApplied
             // 
-            txtIsApplied.Location = new Point(201, 37);
+            txtIsApplied.Location = new Point(186, 32);
             txtIsApplied.Name = "txtIsApplied";
             txtIsApplied.Properties.Caption = "";
-            txtIsApplied.Size = new Size(41, 22);
+            txtIsApplied.Size = new Size(35, 22);
             txtIsApplied.TabIndex = 10;
             // 
             // labelControl19
             // 
             labelControl19.Appearance.Font = new Font("Tahoma", 9F);
             labelControl19.Appearance.Options.UseFont = true;
-            labelControl19.Location = new Point(3, 40);
+            labelControl19.Location = new Point(130, 35);
             labelControl19.Name = "labelControl19";
             labelControl19.Size = new Size(49, 14);
             labelControl19.TabIndex = 9;
@@ -1024,17 +1024,17 @@
             // 
             // txtReference1
             // 
-            txtReference1.Location = new Point(201, 8);
+            txtReference1.Location = new Point(186, 3);
             txtReference1.Name = "txtReference1";
             txtReference1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            txtReference1.Size = new Size(242, 28);
+            txtReference1.Size = new Size(207, 28);
             txtReference1.TabIndex = 8;
             // 
             // labelControl18
             // 
             labelControl18.Appearance.Font = new Font("Tahoma", 9F);
             labelControl18.Appearance.Options.UseFont = true;
-            labelControl18.Location = new Point(3, 10);
+            labelControl18.Location = new Point(59, 9);
             labelControl18.Name = "labelControl18";
             labelControl18.Size = new Size(120, 14);
             labelControl18.TabIndex = 7;
@@ -1045,7 +1045,7 @@
             tabMas.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("tabMas.ImageOptions.SvgImage");
             tabMas.ImageOptions.SvgImageSize = new Size(15, 15);
             tabMas.Name = "tabMas";
-            tabMas.Size = new Size(1203, 151);
+            tabMas.Size = new Size(1031, 123);
             tabMas.Text = "Mas";
             // 
             // colQuantity
@@ -1056,29 +1056,30 @@
             colQuantity.DisplayFormat.FormatString = "N2";
             colQuantity.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             colQuantity.FieldName = "Quantity";
+            colQuantity.MinWidth = 17;
             colQuantity.Name = "colQuantity";
             colQuantity.Visible = true;
             colQuantity.VisibleIndex = 3;
-            colQuantity.Width = 146;
+            colQuantity.Width = 48;
             // 
             // pictureEdit2
             // 
-            pictureEdit2.Location = new Point(722, 385);
+            pictureEdit2.Location = new Point(627, 436);
             pictureEdit2.Name = "pictureEdit2";
             pictureEdit2.Properties.ErrorImageOptions.Image = (Image)resources.GetObject("pictureEdit2.Properties.ErrorImageOptions.Image");
             pictureEdit2.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             pictureEdit2.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            pictureEdit2.Size = new Size(220, 112);
+            pictureEdit2.Size = new Size(189, 97);
             pictureEdit2.TabIndex = 42;
             // 
             // pictureEdit1
             // 
-            pictureEdit1.Location = new Point(960, 385);
+            pictureEdit1.Location = new Point(831, 436);
             pictureEdit1.Name = "pictureEdit1";
             pictureEdit1.Properties.ErrorImageOptions.Image = (Image)resources.GetObject("pictureEdit1.Properties.ErrorImageOptions.Image");
             pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             pictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            pictureEdit1.Size = new Size(220, 112);
+            pictureEdit1.Size = new Size(189, 97);
             pictureEdit1.TabIndex = 41;
             // 
             // tablePanel2
@@ -1090,39 +1091,41 @@
             tablePanel2.Controls.Add(labelControl39);
             tablePanel2.Controls.Add(labelControl38);
             tablePanel2.Controls.Add(labelControl37);
-            tablePanel2.Location = new Point(460, 385);
+            tablePanel2.Location = new Point(408, 436);
             tablePanel2.Name = "tablePanel2";
             tablePanel2.Padding = new Padding(3);
-            tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F) });
-            tablePanel2.Size = new Size(240, 112);
+            tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F) });
+            tablePanel2.Size = new Size(206, 102);
             tablePanel2.TabIndex = 39;
             tablePanel2.UseSkinIndents = true;
             // 
             // txtTotal
             // 
             tablePanel2.SetColumn(txtTotal, 1);
-            txtTotal.Location = new Point(116, 80);
+            txtTotal.Location = new Point(100, 70);
             txtTotal.Name = "txtTotal";
+            txtTotal.Properties.Appearance.Options.UseTextOptions = true;
+            txtTotal.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel2.SetRow(txtTotal, 2);
-            txtTotal.Size = new Size(118, 28);
+            txtTotal.Size = new Size(100, 28);
             txtTotal.TabIndex = 38;
             // 
             // txtIva
             // 
             tablePanel2.SetColumn(txtIva, 1);
-            txtIva.Location = new Point(116, 44);
+            txtIva.Location = new Point(100, 38);
             txtIva.Name = "txtIva";
             tablePanel2.SetRow(txtIva, 1);
-            txtIva.Size = new Size(118, 28);
+            txtIva.Size = new Size(100, 28);
             txtIva.TabIndex = 37;
             // 
             // txtSubTotal
             // 
             tablePanel2.SetColumn(txtSubTotal, 1);
-            txtSubTotal.Location = new Point(116, 7);
+            txtSubTotal.Location = new Point(100, 6);
             txtSubTotal.Name = "txtSubTotal";
             tablePanel2.SetRow(txtSubTotal, 0);
-            txtSubTotal.Size = new Size(118, 28);
+            txtSubTotal.Size = new Size(100, 28);
             txtSubTotal.TabIndex = 34;
             // 
             // labelControl39
@@ -1130,7 +1133,7 @@
             labelControl39.Appearance.Font = new Font("Tahoma", 9F);
             labelControl39.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl39, 0);
-            labelControl39.Location = new Point(6, 86);
+            labelControl39.Location = new Point(6, 76);
             labelControl39.Name = "labelControl39";
             tablePanel2.SetRow(labelControl39, 2);
             labelControl39.Size = new Size(51, 14);
@@ -1142,7 +1145,7 @@
             labelControl38.Appearance.Font = new Font("Tahoma", 9F);
             labelControl38.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl38, 0);
-            labelControl38.Location = new Point(6, 50);
+            labelControl38.Location = new Point(6, 44);
             labelControl38.Name = "labelControl38";
             tablePanel2.SetRow(labelControl38, 1);
             labelControl38.Size = new Size(39, 14);
@@ -1154,7 +1157,7 @@
             labelControl37.Appearance.Font = new Font("Tahoma", 9F);
             labelControl37.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl37, 0);
-            labelControl37.Location = new Point(6, 13);
+            labelControl37.Location = new Point(6, 12);
             labelControl37.Name = "labelControl37";
             tablePanel2.SetRow(labelControl37, 0);
             labelControl37.Size = new Size(76, 14);
@@ -1163,7 +1166,6 @@
             // 
             // tablePanel1
             // 
-            tablePanel1.AutoSize = true;
             tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 44.9F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 36.22F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 28.88F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F) });
             tablePanel1.Controls.Add(txtReceiptAmountBank_Reference);
             tablePanel1.Controls.Add(txtReceiptAmountBank_BankID);
@@ -1189,151 +1191,151 @@
             tablePanel1.Controls.Add(labelControl31);
             tablePanel1.Controls.Add(labelControl30);
             tablePanel1.Controls.Add(labelControl29);
-            tablePanel1.Location = new Point(8, 385);
+            tablePanel1.Location = new Point(15, 436);
             tablePanel1.Name = "tablePanel1";
             tablePanel1.Padding = new Padding(3);
-            tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 44.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F) });
-            tablePanel1.Size = new Size(446, 315);
+            tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 31.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 33.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 31.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 31.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 33.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F) });
+            tablePanel1.Size = new Size(387, 263);
             tablePanel1.TabIndex = 38;
             tablePanel1.UseSkinIndents = true;
             // 
             // txtReceiptAmountBank_Reference
             // 
             tablePanel1.SetColumn(txtReceiptAmountBank_Reference, 3);
-            txtReceiptAmountBank_Reference.Location = new Point(309, 192);
+            txtReceiptAmountBank_Reference.Location = new Point(268, 165);
             txtReceiptAmountBank_Reference.Name = "txtReceiptAmountBank_Reference";
             tablePanel1.SetRow(txtReceiptAmountBank_Reference, 5);
-            txtReceiptAmountBank_Reference.Size = new Size(132, 28);
+            txtReceiptAmountBank_Reference.Size = new Size(113, 28);
             txtReceiptAmountBank_Reference.TabIndex = 33;
             // 
             // txtReceiptAmountBank_BankID
             // 
             tablePanel1.SetColumn(txtReceiptAmountBank_BankID, 2);
-            txtReceiptAmountBank_BankID.Location = new Point(229, 192);
+            txtReceiptAmountBank_BankID.Location = new Point(199, 165);
             txtReceiptAmountBank_BankID.MenuManager = barManager1;
             txtReceiptAmountBank_BankID.Name = "txtReceiptAmountBank_BankID";
             txtReceiptAmountBank_BankID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             tablePanel1.SetRow(txtReceiptAmountBank_BankID, 5);
-            txtReceiptAmountBank_BankID.Size = new Size(73, 28);
+            txtReceiptAmountBank_BankID.Size = new Size(63, 28);
             txtReceiptAmountBank_BankID.TabIndex = 32;
             // 
             // txtReceiptAmountTarjetaDol_Reference
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjetaDol_Reference, 3);
-            txtReceiptAmountTarjetaDol_Reference.Location = new Point(309, 155);
+            txtReceiptAmountTarjetaDol_Reference.Location = new Point(268, 134);
             txtReceiptAmountTarjetaDol_Reference.Name = "txtReceiptAmountTarjetaDol_Reference";
             tablePanel1.SetRow(txtReceiptAmountTarjetaDol_Reference, 4);
-            txtReceiptAmountTarjetaDol_Reference.Size = new Size(132, 28);
+            txtReceiptAmountTarjetaDol_Reference.Size = new Size(113, 28);
             txtReceiptAmountTarjetaDol_Reference.TabIndex = 31;
             // 
             // txtReceiptAmountTarjeta_Reference
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjeta_Reference, 3);
-            txtReceiptAmountTarjeta_Reference.Location = new Point(309, 118);
+            txtReceiptAmountTarjeta_Reference.Location = new Point(268, 101);
             txtReceiptAmountTarjeta_Reference.Name = "txtReceiptAmountTarjeta_Reference";
             tablePanel1.SetRow(txtReceiptAmountTarjeta_Reference, 3);
-            txtReceiptAmountTarjeta_Reference.Size = new Size(132, 28);
+            txtReceiptAmountTarjeta_Reference.Size = new Size(113, 28);
             txtReceiptAmountTarjeta_Reference.TabIndex = 30;
             // 
             // txtReceiptAmountBankDol_Reference
             // 
             tablePanel1.SetColumn(txtReceiptAmountBankDol_Reference, 3);
-            txtReceiptAmountBankDol_Reference.Location = new Point(309, 233);
+            txtReceiptAmountBankDol_Reference.Location = new Point(268, 196);
             txtReceiptAmountBankDol_Reference.Name = "txtReceiptAmountBankDol_Reference";
             tablePanel1.SetRow(txtReceiptAmountBankDol_Reference, 6);
-            txtReceiptAmountBankDol_Reference.Size = new Size(132, 28);
+            txtReceiptAmountBankDol_Reference.Size = new Size(113, 28);
             txtReceiptAmountBankDol_Reference.TabIndex = 29;
             // 
             // txtReceiptAmountTarjetaDol_BankID
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjetaDol_BankID, 2);
-            txtReceiptAmountTarjetaDol_BankID.Location = new Point(229, 155);
+            txtReceiptAmountTarjetaDol_BankID.Location = new Point(199, 134);
             txtReceiptAmountTarjetaDol_BankID.MenuManager = barManager1;
             txtReceiptAmountTarjetaDol_BankID.Name = "txtReceiptAmountTarjetaDol_BankID";
             txtReceiptAmountTarjetaDol_BankID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             tablePanel1.SetRow(txtReceiptAmountTarjetaDol_BankID, 4);
-            txtReceiptAmountTarjetaDol_BankID.Size = new Size(73, 28);
+            txtReceiptAmountTarjetaDol_BankID.Size = new Size(63, 28);
             txtReceiptAmountTarjetaDol_BankID.TabIndex = 28;
             // 
             // txtReceiptAmountTarjeta_BankID
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjeta_BankID, 2);
-            txtReceiptAmountTarjeta_BankID.Location = new Point(229, 118);
+            txtReceiptAmountTarjeta_BankID.Location = new Point(199, 101);
             txtReceiptAmountTarjeta_BankID.MenuManager = barManager1;
             txtReceiptAmountTarjeta_BankID.Name = "txtReceiptAmountTarjeta_BankID";
             txtReceiptAmountTarjeta_BankID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             tablePanel1.SetRow(txtReceiptAmountTarjeta_BankID, 3);
-            txtReceiptAmountTarjeta_BankID.Size = new Size(73, 28);
+            txtReceiptAmountTarjeta_BankID.Size = new Size(63, 28);
             txtReceiptAmountTarjeta_BankID.TabIndex = 27;
             // 
             // txtReceiptAmountBankDol_BankID
             // 
             tablePanel1.SetColumn(txtReceiptAmountBankDol_BankID, 2);
-            txtReceiptAmountBankDol_BankID.Location = new Point(229, 233);
+            txtReceiptAmountBankDol_BankID.Location = new Point(199, 196);
             txtReceiptAmountBankDol_BankID.MenuManager = barManager1;
             txtReceiptAmountBankDol_BankID.Name = "txtReceiptAmountBankDol_BankID";
             txtReceiptAmountBankDol_BankID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             tablePanel1.SetRow(txtReceiptAmountBankDol_BankID, 6);
-            txtReceiptAmountBankDol_BankID.Size = new Size(73, 28);
+            txtReceiptAmountBankDol_BankID.Size = new Size(63, 28);
             txtReceiptAmountBankDol_BankID.TabIndex = 26;
             // 
             // txtReceiptAmountPoint
             // 
             tablePanel1.SetColumn(txtReceiptAmountPoint, 1);
-            txtReceiptAmountPoint.Location = new Point(129, 276);
+            txtReceiptAmountPoint.Location = new Point(113, 229);
             txtReceiptAmountPoint.Name = "txtReceiptAmountPoint";
             tablePanel1.SetRow(txtReceiptAmountPoint, 7);
-            txtReceiptAmountPoint.Size = new Size(94, 28);
+            txtReceiptAmountPoint.Size = new Size(80, 28);
             txtReceiptAmountPoint.TabIndex = 25;
             txtReceiptAmountPoint.EditValueChanged += txtReceiptAmountPoint_EditValueChanged;
             // 
             // txtReceiptAmountBankDol
             // 
             tablePanel1.SetColumn(txtReceiptAmountBankDol, 1);
-            txtReceiptAmountBankDol.Location = new Point(129, 233);
+            txtReceiptAmountBankDol.Location = new Point(113, 196);
             txtReceiptAmountBankDol.Name = "txtReceiptAmountBankDol";
             tablePanel1.SetRow(txtReceiptAmountBankDol, 6);
-            txtReceiptAmountBankDol.Size = new Size(94, 28);
+            txtReceiptAmountBankDol.Size = new Size(80, 28);
             txtReceiptAmountBankDol.TabIndex = 25;
             txtReceiptAmountBankDol.EditValueChanged += txtReceiptAmountBankDol_EditValueChanged;
             // 
             // txtReceiptAmountBank
             // 
             tablePanel1.SetColumn(txtReceiptAmountBank, 1);
-            txtReceiptAmountBank.Location = new Point(129, 192);
+            txtReceiptAmountBank.Location = new Point(113, 165);
             txtReceiptAmountBank.Name = "txtReceiptAmountBank";
             tablePanel1.SetRow(txtReceiptAmountBank, 5);
-            txtReceiptAmountBank.Size = new Size(94, 28);
+            txtReceiptAmountBank.Size = new Size(80, 28);
             txtReceiptAmountBank.TabIndex = 25;
             txtReceiptAmountBank.EditValueChanged += txtReceiptAmountBank_EditValueChanged;
             // 
             // txtReceiptAmountTarjetaDol
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjetaDol, 1);
-            txtReceiptAmountTarjetaDol.Location = new Point(129, 155);
+            txtReceiptAmountTarjetaDol.Location = new Point(113, 134);
             txtReceiptAmountTarjetaDol.Name = "txtReceiptAmountTarjetaDol";
             tablePanel1.SetRow(txtReceiptAmountTarjetaDol, 4);
-            txtReceiptAmountTarjetaDol.Size = new Size(94, 28);
+            txtReceiptAmountTarjetaDol.Size = new Size(80, 28);
             txtReceiptAmountTarjetaDol.TabIndex = 25;
             txtReceiptAmountTarjetaDol.EditValueChanged += txtReceiptAmountTarjetaDol_EditValueChanged;
             // 
             // txtReceiptAmountTarjeta
             // 
             tablePanel1.SetColumn(txtReceiptAmountTarjeta, 1);
-            txtReceiptAmountTarjeta.Location = new Point(129, 118);
+            txtReceiptAmountTarjeta.Location = new Point(113, 101);
             txtReceiptAmountTarjeta.Name = "txtReceiptAmountTarjeta";
             tablePanel1.SetRow(txtReceiptAmountTarjeta, 3);
-            txtReceiptAmountTarjeta.Size = new Size(94, 28);
+            txtReceiptAmountTarjeta.Size = new Size(80, 28);
             txtReceiptAmountTarjeta.TabIndex = 25;
             txtReceiptAmountTarjeta.EditValueChanged += txtReceiptAmountTarjeta_EditValueChanged;
             // 
             // txtReceiptAmountDol
             // 
             tablePanel1.SetColumn(txtReceiptAmountDol, 1);
-            txtReceiptAmountDol.Location = new Point(129, 81);
+            txtReceiptAmountDol.Location = new Point(113, 69);
             txtReceiptAmountDol.Name = "txtReceiptAmountDol";
             tablePanel1.SetRow(txtReceiptAmountDol, 2);
-            txtReceiptAmountDol.Size = new Size(94, 28);
+            txtReceiptAmountDol.Size = new Size(80, 28);
             txtReceiptAmountDol.TabIndex = 25;
             txtReceiptAmountDol.EditValueChanged += txtReceiptAmountDol_EditValueChanged;
             txtReceiptAmountDol.KeyDown += txtReceiptAmountDol_KeyDown;
@@ -1342,10 +1344,10 @@
             // txtReceiptAmount
             // 
             tablePanel1.SetColumn(txtReceiptAmount, 1);
-            txtReceiptAmount.Location = new Point(129, 44);
+            txtReceiptAmount.Location = new Point(113, 38);
             txtReceiptAmount.Name = "txtReceiptAmount";
             tablePanel1.SetRow(txtReceiptAmount, 1);
-            txtReceiptAmount.Size = new Size(94, 28);
+            txtReceiptAmount.Size = new Size(80, 28);
             txtReceiptAmount.TabIndex = 25;
             txtReceiptAmount.EditValueChanged += txtReceiptAmount_EditValueChanged;
             txtReceiptAmount.KeyDown += txtReceiptAmount_KeyDown;
@@ -1354,10 +1356,10 @@
             // txtChangeAmount
             // 
             tablePanel1.SetColumn(txtChangeAmount, 1);
-            txtChangeAmount.Location = new Point(129, 7);
+            txtChangeAmount.Location = new Point(113, 6);
             txtChangeAmount.Name = "txtChangeAmount";
             tablePanel1.SetRow(txtChangeAmount, 0);
-            txtChangeAmount.Size = new Size(94, 28);
+            txtChangeAmount.Size = new Size(80, 28);
             txtChangeAmount.TabIndex = 24;
             // 
             // labelControl36
@@ -1365,7 +1367,7 @@
             labelControl36.Appearance.Font = new Font("Tahoma", 9F);
             labelControl36.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl36, 0);
-            labelControl36.Location = new Point(6, 282);
+            labelControl36.Location = new Point(6, 235);
             labelControl36.Name = "labelControl36";
             tablePanel1.SetRow(labelControl36, 7);
             labelControl36.Size = new Size(39, 14);
@@ -1377,7 +1379,7 @@
             labelControl35.Appearance.Font = new Font("Tahoma", 9F);
             labelControl35.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl35, 0);
-            labelControl35.Location = new Point(6, 239);
+            labelControl35.Location = new Point(6, 202);
             labelControl35.Name = "labelControl35";
             tablePanel1.SetRow(labelControl35, 6);
             labelControl35.Size = new Size(83, 14);
@@ -1389,7 +1391,7 @@
             labelControl34.Appearance.Font = new Font("Tahoma", 9F);
             labelControl34.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl34, 0);
-            labelControl34.Location = new Point(6, 198);
+            labelControl34.Location = new Point(6, 171);
             labelControl34.Name = "labelControl34";
             tablePanel1.SetRow(labelControl34, 5);
             labelControl34.Size = new Size(85, 14);
@@ -1401,7 +1403,7 @@
             labelControl33.Appearance.Font = new Font("Tahoma", 9F);
             labelControl33.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl33, 0);
-            labelControl33.Location = new Point(6, 161);
+            labelControl33.Location = new Point(6, 140);
             labelControl33.Name = "labelControl33";
             tablePanel1.SetRow(labelControl33, 4);
             labelControl33.Size = new Size(88, 14);
@@ -1413,7 +1415,7 @@
             labelControl32.Appearance.Font = new Font("Tahoma", 9F);
             labelControl32.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl32, 0);
-            labelControl32.Location = new Point(6, 124);
+            labelControl32.Location = new Point(6, 107);
             labelControl32.Name = "labelControl32";
             tablePanel1.SetRow(labelControl32, 3);
             labelControl32.Size = new Size(90, 14);
@@ -1425,7 +1427,7 @@
             labelControl31.Appearance.Font = new Font("Tahoma", 9F);
             labelControl31.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl31, 0);
-            labelControl31.Location = new Point(6, 87);
+            labelControl31.Location = new Point(6, 75);
             labelControl31.Name = "labelControl31";
             tablePanel1.SetRow(labelControl31, 2);
             labelControl31.Size = new Size(76, 14);
@@ -1437,7 +1439,7 @@
             labelControl30.Appearance.Font = new Font("Tahoma", 9F);
             labelControl30.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl30, 0);
-            labelControl30.Location = new Point(6, 50);
+            labelControl30.Location = new Point(6, 44);
             labelControl30.Name = "labelControl30";
             tablePanel1.SetRow(labelControl30, 1);
             labelControl30.Size = new Size(50, 14);
@@ -1449,7 +1451,7 @@
             labelControl29.Appearance.Font = new Font("Tahoma", 9F);
             labelControl29.Appearance.Options.UseFont = true;
             tablePanel1.SetColumn(labelControl29, 0);
-            labelControl29.Location = new Point(6, 13);
+            labelControl29.Location = new Point(6, 12);
             labelControl29.Name = "labelControl29";
             tablePanel1.SetRow(labelControl29, 0);
             labelControl29.Size = new Size(62, 14);
@@ -1460,9 +1462,9 @@
             // 
             btnRegistrar.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Warning;
             btnRegistrar.Appearance.Options.UseBackColor = true;
-            btnRegistrar.Location = new Point(470, 538);
+            btnRegistrar.Location = new Point(411, 587);
             btnRegistrar.Name = "btnRegistrar";
-            btnRegistrar.Size = new Size(148, 30);
+            btnRegistrar.Size = new Size(127, 26);
             btnRegistrar.TabIndex = 36;
             btnRegistrar.Text = "REGISTRAR";
             btnRegistrar.Click += btnRegistrar_Click;
@@ -1471,30 +1473,36 @@
             // 
             btnNew.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Question;
             btnNew.Appearance.Options.UseBackColor = true;
-            btnNew.Location = new Point(470, 573);
+            btnNew.Location = new Point(411, 618);
             btnNew.Name = "btnNew";
-            btnNew.Size = new Size(148, 30);
+            btnNew.Size = new Size(127, 26);
             btnNew.TabIndex = 35;
             btnNew.Text = "NUEVA FAC";
             btnNew.Click += btnNew_Click;
             // 
             // gridViewTbTransactionMasterDetail
             // 
-            gridViewTbTransactionMasterDetail.Location = new Point(0, 274);
+            gridViewTbTransactionMasterDetail.Location = new Point(0, 237);
             gridViewTbTransactionMasterDetail.MainView = gridViewValues;
             gridViewTbTransactionMasterDetail.Name = "gridViewTbTransactionMasterDetail";
             gridViewTbTransactionMasterDetail.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { itemCheck, repositoryItemComboBox1, repositoryItemPictureEdit1, repositoryItemButtonEdit1, repositoryItemButtonEdit2, repositoryItemComboBox2 });
-            gridViewTbTransactionMasterDetail.Size = new Size(1205, 104);
+            gridViewTbTransactionMasterDetail.Size = new Size(1033, 193);
             gridViewTbTransactionMasterDetail.TabIndex = 30;
             gridViewTbTransactionMasterDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewValues });
             // 
             // gridViewValues
             // 
-            gridViewValues.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colTransactionMasterDetailId, colItemId, colItemNumber, colTransactionDetailName, colSku, colQuantity, colPrice, colSubTotal, colAccionPrecios, colAccionMenos, colAccionMas, colIva, colSkuQuantityBySku, colUnitaryPriceIndividual, colSkuFormatoDescripton, colItemPrecio2, colItemPrecio3, colDetailVencimiento });
+            gridViewValues.Appearance.Row.Font = new Font("Tahoma", 8F);
+            gridViewValues.Appearance.Row.Options.UseFont = true;
+            gridViewValues.Appearance.SelectedRow.BackColor = Color.SpringGreen;
+            gridViewValues.Appearance.SelectedRow.Options.UseBackColor = true;
+            gridViewValues.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colTransactionMasterDetailId, colItemId, colItemNumber, colTransactionDetailName, colSkuFormatoDescripton, colSku, colQuantity, colPrice, colSubTotal, colAccionMas, colAccionMenos, colAccionPrecios, colIva, colSkuQuantityBySku, colUnitaryPriceIndividual, colItemPrecio2, colItemPrecio3, colDetailVencimiento });
+            gridViewValues.DetailHeight = 303;
             gridViewValues.GridControl = gridViewTbTransactionMasterDetail;
             gridViewValues.Name = "gridViewValues";
-            gridViewValues.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
+            gridViewValues.OptionsEditForm.PopupEditFormWidth = 686;
             gridViewValues.OptionsView.ShowGroupPanel = false;
+            gridViewValues.RowHeight = 5;
             gridViewValues.CustomRowCellEditForEditing += gridViewValues_CustomRowCellEditForEditing;
             gridViewValues.CellValueChanged += gridViewValues_CellValueChanged;
             // 
@@ -1502,42 +1510,57 @@
             // 
             colTransactionMasterDetailId.Caption = "TransactionMasterDetailId";
             colTransactionMasterDetailId.FieldName = "TransactionMasterDetailId";
+            colTransactionMasterDetailId.MinWidth = 17;
             colTransactionMasterDetailId.Name = "colTransactionMasterDetailId";
+            colTransactionMasterDetailId.Width = 64;
             // 
             // colItemId
             // 
             colItemId.Caption = "ItemId";
             colItemId.FieldName = "ItemId";
+            colItemId.MinWidth = 17;
             colItemId.Name = "colItemId";
+            colItemId.Width = 64;
             // 
             // colItemNumber
             // 
             colItemNumber.Caption = "Codigo";
             colItemNumber.FieldName = "ItemNumber";
+            colItemNumber.MinWidth = 17;
             colItemNumber.Name = "colItemNumber";
             colItemNumber.OptionsColumn.AllowEdit = false;
             colItemNumber.Visible = true;
             colItemNumber.VisibleIndex = 0;
-            colItemNumber.Width = 146;
+            colItemNumber.Width = 104;
             // 
             // colTransactionDetailName
             // 
             colTransactionDetailName.Caption = "Descripcion";
             colTransactionDetailName.FieldName = "TransactionDetailName";
+            colTransactionDetailName.MinWidth = 350;
             colTransactionDetailName.Name = "colTransactionDetailName";
             colTransactionDetailName.Visible = true;
             colTransactionDetailName.VisibleIndex = 1;
-            colTransactionDetailName.Width = 146;
+            colTransactionDetailName.Width = 516;
+            // 
+            // colSkuFormatoDescripton
+            // 
+            colSkuFormatoDescripton.Caption = "U/M";
+            colSkuFormatoDescripton.FieldName = "SkuFormatoDescription";
+            colSkuFormatoDescripton.MinWidth = 17;
+            colSkuFormatoDescripton.Name = "colSkuFormatoDescripton";
+            colSkuFormatoDescripton.Visible = true;
+            colSkuFormatoDescripton.VisibleIndex = 2;
+            colSkuFormatoDescripton.Width = 49;
             // 
             // colSku
             // 
             colSku.Caption = "U/M";
             colSku.FieldName = "Sku";
+            colSku.MinWidth = 17;
             colSku.Name = "colSku";
             colSku.OptionsColumn.AllowEdit = false;
-            colSku.Visible = true;
-            colSku.VisibleIndex = 2;
-            colSku.Width = 146;
+            colSku.Width = 38;
             // 
             // colPrice
             // 
@@ -1547,10 +1570,11 @@
             colPrice.DisplayFormat.FormatString = "N2";
             colPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             colPrice.FieldName = "Price";
+            colPrice.MinWidth = 17;
             colPrice.Name = "colPrice";
             colPrice.Visible = true;
             colPrice.VisibleIndex = 4;
-            colPrice.Width = 146;
+            colPrice.Width = 49;
             // 
             // colSubTotal
             // 
@@ -1560,67 +1584,75 @@
             colSubTotal.DisplayFormat.FormatString = "N2";
             colSubTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             colSubTotal.FieldName = "SubTotal";
+            colSubTotal.MinWidth = 17;
             colSubTotal.Name = "colSubTotal";
             colSubTotal.OptionsColumn.AllowEdit = false;
             colSubTotal.Visible = true;
             colSubTotal.VisibleIndex = 5;
-            colSubTotal.Width = 146;
-            // 
-            // colAccionPrecios
-            // 
-            colAccionPrecios.ColumnEdit = repositoryItemComboBox2;
-            colAccionPrecios.FieldName = "AccionPrecios";
-            colAccionPrecios.MinWidth = 22;
-            colAccionPrecios.Name = "colAccionPrecios";
-            colAccionPrecios.Visible = true;
-            colAccionPrecios.VisibleIndex = 8;
-            colAccionPrecios.Width = 64;
-            // 
-            // repositoryItemComboBox2
-            // 
-            repositoryItemComboBox2.AutoHeight = false;
-            repositoryItemComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            repositoryItemComboBox2.Items.AddRange(new object[] { "Precio 1", "Precio 2", "Precio 3" });
-            repositoryItemComboBox2.Name = "repositoryItemComboBox2";
-            repositoryItemComboBox2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
-            repositoryItemComboBox2.SelectedIndexChanged += repositoryItemComboBox2_SelectedIndexChanged;
-            // 
-            // colAccionMenos
-            // 
-            colAccionMenos.ColumnEdit = repositoryItemButtonEdit2;
-            colAccionMenos.FieldName = "AccionMenos";
-            colAccionMenos.MinWidth = 22;
-            colAccionMenos.Name = "colAccionMenos";
-            colAccionMenos.Visible = true;
-            colAccionMenos.VisibleIndex = 7;
-            colAccionMenos.Width = 57;
-            // 
-            // repositoryItemButtonEdit2
-            // 
-            repositoryItemButtonEdit2.AutoHeight = false;
-            editorButtonImageOptions1.ImageUri.Uri = "icon%20builder/actions_remove";
-            repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default) });
-            repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
-            repositoryItemButtonEdit2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
-            repositoryItemButtonEdit2.Click += repositoryItemButtonEdit2_Click;
+            colSubTotal.Width = 47;
             // 
             // colAccionMas
             // 
+            colAccionMas.Caption = "Más";
             colAccionMas.ColumnEdit = repositoryItemButtonEdit1;
             colAccionMas.FieldName = "AccionMas";
+            colAccionMas.MinWidth = 17;
             colAccionMas.Name = "colAccionMas";
             colAccionMas.Visible = true;
             colAccionMas.VisibleIndex = 6;
-            colAccionMas.Width = 52;
+            colAccionMas.Width = 39;
             // 
             // repositoryItemButtonEdit1
             // 
             repositoryItemButtonEdit1.AutoHeight = false;
-            editorButtonImageOptions2.ImageUri.Uri = "Add";
-            repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default) });
+            editorButtonImageOptions1.ImageUri.Uri = "Add";
+            repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default) });
             repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             repositoryItemButtonEdit1.Click += repositoryItemButtonEdit1_Click;
+            // 
+            // colAccionMenos
+            // 
+            colAccionMenos.Caption = "Menos";
+            colAccionMenos.ColumnEdit = repositoryItemButtonEdit2;
+            colAccionMenos.FieldName = "AccionMenos";
+            colAccionMenos.MinWidth = 19;
+            colAccionMenos.Name = "colAccionMenos";
+            colAccionMenos.Visible = true;
+            colAccionMenos.VisibleIndex = 7;
+            colAccionMenos.Width = 46;
+            // 
+            // repositoryItemButtonEdit2
+            // 
+            repositoryItemButtonEdit2.AutoHeight = false;
+            editorButtonImageOptions2.ImageUri.Uri = "icon%20builder/actions_remove";
+            repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default) });
+            repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
+            repositoryItemButtonEdit2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            repositoryItemButtonEdit2.Click += repositoryItemButtonEdit2_Click;
+            // 
+            // colAccionPrecios
+            // 
+            colAccionPrecios.Caption = "Precios";
+            colAccionPrecios.ColumnEdit = repositoryItemComboBox2;
+            colAccionPrecios.DisplayFormat.FormatString = "N2";
+            colAccionPrecios.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            colAccionPrecios.FieldName = "AccionPrecios";
+            colAccionPrecios.MinWidth = 19;
+            colAccionPrecios.Name = "colAccionPrecios";
+            colAccionPrecios.Visible = true;
+            colAccionPrecios.VisibleIndex = 8;
+            colAccionPrecios.Width = 54;
+            // 
+            // repositoryItemComboBox2
+            // 
+            repositoryItemComboBox2.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+            repositoryItemComboBox2.AutoHeight = false;
+            repositoryItemComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemComboBox2.Name = "repositoryItemComboBox2";
+            repositoryItemComboBox2.ShowNullValuePrompt = DevExpress.XtraEditors.ShowNullValuePromptOptions.NullValue;
+            repositoryItemComboBox2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            repositoryItemComboBox2.SelectedIndexChanged += repositoryItemComboBox2_SelectedIndexChanged;
             // 
             // colIva
             // 
@@ -1628,44 +1660,49 @@
             colIva.DisplayFormat.FormatString = "N2";
             colIva.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             colIva.FieldName = "Iva";
+            colIva.MinWidth = 17;
             colIva.Name = "colIva";
+            colIva.Width = 64;
             // 
             // colSkuQuantityBySku
             // 
             colSkuQuantityBySku.FieldName = "SkuQuantityBySku";
+            colSkuQuantityBySku.MinWidth = 17;
             colSkuQuantityBySku.Name = "colSkuQuantityBySku";
+            colSkuQuantityBySku.Width = 64;
             // 
             // colUnitaryPriceIndividual
             // 
             colUnitaryPriceIndividual.FieldName = "UnitaryPriceIndividual";
+            colUnitaryPriceIndividual.MinWidth = 17;
             colUnitaryPriceIndividual.Name = "colUnitaryPriceIndividual";
-            // 
-            // colSkuFormatoDescripton
-            // 
-            colSkuFormatoDescripton.FieldName = "SkuFormatoDescription";
-            colSkuFormatoDescripton.Name = "colSkuFormatoDescripton";
+            colUnitaryPriceIndividual.Width = 64;
             // 
             // colItemPrecio2
             // 
             colItemPrecio2.DisplayFormat.FormatString = "N2";
             colItemPrecio2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             colItemPrecio2.FieldName = "ItemPrecio2";
+            colItemPrecio2.MinWidth = 17;
             colItemPrecio2.Name = "colItemPrecio2";
+            colItemPrecio2.Width = 64;
             // 
             // colItemPrecio3
             // 
             colItemPrecio3.DisplayFormat.FormatString = "N2";
             colItemPrecio3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             colItemPrecio3.FieldName = "ItemPrecio3";
+            colItemPrecio3.MinWidth = 17;
             colItemPrecio3.Name = "colItemPrecio3";
+            colItemPrecio3.Width = 64;
             // 
             // colDetailVencimiento
             // 
             colDetailVencimiento.Caption = "colDetailVencimiento";
             colDetailVencimiento.FieldName = "DetailVencimiento";
-            colDetailVencimiento.MinWidth = 22;
+            colDetailVencimiento.MinWidth = 19;
             colDetailVencimiento.Name = "colDetailVencimiento";
-            colDetailVencimiento.Width = 82;
+            colDetailVencimiento.Width = 70;
             // 
             // itemCheck
             // 
@@ -1691,9 +1728,8 @@
             progressPanel.ContentAlignment = ContentAlignment.MiddleCenter;
             progressPanel.Description = "Buscando recursos de usuario";
             progressPanel.Location = new Point(0, 0);
-            progressPanel.Margin = new Padding(4, 3, 4, 3);
             progressPanel.Name = "progressPanel";
-            progressPanel.Size = new Size(389, 8);
+            progressPanel.Size = new Size(333, 7);
             progressPanel.TabIndex = 47;
             progressPanel.Visible = false;
             // 
@@ -1702,9 +1738,9 @@
             dropDownButton1.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Success;
             dropDownButton1.Appearance.Options.UseBackColor = true;
             dropDownButton1.DropDownControl = popupImprimir;
-            dropDownButton1.Location = new Point(892, 239);
+            dropDownButton1.Location = new Point(765, 207);
             dropDownButton1.Name = "dropDownButton1";
-            dropDownButton1.Size = new Size(126, 30);
+            dropDownButton1.Size = new Size(108, 26);
             dropDownButton1.TabIndex = 52;
             dropDownButton1.Text = "IMPRIMIR";
             // 
@@ -1718,19 +1754,18 @@
             // 
             btnAplicar.Appearance.BackColor = Color.FromArgb(128, 255, 128);
             btnAplicar.Appearance.Options.UseBackColor = true;
-            btnAplicar.Location = new Point(470, 502);
+            btnAplicar.Location = new Point(411, 556);
             btnAplicar.Name = "btnAplicar";
-            btnAplicar.Size = new Size(148, 30);
+            btnAplicar.Size = new Size(127, 26);
             btnAplicar.TabIndex = 53;
             btnAplicar.Text = "APLICAR";
             btnAplicar.Click += btnAplicar_Click;
             // 
             // FormInvoiceBillingEdit
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
-            ClientSize = new Size(1329, 707);
+            ClientSize = new Size(1139, 701);
             Controls.Add(progressPanel);
             Controls.Add(btnAplicar);
             Controls.Add(dropDownButton1);
@@ -1753,7 +1788,7 @@
             Controls.Add(barDockControlRight);
             Controls.Add(barDockControlBottom);
             Controls.Add(barDockControlTop);
-            Icon = (Icon)resources.GetObject("$this.Icon");
+            IconOptions.Icon = (Icon)resources.GetObject("FormInvoiceBillingEdit.IconOptions.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormInvoiceBillingEdit";
@@ -1833,9 +1868,9 @@
             ((System.ComponentModel.ISupportInitialize)txtChangeAmount.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewTbTransactionMasterDetail).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewValues).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit2).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)itemCheck).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemPictureEdit1).EndInit();
