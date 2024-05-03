@@ -133,6 +133,7 @@ namespace v4posme_window.Template
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             FnSelectedRow();
+            Close();
         }
 
         private void FnSelectedRow()

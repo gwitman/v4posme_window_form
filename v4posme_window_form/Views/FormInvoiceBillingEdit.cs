@@ -3236,8 +3236,13 @@ namespace v4posme_window.Views
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            LoadNew();
-            LoadRender(TypeRender.New);
+            if (!progressPanel.Visible)
+            {
+                progressPanel.Visible = true;
+            }
+           TypeOpen= TypeOpenForm.Init;
+            TransactionMasterId = 0;
+            backgroundWorker.RunWorkerAsync();
         }
 
         private void barManager1_ItemClick(object sender, ItemClickEventArgs e)
@@ -3289,8 +3294,6 @@ namespace v4posme_window.Views
 
             if (e.Item.Name==btnSeleccionarFactura.Name)
             {
-
-                
                 var formTypeListSearch = new FormTypeListSearch("Lista de Facturas", ObjComponentTransactionBilling!.ComponentId,
                     "SELECCIONAR_BILLING_REGISTER", true,
                     "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
@@ -3313,6 +3316,11 @@ namespace v4posme_window.Views
                     formulario.BringToFront();
                     formulario.Focus();
                 }
+            }
+
+            if (e.Item.Name==btnOpenCashdrawer.Name)
+            {
+                OpenCashbox();
             }
         }
 
@@ -3397,8 +3405,15 @@ namespace v4posme_window.Views
             CompanyId = Convert.ToInt32(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "companyID", "0"));
             TransactionId = Convert.ToInt32(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "transactionID", "0"));
             TransactionMasterId = Convert.ToInt32(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "transactionMasterID", "0"));
-            LoadEdit();
-            LoadRender(TypeRender.Edit);
+            if (!backgroundWorker.IsBusy)
+            {
+                if (!progressPanel.Visible)
+                {
+                    progressPanel.Size = Size;
+                    progressPanel.Visible = true;
+                }
+                backgroundWorker.RunWorkerAsync();
+            }
         }
 
 
