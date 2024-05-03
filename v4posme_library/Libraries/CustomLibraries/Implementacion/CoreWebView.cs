@@ -203,8 +203,7 @@ class CoreWebView(
             throw new Exception("No existe el company default data view");
         }
 
-        var companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId,
-            objCompanyDefaultDataView.DataViewId, callerId.Value, componentId.Value);
+        var companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId, objCompanyDefaultDataView.DataViewId, callerId.Value, componentId.Value);
         if (companyDataView is null)
         {
             throw new Exception("No existe el company data view");

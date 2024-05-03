@@ -84,6 +84,15 @@ namespace v4posme_window.Views
             backgroundWorker.RunWorkerAsync();
         }
 
+        private void FormInvoiceBillingList_Enter(object sender, EventArgs e)
+        {
+            //este evento es cada vez que el formulario tiene el focus
+            if (!backgroundWorker.IsBusy)
+            {
+                FormInvoiceBillingList_Load(sender, e);
+            }
+        }
+
         private void BackgroundWorker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
             // Ocultar el mensaje de carga
@@ -344,5 +353,6 @@ namespace v4posme_window.Views
         {
             progressPanel.Size = Size;
         }
+
     }
 }

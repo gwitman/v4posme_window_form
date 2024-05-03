@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows.Controls;
+using DevExpress.LookAndFeel;
 using DevExpress.Utils.Layout;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraBars;
@@ -3190,10 +3191,11 @@ namespace v4posme_window.Views
         {
             var quantity = gridViewValues.GetRowCellValue(gridViewValues.FocusedRowHandle, colQuantity).ToString();
             var quantityDecimal = WebToolsHelper.ConvertToNumber<decimal>(quantity);
-            if (decimal.Compare(quantityDecimal, Decimal.Zero)==0)
+            if (decimal.Compare(quantityDecimal, Decimal.Zero) == 0)
             {
                 return;
             }
+
             quantityDecimal -= 1;
             gridViewValues.SetRowCellValue(gridViewValues.FocusedRowHandle, colQuantity, quantityDecimal);
             FnRecalculateDetail(true, "");
@@ -3265,19 +3267,38 @@ namespace v4posme_window.Views
                 ComandPrinter();
             }
 
-            if (e.Item.Name== btnInvoiceDelete.Name)
+            if (e.Item.Name == btnInvoiceDelete.Name)
             {
-                if (TransactionId is null)
+                var message = XtraMessageBox.Show("¿Seguro desea eliminar la factua actual? Esta acción no se puede revertir", "Eliminar", MessageBoxButtons.YesNo);
+                if (message == DialogResult.No)
                 {
-
-                    var objFormInvoiceBillingDelete = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, CompanyId!.Value, TransactionId!.Value, TransactionMasterId!.Value);
-                    objFormInvoiceBillingDelete.ComandDelete();
-                    LoadNew();
-                    LoadRender(TypeRender.New);
-
                     return;
                 }
 
+                if (TransactionMasterId > 0)
+                {
+                    coreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Eliminar", "No hay factura a eliminar", this);
+                    var objFormInvoiceBillingDelete = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, CompanyId!.Value, TransactionId!.Value, TransactionMasterId!.Value);
+                    objFormInvoiceBillingDelete.ComandDelete();
+                    //background
+                    LoadNew();
+                    LoadRender(TypeRender.New);
+                    return;
+                }
+            }
+
+            if (e.Item.Name==btnSeleccionarFactura.Name)
+            {
+                var objComponent = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_billing");
+                if (objComponent is null)
+                {
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error",
+                        "00409 EL COMPONENTE 'tb_transaction_master_billing' NO EXISTE...", this);
+                    return;
+                }
+
+                var callerIdList = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["CALLERID_LIST"]);
+                //var formTypeListSearch = new FormTypeListSearch("Lista de Facturas",objComponent.ComponentId,"billing_invoice");
             }
 
             if (e.Item.Name == btnRegresar.Name)
