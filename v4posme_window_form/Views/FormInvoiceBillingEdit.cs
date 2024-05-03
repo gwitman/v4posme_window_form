@@ -3269,7 +3269,12 @@ namespace v4posme_window.Views
             {
                 if (TransactionId is null)
                 {
-                    coreWebRenderInView.GetMessageAlert(TypeError.Error, "Eliminar", "No hay datos a eliminar, seleccione una factura para proceder", this);
+
+                    var objFormInvoiceBillingDelete = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, CompanyId!.Value, TransactionId!.Value, TransactionMasterId!.Value);
+                    objFormInvoiceBillingDelete.ComandDelete();
+                    LoadNew();
+                    LoadRender(TypeRender.New);
+
                     return;
                 }
 
