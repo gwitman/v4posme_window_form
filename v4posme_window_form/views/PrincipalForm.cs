@@ -84,7 +84,7 @@ namespace v4posme_window.Views
 
         }
 
-        private static bool IsFormOpen(Type formType)
+        public bool IsFormOpen(Type formType)
         {
             return Application.OpenForms.Cast<Form>().Any(form => form.GetType() == formType);
         }

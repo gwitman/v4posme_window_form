@@ -3240,6 +3240,7 @@ namespace v4posme_window.Views
 
         private void barManager1_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var coreWebRenderInView = new CoreWebRenderInView();
             if (e.Item.Name == btnActualizarCatalogo.Name)
             {
                 var formInvoiceApi = new FormInvoiceApi();
@@ -3264,13 +3265,30 @@ namespace v4posme_window.Views
                 ComandPrinter();
             }
 
+            if (e.Item.Name== btnInvoiceDelete.Name)
+            {
+                if (TransactionId is null)
+                {
+                    coreWebRenderInView.GetMessageAlert(TypeError.Error, "Eliminar", "No hay datos a eliminar, seleccione una factura para proceder", this);
+                    return;
+                }
+
+            }
+
             if (e.Item.Name == btnRegresar.Name)
             {
-                this.Close();
-
-                // Mostrar el formulario anterior
-                FormInvoiceBillingList formularioAnterior = new FormInvoiceBillingList();
-                formularioAnterior.Show();
+                Close();
+                var formulario = CoreFormList.Formularios()["core_dashboards"];
+                if (!CoreFormList.Principal().IsFormOpen(formulario.GetType()))
+                {
+                    formulario.MdiParent = CoreFormList.Principal();
+                    formulario.Show();
+                }
+                else
+                {
+                    formulario.BringToFront();
+                    formulario.Focus();
+                }
             }
         }
 
