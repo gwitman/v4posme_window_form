@@ -8,7 +8,7 @@ class CompanyDataViewModel : ICompanyDataViewModel
     {
         using var context = new DataContext();
         return context.TbCompanyDataviews
-            .SingleOrDefault(datafile => datafile!.CompanyId == companyId
+            .FirstOrDefault(datafile => datafile!.CompanyId == companyId
                                          && datafile.DataViewId == dataViewId
                                          && datafile.CallerId == callerId
                                          && datafile.ComponentId == componentId

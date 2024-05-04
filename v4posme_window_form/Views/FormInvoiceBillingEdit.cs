@@ -730,7 +730,7 @@ namespace v4posme_window.Views
                 ObjTransactionMasterDetail = _objInterfazTransactionMasterDetailModel.GetRowByTransaction(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value);
                 ObjTransactionMasterDetailWarehouse = _objInterfazTransactionMasterDetailModel.GetRowByTransactionAndWarehouse(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value);
                 ObjTransactionMasterDetailConcept = _objInterfazTransactionMasterConceptModel.GetRowByTransactionMasterConcept(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value, ObjComponentItem.ComponentId);
-                DateTime dateTimeNow = DateTime.Now;
+                var dateTimeNow = DateTime.Now;
                 var dateRatio = new DateOnly(dateTimeNow.Year, dateTimeNow.Month, dateTimeNow.Day);
                 ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, dateRatio, decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
                 ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(objParameterAll["INVOICE_TYPE_EMPLOYEER"]));
@@ -781,7 +781,6 @@ namespace v4posme_window.Views
                     }
                 }
 
-
                 //Obtener la linea de credito del cliente por defecto
                 ObjCurrencyDolares = _objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyId);
                 ObjCurrencyCordoba = _objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyId);
@@ -797,7 +796,7 @@ namespace v4posme_window.Views
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show($"Se produjo el siguiente error: {ex.Message}");
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error,"Error",ex.Message,this);
             }
         }
 
@@ -947,7 +946,7 @@ namespace v4posme_window.Views
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show($"Se produjo el siguiente error: {ex.Message}");
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error,"Error",ex.Message,this);
             }
         }
 
@@ -2199,6 +2198,8 @@ namespace v4posme_window.Views
                     txtReceiptAmountPoint.Text = ObjTransactionMasterInfo.ReceiptAmountPoint!.Value.ToString(FormatDecimal);
 
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(typeRender), typeRender, null);
             }
 
 
@@ -2847,6 +2848,7 @@ namespace v4posme_window.Views
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            _bindingListTransactionMasterDetail.Clear();
             if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
             {
                 LoadEdit();
@@ -2892,6 +2894,8 @@ namespace v4posme_window.Views
 
             if (TypeOpen == TypeOpenForm.Init && TransactionMasterId == 0)
             {
+                gridViewTbTransactionMasterDetail.DataSource = null;
+                _bindingListTransactionMasterDetail.Clear();
                 LoadRender(TypeRender.New);
             }
         }
@@ -3261,13 +3265,30 @@ namespace v4posme_window.Views
                 var warehouseID_ = Convert.ToInt32(warehouseComboBoxItem.Key);
                 var typePrice_ = Convert.ToInt32(typePriceComboBoxItem.Key);
                 var currencyID_ = Convert.ToInt32(currencyIdComboBoxItem.Key);
-
-                ObjSELECCIONAR_ITEM_BILLING_BACKGROUND =
-                    formInvoiceApi.GetViewApi(
-                        ObjComponentItem!.ComponentId,
-                        @"SELECCIONAR_ITEM_BILLING_BACKGROUND",
-                        @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}"
-                    );
+                if (!progressPanel.Visible)
+                {
+                    progressPanel.Visible = true;
+                }
+                backgroundWorker.DoWork += (ob, ev) =>
+                {
+                    ObjSELECCIONAR_ITEM_BILLING_BACKGROUND =
+                        formInvoiceApi.GetViewApi(
+                            ObjComponentItem!.ComponentId,
+                            @"SELECCIONAR_ITEM_BILLING_BACKGROUND",
+                            @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}"
+                        );
+                };
+                backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+                {
+                    if (progressPanel.Visible)
+                    {
+                        progressPanel.Visible = false;
+                    }
+                };
+                if (!backgroundWorker.IsBusy)
+                {
+                    backgroundWorker.RunWorkerAsync();
+                }
             }
 
             if (e.Item.Name == btnPrinterInvoice.Name)
@@ -3407,7 +3428,7 @@ namespace v4posme_window.Views
             var formTypeListSearch = new FormTypeListSearch("Lista de Productos", ObjComponentItem!.ComponentId,
                 "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
                 @"{warehouseID:" + warehouseId + ", listPriceID:" + listPrice + ",typePriceID:" + typePriceId + ",currencyID:" + currencyIdKey + "}",
-                false, "", 0, 5, "");
+                false, "", 0, 5, "",true);
             formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarItem;
             formTypeListSearch.ShowDialog(this);
         }

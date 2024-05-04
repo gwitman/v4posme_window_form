@@ -28,6 +28,8 @@ namespace v4posme_window.Template
         private int? ComponentId { get; set; }
         private string? ViewName { get; set; }
         private bool? AutoClose { get; set; }
+
+        private bool ShowRow { get; set; }
         private string? Filter { get; set; }
         private bool? MultiSelect { get; set; }
         private string? UrlRedictWhenEmpty { get; set; }
@@ -38,8 +40,10 @@ namespace v4posme_window.Template
         private string? TitleWindow { get; set; }
         private GridControl ObjGridControl { get; set; }
 
+        private GridView? _gridView = null;
+
         public FormTypeListSearch(string title, int componentId, string viewName, bool autoClose, string filter,
-            bool multiSelect, string urlRedictWhenEmpty, int iDisplayStart, int iDisplayLength, string sSearch)
+            bool multiSelect, string urlRedictWhenEmpty, int iDisplayStart, int iDisplayLength, string sSearch, bool showRow = false)
         {
             ComponentId = componentId;
             ViewName = viewName;
@@ -53,6 +57,8 @@ namespace v4posme_window.Template
             TitleWindow = title;
             PageCurrent = 0;
             ObjGridControl = new GridControl();
+            _gridView=ObjGridControl.MainView as GridView;
+            ShowRow = showRow;
             InitializeComponent();
         }
 
@@ -63,11 +69,10 @@ namespace v4posme_window.Template
             ObjGridControl.Name = "ObjGridControl";
             ObjGridControl.Parent = controlParent;
             ObjGridControl.Dock = DockStyle.Fill;
-            ShowViewByNamePaginate();
+            if (ShowRow) ShowViewByNamePaginate();
             ObjGridControl.KeyDown += GridView_KeyDown!;
             ((GridView)ObjGridControl.MainView).OptionsView.ShowGroupPanel = false;
             ((GridView)ObjGridControl.MainView).OptionsBehavior.Editable = false;
-            
         }
 
 
@@ -118,6 +123,8 @@ namespace v4posme_window.Template
 
 
             CoreWebRenderInView.RenderGrid(datos, "ListView", ObjGridControl);
+            _gridView= (GridView)ObjGridControl.MainView;
+            _gridView.OptionsSelection.MultiSelect = multiSelect;
             ObjGridControl.Refresh();
         }
 
@@ -133,7 +140,7 @@ namespace v4posme_window.Template
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             FnSelectedRow();
-            Close();
+            if (AutoClose is not null && AutoClose.Value) Close();
         }
 
         private void FnSelectedRow()
@@ -144,20 +151,16 @@ namespace v4posme_window.Template
             if (((GridView)ObjGridControl.MainView).SelectedRowsCount > 0)
             {
                 // Obtener el índice de la fila seleccionada
-                List<int> rowIndex = ((GridView)ObjGridControl.MainView).GetSelectedRows().ToList();
+                List<int> rowIndex = _gridView!.GetSelectedRows().ToList();
                 foreach (var indexRow in rowIndex)
                 {
-                    foreach (GridColumn column in ((GridView)ObjGridControl.MainView).Columns)
+                    foreach (GridColumn column in _gridView!.Columns)
                     {
-                        string nombreColumna    = column.FieldName == null ? "" : column.FieldName;
-                        var valueColumn         = ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, nombreColumna).ToString();
+                        var nombreColumna = column.FieldName ?? "";
+                        var valueColumn = ((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, nombreColumna).ToString();
                         dictionaryObject[nombreColumna] = valueColumn!;
                     }
                 }
-            }
-            else
-            {
-                // No se ha seleccionado ninguna fila, maneja este caso según tus requerimientos
             }
 
             EventoCallBackAceptarEvent?.Invoke(dynamicObject);
@@ -176,7 +179,6 @@ namespace v4posme_window.Template
         {
             PageCurrent++;
             ShowViewByNamePaginate();
-           
         }
 
 
