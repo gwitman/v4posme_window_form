@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            backgroundWorker = new System.ComponentModel.BackgroundWorker();
             SuspendLayout();
             // 
             // progressPanel
@@ -36,11 +37,16 @@
             progressPanel.Appearance.Options.UseBackColor = true;
             progressPanel.Size = new Size(285, 39);
             // 
+            // backgroundWorker
+            // 
+            backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.WorkerSupportsCancellation = true;
+            // 
             // FormInvoiceBillingList
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(805, 471);
+            ClientSize = new Size(1048, 613);
             Name = "FormInvoiceBillingList";
             Text = "FormInvoiceBillingList";
             WindowState = FormWindowState.Maximized;
@@ -51,5 +57,7 @@
         }
 
         #endregion
+
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }

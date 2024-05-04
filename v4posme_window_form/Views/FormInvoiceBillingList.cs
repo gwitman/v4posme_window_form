@@ -5,7 +5,6 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraWaitForm;
 using Mysqlx.Cursor;
 using System.Dynamic;
-using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using Unity;
 using v4posme_library.Libraries;
@@ -49,7 +48,6 @@ namespace v4posme_window.Views
         private static readonly string? NotAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
         private static readonly int? PermissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
         private static readonly string? UrlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
-        private BackgroundWorker backgroundWorker;
         private TableCompanyDataViewDto? _dataViewData;
 
         public FormInvoiceBillingList()
@@ -72,7 +70,6 @@ namespace v4posme_window.Views
 
         private void FormInvoiceBillingList_Load(object sender, EventArgs e)
         {
-            backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += BackgroundWorker_DoWork;
             backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             progressPanel.Size = Size;
@@ -116,9 +113,7 @@ namespace v4posme_window.Views
 
             // Aquí puedes actualizar otros controles con los datos cargados
             PreRender();
-            CoreWebRenderInView.RenderGrid(_dataViewData!, "invoice", ObjGridControl);
-            ObjGridControl.MainView.RefreshData();
-            ObjGridControl.Refresh();
+            RefreshData();
         }
 
         private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs args)
@@ -209,14 +204,68 @@ namespace v4posme_window.Views
             }
         }
 
-        private void RepositoryItemButtonEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
+        private void RefreshData()
         {
-            throw new NotImplementedException();
+            CoreWebRenderInView.RenderGrid(_dataViewData!, "invoice", ObjGridControl);
+            ObjGridControl.MainView.RefreshData();
+            ObjGridControl.Refresh();
         }
 
         public void Delete(object? sender, EventArgs? args)
         {
-            if (((GridView)ObjGridControl.MainView).SelectedRowsCount > 0)
+            var result = XtraMessageBox.Show("¿Estás seguro de que deseas eliminar este registro? Esta acción no se puede revertir", "Eliminar", MessageBoxButtons.YesNo);
+            if (result == DialogResult.No)
+            {
+                return;
+            }
+
+            if (!progressPanel.Visible)
+            {
+                progressPanel.Visible = true;
+            }
+
+            var gridView = (GridView)ObjGridControl.MainView;
+            var countRows = gridView.SelectedRowsCount > 0;
+            var errorDelete = new Exception();
+            backgroundWorker.DoWork += (ob, ev) =>
+            {
+                if (!countRows) return;
+                var rowIndex = gridView.GetSelectedRows().ToList();
+                foreach (var indexRow in rowIndex)
+                {
+                    var companyId = Convert.ToInt32(gridView.GetRowCellValue(indexRow, "companyID").ToString());
+                    var transactionId = Convert.ToInt32(gridView.GetRowCellValue(indexRow, "transactionID").ToString());
+                    var transactionMasterId = Convert.ToInt32(gridView.GetRowCellValue(indexRow, "transactionMasterID").ToString());
+                    var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
+                    objFormInvoiceBillingEdit.ComandDelete();
+                    errorDelete = objFormInvoiceBillingEdit.ExceptionDelete ?? null;
+                }
+            };
+            backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+            {
+                if (!countRows)
+                {
+                    CoreWebRenderInView objCoreWebRenderInView = new CoreWebRenderInView();
+                    objCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando", "Debe seleccionar un registro", this);
+                    return;
+                }
+
+                //MessageBox.Show(ev.Result.ToString());
+
+                if (errorDelete is not null)
+                {
+                    _coreWebRender.GetMessageAlert(TypeError.Error, "Error", errorDelete.Message, this);
+                }
+
+                List();
+                RefreshData();
+                if (progressPanel.Visible)
+                {
+                    progressPanel.Visible = false;
+                }
+            };
+            backgroundWorker.RunWorkerAsync();
+            /*if (countRows)
             {
                 // Obtener el índice de la fila seleccionada
                 var rowIndex = ((GridView)ObjGridControl.MainView).GetSelectedRows().ToList();
@@ -236,7 +285,7 @@ namespace v4posme_window.Views
             {
                 CoreWebRenderInView objCoreWebRenderInView = new CoreWebRenderInView();
                 objCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando", "Debe seleccionar un registro", this);
-            }
+            }*/
         }
 
         public void Edit(object? sender, EventArgs? args)
@@ -253,9 +302,9 @@ namespace v4posme_window.Views
 
 
                     var formInvoiceBillingEdit = new FormInvoiceBillingEdit(
-                        TypeOpenForm.Init, companyId, transactionId,
-                        transactionMasterId)
-                    { MdiParent = CoreFormList.Principal() };
+                            TypeOpenForm.Init, companyId, transactionId,
+                            transactionMasterId)
+                        { MdiParent = CoreFormList.Principal() };
                     formInvoiceBillingEdit.Show();
                     break;
                 }
@@ -272,12 +321,12 @@ namespace v4posme_window.Views
             var transactionID = _coreWebTransaction.GetTransactionId(VariablesGlobales.Instance.User!.CompanyId, "tb_transaction_master_billing", 0);
 
             var objFormInvoiceList = new FormInvoiceBillingEdit(
-                TypeOpenForm.Init,
-                VariablesGlobales.Instance.User!.CompanyId,
-                transactionID!.Value,
-                0
-            )
-            { MdiParent = CoreFormList.Principal() };
+                    TypeOpenForm.Init,
+                    VariablesGlobales.Instance.User!.CompanyId,
+                    transactionID!.Value,
+                    0
+                )
+                { MdiParent = CoreFormList.Principal() };
             objFormInvoiceList.Show();
         }
 
@@ -340,7 +389,7 @@ namespace v4posme_window.Views
                         TypeOpenForm.Init, objTm.CompanyId, objTm.TransactionId,
                         objTm.TransactionMasterId
                     )
-                { MdiParent = CoreFormList.Principal() };
+                    { MdiParent = CoreFormList.Principal() };
                 formInvoiceBillingEdit.Show();
             }
             catch (Exception ex)
@@ -353,6 +402,5 @@ namespace v4posme_window.Views
         {
             progressPanel.Size = Size;
         }
-
     }
 }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Controls;
 using DevExpress.LookAndFeel;
+using DevExpress.Mvvm.Native;
 using DevExpress.Utils.Layout;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraBars;
@@ -128,6 +129,8 @@ namespace v4posme_window.Views
 
         #region Properties
 
+        public Exception? ExceptionDelete { get; private set; }
+        
         private IBindingList _bindingListTransactionMasterDetail = new BindingList<FormInvoiceBillingEditDetailDTO>();
         private string? ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE { get; set; }
         private string? objCompanyParameter_Key_INVOICE_BILLING_CREDIT { get; set; }
@@ -417,7 +420,7 @@ namespace v4posme_window.Views
                 var workflowStage = _objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing",
                     "statusID", objTm.StatusId!.Value, commandEliminable, objUser.CompanyId,
                     objUser.BranchId, objRole!.RoleId);
-                if (!(workflowStage!.Value))
+                if (workflowStage!.Value)
                 {
                     throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
                 }
@@ -505,15 +508,16 @@ namespace v4posme_window.Views
                     _objInterfazTransactionMasterModel.DeleteAppPosme(objUser.CompanyId, objTm.TransactionId, objTm.TransactionMasterId);
                     _objInterfazTransactionMasterDetailModel.DeleteWhereTm(objUser.CompanyId, objTm.TransactionId, objTm.TransactionMasterId);
                 }
+
+                ExceptionDelete = null;
             }
             catch (Exception ex)
             {
-                var objCoreWebRenderInView = new CoreWebRenderInView();
-                Console.WriteLine(ex);
-                objCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando", ex.ToString(), this);
+                ExceptionDelete = ex;
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando", ex.Message, this);
             }
         }
-
+        
         public void ComandPrinter()
         {
             try
@@ -632,8 +636,7 @@ namespace v4posme_window.Views
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error,"Imprimir", $"Se produjo un error al imprimir, revisar los datos. Error: {e.Message}", this);
             }
         }
 
@@ -3282,13 +3285,36 @@ namespace v4posme_window.Views
 
                 if (TransactionMasterId > 0)
                 {
+                    if (!progressPanel.Visible)
+                    {
+                        progressPanel.Visible = true;
+                    }
+                    backgroundWorker.DoWork += (o, args) =>
+                    {
+                        var objFormInvoiceBillingDelete = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, CompanyId!.Value, TransactionId!.Value, TransactionMasterId!.Value);
+                        objFormInvoiceBillingDelete.ComandDelete();
+                        //background
+                        
+                    };
+                    backgroundWorker.RunWorkerCompleted += (o, args) =>
+                    {
+                        if (args.Error is not null)
+                        {
+                            _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", args.Error.Message, this);
+                            return;
+                        }
+                        LoadNew();
+                        LoadRender(TypeRender.New);
+                        if (progressPanel.Visible)
+                        {
+                            progressPanel.Visible = false;
+                        }
+                    };
+                    backgroundWorker.RunWorkerAsync();
+                }
+                else
+                {
                     coreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Eliminar", "No hay factura a eliminar", this);
-                    var objFormInvoiceBillingDelete = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, CompanyId!.Value, TransactionId!.Value, TransactionMasterId!.Value);
-                    objFormInvoiceBillingDelete.ComandDelete();
-                    //background
-                    LoadNew();
-                    LoadRender(TypeRender.New);
-                    return;
                 }
             }
 
