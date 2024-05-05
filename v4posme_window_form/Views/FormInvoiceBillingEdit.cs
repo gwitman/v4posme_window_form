@@ -420,7 +420,7 @@ namespace v4posme_window.Views
                 var workflowStage = _objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing",
                     "statusID", objTm.StatusId!.Value, commandEliminable, objUser.CompanyId,
                     objUser.BranchId, objRole!.RoleId);
-                if (workflowStage!.Value)
+                if (!workflowStage!.Value)
                 {
                     throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
                 }
@@ -582,17 +582,14 @@ namespace v4posme_window.Views
                 // Obtener información del usuario que creó la transacción
                 var objUserCreated = VariablesGlobales.Instance.UnityContainer.Resolve<IUserModel>().GetRowByPk(companyID, objTm.CreatedAt!.Value, objTm.CreatedBy!.Value);
 
-                // Imprimir el documento 
-                //$objParameterPrinterName = $this->core_web_parameter->getParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT",$companyID); 
-                //$objParameterPrinterName = $objParameterPrinterName->value;  ???  
-                //PATH_FILE_OF_APP_ROOT.\img\logos\xxxxxxxx 
+                // Imprimir el documento               
                 var printerName = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT", companyID);
                 var pathOfLogo = VariablesGlobales.ConfigurationBuilder["PATH_FILE_OF_APP_ROOT"];
                 var printer = new Printer(printerName!.Value);
                 printer.AlignCenter();
                 if (objParameterCompanyLogo is not null)
                 {
-                    var imagePath = $"{pathOfLogo}\\{objParameterCompanyLogo.Value!}";
+                    var imagePath = $"{pathOfLogo}/img/logos/{objParameterCompanyLogo.Value!}";
                     if (File.Exists(imagePath))
                     {
                         var logoCompany = new Bitmap(Image.FromFile(imagePath));
@@ -615,6 +612,7 @@ namespace v4posme_window.Views
                 printer.Append("Cliente");
                 printer.Append($"{objCustomer.FirstName} {objCustomer.LastName}");
                 printer.Append($"{objTm.Note}");
+                printer.Append("123456789123456789123456789123456789123456789123456789");
                 printer.Append("PRODUCTO           CANT            TOTAL");
                 printer.CondensedMode(PrinterModeState.On);
                 foreach (var detailDto in objTmd)
@@ -690,6 +688,7 @@ namespace v4posme_window.Views
                     throw new Exception("EL COMPONENTE 'tb_transaction_master_billing' NO EXISTE...");
                 }
 
+                _bindingListTransactionMasterDetail.Clear();
                 TransactionId = _objInterfazCoreWebTransaction.GetTransactionId(user.CompanyId, "tb_transaction_master_billing", 0)!.Value;
                 ObjCurrency = _objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyId);
                 ObjCurrencyDolares = _objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyId);
@@ -859,6 +858,7 @@ namespace v4posme_window.Views
                     throw new Exception("EL COMPONENTE 'tb_transaction_master_billing' NO EXISTE...");
                 }
 
+                _bindingListTransactionMasterDetail.Clear();
                 TransactionId = _objInterfazCoreWebTransaction.GetTransactionId(user.CompanyId, "tb_transaction_master_billing", 0)!.Value;
                 ObjCurrency = _objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyId);
                 ObjCurrencyDolares = _objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyId);
@@ -1987,9 +1987,6 @@ namespace v4posme_window.Views
                 var objParameterPrinterName = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT", user.CompanyId)!.Value;
                 var coreWebPrinter = new CoreWebPrinterDirect();
                 var pd = coreWebPrinter.ConfigurationPrinter(objParameterPrinterName);
-                //PrintDocument maneja el evento para imprimir
-                //$objParameterPrinterName = $this->core_web_parameter->getParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT",$companyID);
-                //$objParameterPrinterName = $objParameterPrinterName->value;  ???  
                 var printer = new Printer(objParameterPrinterName);
                 printer.OpenDrawer();
                 printer.PrintDocument();
@@ -2638,7 +2635,7 @@ namespace v4posme_window.Views
             var formTypeListSearch = new FormTypeListSearch("Lista de Productos", ObjComponentItem!.ComponentId,
                 "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
                 @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}",
-                false, "", 0, Convert.ToInt32(ObjParameterCantidadItemPoup!), "");
+                false, "", 0, Convert.ToInt32(ObjParameterCantidadItemPoup!), "",false);
             formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarItem;
             formTypeListSearch.ShowDialog(this);
         }
@@ -2848,7 +2845,7 @@ namespace v4posme_window.Views
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            _bindingListTransactionMasterDetail.Clear();
+            
             if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
             {
                 LoadEdit();
@@ -3343,7 +3340,7 @@ namespace v4posme_window.Views
             {
                 var formTypeListSearch = new FormTypeListSearch("Lista de Facturas", ObjComponentTransactionBilling!.ComponentId,
                     "SELECCIONAR_BILLING_REGISTER", true,
-                    "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
+                    "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "",true);
                 formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarSeleccoinDeFactura;
                 formTypeListSearch.ShowDialog(this);
 
@@ -3409,7 +3406,7 @@ namespace v4posme_window.Views
 
             var formTypeListSearch = new FormTypeListSearch("Lista de Cliente", ObjComponentCustomer!.ComponentId,
                 "SELECCIONAR_CLIENTES_BILLING", true,
-                "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "");
+                "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 15, "",true);
             formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarCusomter;
             formTypeListSearch.ShowDialog(this);
         }
@@ -3428,7 +3425,7 @@ namespace v4posme_window.Views
             var formTypeListSearch = new FormTypeListSearch("Lista de Productos", ObjComponentItem!.ComponentId,
                 "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
                 @"{warehouseID:" + warehouseId + ", listPriceID:" + listPrice + ",typePriceID:" + typePriceId + ",currencyID:" + currencyIdKey + "}",
-                false, "", 0, 5, "",true);
+                false, "", 0, 5, "",false);
             formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarItem;
             formTypeListSearch.ShowDialog(this);
         }

@@ -43,7 +43,7 @@ namespace v4posme_window.Template
         private GridView? _gridView = null;
 
         public FormTypeListSearch(string title, int componentId, string viewName, bool autoClose, string filter,
-            bool multiSelect, string urlRedictWhenEmpty, int iDisplayStart, int iDisplayLength, string sSearch, bool showRow = false)
+            bool multiSelect, string urlRedictWhenEmpty, int iDisplayStart, int iDisplayLength, string sSearch, bool showRow)
         {
             ComponentId = componentId;
             ViewName = viewName;
@@ -70,7 +70,9 @@ namespace v4posme_window.Template
             ObjGridControl.Parent = controlParent;
             ObjGridControl.Dock = DockStyle.Fill;
             if (ShowRow) ShowViewByNamePaginate();
+
             ObjGridControl.KeyDown += GridView_KeyDown!;
+            txtFilter.Focus();
             ((GridView)ObjGridControl.MainView).OptionsView.ShowGroupPanel = false;
             ((GridView)ObjGridControl.MainView).OptionsBehavior.Editable = false;
         }
