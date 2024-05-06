@@ -187,7 +187,8 @@ namespace v4posme_window.Views
 
         public string? ObjParameterInvoiceBillingSelectitem { get; private set; }
 
-        public Dictionary<string, string?> ObjListParameterAll { get; private set; }
+        public string? ObjParameterInvoiceTypeEmployer { get; private set; }
+        public string? ObjParameterInvoiceBillingEmployeeDefault { get; private set; }
 
         public string? ObjParameterobjParameterInvoiceBillingPrinterUrlBar { get; private set; }
 
@@ -762,7 +763,10 @@ namespace v4posme_window.Views
                     throw new Exception("NO EXISTE UNA LISTA DE PRECIO PARA SER APLICADA");
                 }
 
-                ObjListParameterAll = _objInterfazCoreWebParameter.GetParameterAll(user.CompanyId);
+                
+                ObjParameterInvoiceTypeEmployer = _objInterfazCoreWebParameter.GetParameter("INVOICE_TYPE_EMPLOYEER", user.CompanyId)!.Value;
+                ObjParameterInvoiceBillingEmployeeDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_EMPLOYEE_DEFAULT", user.CompanyId)!.Value;
+
                 var parameterValue = _objInterfazCoreWebParameter.GetParameter("INVOICE_BUTTOM_PRINTER_FIDLOCAL_PAYMENT_AND_AMORTIZACION", user.CompanyId);
                 ObjParameterInvoiceButtomPrinterFidLocalPaymentAndAmortization = parameterValue!.Value;
 
@@ -794,7 +798,7 @@ namespace v4posme_window.Views
                 var dateTimeNow = DateTime.Now;
                 var dateRatio = new DateOnly(dateTimeNow.Year, dateTimeNow.Month, dateTimeNow.Day);
                 ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, dateRatio, decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
-                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(ObjListParameterAll["INVOICE_TYPE_EMPLOYEER"]));
+                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(ObjParameterInvoiceTypeEmployer));
                 ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyId);
                 ObjCausal = _objInterfazTransactionCausalModel!.GetCausalByBranch(user.CompanyId, TransactionId!.Value, user.BranchId);
                 WarehouseId = ObjCausal.First()!.WarehouseSourceId;
@@ -932,8 +936,9 @@ namespace v4posme_window.Views
                     throw new Exception("NO EXISTE UNA LISTA DE PRECIO PARA SER APLICADA");
                 }
 
-                
-                ObjListParameterAll = _objInterfazCoreWebParameter.GetParameterAll(user.CompanyId);
+                              
+                ObjParameterInvoiceTypeEmployer = _objInterfazCoreWebParameter.GetParameter("INVOICE_TYPE_EMPLOYEER", user.CompanyId)!.Value;
+                ObjParameterInvoiceBillingEmployeeDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_EMPLOYEE_DEFAULT", user.CompanyId)!.Value;
                 ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE = _objInterfazCoreWebParameter.GetParameter("INVOICE_VALIDATE_BALANCE", user.CompanyId)!.Value;
                 objCompanyParameter_Key_INVOICE_BILLING_CREDIT = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyId)!.Value;
                 ObjParameterInvoiceAutoApply = _objInterfazCoreWebParameter.GetParameter("INVOICE_AUTOAPPLY_CASH", user.CompanyId)!.Value;
@@ -958,7 +963,7 @@ namespace v4posme_window.Views
                 }
 
                 ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
-                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(ObjListParameterAll["INVOICE_TYPE_EMPLOYEER"]));
+                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(ObjParameterInvoiceTypeEmployer));
                 ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyId);
                 ObjCausal = _objInterfazTransactionCausalModel.GetCausalByBranch(user.CompanyId, TransactionId.Value, user.BranchId);
                 WarehouseId = ObjCausal.First()!.WarehouseSourceId;
@@ -2101,7 +2106,7 @@ namespace v4posme_window.Views
             {
                 case TypeRender.New:
                     _bindingListTransactionMasterDetail.Clear();
-                    var employerDefault = ObjListParameterAll["INVOICE_BILLING_EMPLOYEE_DEFAULT"];
+                    var employerDefault = ObjParameterInvoiceBillingEmployeeDefault;
                     if (employerDefault == "true")
                         CoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", ObjListEmployee.ElementAt(0).EntityId);
                     else
