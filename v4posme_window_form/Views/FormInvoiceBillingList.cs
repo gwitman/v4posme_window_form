@@ -244,9 +244,10 @@ namespace v4posme_window.Views
                     var transactionMasterId = Convert.ToInt32(gridView.GetRowCellValue(indexRow, "transactionMasterID").ToString());
                     var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
                     objFormInvoiceBillingEdit.ComandDelete();
-                    errorDelete = objFormInvoiceBillingEdit.ExceptionDelete ?? null;
+                    
                 }
             };
+            
             backgroundWorker.RunWorkerCompleted += (ob, ev) =>
             {
                 if (!countRows)
@@ -254,9 +255,9 @@ namespace v4posme_window.Views
                     _coreWebRender.GetMessageAlert(TypeError.Error, @"Error eliminando", "Debe seleccionar un registro", this);
                     return;
                 }
-                if (errorDelete is not null)
+                if (ev.Error is not null)
                 {
-                    _coreWebRender.GetMessageAlert(TypeError.Error, "Error", errorDelete.Message, this);
+                    _coreWebRender.GetMessageAlert(TypeError.Error, "Error", ev.Error.Message, this);
                 }else if (ev.Cancelled)
                 {
                     //evento cancelado

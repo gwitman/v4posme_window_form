@@ -129,8 +129,7 @@ namespace v4posme_window.Views
 
         #region Properties
 
-        public Exception? ExceptionDelete { get; private set; }
-
+        
         private IBindingList _bindingListTransactionMasterDetail = new BindingList<FormInvoiceBillingEditDetailDTO>();
         private string? ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE { get; set; }
         private string? objCompanyParameter_Key_INVOICE_BILLING_CREDIT { get; set; }
@@ -513,12 +512,11 @@ namespace v4posme_window.Views
                     _objInterfazTransactionMasterDetailModel.DeleteWhereTm(objUser.CompanyId, objTm.TransactionId, objTm.TransactionMasterId);
                 }
 
-                ExceptionDelete = null;
+                
             }
             catch (Exception ex)
             {
-                ExceptionDelete = ex;
-                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando", ex.Message, this);
+                throw ex;
             }
         }
 
@@ -3115,7 +3113,6 @@ namespace v4posme_window.Views
                 return;
             }
 
-            //FnEnviarFactura();
         }
 
         private void txtReceiptAmountDol_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -3123,8 +3120,7 @@ namespace v4posme_window.Views
             if (e.Control && e.KeyCode == Keys.A)
             {
                 var workflowStage = ObjListWorkflowStage!.Where(c => c.Aplicable!.Value).FirstOrDefault();
-                TxtStatusId = workflowStage!.WorkflowStageId;
-                //FnEnviarFactura();
+                TxtStatusId = workflowStage!.WorkflowStageId;                
             }
 
             if (e.Control && e.KeyCode == Keys.B)
@@ -3170,8 +3166,7 @@ namespace v4posme_window.Views
             {
                 var rowIndex = gridViewValues.GetSelectedRows().ToList();
                 foreach (var indexRow in rowIndex)
-                {
-                    //var itemID = Convert.ToInt32(gridViewValues.GetRowCellValue(indexRow, colItemId).ToString());
+                {   
                     gridViewValues.DeleteRow(indexRow);
                 }
 
@@ -3370,8 +3365,7 @@ namespace v4posme_window.Views
                     }
 
                     backgroundWorker.DoWork += (o, args) =>
-                    {
-                        //var objFormInvoiceBillingDelete = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, CompanyId!.Value, TransactionId!.Value, TransactionMasterId!.Value);
+                    {   
                         ComandDelete();
                     };
                     backgroundWorker.RunWorkerCompleted += (o, args) =>
