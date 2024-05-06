@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics;
+using System.Globalization;
 using System.Reflection.Metadata.Ecma335;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -319,7 +320,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         return resultado != null ? resultado.ToList() : [];
     }
 
-    public List<TbTransactionMasterDetailDto>? GetRowByTransaction(int companyId, int transactionId,
+    public List<TbTransactionMasterDetailDto> GetRowByTransaction(int companyId, int transactionId,
         int transactionMasterId)
     {
         using var context = new DataContext();

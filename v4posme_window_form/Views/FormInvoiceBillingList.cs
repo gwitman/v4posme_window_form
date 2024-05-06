@@ -17,6 +17,7 @@ using v4posme_window.Libraries;
 using v4posme_window.Template;
 using GridView = DevExpress.XtraGrid.Views.Grid.GridView;
 using System.ComponentModel;
+using DevExpress.Mvvm.Native;
 using v4posme_library.ModelsDto;
 
 namespace v4posme_window.Views
@@ -99,12 +100,16 @@ namespace v4posme_window.Views
             }
 
             // Verificar si hubo algún error durante la carga de datos
-            if (e.Error != null)
+            if (e.Error is not null)
             {
                 MessageBox.Show($"Error al cargar datos: {e.Error.Message}");
                 return;
             }
 
+            if (e.Cancelled)
+            {
+                return;
+            }
             // Actualizar la interfaz de usuario con los datos cargados
             if (progressPanel.Visible)
             {
@@ -227,10 +232,11 @@ namespace v4posme_window.Views
             var gridView = (GridView)ObjGridControl.MainView;
             var countRows = gridView.SelectedRowsCount > 0;
             var errorDelete = new Exception();
+            backgroundWorker=new BackgroundWorker();
             backgroundWorker.DoWork += (ob, ev) =>
             {
                 if (!countRows) return;
-                var rowIndex = gridView.GetSelectedRows().ToList();
+                var rowIndex = gridView.GetSelectedRows();
                 foreach (var indexRow in rowIndex)
                 {
                     var companyId = Convert.ToInt32(gridView.GetRowCellValue(indexRow, "companyID").ToString());
@@ -245,47 +251,33 @@ namespace v4posme_window.Views
             {
                 if (!countRows)
                 {
-                    CoreWebRenderInView objCoreWebRenderInView = new CoreWebRenderInView();
-                    objCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando", "Debe seleccionar un registro", this);
+                    _coreWebRender.GetMessageAlert(TypeError.Error, @"Error eliminando", "Debe seleccionar un registro", this);
                     return;
                 }
-
-                //MessageBox.Show(ev.Result.ToString());
-
                 if (errorDelete is not null)
                 {
                     _coreWebRender.GetMessageAlert(TypeError.Error, "Error", errorDelete.Message, this);
+                }else if (ev.Cancelled)
+                {
+                    //evento cancelado
+                }
+                else
+                {
+                    Invoke(() =>
+                    {
+                        List();
+                        RefreshData();
+                        if (progressPanel.Visible)
+                        {
+                            progressPanel.Visible = false;
+                        }
+                    });
                 }
 
-                List();
-                RefreshData();
-                if (progressPanel.Visible)
-                {
-                    progressPanel.Visible = false;
-                }
+               
             };
+            if (backgroundWorker.IsBusy) return;
             backgroundWorker.RunWorkerAsync();
-            /*if (countRows)
-            {
-                // Obtener el índice de la fila seleccionada
-                var rowIndex = ((GridView)ObjGridControl.MainView).GetSelectedRows().ToList();
-                foreach (var indexRow in rowIndex)
-                {
-                    var companyId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "companyID").ToString());
-                    var transactionId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionID").ToString());
-                    var transactionMasterId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionMasterID").ToString());
-                    var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
-                    objFormInvoiceBillingEdit.ComandDelete();
-                }
-
-                //Listar los registros nuevamente
-                List();
-            }
-            else
-            {
-                CoreWebRenderInView objCoreWebRenderInView = new CoreWebRenderInView();
-                objCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando", "Debe seleccionar un registro", this);
-            }*/
         }
 
         public void Edit(object? sender, EventArgs? args)

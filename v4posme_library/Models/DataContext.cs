@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using v4posme_library.Libraries;
 
 namespace v4posme_library.Models;
@@ -26,7 +24,7 @@ public partial class DataContext : DbContext
         {
             var connectionString = VariablesGlobales.ConnectionString;
             //optionsBuilder.UseMySQL(connectionString);
-            optionsBuilder.UseMySql(connectionString,MariaDbServerVersion.LatestSupportedServerVersion);
+            optionsBuilder.UseMySql(connectionString,MySqlServerVersion.LatestSupportedServerVersion);
         }
         catch (Exception ex)
         {
@@ -256,7 +254,7 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<TbTransactionMasterDetail> TbTransactionMasterDetails { get; set; }
 
-    public virtual DbSet<TbTransactionMasterDetailCredit> TbTransactionMasterDetailCredits { get; set; }
+    public virtual DbSet<TbTransactionMasterDetailCredit?> TbTransactionMasterDetailCredits { get; set; }
 
     public virtual DbSet<TbTransactionMasterDetailTemp> TbTransactionMasterDetailTemps { get; set; }
 

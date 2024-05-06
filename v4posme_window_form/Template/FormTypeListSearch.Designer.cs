@@ -80,7 +80,7 @@
             simpleButton2.Location = new Point(5, 11);
             simpleButton2.Name = "simpleButton2";
             simpleButton2.Size = new Size(85, 26);
-            simpleButton2.TabIndex = 1;
+            simpleButton2.TabIndex = 4;
             simpleButton2.Text = "Cancelar";
             // 
             // btnAceptar
@@ -95,7 +95,7 @@
             btnAceptar.Location = new Point(96, 11);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(85, 26);
-            btnAceptar.TabIndex = 2;
+            btnAceptar.TabIndex = 1;
             btnAceptar.Text = "Aceptar";
             btnAceptar.Click += btnAceptar_Click;
             // 
@@ -104,7 +104,7 @@
             txtFilter.Location = new Point(187, 10);
             txtFilter.Name = "txtFilter";
             txtFilter.Size = new Size(239, 28);
-            txtFilter.TabIndex = 20;
+            txtFilter.TabIndex = 0;
             txtFilter.KeyPress += txtFilter_KeyPress;
             // 
             // btnAtras
@@ -119,7 +119,7 @@
             btnAtras.Location = new Point(432, 11);
             btnAtras.Name = "btnAtras";
             btnAtras.Size = new Size(85, 26);
-            btnAtras.TabIndex = 4;
+            btnAtras.TabIndex = 3;
             btnAtras.Text = "Atras";
             btnAtras.Click += btnAtras_Click;
             // 
@@ -135,7 +135,7 @@
             btnSiguiente.Location = new Point(523, 11);
             btnSiguiente.Name = "btnSiguiente";
             btnSiguiente.Size = new Size(85, 26);
-            btnSiguiente.TabIndex = 3;
+            btnSiguiente.TabIndex = 2;
             btnSiguiente.Text = "Siguiente";
             btnSiguiente.Click += btnSiguiente_Click;
             // 

@@ -130,7 +130,7 @@ namespace v4posme_window.Views
         #region Properties
 
         public Exception? ExceptionDelete { get; private set; }
-        
+
         private IBindingList _bindingListTransactionMasterDetail = new BindingList<FormInvoiceBillingEditDetailDTO>();
         private string? ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE { get; set; }
         private string? objCompanyParameter_Key_INVOICE_BILLING_CREDIT { get; set; }
@@ -239,7 +239,7 @@ namespace v4posme_window.Views
 
         public List<TbPrice> ObjTransactionMasterItemPrice { get; set; }
 
-        public TbTransactionMasterDetailCredit ObjTransactionMasterDetailCredit { get; set; }
+        public TbTransactionMasterDetailCredit? ObjTransactionMasterDetailCredit { get; set; }
 
         public string? ObjParameterInvoiceBillingPrinterDirectNameDefaDefaultBar { get; set; }
 
@@ -258,7 +258,7 @@ namespace v4posme_window.Views
 
         public List<TbTransactionMasterDetailDto> ObjTransactionMasterDetailWarehouse { get; set; }
 
-        public List<TbTransactionMasterDetailDto>? ObjTransactionMasterDetail { get; set; }
+        public List<TbTransactionMasterDetailDto> ObjTransactionMasterDetail { get; set; }
 
         public TbTransactionMasterInfoDto? ObjTransactionMasterInfo { get; set; }
 
@@ -292,9 +292,10 @@ namespace v4posme_window.Views
         private int? TxtStatusOldId { get; set; }
         private int? TxtStatusId { get; set; }
 
-        private const string FormatDecimal = "#,###.00";
+        private const string FormatDecimal = "N2";
 
-        private BackgroundWorker backgroundWorker;
+        private BackgroundWorker backgroundWorker=null;
+        private Dictionary<string, string?> _objParameterAll;
 
         #endregion
 
@@ -303,15 +304,14 @@ namespace v4posme_window.Views
         public FormInvoiceBillingEdit(TypeOpenForm typeOpen, int companyId, int transactionId, int transactionMasterId)
         {
             InitializeComponent();
-
             // Suscribir al manejador de excepciones global
             Application.ThreadException += Application_ThreadException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-
             CompanyId = companyId;
             TransactionId = transactionId;
             TransactionMasterId = transactionMasterId;
             TypeOpen = typeOpen;
+            
         }
 
 
@@ -328,6 +328,7 @@ namespace v4posme_window.Views
 
         private async void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
         {
+            txtScanerCodigo.Focus();
             backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += BackgroundWorker_DoWork!;
             backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted!;
@@ -338,7 +339,10 @@ namespace v4posme_window.Views
                 progressPanel.Visible = true;
             }
 
-            backgroundWorker.RunWorkerAsync();
+            if (!backgroundWorker.IsBusy)
+            {
+                backgroundWorker.RunWorkerAsync();
+            }
         }
 
         #endregion
@@ -517,7 +521,7 @@ namespace v4posme_window.Views
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, @"Error eliminando", ex.Message, this);
             }
         }
-        
+
         public void ComandPrinter()
         {
             try
@@ -586,6 +590,7 @@ namespace v4posme_window.Views
                 var printerName = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT", companyID);
                 var pathOfLogo = VariablesGlobales.ConfigurationBuilder["PATH_FILE_OF_APP_ROOT"];
                 var printer = new Printer(printerName!.Value);
+                //var printer = new Printer("Two Pilots Demo Printer"); //para prueba
                 printer.AlignCenter();
                 if (objParameterCompanyLogo is not null)
                 {
@@ -597,6 +602,7 @@ namespace v4posme_window.Views
                     }
                 }
 
+                printer.AlignCenter();
                 printer.Append(objCompany.Name);
                 printer.Append($"RUC: {objParameterRuc}");
                 printer.BoldMode("FACTURA");
@@ -604,20 +610,29 @@ namespace v4posme_window.Views
                 printer.Append($"FECHA: {objTm.CreatedOn.Value:yyyy-M-d hh:mm:ss t z} ");
                 printer.Separator();
                 printer.AlignLeft();
-                printer.Append($"Vendedor: {objUserCreated.Nickname}");
-                printer.Append($"Codigo: {objCustomer.CustomerNumber}");
-                printer.Append($"Tipo: {objTipo.Name}");
-                printer.Append($"Estado: {objStage.First().Name}");
-                printer.Append($"Moneda: {objCurrency.Name}");
+                var datos = $"""
+                             Vendedor: {objUserCreated.Nickname}
+                             Codigo:   {objCustomer.CustomerNumber}
+                             Tipo:     {objTipo.Name}
+                             Estado:   {objStage.First().Name}
+                             Moneda:   {objCurrency.Name}
+                             """;
+                printer.Append(datos);
                 printer.Append("Cliente");
                 printer.Append($"{objCustomer.FirstName} {objCustomer.LastName}");
                 printer.Append($"{objTm.Note}");
-                printer.Append("123456789123456789123456789123456789123456789123456789");
-                printer.Append("PRODUCTO           CANT            TOTAL");
+                //printer.Append("123456789123456789123456789123456789123456789123");
+                printer.Append("PRODUCTO               CANT            TOTAL");
                 printer.CondensedMode(PrinterModeState.On);
                 foreach (var detailDto in objTmd)
                 {
-                    printer.Append($"{detailDto.ItemNameLog}  {detailDto.Quantity}   {detailDto.Quantity * detailDto.UnitaryAmount}");
+                    var subTotal = detailDto.Quantity * detailDto.UnitaryAmount;
+                    var detail = $"""
+                                  {detailDto.ItemNameLog}
+                                                       {detailDto.Quantity!.Value:N2}          {subTotal!.Value:C}
+                                  """;
+                    printer.Append(detail);
+                    //printer.Append("123456789123456789123456789123456789123456789123");
                 }
 
                 printer.CondensedMode(PrinterModeState.Off);
@@ -634,7 +649,7 @@ namespace v4posme_window.Views
             }
             catch (Exception e)
             {
-                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error,"Imprimir", $"Se produjo un error al imprimir, revisar los datos. Error: {e.Message}", this);
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Imprimir", $"Se produjo un error al imprimir, revisar los datos. Error: {e.Message}", this);
             }
         }
 
@@ -700,7 +715,7 @@ namespace v4posme_window.Views
                     throw new Exception("NO EXISTE UNA LISTA DE PRECIO PARA SER APLICADA");
                 }
 
-                var objParameterAll = _objInterfazCoreWebParameter.GetParameterAll(user.CompanyId);
+
                 var parameterValue = _objInterfazCoreWebParameter.GetParameter("INVOICE_BUTTOM_PRINTER_FIDLOCAL_PAYMENT_AND_AMORTIZACION", user.CompanyId);
                 ObjParameterInvoiceButtomPrinterFidLocalPaymentAndAmortization = parameterValue!.Value;
 
@@ -732,7 +747,7 @@ namespace v4posme_window.Views
                 var dateTimeNow = DateTime.Now;
                 var dateRatio = new DateOnly(dateTimeNow.Year, dateTimeNow.Month, dateTimeNow.Day);
                 ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, dateRatio, decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
-                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(objParameterAll["INVOICE_TYPE_EMPLOYEER"]));
+                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(_objParameterAll["INVOICE_TYPE_EMPLOYEER"]));
                 ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyId);
                 ObjCausal = _objInterfazTransactionCausalModel.GetCausalByBranch(user.CompanyId, TransactionId!.Value, user.BranchId);
                 WarehouseId = ObjCausal.First()!.WarehouseSourceId;
@@ -795,7 +810,7 @@ namespace v4posme_window.Views
             }
             catch (Exception ex)
             {
-                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error,"Error",ex.Message,this);
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", ex.Message, this);
             }
         }
 
@@ -946,7 +961,7 @@ namespace v4posme_window.Views
             }
             catch (Exception ex)
             {
-                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error,"Error",ex.Message,this);
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", ex.Message, this);
             }
         }
 
@@ -1031,8 +1046,7 @@ namespace v4posme_window.Views
                 {
                     statusId = ObjListWorkflowStage?[0].WorkflowStageId;
                 }
-
-                if (ObjParameterInvoiceAutoApply == "true" && exisCausalInCredit == false)
+                else if (ObjParameterInvoiceAutoApply == "true" && !exisCausalInCredit)
                 {
                     statusId = Convert.ToInt32(ObjParaemterStatusCanceled);
                 }
@@ -1084,7 +1098,6 @@ namespace v4posme_window.Views
                 //retorna 187 parametros
                 var objParameterAll = _objInterfazCoreWebParameter.GetParameterAll(user.CompanyId);
                 TransactionMasterId = _objInterfazTransactionMasterModel.InsertAppPosme(objTm);
-
                 var assembly = Assembly.GetEntryAssembly();
                 var documentoPath = "";
                 if (assembly is not null)
@@ -2125,12 +2138,12 @@ namespace v4posme_window.Views
                     txtReference3.Text = ObjTransactionMaster.Reference3;
                     txtNumberPhone.Text = ObjTransactionMaster.NumberPhone;
                     txtNextVisit.DateTime = ObjTransactionMaster.NextVisit!.Value;
-                    txtFixedExpenses.Text = ObjTransactionMasterDetailCredit.Reference1;
+                    txtFixedExpenses.Text = ObjTransactionMasterDetailCredit is null ? "" : ObjTransactionMasterDetailCredit.Reference1;
                     txtIsApplied.Checked = ObjTransactionMaster.IsApplied!.Value;
                     txtDateFirst.DateTime = ObjTransactionMaster.TransactionOn2!.Value;
                     txtReference2.Text = ObjTransactionMaster.Reference2;
                     txtDesembolsoEfectivo.IsOn = true; //txtCheckDeEfectivo
-                    txtReportSinRiesgo.IsOn = ObjTransactionMasterDetailCredit.Reference2!.Equals("true", StringComparison.InvariantCultureIgnoreCase);
+                    txtReportSinRiesgo.IsOn = ObjTransactionMasterDetailCredit is not null && ObjTransactionMasterDetailCredit.Reference2!.Equals("true", StringComparison.InvariantCultureIgnoreCase);
                     TxtStatusOldId = ObjTransactionMaster.StatusId;
                     TxtStatusId = ObjTransactionMaster.StatusId;
                     txtSubTotal.Text = @"0.0";
@@ -2635,7 +2648,7 @@ namespace v4posme_window.Views
             var formTypeListSearch = new FormTypeListSearch("Lista de Productos", ObjComponentItem!.ComponentId,
                 "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
                 @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}",
-                false, "", 0, Convert.ToInt32(ObjParameterCantidadItemPoup!), "",false);
+                false, "", 0, Convert.ToInt32(ObjParameterCantidadItemPoup!), "", false);
             formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarItem;
             formTypeListSearch.ShowDialog(this);
         }
@@ -2845,7 +2858,7 @@ namespace v4posme_window.Views
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            
+            _objParameterAll = _objInterfazCoreWebParameter.GetParameterAll(VariablesGlobales.Instance.User.CompanyId);
             if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
             {
                 LoadEdit();
@@ -2859,41 +2872,39 @@ namespace v4posme_window.Views
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            // Ocultar el mensaje de carga
-            if (progressPanel.Visible)
+            if (e.Error is not null)
             {
-                progressPanel.Visible = false;
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", e.Error.Message, this);
             }
-
-            // Verificar si hubo algún error durante la carga de datos
-            if (e.Error != null)
+            else if (e.Cancelled)
             {
-                MessageBox.Show($"Error al cargar datos: {e.Error.Message}");
-                return;
+                //se canceló por el usuario
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Warning, "Error", "Operación cancelada por el usuario", this);
             }
-
-            // Actualizar la interfaz de usuario con los datos cargados
-            if (progressPanel.Visible)
+            else
             {
-                progressPanel.Visible = false;
-            }
+                // Aquí puedes actualizar otros controles con los datos cargados
+                if (TypeOpen == TypeOpenForm.Init)
+                {
+                    PreRender();
+                }
 
-            // Aquí puedes actualizar otros controles con los datos cargados
-            if (TypeOpen == TypeOpenForm.Init)
-            {
-                PreRender();
-            }
+                if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
+                {
+                    LoadRender(TypeRender.Edit);
+                }
 
-            if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
-            {
-                LoadRender(TypeRender.Edit);
-            }
+                if (TypeOpen == TypeOpenForm.Init && TransactionMasterId == 0)
+                {
+                    gridViewTbTransactionMasterDetail.DataSource = null;
+                    _bindingListTransactionMasterDetail.Clear();
+                    LoadRender(TypeRender.New);
+                }
 
-            if (TypeOpen == TypeOpenForm.Init && TransactionMasterId == 0)
-            {
-                gridViewTbTransactionMasterDetail.DataSource = null;
-                _bindingListTransactionMasterDetail.Clear();
-                LoadRender(TypeRender.New);
+                if (progressPanel.Visible)
+                {
+                    progressPanel.Visible = false;
+                }
             }
         }
 
@@ -2917,6 +2928,14 @@ namespace v4posme_window.Views
             if (e.KeyCode == Keys.I)
             {
                 OpenCashbox();
+            }
+        }
+
+        private void txtReceiptAmountDol_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Tab)
+            {
+                btnRegistrar.Focus();
             }
         }
 
@@ -3209,16 +3228,15 @@ namespace v4posme_window.Views
         {
             if (e.Column.Name == colAccionPrecios.Name)
             {
-                RepositoryItemComboBox? buttonEdit = e.RepositoryItem as RepositoryItemComboBox;
-                if (buttonEdit == null) return;
+                if (e.RepositoryItem is not RepositoryItemComboBox buttonEdit) return;
                 if (gridViewValues.RowCount <= 0) return;
                 buttonEdit.Items.Clear();
-                var precio1 = gridViewValues.GetRowCellValue(e.RowHandle, colPrice).ToString();
-                var precio2 = gridViewValues.GetRowCellValue(e.RowHandle, colItemPrecio2).ToString();
-                var precio3 = gridViewValues.GetRowCellValue(e.RowHandle, colItemPrecio3).ToString();
-                var comboBoxItem1 = new ComboBoxItem("1", $"C$ {precio1}");
-                var comboBoxItem2 = new ComboBoxItem("2", $"C$ {precio2}");
-                var comboBoxItem3 = new ComboBoxItem("3", $"C$ {precio3}");
+                var precio1 = Convert.ToDecimal(gridViewValues.GetRowCellValue(e.RowHandle, colPrice).ToString());
+                var precio2 = Convert.ToDecimal(gridViewValues.GetRowCellValue(e.RowHandle, colItemPrecio2).ToString());
+                var precio3 = Convert.ToDecimal(gridViewValues.GetRowCellValue(e.RowHandle, colItemPrecio3).ToString());
+                var comboBoxItem1 = new ComboBoxItem("1", $"{precio1:C}");
+                var comboBoxItem2 = new ComboBoxItem("2", $"{precio2:C}");
+                var comboBoxItem3 = new ComboBoxItem("3", $"{precio3:C}");
                 buttonEdit.Items.AddRange([comboBoxItem1, comboBoxItem2, comboBoxItem3]);
                 repositoryItemComboBox2 = buttonEdit;
             }
@@ -3244,14 +3262,18 @@ namespace v4posme_window.Views
             {
                 progressPanel.Visible = true;
             }
-           TypeOpen= TypeOpenForm.Init;
+
+            TypeOpen = TypeOpenForm.Init;
             TransactionMasterId = 0;
-            backgroundWorker.RunWorkerAsync();
+            if (!backgroundWorker.IsBusy)
+            {
+                backgroundWorker.RunWorkerAsync();
+            }
         }
 
         private void barManager1_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var coreWebRenderInView = new CoreWebRenderInView();
+            backgroundWorker = new BackgroundWorker();
             if (e.Item.Name == btnActualizarCatalogo.Name)
             {
                 var formInvoiceApi = new FormInvoiceApi();
@@ -3266,6 +3288,7 @@ namespace v4posme_window.Views
                 {
                     progressPanel.Visible = true;
                 }
+
                 backgroundWorker.DoWork += (ob, ev) =>
                 {
                     ObjSELECCIONAR_ITEM_BILLING_BACKGROUND =
@@ -3277,7 +3300,15 @@ namespace v4posme_window.Views
                 };
                 backgroundWorker.RunWorkerCompleted += (ob, ev) =>
                 {
-                    if (progressPanel.Visible)
+                    if (ev.Error is not null)
+                    {
+                        _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", $"Se ha cancelado la operación actual. Error: {ev.Error.Message}", this);
+                    }
+                    else if (ev.Cancelled)
+                    {
+                        _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Warning, "Cancelado", "Se ha cancelado la operación actual", this);
+                    }
+                    else
                     {
                         progressPanel.Visible = false;
                     }
@@ -3290,7 +3321,31 @@ namespace v4posme_window.Views
 
             if (e.Item.Name == btnPrinterInvoice.Name)
             {
-                ComandPrinter();
+                if (!progressPanel.Visible)
+                {
+                    progressPanel.Visible = true;
+                }
+
+                backgroundWorker.DoWork += (ob, ev) => { ComandPrinter(); };
+                backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+                {
+                    if (ev.Error is not null)
+                    {
+                        _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", $"Se ha cancelado la operación actual. Error: {ev.Error.Message}", this);
+                    }
+                    else if (ev.Cancelled)
+                    {
+                        _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Warning, "Cancelado", "Se ha cancelado la operación actual", this);
+                    }
+                    else
+                    {
+                        progressPanel.Visible = false;
+                    }
+                };
+                if (!backgroundWorker.IsBusy)
+                {
+                    backgroundWorker.RunWorkerAsync();
+                }
             }
 
             if (e.Item.Name == btnInvoiceDelete.Name)
@@ -3307,12 +3362,11 @@ namespace v4posme_window.Views
                     {
                         progressPanel.Visible = true;
                     }
+
                     backgroundWorker.DoWork += (o, args) =>
                     {
-                        var objFormInvoiceBillingDelete = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, CompanyId!.Value, TransactionId!.Value, TransactionMasterId!.Value);
-                        objFormInvoiceBillingDelete.ComandDelete();
-                        //background
-                        
+                        //var objFormInvoiceBillingDelete = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, CompanyId!.Value, TransactionId!.Value, TransactionMasterId!.Value);
+                        ComandDelete();
                     };
                     backgroundWorker.RunWorkerCompleted += (o, args) =>
                     {
@@ -3321,29 +3375,42 @@ namespace v4posme_window.Views
                             _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", args.Error.Message, this);
                             return;
                         }
-                        LoadNew();
-                        LoadRender(TypeRender.New);
-                        if (progressPanel.Visible)
+
+                        if (args.Cancelled)
                         {
-                            progressPanel.Visible = false;
+                            _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "Se ha cancelado la operación actual", this);
+                        }
+                        else
+                        {
+                            Invoke(() =>
+                            {
+                                LoadNew();
+                                LoadRender(TypeRender.New);
+                                if (progressPanel.Visible)
+                                {
+                                    progressPanel.Visible = false;
+                                }
+                            });
                         }
                     };
-                    backgroundWorker.RunWorkerAsync();
+                    if (!backgroundWorker.IsBusy)
+                    {
+                        backgroundWorker.RunWorkerAsync();
+                    }
                 }
                 else
                 {
-                    coreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Eliminar", "No hay factura a eliminar", this);
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Eliminar", "No hay factura a eliminar", this);
                 }
             }
 
-            if (e.Item.Name==btnSeleccionarFactura.Name)
+            if (e.Item.Name == btnSeleccionarFactura.Name)
             {
                 var formTypeListSearch = new FormTypeListSearch("Lista de Facturas", ObjComponentTransactionBilling!.ComponentId,
                     "SELECCIONAR_BILLING_REGISTER", true,
-                    "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "",true);
+                    "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 5, "", true);
                 formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarSeleccoinDeFactura;
                 formTypeListSearch.ShowDialog(this);
-
             }
 
             if (e.Item.Name == btnRegresar.Name)
@@ -3362,7 +3429,7 @@ namespace v4posme_window.Views
                 }
             }
 
-            if (e.Item.Name==btnOpenCashdrawer.Name)
+            if (e.Item.Name == btnOpenCashdrawer.Name)
             {
                 OpenCashbox();
             }
@@ -3374,12 +3441,55 @@ namespace v4posme_window.Views
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            if (FnValidateFormAndSubmit())
+            try
             {
-                if (TransactionMasterId == 0)
-                    SaveInsert();
-                else
-                    SaveUpdate();
+                backgroundWorker = new BackgroundWorker();
+
+                if (FnValidateFormAndSubmit())
+                {
+                    if (!progressPanel.Visible)
+                    {
+                        progressPanel.Visible = true;
+                    }
+
+                    backgroundWorker.DoWork += (ob, ev) =>
+                    {
+                        if (TransactionMasterId == 0)
+                            SaveInsert();
+                        else
+                            SaveUpdate();
+                    };
+                    backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+                    {
+                        if (ev.Error is not null)
+                        {
+                            _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Registrar", $"No se registraron los valores. {ev.Error.Message}", this);
+                        }
+                        else if (ev.Cancelled)
+                        {
+                            //cancelado por el usuario   
+                            _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Registrar", "Se ha cancelado la operación actual. Linea 3424", this);
+                        }
+                        else
+                        {
+                            _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Registrar", "Se han registrdo los datos de forma correcta", this);
+                            if (progressPanel.Visible)
+                            {
+                                progressPanel.Visible = false;
+                            }
+                        }
+                    };
+
+                    if (!backgroundWorker.IsBusy)
+                    {
+                        backgroundWorker.RunWorkerAsync();
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", exception.Message, this);
             }
         }
 
@@ -3406,7 +3516,7 @@ namespace v4posme_window.Views
 
             var formTypeListSearch = new FormTypeListSearch("Lista de Cliente", ObjComponentCustomer!.ComponentId,
                 "SELECCIONAR_CLIENTES_BILLING", true,
-                "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 15, "",true);
+                "{warehouseID:4,listPriceID:12,typePriceID:154,currencyID:1}", false, "", 0, 15, "", true);
             formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarCusomter;
             formTypeListSearch.ShowDialog(this);
         }
@@ -3425,7 +3535,7 @@ namespace v4posme_window.Views
             var formTypeListSearch = new FormTypeListSearch("Lista de Productos", ObjComponentItem!.ComponentId,
                 "SELECCIONAR_ITEM_BILLING_POPUP_INVOICE", true,
                 @"{warehouseID:" + warehouseId + ", listPriceID:" + listPrice + ",typePriceID:" + typePriceId + ",currencyID:" + currencyIdKey + "}",
-                false, "", 0, 5, "",false);
+                false, "", 0, 5, "", false);
             formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarItem;
             formTypeListSearch.ShowDialog(this);
         }
@@ -3444,7 +3554,6 @@ namespace v4posme_window.Views
 
         private void EventoCallBackAceptarSeleccoinDeFactura(dynamic mensaje)
         {
-            
             WebToolsHelper objWebToolsHelper = new WebToolsHelper();
             CompanyId = Convert.ToInt32(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "companyID", "0"));
             TransactionId = Convert.ToInt32(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "transactionID", "0"));
@@ -3456,10 +3565,10 @@ namespace v4posme_window.Views
                     progressPanel.Size = Size;
                     progressPanel.Visible = true;
                 }
+
                 backgroundWorker.RunWorkerAsync();
             }
         }
-
 
 
         private void EventoCallBackAceptarItem(dynamic mensaje)

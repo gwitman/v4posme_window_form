@@ -128,7 +128,6 @@ namespace v4posme_window.Api
         }
         public DataTable? GetViewApi(int componentId,string viewName = "",string filter = "")
         {
-            
             var coreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
             var coreWebView = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
             var usuario = VariablesGlobales.Instance.User;

@@ -291,7 +291,7 @@
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Padding = new Padding(3, 0, 0, 0);
             lblTitulo.Size = new Size(258, 28);
-            lblTitulo.TabIndex = 0;
+            lblTitulo.TabIndex = 67;
             lblTitulo.Text = "Editar Factura No. # FAC00000001";
             lblTitulo.UseMnemonic = false;
             // 
@@ -418,7 +418,7 @@
             txtScanerCodigo.Location = new Point(50, 207);
             txtScanerCodigo.Name = "txtScanerCodigo";
             txtScanerCodigo.Size = new Size(250, 28);
-            txtScanerCodigo.TabIndex = 37;
+            txtScanerCodigo.TabIndex = 0;
             txtScanerCodigo.KeyDown += txtScanerCodigo_KeyDown;
             txtScanerCodigo.KeyPress += txtScanerCodigo_KeyPress;
             // 
@@ -442,7 +442,7 @@
             downButtonProducto.Location = new Point(652, 207);
             downButtonProducto.Name = "downButtonProducto";
             downButtonProducto.Size = new Size(108, 26);
-            downButtonProducto.TabIndex = 33;
+            downButtonProducto.TabIndex = 35;
             downButtonProducto.Text = "PRODUCTO";
             downButtonProducto.Click += downButtonProducto_Click;
             // 
@@ -453,7 +453,7 @@
             btnDeleteItem.Location = new Point(427, 207);
             btnDeleteItem.Name = "btnDeleteItem";
             btnDeleteItem.Size = new Size(108, 26);
-            btnDeleteItem.TabIndex = 32;
+            btnDeleteItem.TabIndex = 33;
             btnDeleteItem.Text = "ELIMINAR PRO";
             btnDeleteItem.Click += btnDeleteItem_Click;
             // 
@@ -464,7 +464,7 @@
             btnAddProduct.Location = new Point(315, 207);
             btnAddProduct.Name = "btnAddProduct";
             btnAddProduct.Size = new Size(108, 26);
-            btnAddProduct.TabIndex = 31;
+            btnAddProduct.TabIndex = 14;
             btnAddProduct.Text = "AGREGAR PRO";
             btnAddProduct.Click += btnAddProduct_Click;
             // 
@@ -476,7 +476,7 @@
             xtraTabControl.Name = "xtraTabControl";
             xtraTabControl.SelectedTabPage = tabInformacion;
             xtraTabControl.Size = new Size(1033, 154);
-            xtraTabControl.TabIndex = 29;
+            xtraTabControl.TabIndex = 80;
             xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { tabInformacion, tabReferencias, tabInfoCredito, tabMas });
             // 
             // tabInformacion
@@ -513,7 +513,7 @@
             txtCustomerCreditLineID.Name = "txtCustomerCreditLineID";
             txtCustomerCreditLineID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtCustomerCreditLineID.Size = new Size(253, 28);
-            txtCustomerCreditLineID.TabIndex = 34;
+            txtCustomerCreditLineID.TabIndex = 11;
             txtCustomerCreditLineID.SelectedIndexChanged += txtCustomerCreditLineID_SelectedIndexChanged;
             // 
             // labelCustomerCreditLineID
@@ -553,7 +553,7 @@
             btnSearchCustomer.Location = new Point(537, 9);
             btnSearchCustomer.Name = "btnSearchCustomer";
             btnSearchCustomer.Size = new Size(87, 26);
-            btnSearchCustomer.TabIndex = 21;
+            btnSearchCustomer.TabIndex = 7;
             btnSearchCustomer.Text = "Buscar";
             btnSearchCustomer.Click += btnSearchCustomer_Click;
             // 
@@ -561,6 +561,7 @@
             // 
             txtCustomerDescription.Location = new Point(411, 9);
             txtCustomerDescription.Name = "txtCustomerDescription";
+            txtCustomerDescription.Properties.ReadOnly = true;
             txtCustomerDescription.Size = new Size(118, 28);
             txtCustomerDescription.TabIndex = 19;
             // 
@@ -570,7 +571,7 @@
             txtCausalID.Name = "txtCausalID";
             txtCausalID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtCausalID.Size = new Size(253, 28);
-            txtCausalID.TabIndex = 15;
+            txtCausalID.TabIndex = 10;
             txtCausalID.SelectedValueChanged += txtCausalID_SelectedValueChanged;
             // 
             // txtReferenceClientIdentifier
@@ -578,14 +579,14 @@
             txtReferenceClientIdentifier.Location = new Point(411, 63);
             txtReferenceClientIdentifier.Name = "txtReferenceClientIdentifier";
             txtReferenceClientIdentifier.Size = new Size(253, 28);
-            txtReferenceClientIdentifier.TabIndex = 14;
+            txtReferenceClientIdentifier.TabIndex = 9;
             // 
             // txtReferenceClientName
             // 
             txtReferenceClientName.Location = new Point(411, 36);
             txtReferenceClientName.Name = "txtReferenceClientName";
             txtReferenceClientName.Size = new Size(253, 28);
-            txtReferenceClientName.TabIndex = 13;
+            txtReferenceClientName.TabIndex = 8;
             // 
             // labelControl5
             // 
@@ -633,7 +634,7 @@
             txtCurrencyID.Name = "txtCurrencyID";
             txtCurrencyID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtCurrencyID.Size = new Size(253, 28);
-            txtCurrencyID.TabIndex = 7;
+            txtCurrencyID.TabIndex = 12;
             txtCurrencyID.SelectedIndexChanged += txtCurrencyID_SelectedIndexChanged;
             // 
             // txtNote
@@ -730,14 +731,14 @@
             txtMesaID.Name = "txtMesaID";
             txtMesaID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtMesaID.Size = new Size(207, 28);
-            txtMesaID.TabIndex = 18;
+            txtMesaID.TabIndex = 57;
             // 
             // txtNumberPhone
             // 
             txtNumberPhone.Location = new Point(440, 54);
             txtNumberPhone.Name = "txtNumberPhone";
             txtNumberPhone.Size = new Size(207, 28);
-            txtNumberPhone.TabIndex = 17;
+            txtNumberPhone.TabIndex = 56;
             // 
             // txtEmployeeID
             // 
@@ -745,14 +746,14 @@
             txtEmployeeID.Name = "txtEmployeeID";
             txtEmployeeID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtEmployeeID.Size = new Size(207, 28);
-            txtEmployeeID.TabIndex = 16;
+            txtEmployeeID.TabIndex = 55;
             // 
             // txtReference3
             // 
             txtReference3.Location = new Point(440, 4);
             txtReference3.Name = "txtReference3";
             txtReference3.Size = new Size(207, 28);
-            txtReference3.TabIndex = 15;
+            txtReference3.TabIndex = 54;
             // 
             // labelControl14
             // 
@@ -802,7 +803,7 @@
             txtNextVisit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtNextVisit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtNextVisit.Size = new Size(207, 28);
-            txtNextVisit.TabIndex = 10;
+            txtNextVisit.TabIndex = 53;
             // 
             // labelControl13
             // 
@@ -820,7 +821,7 @@
             txtWarehouseID.Name = "txtWarehouseID";
             txtWarehouseID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtWarehouseID.Size = new Size(207, 28);
-            txtWarehouseID.TabIndex = 8;
+            txtWarehouseID.TabIndex = 52;
             txtWarehouseID.SelectedIndexChanged += txtWarehouseID_SelectedIndexChanged;
             // 
             // txtTypePriceID
@@ -829,7 +830,7 @@
             txtTypePriceID.Name = "txtTypePriceID";
             txtTypePriceID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtTypePriceID.Size = new Size(207, 28);
-            txtTypePriceID.TabIndex = 7;
+            txtTypePriceID.TabIndex = 51;
             txtTypePriceID.SelectedIndexChanged += txtTypePriceID_SelectedIndexChanged;
             // 
             // txtZoneID
@@ -838,7 +839,7 @@
             txtZoneID.Name = "txtZoneID";
             txtZoneID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtZoneID.Size = new Size(207, 28);
-            txtZoneID.TabIndex = 6;
+            txtZoneID.TabIndex = 50;
             // 
             // labelControl10
             // 
@@ -908,14 +909,14 @@
             txtPeriodPay.Name = "txtPeriodPay";
             txtPeriodPay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtPeriodPay.Size = new Size(223, 28);
-            txtPeriodPay.TabIndex = 21;
+            txtPeriodPay.TabIndex = 64;
             // 
             // txtReference2
             // 
             txtReference2.Location = new Point(557, 29);
             txtReference2.Name = "txtReference2";
             txtReference2.Size = new Size(223, 28);
-            txtReference2.TabIndex = 20;
+            txtReference2.TabIndex = 63;
             // 
             // labelControl24
             // 
@@ -937,7 +938,7 @@
             txtDateFirst.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("txtDateFirst.Properties.ContextImageOptions.SvgImage");
             txtDateFirst.Properties.ContextImageOptions.SvgImageSize = new Size(16, 16);
             txtDateFirst.Size = new Size(223, 28);
-            txtDateFirst.TabIndex = 18;
+            txtDateFirst.TabIndex = 62;
             // 
             // labelControl23
             // 
@@ -956,7 +957,7 @@
             txtReportSinRiesgo.Properties.OffText = "";
             txtReportSinRiesgo.Properties.OnText = "";
             txtReportSinRiesgo.Size = new Size(81, 24);
-            txtReportSinRiesgo.TabIndex = 16;
+            txtReportSinRiesgo.TabIndex = 65;
             // 
             // labelControl22
             // 
@@ -975,7 +976,7 @@
             txtDesembolsoEfectivo.Properties.OffText = "";
             txtDesembolsoEfectivo.Properties.OnText = "";
             txtDesembolsoEfectivo.Size = new Size(81, 24);
-            txtDesembolsoEfectivo.TabIndex = 14;
+            txtDesembolsoEfectivo.TabIndex = 61;
             // 
             // labelControl21
             // 
@@ -992,7 +993,7 @@
             txtFixedExpenses.Location = new Point(186, 52);
             txtFixedExpenses.Name = "txtFixedExpenses";
             txtFixedExpenses.Size = new Size(207, 28);
-            txtFixedExpenses.TabIndex = 12;
+            txtFixedExpenses.TabIndex = 60;
             // 
             // labelControl20
             // 
@@ -1010,7 +1011,7 @@
             txtIsApplied.Name = "txtIsApplied";
             txtIsApplied.Properties.Caption = "";
             txtIsApplied.Size = new Size(35, 22);
-            txtIsApplied.TabIndex = 10;
+            txtIsApplied.TabIndex = 59;
             // 
             // labelControl19
             // 
@@ -1028,7 +1029,7 @@
             txtReference1.Name = "txtReference1";
             txtReference1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtReference1.Size = new Size(207, 28);
-            txtReference1.TabIndex = 8;
+            txtReference1.TabIndex = 58;
             // 
             // labelControl18
             // 
@@ -1060,7 +1061,7 @@
             colQuantity.Name = "colQuantity";
             colQuantity.Visible = true;
             colQuantity.VisibleIndex = 3;
-            colQuantity.Width = 48;
+            colQuantity.Width = 50;
             // 
             // pictureEdit2
             // 
@@ -1106,9 +1107,11 @@
             txtTotal.Name = "txtTotal";
             txtTotal.Properties.Appearance.Options.UseTextOptions = true;
             txtTotal.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            txtTotal.Properties.ReadOnly = true;
             tablePanel2.SetRow(txtTotal, 2);
             txtTotal.Size = new Size(100, 28);
-            txtTotal.TabIndex = 38;
+            txtTotal.TabIndex = 32;
+            txtTotal.TabStop = false;
             // 
             // txtIva
             // 
@@ -1117,9 +1120,11 @@
             txtIva.Name = "txtIva";
             txtIva.Properties.Appearance.Options.UseTextOptions = true;
             txtIva.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            txtIva.Properties.ReadOnly = true;
             tablePanel2.SetRow(txtIva, 1);
             txtIva.Size = new Size(100, 28);
-            txtIva.TabIndex = 37;
+            txtIva.TabIndex = 31;
+            txtIva.TabStop = false;
             // 
             // txtSubTotal
             // 
@@ -1128,9 +1133,11 @@
             txtSubTotal.Name = "txtSubTotal";
             txtSubTotal.Properties.Appearance.Options.UseTextOptions = true;
             txtSubTotal.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            txtSubTotal.Properties.ReadOnly = true;
             tablePanel2.SetRow(txtSubTotal, 0);
             txtSubTotal.Size = new Size(100, 28);
-            txtSubTotal.TabIndex = 34;
+            txtSubTotal.TabIndex = 30;
+            txtSubTotal.TabStop = false;
             // 
             // labelControl39
             // 
@@ -1292,7 +1299,8 @@
             txtReceiptAmountPoint.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetRow(txtReceiptAmountPoint, 7);
             txtReceiptAmountPoint.Size = new Size(80, 28);
-            txtReceiptAmountPoint.TabIndex = 25;
+            txtReceiptAmountPoint.TabIndex = 29;
+            txtReceiptAmountPoint.TabStop = false;
             txtReceiptAmountPoint.EditValueChanged += txtReceiptAmountPoint_EditValueChanged;
             // 
             // txtReceiptAmountBankDol
@@ -1304,7 +1312,8 @@
             txtReceiptAmountBankDol.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetRow(txtReceiptAmountBankDol, 6);
             txtReceiptAmountBankDol.Size = new Size(80, 28);
-            txtReceiptAmountBankDol.TabIndex = 25;
+            txtReceiptAmountBankDol.TabIndex = 28;
+            txtReceiptAmountBankDol.TabStop = false;
             txtReceiptAmountBankDol.EditValueChanged += txtReceiptAmountBankDol_EditValueChanged;
             // 
             // txtReceiptAmountBank
@@ -1316,7 +1325,8 @@
             txtReceiptAmountBank.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetRow(txtReceiptAmountBank, 5);
             txtReceiptAmountBank.Size = new Size(80, 28);
-            txtReceiptAmountBank.TabIndex = 25;
+            txtReceiptAmountBank.TabIndex = 27;
+            txtReceiptAmountBank.TabStop = false;
             txtReceiptAmountBank.EditValueChanged += txtReceiptAmountBank_EditValueChanged;
             // 
             // txtReceiptAmountTarjetaDol
@@ -1328,7 +1338,8 @@
             txtReceiptAmountTarjetaDol.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetRow(txtReceiptAmountTarjetaDol, 4);
             txtReceiptAmountTarjetaDol.Size = new Size(80, 28);
-            txtReceiptAmountTarjetaDol.TabIndex = 25;
+            txtReceiptAmountTarjetaDol.TabIndex = 26;
+            txtReceiptAmountTarjetaDol.TabStop = false;
             txtReceiptAmountTarjetaDol.EditValueChanged += txtReceiptAmountTarjetaDol_EditValueChanged;
             // 
             // txtReceiptAmountTarjeta
@@ -1341,6 +1352,7 @@
             tablePanel1.SetRow(txtReceiptAmountTarjeta, 3);
             txtReceiptAmountTarjeta.Size = new Size(80, 28);
             txtReceiptAmountTarjeta.TabIndex = 25;
+            txtReceiptAmountTarjeta.TabStop = false;
             txtReceiptAmountTarjeta.EditValueChanged += txtReceiptAmountTarjeta_EditValueChanged;
             // 
             // txtReceiptAmountDol
@@ -1352,9 +1364,10 @@
             txtReceiptAmountDol.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetRow(txtReceiptAmountDol, 2);
             txtReceiptAmountDol.Size = new Size(80, 28);
-            txtReceiptAmountDol.TabIndex = 25;
+            txtReceiptAmountDol.TabIndex = 16;
             txtReceiptAmountDol.EditValueChanged += txtReceiptAmountDol_EditValueChanged;
             txtReceiptAmountDol.KeyDown += txtReceiptAmountDol_KeyDown;
+            txtReceiptAmountDol.KeyPress += txtReceiptAmountDol_KeyPress;
             txtReceiptAmountDol.PreviewKeyDown += txtReceiptAmountDol_PreviewKeyDown;
             // 
             // txtReceiptAmount
@@ -1366,7 +1379,7 @@
             txtReceiptAmount.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetRow(txtReceiptAmount, 1);
             txtReceiptAmount.Size = new Size(80, 28);
-            txtReceiptAmount.TabIndex = 25;
+            txtReceiptAmount.TabIndex = 15;
             txtReceiptAmount.EditValueChanged += txtReceiptAmount_EditValueChanged;
             txtReceiptAmount.KeyDown += txtReceiptAmount_KeyDown;
             txtReceiptAmount.KeyPress += txtReceiptAmount_KeyPress;
@@ -1378,9 +1391,10 @@
             txtChangeAmount.Name = "txtChangeAmount";
             txtChangeAmount.Properties.Appearance.Options.UseTextOptions = true;
             txtChangeAmount.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            txtChangeAmount.Properties.ReadOnly = true;
             tablePanel1.SetRow(txtChangeAmount, 0);
             txtChangeAmount.Size = new Size(80, 28);
-            txtChangeAmount.TabIndex = 24;
+            txtChangeAmount.TabIndex = 50;
             // 
             // labelControl36
             // 
@@ -1485,7 +1499,7 @@
             btnRegistrar.Location = new Point(411, 587);
             btnRegistrar.Name = "btnRegistrar";
             btnRegistrar.Size = new Size(127, 26);
-            btnRegistrar.TabIndex = 36;
+            btnRegistrar.TabIndex = 17;
             btnRegistrar.Text = "REGISTRAR";
             btnRegistrar.Click += btnRegistrar_Click;
             // 
@@ -1496,7 +1510,7 @@
             btnNew.Location = new Point(411, 618);
             btnNew.Name = "btnNew";
             btnNew.Size = new Size(127, 26);
-            btnNew.TabIndex = 35;
+            btnNew.TabIndex = 19;
             btnNew.Text = "NUEVA FAC";
             btnNew.Click += btnNew_Click;
             // 
@@ -1551,7 +1565,7 @@
             colItemNumber.OptionsColumn.AllowEdit = false;
             colItemNumber.Visible = true;
             colItemNumber.VisibleIndex = 0;
-            colItemNumber.Width = 104;
+            colItemNumber.Width = 109;
             // 
             // colTransactionDetailName
             // 
@@ -1561,7 +1575,7 @@
             colTransactionDetailName.Name = "colTransactionDetailName";
             colTransactionDetailName.Visible = true;
             colTransactionDetailName.VisibleIndex = 1;
-            colTransactionDetailName.Width = 516;
+            colTransactionDetailName.Width = 542;
             // 
             // colSkuFormatoDescripton
             // 
@@ -1571,7 +1585,7 @@
             colSkuFormatoDescripton.Name = "colSkuFormatoDescripton";
             colSkuFormatoDescripton.Visible = true;
             colSkuFormatoDescripton.VisibleIndex = 2;
-            colSkuFormatoDescripton.Width = 49;
+            colSkuFormatoDescripton.Width = 51;
             // 
             // colSku
             // 
@@ -1587,21 +1601,21 @@
             colPrice.AppearanceCell.Options.UseTextOptions = true;
             colPrice.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             colPrice.Caption = "Precio";
-            colPrice.DisplayFormat.FormatString = "N2";
+            colPrice.DisplayFormat.FormatString = "C";
             colPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             colPrice.FieldName = "Price";
             colPrice.MinWidth = 17;
             colPrice.Name = "colPrice";
             colPrice.Visible = true;
             colPrice.VisibleIndex = 4;
-            colPrice.Width = 49;
+            colPrice.Width = 51;
             // 
             // colSubTotal
             // 
             colSubTotal.AppearanceCell.Options.UseTextOptions = true;
             colSubTotal.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             colSubTotal.Caption = "Total";
-            colSubTotal.DisplayFormat.FormatString = "N2";
+            colSubTotal.DisplayFormat.FormatString = "C";
             colSubTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             colSubTotal.FieldName = "SubTotal";
             colSubTotal.MinWidth = 17;
@@ -1609,7 +1623,7 @@
             colSubTotal.OptionsColumn.AllowEdit = false;
             colSubTotal.Visible = true;
             colSubTotal.VisibleIndex = 5;
-            colSubTotal.Width = 47;
+            colSubTotal.Width = 55;
             // 
             // colAccionMas
             // 
@@ -1662,7 +1676,7 @@
             colAccionPrecios.Name = "colAccionPrecios";
             colAccionPrecios.Visible = true;
             colAccionPrecios.VisibleIndex = 8;
-            colAccionPrecios.Width = 54;
+            colAccionPrecios.Width = 58;
             // 
             // repositoryItemComboBox2
             // 
@@ -1750,7 +1764,7 @@
             progressPanel.Location = new Point(0, 0);
             progressPanel.Name = "progressPanel";
             progressPanel.Size = new Size(333, 7);
-            progressPanel.TabIndex = 47;
+            progressPanel.TabIndex = 70;
             progressPanel.Visible = false;
             // 
             // dropDownButton1
@@ -1761,7 +1775,7 @@
             dropDownButton1.Location = new Point(765, 207);
             dropDownButton1.Name = "dropDownButton1";
             dropDownButton1.Size = new Size(108, 26);
-            dropDownButton1.TabIndex = 52;
+            dropDownButton1.TabIndex = 36;
             dropDownButton1.Text = "IMPRIMIR";
             // 
             // popupImprimir
@@ -1777,7 +1791,7 @@
             btnAplicar.Location = new Point(411, 556);
             btnAplicar.Name = "btnAplicar";
             btnAplicar.Size = new Size(127, 26);
-            btnAplicar.TabIndex = 53;
+            btnAplicar.TabIndex = 18;
             btnAplicar.Text = "APLICAR";
             btnAplicar.Click += btnAplicar_Click;
             // 

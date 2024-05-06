@@ -13,7 +13,7 @@ class TransactionMasterDetailCreditModel : ITransactionMasterDetailCreditModel
         return add.Entity.TransactionMasterDetailCreditId;
     }
 
-    public void UpdateAppPosme(int transactionMasterDetailId, TbTransactionMasterDetailCredit data)
+    public void UpdateAppPosme(int transactionMasterDetailId, TbTransactionMasterDetailCredit? data)
     {
         using var context = new DataContext();
         var findDetailCredits = context.TbTransactionMasterDetailCredits
@@ -36,7 +36,7 @@ class TransactionMasterDetailCreditModel : ITransactionMasterDetailCreditModel
             .ExecuteDelete();
     }
 
-    public TbTransactionMasterDetailCredit GetRowByPk(int transactionMasterDetailId)
+    public TbTransactionMasterDetailCredit? GetRowByPk(int transactionMasterDetailId)
     {
         using var context = new DataContext();
         return context.TbTransactionMasterDetailCredits
