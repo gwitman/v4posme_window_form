@@ -69,19 +69,6 @@ namespace v4posme_window.Views
             btnSearchTransaction.Click += SearchTransactionMaster;
         }
 
-
-        private void FormInvoiceBillingList_Load(object sender, EventArgs e)
-        {
-            backgroundWorker.DoWork += BackgroundWorker_DoWork;
-            backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
-            progressPanel.Size = Size;
-            if (!progressPanel.Visible)
-            {
-                progressPanel.Visible = true;
-            }
-            backgroundWorker.RunWorkerAsync();
-        }
-
         private void FormInvoiceBillingList_Enter(object sender, EventArgs e)
         {
             //este evento es cada vez que el formulario tiene el focus
@@ -91,37 +78,49 @@ namespace v4posme_window.Views
             }
         }
 
-        private void BackgroundWorker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
+        private void FormInvoiceBillingList_Load(object sender, EventArgs e)
         {
-            // Ocultar el mensaje de carga
-            if (progressPanel.Visible)
+            backgroundWorker = new BackgroundWorker();            
+            backgroundWorker.DoWork += (ob, ev) =>
             {
-                progressPanel.Visible = false;
-            }
+                List();
+            };
+            backgroundWorker.RunWorkerCompleted += (obb, evb) =>
+            {
+                // Ocultar el mensaje de carga
+                if (progressPanel.Visible)
+                {
+                    progressPanel.Visible = false;
+                }
 
-            // Verificar si hubo algún error durante la carga de datos
-            if (e.Error is not null)
-            {
-                _coreWebRender.GetMessageAlert(TypeError.Error, "Error", $@"Error al cargar datos: {e.Error.Message}", this);
-                return;
-            }
+                // Verificar si hubo algún error durante la carga de datos
+                if (evb.Error is not null)
+                {
+                    _coreWebRender.GetMessageAlert(TypeError.Error, "Error", $@"Error al cargar datos: {evb.Error.Message}", this);
+                    return;
+                }
 
-            if (e.Cancelled)
+                if (evb.Cancelled)
+                {
+                    _coreWebRender.GetMessageAlert(TypeError.Error, "Error", $@"Operación cancelada por el usuario", this);
+                    return;
+                }
+
+                // Actualizar la interfaz de usuario con los datos cargados
+                PreRender();
+                RefreshData();
+            };
+            progressPanel.Size = Size;
+            if (!progressPanel.Visible)
             {
-                _coreWebRender.GetMessageAlert(TypeError.Error, "Error", $@"Operación cancelada por el usuario", this);
-                return;
+                progressPanel.Visible = true;
             }
-            // Actualizar la interfaz de usuario con los datos cargados
-            PreRender();
-            RefreshData();
+            backgroundWorker.RunWorkerAsync();
         }
 
-        private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs args)
-        {
-            List();
-        }
+        
 
-
+      
         public void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             CustomException.LogException(e.Exception);
@@ -225,12 +224,18 @@ namespace v4posme_window.Views
             {
                 progressPanel.Visible = true;
             }
-            var countRows = _gridViewData.SelectedRowsCount > 0;
-            var errorDelete = new Exception();
+            var countRows = _gridViewData!.SelectedRowsCount > 0;
+            if (!countRows)
+            {
+                _coreWebRender.GetMessageAlert(TypeError.Error, @"Error eliminando", "Debe seleccionar un registro", this);
+                return;
+            }
+            
+
             backgroundWorker=new BackgroundWorker();
             backgroundWorker.DoWork += (ob, ev) =>
             {
-                if (!countRows) return;
+                
                 var rowIndex = _gridViewData.GetSelectedRows();
                 foreach (var indexRow in rowIndex)
                 {
@@ -244,34 +249,30 @@ namespace v4posme_window.Views
             };
             
             backgroundWorker.RunWorkerCompleted += (ob, ev) =>
-            {
-                if (!countRows)
-                {
-                    _coreWebRender.GetMessageAlert(TypeError.Error, @"Error eliminando", "Debe seleccionar un registro", this);
-                    return;
-                }
+            {   
                 if (ev.Error is not null)
                 {
                     _coreWebRender.GetMessageAlert(TypeError.Error, "Error", ev.Error.Message, this);
+
                 }else if (ev.Cancelled)
                 {
-                    //evento cancelado
+                    
                 }
                 else
                 {
-                    Invoke(() =>
+                    
+                    List();
+                    RefreshData();
+                    if (progressPanel.Visible)
                     {
-                        List();
-                        RefreshData();
-                        if (progressPanel.Visible)
-                        {
-                            progressPanel.Visible = false;
-                        }
-                    });
+                        progressPanel.Visible = false;
+                    }
+                    
                 }
 
                
             };
+
             if (backgroundWorker.IsBusy) return;
             backgroundWorker.RunWorkerAsync();
         }
@@ -286,9 +287,7 @@ namespace v4posme_window.Views
                     var companyId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "companyID").ToString());
                     var transactionId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionID").ToString());
                     var transactionMasterId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionMasterID").ToString());
-                    var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
-
-
+                    
                     var formInvoiceBillingEdit = new FormInvoiceBillingEdit(
                             TypeOpenForm.Init, companyId, transactionId,
                             transactionMasterId)
