@@ -72,6 +72,7 @@ namespace v4posme_window.Template
             if (ShowRow) ShowViewByNamePaginate();
 
             ObjGridControl.KeyDown += GridView_KeyDown!;
+            txtFilter.SelectAll();
             txtFilter.Focus();
             ((GridView)ObjGridControl.MainView).OptionsView.ShowGroupPanel = false;
             ((GridView)ObjGridControl.MainView).OptionsBehavior.Editable = false;

@@ -590,7 +590,7 @@ namespace v4posme_window.Views
                 var printerName = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT", companyID);
                 var pathOfLogo = VariablesGlobales.ConfigurationBuilder["PATH_FILE_OF_APP_ROOT"];
                 var printer = new Printer(printerName!.Value);
-                //var printer = new Printer("Two Pilots Demo Printer"); //para prueba
+                
                 printer.AlignCenter();
                 if (objParameterCompanyLogo is not null)
                 {
@@ -607,43 +607,49 @@ namespace v4posme_window.Views
                 printer.Append($"RUC: {objParameterRuc}");
                 printer.BoldMode("FACTURA");
                 printer.Append(objTm.TransactionNumber);
-                printer.Append($"FECHA: {objTm.CreatedOn.Value:yyyy-M-d hh:mm:ss t z} ");
+                printer.Append($"FECHA: {objTm.CreatedOn.Value:yyyy-M-d hh:mm:ss tt} ");
                 printer.Separator();
                 printer.AlignLeft();
                 var datos = $"""
-                             Vendedor: {objUserCreated.Nickname}
-                             Codigo:   {objCustomer.CustomerNumber}
-                             Tipo:     {objTipo.Name}
-                             Estado:   {objStage.First().Name}
-                             Moneda:   {objCurrency.Name}
+                             VENDEDOR: {objUserCreated.Nickname}
+                             CODIGO:   {objCustomer.CustomerNumber}
+                             TIPO:     {objTipo.Name}
+                             ESTADO:   {objStage.First().Name}
+                             MONEDA:   {objCurrency.Name}
                              """;
                 printer.Append(datos);
-                printer.Append("Cliente");
+                printer.Append("CLIENTE");
                 printer.Append($"{objCustomer.FirstName} {objCustomer.LastName}");
+                printer.Append(" ");
                 printer.Append($"{objTm.Note}");
-                //printer.Append("123456789123456789123456789123456789123456789123");
+                printer.Append(" ");
                 printer.Append("PRODUCTO               CANT            TOTAL");
-                printer.CondensedMode(PrinterModeState.On);
+                //printer.CondensedMode(PrinterModeState.On);
                 foreach (var detailDto in objTmd)
                 {
-                    var subTotal = detailDto.Quantity * detailDto.UnitaryAmount;
-                    var detail = $"""
-                                  {detailDto.ItemNameLog}
-                                                       {detailDto.Quantity!.Value:N2}          {subTotal!.Value:C}
-                                  """;
+                    printer.AlignLeft();
+                    printer.Append($"{detailDto.ItemNameLog}");
+
+                    printer.AlignRight();
+                    var subTotal    = detailDto.Quantity * detailDto.UnitaryAmount;
+                    var detail      = $"{detailDto.Quantity!.Value:N2}          {subTotal!.Value:C}";
                     printer.Append(detail);
-                    //printer.Append("123456789123456789123456789123456789123456789123");
+                    
                 }
 
-                printer.CondensedMode(PrinterModeState.Off);
+                //printer.CondensedMode(PrinterModeState.Off);
                 printer.Separator();
-                printer.Append($"TOTAL: {objTm.Amount}");
-                printer.Append($"RECIBIDO: {objTmi.ReceiptAmount}");
-                printer.Append($"CAMBIO: {objTmi.ChangeAmount}");
+                printer.AlignLeft();
+                var totalstring = $"""
+                                   TOTAL:      {objTm!.Amount!.Value:C}
+                                   RECIBIDO:   {objTmi!.ReceiptAmount!.Value:C}
+                                   CAMBIO:     {objTmi.ChangeAmount:C}
+                                   """;
+                printer.Append(totalstring);
                 printer.Separator();
                 printer.AlignCenter();
                 printer.Append(objCompany.Address);
-                printer.Append($"Tel.: {objParameterTelefono.Value}");
+                printer.Append($"Tel.: {objParameterTelefono!.Value}");
                 printer.FullPaperCut();
                 printer.PrintDocument();
             }
