@@ -1063,7 +1063,7 @@
             colQuantity.Name = "colQuantity";
             colQuantity.Visible = true;
             colQuantity.VisibleIndex = 3;
-            colQuantity.Width = 50;
+            colQuantity.Width = 80;
             // 
             // pictureEdit2
             // 
@@ -1577,7 +1577,7 @@
             colTransactionDetailName.Name = "colTransactionDetailName";
             colTransactionDetailName.Visible = true;
             colTransactionDetailName.VisibleIndex = 1;
-            colTransactionDetailName.Width = 542;
+            colTransactionDetailName.Width = 10;
             // 
             // colSkuFormatoDescripton
             // 
@@ -1588,7 +1588,7 @@
             colSkuFormatoDescripton.OptionsColumn.AllowEdit = false;
             colSkuFormatoDescripton.Visible = true;
             colSkuFormatoDescripton.VisibleIndex = 2;
-            colSkuFormatoDescripton.Width = 51;
+            colSkuFormatoDescripton.Width = 80;
             // 
             // colSku
             // 
@@ -1597,7 +1597,7 @@
             colSku.MinWidth = 17;
             colSku.Name = "colSku";
             colSku.OptionsColumn.AllowEdit = false;
-            colSku.Width = 38;
+            colSku.Width = 50;
             // 
             // colPrice
             // 
@@ -1611,7 +1611,7 @@
             colPrice.Name = "colPrice";
             colPrice.Visible = true;
             colPrice.VisibleIndex = 4;
-            colPrice.Width = 51;
+            colPrice.Width = 80;
             // 
             // colSubTotal
             // 
@@ -1626,7 +1626,7 @@
             colSubTotal.OptionsColumn.AllowEdit = false;
             colSubTotal.Visible = true;
             colSubTotal.VisibleIndex = 5;
-            colSubTotal.Width = 55;
+            colSubTotal.Width = 80;
             // 
             // colAccionMas
             // 

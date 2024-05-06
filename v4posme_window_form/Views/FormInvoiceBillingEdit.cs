@@ -325,13 +325,12 @@ namespace v4posme_window.Views
 
         private async void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
         {
+            
+
             backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += (ob, ev) =>
             {
-                if (TypeOpen == TypeOpenForm.Init)
-                {
-                    PreRender();
-                }
+                
                 if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
                 {
                     LoadEdit();
@@ -355,7 +354,12 @@ namespace v4posme_window.Views
                 }
                 else
                 {
-                    
+
+                    if (TypeOpen == TypeOpenForm.Init)
+                    {
+                        PreRender();
+                    }
+
                     if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
                     {
                         LoadRender(TypeRender.Edit);
