@@ -52,7 +52,7 @@
             panelControl1.Location = new Point(0, 0);
             panelControl1.Name = "panelControl1";
             panelControl1.Size = new Size(686, 56);
-            panelControl1.TabIndex = 0;
+            panelControl1.TabIndex = 6;
             // 
             // stackPanel1
             // 
@@ -65,11 +65,12 @@
             stackPanel1.Name = "stackPanel1";
             stackPanel1.Padding = new Padding(2);
             stackPanel1.Size = new Size(675, 48);
-            stackPanel1.TabIndex = 0;
+            stackPanel1.TabIndex = 5;
             stackPanel1.UseSkinIndents = true;
             // 
             // simpleButton2
             // 
+            simpleButton2.AllowFocus = false;
             simpleButton2.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
             simpleButton2.Appearance.ForeColor = Color.White;
             simpleButton2.Appearance.Options.UseBackColor = true;
@@ -85,6 +86,7 @@
             // 
             // btnAceptar
             // 
+            btnAceptar.AllowFocus = false;
             btnAceptar.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Success;
             btnAceptar.Appearance.ForeColor = Color.White;
             btnAceptar.Appearance.Options.UseBackColor = true;
@@ -109,6 +111,7 @@
             // 
             // btnAtras
             // 
+            btnAtras.AllowFocus = false;
             btnAtras.Appearance.BackColor = Color.Salmon;
             btnAtras.Appearance.ForeColor = Color.White;
             btnAtras.Appearance.Options.UseBackColor = true;
@@ -125,6 +128,7 @@
             // 
             // btnSiguiente
             // 
+            btnSiguiente.AllowFocus = false;
             btnSiguiente.Appearance.BackColor = Color.Salmon;
             btnSiguiente.Appearance.ForeColor = Color.White;
             btnSiguiente.Appearance.Options.UseBackColor = true;
@@ -144,14 +148,14 @@
             centerPane.Dock = DockStyle.Fill;
             centerPane.Location = new Point(0, 56);
             centerPane.Name = "centerPane";
-            centerPane.Size = new Size(686, 324);
-            centerPane.TabIndex = 1;
+            centerPane.Size = new Size(686, 322);
+            centerPane.TabIndex = 7;
             // 
             // FormTypeListSearch
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(686, 380);
+            ClientSize = new Size(686, 378);
             Controls.Add(centerPane);
             Controls.Add(panelControl1);
             IconOptions.Icon = (Icon)resources.GetObject("FormTypeListSearch.IconOptions.Icon");

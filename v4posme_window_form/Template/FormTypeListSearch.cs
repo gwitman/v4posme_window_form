@@ -56,7 +56,10 @@ namespace v4posme_window.Template
             SSearch = sSearch;
             TitleWindow = title;
             PageCurrent = 0;
-            ObjGridControl = new GridControl();
+            ObjGridControl = new GridControl
+            {
+                TabIndex = 8
+            };
             _gridView=ObjGridControl.MainView as GridView;
             ShowRow = showRow;
             InitializeComponent();
@@ -70,12 +73,11 @@ namespace v4posme_window.Template
             ObjGridControl.Parent = controlParent;
             ObjGridControl.Dock = DockStyle.Fill;
             if (ShowRow) ShowViewByNamePaginate();
-
             ObjGridControl.KeyDown += GridView_KeyDown!;
-            txtFilter.SelectAll();
-            txtFilter.Focus();
             ((GridView)ObjGridControl.MainView).OptionsView.ShowGroupPanel = false;
             ((GridView)ObjGridControl.MainView).OptionsBehavior.Editable = false;
+            txtFilter.SelectAll();
+            txtFilter.Focus();
         }
 
 

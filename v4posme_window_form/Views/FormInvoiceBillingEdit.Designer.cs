@@ -410,7 +410,7 @@
             svgImageBox1.Name = "svgImageBox1";
             svgImageBox1.Size = new Size(32, 24);
             svgImageBox1.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("svgImageBox1.SvgImage");
-            svgImageBox1.TabIndex = 40;
+            svgImageBox1.TabIndex = 81;
             svgImageBox1.Text = "svgImageBox1";
             // 
             // txtScanerCodigo
@@ -636,6 +636,8 @@
             txtCurrencyID.Size = new Size(253, 28);
             txtCurrencyID.TabIndex = 12;
             txtCurrencyID.SelectedIndexChanged += txtCurrencyID_SelectedIndexChanged;
+            txtCurrencyID.KeyDown += txtCurrencyID_KeyDown;
+            txtCurrencyID.KeyPress += txtCurrencyID_KeyPress;
             // 
             // txtNote
             // 
@@ -1583,6 +1585,7 @@
             colSkuFormatoDescripton.FieldName = "SkuFormatoDescription";
             colSkuFormatoDescripton.MinWidth = 17;
             colSkuFormatoDescripton.Name = "colSkuFormatoDescripton";
+            colSkuFormatoDescripton.OptionsColumn.AllowEdit = false;
             colSkuFormatoDescripton.Visible = true;
             colSkuFormatoDescripton.VisibleIndex = 2;
             colSkuFormatoDescripton.Width = 51;

@@ -50,6 +50,7 @@ namespace v4posme_window.Views
         private static readonly int? PermissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
         private static readonly string? UrlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
         private TableCompanyDataViewDto? _dataViewData;
+        private GridView? _gridViewData=null;
 
         public FormInvoiceBillingList()
         {
@@ -78,7 +79,6 @@ namespace v4posme_window.Views
             {
                 progressPanel.Visible = true;
             }
-
             backgroundWorker.RunWorkerAsync();
         }
 
@@ -102,21 +102,16 @@ namespace v4posme_window.Views
             // Verificar si hubo algún error durante la carga de datos
             if (e.Error is not null)
             {
-                MessageBox.Show($"Error al cargar datos: {e.Error.Message}");
+                _coreWebRender.GetMessageAlert(TypeError.Error, "Error", $@"Error al cargar datos: {e.Error.Message}", this);
                 return;
             }
 
             if (e.Cancelled)
             {
+                _coreWebRender.GetMessageAlert(TypeError.Error, "Error", $@"Operación cancelada por el usuario", this);
                 return;
             }
             // Actualizar la interfaz de usuario con los datos cargados
-            if (progressPanel.Visible)
-            {
-                progressPanel.Visible = false;
-            }
-
-            // Aquí puedes actualizar otros controles con los datos cargados
             PreRender();
             RefreshData();
         }
@@ -212,7 +207,9 @@ namespace v4posme_window.Views
         private void RefreshData()
         {
             CoreWebRenderInView.RenderGrid(_dataViewData!, "invoice", ObjGridControl);
-            ObjGridControl.MainView.RefreshData();
+            _gridViewData = (GridView)ObjGridControl.MainView;
+            _gridViewData.RefreshData();
+            _gridViewData.Columns.ForEach(column => column.OptionsColumn.ReadOnly=true);
             ObjGridControl.Refresh();
         }
 
@@ -228,20 +225,18 @@ namespace v4posme_window.Views
             {
                 progressPanel.Visible = true;
             }
-
-            var gridView = (GridView)ObjGridControl.MainView;
-            var countRows = gridView.SelectedRowsCount > 0;
+            var countRows = _gridViewData.SelectedRowsCount > 0;
             var errorDelete = new Exception();
             backgroundWorker=new BackgroundWorker();
             backgroundWorker.DoWork += (ob, ev) =>
             {
                 if (!countRows) return;
-                var rowIndex = gridView.GetSelectedRows();
+                var rowIndex = _gridViewData.GetSelectedRows();
                 foreach (var indexRow in rowIndex)
                 {
-                    var companyId = Convert.ToInt32(gridView.GetRowCellValue(indexRow, "companyID").ToString());
-                    var transactionId = Convert.ToInt32(gridView.GetRowCellValue(indexRow, "transactionID").ToString());
-                    var transactionMasterId = Convert.ToInt32(gridView.GetRowCellValue(indexRow, "transactionMasterID").ToString());
+                    var companyId = Convert.ToInt32(_gridViewData.GetRowCellValue(indexRow, "companyID").ToString());
+                    var transactionId = Convert.ToInt32(_gridViewData.GetRowCellValue(indexRow, "transactionID").ToString());
+                    var transactionMasterId = Convert.ToInt32(_gridViewData.GetRowCellValue(indexRow, "transactionMasterID").ToString());
                     var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
                     objFormInvoiceBillingEdit.ComandDelete();
                     

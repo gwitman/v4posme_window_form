@@ -129,7 +129,6 @@ namespace v4posme_window.Views
 
         #region Properties
 
-        
         private IBindingList _bindingListTransactionMasterDetail = new BindingList<FormInvoiceBillingEditDetailDTO>();
         private string? ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE { get; set; }
         private string? objCompanyParameter_Key_INVOICE_BILLING_CREDIT { get; set; }
@@ -293,7 +292,7 @@ namespace v4posme_window.Views
 
         private const string FormatDecimal = "N2";
 
-        private BackgroundWorker backgroundWorker=null;
+        private BackgroundWorker backgroundWorker = null;
         private Dictionary<string, string?> _objParameterAll;
 
         #endregion
@@ -310,7 +309,6 @@ namespace v4posme_window.Views
             TransactionId = transactionId;
             TransactionMasterId = transactionMasterId;
             TypeOpen = typeOpen;
-            
         }
 
 
@@ -327,7 +325,6 @@ namespace v4posme_window.Views
 
         private async void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
         {
-            txtScanerCodigo.Focus();
             backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += BackgroundWorker_DoWork!;
             backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted!;
@@ -511,8 +508,6 @@ namespace v4posme_window.Views
                     _objInterfazTransactionMasterModel.DeleteAppPosme(objUser.CompanyId, objTm.TransactionId, objTm.TransactionMasterId);
                     _objInterfazTransactionMasterDetailModel.DeleteWhereTm(objUser.CompanyId, objTm.TransactionId, objTm.TransactionMasterId);
                 }
-
-                
             }
             catch (Exception ex)
             {
@@ -588,7 +583,7 @@ namespace v4posme_window.Views
                 var printerName = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT", companyID);
                 var pathOfLogo = VariablesGlobales.ConfigurationBuilder["PATH_FILE_OF_APP_ROOT"];
                 var printer = new Printer(printerName!.Value);
-                
+
                 printer.AlignCenter();
                 if (objParameterCompanyLogo is not null)
                 {
@@ -629,10 +624,9 @@ namespace v4posme_window.Views
                     printer.Append($"{detailDto.ItemNameLog}");
 
                     printer.AlignRight();
-                    var subTotal    = detailDto.Quantity * detailDto.UnitaryAmount;
-                    var detail      = $"{detailDto.Quantity!.Value:N2}          {subTotal!.Value:C}";
+                    var subTotal = detailDto.Quantity * detailDto.UnitaryAmount;
+                    var detail = $"{detailDto.Quantity!.Value:N2}          {subTotal!.Value:C}";
                     printer.Append(detail);
-                    
                 }
 
                 //printer.CondensedMode(PrinterModeState.Off);
@@ -2909,6 +2903,8 @@ namespace v4posme_window.Views
                 {
                     progressPanel.Visible = false;
                 }
+
+                txtScanerCodigo.Focus();
             }
         }
 
@@ -2937,10 +2933,15 @@ namespace v4posme_window.Views
 
         private void txtReceiptAmountDol_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Tab)
+            switch (e.KeyChar)
             {
-                btnRegistrar.Focus();
+                case (char)Keys.Tab:
+                case (char)Keys.Enter:
+                    btnRegistrar.Focus();
+                    break;
             }
+
+            e.Handled = true;
         }
 
         private void txtScanerCodigo_KeyPress(object sender, KeyPressEventArgs e)
@@ -3108,11 +3109,15 @@ namespace v4posme_window.Views
 
         private void txtReceiptAmountDol_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode != Keys.Enter)
+            switch (e.KeyCode)
             {
-                return;
+                case Keys.Enter:
+                case Keys.Tab:
+                    btnRegistrar.Focus();
+                    break;
             }
 
+            e.Handled = true;
         }
 
         private void txtReceiptAmountDol_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -3120,7 +3125,7 @@ namespace v4posme_window.Views
             if (e.Control && e.KeyCode == Keys.A)
             {
                 var workflowStage = ObjListWorkflowStage!.Where(c => c.Aplicable!.Value).FirstOrDefault();
-                TxtStatusId = workflowStage!.WorkflowStageId;                
+                TxtStatusId = workflowStage!.WorkflowStageId;
             }
 
             if (e.Control && e.KeyCode == Keys.B)
@@ -3166,13 +3171,39 @@ namespace v4posme_window.Views
             {
                 var rowIndex = gridViewValues.GetSelectedRows().ToList();
                 foreach (var indexRow in rowIndex)
-                {   
+                {
                     gridViewValues.DeleteRow(indexRow);
                 }
 
                 FnRefrechDetail();
                 FnRecalculateDetail(true, "");
             }
+        }
+
+        private void txtCurrencyID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            switch (e.KeyChar)
+            {
+                case (char)Keys.Enter:
+                case (char)Keys.Tab:
+                    txtScanerCodigo.Focus();
+                    break;
+            }
+
+            e.Handled = true;
+        }
+
+        private void txtCurrencyID_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                case Keys.Tab:
+                    txtScanerCodigo.Focus();
+                    break;
+            }
+
+            e.Handled = true;
         }
 
         private void gridViewValues_CellValueChanged(object sender, CellValueChangedEventArgs e)
@@ -3311,6 +3342,7 @@ namespace v4posme_window.Views
                     }
                     else
                     {
+                        _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Actualizar Catálogo", "Se ha actualizado el catálogo de forma correcta", this);
                         progressPanel.Visible = false;
                     }
                 };
@@ -3340,6 +3372,7 @@ namespace v4posme_window.Views
                     }
                     else
                     {
+                        _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Imprimir", "Se ha enviado a la impresora de forma correcta", this);
                         progressPanel.Visible = false;
                     }
                 };
@@ -3359,38 +3392,32 @@ namespace v4posme_window.Views
 
                 if (TransactionMasterId > 0)
                 {
+                    backgroundWorker = new BackgroundWorker();
                     if (!progressPanel.Visible)
                     {
                         progressPanel.Visible = true;
                     }
 
-                    backgroundWorker.DoWork += (o, args) =>
-                    {   
-                        ComandDelete();
-                    };
+                    backgroundWorker.DoWork += (o, args) => { ComandDelete(); };
                     backgroundWorker.RunWorkerCompleted += (o, args) =>
                     {
                         if (args.Error is not null)
                         {
                             _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", args.Error.Message, this);
-                            return;
-                        }
-
-                        if (args.Cancelled)
+                        }else if (args.Cancelled)
                         {
                             _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "Se ha cancelado la operación actual", this);
                         }
                         else
                         {
-                            Invoke(() =>
+                            LoadNew();
+                            LoadRender(TypeRender.New);
+                            if (progressPanel.Visible)
                             {
-                                LoadNew();
-                                LoadRender(TypeRender.New);
-                                if (progressPanel.Visible)
-                                {
-                                    progressPanel.Visible = false;
-                                }
-                            });
+                                progressPanel.Visible = false;
+                            }
+
+                            _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Eliminar", "Se ha eliminado la factura de forma correcta", this);
                         }
                     };
                     if (!backgroundWorker.IsBusy)
@@ -3495,14 +3522,48 @@ namespace v4posme_window.Views
 
         private void btnAplicar_Click(object sender, EventArgs e)
         {
+            backgroundWorker = new BackgroundWorker();
             if (FnValidateFormAndSubmit())
             {
-                if (TransactionMasterId == 0)
-                    SaveInsert();
-                else
+                if (!progressPanel.Visible)
                 {
-                    TxtStatusId = (int)WorkflowStatus.FacturaStatusAplicado;
-                    SaveUpdate();
+                    progressPanel.Visible = true;
+                }
+
+                backgroundWorker.DoWork += (ob, ev) =>
+                {
+                    if (TransactionMasterId == 0)
+                        SaveInsert();
+                    else
+                    {
+                        TxtStatusId = (int)WorkflowStatus.FacturaStatusAplicado;
+                        SaveUpdate();
+                    }
+                };
+                backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+                {
+                    if (ev.Error is not null)
+                    {
+                        _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Registrar", $"No se registraron los valores. {ev.Error.Message}", this);
+                    }
+                    else if (ev.Cancelled)
+                    {
+                        //cancelado por el usuario   
+                        _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Registrar", "Se ha cancelado la operación actual. Linea 3424", this);
+                    }
+                    else
+                    {
+                        _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Registrar", "Se han registrdo los datos de forma correcta", this);
+                        if (progressPanel.Visible)
+                        {
+                            progressPanel.Visible = false;
+                        }
+                    }
+                };
+
+                if (!backgroundWorker.IsBusy)
+                {
+                    backgroundWorker.RunWorkerAsync();
                 }
             }
         }
