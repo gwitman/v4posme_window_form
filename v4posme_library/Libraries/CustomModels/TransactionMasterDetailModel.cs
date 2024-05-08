@@ -4,6 +4,7 @@ using System.Reflection.Metadata.Ecma335;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using MySqlX.XDevAPI.Common;
 using v4posme_library.Models;
 using v4posme_library.ModelsDto;
 
@@ -121,6 +122,14 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         };
         return result.First();
     }
+
+    public TbTransactionMasterDetail? GetRowByPKK(     int transactionMasterDetailId )
+    {
+        using var context = new DataContext();
+        var result = context.TbTransactionMasterDetails.FirstOrDefault(c => c.TransactionMasterDetailId == transactionMasterDetailId);
+        return result;
+    }
+
 
     public TbTransactionMasterDetailDto GetRowByTransactionAndItems(int companyId, int transactionId,
         int transactionMasterId,

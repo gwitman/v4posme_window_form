@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using System.ComponentModel.Design;
+using v4posme_library.Models;
 using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
@@ -242,11 +243,18 @@ public class CustomerModel : ICustomerModel
         return result.Single();
     }
 
-    public TbCustomer GetRowByPk(int companyId, int branchId, int entityId)
+    public TbCustomer? GetRowByPKK(int entityId)
     {
         using var context = new DataContext();
         return context.TbCustomers
-            .Single(customer => customer.CompanyId == companyId
+            .FirstOrDefault(customer =>  customer.EntityId == entityId);
+        
+    }
+    public TbCustomer? GetRowByPk(int companyId, int branchId, int entityId)
+    {
+        using var context = new DataContext();
+        return context.TbCustomers
+            .FirstOrDefault(customer => customer.CompanyId == companyId
                                 && customer.BranchId == branchId
                                 && customer.EntityId == entityId);
     }

@@ -125,6 +125,7 @@ namespace v4posme_window.Views
 
         private bool varPermisosEsPermitidoModificarPrecio;
         private bool varPermisosEsPermitidoModificarNombre;
+        private bool varPermisosEsPermitidoSeleccionarPrecioPublico;
         private bool varPermisosEsPermitidoSeleccionarPrecioMayor;
         private bool varPermisosEsPermitidoSeleccionarPrecioCredito;
         public List<TbMenuElement>? ObjListPermisos { get; set; }
@@ -281,11 +282,8 @@ namespace v4posme_window.Views
         private int? TxtStatusId { get; set; }
 
         private const string FormatDecimal = "N2";
-
         private BackgroundWorker? _backgroundWorker = null;
-        private Dictionary<string, string> ObjListParameterAll;
-
-        //private Dictionary<string, string?> _objParameterAll;
+        
 
         #endregion
 
@@ -318,8 +316,57 @@ namespace v4posme_window.Views
         private async void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
         {
             _backgroundWorker = new BackgroundWorker();
-            _backgroundWorker.DoWork += BackgroundWorker_DoWork!;
-            _backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted!;
+            _backgroundWorker.DoWork += (ob, ev) => {
+
+                if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
+                {
+                    LoadEdit();
+                }
+
+                if (TypeOpen == TypeOpenForm.Init && TransactionMasterId == 0)
+                {
+                    LoadNew();
+                }
+            };
+
+            _backgroundWorker.RunWorkerCompleted += (ob, ev) => {
+
+                if (ev.Error is not null)
+                {
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", ev.Error.Message, this);
+                }
+                else if (ev.Cancelled)
+                {
+                    //se canceló por el usuario
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Warning, "Error", "Operación cancelada por el usuario", this);
+                }
+                else
+                {
+                    // Aquí puedes actualizar otros controles con los datos cargados
+                    if (TypeOpen == TypeOpenForm.Init)
+                    {
+                        PreRender();
+                    }
+
+                    if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
+                    {
+                        LoadRender(TypeRender.Edit);
+                    }
+
+                    if (TypeOpen == TypeOpenForm.Init && TransactionMasterId == 0)
+                    {                        
+                        LoadRender(TypeRender.New);
+                    }
+
+                    if (progressPanel.Visible)
+                    {
+                        progressPanel.Visible = false;
+                    }
+
+                    
+                }
+
+            }; 
 
             if (!progressPanel.Visible)
             {
@@ -733,7 +780,7 @@ namespace v4posme_window.Views
                 var dateTimeNow = DateTime.Now;
                 var dateRatio = new DateOnly(dateTimeNow.Year, dateTimeNow.Month, dateTimeNow.Day);
                 ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, dateRatio, decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
-                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(ObjListParameterAll["INVOICE_TYPE_EMPLOYEER"]));
+                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(ObjParameterInvoiceTypeEmployer));
                 ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyId);
                 ObjCausal = _objInterfazTransactionCausalModel!.GetCausalByBranch(user.CompanyId, TransactionId!.Value, user.BranchId);
                 WarehouseId = ObjCausal.First()!.WarehouseSourceId;
@@ -760,6 +807,7 @@ namespace v4posme_window.Views
                 ObjListPermisos = VariablesGlobales.Instance.ListMenuHiddenPopup;
                 varPermisosEsPermitidoModificarPrecio = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_MODIFICAR_PRECIO_EN_FACTURACION") > 0;
                 varPermisosEsPermitidoModificarNombre = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_MODIFICAR_NOMBRE_EN_FACTURACION") > 0;
+                varPermisosEsPermitidoSeleccionarPrecioPublico = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PUBLICO") > 0;
                 varPermisosEsPermitidoSeleccionarPrecioMayor = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PORMAYOR") > 0;
                 varPermisosEsPermitidoSeleccionarPrecioCredito = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_CREDITO") > 0;
 
@@ -939,6 +987,7 @@ namespace v4posme_window.Views
                 ObjListPermisos = VariablesGlobales.Instance.ListMenuHiddenPopup;
                 varPermisosEsPermitidoModificarPrecio = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_MODIFICAR_PRECIO_EN_FACTURACION") > 0;
                 varPermisosEsPermitidoModificarNombre = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_MODIFICAR_NOMBRE_EN_FACTURACION") > 0;
+                varPermisosEsPermitidoSeleccionarPrecioPublico = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PUBLICO") > 0;
                 varPermisosEsPermitidoSeleccionarPrecioMayor = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PORMAYOR") > 0;
                 varPermisosEsPermitidoSeleccionarPrecioCredito = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_CREDITO") > 0;
             }
@@ -1114,10 +1163,8 @@ namespace v4posme_window.Views
                     ReceiptAmountCardBankId = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)txtReceiptAmountTarjeta_BankID.SelectedItem).Key),
                     ReceiptAmountCardBankDolId = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)txtReceiptAmountTarjetaDol_BankID.SelectedItem).Key)
                 };
-
                 objTmInfo.TransactionMasterInfoId = _objInterfazTransactionMasterInfoModel.InsertAppPosme(objTmInfo);
-
-                //ObjTransactionMasterInfo =ObjTransactionMasterInfo.ToDtoTbTransactionMasterInfo(objTmInfo) ;
+                
                 //Ingresar la configuracion de precios		
                 var amountTotal = decimal.Zero;
                 var tax1Total = decimal.Zero;
@@ -1173,7 +1220,7 @@ namespace v4posme_window.Views
                     var tax1 = price * ivaPercentage;
 
                     //Actualisar nombre 
-                    if (ObjListParameterAll["INVOICE_UPDATENAME_IN_TRANSACTION_ONLY"] == "false")
+                    if ( ObjParameterInvoiceUpitoal   ObjListParameterAll["INVOICE_UPDATENAME_IN_TRANSACTION_ONLY"] == "false")
                     {
                         var objItemNew = _objInterfazItemModel.GetRowByPk(user.CompanyId, itemId);
                         objItemNew.Name = itemNameDetail;
@@ -1377,7 +1424,6 @@ namespace v4posme_window.Views
                     throw new Exception("EL DOCUMENTO NO PUEDE ACTUALIZARCE, EL CICLO CONTABLE ESTA CERRADO");
                 }
 
-                //var objParameterAll = _objInterfazCoreWebParameter.GetParameterAll(user.CompanyId);
                 ObjParameterInvoiceBillingQuantityZero = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_QUANTITY_ZERO", user.CompanyId)!.Value;
                 ObjParameterImprimirPorCadaFactura = _objInterfazCoreWebParameter.GetParameter("INVOICE_PRINT_BY_INVOICE", user.CompanyId)!.Value;
                 var objParameterRegrearANuevo = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SAVE_AFTER_TO_ADD", user.CompanyId)!.Value;
@@ -1444,19 +1490,12 @@ namespace v4posme_window.Views
                 };
 
 
-                //El Estado solo permite editar el workflow
-                //using var dataContext = new DataContext();
+                //El Estado solo permite editar el workflow                
                 if (_objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing", "statusID", objTm.StatusId!.Value, commandEditable, user.CompanyId, user.BranchId, role.RoleId)!.Value)
                 {
-                    var tbTransactionMasterDto = _objInterfazTransactionMasterModel.GetRowByPk(user.CompanyId, TransactionId.Value, TransactionMasterId.Value);
-                    //var objTmFind = dataContext.TbTransactionMasters.First(u =>
-                    //    u.CompanyId == user.CompanyId &&
-                    //    u.TransactionId == TransactionId!.Value &&
-                    //    u.TransactionMasterId == TransactionMasterId!.Value
-                    //);
-                    var objTmFind = tbTransactionMasterDto.ToTbTransactionMasterInfo();
-                    objTmFind.StatusId = TxtStatusId;
-                    _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value, objTmFind);
+                    var tbTransactionMasterDto = _objInterfazTransactionMasterModel.GetRowByPKK( TransactionMasterId.Value);
+                    tbTransactionMasterDto.StatusId = TxtStatusId;
+                    _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value, tbTransactionMasterDto);
                 }
                 else
                 {
@@ -1594,7 +1633,7 @@ namespace v4posme_window.Views
                         unitaryCost = coreWebTransactionMasterDetail.GetCostCustomer(user.CompanyId, itemId.ToString(), unitaryCost, price);
 
                         // Actualizar nombre
-                        if (ObjListParameterAll["INVOICE_UPDATENAME_IN_TRANSACTION_ONLY"] == "false")
+                        if (ObjParameterInvoiceUpda  ObjListParameterAll["INVOICE_UPDATENAME_IN_TRANSACTION_ONLY"] == "false")
                         {
                             // Crear nuevo objeto de item
                             var objItemNew = _objInterfazItemModel.GetRowByPk(user.CompanyId, itemId);
@@ -1707,8 +1746,7 @@ namespace v4posme_window.Views
                         else
                         {
                             var objTmdc = _objInterfazTransactionMasterDetailCreditModel.GetRowByPk(transactionMasterDetailId);
-                            var objTmdNew = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterDetailModel>().GetRowByPk(objTm.CompanyId, TransactionId.Value, TransactionMasterId.Value, transactionMasterDetailId, objTm.ComponentId!.Value).TransactionMasterDetail();
-                            //var objTmdNew = dataContext.TbTransactionMasterDetails.FirstOrDefault(u => u.TransactionMasterDetailId == transactionMasterDetailId);
+                            var objTmdNew = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterDetailModel>().GetRowByPKK( transactionMasterDetailId);                            
                             if (objTmdNew is null) throw new Exception("No existe el objeto objTmdNew");
                             objTmdNew.Quantity = quantity * objItemSku.Value; // cantidad
                             objTmdNew.SkuQuantity = quantity; // cantidad
@@ -1787,7 +1825,7 @@ namespace v4posme_window.Views
                     //Acumular punto del cliente.
                     if (objTmInfoNew.ReceiptAmountPoint <= 0 && objTmNew.CurrencyId == ObjCurrencyCordoba.CurrencyId)
                     {
-                        var objCustomer = _objInterfazCustomerModel.GetRowByEntity(user.CompanyId, objTmNew.EntityId.Value).ToTbCustomer();
+                        var objCustomer = _objInterfazCustomerModel.GetRowByPKK(objTmNew.EntityId.Value);
                         objCustomer.BalancePoint = objCustomer.BalancePoint + amountTotal;
                         _objInterfazCustomerModel.UpdateAppPosme(objCustomer.CompanyId, objCustomer.BranchId, objCustomer.EntityId, objCustomer);
                     }
@@ -1795,7 +1833,7 @@ namespace v4posme_window.Views
                     //Es pago con punto restar puntos
                     if (objTmInfoNew.ReceiptAmountPoint > 0 && objTmNew.CurrencyId == ObjCurrencyCordoba.CurrencyId)
                     {
-                        var objCustomer = _objInterfazCustomerModel.GetRowByEntity(user.CompanyId, objTmNew.EntityId.Value).ToTbCustomer();
+                        var objCustomer = _objInterfazCustomerModel.GetRowByPKK(objTmNew.EntityId.Value);
                         objCustomer.BalancePoint = objCustomer.BalancePoint - objTmInfoNew.ReceiptAmountPoint;
                         _objInterfazCustomerModel.UpdateAppPosme(objCustomer.CompanyId, objCustomer.BranchId, objCustomer.EntityId, objCustomer);
                     }
@@ -2646,6 +2684,11 @@ namespace v4posme_window.Views
 
         public void FnClearData()
         {
+
+            gridViewTbTransactionMasterDetail.DataSource = null;
+            gridViewValues.RefreshData();
+            gridViewTbTransactionMasterDetail.RefreshDataSource();
+
             txtReceiptAmount.Text = "0";
             txtReceiptAmountDol.Text = "0";
             txtReceiptAmountBank.Text = "0";
@@ -2728,7 +2771,6 @@ namespace v4posme_window.Views
             };
             _bindingListTransactionMasterDetail.Add(billingEdit);
             FnRefrechDetail();
-
             FnGetConcept(itemID, "IVA");
         }
 
@@ -2813,36 +2855,50 @@ namespace v4posme_window.Views
             txtIva.Text = ivaGeneral.ToString(FormatDecimal);
             txtTotal.Text = totalGeneral.ToString(FormatDecimal);
 
+
             //Si es de credito que la factura no supere la linea de credito
-            var causalSelect = ((ComboBoxItem)txtCausalID.EditValue).Key; //$("#txtCausalID").val();
-            var customerCreditLineSelectedValue = txtCustomerCreditLineID.EditValue;
-            if (customerCreditLineSelectedValue is not null)
+            if (TransactionMasterId > 0)
             {
-                var customerCreditLineID = ((ComboBoxItem)customerCreditLineSelectedValue).Key; //$("#txtCustomerCreditLineID").val();
-                //var objCustomerCreditLine = ObjListCustomerCreditLine.First(dto => dto.CustomerCreditLineId == Convert.ToInt32(customerCreditLineID));
+                txtReceiptAmountDol.Text = @"0";
+                txtChangeAmount.Text = @"0";
+                txtReceiptAmountBank.Text = @"0";
+                txtReceiptAmountPoint.Text = @"0";
+                txtReceiptAmountTarjeta.Text = @"0";
+                txtReceiptAmountTarjetaDol.Text = @"0";
+                txtReceiptAmountBankDol.Text = @"0";
+                txtReceiptAmount.Text = @"0";
             }
-
-            var causalCredit = ParameterCausalTypeCredit.Value.Split(",");
-            var invoiceTypeCredit = false;
-
-            //Obtener si la factura es al credito						
-            foreach (var t in causalCredit)
+            else
             {
-                if (t == causalSelect)
+                var causalSelect = ((ComboBoxItem)txtCausalID.EditValue).Key;
+                var customerCreditLineSelectedValue = txtCustomerCreditLineID.EditValue;
+                if (customerCreditLineSelectedValue is not null)
                 {
-                    invoiceTypeCredit = true;
+                    var customerCreditLineID = ((ComboBoxItem)customerCreditLineSelectedValue).Key; //$("#txtCustomerCreditLineID").val();
+                                                                                                    //var objCustomerCreditLine = ObjListCustomerCreditLine.First(dto => dto.CustomerCreditLineId == Convert.ToInt32(customerCreditLineID));
                 }
+
+                var causalCredit = ParameterCausalTypeCredit.Value.Split(",");
+                var invoiceTypeCredit = false;
+
+                //Obtener si la factura es al credito						
+                foreach (var t in causalCredit)
+                {
+                    if (t == causalSelect)
+                    {
+                        invoiceTypeCredit = true;
+                    }
+                }
+
+                txtReceiptAmountDol.Text = @"0";
+                txtChangeAmount.Text = @"0";
+                txtReceiptAmountBank.Text = @"0";
+                txtReceiptAmountPoint.Text = @"0";
+                txtReceiptAmountTarjeta.Text = @"0";
+                txtReceiptAmountTarjetaDol.Text = @"0";
+                txtReceiptAmountBankDol.Text = @"0";
+                txtReceiptAmount.Text = invoiceTypeCredit ? @"0" : decimal.Round(totalGeneral, 2).ToString("N2");
             }
-
-            txtReceiptAmountDol.Text = @"0";
-            txtChangeAmount.Text = @"0";
-            txtReceiptAmountBank.Text = @"0";
-            txtReceiptAmountPoint.Text = @"0";
-            txtReceiptAmountTarjeta.Text = @"0";
-            txtReceiptAmountTarjetaDol.Text = @"0";
-            txtReceiptAmountBankDol.Text = @"0";
-
-            txtReceiptAmount.Text = invoiceTypeCredit ? @"0" : decimal.Round(totalGeneral, 2).ToString("N2");
         }
 
         public void FnGetCustomerClient(int entityID)
@@ -2857,59 +2913,9 @@ namespace v4posme_window.Views
 
         #region Eventos Formulario
 
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            ObjListParameterAll = VariablesGlobales.Instance.ObjListParameterAll;
-            if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
-            {
-                LoadEdit();
-            }
+      
 
-            if (TypeOpen == TypeOpenForm.Init && TransactionMasterId == 0)
-            {
-                LoadNew();
-            }
-        }
-
-        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Error is not null)
-            {
-                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", e.Error.Message, this);
-            }
-            else if (e.Cancelled)
-            {
-                //se canceló por el usuario
-                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Warning, "Error", "Operación cancelada por el usuario", this);
-            }
-            else
-            {
-                // Aquí puedes actualizar otros controles con los datos cargados
-                if (TypeOpen == TypeOpenForm.Init)
-                {
-                    PreRender();
-                }
-
-                if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
-                {
-                    LoadRender(TypeRender.Edit);
-                }
-
-                if (TypeOpen == TypeOpenForm.Init && TransactionMasterId == 0)
-                {
-                    gridViewTbTransactionMasterDetail.DataSource = null;
-                    _bindingListTransactionMasterDetail.Clear();
-                    LoadRender(TypeRender.New);
-                }
-
-                if (progressPanel.Visible)
-                {
-                    progressPanel.Visible = false;
-                }
-
-                txtScanerCodigo.Focus();
-            }
-        }
+        
 
         private void txtScanerCodigo_KeyDown(object sender, KeyEventArgs e)
         {
@@ -3322,20 +3328,17 @@ namespace v4posme_window.Views
                 }
 
                 _backgroundWorker.DoWork += (ob, ev) =>
-                {
-                    if (VariablesGlobales.Instance.ObjSELECCIONAR_ITEM_BILLING_BACKGROUND is null)
-                    {
-                        VariablesGlobales.Instance.ObjSELECCIONAR_ITEM_BILLING_BACKGROUND =
-                            formInvoiceApi.GetViewApi(
-                                ObjComponentItem!.ComponentId,
-                                @"SELECCIONAR_ITEM_BILLING_BACKGROUND",
-                                @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}"
-                            );
-                    }
-                    else
-                    {
-                        ObjSELECCIONAR_ITEM_BILLING_BACKGROUND = VariablesGlobales.Instance.ObjSELECCIONAR_ITEM_BILLING_BACKGROUND;
-                    }
+                {                    
+                    
+                    VariablesGlobales.Instance.ObjSELECCIONAR_ITEM_BILLING_BACKGROUND =
+                        formInvoiceApi.GetViewApi(
+                            ObjComponentItem!.ComponentId,
+                            @"SELECCIONAR_ITEM_BILLING_BACKGROUND",
+                            @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}"
+                        );
+                    
+                    ObjSELECCIONAR_ITEM_BILLING_BACKGROUND = VariablesGlobales.Instance.ObjSELECCIONAR_ITEM_BILLING_BACKGROUND;
+                    
                 };
                 _backgroundWorker.RunWorkerCompleted += (ob, ev) =>
                 {

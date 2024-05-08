@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Mysqlx.Crud;
+using System.ComponentModel.Design;
 using v4posme_library.Models;
 using v4posme_library.ModelsDto;
 
@@ -28,22 +29,21 @@ class TransactionMasterModel : ITransactionMasterModel
 
     public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, TbTransactionMaster data)
     {
-        using var context = new DataContext();
-        var config = new MapperConfiguration(cfg =>
-            cfg.CreateMap<TbTransactionMaster, TbTransactionMaster>()
-                .ForAllMembers(expression => expression.Condition((master, transactionMaster, srcMember) => srcMember != null)));
+        using var context = new DataContext();        
         var find = context.TbTransactionMasters
             .AsNoTracking()
             .FirstOrDefault(master => master.CompanyId == companyId
                                       && master.TransactionId == transactionId
                                       && master.TransactionMasterId == transactionMasterId);
+
         if (find is null) return;
+
         data.TransactionMasterId = find.TransactionMasterId;
         data.CompanyId = companyId;
         data.TransactionId = transactionId;
-        var mapper = new Mapper(config);
-        var dataUpdate = mapper.Map(data, find);
-        context.TbTransactionMasters.Update(dataUpdate);
+        
+        
+        context.TbTransactionMasters.Update(data);
         context.SaveChanges();
     }
 
@@ -110,6 +110,13 @@ class TransactionMasterModel : ITransactionMasterModel
         return result.First();
     }
 
+    public TbTransactionMaster? GetRowByPKK( int transactionMasterId)
+    {
+        using var context = new DataContext();
+        var result = context.TbTransactionMasters.FirstOrDefault(u => u.TransactionMasterId == transactionMasterId);
+        return result;
+    }
+
     public TbTransactionMaster GetRowByTransactionMasterId(int companyId, int transactionMasterId)
     {
         using var context = new DataContext();
@@ -118,6 +125,8 @@ class TransactionMasterModel : ITransactionMasterModel
                              && master.CompanyId == companyId
                              && master.TransactionMasterId == transactionMasterId);
     }
+
+    
 
     public TbTransactionMaster GetRowByTransactionNumber(int companyId, string transactionNumber)
     {

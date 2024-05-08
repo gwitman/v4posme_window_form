@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Mysqlx.Crud;
 using v4posme_library.Models;
-
 namespace v4posme_library.ModelsDto;
 
 public class TbCustomerDto()
@@ -48,10 +47,5 @@ public class TbCustomerDto()
     public byte[] PhoneNumber { get; set; }
     public int CustomerId { get; set; }
 
-    public TbCustomer ToTbCustomer()
-    {
-        var config = new MapperConfiguration(cfg => cfg.CreateMap<TbCustomer, TbCustomerDto>());
-        var mapper = new Mapper(config);
-        return mapper.Map<TbCustomer>(this);
-    }
+    
 }

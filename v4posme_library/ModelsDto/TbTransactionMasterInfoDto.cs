@@ -36,10 +36,5 @@ public class TbTransactionMasterInfoDto
     public string? ZonaName { get; set; }
     public string? MesaName { get; set; }
 
-    public TbTransactionMasterInfoDto ToDtoTbTransactionMasterInfo(TbTransactionMasterInfo info)
-    {
-        var config = new MapperConfiguration(cfg => cfg.CreateMap<TbTransactionMasterInfo, TbTransactionMasterInfoDto>());
-        var mapper = config.CreateMapper();
-        return mapper.Map<TbTransactionMasterInfoDto>(info);
-    }
+
 }

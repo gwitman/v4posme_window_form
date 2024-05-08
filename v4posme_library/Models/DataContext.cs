@@ -23,8 +23,7 @@ public partial class DataContext : DbContext
         if (optionsBuilder.IsConfigured) return;
         try
         {
-            var connectionString = VariablesGlobales.ConnectionString;
-            //optionsBuilder.UseMySQL(connectionString);
+            var connectionString = VariablesGlobales.ConnectionString;            
             optionsBuilder.UseMySql(connectionString,MySqlServerVersion.LatestSupportedServerVersion);
         }
         catch (Exception ex)

@@ -13,6 +13,8 @@ public interface ITransactionMasterDetailModel
     TbTransactionMasterDetailDto GetRowByPk(int companyId, int transactionId, int transactionMasterId,
         int transactionMasterDetailId, int componentId = 33);
 
+    TbTransactionMasterDetail? GetRowByPKK(int transactionMasterDetailId);
+
     TbTransactionMasterDetailDto GetRowByTransactionAndItems(int companyId, int transactionId,
         int transactionMasterId, List<int> listTmdId);
 

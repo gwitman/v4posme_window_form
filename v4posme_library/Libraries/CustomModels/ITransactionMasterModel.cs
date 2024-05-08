@@ -13,6 +13,7 @@ public interface ITransactionMasterModel
     
     
     TbTransactionMasterDto? GetRowByPk(int companyId, int transactionId, int transactionMasterId);
+    TbTransactionMaster? GetRowByPKK(int transactionMasterId);
     
     TbTransactionMaster GetRowByTransactionMasterId(int companyId,int transactionMasterId);
     

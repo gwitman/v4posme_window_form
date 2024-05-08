@@ -24,5 +24,6 @@ public interface ICustomerModel
 
     TbCustomerDto GetRowByEntity(int companyId, int entityId);
 
-    TbCustomer GetRowByPk(int companyId,int branchId,int entityId);
+    TbCustomer? GetRowByPk(int companyId,int branchId,int entityId);
+    TbCustomer? GetRowByPKK(int entityId);
 }

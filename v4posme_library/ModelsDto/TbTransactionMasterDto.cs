@@ -54,10 +54,5 @@ public record TbTransactionMasterDto()
     public int? EntityIdsecondary { get; set; }
     public string? NameStatus { get; set; }
 
-    public TbTransactionMaster ToTbTransactionMasterInfo()
-    {
-        var config = new MapperConfiguration(cfg => cfg.CreateMap<TbTransactionMaster, TbTransactionMasterDto>());
-        var mapper = config.CreateMapper();
-        return mapper.Map<TbTransactionMaster>(this);
-    }
+ 
 }
