@@ -12,4 +12,6 @@ public interface ITransactionMasterInfoModel
     void UpdateAppPosme(int companyId,int transactionId,int transactionMasterId,TbTransactionMasterInfo data);
     
     TbTransactionMasterInfoDto? GetRowByPk(int companyId, int transactionId, int transactionMasterId);
+
+    TbTransactionMasterInfo? GetRowByPkPk(int transactionMasterId);
 }

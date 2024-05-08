@@ -283,7 +283,6 @@ namespace v4posme_window.Views
 
         private const string FormatDecimal = "N2";
         private BackgroundWorker? _backgroundWorker = null;
-        
 
         #endregion
 
@@ -313,11 +312,11 @@ namespace v4posme_window.Views
         }
 
 
-        private async void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
+        private void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
         {
             _backgroundWorker = new BackgroundWorker();
-            _backgroundWorker.DoWork += (ob, ev) => {
-
+            _backgroundWorker.DoWork += (ob, ev) =>
+            {
                 if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
                 {
                     LoadEdit();
@@ -329,8 +328,8 @@ namespace v4posme_window.Views
                 }
             };
 
-            _backgroundWorker.RunWorkerCompleted += (ob, ev) => {
-
+            _backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+            {
                 if (ev.Error is not null)
                 {
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", ev.Error.Message, this);
@@ -354,7 +353,7 @@ namespace v4posme_window.Views
                     }
 
                     if (TypeOpen == TypeOpenForm.Init && TransactionMasterId == 0)
-                    {                        
+                    {
                         LoadRender(TypeRender.New);
                     }
 
@@ -362,11 +361,8 @@ namespace v4posme_window.Views
                     {
                         progressPanel.Visible = false;
                     }
-
-                    
                 }
-
-            }; 
+            };
 
             if (!progressPanel.Visible)
             {
@@ -918,6 +914,8 @@ namespace v4posme_window.Views
                     throw new Exception("NO EXISTE UNA LISTA DE PRECIO PARA SER APLICADA");
                 }
 
+                ObjParameterInvoiceTypeEmployer = _objInterfazCoreWebParameter.GetParameter("INVOICE_TYPE_EMPLOYEER", user.CompanyId)!.Value;
+                ObjParameterInvoiceBillingEmployeeDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_EMPLOYEE_DEFAULT", user.CompanyId)!.Value;
                 ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE = _objInterfazCoreWebParameter.GetParameter("INVOICE_VALIDATE_BALANCE", user.CompanyId)!.Value;
                 objCompanyParameter_Key_INVOICE_BILLING_CREDIT = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyId)!.Value;
                 ObjParameterInvoiceAutoApply = _objInterfazCoreWebParameter.GetParameter("INVOICE_AUTOAPPLY_CASH", user.CompanyId)!.Value;
@@ -1164,7 +1162,7 @@ namespace v4posme_window.Views
                     ReceiptAmountCardBankDolId = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)txtReceiptAmountTarjetaDol_BankID.SelectedItem).Key)
                 };
                 objTmInfo.TransactionMasterInfoId = _objInterfazTransactionMasterInfoModel.InsertAppPosme(objTmInfo);
-                
+
                 //Ingresar la configuracion de precios		
                 var amountTotal = decimal.Zero;
                 var tax1Total = decimal.Zero;
@@ -1432,31 +1430,30 @@ namespace v4posme_window.Views
                 var objParameterRegrearANuevo = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SAVE_AFTER_TO_ADD", user.CompanyId)!.Value;
 
                 //Actualizar Maestro
-                var typePriceId = Convert.ToInt32(((ComboBoxItem)txtTypePriceID.SelectedItem).Key);
+                var typePriceId = Convert.ToInt32(((ComboBoxItem)txtTypePriceID.EditValue).Key);
                 var objListPrice = _objInterfazListPriceModel.GetListPriceToApply(user.CompanyId);
-                var customerCreditlineIdEditValue = (ComboBoxItem)txtCustomerCreditLineID.SelectedItem; //esta dando null
-                var objTmNew = new TbTransactionMaster
-                {
-                    TransactionCausalId = Convert.ToInt32(((ComboBoxItem)txtCausalID.SelectedItem).Key),
-                    EntityId = TxtCustomerId,
-                    TransactionOn = DateTime.Now.Date,
-                    TransactionOn2 = txtDateFirst.DateTime,
-                    StatusIdchangeOn = DateTime.Now,
-                    Note = txtNote.Text,
-                    Reference1 = ((ComboBoxItem)txtReference1.SelectedItem).Key,
-                    DescriptionReference = "reference1:entityId del proveedor de credito para las facturas al credito,reference4: customerCreditLineId linea de credito del cliente",
-                    Reference2 = txtReference2.Text,
-                    Reference3 = txtReference3.Text,
-                    Reference4 = customerCreditlineIdEditValue is null ? "0" : customerCreditlineIdEditValue.Key,
-                    StatusId = TxtStatusId,
-                    Amount = 0,
-                    CurrencyId = Convert.ToInt32(((ComboBoxItem)txtCurrencyID.SelectedItem).Key),
-                    SourceWarehouseId = Convert.ToInt32(((ComboBoxItem)txtWarehouseID.SelectedItem).Key),
-                    PeriodPay = Convert.ToInt32(((ComboBoxItem)txtPeriodPay.SelectedItem).Key),
-                    NextVisit = txtNextVisit.DateTime,
-                    NumberPhone = txtNumberPhone.Text,
-                    EntityIdsecondary = Convert.ToInt32(((ComboBoxItem)txtEmployeeID.SelectedItem).Key)
-                };
+                var customerCreditlineIdEditValue = (ComboBoxItem)txtCustomerCreditLineID.EditValue; //esta dando null
+                var objTmNew = _objInterfazTransactionMasterModel.GetRowByPKK(TransactionMasterId.Value);
+                objTmNew.TransactionCausalId = Convert.ToInt32(((ComboBoxItem)txtCausalID.SelectedItem).Key);
+                objTmNew.EntityId = TxtCustomerId;
+                objTmNew.TransactionOn = DateTime.Now.Date;
+                objTmNew.TransactionOn2 = txtDateFirst.DateTime;
+                objTmNew.StatusIdchangeOn = DateTime.Now;
+                objTmNew.Note = txtNote.Text;
+                objTmNew.Reference1 = ((ComboBoxItem)txtReference1.SelectedItem).Key;
+                objTmNew.DescriptionReference = "reference1:entityId del proveedor de credito para las facturas al credito;reference4: customerCreditLineId linea de credito del cliente";
+                objTmNew.Reference2 = txtReference2.Text;
+                objTmNew.Reference3 = txtReference3.Text;
+                objTmNew.Reference4 = customerCreditlineIdEditValue is null ? "0" : customerCreditlineIdEditValue.Key;
+                objTmNew.StatusId = TxtStatusId;
+                objTmNew.Amount = 0;
+                objTmNew.CurrencyId = Convert.ToInt32(((ComboBoxItem)txtCurrencyID.SelectedItem).Key);
+                objTmNew.SourceWarehouseId = Convert.ToInt32(((ComboBoxItem)txtWarehouseID.SelectedItem).Key);
+                objTmNew.PeriodPay = Convert.ToInt32(((ComboBoxItem)txtPeriodPay.SelectedItem).Key);
+                objTmNew.NextVisit = txtNextVisit.DateTime;
+                objTmNew.NumberPhone = txtNumberPhone.Text;
+                objTmNew.EntityIdsecondary = Convert.ToInt32(((ComboBoxItem)txtEmployeeID.SelectedItem).Key);
+
                 objTmNew.CurrencyId2 = _objInterfazCoreWebCurrency.GetTarget(user.CompanyId, objTmNew.CurrencyId!.Value);
                 objTmNew.ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), 1, objTmNew.CurrencyId2!.Value, objTmNew.CurrencyId!.Value);
 
@@ -1464,39 +1461,41 @@ namespace v4posme_window.Views
                 var receiptAmountBankDolBankIdkey = txtReceiptAmountBankDol_BankID.SelectedItem is null ? "0" : ((ComboBoxItem)txtReceiptAmountBankDol_BankID.SelectedItem).Key;
                 var receiptAmountTajertaBankIdKey = txtReceiptAmountTarjeta_BankID.SelectedItem is null ? "0" : ((ComboBoxItem)txtReceiptAmountTarjeta_BankID.SelectedItem).Key;
                 var receiptAmountTarjetDolBankIdKey = txtReceiptAmountTarjetaDol_BankID.SelectedItem is null ? "0" : ((ComboBoxItem)txtReceiptAmountTarjetaDol_BankID.SelectedItem).Key;
-                var objTmInfoNew = new TbTransactionMasterInfo
-                {
-                    CompanyId = objTm.CompanyId,
-                    TransactionId = TransactionId.Value,
-                    TransactionMasterId = TransactionMasterId.Value,
-                    ZoneId = Convert.ToInt32(((ComboBoxItem)txtZoneID.SelectedItem).Key),
-                    MesaId = Convert.ToInt32(((ComboBoxItem)txtMesaID.SelectedItem).Key),
-                    RouteId = 0,
-                    ReferenceClientName = txtReferenceClientName.Text,
-                    ReferenceClientIdentifier = txtReferenceClientIdentifier.Text,
-                    ReceiptAmount = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmount.Text),
-                    ReceiptAmountDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountDol.Text),
-                    ReceiptAmountPoint = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountPoint.Text),
-                    ReceiptAmountBank = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBank.Text),
-                    ReceiptAmountBankDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBankDol.Text),
-                    ReceiptAmountCardDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjetaDol.Text),
-                    ReceiptAmountCard = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjeta.Text),
-                    ChangeAmount = WebToolsHelper.ConvertToNumber<decimal>(txtChangeAmount.Text),
-                    ReceiptAmountBankReference = txtReceiptAmountBank_Reference.Text,
-                    ReceiptAmountBankDolReference = txtReceiptAmountBankDol_Reference.Text,
-                    ReceiptAmountCardBankReference = txtReceiptAmountTarjeta_Reference.Text,
-                    ReceiptAmountCardBankDolReference = txtReceiptAmountTarjetaDol_Reference.Text,
-                    ReceiptAmountBankId = WebToolsHelper.ConvertToNumber<int>(receiptAmountBankBankIdkey),
-                    ReceiptAmountBankDolId = WebToolsHelper.ConvertToNumber<int>(receiptAmountBankDolBankIdkey),
-                    ReceiptAmountCardBankId = WebToolsHelper.ConvertToNumber<int>(receiptAmountTajertaBankIdKey),
-                    ReceiptAmountCardBankDolId = WebToolsHelper.ConvertToNumber<int>(receiptAmountTarjetDolBankIdKey)
-                };
-
+                var objTmInfoNew = _objInterfazTransactionMasterInfoModel.GetRowByPkPk(TransactionMasterId.Value);
+                objTmInfoNew.CompanyId = objTm.CompanyId;
+                objTmInfoNew.TransactionId = TransactionId.Value;
+                objTmInfoNew.TransactionMasterId = TransactionMasterId.Value;
+                objTmInfoNew.ZoneId = Convert.ToInt32(((ComboBoxItem)txtZoneID.SelectedItem).Key);
+                objTmInfoNew.MesaId = Convert.ToInt32(((ComboBoxItem)txtMesaID.SelectedItem).Key);
+                objTmInfoNew.RouteId = 0;
+                objTmInfoNew.ReferenceClientName = txtReferenceClientName.Text;
+                objTmInfoNew.ReferenceClientIdentifier = txtReferenceClientIdentifier.Text;
+                objTmInfoNew.ReceiptAmount = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmount.Text);
+                objTmInfoNew.ReceiptAmountDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountDol.Text);
+                objTmInfoNew.ReceiptAmountPoint = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountPoint.Text);
+                objTmInfoNew.ReceiptAmountBank = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBank.Text);
+                objTmInfoNew.ReceiptAmountBankDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBankDol.Text);
+                objTmInfoNew.ReceiptAmountCardDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjetaDol.Text);
+                objTmInfoNew.ReceiptAmountCard = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjeta.Text);
+                objTmInfoNew.ChangeAmount = WebToolsHelper.ConvertToNumber<decimal>(txtChangeAmount.Text);
+                objTmInfoNew.ReceiptAmountBankReference = txtReceiptAmountBank_Reference.Text;
+                objTmInfoNew.ReceiptAmountBankDolReference = txtReceiptAmountBankDol_Reference.Text;
+                objTmInfoNew.ReceiptAmountCardBankReference = txtReceiptAmountTarjeta_Reference.Text;
+                objTmInfoNew.ReceiptAmountCardBankDolReference = txtReceiptAmountTarjetaDol_Reference.Text;
+                objTmInfoNew.ReceiptAmountBankId = WebToolsHelper.ConvertToNumber<int>(receiptAmountBankBankIdkey);
+                objTmInfoNew.ReceiptAmountBankDolId = WebToolsHelper.ConvertToNumber<int>(receiptAmountBankDolBankIdkey);
+                objTmInfoNew.ReceiptAmountCardBankId = WebToolsHelper.ConvertToNumber<int>(receiptAmountTajertaBankIdKey);
+                objTmInfoNew.ReceiptAmountCardBankDolId = WebToolsHelper.ConvertToNumber<int>(receiptAmountTarjetDolBankIdKey);
 
                 //El Estado solo permite editar el workflow                
                 if (_objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing", "statusID", objTm.StatusId!.Value, commandEditable, user.CompanyId, user.BranchId, role.RoleId)!.Value)
                 {
-                    var tbTransactionMasterDto = _objInterfazTransactionMasterModel.GetRowByPKK( TransactionMasterId.Value);
+                    var tbTransactionMasterDto = _objInterfazTransactionMasterModel.GetRowByPKK(TransactionMasterId.Value);
+                    if (tbTransactionMasterDto is null)
+                    {
+                        throw new Exception("NO existe el transaction master a actualizar");
+                    }
+
                     tbTransactionMasterDto.StatusId = TxtStatusId;
                     _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyId, TransactionId!.Value, TransactionMasterId!.Value, tbTransactionMasterDto);
                 }
@@ -1755,7 +1754,7 @@ namespace v4posme_window.Views
                         else
                         {
                             var objTmdc = _objInterfazTransactionMasterDetailCreditModel.GetRowByPk(transactionMasterDetailId);
-                            var objTmdNew = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterDetailModel>().GetRowByPKK( transactionMasterDetailId);                            
+                            var objTmdNew = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterDetailModel>().GetRowByPKK(transactionMasterDetailId);
                             if (objTmdNew is null) throw new Exception("No existe el objeto objTmdNew");
                             objTmdNew.Quantity = quantity * objItemSku.Value; // cantidad
                             objTmdNew.SkuQuantity = quantity; // cantidad
@@ -2013,7 +2012,7 @@ namespace v4posme_window.Views
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e.ToString());
+                Debug.WriteLine(e);
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error Update", e.Message + e.Source, this);
             }
         }
@@ -2693,7 +2692,6 @@ namespace v4posme_window.Views
 
         public void FnClearData()
         {
-
             gridViewTbTransactionMasterDetail.DataSource = null;
             gridViewValues.RefreshData();
             gridViewTbTransactionMasterDetail.RefreshDataSource();
@@ -2884,7 +2882,7 @@ namespace v4posme_window.Views
                 if (customerCreditLineSelectedValue is not null)
                 {
                     var customerCreditLineID = ((ComboBoxItem)customerCreditLineSelectedValue).Key; //$("#txtCustomerCreditLineID").val();
-                                                                                                    //var objCustomerCreditLine = ObjListCustomerCreditLine.First(dto => dto.CustomerCreditLineId == Convert.ToInt32(customerCreditLineID));
+                    //var objCustomerCreditLine = ObjListCustomerCreditLine.First(dto => dto.CustomerCreditLineId == Convert.ToInt32(customerCreditLineID));
                 }
 
                 var causalCredit = ParameterCausalTypeCredit.Value.Split(",");
@@ -2921,10 +2919,6 @@ namespace v4posme_window.Views
 
 
         #region Eventos Formulario
-
-      
-
-        
 
         private void txtScanerCodigo_KeyDown(object sender, KeyEventArgs e)
         {
@@ -3337,17 +3331,15 @@ namespace v4posme_window.Views
                 }
 
                 _backgroundWorker.DoWork += (ob, ev) =>
-                {                    
-                    
+                {
                     VariablesGlobales.Instance.ObjSELECCIONAR_ITEM_BILLING_BACKGROUND =
                         formInvoiceApi.GetViewApi(
                             ObjComponentItem!.ComponentId,
                             @"SELECCIONAR_ITEM_BILLING_BACKGROUND",
                             @"{warehouseID:" + warehouseID_ + ", listPriceID:" + listPrice_ + ",typePriceID:" + typePrice_ + ",currencyID:" + currencyID_ + "}"
                         );
-                    
+
                     ObjSELECCIONAR_ITEM_BILLING_BACKGROUND = VariablesGlobales.Instance.ObjSELECCIONAR_ITEM_BILLING_BACKGROUND;
-                    
                 };
                 _backgroundWorker.RunWorkerCompleted += (ob, ev) =>
                 {

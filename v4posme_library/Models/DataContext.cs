@@ -258,7 +258,7 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<TbTransactionMasterDetailTemp> TbTransactionMasterDetailTemps { get; set; }
 
-    public virtual DbSet<TbTransactionMasterInfo> TbTransactionMasterInfoes { get; set; }
+    public virtual DbSet<TbTransactionMasterInfo?> TbTransactionMasterInfoes { get; set; }
 
     public virtual DbSet<TbTransactionMasterPurchase> TbTransactionMasterPurchases { get; set; }
 

@@ -82,4 +82,10 @@ class TransactionMasterInfoModel : ITransactionMasterInfoModel
             };
         return result.First();
     }
+
+    public TbTransactionMasterInfo? GetRowByPkPk(int transactionMasterId)
+    {
+        using var context = new DataContext();
+        return context.TbTransactionMasterInfoes.FirstOrDefault(master => master!.TransactionMasterId == transactionMasterId);
+    }
 }
