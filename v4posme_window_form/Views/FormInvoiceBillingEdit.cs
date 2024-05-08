@@ -283,6 +283,7 @@ namespace v4posme_window.Views
         private const string FormatDecimal = "N2";
 
         private BackgroundWorker? _backgroundWorker = null;
+        private Dictionary<string, string> ObjListParameterAll;
 
         //private Dictionary<string, string?> _objParameterAll;
 
@@ -739,7 +740,7 @@ namespace v4posme_window.Views
                 var dateTimeNow = DateTime.Now;
                 var dateRatio = new DateOnly(dateTimeNow.Year, dateTimeNow.Month, dateTimeNow.Day);
                 ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, dateRatio, decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
-                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(_objParameterAll["INVOICE_TYPE_EMPLOYEER"]));
+                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(ObjListParameterAll["INVOICE_TYPE_EMPLOYEER"]));
                 ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyId);
                 ObjCausal = _objInterfazTransactionCausalModel!.GetCausalByBranch(user.CompanyId, TransactionId!.Value, user.BranchId);
                 WarehouseId = ObjCausal.First()!.WarehouseSourceId;
@@ -2868,7 +2869,7 @@ namespace v4posme_window.Views
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            _objParameterAll = _objInterfazCoreWebParameter.GetParameterAll(VariablesGlobales.Instance.User.CompanyId);
+            ObjListParameterAll = VariablesGlobales.Instance.ObjListParameterAll;
             if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
             {
                 LoadEdit();
