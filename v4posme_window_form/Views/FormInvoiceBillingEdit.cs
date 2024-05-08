@@ -179,7 +179,7 @@ namespace v4posme_window.Views
 
         public string? ObjParameterInvoiceTypeEmployer { get; private set; }
         public string? ObjParameterInvoiceBillingEmployeeDefault { get; private set; }
-
+        public string? ObjParameterInvoiceUpdateNameInTransactionOnly { get; private set; }
         public string? ObjParameterobjParameterInvoiceBillingPrinterUrlBar { get; private set; }
 
         public string? ObjParameterInvoiceBillingPrinterDirectUrlBar { get; private set; }
@@ -1184,6 +1184,9 @@ namespace v4posme_window.Views
                 var objParameterUpdatePrice = _objInterfazCoreWebParameter.GetParameter("INVOICE_UPDATEPRICE_ONLINE", user.CompanyId);
                 var objUpdatePrice = objParameterUpdatePrice!.Value;
 
+                var ObjParameterUpdateNameInTransactionOnly = _objInterfazCoreWebParameter.GetParameter("INVOICE_UPDATENAME_IN_TRANSACTION_ONLY", user.CompanyId);
+                ObjParameterInvoiceUpdateNameInTransactionOnly = ObjParameterUpdateNameInTransactionOnly!.Value;
+
                 var rowCount = gridViewValues.RowCount;
                 for (var i = 0; i < rowCount; i++)
                 {
@@ -1220,7 +1223,7 @@ namespace v4posme_window.Views
                     var tax1 = price * ivaPercentage;
 
                     //Actualisar nombre 
-                    if ( ObjParameterInvoiceUpitoal   ObjListParameterAll["INVOICE_UPDATENAME_IN_TRANSACTION_ONLY"] == "false")
+                    if (ObjParameterInvoiceUpdateNameInTransactionOnly == "false")
                     {
                         var objItemNew = _objInterfazItemModel.GetRowByPk(user.CompanyId, itemId);
                         objItemNew.Name = itemNameDetail;
@@ -1586,9 +1589,15 @@ namespace v4posme_window.Views
                 var objParameterPriceDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_DEFAULT_PRICELIST", user.CompanyId);
                 var listPriceId = objParameterPriceDefault!.Value;
                 var objTipePrice = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_price", "typePriceID", user.CompanyId);
+
                 var objParameterUpdatePrice = _objInterfazCoreWebParameter.GetParameter("INVOICE_UPDATEPRICE_ONLINE", user.CompanyId);
                 var objUpdatePrice = objParameterUpdatePrice!.Value;
+
+                var ObjParameterUpdateName = _objInterfazCoreWebParameter.GetParameter("INVOICE_UPDATENAME_IN_TRANSACTION_ONLY", user.CompanyId);
+                ObjParameterInvoiceUpdateNameInTransactionOnly = ObjParameterUpdateName!.Value;
+
                 var objParameterAmortizationDuranteFactura = _objInterfazCoreWebParameter.GetParameter("INVOICE_PARAMTER_AMORITZATION_DURAN_INVOICE", user.CompanyId)!.Value;
+
                 decimal? amountTotal = decimal.Zero;
                 var tax1Total = decimal.Zero;
                 decimal subAmountTotal = 0;
@@ -1633,7 +1642,7 @@ namespace v4posme_window.Views
                         unitaryCost = coreWebTransactionMasterDetail.GetCostCustomer(user.CompanyId, itemId.ToString(), unitaryCost, price);
 
                         // Actualizar nombre
-                        if (ObjParameterInvoiceUpda  ObjListParameterAll["INVOICE_UPDATENAME_IN_TRANSACTION_ONLY"] == "false")
+                        if (ObjParameterInvoiceUpdateNameInTransactionOnly == "false")
                         {
                             // Crear nuevo objeto de item
                             var objItemNew = _objInterfazItemModel.GetRowByPk(user.CompanyId, itemId);
