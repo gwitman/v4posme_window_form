@@ -176,7 +176,8 @@ namespace v4posme_window.Views
 
         public string? ObjParameterInvoiceBillingSelectitem { get; private set; }
 
-        public Dictionary<string, string?> ObjListParameterAll { get; private set; }
+        public string? ObjParameterInvoiceTypeEmployer { get; private set; }
+        public string? ObjParameterInvoiceBillingEmployeeDefault { get; private set; }
 
         public string? ObjParameterobjParameterInvoiceBillingPrinterUrlBar { get; private set; }
 
@@ -703,6 +704,9 @@ namespace v4posme_window.Views
                     throw new Exception("NO EXISTE UNA LISTA DE PRECIO PARA SER APLICADA");
                 }
 
+                
+                ObjParameterInvoiceTypeEmployer = _objInterfazCoreWebParameter.GetParameter("INVOICE_TYPE_EMPLOYEER", user.CompanyId)!.Value;
+                ObjParameterInvoiceBillingEmployeeDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_EMPLOYEE_DEFAULT", user.CompanyId)!.Value;
 
                 var parameterValue = _objInterfazCoreWebParameter.GetParameter("INVOICE_BUTTOM_PRINTER_FIDLOCAL_PAYMENT_AND_AMORTIZACION", user.CompanyId);
                 ObjParameterInvoiceButtomPrinterFidLocalPaymentAndAmortization = parameterValue!.Value;
@@ -735,9 +739,9 @@ namespace v4posme_window.Views
                 var dateTimeNow = DateTime.Now;
                 var dateRatio = new DateOnly(dateTimeNow.Year, dateTimeNow.Month, dateTimeNow.Day);
                 ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, dateRatio, decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
-                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(ObjListParameterAll["INVOICE_TYPE_EMPLOYEER"]));
+                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(_objParameterAll["INVOICE_TYPE_EMPLOYEER"]));
                 ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyId);
-                ObjCausal = _objInterfazTransactionCausalModel.GetCausalByBranch(user.CompanyId, TransactionId!.Value, user.BranchId);
+                ObjCausal = _objInterfazTransactionCausalModel!.GetCausalByBranch(user.CompanyId, TransactionId!.Value, user.BranchId);
                 WarehouseId = ObjCausal.First()!.WarehouseSourceId;
                 ObjListWarehouse = _objInterfazUserWarehouseModel.GetRowByUserIdAndFacturable(user.CompanyId, user.UserId);
                 ObjCustomerDefault = _objInterfazCustomerModel.GetRowByCode(user.CompanyId, customerDefault!.Value);
@@ -896,7 +900,7 @@ namespace v4posme_window.Views
                 }
 
                 ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
-                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(ObjListParameterAll["INVOICE_TYPE_EMPLOYEER"]));
+                ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(ObjParameterInvoiceTypeEmployer));
                 ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyId);
                 ObjCausal = _objInterfazTransactionCausalModel.GetCausalByBranch(user.CompanyId, TransactionId.Value, user.BranchId);
                 WarehouseId = ObjCausal.First()!.WarehouseSourceId;
@@ -2030,7 +2034,8 @@ namespace v4posme_window.Views
             switch (typeRender)
             {
                 case TypeRender.New:
-                    var employerDefault = ObjListParameterAll["INVOICE_BILLING_EMPLOYEE_DEFAULT"];
+                    _bindingListTransactionMasterDetail.Clear();
+                    var employerDefault = ObjParameterInvoiceBillingEmployeeDefault;
                     if (employerDefault == "true")
                         CoreWebRenderInView.LlenarComboBox(ObjListEmployee, txtEmployeeID, "EntityId", "FirstName", ObjListEmployee.ElementAt(0).EntityId);
                     else
@@ -2088,6 +2093,8 @@ namespace v4posme_window.Views
                     btnAplicar.Visible = false;
                     break;
                 case TypeRender.Edit:
+                    _bindingListTransactionMasterDetail.Clear();
+
                     CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjTransactionMaster!.CurrencyId);
                     CoreWebRenderInView.LlenarComboBox(ObjListZone, txtZoneID, "CatalogItemId", "Name", ObjTransactionMasterInfo!.ZoneId);
                     CoreWebRenderInView.LlenarComboBox(ObjListWarehouse, txtWarehouseID, "WarehouseId", "Name", ObjTransactionMaster.SourceWarehouseId);
@@ -2195,6 +2202,9 @@ namespace v4posme_window.Views
             {
                 txtScanerCodigo.Focus();
             }
+
+
+            
         }
 
         public void FnEnviarFactura()
@@ -2858,7 +2868,7 @@ namespace v4posme_window.Views
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            ObjListParameterAll = VariablesGlobales.Instance.ObjListParameterAll;
+            _objParameterAll = _objInterfazCoreWebParameter.GetParameterAll(VariablesGlobales.Instance.User.CompanyId);
             if (TypeOpen == TypeOpenForm.Init && TransactionMasterId > 0)
             {
                 LoadEdit();
@@ -2896,6 +2906,8 @@ namespace v4posme_window.Views
 
                 if (TypeOpen == TypeOpenForm.Init && TransactionMasterId == 0)
                 {
+                    gridViewTbTransactionMasterDetail.DataSource = null;
+                    _bindingListTransactionMasterDetail.Clear();
                     LoadRender(TypeRender.New);
                 }
 
@@ -2904,7 +2916,6 @@ namespace v4posme_window.Views
                     progressPanel.Visible = false;
                 }
 
-                FnRefrechDetail();
                 txtScanerCodigo.Focus();
             }
         }
@@ -3348,6 +3359,7 @@ namespace v4posme_window.Views
                     else
                     {
                         _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Actualizar Catálogo", "Se ha actualizado el catálogo de forma correcta", this);
+                        txtScanerCodigo.Focus();
                         progressPanel.Visible = false;
                     }
                 };
