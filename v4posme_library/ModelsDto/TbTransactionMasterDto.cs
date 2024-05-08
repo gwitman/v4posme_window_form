@@ -1,4 +1,7 @@
-﻿namespace v4posme_library.ModelsDto;
+﻿using AutoMapper;
+using v4posme_library.Models;
+
+namespace v4posme_library.ModelsDto;
 
 public record TbTransactionMasterDto()
 {
@@ -50,4 +53,11 @@ public record TbTransactionMasterDto()
     public int? PrinterQuantity { get; set; }
     public int? EntityIdsecondary { get; set; }
     public string? NameStatus { get; set; }
+
+    public TbTransactionMaster ToTbTransactionMasterInfo()
+    {
+        var config = new MapperConfiguration(cfg => cfg.CreateMap<TbTransactionMaster, TbTransactionMasterDto>());
+        var mapper = config.CreateMapper();
+        return mapper.Map<TbTransactionMaster>(this);
+    }
 }

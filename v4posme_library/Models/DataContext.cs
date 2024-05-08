@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using v4posme_library.Libraries;
 
 namespace v4posme_library.Models;
@@ -18,7 +19,7 @@ public partial class DataContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        optionsBuilder.LogTo(Console.WriteLine);
+        optionsBuilder.LogTo(s => Debug.WriteLine(s));
         if (optionsBuilder.IsConfigured) return;
         try
         {

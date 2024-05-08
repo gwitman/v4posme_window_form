@@ -1,6 +1,10 @@
-﻿namespace v4posme_library.ModelsDto;
+﻿using AutoMapper;
+using Mysqlx.Crud;
+using v4posme_library.Models;
 
-public record TbTransactionMasterInfoDto()
+namespace v4posme_library.ModelsDto;
+
+public class TbTransactionMasterInfoDto
 {
     public int TransactionMasterInfoId { get; set; }
     public int CompanyId { get; set; }
@@ -31,4 +35,11 @@ public record TbTransactionMasterInfoDto()
     public string? Reference2 { get; set; }
     public string? ZonaName { get; set; }
     public string? MesaName { get; set; }
+
+    public TbTransactionMasterInfoDto ToDtoTbTransactionMasterInfo(TbTransactionMasterInfo info)
+    {
+        var config = new MapperConfiguration(cfg => cfg.CreateMap<TbTransactionMasterInfo, TbTransactionMasterInfoDto>());
+        var mapper = config.CreateMapper();
+        return mapper.Map<TbTransactionMasterInfoDto>(info);
+    }
 }

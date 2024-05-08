@@ -22,6 +22,14 @@ namespace v4posme_window.Libraries;
 
 public class CoreWebRenderInView
 {
+    private AlertControl _alert=new();
+
+    public CoreWebRenderInView()
+    {
+        _alert.AutoHeight = true;
+        _alert.AutoFormDelay = 2000;
+    }
+
     public static void LlenarComboBoxSetIndex(ComboBoxEdit comboBox, int indexValue)
     {
         for (var i = 0; i < comboBox.Properties.Items.Count; i++)
@@ -110,9 +118,12 @@ public class CoreWebRenderInView
         var table = FillGridControl(viewData);
         gridControl.DataSource = table;
         // Ajustar la configuración del GridView
-        var gridView = (GridView)gridControl.MainView;
-        gridView.BestFitColumns();
-        gridView.OptionsView.ShowGroupPanel = false;
+        var gridView = gridControl.MainView as GridView;
+        if (gridView is not null)
+        {
+            gridView.BestFitColumns();
+            gridView.OptionsView.ShowGroupPanel = false;
+        }
         var summaryColumns = dataViewDto.Config.SummaryColumns is null
             ? []
             : dataViewDto.Config.SummaryColumns.Split(",");
@@ -213,7 +224,6 @@ public class CoreWebRenderInView
 
     public void GetMessageAlert(TypeError type, string title, string body, Form form)
     {
-        var alert = new AlertControl();
         var image = type switch
         {
             TypeError.Informacion => Image.FromFile(
@@ -222,7 +232,7 @@ public class CoreWebRenderInView
             TypeError.Warning => Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_WARNING_PATH"]!),
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
-        alert.Show(form, title, body, image);
+        _alert.Show(form, title, body, image);
     }
 
     public static void RenderMenuLeft(List<TbMenuElement> data, AccordionControl menu)

@@ -1,6 +1,10 @@
-﻿namespace v4posme_library.ModelsDto;
+﻿using AutoMapper;
+using Mysqlx.Crud;
+using v4posme_library.Models;
 
-public record TbCustomerDto()
+namespace v4posme_library.ModelsDto;
+
+public class TbCustomerDto()
 {
     public string? CustomerNumber { get; set; }
     public string? FirstName { get; set; }
@@ -43,4 +47,11 @@ public record TbCustomerDto()
     public int? TypeFirm { get; set; }
     public byte[] PhoneNumber { get; set; }
     public int CustomerId { get; set; }
+
+    public TbCustomer ToTbCustomer()
+    {
+        var config = new MapperConfiguration(cfg => cfg.CreateMap<TbCustomer, TbCustomerDto>());
+        var mapper = new Mapper(config);
+        return mapper.Map<TbCustomer>(this);
+    }
 }

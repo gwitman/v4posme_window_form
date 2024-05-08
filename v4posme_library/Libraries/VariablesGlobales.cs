@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Data;
+using Microsoft.Extensions.Configuration;
 using Unity;
 using Unity.Lifetime;
 using v4posme_library.Libraries.CustomLibraries.Implementacion;
@@ -189,5 +190,8 @@ namespace v4posme_library.Libraries
         public int ViewData { get; set; }
 
         public DataContext DataContext => new();
+
+        public DataTable? ObjSELECCIONAR_ITEM_BILLING_BACKGROUND { get; set; }
+        public Dictionary<string, string?> ObjListParameterAll { get; set; }
     }
 }

@@ -207,7 +207,7 @@ namespace v4posme_window.Views
         private void RefreshData()
         {
             CoreWebRenderInView.RenderGrid(_dataViewData!, "invoice", ObjGridControl);
-            _gridViewData = (GridView)ObjGridControl.MainView;
+            _gridViewData = ObjGridControl.MainView as GridView;
             _gridViewData.RefreshData();
             _gridViewData.Columns.ForEach(column => column.OptionsColumn.ReadOnly=true);
             ObjGridControl.Refresh();
@@ -278,20 +278,17 @@ namespace v4posme_window.Views
 
         public void Edit(object? sender, EventArgs? args)
         {
-            if (((GridView)ObjGridControl.MainView).SelectedRowsCount > 0)
+            if ((_gridViewData).SelectedRowsCount > 0)
             {
-                var rowIndex = ((GridView)ObjGridControl.MainView).GetSelectedRows().ToList();
+                var rowIndex = (_gridViewData).GetSelectedRows().ToList();
                 foreach (var indexRow in rowIndex)
                 {
-                    var companyId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "companyID").ToString());
-                    var transactionId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionID").ToString());
-                    var transactionMasterId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionMasterID").ToString());
-                    var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
+                    var companyId = Convert.ToInt32((_gridViewData).GetRowCellValue(indexRow, "companyID").ToString());
+                    var transactionId = Convert.ToInt32((_gridViewData).GetRowCellValue(indexRow, "transactionID").ToString());
+                    var transactionMasterId = Convert.ToInt32((_gridViewData).GetRowCellValue(indexRow, "transactionMasterID").ToString());
+                    //var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
 
-
-                    var formInvoiceBillingEdit = new FormInvoiceBillingEdit(
-                            TypeOpenForm.Init, companyId, transactionId,
-                            transactionMasterId)
+                    var formInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.Init, companyId, transactionId, transactionMasterId)
                         { MdiParent = CoreFormList.Principal() };
                     formInvoiceBillingEdit.Show();
                     break;

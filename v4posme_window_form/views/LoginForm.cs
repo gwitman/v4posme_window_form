@@ -112,11 +112,11 @@ namespace v4posme_window.Views
                 }
 
                 if (VariablesGlobales.Instance.User is null) return;
-
                 //si existe el usuario
                 userTools.Log($@"Usuario logeado al sistema: {VariablesGlobales.Instance.User.Nickname}, {DateTime.Now.ToLongDateString()}");
 
                 var companyId = VariablesGlobales.Instance.User.CompanyId;
+                VariablesGlobales.Instance.ObjListParameterAll = coreWebParameter.GetParameterAll(companyId);
                 var parameterCantidadTransacciones = coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId).Value;
                 var parameterBalance = coreWebParameter.GetParameter("CORE_CUST_PRICE_BALANCE", companyId).Value;
                 var parameterSendBox = coreWebParameter.GetParameter("CORE_PAYMENT_SENDBOX", companyId).Value;
