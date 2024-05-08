@@ -17,6 +17,7 @@ using v4posme_window.Libraries;
 using v4posme_window.Template;
 using GridView = DevExpress.XtraGrid.Views.Grid.GridView;
 using System.ComponentModel;
+using System.Diagnostics;
 using DevExpress.Mvvm.Native;
 using v4posme_library.ModelsDto;
 
@@ -244,32 +245,30 @@ namespace v4posme_window.Views
                     var transactionMasterId = Convert.ToInt32(_gridViewData.GetRowCellValue(indexRow, "transactionMasterID").ToString());
                     var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
                     objFormInvoiceBillingEdit.ComandDelete();
-                    
                 }
             };
             
             backgroundWorker.RunWorkerCompleted += (ob, ev) =>
             {   
+                Debug.WriteLine(ev);
                 if (ev.Error is not null)
                 {
-                    _coreWebRender.GetMessageAlert(TypeError.Error, "Error", ev.Error.Message, this);
+                    _coreWebRender.GetMessageAlert(TypeError.Error, "Error Eliminar", $"Se ha producido un error al eliminar {ev.Error.Message}", this);
 
                 }else if (ev.Cancelled)
                 {
-                    
+                    _coreWebRender.GetMessageAlert(TypeError.Warning, "Eliminar", "Se ha cancelado la eliminación de la factura", this);
                 }
                 else
                 {
-                    
+                    _coreWebRender.GetMessageAlert(TypeError.Informacion, "Eliminar", "Se ha eliminado la factura de forma correcta", this);
                     List();
                     RefreshData();
                     if (progressPanel.Visible)
                     {
                         progressPanel.Visible = false;
                     }
-                    
                 }
-
                
             };
 

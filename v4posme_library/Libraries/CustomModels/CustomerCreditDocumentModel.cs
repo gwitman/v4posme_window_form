@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using v4posme_library.Models;
 using v4posme_library.ModelsDto;
 
@@ -200,7 +201,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                     DateFinish = null 
                 };
 
-            TbCustomerCreditDocumentDto objCustomerCreditDocumentDto = result.Single();
+            var objCustomerCreditDocumentDto = result.SingleOrDefault();
             if (objCustomerCreditDocumentDto is null)
                 objCustomerCreditDocumentDto = new TbCustomerCreditDocumentDto();
 
@@ -210,15 +211,14 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                                            select new { ccd };
 
 
-            if(objListCreditAmortiation is not null )
-                objCustomerCreditDocumentDto.DateApply = objListCreditAmortiation.Max(u => u.ccd.DateApply);
+            objCustomerCreditDocumentDto.DateApply = objListCreditAmortiation.Max(u => u.ccd.DateApply);
 
             return objCustomerCreditDocumentDto;
 
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            Debug.WriteLine(e);
             return null;
         }
     }

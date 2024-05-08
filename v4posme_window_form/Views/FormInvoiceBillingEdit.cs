@@ -503,7 +503,7 @@ namespace v4posme_window.Views
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -705,7 +705,7 @@ namespace v4posme_window.Views
                     throw new Exception("NO EXISTE UNA LISTA DE PRECIO PARA SER APLICADA");
                 }
 
-                
+
                 ObjParameterInvoiceTypeEmployer = _objInterfazCoreWebParameter.GetParameter("INVOICE_TYPE_EMPLOYEER", user.CompanyId)!.Value;
                 ObjParameterInvoiceBillingEmployeeDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_EMPLOYEE_DEFAULT", user.CompanyId)!.Value;
 
@@ -2203,9 +2203,6 @@ namespace v4posme_window.Views
             {
                 txtScanerCodigo.Focus();
             }
-
-
-            
         }
 
         public void FnEnviarFactura()
@@ -3429,14 +3426,13 @@ namespace v4posme_window.Views
                         }
                         else
                         {
+                            _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Eliminar", "Se ha eliminado la factura de forma correcta", this);
                             LoadNew();
                             LoadRender(TypeRender.New);
                             if (progressPanel.Visible)
                             {
                                 progressPanel.Visible = false;
                             }
-
-                            _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Eliminar", "Se ha eliminado la factura de forma correcta", this);
                         }
                     };
                     if (!_backgroundWorker.IsBusy)
