@@ -1430,9 +1430,9 @@ namespace v4posme_window.Views
                 var objParameterRegrearANuevo = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SAVE_AFTER_TO_ADD", user.CompanyId)!.Value;
 
                 //Actualizar Maestro
-                var typePriceId = Convert.ToInt32(((ComboBoxItem)txtTypePriceID.EditValue).Key);
+                var typePriceId = Convert.ToInt32(((ComboBoxItem)txtTypePriceID.SelectedItem).Key);
                 var objListPrice = _objInterfazListPriceModel.GetListPriceToApply(user.CompanyId);
-                var customerCreditlineIdEditValue = (ComboBoxItem)txtCustomerCreditLineID.EditValue; //esta dando null
+                var customerCreditlineIdEditValue = (ComboBoxItem)txtCustomerCreditLineID.SelectedItem; //esta dando null
                 var objTmNew = _objInterfazTransactionMasterModel.GetRowByPKK(TransactionMasterId.Value);
                 objTmNew.TransactionCausalId = Convert.ToInt32(((ComboBoxItem)txtCausalID.SelectedItem).Key);
                 objTmNew.EntityId = TxtCustomerId;
@@ -2877,8 +2877,8 @@ namespace v4posme_window.Views
             }
             else
             {
-                var causalSelect = ((ComboBoxItem)txtCausalID.EditValue).Key;
-                var customerCreditLineSelectedValue = txtCustomerCreditLineID.EditValue;
+                var causalSelect = ((ComboBoxItem)txtCausalID.SelectedItem).Key;
+                var customerCreditLineSelectedValue = txtCustomerCreditLineID.SelectedItem;
                 if (customerCreditLineSelectedValue is not null)
                 {
                     var customerCreditLineID = ((ComboBoxItem)customerCreditLineSelectedValue).Key; //$("#txtCustomerCreditLineID").val();
