@@ -3513,10 +3513,16 @@ namespace v4posme_window.Views
                         else
                         {
                             _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Registrar", "Se han registrdo los datos de forma correcta", this);
-                            if (TransactionMasterId > 0)
+                            if (TransactionMasterId > 0 && ObjParameterInvoiceAutoApply == "false")
                             {
                                 LoadEdit();
                                 LoadRender(TypeRender.Edit);
+                            }
+
+                            if (TransactionMasterId > 0 && ObjParameterInvoiceAutoApply!.ToUpper() == "true".ToUpper())
+                            {
+                                LoadNew();
+                                LoadRender(TypeRender.New);
                             }
 
                             if (progressPanel.Visible)
