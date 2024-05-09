@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +11,7 @@ namespace v4posme_library.Models;
 [Index("CompanyId", Name = "IDX_EXCHANGE_RATE_002")]
 [Index("TargetCurrencyId", Name = "IDX_EXCHANGE_RATE_003")]
 [Index("Date", Name = "IDX_EXCHANGE_RATE_004")]
+[Index("CurrencyId", "CompanyId", "Date", "TargetCurrencyId", Name = "IDX_EXCHANGE_RATE_005")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbExchangeRate

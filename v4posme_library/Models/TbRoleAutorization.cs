@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +11,8 @@ namespace v4posme_library.Models;
 [Index("ComponentAutorizationId", Name = "IDX_ROLE_AUROTIZATION_002")]
 [Index("RoleId", Name = "IDX_ROLE_AUROTIZATION_003")]
 [Index("BranchId", Name = "IDX_ROLE_AUROTIZATION_004")]
+[Index("CompanyId", "ComponentAutorizationId", Name = "IDX_ROLE_AUROTIZATION_005")]
+[Index("CompanyId", "RoleId", "BranchId", Name = "IDX_ROLE_AUROTIZATION_006")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbRoleAutorization

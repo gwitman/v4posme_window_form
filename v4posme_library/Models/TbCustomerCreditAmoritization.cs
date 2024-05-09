@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +22,7 @@ public partial class TbCustomerCreditAmortization
     public int CustomerCreditDocumentId { get; set; }
 
     [Column("dateApply")]
-    public DateTime DateApply { get; set; }
+    public DateOnly? DateApply { get; set; }
 
     [Column("balanceStart")]
     [Precision(19, 9)]

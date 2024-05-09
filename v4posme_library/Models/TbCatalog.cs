@@ -1,10 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace v4posme_library.Models;
 
 [Table("tb_catalog")]
+[Index("CatalogId", Name = "IDX_CATALOG_001")]
+[Index("CatalogId", "IsActive", Name = "IDX_CATALOG_002")]
+[Index("Name", "IsActive", Name = "IDX_CATALOG_003")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_general_ci")]
 public partial class TbCatalog

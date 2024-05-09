@@ -121,7 +121,7 @@ class CoreWebAuditoria : ICoreWebAuditoria
         if (oldObject.GetType() != newObject.GetType())
             throw new Exception("LOS OBJET. EN LA AUDITORIA NO SON DE IGUAL TIPO");
         var columnAutoIncrement = objElement.ColumnAutoIncrement;
-        if (columnAutoIncrement is null)
+        if (columnAutoIncrement == null)
             throw new Exception("LA TABLA NO TIENE UNA COLUMNA AUTO IDENTIFICADORA");
         var elementSalvar = new Dictionary<int, Dictionary<string, object?>>();
         var aux = 0;

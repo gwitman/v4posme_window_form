@@ -169,6 +169,8 @@ E:\RiderProjects\v4posme_window\v4posme_window_form\obj\Debug\net8.0-windows\ref
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\v4posme_window_form.exe
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\App.config
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\appsettings.json
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Libraries\Style\Alert.css
+E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\Libraries\Style\Alert.html
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\v4posme_window_form.dll.config
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\v4posme_window_form.deps.json
 E:\Repos\v4posme_window_form\v4posme_window_form\bin\Debug\net8.0-windows\v4posme_window_form.runtimeconfig.json
