@@ -178,7 +178,7 @@ namespace v4posme_window.Views
                 parameters = new Dictionary<string, string>
                 {
                     { "{companyID}", VariablesGlobales.Instance.User!.CompanyId.ToString() },
-                    { "{fecha}", Fecha!.Value.ToShortDateString() }
+                    { "{fecha}", Fecha!.Value.ToString("yyyy-MM-dd")  }
                 };
 
                 _dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User, objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
@@ -188,7 +188,7 @@ namespace v4posme_window.Views
                     parameters = new Dictionary<string, string>
                     {
                         { "{companyID}", VariablesGlobales.Instance.User.CompanyId.ToString() },
-                        { "{fecha}", Fecha.Value.ToShortDateString() }
+                        { "{fecha}", Fecha.Value.ToString("yyyy-MM-dd") }
                     };
                     _dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User, objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
                 }

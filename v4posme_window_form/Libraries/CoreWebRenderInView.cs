@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.IO;
 using System.Reflection;
+using DevExpress.CodeParser;
 using DevExpress.Data;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Alerter;
@@ -232,6 +233,8 @@ public class CoreWebRenderInView
             TypeError.Warning => Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_WARNING_PATH"]!),
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
+
+
         _alert.Show(form, title, body, image);
     }
 
