@@ -158,8 +158,8 @@ namespace v4posme_library.Libraries
         }
 
         public static IConfigurationSection ConfigurationBuilder =>
-            _builderConfigurationSection ?? (_builderConfigurationSection = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json").Build().GetSection("globals"));
+            _builderConfigurationSection ??= new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json").Build().GetSection("globals");
 
         public IUnityContainer UnityContainer => _unityContainer;
 

@@ -107,10 +107,10 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
             .Select(t => new TbCustomerCreditAmortizationDto
             {
                 DocumentNumber = t.t.cd.DocumentNumber,
-                DateApply = DateTime.Parse(t.t.t.i.DateApply.ToShortDateString()),
+                DateApply = (t.t.t.i.DateApply),
                 Remaining = t.t.t.i.Remaining,
-                Orden = WebToolsHelper.ToUnixTimestamp(t.t.t.i.DateApply),
-                Mora =  EF.Functions.DateDiffDay(DateTime.Now, DateTime.Parse(t.t.t.i.DateApply.ToShortDateString())),
+                Orden = WebToolsHelper.ToUnixTimestamp(t.t.t.i.DateApply!.Value),
+                Mora =  EF.Functions.DateDiffDay(DateOnly.FromDateTime(DateTime.Now), t.t.t.i.DateApply),
                 StageCuota = t.t.t.ws.Name,
                 StageDocumento = t.wsd.Name
             })
@@ -131,7 +131,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                   && ccdStatus.Vinculable!.Value
                   && c.IsActive!.Value
                   && cca.Remaining > 0
-                  && cca.DateApply < DateTime.Now
+                  && cca.DateApply < DateOnly.FromDateTime(DateTime.Now)
             select new TbCustomerCreditAmortizationDto
             {
                 CustomerNumber = c.CustomerNumber,
@@ -170,7 +170,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                         u.CreditAmortizationId == c.CustomerCreditDocumentId
                         && u.Remaining > 0
                         && u.IsActive == 1
-                        && u.DateApply < DateTime.Now)
+                        && u.DateApply < DateOnly.FromDateTime(DateTime.Now))
                     .Select(u => u.Remaining).Sum()
             });
         return result.Single();
@@ -197,7 +197,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
                 DateApply = i.DateApply,
                 Remaining = i.Remaining,
                 Orden = Convert.ToUInt32(i.DateApply),
-                Mora = EF.Functions.DateDiffDay(DateTime.Now, i.DateApply),
+                Mora = EF.Functions.DateDiffDay(DateOnly.FromDateTime(DateTime.Now), i.DateApply),
                 StageCuota = ws.Name,
                 StageDocumento = wsd.Name
             };

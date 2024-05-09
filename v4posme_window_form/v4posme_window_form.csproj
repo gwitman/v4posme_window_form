@@ -58,6 +58,12 @@
         <Pack>True</Pack>
         <PackagePath></PackagePath>
       </None>
+      <None Update="Libraries\Style\Alert.html">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Libraries\Style\Alert.css">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>

@@ -111,6 +111,16 @@ namespace v4posme_window.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] Glyph_Message {
+            get {
+                object obj = ResourceManager.GetObject("Glyph_Message", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap Image1 {
@@ -127,6 +137,26 @@ namespace v4posme_window.Properties {
             get {
                 object obj = ResourceManager.GetObject("markcomplete", resourceCulture);
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] message_close {
+            get {
+                object obj = ResourceManager.GetObject("message_close", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap messageClose {
+            get {
+                object obj = ResourceManager.GetObject("messageClose", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

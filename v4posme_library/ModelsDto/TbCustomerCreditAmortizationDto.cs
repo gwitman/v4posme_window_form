@@ -6,9 +6,9 @@ public class TbCustomerCreditAmortizationDto
     
     public string? DocumentNumber { get; set; }
 
-    public DateTime? FechaVencimiento { get; set; }
+    public DateOnly? FechaVencimiento { get; set; }
     
-    public DateTime? DateApply { get; set; }
+    public DateOnly? DateApply { get; set; }
     
     public decimal? Remaining { get; set; }
     

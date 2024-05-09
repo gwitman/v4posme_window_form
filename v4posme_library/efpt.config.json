@@ -2,7 +2,6 @@
    "CodeGenerationMode": 4,
    "ContextClassName": "DataContext",
    "ContextNamespace": null,
-   "DefaultDacpacSchema": null,
    "FilterSchemas": false,
    "IncludeConnectionString": false,
    "ModelNamespace": null,
@@ -584,7 +583,7 @@
          "ObjectType": 3
       }
    ],
-   "UiHint": "ConnectionString",
+   "UiHint": null,
    "UncountableWords": null,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,

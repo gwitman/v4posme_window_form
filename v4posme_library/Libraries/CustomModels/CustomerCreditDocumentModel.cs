@@ -211,7 +211,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                                            select new { ccd };
 
 
-            objCustomerCreditDocumentDto.DateApply = objListCreditAmortiation.Max(u => u.ccd.DateApply);
+            objCustomerCreditDocumentDto.DateApply = objListCreditAmortiation.Max(u => u.ccd.DateApply!.Value);
 
             return objCustomerCreditDocumentDto;
 
@@ -273,7 +273,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                 CurrencyId = g.Key.CurrencyId,
                 StatusId = g.Key.StatusId,
                 CreditAmortizationId = g.Min(x => x.a.CustomerCreditDocumentId),
-                DateApply = g.Min(x => x.a.DateApply),
+                DateApply = g.Min(x => x.a.DateApply!.Value),
                 Remaining = g.Sum(x => x.a.Remaining),
                 StatusAmotization = g.Min(x => x.a.StatusId),
                 StatusAmortizatonName = g.Min(x => x.wsa.Name)

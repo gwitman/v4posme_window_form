@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using v4posme_library.Libraries;
 
@@ -13,25 +15,14 @@ public partial class DataContext : DbContext
 
     public DataContext()
     {
-
+        
     }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        base.OnConfiguring(optionsBuilder);
         optionsBuilder.LogTo(s => Debug.WriteLine(s));
-        if (optionsBuilder.IsConfigured) return;
-        try
-        {
-            var connectionString = VariablesGlobales.ConnectionString;            
-            optionsBuilder.UseMySql(connectionString,MySqlServerVersion.LatestSupportedServerVersion);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
+        var connectionString = VariablesGlobales.ConnectionString;
+        optionsBuilder.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion); //Cannot find this method
     }
-
     public virtual DbSet<TbAccount> TbAccounts { get; set; }
 
     public virtual DbSet<TbAccountLevel> TbAccountLevels { get; set; }
@@ -254,11 +245,11 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<TbTransactionMasterDetail> TbTransactionMasterDetails { get; set; }
 
-    public virtual DbSet<TbTransactionMasterDetailCredit?> TbTransactionMasterDetailCredits { get; set; }
+    public virtual DbSet<TbTransactionMasterDetailCredit> TbTransactionMasterDetailCredits { get; set; }
 
     public virtual DbSet<TbTransactionMasterDetailTemp> TbTransactionMasterDetailTemps { get; set; }
 
-    public virtual DbSet<TbTransactionMasterInfo?> TbTransactionMasterInfoes { get; set; }
+    public virtual DbSet<TbTransactionMasterInfo> TbTransactionMasterInfoes { get; set; }
 
     public virtual DbSet<TbTransactionMasterPurchase> TbTransactionMasterPurchases { get; set; }
 

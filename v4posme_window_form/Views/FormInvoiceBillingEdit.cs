@@ -1956,7 +1956,7 @@ namespace v4posme_window.Views
                                 {
                                     CustomerCreditDocumentId = customerCreditDocumentID,
                                     BalanceStart = itemAmortization!.SaldoInicial!.Value,
-                                    DateApply = itemAmortization.Date!.Value,
+                                    DateApply = DateOnly.FromDateTime(itemAmortization.Date!.Value),
                                     Interest = itemAmortization.Interes!.Value,
                                     Capital = itemAmortization.Principal!.Value,
                                     Share = itemAmortization.Cuota!.Value,

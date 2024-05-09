@@ -203,14 +203,15 @@ public class CoreWebAmortization : ICoreWebAmortization
         {
             foreach (var itemAmortization in objListCustomerCreditDocumentAmortization)
             {
-                var interval            =DateTime.Now.Subtract(itemAmortization.DateApply);
+                var now = DateOnly.FromDateTime(DateTime.Now);
+                var interval            = now.DayNumber-itemAmortization.DateApply!.Value.DayNumber;
                 var itemAmortizationNew = itemAmortization;
                 if (amount >= itemAmortization.Remaining && amount != decimal.Zero)                {
                     amount = amount - itemAmortization.Remaining;				
 				    var dif = itemAmortization.Remaining - amount;
                     itemAmortizationNew.StatusId = Convert.ToInt32(amortizationCancel);
                     itemAmortizationNew.Remaining = decimal.Zero;
-                    itemAmortizationNew.DayDelay = (int)interval.TotalDays;     
+                    itemAmortizationNew.DayDelay = interval;     
                     
                     if (itemAmortization.Remaining == itemAmortization.Share)
                     {
@@ -239,7 +240,7 @@ public class CoreWebAmortization : ICoreWebAmortization
                 {
                     var dif = itemAmortization.Remaining - amount;
                     itemAmortizationNew.Remaining = dif;
-                    itemAmortizationNew.DayDelay = (int)interval.TotalDays;
+                    itemAmortizationNew.DayDelay = interval;
                     if (dif > itemAmortization.Interest)
                     {
                         capital = capital + amount;

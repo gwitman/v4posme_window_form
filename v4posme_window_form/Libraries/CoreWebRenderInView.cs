@@ -1,8 +1,13 @@
 ﻿using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using DevExpress.CodeParser;
 using DevExpress.Data;
+using DevExpress.LookAndFeel;
+using DevExpress.Utils;
+using DevExpress.Utils.Html;
+using DevExpress.Utils.Svg;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Alerter;
 using DevExpress.XtraBars.Navigation;
@@ -225,17 +230,24 @@ public class CoreWebRenderInView
 
     public void GetMessageAlert(TypeError type, string title, string body, Form form)
     {
+        var templateHtml = new HtmlTemplate();
         var image = type switch
         {
-            TypeError.Informacion => Image.FromFile(
-                VariablesGlobales.ConfigurationBuilder["ICON_INFORMACION_PATH"]!),
+            TypeError.Informacion => Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_INFORMACION_PATH"]!),
             TypeError.Error => Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_ERROR_PATH"]!),
             TypeError.Warning => Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_WARNING_PATH"]!),
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
-
-
-        _alert.Show(form, title, body, image);
+        templateHtml.Template = Load("Alert.html");
+        templateHtml.Styles = Load("Alert.css");
+        var svgImageItemCollection = new SvgImageCollection();
+        svgImageItemCollection.Add("message_close",Properties.Resources.message_close);
+        svgImageItemCollection.Add("message_icon",Properties.Resources.Glyph_Message);
+        svgImageItemCollection.ImageSize = new Size(16, 16);
+        _alert.HtmlTemplates.Add(templateHtml);
+        _alert.HtmlImages = svgImageItemCollection;
+        _alert.HtmlElementMouseClick += AlertControl1_HtmlElementMouseClick;
+        _alert.Show(form, title, body,"", image);
     }
 
     public static void RenderMenuLeft(List<TbMenuElement> data, AccordionControl menu)
@@ -346,5 +358,19 @@ public class CoreWebRenderInView
                 parentElement.Groups.Add(subElement);
             }
         }
+    }
+    private static string Load(string fileName)
+    {
+        var directoryPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        var filePath = Path.Combine(directoryPath, "Libraries/Style", fileName);
+        Debug.WriteLine(File.ReadAllText(filePath));
+        return File.Exists(filePath) ? File.ReadAllText(filePath) : "";
+    }
+    private void AlertControl1_HtmlElementMouseClick(object sender, AlertHtmlElementMouseEventArgs e) {
+        if(e.ElementId == "closeButton" || e.ParentHasId("closeButton") ||
+           e.ElementId == "okButton" || e.ParentHasId("okButton"))
+            e.HtmlPopup.Close();
+        else
+            e.HtmlPopup.Pinned = !e.HtmlPopup.Pinned;
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +12,7 @@ namespace v4posme_library.Models;
 [Index("ComponentId", Name = "IDX_COMPONENT_AUTORIZATSION_DETAIL_003")]
 [Index("WorkflowId", Name = "IDX_COMPONENT_AUTORIZATSION_DETAIL_004")]
 [Index("WorkflowStageId", Name = "IDX_COMPONENT_AUTORIZATSION_DETAIL_005")]
+[Index("CompanyId", "ComponentAutorizationId", Name = "IDX_COMPONENT_AUTORIZATSION_DETAIL_006")]
 [MySqlCharSet("latin1")]
 [MySqlCollation("latin1_swedish_ci")]
 public partial class TbComponentAutorizationDetail

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using DevExpress.Xpo;
 using DevExpress.Xpo.DB;
 using DevExpress.XtraBars.Alerter;
@@ -26,17 +27,16 @@ static class Program
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
         var loginForm = new LoginForm();
-        var alert = new AlertControl();
         try
         {
-            var defaultTest = Settings.Default.test;
             var dataLayer = XpoDefault.GetDataLayer("XpoProvider=MySql;"+VariablesGlobales.ConnectionString, AutoCreateOption.None);
             XpoDefault.DataLayer = dataLayer;
         }
         catch (Exception exception)
         {
-            XtraMessageBox.Show(exception.Message);
-            alert.Show(loginForm, "Error", "No hay una conexión activa, revise su internet o solicite permiso para la conexion a la base de datos.");
+            Debug.WriteLine(exception);
+            var coreWebRender = new CoreWebRenderInView();
+            coreWebRender.GetMessageAlert(TypeError.Error,"Login", $"No hay una conexion activa o revise su conexion a internet, {exception.Message}",loginForm);
         }         
         if (loginForm.ShowDialog() == DialogResult.OK)
         {
