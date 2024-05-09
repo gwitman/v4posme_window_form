@@ -2066,6 +2066,8 @@ namespace v4posme_window.Views
             colAccionMas.Caption = "Mas";
             colAccionMenos.Caption = "Menos";
             colAccionPrecios.Caption = "Precios";
+
+            ObjSELECCIONAR_ITEM_BILLING_BACKGROUND = VariablesGlobales.Instance.ObjSELECCIONAR_ITEM_BILLING_BACKGROUND;
         }
 
 
