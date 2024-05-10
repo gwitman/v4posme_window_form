@@ -24,8 +24,9 @@ static class Program
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
         // Establecer la cultura predeterminada para la aplicación
-        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("es-NI"); // Cultura española (España)
-        CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("es-NI");
+        var culture = VariablesGlobales.ConfigurationBuilder["APP_REGION_CULTURE"] ?? "es-NI";
+        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo(culture);
+        CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo(culture);
         //Application.Run(new Form1());
         WindowsFormsSettings.UseAdvancedTextEdit = DevExpress.Utils.DefaultBoolean.True;
         Application.EnableVisualStyles();
