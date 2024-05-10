@@ -1,5 +1,4 @@
-﻿using Unity;
-using v4posme_library.Libraries.CustomLibraries.Interfaz;
+﻿using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Libraries.CustomModels.Core;
 
 namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
@@ -52,14 +51,13 @@ class CoreWebCounter(ICounterModel counterModel, IComponentModel componentModel)
         if (objCounter == null)
             throw new Exception("NO EXISTE EL CONTADOR");
 
+        // Obtener valor
+        var value = (objCounter.CurrentValue!.Value+objCounter.Seed!.Value).ToString().PadLeft(objCounter.Length!.Value, '0');
+        value = objCounter.Serie + value;
+
         // Actualizar
         objCounter.CurrentValue = objCounter.CurrentValue!.Value + objCounter.Seed!.Value;
         counterModel.UpdateAppPosme(companyId, branchId, objComponente.ComponentId, componentItemId, objCounter);
-
-        // Obtener valor
-        string value = objCounter.CurrentValue!.Value.ToString().PadLeft(objCounter.Length!.Value, '0');
-        value = objCounter.Serie + value;
-
         // Retornar valor
         return value;
     }
