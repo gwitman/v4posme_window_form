@@ -37,6 +37,8 @@
             btnAtras = new DevExpress.XtraEditors.SimpleButton();
             btnSiguiente = new DevExpress.XtraEditors.SimpleButton();
             centerPane = new DevExpress.XtraEditors.PanelControl();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            progressPanel = new DevExpress.XtraWaitForm.ProgressPanel();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
             panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)stackPanel1).BeginInit();
@@ -52,7 +54,7 @@
             panelControl1.Location = new Point(0, 0);
             panelControl1.Name = "panelControl1";
             panelControl1.Size = new Size(686, 56);
-            panelControl1.TabIndex = 6;
+            panelControl1.TabIndex = 2;
             // 
             // stackPanel1
             // 
@@ -148,14 +150,30 @@
             centerPane.Dock = DockStyle.Fill;
             centerPane.Location = new Point(0, 56);
             centerPane.Name = "centerPane";
-            centerPane.Size = new Size(686, 322);
-            centerPane.TabIndex = 7;
+            centerPane.Size = new Size(686, 320);
+            centerPane.TabIndex = 1;
+            // 
+            // progressPanel
+            // 
+            progressPanel.Appearance.BackColor = Color.Transparent;
+            progressPanel.Appearance.Options.UseBackColor = true;
+            progressPanel.Caption = "Cargando...";
+            progressPanel.CaptionToDescriptionDistance = 5;
+            progressPanel.ContentAlignment = ContentAlignment.MiddleCenter;
+            progressPanel.Description = "Recuperando datos de usuario...";
+            progressPanel.Location = new Point(0, 0);
+            progressPanel.Name = "progressPanel";
+            progressPanel.Size = new Size(686, 371);
+            progressPanel.TabIndex = 0;
+            progressPanel.Visible = false;
+            progressPanel.WaitAnimationType = DevExpress.Utils.Animation.WaitingAnimatorType.Ring;
             // 
             // FormTypeListSearch
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(686, 378);
+            ClientSize = new Size(686, 376);
+            Controls.Add(progressPanel);
             Controls.Add(centerPane);
             Controls.Add(panelControl1);
             IconOptions.Icon = (Icon)resources.GetObject("FormTypeListSearch.IconOptions.Icon");
@@ -186,5 +204,7 @@
         private DevExpress.XtraEditors.SimpleButton btnSiguiente;
         private DevExpress.XtraEditors.SimpleButton btnAtras;
         private DevExpress.XtraEditors.TextEdit txtFilter;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        public DevExpress.XtraWaitForm.ProgressPanel progressPanel;
     }
 }

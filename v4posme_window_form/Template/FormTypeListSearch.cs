@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.ComponentModel;
+using System.Data;
 using System.Dynamic;
 using System.Text;
 using System.Windows.Forms;
@@ -10,6 +11,7 @@ using DevExpress.XtraVerticalGrid;
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
+using v4posme_library.ModelsDto;
 using v4posme_window.Libraries;
 using DataColumn = System.Data.DataColumn;
 using DataTable = System.Data.DataTable;
@@ -41,6 +43,7 @@ namespace v4posme_window.Template
         private GridControl ObjGridControl { get; set; }
 
         private GridView? _gridView = null;
+        private TableCompanyDataViewDto? _datos;
 
         public FormTypeListSearch(string title, int componentId, string viewName, bool autoClose, string filter,
             bool multiSelect, string urlRedictWhenEmpty, int iDisplayStart, int iDisplayLength, string sSearch, bool showRow)
@@ -83,6 +86,11 @@ namespace v4posme_window.Template
 
         private void ShowViewByNamePaginate()
         {
+            backgroundWorker1 = new();
+            if (!progressPanel.Visible)
+            {
+                progressPanel.Visible=true;
+            }
             var componentId = ComponentId!.Value;
             var viewName = ViewName!;
             var autoClose = AutoClose!.Value;
@@ -92,45 +100,65 @@ namespace v4posme_window.Template
             var iDisplayStart = DisplayStart;
             var iDisplayLength = DisplayLength;
             var sSearch = SSearch;
-
-            var coreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
-            var coreWebView = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
-            var calleridSearch = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["CALLERID_SEARCH"]);
-            var coreWebRenderInView = new CoreWebRenderInView();
-            var usuario = VariablesGlobales.Instance.User;
-
-
-            // Crear un diccionario para los parámetros staticos
-            var parameter = new Dictionary<string, string>
+            backgroundWorker1.DoWork += (ob, ev) =>
             {
-                ["{companyID}"] = usuario!.CompanyId.ToString(),
-                ["{componentID}"] = componentId.ToString(),
-                ["{iDisplayLength}"] = iDisplayLength!.Value.ToString(),
-                ["{iDisplayStartDB}"] = (PageCurrent * iDisplayLength.Value).ToString()!,
-                ["{sSearchDB}"] = sSearch!,
-                ["{isWindowForm}"] = "1"
+                
+
+                var coreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
+                var coreWebView = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
+                var calleridSearch = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["CALLERID_SEARCH"]);
+                var coreWebRenderInView = new CoreWebRenderInView();
+                var usuario = VariablesGlobales.Instance.User;
+
+
+                // Crear un diccionario para los parámetros staticos
+                var parameter = new Dictionary<string, string>
+                {
+                    ["{companyID}"] = usuario!.CompanyId.ToString(),
+                    ["{componentID}"] = componentId.ToString(),
+                    ["{iDisplayLength}"] = iDisplayLength!.Value.ToString(),
+                    ["{iDisplayStartDB}"] = (PageCurrent * iDisplayLength.Value).ToString()!,
+                    ["{sSearchDB}"] = sSearch!,
+                    ["{isWindowForm}"] = "1"
+                };
+
+                // Agregar al diccionarios los parametros dinamicos
+                var result = coreWebTools.FormatParameter(filter!);
+                if (result is not null)
+                {
+                    foreach (var kvp in result)
+                    {
+                        parameter[kvp.Key] = kvp.Value.ToString()!;
+                    }
+                }
+
+
+                _datos = coreWebView.GetViewByName(usuario, componentId, viewName, calleridSearch, null, parameter);
             };
 
-            // Agregar al diccionarios los parametros dinamicos
-            var result = coreWebTools.FormatParameter(filter!);
-            if (result is not null)
+            backgroundWorker1.RunWorkerCompleted+=(ob,ev)=>
             {
-                foreach (var kvp in result)
+                var coreWebRender = new CoreWebRenderInView();
+                if (ev.Error is not null)
                 {
-                    parameter[kvp.Key] = kvp.Value.ToString()!;
+                    coreWebRender.GetMessageAlert(TypeError.Error, "Seleccionar", $"No se pudo realizar la operacion debido al siguiente error {ev.Error.Message}",this);
+                }else if (ev.Cancelled)
+                {
+                    coreWebRender.GetMessageAlert(TypeError.Warning,"Seleccionar", "Se ha cancelado la operacion", this);
                 }
+                else
+                {
+                    progressPanel.Visible=false;
+                    CoreWebRenderInView.RenderGrid(_datos, "ListView", ObjGridControl);
+                    _gridView= (GridView)ObjGridControl.MainView;
+                    _gridView.OptionsSelection.MultiSelect = multiSelect;
+                    ObjGridControl.Refresh();
+                }
+            };
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
             }
-
-
-            var datos = coreWebView.GetViewByName(usuario, componentId, viewName, calleridSearch, null, parameter);
-            if (datos is null)
-                return;
-
-
-            CoreWebRenderInView.RenderGrid(datos, "ListView", ObjGridControl);
-            _gridView= (GridView)ObjGridControl.MainView;
-            _gridView.OptionsSelection.MultiSelect = multiSelect;
-            ObjGridControl.Refresh();
         }
 
         private void GridView_KeyDown(object sender, KeyEventArgs e)
@@ -144,8 +172,37 @@ namespace v4posme_window.Template
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            FnSelectedRow();
-            if (AutoClose is not null && AutoClose.Value) Close();
+            backgroundWorker1 = new BackgroundWorker();
+            if (!progressPanel.Visible)
+            {
+                progressPanel.Visible = true;
+            }
+
+            backgroundWorker1.DoWork += (ob, ev) =>
+            {
+                FnSelectedRow();
+            };
+            backgroundWorker1.RunWorkerCompleted+=(ob,ev)=>
+                {
+                    var coreWebRender = new CoreWebRenderInView();
+                if (ev.Error is not null)
+                {
+                    coreWebRender.GetMessageAlert(TypeError.Error, "Seleccionar", $"No se pudo realizar la operacion debido al siguiente error {ev.Error.Message}",this);
+                }else if (ev.Cancelled)
+                {
+                    coreWebRender.GetMessageAlert(TypeError.Warning,"Seleccionar", "Se ha cancelado la operacion", this);
+                }
+                else
+                {
+                    progressPanel.Visible=false;
+                    if (AutoClose is not null && AutoClose.Value) Close();
+                }
+            };
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+            
         }
 
         private void FnSelectedRow()

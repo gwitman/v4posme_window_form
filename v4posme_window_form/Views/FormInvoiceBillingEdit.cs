@@ -1191,7 +1191,7 @@ namespace v4posme_window.Views
                     var itemNameDetail = transactionDetailName is null ? "" : transactionDetailName.Replace("'", "");
                     var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity).ToString());
                     var listPrice = Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colPrice));
-                    var listLote = string.Empty;                    
+                    var listLote = string.Empty;
                     var listVencimiento = string.Empty;
                     var skuCatalogItemId = Convert.ToInt32(gridViewValues.GetRowCellValue(i, colSku));
                     var skuFormatoDescription = gridViewValues.GetRowCellValue(i, colSkuFormatoDescripton).ToString();
@@ -1329,16 +1329,16 @@ namespace v4posme_window.Views
                     case "false":
                         return;
                     case "true":
-                    {
-                        //si es auto aplicadao mandar a imprimir
-                        if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
                         {
-                            ComandPrinter();
-                        }
+                            //si es auto aplicadao mandar a imprimir
+                            if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
+                            {
+                                ComandPrinter();
+                            }
 
-                        break;
-                    }
-                    //Error 
+                            break;
+                        }
+                        //Error 
                 }
             }
             catch (Exception e)
@@ -2723,55 +2723,58 @@ namespace v4posme_window.Views
 
         public void FnOnCompleteNewItem(Dictionary<string, string> diccionario, bool sumar)
         {
-            txtScanerCodigo.Focus();
-            var index = 0;
-            var indexEncontrado = 0;
-            var encontrado = false;
-            var itemID = Convert.ToInt32(diccionario["itemID"]);
-
-            //Buscar Item
-            if (_bindingListTransactionMasterDetail.Count > 0)
+            Invoke(() =>
             {
-                foreach (FormInvoiceBillingEditDetailDTO detailDto in _bindingListTransactionMasterDetail)
+                txtScanerCodigo.Focus();
+                var index = 0;
+                var indexEncontrado = 0;
+                var encontrado = false;
+                var itemID = Convert.ToInt32(diccionario["itemID"]);
+
+                //Buscar Item
+                if (_bindingListTransactionMasterDetail.Count > 0)
                 {
-                    if (detailDto.ItemId == itemID)
+                    foreach (FormInvoiceBillingEditDetailDTO detailDto in _bindingListTransactionMasterDetail)
                     {
-                        detailDto.Quantity = decimal.Add(detailDto.Quantity, decimal.One);
-                        encontrado = true;
-                        break;
+                        if (detailDto.ItemId == itemID)
+                        {
+                            detailDto.Quantity = decimal.Add(detailDto.Quantity, decimal.One);
+                            encontrado = true;
+                            break;
+                        }
                     }
                 }
-            }
 
-            if (encontrado)
-            {
+                if (encontrado)
+                {
+                    FnRefrechDetail();
+                    FnGetConcept(itemID, "IVA");
+                    return;
+                }
+
+                var billingEdit = new FormInvoiceBillingEditDetailDTO
+                {
+                    ItemId = Convert.ToInt32(diccionario["itemID"]),
+                    ItemNumber = diccionario["Codigo"],
+                    TransactionDetailName = diccionario["Nombre"],
+                    Sku = Convert.ToInt32(diccionario["MedidaID"]),
+                    Quantity = 1,
+                    Price = WebToolsHelper.ConvertToNumber<decimal>(diccionario["Precio"]),
+                    SubTotal = 1 * WebToolsHelper.ConvertToNumber<decimal>(diccionario["Precio"]),
+                    Iva = WebToolsHelper.ConvertToNumber<decimal>(diccionario["Iva"]),
+                    SkuQuantityBySku = 0,
+                    UnitaryPriceIndividual = 0,
+                    SkuFormatoDescription = diccionario["Medida"],
+                    ItemPrecio2 = WebToolsHelper.ConvertToNumber<decimal>(diccionario["Precio2"]),
+                    ItemPrecio3 = WebToolsHelper.ConvertToNumber<decimal>(diccionario["Precio3"]),
+                    AccionMas = "",
+                    AccionMenos = "",
+                    AccionPrecios = decimal.Zero
+                };
+                _bindingListTransactionMasterDetail.Add(billingEdit);
                 FnRefrechDetail();
                 FnGetConcept(itemID, "IVA");
-                return;
-            }
-
-            var billingEdit = new FormInvoiceBillingEditDetailDTO
-            {
-                ItemId = Convert.ToInt32(diccionario["itemID"]),
-                ItemNumber = diccionario["Codigo"],
-                TransactionDetailName = diccionario["Nombre"],
-                Sku = Convert.ToInt32(diccionario["MedidaID"]),
-                Quantity = 1,
-                Price = WebToolsHelper.ConvertToNumber<decimal>(diccionario["Precio"]),
-                SubTotal = 1 * WebToolsHelper.ConvertToNumber<decimal>(diccionario["Precio"]),
-                Iva = WebToolsHelper.ConvertToNumber<decimal>(diccionario["Iva"]),
-                SkuQuantityBySku = 0,
-                UnitaryPriceIndividual = 0,
-                SkuFormatoDescription = diccionario["Medida"],
-                ItemPrecio2 = WebToolsHelper.ConvertToNumber<decimal>(diccionario["Precio2"]),
-                ItemPrecio3 = WebToolsHelper.ConvertToNumber<decimal>(diccionario["Precio3"]),
-                AccionMas = "",
-                AccionMenos = "",
-                AccionPrecios = decimal.Zero
-            };
-            _bindingListTransactionMasterDetail.Add(billingEdit);
-            FnRefrechDetail();
-            FnGetConcept(itemID, "IVA");
+            });
         }
 
         public void FnGetConcept(int itemID, string concepName)
@@ -2929,24 +2932,32 @@ namespace v4posme_window.Views
 
         private void txtScanerCodigo_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.M)
+            switch (e.KeyCode)
             {
-                // La tecla presionada es la letra "M"
-                // Aquí puedes agregar la lógica que deseas ejecutar
-                ComandPrinter();
-            }
+                case Keys.M:
+                    // La tecla presionada es la letra "M"
+                    // Aquí puedes agregar la lógica que deseas ejecutar
+                    ComandPrinter();
+                    break;
+                case Keys.K:
+                    // La tecla presionada es la letra "M"
+                    // Aquí puedes agregar la lógica que deseas ejecutar
+                    LoadNew();
+                    LoadRender(TypeRender.New);
+                    break;
+                case Keys.I:
+                    OpenCashbox();
+                    break;
+                case Keys.Down:
+                {
+                    if (gridViewValues.RowCount>0)
+                    {
+                        gridViewValues.Focus();
+                        gridViewValues.FocusedRowHandle = 0;
+                    }
 
-            if (e.KeyCode == Keys.K)
-            {
-                // La tecla presionada es la letra "M"
-                // Aquí puedes agregar la lógica que deseas ejecutar
-                LoadNew();
-                LoadRender(TypeRender.New);
-            }
-
-            if (e.KeyCode == Keys.I)
-            {
-                OpenCashbox();
+                    break;
+                }
             }
         }
 
@@ -3244,7 +3255,7 @@ namespace v4posme_window.Views
         }
 
 
-        private void repositoryItemButtonEdit1_Click(object sender, EventArgs e)
+        private void ButtonPlusQuantity_Click(object sender, EventArgs e)
         {
             var quantity = gridViewValues.GetRowCellValue(gridViewValues.FocusedRowHandle, colQuantity).ToString();
             var quantityDecimal = WebToolsHelper.ConvertToNumber<decimal>(quantity);
@@ -3253,11 +3264,11 @@ namespace v4posme_window.Views
             FnRecalculateDetail(true, "");
         }
 
-        private void repositoryItemButtonEdit2_Click(object sender, EventArgs e)
+        private void ButtonMinusQuantity_Click(object sender, EventArgs e)
         {
             var quantity = gridViewValues.GetRowCellValue(gridViewValues.FocusedRowHandle, colQuantity).ToString();
             var quantityDecimal = WebToolsHelper.ConvertToNumber<decimal>(quantity);
-            if (decimal.Compare(quantityDecimal, Decimal.Zero) == 0)
+            if (decimal.Compare(quantityDecimal, decimal.Zero) == 0)
             {
                 return;
             }
@@ -3277,9 +3288,9 @@ namespace v4posme_window.Views
                 var precio1 = Convert.ToDecimal(gridViewValues.GetRowCellValue(e.RowHandle, colPrice).ToString());
                 var precio2 = Convert.ToDecimal(gridViewValues.GetRowCellValue(e.RowHandle, colItemPrecio2).ToString());
                 var precio3 = Convert.ToDecimal(gridViewValues.GetRowCellValue(e.RowHandle, colItemPrecio3).ToString());
-                var comboBoxItem1 = new ComboBoxItem("1", $"{precio1:C}");
-                var comboBoxItem2 = new ComboBoxItem("2", $"{precio2:C}");
-                var comboBoxItem3 = new ComboBoxItem("3", $"{precio3:C}");
+                var comboBoxItem1 = new ComboBoxItem("1", $"{precio1:N2}");
+                var comboBoxItem2 = new ComboBoxItem("2", $"{precio2:N2}");
+                var comboBoxItem3 = new ComboBoxItem("3", $"{precio3:N2}");
                 buttonEdit.Items.AddRange([comboBoxItem1, comboBoxItem2, comboBoxItem3]);
                 repositoryItemComboBox2 = buttonEdit;
             }
@@ -3289,11 +3300,10 @@ namespace v4posme_window.Views
         {
             // Obtiene el índice de la fila actualmente enfocada
             int fila = gridViewValues.FocusedRowHandle;
-
+            var comboBoxEdit = sender as ComboBoxEdit;
             // Obtiene el valor seleccionado del RepositoryItemComboBox
-            string? itemSeleccionado = (sender as ComboBoxEdit)?.SelectedItem.ToString();
-            itemSeleccionado = itemSeleccionado!.Replace("C$ ", "");
-            decimal priceSeleccionado = WebToolsHelper.ConvertToNumber<decimal>(itemSeleccionado);
+            var itemSeleccionado = ((ComboBoxItem)comboBoxEdit.SelectedItem).Value.ToString();
+            var priceSeleccionado = WebToolsHelper.ConvertToNumber<decimal>(itemSeleccionado);
             gridViewValues.SetRowCellValue(fila, colPrice, itemSeleccionado);
             gridViewValues.SetRowCellValue(fila, colAccionPrecios, itemSeleccionado);
             FnRecalculateDetail(true, "txtPrice");
@@ -3630,13 +3640,16 @@ namespace v4posme_window.Views
         private void EventoCallBackAceptarCusomter(dynamic mensaje)
         {
             // Realizar la lógica que desees en el formulario padre
-            WebToolsHelper objWebToolsHelper = new WebToolsHelper();
-            TxtCustomerId = Convert.ToInt32(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "entityID", "0"));
-            txtCustomerDescription.Text = objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Codigo", "0");
-            txtCustomerDescription.Text = txtCustomerDescription.Text + "/" + objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Nombre", "N/D");
+            Invoke(() =>
+            {
+                WebToolsHelper objWebToolsHelper = new WebToolsHelper();
+                TxtCustomerId = Convert.ToInt32(objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "entityID", "0"));
+                txtCustomerDescription.Text = objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Codigo", "0");
+                txtCustomerDescription.Text = txtCustomerDescription.Text + "/" + objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Nombre", "N/D");
 
-            //FnClearData();
-            FnGetCustomerClient(TxtCustomerId);
+                //FnClearData();
+                FnGetCustomerClient(TxtCustomerId);
+            });
         }
 
         private void EventoCallBackAceptarSeleccoinDeFactura(dynamic mensaje)
@@ -3657,6 +3670,32 @@ namespace v4posme_window.Views
             }
         }
 
+        private void gridViewValues_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up && gridViewValues.FocusedRowHandle == 0)
+            {
+                txtScanerCodigo.Focus();
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                var focusedColumn = gridViewValues.FocusedColumn;
+        
+                if (focusedColumn.FieldName == colAccionMas.FieldName)
+                {
+                    ButtonPlusQuantity_Click(sender, e);
+                }
+                if (focusedColumn.FieldName == colAccionMenos.FieldName)
+                {
+                    ButtonMinusQuantity_Click(sender, e);
+                }
+
+                if (focusedColumn.FieldName==colAccionPrecios.FieldName)
+                {
+                    var editor = (sender as GridView);
+                    repositoryItemComboBox2.OwnerEdit.ShowPopup();
+                }
+            }
+        }
 
         private void EventoCallBackAceptarItem(dynamic mensaje)
         {
@@ -3664,7 +3703,9 @@ namespace v4posme_window.Views
             var objWebToolsHelper = new WebToolsHelper();
             FnOnCompleteNewItemPopPub(mensaje);
         }
-
         #endregion
+
+
+        
     }
 }

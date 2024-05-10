@@ -318,7 +318,7 @@
             // 
             barDockControlBottom.CausesValidation = false;
             barDockControlBottom.Dock = DockStyle.Bottom;
-            barDockControlBottom.Location = new Point(0, 701);
+            barDockControlBottom.Location = new Point(0, 699);
             barDockControlBottom.Manager = barManager1;
             barDockControlBottom.Size = new Size(1139, 0);
             // 
@@ -328,7 +328,7 @@
             barDockControlLeft.Dock = DockStyle.Left;
             barDockControlLeft.Location = new Point(0, 0);
             barDockControlLeft.Manager = barManager1;
-            barDockControlLeft.Size = new Size(0, 701);
+            barDockControlLeft.Size = new Size(0, 699);
             // 
             // barDockControlRight
             // 
@@ -336,7 +336,7 @@
             barDockControlRight.Dock = DockStyle.Right;
             barDockControlRight.Location = new Point(1139, 0);
             barDockControlRight.Manager = barManager1;
-            barDockControlRight.Size = new Size(0, 701);
+            barDockControlRight.Size = new Size(0, 699);
             // 
             // btnNuevoProducto
             // 
@@ -1541,6 +1541,7 @@
             gridViewValues.RowHeight = 5;
             gridViewValues.CustomRowCellEditForEditing += gridViewValues_CustomRowCellEditForEditing;
             gridViewValues.CellValueChanged += gridViewValues_CellValueChanged;
+            gridViewValues.KeyDown += gridViewValues_KeyDown;
             // 
             // colTransactionMasterDetailId
             // 
@@ -1577,7 +1578,7 @@
             colTransactionDetailName.Name = "colTransactionDetailName";
             colTransactionDetailName.Visible = true;
             colTransactionDetailName.VisibleIndex = 1;
-            colTransactionDetailName.Width = 10;
+            colTransactionDetailName.Width = 350;
             // 
             // colSkuFormatoDescripton
             // 
@@ -1646,7 +1647,7 @@
             repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default) });
             repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
-            repositoryItemButtonEdit1.Click += repositoryItemButtonEdit1_Click;
+            repositoryItemButtonEdit1.Click += ButtonPlusQuantity_Click;
             // 
             // colAccionMenos
             // 
@@ -1666,7 +1667,7 @@
             repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default) });
             repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
             repositoryItemButtonEdit2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
-            repositoryItemButtonEdit2.Click += repositoryItemButtonEdit2_Click;
+            repositoryItemButtonEdit2.Click += ButtonMinusQuantity_Click;
             // 
             // colAccionPrecios
             // 
@@ -1802,7 +1803,7 @@
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1139, 701);
+            ClientSize = new Size(1139, 699);
             Controls.Add(progressPanel);
             Controls.Add(btnAplicar);
             Controls.Add(dropDownButton1);
