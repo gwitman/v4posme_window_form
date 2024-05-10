@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Globalization;
 using DevExpress.Xpo;
 using DevExpress.Xpo.DB;
 using DevExpress.XtraBars.Alerter;
@@ -22,6 +23,9 @@ static class Program
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
+        // Establecer la cultura predeterminada para la aplicación
+        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("es-NI"); // Cultura española (España)
+        CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("es-NI");
         //Application.Run(new Form1());
         WindowsFormsSettings.UseAdvancedTextEdit = DevExpress.Utils.DefaultBoolean.True;
         Application.EnableVisualStyles();

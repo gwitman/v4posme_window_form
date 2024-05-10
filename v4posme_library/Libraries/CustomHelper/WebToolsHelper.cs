@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics;
+using System.Globalization;
 
 
 namespace v4posme_library.Libraries.CustomHelper
@@ -11,26 +12,27 @@ namespace v4posme_library.Libraries.CustomHelper
             var unixTime = dateTime - epoch;
             return (long)unixTime.TotalSeconds;
         }
+
         public static long ToUnixTimestamp(DateOnly dateTime)
         {
             var epoch = new DateOnly(1970, 1, 1);
             var unixTime = dateTime.DayNumber - epoch.DayNumber;
             return unixTime;
         }
-        
-        public string helper_RequestGetValueObjet(dynamic data,string fieldData, string defaultValue)
+
+        public string helper_RequestGetValueObjet(dynamic data, string fieldData, string defaultValue)
         {
             //Validar data
             if (data is null)
                 return defaultValue;
 
             //Validar has
-            var dictionary  = (IDictionary<string, object>)data;
+            var dictionary = (IDictionary<string, object>)data;
             if (!dictionary.ContainsKey(fieldData))
                 return defaultValue;
 
 
-            string value    = dictionary[fieldData].ToString();
+            string value = dictionary[fieldData].ToString();
             return value;
         }
 
@@ -103,10 +105,9 @@ namespace v4posme_library.Libraries.CustomHelper
             return Convert.ToDecimal(input.Replace(",", ""));
         }
 
-        public static T? ConvertToNumber<T>(string? input)
+        public static T? ConvertToNumber<T>(string input)
         {
-            T? result = default(T);
-
+            var result = default(T);
             try
             {
                 result = (T)Convert.ChangeType(input!, typeof(T));
@@ -119,9 +120,10 @@ namespace v4posme_library.Libraries.CustomHelper
             {
                 Console.WriteLine("Error: No se puede convertir la cadena a un número del tipo " + typeof(T).Name);
             }
-        
+
             return result;
         }
+
         public string HelperGetSr(string sexo)
         {
             return sexo == "FEMENINO" ? "Sra." : "Sr.";
