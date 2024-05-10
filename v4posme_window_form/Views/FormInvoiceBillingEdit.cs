@@ -1191,16 +1191,15 @@ namespace v4posme_window.Views
                     var itemNameDetail = transactionDetailName is null ? "" : transactionDetailName.Replace("'", "");
                     var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity).ToString());
                     var listPrice = Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colPrice));
-                    var listLote = string.Empty;
-                    var rowCellValueDetalilVencimiento = gridViewValues.GetRowCellValue(i, colDetailVencimiento);
-                    var listVencimiento = rowCellValueDetalilVencimiento is null ? "" : rowCellValueDetalilVencimiento.ToString();
+                    var listLote = string.Empty;                    
+                    var listVencimiento = string.Empty;
                     var skuCatalogItemId = Convert.ToInt32(gridViewValues.GetRowCellValue(i, colSku));
                     var skuFormatoDescription = gridViewValues.GetRowCellValue(i, colSkuFormatoDescripton).ToString();
                     var itemId = Convert.ToInt32(gridViewValues.GetRowCellValue(i, colItemId));
 
 
                     var lote = string.IsNullOrEmpty(listLote) ? "" : listLote;
-                    var vencimiento = string.IsNullOrWhiteSpace(listVencimiento) ? "" : listVencimiento;
+                    var vencimiento = string.IsNullOrEmpty(listVencimiento) ? "" : listVencimiento;
                     var warehouseId = objTm.SourceWarehouseId;
                     var objItem = _objInterfazItemModel.GetRowByPk(user.CompanyId, itemId);
                     var objItemWarehouse = VariablesGlobales.Instance.UnityContainer.Resolve<IItemWarehouseModel>().GetByPk(user.CompanyId, itemId, warehouseId.Value);
@@ -1577,7 +1576,7 @@ namespace v4posme_window.Views
                     arrayListSubTotal.Add(formInvoiceBillingEditDetailDto.SubTotal);
                     arrayListIva.Add(formInvoiceBillingEditDetailDto.Iva);
                     arrayListLote.Add("");
-                    arrayListVencimiento.Add(formInvoiceBillingEditDetailDto.DetailVencimiento!);
+                    arrayListVencimiento.Add("");
                     arrayListSku.Add(formInvoiceBillingEditDetailDto.Sku);
                     arrayListSkuFormatoDescription.Add(formInvoiceBillingEditDetailDto.SkuFormatoDescription!);
                 }
@@ -1607,7 +1606,7 @@ namespace v4posme_window.Views
                 {
                     var itemId = arrayListItemId[i];
                     var lote = string.Empty;
-                    var vencimiento = arrayListVencimiento == null ? "" : arrayListVencimiento[i];
+                    var vencimiento = string.Empty;
                     var warehouseId = objTmNew.SourceWarehouseId;
                     var objItem = _objInterfazItemModel.GetRowByPk(user.CompanyId, itemId);
                     var objItemWarehouse = VariablesGlobales.Instance.UnityContainer.Resolve<IItemWarehouseModel>().GetByPk(user.CompanyId, itemId, warehouseId!.Value);
@@ -1853,7 +1852,7 @@ namespace v4posme_window.Views
 
                 //Si es al credito crear tabla de amortizacion
                 string[] causalIDTypeCredit = ParameterCausalTypeCredit!.Value!.Split(',');
-                var exisCausalInCredit = Array.IndexOf(causalIDTypeCredit, objTmNew.TransactionCausalId) > 0;
+                var exisCausalInCredit = causalIDTypeCredit.Any(c => c == objTmNew.TransactionCausalId.ToString());
 
                 //si la factura es de credito
                 if (exisCausalInCredit)
@@ -1935,7 +1934,8 @@ namespace v4posme_window.Views
                     var objCatalogItem_DiasFeriados366 = _objInterfazCoreWebCatalog.GetCatalogAllItemByNameCatalogo("CXC_NO_COBRABLES_FERIADOS_366", user.CompanyId);
 
                     //Crear tabla de amortizacion
-                    VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebFinancialAmort>().Amort(
+                    var objInterfazFinaicialAmortization = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebFinancialAmort>();
+                    objInterfazFinaicialAmortization.Amort(
                         objCustomerCreditDocument.Amount, /*monto*/
                         objCustomerCreditDocument.Interes, /*interes anual*/
                         objCustomerCreditDocument.Term, /*numero de pagos*/
@@ -1946,7 +1946,8 @@ namespace v4posme_window.Views
                         objCatalogItem_DiasFeriados365,
                         objCatalogItem_DiasFeriados366
                     );
-                    var tableAmortization = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebFinancialAmort>().GetTable();
+
+                    var tableAmortization = objInterfazFinaicialAmortization.GetTable();
                     if (tableAmortization.ListDetailDto is not null && tableAmortization.ListDetailDto.Count > 0)
                     {
                         foreach (var itemAmortization in tableAmortization.ListDetailDto)
@@ -2224,7 +2225,7 @@ namespace v4posme_window.Views
                     txtReceiptAmountBankDol.Text = ObjTransactionMasterInfo.ReceiptAmountBankDol.ToString(FormatDecimal);
                     txtReceiptAmountBankDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
                     txtReceiptAmountPoint.Text = ObjTransactionMasterInfo.ReceiptAmountPoint!.Value.ToString(FormatDecimal);
-                    txtChangeAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString(FormatDecimal);
+                    txtChangeAmount.Text = ObjTransactionMasterInfo.ChangeAmount.ToString(FormatDecimal);
                     btnAplicar.Visible = true;
                     break;
                 default:
@@ -2742,7 +2743,12 @@ namespace v4posme_window.Views
                 }
             }
 
-            if (encontrado) return;
+            if (encontrado)
+            {
+                FnRefrechDetail();
+                FnGetConcept(itemID, "IVA");
+                return;
+            }
 
             var billingEdit = new FormInvoiceBillingEditDetailDTO
             {
