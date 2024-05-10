@@ -103,7 +103,7 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<TbCurrency> TbCurrencies { get; set; }
 
-    public virtual DbSet<TbCustomer> TbCustomers { get; set; }
+    public virtual DbSet<TbCustomer?> TbCustomers { get; set; }
 
     public virtual DbSet<TbCustomerConsultasSinRiesgo> TbCustomerConsultasSinRiesgoes { get; set; }
 
