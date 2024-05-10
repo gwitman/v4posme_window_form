@@ -47,6 +47,12 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Update="Libraries\Style\AlertWarning.css">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Libraries\Style\AlertSuccess.css">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
       <None Update="Properties\Settings.settings">
         <Generator>PublicSettingsSingleFileGenerator</Generator>
         <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -61,7 +67,7 @@
       <None Update="Libraries\Style\Alert.html">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="Libraries\Style\Alert.css">
+      <None Update="Libraries\Style\AlertError.css">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

@@ -1,0 +1,105 @@
+﻿.container{
+    padding: 6px 14px 20px 14px;
+}
+.popup {
+    width: 362px;
+    height: auto;
+    padding: 4px;
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.25);
+    border: 1px solid @WindowText/0.2;
+    display: flex;
+    flex-direction: column;
+    font-family: "Segoe UI", serif;
+    text-align: center;
+    justify-content: space-around;
+    background-color: #2A9134;
+    color: white;
+    font-size: 10pt;
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Segoe UI Semibold', serif;
+}
+.header-caption{
+    padding: 10px 10px 0px 10px;
+    display: flex;
+    flex-direction: row;
+}
+.header-caption-icon{
+    width: 18px;
+    height: 18px;
+}
+.header-caption-text{
+    padding-left: 10px;
+}
+.header-buttons{
+    display: flex;
+    flex-direction: row;
+    padding: 5px 2px 0px 0px;
+}
+.header-button{
+    padding: 5px;
+    border-radius: 2px;
+    align-self: center;
+}
+.header-button:hover{
+    background-color: @HotTrackedColor/0.9;
+}
+.header-button:active{
+    background-color: @HotTrackedColor/0.6;
+}
+.close-button{
+    width: 18px;
+    height: 18px;
+}
+.message{
+    display: flex;
+    flex-direction: row;
+}
+.message-text-container{
+    text-align: left;
+    padding: 10px;
+}
+.message-image-container{
+    align-self: center;
+    padding: 9px;
+}
+.message-image{
+    width: 54px;
+    height: 54px;
+}
+.message-caption{
+    font-size: 10.5pt;
+    font-family: 'Segoe UI Semibold';
+}
+.message-text{
+}
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.button{
+    margin: 9px;
+    padding: 8px;
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.25);
+    background-color: @Window;
+    color: @WindowText;
+    font-size: 10.5pt;
+    font-family: 'Segoe UI Semibold';
+    border: 1px solid @WindowText/0.1;
+
+}
+.button:hover{
+    background-color: @HotTrackedColor/0.9;
+    color: @HotTrackedForeColor;
+    border: 1px solid @HotTrackedForeColor/0.2;
+}
+.button:active{
+    background-color: @HotTrackedColor/0.6;
+}

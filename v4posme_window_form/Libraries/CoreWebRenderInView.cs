@@ -231,15 +231,25 @@ public class CoreWebRenderInView
     public void GetMessageAlert(TypeError type, string title, string body, Form form)
     {
         var templateHtml = new HtmlTemplate();
-        var image = type switch
-        {
-            TypeError.Informacion => Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_INFORMACION_PATH"]!),
-            TypeError.Error => Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_ERROR_PATH"]!),
-            TypeError.Warning => Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_WARNING_PATH"]!),
-            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
-        };
         templateHtml.Template = Load("Alert.html");
-        templateHtml.Styles = Load("Alert.css");
+        Image? image;
+        switch (type)
+        {
+            case TypeError.Informacion:
+                image = Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_INFORMACION_PATH"]!);
+                templateHtml.Styles = Load("AlertSuccess.css"); break;
+            case TypeError.Error:
+                image = Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_ERROR_PATH"]!);
+                templateHtml.Styles = Load("AlertError.css");
+                break;
+            case TypeError.Warning:
+                image = Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_WARNING_PATH"]!);
+                templateHtml.Styles = Load("AlertWarning.css");
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
+        
         var svgImageItemCollection = new SvgImageCollection();
         svgImageItemCollection.Add("message_close",Properties.Resources.message_close);
         svgImageItemCollection.Add("message_icon",Properties.Resources.Glyph_Message);
