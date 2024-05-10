@@ -108,17 +108,21 @@ namespace v4posme_library.Libraries.CustomHelper
         public static T? ConvertToNumber<T>(string input)
         {
             var result = default(T);
+            if (string.IsNullOrEmpty(input))
+            {
+                return result;
+            }
             try
             {
                 result = (T)Convert.ChangeType(input!, typeof(T));
             }
             catch (FormatException)
             {
-                Console.WriteLine("Error: La cadena no se puede convertir a un número del tipo " + typeof(T).Name);
+                Debug.WriteLine($@"Error: La cadena {input} no se puede convertir a un número del tipo {typeof(T).Name}");
             }
             catch (InvalidCastException)
             {
-                Console.WriteLine("Error: No se puede convertir la cadena a un número del tipo " + typeof(T).Name);
+                Debug.WriteLine($@"Error: La cadena {input} no se puede convertir a un número del tipo {typeof(T).Name}");
             }
 
             return result;
