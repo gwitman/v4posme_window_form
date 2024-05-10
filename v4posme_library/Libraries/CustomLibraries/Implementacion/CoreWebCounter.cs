@@ -52,7 +52,7 @@ class CoreWebCounter(ICounterModel counterModel, IComponentModel componentModel)
             throw new Exception("NO EXISTE EL CONTADOR");
 
         // Obtener valor
-        var value = (objCounter.CurrentValue!.Value+objCounter.Seed!.Value).ToString().PadLeft(objCounter.Length!.Value, '0');
+        var value = (objCounter.CurrentValue!.Value).ToString().PadLeft(objCounter.Length!.Value, '0');
         value = objCounter.Serie + value;
 
         // Actualizar

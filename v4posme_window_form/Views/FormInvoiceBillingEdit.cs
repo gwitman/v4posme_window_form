@@ -1726,9 +1726,9 @@ namespace v4posme_window.Views
                         var objTmdc = new TbTransactionMasterDetailCredit();
                         objTmdc.TransactionMasterId = TransactionMasterId.Value;
                         objTmdc.TransactionMasterDetailId = transactionMasterDetailId;
-                        objTmdc.Reference1 = txtFixedExpenses.Text;
-                        objTmdc.Reference2 = txtReportSinRiesgo.IsOn ? "true" : "false";
-                        objTmdc.Reference3 = "txtLayFirstLineProtocolo";
+                        objTmdc.Reference1 = string.IsNullOrEmpty(txtFixedExpenses.Text) ? "0" : txtFixedExpenses.Text;
+                        objTmdc.Reference2 = txtReportSinRiesgo.IsOn ? "1" : "0";
+                        objTmdc.Reference3 = "0"; //no existe el campo
                         objTmdc.Reference4 = "";
                         objTmdc.Reference5 = "";
                         objTmdc.Reference9 = "reference1: Porcentaje de Gastos fijos para las facturas de credito,reference2: Escritura Publica,reference3: Primer Linea del Protocolo";
@@ -1781,9 +1781,9 @@ namespace v4posme_window.Views
                         amountTotal = amountTotal + objTmdNew.Amount;
                         _objInterfazTransactionMasterDetailModel.UpdateAppPosme(user.CompanyId, TransactionId.Value, TransactionMasterId.Value, transactionMasterDetailId, objTmdNew);
 
-                        objTmdc.Reference1 = txtFixedExpenses.Text;
-                        objTmdc.Reference2 = txtReportSinRiesgo.IsOn ? "true" : "false";
-                        objTmdc.Reference3 = "txtLayFirstLineProtocolo";
+                        objTmdc.Reference1 = string.IsNullOrEmpty(txtFixedExpenses.Text) ? "0" : txtFixedExpenses.Text;
+                        objTmdc.Reference2 = txtReportSinRiesgo.IsOn ? "1" : "0";
+                        objTmdc.Reference3 = "0"; //no existe el campo
                         objTmdc.Reference4 = "";
                         objTmdc.Reference5 = "";
                         objTmdc.Reference9 = "reference1: Porcentaje de Gastos Fijos para las Facturas de Credito,reference2: Escritura Publica,reference3: Primer Linea del Protocolo";
@@ -2105,8 +2105,8 @@ namespace v4posme_window.Views
                     txtReference3.Text = ObjEmployeeNatural is null ? "N/D" : ObjEmployeeNatural.FirstName;
                     txtIsApplied.Checked = false;
                     txtDateFirst.DateTime = DateTime.Today;
-                    txtDesembolsoEfectivo.IsOn = true;
-                    txtReportSinRiesgo.IsOn = true;
+                    txtDesembolsoEfectivo.IsOn = false;
+                    txtReportSinRiesgo.IsOn = false;
                     TxtStatusOldId = ObjListWorkflowStage!.ElementAt(0).WorkflowStageId;
                     TxtStatusId = ObjListWorkflowStage!.ElementAt(0).WorkflowStageId;
                     txtSubTotal.Text = @"0.0";
@@ -2165,7 +2165,7 @@ namespace v4posme_window.Views
                     txtDateFirst.DateTime = ObjTransactionMaster.TransactionOn2!.Value;
                     txtReference2.Text = ObjTransactionMaster.Reference2;
                     txtDesembolsoEfectivo.IsOn = true; //txtCheckDeEfectivo
-                    txtReportSinRiesgo.IsOn = ObjTransactionMasterDetailCredit is not null && ObjTransactionMasterDetailCredit.Reference2!.Equals("true", StringComparison.InvariantCultureIgnoreCase);
+                    txtReportSinRiesgo.IsOn = ObjTransactionMasterDetailCredit is not null && ObjTransactionMasterDetailCredit.Reference2!.Equals("1", StringComparison.InvariantCultureIgnoreCase);
                     TxtStatusOldId = ObjTransactionMaster.StatusId;
                     TxtStatusId = ObjTransactionMaster.StatusId;
                     txtSubTotal.Text = @"0.0";
@@ -2878,8 +2878,8 @@ namespace v4posme_window.Views
                 var customerCreditLineSelectedValue = txtCustomerCreditLineID.SelectedItem;
                 if (customerCreditLineSelectedValue is not null)
                 {
-                    var customerCreditLineID = ((ComboBoxItem)customerCreditLineSelectedValue).Key; //$("#txtCustomerCreditLineID").val();
-                    //var objCustomerCreditLine = ObjListCustomerCreditLine.First(dto => dto.CustomerCreditLineId == Convert.ToInt32(customerCreditLineID));
+                    var customerCreditLineID = ((ComboBoxItem)customerCreditLineSelectedValue).Key; 
+                    
                 }
 
                 var causalCredit = ParameterCausalTypeCredit.Value.Split(",");
@@ -2949,8 +2949,7 @@ namespace v4posme_window.Views
                     btnRegistrar.Focus();
                     break;
             }
-
-            e.Handled = true;
+            
         }
 
         private void txtScanerCodigo_KeyPress(object sender, KeyPressEventArgs e)
@@ -3126,7 +3125,7 @@ namespace v4posme_window.Views
                     break;
             }
 
-            e.Handled = true;
+            
         }
 
         private void txtReceiptAmountDol_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -3199,7 +3198,7 @@ namespace v4posme_window.Views
                     break;
             }
 
-            e.Handled = true;
+            
         }
 
         private void txtCurrencyID_KeyDown(object sender, KeyEventArgs e)
@@ -3212,7 +3211,7 @@ namespace v4posme_window.Views
                     break;
             }
 
-            e.Handled = true;
+            
         }
 
         private void gridViewValues_CellValueChanged(object sender, CellValueChangedEventArgs e)
