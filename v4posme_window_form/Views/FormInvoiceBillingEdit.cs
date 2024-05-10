@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
@@ -1076,7 +1077,7 @@ namespace v4posme_window.Views
                 {
                     statusId = ObjListWorkflowStage?[0].WorkflowStageId;
                 }
-                else if (ObjParameterInvoiceAutoApply == "true" && !exisCausalInCredit)
+                else if (ObjParameterInvoiceAutoApply == "true" && exisCausalInCredit != true)
                 {
                     statusId = Convert.ToInt32(ObjParaemterStatusCanceled);
                 }
@@ -1193,7 +1194,7 @@ namespace v4posme_window.Views
                     var itemNameDetail = transactionDetailName is null ? "" : transactionDetailName.Replace("'", "");
                     var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity).ToString());
                     var listPrice = Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colPrice));
-                    var listLote = gridViewValues.GetRowCellValue(i, colTransactionDetailName).ToString();
+                    var listLote = string.Empty;
                     var rowCellValueDetalilVencimiento = gridViewValues.GetRowCellValue(i, colDetailVencimiento);
                     var listVencimiento = rowCellValueDetalilVencimiento is null ? "" : rowCellValueDetalilVencimiento.ToString();
                     var skuCatalogItemId = Convert.ToInt32(gridViewValues.GetRowCellValue(i, colSku));
@@ -1608,7 +1609,7 @@ namespace v4posme_window.Views
                 for (var i = 0; i < arrayListItemId.Count; i++)
                 {
                     var itemId = arrayListItemId[i];
-                    var lote = arrayListLote == null ? "" : arrayListLote[i];
+                    var lote = string.Empty;
                     var vencimiento = arrayListVencimiento == null ? "" : arrayListVencimiento[i];
                     var warehouseId = objTmNew.SourceWarehouseId;
                     var objItem = _objInterfazItemModel.GetRowByPk(user.CompanyId, itemId);
@@ -2116,7 +2117,7 @@ namespace v4posme_window.Views
                     txtReceiptAmount.Text = @"0.0";
                     txtReceiptAmountDol.Text = @"0.0";
                     txtReceiptAmountTarjeta.Text = @"0.0";
-                    txtReceiptAmountTarjeta_Reference.Text = @"0.0";
+                    txtReceiptAmountTarjeta_Reference.Text = string.Empty;
                     txtReceiptAmountTarjetaDol.Text = @"0.0";
                     txtReceiptAmountTarjetaDol_Reference.Text = string.Empty;
                     txtReceiptAmountBank.Text = @"0.0";
@@ -2296,7 +2297,7 @@ namespace v4posme_window.Views
             }
 
 
-            if (TxtStatusOldId == (int)WorkflowStatus.FacturaStatusAplicado)
+            if (TxtStatusOldId == (int)WorkflowStatus.FacturaStatusAplicado && TransactionMasterId > 0 )
             {
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
                     "Debe crear una factura nueva la actual ya esta aplicada.", this);
