@@ -2125,6 +2125,7 @@ namespace v4posme_window.Views
                     txtReceiptAmountBankDol.Text = @"0.0";
                     txtReceiptAmountBankDol_Reference.Text = string.Empty;
                     txtReceiptAmountPoint.Text = @"0.0";
+                    txtNote.Text = "sin comentario...";
 
                     //Llenar Linea de Credito
                     FnRenderLineaCredit(ObjListCustomerCreditLine, ParameterCausalTypeCredit!);
@@ -2214,9 +2215,7 @@ namespace v4posme_window.Views
                     FnRefrechDetail();
                     FnRecalculateDetail(false, "");
 
-                    //Renderizar Pagos
-
-                    txtChangeAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString(FormatDecimal);
+                    //Renderizar Pagos                    
                     txtReceiptAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString(FormatDecimal);
                     txtReceiptAmountDol.Text = ObjTransactionMasterInfo.ReceiptAmountDol.ToString(FormatDecimal);
                     txtReceiptAmountTarjeta.Text = ObjTransactionMasterInfo.ReceiptAmountCard.ToString(FormatDecimal);
@@ -2228,6 +2227,7 @@ namespace v4posme_window.Views
                     txtReceiptAmountBankDol.Text = ObjTransactionMasterInfo.ReceiptAmountBankDol.ToString(FormatDecimal);
                     txtReceiptAmountBankDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
                     txtReceiptAmountPoint.Text = ObjTransactionMasterInfo.ReceiptAmountPoint!.Value.ToString(FormatDecimal);
+                    txtChangeAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString(FormatDecimal);
                     btnAplicar.Visible = true;
                     break;
                 default:
@@ -2383,14 +2383,7 @@ namespace v4posme_window.Views
 
 
             if (invoiceTypeCredit)
-            {
-                if (txtDateFirst.EditValue != null && switchDesembolso)
-                {
-                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
-                        "Seleccione la fecha del primer pago.", this);
-
-                    return false;
-                }
+            {               
 
                 if (txtNote.EditValue.ToString() == "" && switchDesembolso)
                 {
@@ -2895,14 +2888,30 @@ namespace v4posme_window.Views
                     }
                 }
 
-                txtReceiptAmountDol.Text = @"0";
-                txtChangeAmount.Text = @"0";
-                txtReceiptAmountBank.Text = @"0";
-                txtReceiptAmountPoint.Text = @"0";
-                txtReceiptAmountTarjeta.Text = @"0";
-                txtReceiptAmountTarjetaDol.Text = @"0";
-                txtReceiptAmountBankDol.Text = @"0";
-                txtReceiptAmount.Text = invoiceTypeCredit ? @"0" : decimal.Round(totalGeneral, 2).ToString("N2");
+
+                if (invoiceTypeCredit == true)
+                {
+                    txtReceiptAmountDol.Text = @"0";
+                    txtChangeAmount.Text = @"0";
+                    txtReceiptAmountBank.Text = @"0";
+                    txtReceiptAmountPoint.Text = @"0";
+                    txtReceiptAmountTarjeta.Text = @"0";
+                    txtReceiptAmountTarjetaDol.Text = @"0";
+                    txtReceiptAmountBankDol.Text = @"0";
+                    txtReceiptAmount.Text = @"0";
+                }
+                else
+                {
+                    txtReceiptAmountDol.Text = @"0";
+                    txtChangeAmount.Text = @"0";
+                    txtReceiptAmountBank.Text = @"0";
+                    txtReceiptAmountPoint.Text = @"0";
+                    txtReceiptAmountTarjeta.Text = @"0";
+                    txtReceiptAmountTarjetaDol.Text = @"0";
+                    txtReceiptAmountBankDol.Text = @"0";
+                    txtReceiptAmount.Text = decimal.Round(totalGeneral, 2).ToString("N2");
+                }
+
             }
         }
 
