@@ -6,7 +6,7 @@ class ComponentModel : IComponentModel
 {
     public TbComponent? GetRowByName(string name)
     {
-        using var context = new DataContext();
+        using var context = new DataContext();        
         return context.TbComponents.FirstOrDefault(component => component.Name == name);
     }
 }

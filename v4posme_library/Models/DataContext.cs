@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+
 using v4posme_library.Libraries;
 
 namespace v4posme_library.Models;
@@ -18,9 +20,15 @@ public partial class DataContext : DbContext
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.LogTo(s => Debug.WriteLine(s));
+        //optionsBuilder
+        //.LogTo(s => Debug.WriteLine(s));
+        //
+        //optionsBuilder
+        //.UseLoggerFactory(LoggerFactory.Create(builder => Debug.WriteLine(builder) ))
+        //.EnableSensitiveDataLogging();
+
         var connectionString = VariablesGlobales.ConnectionString;
-        optionsBuilder.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion); //Cannot find this method
+        optionsBuilder.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion); 
     }
 
     public virtual DbSet<TbAccount> TbAccounts { get; set; }
