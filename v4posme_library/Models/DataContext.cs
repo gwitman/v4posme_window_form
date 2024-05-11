@@ -12,10 +12,9 @@ public partial class DataContext : DbContext
         : base(options)
     {
     }
-
     public DataContext()
     {
-        
+
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -23,6 +22,7 @@ public partial class DataContext : DbContext
         var connectionString = VariablesGlobales.ConnectionString;
         optionsBuilder.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion); //Cannot find this method
     }
+
     public virtual DbSet<TbAccount> TbAccounts { get; set; }
 
     public virtual DbSet<TbAccountLevel> TbAccountLevels { get; set; }
@@ -103,7 +103,7 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<TbCurrency> TbCurrencies { get; set; }
 
-    public virtual DbSet<TbCustomer?> TbCustomers { get; set; }
+    public virtual DbSet<TbCustomer> TbCustomers { get; set; }
 
     public virtual DbSet<TbCustomerConsultasSinRiesgo> TbCustomerConsultasSinRiesgoes { get; set; }
 

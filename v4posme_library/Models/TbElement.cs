@@ -25,5 +25,5 @@ public partial class TbElement
     public string? Name { get; set; }
 
     [Column("columnAutoIncrement")]
-    public int? ColumnAutoIncrement { get; set; }
+    public int ColumnAutoIncrement { get; set; }
 }
