@@ -12,10 +12,15 @@
         <PackageProjectUrl>https://posme.net</PackageProjectUrl>
         <PackageIcon>PM-ico-36.ico</PackageIcon>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <ApplicationIcon>Resources\posMe.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
       <Compile Remove="Libraries\FormInvoiceApi.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Resources\posMe.ico" />
     </ItemGroup>
 
     <ItemGroup>

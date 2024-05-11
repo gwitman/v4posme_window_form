@@ -25,6 +25,12 @@
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_9A13C559F6C54742A619C3F172CE0C28"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -110,6 +116,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9A13C559F6C54742A619C3F172CE0C28"
+            {
+            "SourcePath" = "8:..\\v4posme_window_form\\Resources\\PM-ico-144px.ico"
+            "TargetName" = "8:PM-ico-144px.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_142223B561814EF3B3AF5C9253AD68FB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -167,7 +193,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:v4posme"
         "ProductCode" = "8:{B5A9D50A-77AB-4FCB-A84B-BE4417796FBE}"
-        "PackageCode" = "8:{9AECDBDD-E239-4B1D-B633-CD56023E6CE9}"
+        "PackageCode" = "8:{EDBB7860-E5E8-498D-9C1B-374FE5E789CB}"
         "UpgradeCode" = "8:{2BB92807-3ACB-4528-896B-7DA24644F38A}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -184,7 +210,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Sistema elaborado para la administracion de empresas"
         "ARPURLINFOABOUT" = "8:https://posme.net"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_05965B45498A43DCA4377039DA829ED0"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -287,9 +313,9 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4A8553B1B260486EAEB413207F1128BA"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_7CBD6052B6C14801B00819FB0A9C6B57"
             {
-            "Name" = "8:posMe (Active)"
+            "Name" = "8:posMe"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -301,9 +327,9 @@
             "Icon" = "8:_05965B45498A43DCA4377039DA829ED0"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D0F3E953BC7E4DFA84B06775DB0E0FA8"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_BF365F70D0994680B196472105EE2891"
             {
-            "Name" = "8:posMe (Active)"
+            "Name" = "8:posMe"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -312,7 +338,7 @@
             "Target" = "8:_4C887F4DA0F54E1A8FA74E62B2E80549"
             "Folder" = "8:_317D4A34F3C84A1D93DA53DF044247A7"
             "WorkingFolder" = "8:_142223B561814EF3B3AF5C9253AD68FB"
-            "Icon" = "8:_05965B45498A43DCA4377039DA829ED0"
+            "Icon" = "8:_9A13C559F6C54742A619C3F172CE0C28"
             "Feature" = "8:"
             }
         }
