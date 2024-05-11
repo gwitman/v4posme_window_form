@@ -8,6 +8,11 @@ namespace v4posme_library.Libraries.CustomModels;
 
 class BdModel : IBdModel
 {
+    public void ExecuteSqlRaw(string query)
+    {
+        var context = new DataContext();
+        context.Database.ExecuteSqlRaw(query);
+    }
     public void ExecuteProcedure(string query)
     {
         using var connection = new MySqlConnection(VariablesGlobales.ConnectionString);

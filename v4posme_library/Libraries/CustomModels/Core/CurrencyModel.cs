@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
@@ -7,7 +8,7 @@ class CurrencyModel : ICurrencyModel
     public TbCurrency GetRowName(string? name)
     {
         using var context = new DataContext();
-        return context.TbCurrencies
+        return context.TbCurrencies.AsNoTracking()
             .First(currency => currency.Name == name
                                && currency.IsActive!.Value);
     }
@@ -15,7 +16,7 @@ class CurrencyModel : ICurrencyModel
     public TbCurrency GetRowByPk(int currencyId)
     {
         using var context = new DataContext();
-        return context.TbCurrencies
+        return context.TbCurrencies.AsNoTracking()
             .First(currency => currency.CurrencyId == currencyId
                                && currency.IsActive!.Value);
     }
@@ -23,6 +24,6 @@ class CurrencyModel : ICurrencyModel
     public List<TbCurrency> GetList()
     {
         using var context = new DataContext();
-        return context.TbCurrencies.ToList();
+        return context.TbCurrencies.AsNoTracking().ToList();
     }
 }

@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
@@ -7,7 +8,7 @@ class WorkflowStageModel : IWorkflowStageModel
     public List<TbWorkflowStage> GetRowByPk(List<TbWorkflowStage> listWorkflowStageRole)
     {
         using var context = new DataContext();
-        var query = context.TbWorkflowStages.Select(stage => stage);
+        var query = context.TbWorkflowStages.AsNoTracking().Select(stage => stage);
         if (listWorkflowStageRole.Count > 0)
         {
             query = listWorkflowStageRole.Aggregate(query,
@@ -22,7 +23,7 @@ class WorkflowStageModel : IWorkflowStageModel
     public List<TbWorkflowStage>? GetRowByWorkflowIdAndFlavorId(int workflowId, int flavorId)
     {
         using var context = new DataContext();
-        return context.TbWorkflowStages
+        return context.TbWorkflowStages.AsNoTracking()
             .Where(stage => stage.WorkflowId == workflowId
                             && stage.FlavorId == flavorId
                             && stage.IsActive)
@@ -32,7 +33,7 @@ class WorkflowStageModel : IWorkflowStageModel
     public List<TbWorkflowStage>? GetRowByWorkflowStageId(int workflowId, int flavorId, int workflowStageId)
     {
         using var context = new DataContext();
-        return context.TbWorkflowStages
+        return context.TbWorkflowStages.AsNoTracking()
             .Where(stage => stage.WorkflowId == workflowId
                             && stage.WorkflowStageId == workflowStageId
                             && stage.FlavorId == flavorId
@@ -43,7 +44,7 @@ class WorkflowStageModel : IWorkflowStageModel
     public List<TbWorkflowStage> GetRowByWorkflowStageIdOnly(int workflowStageId)
     {
         using var context = new DataContext();
-        return context.TbWorkflowStages
+        return context.TbWorkflowStages.AsNoTracking()
             .Where(stage => stage.WorkflowStageId == workflowStageId
                             && stage.IsActive)
             .ToList();
@@ -52,7 +53,7 @@ class WorkflowStageModel : IWorkflowStageModel
     public List<TbWorkflowStage>? GetRowByWorkflowIdAndFlavorIdInit(int workflowId, int flavorId)
     {
         using var context = new DataContext();
-        return context.TbWorkflowStages
+        return context.TbWorkflowStages.AsNoTracking()
             .Where(stage => stage.WorkflowId == workflowId
                             && stage.FlavorId == flavorId
                             && stage.IsActive && stage.IsInit)
@@ -62,7 +63,7 @@ class WorkflowStageModel : IWorkflowStageModel
     public List<TbWorkflowStage>? GetRowByWorkflowIdAndFlavorIdApplyFirst(int workflowId, int flavorId)
     {
         using var context = new DataContext();
-        return context.TbWorkflowStages
+        return context.TbWorkflowStages.AsNoTracking()
             .Where(stage => stage.WorkflowId == workflowId
                             && stage.FlavorId == flavorId
                             && stage.IsActive && stage.Aplicable!.Value)

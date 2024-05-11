@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
@@ -8,8 +9,8 @@ class CompanySubElementAuditModel : ICompanySubElementAuditModel
     public List<TbCompanySubelementAuditDto>? ListElementAudit(int companyId, int elementId)
     {
         using var context = new DataContext();
-        return context.TbCompanySubelementAudits
-            .Join(context.TbSubelements,
+        return context.TbCompanySubelementAudits.AsNoTracking()
+            .Join(context.TbSubelements.AsNoTracking(),
                 audit => audit.SubElementId,
                 subelement => subelement.SubElementId
                 , (audit, subelement) => new { audit, subelement })

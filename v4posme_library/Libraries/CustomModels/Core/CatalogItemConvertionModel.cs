@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
@@ -7,7 +8,7 @@ class CatalogItemConvertionModel : ICatalogItemConvertionModel
     public TbCatalogItemConvertion GetDefault(int companyId, int catalogId)
     {
         using var context = new DataContext();
-        return context.TbCatalogItemConvertions
+        return context.TbCatalogItemConvertions.AsNoTracking()
             .First(convertion => convertion.CompanyId == companyId
                                  && convertion.CatalogId == catalogId
                                  && convertion.IsActive!.Value
@@ -18,7 +19,7 @@ class CatalogItemConvertionModel : ICatalogItemConvertionModel
         int catalogItemIdTarget)
     {
         using var context = new DataContext();
-        return context.TbCatalogItemConvertions
+        return context.TbCatalogItemConvertions.AsNoTracking()
             .First(convertion => convertion.CompanyId == companyId
                                  && convertion.CatalogId == catalogId
                                  && convertion.CatalogItemId == catalogItemIdSource

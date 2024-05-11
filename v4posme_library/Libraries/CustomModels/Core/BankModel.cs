@@ -8,7 +8,7 @@ class BankModel : IBankModel
     public void DeleteAppPosme(int companyId, int bankId)
     {
         using var context = new DataContext();
-        context.TbBanks
+        context.TbBanks.AsNoTracking()
             .Where(bank => bank.CompanyId == companyId
                            && bank.BankId == bankId)
             .ExecuteUpdate(calls => calls.SetProperty(bank => bank.IsActive, 0));
@@ -17,7 +17,7 @@ class BankModel : IBankModel
     public void UpdateAppPosme(int companyId, int bankId, TbBank data)
     {
         using var context = new DataContext();
-        var find = context.TbBanks.FirstOrDefault(bank => bank.CompanyId == companyId
+        var find = context.TbBanks.AsNoTracking().FirstOrDefault(bank => bank.CompanyId == companyId
                                                           && bank.BankId == bankId);
         if (find is null) return;
         data.BankId = find.BankId;
@@ -36,7 +36,7 @@ class BankModel : IBankModel
     public TbBank GetRowByPk(int companyId, int bankId)
     {
         using var context = new DataContext();
-        return context.TbBanks.First(bank =>
+        return context.TbBanks.AsNoTracking().First(bank =>
             bank.CompanyId == companyId
             && bank.BankId == bankId
             && bank.IsActive == 1);
@@ -45,6 +45,6 @@ class BankModel : IBankModel
     public List<TbBank> GetByCompany(int companyId)
     {
         using var context = new DataContext();
-        return context.TbBanks.Where(bank => bank.CompanyId == companyId && bank.IsActive == 1).ToList();
+        return context.TbBanks.AsNoTracking().Where(bank => bank.CompanyId == companyId && bank.IsActive == 1).ToList();
     }
 }

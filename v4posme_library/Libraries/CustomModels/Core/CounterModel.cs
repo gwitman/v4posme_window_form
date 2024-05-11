@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
@@ -7,7 +8,7 @@ class CounterModel : ICounterModel
     public TbCounter? GetRowByPk(int companyId, int branchId, int componentId, int componentItemId)
     {
         using var context = new DataContext();
-        return context.TbCounters
+        return context.TbCounters.AsNoTracking()   
             .FirstOrDefault(counter => counter!.CompanyId == companyId
                                        && counter.BranchId == branchId
                                        && counter.ComponentId == componentId

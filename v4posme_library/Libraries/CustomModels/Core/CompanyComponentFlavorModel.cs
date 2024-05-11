@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
@@ -8,7 +9,7 @@ class CompanyComponentFlavorModel : ICompanyComponentFlavorModel
         int componentItemId)
     {
         using var context = new DataContext();
-        return context.TbCompanyComponentFlavors
+        return context.TbCompanyComponentFlavors.AsNoTracking()
             .FirstOrDefault(flavor => flavor!.CompanyId == companyId
                              && flavor.ComponentId == componentId
                              && flavor.ComponentItemId == componentItemId);

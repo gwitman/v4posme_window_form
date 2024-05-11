@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
@@ -7,7 +8,7 @@ class TransactionModel : ITransactionModel
     public TbTransaction? GetRowByPk(int companyId, string name)
     {
         using var context = new DataContext();
-        return context.TbTransactions
+        return context.TbTransactions.AsNoTracking()
             .FirstOrDefault(transaction => transaction!.CompanyId == companyId
                                   && transaction.Name == name
                                   && transaction.IsActive!.Value);
@@ -16,8 +17,8 @@ class TransactionModel : ITransactionModel
     public int GetCounterTransactionMaster(int companyId, int transactionId, int statusId)
     {
         using var context = new DataContext();
-        var query = from tb in context.TbTransactions
-            join tm in context.TbTransactionMasters on tb.TransactionId equals tm.TransactionId
+        var query = from tb in context.TbTransactions.AsNoTracking()
+            join tm in context.TbTransactionMasters.AsNoTracking() on tb.TransactionId equals tm.TransactionId
             where tm.IsActive!.Value && tm.CompanyId == companyId && tm.TransactionId == transactionId &&
                   tm.StatusId == statusId
             select new { tm, tb };
@@ -27,8 +28,8 @@ class TransactionModel : ITransactionModel
     public int GetCountInput(int companyId)
     {
         using var context = new DataContext();
-        var query = from tb in context.TbTransactions
-            join tm in context.TbTransactionMasters on tb.TransactionId equals tm.TransactionId
+        var query = from tb in context.TbTransactions.AsNoTracking()
+            join tm in context.TbTransactionMasters.AsNoTracking() on tb.TransactionId equals tm.TransactionId
             where tm.IsActive!.Value && tm.CompanyId == companyId && tb.SignInventory == 1
             select new { tm, tb };
         return query.Count();
@@ -37,8 +38,8 @@ class TransactionModel : ITransactionModel
     public int GetCountOutput(int companyId)
     {
         using var context = new DataContext();
-        var query = from tb in context.TbTransactions
-            join tm in context.TbTransactionMasters on tb.TransactionId equals tm.TransactionId
+        var query = from tb in context.TbTransactions.AsNoTracking()
+            join tm in context.TbTransactionMasters.AsNoTracking() on tb.TransactionId equals tm.TransactionId
             where tm.IsActive!.Value && tm.CompanyId == companyId && tb.SignInventory == -1
             select new { tm, tb };
         return query.Count();

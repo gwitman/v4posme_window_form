@@ -31,7 +31,7 @@ namespace v4posme_library.Libraries.CustomModels.Core
         public List<TbRole> GetRowByCompanyIDyBranchId(int companyId, int branchId)
         {
             using var context = new DataContext();
-            return context.TbRoles
+            return context.TbRoles.AsNoTracking()
                 .Where(role => role.CompanyId == companyId
                                && role.BranchId == branchId
                                && role.IsActive!.Value
@@ -42,7 +42,7 @@ namespace v4posme_library.Libraries.CustomModels.Core
         public TbRole? GetRowByPk(int companyId, int branchId, int roleId)
         {
             using var context = new DataContext();
-            return context.TbRoles.FirstOrDefault(role => role.CompanyId == companyId
+            return context.TbRoles.AsNoTracking().FirstOrDefault(role => role.CompanyId == companyId
                                                           && role.BranchId == branchId
                                                           && role.RoleId == roleId
                                                           && role.IsActive!.Value);

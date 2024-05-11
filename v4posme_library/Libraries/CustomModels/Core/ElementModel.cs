@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
@@ -7,8 +8,8 @@ class ElementModel : IElementModel
     public List<TbElement> GetRowByComponentIdNotIn(List<int> componentId, int elementTypeId)
     {
         using var context = new DataContext();
-        return context.TbElements
-            .Join(context.TbComponentElements,
+        return context.TbElements.AsNoTracking()
+            .Join(context.TbComponentElements.AsNoTracking(),
                 element => element.ElementId,
                 component => component.ElementId,
                 (element, componentElement) => new { element, componentElement })
@@ -24,7 +25,7 @@ class ElementModel : IElementModel
     public TbElement? GetRowByName(string name, int elementTypeId)
     {
         using var context = new DataContext();
-        return context.TbElements
+        return context.TbElements.AsNoTracking()
             .FirstOrDefault(element => element.Name == name
                               && element.ElementTypeId == elementTypeId);
     }
@@ -32,9 +33,9 @@ class ElementModel : IElementModel
     public List<TbElement>? GetRowByTypeAndLayout(int elementTypeId, int layoutId)
     {
         using var context = new DataContext();
-        var result = from e in context.TbElements
-            join ce in context.TbComponentElements on e.ElementId equals ce.ElementId
-            join me in context.TbMenuElements on e.ElementId equals me.ElementId
+        var result = from e in context.TbElements.AsNoTracking()
+            join ce in context.TbComponentElements.AsNoTracking() on e.ElementId equals ce.ElementId
+            join me in context.TbMenuElements.AsNoTracking() on e.ElementId equals me.ElementId
             where me.TypeMenuElementId == layoutId  
                   && e.ElementTypeId == elementTypeId
             select new TbElement
@@ -48,8 +49,8 @@ class ElementModel : IElementModel
     public List<TbElement> GetRowByPk(int componentId, int elementTypeId)
     {
         using var context = new DataContext();
-        var result = from e in context.TbElements
-            join ce in context.TbComponentElements on e.ElementId equals ce.ElementId
+        var result = from e in context.TbElements.AsNoTracking()
+            join ce in context.TbComponentElements.AsNoTracking() on e.ElementId equals ce.ElementId
             where ce.ComponentId == componentId  
                   && e.ElementTypeId == elementTypeId
             select new TbElement

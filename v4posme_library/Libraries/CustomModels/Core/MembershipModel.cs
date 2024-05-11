@@ -8,7 +8,7 @@ class MembershipModel : IMembershipModel
     public int DeleteAppPosme(int companyId, int branchId, int userId)
     {
         using var context = new DataContext();
-        return context.TbMemberships
+        return context.TbMemberships.AsNoTracking()
             .Where(membership => membership.CompanyId == companyId
                                  && membership.BranchId == branchId
                                  && membership.UserId == userId)
@@ -26,7 +26,7 @@ class MembershipModel : IMembershipModel
     public TbMembership? GetRowByCompanyIdBranchIdUserId(int companyId, int branchId, int userId)
     {
         using var context = new DataContext();
-        return context.TbMemberships
+        return context.TbMemberships.AsNoTracking()
             .SingleOrDefault(membership => membership!.CompanyId == companyId
                                  && membership.BranchId == branchId
                                  && membership.UserId == userId);

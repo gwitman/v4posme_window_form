@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
@@ -7,7 +8,7 @@ class CatalogItemModel : ICatalogItemModel
     public List<TbCatalogItem> GetRowByCatalogIdAndFlavorId(int catalogId, int flavorId)
     {
         using var context = new DataContext();
-        return context.TbCatalogItems
+        return context.TbCatalogItems.AsNoTracking()
             .Where(item => item.CatalogId == catalogId
                            && item.FlavorId == flavorId)
             .ToList();
@@ -16,7 +17,7 @@ class CatalogItemModel : ICatalogItemModel
     public List<TbCatalogItem> GetRowByCatalogIdAndFlavorIdParent(int catalogId, int flavorId, int parentCatalogItemId)
     {
         using var context = new DataContext();
-        return context.TbCatalogItems
+        return context.TbCatalogItems.AsNoTracking()
             .Where(item => item.CatalogId == catalogId
                            && item.FlavorId == flavorId
                            && item.ParentCatalogItemId == parentCatalogItemId)
@@ -26,7 +27,7 @@ class CatalogItemModel : ICatalogItemModel
     public TbCatalogItem GetRowByCatalogItemId(int catalogItemId)
     {
         using var context = new DataContext();
-        return context.TbCatalogItems
+        return context.TbCatalogItems.AsNoTracking()
             .First(item => item.CatalogItemId == catalogItemId);
     }
 }

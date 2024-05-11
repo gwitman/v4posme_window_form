@@ -8,7 +8,7 @@ class BranchModel : IBranchModel
     public void DeleteAppPosme(int companyId, int branchId)
     {
         using var context = new DataContext();
-        context.TbBranches
+        context.TbBranches.AsNoTracking()
             .Where(branch => branch.CompanyId == companyId
                              && branch.BranchId == branchId)
             .ExecuteUpdate(calls =>
@@ -18,7 +18,7 @@ class BranchModel : IBranchModel
     public void UpdateAppPosme(int companyId, int branchId, TbBranch data)
     {
         using var context = new DataContext();
-        var find = context.TbBranches
+        var find = context.TbBranches.AsNoTracking()
             .FirstOrDefault(branch => branch.CompanyId == companyId
                                       && branch.BranchId == branchId);
         if (find is null) return;
@@ -38,7 +38,7 @@ class BranchModel : IBranchModel
     public TbBranch GetRowByPk(int companyId, int branchId)
     {
         using var context = new DataContext();
-        return context.TbBranches
+        return context.TbBranches .AsNoTracking()
             .First(branch => branch.BranchId == branchId
                              && branch.CompanyId == companyId
                              && branch.IsActive!.Value);
@@ -47,7 +47,7 @@ class BranchModel : IBranchModel
     public List<TbBranch> GetByCompany(int companyId)
     {
         using var context = new DataContext();
-        return context.TbBranches
+        return context.TbBranches.AsNoTracking()
             .Where(branch => branch.CompanyId == companyId
                              && branch.IsActive!.Value)
             .ToList();

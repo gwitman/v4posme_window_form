@@ -38,8 +38,8 @@ class RoleAutorizationModel : IRoleAutorizationModel
     public List<TbRoleAutorizationDto> GetRowByRoleAutorization(int companyId, int branchId, int roleId)
     {
         using var context = new DataContext();
-        var query = from ra in context.TbRoleAutorizations
-            join ca in context.TbComponentAutorizations
+        var query = from ra in context.TbRoleAutorizations.AsNoTracking()
+            join ca in context.TbComponentAutorizations.AsNoTracking()
                 on new { ra.CompanyId, ra.ComponentAutorizationId } equals new
                     { ca.CompanyId, ca.ComponentAutorizationId }
             where ra.CompanyId == companyId
@@ -59,11 +59,11 @@ class RoleAutorizationModel : IRoleAutorizationModel
     public List<TbRoleAutorizationDto>? GetRowByRole(int companyId, int branchId, int roleId)
     {
         using var context = new DataContext();
-        var query = from ra in context.TbRoleAutorizations
-            join ca in context.TbComponentAutorizations
+        var query = from ra in context.TbRoleAutorizations.AsNoTracking()
+            join ca in context.TbComponentAutorizations.AsNoTracking()
                 on new { ra.CompanyId, ra.ComponentAutorizationId } equals new
                     { ca.CompanyId, ca.ComponentAutorizationId }
-            join cad in context.TbComponentAutorizationDetails
+            join cad in context.TbComponentAutorizationDetails.AsNoTracking()
                 on new { ca.CompanyId, ca.ComponentAutorizationId } equals new
                     { cad.CompanyId, cad.ComponentAutorizationId }
             where ra.CompanyId == companyId
@@ -85,11 +85,11 @@ class RoleAutorizationModel : IRoleAutorizationModel
     public List<TbRoleAutorizationDto> GetRowByPk(int companyId, int branchId, int roleId, int componentAutorizationId)
     {
         using var context = new DataContext();
-        var query = from ra in context.TbRoleAutorizations
-            join ca in context.TbComponentAutorizations
+        var query = from ra in context.TbRoleAutorizations.AsNoTracking()
+            join ca in context.TbComponentAutorizations.AsNoTracking()
                 on new { ra.CompanyId, ra.ComponentAutorizationId } equals new
                     { ca.CompanyId, ca.ComponentAutorizationId }
-            join cad in context.TbComponentAutorizationDetails
+            join cad in context.TbComponentAutorizationDetails.AsNoTracking()
                 on new { ca.CompanyId, ca.ComponentAutorizationId } equals new
                     { cad.CompanyId, cad.ComponentAutorizationId }
             where ra.CompanyId == companyId

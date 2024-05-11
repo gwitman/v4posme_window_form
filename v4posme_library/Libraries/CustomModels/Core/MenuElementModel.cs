@@ -9,10 +9,10 @@ namespace v4posme_library.Libraries.CustomModels.Core
         {
             var listMenuElement = new List<TbMenuElement>();
             using var context = new DataContext();
-            var result = from x in context.TbMenuElements
-                join e in context.TbElements on x.ElementId equals e.ElementId
-                join ce in context.TbComponentElements on e.ElementId equals ce.ElementId
-                join cco in context.TbCompanyComponents on ce.ComponentId equals cco.ComponentId
+            var result = from x in context.TbMenuElements.AsNoTracking()
+                join e in context.TbElements.AsNoTracking() on x.ElementId equals e.ElementId
+                join ce in context.TbComponentElements.AsNoTracking() on e.ElementId equals ce.ElementId
+                join cco in context.TbCompanyComponents.AsNoTracking() on ce.ComponentId equals cco.ComponentId
                 where x.CompanyId == companyId &&
                       x.IsActive == 1 &&
                       cco.CompanyId == companyId
@@ -46,8 +46,8 @@ namespace v4posme_library.Libraries.CustomModels.Core
         public List<TbMenuElement> GetRowByCompanyId(int companyId)
         {
             using var context = new DataContext();
-            return context.TbMenuElements
-                .Join(context.TbElements, 
+            return context.TbMenuElements.AsNoTracking()
+                .Join(context.TbElements.AsNoTracking(), 
                     menu => menu.ElementId, 
                     element => element.ElementId, 
                     (menu, element) => menu)

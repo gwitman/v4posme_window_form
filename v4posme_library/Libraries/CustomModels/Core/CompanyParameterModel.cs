@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
@@ -19,7 +20,7 @@ class CompanyParameterModel : ICompanyParameterModel
     public TbCompanyParameter? GetRowByParameterIdCompanyId(int companyId, int parameterId)
     {
         using var context = new DataContext();
-        return context.TbCompanyParameters
+        return context.TbCompanyParameters.AsNoTracking()
             .FirstOrDefault(parameter => parameter.CompanyId == companyId
                                          && parameter.ParameterId == parameterId);
     }

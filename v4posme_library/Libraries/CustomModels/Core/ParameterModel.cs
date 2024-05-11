@@ -10,7 +10,7 @@ class ParameterModel : IParameterModel
     public TbParameter? GetRowByName(string name)
     {
         using var context = new DataContext();        
-        var resul =  context.TbParameters
+        var resul =  context.TbParameters.AsNoTracking()
             .FirstOrDefault(parameter => parameter!.Name != null
                                          && parameter.Name.Contains(name));
 
@@ -20,6 +20,6 @@ class ParameterModel : IParameterModel
     public List<TbParameter> GetAll()
     {
         using var context = new DataContext();
-        return context.TbParameters.ToList();
+        return context.TbParameters.AsNoTracking().ToList();
     }
 }

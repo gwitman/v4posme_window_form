@@ -31,7 +31,7 @@ class ExchangerateModel : IExchangerateModel
     public TbExchangeRate? GetDefault(int companyId)
     {
         using var context = new DataContext();
-        return context.TbExchangeRates
+        return context.TbExchangeRates.AsNoTracking()
             .First(rate => Math.Abs(rate.Ratio!.Value - 1) < 1E8
                            && rate.CompanyId == companyId);
     }
@@ -39,7 +39,7 @@ class ExchangerateModel : IExchangerateModel
     public TbExchangeRate? GetRowByPk(int companyId, DateOnly date, int currencyIdSource, int currencyIdTarget)
     {
         using var context = new DataContext();
-        return context.TbExchangeRates
+        return context.TbExchangeRates.AsNoTracking()
             .FirstOrDefault(rate => rate!.CompanyId == companyId
                            && rate.CurrencyId == currencyIdSource
                            && rate.TargetCurrencyId == currencyIdTarget
@@ -49,14 +49,14 @@ class ExchangerateModel : IExchangerateModel
     public List<TbExchangeRateDto> GetByCompanyAndDate(int companyId, DateOnly dateStartOn, DateOnly dateEndOn)
     {
         using var context = new DataContext();
-        var result = from er in context.TbExchangeRates
-            join cc in context.TbCompanyCurrencies
+        var result = from er in context.TbExchangeRates.AsNoTracking()
+            join cc in context.TbCompanyCurrencies.AsNoTracking()
                 on new { er.CompanyId, er.CurrencyId } equals new { cc.CompanyId, cc.CurrencyId }
-            join c in context.TbCurrencies on cc.CurrencyId equals c.CurrencyId
-            join cct in context.TbCompanyCurrencies
+            join c in context.TbCurrencies.AsNoTracking() on cc.CurrencyId equals c.CurrencyId
+            join cct in context.TbCompanyCurrencies.AsNoTracking()
                 on new { er.CompanyId, TargetCurrencyId = er.TargetCurrencyId } equals new
                     { cct.CompanyId, TargetCurrencyId = cct.CurrencyId }
-            join ct in context.TbCurrencies on cct.CurrencyId equals ct.CurrencyId
+            join ct in context.TbCurrencies.AsNoTracking()  on cct.CurrencyId equals ct.CurrencyId
             where er.CompanyId == companyId &&
                   er.Date >= dateStartOn && er.Date <= dateEndOn
             orderby er.Date, c.Name

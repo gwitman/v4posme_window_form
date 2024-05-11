@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using DevExpress.DataAccess.Sql.DataApi;
 using DevExpress.XtraBars.Alerter;
 using DevExpress.XtraBars.ToastNotifications;
 using DevExpress.XtraEditors;
@@ -7,7 +8,9 @@ using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomLibraries.Implementacion;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
+using v4posme_library.Libraries.CustomModels;
 using v4posme_window.Libraries;
+using static Mysqlx.Notice.Warning.Types;
 
 namespace v4posme_window.Views
 {
@@ -51,6 +54,8 @@ namespace v4posme_window.Views
             var userService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
             var userTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
             var coreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
+            var objInterfazBDModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBdModel>();
+
             progressPanel.Visible = true;
 
             if (string.IsNullOrEmpty(txtUsuario.Text))
@@ -91,10 +96,12 @@ namespace v4posme_window.Views
             {
                 progressPanel.Visible = true;
             }
-
             var validar = 0;
             await Task.Run(() =>
             {
+
+                objInterfazBDModel.ExecuteSqlRaw("SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;");
+
                 var nickname = txtUsuario.Text;
                 var password = txtPassword.Text;
                 VariablesGlobales.Instance.User = userService.GetUserByNickname(nickname);

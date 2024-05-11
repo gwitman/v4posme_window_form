@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
@@ -28,7 +29,7 @@ class UserModel : IUserModel
     public List<TbUser?> GetRowByComercio(string comercio)
     {
         using var context = new DataContext();
-        return context.TbUsers
+        return context.TbUsers.AsNoTracking()
             .Where(user => user.Comercio == comercio
                            && user.IsActive!.Value)
             .ToList();
@@ -37,7 +38,7 @@ class UserModel : IUserModel
     public List<TbUser?> GetRowByFoto(string foto)
     {
         using var context = new DataContext();
-        return context.TbUsers
+        return context.TbUsers.AsNoTracking()
             .Where(user => user.Foto == foto
                            && user.IsActive!.Value)
             .ToList();
@@ -46,7 +47,7 @@ class UserModel : IUserModel
     public TbUser? GetRowByExistNickname(string nickname)
     {
         using var context = new DataContext();
-        return context.TbUsers
+        return context.TbUsers.AsNoTracking()
             .Single(user => user.Nickname == nickname
                             && user.IsActive!.Value);
     }
@@ -54,7 +55,7 @@ class UserModel : IUserModel
     public TbUser? GetRowByNiknamePassword(string nickname, string password)
     {
         using var context = new DataContext();
-        return context.TbUsers
+        return context.TbUsers.AsNoTracking()
             .SingleOrDefault(user => user!.Nickname == nickname
                                      && user.Password == password
                                      && user.IsActive!.Value);
@@ -63,7 +64,7 @@ class UserModel : IUserModel
     public TbUser? GetRowByEmail(string email)
     {
         using var context = new DataContext();
-        return context.TbUsers
+        return context.TbUsers.AsNoTracking()
             .SingleOrDefault(user => user!.Email == email
                                      && user.IsActive!.Value);
     }
@@ -71,7 +72,7 @@ class UserModel : IUserModel
     public TbUser? GetRowByPk(int companyId, int branchId, int userId)
     {
         using var context = new DataContext();
-        return context.TbUsers
+        return context.TbUsers.AsNoTracking()
             .Single(user => user.CompanyId == companyId
                             && user.BranchId == branchId
                             && user.UserId == userId
@@ -81,7 +82,7 @@ class UserModel : IUserModel
     public List<TbUser?> GetAll(int companyId)
     {
         using var context = new DataContext();
-        return context.TbUsers
+        return context.TbUsers.AsNoTracking()
             .Where(user => user.CompanyId == companyId
                            && user.IsActive!.Value)
             .ToList();
@@ -90,7 +91,7 @@ class UserModel : IUserModel
     public List<TbUser?> GetUserByBussnes(int companyId, string bussines)
     {
         using var context = new DataContext();
-        return context.TbUsers
+        return context.TbUsers.AsNoTracking()
             .Where(user => user.CompanyId == companyId
                            && user.Nickname!.Contains(bussines))
             .ToList();
@@ -99,7 +100,7 @@ class UserModel : IUserModel
     public int GetCountUser(int companyId)
     {
         using var context = new DataContext();
-        return context.TbUsers
+        return context.TbUsers.AsNoTracking()
             .Where(user => user.CompanyId == companyId
                            && user.IsActive!.Value)
             .Select(user => user)
@@ -109,7 +110,7 @@ class UserModel : IUserModel
     public int GetCount(int companyId)
     {
         using var context = new DataContext();
-        return context.TbUsers
+        return context.TbUsers.AsNoTracking()
             .Where(user => user.CompanyId == companyId
                            && user.IsActive!.Value)
             .Select(user => user)
