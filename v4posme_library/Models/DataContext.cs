@@ -16,7 +16,7 @@ public partial class DataContext : DbContext
     }
     public DataContext()
     {
-
+        this.Database.ExecuteSqlRaw("SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;");
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
