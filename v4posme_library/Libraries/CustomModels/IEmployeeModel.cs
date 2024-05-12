@@ -16,6 +16,8 @@ public interface IEmployeeModel
     List<TbEmployeeDto> GetRowByBranchId(int companyId, int branchId);
     
     TbEmployeeDto GetRowByPk(int companyId, int branchId, int entityId);
-    
+
+    List<TbEmployeeDto> GetRowByCompanyId(int companyId);
+
     TbEmployeeDto GetRowByEntityId(int companyId, int entityId);
 }

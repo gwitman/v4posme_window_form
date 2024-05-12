@@ -169,6 +169,48 @@ class EmployeeModel : IEmployeeModel
             };
         return result.Single();
     }
+    public List<TbEmployeeDto> GetRowByCompanyId(int companyId)
+    {
+        using var dbContext = new DataContext();
+        var result = from i in dbContext.TbEmployees
+                     join n in dbContext.TbNaturales on i.EntityId equals n.EntityId
+                     where i.CompanyId == companyId 
+                           && i.IsActive == 1
+                     select new TbEmployeeDto
+                     {
+                         CompanyId = i.CompanyId,
+                         BranchId = i.BranchId,
+                         EntityId = i.EntityId,
+                         EmployeNumber = i.EmployeNumber,
+                         NumberIdentification = i.NumberIdentification,
+                         IdentificationTypeId = i.IdentificationTypeId,
+                         SocialSecurityNumber = i.SocialSecurityNumber,
+                         Address = i.Address,
+                         CountryId = i.CountryId,
+                         StateId = i.StateId,
+                         CityId = i.CityId,
+                         DepartamentId = i.DepartamentId,
+                         AreaId = i.AreaId,
+                         ClasificationId = i.ClasificationId,
+                         CategoryId = i.CategoryId,
+                         Reference1 = i.Reference1,
+                         Reference2 = i.Reference2,
+                         TypeEmployeeId = i.TypeEmployeeId,
+                         HourCost = i.HourCost,
+                         ParentEmployeeId = i.ParentEmployeeId,
+                         StartOn = i.StartOn,
+                         EndOn = i.EndOn,
+                         StatusId = i.StatusId,
+                         CreatedOn = i.CreatedOn,
+                         CreatedIn = i.CreatedIn,
+                         CreatedAt = i.CreatedAt,
+                         CreatedBy = i.CreatedBy,
+                         IsActive = i.IsActive,
+                         FirstName = n.FirstName,
+                         LastName = n.LastName
+                     };
+        return result.ToList();
+    }
 
     public TbEmployeeDto GetRowByEntityId(int companyId, int entityId)
     {
