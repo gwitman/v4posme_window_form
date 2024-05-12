@@ -104,11 +104,7 @@ namespace v4posme_window.Views
 
                 var nickname = txtUsuario.Text;
                 var password = txtPassword.Text;
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
                 VariablesGlobales.Instance.User = userService.GetUserByNickname(nickname);
-                stopwatch.Stop();
-                Console.WriteLine("Tiempo transcurrido: " + stopwatch.Elapsed.TotalSeconds + " s");
             
                 if (VariablesGlobales.Instance.User == null)
                 {

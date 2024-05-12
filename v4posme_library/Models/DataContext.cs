@@ -20,7 +20,7 @@ public partial class DataContext : DbContext
     }
     public DataContext()
     {
-        //this.Database.ExecuteSqlRaw("SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;");
+        this.Database.ExecuteSqlRaw("SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;");
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -32,8 +32,16 @@ public partial class DataContext : DbContext
         //    .UseLoggerFactory(LoggerFactory.Create(builder => Debug.WriteLine(builder) ))        
         //    .EnableSensitiveDataLogging();
 
+        
+
         var connectionString = VariablesGlobales.ConnectionString;
-        optionsBuilder.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion); 
+        optionsBuilder.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion, options => {
+            options.EnableRetryOnFailure();
+            options.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery);
+            options.UseRelationalNulls();
+            options.CommandTimeout(60);            
+            //options.TransactionBehavior(TransactionBehavior.ReadUncommitted);
+        }); 
     }
 
     public virtual DbSet<TbAccount> TbAccounts { get; set; }

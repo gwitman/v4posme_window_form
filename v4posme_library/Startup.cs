@@ -32,9 +32,9 @@ public class Startup
                 .UseMySql(connectionString,MariaDbServerVersion.LatestSupportedServerVersion)
                 // The following three options help with debugging, but should
                 // be changed or removed for production.
-                .LogTo(Console.WriteLine, LogLevel.Information)                                                
-                .EnableSensitiveDataLogging()
-                .EnableDetailedErrors()
+                //.LogTo(Console.WriteLine, LogLevel.Information)                                                
+                //.EnableSensitiveDataLogging()
+                //.EnableDetailedErrors()
                 .EnableSensitiveDataLogging(false)
                 
         );
