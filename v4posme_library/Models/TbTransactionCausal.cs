@@ -40,8 +40,8 @@ public partial class TbTransactionCausal
     public int? WarehouseTargetId { get; set; }
 
     [Column("isDefault", TypeName = "bit(1)")]
-    public bool IsDefault { get; set; }
+    public bool? IsDefault { get; set; }
 
     [Column("isActive", TypeName = "bit(1)")]
-    public bool IsActive { get; set; }
+    public bool? IsActive { get; set; }
 }

@@ -13,7 +13,7 @@ class TransactionCausalModel : ITransactionCausalModel
             .Where(causal => causal.CompanyId == companyId
                              && causal.TransactionId == transactionId
                              && causal.BranchId == branchId
-                             && causal.IsActive )
+                             && causal.IsActive!.Value )
             .ToList();
     }
 
@@ -23,32 +23,32 @@ class TransactionCausalModel : ITransactionCausalModel
         return context.TbTransactionCausals
             .SingleOrDefault(causal => causal!.CompanyId == companyId
                               && causal.TransactionId == transactionId
-                              && causal.IsActive  && causal.IsDefault );
+                              && causal.IsActive!.Value  && !causal.IsDefault!.Value );
     }
 
     public List<TbTransactionCausalDto> GetByCompanyAndTransaction(int companyId, int transactionId)
     {
         using var context = new DataContext();
         var result = from tc in context.TbTransactionCausals
-            join b in context.TbBranches on tc.BranchId equals b.BranchId
-            join w in context.TbWarehouses on tc.WarehouseSourceId equals w.WarehouseId into wJoin
+            join b in context.TbBranches on tc.BranchId!.Value equals b.BranchId
+            join w in context.TbWarehouses on tc.WarehouseSourceId!.Value equals w.WarehouseId into wJoin
             from w in wJoin.DefaultIfEmpty()
-            join w2 in context.TbWarehouses on tc.WarehouseTargetId equals w2.WarehouseId into w2Join
+            join w2 in context.TbWarehouses on tc.WarehouseTargetId!.Value equals w2.WarehouseId into w2Join
             from w2 in w2Join.DefaultIfEmpty()
             where tc.CompanyId == companyId
                   && tc.TransactionId == transactionId
-                  && tc.IsActive
+                  && tc.IsActive!.Value
             select new TbTransactionCausalDto
             {
                 CompanyId = tc.CompanyId,
                 TransactionId = tc.TransactionId,
                 TransactionCausalId = tc.TransactionCausalId,
-                BranchId = tc.BranchId,
+                BranchId = tc.BranchId!.Value,
                 Name = tc.Name,
-                WarehouseSourceId = tc.WarehouseSourceId,
-                WarehouseTargetId = tc.WarehouseTargetId,
-                IsDefault = tc.IsDefault,
-                IsActive = tc.IsActive,
+                WarehouseSourceId = tc.WarehouseSourceId!.Value,
+                WarehouseTargetId = tc.WarehouseTargetId!.Value,
+                IsDefault = tc.IsDefault!.Value,
+                IsActive = tc.IsActive!.Value,
                 Branch = b.Name,
                 WarehouseSourceDescription = w.Name,
                 WarehouseTargetDescription = w2.Name
@@ -63,7 +63,7 @@ class TransactionCausalModel : ITransactionCausalModel
             .Single(causal => causal.CompanyId == companyId
                               && causal.TransactionId == transactionId
                               && causal.TransactionCausalId == causalId
-                              && causal.IsActive);
+                              && causal.IsActive!.Value);
     }
 
     public void DeleteAppPosme(int companyId, int transactionId, List<int> listCausal)
@@ -73,7 +73,7 @@ class TransactionCausalModel : ITransactionCausalModel
             .Where(causal => causal.CompanyId == companyId
                              && causal.TransactionId == transactionId
                              && !listCausal.Contains(causal.TransactionCausalId))
-            .ExecuteUpdate(calls => calls.SetProperty(causal => causal.IsActive, false));
+            .ExecuteUpdate(calls => calls.SetProperty(causal => causal.IsActive!.Value, false));
     }
 
     public int InsertAppPosme(TbTransactionCausal data)
@@ -102,7 +102,7 @@ class TransactionCausalModel : ITransactionCausalModel
         return context.TbTransactionCausals
             .Count(causal => causal.CompanyId == companyId
                              && causal.TransactionId == transactionId
-                             && causal.IsActive
-                             && causal.IsDefault);
+                             && causal.IsActive!.Value
+                             && causal.IsDefault!.Value);
     }
 }

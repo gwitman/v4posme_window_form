@@ -100,11 +100,16 @@ namespace v4posme_window.Views
             await Task.Run(() =>
             {
 
-                objInterfazBDModel.ExecuteSqlRaw("SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;");
+                
 
                 var nickname = txtUsuario.Text;
                 var password = txtPassword.Text;
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
                 VariablesGlobales.Instance.User = userService.GetUserByNickname(nickname);
+                stopwatch.Stop();
+                Console.WriteLine("Tiempo transcurrido: " + stopwatch.Elapsed.TotalSeconds + " s");
+            
                 if (VariablesGlobales.Instance.User == null)
                 {
                     validar = 1;

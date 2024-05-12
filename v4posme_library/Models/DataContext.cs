@@ -3,29 +3,34 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-
 using v4posme_library.Libraries;
-
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Z.EntityFramework.Extensions;
 namespace v4posme_library.Models;
 
 public partial class DataContext : DbContext
 {
+
+  
+
     public DataContext(DbContextOptions<DataContext> options)
         : base(options)
     {
+        
     }
     public DataContext()
     {
-        
+        //this.Database.ExecuteSqlRaw("SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;");
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         //optionsBuilder
         //.LogTo(s => Debug.WriteLine(s));
         //
-        //optionsBuilder
-        //.UseLoggerFactory(LoggerFactory.Create(builder => Debug.WriteLine(builder) ))
-        //.EnableSensitiveDataLogging();
+        //
+        //optionsBuilder        
+        //    .UseLoggerFactory(LoggerFactory.Create(builder => Debug.WriteLine(builder) ))        
+        //    .EnableSensitiveDataLogging();
 
         var connectionString = VariablesGlobales.ConnectionString;
         optionsBuilder.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion); 
