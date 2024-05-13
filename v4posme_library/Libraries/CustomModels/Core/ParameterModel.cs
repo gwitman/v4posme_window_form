@@ -4,12 +4,12 @@ using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
-class ParameterModel : IParameterModel
+class ParameterModel(DataContext context) : IParameterModel
 {
     
     public TbParameter? GetRowByName(string name)
     {
-        using var context = new DataContext();        
+              
         var resul =  context.TbParameters.AsNoTracking()
             .FirstOrDefault(parameter => parameter!.Name != null
                                          && parameter.Name.Contains(name));
@@ -19,7 +19,6 @@ class ParameterModel : IParameterModel
 
     public List<TbParameter> GetAll()
     {
-        using var context = new DataContext();
         return context.TbParameters.AsNoTracking().ToList();
     }
 }

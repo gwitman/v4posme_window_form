@@ -3,11 +3,11 @@ using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
-class CounterModel : ICounterModel
+class CounterModel(DataContext context) : ICounterModel
 {
     public TbCounter? GetRowByPk(int companyId, int branchId, int componentId, int componentItemId)
     {
-        using var context = new DataContext();
+        
         return context.TbCounters.AsNoTracking()   
             .FirstOrDefault(counter => counter!.CompanyId == companyId
                                        && counter.BranchId == branchId
@@ -17,7 +17,7 @@ class CounterModel : ICounterModel
 
     public void UpdateAppPosme(int companyId, int branchId, int componentId, int componentItemId, TbCounter data)
     {
-        using var context = new DataContext();
+        
         var find = context.TbCounters
             .FirstOrDefault(counter => counter!.CompanyId == companyId
                                        && counter.BranchId == branchId

@@ -4,11 +4,11 @@ using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels;
 
-public class ComponentCycleModel : IComponentCycleModel
+public class ComponentCycleModel(DataContext context) : IComponentCycleModel
 {
     public void DeleteAppPosme(int componentCycleId)
     {
-        using var context = new DataContext();
+        
         var find = context.TbAccountingCycles
             .SingleOrDefault(cycle => cycle!.ComponentCycleId == componentCycleId);
         if (find is null)
@@ -21,7 +21,7 @@ public class ComponentCycleModel : IComponentCycleModel
 
     public void DeleteNotInArray(int companyId, int componentId, int componentPeriodId, List<int> array)
     {
-        using var context = new DataContext();
+        
         context.TbAccountingCycles
             .Where(cycle => cycle!.CompanyId == companyId
                             && cycle.ComponentId == componentId
@@ -32,7 +32,7 @@ public class ComponentCycleModel : IComponentCycleModel
 
     public void UpdateAppPosme(int componentCycleId, TbAccountingCycle data)
     {
-        using var context = new DataContext();
+        
         var find = context.TbAccountingCycles
             .SingleOrDefault(cycle => cycle!.ComponentCycleId == componentCycleId);
         if (find is null)
@@ -46,7 +46,7 @@ public class ComponentCycleModel : IComponentCycleModel
 
     public int InsertAppPosme(TbAccountingCycle? data)
     {
-        using var context = new DataContext();
+        
         var add = context.TbAccountingCycles.Add(data);
         context.SaveChanges();
         return add.Entity!.ComponentCycleId;
@@ -54,7 +54,7 @@ public class ComponentCycleModel : IComponentCycleModel
 
     public List<TbAccountingCycle?> GetRowByNotClosed(int companyId, int componentPeriodId, int workflowStageClosed)
     {
-        using var context = new DataContext();
+        
         return context.TbAccountingCycles
             .Where(cycle => cycle!.IsActive)
             .Where(cycle => cycle!.ComponentPeriodId == componentPeriodId)
@@ -66,14 +66,14 @@ public class ComponentCycleModel : IComponentCycleModel
 
     public TbAccountingCycle? GetRowByCycleId(int cycleId)
     {
-        using var context = new DataContext();
+        
         return context.TbAccountingCycles
             .SingleOrDefault(cycle => cycle!.IsActive && cycle.ComponentCycleId == cycleId);
     }
 
     public int CountJournalInCycle(int cycleId, int companyId)
     {
-        using var context = new DataContext();
+        
         return context.TbJournalEntries
             .Count(entry => entry.IsActive
                             && entry.CompanyId == companyId
@@ -82,7 +82,7 @@ public class ComponentCycleModel : IComponentCycleModel
 
     public TbAccountingCycle? GetRowByCompanyIdFecha(int companyId, DateTime dateStart)
     {
-        using var context = new DataContext();
+        
         return context.TbAccountingCycles
             .Single(cycle => cycle!.IsActive &&
                              cycle.CompanyId == companyId &&
@@ -93,7 +93,7 @@ public class ComponentCycleModel : IComponentCycleModel
     public List<TbAccountingCycle?> GetRowByCompanyIdTopCycleOpenAscAndOpen(int companyId, int top,
         int workflowStageClosed)
     {
-        using var context = new DataContext();
+        
         return context.TbAccountingCycles
             .Where(cycle => cycle!.IsActive)
             .Where(cycle => cycle!.CompanyId == companyId)
@@ -105,7 +105,7 @@ public class ComponentCycleModel : IComponentCycleModel
 
     public TbAccountingCycle? GetRowByPk(int periodId, int cycleId)
     {
-        using var context = new DataContext();
+        
         return context.TbAccountingCycles
             .Single(account => account!.IsActive
                                && account.ComponentPeriodId == periodId
@@ -115,7 +115,7 @@ public class ComponentCycleModel : IComponentCycleModel
     public List<TbAccountingCycle?> GetRowByCycleNotIn(int companyId, int componentId,
         int componentPeriodId, List<int> data)
     {
-        using var context = new DataContext();
+        
         return context.TbAccountingCycles
             .Where(cycle => cycle!.CompanyId != companyId
                             && cycle.ComponentId == componentId
@@ -127,7 +127,7 @@ public class ComponentCycleModel : IComponentCycleModel
 
     public List<TbAccountingCycle?> GetByComponentPeriodId(int componentPeriodId)
     {
-        using var context = new DataContext();
+        
         return context.TbAccountingCycles
             .Where(cycle => cycle!.ComponentPeriodId == componentPeriodId)
             .Where(cycle => cycle!.IsActive)

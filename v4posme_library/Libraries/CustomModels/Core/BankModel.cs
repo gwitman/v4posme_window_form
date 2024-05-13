@@ -3,11 +3,11 @@ using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
-class BankModel : IBankModel
+class BankModel(DataContext context) : IBankModel
 {
     public void DeleteAppPosme(int companyId, int bankId)
     {
-        using var context = new DataContext();
+        
         context.TbBanks.AsNoTracking()
             .Where(bank => bank.CompanyId == companyId
                            && bank.BankId == bankId)
@@ -16,7 +16,7 @@ class BankModel : IBankModel
 
     public void UpdateAppPosme(int companyId, int bankId, TbBank data)
     {
-        using var context = new DataContext();
+        
         var find = context.TbBanks.AsNoTracking().FirstOrDefault(bank => bank.CompanyId == companyId
                                                           && bank.BankId == bankId);
         if (find is null) return;
@@ -27,7 +27,7 @@ class BankModel : IBankModel
 
     public int InsertAppPosme(int companyId, TbBank data)
     {
-        using var context = new DataContext();
+        
         var add = context.Add(data);
         context.SaveChanges();
         return add.Entity.BankId;
@@ -35,7 +35,7 @@ class BankModel : IBankModel
 
     public TbBank GetRowByPk(int companyId, int bankId)
     {
-        using var context = new DataContext();
+        
         return context.TbBanks.AsNoTracking().First(bank =>
             bank.CompanyId == companyId
             && bank.BankId == bankId
@@ -44,7 +44,7 @@ class BankModel : IBankModel
 
     public List<TbBank> GetByCompany(int companyId)
     {
-        using var context = new DataContext();
+        
         return context.TbBanks.AsNoTracking().Where(bank => bank.CompanyId == companyId && bank.IsActive == 1).ToList();
     }
 }

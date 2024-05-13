@@ -3,11 +3,11 @@ using v4posme_library.Models;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
-class TransactionModel : ITransactionModel
+class TransactionModel(DataContext context) : ITransactionModel
 {
     public TbTransaction? GetRowByPk(int companyId, string name)
     {
-        using var context = new DataContext();
+        
         return context.TbTransactions.AsNoTracking()
             .FirstOrDefault(transaction => transaction!.CompanyId == companyId
                                   && transaction.Name == name
@@ -16,7 +16,7 @@ class TransactionModel : ITransactionModel
 
     public int GetCounterTransactionMaster(int companyId, int transactionId, int statusId)
     {
-        using var context = new DataContext();
+        
         var query = from tb in context.TbTransactions.AsNoTracking()
             join tm in context.TbTransactionMasters.AsNoTracking() on tb.TransactionId equals tm.TransactionId
             where tm.IsActive!.Value && tm.CompanyId == companyId && tm.TransactionId == transactionId &&
@@ -27,7 +27,7 @@ class TransactionModel : ITransactionModel
 
     public int GetCountInput(int companyId)
     {
-        using var context = new DataContext();
+        
         var query = from tb in context.TbTransactions.AsNoTracking()
             join tm in context.TbTransactionMasters.AsNoTracking() on tb.TransactionId equals tm.TransactionId
             where tm.IsActive!.Value && tm.CompanyId == companyId && tb.SignInventory == 1
@@ -37,7 +37,7 @@ class TransactionModel : ITransactionModel
 
     public int GetCountOutput(int companyId)
     {
-        using var context = new DataContext();
+        
         var query = from tb in context.TbTransactions.AsNoTracking()
             join tm in context.TbTransactionMasters.AsNoTracking() on tb.TransactionId equals tm.TransactionId
             where tm.IsActive!.Value && tm.CompanyId == companyId && tb.SignInventory == -1
@@ -47,7 +47,7 @@ class TransactionModel : ITransactionModel
 
     public TbTransaction? GetByCompanyAndTransaction(int companyId, int transactionId)
     {
-        using var context = new DataContext();
+        
         return context.TbTransactions
             .First(transaction => transaction.CompanyId == companyId
                                   && transaction.TransactionId == transactionId
@@ -56,7 +56,7 @@ class TransactionModel : ITransactionModel
 
     public List<TbTransaction?> GetTransactionContabilizable(int companyId)
     {
-        using var context = new DataContext();
+        
         return context.TbTransactions
             .Where(transaction => transaction.CompanyId == companyId
                                   && transaction.IsCountable!.Value
@@ -66,7 +66,7 @@ class TransactionModel : ITransactionModel
 
     public void UpdateAppPosme(int companyId, int transactionId, TbTransaction data)
     {
-        using var context = new DataContext();
+        
         var find = context.TbTransactions
             .FirstOrDefault(transaction => transaction.CompanyId == companyId
                                            && transaction.TransactionId == transactionId);

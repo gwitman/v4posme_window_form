@@ -16,7 +16,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         private readonly IUserModel _userModel;
         private readonly ICompanyModel _companyModel;
         private readonly IBranchModel _branchModel;
-        
+        private readonly DataContext _context;
         public CoreWebAuthentication(IMembershipModel membershipModel,
             IRoleModel roleModel,
             ICoreWebMenu coreWebMenu,
@@ -24,7 +24,8 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             ICoreWebTools coreWebToolser,
             IUserModel userModel,
             ICompanyModel companyModel,
-            IBranchModel branchModel)
+            IBranchModel branchModel,
+            DataContext context)
         {
             _membershipModel = membershipModel;
             _roleModel = roleModel;
@@ -34,6 +35,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             _userModel = userModel;
             _companyModel = companyModel;
             _branchModel = branchModel;
+            _context = context;
         }
 
         public TbUser Validar(TbUser user, string password)
@@ -52,8 +54,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
             try
             {
-                using var context = new DataContext();
-                var user = from u in context.TbUsers where u.Nickname == nickname select u;
+                var user = from u in _context.TbUsers where u.Nickname == nickname select u;
                 return user.FirstOrDefault();
             }
             catch (Exception exception)

@@ -4,12 +4,12 @@ using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels.Core;
 
-class ExchangerateModel : IExchangerateModel
+class ExchangerateModel(DataContext context) : IExchangerateModel
 {
     public void UpdateAppPosme(int companyId, DateOnly date, int currencyIdSource, int currencyIdTarget,
         TbExchangeRate data)
     {
-        using var context = new DataContext();
+        
         context.TbExchangeRates
             .Where(rate => rate.CompanyId == companyId
                            && rate.Date == date
@@ -22,7 +22,7 @@ class ExchangerateModel : IExchangerateModel
 
     public int InsertAppPosme(TbExchangeRate data)
     {
-        using var context = new DataContext();
+        
         var add = context.Add(data);
         context.SaveChanges();
         return add.Entity.ExchangeRateId;
@@ -30,7 +30,7 @@ class ExchangerateModel : IExchangerateModel
 
     public TbExchangeRate? GetDefault(int companyId)
     {
-        using var context = new DataContext();
+        
         return context.TbExchangeRates.AsNoTracking()
             .First(rate => Math.Abs(rate.Ratio!.Value - 1) < 1E8
                            && rate.CompanyId == companyId);
@@ -38,7 +38,7 @@ class ExchangerateModel : IExchangerateModel
 
     public TbExchangeRate? GetRowByPk(int companyId, DateOnly date, int currencyIdSource, int currencyIdTarget)
     {
-        using var context = new DataContext();
+        
         return context.TbExchangeRates.AsNoTracking()
             .FirstOrDefault(rate => rate!.CompanyId == companyId
                            && rate.CurrencyId == currencyIdSource
@@ -48,7 +48,7 @@ class ExchangerateModel : IExchangerateModel
 
     public List<TbExchangeRateDto> GetByCompanyAndDate(int companyId, DateOnly dateStartOn, DateOnly dateEndOn)
     {
-        using var context = new DataContext();
+        
         var result = from er in context.TbExchangeRates.AsNoTracking()
             join cc in context.TbCompanyCurrencies.AsNoTracking()
                 on new { er.CompanyId, er.CurrencyId } equals new { cc.CompanyId, cc.CurrencyId }

@@ -70,10 +70,6 @@ namespace v4posme_window.Views
 
                 return;
             }
-            else
-            {
-                dxErrorProvider.SetError(txtUsuario, "");
-            }
 
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
@@ -86,10 +82,6 @@ namespace v4posme_window.Views
                 }
 
                 return;
-            }
-            else
-            {
-                dxErrorProvider.SetError(txtPassword, "");
             }
 
             if (!progressPanel.Visible)
@@ -125,14 +117,17 @@ namespace v4posme_window.Views
 
                 var companyId = VariablesGlobales.Instance.User.CompanyId;
                 VariablesGlobales.Instance.ObjListParameterAll = coreWebParameter.GetParameterAll(companyId);
-                var parameterCantidadTransacciones = coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId).Value;
-                var parameterBalance = coreWebParameter.GetParameter("CORE_CUST_PRICE_BALANCE", companyId).Value;
+                //var parameterCantidadTransacciones = coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId).Value;
+                var parameterCantidadTransacciones = VariablesGlobales.Instance.ObjListParameterAll["CORE_QUANTITY_TRANSACCION"];
+                //var parameterBalance = coreWebParameter.GetParameter("CORE_CUST_PRICE_BALANCE", companyId).Value;
+                var parameterBalance = VariablesGlobales.Instance.ObjListParameterAll["CORE_CUST_PRICE_BALANCE"];
                 var parameterSendBox = coreWebParameter.GetParameter("CORE_PAYMENT_SENDBOX", companyId).Value;
                 var parameterSendBoxUsuario = coreWebParameter.GetParameter("CORE_PAYMENT_PRUEBA_USUARIO", companyId).Value;
                 var parameterSendBoxClave = coreWebParameter.GetParameter("CORE_PAYMENT_PRUEBA_CLAVE", companyId).Value;
                 var parameterProduccionUsuario = coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_USUARIO", companyId).Value;
                 var parameterProduccionClave = coreWebParameter.GetParameter("CORE_PAYMENT_PRODUCCION_CLAVE", companyId).Value;
-                _parameterPrice = Convert.ToDecimal(coreWebParameter.GetParameter("CORE_CUST_PRICE", companyId).Value);
+                //_parameterPrice = Convert.ToDecimal(coreWebParameter.GetParameter("CORE_CUST_PRICE", companyId).Value);
+                _parameterPrice = Convert.ToDecimal(VariablesGlobales.Instance.ObjListParameterAll["CORE_CUST_PRICE"]);
                 var parameterTipoPlan = coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId).Value;
 
                 var subject = $@"Inicio de session: {nickname}";

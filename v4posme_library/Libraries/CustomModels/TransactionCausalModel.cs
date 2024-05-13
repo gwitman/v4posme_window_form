@@ -4,11 +4,11 @@ using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
-class TransactionCausalModel : ITransactionCausalModel
+class TransactionCausalModel(DataContext context) : ITransactionCausalModel
 {
     public List<TbTransactionCausal> GetCausalByBranch(int companyId, int transactionId, int branchId)
     {
-        using var context = new DataContext();
+        
         return context.TbTransactionCausals
             .Where(causal => causal.CompanyId == companyId
                              && causal.TransactionId == transactionId
@@ -19,7 +19,7 @@ class TransactionCausalModel : ITransactionCausalModel
 
     public TbTransactionCausal? GetCausalDefaultId(int companyId, int transactionId)
     {
-        using var context = new DataContext();
+        
         return context.TbTransactionCausals
             .SingleOrDefault(causal => causal!.CompanyId == companyId
                               && causal.TransactionId == transactionId
@@ -28,7 +28,7 @@ class TransactionCausalModel : ITransactionCausalModel
 
     public List<TbTransactionCausalDto> GetByCompanyAndTransaction(int companyId, int transactionId)
     {
-        using var context = new DataContext();
+        
         var result = from tc in context.TbTransactionCausals
             join b in context.TbBranches on tc.BranchId!.Value equals b.BranchId
             join w in context.TbWarehouses on tc.WarehouseSourceId!.Value equals w.WarehouseId into wJoin
@@ -58,7 +58,7 @@ class TransactionCausalModel : ITransactionCausalModel
 
     public TbTransactionCausal? GetByCompanyAndTransactionAndCausal(int companyId, int transactionId, int causalId)
     {
-        using var context = new DataContext();
+        
         return context.TbTransactionCausals
             .Single(causal => causal.CompanyId == companyId
                               && causal.TransactionId == transactionId
@@ -68,7 +68,7 @@ class TransactionCausalModel : ITransactionCausalModel
 
     public void DeleteAppPosme(int companyId, int transactionId, List<int> listCausal)
     {
-        using var context = new DataContext();
+        
         context.TbTransactionCausals
             .Where(causal => causal.CompanyId == companyId
                              && causal.TransactionId == transactionId
@@ -78,7 +78,7 @@ class TransactionCausalModel : ITransactionCausalModel
 
     public int InsertAppPosme(TbTransactionCausal data)
     {
-        using var context = new DataContext();
+        
         var add = context.Add(data);
         context.SaveChanges();
         return add.Entity.TransactionCausalId;
@@ -86,7 +86,7 @@ class TransactionCausalModel : ITransactionCausalModel
 
     public void UpdateAppPosme(int companyId, int transactionId, int causalId, TbTransactionCausal data)
     {
-        using var context = new DataContext();
+        
         var find = context.TbTransactionCausals
             .Single(causal => causal.CompanyId == companyId
                               && causal.TransactionId == transactionId
@@ -98,7 +98,7 @@ class TransactionCausalModel : ITransactionCausalModel
 
     public int CountCausalDefault(int companyId, int transactionId)
     {
-        using var context = new DataContext();
+        
         return context.TbTransactionCausals
             .Count(causal => causal.CompanyId == companyId
                              && causal.TransactionId == transactionId
