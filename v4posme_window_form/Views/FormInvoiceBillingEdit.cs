@@ -316,7 +316,7 @@ namespace v4posme_window.Views
 
         private void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
         {
-            var stopWatch = Stopwatch.StartNew();
+            
             _backgroundWorker = new BackgroundWorker();
             _backgroundWorker.DoWork += (ob, ev) =>
             {
@@ -364,9 +364,7 @@ namespace v4posme_window.Views
                     {
                         progressPanel.Visible = false;
                     }
-
-                    stopWatch.Stop();
-                    Debug.WriteLine($"Tiempo de carga {stopWatch.Elapsed}");
+                    
                 }
             };
 
@@ -851,7 +849,7 @@ namespace v4posme_window.Views
 
         public void LoadNew()
         {
-            var stopWatch = Stopwatch.StartNew();
+            
             //using var tx = new TransactionScope();
             var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
             var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
@@ -993,8 +991,7 @@ namespace v4posme_window.Views
             varPermisosEsPermitidoSeleccionarPrecioMayor = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PORMAYOR") > 0;
             varPermisosEsPermitidoSeleccionarPrecioCredito = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_CREDITO") > 0;
             //tx.Complete();
-            stopWatch.Stop();
-            Debug.WriteLine($"Tiempo de carga: {stopWatch.ElapsedMilliseconds}");
+            
         }
 
         public void SaveInsert()

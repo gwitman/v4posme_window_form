@@ -24,7 +24,8 @@ public partial class DataContext : DbContext
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.LogTo(s => Debug.WriteLine(s));
+        //optionsBuilder
+        //  .LogTo(s => Debug.WriteLine(s));
         //
         //
         //optionsBuilder        
