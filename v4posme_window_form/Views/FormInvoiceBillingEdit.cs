@@ -335,6 +335,7 @@ namespace v4posme_window.Views
             {
                 if (ev.Error is not null)
                 {
+                    CustomException.LogException(ev.Error);
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", ev.Error.Message, this);
                 }
                 else if (ev.Cancelled)
@@ -862,6 +863,10 @@ namespace v4posme_window.Views
             {
                 throw new Exception(userNotAutenticated);
             }
+
+            var i = 0;
+            var l = 12;
+            var z = l / i;
 
             var role = VariablesGlobales.Instance.Role;
             if (appNeedAuthentication == "true")
@@ -3354,6 +3359,7 @@ namespace v4posme_window.Views
                 {
                     if (ev.Error is not null)
                     {
+                        CustomException.LogException(ev.Error);
                         _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", $"Se ha cancelado la operación actual. Error: {ev.Error.Message}", this);
                     }
                     else if (ev.Cancelled)
@@ -3385,6 +3391,7 @@ namespace v4posme_window.Views
                 {
                     if (ev.Error is not null)
                     {
+                        CustomException.LogException(ev.Error);
                         _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", $"Se ha cancelado la operación actual. Error: {ev.Error.Message}", this);
                     }
                     else if (ev.Cancelled)
@@ -3424,6 +3431,7 @@ namespace v4posme_window.Views
                     {
                         if (args.Error is not null)
                         {
+                            CustomException.LogException(args.Error);
                             _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", args.Error.Message, this);
                         }
                         else if (args.Cancelled)
@@ -3510,6 +3518,7 @@ namespace v4posme_window.Views
                     {
                         if (ev.Error is not null)
                         {
+                            CustomException.LogException(ev.Error);
                             _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Registrar", $"No se registraron los valores. {ev.Error.Message}", this);
                         }
                         else if (ev.Cancelled)
@@ -3575,6 +3584,7 @@ namespace v4posme_window.Views
             {
                 if (ev.Error is not null)
                 {
+                    CustomException.LogException(ev.Error);
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Registrar", $"No se registraron los valores. {ev.Error.Message}", this);
                 }
                 else if (ev.Cancelled)
