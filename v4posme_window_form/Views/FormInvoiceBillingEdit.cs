@@ -620,6 +620,7 @@ namespace v4posme_window.Views
                 printer.AlignCenter();
                 if (objParameterCompanyLogo is not null)
                 {
+                    objParameterCompanyLogo.Value = "direct-ticket-" + objParameterCompanyLogo.Value;
                     var imagePath = $"{pathOfLogo}/img/logos/{objParameterCompanyLogo.Value!}";
                     if (File.Exists(imagePath))
                     {
@@ -932,8 +933,8 @@ namespace v4posme_window.Views
             ObjParameterAmortizationDuranteFactura = _objInterfazCoreWebParameter.GetParameter("INVOICE_PARAMTER_AMORITZATION_DURAN_INVOICE", user.CompanyId)!.Value;
             ObjParameterAlturaDelModalDeSeleccionProducto = _objInterfazCoreWebParameter.GetParameter("INVOICE_ALTO_MODAL_DE_SELECCION_DE_PRODUCTO_AL_FACTURAR", user.CompanyId)!.Value;
             ObjParameterScrollDelModalDeSeleccionProducto = _objInterfazCoreWebParameter.GetParameter("INVOICE_SCROLL_DE_MODAL_EN_SELECCION_DE_PRODUTO_AL_FACTURAR", user.CompanyId)!.Value;
+            ObjParameterShowComandoDeCocina = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SHOW_COMMAND_FOOT", user.CompanyId)!.Value;
 
-            
             //Obtener la lista de estados
             if (ObjParameterInvoiceAutoApply == "true")
             {
@@ -2134,6 +2135,10 @@ namespace v4posme_window.Views
                     //Llenar Linea de Credito
                     FnRenderLineaCredit(ObjListCustomerCreditLine, ParameterCausalTypeCredit!);
                     btnAplicar.Visible = false;
+
+                    btnPrinterFooter.Visibility = ObjParameterShowComandoDeCocina!.ToUpper() == "false".ToUpper() ? BarItemVisibility.Never : BarItemVisibility.Always;
+                    btnPrinterBar.Visibility = ObjParameterInvoiceBillingShowCommandBar!.ToUpper() == "false".ToUpper() ? BarItemVisibility.Never : BarItemVisibility.Always;
+
                     break;
                 case TypeRender.Edit:
                     _bindingListTransactionMasterDetail.Clear();
@@ -2233,6 +2238,9 @@ namespace v4posme_window.Views
                     txtReceiptAmountPoint.Text = ObjTransactionMasterInfo.ReceiptAmountPoint!.Value.ToString(FormatDecimal);
                     txtChangeAmount.Text = ObjTransactionMasterInfo.ChangeAmount.ToString(FormatDecimal);
                     btnAplicar.Visible = true;
+
+                    btnPrinterFooter.Visibility = ObjParameterShowComandoDeCocina!.ToUpper() == "false".ToUpper() ?  BarItemVisibility.Never : BarItemVisibility.Always;
+                    btnPrinterBar.Visibility = ObjParameterInvoiceBillingShowCommandBar!.ToUpper() == "false".ToUpper() ? BarItemVisibility.Never : BarItemVisibility.Always;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(typeRender), typeRender, null);
