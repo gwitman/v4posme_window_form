@@ -4,6 +4,9 @@
     <_LastSelectedProfileId>C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Template\FormTypeCustomInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Template\FormTypeList.cs">
       <SubType>Form</SubType>
     </Compile>

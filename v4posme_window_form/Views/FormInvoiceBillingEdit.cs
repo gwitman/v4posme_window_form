@@ -66,6 +66,9 @@ namespace v4posme_window.Views
         #endregion
 
         #region Libreria Model Custom DLL
+        private readonly IPublicCatalogModel _objInterfazPublicCatalogModel = VariablesGlobales.Instance.UnityContainer.Resolve<IPublicCatalogModel>();
+
+        private readonly IPublicCatalogDetailModel _objInterfazPublicCatalogDetailModel = VariablesGlobales.Instance.UnityContainer.Resolve<IPublicCatalogDetailModel>();
 
         private readonly IItemModel _objInterfazItemModel = VariablesGlobales.Instance.UnityContainer.Resolve<IItemModel>();
 
@@ -275,6 +278,7 @@ namespace v4posme_window.Views
 
         #region Variables internas
 
+        private string CodigoMesero { get; set; }
         private int? CompanyId { get; set; }
         private int? TransactionId { get; set; }
         private int? TransactionMasterId { get; set; }
@@ -290,7 +294,7 @@ namespace v4posme_window.Views
 
         #region Init
 
-        public FormInvoiceBillingEdit(TypeOpenForm typeOpen, int companyId, int transactionId, int transactionMasterId)
+        public FormInvoiceBillingEdit(TypeOpenForm typeOpen, int companyId, int transactionId, int transactionMasterId,string codeMesero)
         {
             InitializeComponent();
             // Suscribir al manejador de excepciones global
@@ -300,6 +304,7 @@ namespace v4posme_window.Views
             TransactionId = transactionId;
             TransactionMasterId = transactionMasterId;
             TypeOpen = typeOpen;
+            CodigoMesero = codeMesero;
         }
 
 
@@ -747,6 +752,25 @@ namespace v4posme_window.Views
             }
 
 
+            CodigoMesero = "abc";
+            int publicCatalogID = 0;
+            List<TbPublicCatalog> objPubliCatalogMesasConfig = _objInterfazPublicCatalogModel.GetBySystemNameAndFlavorID("tb_transaction_master_billing.mesas_x_meseros", VariablesGlobales.Instance.Company!.FlavorId);
+            if (CodigoMesero != "none")
+            {
+                if (objPubliCatalogMesasConfig is null)
+                    throw new Exception("CONFIGURAR EL CATALOGO DE MESAS tb_transaction_master_billing.mesas_x_meseros");
+
+                if (objPubliCatalogMesasConfig.Count == 0)
+                    throw new Exception("CONFIGURAR EL CATALOGO DE MESAS tb_transaction_master_billing.mesas_x_meseros");
+
+            }
+
+            publicCatalogID = CodigoMesero == "none" ? 0 : objPubliCatalogMesasConfig.ElementAt(0).PublicCatalogId;
+            List<TbPublicCatalogDetail> objPubliCatalogDetailMesasConfiguradas = _objInterfazPublicCatalogDetailModel.GetRowByCatalogIDAndName(publicCatalogID, CodigoMesero);
+
+
+
+
             ObjParameterInvoiceTypeEmployer = _objInterfazCoreWebParameter.GetParameter("INVOICE_TYPE_EMPLOYEER", user.CompanyId)!.Value;
             ObjParameterInvoiceBillingEmployeeDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_EMPLOYEE_DEFAULT", user.CompanyId)!.Value;
 
@@ -794,6 +818,23 @@ namespace v4posme_window.Views
             ObjListTypePrice = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_price", "typePriceID", user.CompanyId);
             ObjListZone = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_info_billing", "zoneID", user.CompanyId);
             ObjListMesa = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_info_billing", "mesaID", user.CompanyId);
+
+            //Filtrar la Lista de mesas
+            var obListMesasFiltradas = ObjListMesa.Where(item1 => objPubliCatalogDetailMesasConfiguradas.Any(item2 => item2.Display == item1.Name)).ToList();
+            ObjListMesa = CodigoMesero == "none" ? ObjListMesa : obListMesasFiltradas;
+
+            if (ObjListMesa is null)
+                throw new Exception("No se puede avanzar configurar catalogo de MESS");
+
+            if (ObjListMesa.Count == 0)
+                throw new Exception("No se puede avanzar configurar catalogo de MESS");
+
+            if(!ObjListMesa.Any( u => u.CatalogItemId == ObjTransactionMasterInfo!.MesaId))
+            {
+                throw new Exception("No tiene acceso al catalogo MESS");
+            }
+
+
             ObjListPay = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_customer_credit_line", "periodPay", user.CompanyId);
             ListProvider = _objInterfazProviderModel.GetRowByCompany(user.CompanyId);
             ObjListWorkflowStage = _objInterfazCoreWebWorkflow.GetWorkflowStageByStageInit("tb_transaction_master_billing", "statusID", ObjTransactionMaster!.StatusId!.Value, role!.CompanyId, role.BranchId, role.RoleId);
@@ -945,6 +986,23 @@ namespace v4posme_window.Views
                 ObjListWorkflowStage = _objInterfazCoreWebWorkflow.GetWorkflowInitStage("tb_transaction_master_billing", "statusID", user.CompanyId, user.BranchId, role.RoleId);
             }
 
+
+            //Obtener lista de mesas configuradas            
+            int publicCatalogID = 0;
+            List<TbPublicCatalog> objPubliCatalogMesasConfig = _objInterfazPublicCatalogModel.GetBySystemNameAndFlavorID("tb_transaction_master_billing.mesas_x_meseros", VariablesGlobales.Instance.Company!.FlavorId);
+            if(CodigoMesero != "none" )
+            {
+                if(objPubliCatalogMesasConfig is null)
+                throw new Exception("CONFIGURAR EL CATALOGO DE MESAS tb_transaction_master_billing.mesas_x_meseros");
+
+                if (objPubliCatalogMesasConfig.Count == 0)
+                    throw new Exception("CONFIGURAR EL CATALOGO DE MESAS tb_transaction_master_billing.mesas_x_meseros");
+
+            }
+
+            publicCatalogID = CodigoMesero == "none" ? 0 : objPubliCatalogMesasConfig.ElementAt(0).PublicCatalogId;
+            List<TbPublicCatalogDetail> objPubliCatalogDetailMesasConfiguradas = _objInterfazPublicCatalogDetailModel.GetRowByCatalogIDAndName(publicCatalogID,CodigoMesero);
+
             ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, DateOnly.FromDateTime(DateTime.Now), decimal.One, ObjCurrencyDolares!.CurrencyId, ObjCurrency!.CurrencyId);
             ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyId, user.BranchId, Convert.ToInt32(ObjParameterInvoiceTypeEmployer));
             ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyId);
@@ -955,6 +1013,19 @@ namespace v4posme_window.Views
             ObjListTypePrice = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_price", "typePriceID", user.CompanyId);
             ObjListZone = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_info_billing", "zoneID", user.CompanyId);
             ObjListMesa = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_info_billing", "mesaID", user.CompanyId);
+
+            //Filtrar la Lista de mesas
+            var obListMesasFiltradas = ObjListMesa.Where(item1 => objPubliCatalogDetailMesasConfiguradas.Any(item2 => item2.Display == item1.Name)).ToList();
+            ObjListMesa = CodigoMesero == "none" ? ObjListMesa : obListMesasFiltradas;
+
+            if(ObjListMesa is null)
+            throw new Exception("No se puede avanzar configurar catalogo de MESS");
+
+            if (ObjListMesa.Count == 0)
+            throw new Exception("No se puede avanzar configurar catalogo de MESS");
+
+
+
             ObjListPay = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_customer_credit_line", "periodPay", user.CompanyId);
             ListProvider = _objInterfazProviderModel.GetRowByCompany(user.CompanyId);
             ObjParameterCxcPlazoDefault = _objInterfazCoreWebParameter.GetParameterValue("CXC_PLAZO_DEFAULT", user.CompanyId);

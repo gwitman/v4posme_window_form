@@ -7,7 +7,7 @@ public static class CoreFormList
     private static PrincipalForm? _principal;
     public static Dictionary<string, Form> Formularios()
     {
-        var formInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.Init,0,0,0);
+        var formInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.Init,0,0,0, "none");
         var formInvoiceBillingList = new FormInvoiceBillingList();
 
         var forms = new Dictionary<string, Form>
