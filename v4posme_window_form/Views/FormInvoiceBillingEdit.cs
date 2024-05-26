@@ -1327,6 +1327,11 @@ namespace v4posme_window.Views
 
                     //Crear Conceptos.
                     VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebConcept>().Billing(user.CompanyId, TransactionId!.Value, TransactionMasterId.Value);
+
+                    //Actualizar el numero de factura
+                    objTm.TransactionNumber = _objInterfazCoreWebCounter.GoNextNumber(user.CompanyId, user.BranchId, "tb_transaction_master_billing", 0);
+                    _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyId, TransactionId.Value, TransactionMasterId.Value, objTm);
+
                 }
 
 
