@@ -10,8 +10,8 @@ class JournalEntryModel : IJournalEntryModel
     {
         using var context = new DataContext();
         context.TbJournalEntries
-            .Where(entry => entry.CompanyId == companyId
-                            && entry.JournalEntryId == journalEntryId)
+            .Where(entry => entry.CompanyID == companyId
+                            && entry.JournalEntryID == journalEntryId)
             .ExecuteUpdate(calls =>
                 calls.SetProperty(entry => entry.IsActive, false));
     }
@@ -20,9 +20,9 @@ class JournalEntryModel : IJournalEntryModel
     {
         using var context = new DataContext();
         var find = context.TbJournalEntries
-            .Single(entry => entry.CompanyId == companyId
-                             && entry.JournalEntryId == journalEntryId);
-        data.JournalEntryId = find.JournalEntryId;
+            .Single(entry => entry.CompanyID == companyId
+                             && entry.JournalEntryID == journalEntryId);
+        data.JournalEntryID = find.JournalEntryID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -32,26 +32,26 @@ class JournalEntryModel : IJournalEntryModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.JournalEntryId;
+        return add.Entity.JournalEntryID;
     }
 
-    public TbJournalEntryDto GetRowByCode(int companyId, string journalNumber)
+    public TbJournalEntryDto GetRowByCode(int companyId, string? journalNumber)
     {
         using var context = new DataContext();
         var result = from je in context.TbJournalEntries
-            join ws in context.TbWorkflowStages on je.StatusId equals ws.WorkflowStageId
-            join ci in context.TbCatalogItems on je.JournalTypeId equals ci.CatalogItemId
-            join cu in context.TbCurrencies on je.CurrencyId equals cu.CurrencyId
-            where je.CompanyId == companyId
+            join ws in context.TbWorkflowStages on je.StatusID equals ws.WorkflowStageID
+            join ci in context.TbCatalogItems on je.JournalTypeID equals ci.CatalogItemID
+            join cu in context.TbCurrencies on je.CurrencyID equals cu.CurrencyID
+            where je.CompanyID == companyId
                   && je.JournalNumber == journalNumber
                   && je.IsActive
             select new TbJournalEntryDto
             {
-                JournalEntryId = je.JournalEntryId,
-                CompanyId = je.CompanyId,
+                JournalEntryId = je.JournalEntryID,
+                CompanyId = je.CompanyID,
                 JournalNumber = je.JournalNumber,
                 EntryName = je.EntryName,
-                JournalDate = je.JournalDate,
+                JournalDate = DateOnly.FromDateTime(je.JournalDate),
                 TbExchangeRate = je.TbExchangeRate,
                 CreatedOn = je.CreatedOn,
                 CreatedIn = je.CreatedIn,
@@ -59,19 +59,19 @@ class JournalEntryModel : IJournalEntryModel
                 CreatedBy = je.CreatedBy,
                 IsActive = je.IsActive,
                 IsApplied = je.IsApplied,
-                StatusId = je.StatusId,
+                StatusId = je.StatusID,
                 Note = je.Note,
                 Reference1 = je.Reference1,
                 Reference2 = je.Reference2,
                 Reference3 = je.Reference3,
-                JournalTypeId = je.JournalTypeId,
-                CurrencyId = je.CurrencyId,
-                AccountingCycleId = je.AccountingCycleId,
+                JournalTypeId = je.JournalTypeID,
+                CurrencyId = je.CurrencyID,
+                AccountingCycleId = je.AccountingCycleID,
                 WorkflowStageName = ws.Name,
                 JournalTypeName = ci.Display,
                 CurrencyName = cu.Name,
                 IsModule = je.IsModule,
-                TransactionMasterId = je.TransactionMasterId
+                TransactionMasterId = je.TransactionMasterID
             };
         return result.Single();
     }
@@ -80,17 +80,17 @@ class JournalEntryModel : IJournalEntryModel
     {
         using var context = new DataContext();
         var result = from je in context.TbJournalEntries
-            join ws in context.TbWorkflowStages on je.StatusId equals ws.WorkflowStageId
-            join ci in context.TbCatalogItems on je.JournalTypeId equals ci.CatalogItemId
-            join cu in context.TbCurrencies on je.CurrencyId equals cu.CurrencyId
-            where je.CompanyId == companyId && je.JournalEntryId == journalEntryId && je.IsActive
+            join ws in context.TbWorkflowStages on je.StatusID equals ws.WorkflowStageID
+            join ci in context.TbCatalogItems on je.JournalTypeID equals ci.CatalogItemID
+            join cu in context.TbCurrencies on je.CurrencyID equals cu.CurrencyID
+            where je.CompanyID == companyId && je.JournalEntryID == journalEntryId && je.IsActive
             select new TbJournalEntryDto
             {
-                JournalEntryId = je.JournalEntryId,
-                CompanyId = je.CompanyId,
+                JournalEntryId = je.JournalEntryID,
+                CompanyId = je.CompanyID,
                 JournalNumber = je.JournalNumber,
                 EntryName = je.EntryName,
-                JournalDate = je.JournalDate,
+                JournalDate = DateOnly.FromDateTime(je.JournalDate),
                 TbExchangeRate = je.TbExchangeRate,
                 CreatedOn = je.CreatedOn,
                 CreatedIn = je.CreatedIn,
@@ -98,19 +98,19 @@ class JournalEntryModel : IJournalEntryModel
                 CreatedBy = je.CreatedBy,
                 IsActive = je.IsActive,
                 IsApplied = je.IsApplied,
-                StatusId = je.StatusId,
+                StatusId = je.StatusID,
                 Note = je.Note,
                 Reference1 = je.Reference1,
                 Reference2 = je.Reference2,
                 Reference3 = je.Reference3,
-                JournalTypeId = je.JournalTypeId,
-                CurrencyId = je.CurrencyId,
-                AccountingCycleId = je.AccountingCycleId,
+                JournalTypeId = je.JournalTypeID,
+                CurrencyId = je.CurrencyID,
+                AccountingCycleId = je.AccountingCycleID,
                 WorkflowStageName = ws.Name,
                 JournalTypeName = ci.Display,
                 CurrencyName = cu.Name,
                 IsModule = je.IsModule,
-                TransactionMasterId = je.TransactionMasterId,
+                TransactionMasterId = je.TransactionMasterID,
                 IsTemplated = je.IsTemplated,
                 TitleTemplated = je.TitleTemplated
             };
@@ -121,10 +121,10 @@ class JournalEntryModel : IJournalEntryModel
     {
         using var context = new DataContext();
         return context.TbJournalEntries
-            .Where(entry => entry.CompanyId == companyId
-                            && entry.JournalEntryId >= journalEntryId
+            .Where(entry => entry.CompanyID == companyId
+                            && entry.JournalEntryID >= journalEntryId
                             && entry.IsActive)
-            .OrderByDescending(entry => entry.JournalEntryId)
+            .OrderByDescending(entry => entry.JournalEntryID)
             .First();
     }
 
@@ -132,10 +132,10 @@ class JournalEntryModel : IJournalEntryModel
     {
         using var context = new DataContext();
         return context.TbJournalEntries
-            .Where(entry => entry.CompanyId == companyId
-                            && entry.JournalEntryId <= journalEntryId
+            .Where(entry => entry.CompanyID == companyId
+                            && entry.JournalEntryID <= journalEntryId
                             && entry.IsActive)
-            .OrderBy(entry => entry.JournalEntryId)
+            .OrderBy(entry => entry.JournalEntryID)
             .First();
     }
 }

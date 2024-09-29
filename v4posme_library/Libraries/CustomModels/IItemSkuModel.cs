@@ -5,7 +5,7 @@ namespace v4posme_library.Libraries.CustomModels;
 
 public interface IItemSkuModel
 {
-    void DeleteAppPosme(int itemId);
+    int DeleteAppPosme(int itemId);
 
     void UpdateAppPosme(int itemId, int catalogItemId, TbItemSku data);
 

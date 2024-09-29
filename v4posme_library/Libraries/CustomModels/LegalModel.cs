@@ -9,11 +9,11 @@ class LegalModel : ILegalModel
     {
         using var context = new DataContext();
         var find = context.TbLegals
-            .FirstOrDefault(legal => legal.CompanyId == companyId
-                                     && legal.BranchId == branchId
-                                     && legal.EntityId == entityId);
+            .FirstOrDefault(legal => legal.CompanyID == companyId
+                                     && legal.BranchID == branchId
+                                     && legal.EntityID == entityId);
         if (find is null) return;
-        data.LegalId = find.LegalId;
+        data.LegalID = find.LegalID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -22,9 +22,9 @@ class LegalModel : ILegalModel
     {
         using var context = new DataContext();
         context.TbLegals
-            .Where(legal => legal.CompanyId == companyId
-                            && legal.BranchId == branchId
-                            && legal.EntityId == entityId)
+            .Where(legal => legal.CompanyID == companyId
+                            && legal.BranchID == branchId
+                            && legal.EntityID == entityId)
             .ExecuteUpdate(calls => calls.SetProperty(legal => legal.IsActive, false));
     }
 
@@ -33,16 +33,16 @@ class LegalModel : ILegalModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.LegalId;
+        return add.Entity.LegalID;
     }
 
-    public TbLegal GetRowByPk(int companyId, int branchId, int entityId)
+    public TbLegal? GetRowByPk(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
         return context.TbLegals
-            .Single(legal => legal.CompanyId == companyId
-                             && legal.BranchId == branchId
-                             && legal.EntityId == entityId
+            .SingleOrDefault(legal => legal.CompanyID == companyId
+                             && legal.BranchID == branchId
+                             && legal.EntityID == entityId
                              && legal.IsActive!.Value);
     }
 }

@@ -17,7 +17,7 @@ public interface ITransactionMasterModel
     
     TbTransactionMaster GetRowByTransactionMasterId(int companyId,int transactionMasterId);
     
-    TbTransactionMaster GetRowByTransactionNumber(int companyId, string transactionNumber);
+    TbTransactionMaster GetRowByTransactionNumber(int companyId, string? transactionNumber);
     
     List<TbTransactionMaster> GetRowByNotification(int companyId);
     

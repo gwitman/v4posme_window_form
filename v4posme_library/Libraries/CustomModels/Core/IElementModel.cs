@@ -6,7 +6,7 @@ public interface IElementModel
 {
     List<TbElement> GetRowByComponentIdNotIn(List<int> componentId,int elementTypeId);
     
-    TbElement? GetRowByName(string name,int elementTypeId);
+    TbElement? GetRowByName(string? name,int elementTypeId);
     
     List<TbElement>? GetRowByTypeAndLayout(int elementTypeId,int layoutId);
     

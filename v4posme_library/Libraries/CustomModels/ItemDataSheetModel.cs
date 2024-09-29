@@ -11,7 +11,7 @@ class ItemDataSheetModel : IItemDataSheetModel
         var find = context.TbItemDataSheets
             .Find(itemDataSheetId);
         if (find is null) return;
-        data.ItemDataSheetId = find.ItemDataSheetId;
+        data.ItemDataSheetID = find.ItemDataSheetID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -20,9 +20,9 @@ class ItemDataSheetModel : IItemDataSheetModel
     {
         using var context = new DataContext();
         context.TbItemDataSheets
-            .Where(sheet => sheet.ItemDataSheetId == itemDataSheetId)
+            .Where(sheet => sheet.ItemDataSheetID == itemDataSheetId)
             .ExecuteUpdate(calls => calls
-                .SetProperty(sheet => sheet.IsActive, (ulong)0));
+                .SetProperty(sheet => sheet.IsActive, false));
     }
 
     public int InsertAppPosme(TbItemDataSheet data)
@@ -30,15 +30,15 @@ class ItemDataSheetModel : IItemDataSheetModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.ItemDataSheetId;
+        return add.Entity.ItemDataSheetID;
     }
 
     public TbItemDataSheet GetRowByPk(int itemDataSheetId)
     {
         using var context = new DataContext();
         return context.TbItemDataSheets
-            .Single(sheet => sheet.ItemDataSheetId == itemDataSheetId
-                             && sheet.IsActive == 1);
+            .Single(sheet => sheet.ItemDataSheetID == itemDataSheetId
+                             && sheet.IsActive);
     }
 
     public TbItemDataSheet GetRowByItemId(int itemId)
@@ -46,7 +46,7 @@ class ItemDataSheetModel : IItemDataSheetModel
         using var context = new DataContext();
         return context.TbItemDataSheets
             .OrderByDescending(sheet => sheet.Version)
-            .Single(sheet => sheet.ItemId == itemId
-                             && sheet.IsActive == 1);
+            .Single(sheet => sheet.ItemID == itemId
+                             && sheet.IsActive);
     }
 }

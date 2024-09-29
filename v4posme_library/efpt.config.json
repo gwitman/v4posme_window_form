@@ -3,7 +3,7 @@
    "ContextClassName": "DataContext",
    "ContextNamespace": null,
    "FilterSchemas": false,
-   "IncludeConnectionString": false,
+   "Includeconnectionstring": false,
    "ModelNamespace": null,
    "OutputContextPath": null,
    "OutputPath": "Models",

@@ -7,4 +7,5 @@ public record TbProviderItemDto()
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public string? ComercialName { get; set; }
+    public string Nombre => $"{FirstName} {LastName}";
 }

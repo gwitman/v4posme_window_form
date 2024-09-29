@@ -38,14 +38,14 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             _context = context;
         }
 
-        public TbUser Validar(TbUser user, string password)
+        public TbUser Validar(TbUser user, string? password)
         {
             if (user == null!) return null!;
             if (string.IsNullOrEmpty(password)) return null!;
             return user.Password == password ? user : null!;
         }
 
-        public TbUser? GetUserByNickname(string nickname)
+        public TbUser? GetUserByNickname(string? nickname)
         {
             if (string.IsNullOrEmpty(nickname))
             {
@@ -65,7 +65,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         }
 
         //validar que usuario este activo en este metodo
-        public TbUser? GetUserByPasswordAndNickname(string nickname, string password)
+        public TbUser? GetUserByPasswordAndNickname(string? nickname, string? password)
         {
             if (string.IsNullOrEmpty(nickname))
             {
@@ -83,27 +83,26 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 return null!;
             }
 
-            var objCompany = _companyModel.GetRowByPk(user.CompanyId);
+            var objCompany = _companyModel.GetRowByPk(user.CompanyID);
             if (objCompany is null)
             {
-                throw new Exception("LA EMPREA NO FUE ENCONTRADA ....");
+                throw new Exception("LA EMPRESA NO FUE ENCONTRADA ....");
             }
 
-            var objBranch = _branchModel.GetRowByPk(user.CompanyId, user.BranchId);
+            var objBranch = _branchModel.GetRowByPk(user.CompanyID, user.BranchID);
             if (objBranch is null)
             {
                 throw new Exception("LA SUCURSAL NO FUE ENCONTRADA ...");
             }
 
-            VariablesGlobales.Instance.Membership =
-                _membershipModel.GetRowByCompanyIdBranchIdUserId(user.CompanyId, user.BranchId, user.UserId);
+            VariablesGlobales.Instance.Membership = _membershipModel.GetRowByCompanyIdBranchIdUserId(user.CompanyID, user.BranchID, user.UserID);
             if (VariablesGlobales.Instance.Membership is null)
             {
                 throw new Exception("EL USUARIO NO TIENE ASIGNADO UN ROL...");
             }
 
-            var objRole = _roleModel.GetRowByPk(user.CompanyId, user.BranchId,
-                VariablesGlobales.Instance.Membership.RoleId);
+            var objRole = _roleModel.GetRowByPk(user.CompanyID, user.BranchID,
+                VariablesGlobales.Instance.Membership.RoleID);
             if (objRole is null)
             {
                 throw new Exception("EL USUARIO NO TIENE ASIGNADO UN ROL...");
@@ -115,24 +114,19 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 VariablesGlobales.Instance.Branch = objBranch;
                 VariablesGlobales.Instance.Role = objRole;
                 VariablesGlobales.Instance.User = user;
-                VariablesGlobales.Instance.ListMenuTop = _coreWebMenu.GetMenuTop(user.CompanyId, user.BranchId,
-                    objRole.RoleId);
-                VariablesGlobales.Instance.ListMenuLeft = _coreWebMenu.GetMenuLeft(user.CompanyId, user.BranchId,
-                    objRole.RoleId);
-                VariablesGlobales.Instance.ListMenuBodyReport = _coreWebMenu.GetMenuBodyReport(user.CompanyId,
-                    user.BranchId, objRole.RoleId);
-                VariablesGlobales.Instance.ListMenuHiddenPopup = _coreWebMenu.GetMenuHiddenPopup(user.CompanyId,
-                    user.BranchId, objRole.RoleId);
-                VariablesGlobales.Instance.MessageLogin = GetLicenseMessage(user.CompanyId);
-                var parameter = _coreWebParameter.GetParameter("CORE_LABEL_SISTEMA_SUPLANTATION",
-                    VariablesGlobales.Instance.Membership.CompanyId);
+                VariablesGlobales.Instance.ListMenuTop = _coreWebMenu.GetMenuTop(user.CompanyID, user.BranchID, objRole.RoleID);
+                VariablesGlobales.Instance.ListMenuLeft = _coreWebMenu.GetMenuLeft(user.CompanyID, user.BranchID, objRole.RoleID);
+                VariablesGlobales.Instance.ListMenuBodyReport = _coreWebMenu.GetMenuBodyReport(user.CompanyID, user.BranchID, objRole.RoleID);
+                VariablesGlobales.Instance.ListMenuHiddenPopup = _coreWebMenu.GetMenuHiddenPopup(user.CompanyID, user.BranchID, objRole.RoleID);
+                VariablesGlobales.Instance.MessageLogin = GetLicenseMessage(user.CompanyID);
+                var parameter = _coreWebParameter.GetParameter("CORE_LABEL_SISTEMA_SUPLANTATION", VariablesGlobales.Instance.Membership.CompanyID);
                 VariablesGlobales.Instance.ParameterLabelSystem = parameter!.Value;
             });
 
             return user;
         }
 
-        public TbUser? GetUserByEmail(string email)
+        public TbUser? GetUserByEmail(string? email)
         {
             var user = _userModel.GetRowByEmail(email);
             if (user is null)
@@ -140,26 +134,26 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 throw new Exception("EMAIL INCORRECTO...");
             }
 
-            var objCompany = _companyModel.GetRowByPk(user.CompanyId);
+            var objCompany = _companyModel.GetRowByPk(user.CompanyID);
             if (objCompany is null)
             {
                 throw new Exception("LA EMPREA NO FUE ENCONTRADA ....");
             }
 
-            var objBranch = _branchModel.GetRowByPk(user.CompanyId, user.BranchId);
+            var objBranch = _branchModel.GetRowByPk(user.CompanyID, user.BranchID);
             if (objBranch is null)
             {
                 throw new Exception("LA SUCURSAL NO FUE ENCONTRADA ...");
             }
 
             var objMembership =
-                _membershipModel.GetRowByCompanyIdBranchIdUserId(user.CompanyId, user.BranchId, user.UserId);
+                _membershipModel.GetRowByCompanyIdBranchIdUserId(user.CompanyID, user.BranchID, user.UserID);
             if (objMembership is null)
             {
                 throw new Exception("EL USUARIO NO TIENE ASIGNADO UN ROL...");
             }
 
-            var objRole = _roleModel.GetRowByPk(user.CompanyId, user.BranchId, objMembership.RoleId);
+            var objRole = _roleModel.GetRowByPk(user.CompanyID, user.BranchID, objMembership.RoleID);
             if (objRole is null)
             {
                 throw new Exception("EL ROL DEL USUARIO NO FUE ENCONTRADO...");
@@ -169,14 +163,14 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             VariablesGlobales.Instance.Branch = objBranch;
             VariablesGlobales.Instance.Role = objRole;
             VariablesGlobales.Instance.User = user;
-            VariablesGlobales.Instance.ListMenuTop = _coreWebMenu.GetMenuTop(user.CompanyId, user.BranchId,
-                objRole.RoleId);
-            VariablesGlobales.Instance.ListMenuLeft = _coreWebMenu.GetMenuLeft(user.CompanyId, user.BranchId,
-                objRole.RoleId);
-            VariablesGlobales.Instance.ListMenuBodyReport = _coreWebMenu.GetMenuBodyReport(user.CompanyId,
-                user.BranchId, objRole.RoleId);
-            VariablesGlobales.Instance.ListMenuHiddenPopup = _coreWebMenu.GetMenuHiddenPopup(user.CompanyId,
-                user.BranchId, objRole.RoleId);
+            VariablesGlobales.Instance.ListMenuTop = _coreWebMenu.GetMenuTop(user.CompanyID, user.BranchID,
+                objRole.RoleID);
+            VariablesGlobales.Instance.ListMenuLeft = _coreWebMenu.GetMenuLeft(user.CompanyID, user.BranchID,
+                objRole.RoleID);
+            VariablesGlobales.Instance.ListMenuBodyReport = _coreWebMenu.GetMenuBodyReport(user.CompanyID,
+                user.BranchID, objRole.RoleID);
+            VariablesGlobales.Instance.ListMenuHiddenPopup = _coreWebMenu.GetMenuHiddenPopup(user.CompanyID,
+                user.BranchID, objRole.RoleID);
 
             return user;
         }
@@ -193,7 +187,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             var objParameterTipoPlan = getParameter3!.Value;
 
             var getParameter4 = _coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId);
-            var objParameterCreditosId = getParameter4!.ParameterId;
+            var objParameterCreditosId = getParameter4!.ParameterID;
             var objParameterCreditos = getParameter4.Value;
 
             var getParameter5 = _coreWebParameter.GetParameter("CORE_CUST_PRICE_BY_INVOICE", companyId);

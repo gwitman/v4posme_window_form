@@ -9,8 +9,8 @@ public record TbUserTagDto()
     public string? UserEmail { get; set; }
     public string? Name { get; set; }
     public string? Description { get; set; }
-    public ulong? SendEmail { get; set; }
-    public ulong? SendNotificationApp { get; set; }
-    public ulong? SendSms { get; set; }
-    public ulong? IsActive { get; set; }
+    public bool? SendEmail { get; set; }
+    public bool? SendNotificationApp { get; set; }
+    public bool? SendSms { get; set; }
+    public bool? IsActive { get; set; }
 }

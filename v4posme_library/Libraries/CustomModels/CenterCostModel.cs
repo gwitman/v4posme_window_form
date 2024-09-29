@@ -16,7 +16,7 @@ public class CenterCostModel : ICenterCostModel
     {
         using var context = new DataContext();
         var find = FindByCompanyIdAndClassId(companyId, classId, context);
-        data.ClassId = find.ClassId;
+        data.ClassID = find.ClassID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
@@ -26,14 +26,14 @@ public class CenterCostModel : ICenterCostModel
         using var context = new DataContext();
         var add = context.TbCenterCosts.Add(data);
         context.BulkSaveChanges();
-        return add.Entity.ClassId;
+        return add.Entity.ClassID;
     }
 
-    public TbCenterCost GetByClassNumber(string classNumber, int companyId)
+    public TbCenterCost GetByClassNumber(string? classNumber, int companyId)
     {
         using var context = new DataContext();
         return context.TbCenterCosts
-            .Single(center => center.CompanyId == companyId
+            .Single(center => center.CompanyID == companyId
                               && center.Number == classNumber
                               && center.IsActive!.Value);
     }
@@ -49,7 +49,7 @@ public class CenterCostModel : ICenterCostModel
     {
         using var context = new DataContext();
         return context.TbCenterCosts
-            .Where(center => center.CompanyId == companyId
+            .Where(center => center.CompanyID == companyId
                              && center.IsActive!.Value)
             .OrderBy(center => center.Number)
             .ToList();
@@ -57,6 +57,6 @@ public class CenterCostModel : ICenterCostModel
 
     private TbCenterCost FindByCompanyIdAndClassId(int companyId, int classId, DataContext dataContext)
     {
-        return dataContext.TbCenterCosts.Single(center => center.CompanyId == companyId && center.ClassId == classId);
+        return dataContext.TbCenterCosts.Single(center => center.CompanyID == companyId && center.ClassID == classId);
     }
 }

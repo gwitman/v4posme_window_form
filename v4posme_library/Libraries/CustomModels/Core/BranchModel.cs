@@ -9,8 +9,8 @@ class BranchModel : IBranchModel
     {
         using var context = new DataContext();
         context.TbBranches.AsNoTracking()
-            .Where(branch => branch.CompanyId == companyId
-                             && branch.BranchId == branchId)
+            .Where(branch => branch.CompanyID == companyId
+                             && branch.BranchID == branchId)
             .ExecuteUpdate(calls =>
                 calls.SetProperty(branch => branch.IsActive, false));
     }
@@ -19,10 +19,10 @@ class BranchModel : IBranchModel
     {
         using var context = new DataContext();
         var find = context.TbBranches.AsNoTracking()
-            .FirstOrDefault(branch => branch.CompanyId == companyId
-                                      && branch.BranchId == branchId);
+            .FirstOrDefault(branch => branch.CompanyID == companyId
+                                      && branch.BranchID == branchId);
         if (find is null) return;
-        data.BranchId = find.BranchId;
+        data.BranchID = find.BranchID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -32,15 +32,15 @@ class BranchModel : IBranchModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.BranchId;
+        return add.Entity.BranchID;
     }
 
     public TbBranch GetRowByPk(int companyId, int branchId)
     {
         using var context = new DataContext();
         return context.TbBranches .AsNoTracking()
-            .First(branch => branch.BranchId == branchId
-                             && branch.CompanyId == companyId
+            .First(branch => branch.BranchID == branchId
+                             && branch.CompanyID == companyId
                              && branch.IsActive!.Value);
     }
 
@@ -48,7 +48,7 @@ class BranchModel : IBranchModel
     {
         using var context = new DataContext();
         return context.TbBranches.AsNoTracking()
-            .Where(branch => branch.CompanyId == companyId
+            .Where(branch => branch.CompanyID == companyId
                              && branch.IsActive!.Value)
             .ToList();
     }

@@ -9,22 +9,22 @@ class CounterModel(DataContext context) : ICounterModel
     {
         
         return context.TbCounters.AsNoTracking()   
-            .FirstOrDefault(counter => counter!.CompanyId == companyId
-                                       && counter.BranchId == branchId
-                                       && counter.ComponentId == componentId
-                                       && counter.ComponentItemId == componentItemId);
+            .FirstOrDefault(counter => counter!.CompanyID == companyId
+                                       && counter.BranchID == branchId
+                                       && counter.ComponentID == componentId
+                                       && counter.ComponentItemID == componentItemId);
     }
 
     public void UpdateAppPosme(int companyId, int branchId, int componentId, int componentItemId, TbCounter data)
     {
         
         var find = context.TbCounters
-            .FirstOrDefault(counter => counter!.CompanyId == companyId
-                                       && counter.BranchId == branchId
-                                       && counter.ComponentId == componentId
-                                       && counter.ComponentItemId == componentItemId);
+            .FirstOrDefault(counter => counter!.CompanyID == companyId
+                                       && counter.BranchID == branchId
+                                       && counter.ComponentID == componentId
+                                       && counter.ComponentItemID == componentItemId);
         if (find is null) return;
-        data.CounterId = find.CounterId;
+        data.CounterID = find.CounterID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }

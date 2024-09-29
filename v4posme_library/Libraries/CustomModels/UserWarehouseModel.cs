@@ -10,8 +10,8 @@ class UserWarehouseModel : IUserWarehouseModel
     {
         using var context = new DataContext();
         return context.TbUserWarehouses
-            .Where(warehouse => warehouse.CompanyId == companyId
-                                && warehouse.UserId == userId)
+            .Where(warehouse => warehouse.CompanyID == companyId
+                                && warehouse.UserID == userId)
             .ExecuteDelete();
     }
 
@@ -20,27 +20,27 @@ class UserWarehouseModel : IUserWarehouseModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.UserWarehouseId;
+        return add.Entity.UserWarehouseID;
     }
 
     public List<TbUserWarehouseDto> GetRowByUserIdAndFacturable(int companyId, int userId)
     {
         using var context = new DataContext();
         var result = from uw in context.TbUserWarehouses
-            join w in context.TbWarehouses on uw.WarehouseId equals w.WarehouseId
-            where uw.CompanyId == companyId
-                  && uw.UserId == userId
-                  && w.IsActive == 1
+            join w in context.TbWarehouses on uw.WarehouseID equals w.WarehouseID
+            where uw.CompanyID == companyId
+                  && uw.UserID == userId
+                  && w.IsActive
                   && w.TypeWarehouse == 480 // Tipo despacho
             select new TbUserWarehouseDto
             {
-                CompanyId = uw.CompanyId,
-                WarehouseId = uw.WarehouseId,
-                BranchId = uw.BranchId,
-                UserId = uw.UserId,
+                CompanyId = uw.CompanyID,
+                WarehouseId = uw.WarehouseID,
+                BranchId = uw.BranchID,
+                UserId = uw.UserID,
                 Number = w.Number,
                 Name = w.Name,
-                StatusId = w.StatusId,
+                StatusId = w.StatusID,
                 IsActive = w.IsActive,
                 TypeWarehouse = w.TypeWarehouse
             };
@@ -51,19 +51,19 @@ class UserWarehouseModel : IUserWarehouseModel
     {
         using var context = new DataContext();
         var result = from uw in context.TbUserWarehouses
-            join w in context.TbWarehouses on uw.WarehouseId equals w.WarehouseId
-            where uw.CompanyId == companyId
-                  && uw.UserId == userId
-                  && w.IsActive == 1
+            join w in context.TbWarehouses on uw.WarehouseID equals w.WarehouseID
+            where uw.CompanyID == companyId
+                  && uw.UserID == userId
+                  && w.IsActive
             select new TbUserWarehouseDto
             {
-                CompanyId = uw.CompanyId,
-                WarehouseId = uw.WarehouseId,
-                BranchId = uw.BranchId,
-                UserId = uw.UserId,
+                CompanyId = uw.CompanyID,
+                WarehouseId = uw.WarehouseID,
+                BranchId = uw.BranchID,
+                UserId = uw.UserID,
                 Number = w.Number,
                 Name = w.Name,
-                StatusId = w.StatusId,
+                StatusId = w.StatusID,
                 IsActive = w.IsActive,
                 TypeWarehouse = w.TypeWarehouse
             };
@@ -74,19 +74,19 @@ class UserWarehouseModel : IUserWarehouseModel
     {
         using var context = new DataContext();
         var result = from uw in context.TbUserWarehouses
-            join w in context.TbWarehouses on uw.WarehouseId equals w.WarehouseId
-            where uw.CompanyId == companyId
-                  && uw.BranchId == branchId
-                  && w.IsActive == 1
+            join w in context.TbWarehouses on uw.WarehouseID equals w.WarehouseID
+            where uw.CompanyID == companyId
+                  && uw.BranchID == branchId
+                  && w.IsActive
             select new TbUserWarehouseDto
             {
-                CompanyId = uw.CompanyId,
-                WarehouseId = uw.WarehouseId,
-                BranchId = uw.BranchId,
-                UserId = uw.UserId,
+                CompanyId = uw.CompanyID,
+                WarehouseId = uw.WarehouseID,
+                BranchId = uw.BranchID,
+                UserId = uw.UserID,
                 Number = w.Number,
                 Name = w.Name,
-                StatusId = w.StatusId,
+                StatusId = w.StatusID,
                 IsActive = w.IsActive,
                 TypeWarehouse = w.TypeWarehouse
             };
@@ -97,8 +97,8 @@ class UserWarehouseModel : IUserWarehouseModel
     {
         using var context = new DataContext();
         return context.TbWarehouses
-            .Where(warehouse => warehouse.CompanyId == companyId
-                                && warehouse.IsActive == 1)
+            .Where(warehouse => warehouse.CompanyID == companyId
+                                && warehouse.IsActive)
             .ToList();
     }
 }

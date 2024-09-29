@@ -10,7 +10,7 @@ class RememberModel : IRememberModel
         using var context = new DataContext();
         var find = context.TbRemembers.Find(rememberId);
         if (find is null) return;
-        find.IsActive = 0;
+        find.IsActive = false;
         context.SaveChanges();
     }
 
@@ -19,7 +19,7 @@ class RememberModel : IRememberModel
         using var context = new DataContext();
         var find = context.TbRemembers.Find(rememberId);
         if (find is null) return;
-        data.RememberId = find.RememberId;
+        data.RememberID = find.RememberID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -29,20 +29,20 @@ class RememberModel : IRememberModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.RememberId;
+        return add.Entity.RememberID;
     }
 
     public TbRemember GetRowByPk(int rememberId)
     {
         using var context = new DataContext();
-        return context.TbRemembers.First(remember => remember.RememberId == rememberId && remember.IsActive == 1);
+        return context.TbRemembers.First(remember => remember.RememberID == rememberId && remember.IsActive);
     }
 
     public List<TbRemember> GetByCompany(int companyId)
     {
         using var context = new DataContext();
         return context.TbRemembers
-            .Where(remember => remember.CompanyId == companyId && remember.IsActive == 1)
+            .Where(remember => remember.CompanyID == companyId && remember.IsActive)
             .ToList();
     }
 
@@ -50,12 +50,12 @@ class RememberModel : IRememberModel
     {
         using var context = new DataContext();
         var result = from c in context.TbRemembers
-            join ci in context.TbCatalogItems on c.Period equals ci.CatalogItemId
-            join ws in context.TbWorkflowStages on c.StatusId equals ws.WorkflowStageId
-            where c.IsActive == 1 &&
+            join ci in context.TbCatalogItems on c.Period equals ci.CatalogItemID
+            join ws in context.TbWorkflowStages on c.StatusID equals ws.WorkflowStageID
+            where c.IsActive &&
                   ws.Vinculable!.Value &&
-                  c.CompanyId == companyId &&
-                  c.TagId == tagId
+                  c.CompanyID == companyId &&
+                  c.TagID == tagId
             select c;
         return result.ToList();
     }
@@ -64,11 +64,11 @@ class RememberModel : IRememberModel
     {
         using var context = new DataContext();
         var result = from c in context.TbRemembers
-            join ci in context.TbCatalogItems on c.Period equals ci.CatalogItemId
-            join ws in context.TbWorkflowStages on c.StatusId equals ws.WorkflowStageId
-            where c.IsActive == 1 &&
+            join ci in context.TbCatalogItems on c.Period equals ci.CatalogItemID
+            join ws in context.TbWorkflowStages on c.StatusID equals ws.WorkflowStageID
+            where c.IsActive &&
                   ws.Vinculable!.Value &&
-                  c.CompanyId == companyId
+                  c.CompanyID == companyId
             select c;
         return result.ToList();
     }
@@ -77,21 +77,21 @@ class RememberModel : IRememberModel
     {
         using var context = new DataContext();
         var result = from c in context.TbRemembers
-            join ci in context.TbCatalogItems on c.Period equals ci.CatalogItemId
+            join ci in context.TbCatalogItems on c.Period equals ci.CatalogItemID
             let diaProcesado =
                 ci.Sequence == 30 ? fechaProcess.Day :
                 ci.Sequence == 15 ? (fechaProcess).Day <= 15 ? fechaProcess.Day : fechaProcess.Day - 15 :
                 ci.Sequence == 7 ? (int)fechaProcess.DayOfWeek :
                 ci.Sequence == 365 ? fechaProcess.DayOfYear :
                 0
-            where c.RememberId == rememberId
+            where c.RememberID == rememberId
             select new TbRememberDto
             {
                 DiaProcesado = diaProcesado,
                 Fecha = fechaProcess,
                 Title = c.Title,
                 Description = c.Description,
-                TagId = c.TagId,
+                TagId = c.TagID,
                 LeerFile = c.LeerFile
             };
         return result.First();

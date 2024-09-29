@@ -9,7 +9,7 @@ class TagModel : ITagModel
         using var context = new DataContext();
         var find = context.TbTags.Find(tagId);
         if (find is null) return;
-        data.TagId = find.TagId;
+        data.TagID = find.TagID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -19,7 +19,7 @@ class TagModel : ITagModel
         using var context = new DataContext();
         var find = context.TbTags.Find(tagId);
         if (find is null) return;
-        find.IsActive = 0;
+        find.IsActive = false;
         context.SaveChanges();
     }
 
@@ -28,28 +28,28 @@ class TagModel : ITagModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.TagId;
+        return add.Entity.TagID;
     }
 
     public List<TbTag> GetRows()
     {
         using var context = new DataContext();
-        return context.TbTags.Where(tag => tag.IsActive == 1).ToList();
+        return context.TbTags.Where(tag => tag.IsActive!.Value).ToList();
     }
 
     public TbTag GetRowByPk(int tagId)
     {
         using var context = new DataContext();
         return context.TbTags
-            .Single(tag => tag.IsActive == 1
-                          && tag.TagId == tagId);
+            .Single(tag => tag.IsActive!.Value
+                          && tag.TagID == tagId);
     }
 
-    public TbTag GetRowByName(string name)
+    public TbTag GetRowByName(string? name)
     {
         using var context = new DataContext();
         return context.TbTags
-            .First(tag => tag.IsActive == 1
+            .First(tag => tag.IsActive!.Value
                           && tag.Name == name);
     }
 }

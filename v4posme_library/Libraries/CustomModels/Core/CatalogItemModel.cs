@@ -9,8 +9,8 @@ class CatalogItemModel : ICatalogItemModel
     {
         using var context = new DataContext();
         return context.TbCatalogItems.AsNoTracking()
-            .Where(item => item.CatalogId == catalogId
-                           && item.FlavorId == flavorId)
+            .Where(item => item.CatalogID == catalogId
+                           && item.FlavorID == flavorId)
             .ToList();
     }
 
@@ -18,9 +18,9 @@ class CatalogItemModel : ICatalogItemModel
     {
         using var context = new DataContext();
         return context.TbCatalogItems.AsNoTracking()
-            .Where(item => item.CatalogId == catalogId
-                           && item.FlavorId == flavorId
-                           && item.ParentCatalogItemId == parentCatalogItemId)
+            .Where(item => item.CatalogID == catalogId
+                           && item.FlavorID == flavorId
+                           && item.ParentCatalogItemID == parentCatalogItemId)
             .ToList();
     }
 
@@ -28,6 +28,6 @@ class CatalogItemModel : ICatalogItemModel
     {
         using var context = new DataContext();
         return context.TbCatalogItems.AsNoTracking()
-            .First(item => item.CatalogItemId == catalogItemId);
+            .First(item => item.CatalogItemID == catalogItemId);
     }
 }

@@ -9,8 +9,8 @@ class RelationshipModel : IRelationshipModel
     {
         using var context = new DataContext();
         return context.TbRelationships
-            .Where(relationship => relationship.EmployeeId == employeeId
-                                   && relationship.CustomerId == customerId)
+            .Where(relationship => relationship.EmployeeID == employeeId
+                                   && relationship.CustomerID == customerId)
             .ExecuteDelete();
     }
 
@@ -19,6 +19,6 @@ class RelationshipModel : IRelationshipModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.RelationshipId;
+        return add.Entity.RelationshipID;
     }
 }

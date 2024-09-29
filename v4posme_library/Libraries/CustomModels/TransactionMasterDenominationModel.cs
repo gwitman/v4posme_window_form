@@ -10,7 +10,7 @@ class TransactionMasterDenominationModel : ITransactionMasterDenominationModel
     {
         using var context = new DataContext();
         return context.TbTransactionMasterDenominations
-            .Where(denomination => denomination.TransactionMasterId == transactionMasterId)
+            .Where(denomination => denomination.TransactionMasterID == transactionMasterId)
             .ExecuteDelete();
     }
 
@@ -19,7 +19,7 @@ class TransactionMasterDenominationModel : ITransactionMasterDenominationModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.TransactionMasterDenominationId;
+        return add.Entity.TransactionMasterDenominationID;
     }
 
     public void UpdateAppPosme(int transactionMasterDenominationId, TbTransactionMasterDenomination data)
@@ -28,7 +28,7 @@ class TransactionMasterDenominationModel : ITransactionMasterDenominationModel
         var find = context.TbTransactionMasterDenominations
             .Find(transactionMasterDenominationId);
         if (find is null) return;
-        data.TransactionMasterDenominationId = transactionMasterDenominationId;
+        data.TransactionMasterDenominationID = transactionMasterDenominationId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -38,24 +38,24 @@ class TransactionMasterDenominationModel : ITransactionMasterDenominationModel
     {
         using var context = new DataContext();
         var result = from i in context.TbTransactionMasterDenominations
-            join ci in context.TbCatalogItems on i.CatalogItemId equals ci.CatalogItemId
-            where i.IsActive == 1 && i.CompanyId == companyId
-                                  && i.TransactionId == transactionId
-                                  && i.TransactionMasterId == transactionMasterId
+            join ci in context.TbCatalogItems on i.CatalogItemID equals ci.CatalogItemID
+            where i.IsActive == 1 && i.CompanyID == companyId
+                                  && i.TransactionID == transactionId
+                                  && i.TransactionMasterID == transactionMasterId
             orderby ci.Sequence
             select new TbTransactionMasterDenominationDto
             {
-                CompanyId = i.CompanyId,
-                CatalogItemId = i.CatalogItemId,
-                CurrencyId = i.CurrencyId,
+                CompanyId = i.CompanyID,
+                CatalogItemId = i.CatalogItemID,
+                CurrencyId = i.CurrencyID,
                 Quantity = i.Quantity,
                 Reference1 = i.Reference1,
                 Reference2 = i.Reference2,
                 IsActive = i.IsActive,
-                TransactionId = i.TransactionId,
-                TransactionMasterDenominationId = i.TransactionMasterDenominationId,
-                TransactionMasterId = i.TransactionMasterId,
-                ComponentId = i.ComponentId,
+                TransactionId = i.TransactionID,
+                TransactionMasterDenominationId = i.TransactionMasterDenominationID,
+                TransactionMasterId = i.TransactionMasterID,
+                ComponentId = i.ComponentID,
                 ExchangeRate = i.ExchangeRate,
                 Ratio = i.Ratio,
                 DenominationName = ci.Name
@@ -67,23 +67,23 @@ class TransactionMasterDenominationModel : ITransactionMasterDenominationModel
     {
         using var context = new DataContext();
         var result = from i in context.TbTransactionMasterDenominations
-            join ci in context.TbCatalogItems on i.CatalogItemId equals ci.CatalogItemId
+            join ci in context.TbCatalogItems on i.CatalogItemID equals ci.CatalogItemID
             where i.IsActive == 1
-                  && i.TransactionMasterDenominationId == transactionMasterDenominationId
+                  && i.TransactionMasterDenominationID == transactionMasterDenominationId
             orderby ci.Sequence
             select new TbTransactionMasterDenominationDto
             {
-                CompanyId = i.CompanyId,
-                CatalogItemId = i.CatalogItemId,
-                CurrencyId = i.CurrencyId,
+                CompanyId = i.CompanyID,
+                CatalogItemId = i.CatalogItemID,
+                CurrencyId = i.CurrencyID,
                 Quantity = i.Quantity,
                 Reference1 = i.Reference1,
                 Reference2 = i.Reference2,
                 IsActive = i.IsActive,
-                TransactionId = i.TransactionId,
-                TransactionMasterDenominationId = i.TransactionMasterDenominationId,
-                TransactionMasterId = i.TransactionMasterId,
-                ComponentId = i.ComponentId,
+                TransactionId = i.TransactionID,
+                TransactionMasterDenominationId = i.TransactionMasterDenominationID,
+                TransactionMasterId = i.TransactionMasterID,
+                ComponentId = i.ComponentID,
                 ExchangeRate = i.ExchangeRate,
                 Ratio = i.Ratio,
                 DenominationName = ci.Name

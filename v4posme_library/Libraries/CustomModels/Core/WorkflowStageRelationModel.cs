@@ -10,17 +10,16 @@ class WorkflowStageRelationModel : IWorkflowStageRelationModel
         using var context = new DataContext();
         var query = from w in context.TbWorkflows.AsNoTracking() 
             join ws in context.TbWorkflowStages.AsNoTracking()
-                on new { w.WorkflowId, w.ComponentId } equals new { ws.WorkflowId, ws.ComponentId }
+                on new { w.WorkflowID, w.ComponentID } equals new { ws.WorkflowID, ws.ComponentID }
             join wsr in context.TbWorkflowStageRelations.AsNoTracking()
-                on new { ws.WorkflowId, ws.WorkflowStageId } equals new { wsr.WorkflowId, wsr.WorkflowStageId }
+                on new { ws.WorkflowID, ws.WorkflowStageID } equals new { wsr.WorkflowID, wsr.WorkflowStageID }
             join ws2 in context.TbWorkflowStages.AsNoTracking()
-                on new { wsr.WorkflowId, WorkflowStageId = wsr.WorkflowStageTargetId }
-                equals new { ws2.WorkflowId, ws2.WorkflowStageId }
+                on new { wsr.WorkflowID, WorkflowStageID = wsr.WorkflowStageTargetID } equals new { ws2.WorkflowID, ws2.WorkflowStageID }
             where w.IsActive && ws.IsActive && ws2.IsActive
-                  && w.WorkflowId == workflowId
-                  && ws.FlavorId == flavorId
-                  && ws2.FlavorId == flavorId
-                  && ws.WorkflowStageId == sourceStageId
+                  && w.WorkflowID == workflowId
+                  && ws.FlavorID == flavorId
+                  && ws2.FlavorID == flavorId
+                  && ws.WorkflowStageID == sourceStageId
             select ws2;
         return query.ToList();
     }

@@ -10,14 +10,14 @@ class TransactionMasterConceptModel : ITransactionMasterConceptModel
         using var context = new DataContext();
         var result = from tm in context.TbTransactionMasters
             join td in context.TbTransactionMasterDetails
-                on new { tm.CompanyId, tm.TransactionId, tm.TransactionMasterId } equals new
-                    { td.CompanyId, td.TransactionId, td.TransactionMasterId }
-            join i in context.TbItems on td.CompanyId equals i.CompanyId
-            join cc in context.TbCompanyComponentConcepts on i.ItemId equals cc.ComponentItemId
-            where  td.CompanyId == companyId
-                   && td.TransactionId == transactionId
-                   && td.TransactionMasterId == transactionMasterId
-                   && cc.ComponentId == componentId
+                on new { tm.CompanyID, tm.TransactionID, tm.TransactionMasterID } equals new
+                    { td.CompanyID, td.TransactionID, td.TransactionMasterID }
+            join i in context.TbItems on td.CompanyID equals i.CompanyID
+            join cc in context.TbCompanyComponentConcepts on i.ItemID equals cc.ComponentItemID
+            where  td.CompanyID == companyId
+                   && td.TransactionID == transactionId
+                   && td.TransactionMasterID == transactionMasterId
+                   && cc.ComponentID == componentId
                    && td.IsActive.Value
             select cc;
         return result.ToList();

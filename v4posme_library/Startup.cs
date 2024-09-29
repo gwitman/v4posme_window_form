@@ -18,18 +18,18 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        // Replace with your connection string.
-        var connectionString = VariablesGlobales.ConnectionString;
+        // Replace with your connection string?.
+        var connectionstring = VariablesGlobales.ConnectionString;
 
         // Replace with your server version and type.
         // Use 'MariaDbServerVersion' for MariaDB.
-        // Alternatively, use 'ServerVersion.AutoDetect(connectionString)'.
+        // Alternatively, use 'ServerVersion.AutoDetect(connectionstring)'.
         // For common usages, see pull request #1233.
 
         // Replace 'YourDbContext' with the name of your own DbContext derived class.
         services.AddDbContext<DataContext>(
             dbContextOptions => dbContextOptions
-                .UseMySql(connectionString,MariaDbServerVersion.LatestSupportedServerVersion)
+                .UseMySql(connectionstring,MariaDbServerVersion.LatestSupportedServerVersion)
                 // The following three options help with debugging, but should
                 // be changed or removed for production.
                 //.LogTo(Console.WriteLine, LogLevel.Information)                                                

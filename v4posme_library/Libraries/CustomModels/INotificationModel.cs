@@ -4,7 +4,7 @@ namespace v4posme_library.Libraries.CustomModels;
 
 public interface INotificationModel
 {
-    void UpdateAppPosmeBySumary(string summary, TbNotification data);
+    void UpdateAppPosmeBySumary(string? summary, TbNotification data);
 
     void UpdateAppPosme(int notificationId, TbNotification data);
     
@@ -18,13 +18,13 @@ public interface INotificationModel
     
     List<TbNotification> GetRowsEmail(int top);
     
-    List<TbNotification> GetRowsWhatsappPrimerEmployeerOcupado(DateTime datetimeCliente,string business);
+    List<TbNotification> GetRowsWhatsappPrimerEmployeerOcupado(DateTime datetimeCliente,string? business);
     
-    List<TbNotification> GetRowsToAddedGoogleCalendar(int tagId,string business);
+    List<TbNotification> GetRowsToAddedGoogleCalendar(int tagId,string? business);
     
     List<TbNotification> GetRowsWhatsappPosMeSendMessage(int top);
     
     List<TbNotification> GetRowsWhatsappPosMeCalendar(int top);
     
-    TbNotification GetRowsByToMessage(string to,string message);
+    TbNotification GetRowsByToMessage(string? to,string? message);
 }

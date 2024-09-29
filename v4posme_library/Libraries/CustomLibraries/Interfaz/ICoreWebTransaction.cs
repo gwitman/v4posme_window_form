@@ -14,9 +14,9 @@ public interface ICoreWebTransaction
         int transactionMasterIdOriginal,
         int transactionIdRevert, int transactionMasterIdRevert);
 
-    int? GetTransactionId(int companyId, string componentName, int componentItemId);
+    int? GetTransactionId(int companyId, string? componentName, int componentItemId);
 
-    TbTransaction? GetTransaction(int companyId, string name);
+    TbTransaction? GetTransaction(int companyId, string? name);
 
-    TbTransactionConcept GetConcept(int companyId, string transactionName, string conceptName);
+    TbTransactionConcept GetConcept(int companyId, string? transactionName, string? conceptName);
 }

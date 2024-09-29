@@ -12,10 +12,10 @@ namespace v4posme_window.Views
 {
     public partial class PrincipalForm : XtraForm
     {
-        private readonly ICompanyModel _companyModel        = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyModel>();
-        private readonly IBranchModel _branchModel          = VariablesGlobales.Instance.UnityContainer.Resolve<IBranchModel>();
-        private readonly IMembershipModel _membershipModel  = VariablesGlobales.Instance.UnityContainer.Resolve<IMembershipModel>();
-        private readonly ICoreWebMenu _coreWebMenu          = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebMenu>();
+        private readonly ICompanyModel _companyModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyModel>();
+        private readonly IBranchModel _branchModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBranchModel>();
+        private readonly IMembershipModel _membershipModel = VariablesGlobales.Instance.UnityContainer.Resolve<IMembershipModel>();
+        private readonly ICoreWebMenu _coreWebMenu = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebMenu>();
 
         public PrincipalForm()
         {
@@ -27,15 +27,15 @@ namespace v4posme_window.Views
             var coreWebRender = new CoreWebRenderInView();
             if (VariablesGlobales.Instance.User is null)
             {
-                coreWebRender.GetMessageAlert(TypeError.Error, "Error","NO se pudo cargar los datos de usuario, inicie sesion nuevamente", this);
+                coreWebRender.GetMessageAlert(TypeError.Error, "Error", "NO se pudo cargar los datos de usuario, inicie sesion nuevamente", this);
                 return;
             }
 
-            VariablesGlobales.Instance.Company          = _companyModel.GetRowByPk(VariablesGlobales.Instance.User.CompanyId);
-            VariablesGlobales.Instance.Branch           = _branchModel.GetRowByPk(VariablesGlobales.Instance.User.BranchId,VariablesGlobales.Instance.User.CompanyId);
-            VariablesGlobales.Instance.Membership       = _membershipModel.GetRowByCompanyIdBranchIdUserId(VariablesGlobales.Instance.User.CompanyId, VariablesGlobales.Instance.User.BranchId,VariablesGlobales.Instance.User.UserId);
-            barStaticItemTitulo.Caption                 = VariablesGlobales.Instance.Company!.Name + "-" + VariablesGlobales.Instance.Branch.Name + $@"(Usuario: {VariablesGlobales.Instance.User.Nickname})";
-            var menuElementModel                        = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
+            VariablesGlobales.Instance.Company = _companyModel.GetRowByPk(VariablesGlobales.Instance.User.CompanyID);
+            VariablesGlobales.Instance.Branch = _branchModel.GetRowByPk(VariablesGlobales.Instance.User.BranchID, VariablesGlobales.Instance.User.CompanyID);
+            VariablesGlobales.Instance.Membership = _membershipModel.GetRowByCompanyIdBranchIdUserId(VariablesGlobales.Instance.User.CompanyID, VariablesGlobales.Instance.User.BranchID, VariablesGlobales.Instance.User.UserID);
+            barStaticItemTitulo.Caption = VariablesGlobales.Instance.Company!.Name + @"-" + VariablesGlobales.Instance.Branch.Name + $@"(Usuario: {VariablesGlobales.Instance.User.Nickname})";
+            var menuElementModel = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
 
             await Task.Run(() =>
             {
@@ -50,11 +50,7 @@ namespace v4posme_window.Views
 
                 if (VariablesGlobales.Instance.ListMenuTop is not null)
                 {
-                    ribbonControl1.Invoke((MethodInvoker)delegate
-                    {
-                        CoreWebRenderInView.RenderMenuTop(VariablesGlobales.Instance.ListMenuTop, ribbonControl1);
-                    });
-                    
+                    ribbonControl1.Invoke((MethodInvoker)delegate { CoreWebRenderInView.RenderMenuTop(VariablesGlobales.Instance.ListMenuTop, ribbonControl1); });
                 }
             });
 
@@ -63,30 +59,37 @@ namespace v4posme_window.Views
                 .Formularios()
                 .FirstOrDefault(c => c.Key == VariablesGlobales.Instance.Role!.UrlDefault).Value;
 
-            if (formularioDefaultValue is null) return;            
+            if (formularioDefaultValue is null) return;
             formularioDefaultValue.MdiParent = this;
             formularioDefaultValue.Show();
         }
 
-        private void accordionControl1_ElementClick(object sender,
-            DevExpress.XtraBars.Navigation.ElementClickEventArgs e)
+        private void accordionControl1_ElementClick(object sender, DevExpress.XtraBars.Navigation.ElementClickEventArgs e)
         {
             if (e.Element.Style == DevExpress.XtraBars.Navigation.ElementStyle.Group) return;
             if (e.Element.Name == null) return;
 
             var filterForm = (from keyValuePair in CoreFormList.Formularios() where e.Element.Name == keyValuePair.Key select keyValuePair.Value).FirstOrDefault();
             if (filterForm is null) return;
-
-            if (IsFormOpen(filterForm.GetType())) return;
-
             filterForm.MdiParent = this;
-            filterForm.Show();
+            if (IsFormOpen(filterForm.Name))
+            {
+                foreach (var frm in this.MdiChildren)
+                {
+                    if (frm.Name != filterForm.Name) continue;
+                    frm.BringToFront();
+                    frm.WindowState = FormWindowState.Maximized;
+                    return;
 
+                }
+            }
+            
+            filterForm.Show();
         }
 
-        public bool IsFormOpen(Type formType)
+        public bool IsFormOpen(string formType)
         {
-            return Application.OpenForms.Cast<Form>().Any(form => form.GetType() == formType);
+            return Application.OpenForms.Cast<Form>().Any(form => form.Name == formType);
         }
     }
 }

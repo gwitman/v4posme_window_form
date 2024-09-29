@@ -10,7 +10,7 @@ class ErrorModel : IErrorModel
         using var context = new DataContext();
         var find = context.TbErrors.Find(errorId);
         if (find is null) return;
-        data.ErrorId = find.ErrorId;
+        data.ErrorID = find.ErrorID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -19,7 +19,7 @@ class ErrorModel : IErrorModel
     {
         using var context = new DataContext();
         context.TbErrors
-            .Where(error => error.TagId == tagId)
+            .Where(error => error.TagID == tagId)
             .ExecuteUpdate(calls =>
                 calls.SetProperty(error => error.Message, data.Message)
                     .SetProperty(error => error.Notificated, data.Notificated)
@@ -32,7 +32,7 @@ class ErrorModel : IErrorModel
     {
         using var context = new DataContext();
         return context.TbErrors
-            .Where(error => error.ErrorId == errorId)
+            .Where(error => error.ErrorID == errorId)
             .ExecuteUpdate(calls =>
                 calls.SetProperty(error => error.IsActive, (sbyte?)0));
     }
@@ -41,7 +41,7 @@ class ErrorModel : IErrorModel
     {
         using var context = new DataContext();
         return context.TbErrors
-            .Where(error => error.TagId == tagId)
+            .Where(error => error.TagID == tagId)
             .ExecuteDelete();
     }
 
@@ -50,14 +50,14 @@ class ErrorModel : IErrorModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.ErrorId;
+        return add.Entity.ErrorID;
     }
 
     public TbError GetRowByPk(int errorId)
     {
         using var context = new DataContext();
         return context.TbErrors
-            .Single(error => error.ErrorId == errorId
+            .Single(error => error.ErrorID == errorId
                              && error.IsActive == 1);
     }
 
@@ -65,7 +65,7 @@ class ErrorModel : IErrorModel
     {
         using var context = new DataContext();
         return context.TbErrors
-            .Where(error => error.UserId == userId
+            .Where(error => error.UserID == userId
                             && error.IsActive == 1
                             && error.ReadOn == null)
             .Take(5)
@@ -76,7 +76,7 @@ class ErrorModel : IErrorModel
     {
         using var context = new DataContext();
         return context.TbErrors
-            .Count(error => error.UserId == userId
+            .Count(error => error.UserID == userId
                             && error.IsActive == 1
                             && error.ReadOn == null);
     }
@@ -85,9 +85,9 @@ class ErrorModel : IErrorModel
     {
         using var context = new DataContext();
         return context.TbErrors
-            .Where(error => error.UserId == userId
+            .Where(error => error.UserID == userId
                             && error.IsActive == 1
-                            && error.TagId == tagId
+                            && error.TagID == tagId
                             && error.ReadOn == null)
             .ToList();
     }
@@ -96,19 +96,19 @@ class ErrorModel : IErrorModel
     {
         using var context = new DataContext();
         return context.TbErrors
-            .Where(error => error.UserId == userId
+            .Where(error => error.UserID == userId
                             && error.IsActive == 1
                             && error.ReadOn == null)
             .ToList();
     }
 
-    public TbError GetRowByMessageUser(int userId, string message)
+    public TbError GetRowByMessageUser(int userId, string? message)
     {
         using var context = new DataContext();
         return context.TbErrors
             .Single(error => userId == 0
-                ? error.UserId == null
-                : error.UserId == userId
+                ? error.UserID == null
+                : error.UserID == userId
                   && error.IsActive == 1
                   && error.Message == message
                   && error.ReadOn == null);

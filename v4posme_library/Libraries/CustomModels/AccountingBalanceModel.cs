@@ -11,10 +11,10 @@ public class AccountingBalanceModel : IAccountingBalanceModel
         using var context = new DataContext();
         context.TbAccountingBalances
             .Where(accountingBalance =>
-                accountingBalance.CompanyId == companyId &&
-                accountingBalance.AccountId == accountId &&
-                accountingBalance.ComponentPeriodId == componentPeriodId &&
-                accountingBalance.ComponentCycleId == componentCycleId)
+                accountingBalance.CompanyID == companyId &&
+                accountingBalance.AccountID == accountId &&
+                accountingBalance.ComponentPeriodID == componentPeriodId &&
+                accountingBalance.ComponentCycleID == componentCycleId)
             .ExecuteUpdate(calls =>
                 calls.SetProperty(accountingBalance => accountingBalance.Balance,
                         accountingBalance => accountingBalance.Balance + balance)
@@ -28,9 +28,9 @@ public class AccountingBalanceModel : IAccountingBalanceModel
     {
         using var context = new DataContext();
         return context.TbJournalEntryDetailSummaries
-            .Where(summary => summary.CompanyId == companyId
-                              && summary.BranchId == branchId
-                              && summary.LoginId == loginId)
+            .Where(summary => summary.CompanyID == companyId
+                              && summary.BranchID == branchId
+                              && summary.LoginID == loginId)
             .ExecuteDelete();
     }
 
@@ -40,28 +40,28 @@ public class AccountingBalanceModel : IAccountingBalanceModel
         using var context = new DataContext();
         //SELECT accountID FROM tb_accounting_balance where companyID = $companyID and componentPeriodID = $periodID and componentCycleID = $cycleID and isActive = 1
         var accountIds = context.TbAccountingBalances
-            .Where(balance => balance.CompanyId == companyId
-                              && balance.ComponentPeriodId == periodId
-                              && balance.ComponentCycleId == cycleId
+            .Where(balance => balance.CompanyID == companyId
+                              && balance.ComponentPeriodID == periodId
+                              && balance.ComponentCycleID == cycleId
                               && balance.IsActive)
-            .Select(balance => balance.AccountId)
+            .Select(balance => balance.AccountID)
             .ToList();
         var query = context.TbAccounts
-            .Where(account => account.CompanyId == companyId
-                              && !accountIds.Contains(account.AccountId)
+            .Where(account => account.CompanyID == companyId
+                              && !accountIds.Contains(account.AccountID)
                               && account.IsActive!.Value)
             .Select(tbAccount => new TbAccountingBalance
             {
-                ComponentCycleId = cycleId,
-                ComponentPeriodId = periodId,
-                CompanyId = companyId,
-                ComponentId = componentAccountId,
-                AccountId = tbAccount.AccountId,
-                BranchId = branchId,
+                ComponentCycleID = cycleId,
+                ComponentPeriodID = periodId,
+                CompanyID = companyId,
+                ComponentID = componentAccountId,
+                AccountID = tbAccount.AccountID,
+                BranchID = branchId,
                 Balance = decimal.Zero,
                 Debit = decimal.Zero,
                 Credit = decimal.Zero,
-                ClassId = 0,
+                ClassID = 0,
                 IsActive = true
             })
             .ToList();
@@ -73,9 +73,9 @@ public class AccountingBalanceModel : IAccountingBalanceModel
     {
         using var context = new DataContext();
         context.TbAccountingBalances
-            .Where(balance => balance.CompanyId == companyId
-                              && balance.ComponentPeriodId == periodId
-                              && balance.ComponentCycleId == cycleId)
+            .Where(balance => balance.CompanyID == companyId
+                              && balance.ComponentPeriodID == periodId
+                              && balance.ComponentCycleID == cycleId)
             .ExecuteUpdate(calls => calls
                 .SetProperty(balance => balance.Debit, decimal.Zero)
                 .SetProperty(balance => balance.Credit, decimal.Zero));
@@ -85,22 +85,22 @@ public class AccountingBalanceModel : IAccountingBalanceModel
     {
         using var context = new DataContext();
         var query = from je in context.TbJournalEntries
-            join jed in context.TbJournalEntryDetails on je.JournalEntryId equals jed.JournalEntryId
-            join wf in context.TbWorkflowStages on je.StatusId equals wf.WorkflowStageId
-            join ac in context.TbAccounts on jed.AccountId equals ac.AccountId
-            where je.CompanyId == jed.CompanyId && je.CompanyId == companyId && je.AccountingCycleId == cycleId &&
+            join jed in context.TbJournalEntryDetails on je.JournalEntryID equals jed.JournalEntryID
+            join wf in context.TbWorkflowStages on je.StatusID equals wf.WorkflowStageID
+            join ac in context.TbAccounts on jed.AccountID equals ac.AccountID  
+            where je.CompanyID == jed.CompanyID && je.CompanyID == companyId && je.AccountingCycleID == cycleId &&
                   je.IsActive && jed.IsActive
-                  && je.JournalTypeId != journalTypeClosed && Decimal.Add(jed.Debit, jed.Credit) > Decimal.Zero
-            group new { je.JournalEntryId, ac.AccountId, ac.ParentAccountId, jed.Debit, jed.Credit } by ac.AccountId
+                  && je.JournalTypeID != journalTypeClosed && Decimal.Add(jed.Debit, jed.Credit) > Decimal.Zero
+            group new { je.JournalEntryID, ac.AccountID, ac.ParentAccountID, jed.Debit, jed.Credit } by ac.AccountID
             into g
             select new
             {
                 CompanyId = companyId,
                 BranchId = branchId,
                 LoginId = loginId,
-                JournalEntryId = g.Select(x => x.JournalEntryId).First(),
+                JournalEntryId = g.Select(x => x.JournalEntryID).First(),
                 AccountId = g.Key,
-                ParentAccountId = g.Select(x => x.ParentAccountId).First(),
+                ParentAccountId = g.Select(x => x.ParentAccountID).First(),
                 Debit = g.Sum(x => x.Debit),
                 Credit = g.Sum(x => x.Credit)
             };
@@ -109,12 +109,12 @@ public class AccountingBalanceModel : IAccountingBalanceModel
         {
             var journal = new TbJournalEntryDetailSummary
             {
-                CompanyId = find.CompanyId,
-                BranchId = find.BranchId,
-                LoginId = find.LoginId,
-                JournalEntryId = find.JournalEntryId,
-                AccountId = find.AccountId,
-                ParentAccountId = find.ParentAccountId,
+                CompanyID = find.CompanyId,
+                BranchID = find.BranchId,
+                LoginID = find.LoginId,
+                JournalEntryID = find.JournalEntryId,
+                AccountID = find.AccountId,
+                ParentAccountID = find.ParentAccountId,
                 Debit = find.Debit,
                 Credit = find.Credit
             };
@@ -130,19 +130,19 @@ public class AccountingBalanceModel : IAccountingBalanceModel
         //al recuperar los datos, este ya incluye el debit y credit, como campos de la tabla
         using var context = new DataContext();
         return context.TbJournalEntryDetailSummaries
-            .Single(summary => summary.CompanyId == companyId
-                               && summary.BranchId == branchId
-                               && summary.LoginId == loginId &&
-                               summary.AccountId == accountId);
+            .Single(summary => summary.CompanyID == companyId
+                               && summary.BranchID == branchId
+                               && summary.LoginID == loginId &&
+                               summary.AccountID == accountId);
     }
 
     public int? GetMinAccountBy(int companyId, int branchId, int loginId, int accountId)
     {
         using var context = new DataContext();
         return context.TbJournalEntryDetailSummaries
-            .Where(journal => journal.CompanyId == companyId && journal.BranchId == branchId &&
-                              journal.LoginId == loginId && journal.AccountId > accountId)
-            .Select(journal => journal.AccountId).Min();
+            .Where(journal => journal.CompanyID == companyId && journal.BranchID == branchId &&
+                              journal.LoginID == loginId && journal.AccountID > accountId)
+            .Select(journal => journal.AccountID).Min();
     }
 
     public int? GetMinAccount(int companyId, int branchId, int loginId)
@@ -159,9 +159,9 @@ public class AccountingBalanceModel : IAccountingBalanceModel
     {
         using var context = new DataContext();
         return context.TbJournalEntryDetailSummaries
-            .Where(journal => journal.CompanyId == companyId
-                              && journal.BranchId == branchId
-                              && journal.LoginId == loginId)
-            .Select(journal => journal.AccountId);
+            .Where(journal => journal.CompanyID == companyId
+                              && journal.BranchID == branchId
+                              && journal.LoginID == loginId)
+            .Select(journal => journal.AccountID);
     }
 }

@@ -10,8 +10,8 @@ public class CompanyCurrencyModel : ICompanyCurrencyModel
     {
         using var context = new DataContext();
         return context.TbCompanyCurrencies
-            .Where(currency => currency.CurrencyId == currencyId
-                               && currency.CompanyId == companyId)
+            .Where(currency => currency.CurrencyID == currencyId
+                               && currency.CompanyID == companyId)
             .ExecuteDelete();
     }
 
@@ -20,9 +20,9 @@ public class CompanyCurrencyModel : ICompanyCurrencyModel
         using var context = new DataContext();
         var find = context.TbCompanyCurrencies
             .Single(currency =>
-                currency.CurrencyId == currencyId
-                && currency.CompanyId == companyId);
-        data.CompanyCurrencyId = find.CompanyCurrencyId;
+                currency.CurrencyID == currencyId
+                && currency.CompanyID == companyId);
+        data.CompanyCurrencyID = find.CompanyCurrencyID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -32,7 +32,7 @@ public class CompanyCurrencyModel : ICompanyCurrencyModel
         using var context = new DataContext();
         var add = context.TbCompanyCurrencies.Add(data);
         context.BulkSaveChanges();
-        return add.Entity.CompanyCurrencyId;
+        return add.Entity.CompanyCurrencyID;
     }
 
     public TbCompanyCurrency GetRowByPk(int companyId, int currencyId)
@@ -40,29 +40,29 @@ public class CompanyCurrencyModel : ICompanyCurrencyModel
         using var context = new DataContext();
         return context.TbCompanyCurrencies
             .Join(context.TbCurrencies,
-                currency => currency.CurrencyId,
-                tbCurrency => tbCurrency.CurrencyId,
+                currency => currency.CurrencyID,
+                tbCurrency => tbCurrency.CurrencyID,
                 (currency, tbCurrency) => new { currency, tbCurrency })
             .Where(k => k.tbCurrency.IsActive!.Value)
             .Select(k => k.currency)
             .Single(currency =>
-                currency.CurrencyId == currencyId
-                && currency.CompanyId == companyId);
+                currency.CurrencyID == currencyId
+                && currency.CompanyID == companyId);
     }
 
     public List<TbCompanyCurrencyDto> GetByCompany(int companyId)
     {
         using var context = new DataContext();
         return context.TbCompanyCurrencies
-            .Join(context.TbCurrencies, currency => currency.CurrencyId, 
-                currency => currency.CurrencyId, 
+            .Join(context.TbCurrencies, currency => currency.CurrencyID, 
+                currency => currency.CurrencyID, 
                 (currency, tbCurrency) => new {currency, tbCurrency})
-            .Where(key => key.currency.CompanyId==companyId
+            .Where(key => key.currency.CompanyID==companyId
             && key.tbCurrency.IsActive!.Value)
             .Select(arg => new TbCompanyCurrencyDto
             {
-                CompanyId = arg.currency.CompanyId,
-                CurrencyId = arg.currency.CurrencyId,
+                CompanyId = arg.currency.CompanyID,
+                CurrencyId = arg.currency.CurrencyID,
                 Simb = arg.currency.Simb,
                 Simbol = arg.tbCurrency.Simbol,
                 Name = arg.tbCurrency.Name

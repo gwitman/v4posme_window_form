@@ -12,7 +12,7 @@ class ItemDataSheetDetailModel : IItemDataSheetDetailModel
         var find = context.TbItemDataSheetDetails
             .Find(itemDataSheetDetailId);
         if (find is null) return;
-        data.ItemDataSheetDetailId = find.ItemDataSheetDetailId;
+        data.ItemDataSheetDetailID = find.ItemDataSheetDetailID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -21,7 +21,7 @@ class ItemDataSheetDetailModel : IItemDataSheetDetailModel
     {
         using var context = new DataContext();
         context.TbItemDataSheetDetails
-            .Where(detail => detail.ItemDataSheetDetailId == itemDataSheetDetailId)
+            .Where(detail => detail.ItemDataSheetDetailID == itemDataSheetDetailId)
             .ExecuteUpdate(calls =>
                 calls.SetProperty(detail => detail.IsActive, 0));
     }
@@ -30,7 +30,7 @@ class ItemDataSheetDetailModel : IItemDataSheetDetailModel
     {
         using var context = new DataContext();
         context.TbItemDataSheetDetails
-            .Where(detail => detail.ItemDataSheetId == itemDataSheetId)
+            .Where(detail => detail.ItemDataSheetID == itemDataSheetId)
             .ExecuteUpdate(calls =>
                 calls.SetProperty(detail => detail.IsActive, 0));
     }
@@ -39,8 +39,8 @@ class ItemDataSheetDetailModel : IItemDataSheetDetailModel
     {
         using var context = new DataContext();
         context.TbItemDataSheetDetails
-            .Where(detail => detail.ItemDataSheetId == itemDataSheetId
-                             && !listDsdId.Contains(detail.ItemDataSheetDetailId))
+            .Where(detail => detail.ItemDataSheetID == itemDataSheetId
+                             && !listDsdId.Contains(detail.ItemDataSheetDetailID))
             .ExecuteUpdate(calls =>
                 calls.SetProperty(detail => detail.IsActive, 0));
     }
@@ -50,23 +50,23 @@ class ItemDataSheetDetailModel : IItemDataSheetDetailModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.ItemDataSheetDetailId;
+        return add.Entity.ItemDataSheetDetailID;
     }
 
     public TbItemDataSheetDetailDto GetRowByPk(int itemDataSheetDetailId)
     {
         using var context = new DataContext();
         var result = from i in context.TbItemDataSheetDetails
-            join tm in context.TbItems on i.ItemId equals tm.ItemId
-            where i.ItemDataSheetDetailId == itemDataSheetDetailId
+            join tm in context.TbItems on i.ItemID equals tm.ItemID
+            where i.ItemDataSheetDetailID == itemDataSheetDetailId
                   && i.IsActive == 1
             select new TbItemDataSheetDetailDto
             {
-                ItemDataSheetDetailId = i.ItemDataSheetDetailId,
-                ItemDataSheetId = i.ItemDataSheetId,
-                ItemId = i.ItemId,
+                ItemDataSheetDetailId = i.ItemDataSheetDetailID,
+                ItemDataSheetId = i.ItemDataSheetID,
+                ItemId = i.ItemID,
                 Quantity = i.Quantity,
-                RelatedItemId = i.RelatedItemId,
+                RelatedItemId = i.RelatedItemID,
                 IsActive = i.IsActive,
                 ItemNumber = tm.ItemNumber,
                 Name = tm.Name
@@ -78,17 +78,17 @@ class ItemDataSheetDetailModel : IItemDataSheetDetailModel
     {
         using var context = new DataContext();
         var result = from i in context.TbItemDataSheetDetails
-            join tm in context.TbItems on i.ItemId equals tm.ItemId
-            where i.ItemDataSheetId == itemDataSheetId
+            join tm in context.TbItems on i.ItemID equals tm.ItemID
+            where i.ItemDataSheetID == itemDataSheetId
                   && i.IsActive == 1
-                  && tm.ItemId == itemId
+                  && tm.ItemID == itemId
             select new TbItemDataSheetDetailDto
             {
-                ItemDataSheetDetailId = i.ItemDataSheetDetailId,
-                ItemDataSheetId = i.ItemDataSheetId,
-                ItemId = i.ItemId,
+                ItemDataSheetDetailId = i.ItemDataSheetDetailID,
+                ItemDataSheetId = i.ItemDataSheetID,
+                ItemId = i.ItemID,
                 Quantity = i.Quantity,
-                RelatedItemId = i.RelatedItemId,
+                RelatedItemId = i.RelatedItemID,
                 IsActive = i.IsActive,
                 ItemNumber = tm.ItemNumber,
                 Name = tm.Name
@@ -100,16 +100,16 @@ class ItemDataSheetDetailModel : IItemDataSheetDetailModel
     {
         using var context = new DataContext();
         var result = from i in context.TbItemDataSheetDetails
-            join tm in context.TbItems on i.ItemId equals tm.ItemId
-            where i.ItemDataSheetId == itemDataSheetId
+            join tm in context.TbItems on i.ItemID equals tm.ItemID
+            where i.ItemDataSheetID == itemDataSheetId
                   && i.IsActive == 1
             select new TbItemDataSheetDetailDto
             {
-                ItemDataSheetDetailId = i.ItemDataSheetDetailId,
-                ItemDataSheetId = i.ItemDataSheetId,
-                ItemId = i.ItemId,
+                ItemDataSheetDetailId = i.ItemDataSheetDetailID,
+                ItemDataSheetId = i.ItemDataSheetID,
+                ItemId = i.ItemID,
                 Quantity = i.Quantity,
-                RelatedItemId = i.RelatedItemId,
+                RelatedItemId = i.RelatedItemID,
                 IsActive = i.IsActive,
                 ItemNumber = tm.ItemNumber,
                 Name = tm.Name

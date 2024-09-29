@@ -9,7 +9,7 @@ class CompanyModel : ICompanyModel
     {
         using var context = new DataContext();
         return context.TbCompanies.AsNoTracking()
-            .First(company => company.CompanyId == companyId
+            .First(company => company.CompanyID == companyId
                               && company.IsActive!.Value);
     }
 

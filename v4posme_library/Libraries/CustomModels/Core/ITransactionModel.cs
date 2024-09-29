@@ -4,7 +4,7 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 public interface ITransactionModel
 {
-    TbTransaction? GetRowByPk(int companyId, string name);
+    TbTransaction? GetRowByPk(int companyId, string? name);
 
     int GetCounterTransactionMaster(int companyId, int transactionId, int statusId);
 

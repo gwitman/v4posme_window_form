@@ -6,5 +6,5 @@ public interface IDataViewModel
 {
     TbDataview? GetListByCompanyComponentCaller(int componentId,int callerId);
     
-    TbDataview? GetViewByName(int componentId, string name, int callerId);
+    TbDataview? GetViewByName(int componentId, string? name, int callerId);
 }

@@ -9,7 +9,7 @@ class ComponentAutorizationModel : IComponentAutorizationModel
     {
         using var context = new DataContext();
         return context.TbComponentAutorizations.AsNoTracking()
-            .Where(autorization => autorization.CompanyId == companyId)
+            .Where(autorization => autorization.CompanyID == companyId)
             .ToList();
     }
 }

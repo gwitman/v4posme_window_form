@@ -10,18 +10,18 @@ class TransactionMasterDetailCreditModel : ITransactionMasterDetailCreditModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.TransactionMasterDetailCreditId;
+        return add.Entity.TransactionMasterDetailCreditID;
     }
 
     public void UpdateAppPosme(int transactionMasterDetailId, TbTransactionMasterDetailCredit? data)
     {
         using var context = new DataContext();
         var findDetailCredits = context.TbTransactionMasterDetailCredits
-            .Where(credit => credit.TransactionMasterDetailId == transactionMasterDetailId)
+            .Where(credit => credit.TransactionMasterDetailID == transactionMasterDetailId)
             .ToList();
         foreach (var iteMasterDetailCredit in findDetailCredits)
         {
-            data.TransactionMasterDetailCreditId = iteMasterDetailCredit.TransactionMasterDetailCreditId;
+            data.TransactionMasterDetailCreditID = iteMasterDetailCredit.TransactionMasterDetailCreditID;
             context.Entry(iteMasterDetailCredit).CurrentValues.SetValues(data);
         }
 
@@ -32,7 +32,7 @@ class TransactionMasterDetailCreditModel : ITransactionMasterDetailCreditModel
     {
         using var context = new DataContext();
         return context.TbTransactionMasterDetailCredits
-            .Where(credit => credit.TransactionMasterDetailId == transactionMasterDetailId)
+            .Where(credit => credit.TransactionMasterDetailID == transactionMasterDetailId)
             .ExecuteDelete();
     }
 
@@ -40,15 +40,15 @@ class TransactionMasterDetailCreditModel : ITransactionMasterDetailCreditModel
     {
         using var context = new DataContext();
         return context.TbTransactionMasterDetailCredits
-            .First(credit => credit.TransactionMasterDetailId == transactionMasterDetailId);
+            .First(credit => credit.TransactionMasterDetailID == transactionMasterDetailId);
     }
 
     public int DeleteWhereIdNotIn(int transactionMasterId, List<int> listTmdId)
     {
         using var context = new DataContext();
         return context.TbTransactionMasterDetailCredits
-            .Where(credit => credit.TransactionMasterId == transactionMasterId
-            && !listTmdId.Contains(credit.TransactionMasterDetailId))
+            .Where(credit => credit.TransactionMasterID == transactionMasterId
+            && !listTmdId.Contains(credit.TransactionMasterDetailID))
             .ExecuteDelete();
     }
 }

@@ -10,10 +10,10 @@ class EntityPhoneModel : IEntityPhoneModel
     {
         using var context = new DataContext();
         context.TbEntityPhones
-            .Where(phone => phone.CompanyId == companyId
-                            && phone.BranchId == branchId
-                            && phone.EntityId == entityId
-                            && phone.EntityPhoneId == entityPhoneId)
+            .Where(phone => phone.CompanyID == companyId
+                            && phone.BranchID == branchId
+                            && phone.EntityID == entityId
+                            && phone.EntityPhoneID == entityPhoneId)
             .ExecuteDelete();
     }
 
@@ -21,9 +21,9 @@ class EntityPhoneModel : IEntityPhoneModel
     {
         using var context = new DataContext();
         context.TbEntityPhones
-            .Where(phone => phone.CompanyId == companyId
-                            && phone.BranchId == branchId
-                            && phone.EntityId == entityId)
+            .Where(phone => phone.CompanyID == companyId
+                            && phone.BranchID == branchId
+                            && phone.EntityID == entityId)
             .ExecuteDelete();
     }
 
@@ -32,18 +32,18 @@ class EntityPhoneModel : IEntityPhoneModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.EntityPhoneId;
+        return add.Entity.EntityPhoneID;
     }
 
     public void UpdateAppPosme(int companyId, int branchId, int entityId, int entityPhoneId, TbEntityPhone data)
     {
         using var context = new DataContext();
         var find = context.TbEntityPhones
-            .Single(phone => phone.CompanyId == companyId
-                             && phone.BranchId == branchId
-                             && phone.EntityId == entityId
-                             && phone.EntityPhoneId == entityPhoneId);
-        data.EntityPhoneId = find.EntityPhoneId;
+            .Single(phone => phone.CompanyID == companyId
+                             && phone.BranchID == branchId
+                             && phone.EntityID == entityId
+                             && phone.EntityPhoneID == entityPhoneId);
+        data.EntityPhoneID = find.EntityPhoneID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -52,18 +52,18 @@ class EntityPhoneModel : IEntityPhoneModel
     {
         using var context = new DataContext();
         var result = from tm in context.TbEntityPhones
-            join ci in context.TbCatalogItems on tm.TypeId equals ci.CatalogItemId
-            where tm.EntityPhoneId == entityPhoneId
-                  && tm.EntityId == entityId
-                  && tm.BranchId == branchId
-                  && tm.CompanyId == companyId
+            join ci in context.TbCatalogItems on tm.TypeID equals ci.CatalogItemID
+            where tm.EntityPhoneID == entityPhoneId
+                  && tm.EntityID == entityId
+                  && tm.BranchID == branchId
+                  && tm.CompanyID == companyId
             select new TbEntityPhoneDto
             {
-                CompanyId = tm.CompanyId,
-                BranchId = tm.BranchId,
-                EntityId = tm.EntityId,
-                EntityPhoneId = tm.EntityPhoneId,
-                TypeId = tm.TypeId,
+                CompanyId = tm.CompanyID,
+                BranchId = tm.BranchID,
+                EntityId = tm.EntityID,
+                EntityPhoneId = tm.EntityPhoneID,
+                TypeId = tm.TypeID,
                 TypeIdDescription = ci.Name,
                 Number = tm.Number,
                 IsPrimary = tm.IsPrimary
@@ -75,17 +75,17 @@ class EntityPhoneModel : IEntityPhoneModel
     {
         using var context = new DataContext();
         var result = from tm in context.TbEntityPhones
-            join ci in context.TbCatalogItems on tm.TypeId equals ci.CatalogItemId
-            where tm.EntityId == entityId
-                  && tm.BranchId == branchId
-                  && tm.CompanyId == companyId
+            join ci in context.TbCatalogItems on tm.TypeID equals ci.CatalogItemID
+            where tm.EntityID == entityId
+                  && tm.BranchID == branchId
+                  && tm.CompanyID == companyId
             select new TbEntityPhoneDto
             {
-                CompanyId = tm.CompanyId,
-                BranchId = tm.BranchId,
-                EntityId = tm.EntityId,
-                EntityPhoneId = tm.EntityPhoneId,
-                TypeId = tm.TypeId,
+                CompanyId = tm.CompanyID,
+                BranchId = tm.BranchID,
+                EntityId = tm.EntityID,
+                EntityPhoneId = tm.EntityPhoneID,
+                TypeId = tm.TypeID,
                 TypeIdDescription = ci.Name,
                 Number = tm.Number,
                 IsPrimary = tm.IsPrimary

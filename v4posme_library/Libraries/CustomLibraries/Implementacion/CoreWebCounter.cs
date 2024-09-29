@@ -5,14 +5,14 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
 
 class CoreWebCounter(ICounterModel counterModel, IComponentModel componentModel) : ICoreWebCounter
 {
-    public string GetFillNumber(int companyId, int branchId, string componentName, int componentItemId, int number)
+    public string? GetFillNumber(int companyId, int branchId, string? componentName, int componentItemId, int number)
     {
         // Obtener componente
         var objComponente = componentModel.GetRowByName(componentName);
         if (objComponente is null) throw new Exception("NO EXISTE EL COMPONENTE '" + componentName + "'");
 
         // Obtener el contador
-        var objCounter = counterModel.GetRowByPk(companyId, branchId, objComponente.ComponentId, componentItemId);
+        var objCounter = counterModel.GetRowByPk(companyId, branchId, objComponente.ComponentID, componentItemId);
         if (objCounter is null) throw new Exception("NO EXISTE EL CONTADOR");
 
         var value = number.ToString().PadLeft(objCounter.Length!.Value, '0');
@@ -22,14 +22,14 @@ class CoreWebCounter(ICounterModel counterModel, IComponentModel componentModel)
         return value;
     }
 
-    public string GetCurrenctNumber(int companyId, int branchId, string componentName, int componentItemId)
+    public string? GetCurrenctNumber(int companyId, int branchId, string? componentName, int componentItemId)
     {
         // Obtener componente
         var objComponente = componentModel.GetRowByName(componentName);
         if (objComponente is null) throw new Exception("NO EXISTE EL COMPONENTE '" + componentName + "'");
 
         // Obtener el contador
-        var objCounter = counterModel.GetRowByPk(companyId, branchId, objComponente.ComponentId, componentItemId);
+        var objCounter = counterModel.GetRowByPk(companyId, branchId, objComponente.ComponentID, componentItemId);
         if (objCounter is null) throw new Exception("NO EXISTE EL CONTADOR");
 
         var value = objCounter.CurrentValue!.Value.ToString().PadLeft(objCounter.Length!.Value, '0');
@@ -39,7 +39,7 @@ class CoreWebCounter(ICounterModel counterModel, IComponentModel componentModel)
         return value;
     }
 
-    public string GoNextNumber(int companyId, int branchId, string componentName, int componentItemId)
+    public string? GoNextNumber(int companyId, int branchId, string? componentName, int componentItemId)
     {
         // Obtener componente
         var objComponente = componentModel.GetRowByName(componentName);
@@ -47,7 +47,7 @@ class CoreWebCounter(ICounterModel counterModel, IComponentModel componentModel)
             throw new Exception("NO EXISTE EL COMPONENTE '" + componentName + "'");
 
         // Obtener el contador
-        var objCounter = counterModel.GetRowByPk(companyId, branchId, objComponente.ComponentId, componentItemId);
+        var objCounter = counterModel.GetRowByPk(companyId, branchId, objComponente.ComponentID, componentItemId);
         if (objCounter == null)
             throw new Exception("NO EXISTE EL CONTADOR");
 
@@ -57,7 +57,7 @@ class CoreWebCounter(ICounterModel counterModel, IComponentModel componentModel)
 
         // Actualizar
         objCounter.CurrentValue = objCounter.CurrentValue!.Value + objCounter.Seed!.Value;
-        counterModel.UpdateAppPosme(companyId, branchId, objComponente.ComponentId, componentItemId, objCounter);
+        counterModel.UpdateAppPosme(companyId, branchId, objComponente.ComponentID, componentItemId, objCounter);
         // Retornar valor
         return value;
     }

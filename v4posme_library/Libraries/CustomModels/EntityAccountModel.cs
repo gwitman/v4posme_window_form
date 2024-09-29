@@ -10,7 +10,7 @@ class EntityAccountModel : IEntityAccountModel
         var find = context.TbEntityAccounts
             .Find(entityAccountId);
         if (find is null) return;
-        data.EntityAccountId = find.EntityAccountId;
+        data.EntityAccountID = find.EntityAccountID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
@@ -20,7 +20,7 @@ class EntityAccountModel : IEntityAccountModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.BulkSaveChanges();
-        return add.Entity.EntityAccountId;
+        return add.Entity.EntityAccountID;
     }
 
     public void DeleteAppPosme(int entityAccountId)
@@ -29,7 +29,7 @@ class EntityAccountModel : IEntityAccountModel
         var find = context.TbEntityAccounts
             .Find(entityAccountId);
         if (find is null) return;
-        find.IsActive = 0;
+        find.IsActive = false;
         context.BulkSaveChanges();
     }
 
@@ -37,10 +37,10 @@ class EntityAccountModel : IEntityAccountModel
     {
         using var context = new DataContext();
         return context.TbEntityAccounts
-            .Where(account => account.CompanyId == companyId
-                              && account.ComponentId == componentId
-                              && account.ComponentItemId == componentItemId
-                              && account.IsActive == 1)
+            .Where(account => account.CompanyID == companyId
+                              && account.ComponentID == componentId
+                              && account.ComponentItemID == componentItemId
+                              && account.IsActive)
             .ToList();
     }
 
@@ -48,18 +48,18 @@ class EntityAccountModel : IEntityAccountModel
     {
         using var context = new DataContext();
         return context.TbEntityAccounts
-            .Single(account => account.EntityAccountId == entityAccountId
-                               && account.IsActive == 1);
+            .Single(account => account.EntityAccountID == entityAccountId
+                               && account.IsActive);
     }
 
     public TbEntityAccount GetRowByAccountId(int companyId, int componentId, int componentItemId, int accountId)
     {
         using var context = new DataContext();
         return context.TbEntityAccounts
-            .Single(account => account.CompanyId == companyId
-                               && account.ComponentId == componentId
-                               && account.ComponentItemId == componentItemId
-                               && account.AccountId == accountId
-                               && account.IsActive == 1);
+            .Single(account => account.CompanyID == companyId
+                               && account.ComponentID == componentId
+                               && account.ComponentItemID == componentItemId
+                               && account.AccountID == accountId
+                               && account.IsActive);
     }
 }

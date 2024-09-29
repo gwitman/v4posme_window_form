@@ -10,9 +10,9 @@ public interface IWarehouseModel
     
     int InsertAppPosme(TbWarehouse data);
     
-    List<TbWarehouse> GetByCode(int companyId,string code);
+    List<TbWarehouse> GetByCode(int companyId,string? code);
     
-    TbWarehouse GetRowByPk(int companyId,int warehouseId);
+    TbWarehouse? GetRowByPk(int companyId,int warehouseId);
     
     List<TbWarehouse> GetByCompany(int companyId);
 }

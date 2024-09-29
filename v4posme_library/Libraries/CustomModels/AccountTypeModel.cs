@@ -8,8 +8,8 @@ class AccountTypeModel : IAccountTypeModel
     {
         using var context = new DataContext();
         var find = context.TbAccountTypes
-            .Single(account => account.CompanyId == companyId
-                               && account.AccountTypeId == accountTypeId);
+            .Single(account => account.CompanyID == companyId
+                               && account.AccountTypeID == accountTypeId);
         find.IsActive = false;
         context.BulkSaveChanges();
     }
@@ -18,9 +18,9 @@ class AccountTypeModel : IAccountTypeModel
     {
         using var context = new DataContext();
         var find = context.TbAccountTypes
-            .Single(account => account.CompanyId == companyId
-                               && account.AccountTypeId == accountTypeId);
-        data.AccountTypeId = find.AccountTypeId;
+            .Single(account => account.CompanyID == companyId
+                               && account.AccountTypeID == accountTypeId);
+        data.AccountTypeID = find.AccountTypeID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
@@ -30,7 +30,7 @@ class AccountTypeModel : IAccountTypeModel
         using var context = new DataContext();
         var add = context.TbAccountTypes.Add(data);
         context.BulkSaveChanges();
-        return add.Entity.AccountTypeId;
+        return add.Entity.AccountTypeID;
     }
 
     public int GetCountInAccount(int companyId, int accountTypeId)
@@ -39,8 +39,8 @@ class AccountTypeModel : IAccountTypeModel
         return context.TbAccounts
             .Count(account => account.IsActive != null
                               && account.IsActive.Value
-                              && account.CompanyId == companyId
-                              && account.AccountTypeId == accountTypeId);
+                              && account.CompanyID == companyId
+                              && account.AccountTypeID == accountTypeId);
     }
 
     public List<TbAccountType> GetByCompany(int companyId)
@@ -49,7 +49,7 @@ class AccountTypeModel : IAccountTypeModel
         return context.TbAccountTypes
             .Where(account => account.IsActive != null
                               && account.IsActive.Value
-                              && account.CompanyId == companyId)
+                              && account.CompanyID == companyId)
             .ToList();
     }
 
@@ -59,7 +59,7 @@ class AccountTypeModel : IAccountTypeModel
         return context.TbAccountTypes
             .Single(account => account.IsActive != null
                                && account.IsActive.Value
-                               && account.CompanyId == companyId
-                               && account.AccountTypeId == accountTypeId);
+                               && account.CompanyID == companyId
+                               && account.AccountTypeID == accountTypeId);
     }
 }

@@ -4,5 +4,5 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 public interface IComponentModel
 {
-    TbComponent? GetRowByName(string name);
+    TbComponent? GetRowByName(string? name);
 }

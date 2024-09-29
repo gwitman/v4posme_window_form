@@ -17,7 +17,7 @@ class CurrencyModel : ICurrencyModel
     {
         using var context = new DataContext();
         return context.TbCurrencies.AsNoTracking()
-            .First(currency => currency.CurrencyId == currencyId
+            .First(currency => currency.CurrencyID == currencyId
                                && currency.IsActive!.Value);
     }
 

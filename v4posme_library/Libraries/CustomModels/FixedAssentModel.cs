@@ -9,10 +9,10 @@ class FixedAssentModel : IFixedAssentModel
     {
         using var context = new DataContext();
         var find = context.TbFixedAssents
-            .Single(assent => assent.CompanyId == companyId
-                              && assent.BranchId == branchId
-                              && assent.FixedAssentId == fixedAssentId);
-        data.FixedAssentId = find.FixedAssentId;
+            .Single(assent => assent.CompanyID == companyId
+                              && assent.BranchID == branchId
+                              && assent.FixedAssentID == fixedAssentId);
+        data.FixedAssentID = find.FixedAssentID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -21,11 +21,11 @@ class FixedAssentModel : IFixedAssentModel
     {
         using var context = new DataContext();
         context.TbFixedAssents
-            .Where(assent => assent.CompanyId == companyId
-                             && assent.BranchId == branchId
-                             && assent.FixedAssentId == fixedAssentId)
+            .Where(assent => assent.CompanyID == companyId
+                             && assent.BranchID == branchId
+                             && assent.FixedAssentID == fixedAssentId)
             .ExecuteUpdate(calls =>
-                calls.SetProperty(assent => assent.IsActive, (ulong)0));
+                calls.SetProperty(assent => assent.IsActive, false));
     }
 
     public int InsertAppPosme(TbFixedAssent data)
@@ -33,15 +33,15 @@ class FixedAssentModel : IFixedAssentModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.FixedAssentId;
+        return add.Entity.FixedAssentID;
     }
 
     public TbFixedAssent GetRowByPk(int companyId, int branchId, int fixedAssentId)
     {
         using var context = new DataContext();
         return context.TbFixedAssents
-            .Single(assent => assent.CompanyId == companyId
-                              && assent.BranchId == branchId
-                              && assent.FixedAssentId == fixedAssentId);
+            .Single(assent => assent.CompanyID == companyId
+                              && assent.BranchID == branchId
+                              && assent.FixedAssentID == fixedAssentId);
     }
 }

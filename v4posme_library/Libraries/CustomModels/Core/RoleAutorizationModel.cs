@@ -10,9 +10,9 @@ class RoleAutorizationModel : IRoleAutorizationModel
     {
         using var context = new DataContext();
         return context.TbRoleAutorizations
-            .Where(autorization => autorization.CompanyId == companyId
-                                   && autorization.BranchId == branchId
-                                   && autorization.RoleId == roleId)
+            .Where(autorization => autorization.CompanyID == companyId
+                                   && autorization.BranchID == branchId
+                                   && autorization.RoleID == roleId)
             .ExecuteDelete();
     }
 
@@ -20,10 +20,10 @@ class RoleAutorizationModel : IRoleAutorizationModel
     {
         using var context = new DataContext();
         return context.TbRoleAutorizations
-            .Where(autorization => autorization.CompanyId == companyId
-                                   && autorization.BranchId == branchId
-                                   && autorization.RoleId == roleId
-                                   && autorization.ComponentAutorizationId == componentAutorizationId)
+            .Where(autorization => autorization.CompanyID == companyId
+                                   && autorization.BranchID == branchId
+                                   && autorization.RoleID == roleId
+                                   && autorization.ComponentAutorizationID == componentAutorizationId)
             .ExecuteDelete();
     }
 
@@ -32,7 +32,7 @@ class RoleAutorizationModel : IRoleAutorizationModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.RoleAurotizationId;
+        return add.Entity.RoleAurotizationID;
     }
 
     public List<TbRoleAutorizationDto> GetRowByRoleAutorization(int companyId, int branchId, int roleId)
@@ -40,17 +40,17 @@ class RoleAutorizationModel : IRoleAutorizationModel
         using var context = new DataContext();
         var query = from ra in context.TbRoleAutorizations.AsNoTracking()
             join ca in context.TbComponentAutorizations.AsNoTracking()
-                on new { ra.CompanyId, ra.ComponentAutorizationId } equals new
-                    { ca.CompanyId, ca.ComponentAutorizationId }
-            where ra.CompanyId == companyId
-                  && ra.BranchId == branchId
-                  && ra.RoleId == roleId
+                on new { ra.CompanyID, ra.ComponentAutorizationID } equals new
+                    { ca.CompanyID, ca.ComponentAutorizationID }
+            where ra.CompanyID == companyId
+                  && ra.BranchID == branchId
+                  && ra.RoleID == roleId
             select new TbRoleAutorizationDto
             {
-                CompanyId = ra.CompanyId,
-                BranchId = ra.BranchId,
-                RoleId = ra.RoleId,
-                ComponentAutorizationId = ra.ComponentAutorizationId,
+                CompanyId = ra.CompanyID,
+                BranchId = ra.BranchID,
+                RoleId = ra.RoleID,
+                ComponentAutorizationId = ra.ComponentAutorizationID,
                 Name = ca.Name
             };
         return query.ToList();
@@ -61,23 +61,23 @@ class RoleAutorizationModel : IRoleAutorizationModel
         using var context = new DataContext();
         var query = from ra in context.TbRoleAutorizations.AsNoTracking()
             join ca in context.TbComponentAutorizations.AsNoTracking()
-                on new { ra.CompanyId, ra.ComponentAutorizationId } equals new
-                    { ca.CompanyId, ca.ComponentAutorizationId }
+                on new { ra.CompanyID, ra.ComponentAutorizationID } equals new
+                    { ca.CompanyID, ca.ComponentAutorizationID }
             join cad in context.TbComponentAutorizationDetails.AsNoTracking()
-                on new { ca.CompanyId, ca.ComponentAutorizationId } equals new
-                    { cad.CompanyId, cad.ComponentAutorizationId }
-            where ra.CompanyId == companyId
-                  && ra.BranchId == branchId
-                  && ra.RoleId == roleId
+                on new { ca.CompanyID, ca.ComponentAutorizationID } equals new
+                    { cad.CompanyID, cad.ComponentAutorizationID }
+            where ra.CompanyID == companyId
+                  && ra.BranchID == branchId
+                  && ra.RoleID == roleId
             select new TbRoleAutorizationDto
             {
-                CompanyId = ra.CompanyId,
-                BranchId = ra.BranchId,
-                RoleId = ra.RoleId,
-                ComponentAutorizationId = cad.ComponentAutorizationId,
-                ComponentId = cad.ComponentId,
-                WorkflowId = cad.WorkflowId,
-                WorkflowStageId = cad.WorkflowStageId
+                CompanyId = ra.CompanyID,
+                BranchId = ra.BranchID,
+                RoleId = ra.RoleID,
+                ComponentAutorizationId = cad.ComponentAutorizationID,
+                ComponentId = cad.ComponentID,
+                WorkflowId = cad.WorkflowID,
+                WorkflowStageId = cad.WorkflowStageID
             };
         return query.ToList();
     }
@@ -87,24 +87,24 @@ class RoleAutorizationModel : IRoleAutorizationModel
         using var context = new DataContext();
         var query = from ra in context.TbRoleAutorizations.AsNoTracking()
             join ca in context.TbComponentAutorizations.AsNoTracking()
-                on new { ra.CompanyId, ra.ComponentAutorizationId } equals new
-                    { ca.CompanyId, ca.ComponentAutorizationId }
+                on new { ra.CompanyID, ra.ComponentAutorizationID } equals new
+                    { ca.CompanyID, ca.ComponentAutorizationID }
             join cad in context.TbComponentAutorizationDetails.AsNoTracking()
-                on new { ca.CompanyId, ca.ComponentAutorizationId } equals new
-                    { cad.CompanyId, cad.ComponentAutorizationId }
-            where ra.CompanyId == companyId
-                  && ra.BranchId == branchId
-                  && ra.RoleId == roleId
-                  && ra.ComponentAutorizationId == componentAutorizationId
+                on new { ca.CompanyID, ca.ComponentAutorizationID } equals new
+                    { cad.CompanyID, cad.ComponentAutorizationID }
+            where ra.CompanyID == companyId
+                  && ra.BranchID == branchId
+                  && ra.RoleID == roleId
+                  && ra.ComponentAutorizationID == componentAutorizationId
             select new TbRoleAutorizationDto
             {
-                CompanyId = ra.CompanyId,
-                BranchId = ra.BranchId,
-                RoleId = ra.RoleId,
-                ComponentAutorizationId = cad.ComponentAutorizationId,
-                ComponentId = cad.ComponentId,
-                WorkflowId = cad.WorkflowId,
-                WorkflowStageId = cad.WorkflowStageId
+                CompanyId = ra.CompanyID,
+                BranchId = ra.BranchID,
+                RoleId = ra.RoleID,
+                ComponentAutorizationId = cad.ComponentAutorizationID,
+                ComponentId = cad.ComponentID,
+                WorkflowId = cad.WorkflowID,
+                WorkflowStageId = cad.WorkflowStageID
             };
         return query.ToList();
     }

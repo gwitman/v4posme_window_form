@@ -8,7 +8,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 {
     public class CoreWebParameter(ICompanyParameterModel companyParameterModel,IParameterModel parameterModel) : ICoreWebParameter
     {
-        public TbCompanyParameter? GetParameter(string parameterName, int companyId)
+        public TbCompanyParameter? GetParameter(string? parameterName, int companyId)
         {
             var parameter = parameterModel.GetRowByName(parameterName);
             if (parameter is null)
@@ -17,7 +17,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             }
 
             var companyParameter =
-                companyParameterModel.GetRowByParameterIdCompanyId(companyId, parameter.ParameterId);
+                companyParameterModel.GetRowByParameterIdCompanyId(companyId, parameter.ParameterID);
             if (companyParameter is null)
             {
                 throw new Exception($"NO EXISTE EL PARAMETRO {parameterName} PARA LA COMPANY {companyId}");
@@ -26,7 +26,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             return companyParameter!;
         }
 
-        public string? GetParameterValue(string parameterName, int companyId)
+        public string? GetParameterValue(string? parameterName, int companyId)
         {
             var objParameter = parameterModel.GetRowByName(parameterName);
             if (objParameter is null)
@@ -35,7 +35,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             }
 
             var objCompanyParameter =
-                companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameter.ParameterId);
+                companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameter.ParameterID);
             if (objCompanyParameter is null)
             {
                 throw new Exception($"NO EXISTE EL PARAMETRO {parameterName} PARA LA COMPANY {companyId}");
@@ -51,16 +51,16 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         /// </summary>
         /// <param name="companyId">Company ID</param>
         /// <returns>Dictionary Clave-Valor</returns>
-        public Dictionary<string, string?> GetParameterAll(int companyId)
+        public Dictionary<string?, string?> GetParameterAll(int companyId)
         {
             var objParameterList = parameterModel.GetAll();
-            var data = new Dictionary<string, string?>();
+            var data = new Dictionary<string?, string?>();
             if (objParameterList == null) return data;
             foreach (var objParameter in objParameterList)
             {
                 if (objParameter == null) continue;
                 var objCompanyParameter =
-                    companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameter.ParameterId);
+                    companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameter.ParameterID);
                 if (objCompanyParameter != null)
                 {
                     data[objParameter.Name!] = objCompanyParameter.Value;
@@ -78,7 +78,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         /// <returns></returns>
         /// <exception cref="Exception">Lanza una excepción si el parámetro con el nombre dado no existe o si el
         /// parámetro no está asociado con la compañía especificada.</exception>
-        public int GetParameterId(string parameterName, int companyId)
+        public int GetParameterId(string? parameterName, int companyId)
         {
             var _companyParameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
             var _parameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<IParameterModel>();
@@ -89,11 +89,11 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
             // Obtener el CompanyParameter
             var objCompanyParameter =
-                _companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameter.ParameterId);
+                _companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameter.ParameterID);
             if (objCompanyParameter == null)
                 throw new Exception($"NO EXISTE EL PARAMETRO {parameterName} PARA LA COMPANY {companyId}");
 
-            return objCompanyParameter.ParameterId;
+            return objCompanyParameter.ParameterID;
         }
     }
 }

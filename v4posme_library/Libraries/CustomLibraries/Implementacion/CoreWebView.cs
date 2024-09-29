@@ -26,7 +26,7 @@ class CoreWebView(
     private static readonly int
         PermissionMe = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_ME"]!);
 
-    public TableCompanyDataViewDto? GetViewByName(TbUser user, int componentId, string name, int callerId, int? permission = null, Dictionary<string, string>? parameter = null)
+    public TableCompanyDataViewDto? GetViewByName(TbUser user, int componentId, string? name, int callerId, int? permission = null, Dictionary<string?, string?>? parameter = null)
     {
         // Obtener la vista generica
         var dataView = dataViewModel.GetViewByName(componentId, name, callerId);
@@ -34,16 +34,16 @@ class CoreWebView(
             return null;
 
         // Obtener la compañia
-        var objCompany = companyModel.GetRowByPk(user.CompanyId);
+        var objCompany = companyModel.GetRowByPk(user.CompanyID);
 
         // Obtener la vista por el flavor
-        var dataViewId = dataView.DataViewId;
+        var dataViewId = dataView.DataViewID;
 
-        var companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewIdAndFlavor(user.CompanyId, dataViewId,callerId, componentId, objCompany.FlavorId);
+        var companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewIdAndFlavor(user.CompanyID, dataViewId,callerId, componentId, objCompany.FlavorID);
         if (companyDataView is null)
         {
             // Obtener la vista unica
-            companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId, dataViewId, callerId, componentId);
+            companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyID, dataViewId, callerId, componentId);
             if (companyDataView is null)
             return null;
         }
@@ -63,11 +63,11 @@ class CoreWebView(
         }
         else if (permission == PermissionBranch)
         {
-            filterPermission = " AND x.createdAt = " + user.BranchId;
+            filterPermission = " AND x.createdAt = " + user.BranchID;
         }
         else if (permission == PermissionMe)
         {
-            filterPermission = " AND x.createdBy = " + user.UserId;
+            filterPermission = " AND x.createdBy = " + user.UserID;
         }
         else
         {
@@ -92,10 +92,10 @@ class CoreWebView(
 
     public TableCompanyDataViewDto GetViewByDataViewId(TbUser user, int componentId, int dataviewId, int callerId,
         int? permission = null,
-        Dictionary<string, string>? parameter = null)
+        Dictionary<string?, string?>? parameter = null)
     {
         var companyDataView =
-            companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId, dataviewId, callerId, componentId);
+            companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyID, dataviewId, callerId, componentId);
         if (companyDataView is null)
         {
             throw new Exception("No existe el company data view");
@@ -115,11 +115,11 @@ class CoreWebView(
         }
         else if (permission == PermissionBranch)
         {
-            filterPermission = " AND x.createdAt = " + user.BranchId;
+            filterPermission = " AND x.createdAt = " + user.BranchID;
         }
         else if (permission == PermissionMe)
         {
-            filterPermission = " AND x.createdBy = " + user.UserId;
+            filterPermission = " AND x.createdBy = " + user.UserID;
         }
         else
         {
@@ -140,7 +140,7 @@ class CoreWebView(
 
     public TableCompanyDataViewDto GetView(TbUser user, int? componentId = null, int? callerId = null,
         int? permission = null,
-        Dictionary<string, string>? parameter = null)
+        Dictionary<string?, string?>? parameter = null)
     {
         var objListView = dataViewModel.GetListByCompanyComponentCaller(componentId!.Value, callerId!.Value);
         if (objListView is null)
@@ -149,7 +149,7 @@ class CoreWebView(
         }
 
         var companyDataView =
-            companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId, objListView.DataViewId, callerId!.Value,
+            companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyID, objListView.DataViewID, callerId!.Value,
                 componentId!.Value);
         if (companyDataView is null)
         {
@@ -170,11 +170,11 @@ class CoreWebView(
         }
         else if (permission == PermissionBranch)
         {
-            filterPermission = " AND x.createdAt = " + user.BranchId;
+            filterPermission = " AND x.createdAt = " + user.BranchID;
         }
         else if (permission == PermissionMe)
         {
-            filterPermission = " AND x.createdBy = " + user.UserId;
+            filterPermission = " AND x.createdBy = " + user.UserID;
         }
         else
         {
@@ -194,22 +194,22 @@ class CoreWebView(
     }
 
     public TableCompanyDataViewDto? GetViewDefault(TbUser user, int? componentId = null, int? callerId = null,
-        int? targetComponentId = null, int? permission = null, Dictionary<string, string>? parameter = null)
+        int? targetComponentId = null, int? permission = null, Dictionary<string?, string?>? parameter = null)
     {
         var companyDefaultDataViewModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyDefaultDataViewModel>();
-        var objCompanyDefaultDataView = companyDefaultDataViewModel.GetRowByCcct(user.CompanyId, componentId!.Value, callerId!.Value, targetComponentId!.Value);
+        var objCompanyDefaultDataView = companyDefaultDataViewModel.GetRowByCcct(user.CompanyID, componentId!.Value, callerId!.Value, targetComponentId!.Value);
         if (objCompanyDefaultDataView is null)
         {
             throw new Exception("No existe el company default data view");
         }
 
-        var companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyId, objCompanyDefaultDataView.DataViewId, callerId.Value, componentId.Value);
+        var companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyID, objCompanyDefaultDataView.DataViewID, callerId.Value, componentId.Value);
         if (companyDataView is null)
         {
             throw new Exception("No existe el company data view");
         }
 
-        parameter ??= new Dictionary<string, string>();
+        parameter ??= new Dictionary<string?, string?>();
         // EXECUTE
         var queryFill = ReplacePlaceholders(companyDataView.SqlScript!, parameter!);
         // Aplicar Filtros y Asignar Variables
@@ -224,11 +224,11 @@ class CoreWebView(
         }
         else if (permission == PermissionBranch)
         {
-            filterPermission = " AND x.createdAt = " + user.BranchId;
+            filterPermission = " AND x.createdAt = " + user.BranchID;
         }
         else if (permission == PermissionMe)
         {
-            filterPermission = " AND x.createdBy = " + user.UserId;
+            filterPermission = " AND x.createdBy = " + user.UserID;
         }
         else
         {
@@ -249,7 +249,7 @@ class CoreWebView(
         return objResult;
     }
 
-    private static string ReplacePlaceholders(string input, Dictionary<string, string> parameter)
+    private static string? ReplacePlaceholders(string? input, Dictionary<string?, string?> parameter)
     {
         return parameter.Aggregate(input, (current, entry) => current.Replace(entry.Key, entry.Value));
     }

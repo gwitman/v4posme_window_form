@@ -4,10 +4,34 @@
     <_LastSelectedProfileId>C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_window_form\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="ControlCustom\GridControlCustom.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Template\FormTypeHeadEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Template\FormTypeList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Template\FormTypeListSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Template\FormTypePdfViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\FormCustomerEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\FormCustomerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\FormInventoryItemEditConcepts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\FormInventoryItemEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\FormInventoryItemList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\FormInvoiceBillingEdit.cs">

@@ -119,9 +119,6 @@ namespace v4posme_window.Views
             backgroundWorker.RunWorkerAsync();
         }
 
-        
-
-      
         public void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             CustomException.LogException(e.Exception);
@@ -174,33 +171,33 @@ namespace v4posme_window.Views
             Dictionary<string, string> parameters;
             if (DataViewId == 0)
             {
-                var targetComponentId = VariablesGlobales.Instance.Company!.FlavorId!;
+                var targetComponentId = VariablesGlobales.Instance.Company!.FlavorID!;
                 parameters = new Dictionary<string, string>
                 {
-                    { "{companyID}", VariablesGlobales.Instance.User!.CompanyId.ToString() },
+                    { "{companyID}", VariablesGlobales.Instance.User!.CompanyID.ToString() },
                     { "{fecha}", Fecha!.Value.ToString("yyyy-MM-dd")  }
                 };
 
-                _dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User, objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
+                _dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User, objComponent.ComponentID, callerIdList, targetComponentId, resultPermission, parameters);
                 if (_dataViewData is null)
                 {
                     targetComponentId = 0;
                     parameters = new Dictionary<string, string>
                     {
-                        { "{companyID}", VariablesGlobales.Instance.User.CompanyId.ToString() },
+                        { "{companyID}", VariablesGlobales.Instance.User.CompanyID.ToString() },
                         { "{fecha}", Fecha.Value.ToString("yyyy-MM-dd") }
                     };
-                    _dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User, objComponent.ComponentId, callerIdList, targetComponentId, resultPermission, parameters);
+                    _dataViewData = _coreWebView.GetViewDefault(VariablesGlobales.Instance.User, objComponent.ComponentID, callerIdList, targetComponentId, resultPermission, parameters);
                 }
             }
             else
             {
                 parameters = new Dictionary<string, string>
                 {
-                    { "{companyID}", VariablesGlobales.Instance.User!.CompanyId.ToString() }
+                    { "{companyID}", VariablesGlobales.Instance.User!.CompanyID.ToString() }
                 };
 
-                _dataViewData = _coreWebView.GetViewByDataViewId(VariablesGlobales.Instance.User, objComponent.ComponentId, DataViewId!.Value, callerIdList, resultPermission, parameters);
+                _dataViewData = _coreWebView.GetViewByDataViewId(VariablesGlobales.Instance.User, objComponent.ComponentID, DataViewId!.Value, callerIdList, resultPermission, parameters);
             }
         }
 
@@ -304,11 +301,11 @@ namespace v4posme_window.Views
 
         public void New(object? sender, EventArgs? args)
         {
-            var transactionID = _coreWebTransaction.GetTransactionId(VariablesGlobales.Instance.User!.CompanyId, "tb_transaction_master_billing", 0);
+            var transactionID = _coreWebTransaction.GetTransactionId(VariablesGlobales.Instance.User!.CompanyID, "tb_transaction_master_billing", 0);
 
             var objFormInvoiceList = new FormInvoiceBillingEdit(
                     TypeOpenForm.Init,
-                    VariablesGlobales.Instance.User!.CompanyId,
+                    VariablesGlobales.Instance.User!.CompanyID,
                     transactionID!.Value,
                     0
                 )
@@ -365,15 +362,15 @@ namespace v4posme_window.Views
                 if (string.IsNullOrEmpty(transactionNumber))
                     throw new Exception(NotParameter);
 
-                var objTm = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterModel>().GetRowByTransactionNumber(user.CompanyId, transactionNumber);
+                var objTm = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterModel>().GetRowByTransactionNumber(user.CompanyID, transactionNumber);
 
                 if (objTm == null)
                     throw new Exception("NO SE ENCONTRO EL DOCUMENTO");
 
 
                 var formInvoiceBillingEdit = new FormInvoiceBillingEdit(
-                        TypeOpenForm.Init, objTm.CompanyId, objTm.TransactionId,
-                        objTm.TransactionMasterId
+                        TypeOpenForm.Init, objTm.CompanyID, objTm.TransactionID,
+                        objTm.TransactionMasterID 
                     )
                     { MdiParent = CoreFormList.Principal() };
                 formInvoiceBillingEdit.Show();

@@ -9,12 +9,11 @@ class CatalogModel : ICatalogModel
     {
         using var context = new DataContext();
         return context.TbCatalogs.AsNoTracking()
-            .FirstOrDefault(catalog => catalog != null 
-                                       && catalog.CatalogId == catalogId 
+            .FirstOrDefault(catalog => catalog.CatalogID == catalogId 
                                        && catalog.IsActive!.Value);
     }
 
-    public TbCatalog? GetRowByName(string name)
+    public TbCatalog? GetRowByName(string? name)
     {
         using var context = new DataContext();
         return context.TbCatalogs.AsNoTracking()

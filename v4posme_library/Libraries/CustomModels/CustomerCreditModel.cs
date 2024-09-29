@@ -8,10 +8,10 @@ class CustomerCreditModel : ICustomerCreditModel
     {
         using var context = new DataContext();
         var find = context.TbCustomerCredits
-            .Single(credit => credit.CompanyId == companyId
-                              && credit.EntityId == entityId
-                              && credit.BranchId == branchId);
-        data.CustomerCreditId = find.CustomerCreditId;
+            .Single(credit => credit.CompanyID == companyId
+                              && credit.EntityID == entityId
+                              && credit.BranchID == branchId);
+        data.CustomerCreditID = find.CustomerCreditID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
@@ -21,15 +21,15 @@ class CustomerCreditModel : ICustomerCreditModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.BulkSaveChanges();
-        return add.Entity.CustomerCreditId;
+        return add.Entity.CustomerCreditID;
     }
 
     public TbCustomerCredit GetRowByPk(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
         return context.TbCustomerCredits
-            .Single(credit => credit.CompanyId == companyId
-                              && credit.EntityId == entityId
-                              && credit.BranchId == branchId);
+            .Single(credit => credit.CompanyID == companyId
+                              && credit.EntityID == entityId
+                              && credit.BranchID == branchId);
     }
 }

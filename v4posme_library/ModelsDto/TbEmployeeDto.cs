@@ -22,14 +22,14 @@ public record TbEmployeeDto()
     public int? TypeEmployeeId { get; set; }
     public decimal HourCost { get; set; }
     public int? ParentEmployeeId { get; set; }
-    public DateOnly? StartOn { get; set; }
-    public DateOnly? EndOn { get; set; }
+    public DateTime? StartOn { get; set; }
+    public DateTime? EndOn { get; set; }
     public int? StatusId { get; set; }
     public DateTime? CreatedOn { get; set; }
     public string? CreatedIn { get; set; }
     public int? CreatedAt { get; set; }
     public int? CreatedBy { get; set; }
-    public ulong? IsActive { get; set; }
+    public bool? IsActive { get; set; }
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
 }

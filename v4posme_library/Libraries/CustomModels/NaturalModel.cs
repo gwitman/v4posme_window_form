@@ -9,10 +9,10 @@ class NaturalModel : INaturalModel
     {
         using var context = new DataContext();
         var find = context.TbNaturales
-            .Single(naturale => naturale.CompanyId == companyId
-                                && naturale.BranchId == branchId
-                                && naturale.EntityId == entityId);
-        data.NaturalesId = find.NaturalesId;
+            .Single(naturale => naturale.CompanyID == companyId
+                                && naturale.BranchID == branchId
+                                && naturale.EntityID == entityId);
+        data.NaturalesID = find.NaturalesID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -21,9 +21,9 @@ class NaturalModel : INaturalModel
     {
         using var context = new DataContext();
         context.TbNaturales
-            .Where(naturale => naturale.CompanyId == companyId
-                               && naturale.BranchId == branchId
-                               && naturale.EntityId == entityId)
+            .Where(naturale => naturale.CompanyID == companyId
+                               && naturale.BranchID == branchId
+                               && naturale.EntityID == entityId)
             .ExecuteUpdate(calls => calls.SetProperty(naturale => naturale.IsActive, false));
     }
 
@@ -32,16 +32,16 @@ class NaturalModel : INaturalModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.NaturalesId;
+        return add.Entity.NaturalesID;
     }
 
     public TbNaturale GetRowByPk(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
         return context.TbNaturales
-            .Single(naturale => naturale.CompanyId == companyId
-                                && naturale.BranchId == branchId
-                                && naturale.EntityId == entityId
+            .Single(naturale => naturale.CompanyID == companyId
+                                && naturale.BranchID == branchId
+                                && naturale.EntityID == entityId
                                 && naturale.IsActive!.Value);
     }
 }

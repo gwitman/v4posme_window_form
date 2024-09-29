@@ -10,23 +10,23 @@ class UserModel : IUserModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.UserId;
+        return add.Entity.UserID;
     }
 
     public void UpdateAppPosme(int companyId, int branchId, int userId, TbUser data)
     {
         using var context = new DataContext();
         var find = context
-            .TbUsers.FirstOrDefault(user => user.CompanyId == companyId
-                                            && user.BranchId == branchId
-                                            && user.UserId == userId);
+            .TbUsers.FirstOrDefault(user => user.CompanyID == companyId
+                                            && user.BranchID == branchId
+                                            && user.UserID == userId);
         if (find is null) return;
-        data.UserId = userId;
+        data.UserID = userId;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
 
-    public List<TbUser?> GetRowByComercio(string comercio)
+    public List<TbUser?> GetRowByComercio(string? comercio)
     {
         using var context = new DataContext();
         return context.TbUsers.AsNoTracking()
@@ -35,7 +35,7 @@ class UserModel : IUserModel
             .ToList();
     }
 
-    public List<TbUser?> GetRowByFoto(string foto)
+    public List<TbUser?> GetRowByFoto(string? foto)
     {
         using var context = new DataContext();
         return context.TbUsers.AsNoTracking()
@@ -44,7 +44,7 @@ class UserModel : IUserModel
             .ToList();
     }
 
-    public TbUser? GetRowByExistNickname(string nickname)
+    public TbUser? GetRowByExistNickname(string? nickname)
     {
         using var context = new DataContext();
         return context.TbUsers.AsNoTracking()
@@ -52,7 +52,7 @@ class UserModel : IUserModel
                             && user.IsActive!.Value);
     }
 
-    public TbUser? GetRowByNiknamePassword(string nickname, string password)
+    public TbUser? GetRowByNiknamePassword(string? nickname, string? password)
     {
         using var context = new DataContext();
         return context.TbUsers.AsNoTracking()
@@ -61,7 +61,7 @@ class UserModel : IUserModel
                                      && user.IsActive!.Value);
     }
 
-    public TbUser? GetRowByEmail(string email)
+    public TbUser? GetRowByEmail(string? email)
     {
         using var context = new DataContext();
         return context.TbUsers.AsNoTracking()
@@ -73,9 +73,9 @@ class UserModel : IUserModel
     {
         using var context = new DataContext();
         return context.TbUsers.AsNoTracking()
-            .Single(user => user.CompanyId == companyId
-                            && user.BranchId == branchId
-                            && user.UserId == userId
+            .Single(user => user.CompanyID == companyId
+                            && user.BranchID == branchId
+                            && user.UserID == userId
                             && user.IsActive!.Value);
     }
 
@@ -83,16 +83,16 @@ class UserModel : IUserModel
     {
         using var context = new DataContext();
         return context.TbUsers.AsNoTracking()
-            .Where(user => user.CompanyId == companyId
+            .Where(user => user.CompanyID == companyId
                            && user.IsActive!.Value)
             .ToList();
     }
 
-    public List<TbUser?> GetUserByBussnes(int companyId, string bussines)
+    public List<TbUser?> GetUserByBussnes(int companyId, string? bussines)
     {
         using var context = new DataContext();
         return context.TbUsers.AsNoTracking()
-            .Where(user => user.CompanyId == companyId
+            .Where(user => user.CompanyID == companyId
                            && user.Nickname!.Contains(bussines))
             .ToList();
     }
@@ -101,7 +101,7 @@ class UserModel : IUserModel
     {
         using var context = new DataContext();
         return context.TbUsers.AsNoTracking()
-            .Where(user => user.CompanyId == companyId
+            .Where(user => user.CompanyID == companyId
                            && user.IsActive!.Value)
             .Select(user => user)
             .Count();
@@ -111,7 +111,7 @@ class UserModel : IUserModel
     {
         using var context = new DataContext();
         return context.TbUsers.AsNoTracking()
-            .Where(user => user.CompanyId == companyId
+            .Where(user => user.CompanyID == companyId
                            && user.IsActive!.Value)
             .Select(user => user)
             .Count();

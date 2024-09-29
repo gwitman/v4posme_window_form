@@ -13,9 +13,9 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
     {
         
         context.TbTransactionMasters
-            .Where(master => master.CompanyId == companyId
-                             && master.TransactionId == transactionId
-                             && master.TransactionMasterId == transactionMasterId)
+            .Where(master => master.CompanyID == companyId
+                             && master.TransactionID == transactionId
+                             && master.TransactionMasterID == transactionMasterId)
             .ExecuteUpdate(calls => calls.SetProperty(master => master.IsActive, false));
     }
 
@@ -24,7 +24,7 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
         
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.TransactionMasterId;
+        return add.Entity.TransactionMasterID;
     }
 
     public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, TbTransactionMaster data)
@@ -32,15 +32,15 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
                 
         var find = context.TbTransactionMasters
             .AsNoTracking()
-            .FirstOrDefault(master => master.CompanyId == companyId
-                                      && master.TransactionId == transactionId
-                                      && master.TransactionMasterId == transactionMasterId);
+            .FirstOrDefault(master => master.CompanyID == companyId
+                                      && master.TransactionID == transactionId
+                                      && master.TransactionMasterID == transactionMasterId);
 
         if (find is null) return;
 
-        data.TransactionMasterId = find.TransactionMasterId;
-        data.CompanyId = companyId;
-        data.TransactionId = transactionId;
+        data.TransactionMasterID = find.TransactionMasterID;
+        data.CompanyID = companyId;
+        data.TransactionID = transactionId;
         
         
         context.TbTransactionMasters.Update(data);
@@ -52,23 +52,23 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
     {
         
         var result = from tm in context.TbTransactionMasters
-            join ws in context.TbWorkflowStages on tm.StatusId equals ws.WorkflowStageId
-            where tm.TransactionMasterId == transactionMasterId
-                  && tm.TransactionId == transactionId
-                  && tm.CompanyId == companyId
+            join ws in context.TbWorkflowStages on tm.StatusID equals ws.WorkflowStageID
+            where tm.TransactionMasterID == transactionMasterId
+                  && tm.TransactionID == transactionId
+                  && tm.CompanyID == companyId
                   && tm.IsActive!.Value
             select new TbTransactionMasterDto
             {
-                CompanyId = tm.CompanyId,
-                TransactionId = tm.TransactionId,
-                TransactionMasterId = tm.TransactionMasterId,
-                BranchId = tm.BranchId,
+                CompanyId = tm.CompanyID,
+                TransactionId = tm.TransactionID,
+                TransactionMasterId = tm.TransactionMasterID,
+                BranchId = tm.BranchID,
                 TransactionNumber = tm.TransactionNumber,
-                TransactionCausalId = tm.TransactionCausalId,
-                EntityId = tm.EntityId,
+                TransactionCausalId = tm.TransactionCausalID,
+                EntityId = tm.EntityID,
                 TransactionOn = tm.TransactionOn,
-                StatusIdchangeOn = tm.StatusIdchangeOn,
-                ComponentId = tm.ComponentId,
+                StatusIdchangeOn = tm.StatusIDChangeOn,
+                ComponentId = tm.ComponentID,
                 Tax1 = tm.Tax1,
                 Tax2 = tm.Tax2,
                 Tax3 = tm.Tax3,
@@ -77,35 +77,35 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
                 SubAmount = tm.SubAmount,
                 Note = tm.Note,
                 Sign = tm.Sign,
-                CurrencyId = tm.CurrencyId,
-                CurrencyId2 = tm.CurrencyId2,
+                CurrencyId = tm.CurrencyID,
+                CurrencyId2 = tm.CurrencyID2,
                 ExchangeRate = tm.ExchangeRate,
                 Reference1 = tm.Reference1,
                 Reference2 = tm.Reference2,
                 Reference3 = tm.Reference3,
                 Reference4 = tm.Reference4,
-                StatusId = tm.StatusId,
+                StatusId = tm.StatusID,
                 Amount = tm.Amount,
                 IsApplied = tm.IsApplied,
-                JournalEntryId = tm.JournalEntryId,
-                ClassId = tm.ClassId,
-                AreaId = tm.AreaId,
-                SourceWarehouseId = tm.SourceWarehouseId,
-                TargetWarehouseId = tm.TargetWarehouseId,
+                JournalEntryId = tm.JournalEntryID,
+                ClassId = tm.ClassID,
+                AreaId = tm.AreaID,
+                SourceWarehouseId = tm.SourceWarehouseID,
+                TargetWarehouseId = tm.TargetWarehouseID,
                 CreatedBy = tm.CreatedBy,
                 CreatedAt = tm.CreatedAt,
                 CreatedOn = tm.CreatedOn,
                 CreatedIn = tm.CreatedIn,
                 IsActive = tm.IsActive,
                 WorkflowStageName = ws.Name,
-                PriorityId = tm.PriorityId,
+                PriorityId = tm.PriorityID,
                 TransactionOn2 = tm.TransactionOn2,
                 IsTemplate = tm.IsTemplate,
                 PeriodPay = tm.PeriodPay,
                 NextVisit = tm.NextVisit,
                 NumberPhone = tm.NumberPhone,
                 PrinterQuantity = tm.PrinterQuantity,
-                EntityIdsecondary = tm.EntityIdsecondary
+                EntityIdsecondary = tm.EntityIDSecondary
             };
         return result.AsNoTracking().FirstOrDefault();
     }
@@ -113,7 +113,7 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
     public TbTransactionMaster? GetRowByPKK( int transactionMasterId)
     {
         
-        var result = context.TbTransactionMasters.FirstOrDefault(u => u.TransactionMasterId == transactionMasterId);
+        var result = context.TbTransactionMasters.FirstOrDefault(u => u.TransactionMasterID == transactionMasterId);
         return result;
     }
 
@@ -122,17 +122,17 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
         
         return context.TbTransactionMasters
             .First(master => master.IsActive!.Value
-                             && master.CompanyId == companyId
-                             && master.TransactionMasterId == transactionMasterId);
+                             && master.CompanyID == companyId
+                             && master.TransactionMasterID == transactionMasterId);
     }
 
     
 
-    public TbTransactionMaster GetRowByTransactionNumber(int companyId, string transactionNumber)
+    public TbTransactionMaster GetRowByTransactionNumber(int companyId, string? transactionNumber)
     {
         
         return context.TbTransactionMasters
-            .First(master => master.CompanyId == companyId
+            .First(master => master.CompanyID == companyId
                              && master.TransactionNumber.Contains(transactionNumber)
                              && master.IsActive!.Value);
     }
@@ -141,11 +141,11 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
     {
         
         return context.TbTransactionMasters
-            .Where(master => master.CompanyId == companyId
+            .Where(master => master.CompanyID == companyId
                              && master.NextVisit != null
                              && master.IsActive!.Value
                              && master.NextVisit != DateTime.Parse("0000-00-00")
-                             && master.NotificationId == null)
+                             && master.NotificationID == null)
             .ToList();
     }
 
@@ -153,11 +153,11 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
     {
         
         var result = from tm in context.TbTransactionMasters
-            join ws in context.TbWorkflowStages on tm.StatusId equals ws.WorkflowStageId
+            join ws in context.TbWorkflowStages on tm.StatusID equals ws.WorkflowStageID
             where tm.IsActive!.Value
-                  && tm.CompanyId == companyId
+                  && tm.CompanyID == companyId
                   && ws.EditableTotal!.Value
-                  && tm.TransactionMasterId != transactionMasterId
+                  && tm.TransactionMasterID != transactionMasterId
             select new TbTransactionMasterDto
             {
                 TransactionNumber = tm.TransactionNumber,

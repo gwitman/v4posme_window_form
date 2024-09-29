@@ -9,7 +9,7 @@ class WorkflowModel : IWorkflowModel
     {
         using var context = new DataContext();
         return context.TbWorkflows.AsNoTracking()
-            .FirstOrDefault(workflow => workflow!.WorkflowId == workflowId
+            .FirstOrDefault(workflow => workflow!.WorkflowID == workflowId
                                && workflow.IsActive);
     }
 }

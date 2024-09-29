@@ -62,7 +62,7 @@ class CoreWebTransaction(
             throw new Exception("NO HAY UN CAUSAL POR DEFECTO PARA LA TRANSACCION");
         }
 
-        return objCausal.TransactionCausalId;
+        return objCausal.TransactionCausalID;
     }
 
     public void CreateInverseDocumentByTransaccion(int companyIdOriginal, int transactionIdOriginal,
@@ -73,7 +73,7 @@ class CoreWebTransaction(
         
     }
 
-    public int? GetTransactionId(int companyId, string componentName, int componentItemId)
+    public int? GetTransactionId(int companyId, string? componentName, int componentItemId)
     {
         var objComponent = componentModel.GetRowByName(componentName);
         if (objComponent is null)
@@ -82,21 +82,21 @@ class CoreWebTransaction(
         }
 
         var objCompanyComponentFlavor = companyComponentFlavor
-            .GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentId, componentItemId);
+            .GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentID, componentItemId);
         if (objCompanyComponentFlavor is null)
         {
             throw new Exception("NO EXISTE EL FLAVOR PARA EL COMPONENTE DE CATALOGO ");
         }
 
-        return Convert.ToInt32(objCompanyComponentFlavor.FlavorId);
+        return Convert.ToInt32(objCompanyComponentFlavor.FlavorID);
     }
 
-    public TbTransaction? GetTransaction(int companyId, string name)
+    public TbTransaction? GetTransaction(int companyId, string? name)
     {
         return transactionModel.GetRowByPk(companyId, name);
     }
 
-    public TbTransactionConcept GetConcept(int companyId, string transactionName, string conceptName)
+    public TbTransactionConcept GetConcept(int companyId, string? transactionName, string? conceptName)
     {
         var transactionConceptModel = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionConceptModel>();
         var objT = transactionModel.GetRowByPk(companyId, transactionName);
@@ -105,6 +105,6 @@ class CoreWebTransaction(
             throw new Exception($"NO EXISTE LA TRANSACCION {transactionName}");
         }
 
-        return transactionConceptModel.GetRowByPk(companyId, objT.TransactionId, conceptName);
+        return transactionConceptModel.GetRowByPk(companyId, objT.TransactionID, conceptName);
     }
 }

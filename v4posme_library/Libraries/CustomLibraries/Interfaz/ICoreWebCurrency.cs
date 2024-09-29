@@ -9,5 +9,5 @@ public interface ICoreWebCurrency
     TbCurrency? GetCurrencyExternal(int companyId);
     TbCurrency? GetCurrencyName(string? name);
     int GetTarget(int companyId, int currencySourceId);
-    decimal GetRatio(int companyId, DateOnly dateRatio, decimal quantity, int currencyId, int targetCurrencyId);
+    decimal GetRatio(int companyId, DateTime dateRatio, decimal quantity, int currencyId, int targetCurrencyId);
 }

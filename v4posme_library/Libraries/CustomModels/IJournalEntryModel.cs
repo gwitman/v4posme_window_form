@@ -11,7 +11,7 @@ public interface IJournalEntryModel
 
     int InsertAppPosme(TbJournalEntry data);
 
-    TbJournalEntryDto GetRowByCode(int companyId, string journalNumber);
+    TbJournalEntryDto GetRowByCode(int companyId, string? journalNumber);
 
     TbJournalEntryDto GetRowByPk(int companyId, int journalEntryId);
     

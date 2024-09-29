@@ -16,9 +16,9 @@ class CoreWebTools : ICoreWebTools
     /// Si message es un array, concatena todos los elementos del array en una sola cadena.
     /// Si no es un array, elimina los saltos de línea de la cadena.
     /// </summary>
-    /// <param name="message">Array|string</param>
-    /// <returns>string</returns>
-    public string FormatMessageError(object message)
+    /// <param name="message">Array|string?</param>
+    /// <returns>string?</returns>
+    public string? FormatMessageError(object message)
     {
         var resultMessage = "";
 
@@ -36,7 +36,7 @@ class CoreWebTools : ICoreWebTools
     /// </summary>
     /// <param name="filter">Parametro a filtrar</param>
     /// <returns>Clave-Valor</returns>
-    public Dictionary<string, object>? FormatParameter(string filter)
+    public Dictionary<string?, object>? FormatParameter(string? filter)
     {
         try
         {
@@ -45,7 +45,7 @@ class CoreWebTools : ICoreWebTools
             var json        = filter.StartsWith("{") && filter.EndsWith("}") ? filter : "{" + filter + "}";
             var jsonObject  = JObject.Parse(json);
 
-            var result = new Dictionary<string, object>();
+            var result = new Dictionary<string?, object>();
             foreach (var item in jsonObject)
             {
                 result["{" + item.Key + "}"] = item.Value!.ToString();
@@ -59,13 +59,13 @@ class CoreWebTools : ICoreWebTools
         }
     }
 
-    public TbComponent? GetComponentIdByComponentName(string componentName)
+    public TbComponent? GetComponentIdByComponentName(string? componentName)
     {
         var componentModel = VariablesGlobales.Instance.UnityContainer.Resolve<IComponentModel>();
         return componentModel.GetRowByName(componentName);
     }
 
-    public string HelperSegmentsByIndex(string[] objListSegments, int i, string variable)
+    public string? HelperSegmentsByIndex(string[] objListSegments, int i, string? variable)
     {
         var result = "";
         var index = i + 1;
@@ -85,7 +85,7 @@ class CoreWebTools : ICoreWebTools
     }
 
 
-    public void Log(string logMessage)
+    public void Log(string? logMessage)
     {
         CreateDirectory();
         using (StreamWriter w = File.AppendText(Path + "\\log.txt"))
@@ -110,7 +110,7 @@ class CoreWebTools : ICoreWebTools
         }
     }
 
-    public void SendEmail(string subject, string body)
+    public void SendEmail(string? subject, string? body)
     {
         var emailFrom = VariablesGlobales.ConfigurationBuilder["EMAIL_APP"];
         var emailCc = VariablesGlobales.ConfigurationBuilder["EMAIL_APP_COPY"];

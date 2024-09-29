@@ -9,7 +9,7 @@ class CompanyComponentModel : ICompanyComponentModel
     {
         using var context = new DataContext();
         return context.TbCompanyComponents.AsNoTracking()
-            .Single(component => component.CompanyId == companyId
-                                 && component.ComponentId == componentId);
+            .Single(component => component.CompanyID == companyId
+                                 && component.ComponentID == componentId);
     }
 }

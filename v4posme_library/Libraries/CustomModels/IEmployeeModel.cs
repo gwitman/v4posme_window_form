@@ -19,5 +19,5 @@ public interface IEmployeeModel
 
     List<TbEmployeeDto> GetRowByCompanyId(int companyId);
 
-    TbEmployeeDto GetRowByEntityId(int companyId, int entityId);
+    TbEmployeeDto? GetRowByEntityId(int companyId, int entityId);
 }

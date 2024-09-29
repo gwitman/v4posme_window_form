@@ -13,27 +13,27 @@ class CoreWebConvertion(ICatalogItemConvertionModel catalogItemConvertionModel) 
             throw new Exception("NO EXISTE EL CATALOGITEM DEFAULT EN EL CATALOGO");
 
         var objConvertionSource = catalogItemConvertionModel.GetRowByPk(companyId, catalogId, fromCatalogItemId,
-            objConvertionDefault.CatalogItemId);
+            objConvertionDefault.CatalogItemID);
         if (objConvertionSource is null)
             throw new Exception("NO EXISTE EL CATALOGITEM-SOURCE --> DEFAULT");
 
         var objConvertionTarget = catalogItemConvertionModel.GetRowByPk(companyId, catalogId, toCatalogItemId,
-            objConvertionDefault.CatalogItemId);
+            objConvertionDefault.CatalogItemID);
         if (objConvertionTarget is null)
             throw new Exception("NO EXISTE EL CATALOGITEM-TARGET --> DEFAULT");
 
-        if (objConvertionSource.CatalogItemId == objConvertionTarget.CatalogItemId)
+        if (objConvertionSource.CatalogItemID == objConvertionTarget.CatalogItemID)
             return quantity;
 
         decimal result;
 
         // De Menor al Default
-        if (objConvertionTarget.CatalogItemId == objConvertionDefault.CatalogItemId && objConvertionSource.Ratio > 0)
+        if (objConvertionTarget.CatalogItemID == objConvertionDefault.CatalogItemID && objConvertionSource.Ratio > 0)
         {
             result = quantity / objConvertionSource.Ratio!.Value;
         }
         // De Mayor al Default
-        else if (objConvertionTarget.CatalogItemId == objConvertionDefault.CatalogItemId &&
+        else if (objConvertionTarget.CatalogItemID == objConvertionDefault.CatalogItemID &&
                  objConvertionSource.Ratio < 0)
         {
             result = quantity * objConvertionSource.Ratio!.Value;

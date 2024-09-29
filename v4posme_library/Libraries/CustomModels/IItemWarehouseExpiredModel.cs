@@ -14,10 +14,10 @@ public interface IItemWarehouseExpiredModel
     List<TbItemWarehouseExpired> GetByItemIdAndWarehouse(int companyId, int warehouseId, int itemId);
 
     List<TbItemWarehouseExpired> GetByItemIdAndWarehouseAndLote(int companyId, int warehouseId, int itemId,
-        string lote);
+        string? lote);
 
     TbItemWarehouseExpired getBy_ItemIDAndWarehouseAndLoteAndExpired(int companyId, int warehouseId,
-        int itemId, string lote, DateTime expired);
+        int itemId, string? lote, DateTime expired);
     
     TbItemWarehouseExpired GetByPk(int companyId,int itemWarehouseExpiredId);
     

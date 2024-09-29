@@ -64,7 +64,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 _userPermissionModel.GetRowByCompanyIdyBranchIdyRoleId(companyId, branchId, roleId);
 
             // Obtener los id de los Elementos
-            var listElementIdSeguridad = listElementSeguridad.Select(i => i.ElementId).ToList();
+            var listElementIdSeguridad = listElementSeguridad.Select(i => i.ElementID).ToList();
             List<int> listElementIdPermitied = [];
             if (listElementPermitido.Count > 0)
             {

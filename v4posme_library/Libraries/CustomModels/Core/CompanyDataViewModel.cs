@@ -9,10 +9,10 @@ class CompanyDataViewModel : ICompanyDataViewModel
     {
         using var context = new DataContext();
         return context.TbCompanyDataviews.AsNoTracking()
-            .FirstOrDefault(datafile => datafile!.CompanyId == companyId
-                                         && datafile.DataViewId == dataViewId
-                                         && datafile.CallerId == callerId
-                                         && datafile.ComponentId == componentId
+            .FirstOrDefault(datafile => datafile!.CompanyID == companyId
+                                         && datafile.DataViewID == dataViewId
+                                         && datafile.CallerID == callerId
+                                         && datafile.ComponentID == componentId
                                          && datafile.IsActive!.Value);
     }
 
@@ -21,11 +21,11 @@ class CompanyDataViewModel : ICompanyDataViewModel
     {
         using var context = new DataContext();
         return context.TbCompanyDataviews.AsNoTracking()
-            .SingleOrDefault(datafile => datafile!.CompanyId == companyId
-                                         && datafile.DataViewId == dataViewId
-                                         && datafile.CallerId == callerId
-                                         && datafile.ComponentId == componentId
-                                         && datafile.FlavorId == flavorId
+            .SingleOrDefault(datafile => datafile!.CompanyID == companyId
+                                         && datafile.DataViewID == dataViewId
+                                         && datafile.CallerID == callerId
+                                         && datafile.ComponentID == componentId
+                                         && datafile.FlavorID == flavorId
                                          && datafile.IsActive!.Value);
     }
 }

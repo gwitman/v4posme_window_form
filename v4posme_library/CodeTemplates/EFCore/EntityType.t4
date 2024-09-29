@@ -5,7 +5,7 @@
 <#@ assembly name="Microsoft.Extensions.DependencyInjection.Abstractions" #>
 <#@ parameter name="EntityType" type="Microsoft.EntityFrameworkCore.Metadata.IEntityType" #>
 <#@ parameter name="Options" type="Microsoft.EntityFrameworkCore.Scaffolding.ModelCodeGenerationOptions" #>
-<#@ parameter name="NamespaceHint" type="System.String" #>
+<#@ parameter name="NamespaceHint" type="System.string?" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.ComponentModel.DataAnnotations" #>
 <#@ import namespace="System.Linq" #>
@@ -25,7 +25,7 @@
     var annotationCodeGenerator = services.GetRequiredService<IAnnotationCodeGenerator>();
     var code = services.GetRequiredService<ICSharpHelper>();
 
-    var usings = new List<string>
+    var usings = new List<string?>
     {
         "System",
         "System.Collections.Generic"
@@ -159,7 +159,7 @@ public partial class <#= EntityType.Name #>
 }
 <#
     var previousOutput = GenerationEnvironment;
-    GenerationEnvironment = new StringBuilder();
+    GenerationEnvironment = new string?Builder();
 
     foreach (var ns in usings.Distinct().OrderBy(x => x, new NamespaceComparer()))
     {

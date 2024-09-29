@@ -11,7 +11,7 @@ public class CoreWebCurrency(ICoreWebParameter coreWebParameter, ICurrencyModel 
     private readonly IExchangerateModel _exchangerateModel =
         VariablesGlobales.Instance.UnityContainer.Resolve<IExchangerateModel>();
 
-    private TbCompanyParameter MoneyFuncionalName(string parameterName, int companyId)
+    private TbCompanyParameter MoneyFuncionalName(string? parameterName, int companyId)
     {
         var moneyFuncionalName =
             coreWebParameter.GetParameter(parameterName, companyId);
@@ -48,12 +48,12 @@ public class CoreWebCurrency(ICoreWebParameter coreWebParameter, ICurrencyModel 
 
     public int GetTarget(int companyId, int currencySourceId)
     {
-        var defaultCurrency = GetCurrencyDefault(companyId)!.CurrencyId;
-        var report = GetCurrencyExternal(companyId)!.CurrencyId;
+        var defaultCurrency = GetCurrencyDefault(companyId)!.CurrencyID;
+        var report = GetCurrencyExternal(companyId)!.CurrencyID;
         return currencySourceId == defaultCurrency ? report : defaultCurrency;
     }
 
-    public decimal GetRatio(int companyId, DateOnly dateRatio, decimal quantity, int currencyId, int targetCurrencyId)
+    public decimal GetRatio(int companyId, DateTime dateRatio, decimal quantity, int currencyId, int targetCurrencyId)
     {
         // Obtener monedas por defecto
         var exchangeRate = decimal.One;
@@ -63,8 +63,8 @@ public class CoreWebCurrency(ICoreWebParameter coreWebParameter, ICurrencyModel 
             throw new Exception("NO EXISTE LA MONEDA POR DEFECTO");
 
         // Cuantos CORDOBAS son en tantos CORDOBAS
-        var objConvertionSource = _exchangerateModel.GetRowByPk(companyId, dateRatio, objConvertionDefault.CurrencyId, currencyId);
-        if (currencyId != objConvertionDefault.CurrencyId)
+        var objConvertionSource = _exchangerateModel.GetRowByPk(companyId, dateRatio, objConvertionDefault.CurrencyID, currencyId);
+        if (currencyId != objConvertionDefault.CurrencyID)
         {
             if (objConvertionSource is null)
                 throw new Exception("NO EXISTE LA TASA DE CAMBIO [012555]:  " + dateRatio);
@@ -73,9 +73,8 @@ public class CoreWebCurrency(ICoreWebParameter coreWebParameter, ICurrencyModel 
         }
 
         // Cuantos DOLARES son en tantos CORDOBAS
-        var objConvertionTarget = _exchangerateModel.GetRowByPk(companyId, dateRatio,
-            objConvertionDefault.CurrencyId, targetCurrencyId);
-        if (targetCurrencyId != objConvertionDefault.CurrencyId)
+        var objConvertionTarget = _exchangerateModel.GetRowByPk(companyId, dateRatio, objConvertionDefault.CurrencyID, targetCurrencyId);
+        if (targetCurrencyId != objConvertionDefault.CurrencyID)
         {
             if (objConvertionTarget is null)
                 throw new Exception("NO EXISTE LA TASA DE CAMBIO [012556]:  " + dateRatio);

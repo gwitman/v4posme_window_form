@@ -21,7 +21,7 @@ class CoreWebGoogle : ICoreWebGoogle
     private static readonly string? PosmeZoneHoariUrl = VariablesGlobales.ConfigurationBuilder["POSME_ZONEHOARIURL"];
     private static readonly string? PosmeCalendarUrl = VariablesGlobales.ConfigurationBuilder["POSME_CALENDARURL"];
 
-    public string GetRequestPermissionPosme(string state)
+    public string? GetRequestPermissionPosme(string state)
     {
         var parameters = new Dictionary<string, string>
         {
@@ -32,16 +32,16 @@ class CoreWebGoogle : ICoreWebGoogle
             { "state", state }
         };
 
-        var queryString = string.Join("&", parameters.Select(x => $"{x.Key}={Uri.EscapeDataString(x.Value)}"));
-        var url = $"{PosmeAuth}{queryString}";
+        var querystring = string.Join("&", parameters.Select(x => $"{x.Key}={Uri.EscapeDataString(x.Value)}"));
+        var url = $"{PosmeAuth}{querystring}";
 
         return url;
     }
 
-    public async Task<string> GetRequestTokenPosme(string code)
+    public async Task<string?> GetRequestTokenPosme(string code)
     {
         var client = new HttpClient();
-        var requestParams = new Dictionary<string, string>
+        var requestParams = new Dictionary<string, string?>
         {
             { "client_id", PosmeClientId! },
             { "redirect_uri", PosmeUrlRedirect! },
@@ -69,8 +69,8 @@ class CoreWebGoogle : ICoreWebGoogle
         return responseData["access_token"]!.ToString();
     }
 
-    public async Task<string> SetEventPosme(string accessToken, string titulo, string descripcion, string date,
-        string hora, string horaFin)
+    public async Task<string?> SetEventPosme(string? accessToken, string? titulo, string? descripcion, string? date,
+        string? hora, string? horaFin)
     {
         using var client = new HttpClient();
         // Obtener zona horaria
@@ -81,7 +81,7 @@ class CoreWebGoogle : ICoreWebGoogle
         if (!getAsync.IsSuccessStatusCode)
         {
             var httpCode = getAsync.StatusCode;
-            const string errorMsg = "Failed to fetch timezone"; 
+            const string? errorMsg = "Failed to fetch timezone"; 
             throw new Exception($"Error {httpCode}: {errorMsg}"); 
         }
         var timezoneData = JObject.Parse(await getAsync.Content.ReadAsStringAsync());
@@ -96,11 +96,11 @@ class CoreWebGoogle : ICoreWebGoogle
         };
 
         const bool allDay = false;
-        const string calendarId = "primary";
+        const string? calendarId = "primary";
         var eventTimezone = userTimezone;
         var apiUrl = $"{PosmeCalendarUrl}{calendarId}/events";
         
-        var curlPost = new Dictionary<string, object>();
+        var curlPost = new Dictionary<string?, object>();
         if (!string.IsNullOrEmpty(eventData.summary))
         {
             curlPost["summary"] = eventData.summary;
@@ -146,14 +146,14 @@ class CoreWebGoogle : ICoreWebGoogle
         var responseStatusCode = response.StatusCode;
         if (!response.IsSuccessStatusCode)
         {
-            const string errorMsg = "Failed to create event"; 
+            const string? errorMsg = "Failed to create event"; 
             throw new Exception($"Error {responseStatusCode}: {errorMsg}"); 
         }
         var responseData = JObject.Parse(await response.Content.ReadAsStringAsync());
         return $"evento agregado:{responseData["id"]}";
     }
 
-    public async Task<string> RemoveEventPosme(string accessToken, string eventId)
+    public async Task<string?> RemoveEventPosme(string? accessToken, string? eventId)
     {
         var calendarId = "primary";
         var apiUrl = $"{PosmeCalendarUrl}{calendarId}/events/{eventId}";
@@ -165,7 +165,7 @@ class CoreWebGoogle : ICoreWebGoogle
         if (!response.IsSuccessStatusCode)
         {
             var responseStatusCode = response.StatusCode;
-            const string errorMsg = "Failed to create event"; 
+            const string? errorMsg = "Failed to create event"; 
             throw new Exception($"Error {responseStatusCode}: {errorMsg}"); 
         }
         return eventId;

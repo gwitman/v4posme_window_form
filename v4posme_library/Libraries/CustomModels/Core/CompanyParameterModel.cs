@@ -9,10 +9,10 @@ class CompanyParameterModel(DataContext context) : ICompanyParameterModel
     {
         
         var finds = context.TbCompanyParameters
-            .FirstOrDefault(parameter => parameter.CompanyId == companyId
-                                         && parameter.ParameterId == parameterId);
+            .FirstOrDefault(parameter => parameter.CompanyID == companyId
+                                         && parameter.ParameterID == parameterId);
         if (finds is null) return;
-        data.CompanyParameterId = finds.CompanyParameterId;
+        data.CompanyParameterID = finds.CompanyParameterID;
         context.Entry(finds).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
@@ -21,7 +21,7 @@ class CompanyParameterModel(DataContext context) : ICompanyParameterModel
     {
         
         return context.TbCompanyParameters.AsNoTracking()
-            .FirstOrDefault(parameter => parameter.CompanyId == companyId
-                                         && parameter.ParameterId == parameterId);
+            .FirstOrDefault(parameter => parameter.CompanyID == companyId
+                                         && parameter.ParameterID == parameterId);
     }
 }

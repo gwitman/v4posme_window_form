@@ -153,7 +153,7 @@ namespace v4posme_library.Libraries
             get
             {
                 var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-                return builder.GetConnectionString("PosmeConnectionString");
+                return builder.GetConnectionString("Posmeconnectionstring");
             }
         }
 
@@ -180,7 +180,7 @@ namespace v4posme_library.Libraries
         public string? MessageLogin { get; set; }
         public string? ParameterLabelSystem { get; set; }
 
-        public List<string>? SubMenu { get; set; }
+        public List<string?>? SubMenu { get; set; }
 
         /// <summary>
         /// Clase con nombre de: view_config
@@ -192,6 +192,6 @@ namespace v4posme_library.Libraries
         public DataContext DataContext => new();
 
         public DataTable? ObjSELECCIONAR_ITEM_BILLING_BACKGROUND { get; set; }
-        public Dictionary<string, string?> ObjListParameterAll { get; set; }
+        public Dictionary<string?, string?> ObjListParameterAll { get; set; }
     }
 }

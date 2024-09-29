@@ -9,9 +9,9 @@ namespace v4posme_library.Libraries.CustomModels.Core
         {
             using var context = new DataContext();
             return context.TbRoles
-                .Where(role => role.CompanyId == companyId
-                               && role.BranchId == branchId
-                               && role.RoleId == roleId)
+                .Where(role => role.CompanyID == companyId
+                               && role.BranchID == branchId
+                               && role.RoleID == roleId)
                 .ExecuteUpdate(calls => calls
                     .SetProperty(role => role.Name, obj.Name)
                     .SetProperty(role => role.Description, obj.Description)
@@ -25,15 +25,15 @@ namespace v4posme_library.Libraries.CustomModels.Core
             using var context = new DataContext();
             var add = context.Add(obj);
             context.SaveChanges();
-            return add.Entity.RoleId;
+            return add.Entity.RoleID;
         }
 
         public List<TbRole> GetRowByCompanyIDyBranchId(int companyId, int branchId)
         {
             using var context = new DataContext();
             return context.TbRoles.AsNoTracking()
-                .Where(role => role.CompanyId == companyId
-                               && role.BranchId == branchId
+                .Where(role => role.CompanyID == companyId
+                               && role.BranchID == branchId
                                && role.IsActive!.Value
                                && !role.IsAdmin!.Value)
                 .ToList();
@@ -42,9 +42,9 @@ namespace v4posme_library.Libraries.CustomModels.Core
         public TbRole? GetRowByPk(int companyId, int branchId, int roleId)
         {
             using var context = new DataContext();
-            return context.TbRoles.AsNoTracking().FirstOrDefault(role => role.CompanyId == companyId
-                                                          && role.BranchId == branchId
-                                                          && role.RoleId == roleId
+            return context.TbRoles.AsNoTracking().FirstOrDefault(role => role.CompanyID == companyId
+                                                          && role.BranchID == branchId
+                                                          && role.RoleID == roleId
                                                           && role.IsActive!.Value);
         }
     }

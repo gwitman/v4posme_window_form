@@ -11,10 +11,10 @@ class ExchangerateModel(DataContext context) : IExchangerateModel
     {
         
         context.TbExchangeRates
-            .Where(rate => rate.CompanyId == companyId
-                           && rate.Date == date
-                           && rate.CurrencyId == currencyIdSource
-                           && rate.TargetCurrencyId == currencyIdTarget)
+            .Where(rate => rate.CompanyID == companyId
+                           && Equals(rate.Date, date)
+                           && rate.CurrencyID == currencyIdSource
+                           && rate.TargetCurrencyID == currencyIdTarget)
             .ExecuteUpdate(calls => calls
                 .SetProperty(rate => rate.Ratio, data.Ratio)
                 .SetProperty(rate => rate.Value, data.Value));
@@ -25,7 +25,7 @@ class ExchangerateModel(DataContext context) : IExchangerateModel
         
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.ExchangeRateId;
+        return add.Entity.ExchangeRateID;
     }
 
     public TbExchangeRate? GetDefault(int companyId)
@@ -33,17 +33,17 @@ class ExchangerateModel(DataContext context) : IExchangerateModel
         
         return context.TbExchangeRates.AsNoTracking()
             .First(rate => Math.Abs(rate.Ratio!.Value - 1) < 1E8
-                           && rate.CompanyId == companyId);
+                           && rate.CompanyID == companyId);
     }
 
-    public TbExchangeRate? GetRowByPk(int companyId, DateOnly date, int currencyIdSource, int currencyIdTarget)
+    public TbExchangeRate? GetRowByPk(int companyId, DateTime date, int currencyIdSource, int currencyIdTarget)
     {
         
         return context.TbExchangeRates.AsNoTracking()
-            .FirstOrDefault(rate => rate!.CompanyId == companyId
-                           && rate.CurrencyId == currencyIdSource
-                           && rate.TargetCurrencyId == currencyIdTarget
-                           && rate.Date==date);
+            .FirstOrDefault(rate => rate!.CompanyID == companyId
+                           && rate.CurrencyID == currencyIdSource
+                           && rate.TargetCurrencyID == currencyIdTarget
+                           && Equals(rate.Date.Date, date));
     }
 
     public List<TbExchangeRateDto> GetByCompanyAndDate(int companyId, DateOnly dateStartOn, DateOnly dateEndOn)
@@ -51,18 +51,18 @@ class ExchangerateModel(DataContext context) : IExchangerateModel
         
         var result = from er in context.TbExchangeRates.AsNoTracking()
             join cc in context.TbCompanyCurrencies.AsNoTracking()
-                on new { er.CompanyId, er.CurrencyId } equals new { cc.CompanyId, cc.CurrencyId }
-            join c in context.TbCurrencies.AsNoTracking() on cc.CurrencyId equals c.CurrencyId
+                on new { er.CompanyID, er.CurrencyID } equals new { cc.CompanyID, cc.CurrencyID }
+            join c in context.TbCurrencies.AsNoTracking() on cc.CurrencyID equals c.CurrencyID
             join cct in context.TbCompanyCurrencies.AsNoTracking()
-                on new { er.CompanyId, TargetCurrencyId = er.TargetCurrencyId } equals new
-                    { cct.CompanyId, TargetCurrencyId = cct.CurrencyId }
-            join ct in context.TbCurrencies.AsNoTracking()  on cct.CurrencyId equals ct.CurrencyId
-            where er.CompanyId == companyId &&
-                  er.Date >= dateStartOn && er.Date <= dateEndOn
+                on new { er.CompanyID, TargetCurrencyId = er.TargetCurrencyID } equals new
+                    { cct.CompanyID, TargetCurrencyId = cct.CurrencyID }
+            join ct in context.TbCurrencies.AsNoTracking()  on cct.CurrencyID equals ct.CurrencyID
+            where er.CompanyID == companyId &&
+                  DateOnly.FromDateTime(er.Date) >= dateStartOn && DateOnly.FromDateTime(er.Date) <= dateEndOn
             orderby er.Date, c.Name
             select new TbExchangeRateDto
             {
-                Date = er.Date,
+                Date = DateOnly.FromDateTime(er.Date),
                 Value = er.Value,
                 Ratio = er.Ratio,
                 NameSource = c.Name,

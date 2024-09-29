@@ -17,7 +17,7 @@ public interface IItemWarehouseModel
 
     List<TbItemWarehouseDto> GetRowByItemId(int companyId, int itemId);
 
-    TbItemWarehouseDto GetByPk(int companyId, int itemId, int warehouseId);
+    TbItemWarehouseDto? GetByPk(int companyId, int itemId, int warehouseId);
 
     int WarehouseIsEmpty(int companyId, int warehouseId);
 }

@@ -6,5 +6,5 @@ public interface ICatalogModel
 {
     TbCatalog? GetRowByCatalogId(int catalogId);
     
-    TbCatalog? GetRowByName(string name);
+    TbCatalog? GetRowByName(string? name);
 }

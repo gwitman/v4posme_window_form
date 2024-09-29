@@ -6,7 +6,7 @@ namespace v4posme_library.Libraries.CustomHelper
     {
         private readonly string? _xmlFilePath  = VariablesGlobales.ConfigurationBuilder["PATH_CUSTOM_FILE"];
 
-        public string? GetBehavior(string typeCompany, string keyController, string? keyElement, string? defaultValue)
+        public string? GetBehavior(string? typeCompany, string? keyController, string? keyElement, string? defaultValue)
         {
             var divs = ReadXmlFile();
             if (keyController != "core_web_menu")
@@ -50,7 +50,7 @@ namespace v4posme_library.Libraries.CustomHelper
             }
         }
 
-        public Dictionary<string, string> ReadXmlFile()
+        public Dictionary<string?, string?> ReadXmlFile()
         {
             if (_xmlFilePath is null)
             {
@@ -58,7 +58,7 @@ namespace v4posme_library.Libraries.CustomHelper
             }
 
             var xmlDoc = new XmlDocument();
-            var xmlData = new Dictionary<string, string>();
+            var xmlData = new Dictionary<string?, string?>();
             try
             {
                 xmlDoc.Load(_xmlFilePath);

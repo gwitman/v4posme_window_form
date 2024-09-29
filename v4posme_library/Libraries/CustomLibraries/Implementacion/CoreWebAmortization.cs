@@ -61,7 +61,7 @@ public class CoreWebAmortization : ICoreWebAmortization
             //mapeamos los valores para q no queden en null lo sque no se usaran
             var objCustomerCreditDocumentNew        = objCustomerCreditDocument.Mapper(objCustomerCreditDocument);
             objCustomerCreditDocumentNew.Balance    = 0;
-            objCustomerCreditDocumentNew.StatusId   = Convert.ToInt32(documentCancel);
+            objCustomerCreditDocumentNew.StatusID   = Convert.ToInt32(documentCancel);
             _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value,objCustomerCreditDocumentNew);
         }
         else
@@ -78,7 +78,7 @@ public class CoreWebAmortization : ICoreWebAmortization
         {
             var itemAmortizationNew = itemAmortization;
             itemAmortizationNew.Remaining = 0;
-            _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationId, itemAmortizationNew);
+            _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationID, itemAmortizationNew);
         }
 
     }
@@ -123,7 +123,7 @@ public class CoreWebAmortization : ICoreWebAmortization
         {
             foreach (var itemAmortization in objListCustomerCreditDocumentAmortization)
             {
-                var itemAmortizationNew = new TbCustomerCreditAmortization();
+                var itemAmortizationNew = new TbCustomerCreditAmoritization();
 
                 if (dateApplyFirst == itemAmortization.DateApply)
                 {
@@ -143,7 +143,7 @@ public class CoreWebAmortization : ICoreWebAmortization
                 itemAmortizationNew.Share = itemAmortizationNew.Interest + itemAmortizationNew.Capital;
                 itemAmortizationNew.Remaining = itemAmortizationNew.Share;
 
-                _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationId, itemAmortizationNew);
+                _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationID, itemAmortizationNew);
                 aux++;
             }
         }
@@ -173,7 +173,7 @@ public class CoreWebAmortization : ICoreWebAmortization
         if (objCustomerCreditDocument.BalanceProvicioned >= objCustomerCreditDocument.Balance)
         {
             var objCustomerCreditDocumentNew = objCustomerCreditDocument.Mapper(objCustomerCreditDocument);
-            objCustomerCreditDocumentNew.StatusId = Convert.ToInt32(documentProvisioned);
+            objCustomerCreditDocumentNew.StatusID = Convert.ToInt32(documentProvisioned);
             _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value,objCustomerCreditDocumentNew);
         }
     }
@@ -204,12 +204,12 @@ public class CoreWebAmortization : ICoreWebAmortization
             foreach (var itemAmortization in objListCustomerCreditDocumentAmortization)
             {
                 var now = DateOnly.FromDateTime(DateTime.Now);
-                var interval            = now.DayNumber-itemAmortization.DateApply!.Value.DayNumber;
+                var interval            = now.DayNumber-DateOnly.FromDateTime(itemAmortization.DateApply).DayNumber;
                 var itemAmortizationNew = itemAmortization;
                 if (amount >= itemAmortization.Remaining && amount != decimal.Zero)                {
                     amount = amount - itemAmortization.Remaining;				
 				    var dif = itemAmortization.Remaining - amount;
-                    itemAmortizationNew.StatusId = Convert.ToInt32(amortizationCancel);
+                    itemAmortizationNew.StatusID = Convert.ToInt32(amortizationCancel);
                     itemAmortizationNew.Remaining = decimal.Zero;
                     itemAmortizationNew.DayDelay = interval;     
                     
@@ -234,7 +234,7 @@ public class CoreWebAmortization : ICoreWebAmortization
                         interes = interes + itemAmortization.Interest;
                     }
 
-                    _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationId,itemAmortizationNew);
+                    _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationID,itemAmortizationNew);
                 }
                 else if (amount != decimal.Zero)
                 {
@@ -264,7 +264,7 @@ public class CoreWebAmortization : ICoreWebAmortization
                         interes = interes + interes001;
                     }
 
-                    _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationId,itemAmortizationNew);
+                    _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationID,itemAmortizationNew);
                     amount = 0;
                 }
             }
@@ -281,7 +281,7 @@ public class CoreWebAmortization : ICoreWebAmortization
         objListCustomerCreditDocumentAmortization = _customerCreditAmortizationModel.GetRowByDocumentAndVinculable(customerCreditDocumentId);
         if (objListCustomerCreditDocumentAmortization is not null)
         {
-            objCustomerCreditDocumentNew.StatusId = Convert.ToInt32(documentCancel);
+            objCustomerCreditDocumentNew.StatusID = Convert.ToInt32(documentCancel);
             _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value, objCustomerCreditDocumentNew);
         }
 

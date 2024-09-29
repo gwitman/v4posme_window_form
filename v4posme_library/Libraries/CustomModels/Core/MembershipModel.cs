@@ -9,9 +9,9 @@ class MembershipModel : IMembershipModel
     {
         using var context = new DataContext();
         return context.TbMemberships.AsNoTracking()
-            .Where(membership => membership.CompanyId == companyId
-                                 && membership.BranchId == branchId
-                                 && membership.UserId == userId)
+            .Where(membership => membership.CompanyID == companyId
+                                 && membership.BranchID == branchId
+                                 && membership.UserID == userId)
             .ExecuteDelete();
     }
 
@@ -20,15 +20,15 @@ class MembershipModel : IMembershipModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.MembershipId;
+        return add.Entity.MembershipID;
     }
 
     public TbMembership? GetRowByCompanyIdBranchIdUserId(int companyId, int branchId, int userId)
     {
         using var context = new DataContext();
         return context.TbMemberships.AsNoTracking()
-            .SingleOrDefault(membership => membership!.CompanyId == companyId
-                                 && membership.BranchId == branchId
-                                 && membership.UserId == userId);
+            .SingleOrDefault(membership => membership!.CompanyID == companyId
+                                 && membership.BranchID == branchId
+                                 && membership.UserID == userId);
     }
 }

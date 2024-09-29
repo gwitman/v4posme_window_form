@@ -7,13 +7,13 @@ namespace v4posme_library.Libraries.CustomModels;
 
 public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
 {
-    public void UpdateAppPosme(int creditAmortizationId, TbCustomerCreditAmortization data)
+    public void UpdateAppPosme(int creditAmortizationId, TbCustomerCreditAmoritization data)
     {
         using var context = new DataContext();
-        var find = context.TbCustomerCreditAmortizations
+        var find = context.TbCustomerCreditAmoritizations
             .Find(creditAmortizationId);
         if (find is null) return;
-        data.CreditAmortizationId = find.CreditAmortizationId;
+        data.CreditAmortizationID = find.CreditAmortizationID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -21,53 +21,53 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
     public void DeleteAppPosme(int creditAmortizationId)
     {
         using var context = new DataContext();
-        context.TbCustomerCreditAmortizations
-            .Where(amortization => amortization.CreditAmortizationId == creditAmortizationId)
+        context.TbCustomerCreditAmoritizations
+            .Where(amortization => amortization.CreditAmortizationID == creditAmortizationId)
             .ExecuteUpdate(calls => calls
-                .SetProperty(amortization => amortization.IsActive, (ulong)0));
+                .SetProperty(amortization => amortization.IsActive, false));
     }
 
-    public int InsertAppPosme(TbCustomerCreditAmortization data)
+    public int InsertAppPosme(TbCustomerCreditAmoritization data)
     {
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.CreditAmortizationId;
+        return add.Entity.CreditAmortizationID;
     }
 
-    public TbCustomerCreditAmortization GetRowByPk(int creditAmortizationId)
+    public TbCustomerCreditAmoritization GetRowByPk(int creditAmortizationId)
     {
         using var context = new DataContext();
-        return context.TbCustomerCreditAmortizations
-            .First(amortization => amortization.IsActive == 1
-                                   && amortization.CreditAmortizationId == creditAmortizationId);
+        return context.TbCustomerCreditAmoritizations
+            .First(amortization => amortization.IsActive
+                                   && amortization.CreditAmortizationID == creditAmortizationId);
     }
 
-    public List<TbCustomerCreditAmortization> GetRowByDocument(int customerCreditDocumentId)
+    public List<TbCustomerCreditAmoritization> GetRowByDocument(int customerCreditDocumentId)
     {
         using var context = new DataContext();
-        return context.TbCustomerCreditAmortizations
-            .Where(amortization => amortization.IsActive == 1
-                                   && amortization.CustomerCreditDocumentId == customerCreditDocumentId)
-            .OrderBy(amortization => amortization.CreditAmortizationId)
+        return context.TbCustomerCreditAmoritizations
+            .Where(amortization => amortization.IsActive
+                                   && amortization.CustomerCreditDocumentID == customerCreditDocumentId)
+            .OrderBy(amortization => amortization.CreditAmortizationID)
             .ToList();
     }
 
-    private static IQueryable<TbCustomerCreditAmortization> FindCreditAmortizations(int customerCreditDocumentId,
+    private static IQueryable<TbCustomerCreditAmoritization> FindCreditAmortizations(int customerCreditDocumentId,
         DataContext context)
     {
-        return context.TbCustomerCreditAmortizations
+        return context.TbCustomerCreditAmoritizations
             .Join(context.TbWorkflowStages,
-                amortization => amortization.StatusId,
-                stage => stage.WorkflowStageId,
+                amortization => amortization.StatusID,
+                stage => stage.WorkflowStageID,
                 (amortization, stage) => new { amortization, stage })
-            .Where(key => key.amortization.CustomerCreditDocumentId == customerCreditDocumentId
-                          && key.amortization.IsActive == 1
+            .Where(key => key.amortization.CustomerCreditDocumentID == customerCreditDocumentId
+                          && key.amortization.IsActive == true
                           && key.stage.Vinculable!.Value)
             .Select(k => k.amortization);
     }
 
-    public List<TbCustomerCreditAmortization>? GetRowByDocumentAndVinculable(int customerCreditDocumentId)
+    public List<TbCustomerCreditAmoritization>? GetRowByDocumentAndVinculable(int customerCreditDocumentId)
     {
         using var context = new DataContext();
         return FindCreditAmortizations(customerCreditDocumentId, context)
@@ -75,11 +75,11 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
             .ToList();
     }
 
-    public List<TbCustomerCreditAmortization> GetRowByDocumentAndNonVinculable(int customerCreditDocumentId)
+    public List<TbCustomerCreditAmoritization> GetRowByDocumentAndNonVinculable(int customerCreditDocumentId)
     {
         using var context = new DataContext();
         return FindCreditAmortizations(customerCreditDocumentId, context)
-            .OrderBy(key => key.CreditAmortizationId)
+            .OrderBy(key => key.CreditAmortizationID)
             .ToList();
     }
 
@@ -87,30 +87,30 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
     {
         var container = new[] { 82, 83 };
         using var dbContext = new DataContext();
-        return dbContext.TbCustomerCreditAmortizations
+        return dbContext.TbCustomerCreditAmoritizations
             .Join(dbContext.TbWorkflowStages,
-                i => i.StatusId,
-                ws => ws.WorkflowStageId,
+                i => i.StatusID,
+                ws => ws.WorkflowStageID,
                 (i, ws) => new { i, ws })
             .Join(dbContext.TbCustomerCreditDocuments,
-                t => t.i.CustomerCreditDocumentId,
-                cd => cd.CustomerCreditDocumentId,
+                t => t.i.CustomerCreditDocumentID,
+                cd => cd.CustomerCreditDocumentID,
                 (t, cd) => new { t, cd })
             .Join(dbContext.TbWorkflowStages,
-                t => t.cd.StatusId,
-                wsd => wsd.WorkflowStageId,
+                t => t.cd.StatusID,
+                wsd => wsd.WorkflowStageID,
                 (t, wsd) => new { t, wsd })
-            .Where(t => t.t.t.i.IsActive == 1
+            .Where(t => t.t.t.i.IsActive
                         && t.t.t.ws.Vinculable!.Value
-                        && t.t.cd.EntityId == customerId
-                        && !container.Contains(t.t.cd.StatusId))
+                        && t.t.cd.EntityID == customerId
+                        && !container.Contains(t.t.cd.StatusID))
             .Select(t => new TbCustomerCreditAmortizationDto
             {
                 DocumentNumber = t.t.cd.DocumentNumber,
                 DateApply = (t.t.t.i.DateApply),
                 Remaining = t.t.t.i.Remaining,
-                Orden = WebToolsHelper.ToUnixTimestamp(t.t.t.i.DateApply!.Value),
-                Mora =  EF.Functions.DateDiffDay(DateOnly.FromDateTime(DateTime.Now), t.t.t.i.DateApply),
+                Orden = WebToolsHelper.ToUnixTimestamp(t.t.t.i.DateApply),
+                Mora = (int?)(DateTime.Today.Subtract(t.t.t.i.DateApply).TotalDays),
                 StageCuota = t.t.t.ws.Name,
                 StageDocumento = t.wsd.Name
             })
@@ -121,56 +121,56 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
     {
         using var dbContext = new DataContext();
         var result = from c in dbContext.TbCustomers
-            join n in dbContext.TbNaturales on c.EntityId equals n.EntityId
-            join ccd in dbContext.TbCustomerCreditDocuments on c.EntityId equals ccd.EntityId
-            join cca in dbContext.TbCustomerCreditAmortizations
-                on ccd.CustomerCreditDocumentId equals cca.CustomerCreditDocumentId
-            join ccaStatus in dbContext.TbWorkflowStages on cca.StatusId equals ccaStatus.WorkflowStageId
-            join ccdStatus in dbContext.TbWorkflowStages on ccd.StatusId equals ccdStatus.WorkflowStageId
-            where c.CompanyId == companyId
+            join n in dbContext.TbNaturales on c.EntityID equals n.EntityID
+            join ccd in dbContext.TbCustomerCreditDocuments on c.EntityID equals ccd.EntityID
+            join cca in dbContext.TbCustomerCreditAmoritizations
+                on ccd.CustomerCreditDocumentID equals cca.CustomerCreditDocumentID
+            join ccaStatus in dbContext.TbWorkflowStages on cca.StatusID equals ccaStatus.WorkflowStageID
+            join ccdStatus in dbContext.TbWorkflowStages on ccd.StatusID equals ccdStatus.WorkflowStageID
+            where c.CompanyID == companyId
                   && ccdStatus.Vinculable!.Value
                   && c.IsActive!.Value
                   && cca.Remaining > 0
-                  && cca.DateApply < DateOnly.FromDateTime(DateTime.Now)
+                  && cca.DateApply < DateTime.Now
             select new TbCustomerCreditAmortizationDto
             {
                 CustomerNumber = c.CustomerNumber,
                 FirstName = n.FirstName,
                 LastName = n.LastName,
-                BirthDate = c.BirthDate,
+                BirthDate = DateOnly.FromDateTime(c.BirthDate!.Value),
                 DocumentNumber = ccd.DocumentNumber,
-                CurrencyId = ccd.CurrencyId,
+                CurrencyId = ccd.CurrencyID,
                 ReportSinRiesgo = ccd.ReportSinRiesgo,
-                DateApply = cca.DateApply,
+                DateApply = (cca.DateApply),
                 Remaining = cca.Remaining,
                 ShareCapital = cca.ShareCapital
             };
         return result.ToList();
     }
 
-    public TbCustomerCreditAmortizationDto GetRowBySummaryInformationCredit(string documentNumber)
+    public TbCustomerCreditAmortizationDto GetRowBySummaryInformationCredit(string? documentNumber)
     {
         using var dbContext = new DataContext();
-        var customerCreditAmortizations = dbContext.TbCustomerCreditAmortizations;
+        var customerCreditAmortizations = dbContext.TbCustomerCreditAmoritizations;
         var result = dbContext.TbCustomerCreditDocuments
-            .Where(c => c.DocumentNumber == documentNumber && c.IsActive == 1)
+            .Where(c => c.DocumentNumber == documentNumber && c.IsActive)
             .Select(c => new TbCustomerCreditAmortizationDto
             {
-                FechaVencimiento =
+                FechaVencimiento = (
                     customerCreditAmortizations
-                        .Where(u => u.CustomerCreditDocumentId == c.CustomerCreditDocumentId)
-                        .Select(u => u.DateApply).Max(),
+                        .Where(u => u.CustomerCreditDocumentID == c.CustomerCreditDocumentID)
+                        .Select(u => u.DateApply).Max()),
                 NumeroCuotasPendiente =
                     customerCreditAmortizations.Where(u =>
-                            u.CustomerCreditDocumentId == c.CustomerCreditDocumentId
+                            u.CustomerCreditDocumentID == c.CustomerCreditDocumentID
                             && u.Remaining > 0
-                            && u.IsActive == 1)
+                            && u.IsActive)
                         .Select(u => u.DateApply).Count(),
                 MontoEnMora = customerCreditAmortizations.Where(u =>
-                        u.CreditAmortizationId == c.CustomerCreditDocumentId
+                        u.CreditAmortizationID == c.CustomerCreditDocumentID
                         && u.Remaining > 0
-                        && u.IsActive == 1
-                        && u.DateApply < DateOnly.FromDateTime(DateTime.Now))
+                        && u.IsActive
+                        && u.DateApply < DateTime.Now)
                     .Select(u => u.Remaining).Sum()
             });
         return result.Single();
@@ -179,25 +179,25 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
     public List<TbCustomerCreditAmortizationDto> GetRowByCreditDocumentAndBalanceMinim(int customerCreditDocumentId)
     {
         using var dbContext = new DataContext();
-        var result = from i in dbContext.TbCustomerCreditAmortizations
+        var result = from i in dbContext.TbCustomerCreditAmoritizations
             join ws in dbContext.TbWorkflowStages
-                on i.StatusId equals ws.WorkflowStageId
+                on i.StatusID equals ws.WorkflowStageID
             join cd in dbContext.TbCustomerCreditDocuments
-                on i.CustomerCreditDocumentId equals cd.CustomerCreditDocumentId
+                on i.CustomerCreditDocumentID equals cd.CustomerCreditDocumentID
             join wsd in dbContext.TbWorkflowStages
-                on cd.StatusId equals wsd.WorkflowStageId
-            where i.IsActive == 1
+                on cd.StatusID equals wsd.WorkflowStageID
+            where i.IsActive
                   && ws.Vinculable!.Value
                   && i.Remaining >= decimal.Zero && i.Remaining <= (decimal)0.2
-                  && cd.CustomerCreditDocumentId == customerCreditDocumentId
+                  && cd.CustomerCreditDocumentID == customerCreditDocumentId
             select new TbCustomerCreditAmortizationDto
             {
-                CreditAmortizationId = i.CreditAmortizationId,
+                CreditAmortizationId = i.CreditAmortizationID,
                 DocumentNumber = cd.DocumentNumber,
-                DateApply = i.DateApply,
+                DateApply = (i.DateApply),
                 Remaining = i.Remaining,
                 Orden = Convert.ToUInt32(i.DateApply),
-                Mora = EF.Functions.DateDiffDay(DateOnly.FromDateTime(DateTime.Now), i.DateApply),
+                Mora = EF.Functions.DateDiffDay((DateTime.Today), (i.DateApply.Date)),
                 StageCuota = ws.Name,
                 StageDocumento = wsd.Name
             };

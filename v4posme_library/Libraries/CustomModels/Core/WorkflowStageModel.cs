@@ -13,8 +13,8 @@ class WorkflowStageModel : IWorkflowStageModel
         {
             query = listWorkflowStageRole.Aggregate(query,
                 (current, item) => current.Where(stage =>
-                    stage.ComponentId == item.ComponentId && stage.WorkflowId == item.WorkflowId &&
-                    stage.WorkflowStageId == item.WorkflowStageId && stage.IsActive));
+                    stage.ComponentID == item.ComponentID && stage.WorkflowID == item.WorkflowID &&
+                    stage.WorkflowStageID == item.WorkflowStageID && stage.IsActive));
         }
 
         return query.ToList();
@@ -24,8 +24,8 @@ class WorkflowStageModel : IWorkflowStageModel
     {
         using var context = new DataContext();
         return context.TbWorkflowStages.AsNoTracking()
-            .Where(stage => stage.WorkflowId == workflowId
-                            && stage.FlavorId == flavorId
+            .Where(stage => stage.WorkflowID == workflowId
+                            && stage.FlavorID == flavorId
                             && stage.IsActive)
             .ToList();
     }
@@ -34,9 +34,9 @@ class WorkflowStageModel : IWorkflowStageModel
     {
         using var context = new DataContext();
         return context.TbWorkflowStages.AsNoTracking()
-            .Where(stage => stage.WorkflowId == workflowId
-                            && stage.WorkflowStageId == workflowStageId
-                            && stage.FlavorId == flavorId
+            .Where(stage => stage.WorkflowID == workflowId
+                            && stage.WorkflowStageID == workflowStageId
+                            && stage.FlavorID == flavorId
                             && stage.IsActive)
             .ToList();
     }
@@ -45,7 +45,7 @@ class WorkflowStageModel : IWorkflowStageModel
     {
         using var context = new DataContext();
         return context.TbWorkflowStages.AsNoTracking()
-            .Where(stage => stage.WorkflowStageId == workflowStageId
+            .Where(stage => stage.WorkflowStageID == workflowStageId
                             && stage.IsActive)
             .ToList();
     }
@@ -54,8 +54,8 @@ class WorkflowStageModel : IWorkflowStageModel
     {
         using var context = new DataContext();
         return context.TbWorkflowStages.AsNoTracking()
-            .Where(stage => stage.WorkflowId == workflowId
-                            && stage.FlavorId == flavorId
+            .Where(stage => stage.WorkflowID == workflowId
+                            && stage.FlavorID == flavorId
                             && stage.IsActive && stage.IsInit)
             .ToList();
     }
@@ -64,8 +64,8 @@ class WorkflowStageModel : IWorkflowStageModel
     {
         using var context = new DataContext();
         return context.TbWorkflowStages.AsNoTracking()
-            .Where(stage => stage.WorkflowId == workflowId
-                            && stage.FlavorId == flavorId
+            .Where(stage => stage.WorkflowID == workflowId
+                            && stage.FlavorID == flavorId
                             && stage.IsActive && stage.Aplicable!.Value)
             .ToList();
     }

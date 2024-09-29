@@ -15,13 +15,13 @@ public class TbCustomerCreditLineDto
     public decimal? InterestPay { get; set; }
     public decimal? TotalPay { get; set; }
     public decimal? TotalDefeated { get; set; }
-    public DateOnly? DateOpen { get; set; }
+    public DateTime DateOpen { get; set; }
     public int PeriodPay { get; set; }
-    public DateOnly? DateLastPay { get; set; }
+    public DateTime? DateLastPay { get; set; }
     public int? Term { get; set; }
     public string? Note { get; set; }
     public int StatusId { get; set; }
-    public ulong? IsActive { get; set; }
+    public bool IsActive { get; set; }
     public string? CurrencyName { get; set; }
     public int TypeAmortization { get; set; }
     public string? CreditLineName { get; set; }

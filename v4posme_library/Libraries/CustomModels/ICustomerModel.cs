@@ -22,7 +22,7 @@ public interface ICustomerModel
 
     List<TbCustomerDto> GetRowByCompany(int companyId);
 
-    TbCustomerDto GetRowByEntity(int companyId, int entityId);
+    TbCustomerDto? GetRowByEntity(int companyId, int entityId);
 
     TbCustomer? GetRowByPk(int companyId,int branchId,int entityId);
     TbCustomer? GetRowByPKK(int entityId);

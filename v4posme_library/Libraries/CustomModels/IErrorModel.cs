@@ -24,5 +24,5 @@ public interface IErrorModel
     
     List<TbError> GetRowByUserAll(int userId);
     
-    TbError GetRowByMessageUser(int userId,string message);
+    TbError GetRowByMessageUser(int userId,string? message);
 }

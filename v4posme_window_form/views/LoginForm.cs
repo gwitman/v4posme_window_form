@@ -54,7 +54,6 @@ namespace v4posme_window.Views
             var userService = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuthentication>();
             var userTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
             var coreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
-            var objInterfazBDModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBdModel>();
 
             progressPanel.Visible = true;
 
@@ -115,7 +114,7 @@ namespace v4posme_window.Views
                 //si existe el usuario
                 userTools.Log($@"Usuario logeado al sistema: {VariablesGlobales.Instance.User.Nickname}, {DateTime.Now.ToLongDateString()}");
 
-                var companyId = VariablesGlobales.Instance.User.CompanyId;
+                var companyId = VariablesGlobales.Instance.User.CompanyID;
                 VariablesGlobales.Instance.ObjListParameterAll = coreWebParameter.GetParameterAll(companyId);
                 //var parameterCantidadTransacciones = coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId).Value;
                 var parameterCantidadTransacciones = VariablesGlobales.Instance.ObjListParameterAll["CORE_QUANTITY_TRANSACCION"];
@@ -281,7 +280,7 @@ namespace v4posme_window.Views
                     return;
                 }
 
-                var companyId = VariablesGlobales.Instance.User.CompanyId;
+                var companyId = VariablesGlobales.Instance.User.CompanyID;
                 var parameter = coreWebParameter.GetParameter("CORE_CUST_PRICE", companyId);
                 if (parameter is null) return;
 

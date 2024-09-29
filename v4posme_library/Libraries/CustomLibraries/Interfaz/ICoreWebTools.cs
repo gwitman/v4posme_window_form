@@ -9,9 +9,9 @@ public interface ICoreWebTools
     /// Si message es un array, concatena todos los elementos del array en una sola cadena.
     /// Si no es un array, elimina los saltos de línea de la cadena.
     /// </summary>
-    /// <param name="message">Array|string</param>
-    /// <returns>string</returns>
-    string FormatMessageError(object message);
+    /// <param name="message">Array|string?</param>
+    /// <returns>string?</returns>
+    string? FormatMessageError(object message);
     
     /// <summary>
     /// Esta función toma una cadena filter, la formatea y la convierte en un diccionario de claves y valores.
@@ -20,13 +20,13 @@ public interface ICoreWebTools
     /// </summary>
     /// <param name="filter">Parametro a filtrar</param>
     /// <returns>Clave-Valor</returns>
-    Dictionary<string, object>? FormatParameter(string filter);
+    Dictionary<string?, object>? FormatParameter(string? filter);
 
-    void Log(string logMessage);
+    void Log(string? logMessage);
 
-    void SendEmail(string subject, string body);
+    void SendEmail(string? subject, string? body);
 
-    TbComponent? GetComponentIdByComponentName(string componentName);
+    TbComponent? GetComponentIdByComponentName(string? componentName);
 
-    string HelperSegmentsByIndex(string[] objListSegments, int i, string variable);
+    string? HelperSegmentsByIndex(string[] objListSegments, int i, string? variable);
 }

@@ -17,5 +17,5 @@ public interface IProviderModel
     
     TbProvider GetRowByPk(int companyId,int branchId,int entityId);
     
-    TbProvider GetRowByProviderNumber(int companyId, string providerNumber);
+    TbProvider GetRowByProviderNumber(int companyId, string? providerNumber);
 }

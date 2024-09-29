@@ -4,7 +4,7 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 public interface ILogModel
 {
-    TbLog GetRowByPk(int companyId,int branchId,int loginId,string token);
+    TbLog GetRowByPk(int companyId,int branchId,int loginId,string? token);
     
-    TbLog GetRowByNameParameterOutput(int companyId,int branchId,int loginId,string token,string nameParameterOutput);
+    TbLog GetRowByNameParameterOutput(int companyId,int branchId,int loginId,string? token,string? nameParameterOutput);
 }

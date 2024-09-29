@@ -36,7 +36,7 @@ class CoreWebWorkflow(
     private readonly IWorkflowStageModel _workflowStageModel =
         VariablesGlobales.Instance.UnityContainer.Resolve<IWorkflowStageModel>();
 
-    public List<TbWorkflowStage>? GetWorkflowAllStage(string table, string field, int companyId, int branchId,
+    public List<TbWorkflowStage>? GetWorkflowAllStage(string? table, string? field, int companyId, int branchId,
         int roleId)
     {
         var objElement = elementModel.GetRowByName(table, Convert.ToInt32(ElementTypeTable));
@@ -45,7 +45,7 @@ class CoreWebWorkflow(
             throw new Exception($"NO EXISTE LA TABLA '{table}' DENTRO DE LOS REGISTROS DE ELEMENT ");
         }
 
-        var objSubElement = subElementModel.GetRowByNameAndElementId(objElement.ElementId, field);
+        var objSubElement = subElementModel.GetRowByNameAndElementId(objElement.ElementID, field);
         if (objSubElement is null)
         {
             throw new Exception(
@@ -58,28 +58,28 @@ class CoreWebWorkflow(
             throw new Exception("NO EXISTE EL COMPONENTE 'tb_workflow' DENTROS DE LOS REGISTROS DE 'Component' ");
         }
 
-        if (objSubElement.WorkflowId is null)
+        if (objSubElement.WorkflowID is null)
         {
             throw new Exception($"EN LA TABLA SUBELEMENT PARA '{field}' NO EXISTE EL WORKFLOW CONFIGURADO");
         }
 
-        var objWorkflow = workflowModel.GetRowByWorkflowId(objSubElement.WorkflowId!.Value);
+        var objWorkflow = workflowModel.GetRowByWorkflowId(objSubElement.WorkflowID!.Value);
         if (objWorkflow is null)
         {
             throw new Exception("NO EXISTE EL WORKFLOW ");
         }
 
         var objCompanyComponentFlavor =
-            componentFlavor.GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentId,
-                objWorkflow.WorkflowId);
+            componentFlavor.GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentID,
+                objWorkflow.WorkflowID);
         if (objCompanyComponentFlavor is null)
         {
             throw new Exception("NO EXISTE EL FLAVOR PARA EL COMPONENTE DE WORKFLOW ");
         }
 
         var objWorkflowStage =
-            _workflowStageModel.GetRowByWorkflowIdAndFlavorId(objWorkflow.WorkflowId,
-                Convert.ToInt32(objCompanyComponentFlavor.FlavorId));
+            _workflowStageModel.GetRowByWorkflowIdAndFlavorId(objWorkflow.WorkflowID,
+                Convert.ToInt32(objCompanyComponentFlavor.FlavorID));
 
         var objWorkflowStageRole = roleAutorizationModel.GetRowByRole(companyId, branchId, roleId);
         var objRole = roleModel.GetRowByPk(companyId, branchId, roleId);
@@ -107,7 +107,7 @@ class CoreWebWorkflow(
         foreach (var stage in objWorkflowStage)
         {
             var exist = false;
-            foreach (var unused in objWorkflowStageRole.Where(dto => stage.WorkflowStageId == dto.WorkflowStageId))
+            foreach (var unused in objWorkflowStageRole.Where(dto => stage.WorkflowStageID == dto.WorkflowStageId))
             {
                 exist = true;
             }
@@ -121,7 +121,7 @@ class CoreWebWorkflow(
         return aux;
     }
 
-    public List<TbWorkflowStage>? GetWorkflowInitStage(string table, string field, int companyId,
+    public List<TbWorkflowStage>? GetWorkflowInitStage(string? table, string? field, int companyId,
         int branchId, int roleId)
     {
         var objElement = elementModel.GetRowByName(table, Convert.ToInt32(ElementTypeTable));
@@ -130,7 +130,7 @@ class CoreWebWorkflow(
             throw new Exception($"NO EXISTE LA TABLA '{table}' DENTRO DE LOS REGISTROS DE ELEMENT ");
         }
 
-        var objSubElement = subElementModel.GetRowByNameAndElementId(objElement.ElementId, field);
+        var objSubElement = subElementModel.GetRowByNameAndElementId(objElement.ElementID, field);
         if (objSubElement is null)
         {
             throw new Exception(
@@ -143,27 +143,27 @@ class CoreWebWorkflow(
             throw new Exception("NO EXISTE EL COMPONENTE 'tb_workflow' DENTROS DE LOS REGISTROS DE 'Component' ");
         }
 
-        if (objSubElement.WorkflowId is null)
+        if (objSubElement.WorkflowID is null)
         {
             throw new Exception($"EN LA TABLA SUBELEMENT PARA '{field}' NO EXISTE EL WORKFLOW CONFIGURADO");
         }
 
-        var objWorkflow = workflowModel.GetRowByWorkflowId(objSubElement.WorkflowId!.Value);
+        var objWorkflow = workflowModel.GetRowByWorkflowId(objSubElement.WorkflowID!.Value);
         if (objWorkflow is null)
         {
             throw new Exception("NO EXISTE EL WORKFLOW ");
         }
 
         var objCompanyComponentFlavor = componentFlavor.GetRowByCompanyAndComponentAndComponentItemId(
-            companyId, objComponent.ComponentId, objWorkflow.WorkflowId);
+            companyId, objComponent.ComponentID, objWorkflow.WorkflowID);
         if (objCompanyComponentFlavor is null)
         {
             throw new Exception("NO EXISTE EL FLAVOR PARA EL COMPONENTE DE WORKFLOW ");
         }
 
         var objWorkflowStage =
-            _workflowStageModel.GetRowByWorkflowIdAndFlavorIdInit(objWorkflow.WorkflowId,
-                Convert.ToInt32(objCompanyComponentFlavor.FlavorId));
+            _workflowStageModel.GetRowByWorkflowIdAndFlavorIdInit(objWorkflow.WorkflowID,
+                Convert.ToInt32(objCompanyComponentFlavor.FlavorID));
         var objWorkflowStageRole = roleAutorizationModel.GetRowByRole(companyId, branchId, roleId);
         var objRole = roleModel.GetRowByPk(companyId, branchId, roleId);
         if (objRole is null)
@@ -189,7 +189,7 @@ class CoreWebWorkflow(
         var exist = false;
         var count =
             objWorkflowStageRole
-                .Where(stageRole => stageRole.WorkflowStageId == objWorkflowStage[0].WorkflowStageId);
+                .Where(stageRole => stageRole.WorkflowStageId == objWorkflowStage[0].WorkflowStageID);
         foreach (var unused in count)
         {
             exist = true;
@@ -198,7 +198,7 @@ class CoreWebWorkflow(
         return exist ? objWorkflowStage : null;
     }
 
-    public List<TbWorkflowStage> GetWorkflowStage(string table, string field, int stageId, int companyId, int branchId,
+    public List<TbWorkflowStage> GetWorkflowStage(string? table, string? field, int stageId, int companyId, int branchId,
         int roleId)
     {
         var objElement = elementModel.GetRowByName(table, Convert.ToInt32(ElementTypeTable));
@@ -207,7 +207,7 @@ class CoreWebWorkflow(
             throw new Exception($"NO EXISTE LA TABLA '{table}' DENTRO DE LOS REGISTROS DE ELEMENT ");
         }
 
-        var objSubElement = subElementModel.GetRowByNameAndElementId(objElement.ElementId, field);
+        var objSubElement = subElementModel.GetRowByNameAndElementId(objElement.ElementID, field);
         if (objSubElement is null)
         {
             throw new Exception(
@@ -220,28 +220,28 @@ class CoreWebWorkflow(
             throw new Exception("NO EXISTE EL COMPONENTE 'tb_workflow' DENTROS DE LOS REGISTROS DE 'Component' ");
         }
 
-        if (objSubElement.WorkflowId is null)
+        if (objSubElement.WorkflowID is null)
         {
             throw new Exception($"EN LA TABLA SUBELEMENT PARA '{field}' NO EXISTE EL WORKFLOW CONFIGURADO");
         }
 
-        var objWorkflow = workflowModel.GetRowByWorkflowId(objSubElement.WorkflowId!.Value);
+        var objWorkflow = workflowModel.GetRowByWorkflowId(objSubElement.WorkflowID!.Value);
         if (objWorkflow is null)
         {
             throw new Exception("NO EXISTE EL WORKFLOW ");
         }
 
         var objCompanyComponentFlavor =
-            componentFlavor.GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentId,
-                objWorkflow.WorkflowId);
+            componentFlavor.GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentID,
+                objWorkflow.WorkflowID);
         if (objCompanyComponentFlavor is null)
         {
             throw new Exception("NO EXISTE EL FLAVOR PARA EL COMPONENTE DE WORKFLOW ");
         }
 
         var objWorkflowStage =
-            _workflowStageModel.GetRowByWorkflowStageId(objWorkflow.WorkflowId,
-                Convert.ToInt32(objCompanyComponentFlavor.FlavorId),
+            _workflowStageModel.GetRowByWorkflowStageId(objWorkflow.WorkflowID,
+                Convert.ToInt32(objCompanyComponentFlavor.FlavorID),
                 stageId);
 
         var objWorkflowStageRole = roleAutorizationModel.GetRowByRole(companyId, branchId, roleId);
@@ -271,7 +271,7 @@ class CoreWebWorkflow(
         foreach (var stage in objWorkflowStage)
         {
             var exist = false;
-            var filter = objWorkflowStageRole.Where(stageRole => stageRole.WorkflowStageId == stage.WorkflowStageId);
+            var filter = objWorkflowStageRole.Where(stageRole => stageRole.WorkflowStageId == stage.WorkflowStageID);
             foreach (var unused in filter)
             {
                 exist = true;
@@ -286,7 +286,7 @@ class CoreWebWorkflow(
         return aux;
     }
 
-    public List<TbWorkflowStage>? GetWorkflowStageApplyFirst(string table, string field, int companyId, int branchId,
+    public List<TbWorkflowStage>? GetWorkflowStageApplyFirst(string? table, string? field, int companyId, int branchId,
         int roleId)
     {
         var objElement = elementModel.GetRowByName(table, Convert.ToInt32(ElementTypeTable));
@@ -295,7 +295,7 @@ class CoreWebWorkflow(
             throw new Exception($"NO EXISTE LA TABLA '{table}' DENTRO DE LOS REGISTROS DE ELEMENT ");
         }
 
-        var objSubElement = subElementModel.GetRowByNameAndElementId(objElement.ElementId, field);
+        var objSubElement = subElementModel.GetRowByNameAndElementId(objElement.ElementID, field);
         if (objSubElement is null)
         {
             throw new Exception(
@@ -308,28 +308,28 @@ class CoreWebWorkflow(
             throw new Exception("NO EXISTE EL COMPONENTE 'tb_workflow' DENTROS DE LOS REGISTROS DE 'Component' ");
         }
 
-        if (objSubElement.WorkflowId is null)
+        if (objSubElement.WorkflowID is null)
         {
             throw new Exception($"EN LA TABLA SUBELEMENT PARA '{field}' NO EXISTE EL WORKFLOW CONFIGURADO");
         }
 
-        var objWorkflow = workflowModel.GetRowByWorkflowId(objSubElement.WorkflowId!.Value);
+        var objWorkflow = workflowModel.GetRowByWorkflowId(objSubElement.WorkflowID!.Value);
         if (objWorkflow is null)
         {
             throw new Exception("NO EXISTE EL WORKFLOW ");
         }
 
         var objCompanyComponentFlavor =
-            componentFlavor.GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentId,
-                objWorkflow.WorkflowId);
+            componentFlavor.GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentID,
+                objWorkflow.WorkflowID);
         if (objCompanyComponentFlavor is null)
         {
             throw new Exception("NO EXISTE EL FLAVOR PARA EL COMPONENTE DE WORKFLOW ");
         }
 
         var objWorkflowStage =
-            _workflowStageModel.GetRowByWorkflowIdAndFlavorIdApplyFirst(objWorkflow.WorkflowId,
-                Convert.ToInt32(objCompanyComponentFlavor.FlavorId));
+            _workflowStageModel.GetRowByWorkflowIdAndFlavorIdApplyFirst(objWorkflow.WorkflowID,
+                Convert.ToInt32(objCompanyComponentFlavor.FlavorID));
         var objWorkflowStageRole = roleAutorizationModel.GetRowByRole(companyId, branchId, roleId);
         var objRole = roleModel.GetRowByPk(companyId, branchId, roleId);
         if (objRole is null)
@@ -355,7 +355,7 @@ class CoreWebWorkflow(
 
         var exist = false;
         var filter = objWorkflowStageRole
-            .Where(dto => dto.WorkflowStageId == objWorkflowStage[0].WorkflowStageId);
+            .Where(dto => dto.WorkflowStageId == objWorkflowStage[0].WorkflowStageID);
         foreach (var unused in filter)
         {
             exist = true;
@@ -364,7 +364,7 @@ class CoreWebWorkflow(
         return exist ? objWorkflowStage : null;
     }
 
-    public List<TbWorkflowStage> GetWorkflowStageByStageInit(string table, string field, int startStageId,
+    public List<TbWorkflowStage> GetWorkflowStageByStageInit(string? table, string? field, int startStageId,
         int companyId, int branchId, int roleId)
     {
         var objElement = elementModel.GetRowByName(table, Convert.ToInt32(ElementTypeTable));
@@ -373,7 +373,7 @@ class CoreWebWorkflow(
             throw new Exception($"NO EXISTE LA TABLA '{table}' DENTRO DE LOS REGISTROS DE ELEMENT ");
         }
 
-        var objSubElement = subElementModel.GetRowByNameAndElementId(objElement.ElementId, field);
+        var objSubElement = subElementModel.GetRowByNameAndElementId(objElement.ElementID, field);
         if (objSubElement is null)
         {
             throw new Exception(
@@ -386,28 +386,28 @@ class CoreWebWorkflow(
             throw new Exception("NO EXISTE EL COMPONENTE 'tb_workflow' DENTROS DE LOS REGISTROS DE 'Component' ");
         }
 
-        if (objSubElement.WorkflowId is null)
+        if (objSubElement.WorkflowID is null)
         {
             throw new Exception($"EN LA TABLA SUBELEMENT PARA '{field}' NO EXISTE EL WORKFLOW CONFIGURADO");
         }
 
-        var objWorkflow = workflowModel.GetRowByWorkflowId(objSubElement.WorkflowId!.Value);
+        var objWorkflow = workflowModel.GetRowByWorkflowId(objSubElement.WorkflowID!.Value);
         if (objWorkflow is null)
         {
             throw new Exception("NO EXISTE EL WORKFLOW ");
         }
 
         var objCompanyComponentFlavor =
-            componentFlavor.GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentId,
-                objWorkflow.WorkflowId);
+            componentFlavor.GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentID,
+                objWorkflow.WorkflowID);
         if (objCompanyComponentFlavor is null)
         {
             throw new Exception("NO EXISTE EL FLAVOR PARA EL COMPONENTE DE WORKFLOW ");
         }
 
         var objWorkflowStage =
-            workflowStageRelationModel.GetRowBySourceWorkflowStageId(objWorkflow.WorkflowId,
-                Convert.ToInt32(objCompanyComponentFlavor.FlavorId), startStageId);
+            workflowStageRelationModel.GetRowBySourceWorkflowStageId(objWorkflow.WorkflowID,
+                Convert.ToInt32(objCompanyComponentFlavor.FlavorID), startStageId);
         var objWorkflowStageRole = roleAutorizationModel.GetRowByRole(companyId, branchId, roleId);
         var objRole = roleModel.GetRowByPk(companyId, branchId, roleId);
         if (objRole is null)
@@ -434,7 +434,7 @@ class CoreWebWorkflow(
         foreach (var stage in objWorkflowStage)
         {
             var exist = false;
-            foreach (var unused in objWorkflowStageRole.Where(dto => dto.WorkflowStageId == stage.WorkflowStageId))
+            foreach (var unused in objWorkflowStageRole.Where(dto => dto.WorkflowStageId == stage.WorkflowStageID))
             {
                 exist = true;
             }
@@ -446,7 +446,7 @@ class CoreWebWorkflow(
         return aux;
     }
 
-    public bool? ValidateWorkflowStage(string table, string field, int stageId, int cmd, int companyId, int branchId,
+    public bool? ValidateWorkflowStage(string? table, string? field, int stageId, int cmd, int companyId, int branchId,
         int roleId)
     {
         var objWorkflowStage = GetWorkflowStage(table, field, stageId, companyId, branchId, roleId);

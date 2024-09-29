@@ -9,7 +9,7 @@ public record TbEmployeeCalendarPayDetailDto()
     public decimal Commission { get; set; }
     public decimal Adelantos { get; set; }
     public decimal Neto { get; set; }
-    public ulong IsActive { get; set; }
+    public bool IsActive { get; set; }
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public string? EmployeNumber { get; set; }

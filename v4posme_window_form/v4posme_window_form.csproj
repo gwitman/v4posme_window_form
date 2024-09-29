@@ -24,14 +24,18 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="DevExpress.Data" Version="23.2.5" />
-      <PackageReference Include="DevExpress.Utils" Version="23.2.5" />
-      <PackageReference Include="DevExpress.Win.Design" Version="23.2.5" />
-      <PackageReference Include="DevExpress.Xpo" Version="23.2.5" />
+      <PackageReference Include="DevExpress.Data" Version="24.1.3" />
+      <PackageReference Include="DevExpress.Drawing" Version="24.1.3" />
+      <PackageReference Include="DevExpress.Printing.Core" Version="24.1.3" />
+      <PackageReference Include="DevExpress.Utils" Version="24.1.3" />
+      <PackageReference Include="DevExpress.Win.Design" Version="24.1.3" />
+      <PackageReference Include="DevExpress.Xpo" Version="24.1.3" />
       <PackageReference Include="ESC-POS-USB-NET" Version="1.1.3" />
       <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
       <PackageReference Include="System.Security.Cryptography.Pkcs" Version="8.0.0" />
       <PackageReference Include="Unity" Version="5.11.10" />
+      <PackageReference Include="ZXing.Net" Version="0.16.9" />
+      <PackageReference Include="ZXing.Net.Bindings.Windows.Compatibility" Version="0.16.12" />
     </ItemGroup>
 
     <ItemGroup>
@@ -75,11 +79,44 @@
       <None Update="Libraries\Style\AlertError.css">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="Resources\cancel_svg.svg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\check_svg.svg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\delete.svg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\download.svg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\error_icon.ico">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\error_svg.svg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\info_icon.ico">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\info_svg.svg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\preview.svg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\warning_icon.ico">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\warning_svg.svg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Update="Properties\Resources.resx">
-        <Generator>PublicResXFileCodeGenerator</Generator>
+        <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>

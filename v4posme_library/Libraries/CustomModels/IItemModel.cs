@@ -11,13 +11,13 @@ public interface IItemModel
 
     int InsertAppPosme(TbItem data);
 
-    TbItem GetRowByCode(int companyId, string itemNumber);
+    TbItem? GetRowByCode(int companyId, string? itemNumber);
     
-    TbItem GetRowByCodeBarra(int companyId, string itemNumber);
+    TbItem? GetRowByCodeBarra(int companyId, string? itemNumber);
     
-    List<TbItem> GetRowByCodeBarraSimilar(int companyId, string itemNumber);
+    List<TbItem> GetRowByCodeBarraSimilar(int companyId, string? itemNumber);
     
-    TbItem GetRowByPk(int companyId,int itemId);
+    TbItem? GetRowByPk(int companyId,int itemId);
     
     TbItem GetRwByPkAndInactive(int companyId,int itemId);
     

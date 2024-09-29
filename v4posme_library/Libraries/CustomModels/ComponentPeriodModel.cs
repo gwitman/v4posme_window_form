@@ -9,9 +9,9 @@ public class ComponentPeriodModel : IComponentPeriodModel
         int componentId, int componentPeriodId, DataContext context)
     {
         return context.TbAccountingPeriods
-            .Where(period => period.CompanyId == companyId
-                             && period.ComponentId == componentId
-                             && period.ComponentPeriodId == componentPeriodId);
+            .Where(period => period.CompanyID == companyId
+                             && period.ComponentID == componentId
+                             && period.ComponentPeriodID == componentPeriodId);
     }
 
     public void DeleteAppPosme(int companyId, int componentId, int componentPeriodId)
@@ -28,7 +28,7 @@ public class ComponentPeriodModel : IComponentPeriodModel
         using var context = new DataContext();
         var find = FindByCompanyIdAndComponentIdAndComponentPeriodId(companyId, componentId, componentPeriodId, context)
             .Single();
-        data.ComponentPeriodId = find.ComponentPeriodId;
+        data.ComponentPeriodID = find.ComponentPeriodID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
@@ -38,7 +38,7 @@ public class ComponentPeriodModel : IComponentPeriodModel
         using var context = new DataContext();
         var add = context.TbAccountingPeriods.Add(data);
         context.BulkSaveChanges();
-        return add.Entity.ComponentPeriodId;
+        return add.Entity.ComponentPeriodID;
     }
 
     public int GetCountPeriod(int companyId)
@@ -46,14 +46,14 @@ public class ComponentPeriodModel : IComponentPeriodModel
         using var context = new DataContext();
         return context.TbAccountingPeriods
             .Count(period => period.IsActive
-                             && period.CompanyId == companyId);
+                             && period.CompanyID == companyId);
     }
 
     public List<TbAccountingPeriod> GetRowByCompany(int companyId)
     {
         using var context = new DataContext();
         return context.TbAccountingPeriods
-            .Where(period => period.CompanyId == companyId
+            .Where(period => period.CompanyID == companyId
                              && period.IsActive)
             .OrderBy(pe => pe.StartOn)
             .ToList();
@@ -63,9 +63,9 @@ public class ComponentPeriodModel : IComponentPeriodModel
     {
         using var context = new DataContext();
         return context.TbAccountingPeriods
-            .Where(period => period.CompanyId == companyId
+            .Where(period => period.CompanyID == companyId
                              && period.IsActive
-                             && period.StatusId != workflowStageClosed)
+                             && period.StatusID != workflowStageClosed)
             .OrderBy(pe => pe.StartOn)
             .ToList();
     }
@@ -75,8 +75,8 @@ public class ComponentPeriodModel : IComponentPeriodModel
         using var context = new DataContext();
         return context.TbAccountingPeriods
             .Where(period => period.IsActive
-                             && period.CompanyId == companyId
-                             && period.ComponentId == componentId
+                             && period.CompanyID == companyId
+                             && period.ComponentID == componentId
                              && dateStart >= period.StartOn && dateStart <= period.EndOn
                              || dateEnd >= period.StartOn && dateEnd <= period.EndOn).ToList();
     }
@@ -86,7 +86,7 @@ public class ComponentPeriodModel : IComponentPeriodModel
         using var context = new DataContext();
         return context.TbAccountingPeriods
             .Single(period => period.IsActive
-                              && period.ComponentPeriodId == componentPeriodId);
+                              && period.ComponentPeriodID == componentPeriodId);
     }
 
     public TbAccountingPeriod GetRowByCompanyIdFecha(int companyId, DateTime dateStart)
@@ -95,7 +95,7 @@ public class ComponentPeriodModel : IComponentPeriodModel
         return context.TbAccountingPeriods
             .Single(period =>
                 period.IsActive
-                && period.CompanyId == companyId
+                && period.CompanyID == companyId
                 && dateStart >= period.StartOn
                 && dateStart <= period.EndOn);
     }
@@ -105,11 +105,11 @@ public class ComponentPeriodModel : IComponentPeriodModel
         using var context = new DataContext();
         return context.TbJournalEntries
             .Join(context.TbAccountingCycles,
-                entry => entry.AccountingCycleId,
-                cycle => cycle.ComponentCycleId,
+                entry => entry.AccountingCycleID,
+                cycle => cycle.ComponentCycleID,
                 (entry, cycle) => new { entry, cycle })
             .Count(data => data.entry.IsActive
-                           && data.entry.CompanyId == companyId
-                           && data.cycle.ComponentPeriodId == periodId);
+                           && data.entry.CompanyID == companyId
+                           && data.cycle.ComponentPeriodID == periodId);
     }
 }

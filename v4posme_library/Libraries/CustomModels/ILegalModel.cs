@@ -10,5 +10,5 @@ public interface ILegalModel
     
     int InsertAppPosme(TbLegal data);
     
-    TbLegal GetRowByPk(int companyId,int branchId,int entityId);
+    TbLegal? GetRowByPk(int companyId,int branchId,int entityId);
 }

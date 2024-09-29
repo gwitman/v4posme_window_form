@@ -9,16 +9,16 @@ class DataViewModel : IDataViewModel
     {
         using var context = new DataContext();
         return context.TbDataviews.AsNoTracking()
-            .SingleOrDefault(dataview => dataview!.ComponentId == componentId
-                                         && dataview.CallerId == callerId
+            .SingleOrDefault(dataview => dataview!.ComponentID == componentId
+                                         && dataview.CallerID == callerId
                                          && dataview.IsActive!.Value);
     }
 
-    public TbDataview? GetViewByName(int componentId, string name, int callerId)
+    public TbDataview? GetViewByName(int componentId, string? name, int callerId)
     {
         using var context = new DataContext();
-        var resultado =  context.TbDataviews.AsNoTracking().FirstOrDefault(dataview => dataview!.ComponentId == componentId
-                                         && dataview.CallerId == callerId
+        var resultado =  context.TbDataviews.AsNoTracking().FirstOrDefault(dataview => dataview!.ComponentID == componentId
+                                         && dataview.CallerID == callerId
                                          && dataview.Name == name
                                          && dataview.IsActive!.Value);
 

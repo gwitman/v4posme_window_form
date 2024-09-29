@@ -9,10 +9,10 @@ class TransactionMasterInfoModel : ITransactionMasterInfoModel
     public void DeleteAppPosme(int companyId, int transactionId, int transactionMasterId)
     {
         using var context = new DataContext();
-        context.TbTransactionMasterInfoes
-            .Where(info => info.CompanyId == companyId
-                           && info.TransactionId == transactionId
-                           && info.TransactionMasterId == transactionMasterId)
+        context.TbTransactionMasterInfos
+            .Where(info => info.CompanyID == companyId
+                           && info.TransactionID == transactionId
+                           && info.TransactionMasterID == transactionMasterId)
             .ExecuteDelete();
     }
 
@@ -21,18 +21,18 @@ class TransactionMasterInfoModel : ITransactionMasterInfoModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.TransactionMasterInfoId;
+        return add.Entity.TransactionMasterInfoID;
     }
 
     public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, TbTransactionMasterInfo data)
     {
         using var context = new DataContext();
-        var find = context.TbTransactionMasterInfoes
-            .FirstOrDefault(info => info.CompanyId == companyId
-                                    && info.TransactionId == transactionId
-                                    && info.TransactionMasterId == transactionMasterId);
+        var find = context.TbTransactionMasterInfos
+            .FirstOrDefault(info => info.CompanyID == companyId
+                                    && info.TransactionID == transactionId
+                                    && info.TransactionMasterID == transactionMasterId);
         if (find is null) return;
-        data.TransactionMasterInfoId = find.TransactionMasterInfoId;
+        data.TransactionMasterInfoID = find.TransactionMasterInfoID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -40,23 +40,23 @@ class TransactionMasterInfoModel : ITransactionMasterInfoModel
     public TbTransactionMasterInfoDto? GetRowByPk(int companyId, int transactionId, int transactionMasterId)
     {
         using var context = new DataContext();
-        var result = from tm in context.TbTransactionMasterInfoes
-            join ci in context.TbCatalogItems on tm.ZoneId equals ci.CatalogItemId into ciJoin
+        var result = from tm in context.TbTransactionMasterInfos
+            join ci in context.TbCatalogItems on tm.ZoneID equals ci.CatalogItemID into ciJoin
             from ci in ciJoin.DefaultIfEmpty()
-            join ci2 in context.TbCatalogItems on tm.MesaId equals ci2.CatalogItemId into ci2Join
+            join ci2 in context.TbCatalogItems on tm.MesaID equals ci2.CatalogItemID into ci2Join
             from ci2 in ci2Join.DefaultIfEmpty()
-            where tm.TransactionMasterId == transactionMasterId
-                  && tm.TransactionId == transactionId
-                  && tm.CompanyId == companyId
+            where tm.TransactionMasterID == transactionMasterId
+                  && tm.TransactionID == transactionId
+                  && tm.CompanyID == companyId
             select new TbTransactionMasterInfoDto
             {
-                TransactionMasterInfoId = tm.TransactionMasterInfoId,
-                CompanyId = tm.CompanyId,
-                TransactionId = tm.TransactionId,
-                TransactionMasterId = tm.TransactionMasterId,
-                ZoneId = tm.ZoneId,
-                RouteId = tm.RouteId,
-                MesaId = tm.MesaId,
+                TransactionMasterInfoId = tm.TransactionMasterInfoID,
+                CompanyId = tm.CompanyID,
+                TransactionId = tm.TransactionID,
+                TransactionMasterId = tm.TransactionMasterID,
+                ZoneId = tm.ZoneID,
+                RouteId = tm.RouteID,
+                MesaId = tm.MesaID,
                 ReferenceClientName = tm.ReferenceClientName,
                 ReferenceClientIdentifier = tm.ReferenceClientIdentifier,
                 ChangeAmount = tm.ChangeAmount,
@@ -64,16 +64,16 @@ class TransactionMasterInfoModel : ITransactionMasterInfoModel
                 ReceiptAmount = tm.ReceiptAmount,
                 ReceiptAmountDol = tm.ReceiptAmountDol,
                 ReceiptAmountBank = tm.ReceiptAmountBank,
-                ReceiptAmountBankId = tm.ReceiptAmountBankId,
+                ReceiptAmountBankId = tm.ReceiptAmountBankID,
                 ReceiptAmountBankReference = tm.ReceiptAmountBankReference,
                 ReceiptAmountBankDol = tm.ReceiptAmountBankDol,
-                ReceiptAmountBankDolId = tm.ReceiptAmountBankDolId,
+                ReceiptAmountBankDolId = tm.ReceiptAmountBankDolID,
                 ReceiptAmountBankDolReference = tm.ReceiptAmountBankDolReference,
                 ReceiptAmountCard = tm.ReceiptAmountCard,
-                ReceiptAmountCardBankId = tm.ReceiptAmountCardBankId,
+                ReceiptAmountCardBankId = tm.ReceiptAmountCardBankID,
                 ReceiptAmountCardBankReference = tm.ReceiptAmountCardBankReference,
                 ReceiptAmountCardDol = tm.ReceiptAmountCardDol,
-                ReceiptAmountCardBankDolId = tm.ReceiptAmountCardBankDolId,
+                ReceiptAmountCardBankDolId = tm.ReceiptAmountCardBankDolID,
                 ReceiptAmountCardBankDolReference = tm.ReceiptAmountCardBankDolReference,
                 Reference1 = tm.Reference1,
                 Reference2 = tm.Reference2,
@@ -86,6 +86,6 @@ class TransactionMasterInfoModel : ITransactionMasterInfoModel
     public TbTransactionMasterInfo? GetRowByPkPk(int transactionMasterId)
     {
         using var context = new DataContext();
-        return context.TbTransactionMasterInfoes.FirstOrDefault(master => master!.TransactionMasterId == transactionMasterId);
+        return context.TbTransactionMasterInfos.FirstOrDefault(master => master!.TransactionMasterID == transactionMasterId);
     }
 }

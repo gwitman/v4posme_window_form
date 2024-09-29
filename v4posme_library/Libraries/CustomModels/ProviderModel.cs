@@ -10,10 +10,10 @@ class ProviderModel : IProviderModel
     {
         using var context = new DataContext();
         var find = context.TbProviders
-            .First(provider => provider.CompanyId == companyId
-                               && provider.BranchId == branchId
-                               && provider.EntityId == entityId);
-        data.ProviderId = find.ProviderId;
+            .First(provider => provider.CompanyID == companyId
+                               && provider.BranchID == branchId
+                               && provider.EntityID == entityId);
+        data.ProviderID = find.ProviderID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -22,11 +22,11 @@ class ProviderModel : IProviderModel
     {
         using var context = new DataContext();
         context.TbProviders
-            .Where(provider => provider.CompanyId == companyId
-                               && provider.BranchId == branchId
-                               && provider.EntityId == entityId)
+            .Where(provider => provider.CompanyID == companyId
+                               && provider.BranchID == branchId
+                               && provider.EntityID == entityId)
             .ExecuteUpdate(calls => calls
-                .SetProperty(provider => provider.IsActive, (ulong?)0));
+                .SetProperty(provider => provider.IsActive, false));
     }
 
     public int InsertAppPosme(TbProvider data)
@@ -34,29 +34,29 @@ class ProviderModel : IProviderModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.ProviderId;
+        return add.Entity.ProviderID;
     }
 
     public TbProvider GetRowByEntity(int companyId, int entityId)
     {
         using var context = new DataContext();
         return context.TbProviders
-            .Single(provider => provider.CompanyId == companyId
-                                && provider.EntityId == entityId
-                                && provider.IsActive == 1);
+            .Single(provider => provider.CompanyID == companyId
+                                && provider.EntityID == entityId
+                                && provider.IsActive!.Value);
     }
 
     public List<TbProviderDto> GetRowByCompany(int companyId)
     {
         using var context = new DataContext();
         return context.TbProviders
-            .Join(context.TbEntities, p => p.EntityId, e => e.EntityId, (p, e) => new { p, e })
-            .Join(context.TbNaturales, t => t.p.EntityId, nat => nat.EntityId, (t, nat) => new { t, nat })
-            .Where(t => t.t.p.CompanyId == companyId && t.t.p.IsActive == 1)
+            .Join(context.TbEntities, p => p.EntityID, e => e.EntityID, (p, e) => new { p, e })
+            .Join(context.TbNaturales, t => t.p.EntityID, nat => nat.EntityID, (t, nat) => new { t, nat })
+            .Where(t => t.t.p.CompanyID == companyId && t.t.p.IsActive!.Value)
             .Select(t => new TbProviderDto
             {
-                EntityId = t.t.p.EntityId,
-                CompanyId = t.t.p.CompanyId,
+                EntityId = t.t.p.EntityID,
+                CompanyId = t.t.p.CompanyID,
                 ProviderNumber = t.t.p.ProviderNumber,
                 NumberIdentification = t.t.p.NumberIdentification,
                 FirstName = t.nat.FirstName,
@@ -69,18 +69,18 @@ class ProviderModel : IProviderModel
     {
         using var context = new DataContext();
         return context.TbProviders
-            .Single(provider => provider.CompanyId == companyId
-                                && provider.BranchId== branchId
-                                && provider.EntityId == entityId
-                                && provider.IsActive == 1);
+            .Single(provider => provider.CompanyID == companyId
+                                && provider.BranchID== branchId
+                                && provider.EntityID == entityId
+                                && provider.IsActive!.Value);
     }
 
-    public TbProvider GetRowByProviderNumber(int companyId, string providerNumber)
+    public TbProvider GetRowByProviderNumber(int companyId, string? providerNumber)
     {
         using var context = new DataContext();
         return context.TbProviders
-            .Single(provider => provider.CompanyId == companyId
+            .Single(provider => provider.CompanyID == companyId
                                 && provider.ProviderNumber== providerNumber
-                                && provider.IsActive == 1);
+                                && provider.IsActive!.Value);
     }
 }

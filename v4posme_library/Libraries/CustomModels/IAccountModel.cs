@@ -9,7 +9,7 @@ public interface IAccountModel
     void UpdateAppPosme(int companyId, int accountId, TbAccount data);
     int InsertAppPosme(TbAccount data);
     int GetIsParent(int companyId, int accountId);
-    TbAccount GetByAccountNumber(string accountNumber, int companyId);
+    TbAccount GetByAccountNumber(string? accountNumber, int companyId);
     List<TbAccount> GetByCompany(int companyId);
     List<TbAccount> GetByCompanyOperative(int companyId);
     int GetCountAccount(int companyId);

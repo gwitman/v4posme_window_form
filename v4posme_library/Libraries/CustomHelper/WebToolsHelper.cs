@@ -9,7 +9,7 @@ namespace v4posme_library.Libraries.CustomHelper
         public static long ToUnixTimestamp(DateTime dateTime)
         {
             var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            var unixTime = dateTime - epoch;
+            var unixTime = dateTime.ToUniversalTime() - epoch;
             return (long)unixTime.TotalSeconds;
         }
 
@@ -20,19 +20,19 @@ namespace v4posme_library.Libraries.CustomHelper
             return unixTime;
         }
 
-        public string helper_RequestGetValueObjet(dynamic data, string fieldData, string defaultValue)
+        public string? helper_RequestGetValueObjet(dynamic data, string? fieldData, string? defaultValue)
         {
             //Validar data
             if (data is null)
                 return defaultValue;
 
             //Validar has
-            var dictionary = (IDictionary<string, object>)data;
+            var dictionary = (IDictionary<string?, object>)data;
             if (!dictionary.ContainsKey(fieldData))
                 return defaultValue;
 
 
-            string value = dictionary[fieldData].ToString();
+            string? value = dictionary[fieldData].ToString();
             return value;
         }
 
@@ -90,7 +90,7 @@ namespace v4posme_library.Libraries.CustomHelper
             return new DateTime(last.Year, last.Month, last.Day, 23, 59, 59);
         }
 
-        public string HelperStrPadString(string input, int length, char paddingChar)
+        public string HelperStrPadstring(string input, int length, char paddingChar)
         {
             if (input.Length >= length)
             {
@@ -100,12 +100,12 @@ namespace v4posme_library.Libraries.CustomHelper
             return input.PadLeft(length, paddingChar);
         }
 
-        public static decimal HelperStringToNumber(string input)
+        public static decimal HelperstringToNumber(string input)
         {
             return Convert.ToDecimal(input.Replace(",", ""));
         }
 
-        public static T? ConvertToNumber<T>(string input)
+        public static T ConvertToNumber<T>(string input)
         {
             var result = default(T);
             if (string.IsNullOrEmpty(input))
@@ -128,17 +128,17 @@ namespace v4posme_library.Libraries.CustomHelper
             return result;
         }
 
-        public string HelperGetSr(string sexo)
+        public string? HelperGetSr(string? sexo)
         {
             return sexo == "FEMENINO" ? "Sra." : "Sr.";
         }
 
-        public string HelperGetEl(string sexo)
+        public string? HelperGetEl(string? sexo)
         {
             return sexo == "FEMENINO" ? "la" : "el";
         }
 
-        public int HelperGetFechaNacimiento(string fecha)
+        public int HelperGetFechaNacimiento(string? fecha)
         {
             var fechaNacimiento = DateOnly.Parse(fecha, CultureInfo.InvariantCulture);
             var fechaActual = DateTime.Now;
@@ -146,7 +146,7 @@ namespace v4posme_library.Libraries.CustomHelper
             return diff;
         }
 
-        public static void EmptyDir(string dir)
+        public static void EmptyDir(string? dir)
         {
             if (!Directory.Exists(dir)) return;
             var files = Directory.GetFiles(dir);
@@ -163,7 +163,7 @@ namespace v4posme_library.Libraries.CustomHelper
             }
         }
 
-        public static void DeleteDir(string dir)
+        public static void DeleteDir(string? dir)
         {
             if (!Directory.Exists(dir)) return;
             foreach (var file in Directory.GetFiles(dir))
@@ -179,7 +179,7 @@ namespace v4posme_library.Libraries.CustomHelper
             Directory.Delete(dir);
         }
 
-        private static int ValidarCampo(string input)
+        private static int ValidarCampo(string? input)
         {
             var isNegative = input.StartsWith("-");
             var isPositive = input.StartsWith("+");

@@ -21,7 +21,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.TransactionMasterDetailId;
+        return add.Entity.TransactionMasterDetailID;
     }
 
     public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId,
@@ -29,12 +29,12 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
     {
         using var context = new DataContext();
         var find = context.TbTransactionMasterDetails
-            .FirstOrDefault(detail => detail.CompanyId == companyId
-                                      && detail.TransactionId == transactionId
-                                      && detail.TransactionMasterId == transactionMasterId
-                                      && detail.TransactionMasterDetailId == transactionMasterDetailId);
+            .FirstOrDefault(detail => detail.CompanyID == companyId
+                                      && detail.TransactionID == transactionId
+                                      && detail.TransactionMasterID == transactionMasterId
+                                      && detail.TransactionMasterDetailID == transactionMasterDetailId);
         if (find is null) return;
-        data.TransactionMasterDetailId = find.TransactionMasterDetailId;
+        data.TransactionMasterDetailID = find.TransactionMasterDetailID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -47,23 +47,23 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         var result = componentId switch
         {
             33 => from td in context.TbTransactionMasterDetails
-                join item in context.TbItems on new { td.CompanyId, ComponentItemId = (int)td.ComponentItemId } equals
-                    new { item.CompanyId, ComponentItemId = item.ItemId }
-                join ci in context.TbCatalogItems on Convert.ToInt32(item.UnitMeasureId) equals ci.CatalogItemId
-                where td.CompanyId == companyId
-                      && td.TransactionId == transactionId
-                      && td.TransactionMasterId == transactionMasterId
-                      && td.TransactionMasterDetailId == transactionMasterDetailId
+                join item in context.TbItems on new { td.CompanyID, ComponentItemId = (int)td.ComponentItemID } equals
+                    new { item.CompanyID, ComponentItemId = item.ItemID }
+                join ci in context.TbCatalogItems on Convert.ToInt32(item.UnitMeasureID) equals ci.CatalogItemID
+                where td.CompanyID == companyId
+                      && td.TransactionID == transactionId
+                      && td.TransactionMasterID == transactionMasterId
+                      && td.TransactionMasterDetailID == transactionMasterDetailId
                       && td.IsActive!.Value
                 select new TbTransactionMasterDetailDto
                 {
-                    CompanyId = td.CompanyId,
-                    TransactionId = td.TransactionId,
-                    TransactionMasterId = td.TransactionMasterId,
-                    TransactionMasterDetailId = td.TransactionMasterDetailId,
-                    ComponentId = td.ComponentId,
-                    ComponentItemId = td.ComponentItemId,
-                    PromotionId = td.PromotionId,
+                    CompanyId = td.CompanyID,
+                    TransactionId = td.TransactionID,
+                    TransactionMasterId = td.TransactionMasterID,
+                    TransactionMasterDetailId = td.TransactionMasterDetailID,
+                    ComponentId = td.ComponentID,
+                    ComponentItemId = td.ComponentItemID,
+                    PromotionId = td.PromotionID,
                     Amount = td.Amount,
                     Cost = td.Cost,
                     Quantity = td.Quantity,
@@ -78,24 +78,24 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                     Reference5 = td.Reference5,
                     Reference6 = td.Reference6,
                     Reference7 = td.Reference7,
-                    CatalogStatusId = td.CatalogStatusId,
-                    InventoryStatusId = td.InventoryStatusId,
+                    CatalogStatusId = td.CatalogStatusID,
+                    InventoryStatusId = td.InventoryStatusID,
                     IsActive = td.IsActive,
                     QuantityStock = td.QuantityStock,
                     QuantiryStockInTraffic = td.QuantiryStockInTraffic,
                     QuantityStockUnaswared = td.QuantityStockUnaswared,
                     RemaingStock = td.RemaingStock,
                     ExpirationDate = td.ExpirationDate,
-                    InventoryWarehouseSourceId = td.InventoryWarehouseSourceId,
-                    InventoryWarehouseTargetId = td.InventoryWarehouseTargetId,
+                    InventoryWarehouseSourceId = td.InventoryWarehouseSourceID,
+                    InventoryWarehouseTargetId = td.InventoryWarehouseTargetID,
                     ItemNumber = item.ItemNumber,
                     ItemName = item.Name,
                     UnitMeasureName = ci.Name,
                     DescriptionReference = td.DescriptionReference,
                     ExchangeRateReference = td.ExchangeRateReference,
                     Lote = td.Lote,
-                    TypePriceId = td.TypePriceId,
-                    SkuCatalogItemId = td.SkuCatalogItemId,
+                    TypePriceId = td.TypePriceID,
+                    SkuCatalogItemId = td.SkuCatalogItemID,
                     SkuQuantity = td.SkuQuantity,
                     SkuQuantityBySku = td.SkuQuantityBySku,
                     SkuFormatoDescription = td.SkuFormatoDescription,
@@ -104,19 +104,19 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 },
             64 => from td in context.TbTransactionMasterDetails
                 join i in context.TbCustomerCreditDocuments on new
-                    { td.CompanyId, ComponentItemId = (int)td.ComponentItemId } equals new
-                    { i.CompanyId, ComponentItemId = i.CustomerCreditDocumentId }
-                where td.CompanyId == companyId
-                      && td.TransactionId == transactionId
-                      && td.TransactionMasterId == transactionMasterId
-                      && td.TransactionMasterDetailId == transactionMasterDetailId
+                    { td.CompanyID, ComponentItemId = (int)td.ComponentItemID } equals new
+                    { i.CompanyID, ComponentItemId = i.CustomerCreditDocumentID }
+                where td.CompanyID == companyId
+                      && td.TransactionID == transactionId
+                      && td.TransactionMasterID == transactionMasterId
+                      && td.TransactionMasterDetailID == transactionMasterDetailId
                       && td.IsActive.Value
                 select mapper.Map<TbTransactionMasterDetailDto>(td),
             _ => from td in context.TbTransactionMasterDetails
-                where td.CompanyId == companyId
-                      && td.TransactionId == transactionId
-                      && td.TransactionMasterId == transactionMasterId
-                      && td.TransactionMasterDetailId == transactionMasterDetailId
+                where td.CompanyID == companyId
+                      && td.TransactionID == transactionId
+                      && td.TransactionMasterID == transactionMasterId
+                      && td.TransactionMasterDetailID == transactionMasterDetailId
                       && td.IsActive.Value
                 select mapper.Map<TbTransactionMasterDetailDto>(td)
         };
@@ -126,7 +126,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
     public TbTransactionMasterDetail? GetRowByPKK(     int transactionMasterDetailId )
     {
         using var context = new DataContext();
-        var result = context.TbTransactionMasterDetails.FirstOrDefault(c => c.TransactionMasterDetailId == transactionMasterDetailId);
+        var result = context.TbTransactionMasterDetails.FirstOrDefault(c => c.TransactionMasterDetailID == transactionMasterDetailId);
         return result;
     }
 
@@ -137,23 +137,23 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
     {
         using var context = new DataContext();
         var result = from td in context.TbTransactionMasterDetails
-            join i in context.TbItems on new { td.CompanyId, ComponentItemId = td.ComponentItemId } equals new
-                { i.CompanyId, ComponentItemId = (int?)i.ItemId }
-            join ci in context.TbCatalogItems on Convert.ToInt32(i.UnitMeasureId) equals ci.CatalogItemId
-            where td.CompanyId == companyId
-                  && td.TransactionId == transactionId
-                  && td.TransactionMasterId == transactionMasterId
+            join i in context.TbItems on new { td.CompanyID, ComponentItemId = td.ComponentItemID } equals new
+                { i.CompanyID, ComponentItemId = (int?)i.ItemID }
+            join ci in context.TbCatalogItems on Convert.ToInt32(i.UnitMeasureID) equals ci.CatalogItemID
+            where td.CompanyID == companyId
+                  && td.TransactionID == transactionId
+                  && td.TransactionMasterID == transactionMasterId
                   && td.IsActive.Value
-                  && listTmdId.Contains(i.ItemId)
+                  && listTmdId.Contains(i.ItemID)
             select new TbTransactionMasterDetailDto
             {
-                CompanyId = td.CompanyId,
-                TransactionId = td.TransactionId,
-                TransactionMasterId = td.TransactionMasterId,
-                TransactionMasterDetailId = td.TransactionMasterDetailId,
-                ComponentId = td.ComponentId,
-                ComponentItemId = td.ComponentItemId,
-                PromotionId = td.PromotionId,
+                CompanyId = td.CompanyID,
+                TransactionId = td.TransactionID,
+                TransactionMasterId = td.TransactionMasterID,
+                TransactionMasterDetailId = td.TransactionMasterDetailID,
+                ComponentId = td.ComponentID,
+                ComponentItemId = td.ComponentItemID,
+                PromotionId = td.PromotionID,
                 Amount = td.Amount,
                 Cost = td.Cost,
                 Quantity = td.Quantity,
@@ -168,16 +168,16 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 Reference5 = td.Reference5,
                 Reference6 = td.Reference6,
                 Reference7 = td.Reference7,
-                CatalogStatusId = td.CatalogStatusId,
-                InventoryStatusId = td.InventoryStatusId,
+                CatalogStatusId = td.CatalogStatusID,
+                InventoryStatusId = td.InventoryStatusID,
                 IsActive = td.IsActive,
                 QuantityStock = td.QuantityStock,
                 QuantiryStockInTraffic = td.QuantiryStockInTraffic,
                 QuantityStockUnaswared = td.QuantityStockUnaswared,
                 RemaingStock = td.RemaingStock,
                 ExpirationDate = td.ExpirationDate,
-                InventoryWarehouseSourceId = td.InventoryWarehouseSourceId,
-                InventoryWarehouseTargetId = td.InventoryWarehouseTargetId,
+                InventoryWarehouseSourceId = td.InventoryWarehouseSourceID,
+                InventoryWarehouseTargetId = td.InventoryWarehouseTargetID,
                 ItemNumber = i.ItemNumber,
                 BarCode = i.BarCode,
                 ItemName = i.Name,
@@ -185,8 +185,8 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 DescriptionReference = td.DescriptionReference,
                 ExchangeRateReference = td.ExchangeRateReference,
                 Lote = td.Lote,
-                TypePriceId = td.TypePriceId,
-                SkuCatalogItemId = td.SkuCatalogItemId,
+                TypePriceId = td.TypePriceID,
+                SkuCatalogItemId = td.SkuCatalogItemID,
                 SkuQuantity = td.SkuQuantity,
                 SkuQuantityBySku = td.SkuQuantityBySku,
                 SkuFormatoDescription = td.SkuFormatoDescription,
@@ -202,24 +202,24 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         using var context = new DataContext();
         var resultado = from tm in context.TbTransactionMasters
             join td in context.TbTransactionMasterDetails
-                on new { tm.CompanyId, tm.TransactionId, tm.TransactionMasterId }
-                equals new { td.CompanyId, td.TransactionId, td.TransactionMasterId }
+                on new { tm.CompanyID, tm.TransactionID, tm.TransactionMasterID }
+                equals new { td.CompanyID, td.TransactionID, td.TransactionMasterID }
             join i in context.TbItems
-                on new { td.CompanyId, ComponentItemId = td.ComponentItemId } equals new
-                    { i.CompanyId, ComponentItemId = (int?)i.ItemId }
+                on new { td.CompanyID, ComponentItemId = td.ComponentItemID } equals new
+                    { i.CompanyID, ComponentItemId = (int?)i.ItemID }
             join w in context.TbItemWarehouses
-                on new { SourceWarehouseId = (int)tm.SourceWarehouseId, i.ItemId } equals new
-                    { SourceWarehouseId = w.WarehouseId, w.ItemId }
-            where td.CompanyId == companyId &&
-                  td.TransactionId == transactionId &&
-                  td.TransactionMasterId == transactionMasterId &&
+                on new { SourceWarehouseId = (int)tm.SourceWarehouseID, i.ItemID } equals new
+                    { SourceWarehouseId = w.WarehouseID, w.ItemID }
+            where td.CompanyID == companyId &&
+                  td.TransactionID == transactionId &&
+                  td.TransactionMasterID == transactionMasterId &&
                   td.IsActive.Value
             select new TbTransactionMasterDetailDto
             {
-                CompanyId = w.CompanyId,
-                BranchId = w.BranchId,
-                WarehouseId = w.WarehouseId,
-                ItemId = w.ItemId,
+                CompanyId = w.CompanyID,
+                BranchId = w.BranchID,
+                WarehouseId = w.WarehouseID,
+                ItemId = w.ItemID,
                 Quantity = w.Quantity,
                 Cost = w.Cost,
                 QuantityMax = w.QuantityMax,
@@ -228,8 +228,8 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 ExchangeRateReference = td.ExchangeRateReference,
                 ExpirationDate = td.ExpirationDate,
                 Lote = td.Lote,
-                TypePriceId = td.TypePriceId,
-                SkuCatalogItemId = td.SkuCatalogItemId,
+                TypePriceId = td.TypePriceID,
+                SkuCatalogItemId = td.SkuCatalogItemID,
                 SkuQuantity = td.SkuQuantity,
                 SkuQuantityBySku = td.SkuQuantityBySku,
                 SkuFormatoDescription = td.SkuFormatoDescription,
@@ -247,22 +247,22 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         {
             3 => from tm in context.TbTransactionMasters
                 join td in context.TbTransactionMasterDetails
-                    on new { tm.CompanyId, tm.TransactionId, tm.TransactionMasterId }
-                    equals new { td.CompanyId, td.TransactionId, td.TransactionMasterId }
+                    on new { tm.CompanyID, tm.TransactionID, tm.TransactionMasterID }
+                    equals new { td.CompanyID, td.TransactionID, td.TransactionMasterID }
                 join i in context.TbCatalogItems
-                    on td.ComponentItemId equals i.CatalogItemId
-                where td.CompanyId == companyId &&
-                      td.TransactionId == transactionId &&
-                      td.TransactionMasterId == transactionMasterId &&
+                    on td.ComponentItemID equals i.CatalogItemID
+                where td.CompanyID == companyId &&
+                      td.TransactionID == transactionId &&
+                      td.TransactionMasterID == transactionMasterId &&
                       td.IsActive.Value
                 select new TbTransactionMasterDetailDto
                 {
-                    CompanyId = tm.CompanyId,
-                    TransactionId = tm.TransactionId,
-                    TransactionMasterId = tm.TransactionMasterId,
-                    TransactionMasterDetailId = td.TransactionMasterDetailId,
-                    ComponentId = td.ComponentId,
-                    ComponentItemId = td.ComponentItemId,
+                    CompanyId = tm.CompanyID,
+                    TransactionId = tm.TransactionID,
+                    TransactionMasterId = tm.TransactionMasterID,
+                    TransactionMasterDetailId = td.TransactionMasterDetailID,
+                    ComponentId = td.ComponentID,
+                    ComponentItemId = td.ComponentItemID,
                     Reference3 = td.Reference3,
                     ItemName = i.Name,
                     Description = i.Description,
@@ -274,22 +274,22 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 },
             92 => from tm in context.TbTransactionMasters
                 join td in context.TbTransactionMasterDetails
-                    on new { tm.CompanyId, tm.TransactionId, tm.TransactionMasterId }
-                    equals new { td.CompanyId, td.TransactionId, td.TransactionMasterId }
+                    on new { tm.CompanyID, tm.TransactionID, tm.TransactionMasterID }
+                    equals new { td.CompanyID, td.TransactionID, td.TransactionMasterID }
                 join i in context.TbPublicCatalogDetails
-                    on td.ComponentItemId equals i.PublicCatalogDetailId
-                where td.CompanyId == companyId &&
-                      td.TransactionId == transactionId &&
-                      td.TransactionMasterId == transactionMasterId &&
+                    on td.ComponentItemID equals i.PublicCatalogDetailID
+                where td.CompanyID == companyId &&
+                      td.TransactionID == transactionId &&
+                      td.TransactionMasterID == transactionMasterId &&
                       td.IsActive.Value
                 select new TbTransactionMasterDetailDto
                 {
-                    CompanyId = tm.CompanyId,
-                    TransactionId = tm.TransactionId,
-                    TransactionMasterId = tm.TransactionMasterId,
-                    TransactionMasterDetailId = td.TransactionMasterDetailId,
-                    ComponentId = td.ComponentId,
-                    ComponentItemId = td.ComponentItemId,
+                    CompanyId = tm.CompanyID,
+                    TransactionId = tm.TransactionID,
+                    TransactionMasterId = tm.TransactionMasterID,
+                    TransactionMasterDetailId = td.TransactionMasterDetailID,
+                    ComponentId = td.ComponentID,
+                    ComponentItemId = td.ComponentItemID,
                     Reference3 = td.Reference3,
                     ItemName = i.Name,
                     Description = i.Description,
@@ -303,22 +303,22 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 },
             100 => from tm in context.TbTransactionMasters
                 join td in context.TbTransactionMasterDetails
-                    on new { tm.CompanyId, tm.TransactionId, tm.TransactionMasterId }
-                    equals new { td.CompanyId, td.TransactionId, td.TransactionMasterId }
+                    on new { tm.CompanyID, tm.TransactionID, tm.TransactionMasterID }
+                    equals new { td.CompanyID, td.TransactionID, td.TransactionMasterID }
                 join tcom in context.TbCatalogItems
-                    on td.ComponentItemId equals tcom.CatalogItemId
-                where td.CompanyId == companyId &&
-                      td.TransactionId == transactionId &&
-                      td.TransactionMasterId == transactionMasterId &&
+                    on td.ComponentItemID equals tcom.CatalogItemID
+                where td.CompanyID == companyId &&
+                      td.TransactionID == transactionId &&
+                      td.TransactionMasterID == transactionMasterId &&
                       td.IsActive.Value
                 select new TbTransactionMasterDetailDto
                 {
-                    CompanyId = tm.CompanyId,
-                    TransactionId = tm.TransactionId,
-                    TransactionMasterId = tm.TransactionMasterId,
-                    TransactionMasterDetailId = td.TransactionMasterDetailId,
-                    ComponentId = td.ComponentId,
-                    ComponentItemId = td.ComponentItemId,
+                    CompanyId = tm.CompanyID,
+                    TransactionId = tm.TransactionID,
+                    TransactionMasterId = tm.TransactionMasterID,
+                    TransactionMasterDetailId = td.TransactionMasterDetailID,
+                    ComponentId = td.ComponentID,
+                    ComponentItemId = td.ComponentItemID,
                     Reference1 = td.Reference1,
                     Reference2 = td.Reference2,
                     Reference3 = td.Reference3,
@@ -334,22 +334,22 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
     {
         using var context = new DataContext();
         var result = from td in context.TbTransactionMasterDetails
-            join i in context.TbItems on new { td.CompanyId, ComponentItemId = (int)td.ComponentItemId } equals new
-                { i.CompanyId, ComponentItemId = i.ItemId }
-            join ci in context.TbCatalogItems on Convert.ToInt32(i.UnitMeasureId) equals ci.CatalogItemId
-            where td.CompanyId == companyId &&
-                  td.TransactionId == transactionId &&
-                  td.TransactionMasterId == transactionMasterId &&
+            join i in context.TbItems on new { td.CompanyID, ComponentItemId = (int)td.ComponentItemID } equals new
+                { i.CompanyID, ComponentItemId = i.ItemID }
+            join ci in context.TbCatalogItems on Convert.ToInt32(i.UnitMeasureID) equals ci.CatalogItemID
+            where td.CompanyID == companyId &&
+                  td.TransactionID == transactionId &&
+                  td.TransactionMasterID == transactionMasterId &&
                   td.IsActive.Value
             select new TbTransactionMasterDetailDto
             {
-                CompanyId = td.CompanyId,
-                TransactionId = td.TransactionId,
-                TransactionMasterId = td.TransactionMasterId,
-                TransactionMasterDetailId = td.TransactionMasterDetailId,
-                ComponentId = td.ComponentId,
-                ComponentItemId = td.ComponentItemId,
-                PromotionId = td.PromotionId,
+                CompanyId = td.CompanyID,
+                TransactionId = td.TransactionID,
+                TransactionMasterId = td.TransactionMasterID,
+                TransactionMasterDetailId = td.TransactionMasterDetailID,
+                ComponentId = td.ComponentID,
+                ComponentItemId = td.ComponentItemID,
+                PromotionId = td.PromotionID,
                 Amount = td.Amount,
                 Cost = td.Cost,
                 Quantity = td.Quantity,
@@ -368,16 +368,16 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 Reference5 = td.Reference5,
                 Reference6 = td.Reference6,
                 Reference7 = td.Reference7,
-                CatalogStatusId = td.CatalogStatusId,
-                InventoryStatusId = td.InventoryStatusId,
+                CatalogStatusId = td.CatalogStatusID,
+                InventoryStatusId = td.InventoryStatusID,
                 IsActive = td.IsActive,
                 QuantityStock = td.QuantityStock,
                 QuantiryStockInTraffic = td.QuantiryStockInTraffic,
                 QuantityStockUnaswared = td.QuantityStockUnaswared,
                 RemaingStock = td.RemaingStock,
                 ExpirationDate = td.ExpirationDate,
-                InventoryWarehouseSourceId = td.InventoryWarehouseSourceId,
-                InventoryWarehouseTargetId = td.InventoryWarehouseTargetId,
+                InventoryWarehouseSourceId = td.InventoryWarehouseSourceID,
+                InventoryWarehouseTargetId = td.InventoryWarehouseTargetID,
                 ItemNumber = i.ItemNumber,
                 BarCode = i.BarCode.Contains(',')
                     ? i.BarCode.Substring(0, i.BarCode.IndexOf(',') + 1) + "..."
@@ -387,8 +387,8 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 DescriptionReference = td.DescriptionReference,
                 ExchangeRateReference = td.ExchangeRateReference,
                 Lote = td.Lote,
-                TypePriceId = td.TypePriceId,
-                SkuCatalogItemId = td.SkuCatalogItemId,
+                TypePriceId = td.TypePriceID,
+                SkuCatalogItemId = td.SkuCatalogItemID,
                 SkuQuantity = td.SkuQuantity,
                 SkuQuantityBySku = td.SkuQuantityBySku,
                 SkuFormatoDescription = td.SkuFormatoDescription,
@@ -403,9 +403,9 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
     {
         using var context = new DataContext();
         return context.TbTransactionMasterDetails
-            .Where(detail => detail.CompanyId == companyId
-                             && detail.TransactionId == transactionId
-                             && detail.TransactionMasterId == transactionMasterId
+            .Where(detail => detail.CompanyID == companyId
+                             && detail.TransactionID == transactionId
+                             && detail.TransactionMasterID == transactionMasterId
                              && detail.IsActive!.Value)
             .ToList();
     }
@@ -414,9 +414,9 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
     {
         using var context = new DataContext();
         context.TbTransactionMasterDetails
-            .Where(detail => detail.CompanyId == companyId
-                             && detail.TransactionId == transactionId
-                             && detail.TransactionMasterId == transactionMasterId)
+            .Where(detail => detail.CompanyID == companyId
+                             && detail.TransactionID == transactionId
+                             && detail.TransactionMasterID == transactionMasterId)
             .ExecuteUpdate(calls => calls.SetProperty(detail => detail.IsActive, false));
     }
 
@@ -424,10 +424,10 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
     {
         using var context = new DataContext();
         context.TbTransactionMasterDetails
-            .Where(detail => detail.CompanyId == companyId
-                             && detail.TransactionId == transactionId
-                             && detail.TransactionMasterId == transactionMasterId
-                             && !listTmdId.Contains(detail.TransactionMasterDetailId))
+            .Where(detail => detail.CompanyID == companyId
+                             && detail.TransactionID == transactionId
+                             && detail.TransactionMasterID == transactionMasterId
+                             && !listTmdId.Contains(detail.TransactionMasterDetailID))
             .ExecuteUpdate(calls => calls.SetProperty(detail => detail.IsActive, false));
     }
 
@@ -436,15 +436,15 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
     {
         using var context = new DataContext();
         var result = from t in context.TbTransactionMasters
-            join ws in context.TbWorkflowStages on t.StatusId equals ws.WorkflowStageId
-            join nat in context.TbNaturales on t.EntityIdsecondary equals nat.EntityId into natGroup
+            join ws in context.TbWorkflowStages on t.StatusID equals ws.WorkflowStageID
+            join nat in context.TbNaturales on t.EntityIDSecondary equals nat.EntityID into natGroup
             from nat in natGroup.DefaultIfEmpty()
-            join td in context.TbTransactionMasterDetails on t.TransactionMasterId equals td.TransactionMasterId
-            join i in context.TbItems on td.ComponentItemId equals i.ItemId
-            where t.TransactionId == 19 &&
+            join td in context.TbTransactionMasterDetails on t.TransactionMasterID equals td.TransactionMasterID
+            join i in context.TbItems on td.ComponentItemID equals i.ItemID
+            where t.TransactionID == 19 &&
                   t.IsActive!.Value! &&
                   ws.Aplicable!.Value! &&
-                  t.CompanyId == companyId &&
+                  t.CompanyID == companyId &&
                   t.TransactionOn >= dateFirst &&
                   t.TransactionOn <= dateLast &&
                   !i.Name.ToLower().Contains("repara")
@@ -463,15 +463,15 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
     {
         using var context = new DataContext();
         var result = from t in context.TbTransactionMasters
-            join ws in context.TbWorkflowStages on t.StatusId equals ws.WorkflowStageId
-            join nat in context.TbNaturales on t.EntityIdsecondary equals nat.EntityId into natGroup
+            join ws in context.TbWorkflowStages on t.StatusID equals ws.WorkflowStageID
+            join nat in context.TbNaturales on t.EntityIDSecondary equals nat.EntityID into natGroup
             from nat in natGroup.DefaultIfEmpty()
-            join td in context.TbTransactionMasterDetails on t.TransactionMasterId equals td.TransactionMasterId
-            join i in context.TbItems on td.ComponentItemId equals i.ItemId
-            where t.TransactionId == 19 &&
+            join td in context.TbTransactionMasterDetails on t.TransactionMasterID equals td.TransactionMasterID
+            join i in context.TbItems on td.ComponentItemID equals i.ItemID
+            where t.TransactionID == 19 &&
                   t.IsActive!.Value &&
                   ws.Aplicable!.Value &&
-                  t.CompanyId == companyId &&
+                  t.CompanyID == companyId &&
                   t.TransactionOn >= dateFirst &&
                   t.TransactionOn <= dateLast &&
                   i.Name.Contains("repara", StringComparison.CurrentCultureIgnoreCase)
@@ -490,13 +490,13 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
     {
         using var context = new DataContext();
         var result = from t in context.TbTransactionMasters
-            join ws in context.TbWorkflowStages on t.StatusId equals ws.WorkflowStageId
-            join nat in context.TbNaturales on t.EntityIdsecondary equals nat.EntityId into natGroup
+            join ws in context.TbWorkflowStages on t.StatusID equals ws.WorkflowStageID
+            join nat in context.TbNaturales on t.EntityIDSecondary equals nat.EntityID into natGroup
             from nat in natGroup.DefaultIfEmpty()
-            where t.TransactionId == 19 &&
+            where t.TransactionID == 19 &&
                   t.IsActive!.Value &&
                   ws.Aplicable!.Value &&
-                  t.CompanyId == companyId &&
+                  t.CompanyID == companyId &&
                   t.TransactionOn >= dateFirst &&
                   t.TransactionOn <= dateLast &&
                   ws.Aplicable.Value
@@ -514,13 +514,13 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
     {
         using var context = new DataContext();
         var result = from t in context.TbTransactionMasters
-            join ws in context.TbWorkflowStages on t.StatusId equals ws.WorkflowStageId
-            join nat in context.TbNaturales on t.EntityIdsecondary equals nat.EntityId into natGroup
+            join ws in context.TbWorkflowStages on t.StatusID equals ws.WorkflowStageID
+            join nat in context.TbNaturales on t.EntityIDSecondary equals nat.EntityID into natGroup
             from nat in natGroup.DefaultIfEmpty()
-            where t.TransactionId == 19 &&
+            where t.TransactionID == 19 &&
                   t.IsActive!.Value &&
                   ws.Aplicable!.Value &&
-                  t.CompanyId == companyId &&
+                  t.CompanyID == companyId &&
                   t.TransactionOn >= dateFirst &&
                   t.TransactionOn <= dateLast &&
                   ws.Aplicable.Value
@@ -540,10 +540,10 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         using var context = new DataContext();
         return context.TbTransactionMasters
             .Join(context.TbPublicCatalogDetails,
-                master => master.PriorityId,
-                detail => detail.PublicCatalogDetailId,
+                master => master.PriorityID,
+                detail => detail.PublicCatalogDetailID,
                 (master, detail) => new { master, detail })
-            .Where(source => source.master.TransactionId == 42
+            .Where(source => source.master.TransactionID == 42
                              && source.master.CreatedOn >= dateFirst
                              && source.master.CreatedOn <= dateLast)
             .GroupBy(arg => arg.detail.Name)
@@ -560,8 +560,8 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         using var context = new DataContext();
         return context.TbCustomers
             .Join(context.TbCatalogItems,
-                customer => customer.CategoryId,
-                item => item.CatalogItemId,
+                customer => customer.CategoryID,
+                item => item.CatalogItemID,
                 (customer, item) => new { customer, item })
             .Where(arg => arg.customer.CreatedOn >= dateFirst
                           && arg.customer.CreatedOn <= dateLast)
@@ -579,8 +579,8 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         using var context = new DataContext();
         return context.TbCustomers
             .Join(context.TbCatalogItems,
-                customer => customer.ClasificationId,
-                item => item.CatalogItemId,
+                customer => customer.ClasificationID,
+                item => item.CatalogItemID,
                 (customer, item) => new { customer, item })
             .Where(arg => arg.customer.CreatedOn >= dateFirst
                           && arg.customer.CreatedOn <= dateLast)
@@ -598,8 +598,8 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         using var context = new DataContext();
         return context.TbCustomers
             .Join(context.TbNaturales,
-                customer => customer.EntityContactId,
-                item => item.EntityId,
+                customer => customer.EntityContactID,
+                item => item.EntityID,
                 (customer, item) => new { customer, item })
             .Where(arg => arg.customer.CreatedOn >= dateFirst
                           && arg.customer.CreatedOn <= dateLast)
@@ -617,11 +617,11 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         using var context = new DataContext();
         return context.TbCustomers
             .Join(context.TbWorkflowStages,
-                customer => customer.StatusId,
-                stage => stage.WorkflowStageId,
+                customer => customer.StatusID,
+                stage => stage.WorkflowStageID,
                 (customer, stage) => new { customer, stage })
-            .Join(context.TbNaturales, arg => arg.customer.EntityContactId,
-                naturale => naturale.EntityId, (arg1, naturale) => new { arg1, naturale })
+            .Join(context.TbNaturales, arg => arg.customer.EntityContactID,
+                naturale => naturale.EntityID, (arg1, naturale) => new { arg1, naturale })
             .Where(arg => arg.arg1.customer.CreatedOn >= dateFirst
                           && arg.arg1.customer.CreatedOn <= dateLast)
             .GroupBy(arg => new { arg.arg1.stage.Name, arg.naturale.FirstName })
@@ -639,8 +639,8 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         using var context = new DataContext();
         return context.TbCustomers
             .Join(context.TbWorkflowStages,
-                customer => customer.StatusId,
-                stage => stage.WorkflowStageId,
+                customer => customer.StatusID,
+                stage => stage.WorkflowStageID,
                 (customer, stage) => new { customer, stage })
             .Where(arg => arg.customer.CreatedOn >= dateFirst
                           && arg.customer.CreatedOn <= dateLast)
@@ -659,13 +659,13 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         var list = new List<int>();
         list.Add(19);
         var query = from t in context.TbTransactionMasters
-            join ws in context.TbWorkflowStages on t.StatusId equals ws.WorkflowStageId
-            join nat in context.TbNaturales on t.EntityIdsecondary equals nat.EntityId into natJoin
+            join ws in context.TbWorkflowStages on t.StatusID equals ws.WorkflowStageID
+            join nat in context.TbNaturales on t.EntityIDSecondary equals nat.EntityID into natJoin
             from nat in natJoin.DefaultIfEmpty()
-            where list.Contains(t.TransactionId)
+            where list.Contains(t.TransactionID)
                   && t.IsActive!.Value
                   && ws.Aplicable!.Value
-                  && t.CompanyId == companyId
+                  && t.CompanyID == companyId
                   && t.TransactionOn >= dateFirst && t.TransactionOn <= dateLast
             group t by new { Day = t.TransactionOn!.Value.Day }
             into g
@@ -683,8 +683,8 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         using var context = new DataContext();
         return context.TbItems
             .Join(context.TbNaturales,
-                item => item.RealStateEmployerAgentId,
-                naturale => naturale.EntityId,
+                item => item.RealStateEmployerAgentID,
+                naturale => naturale.EntityID,
                 (item, naturale) => new { item, naturale })
             .Where(arg => arg.item.CreatedOn >= dateFirst
                           && arg.item.CreatedOn <= dateLast)
@@ -704,13 +704,13 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         list.Add(19);
         return context.TbTransactionMasters
             .Join(context.TbWorkflowStages,
-                master => master.StatusId,
-                stage => stage.WorkflowStageId,
+                master => master.StatusID,
+                stage => stage.WorkflowStageID,
                 (master, stage) => new { master, stage })
-            .Where(arg => list.Contains(arg.master.TransactionId)
+            .Where(arg => list.Contains(arg.master.TransactionID)
                           && arg.master.IsActive!.Value
                           && arg.stage.Aplicable!.Value
-                          && arg.master.CompanyId == companyId
+                          && arg.master.CompanyID == companyId
                           && arg.master.TransactionOn >= dateFirst
                           && arg.master.TransactionOn <= dateLast)
             .GroupBy(arg => arg.master.TransactionOn!.Value)
@@ -728,18 +728,18 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         var list = new List<int> { 19 };
         var query = context.TbTransactionMasters
             .Join(context.TbWorkflowStages,
-                t => t.StatusId,
-                ws => ws.WorkflowStageId,
+                t => t.StatusID,
+                ws => ws.WorkflowStageID,
                 (t, ws) => new { t, ws })
-            .Where(t1 => list.Contains(t1.t.TransactionId)
+            .Where(t1 => list.Contains(t1.t.TransactionID)
                          && t1.t.IsActive!.Value
                          && t1.ws.Aplicable!.Value
-                         && t1.t.CompanyId == companyId
+                         && t1.t.CompanyID == companyId
                          && t1.t.TransactionOn >= dateFirst
                          && t1.t.TransactionOn <= dateLast)
             .GroupJoin(context.TbNaturales,
-                t1 => t1.t.EntityIdsecondary,
-                nat => nat.EntityId,
+                t1 => t1.t.EntityIDSecondary,
+                nat => nat.EntityID,
                 (t1, natJoin) => new { t1, natJoin })
             .SelectMany(t1 => t1.natJoin.DefaultIfEmpty(),
                 (t1, nat) => new
@@ -763,13 +763,13 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         using var context = new DataContext();
         var list = new List<int> { 19 };
         var result = from t in context.TbTransactionMasters
-            join ws in context.TbWorkflowStages on t.StatusId equals ws.WorkflowStageId
-            join nat in context.TbNaturales on t.EntityIdsecondary equals nat.EntityId into natJoin
+            join ws in context.TbWorkflowStages on t.StatusID equals ws.WorkflowStageID
+            join nat in context.TbNaturales on t.EntityIDSecondary equals nat.EntityID into natJoin
             from nat in natJoin.DefaultIfEmpty()
-            where list.Contains(t.TransactionId)
+            where list.Contains(t.TransactionID)
                   && t.IsActive!.Value
                   && ws.Aplicable!.Value
-                  && t.CompanyId == companyId
+                  && t.CompanyID == companyId
                   && t.TransactionOn >= dateFirst
                   && t.TransactionOn <= dateLast
             group t by t.TransactionOn!.Value.Day

@@ -6,11 +6,11 @@ namespace v4posme_library.Libraries.CustomModels;
 
 class ItemSkuModel : IItemSkuModel
 {
-    public void DeleteAppPosme(int itemId)
+    public int DeleteAppPosme(int itemId)
     {
         using var context = new DataContext();
-        context.TbItemSkus
-            .Where(sku => sku.ItemId == itemId)
+        return context.TbItemSkus
+            .Where(sku => sku.ItemID == itemId)
             .ExecuteDelete();
     }
 
@@ -18,8 +18,8 @@ class ItemSkuModel : IItemSkuModel
     {
         using var context = new DataContext();
         var find = context.TbItemSkus
-            .Where(sku => sku.ItemId == itemId
-                          && sku.CatalogItemId == catalogItemId)
+            .Where(sku => sku.ItemID == itemId
+                          && sku.CatalogItemID == catalogItemId)
             .ExecuteUpdate(calls =>
                 calls.SetProperty(sku => sku.Value, data.Value));
     }
@@ -29,20 +29,20 @@ class ItemSkuModel : IItemSkuModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.SkuId;
+        return add.Entity.SkuID;
     }
 
     public List<TbItemSkuDto> GetRowByItemId(int itemId)
     {
         using var context = new DataContext();
         var result = from sku in context.TbItemSkus
-            join w in context.TbCatalogItems on sku.CatalogItemId equals w.CatalogItemId
-            where sku.ItemId == itemId
+            join w in context.TbCatalogItems on sku.CatalogItemID equals w.CatalogItemID
+            where sku.ItemID == itemId
             select new TbItemSkuDto
             {
-                SkuId = sku.SkuId,
-                ItemId = sku.ItemId,
-                CatalogItemId = sku.CatalogItemId,
+                SkuId = sku.SkuID,
+                ItemId = sku.ItemID,
+                CatalogItemId = sku.CatalogItemID,
                 Value = sku.Value,
                 Sku = w.Display
             };
@@ -52,14 +52,14 @@ class ItemSkuModel : IItemSkuModel
     public TbItemSkuDto? GetByPk(int itemId, int catalogItemId)
     {
         using var context = new DataContext();
-        var result = from sku in context.TbItemSkus
-            join w in context.TbCatalogItems on sku.CatalogItemId equals w.CatalogItemId
-            where sku.ItemId == itemId && sku.CatalogItemId == catalogItemId
+        var result = from sku in context.TbItemSkus.AsNoTracking()
+            join w in context.TbCatalogItems.AsNoTracking() on sku.CatalogItemID equals w.CatalogItemID
+            where sku.ItemID == itemId && sku.CatalogItemID == catalogItemId
             select new TbItemSkuDto
             {
-                SkuId = sku.SkuId,
-                ItemId = sku.ItemId,
-                CatalogItemId = sku.CatalogItemId,
+                SkuId = sku.SkuID,
+                ItemId = sku.ItemID,
+                CatalogItemId = sku.CatalogItemID,
                 Value = sku.Value,
                 Sku = w.Display
             };
@@ -70,15 +70,15 @@ class ItemSkuModel : IItemSkuModel
     {
         using var context = new DataContext();
         var result = from tm in context.TbTransactionMasters
-            join tmd in context.TbTransactionMasterDetails on tm.TransactionMasterId equals tmd.TransactionMasterId
-            join i in context.TbItemSkus on tmd.ComponentItemId equals i.ItemId
-            join w in context.TbCatalogItems on i.CatalogItemId equals w.CatalogItemId
-            where tm.TransactionMasterId == transactionMasterId
+            join tmd in context.TbTransactionMasterDetails on tm.TransactionMasterID equals tmd.TransactionMasterID
+            join i in context.TbItemSkus on tmd.ComponentItemID equals i.ItemID
+            join w in context.TbCatalogItems on i.CatalogItemID equals w.CatalogItemID
+            where tm.TransactionMasterID == transactionMasterId
             select new TbItemSkuDto
             {
-                SkuId = i.SkuId,
-                ItemId = i.ItemId,
-                CatalogItemId = i.CatalogItemId,
+                SkuId = i.SkuID,
+                ItemId = i.ItemID,
+                CatalogItemId = i.CatalogItemID,
                 Value = i.Value,
                 Sku = w.Display
             };

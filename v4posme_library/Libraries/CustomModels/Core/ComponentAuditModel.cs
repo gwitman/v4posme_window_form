@@ -9,6 +9,6 @@ class ComponentAuditModel : IComponentAuditModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.ComponentAuditId;
+        return add.Entity.ComponentAuditID;
     }
 }

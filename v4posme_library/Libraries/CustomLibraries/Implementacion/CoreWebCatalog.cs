@@ -34,7 +34,7 @@ class CoreWebCatalog : ICoreWebCatalog
         _catalogItemModel = catalogItemModel;
     }
 
-    public List<TbCatalogItem> GetCatalogAllItem(string table, string field, int companyId)
+    public List<TbCatalogItem> GetCatalogAllItem(string? table, string? field, int companyId)
     {
         var objCompanyModel = _companyModel.GetRowByPk(companyId);
         var objElement = _elementModel.GetRowByName(table, Convert.ToInt32(ElementTypeTable));
@@ -43,7 +43,7 @@ class CoreWebCatalog : ICoreWebCatalog
             throw new Exception($"NO EXISTE LA TABLA {table} DENTRO DE LOS REGISTROS DE ELEMENT ");
         }
 
-        var objSubElement = _subElementModel.GetRowByNameAndElementId(objElement.ElementId, field);
+        var objSubElement = _subElementModel.GetRowByNameAndElementId(objElement.ElementID, field);
         if (objSubElement is null)
         {
             throw new Exception(
@@ -57,12 +57,12 @@ class CoreWebCatalog : ICoreWebCatalog
         }
 
         //obtener el catalogo
-        if (objSubElement.CatalogId is null)
+        if (objSubElement.CatalogID is null)
         {
             throw new Exception($"EN LA TABLA SUBELEMENT PARA {field} NO EXISTE EL CATALOGO CONFIGURADO");
         }
 
-        var objCatalog = _catalogModel.GetRowByCatalogId(Convert.ToInt32(objSubElement.CatalogId));
+        var objCatalog = _catalogModel.GetRowByCatalogId(Convert.ToInt32(objSubElement.CatalogID));
         if (objCatalog is null)
         {
             throw new Exception("NO EXISTE EL CATALOGO ");
@@ -70,24 +70,24 @@ class CoreWebCatalog : ICoreWebCatalog
 
         //obtener flavor
         var objCompanyComponentFlavor = _componentFlavor.GetRowByCompanyAndComponentAndComponentItemId(companyId,
-            objComponent.ComponentId, objCatalog.CatalogId);
+            objComponent.ComponentID, objCatalog.CatalogID);
         if (objCompanyComponentFlavor is null)
         {
             throw new Exception("NO EXISTE EL FLAVOR PARA EL COMPONENTE DE CATALOGO ");
         }
 
         var objCatalogItem =
-            _catalogItemModel.GetRowByCatalogIdAndFlavorId(objCatalog.CatalogId, objCompanyModel.FlavorId);
+            _catalogItemModel.GetRowByCatalogIdAndFlavorId(objCatalog.CatalogID, objCompanyModel.FlavorID);
         if (objCatalogItem.Count <= 0)
         {
-            objCatalogItem = _catalogItemModel.GetRowByCatalogIdAndFlavorId(objCatalog.CatalogId,
-                Convert.ToInt32(objCompanyComponentFlavor.FlavorId));
+            objCatalogItem = _catalogItemModel.GetRowByCatalogIdAndFlavorId(objCatalog.CatalogID,
+                Convert.ToInt32(objCompanyComponentFlavor.FlavorID));
         }
 
         return objCatalogItem;
     }
 
-    public List<TbCatalogItem> GetCatalogAllItemByNameCatalogo(string name, int companyId)
+    public List<TbCatalogItem> GetCatalogAllItemByNameCatalogo(string? name, int companyId)
     {
         var objCompanyModel = _companyModel.GetRowByPk(companyId);
 
@@ -104,25 +104,25 @@ class CoreWebCatalog : ICoreWebCatalog
         }
 
         var objCompanyComponentFlavor =
-            _componentFlavor.GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentId,
-                objCatalog.CatalogId);
+            _componentFlavor.GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentID,
+                objCatalog.CatalogID);
         if (objCatalog is null)
         {
             throw new Exception("NO EXISTE EL FLAVOR PARA EL COMPONENTE DE CATALOGO ");
         }
 
         var objCatalogItem =
-            _catalogItemModel.GetRowByCatalogIdAndFlavorId(objCatalog.CatalogId, objCompanyModel.FlavorId);
+            _catalogItemModel.GetRowByCatalogIdAndFlavorId(objCatalog.CatalogID, objCompanyModel.FlavorID);
         if (objCatalogItem.Count <= 0)
         {
-            objCatalogItem = _catalogItemModel.GetRowByCatalogIdAndFlavorId(objCatalog.CatalogId,
-                Convert.ToInt32(objCompanyComponentFlavor.FlavorId));
+            objCatalogItem = _catalogItemModel.GetRowByCatalogIdAndFlavorId(objCatalog.CatalogID,
+                Convert.ToInt32(objCompanyComponentFlavor.FlavorID));
         }
 
         return objCatalogItem;
     }
 
-    public List<TbCatalogItem> GetCatalogAllItemParent(string table, string field, int companyId,
+    public List<TbCatalogItem> GetCatalogAllItemParent(string? table, string? field, int companyId,
         int parentCatalogItemId)
     {
         var objElement = _elementModel.GetRowByName(table, Convert.ToInt32(ElementTypeTable));
@@ -131,7 +131,7 @@ class CoreWebCatalog : ICoreWebCatalog
             throw new Exception($"NO EXISTE LA TABLA {table} DENTRO DE LOS REGISTROS DE ELEMENT ");
         }
 
-        var objSubElement = _subElementModel.GetRowByNameAndElementId(objElement.ElementId, field);
+        var objSubElement = _subElementModel.GetRowByNameAndElementId(objElement.ElementID, field);
         if (objSubElement is null)
         {
             throw new Exception(
@@ -144,29 +144,29 @@ class CoreWebCatalog : ICoreWebCatalog
             throw new Exception("NO EXISTE EL COMPONENTE 'tb_catalog' DENTROS DE LOS REGISTROS DE 'Component' ");
         }
 
-        if (objSubElement.CatalogId is null)
+        if (objSubElement.CatalogID is null)
         {
             throw new Exception($"EN LA TABLA SUBELEMENT PARA '{field}' NO EXISTE EL CATALOGO CONFIGURADO");
         }
 
-        var objCatalog = _catalogModel.GetRowByCatalogId(Convert.ToInt32(objSubElement.CatalogId));
+        var objCatalog = _catalogModel.GetRowByCatalogId(Convert.ToInt32(objSubElement.CatalogID));
         if (objCatalog is null)
         {
             throw new Exception("NO EXISTE EL CATALOGO ");
         }
 
         var objCompanyComponentFlavor = _componentFlavor
-            .GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentId, objCatalog.CatalogId);
+            .GetRowByCompanyAndComponentAndComponentItemId(companyId, objComponent.ComponentID, objCatalog.CatalogID);
         if (objCompanyComponentFlavor is null)
         {
             throw new Exception("NO EXISTE EL FLAVOR PARA EL COMPONENTE DE CATALOGO ");
         }
 
         return _catalogItemModel.GetRowByCatalogIdAndFlavorIdParent(
-            objCatalog.CatalogId, Convert.ToInt32(objCompanyComponentFlavor.FlavorId), parentCatalogItemId);
+            objCatalog.CatalogID, Convert.ToInt32(objCompanyComponentFlavor.FlavorID), parentCatalogItemId);
     }
 
-    public TbCatalogItem GetCatalogItem(string table, string field, int companyId, int catalogItemId)
+    public TbCatalogItem GetCatalogItem(string? table, string? field, int companyId, int catalogItemId)
     {
         var objElement = _elementModel.GetRowByName(table, Convert.ToInt32(ElementTypeTable));
         if (objElement is null)
@@ -174,7 +174,7 @@ class CoreWebCatalog : ICoreWebCatalog
             throw new Exception($"NO EXISTE LA TABLA {table} DENTRO DE LOS REGISTROS DE ELEMENT ");
         }
 
-        var objSubElement = _subElementModel.GetRowByNameAndElementId(objElement.ElementId, field);
+        var objSubElement = _subElementModel.GetRowByNameAndElementId(objElement.ElementID, field);
         if (objSubElement is null)
         {
             throw new Exception(
@@ -187,19 +187,19 @@ class CoreWebCatalog : ICoreWebCatalog
             throw new Exception("NO EXISTE EL COMPONENTE 'tb_catalog' DENTROS DE LOS REGISTROS DE 'Component' ");
         }
 
-        if (objSubElement.CatalogId is null)
+        if (objSubElement.CatalogID is null)
         {
             throw new Exception($"EN LA TABLA SUBELEMENT PARA '{field}' NO EXISTE EL CATALOGO CONFIGURADO");
         }
 
-        var objCatalog = _catalogModel.GetRowByCatalogId(Convert.ToInt32(objSubElement.CatalogId));
+        var objCatalog = _catalogModel.GetRowByCatalogId(Convert.ToInt32(objSubElement.CatalogID));
         if (objCatalog is null)
         {
             throw new Exception("NO EXISTE EL CATALOGO ");
         }
 
         var objCompanyComponentFlavor = _componentFlavor.GetRowByCompanyAndComponentAndComponentItemId(
-            companyId, objComponent.ComponentId, objCatalog.CatalogId);
+            companyId, objComponent.ComponentID, objCatalog.CatalogID);
         if (objCompanyComponentFlavor is null)
         {
             throw new Exception("NO EXISTE EL FLAVOR PARA EL COMPONENTE DE CATALOGO ");

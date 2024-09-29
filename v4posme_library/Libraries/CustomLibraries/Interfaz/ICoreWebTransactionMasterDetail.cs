@@ -8,7 +8,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Interfaz
 {
     public interface ICoreWebTransactionMasterDetail
     {
-        decimal GetCostCustomer(int companyId, string itemId, decimal unitaryCost, decimal unitaryPrice);
-        public decimal GetPercentageCommission(int companyId, int listPriceId, string itemId, decimal price);
+        decimal GetCostCustomer(int companyId, string? itemId, decimal unitaryCost, decimal unitaryPrice);
+        public decimal GetPercentageCommission(int companyId, int listPriceId, string? itemId, decimal price);
     }
 }

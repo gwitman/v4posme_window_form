@@ -13,6 +13,6 @@ public record TbListPriceDto()
     public string? CreatedIn { get; set; }
     public int CreatedBy { get; set; }
     public int CreatedAt { get; set; }
-    public ulong IsActive { get; set; }
+    public bool IsActive { get; set; }
     public string? StatusName { get; set; }
 }

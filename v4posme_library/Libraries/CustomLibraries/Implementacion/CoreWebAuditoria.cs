@@ -27,7 +27,7 @@ class CoreWebAuditoria : ICoreWebAuditoria
     }
 
 
-    public void SetAuditCreated<T>(T obj, TbUser dataUser, string request)
+    public void SetAuditCreated<T>(T obj, TbUser dataUser, string? request)
     {
         var ipAddresses = Dns.GetHostAddresses(Dns.GetHostName()).First();
         if (obj == null) return;
@@ -41,7 +41,7 @@ class CoreWebAuditoria : ICoreWebAuditoria
 
             if (property is { Name: "CreatedBy", CanWrite: true })
             {
-                property.SetValue(obj, dataUser.UserId);
+                property.SetValue(obj, dataUser.UserID);
             }
 
             if (property is { Name: "CreatedIn", CanWrite: true })
@@ -51,12 +51,12 @@ class CoreWebAuditoria : ICoreWebAuditoria
 
             if (property is { Name: "CreatedAt", CanWrite: true })
             {
-                property.SetValue(obj, dataUser.BranchId);
+                property.SetValue(obj, dataUser.BranchID);
             }
         }
     }
 
-    public void SetAuditCreatedAdmin<T>(T obj, string request)
+    public void SetAuditCreatedAdmin<T>(T obj, string? request)
     {
         var appUserAdmin = VariablesGlobales.ConfigurationBuilder["APP_USERADMIN"];
         var appBranch = VariablesGlobales.ConfigurationBuilder["APP_BRANCH"];
@@ -87,7 +87,7 @@ class CoreWebAuditoria : ICoreWebAuditoria
         }
     }
 
-    public List<TbComponentAuditDetailDto> GetAuditDetail(int companyId, int id, string tableName)
+    public List<TbComponentAuditDetailDto> GetAuditDetail(int companyId, int id, string? tableName)
     {
         var elementTypeTable = VariablesGlobales.ConfigurationBuilder["ELEMENT_TYPE_TABLE"];
         var objElement = _elementModel.GetRowByName(tableName, Convert.ToInt32(elementTypeTable));
@@ -96,10 +96,10 @@ class CoreWebAuditoria : ICoreWebAuditoria
             throw new Exception($"NO EXISTE LA TABLA '{tableName}' DENTRO DE LOS REGISTROS DE ELEMENT ");
         }
 
-        return _componentAuditDetailModel.GetAuditDetail(companyId, id, objElement.ElementId);
+        return _componentAuditDetailModel.GetAuditDetail(companyId, id, objElement.ElementID);
     }
 
-    public void SetAudit(string tableName, object oldObject, object newObject, TbUser user, string request)
+    public void SetAudit(string? tableName, object oldObject, object newObject, TbUser user, string? request)
     {
         var elementTypeTable = VariablesGlobales.ConfigurationBuilder["ELEMENT_TYPE_TABLE"];
         var ipAddresses = Dns.GetHostAddresses(Dns.GetHostName()).First();
@@ -110,7 +110,7 @@ class CoreWebAuditoria : ICoreWebAuditoria
 
         // Obtener subElementos Auditables
         var listSubElementAuditables =
-            _companySubElementAuditModel.ListElementAudit(user.CompanyId, objElement.ElementId);
+            _companySubElementAuditModel.ListElementAudit(user.CompanyID, objElement.ElementID);
         if (listSubElementAuditables is null)
             return;
 
@@ -123,7 +123,7 @@ class CoreWebAuditoria : ICoreWebAuditoria
         var columnAutoIncrement = objElement.ColumnAutoIncrement;
         if (columnAutoIncrement == null)
             throw new Exception("LA TABLA NO TIENE UNA COLUMNA AUTO IDENTIFICADORA");
-        var elementSalvar = new Dictionary<int, Dictionary<string, object?>>();
+        var elementSalvar = new Dictionary<int, Dictionary<string?, object?>>();
         var aux = 0;
         foreach (var auditable in listSubElementAuditables)
         {
@@ -137,7 +137,7 @@ class CoreWebAuditoria : ICoreWebAuditoria
             {
                 continue;
             }
-            elementSalvar[aux] = new Dictionary<string, object?>
+            elementSalvar[aux] = new Dictionary<string?, object?>
             {
                 { "subelementid", fieldId },
                 { "oldvalue", fieldValueOld },
@@ -149,14 +149,14 @@ class CoreWebAuditoria : ICoreWebAuditoria
         var elementItemId = oldObject.GetType().GetProperty(columnAutoIncrement.ToString()!)!.GetValue(oldObject);
         var data = new TbComponentAudit
         {
-            CompanyId = user.CompanyId,
-            BranchId = user.BranchId,
-            ElementId = objElement.ElementId,
-            ElementItemId = elementItemId as int?,
+            CompanyID = user.CompanyID,
+            BranchID = user.BranchID,
+            ElementID = objElement.ElementID,
+            ElementItemID = elementItemId as int?,
             ModifiedOn = DateTime.Now,
-            ModifiedAt = user.BranchId,
+            ModifiedAt = user.BranchID,
             ModifiedIn = ipAddresses.ToString(),
-            ModifiedBy = user.UserId
+            ModifiedBy = user.UserID
         };
         var componentAuditId = _componentAuditModel.InsertAppPosme(data);
         foreach (var (key, values) in elementSalvar)
@@ -182,10 +182,10 @@ class CoreWebAuditoria : ICoreWebAuditoria
 
             var componentAUditDetail = new TbComponentAuditDetail
             {
-                CompanyId = data.CompanyId,
-                BranchId = data.BranchId,
-                ComponentAuditId = componentAuditId,
-                FieldId = subElementId,
+                CompanyID = data.CompanyID,
+                BranchID = data.BranchID,
+                ComponentAuditID = componentAuditId,
+                FieldID = subElementId,
                 OldValue = oldValue!.ToString(),
                 NewValue = newValue!.ToString()
             };

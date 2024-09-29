@@ -42,7 +42,7 @@ public class CoreWebAccounting : ICoreWebAccounting
         }
 
         var objCompanyParameter =
-            _companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameter.ParameterId);
+            _companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameter.ParameterID);
         var objCycle = _componentCycleModel.GetRowByCycleId(cycleId);
         if (objCycle is null)
         {
@@ -54,7 +54,7 @@ public class CoreWebAccounting : ICoreWebAccounting
             throw new Exception("NO EXISTE EL COMPANY PARAMETER");
         }
 
-        return objCycle.StatusId == Convert.ToInt32(objCompanyParameter.Value);
+        return objCycle.StatusID == Convert.ToInt32(objCompanyParameter.Value);
         ;
     }
 
@@ -74,7 +74,7 @@ public class CoreWebAccounting : ICoreWebAccounting
         }
 
         var objCompanyParameter =
-            _companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameter.ParameterId);
+            _companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameter.ParameterID);
         var objCycle = _componentCycleModel.GetRowByCompanyIdFecha(companyId, dateOn);
         if (objCycle is null)
         {
@@ -86,7 +86,7 @@ public class CoreWebAccounting : ICoreWebAccounting
             throw new Exception("NO EXISTE EL COMPANY PARAMETER");
         }
 
-        return objCycle.StatusId == Convert.ToInt32(objCompanyParameter.Value);
+        return objCycle.StatusID == Convert.ToInt32(objCompanyParameter.Value);
     }
 
     public bool CycleIsEmptyByDate(int companyId, DateTime dateOn)
@@ -96,7 +96,7 @@ public class CoreWebAccounting : ICoreWebAccounting
         {
             throw new Exception("NO EXISTE EL CICLO CONTABLE");
         }
-        var countJournal = _componentCycleModel.CountJournalInCycle(objCycle.ComponentCycleId, companyId);
+        var countJournal = _componentCycleModel.CountJournalInCycle(objCycle.ComponentCycleID, companyId);
         return countJournal > 0;
     }
 
@@ -104,7 +104,7 @@ public class CoreWebAccounting : ICoreWebAccounting
     {
         var objParameter = _parameterModel.GetRowByName("ACCOUNTING_PERIOD_WORKFLOWSTAGECLOSED");
         var objCompanyParameter =
-            _companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameter.ParameterId);
+            _companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameter.ParameterID);
         var objPeriod = _componentPeriodModel.GetRowByPk(periodId);
         if (objPeriod is null)
         {
@@ -116,7 +116,7 @@ public class CoreWebAccounting : ICoreWebAccounting
             throw new Exception("NO EXISTE EL COMPANY PARAMETER");
         }
 
-        return objPeriod.StatusId == Convert.ToInt32(objCompanyParameter.Value);
+        return objPeriod.StatusID == Convert.ToInt32(objCompanyParameter.Value);
     }
 
     public bool PeriodIsEmptyById(int companyId, int periodId)
@@ -129,19 +129,19 @@ public class CoreWebAccounting : ICoreWebAccounting
     {
         var objParameter = _parameterModel.GetRowByName("ACCOUNTING_PERIOD_WORKFLOWSTAGECLOSED");
         var objCompanyParameter =
-            _companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameter.ParameterId);
+            _companyParameterModel.GetRowByParameterIdCompanyId(companyId, objParameter.ParameterID);
         var objPeriod = _componentPeriodModel.GetRowByCompanyIdFecha(companyId, dateOn);
         if (objCompanyParameter is null)
         {
             throw new Exception("NO EXISTE EL COMPANY PARAMETER");
         }
-        return objPeriod.StatusId == Convert.ToInt32(objCompanyParameter.Value);
+        return objPeriod.StatusID == Convert.ToInt32(objCompanyParameter.Value);
     }
 
     public bool PeriodIsEmptyByDate(int companyId, DateTime dateOn)
     {
         var objPeriod = _componentPeriodModel.GetRowByCompanyIdFecha(companyId, dateOn);
-        var countJournal = _componentPeriodModel.CountJournalInPeriod(objPeriod.ComponentPeriodId, companyId);
+        var countJournal = _componentPeriodModel.CountJournalInPeriod(objPeriod.ComponentPeriodID, companyId);
         return countJournal > 0;
     }
 
@@ -149,9 +149,9 @@ public class CoreWebAccounting : ICoreWebAccounting
         int componentPeriodId, int componentCycleId, decimal balance, decimal debit, decimal credit)
     {
         var objAccount = _accountModel.GetRowByPk(companyId, accountId);
-        if (objAccount.ParentAccountId != null)
+        if (objAccount.ParentAccountID != null)
         {
-            MayorizateAccount(companyId, branchId, loginId, objAccount.ParentAccountId.Value, componentPeriodId,
+            MayorizateAccount(companyId, branchId, loginId, objAccount.ParentAccountID.Value, componentPeriodId,
                 componentCycleId, balance, debit, credit);
         }
 
@@ -166,7 +166,7 @@ public class CoreWebAccounting : ICoreWebAccounting
         var objCycle = _componentCycleModel.GetRowByPk(componentPeriodId, componentCycleId);
         var workflowStageCycleClose =
             _coreWebParameter.GetParameter("ACCOUNTING_CYCLE_WORKFLOWSTAGECLOSED", companyId)!.Value;
-        if (objCycle.StatusId == Convert.ToInt32(workflowStageCycleClose))
+        if (objCycle.StatusID == Convert.ToInt32(workflowStageCycleClose))
         {
             return 1;
         }

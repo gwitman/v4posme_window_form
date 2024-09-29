@@ -26,7 +26,7 @@ public class TbCustomerCreditDocumentDto
     public string? Reference2 { get; set; }
     public string? Reference3 { get; set; }
     public int StatusId { get; set; }
-    public ulong? IsActive { get; set; }
+    public bool IsActive { get; set; }
     public decimal? Balance { get; set; }
     public decimal? BalanceProvicioned { get; set; }
     public int CurrencyId { get; set; }

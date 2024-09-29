@@ -11,7 +11,7 @@ public interface ICenterCostModel
 
     int InsertAppPosme(TbCenterCost data);
 
-    TbCenterCost GetByClassNumber(string classNumber, int companyId);
+    TbCenterCost GetByClassNumber(string? classNumber, int companyId);
 
     TbCenterCost GetRowByPk(int companyId,int classId);
 

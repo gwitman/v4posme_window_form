@@ -9,20 +9,20 @@ class ProviderItemModel : IProviderItemModel
     public int DeleteWhereItemId(int companyId, int itemId)
     {
         using var context = new DataContext();
-        return context.TbProviderItems
-            .Where(item => item.CompanyId == companyId
-                           && item.ItemId == itemId)
-            .ExecuteDelete();
+        var findValues= context.TbProviderItems
+            .Where(item => item.CompanyID == companyId
+                           && item.ItemID == itemId);
+        return findValues.Any() ? findValues.ExecuteDelete() : 0;
     }
 
     public int DeleteWhereItemIdyProviderId(int companyId, int itemId, int providerId)
     {
         using var context = new DataContext();
-        return context.TbProviderItems
-            .Where(item => item.CompanyId == companyId
-                           && item.ItemId == itemId
-                           && item.EntityId == providerId)
-            .ExecuteDelete();
+        var findValues = context.TbProviderItems
+            .Where(item => item.CompanyID == companyId
+                           && item.ItemID == itemId
+                           && item.EntityID == providerId);
+        return findValues.Any() ? findValues.ExecuteDelete() : 0;
     }
 
     public int InsertAppPosme(TbProviderItem data)
@@ -30,22 +30,22 @@ class ProviderItemModel : IProviderItemModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.ProviderItemId;
+        return add.Entity.ProviderItemID;
     }
 
     public List<TbProviderItemDto> GetRowByItemId(int companyId, int itemId)
     {
         using var context = new DataContext();
         var result = from ip in context.TbProviderItems
-            join p in context.TbProviders on ip.EntityId equals p.EntityId
-            join n in context.TbNaturales on p.EntityId equals n.EntityId into naturales
+            join p in context.TbProviders on ip.EntityID equals p.EntityID
+            join n in context.TbNaturales on p.EntityID equals n.EntityID into naturales
             from n in naturales.DefaultIfEmpty()
-            join l in context.TbLegals on p.EntityId equals l.EntityId into legales
+            join l in context.TbLegals on p.EntityID equals l.EntityID into legales
             from l in legales.DefaultIfEmpty()
-            where ip.CompanyId == companyId && ip.ItemId == itemId
+            where ip.CompanyID == companyId && ip.ItemID == itemId
             select new TbProviderItemDto
             {
-                EntityId = ip.EntityId,
+                EntityId = ip.EntityID,
                 ProviderNumber = p.ProviderNumber,
                 FirstName = n.FirstName,
                 LastName = n.LastName,
@@ -58,15 +58,15 @@ class ProviderItemModel : IProviderItemModel
     {
         using var context = new DataContext();
         var result = from ip in context.TbProviderItems
-            join p in context.TbProviders on ip.EntityId equals p.EntityId
-            join n in context.TbNaturales on p.EntityId equals n.EntityId into naturales
+            join p in context.TbProviders on ip.EntityID equals p.EntityID
+            join n in context.TbNaturales on p.EntityID equals n.EntityID into naturales
             from n in naturales.DefaultIfEmpty()
-            join l in context.TbLegals on p.EntityId equals l.EntityId into legales
+            join l in context.TbLegals on p.EntityID equals l.EntityID into legales
             from l in legales.DefaultIfEmpty()
-            where ip.CompanyId == companyId && ip.ItemId == itemId && ip.EntityId == providerId
+            where ip.CompanyID == companyId && ip.ItemID == itemId && ip.EntityID == providerId
             select new TbProviderItemDto
             {
-                EntityId = ip.EntityId,
+                EntityId = ip.EntityID,
                 ProviderNumber = p.ProviderNumber,
                 FirstName = n.FirstName,
                 LastName = n.LastName,

@@ -10,8 +10,8 @@ class EmployeeCalendarPayDetailModel : IEmployeeCalendarPayDetailModel
     {
         using var context = new DataContext();
         var find = context.TbEmployeeCalendarPayDetails
-            .Single(detail => detail.CalendarDetailId == calendarDetailId);
-        data.CalendarDetailId = find.CalendarDetailId;
+            .Single(detail => detail.CalendarDetailID == calendarDetailId);
+        data.CalendarDetailID = find.CalendarDetailID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
@@ -20,18 +20,18 @@ class EmployeeCalendarPayDetailModel : IEmployeeCalendarPayDetailModel
     {
         using var context = new DataContext();
         var find = context.TbEmployeeCalendarPayDetails
-            .Where(detail => detail.CalendarId == calendarId
-                             && !arrayId.Contains(detail.CalendarDetailId));
+            .Where(detail => detail.CalendarID == calendarId
+                             && !arrayId.Contains(detail.CalendarDetailID));
         Console.WriteLine(find.ToQueryString());
-        find.ExecuteUpdate(calls => calls.SetProperty(detail => detail.IsActive, (ulong)0));
+        find.ExecuteUpdate(calls => calls.SetProperty(detail => detail.IsActive, false));
     }
 
     public void DeleteAppPosme(int calendarDetailId)
     {
         using var context = new DataContext();
         var find = context.TbEmployeeCalendarPayDetails
-            .Single(detail => detail.CalendarDetailId == calendarDetailId);
-        find.IsActive = 0;
+            .Single(detail => detail.CalendarDetailID == calendarDetailId);
+        find.IsActive = false;
         context.BulkSaveChanges();
     }
 
@@ -40,22 +40,22 @@ class EmployeeCalendarPayDetailModel : IEmployeeCalendarPayDetailModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.BulkSaveChanges();
-        return add.Entity.CalendarDetailId;
+        return add.Entity.CalendarDetailID;
     }
 
     public TbEmployeeCalendarPayDetailDto GetRowByPk(int calendarDetailId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbEmployeeCalendarPayDetails
-            join e in dbContext.TbEmployees on i.EmployeeId equals e.EntityId
-            join n in dbContext.TbNaturales on i.EmployeeId equals n.EntityId
-            where i.CalendarDetailId == calendarDetailId
-                  && i.IsActive == 1
+            join e in dbContext.TbEmployees on i.EmployeeID equals e.EntityID
+            join n in dbContext.TbNaturales on i.EmployeeID equals n.EntityID
+            where i.CalendarDetailID == calendarDetailId
+                  && i.IsActive
             select new TbEmployeeCalendarPayDetailDto
             {
-                CalendarDetailId = i.CalendarDetailId,
-                CalendarId = i.CalendarId,
-                EmployeeId = i.EmployeeId,
+                CalendarDetailId = i.CalendarDetailID,
+                CalendarId = i.CalendarID,
+                EmployeeId = i.EmployeeID,
                 Salary = i.Salary,
                 Commission = i.Commission,
                 Adelantos = i.Adelantos,
@@ -74,15 +74,15 @@ class EmployeeCalendarPayDetailModel : IEmployeeCalendarPayDetailModel
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbEmployeeCalendarPayDetails
-            join e in dbContext.TbEmployees on i.EmployeeId equals e.EntityId
-            join n in dbContext.TbNaturales on i.EmployeeId equals n.EntityId
-            where i.CalendarId == calendarId
-                  && i.IsActive == 1
+            join e in dbContext.TbEmployees on i.EmployeeID equals e.EntityID
+            join n in dbContext.TbNaturales on i.EmployeeID equals n.EntityID
+            where i.CalendarID == calendarId
+                  && i.IsActive
             select new TbEmployeeCalendarPayDetailDto
             {
-                CalendarDetailId = i.CalendarDetailId,
-                CalendarId = i.CalendarId,
-                EmployeeId = i.EmployeeId,
+                CalendarDetailId = i.CalendarDetailID,
+                CalendarId = i.CalendarID,
+                EmployeeId = i.EmployeeID,
                 Salary = i.Salary,
                 Commission = i.Commission,
                 Adelantos = i.Adelantos,

@@ -9,8 +9,8 @@ class ItemCategoryModel : IItemCategoryModel
     {
         using var context = new DataContext();
         context.TbItemCategories
-            .Where(category => category.CompanyId == companyId
-                               && category.InventoryCategoryId == itemCategoryId)
+            .Where(category => category.CompanyID == companyId
+                               && category.InventoryCategoryID == itemCategoryId)
             .ExecuteUpdate(calls =>
                 calls.SetProperty(category => category.IsActive, false));
     }
@@ -20,16 +20,16 @@ class ItemCategoryModel : IItemCategoryModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.InventoryCategoryId;
+        return add.Entity.InventoryCategoryID;
     }
 
     public void UpdateAppPosme(int companyId, int itemCategoryId, TbItemCategory data)
     {
         using var context = new DataContext();
         var find = context.TbItemCategories
-            .Single(category => category.CompanyId == companyId
-                                && category.InventoryCategoryId == itemCategoryId);
-        data.InventoryCategoryId = find.InventoryCategoryId;
+            .Single(category => category.CompanyID == companyId
+                                && category.InventoryCategoryID == itemCategoryId);
+        data.InventoryCategoryID = find.InventoryCategoryID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -38,7 +38,7 @@ class ItemCategoryModel : IItemCategoryModel
     {
         using var context = new DataContext();
         return context.TbItemCategories
-            .Where(category => category.CompanyId == companyId
+            .Where(category => category.CompanyID == companyId
                                && category.IsActive!.Value)
             .ToList();
     }
@@ -47,8 +47,8 @@ class ItemCategoryModel : IItemCategoryModel
     {
         using var context = new DataContext();
         return context.TbItemCategories
-            .Single(category => category.CompanyId == companyId
-                                && category.InventoryCategoryId == itemCategoryId
+            .Single(category => category.CompanyID == companyId
+                                && category.InventoryCategoryID == itemCategoryId
                                 && category.IsActive!.Value);
     }
 }

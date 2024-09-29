@@ -7,7 +7,7 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 class ParameterModel(DataContext context) : IParameterModel
 {
     
-    public TbParameter? GetRowByName(string name)
+    public TbParameter? GetRowByName(string? name)
     {
               
         var resul =  context.TbParameters.AsNoTracking()

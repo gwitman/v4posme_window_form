@@ -46,11 +46,11 @@ namespace v4posme_window.Api
                 throw new Exception(userNotAutenticated);
             }
 
-            var ParametroFacturacionZero = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_QUANTITY_ZERO", user.CompanyId);
+            var ParametroFacturacionZero = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_QUANTITY_ZERO", user.CompanyID);
             IItemModel _objItemModel = VariablesGlobales.Instance.UnityContainer.Resolve<IItemModel>();
             IItemWarehouseModel _objItemWarehouseModel = VariablesGlobales.Instance.UnityContainer.Resolve<IItemWarehouseModel>();
-            var objItemModel = _objItemModel.GetRowByPk(user.CompanyId, itemID);
-            var objItemWarehouseModel = _objItemWarehouseModel.GetByPk(user.CompanyId, itemID, warehouseID);
+            var objItemModel = _objItemModel.GetRowByPk(user.CompanyID, itemID);
+            var objItemWarehouseModel = _objItemWarehouseModel.GetByPk(user.CompanyID, itemID, warehouseID);
 
             if (
                 objItemWarehouseModel.Quantity < quantity &&
@@ -85,14 +85,14 @@ namespace v4posme_window.Api
                 }
 
                 var role = VariablesGlobales.Instance.Role;
-                var objCurrencyDolares  = _objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyId);
-                var objCurrencyCordoba  = _objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyId);
-                var dateOn              = new DateOnly(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day);
-                var ExchangeRate        = _objInterfazCoreWebCurrency.GetRatio(user.CompanyId, dateOn,decimal.One, objCurrencyDolares!.CurrencyId, objCurrencyCordoba!.CurrencyId);
-                var ParameterCausalTypeCredit   = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyId);
-                var ObjCustomer                 = _objInterfazCustomerModel.GetRowByEntity(user.CompanyId,entityID);
+                var objCurrencyDolares  = _objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyID);
+                var objCurrencyCordoba  = _objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyID);
+                var dateOn              = DateTime.Today;
+                var ExchangeRate        = _objInterfazCoreWebCurrency.GetRatio(user.CompanyID, dateOn,decimal.One, objCurrencyDolares!.CurrencyID, objCurrencyCordoba!.CurrencyID);
+                var ParameterCausalTypeCredit   = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyID);
+                var ObjCustomer                 = _objInterfazCustomerModel.GetRowByEntity(user.CompanyID,entityID);
                 var BranchID                    = ObjCustomer is not null ? ObjCustomer.BranchId : 0;
-                var ObjListCustomerCreditLine2  = _objInterfazCustomerCreditLineModel.GetRowByEntity(user.CompanyId, BranchID, entityID);
+                var ObjListCustomerCreditLine2  = _objInterfazCustomerCreditLineModel.GetRowByEntity(user.CompanyID, BranchID, entityID);
                 var ObjListCustomerCreditLine   = new List<TbCustomerCreditLineDto>();       
                 
                 //Obtener linesas de credito
@@ -136,7 +136,7 @@ namespace v4posme_window.Api
             //Parametros
             var parameter = new Dictionary<string, string>
             {
-                ["{companyID}"] = usuario!.CompanyId.ToString()
+                ["{companyID}"] = usuario!.CompanyID.ToString()
             };
 
             // Agregar al diccionarios los parametros dinamicos

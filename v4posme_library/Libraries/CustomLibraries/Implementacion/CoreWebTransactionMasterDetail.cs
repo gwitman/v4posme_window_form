@@ -7,7 +7,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion;
 
 class CoreWebTransactionMasterDetail : ICoreWebTransactionMasterDetail
 {
-    public decimal GetCostCustomer(int companyId, string itemId, decimal unitaryCost, decimal unitaryPrice)
+    public decimal GetCostCustomer(int companyId, string? itemId, decimal unitaryCost, decimal unitaryPrice)
     {
         var companyModel = VariablesGlobales.Instance.UnityContainer.Resolve<CompanyModel>();
         var itemModel = VariablesGlobales.Instance.UnityContainer.Resolve<IItemModel>();
@@ -29,7 +29,7 @@ class CoreWebTransactionMasterDetail : ICoreWebTransactionMasterDetail
         return finalUnitaryCost;
     }
 
-    public decimal GetPercentageCommission(int companyId, int listPriceId, string itemId, decimal price)
+    public decimal GetPercentageCommission(int companyId, int listPriceId, string? itemId, decimal price)
     {
         var priceModel = VariablesGlobales.Instance.UnityContainer.Resolve<IPriceModel>();
         var companyModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyModel>();

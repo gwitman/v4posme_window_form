@@ -25,7 +25,7 @@ public record TbJournalEntryDto()
     public string? WorkflowStageName { get; set; }
     public string? JournalTypeName { get; set; }
     public string? CurrencyName { get; set; }
-    public ulong IsModule { get; set; }
+    public bool IsModule { get; set; }
     public int TransactionMasterId { get; set; }
     public bool IsTemplated { get; set; }
     public string? TitleTemplated { get; set; }

@@ -7,26 +7,26 @@ public class CustomerConsultasSinRiesgoModel : ICustomerConsultasSinRiesgoModel
 {
     private static IQueryable<TbCustomerConsultasSinRiesgo> FindByRequestId(int requestId, DataContext context)
     {
-        return context.TbCustomerConsultasSinRiesgoes
-            .Where(riesgo => riesgo.RequestId == requestId);
+        return context.TbCustomerConsultasSinRiesgos
+            .Where(riesgo => riesgo.RequestID == requestId);
     }
 
-    private static IQueryable<TbCustomerConsultasSinRiesgo> FindByCedulaAndCompanyId(int companyId, string cedula, DataContext context)
+    private static IQueryable<TbCustomerConsultasSinRiesgo> FindByCedulaAndCompanyId(int companyId, string? cedula, DataContext context)
     {
-        return context.TbCustomerConsultasSinRiesgoes
-            .Where(riesgo => riesgo.CompanyId == companyId 
+        return context.TbCustomerConsultasSinRiesgos
+            .Where(riesgo => riesgo.CompanyID == companyId 
                              && riesgo.Id.Equals(cedula));
     }
     public void UpdateAppPosme(int requestId, TbCustomerConsultasSinRiesgo data)
     {
         using var context = new DataContext();
         var find = FindByRequestId(requestId, context).Single();
-        data.RequestId = find.RequestId;
+        data.RequestID = find.RequestID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
 
-    public void UpdateByCedula(int companyId, string cedula, TbCustomerConsultasSinRiesgo data)
+    public void UpdateByCedula(int companyId, string? cedula, TbCustomerConsultasSinRiesgo data)
     {
         using var context = new DataContext();
         var find = FindByCedulaAndCompanyId(companyId, cedula, context).Single();
@@ -37,9 +37,9 @@ public class CustomerConsultasSinRiesgoModel : ICustomerConsultasSinRiesgoModel
     public int InsertAppPosme(TbCustomerConsultasSinRiesgo data)
     {
         using var context = new DataContext();
-        var add = context.TbCustomerConsultasSinRiesgoes.Add(data);
+        var add = context.TbCustomerConsultasSinRiesgos.Add(data);
         context.BulkSaveChanges();
-        return add.Entity.RequestId;
+        return add.Entity.RequestID;
     }
 
     public TbCustomerConsultasSinRiesgo GetRowByPk(int requestId)
@@ -48,7 +48,7 @@ public class CustomerConsultasSinRiesgoModel : ICustomerConsultasSinRiesgoModel
         return FindByRequestId(requestId, context).Single();
     }
 
-    public TbCustomerConsultasSinRiesgo GetRowByCedulaLast(int companyId, string cedula)
+    public TbCustomerConsultasSinRiesgo GetRowByCedulaLast(int companyId, string? cedula)
     {
         using var context = new DataContext();
         return FindByCedulaAndCompanyId(companyId, cedula, context)
@@ -63,7 +63,7 @@ public class CustomerConsultasSinRiesgoModel : ICustomerConsultasSinRiesgoModel
             .Single(riesgo => old > 0 && (DateTime.Now - riesgo.CreatedOn).Days > 0);
     }
 
-    public List<TbCustomerConsultasSinRiesgo> GetRowByCedulaFileName(int companyId, string cedula)
+    public List<TbCustomerConsultasSinRiesgo> GetRowByCedulaFileName(int companyId, string? cedula)
     {
         using var context = new DataContext();
         return FindByCedulaAndCompanyId(companyId, cedula, context)
@@ -75,7 +75,7 @@ public class CustomerConsultasSinRiesgoModel : ICustomerConsultasSinRiesgoModel
     {
         using var context = new DataContext();
         return context.VwSinRiesgoReporteCreditosToSystemas
-            .Where(system => system.CompanyId == companyId)
+            .Where(system => system.CompanyID == companyId)
             .AsNoTracking()
             .ToList();
     }

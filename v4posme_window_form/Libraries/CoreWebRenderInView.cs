@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -7,6 +8,7 @@ using DevExpress.Data;
 using DevExpress.LookAndFeel;
 using DevExpress.Utils;
 using DevExpress.Utils.Html;
+using DevExpress.Utils.Layout;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Alerter;
@@ -14,12 +16,17 @@ using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraCharts.Sankey;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
 using v4posme_library.Models;
 using v4posme_library.ModelsDto;
+using v4posme_window.Dto;
+using v4posme_window.Template;
 using Control = System.Windows.Forms.Control;
 using GridView = DevExpress.XtraGrid.Views.Grid.GridView;
 using Image = System.Drawing.Image;
@@ -34,6 +41,48 @@ public class CoreWebRenderInView
     {
         _alert.AutoHeight = true;
         _alert.AutoFormDelay = 2000;
+    }
+
+    public static void MostrarArchivoGrid(ArchivoDto selectedValue)
+    {
+        var extension = selectedValue.FileType;
+        switch (extension)
+        {
+            case ".jpg":
+            case ".jpeg":
+            case ".png":
+            case ".gif":
+            case ".bmp":
+            case ".tiff":
+                MostrarDialogImagen(selectedValue.PathFile);
+                break;
+            case ".pdf":
+                MostrarPdf(selectedValue.PathFile, selectedValue.FileName);
+                break;
+        }
+    }
+    public static void MostrarDialogImagen(string pathFile)
+    {
+        var layoutControl = new StackPanel();
+        layoutControl.Width = 500;
+        layoutControl.Height = 350;
+        var pictureEdit = new PictureEdit();
+        pictureEdit.Image = Image.FromFile(pathFile);
+        pictureEdit.Width = 500;
+        pictureEdit.Height = 350;
+        pictureEdit.Dock= DockStyle.Fill;
+        pictureEdit.Properties.ShowMenu = false;
+        pictureEdit.Properties.SizeMode = PictureSizeMode.Zoom;
+        layoutControl.Controls.Add(pictureEdit);
+        XtraDialog.Show(layoutControl,"Imagen Producto",MessageBoxButtons.OK);
+    }
+
+    public static void MostrarPdf(string pathFile, string fileName)
+    {
+        var pdfViewer = new FormTypePdfViewer();
+        pdfViewer.pdfViewer.LoadDocument(pathFile);
+        pdfViewer.Text = fileName;
+        pdfViewer.Show();
     }
 
     public static void LlenarComboBoxSetIndex(ComboBoxEdit comboBox, int indexValue)
@@ -103,12 +152,27 @@ public class CoreWebRenderInView
 
             if (Convert.ToInt32(key) == Convert.ToInt32(defaultValue))
             {
-                comboBox.EditValue = comboBoxItem;
+                comboBox.SelectedItem = comboBoxItem;
             }
         }
     }
 
-    public static void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, GridControl gridControl)
+    public static void LlenarComboBoxGridControl<T>(IList<T> lista, RepositoryItemComboBox comboBox, string keyField, string descripcionField)
+    {
+        // Limpiar el combobox
+        comboBox.Items.Clear();
+        // Agregar los elementos de la lista al combobox
+        foreach (var item in lista)
+        {
+            // Obtener los valores de key y value de cada objeto
+            var key = item!.GetType().GetProperty(keyField)?.GetValue(item)?.ToString();
+            var value = item.GetType().GetProperty(descripcionField)?.GetValue(item);
+            var comboBoxItem = new ComboBoxItem(key, value);
+            comboBox.Items.Add(comboBoxItem);
+        }
+    }
+
+    public static void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, GridControl gridControl, bool searchPanel = false)
     {
         if (dataViewDto.Config is null)
         {
@@ -124,11 +188,16 @@ public class CoreWebRenderInView
         var table = FillGridControl(viewData);
         gridControl.DataSource = table;
         // Ajustar la configuración del GridView
-        var gridView = gridControl.MainView as GridView;
-        if (gridView is not null)
+        if (gridControl.MainView is not GridView gridView)
         {
-            gridView.BestFitColumns();
-            gridView.OptionsView.ShowGroupPanel = false;
+            gridView=new GridView(gridControl);
+        }
+        gridView.BestFitColumns();
+        gridView.OptionsView.ShowGroupPanel = searchPanel;
+        gridView.OptionsCustomization.AllowSort = true;
+        if (searchPanel)
+        {
+            gridView.OptionsFind.AlwaysVisible = true;
         }
         var summaryColumns = dataViewDto.Config.SummaryColumns is null
             ? []
@@ -176,6 +245,7 @@ public class CoreWebRenderInView
         var aux = 0;
         foreach (var column in columnsGrid)
         {
+            column.OptionsColumn.AllowSort = DefaultBoolean.True;
             if (noVisibleColumns.Contains(column.Name))
             {
                 column.Visible = false;
@@ -196,8 +266,6 @@ public class CoreWebRenderInView
 
             aux++;
         }
-
-        return;
     }
 
     public static DataTable? FillGridControl(List<Dictionary<string, object>>? data)
@@ -228,6 +296,55 @@ public class CoreWebRenderInView
         return table;
     }
 
+    public DialogResult XtraMessageBoxArgs(TypeError type,string title, string body)
+    {
+        var args = new XtraMessageBoxArgs() {
+            Caption = title,
+            Text = body,
+            Buttons = [DialogResult.Yes, DialogResult.No],
+        };
+        switch (type)
+        {
+            case TypeError.Informacion:
+                args.ImageOptions.SvgImage = SvgImage.FromFile(Path.Combine(Application.StartupPath, "Resources", "info_svg.svg"));
+                break;
+            case TypeError.Warning:
+                args.ImageOptions.SvgImage = SvgImage.FromFile(Path.Combine(Application.StartupPath, "Resources", "warning_svg.svg"));
+                break;
+            case TypeError.Error:
+                args.ImageOptions.SvgImage = SvgImage.FromFile(Path.Combine(Application.StartupPath, "Resources", "error_svg.svg"));
+                break;
+        }
+
+        args.ImageOptions.SvgImageSize = new Size(48, 48);
+        args.Showing += Args_Showing;
+        return XtraMessageBox.Show(args);
+    }
+    private void Args_Showing(object? sender, XtraMessageShowingArgs e)
+    {
+        e.Form.Appearance.FontSizeDelta = 2;
+        foreach (var control in e.MessageBoxForm.Controls) {
+            // Checks if a control is a SimpleButton.
+            var button = control as SimpleButton;
+            if (button != null)
+            {
+                button.ImageOptions.SvgImageSize = new Size(22, 22);
+                button.Appearance.FontSizeDelta = 2;
+                switch (button.DialogResult.ToString())
+                {
+                    case ("Yes"):
+                        button.ImageOptions.SvgImage = SvgImage.FromFile(Path.Combine(Application.StartupPath, "Resources", "check_svg.svg"));
+                        break;
+                    case ("No"):
+                        button.ImageOptions.SvgImage = SvgImage.FromFile(Path.Combine(Application.StartupPath, "Resources", "cancel_svg.svg"));
+                        break;
+                    default:
+                        button.ImageOptions.SvgImage = button.ImageOptions.SvgImage;
+                        break;
+                }
+            }
+        }
+    }
     public void GetMessageAlert(TypeError type, string title, string body, Form form)
     {
         var templateHtml = new HtmlTemplate();
@@ -265,7 +382,7 @@ public class CoreWebRenderInView
         // Llamada inicial a la función recursiva para agregar elementos al AccordionControl
         foreach (var menuItem in data)
         {
-            if (menuItem.ParentMenuElementId is null)
+            if (menuItem.ParentMenuElementID is null)
             {
                 var accordionElement = new AccordionControlElement();
                 accordionElement.Text = menuItem.Display;
@@ -277,8 +394,7 @@ public class CoreWebRenderInView
                 }
 
                 menu.Elements.Add(accordionElement);
-                RenderItemLeft(accordionElement,
-                    data.Where(k => k.ParentMenuElementId == menuItem.MenuElementId).ToList());
+                RenderItemLeft(accordionElement, data.Where(k => k.ParentMenuElementID == menuItem.MenuElementID).ToList());
             }
         }
     }
@@ -290,7 +406,7 @@ public class CoreWebRenderInView
             var subElement = new AccordionControlElement();
             subElement.Text = subItem.Display;
             parentElement.Elements.Add(subElement);
-            var subItemsInner = subItems.Where(k => k.ParentMenuElementId == subItem.MenuElementId).ToList();
+            var subItemsInner = subItems.Where(k => k.ParentMenuElementID == subItem.MenuElementID).ToList();
             // Si el elemento tiene subelementos, llamamos recursivamente a esta función
             if (subItemsInner.Count > 0)
             {
@@ -323,13 +439,13 @@ public class CoreWebRenderInView
         // Llamada inicial a la función recursiva para agregar elementos al AccordionControl
         foreach (var menuItem in data)
         {
-            if (menuItem.ParentMenuElementId is null)
+            if (menuItem.ParentMenuElementID is null)
             {
                 var ribbonPage = new RibbonPage();
                 ribbonPage.Text = menuItem.Display;
                 menu.Pages.Add(ribbonPage);
                 RenderItemTop(ribbonPage,
-                    data.Where(k => k.ParentMenuElementId == menuItem.MenuElementId).ToList());
+                    data.Where(k => k.ParentMenuElementID == menuItem.MenuElementID).ToList());
             }
         }
     }
@@ -338,7 +454,7 @@ public class CoreWebRenderInView
     {
         foreach (var subItem in subItems)
         {
-            var subItemsInner = subItems.Where(k => k.ParentMenuElementId == subItem.MenuElementId).ToList();
+            var subItemsInner = subItems.Where(k => k.ParentMenuElementID == subItem.MenuElementID).ToList();
             var subElement = new RibbonPageGroup();
             // Si el elemento tiene subelementos, llamamos recursivamente a esta función
             if (subItemsInner.Count > 0)
@@ -371,7 +487,7 @@ public class CoreWebRenderInView
     }
     private static string Load(string fileName)
     {
-        var directoryPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        var directoryPath = Application.StartupPath;
         var filePath = Path.Combine(directoryPath, "Libraries/Style", fileName);
         Debug.WriteLine(File.ReadAllText(filePath));
         return File.Exists(filePath) ? File.ReadAllText(filePath) : "";

@@ -10,7 +10,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
     private static IQueryable<TbCustomerCreditDocument> FindDocuments(int customerCreditDocumentId, DataContext context)
     {
         return context.TbCustomerCreditDocuments
-            .Where(document => document.CustomerCreditDocumentId == customerCreditDocumentId);
+            .Where(document => document.CustomerCreditDocumentID == customerCreditDocumentId);
     }
 
     public void UpdateAppPosme(int customerCreditDocumentId, TbCustomerCreditDocument data)
@@ -22,7 +22,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
             return;
         }
 
-        data.CustomerCreditDocumentId = find.CustomerCreditDocumentId;
+        data.CustomerCreditDocumentID = find.CustomerCreditDocumentID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
@@ -33,7 +33,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
     {
         using var context = new DataContext();
         var find = FindDocuments(customerCreditDocumentId, context).Single();
-        find.IsActive = 0;
+        find.IsActive = false;
         context.BulkSaveChanges();
     }
 
@@ -42,25 +42,25 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.BulkSaveChanges();
-        return add.Entity.CustomerCreditDocumentId;
+        return add.Entity.CustomerCreditDocumentID;
     }
 
     public TbCustomerCreditDocumentDto? GetRowByPk(int customerCreditDocumentId)
     {
         using var context = new DataContext();
         var customerCreditDocuments = context.TbCustomerCreditDocuments;
-        var creditAmortizations = context.TbCustomerCreditAmortizations;
+        var creditAmortizations = context.TbCustomerCreditAmoritizations;
         var result = from i in customerCreditDocuments
-            join cur in context.TbCurrencies on i.CurrencyId equals cur.CurrencyId
-            where i.CustomerCreditDocumentId == customerCreditDocumentId && i.IsActive == 1
+            join cur in context.TbCurrencies on i.CurrencyID equals cur.CurrencyID
+            where i.CustomerCreditDocumentID == customerCreditDocumentId && i.IsActive
             select new TbCustomerCreditDocumentDto
             {
-                CustomerCreditDocumentId = i.CustomerCreditDocumentId,
-                CompanyId = i.CompanyId,
-                EntityId = i.EntityId,
-                CustomerCreditLineId = i.CustomerCreditLineId,
+                CustomerCreditDocumentId = i.CustomerCreditDocumentID,
+                CompanyId = i.CompanyID,
+                EntityId = i.EntityID,
+                CustomerCreditLineId = i.CustomerCreditLineID,
                 DocumentNumber = i.DocumentNumber,
-                DateOn = i.DateOn,
+                DateOn = DateOnly.FromDateTime(i.DateOn),
                 Amount = i.Amount,
                 Interes = i.Interes,
                 Term = i.Term,
@@ -68,17 +68,17 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                 Reference1 = i.Reference1,
                 Reference2 = i.Reference2,
                 Reference3 = i.Reference3,
-                StatusId = i.StatusId,
+                StatusId = i.StatusID,
                 IsActive = i.IsActive,
                 Balance = i.Balance,
                 BalanceProvicioned = i.BalanceProvicioned,
-                CurrencyId = i.CurrencyId,
+                CurrencyId = i.CurrencyID,
                 CurrencyName = cur.Name,
                 CurrencySymbol = cur.Simbol,
                 BalanceNew = (from ccd in customerCreditDocuments
                     join ccda in creditAmortizations
-                        on ccd.CustomerCreditDocumentId equals ccda.CustomerCreditDocumentId
-                    where ccd.CustomerCreditDocumentId == i.CustomerCreditDocumentId
+                        on ccd.CustomerCreditDocumentID equals ccda.CustomerCreditDocumentID
+                    where ccd.CustomerCreditDocumentID == i.CustomerCreditDocumentID
                     select ccda.Remaining).Sum(),
                 ReportSinRiesgo = i.ReportSinRiesgo
             };
@@ -89,9 +89,9 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
     {
         using var context = new DataContext();
         return context.TbCustomerCreditDocuments
-            .Where(document => document.CompanyId == companyId
-                               && document.EntityId == entityId
-                               && document.IsActive == 1)
+            .Where(document => document.CompanyID == companyId
+                               && document.EntityID == entityId
+                               && document.IsActive)
             .ToList();
     }
 
@@ -99,20 +99,20 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbCustomerCreditDocuments
-            join cc in dbContext.TbCustomerCreditAmortizations
-                on i.CustomerCreditDocumentId equals cc.CustomerCreditDocumentId
-            join a in dbContext.TbWorkflowStages on i.StatusId equals a.WorkflowStageId
-            where i.CompanyId == companyId
-                  && i.EntityId == entityId
-                  && i.IsActive == 1
+            join cc in dbContext.TbCustomerCreditAmoritizations
+                on i.CustomerCreditDocumentID equals cc.CustomerCreditDocumentID
+            join a in dbContext.TbWorkflowStages on i.StatusID equals a.WorkflowStageID
+            where i.CompanyID == companyId
+                  && i.EntityID == entityId
+                  && i.IsActive
                   && a.Aplicable!.Value
-                  && i.CurrencyId == currencyId
+                  && i.CurrencyID == currencyId
             group new { i, cc } by new
             {
-                i.CustomerCreditDocumentId,
-                i.CompanyId,
-                i.EntityId,
-                i.CustomerCreditLineId,
+                i.CustomerCreditDocumentID,
+                i.CompanyID,
+                i.EntityID,
+                i.CustomerCreditLineID,
                 i.DocumentNumber,
                 i.DateOn,
                 i.Amount,
@@ -122,21 +122,21 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                 i.Reference1,
                 i.Reference2,
                 i.Reference3,
-                i.StatusId,
+                i.StatusID,
                 i.IsActive,
                 i.Balance,
-                i.CurrencyId,
+                i.CurrencyID,
                 i.ReportSinRiesgo
             }
             into g
             select new TbCustomerCreditDocumentDto
             {
-                CustomerCreditDocumentId = g.Key.CustomerCreditDocumentId,
-                CompanyId = g.Key.CompanyId,
-                EntityId = g.Key.EntityId,
-                CustomerCreditLineId = g.Key.CustomerCreditLineId,
+                CustomerCreditDocumentId = g.Key.CustomerCreditDocumentID,
+                CompanyId = g.Key.CompanyID,
+                EntityId = g.Key.EntityID,
+                CustomerCreditLineId = g.Key.CustomerCreditLineID,
                 DocumentNumber = g.Key.DocumentNumber,
-                DateOn = g.Key.DateOn,
+                DateOn = DateOnly.FromDateTime(g.Key.DateOn),
                 Amount = g.Key.Amount,
                 Interes = g.Key.Interes,
                 Term = g.Key.Term,
@@ -144,10 +144,10 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                 Reference1 = g.Key.Reference1,
                 Reference2 = g.Key.Reference2,
                 Reference3 = g.Key.Reference3,
-                StatusId = g.Key.StatusId,
+                StatusId = g.Key.StatusID,
                 IsActive = g.Key.IsActive,
                 Balance = g.Key.Balance,
-                CurrencyId = g.Key.CurrencyId,
+                CurrencyId = g.Key.CurrencyID,
                 ReportSinRiesgo = g.Key.ReportSinRiesgo,
                 Remaining = g.Sum(x => x.cc.Remaining)
             };
@@ -158,34 +158,34 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
     {
         using var context = new DataContext();
         return context.TbCustomerCreditDocuments
-            .Where(document => document.CompanyId == companyId
-                               && document.EntityId == entityId
-                               && document.CustomerCreditLineId == creditLineId
-                               && document.IsActive == 1)
+            .Where(document => document.CompanyID == companyId
+                               && document.EntityID == entityId
+                               && document.CustomerCreditLineID == creditLineId
+                               && document.IsActive)
             .ToList();
     }
 
-    public TbCustomerCreditDocumentDto? GetRowByDocument(int companyId, int entityId, string documentNumber)
+    public TbCustomerCreditDocumentDto? GetRowByDocument(int companyId, int entityId, string? documentNumber)
     {
         using var context = new DataContext();
         var creditDocuments = context.TbCustomerCreditDocuments;
-        var creditAmortizations = context.TbCustomerCreditAmortizations;
+        var creditAmortizations = context.TbCustomerCreditAmoritizations;
       
         try
         {
             var result = from i in creditDocuments
-                where i.CompanyId == companyId
-                      && i.EntityId == entityId
+                where i.CompanyID == companyId
+                      && i.EntityID == entityId
                       && i.DocumentNumber == documentNumber
-                      && i.IsActive == 1
+                      && i.IsActive
                 select new TbCustomerCreditDocumentDto
                 {
-                    CustomerCreditDocumentId = i.CustomerCreditDocumentId,
-                    CompanyId = i.CompanyId,
-                    EntityId = i.EntityId,
-                    CustomerCreditLineId = i.CustomerCreditLineId,
+                    CustomerCreditDocumentId = i.CustomerCreditDocumentID,
+                    CompanyId = i.CompanyID,
+                    EntityId = i.EntityID,
+                    CustomerCreditLineId = i.CustomerCreditLineID,
                     DocumentNumber = i.DocumentNumber,
-                    DateOn = i.DateOn,
+                    DateOn = DateOnly.FromDateTime(i.DateOn),
                     Amount = i.Amount,
                     Interes = i.Interes,
                     Term = i.Term,
@@ -193,10 +193,10 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                     Reference1 = i.Reference1,
                     Reference2 = i.Reference2,
                     Reference3 = i.Reference3,
-                    StatusId = i.StatusId,
+                    StatusId = i.StatusID,
                     IsActive = i.IsActive,
                     Balance = i.Balance,
-                    CurrencyId = i.CurrencyId,
+                    CurrencyId = i.CurrencyID,
                     ReportSinRiesgo = i.ReportSinRiesgo,
                     DateFinish = null 
                 };
@@ -207,11 +207,11 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
 
             var objListCreditAmortiation = from ccd 
                                            in  creditAmortizations 
-                                           where ccd.CustomerCreditDocumentId == objCustomerCreditDocumentDto.CustomerCreditDocumentId 
+                                           where ccd.CustomerCreditDocumentID == objCustomerCreditDocumentDto.CustomerCreditDocumentId   
                                            select new { ccd };
 
 
-            objCustomerCreditDocumentDto.DateApply = objListCreditAmortiation.Max(u => u.ccd.DateApply!.Value);
+            objCustomerCreditDocumentDto.DateApply =DateOnly.FromDateTime(objListCreditAmortiation.Max(u => u.ccd.DateApply));
 
             return objCustomerCreditDocumentDto;
 
@@ -227,8 +227,8 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
     {
         using var context = new DataContext();
         return context.TbCustomerCreditDocuments
-            .Where(document => document.CompanyId == companyId
-                               && document.IsActive == 1
+            .Where(document => document.CompanyID == companyId
+                               && document.IsActive 
                                && document.Balance > 0
                                && document.Balance <= (decimal)0.2)
             .ToList();
@@ -239,43 +239,43 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
     {
         using var dbContext = new DataContext();
         var result = from d in dbContext.TbCustomerCreditDocuments
-            join a in dbContext.TbCustomerCreditAmortizations
-                on d.CustomerCreditDocumentId equals a.CustomerCreditDocumentId
-            join wsa in dbContext.TbWorkflowStages on a.StatusId equals wsa.WorkflowStageId
-            join wsd in dbContext.TbWorkflowStages on d.StatusId equals wsd.WorkflowStageId
-            where d.IsActive == 1
-                  && d.CompanyId == companyId
-                  && a.IsActive == 1
+            join a in dbContext.TbCustomerCreditAmoritizations
+                on d.CustomerCreditDocumentID equals a.CustomerCreditDocumentID
+            join wsa in dbContext.TbWorkflowStages on a.StatusID equals wsa.WorkflowStageID
+            join wsd in dbContext.TbWorkflowStages on d.StatusID equals wsd.WorkflowStageID
+            where d.IsActive
+                  && d.CompanyID == companyId
+                  && a.IsActive
                   && wsa.Aplicable!.Value
                   && wsd.Aplicable!.Value 
                   && a.Remaining > 0
-                  && d.EntityId == entityId
-                  && a.CustomerCreditDocumentId >= customerCreditDocumentId
-                  && d.CurrencyId == currencyId
+                  && d.EntityID == entityId
+                  && a.CustomerCreditDocumentID >= customerCreditDocumentId
+                  && d.CurrencyID == currencyId
             group new { d, a, wsa } by new
             {
-                d.EntityId,
-                d.CustomerCreditDocumentId,
-                d.CustomerCreditLineId,
+                d.EntityID,
+                d.CustomerCreditDocumentID,
+                d.CustomerCreditLineID,
                 d.DocumentNumber,
                 d.Balance,
-                d.CurrencyId,
-                d.StatusId
+                d.CurrencyID,
+                d.StatusID
             }
             into g
             select new TbCustomerCreditDocumentDto
             {
-                EntityId = g.Key.EntityId,
-                CustomerCreditDocumentId = g.Key.CustomerCreditDocumentId,
-                CustomerCreditLineId = g.Key.CustomerCreditLineId,
+                EntityId = g.Key.EntityID,
+                CustomerCreditDocumentId = g.Key.CustomerCreditDocumentID,
+                CustomerCreditLineId = g.Key.CustomerCreditLineID,
                 DocumentNumber = g.Key.DocumentNumber,
                 Balance = g.Key.Balance,
-                CurrencyId = g.Key.CurrencyId,
-                StatusId = g.Key.StatusId,
-                CreditAmortizationId = g.Min(x => x.a.CustomerCreditDocumentId),
-                DateApply = g.Min(x => x.a.DateApply!.Value),
+                CurrencyId = g.Key.CurrencyID,
+                StatusId = g.Key.StatusID,
+                CreditAmortizationId = g.Min(x => x.a.CustomerCreditDocumentID),
+                DateApply = DateOnly.FromDateTime(g.Min(x => x.a.DateApply)),
                 Remaining = g.Sum(x => x.a.Remaining),
-                StatusAmotization = g.Min(x => x.a.StatusId),
+                StatusAmotization = g.Min(x => x.a.StatusID),
                 StatusAmortizatonName = g.Min(x => x.wsa.Name)
             };
         return result.ToList();

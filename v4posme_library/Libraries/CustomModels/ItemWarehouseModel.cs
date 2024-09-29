@@ -10,10 +10,10 @@ class ItemWarehouseModel : IItemWarehouseModel
     {
         using var context = new DataContext();
         context.TbItemWarehouses
-            .Where(warehouse => warehouse.CompanyId == companyId
-                                && warehouse.ItemId == itemId
+            .Where(warehouse => warehouse.CompanyID == companyId
+                                && warehouse.ItemID == itemId
                                 && warehouse.Quantity == decimal.Zero
-                                && !listWarehouseId.Contains(warehouse.WarehouseId))
+                                && !listWarehouseId.Contains(warehouse.WarehouseID))
             .ExecuteDelete();
     }
 
@@ -21,9 +21,9 @@ class ItemWarehouseModel : IItemWarehouseModel
     {
         using var context = new DataContext();
         var find = context.TbItemWarehouses
-            .Where(warehouse => warehouse.CompanyId == companyId
-                                && warehouse.ItemId == itemId
-                                && warehouse.WarehouseId == warehouseId)
+            .Where(warehouse => warehouse.CompanyID == companyId
+                                && warehouse.ItemID == itemId
+                                && warehouse.WarehouseID == warehouseId)
             .ExecuteUpdate(calls =>
                 calls.SetProperty(warehouse => warehouse.Quantity, data.Quantity)
                     .SetProperty(warehouse => warehouse.Cost, data.Cost)
@@ -43,15 +43,15 @@ class ItemWarehouseModel : IItemWarehouseModel
     {
         using var context = new DataContext();
         var result = from i in context.TbItems
-            join w in context.TbItemWarehouses on i.ItemId equals w.ItemId
-            join ci in context.TbCatalogItems on Convert.ToInt32(i.UnitMeasureId) equals ci.CatalogItemId
-            where i.CompanyId == companyId && w.WarehouseId == warehouseId && i.IsActive.Value
+            join w in context.TbItemWarehouses on i.ItemID equals w.ItemID
+            join ci in context.TbCatalogItems on Convert.ToInt32(i.UnitMeasureID) equals ci.CatalogItemID
+            where i.CompanyID == companyId && w.WarehouseID == warehouseId && i.IsActive.Value
             select new TbItemWarehouseDto
             {
                 Codigo = i.ItemNumber,
                 Producto = i.Name,
                 UM = ci.Display,
-                ItemId = i.ItemId,
+                ItemId = i.ItemID,
                 Quantity = w.Quantity,
                 Cost = i.Cost
             };
@@ -60,13 +60,13 @@ class ItemWarehouseModel : IItemWarehouseModel
 
     public List<TbItemWarehouseDto> GetRowLowMinimus(int companyId)
     {
-        var dbContext = new DataContext();
+        using var dbContext = new DataContext();
         var result = from iw in dbContext.TbItemWarehouses
-            join w in dbContext.TbWarehouses on iw.WarehouseId equals w.WarehouseId
-            join i in dbContext.TbItems on iw.ItemId equals i.ItemId
-            where i.CompanyId == companyId
+            join w in dbContext.TbWarehouses on iw.WarehouseID equals w.WarehouseID
+            join i in dbContext.TbItems on iw.ItemID equals i.ItemID
+            where i.CompanyID == companyId
                   && i.IsActive.Value
-                  && w.IsActive == 1
+                  && w.IsActive 
                   && iw.Quantity < iw.QuantityMin
             select new TbItemWarehouseDto
             {
@@ -82,16 +82,16 @@ class ItemWarehouseModel : IItemWarehouseModel
 
     public List<TbItemWarehouseDto> GetRowByItemId(int companyId, int itemId)
     {
-        var dbContext = new DataContext();
+        using var dbContext = new DataContext();
         var result = from i in dbContext.TbItemWarehouses
-            join w in dbContext.TbWarehouses on i.WarehouseId equals w.WarehouseId
-            where i.CompanyId == companyId && i.ItemId == itemId
+            join w in dbContext.TbWarehouses on i.WarehouseID equals w.WarehouseID
+            where i.CompanyID == companyId && i.ItemID == itemId
             select new TbItemWarehouseDto
             {
-                CompanyId = i.CompanyId,
-                BranchId = i.BranchId,
-                WarehouseId = i.WarehouseId,
-                ItemId = i.ItemId,
+                CompanyId = i.CompanyID,
+                BranchId = i.BranchID,
+                WarehouseId = i.WarehouseID,
+                ItemId = i.ItemID,
                 Quantity = i.Quantity,
                 QuantityMax = i.QuantityMax,
                 QuantityMin = i.QuantityMin,
@@ -100,32 +100,32 @@ class ItemWarehouseModel : IItemWarehouseModel
         return result.ToList();
     }
 
-    public TbItemWarehouseDto GetByPk(int companyId, int itemId, int warehouseId)
+    public TbItemWarehouseDto? GetByPk(int companyId, int itemId, int warehouseId)
     {
-        var dbContext = new DataContext();
-        var result = from i in dbContext.TbItemWarehouses
-            join w in dbContext.TbWarehouses on i.WarehouseId equals w.WarehouseId
-            where i.CompanyId == companyId && i.ItemId == itemId && i.WarehouseId == warehouseId
+        using var dbContext = new DataContext();
+        var result = from i in dbContext.TbItemWarehouses.AsNoTracking()
+            join w in dbContext.TbWarehouses.AsNoTracking() on i.WarehouseID equals w.WarehouseID
+            where i.CompanyID == companyId && i.ItemID == itemId && i.WarehouseID == warehouseId
             select new TbItemWarehouseDto
             {
-                CompanyId = i.CompanyId,
-                BranchId = i.BranchId,
-                WarehouseId = i.WarehouseId,
-                ItemId = i.ItemId,
+                CompanyId = i.CompanyID,
+                BranchId = i.BranchID,
+                WarehouseId = i.WarehouseID,
+                ItemId = i.ItemID,
                 Quantity = i.Quantity,
                 QuantityMax = i.QuantityMax,
                 QuantityMin = i.QuantityMin,
                 WarehouseName = w.Name
             };
-        return result.Single();
+        return result.SingleOrDefault();
     }
 
     public int WarehouseIsEmpty(int companyId, int warehouseId)
     {
         using var context = new DataContext();
         return context.TbItemWarehouses
-            .Count(warehouse => warehouse.CompanyId == companyId
-                                && warehouse.WarehouseId == warehouseId
+            .Count(warehouse => warehouse.CompanyID == companyId
+                                && warehouse.WarehouseID == warehouseId
                                 && warehouse.Quantity > decimal.Zero);
     }
 }

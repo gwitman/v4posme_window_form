@@ -14,5 +14,5 @@ public interface ITagModel
 
     TbTag GetRowByPk(int tagId);
     
-    TbTag GetRowByName(string name);
+    TbTag GetRowByName(string? name);
 }

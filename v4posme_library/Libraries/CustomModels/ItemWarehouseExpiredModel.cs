@@ -10,8 +10,8 @@ class ItemWarehouseExpiredModel : IItemWarehouseExpiredModel
     {
         using var context = new DataContext();
         context.TbItemWarehouseExpireds
-            .Where(expired => expired.CompanyId == companyId
-                              && expired.ItemWarehouseExpiredId == itemWarehouseExpiredId)
+            .Where(expired => expired.CompanyID == companyId
+                              && expired.ItemWarehouseExpiredID == itemWarehouseExpiredId)
             .ExecuteDelete();
     }
 
@@ -19,9 +19,9 @@ class ItemWarehouseExpiredModel : IItemWarehouseExpiredModel
     {
         using var context = new DataContext();
         var find = context.TbItemWarehouseExpireds
-            .Single(expired => expired.CompanyId == companyId
-                               && expired.ItemWarehouseExpiredId == itemWarehouseExpiredId);
-        data.ItemWarehouseExpiredId = find.ItemWarehouseExpiredId;
+            .Single(expired => expired.CompanyID == companyId
+                               && expired.ItemWarehouseExpiredID == itemWarehouseExpiredId);
+        data.ItemWarehouseExpiredID = find.ItemWarehouseExpiredID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -31,39 +31,39 @@ class ItemWarehouseExpiredModel : IItemWarehouseExpiredModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.ItemWarehouseExpiredId;
+        return add.Entity.ItemWarehouseExpiredID;
     }
 
     public List<TbItemWarehouseExpired> GetByItemIdAndWarehouse(int companyId, int warehouseId, int itemId)
     {
         using var context = new DataContext();
         return context.TbItemWarehouseExpireds
-            .Where(expired => expired.CompanyId == companyId
-                              && expired.WarehouseId == warehouseId
-                              && expired.ItemId == itemId)
+            .Where(expired => expired.CompanyID == companyId
+                              && expired.WarehouseID == warehouseId
+                              && expired.ItemID == itemId)
             .ToList();
     }
 
     public List<TbItemWarehouseExpired> GetByItemIdAndWarehouseAndLote(int companyId, int warehouseId, int itemId,
-        string lote)
+        string? lote)
     {
         using var context = new DataContext();
         return context.TbItemWarehouseExpireds
-            .Where(expired => expired.CompanyId == companyId
-                              && expired.WarehouseId == warehouseId
-                              && expired.ItemId == itemId
+            .Where(expired => expired.CompanyID == companyId
+                              && expired.WarehouseID == warehouseId
+                              && expired.ItemID == itemId
                               && expired.Lote!.Contains(lote))
             .ToList();
     }
 
     public TbItemWarehouseExpired getBy_ItemIDAndWarehouseAndLoteAndExpired(int companyId, int warehouseId, int itemId,
-        string lote, DateTime expiredDate)
+        string? lote, DateTime expiredDate)
     {
         using var context = new DataContext();
         return context.TbItemWarehouseExpireds
-            .Single(expired => expired.CompanyId == companyId
-                               && expired.WarehouseId == warehouseId
-                               && expired.ItemId == itemId
+            .Single(expired => expired.CompanyID == companyId
+                               && expired.WarehouseID == warehouseId
+                               && expired.ItemID == itemId
                                && expired.Lote!.Contains(lote)
                                && expired.DateExpired == expiredDate);
     }
@@ -72,24 +72,24 @@ class ItemWarehouseExpiredModel : IItemWarehouseExpiredModel
     {
         using var context = new DataContext();
         return context.TbItemWarehouseExpireds
-            .Single(expired => expired.CompanyId == companyId
-                               && expired.ItemWarehouseExpiredId == itemWarehouseExpiredId);
+            .Single(expired => expired.CompanyID == companyId
+                               && expired.ItemWarehouseExpiredID == itemWarehouseExpiredId);
     }
 
     public List<TbItemWarehouseExpiredDto> GetByItemIdAproxVencimiento(int companyId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbItems
-            join iw in dbContext.TbItemWarehouses on i.ItemId equals iw.ItemId
-            join w in dbContext.TbWarehouses on iw.WarehouseId equals w.WarehouseId
-            join e in dbContext.TbItemWarehouseExpireds on new { iw.ItemId, iw.WarehouseId } equals new { e.ItemId, e.WarehouseId }
-            where i.CompanyId == companyId 
+            join iw in dbContext.TbItemWarehouses on i.ItemID equals iw.ItemID
+            join w in dbContext.TbWarehouses on iw.WarehouseID equals w.WarehouseID
+            join e in dbContext.TbItemWarehouseExpireds on new { iw.ItemID, iw.WarehouseID } equals new { e.ItemID, e.WarehouseID }
+            where i.CompanyID == companyId 
                   && DateTime.Now.AddMonths(6) > e.DateExpired
             select new TbItemWarehouseExpiredDto
             {
                 ItemNumber = i.ItemNumber,
                 ItemName = i.Name,
-                WarehouseNumber = w.WarehouseId,
+                WarehouseNumber = w.WarehouseID,
                 WarehouseName = w.Name,
                 Quantity = e.Quantity,
                 Lote = e.Lote,

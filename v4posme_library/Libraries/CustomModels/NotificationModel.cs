@@ -5,7 +5,7 @@ namespace v4posme_library.Libraries.CustomModels;
 
 class NotificationModel : INotificationModel
 {
-    public void UpdateAppPosmeBySumary(string summary, TbNotification data)
+    public void UpdateAppPosmeBySumary(string? summary, TbNotification data)
     {
         using var context = new DataContext();
         var notifications = context.TbNotifications
@@ -13,7 +13,7 @@ class NotificationModel : INotificationModel
             .ToList();
         foreach (var notification in notifications)
         {
-            data.NotificationId = notification.NotificationId;
+            data.NotificationID = notification.NotificationID;
             context.Entry(notification).CurrentValues.SetValues(data);
         }
 
@@ -25,7 +25,7 @@ class NotificationModel : INotificationModel
         using var context = new DataContext();
         var find = context.TbNotifications.Find(notificationId);
         if (find is null) return;
-        data.NotificationId = find.NotificationId;
+        data.NotificationID = find.NotificationID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -34,8 +34,8 @@ class NotificationModel : INotificationModel
     {
         using var context = new DataContext();
         context.TbNotifications
-            .Where(notification => notification.NotificationId == notificationId)
-            .ExecuteUpdate(calls => calls.SetProperty(notification => notification.IsActive, (ulong?)0));
+            .Where(notification => notification.NotificationID == notificationId)
+            .ExecuteUpdate(calls => calls.SetProperty(notification => notification.IsActive, false));
     }
 
     public int InsertAppPosme(TbNotification data)
@@ -43,15 +43,15 @@ class NotificationModel : INotificationModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.NotificationId;
+        return add.Entity.NotificationID;
     }
 
     public TbNotification GetRowByPk(int notificationId)
     {
         using var context = new DataContext();
         return context.TbNotifications
-            .Single(notification => notification.NotificationId == notificationId
-                                    && notification.IsActive == 1);
+            .Single(notification => notification.NotificationID == notificationId
+                                    && notification.IsActive!.Value);
     }
 
     public List<TbNotification> GetRows(int top)
@@ -59,7 +59,7 @@ class NotificationModel : INotificationModel
         using var context = new DataContext();
         return context.TbNotifications
             .Where(notification => notification.SendOn == null
-                                   && notification.IsActive == 1)
+                                   && notification.IsActive!.Value)
             .Take(top)
             .ToList();
     }
@@ -69,12 +69,12 @@ class NotificationModel : INotificationModel
         using var context = new DataContext();
         return context.TbNotifications
             .Where(notification => notification.SendEmailOn == null
-                                   && notification.IsActive == 1)
+                                   && notification.IsActive!.Value)
             .Take(top)
             .ToList();
     }
 
-    public List<TbNotification> GetRowsWhatsappPrimerEmployeerOcupado(DateTime datetimeCliente, string business)
+    public List<TbNotification> GetRowsWhatsappPrimerEmployeerOcupado(DateTime datetimeCliente, string? business)
     {
         using var context = new DataContext();
         FormattableString sql = $$"""
@@ -99,13 +99,13 @@ class NotificationModel : INotificationModel
         return context.TbNotifications.FromSql(sql).ToList();
     }
 
-    public List<TbNotification> GetRowsToAddedGoogleCalendar(int tagId, string business)
+    public List<TbNotification> GetRowsToAddedGoogleCalendar(int tagId, string? business)
     {
         using var context = new DataContext();
         return context.TbNotifications
-            .Where(notification => notification.IsActive == 1
-                                   && notification.AddedCalendarGoogle == 0
-                                   && notification.TagId == tagId
+            .Where(notification => notification.IsActive!.Value
+                                   && notification.AddedCalendarGoogle == false
+                                   && notification.TagID == tagId
                                    && notification.Summary!.Contains(business))
             .ToList();
     }
@@ -117,7 +117,7 @@ class NotificationModel : INotificationModel
         FormattableString query = $"""
                                    select n.*
                                    from tb_notification n
-                                            inner join tb_tag t on n.tagID = t.tagID
+                                            inner join tb_tag t on n.TagID = t.TagID
                                    where n.isActive = 1
                                      and t.sendSMS = 1
                                      and n.sendWhatsappOn is null
@@ -135,29 +135,29 @@ class NotificationModel : INotificationModel
     {
         using var context = new DataContext();
         var appHourDifference = VariablesGlobales.ConfigurationBuilder["APP_HOUR_DIFERENCE_MYSQL"];
-        FormattableString sql = $"""
-                                 select *
-                                 from tb_notification n
-                                 where n.isActive = 1
-                                   and n.sendWhatsappOn is null
-                                   and CAST(CONCAT(n.programDate, ' ', n.programHour, ':00') AS DATETIME) >
-                                       ADDTIME(ADDTIME(now(), '{appHourDifference}'), '-00:30:00')
-                                 
-                                   and CAST(CONCAT(n.programDate, ' ', n.programHour, ':00') AS DATETIME) <=
-                                       ADDTIME(ADDTIME(now(), '{appHourDifference}'), '+00:30:00')
+        FormattableString? sql = $"""
+                                  select *
+                                  from tb_notification n
+                                  where n.isActive = 1
+                                    and n.sendWhatsappOn is null
+                                    and CAST(CONCAT(n.programDate, ' ', n.programHour, ':00') AS DATETIME) >
+                                        ADDTIME(ADDTIME(now(), '{appHourDifference}'), '-00:30:00')
+                                  
+                                    and CAST(CONCAT(n.programDate, ' ', n.programHour, ':00') AS DATETIME) <=
+                                        ADDTIME(ADDTIME(now(), '{appHourDifference}'), '+00:30:00')
 
-                                 limit 0,{top}
-                                 """;
+                                  limit 0,{top}
+                                  """;
         var result = context.TbNotifications.FromSql(sql);
         return result.Take(top).ToList();
     }
 
-    public TbNotification GetRowsByToMessage(string to, string message)
+    public TbNotification GetRowsByToMessage(string? to, string? message)
     {
         using var context = new DataContext();
         return context.TbNotifications
             .Single(notification => notification.To!.Contains(to)
                                     && notification.Message!.Contains(message)
-                                    && notification.IsActive == 1);
+                                    && notification.IsActive!.Value);
     }
 }

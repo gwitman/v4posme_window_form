@@ -10,9 +10,9 @@ class ListPriceModel : IListPriceModel
     {
         using var context = new DataContext();
         var find = context.TbListPrices
-            .Single(price => price.CompanyId == companyId
-                             && price.ListPriceId == listPriceId);
-        data.ListPriceId = find.ListPriceId;
+            .Single(price => price.CompanyID == companyId
+                             && price.ListPriceID == listPriceId);
+        data.ListPriceID = find.ListPriceID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -21,10 +21,10 @@ class ListPriceModel : IListPriceModel
     {
         using var context = new DataContext();
         context.TbListPrices
-            .Where(price => price.CompanyId == companyId
-                            && price.ListPriceId == listPriceId)
+            .Where(price => price.CompanyID == companyId
+                            && price.ListPriceID == listPriceId)
             .ExecuteUpdate(calls => calls
-                .SetProperty(price => price.IsActive, (ulong)0));
+                .SetProperty(price => price.IsActive, false));
     }
 
     public int InsertAppPosme(TbListPrice data)
@@ -32,24 +32,24 @@ class ListPriceModel : IListPriceModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.ListPriceId;
+        return add.Entity.ListPriceID;
     }
 
     public TbListPriceDto GetRowByPk(int companyId, int listPriceId)
     {
         using var context = new DataContext();
         var result = from i in context.TbListPrices
-            join ws in context.TbWorkflowStages on i.StatusId equals ws.WorkflowStageId
-            where i.CompanyId == companyId && i.ListPriceId == listPriceId && i.IsActive == 1
+            join ws in context.TbWorkflowStages on i.StatusID equals ws.WorkflowStageID
+            where i.CompanyID == companyId && i.ListPriceID == listPriceId && i.IsActive
             select new TbListPriceDto
             {
-                CompanyId = i.CompanyId,
-                ListPriceId = i.ListPriceId,
+                CompanyId = i.CompanyID,
+                ListPriceId = i.ListPriceID,
                 StartOn = i.StartOn,
                 EndOn = i.EndOn,
                 Name = i.Name,
                 Description = i.Description,
-                StatusId = i.StatusId,
+                StatusId = i.StatusID,
                 CreatedOn = i.CreatedOn,
                 CreatedIn = i.CreatedIn,
                 CreatedBy = i.CreatedBy,
@@ -64,11 +64,11 @@ class ListPriceModel : IListPriceModel
     {
         using var context = new DataContext();
         return context.TbListPrices
-            .Where(price => price!.CompanyId == companyId
+            .Where(price => price!.CompanyID == companyId
                             && DateTime.Now >= price.StartOn
                             && DateTime.Now <= price.EndOn
-                            && price.IsActive == 1)
-            .OrderByDescending(price => price!.ListPriceId)
+                            && price.IsActive)
+            .OrderByDescending(price => price!.ListPriceID)
             .FirstOrDefault();
     }
 }

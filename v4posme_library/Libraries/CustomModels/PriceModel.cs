@@ -10,8 +10,8 @@ class PriceModel : IPriceModel
     {
         using var context = new DataContext();
         context.TbPrices
-            .Where(price => price!.CompanyId == companyId
-                            && price.ListPriceId == listPriceId)
+            .Where(price => price!.CompanyID == companyId
+                            && price.ListPriceID == listPriceId)
             .ExecuteDelete();
     }
 
@@ -20,15 +20,15 @@ class PriceModel : IPriceModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.PriceId;
+        return add.Entity.PriceID;
     }
 
     public void UpdateAppPosme(int companyId, int listPriceId, int itemId, int typePriceId, TbPrice data)
     {
         using var context = new DataContext();
-        context.TbPrices.Where(price => price!.CompanyId == companyId
-                                        && price.ListPriceId == listPriceId && price.ItemId == itemId
-                                        && price.TypePriceId == typePriceId)
+        context.TbPrices.Where(price => price!.CompanyID == companyId
+                                        && price.ListPriceID == listPriceId && price.ItemID == itemId
+                                        && price.TypePriceID == typePriceId)
             .ExecuteUpdate(calls => calls
                 .SetProperty(price => price!.Percentage, data.Percentage)
                 .SetProperty(price => price!.Price, data.Price)
@@ -39,16 +39,16 @@ class PriceModel : IPriceModel
     {
         using var context = new DataContext();
         var result = from i in context.TbPrices
-            join it in context.TbItems on i.ItemId equals it.ItemId
-            join ci in context.TbCatalogItems on i.TypePriceId equals ci.CatalogItemId
-            where i.CompanyId == companyId && i.ListPriceId == listPriceId
+            join it in context.TbItems on i.ItemID equals it.ItemID
+            join ci in context.TbCatalogItems on i.TypePriceID equals ci.CatalogItemID
+            where i.CompanyID == companyId && i.ListPriceID == listPriceId
             select new TbPriceDto
             {
-                CompanyId = i.CompanyId,
-                ListPriceId = i.ListPriceId,
-                ItemId = i.ItemId,
-                PriceId = i.PriceId,
-                TypePriceId = i.TypePriceId,
+                CompanyId = i.CompanyID,
+                ListPriceId = i.ListPriceID,
+                ItemId = i.ItemID,
+                PriceId = i.PriceID,
+                TypePriceId = i.TypePriceID,
                 Percentage = i.Percentage,
                 Price = i.Price,
                 TipoPrice = ci.Name,
@@ -64,10 +64,10 @@ class PriceModel : IPriceModel
     {
         using var context = new DataContext();
         return context.TbPrices
-            .FirstOrDefault(price => price!.CompanyId == companyId
-                            && price.ListPriceId == listPriceId
-                            && price.ItemId == itemId
-                            && price.TypePriceId == typePriceId);
+            .FirstOrDefault(price => price!.CompanyID == companyId
+                            && price.ListPriceID == listPriceId
+                            && price.ItemID == itemId
+                            && price.TypePriceID == typePriceId);
     }
 
     public List<TbPrice> GetRowByTransactionMasterId(int companyId, int listPriceId, int transactionMasterId)
@@ -75,16 +75,16 @@ class PriceModel : IPriceModel
         using var context = new DataContext();
         return context.TbTransactionMasters
             .Join(context.TbTransactionMasterDetails,
-                tm => tm.TransactionMasterId,
-                tmd => tmd.TransactionMasterId,
+                tm => tm.TransactionMasterID,
+                tmd => tmd.TransactionMasterID,
                 (tm, tmd) => new { tm, tmd })
             .Join(context.TbPrices,
-                t => t.tmd.ComponentItemId,
-                i => i.ItemId,
+                t => t.tmd.ComponentItemID,
+                i => i.ItemID,
                 (t, i) => new { t, i })
             .Where(t =>
-                t.i.CompanyId == companyId && t.i.ListPriceId == listPriceId &&
-                t.t.tm.TransactionMasterId == transactionMasterId)
+                t.i.CompanyID == companyId && t.i.ListPriceID == listPriceId &&
+                t.t.tm.TransactionMasterID == transactionMasterId)
             .Select(t => t.i)
             .ToList();
     }
@@ -93,9 +93,9 @@ class PriceModel : IPriceModel
     {
         using var context = new DataContext();
         return context.TbPrices
-            .Where(price => price!.CompanyId == companyId
-                            && price.ListPriceId == listPriceId
-                            && price.ItemId == itemId
+            .Where(price => price!.CompanyID == companyId
+                            && price.ListPriceID == listPriceId
+                            && price.ItemID == itemId
                             && price.PercentageCommision > decimal.Zero
                             && price.Price >= amount)
             .OrderBy(price => price!.Price)
@@ -107,19 +107,19 @@ class PriceModel : IPriceModel
         using var context = new DataContext();
         return context.TbPrices
             .Join(context.TbCatalogItems,
-                i => i.TypePriceId,
-                c => c.CatalogItemId,
+                i => i.TypePriceID,
+                c => c.CatalogItemID,
                 (i, c) => new { i, c })
-            .Where(t => t.i.CompanyId == companyId
-                        && t.i.ListPriceId == listPriceId
-                        && t.i.ItemId == itemId)
+            .Where(t => t.i.CompanyID == companyId
+                        && t.i.ListPriceID == listPriceId
+                        && t.i.ItemID == itemId)
             .Select(t => new TbPriceDto
             {
-                CompanyId = t.i.CompanyId,
-                ListPriceId = t.i.ListPriceId,
-                ItemId = t.i.ItemId,
-                PriceId = t.i.PriceId,
-                TypePriceId = t.i.TypePriceId,
+                CompanyId = t.i.CompanyID,
+                ListPriceId = t.i.ListPriceID,
+                ItemId = t.i.ItemID,
+                PriceId = t.i.PriceID,
+                TypePriceId = t.i.TypePriceID,
                 Percentage = t.i.Percentage,
                 Price = t.i.Price,
                 NameTypePrice = t.c.Name,

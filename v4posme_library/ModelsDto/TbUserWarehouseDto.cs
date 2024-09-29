@@ -9,6 +9,6 @@ public record TbUserWarehouseDto()
     public string? Number { get; set; }
     public string? Name { get; set; }
     public int StatusId { get; set; }
-    public ulong IsActive { get; set; }
+    public bool IsActive { get; set; }
     public int TypeWarehouse { get; set; }
 }

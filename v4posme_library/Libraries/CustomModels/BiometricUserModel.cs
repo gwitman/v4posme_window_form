@@ -8,7 +8,7 @@ public class BiometricUserModel : IBiometricUserModel
     public void DeleteAppPosme(int userId)
     {
         using var context = new DataContext();
-        var find = context.TbUsers.Single(user => user.UserId == userId);
+        var find = context.TbUsers.Single(user => user.UserID == userId);
         context.TbUsers.Remove(find);
         context.BulkSaveChanges();
     }
@@ -18,6 +18,6 @@ public class BiometricUserModel : IBiometricUserModel
         using var context = new DataContext();
         var add = context.TbUsers.Add(data);
         context.BulkSaveChanges();
-        return add.Entity.UserId;
+        return add.Entity.UserID;
     }
 }

@@ -16,7 +16,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
         private static readonly string? UrlSuffixNew = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX_NEW"];
         private static readonly string? UrlSuffixOld = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX_OLD"];
 
-        public int GetElementId(string controller, string method, string suffix, List<TbMenuElement> dataMenuTop,
+        public int GetElementId(string? controller, string? method, string? suffix, List<TbMenuElement> dataMenuTop,
             List<TbMenuElement> dataMenuLeft,
             List<TbMenuElement> dataMenuBodyReport, List<TbMenuElement> dataMenuBodyTop,
             List<TbMenuElement> dataMenuHiddenPopup)
@@ -30,10 +30,10 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             {
                 foreach (var menuElement in dataMenuHiddenPopup)
                 {
-                    string urlCompare = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
+                    string? urlCompare = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(urlCompare, url, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        return menuElement.MenuElementId;
+                        return menuElement.MenuElementID;
                     }
                 }
             }
@@ -45,7 +45,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                     var urlCompare = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(urlCompare, url, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        return menuElement.MenuElementId;
+                        return menuElement.MenuElementID;
                     }
                 }
             }
@@ -57,7 +57,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                     var urlCompare = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(urlCompare, url, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        return menuElement.MenuElementId;
+                        return menuElement.MenuElementID;
                     }
                 }
             }
@@ -69,7 +69,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                     var urlCompare = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(urlCompare, url, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        return menuElement.MenuElementId;
+                        return menuElement.MenuElementID;
                     }
                 }
             }
@@ -81,7 +81,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                     var urlCompare = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(urlCompare, url, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        return menuElement.MenuElementId;
+                        return menuElement.MenuElementID;
                     }
                 }
             }
@@ -89,7 +89,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             return 0;
         }
 
-        public bool UrlPermited(string controller, string method, string suffix, List<TbMenuElement>? dataMenuTop,
+        public bool UrlPermited(string? controller, string? method, string? suffix, List<TbMenuElement>? dataMenuTop,
             List<TbMenuElement>? dataMenuLeft,
             List<TbMenuElement>? dataMenuBodyReport, List<TbMenuElement>? dataMenuBodyTop,
             List<TbMenuElement>? dataMenuHiddenPopup)
@@ -179,7 +179,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             return false;
         }
 
-        public int UrlPermissionCmd(string controller, string method, string suffix, TbRole? role,
+        public int UrlPermissionCmd(string? controller, string? method, string? suffix, TbRole? role,
             TbUser? user, List<TbMenuElement>? dataMenuTop, List<TbMenuElement>? dataMenuLeft,
             List<TbMenuElement>? dataMenuBodyReport, List<TbMenuElement>? dataMenuBodyTop,
             List<TbMenuElement>? dataMenuHiddenPopup)
@@ -208,13 +208,13 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                     var replace = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(replace, url, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        elementId = menuElement.ElementId;
+                        elementId = menuElement.ElementID;
                         break;
                     }
 
                     if (string.Equals(replace, url2, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        elementId = menuElement.ElementId;
+                        elementId = menuElement.ElementID;
                         break;
                     }
                 }
@@ -227,13 +227,13 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                     var replace = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(replace, url, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        elementId = menuElement.ElementId;
+                        elementId = menuElement.ElementID;
                         break;
                     }
 
                     if (string.Equals(replace, url2, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        elementId = menuElement.ElementId;
+                        elementId = menuElement.ElementID;
                         break;
                     }
                 }
@@ -246,12 +246,12 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                     var replace = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(replace, url, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        elementId = menuElement.ElementId;
+                        elementId = menuElement.ElementID;
                         break;
                     }
                     else if (string.Equals(replace, url2, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        elementId = menuElement.ElementId;
+                        elementId = menuElement.ElementID;
                         break;
                     }
                 }
@@ -264,13 +264,13 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                     var replace = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(replace, url, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        elementId = menuElement.ElementId;
+                        elementId = menuElement.ElementID;
                         break;
                     }
 
                     if (string.Equals(replace, url2, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        elementId = menuElement.ElementId;
+                        elementId = menuElement.ElementID;
                         break;
                     }
                 }
@@ -283,13 +283,13 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                     var replace = menuElement.Address!.Replace(UrlSuffixOld!, UrlSuffixNew);
                     if (string.Equals(replace, url, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        elementId = menuElement.ElementId;
+                        elementId = menuElement.ElementID;
                         break;
                     }
 
                     if (string.Equals(replace, url2, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        elementId = menuElement.ElementId;
+                        elementId = menuElement.ElementID;
                         break;
                     }
                 }
@@ -301,7 +301,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             }
 
             var rowRolePermission =
-                userPermissionModel.GetRowByPk(user.CompanyId, user.BranchId, role.RoleId, elementId);
+                userPermissionModel.GetRowByPk(user.CompanyID, user.BranchID, role.RoleID, elementId);
             if (rowRolePermission is null)
             {
                 return permissionNone;
@@ -317,7 +317,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             };
         }
 
-        public void GetValueLicense(int companyId, string url)
+        public void GetValueLicense(int companyId, string? url)
         {
             var companyParameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
             var objParameterMaxUser = coreWebParameter.GetParameter("CORE_CUST_PRICE_MAX_USER", companyId);
@@ -326,7 +326,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             var objParameterTipoPlan = coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId)!.Value;
             var objParameterExpiredLicense = DateTime.Parse(coreWebParameter.GetParameter("CORE_CUST_PRICE_LICENCES_EXPIRED", companyId)!.Value);
             var objParameterCreditos = coreWebParameter.GetParameter("CORE_CUST_PRICE_BALANCE", companyId);
-            var objParameterCreditosId = objParameterCreditos!.ParameterId;
+            var objParameterCreditosId = objParameterCreditos!.ParameterID;
             var parameterCreditos = (int)Math.Floor(Convert.ToDouble(objParameterCreditos.Value));
             var objParameterPriceByInvoice = (int)Math.Floor(Convert.ToDouble(coreWebParameter.GetParameter("CORE_CUST_PRICE_BY_INVOICE", companyId)!.Value));
             var parameterMaxUser = Convert.ToInt32(objParameterMaxUser!.Value);
@@ -382,7 +382,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
 
             var parameterCantiadTransacciones = coreWebParameter.GetParameter("CORE_QUANTITY_TRANSACCION", companyId);
-            var parameterCantiadTransaccionesId = parameterCantiadTransacciones!.ParameterId;
+            var parameterCantiadTransaccionesId = parameterCantiadTransacciones!.ParameterID;
             var parameterCantiadTransaccionesValue = int.Parse(parameterCantiadTransacciones.Value);
             var parameterCantiadTransaccionesNewValor = parameterCantiadTransaccionesValue + 1;
             var dataNewParameterCantidadTransacciones = companyParameterModel.GetRowByParameterIdCompanyId(companyId, parameterCantiadTransaccionesId);

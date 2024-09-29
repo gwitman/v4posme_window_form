@@ -9,9 +9,9 @@ class CompanyDefaultDataViewModel : ICompanyDefaultDataViewModel
     {
         using var context = new DataContext();
         return context.TbCompanyDefaultDataviews.AsNoTracking()
-            .FirstOrDefault(dataview => dataview!.CompanyId == companyId
-                                        && dataview.ComponentId == componentId
-                                        && dataview.CallerId == callerId
-                                        && dataview.TargetComponentId == targetComponentId);
+            .FirstOrDefault(dataview => dataview!.CompanyID == companyId
+                                        && dataview.ComponentID == componentId
+                                        && dataview.CallerID == callerId
+                                        && dataview.TargetComponentID == targetComponentId);
     }
 }

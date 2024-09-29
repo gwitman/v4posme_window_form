@@ -9,8 +9,8 @@ class CompanyComponentFlavorModel(DataContext context) : ICompanyComponentFlavor
         int componentItemId)
     {
         return context.TbCompanyComponentFlavors.AsNoTracking()
-            .FirstOrDefault(flavor => flavor!.CompanyId == companyId
-                             && flavor.ComponentId == componentId
-                             && flavor.ComponentItemId == componentItemId);
+            .FirstOrDefault(flavor => flavor!.CompanyID == companyId
+                             && flavor.ComponentID == componentId
+                             && flavor.ComponentItemID == componentItemId);
     }
 }

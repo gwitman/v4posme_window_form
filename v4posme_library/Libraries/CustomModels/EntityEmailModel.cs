@@ -9,10 +9,10 @@ class EntityEmailModel : IEntityEmailModel
     {
         using var context = new DataContext();
         return context.TbEntityEmails
-            .Where(email => email.CompanyId == companyId
-                            && email.BranchId == branchId
-                            && email.EntityId == entityId
-                            && email.EntityEmailId == entityEmailId)
+            .Where(email => email.CompanyID == companyId
+                            && email.BranchID == branchId
+                            && email.EntityID == entityId
+                            && email.EntityEmailID == entityEmailId)
             .ExecuteDelete();
     }
 
@@ -20,9 +20,9 @@ class EntityEmailModel : IEntityEmailModel
     {
         using var context = new DataContext();
         return context.TbEntityEmails
-            .Where(email => email.CompanyId == companyId
-                            && email.BranchId == branchId
-                            && email.EntityId == entityId)
+            .Where(email => email.CompanyID == companyId
+                            && email.BranchID == branchId
+                            && email.EntityID == entityId)
             .ExecuteDelete();
     }
 
@@ -31,18 +31,18 @@ class EntityEmailModel : IEntityEmailModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.EntityEmailId;
+        return add.Entity.EntityEmailID;
     }
 
     public void UpdateAppPosme(int companyId, int branchId, int entityId, int entityEmailId, TbEntityEmail data)
     {
         using var context = new DataContext();
         var find = context.TbEntityEmails
-            .Single(email => email.CompanyId == companyId
-                            && email.BranchId == branchId
-                            && email.EntityId == entityId
-                            && email.EntityEmailId == entityEmailId);
-        data.EntityEmailId = find.EntityEmailId;
+            .Single(email => email.CompanyID == companyId
+                            && email.BranchID == branchId
+                            && email.EntityID == entityId
+                            && email.EntityEmailID == entityEmailId);
+        data.EntityEmailID = find.EntityEmailID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -51,19 +51,19 @@ class EntityEmailModel : IEntityEmailModel
     {
         using var context = new DataContext();
         return context.TbEntityEmails
-            .Single(email => email.CompanyId == companyId
-                             && email.BranchId == branchId
-                             && email.EntityId == entityId
-                             && email.EntityEmailId == entityEmailId);
+            .Single(email => email.CompanyID == companyId
+                             && email.BranchID == branchId
+                             && email.EntityID == entityId
+                             && email.EntityEmailID == entityEmailId);
     }
 
     public List<TbEntityEmail> GetRowByEntity(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
         return context.TbEntityEmails
-            .Where(email => email.CompanyId == companyId
-                             && email.BranchId == branchId
-                             && email.EntityId == entityId)
+            .Where(email => email.CompanyID == companyId
+                             && email.BranchID == branchId
+                             && email.EntityID == entityId)
             .ToList();
     }
 
@@ -71,7 +71,7 @@ class EntityEmailModel : IEntityEmailModel
     {
         using var context = new DataContext();
         return context.TbEntityEmails
-            .Where(email => email.CompanyId == companyId)
+            .Where(email => email.CompanyID == companyId)
             .ToList();
     }
 }

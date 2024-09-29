@@ -15,16 +15,16 @@ class CoreWebWhatsap : ICoreWebWhatsap
         var companyParameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
 
         var objPWhatsapMonth = parameterModel.GetRowByName("WHATSAP_MONTH");
-        var objPWhatsapMonthId = objPWhatsapMonth!.ParameterId;
+        var objPWhatsapMonthId = objPWhatsapMonth!.ParameterID;
         var objCpWhatsapMonth = companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapMonthId);
 
         var objPWhatsapMessageByMonto = parameterModel.GetRowByName("WHATSAP_MESSAGE_BY_MONTO");
-        var objPWhatsapMessageByMontoId = objPWhatsapMessageByMonto!.ParameterId;
+        var objPWhatsapMessageByMontoId = objPWhatsapMessageByMonto!.ParameterID;
         var objCpWhatsapMessageByMonto =
             companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapMessageByMontoId);
 
         var objPWhatsapCounterMessage = parameterModel.GetRowByName("WHATSAP_COUNTER_MESSAGE");
-        var objPWhatsapCounterMessageId = objPWhatsapCounterMessage!.ParameterId;
+        var objPWhatsapCounterMessageId = objPWhatsapCounterMessage!.ParameterID;
         var objCpWhatsapCounterMessage =
             companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapCounterMessageId);
 
@@ -34,27 +34,27 @@ class CoreWebWhatsap : ICoreWebWhatsap
         if (fechaNow.Year == fechaMonth.Year && fechaNow.Month == fechaMonth.Month && int.Parse(objCpWhatsapCounterMessage!.Value) <=
             int.Parse(objCpWhatsapMessageByMonto!.Value))
         {
-            var data = companyParameterModel.GetRowByParameterIdCompanyId(objCpWhatsapCounterMessage.CompanyId,
-                objCpWhatsapCounterMessage.ParameterId);
+            var data = companyParameterModel.GetRowByParameterIdCompanyId(objCpWhatsapCounterMessage.CompanyID,
+                objCpWhatsapCounterMessage.ParameterID);
             data!.Value = (int.Parse(objCpWhatsapCounterMessage.Value) + 1).ToString();
-            companyParameterModel.UpdateAppPosme(objCpWhatsapCounterMessage.CompanyId,
-                objCpWhatsapCounterMessage.ParameterId, data);
+            companyParameterModel.UpdateAppPosme(objCpWhatsapCounterMessage.CompanyID,
+                objCpWhatsapCounterMessage.ParameterID, data);
             return true;
         }
 
         if (fechaNow > fechaMonth && int.Parse(objCpWhatsapCounterMessage!.Value) > 0)
         {
             var data = companyParameterModel
-                .GetRowByParameterIdCompanyId(objCpWhatsapMonth.CompanyId, objCpWhatsapMonth.ParameterId);
+                .GetRowByParameterIdCompanyId(objCpWhatsapMonth.CompanyID, objCpWhatsapMonth.ParameterID);
             data!.Value = fechaNow.ToString("yyyy-MM-dd");
-            companyParameterModel.UpdateAppPosme(objCpWhatsapMonth.CompanyId, objCpWhatsapMonth.ParameterId, data);
+            companyParameterModel.UpdateAppPosme(objCpWhatsapMonth.CompanyID, objCpWhatsapMonth.ParameterID, data);
 
             data = companyParameterModel
-                .GetRowByParameterIdCompanyId(objCpWhatsapCounterMessage.CompanyId,
-                    objCpWhatsapCounterMessage.ParameterId);
+                .GetRowByParameterIdCompanyId(objCpWhatsapCounterMessage.CompanyID,
+                    objCpWhatsapCounterMessage.ParameterID);
             data!.Value = 1.ToString();
-            companyParameterModel.UpdateAppPosme(objCpWhatsapCounterMessage.CompanyId,
-                objCpWhatsapCounterMessage.ParameterId, data);
+            companyParameterModel.UpdateAppPosme(objCpWhatsapCounterMessage.CompanyID,
+                objCpWhatsapCounterMessage.ParameterID, data);
             return true;
         }
 
@@ -67,33 +67,33 @@ class CoreWebWhatsap : ICoreWebWhatsap
         var companyParameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
 
         var objPWhatsapPropertyNumber = parameterModel.GetRowByName("WHATSAP_CURRENT_PROPIETARY_COMMERSE");
-        var objPWhatsapPropertyNumberId = objPWhatsapPropertyNumber!.ParameterId;
+        var objPWhatsapPropertyNumberId = objPWhatsapPropertyNumber!.ParameterID;
         var objCpWhatsapPropertyNumber =
             companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapPropertyNumberId);
 
         var objPWhatsapToken = parameterModel.GetRowByName("WHATSAP_TOCKEN");
-        var objPWhatsapTokenId = objPWhatsapToken!.ParameterId;
+        var objPWhatsapTokenId = objPWhatsapToken!.ParameterID;
         var objCpWhatsapToken = companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapTokenId);
 
         var objPWhatsapUrlSession = parameterModel.GetRowByName("WHATSAP_URL_REQUEST_SESSION");
-        var objPWhatsapUrlSessionId = objPWhatsapUrlSession!.ParameterId;
+        var objPWhatsapUrlSessionId = objPWhatsapUrlSession!.ParameterID;
         var objCpWhatsapUrlSession =
             companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapUrlSessionId);
 
         var objPWhatsapUrlSendMessage = parameterModel.GetRowByName("WAHTSAP_URL_ENVIO_MENSAJE");
-        var objPWhatsapUrlSendMessageId = objPWhatsapUrlSendMessage!.ParameterId;
+        var objPWhatsapUrlSendMessageId = objPWhatsapUrlSendMessage!.ParameterID;
         var objCpWhatsapUrlSendMessage =
             companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapUrlSendMessageId);
 
         var clientCurl = new HttpClient();
         var response = clientCurl.GetAsync(objCpWhatsapUrlSession!.Value).Result;
         var responseBody = response.Content.ReadAsStringAsync().Result;
-        var jsonResponse = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(responseBody);
+        var jsonResponse = JsonConvert.DeserializeObject<List<Dictionary<string?, object>>>(responseBody);
 
         if (jsonResponse!.Count > 0 && jsonResponse[0].ContainsKey("id"))
         {
             var sessionId = jsonResponse[0]["id"].ToString();
-            var sendWhatsapp = new Dictionary<string, string?>
+            var sendWhatsapp = new Dictionary<string?, string?>
             {
                 { "whatsappId", sessionId! },
                 { "number", objCpWhatsapPropertyNumber!.Value },
@@ -113,28 +113,28 @@ class CoreWebWhatsap : ICoreWebWhatsap
         }
     }
 
-    public async Task<string> SendMessageAsync(int companyId, string? message, string? phoneDestino = "")
+    public async Task<string?> SendMessageAsync(int companyId, string? message, string? phoneDestino = "")
     {
         var parameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<IParameterModel>();
         var companyParameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
         // Obtener los parámetros necesarios
         var objPWhatsapPropertyNumber = parameterModel.GetRowByName("WHATSAP_CURRENT_PROPIETARY_COMMERSE");
-        var objPWhatsapPropertyNumberId = objPWhatsapPropertyNumber!.ParameterId;
+        var objPWhatsapPropertyNumberId = objPWhatsapPropertyNumber!.ParameterID;
         var objCpWhatsapPropertyNumber =
             companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapPropertyNumberId);
 
         var objPWhatsapToken = parameterModel.GetRowByName("WHATSAP_TOCKEN");
-        var objPWhatsapTokenId = objPWhatsapToken!.ParameterId;
+        var objPWhatsapTokenId = objPWhatsapToken!.ParameterID;
         var objCpWhatsapToken =
             companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapTokenId);
 
         var objPWhatsapUrlSession = parameterModel.GetRowByName("WHATSAP_URL_REQUEST_SESSION");
-        var objPWhatsapUrlSessionId = objPWhatsapUrlSession!.ParameterId;
+        var objPWhatsapUrlSessionId = objPWhatsapUrlSession!.ParameterID;
         var objCpWhatsapUrlSession =
             companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapUrlSessionId);
 
         var objPWhatsapUrlSendMessage = parameterModel.GetRowByName("WAHTSAP_URL_ENVIO_MENSAJE");
-        var objPWhatsapUrlSendMessageId = objPWhatsapUrlSendMessage!.ParameterId;
+        var objPWhatsapUrlSendMessageId = objPWhatsapUrlSendMessage!.ParameterID;
         var objCpWhatsapUrlSendMessage =
             companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapUrlSendMessageId);
 
@@ -142,7 +142,7 @@ class CoreWebWhatsap : ICoreWebWhatsap
         phoneDestino = string.IsNullOrEmpty(phoneDestino) ? "" : phoneDestino;
 
         // Construir los parámetros para la solicitud HTTP
-        var parameters = new Dictionary<string, string?>
+        var parameters = new Dictionary<string?, string?>
         {
             { "token", objCpWhatsapUrlSendMessage!.Value },
             { "to", phoneDestino },
@@ -163,29 +163,29 @@ class CoreWebWhatsap : ICoreWebWhatsap
         return await responseContent.Content.ReadAsStringAsync();
     }
 
-    public async Task<string> SendMessageTypeImageUltramsg(int companyId, string? message, string? title,
+    public async Task<string?> SendMessageTypeImageUltramsg(int companyId, string? message, string? title,
         string? phoneDestino = "")
     {
         var parameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<IParameterModel>();
         var companyParameterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyParameterModel>();
         // Obtener los parámetros necesarios
         var objPWhatsapPropertyNumber = parameterModel.GetRowByName("WHATSAP_CURRENT_PROPIETARY_COMMERSE");
-        var objPWhatsapPropertyNumberId = objPWhatsapPropertyNumber!.ParameterId;
+        var objPWhatsapPropertyNumberId = objPWhatsapPropertyNumber!.ParameterID;
         var objCpWhatsapPropertyNumber =
             companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapPropertyNumberId);
 
         var objPWhatsapToken = parameterModel.GetRowByName("WHATSAP_TOCKEN");
-        var objPWhatsapTokenId = objPWhatsapToken!.ParameterId;
+        var objPWhatsapTokenId = objPWhatsapToken!.ParameterID;
         var objCpWhatsapToken =
             companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapTokenId);
 
         var objPWhatsapUrlSession = parameterModel.GetRowByName("WHATSAP_URL_REQUEST_SESSION");
-        var objPWhatsapUrlSessionId = objPWhatsapUrlSession!.ParameterId;
+        var objPWhatsapUrlSessionId = objPWhatsapUrlSession!.ParameterID;
         var objCpWhatsapUrlSession =
             companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapUrlSessionId);
 
         var objPWhatsapUrlSendMessage = parameterModel.GetRowByName("WAHTSAP_URL_ENVIO_MENSAJE");
-        var objPWhatsapUrlSendMessageId = objPWhatsapUrlSendMessage!.ParameterId;
+        var objPWhatsapUrlSendMessageId = objPWhatsapUrlSendMessage!.ParameterID;
         var objCpWhatsapUrlSendMessage =
             companyParameterModel.GetRowByParameterIdCompanyId(companyId, objPWhatsapUrlSendMessageId);
 
@@ -193,7 +193,7 @@ class CoreWebWhatsap : ICoreWebWhatsap
         phoneDestino = !string.IsNullOrEmpty(phoneDestino) ? objCpWhatsapPropertyNumber!.Value : phoneDestino;
 
         // Construir los parámetros para la solicitud HTTP
-        var parameters = new Dictionary<string, string?>
+        var parameters = new Dictionary<string?, string?>
         {
             { "token", objCpWhatsapToken!.Value },
             { "to", phoneDestino },

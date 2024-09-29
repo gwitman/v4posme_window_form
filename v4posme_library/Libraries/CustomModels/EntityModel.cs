@@ -9,10 +9,10 @@ class EntityModel : IEntityModel
     {
         using var context = new DataContext();
         var find = context.TbEntities
-            .Single(entity => entity.CompanyId == companyId
-                              && entity.BranchId == branchId
-                              && entity.EntityId == entityId);
-        data.EntityId = find.EntityId;
+            .Single(entity => entity.CompanyID == companyId
+                              && entity.BranchID == branchId
+                              && entity.EntityID == entityId);
+        data.EntityID = find.EntityID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.SaveChanges();
     }
@@ -21,9 +21,9 @@ class EntityModel : IEntityModel
     {
         using var context = new DataContext();
         return context.TbEntities
-            .Where(entity => entity.CompanyId == companyId
-                             && entity.BranchId == branchId
-                             && entity.EntityId == entityId)
+            .Where(entity => entity.CompanyID == companyId
+                             && entity.BranchID == branchId
+                             && entity.EntityID == entityId)
             .ExecuteDelete();
     }
 
@@ -32,23 +32,23 @@ class EntityModel : IEntityModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
-        return add.Entity.EntityId;
+        return add.Entity.EntityID;
     }
 
     public TbEntity GetRowByPk(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
         return context.TbEntities
-            .Single(entity => entity.CompanyId == companyId
-                              && entity.BranchId == branchId
-                              && entity.EntityId == entityId);
+            .Single(entity => entity.CompanyID == companyId
+                              && entity.BranchID == branchId
+                              && entity.EntityID == entityId);
     }
 
     public TbEntity GetRowByEntity(int companyId, int entityId)
     {
         using var context = new DataContext();
         return context.TbEntities
-            .Single(entity => entity.CompanyId == companyId
-                              && entity.EntityId == entityId);
+            .Single(entity => entity.CompanyID == companyId
+                              && entity.EntityID == entityId);
     }
 }

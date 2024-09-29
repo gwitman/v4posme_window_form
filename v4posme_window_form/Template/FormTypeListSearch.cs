@@ -63,7 +63,7 @@ namespace v4posme_window.Template
             {
                 TabIndex = 8
             };
-            _gridView=ObjGridControl.MainView as GridView;
+            _gridView = ObjGridControl.MainView as GridView;
             ShowRow = showRow;
             InitializeComponent();
         }
@@ -89,8 +89,9 @@ namespace v4posme_window.Template
             backgroundWorker1 = new();
             if (!progressPanel.Visible)
             {
-                progressPanel.Visible=true;
+                progressPanel.Visible = true;
             }
+
             var componentId = ComponentId!.Value;
             var viewName = ViewName!;
             var autoClose = AutoClose!.Value;
@@ -102,8 +103,6 @@ namespace v4posme_window.Template
             var sSearch = SSearch;
             backgroundWorker1.DoWork += (ob, ev) =>
             {
-                
-
                 var coreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
                 var coreWebView = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
                 var calleridSearch = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["CALLERID_SEARCH"]);
@@ -114,7 +113,7 @@ namespace v4posme_window.Template
                 // Crear un diccionario para los parámetros staticos
                 var parameter = new Dictionary<string, string>
                 {
-                    ["{companyID}"] = usuario!.CompanyId.ToString(),
+                    ["{companyID}"] = usuario!.CompanyID.ToString(),
                     ["{componentID}"] = componentId.ToString(),
                     ["{iDisplayLength}"] = iDisplayLength!.Value.ToString(),
                     ["{iDisplayStartDB}"] = (PageCurrent * iDisplayLength.Value).ToString()!,
@@ -136,21 +135,22 @@ namespace v4posme_window.Template
                 _datos = coreWebView.GetViewByName(usuario, componentId, viewName, calleridSearch, null, parameter);
             };
 
-            backgroundWorker1.RunWorkerCompleted+=(ob,ev)=>
+            backgroundWorker1.RunWorkerCompleted += (ob, ev) =>
             {
                 var coreWebRender = new CoreWebRenderInView();
                 if (ev.Error is not null)
                 {
-                    coreWebRender.GetMessageAlert(TypeError.Error, "Seleccionar", $"No se pudo realizar la operacion debido al siguiente error {ev.Error.Message}",this);
-                }else if (ev.Cancelled)
+                    coreWebRender.GetMessageAlert(TypeError.Error, "Seleccionar", $"No se pudo realizar la operacion debido al siguiente error {ev.Error.Message}", this);
+                }
+                else if (ev.Cancelled)
                 {
-                    coreWebRender.GetMessageAlert(TypeError.Warning,"Seleccionar", "Se ha cancelado la operacion", this);
+                    coreWebRender.GetMessageAlert(TypeError.Warning, "Seleccionar", "Se ha cancelado la operacion", this);
                 }
                 else
                 {
-                    progressPanel.Visible=false;
+                    progressPanel.Visible = false;
                     CoreWebRenderInView.RenderGrid(_datos, "ListView", ObjGridControl);
-                    _gridView= (GridView)ObjGridControl.MainView;
+                    _gridView = (GridView)ObjGridControl.MainView;
                     _gridView.OptionsSelection.MultiSelect = multiSelect;
                     ObjGridControl.Refresh();
                 }
@@ -178,23 +178,21 @@ namespace v4posme_window.Template
                 progressPanel.Visible = true;
             }
 
-            backgroundWorker1.DoWork += (ob, ev) =>
+            backgroundWorker1.DoWork += (ob, ev) => { FnSelectedRow(); };
+            backgroundWorker1.RunWorkerCompleted += (ob, ev) =>
             {
-                FnSelectedRow();
-            };
-            backgroundWorker1.RunWorkerCompleted+=(ob,ev)=>
-                {
-                    var coreWebRender = new CoreWebRenderInView();
+                var coreWebRender = new CoreWebRenderInView();
                 if (ev.Error is not null)
                 {
-                    coreWebRender.GetMessageAlert(TypeError.Error, "Seleccionar", $"No se pudo realizar la operacion debido al siguiente error {ev.Error.Message}",this);
-                }else if (ev.Cancelled)
+                    coreWebRender.GetMessageAlert(TypeError.Error, "Seleccionar", $"No se pudo realizar la operacion debido al siguiente error {ev.Error.Message}", this);
+                }
+                else if (ev.Cancelled)
                 {
-                    coreWebRender.GetMessageAlert(TypeError.Warning,"Seleccionar", "Se ha cancelado la operacion", this);
+                    coreWebRender.GetMessageAlert(TypeError.Warning, "Seleccionar", "Se ha cancelado la operacion", this);
                 }
                 else
                 {
-                    progressPanel.Visible=false;
+                    progressPanel.Visible = false;
                     if (AutoClose is not null && AutoClose.Value) Close();
                 }
             };
@@ -202,7 +200,6 @@ namespace v4posme_window.Template
             {
                 backgroundWorker1.RunWorkerAsync();
             }
-            
         }
 
         private void FnSelectedRow()

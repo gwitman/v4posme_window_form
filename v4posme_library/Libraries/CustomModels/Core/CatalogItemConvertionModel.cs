@@ -9,8 +9,8 @@ class CatalogItemConvertionModel : ICatalogItemConvertionModel
     {
         using var context = new DataContext();
         return context.TbCatalogItemConvertions.AsNoTracking()
-            .First(convertion => convertion.CompanyId == companyId
-                                 && convertion.CatalogId == catalogId
+            .First(convertion => convertion.CompanyID == companyId
+                                 && convertion.CatalogID == catalogId
                                  && convertion.IsActive!.Value
                                  && convertion.Ratio == decimal.One);
     }
@@ -20,10 +20,10 @@ class CatalogItemConvertionModel : ICatalogItemConvertionModel
     {
         using var context = new DataContext();
         return context.TbCatalogItemConvertions.AsNoTracking()
-            .First(convertion => convertion.CompanyId == companyId
-                                 && convertion.CatalogId == catalogId
-                                 && convertion.CatalogItemId == catalogItemIdSource
-                                 && convertion.TargetCatalogItemId == catalogItemIdTarget
+            .First(convertion => convertion.CompanyID == companyId
+                                 && convertion.CatalogID == catalogId
+                                 && convertion.CatalogItemID == catalogItemIdSource
+                                 && convertion.TargetCatalogItemID == catalogItemIdTarget
                                  && convertion.IsActive!.Value);
     }
 }

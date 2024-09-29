@@ -10,21 +10,21 @@ public class CustomerModel : ICustomerModel
     {
         using var context = new DataContext();
         var find = context.TbCustomers
-            .Single(customer => customer.CompanyId == companyId
-                                && customer.BranchId == branchId
-                                && customer.EntityId == entityId);
-        data.CustomerId = find.CustomerId;
+            .Single(customer => customer.CompanyID == companyId
+                                && customer.BranchID == branchId
+                                && customer.EntityID == entityId);
+        data.CustomerID = find.CustomerID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
- 
+
     public void DeleteAppPosme(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
         var find = context.TbCustomers
-            .Single(customer => customer.CompanyId == companyId
-                                && customer.BranchId == branchId
-                                && customer.EntityId == entityId);
+            .Single(customer => customer.CompanyID == companyId
+                                && customer.BranchID == branchId
+                                && customer.EntityID == entityId);
         find.IsActive = false;
         context.BulkSaveChanges();
     }
@@ -34,17 +34,17 @@ public class CustomerModel : ICustomerModel
         using var context = new DataContext();
         var entityEntry = context.Add(data);
         context.BulkSaveChanges();
-        return entityEntry.Entity.CustomerId;
+        return entityEntry.Entity.CustomerID;
     }
 
     public List<TbCustomerDto> GetHappyBirthDay(int companyId)
     {
         using var dbContext = new DataContext();
         var result = from c in dbContext.TbCustomers
-            join n in dbContext.TbNaturales on c.EntityId equals n.EntityId
-            where c.CompanyId == companyId
+            join n in dbContext.TbNaturales on c.EntityID equals n.EntityID
+            where c.CompanyID == companyId
                   && c.IsActive!.Value
-                  && c.BirthDate <= DateOnly.FromDateTime(DateTime.Today)
+                  && c.BirthDate <= DateTime.Today
             select new TbCustomerDto
             {
                 CustomerNumber = c.CustomerNumber,
@@ -53,7 +53,7 @@ public class CustomerModel : ICustomerModel
                 BirthDate = c.BirthDate,
                 BalancePoint = c.BalancePoint,
                 DateContract = c.DateContract,
-                EntityContactId = c.EntityContactId,
+                EntityContactId = c.EntityContactID,
                 Reference3 = c.Reference3,
                 Reference4 = c.Reference4,
                 Reference5 = c.Reference5,
@@ -69,7 +69,7 @@ public class CustomerModel : ICustomerModel
     {
         using var dbContext = new DataContext();
         return dbContext.TbCustomers
-            .Single(c => c.CompanyId == companyId
+            .Single(c => c.CompanyID == companyId
                          && c.IsActive!.Value
                          && c.CustomerNumber.Equals(customerCode));
     }
@@ -78,7 +78,7 @@ public class CustomerModel : ICustomerModel
     {
         using var dbContext = new DataContext();
         return dbContext.TbCustomers
-            .Single(c => c.CompanyId == companyId
+            .Single(c => c.CompanyID == companyId
                          && c.IsActive!.Value
                          && c.Identification.Equals(identification));
     }
@@ -87,32 +87,32 @@ public class CustomerModel : ICustomerModel
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbCustomers
-            join nat in dbContext.TbNaturales on i.EntityId equals nat.EntityId
-            where i.CompanyId == companyId
+            join nat in dbContext.TbNaturales on i.EntityID equals nat.EntityID
+            where i.CompanyID == companyId
                   && i.IsActive!.Value
             select new TbCustomerDto
             {
-                CompanyId = i.CompanyId,
-                BranchId = i.BranchId,
-                EntityId = i.EntityId,
+                CompanyId = i.CompanyID,
+                BranchId = i.BranchID,
+                EntityId = i.EntityID,
                 CustomerNumber = i.CustomerNumber,
                 IdentificationType = i.IdentificationType,
                 Identification = i.Identification,
-                CountryId = i.CountryId,
-                StateId = i.StateId,
-                CityId = i.CityId,
+                CountryId = i.CountryID,
+                StateId = i.StateID,
+                CityId = i.CityID,
                 Location = i.Location,
                 Address = i.Address,
-                CurrencyId = i.CurrencyId,
-                ClasificationId = i.ClasificationId,
-                CategoryId = i.CategoryId,
-                SubCategoryId = i.SubCategoryId,
-                CustomerTypeId = i.CustomerTypeId,
-                BirthDate = i.BirthDate,
-                StatusId = i.StatusId,
+                CurrencyId = i.CurrencyID,
+                ClasificationId = i.ClasificationID,
+                CategoryId = i.CategoryID,
+                SubCategoryId = i.SubCategoryID,
+                CustomerTypeId = i.CustomerTypeID,
+                BirthDate = (i.BirthDate),
+                StatusId = i.StatusID,
                 TypePay = i.TypePay,
-                PayConditionId = i.PayConditionId,
-                SexoId = i.SexoId,
+                PayConditionId = i.PayConditionID,
+                SexoId = i.SexoID,
                 Reference1 = i.Reference1,
                 Reference2 = i.Reference2,
                 CreatedIn = i.CreatedIn,
@@ -125,8 +125,8 @@ public class CustomerModel : ICustomerModel
                 TypeFirm = i.TypeFirm,
                 BalancePoint = i.BalancePoint,
                 PhoneNumber = i.PhoneNumber,
-                DateContract = i.DateContract,
-                EntityContactId = i.EntityContactId,
+                DateContract = (i.DateContract),
+                EntityContactId = i.EntityContactID,
                 Reference3 = i.Reference3,
                 Reference4 = i.Reference4,
                 Reference5 = i.Reference5,
@@ -140,32 +140,32 @@ public class CustomerModel : ICustomerModel
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbCustomers
-            join nat in dbContext.TbNaturales on i.EntityId equals nat.EntityId
-            where i.CompanyId == companyId
+            join nat in dbContext.TbNaturales on i.EntityID equals nat.EntityID
+            where i.CompanyID == companyId
                   && i.IsActive!.Value
             select new TbCustomerDto
             {
-                CompanyId = i.CompanyId,
-                BranchId = i.BranchId,
-                EntityId = i.EntityId,
+                CompanyId = i.CompanyID,
+                BranchId = i.BranchID,
+                EntityId = i.EntityID,
                 CustomerNumber = i.CustomerNumber,
                 IdentificationType = i.IdentificationType,
                 Identification = i.Identification,
-                CountryId = i.CountryId,
-                StateId = i.StateId,
-                CityId = i.CityId,
+                CountryId = i.CountryID,
+                StateId = i.StateID,
+                CityId = i.CityID,
                 Location = i.Location,
                 Address = i.Address,
-                CurrencyId = i.CurrencyId,
-                ClasificationId = i.ClasificationId,
-                CategoryId = i.CategoryId,
-                SubCategoryId = i.SubCategoryId,
-                CustomerTypeId = i.CustomerTypeId,
-                BirthDate = i.BirthDate,
-                StatusId = i.StatusId,
+                CurrencyId = i.CurrencyID,
+                ClasificationId = i.ClasificationID,
+                CategoryId = i.CategoryID,
+                SubCategoryId = i.SubCategoryID,
+                CustomerTypeId = i.CustomerTypeID,
+                BirthDate = (i.BirthDate),
+                StatusId = i.StatusID,
                 TypePay = i.TypePay,
-                PayConditionId = i.PayConditionId,
-                SexoId = i.SexoId,
+                PayConditionId = i.PayConditionID,
+                SexoId = i.SexoID,
                 Reference1 = i.Reference1,
                 Reference2 = i.Reference2,
                 CreatedIn = i.CreatedIn,
@@ -178,8 +178,8 @@ public class CustomerModel : ICustomerModel
                 TypeFirm = i.TypeFirm,
                 BalancePoint = i.BalancePoint,
                 PhoneNumber = i.PhoneNumber,
-                DateContract = i.DateContract,
-                EntityContactId = i.EntityContactId,
+                DateContract = (i.DateContract),
+                EntityContactId = i.EntityContactID,
                 Reference3 = i.Reference3,
                 Reference4 = i.Reference4,
                 Reference5 = i.Reference5,
@@ -189,37 +189,37 @@ public class CustomerModel : ICustomerModel
         return result.ToList();
     }
 
-    public TbCustomerDto GetRowByEntity(int companyId, int entityId)
+    public TbCustomerDto? GetRowByEntity(int companyId, int entityId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbCustomers
-            join nat in dbContext.TbNaturales on i.EntityId equals nat.EntityId
-            where i.CompanyId == companyId
-                  && i.EntityId == entityId
+            join nat in dbContext.TbNaturales on i.EntityID equals nat.EntityID
+            where i.CompanyID == companyId
+                  && i.EntityID == entityId
                   && i.IsActive!.Value
             select new TbCustomerDto
             {
-                CompanyId = i.CompanyId,
-                BranchId = i.BranchId,
-                EntityId = i.EntityId,
+                CompanyId = i.CompanyID,
+                BranchId = i.BranchID,
+                EntityId = i.EntityID,
                 CustomerNumber = i.CustomerNumber,
                 IdentificationType = i.IdentificationType,
                 Identification = i.Identification,
-                CountryId = i.CountryId,
-                StateId = i.StateId,
-                CityId = i.CityId,
+                CountryId = i.CountryID,
+                StateId = i.StateID,
+                CityId = i.CityID,
                 Location = i.Location,
                 Address = i.Address,
-                CurrencyId = i.CurrencyId,
-                ClasificationId = i.ClasificationId,
-                CategoryId = i.CategoryId,
-                SubCategoryId = i.SubCategoryId,
-                CustomerTypeId = i.CustomerTypeId,
+                CurrencyId = i.CurrencyID,
+                ClasificationId = i.ClasificationID,
+                CategoryId = i.CategoryID,
+                SubCategoryId = i.SubCategoryID,
+                CustomerTypeId = i.CustomerTypeID,
                 BirthDate = i.BirthDate,
-                StatusId = i.StatusId,
+                StatusId = i.StatusID,
                 TypePay = i.TypePay,
-                PayConditionId = i.PayConditionId,
-                SexoId = i.SexoId,
+                PayConditionId = i.PayConditionID,
+                SexoId = i.SexoID,
                 Reference1 = i.Reference1,
                 Reference2 = i.Reference2,
                 CreatedIn = i.CreatedIn,
@@ -232,30 +232,30 @@ public class CustomerModel : ICustomerModel
                 TypeFirm = i.TypeFirm,
                 BalancePoint = i.BalancePoint,
                 PhoneNumber = i.PhoneNumber,
-                DateContract = i.DateContract,
-                EntityContactId = i.EntityContactId,
+                DateContract = (i.DateContract),
+                EntityContactId = i.EntityContactID,
                 Reference3 = i.Reference3,
                 Reference4 = i.Reference4,
                 Reference5 = i.Reference5,
                 Reference6 = i.Reference6,
                 Budget = i.Budget
             };
-        return result.Single();
+        return result.SingleOrDefault();
     }
 
     public TbCustomer? GetRowByPKK(int entityId)
     {
         using var context = new DataContext();
         return context.TbCustomers
-            .FirstOrDefault(customer =>  customer.EntityId == entityId);
-        
+            .FirstOrDefault(customer => customer.EntityID == entityId);
     }
+
     public TbCustomer? GetRowByPk(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
         return context.TbCustomers
-            .FirstOrDefault(customer => customer.CompanyId == companyId
-                                && customer.BranchId == branchId
-                                && customer.EntityId == entityId);
+            .FirstOrDefault(customer => customer.CompanyID == companyId
+                                        && customer.BranchID == branchId
+                                        && customer.EntityID == entityId);
     }
 }

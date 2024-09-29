@@ -11,16 +11,16 @@ namespace v4posme_library.Libraries.CustomModels.Core
             using var context = new DataContext();
             var add = context.Add(data);
             context.SaveChanges();
-            return add.Entity.UserPermissionId;
+            return add.Entity.UserPermissionID;
         }
 
         public int DeleteByRole(int companyId, int branchId, int roleId)
         {
             using var context = new DataContext();
             return context.TbUserPermissions
-                .Where(permission => permission.CompanyId == companyId
-                                     && permission.BranchId == branchId
-                                     && permission.RoleId == roleId)
+                .Where(permission => permission.CompanyID == companyId
+                                     && permission.BranchID == branchId
+                                     && permission.RoleID == roleId)
                 .ExecuteDelete();
         }
 
@@ -29,18 +29,18 @@ namespace v4posme_library.Libraries.CustomModels.Core
             if (companyId == 0 || branchId == 0 || roleId == 0) return [];
             using var context = new DataContext();
             var query = from userPermission in context.TbUserPermissions.AsNoTracking()
-                join element in context.TbElements.AsNoTracking() on userPermission.ElementId equals element.ElementId
-                join menuElement in context.TbMenuElements.AsNoTracking() on userPermission.ElementId equals menuElement.ElementId
-                where userPermission.CompanyId == companyId
-                      && userPermission.BranchId == branchId
-                      && userPermission.RoleId == roleId
-                      && menuElement.CompanyId == companyId
+                join element in context.TbElements.AsNoTracking() on userPermission.ElementID equals element.ElementID
+                join menuElement in context.TbMenuElements.AsNoTracking() on userPermission.ElementID equals menuElement.ElementID
+                where userPermission.CompanyID == companyId
+                      && userPermission.BranchID == branchId
+                      && userPermission.RoleID == roleId
+                      && menuElement.CompanyID == companyId
                 select new TbUserPermissionDto
                 {
-                    CompanyId = userPermission.CompanyId,
-                    BranchId = userPermission.BranchId,
-                    RoleId = userPermission.RoleId,
-                    ElementId = userPermission.ElementId,
+                    CompanyId = userPermission.CompanyID,
+                    BranchId = userPermission.BranchID,
+                    RoleId = userPermission.RoleID,
+                    ElementId = userPermission.ElementID,
                     Selected = userPermission.Selected,
                     Inserted = userPermission.Inserted,
                     Deleted = userPermission.Deleted,
@@ -56,10 +56,10 @@ namespace v4posme_library.Libraries.CustomModels.Core
         {
             using var context = new DataContext();
             return context.TbUserPermissions.AsNoTracking()
-                .FirstOrDefault(permission => permission!.CompanyId == companyId
-                                              && permission.BranchId == branchId
-                                              && permission.RoleId == roleId
-                                              && permission.ElementId == elementId);
+                .FirstOrDefault(permission => permission!.CompanyID == companyId
+                                              && permission.BranchID == branchId
+                                              && permission.RoleID == roleId
+                                              && permission.ElementID == elementId);
         }
     }
 }

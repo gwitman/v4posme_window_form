@@ -2,7 +2,7 @@
 {
     public class TbUserPermissionDto
     {
-        /*tb_user_permission.companyID,tb_user_permission.branchID,tb_user_permission.roleID,tb_user_permission.elementID,
+        /*tb_user_permission.CompanyID,tb_user_permission.BranchID,tb_user_permission.RoleID,tb_user_permission.ElementID,
         tb_user_permission.selected,tb_user_permission.inserted,tb_user_permission.deleted,
         tb_user_permission.edited,tb_menu_element.orden,tb_menu_element.display*/
         public int? CompanyId { get; set; }

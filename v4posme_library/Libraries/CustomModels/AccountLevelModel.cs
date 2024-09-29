@@ -9,7 +9,7 @@ public class AccountLevelModel : IAccountLevelModel
     {
         using var context = new DataContext();
         var find = context.TbAccountLevels.Single(account =>
-            account.CompanyId == companyId && account.AccountLevelId == accountLevelId);
+            account.CompanyID == companyId && account.AccountLevelID == accountLevelId);
         find.IsActive = false;
         context.BulkSaveChanges();
     }
@@ -18,8 +18,8 @@ public class AccountLevelModel : IAccountLevelModel
     {
         using var context = new DataContext();
         var find = context.TbAccountLevels.Single(account =>
-            account.CompanyId == companyId && account.AccountLevelId == accountLevelId);
-        data.AccountLevelId = find.AccountLevelId;
+            account.CompanyID == companyId && account.AccountLevelID == accountLevelId);
+        data.AccountLevelID = find.AccountLevelID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
@@ -29,7 +29,7 @@ public class AccountLevelModel : IAccountLevelModel
         using var context = new DataContext();
         var insert = context.TbAccountLevels.Add(data);
         context.BulkSaveChanges();
-        return insert.Entity.AccountLevelId;
+        return insert.Entity.AccountLevelID;
     }
 
     public int GetCountInAccount(int companyId, int accountLevelId)
@@ -38,8 +38,8 @@ public class AccountLevelModel : IAccountLevelModel
         return context.TbAccounts
             .Count(account => account.IsActive != null
                               && account.IsActive.Value
-                              && account.CompanyId == companyId &&
-                              account.AccountLevelId == accountLevelId);
+                              && account.CompanyID == companyId &&
+                              account.AccountLevelID == accountLevelId);
     }
 
     public List<TbAccountLevel> GetByCompany(int companyId)
@@ -47,7 +47,7 @@ public class AccountLevelModel : IAccountLevelModel
         using var context = new DataContext();
         return context.TbAccountLevels
             .Where(account => account.IsActive
-                              && account.CompanyId == companyId)
+                              && account.CompanyID == companyId)
             .ToList();
     }
 
@@ -56,7 +56,7 @@ public class AccountLevelModel : IAccountLevelModel
         using var context = new DataContext();
         return context.TbAccountLevels
             .Single(account => account.IsActive
-                               && account.CompanyId == companyId
-                               && account.AccountLevelId == accountLevelId);
+                               && account.CompanyID == companyId
+                               && account.AccountLevelID == accountLevelId);
     }
 }

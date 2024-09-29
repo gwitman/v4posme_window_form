@@ -9,7 +9,7 @@ class EmployeeCalendarPayModel : IEmployeeCalendarPayModel
         using var context = new DataContext();
         var find = context.TbEmployeeCalendarPays.Find(calendarId);
         if (find is null) return;
-        data.CalendarId = find.CalendarId;
+        data.CalendarID = find.CalendarID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
@@ -19,7 +19,7 @@ class EmployeeCalendarPayModel : IEmployeeCalendarPayModel
         using var context = new DataContext();
         var find = context.TbEmployeeCalendarPays.Find(calendarId);
         if (find is null) return;
-        find.IsActive = 0;
+        find.IsActive = false;
         context.BulkSaveChanges();
     }
 
@@ -28,7 +28,7 @@ class EmployeeCalendarPayModel : IEmployeeCalendarPayModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.BulkSaveChanges();
-        return add.Entity.CalendarId;
+        return add.Entity.CalendarID;
     }
 
     public TbEmployeeCalendarPay? GetRowByPk(int calendarId)

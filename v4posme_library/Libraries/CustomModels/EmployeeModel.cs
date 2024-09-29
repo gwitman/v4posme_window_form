@@ -9,10 +9,10 @@ class EmployeeModel : IEmployeeModel
     {
         using var context = new DataContext();
         var find = context.TbEmployees
-            .Single(employee => employee.CompanyId == companyId
-                                && employee.BranchId == branchId
-                                && employee.EntityId == entityId);
-        data.EmployeeId = find.EmployeeId;
+            .Single(employee => employee.CompanyID == companyId
+                                && employee.BranchID == branchId
+                                && employee.EntityID == entityId);
+        data.EmployeeID = find.EmployeeID;
         context.Entry(find).CurrentValues.SetValues(data);
         context.BulkSaveChanges();
     }
@@ -21,10 +21,10 @@ class EmployeeModel : IEmployeeModel
     {
         using var context = new DataContext();
         var find = context.TbEmployees
-            .Single(employee => employee.CompanyId == companyId
-                                && employee.BranchId == branchId
-                                && employee.EntityId == entityId);
-        find.IsActive = 0;
+            .Single(employee => employee.CompanyID == companyId
+                                && employee.BranchID == branchId
+                                && employee.EntityID == entityId);
+        find.IsActive = false;
         context.BulkSaveChanges();
     }
 
@@ -33,43 +33,43 @@ class EmployeeModel : IEmployeeModel
         using var context = new DataContext();
         var add = context.Add(data);
         context.BulkSaveChanges();
-        return add.Entity.EmployeeId;
+        return add.Entity.EmployeeID;
     }
 
     public List<TbEmployeeDto> GetRowByBranchIdAndType(int companyId, int branchId, int typeEmployer)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbEmployees
-            join n in dbContext.TbNaturales on i.EntityId equals n.EntityId
-            where i.CompanyId == companyId
-                  && i.BranchId == branchId
-                  && i.DepartamentId == typeEmployer
-                  && i.IsActive == 1
+            join n in dbContext.TbNaturales on i.EntityID equals n.EntityID
+            where i.CompanyID == companyId
+                  && i.BranchID == branchId
+                  && i.DepartamentID == typeEmployer
+                  && i.IsActive.Value
             select new TbEmployeeDto
             {
-                CompanyId = i.CompanyId,
-                BranchId = i.BranchId,
-                EntityId = i.EntityId,
+                CompanyId = i.CompanyID,
+                BranchId = i.BranchID,
+                EntityId = i.EntityID,
                 EmployeNumber = i.EmployeNumber,
                 NumberIdentification = i.NumberIdentification,
-                IdentificationTypeId = i.IdentificationTypeId,
+                IdentificationTypeId = i.IdentificationTypeID,
                 SocialSecurityNumber = i.SocialSecurityNumber,
                 Address = i.Address,
-                CountryId = i.CountryId,
-                StateId = i.StateId,
-                CityId = i.CityId,
-                DepartamentId = i.DepartamentId,
-                AreaId = i.AreaId,
-                ClasificationId = i.ClasificationId,
-                CategoryId = i.CategoryId,
+                CountryId = i.CountryID,
+                StateId = i.StateID,
+                CityId = i.CityID,
+                DepartamentId = i.DepartamentID,
+                AreaId = i.AreaID,
+                ClasificationId = i.ClasificationID,
+                CategoryId = i.CategoryID,
                 Reference1 = i.Reference1,
                 Reference2 = i.Reference2,
-                TypeEmployeeId = i.TypeEmployeeId,
+                TypeEmployeeId = i.TypeEmployeeID,
                 HourCost = i.HourCost,
-                ParentEmployeeId = i.ParentEmployeeId,
+                ParentEmployeeId = i.ParentEmployeeID,
                 StartOn = i.StartOn,
-                EndOn = i.EndOn,
-                StatusId = i.StatusId,
+                EndOn = i.EndOn.Value,
+                StatusId = i.StatusID,
                 CreatedOn = i.CreatedOn,
                 CreatedIn = i.CreatedIn,
                 CreatedAt = i.CreatedAt,
@@ -85,35 +85,35 @@ class EmployeeModel : IEmployeeModel
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbEmployees
-            join n in dbContext.TbNaturales on i.EntityId equals n.EntityId
-            where i.CompanyId == companyId
-                  && i.BranchId == branchId
-                  && i.IsActive == 1
+            join n in dbContext.TbNaturales on i.EntityID equals n.EntityID
+            where i.CompanyID == companyId
+                  && i.BranchID == branchId
+                  && i.IsActive.Value
             select new TbEmployeeDto
             {
-                CompanyId = i.CompanyId,
-                BranchId = i.BranchId,
-                EntityId = i.EntityId,
+                CompanyId = i.CompanyID,
+                BranchId = i.BranchID,
+                EntityId = i.EntityID,
                 EmployeNumber = i.EmployeNumber,
                 NumberIdentification = i.NumberIdentification,
-                IdentificationTypeId = i.IdentificationTypeId,
+                IdentificationTypeId = i.IdentificationTypeID,
                 SocialSecurityNumber = i.SocialSecurityNumber,
                 Address = i.Address,
-                CountryId = i.CountryId,
-                StateId = i.StateId,
-                CityId = i.CityId,
-                DepartamentId = i.DepartamentId,
-                AreaId = i.AreaId,
-                ClasificationId = i.ClasificationId,
-                CategoryId = i.CategoryId,
+                CountryId = i.CountryID,
+                StateId = i.StateID,
+                CityId = i.CityID,
+                DepartamentId = i.DepartamentID,
+                AreaId = i.AreaID,
+                ClasificationId = i.ClasificationID,
+                CategoryId = i.CategoryID,
                 Reference1 = i.Reference1,
                 Reference2 = i.Reference2,
-                TypeEmployeeId = i.TypeEmployeeId,
+                TypeEmployeeId = i.TypeEmployeeID,
                 HourCost = i.HourCost,
-                ParentEmployeeId = i.ParentEmployeeId,
-                StartOn = i.StartOn,
-                EndOn = i.EndOn,
-                StatusId = i.StatusId,
+                ParentEmployeeId = i.ParentEmployeeID,
+                StartOn = (i.StartOn.Value),
+                EndOn = (i.EndOn.Value),
+                StatusId = i.StatusID,
                 CreatedOn = i.CreatedOn,
                 CreatedIn = i.CreatedIn,
                 CreatedAt = i.CreatedAt,
@@ -129,36 +129,36 @@ class EmployeeModel : IEmployeeModel
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbEmployees
-            join n in dbContext.TbNaturales on i.EntityId equals n.EntityId
-            where i.CompanyId == companyId
-                  && i.BranchId == branchId
-                  && i.EntityId == entityId
-                  && i.IsActive==1
+            join n in dbContext.TbNaturales on i.EntityID equals n.EntityID
+            where i.CompanyID == companyId
+                  && i.BranchID == branchId
+                  && i.EntityID == entityId
+                  && i.IsActive.Value
             select new TbEmployeeDto
             {
-                CompanyId = i.CompanyId,
-                BranchId = i.BranchId,
-                EntityId = i.EntityId,
+                CompanyId = i.CompanyID,
+                BranchId = i.BranchID,
+                EntityId = i.EntityID,
                 EmployeNumber = i.EmployeNumber,
                 NumberIdentification = i.NumberIdentification,
-                IdentificationTypeId = i.IdentificationTypeId,
+                IdentificationTypeId = i.IdentificationTypeID,
                 SocialSecurityNumber = i.SocialSecurityNumber,
                 Address = i.Address,
-                CountryId = i.CountryId,
-                StateId = i.StateId,
-                CityId = i.CityId,
-                DepartamentId = i.DepartamentId,
-                AreaId = i.AreaId,
-                ClasificationId = i.ClasificationId,
-                CategoryId = i.CategoryId,
+                CountryId = i.CountryID,
+                StateId = i.StateID,
+                CityId = i.CityID,
+                DepartamentId = i.DepartamentID,
+                AreaId = i.AreaID,
+                ClasificationId = i.ClasificationID,
+                CategoryId = i.CategoryID,
                 Reference1 = i.Reference1,
                 Reference2 = i.Reference2,
-                TypeEmployeeId = i.TypeEmployeeId,
+                TypeEmployeeId = i.TypeEmployeeID,
                 HourCost = i.HourCost,
-                ParentEmployeeId = i.ParentEmployeeId,
-                StartOn = i.StartOn,
-                EndOn = i.EndOn,
-                StatusId = i.StatusId,
+                ParentEmployeeId = i.ParentEmployeeID,
+                StartOn =(i.StartOn.Value),
+                EndOn = (i.EndOn.Value),
+                StatusId = i.StatusID,
                 CreatedOn = i.CreatedOn,
                 CreatedIn = i.CreatedIn,
                 CreatedAt = i.CreatedAt,
@@ -173,34 +173,34 @@ class EmployeeModel : IEmployeeModel
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbEmployees
-                     join n in dbContext.TbNaturales on i.EntityId equals n.EntityId
-                     where i.CompanyId == companyId 
-                           && i.IsActive == 1
+                     join n in dbContext.TbNaturales on i.EntityID equals n.EntityID
+                     where i.CompanyID == companyId 
+                           && i.IsActive.Value
                      select new TbEmployeeDto
                      {
-                         CompanyId = i.CompanyId,
-                         BranchId = i.BranchId,
-                         EntityId = i.EntityId,
+                         CompanyId = i.CompanyID,
+                         BranchId = i.BranchID,
+                         EntityId = i.EntityID,
                          EmployeNumber = i.EmployeNumber,
                          NumberIdentification = i.NumberIdentification,
-                         IdentificationTypeId = i.IdentificationTypeId,
+                         IdentificationTypeId = i.IdentificationTypeID,
                          SocialSecurityNumber = i.SocialSecurityNumber,
                          Address = i.Address,
-                         CountryId = i.CountryId,
-                         StateId = i.StateId,
-                         CityId = i.CityId,
-                         DepartamentId = i.DepartamentId,
-                         AreaId = i.AreaId,
-                         ClasificationId = i.ClasificationId,
-                         CategoryId = i.CategoryId,
+                         CountryId = i.CountryID,
+                         StateId = i.StateID,
+                         CityId = i.CityID,
+                         DepartamentId = i.DepartamentID,
+                         AreaId = i.AreaID,
+                         ClasificationId = i.ClasificationID,
+                         CategoryId = i.CategoryID,
                          Reference1 = i.Reference1,
                          Reference2 = i.Reference2,
-                         TypeEmployeeId = i.TypeEmployeeId,
+                         TypeEmployeeId = i.TypeEmployeeID,
                          HourCost = i.HourCost,
-                         ParentEmployeeId = i.ParentEmployeeId,
-                         StartOn = i.StartOn,
-                         EndOn = i.EndOn,
-                         StatusId = i.StatusId,
+                         ParentEmployeeId = i.ParentEmployeeID,
+                         StartOn = (i.StartOn.Value),
+                         EndOn = (i.EndOn.Value),
+                         StatusId = i.StatusID,
                          CreatedOn = i.CreatedOn,
                          CreatedIn = i.CreatedIn,
                          CreatedAt = i.CreatedAt,
@@ -212,39 +212,39 @@ class EmployeeModel : IEmployeeModel
         return result.ToList();
     }
 
-    public TbEmployeeDto GetRowByEntityId(int companyId, int entityId)
+    public TbEmployeeDto? GetRowByEntityId(int companyId, int entityId)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbEmployees
-            join n in dbContext.TbNaturales on i.EntityId equals n.EntityId
-            where i.CompanyId == companyId
-                  && i.EntityId == entityId
-                  && i.IsActive==1
+            join n in dbContext.TbNaturales on i.EntityID equals n.EntityID
+            where i.CompanyID == companyId
+                  && i.EntityID == entityId
+                  && i.IsActive.Value
             select new TbEmployeeDto
             {
-                CompanyId = i.CompanyId,
-                BranchId = i.BranchId,
-                EntityId = i.EntityId,
+                CompanyId = i.CompanyID,
+                BranchId = i.BranchID,
+                EntityId = i.EntityID,
                 EmployeNumber = i.EmployeNumber,
                 NumberIdentification = i.NumberIdentification,
-                IdentificationTypeId = i.IdentificationTypeId,
+                IdentificationTypeId = i.IdentificationTypeID,
                 SocialSecurityNumber = i.SocialSecurityNumber,
                 Address = i.Address,
-                CountryId = i.CountryId,
-                StateId = i.StateId,
-                CityId = i.CityId,
-                DepartamentId = i.DepartamentId,
-                AreaId = i.AreaId,
-                ClasificationId = i.ClasificationId,
-                CategoryId = i.CategoryId,
+                CountryId = i.CountryID,
+                StateId = i.StateID,
+                CityId = i.CityID,
+                DepartamentId = i.DepartamentID,
+                AreaId = i.AreaID,
+                ClasificationId = i.ClasificationID,
+                CategoryId = i.CategoryID,
                 Reference1 = i.Reference1,
                 Reference2 = i.Reference2,
-                TypeEmployeeId = i.TypeEmployeeId,
+                TypeEmployeeId = i.TypeEmployeeID,
                 HourCost = i.HourCost,
-                ParentEmployeeId = i.ParentEmployeeId,
-                StartOn = i.StartOn,
-                EndOn = i.EndOn,
-                StatusId = i.StatusId,
+                ParentEmployeeId = i.ParentEmployeeID,
+                StartOn =(i.StartOn.Value),
+                EndOn = (i.EndOn.Value),
+                StatusId = i.StatusID,
                 CreatedOn = i.CreatedOn,
                 CreatedIn = i.CreatedIn,
                 CreatedAt = i.CreatedAt,
@@ -253,6 +253,6 @@ class EmployeeModel : IEmployeeModel
                 FirstName = n.FirstName,
                 LastName = n.LastName
             };
-        return result.Single();
+        return result.SingleOrDefault();
     }
 }

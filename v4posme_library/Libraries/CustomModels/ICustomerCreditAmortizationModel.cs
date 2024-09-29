@@ -5,25 +5,25 @@ namespace v4posme_library.Libraries.CustomModels;
 
 public interface ICustomerCreditAmortizationModel
 {
-    void UpdateAppPosme(int creditAmortizationId,TbCustomerCreditAmortization data);
+    void UpdateAppPosme(int creditAmortizationId,TbCustomerCreditAmoritization data);
     
     void DeleteAppPosme(int creditAmortizationId);
     
-    int InsertAppPosme(TbCustomerCreditAmortization data);
+    int InsertAppPosme(TbCustomerCreditAmoritization data);
 
-    TbCustomerCreditAmortization GetRowByPk(int creditAmortizationId);
+    TbCustomerCreditAmoritization GetRowByPk(int creditAmortizationId);
     
-    List<TbCustomerCreditAmortization> GetRowByDocument(int customerCreditDocumentId);
+    List<TbCustomerCreditAmoritization> GetRowByDocument(int customerCreditDocumentId);
     
-    List<TbCustomerCreditAmortization>? GetRowByDocumentAndVinculable(int customerCreditDocumentId);
+    List<TbCustomerCreditAmoritization>? GetRowByDocumentAndVinculable(int customerCreditDocumentId);
     
-    List<TbCustomerCreditAmortization> GetRowByDocumentAndNonVinculable(int customerCreditDocumentId);
+    List<TbCustomerCreditAmoritization> GetRowByDocumentAndNonVinculable(int customerCreditDocumentId);
     
     List<TbCustomerCreditAmortizationDto> GetRowByCustomerId(int customerId);
     
     List<TbCustomerCreditAmortizationDto> GetRowShareLate(int customerId);
 
-    TbCustomerCreditAmortizationDto GetRowBySummaryInformationCredit(string documentNumber);
+    TbCustomerCreditAmortizationDto GetRowBySummaryInformationCredit(string? documentNumber);
     
     List<TbCustomerCreditAmortizationDto> GetRowByCreditDocumentAndBalanceMinim(int customerCreditDocumentId);
 }

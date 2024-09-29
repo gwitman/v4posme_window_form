@@ -5,12 +5,12 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 class TransactionConceptModel : ITransactionConceptModel
 {
-    public TbTransactionConcept GetRowByPk(int companyId, int transactionId, string name)
+    public TbTransactionConcept GetRowByPk(int companyId, int transactionId, string? name)
     {
         using var context = new DataContext();
         return context.TbTransactionConcepts.AsNoTracking()
-            .First(concept => concept.CompanyId == companyId
-                              && concept.TransactionId == transactionId
+            .First(concept => concept.CompanyID == companyId
+                              && concept.TransactionID == transactionId
                               && concept.Name == name
                               && concept.IsActive!.Value);
     }
@@ -19,8 +19,8 @@ class TransactionConceptModel : ITransactionConceptModel
     {
         using var context = new DataContext();
         return context.TbTransactionConcepts.AsNoTracking()
-            .Where(concept => concept.CompanyId == companyId
-                              && concept.TransactionId == transactionId
+            .Where(concept => concept.CompanyID == companyId
+                              && concept.TransactionID == transactionId
                               && concept.IsActive!.Value)
             .ToList();
     }
