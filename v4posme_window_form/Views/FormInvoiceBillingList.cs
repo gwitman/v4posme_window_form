@@ -20,6 +20,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using DevExpress.Mvvm.Native;
 using v4posme_library.ModelsDto;
+using DevExpress.Utils.DirectXPaint;
 
 namespace v4posme_window.Views
 {
@@ -42,6 +43,7 @@ namespace v4posme_window.Views
         public GridControl ObjGridControl { get; set; }
         public int? DataViewId { get; set; }
         public DateTime? Fecha { get; set; }
+        private bool EsMesero { get; set; }
 
         private static readonly string? UserNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
         private static readonly string? NotParameter = VariablesGlobales.ConfigurationBuilder["NOT_PARAMETER"];
@@ -50,6 +52,7 @@ namespace v4posme_window.Views
         private static readonly string? NotAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
         private static readonly int? PermissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
         private static readonly string? UrlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+        
         private TableCompanyDataViewDto? _dataViewData;
         private GridView? _gridViewData=null;
 
@@ -167,6 +170,15 @@ namespace v4posme_window.Views
                 return;
             }
 
+            //Validar si es cajero
+            var esMesero = _coreWebPermission.UrlPermited("es_mesero", "index", UrlSuffix!,
+                    VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft,
+                    VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop,
+                    VariablesGlobales.Instance.ListMenuHiddenPopup);
+
+            EsMesero = VariablesGlobales.Instance.Role!.IsAdmin == true ? false : esMesero;
+
+
             var callerIdList = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["CALLERID_LIST"]);
             Dictionary<string, string> parameters;
             if (DataViewId == 0)
@@ -240,7 +252,7 @@ namespace v4posme_window.Views
                     var companyId = Convert.ToInt32(_gridViewData.GetRowCellValue(indexRow, "companyID").ToString());
                     var transactionId = Convert.ToInt32(_gridViewData.GetRowCellValue(indexRow, "transactionID").ToString());
                     var transactionMasterId = Convert.ToInt32(_gridViewData.GetRowCellValue(indexRow, "transactionMasterID").ToString());
-                    var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId);
+                    var objFormInvoiceBillingEdit = new FormInvoiceBillingEdit(TypeOpenForm.NotInit, companyId, transactionId, transactionMasterId,"none");
                     objFormInvoiceBillingEdit.ComandDelete();
                 }
             };
@@ -283,12 +295,29 @@ namespace v4posme_window.Views
                     var companyId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "companyID").ToString());
                     var transactionId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionID").ToString());
                     var transactionMasterId = Convert.ToInt32(((GridView)ObjGridControl.MainView).GetRowCellValue(indexRow, "transactionMasterID").ToString());
-                    
-                    var formInvoiceBillingEdit = new FormInvoiceBillingEdit(
-                            TypeOpenForm.Init, companyId, transactionId,
-                            transactionMasterId)
+
+                    if (EsMesero == true)
+                    {
+                        using (var inputForm = new FormTypeCustomInputForm())
+                        {
+                            if (inputForm.ShowDialog() == DialogResult.OK)
+                            {
+                                var formInvoiceBillingEdit = new FormInvoiceBillingEdit(
+                                        TypeOpenForm.Init, companyId, transactionId,
+                                        transactionMasterId , inputForm.InputText)
+                                { MdiParent = CoreFormList.Principal() };
+                                formInvoiceBillingEdit.Show();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var formInvoiceBillingEdit = new FormInvoiceBillingEdit(
+                                        TypeOpenForm.Init, companyId, transactionId,
+                                        transactionMasterId,"none")
                         { MdiParent = CoreFormList.Principal() };
-                    formInvoiceBillingEdit.Show();
+                        formInvoiceBillingEdit.Show();
+                    }
                     break;
                 }
             }
@@ -302,15 +331,36 @@ namespace v4posme_window.Views
         public void New(object? sender, EventArgs? args)
         {
             var transactionID = _coreWebTransaction.GetTransactionId(VariablesGlobales.Instance.User!.CompanyID, "tb_transaction_master_billing", 0);
+            if (EsMesero == true)
+            {
+                using (var inputForm = new FormTypeCustomInputForm())
+                {
+                    if (inputForm.ShowDialog() == DialogResult.OK)
+                    {
 
-            var objFormInvoiceList = new FormInvoiceBillingEdit(
-                    TypeOpenForm.Init,
-                    VariablesGlobales.Instance.User!.CompanyID,
-                    transactionID!.Value,
-                    0
-                )
+                        var objFormInvoiceList = new FormInvoiceBillingEdit(
+                                TypeOpenForm.Init,
+                                VariablesGlobales.Instance.User!.CompanyID,
+                                transactionID!.Value,
+                                0, inputForm.InputText
+                            )
+                        { MdiParent = CoreFormList.Principal() };
+                        objFormInvoiceList.Show();
+
+                    }
+                }
+            }
+            else
+            {
+                var objFormInvoiceList = new FormInvoiceBillingEdit(
+                                TypeOpenForm.Init,
+                                VariablesGlobales.Instance.User!.CompanyID,
+                                transactionID!.Value,
+                                0,"none"
+                            )
                 { MdiParent = CoreFormList.Principal() };
-            objFormInvoiceList.Show();
+                objFormInvoiceList.Show();
+            }
         }
 
         public void PreRender()
@@ -370,7 +420,7 @@ namespace v4posme_window.Views
 
                 var formInvoiceBillingEdit = new FormInvoiceBillingEdit(
                         TypeOpenForm.Init, objTm.CompanyID, objTm.TransactionID,
-                        objTm.TransactionMasterID 
+                        objTm.TransactionMasterID,"none"
                     )
                     { MdiParent = CoreFormList.Principal() };
                 formInvoiceBillingEdit.Show();

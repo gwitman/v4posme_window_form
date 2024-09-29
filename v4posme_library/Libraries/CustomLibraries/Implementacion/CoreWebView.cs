@@ -200,13 +200,13 @@ class CoreWebView(
         var objCompanyDefaultDataView = companyDefaultDataViewModel.GetRowByCcct(user.CompanyID, componentId!.Value, callerId!.Value, targetComponentId!.Value);
         if (objCompanyDefaultDataView is null)
         {
-            throw new Exception("No existe el company default data view");
+            return null;
         }
 
         var companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyID, objCompanyDefaultDataView.DataViewID, callerId.Value, componentId.Value);
         if (companyDataView is null)
         {
-            throw new Exception("No existe el company data view");
+            return null;
         }
 
         parameter ??= new Dictionary<string?, string?>();

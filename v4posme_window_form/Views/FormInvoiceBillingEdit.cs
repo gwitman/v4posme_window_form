@@ -66,6 +66,9 @@ namespace v4posme_window.Views
         #endregion
 
         #region Libreria Model Custom DLL
+        private readonly IPublicCatalogModel _objInterfazPublicCatalogModel = VariablesGlobales.Instance.UnityContainer.Resolve<IPublicCatalogModel>();
+
+        private readonly IPublicCatalogDetailModel _objInterfazPublicCatalogDetailModel = VariablesGlobales.Instance.UnityContainer.Resolve<IPublicCatalogDetailModel>();
 
         private readonly IItemModel _objInterfazItemModel = VariablesGlobales.Instance.UnityContainer.Resolve<IItemModel>();
 
@@ -275,6 +278,7 @@ namespace v4posme_window.Views
 
         #region Variables internas
 
+        private string CodigoMesero { get; set; }
         private int? CompanyId { get; set; }
         private int? TransactionId { get; set; }
         private int? TransactionMasterId { get; set; }
@@ -290,7 +294,7 @@ namespace v4posme_window.Views
 
         #region Init
 
-        public FormInvoiceBillingEdit(TypeOpenForm typeOpen, int companyId, int transactionId, int transactionMasterId)
+        public FormInvoiceBillingEdit(TypeOpenForm typeOpen, int companyId, int transactionId, int transactionMasterId,string codeMesero)
         {
             InitializeComponent();
             // Suscribir al manejador de excepciones global
@@ -300,6 +304,7 @@ namespace v4posme_window.Views
             TransactionId = transactionId;
             TransactionMasterId = transactionMasterId;
             TypeOpen = typeOpen;
+            CodigoMesero = codeMesero;
         }
 
 
@@ -316,7 +321,7 @@ namespace v4posme_window.Views
 
         private void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
         {
-            var stopWatch = Stopwatch.StartNew();
+            
             _backgroundWorker = new BackgroundWorker();
             _backgroundWorker.DoWork += (ob, ev) =>
             {
@@ -335,6 +340,7 @@ namespace v4posme_window.Views
             {
                 if (ev.Error is not null)
                 {
+                    CustomException.LogException(ev.Error);
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", ev.Error.Message, this);
                 }
                 else if (ev.Cancelled)
@@ -364,9 +370,7 @@ namespace v4posme_window.Views
                     {
                         progressPanel.Visible = false;
                     }
-
-                    stopWatch.Stop();
-                    Debug.WriteLine($"Tiempo de carga {stopWatch.Elapsed}");
+                    
                 }
             };
 
@@ -621,6 +625,7 @@ namespace v4posme_window.Views
                 printer.AlignCenter();
                 if (objParameterCompanyLogo is not null)
                 {
+                    objParameterCompanyLogo.Value = "direct-ticket-" + objParameterCompanyLogo.Value;
                     var imagePath = $"{pathOfLogo}/img/logos/{objParameterCompanyLogo.Value!}";
                     if (File.Exists(imagePath))
                     {
@@ -747,6 +752,25 @@ namespace v4posme_window.Views
             }
 
 
+            CodigoMesero = "abc";
+            int publicCatalogID = 0;
+            List<TbPublicCatalog> objPubliCatalogMesasConfig = _objInterfazPublicCatalogModel.GetBySystemNameAndFlavorID("tb_transaction_master_billing.mesas_x_meseros", VariablesGlobales.Instance.Company!.FlavorID);
+            if (CodigoMesero != "none")
+            {
+                if (objPubliCatalogMesasConfig is null)
+                    throw new Exception("CONFIGURAR EL CATALOGO DE MESAS tb_transaction_master_billing.mesas_x_meseros");
+
+                if (objPubliCatalogMesasConfig.Count == 0)
+                    throw new Exception("CONFIGURAR EL CATALOGO DE MESAS tb_transaction_master_billing.mesas_x_meseros");
+
+            }
+
+            publicCatalogID = CodigoMesero == "none" ? 0 : objPubliCatalogMesasConfig.ElementAt(0).PublicCatalogID;
+            List<TbPublicCatalogDetail> objPubliCatalogDetailMesasConfiguradas = _objInterfazPublicCatalogDetailModel.GetRowByCatalogIDAndName(publicCatalogID, CodigoMesero);
+
+
+
+
             ObjParameterInvoiceTypeEmployer = _objInterfazCoreWebParameter.GetParameter("INVOICE_TYPE_EMPLOYEER", user.CompanyID)!.Value;
             ObjParameterInvoiceBillingEmployeeDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_EMPLOYEE_DEFAULT", user.CompanyID)!.Value;
 
@@ -794,6 +818,23 @@ namespace v4posme_window.Views
             ObjListTypePrice = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_price", "typePriceID", user.CompanyID);
             ObjListZone = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_info_billing", "zoneID", user.CompanyID);
             ObjListMesa = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_info_billing", "mesaID", user.CompanyID);
+
+            //Filtrar la Lista de mesas
+            var obListMesasFiltradas = ObjListMesa.Where(item1 => objPubliCatalogDetailMesasConfiguradas.Any(item2 => item2.Display == item1.Name)).ToList();
+            ObjListMesa = CodigoMesero == "none" ? ObjListMesa : obListMesasFiltradas;
+
+            if (ObjListMesa is null)
+                throw new Exception("No se puede avanzar configurar catalogo de MESS");
+
+            if (ObjListMesa.Count == 0)
+                throw new Exception("No se puede avanzar configurar catalogo de MESS");
+
+            if(!ObjListMesa.Any( u => u.CatalogItemID == ObjTransactionMasterInfo!.MesaId))
+            {
+                throw new Exception("No tiene acceso al catalogo MESS");
+            }
+
+
             ObjListPay = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_customer_credit_line", "periodPay", user.CompanyID);
             ListProvider = _objInterfazProviderModel.GetRowByCompany(user.CompanyID);
             ObjListWorkflowStage = _objInterfazCoreWebWorkflow.GetWorkflowStageByStageInit("tb_transaction_master_billing", "statusID", ObjTransactionMaster!.StatusId!.Value, role!.CompanyID, role.BranchID, role.RoleID);
@@ -851,7 +892,7 @@ namespace v4posme_window.Views
 
         public void LoadNew()
         {
-            var stopWatch = Stopwatch.StartNew();
+            
             //using var tx = new TransactionScope();
             var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
             var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
@@ -865,6 +906,7 @@ namespace v4posme_window.Views
                 throw new Exception(userNotAutenticated);
             }
 
+            
             var role = VariablesGlobales.Instance.Role;
             if (appNeedAuthentication == "true")
             {
@@ -932,6 +974,7 @@ namespace v4posme_window.Views
             ObjParameterAmortizationDuranteFactura = _objInterfazCoreWebParameter.GetParameter("INVOICE_PARAMTER_AMORITZATION_DURAN_INVOICE", user.CompanyID)!.Value;
             ObjParameterAlturaDelModalDeSeleccionProducto = _objInterfazCoreWebParameter.GetParameter("INVOICE_ALTO_MODAL_DE_SELECCION_DE_PRODUCTO_AL_FACTURAR", user.CompanyID)!.Value;
             ObjParameterScrollDelModalDeSeleccionProducto = _objInterfazCoreWebParameter.GetParameter("INVOICE_SCROLL_DE_MODAL_EN_SELECCION_DE_PRODUTO_AL_FACTURAR", user.CompanyID)!.Value;
+            ObjParameterShowComandoDeCocina = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SHOW_COMMAND_FOOT", user.CompanyID)!.Value;
 
             //Obtener la lista de estados
             if (ObjParameterInvoiceAutoApply == "true")
@@ -943,7 +986,24 @@ namespace v4posme_window.Views
                 ObjListWorkflowStage = _objInterfazCoreWebWorkflow.GetWorkflowInitStage("tb_transaction_master_billing", "statusID", user.CompanyID, user.BranchID, role.RoleID);
             }
 
-            ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Now.Date, decimal.One, ObjCurrencyDolares!.CurrencyID, ObjCurrency!.CurrencyID);
+
+            //Obtener lista de mesas configuradas            
+            int publicCatalogID = 0;
+            List<TbPublicCatalog> objPubliCatalogMesasConfig = _objInterfazPublicCatalogModel.GetBySystemNameAndFlavorID("tb_transaction_master_billing.mesas_x_meseros", VariablesGlobales.Instance.Company!.FlavorID);
+            if(CodigoMesero != "none" )
+            {
+                if(objPubliCatalogMesasConfig is null)
+                throw new Exception("CONFIGURAR EL CATALOGO DE MESAS tb_transaction_master_billing.mesas_x_meseros");
+
+                if (objPubliCatalogMesasConfig.Count == 0)
+                    throw new Exception("CONFIGURAR EL CATALOGO DE MESAS tb_transaction_master_billing.mesas_x_meseros");
+
+            }
+
+            publicCatalogID = CodigoMesero == "none" ? 0 : objPubliCatalogMesasConfig.ElementAt(0).PublicCatalogID;
+            List<TbPublicCatalogDetail> objPubliCatalogDetailMesasConfiguradas = _objInterfazPublicCatalogDetailModel.GetRowByCatalogIDAndName(publicCatalogID,CodigoMesero);
+
+            ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Today, decimal.One, ObjCurrencyDolares!.CurrencyID, ObjCurrency!.CurrencyID);
             ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyID, user.BranchID, Convert.ToInt32(ObjParameterInvoiceTypeEmployer));
             ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyID);
             ObjCausal = _objInterfazTransactionCausalModel.GetCausalByBranch(user.CompanyID, TransactionId.Value, user.BranchID);
@@ -953,6 +1013,19 @@ namespace v4posme_window.Views
             ObjListTypePrice = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_price", "typePriceID", user.CompanyID);
             ObjListZone = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_info_billing", "zoneID", user.CompanyID);
             ObjListMesa = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_info_billing", "mesaID", user.CompanyID);
+
+            //Filtrar la Lista de mesas
+            var obListMesasFiltradas = ObjListMesa.Where(item1 => objPubliCatalogDetailMesasConfiguradas.Any(item2 => item2.Display == item1.Name)).ToList();
+            ObjListMesa = CodigoMesero == "none" ? ObjListMesa : obListMesasFiltradas;
+
+            if(ObjListMesa is null)
+            throw new Exception("No se puede avanzar configurar catalogo de MESS");
+
+            if (ObjListMesa.Count == 0)
+            throw new Exception("No se puede avanzar configurar catalogo de MESS");
+
+
+
             ObjListPay = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_customer_credit_line", "periodPay", user.CompanyID);
             ListProvider = _objInterfazProviderModel.GetRowByCompany(user.CompanyID);
             ObjParameterCxcPlazoDefault = _objInterfazCoreWebParameter.GetParameterValue("CXC_PLAZO_DEFAULT", user.CompanyID);
@@ -968,15 +1041,18 @@ namespace v4posme_window.Views
             ObjParameterRegresarAListaDespuesDeGuardar = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SAVE_AFTER_TO_LIST", user.CompanyID)!.Value;
             ObjParameterMostrarImagenEnSeleccion = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SHOW_IMAGE_IN_DETAIL_SELECTION", user.CompanyID)!.Value;
             ObjParameterPantallaParaFacturar = _objInterfazCoreWebParameter.GetParameter("INVOICE_PANTALLA_FACTURACION", user.CompanyID)!.Value;
-
+            
             if (ObjCustomerDefault is null)
             {
                 throw new Exception("NO EXISTE EL CLIENTE POR DEFECTO");
             }
 
-            ObjNaturalDefault = _objInterfazNaturalModel.GetRowByPk(user.CompanyID, ObjCustomerDefault.BranchID, ObjCustomerDefault.EntityID);
-            ObjLegalDefault = _objInterfazLegalModel.GetRowByPk(user.CompanyID, ObjCustomerDefault.BranchID, ObjCustomerDefault.EntityID);
+            
+            ObjNaturalDefault = _objInterfazNaturalModel.GetRowByPk(user.CompanyID, ObjCustomerDefault.BranchID, ObjCustomerDefault.EntityID);            
+            ObjLegalDefault = _objInterfazLegalModel.GetRowByPk(user.CompanyID, ObjCustomerDefault.BranchID, ObjCustomerDefault.EntityID);            
             ObjEmployeeNatural = _objInterfazNaturalModel.GetRowByPk(user.CompanyID, user.BranchID, user.EmployeeID);
+            if(ObjEmployeeNatural == null)
+                throw new Exception("USUARIO DEBE DE TENER CONFIGURADO UN COLABORADOR ");
 
             //Obtener la linea de credito del cliente por defecto
             ObjCurrencyDolares = _objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyID);
@@ -984,7 +1060,7 @@ namespace v4posme_window.Views
             ParameterCausalTypeCredit = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyID);
             ObjCustomerCreditAmoritizationAll = _objInterfazCustomerCreditAmortizationModel.GetRowByCustomerId(ObjCustomerDefault.EntityID);
             ObjListCustomerCreditLine = _objInterfazCustomerCreditLineModel.GetRowByEntityBalanceMayorCero(user.CompanyID, user.BranchID, this.ObjCustomerDefault.EntityID);
-
+            
 
             ObjListPermisos = VariablesGlobales.Instance.ListMenuHiddenPopup;
             varPermisosEsPermitidoModificarPrecio = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_MODIFICAR_PRECIO_EN_FACTURACION") > 0;
@@ -993,8 +1069,7 @@ namespace v4posme_window.Views
             varPermisosEsPermitidoSeleccionarPrecioMayor = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PORMAYOR") > 0;
             varPermisosEsPermitidoSeleccionarPrecioCredito = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_CREDITO") > 0;
             //tx.Complete();
-            stopWatch.Stop();
-            Debug.WriteLine($"Tiempo de carga: {stopWatch.ElapsedMilliseconds}");
+            
         }
 
         public void SaveInsert()
@@ -1324,6 +1399,11 @@ namespace v4posme_window.Views
 
                     //Crear Conceptos.
                     VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebConcept>().Billing(user.CompanyID, TransactionId!.Value, TransactionMasterId.Value);
+
+                    //Actualizar el numero de factura
+                    objTm.TransactionNumber = _objInterfazCoreWebCounter.GoNextNumber(user.CompanyID, user.BranchID, "tb_transaction_master_billing", 0);
+                    _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, objTm);
+
                 }
 
 
@@ -2132,6 +2212,10 @@ namespace v4posme_window.Views
                     //Llenar Linea de Credito
                     FnRenderLineaCredit(ObjListCustomerCreditLine, ParameterCausalTypeCredit!);
                     btnAplicar.Visible = false;
+
+                    btnPrinterFooter.Visibility = ObjParameterShowComandoDeCocina!.ToUpper() == "false".ToUpper() ? BarItemVisibility.Never : BarItemVisibility.Always;
+                    btnPrinterBar.Visibility = ObjParameterInvoiceBillingShowCommandBar!.ToUpper() == "false".ToUpper() ? BarItemVisibility.Never : BarItemVisibility.Always;
+
                     break;
                 case TypeRender.Edit:
                     _bindingListTransactionMasterDetail.Clear();
@@ -2231,6 +2315,9 @@ namespace v4posme_window.Views
                     txtReceiptAmountPoint.Text = ObjTransactionMasterInfo.ReceiptAmountPoint!.Value.ToString(FormatDecimal);
                     txtChangeAmount.Text = ObjTransactionMasterInfo.ChangeAmount.ToString(FormatDecimal);
                     btnAplicar.Visible = true;
+
+                    btnPrinterFooter.Visibility = ObjParameterShowComandoDeCocina!.ToUpper() == "false".ToUpper() ?  BarItemVisibility.Never : BarItemVisibility.Always;
+                    btnPrinterBar.Visibility = ObjParameterInvoiceBillingShowCommandBar!.ToUpper() == "false".ToUpper() ? BarItemVisibility.Never : BarItemVisibility.Always;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(typeRender), typeRender, null);
@@ -3358,6 +3445,7 @@ namespace v4posme_window.Views
                 {
                     if (ev.Error is not null)
                     {
+                        CustomException.LogException(ev.Error);
                         _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", $"Se ha cancelado la operación actual. Error: {ev.Error.Message}", this);
                     }
                     else if (ev.Cancelled)
@@ -3389,6 +3477,7 @@ namespace v4posme_window.Views
                 {
                     if (ev.Error is not null)
                     {
+                        CustomException.LogException(ev.Error);
                         _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", $"Se ha cancelado la operación actual. Error: {ev.Error.Message}", this);
                     }
                     else if (ev.Cancelled)
@@ -3428,6 +3517,7 @@ namespace v4posme_window.Views
                     {
                         if (args.Error is not null)
                         {
+                            CustomException.LogException(args.Error);
                             _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", args.Error.Message, this);
                         }
                         else if (args.Cancelled)
@@ -3514,6 +3604,7 @@ namespace v4posme_window.Views
                     {
                         if (ev.Error is not null)
                         {
+                            CustomException.LogException(ev.Error);
                             _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Registrar", $"No se registraron los valores. {ev.Error.Message}", this);
                         }
                         else if (ev.Cancelled)
@@ -3579,6 +3670,7 @@ namespace v4posme_window.Views
             {
                 if (ev.Error is not null)
                 {
+                    CustomException.LogException(ev.Error);
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Registrar", $"No se registraron los valores. {ev.Error.Message}", this);
                 }
                 else if (ev.Cancelled)

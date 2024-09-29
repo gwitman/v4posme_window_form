@@ -35,11 +35,11 @@ class NaturalModel : INaturalModel
         return add.Entity.NaturalesID;
     }
 
-    public TbNaturale GetRowByPk(int companyId, int branchId, int entityId)
+    public TbNaturale? GetRowByPk(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
         return context.TbNaturales
-            .Single(naturale => naturale.CompanyID == companyId
+            .FirstOrDefault(naturale => naturale.CompanyID == companyId
                                 && naturale.BranchID == branchId
                                 && naturale.EntityID == entityId
                                 && naturale.IsActive!.Value);
