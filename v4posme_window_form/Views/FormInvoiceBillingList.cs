@@ -362,6 +362,9 @@ namespace v4posme_window.Views
                 objFormInvoiceList.Show();
             }
         }
+        public void Print(object? sender, EventArgs? args)
+        {
+        }
 
         public void PreRender()
         {

@@ -25,6 +25,9 @@
     <Compile Update="Views\FormCustomerList.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\FormInventoryItemCantidadImprimir.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\FormInventoryItemEditConcepts.cs">
       <SubType>Form</SubType>
     </Compile>

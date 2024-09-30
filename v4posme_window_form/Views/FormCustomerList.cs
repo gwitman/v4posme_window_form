@@ -197,7 +197,9 @@ namespace v4posme_window.Views
         {
             throw new NotImplementedException();
         }
-
+        public void Print(object? sender, EventArgs? args)
+        {
+        }
         public void SearchTransactionMaster(object? sender, EventArgs? args)
         {
             throw new NotImplementedException();

@@ -114,6 +114,7 @@ namespace v4posme_window.Views
             btnEliminar.Click += (s, e) => ComandDelete();
             btnNuevo.Click += CommandNew;
         }
+
         public void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
         }
@@ -121,6 +122,7 @@ namespace v4posme_window.Views
         public void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
         }
+
         private void FormInventoryItemEdit_Load(object sender, EventArgs e)
         {
             _backgroundWorker = new BackgroundWorker();
@@ -180,8 +182,9 @@ namespace v4posme_window.Views
         }
 
         #endregion
-        
+
         #region Metodos
+
         public void ComandDelete()
         {
             var result = _objInterfazCoreWebRenderInView.XtraMessageBoxArgs(TypeError.Error, "Eliminar", "¿Seguro desea eliminar el articulo seleccionado? Esta acción no se puede revertir.");
@@ -274,6 +277,7 @@ namespace v4posme_window.Views
 
         public void ComandPrinter()
         {
+            
         }
 
         public void LoadEdit()
@@ -450,14 +454,14 @@ namespace v4posme_window.Views
             if (ObjListTypePrice.Count > 0)
             {
                 var pricesItem = ObjListTypePrice.Select(tbCatalogItem => new TbPriceDto
-                    {
-                        CompanyId = user.CompanyID,
-                        TypePriceId = tbCatalogItem.CatalogItemID,
-                        ListPriceId = Convert.ToInt32(objParameterListPreiceDefault!.Value),
-                        NameTypePrice = tbCatalogItem.Name,
-                        Price = decimal.Zero,
-                        PercentageCommision = decimal.Zero
-                    })
+                {
+                    CompanyId = user.CompanyID,
+                    TypePriceId = tbCatalogItem.CatalogItemID,
+                    ListPriceId = Convert.ToInt32(objParameterListPreiceDefault!.Value),
+                    NameTypePrice = tbCatalogItem.Name,
+                    Price = decimal.Zero,
+                    PercentageCommision = decimal.Zero
+                })
                     .ToList();
 
                 FnPriceItemBindingList(pricesItem);
@@ -1329,10 +1333,11 @@ namespace v4posme_window.Views
                     throw new ArgumentOutOfRangeException(nameof(typeRedner), typeRedner, null);
             }
         }
+
         #endregion
 
         #region Funciones
-        
+
         private bool FnValidateFormAndSubmit()
         {
             if (string.IsNullOrWhiteSpace(txtName.Text))
@@ -1387,6 +1392,7 @@ namespace v4posme_window.Views
             dxErrorProvider.ClearErrors();
             return true;
         }
+
         private void FnOnCompleteNewEmployerPopPub(dynamic mensaje)
         {
             Dictionary<string, string> diccionario = new Dictionary<string, string>();
@@ -1545,7 +1551,7 @@ namespace v4posme_window.Views
 
         #region Eventos
 
-         private void cmbWarehouseNameGridControl_ValueChanged(object? sender, EventArgs e)
+        private void cmbWarehouseNameGridControl_ValueChanged(object? sender, EventArgs e)
         {
             if (sender is ComboBoxEdit editor)
             {
@@ -1769,5 +1775,29 @@ namespace v4posme_window.Views
         }
 
         #endregion
+
+        private void btnImprimirCodigoBarra_Click(object sender, EventArgs e)
+        {
+            var cantidadImprimirFrm = new FormInventoryItemCantidadImprimir();
+            var dialogResult = cantidadImprimirFrm.ShowDialog(this);
+            if (dialogResult == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            var user = VariablesGlobales.Instance.User;
+            if (user is null)
+            {
+                throw new Exception("Usuario no logeado");
+            }
+
+            if (ObjItem is null)
+            {
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Imprimir", "No se ha seleccionado un articulo a imprimir", this);
+                return;
+            }
+
+            _objInterfazCoreWebRenderInView.PrintBarCodeItem(ObjItem, cantidadImprimirFrm.CantidadImprimir);
+        }
     }
 }

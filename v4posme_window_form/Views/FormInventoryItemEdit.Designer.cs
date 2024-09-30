@@ -33,7 +33,9 @@
             xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             layoutControlCodigoBarra = new DevExpress.XtraLayout.LayoutControl();
+            txtCodigoBarra = new DevExpress.XtraEditors.PictureEdit();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
             labelControl21 = new DevExpress.XtraEditors.LabelControl();
             labelControl20 = new DevExpress.XtraEditors.LabelControl();
@@ -189,14 +191,15 @@
             cmbSku = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             colSkuCantidad = new DevExpress.XtraGrid.Columns.GridColumn();
             dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(components);
-            txtCodigoBarra = new DevExpress.XtraEditors.PictureEdit();
-            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            btnImprimirCodigoBarra = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).BeginInit();
             xtraTabControl1.SuspendLayout();
             xtraTabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)layoutControlCodigoBarra).BeginInit();
             layoutControlCodigoBarra.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtCodigoBarra.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tablePanel2).BeginInit();
             tablePanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtCurrencyID.Properties).BeginInit();
@@ -279,8 +282,6 @@
             ((System.ComponentModel.ISupportInitialize)gridViewSku).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cmbSku).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dxErrorProvider).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)txtCodigoBarra.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -293,7 +294,6 @@
             lblTitulo.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             lblTitulo.ImageOptions.Alignment = ContentAlignment.MiddleLeft;
             lblTitulo.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("lblTitulo.ImageOptions.SvgImage");
-            lblTitulo.Location = new Point(4, 2);
             // 
             // progressPanel
             // 
@@ -304,10 +304,10 @@
             // xtraTabControl1
             // 
             xtraTabControl1.Dock = DockStyle.Fill;
-            xtraTabControl1.Location = new Point(0, 98);
+            xtraTabControl1.Location = new Point(0, 100);
             xtraTabControl1.Name = "xtraTabControl1";
             xtraTabControl1.SelectedTabPage = xtraTabPage1;
-            xtraTabControl1.Size = new Size(1111, 650);
+            xtraTabControl1.Size = new Size(1111, 648);
             xtraTabControl1.TabIndex = 76;
             xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPage1, xtraTabPage2, xtraTabPage3, tabPageProveedores, tabPageConceptos, xtraTabPage6, tabPageArchivos, xtraTabPage8, xtraTabPage9 });
             // 
@@ -316,8 +316,9 @@
             xtraTabPage1.Controls.Add(layoutControlCodigoBarra);
             xtraTabPage1.Controls.Add(tablePanel2);
             xtraTabPage1.Controls.Add(tablePanel1);
+            xtraTabPage1.Controls.Add(btnImprimirCodigoBarra);
             xtraTabPage1.Name = "xtraTabPage1";
-            xtraTabPage1.Size = new Size(1109, 625);
+            xtraTabPage1.Size = new Size(1109, 617);
             xtraTabPage1.Text = "Información";
             // 
             // layoutControlCodigoBarra
@@ -330,6 +331,17 @@
             layoutControlCodigoBarra.TabIndex = 2;
             layoutControlCodigoBarra.Text = "layoutControl1";
             // 
+            // txtCodigoBarra
+            // 
+            txtCodigoBarra.Location = new Point(121, 16);
+            txtCodigoBarra.Name = "txtCodigoBarra";
+            txtCodigoBarra.Properties.ReadOnly = true;
+            txtCodigoBarra.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+            txtCodigoBarra.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            txtCodigoBarra.Size = new Size(334, 88);
+            txtCodigoBarra.StyleController = layoutControlCodigoBarra;
+            txtCodigoBarra.TabIndex = 4;
+            // 
             // Root
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -338,6 +350,20 @@
             Root.Name = "Root";
             Root.Size = new Size(471, 120);
             Root.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            layoutControlItem1.AppearanceItemCaption.Options.UseTextOptions = true;
+            layoutControlItem1.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            layoutControlItem1.AppearanceItemCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+            layoutControlItem1.Control = txtCodigoBarra;
+            layoutControlItem1.Location = new Point(0, 0);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new Size(445, 94);
+            layoutControlItem1.Text = "Barra:";
+            layoutControlItem1.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem1.TextSize = new Size(100, 20);
+            layoutControlItem1.TextToControlDistance = 5;
             // 
             // tablePanel2
             // 
@@ -482,89 +508,89 @@
             // txtCurrencyID
             // 
             tablePanel2.SetColumn(txtCurrencyID, 1);
-            txtCurrencyID.Location = new Point(180, 275);
+            txtCurrencyID.Location = new Point(181, 271);
             txtCurrencyID.Name = "txtCurrencyID";
             txtCurrencyID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtCurrencyID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             tablePanel2.SetRow(txtCurrencyID, 7);
-            txtCurrencyID.Size = new Size(287, 20);
+            txtCurrencyID.Size = new Size(285, 28);
             txtCurrencyID.TabIndex = 7;
             // 
             // txtDefaultWarehouseID
             // 
             tablePanel2.SetColumn(txtDefaultWarehouseID, 1);
-            txtDefaultWarehouseID.Location = new Point(180, 235);
+            txtDefaultWarehouseID.Location = new Point(181, 231);
             txtDefaultWarehouseID.Name = "txtDefaultWarehouseID";
             txtDefaultWarehouseID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtDefaultWarehouseID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             tablePanel2.SetRow(txtDefaultWarehouseID, 6);
-            txtDefaultWarehouseID.Size = new Size(287, 20);
+            txtDefaultWarehouseID.Size = new Size(285, 28);
             txtDefaultWarehouseID.TabIndex = 6;
             // 
             // txtDisplayUnitMeasureID
             // 
             tablePanel2.SetColumn(txtDisplayUnitMeasureID, 1);
-            txtDisplayUnitMeasureID.Location = new Point(180, 197);
+            txtDisplayUnitMeasureID.Location = new Point(181, 193);
             txtDisplayUnitMeasureID.Name = "txtDisplayUnitMeasureID";
             txtDisplayUnitMeasureID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtDisplayUnitMeasureID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             tablePanel2.SetRow(txtDisplayUnitMeasureID, 5);
-            txtDisplayUnitMeasureID.Size = new Size(287, 20);
+            txtDisplayUnitMeasureID.Size = new Size(285, 28);
             txtDisplayUnitMeasureID.TabIndex = 5;
             // 
             // txtDisplayID
             // 
             tablePanel2.SetColumn(txtDisplayID, 1);
-            txtDisplayID.Location = new Point(180, 160);
+            txtDisplayID.Location = new Point(181, 156);
             txtDisplayID.Name = "txtDisplayID";
             txtDisplayID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtDisplayID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             tablePanel2.SetRow(txtDisplayID, 4);
-            txtDisplayID.Size = new Size(287, 20);
+            txtDisplayID.Size = new Size(285, 28);
             txtDisplayID.TabIndex = 4;
             // 
             // txtFamilyID
             // 
             tablePanel2.SetColumn(txtFamilyID, 1);
-            txtFamilyID.Location = new Point(180, 86);
+            txtFamilyID.Location = new Point(181, 82);
             txtFamilyID.Name = "txtFamilyID";
             txtFamilyID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtFamilyID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             tablePanel2.SetRow(txtFamilyID, 2);
-            txtFamilyID.Size = new Size(287, 20);
+            txtFamilyID.Size = new Size(285, 28);
             txtFamilyID.TabIndex = 2;
             // 
             // txtInventoryCategoryID
             // 
             tablePanel2.SetColumn(txtInventoryCategoryID, 1);
-            txtInventoryCategoryID.Location = new Point(180, 49);
+            txtInventoryCategoryID.Location = new Point(181, 45);
             txtInventoryCategoryID.Name = "txtInventoryCategoryID";
             txtInventoryCategoryID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtInventoryCategoryID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             tablePanel2.SetRow(txtInventoryCategoryID, 1);
-            txtInventoryCategoryID.Size = new Size(287, 20);
+            txtInventoryCategoryID.Size = new Size(285, 28);
             txtInventoryCategoryID.TabIndex = 1;
             // 
             // txtStatusID
             // 
             tablePanel2.SetColumn(txtStatusID, 1);
-            txtStatusID.Location = new Point(180, 11);
+            txtStatusID.Location = new Point(181, 7);
             txtStatusID.Name = "txtStatusID";
             txtStatusID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtStatusID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             tablePanel2.SetRow(txtStatusID, 0);
-            txtStatusID.Size = new Size(287, 20);
+            txtStatusID.Size = new Size(285, 28);
             txtStatusID.TabIndex = 0;
             // 
             // txtUnitMeasureID
             // 
             tablePanel2.SetColumn(txtUnitMeasureID, 1);
-            txtUnitMeasureID.Location = new Point(180, 124);
+            txtUnitMeasureID.Location = new Point(181, 120);
             txtUnitMeasureID.Name = "txtUnitMeasureID";
             txtUnitMeasureID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtUnitMeasureID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             tablePanel2.SetRow(txtUnitMeasureID, 3);
-            txtUnitMeasureID.Size = new Size(287, 20);
+            txtUnitMeasureID.Size = new Size(285, 28);
             txtUnitMeasureID.TabIndex = 3;
             // 
             // tablePanel1
@@ -607,66 +633,66 @@
             // txtFactorProgram
             // 
             tablePanel1.SetColumn(txtFactorProgram, 1);
-            txtFactorProgram.Location = new Point(133, 405);
+            txtFactorProgram.Location = new Point(134, 401);
             txtFactorProgram.Name = "txtFactorProgram";
             tablePanel1.SetRow(txtFactorProgram, 12);
-            txtFactorProgram.Size = new Size(313, 20);
+            txtFactorProgram.Size = new Size(311, 28);
             txtFactorProgram.TabIndex = 25;
             // 
             // txtFactorBox
             // 
             tablePanel1.SetColumn(txtFactorBox, 1);
-            txtFactorBox.Location = new Point(133, 371);
+            txtFactorBox.Location = new Point(134, 367);
             txtFactorBox.Name = "txtFactorBox";
             tablePanel1.SetRow(txtFactorBox, 11);
-            txtFactorBox.Size = new Size(313, 20);
+            txtFactorBox.Size = new Size(311, 28);
             txtFactorBox.TabIndex = 24;
             // 
             // txtCost
             // 
             tablePanel1.SetColumn(txtCost, 1);
-            txtCost.Location = new Point(133, 336);
+            txtCost.Location = new Point(134, 332);
             txtCost.Name = "txtCost";
             txtCost.Properties.ReadOnly = true;
             tablePanel1.SetRow(txtCost, 10);
-            txtCost.Size = new Size(313, 20);
+            txtCost.Size = new Size(311, 28);
             txtCost.TabIndex = 23;
             // 
             // txtQuantityMax
             // 
             tablePanel1.SetColumn(txtQuantityMax, 1);
-            txtQuantityMax.Location = new Point(133, 302);
+            txtQuantityMax.Location = new Point(134, 298);
             txtQuantityMax.Name = "txtQuantityMax";
             tablePanel1.SetRow(txtQuantityMax, 9);
-            txtQuantityMax.Size = new Size(313, 20);
+            txtQuantityMax.Size = new Size(311, 28);
             txtQuantityMax.TabIndex = 22;
             // 
             // txtQuantityMin
             // 
             tablePanel1.SetColumn(txtQuantityMin, 1);
-            txtQuantityMin.Location = new Point(133, 268);
+            txtQuantityMin.Location = new Point(134, 264);
             txtQuantityMin.Name = "txtQuantityMin";
             tablePanel1.SetRow(txtQuantityMin, 8);
-            txtQuantityMin.Size = new Size(313, 20);
+            txtQuantityMin.Size = new Size(311, 28);
             txtQuantityMin.TabIndex = 21;
             // 
             // txtQuantity
             // 
             tablePanel1.SetColumn(txtQuantity, 1);
-            txtQuantity.Location = new Point(133, 234);
+            txtQuantity.Location = new Point(134, 230);
             txtQuantity.Name = "txtQuantity";
             txtQuantity.Properties.ReadOnly = true;
             tablePanel1.SetRow(txtQuantity, 7);
-            txtQuantity.Size = new Size(313, 20);
+            txtQuantity.Size = new Size(311, 28);
             txtQuantity.TabIndex = 20;
             // 
             // txtCapacity
             // 
             tablePanel1.SetColumn(txtCapacity, 1);
-            txtCapacity.Location = new Point(133, 199);
+            txtCapacity.Location = new Point(134, 195);
             txtCapacity.Name = "txtCapacity";
             tablePanel1.SetRow(txtCapacity, 6);
-            txtCapacity.Size = new Size(313, 20);
+            txtCapacity.Size = new Size(311, 28);
             txtCapacity.TabIndex = 19;
             // 
             // labelControl13
@@ -677,11 +703,11 @@
             labelControl13.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetColumn(labelControl13, 0);
             labelControl13.Dock = DockStyle.Fill;
-            labelControl13.Location = new Point(4, 400);
+            labelControl13.Location = new Point(5, 401);
             labelControl13.Name = "labelControl13";
             labelControl13.Padding = new Padding(0, 0, 5, 0);
             tablePanel1.SetRow(labelControl13, 12);
-            labelControl13.Size = new Size(125, 30);
+            labelControl13.Size = new Size(123, 28);
             labelControl13.TabIndex = 18;
             labelControl13.Text = "SKU Producción:";
             // 
@@ -693,11 +719,11 @@
             labelControl12.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetColumn(labelControl12, 0);
             labelControl12.Dock = DockStyle.Fill;
-            labelControl12.Location = new Point(4, 366);
+            labelControl12.Location = new Point(5, 367);
             labelControl12.Name = "labelControl12";
             labelControl12.Padding = new Padding(0, 0, 5, 0);
             tablePanel1.SetRow(labelControl12, 11);
-            labelControl12.Size = new Size(125, 30);
+            labelControl12.Size = new Size(123, 28);
             labelControl12.TabIndex = 17;
             labelControl12.Text = "SKU Compras:";
             // 
@@ -709,11 +735,11 @@
             labelControl11.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetColumn(labelControl11, 0);
             labelControl11.Dock = DockStyle.Fill;
-            labelControl11.Location = new Point(4, 331);
+            labelControl11.Location = new Point(5, 332);
             labelControl11.Name = "labelControl11";
             labelControl11.Padding = new Padding(0, 0, 5, 0);
             tablePanel1.SetRow(labelControl11, 10);
-            labelControl11.Size = new Size(125, 31);
+            labelControl11.Size = new Size(123, 29);
             labelControl11.TabIndex = 16;
             labelControl11.Text = "Costo:";
             // 
@@ -725,11 +751,11 @@
             labelControl10.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetColumn(labelControl10, 0);
             labelControl10.Dock = DockStyle.Fill;
-            labelControl10.Location = new Point(4, 297);
+            labelControl10.Location = new Point(5, 298);
             labelControl10.Name = "labelControl10";
             labelControl10.Padding = new Padding(0, 0, 5, 0);
             tablePanel1.SetRow(labelControl10, 9);
-            labelControl10.Size = new Size(125, 30);
+            labelControl10.Size = new Size(123, 28);
             labelControl10.TabIndex = 15;
             labelControl10.Text = "Cantidad máxima:";
             // 
@@ -741,11 +767,11 @@
             labelControl9.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetColumn(labelControl9, 0);
             labelControl9.Dock = DockStyle.Fill;
-            labelControl9.Location = new Point(4, 263);
+            labelControl9.Location = new Point(5, 264);
             labelControl9.Name = "labelControl9";
             labelControl9.Padding = new Padding(0, 0, 5, 0);
             tablePanel1.SetRow(labelControl9, 8);
-            labelControl9.Size = new Size(125, 30);
+            labelControl9.Size = new Size(123, 28);
             labelControl9.TabIndex = 14;
             labelControl9.Text = "Cantidad minima:";
             // 
@@ -757,11 +783,11 @@
             labelControl8.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetColumn(labelControl8, 0);
             labelControl8.Dock = DockStyle.Fill;
-            labelControl8.Location = new Point(4, 229);
+            labelControl8.Location = new Point(5, 230);
             labelControl8.Name = "labelControl8";
             labelControl8.Padding = new Padding(0, 0, 5, 0);
             tablePanel1.SetRow(labelControl8, 7);
-            labelControl8.Size = new Size(125, 30);
+            labelControl8.Size = new Size(123, 28);
             labelControl8.TabIndex = 13;
             labelControl8.Text = "Cantidad:";
             // 
@@ -773,11 +799,11 @@
             labelControl7.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetColumn(labelControl7, 0);
             labelControl7.Dock = DockStyle.Fill;
-            labelControl7.Location = new Point(4, 194);
+            labelControl7.Location = new Point(5, 195);
             labelControl7.Name = "labelControl7";
             labelControl7.Padding = new Padding(0, 0, 5, 0);
             tablePanel1.SetRow(labelControl7, 6);
-            labelControl7.Size = new Size(125, 31);
+            labelControl7.Size = new Size(123, 29);
             labelControl7.TabIndex = 12;
             labelControl7.Text = "Capacidad:";
             // 
@@ -789,11 +815,11 @@
             labelControl6.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetColumn(labelControl6, 0);
             labelControl6.Dock = DockStyle.Fill;
-            labelControl6.Location = new Point(4, 165);
+            labelControl6.Location = new Point(5, 166);
             labelControl6.Name = "labelControl6";
             labelControl6.Padding = new Padding(0, 0, 5, 0);
             tablePanel1.SetRow(labelControl6, 5);
-            labelControl6.Size = new Size(125, 25);
+            labelControl6.Size = new Size(123, 23);
             labelControl6.TabIndex = 11;
             labelControl6.Text = "Servicio:";
             // 
@@ -805,11 +831,11 @@
             labelControl5.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetColumn(labelControl5, 0);
             labelControl5.Dock = DockStyle.Fill;
-            labelControl5.Location = new Point(4, 136);
+            labelControl5.Location = new Point(5, 137);
             labelControl5.Name = "labelControl5";
             labelControl5.Padding = new Padding(0, 0, 5, 0);
             tablePanel1.SetRow(labelControl5, 4);
-            labelControl5.Size = new Size(125, 25);
+            labelControl5.Size = new Size(123, 23);
             labelControl5.TabIndex = 10;
             labelControl5.Text = "Facturable:";
             // 
@@ -821,11 +847,11 @@
             labelControl4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetColumn(labelControl4, 0);
             labelControl4.Dock = DockStyle.Fill;
-            labelControl4.Location = new Point(4, 107);
+            labelControl4.Location = new Point(5, 108);
             labelControl4.Name = "labelControl4";
             labelControl4.Padding = new Padding(0, 0, 5, 0);
             tablePanel1.SetRow(labelControl4, 3);
-            labelControl4.Size = new Size(125, 25);
+            labelControl4.Size = new Size(123, 23);
             labelControl4.TabIndex = 9;
             labelControl4.Text = "Cantidad Zero:";
             // 
@@ -837,66 +863,66 @@
             labelControl3.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetColumn(labelControl3, 0);
             labelControl3.Dock = DockStyle.Fill;
-            labelControl3.Location = new Point(4, 78);
+            labelControl3.Location = new Point(5, 79);
             labelControl3.Name = "labelControl3";
             labelControl3.Padding = new Padding(0, 0, 5, 0);
             tablePanel1.SetRow(labelControl3, 2);
-            labelControl3.Size = new Size(125, 25);
+            labelControl3.Size = new Size(123, 23);
             labelControl3.TabIndex = 8;
             labelControl3.Text = "Perecedero:";
             // 
             // txtIsServices
             // 
             tablePanel1.SetColumn(txtIsServices, 1);
-            txtIsServices.Location = new Point(133, 167);
+            txtIsServices.Location = new Point(134, 166);
             txtIsServices.Name = "txtIsServices";
             txtIsServices.Properties.Caption = "";
             tablePanel1.SetRow(txtIsServices, 5);
-            txtIsServices.Size = new Size(313, 20);
+            txtIsServices.Size = new Size(311, 22);
             txtIsServices.TabIndex = 7;
             // 
             // txtIsInvoice
             // 
             tablePanel1.SetColumn(txtIsInvoice, 1);
             txtIsInvoice.EditValue = true;
-            txtIsInvoice.Location = new Point(133, 138);
+            txtIsInvoice.Location = new Point(134, 137);
             txtIsInvoice.Name = "txtIsInvoice";
             txtIsInvoice.Properties.Caption = "";
             tablePanel1.SetRow(txtIsInvoice, 4);
-            txtIsInvoice.Size = new Size(313, 20);
+            txtIsInvoice.Size = new Size(311, 22);
             txtIsInvoice.TabIndex = 6;
             // 
             // txtIsInvoiceQuantityZero
             // 
             tablePanel1.SetColumn(txtIsInvoiceQuantityZero, 1);
             txtIsInvoiceQuantityZero.EditValue = true;
-            txtIsInvoiceQuantityZero.Location = new Point(133, 109);
+            txtIsInvoiceQuantityZero.Location = new Point(134, 108);
             txtIsInvoiceQuantityZero.Name = "txtIsInvoiceQuantityZero";
             txtIsInvoiceQuantityZero.Properties.Caption = "";
             tablePanel1.SetRow(txtIsInvoiceQuantityZero, 3);
-            txtIsInvoiceQuantityZero.Size = new Size(313, 20);
+            txtIsInvoiceQuantityZero.Size = new Size(311, 22);
             txtIsInvoiceQuantityZero.TabIndex = 5;
             // 
             // txtIsPerishable
             // 
             tablePanel1.SetColumn(txtIsPerishable, 1);
-            txtIsPerishable.Location = new Point(133, 80);
+            txtIsPerishable.Location = new Point(134, 79);
             txtIsPerishable.Name = "txtIsPerishable";
             txtIsPerishable.Properties.Caption = "";
             tablePanel1.SetRow(txtIsPerishable, 2);
-            txtIsPerishable.Size = new Size(313, 20);
+            txtIsPerishable.Size = new Size(311, 22);
             txtIsPerishable.TabIndex = 4;
             // 
             // txtBarCode
             // 
             tablePanel1.SetColumn(txtBarCode, 1);
-            txtBarCode.Location = new Point(133, 47);
+            txtBarCode.Location = new Point(134, 43);
             txtBarCode.Name = "txtBarCode";
             txtBarCode.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             txtBarCode.Properties.NullText = "Código de barra";
             txtBarCode.Properties.NullValuePrompt = "Debe especificar un código de barra";
             tablePanel1.SetRow(txtBarCode, 1);
-            txtBarCode.Size = new Size(313, 20);
+            txtBarCode.Size = new Size(311, 28);
             txtBarCode.TabIndex = 3;
             // 
             // labelControl2
@@ -907,11 +933,11 @@
             labelControl2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetColumn(labelControl2, 0);
             labelControl2.Dock = DockStyle.Fill;
-            labelControl2.Location = new Point(4, 40);
+            labelControl2.Location = new Point(5, 41);
             labelControl2.Name = "labelControl2";
             labelControl2.Padding = new Padding(0, 0, 5, 0);
             tablePanel1.SetRow(labelControl2, 1);
-            labelControl2.Size = new Size(125, 34);
+            labelControl2.Size = new Size(123, 32);
             labelControl2.TabIndex = 2;
             labelControl2.Text = "Barra:";
             // 
@@ -919,13 +945,13 @@
             // 
             tablePanel1.SetColumn(txtName, 1);
             txtName.EnterMoveNextControl = true;
-            txtName.Location = new Point(133, 10);
+            txtName.Location = new Point(134, 6);
             txtName.Name = "txtName";
             txtName.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             txtName.Properties.NullText = "Nombre del producto";
             txtName.Properties.NullValuePrompt = "Debe especificar una descripción del producto o servicio";
             tablePanel1.SetRow(txtName, 0);
-            txtName.Size = new Size(313, 20);
+            txtName.Size = new Size(311, 28);
             txtName.TabIndex = 1;
             // 
             // labelControl1
@@ -936,11 +962,11 @@
             labelControl1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel1.SetColumn(labelControl1, 0);
             labelControl1.Dock = DockStyle.Fill;
-            labelControl1.Location = new Point(4, 4);
+            labelControl1.Location = new Point(5, 5);
             labelControl1.Name = "labelControl1";
             labelControl1.Padding = new Padding(0, 0, 5, 0);
             tablePanel1.SetRow(labelControl1, 0);
-            labelControl1.Size = new Size(125, 32);
+            labelControl1.Size = new Size(123, 30);
             labelControl1.TabIndex = 0;
             labelControl1.Text = "Nombre:";
             // 
@@ -948,7 +974,7 @@
             // 
             xtraTabPage2.Controls.Add(xtraScrollableControl1);
             xtraTabPage2.Name = "xtraTabPage2";
-            xtraTabPage2.Size = new Size(1109, 625);
+            xtraTabPage2.Size = new Size(1109, 619);
             xtraTabPage2.Text = "Referencias";
             // 
             // xtraScrollableControl1
@@ -958,7 +984,7 @@
             xtraScrollableControl1.Dock = DockStyle.Fill;
             xtraScrollableControl1.Location = new Point(0, 0);
             xtraScrollableControl1.Name = "xtraScrollableControl1";
-            xtraScrollableControl1.Size = new Size(1109, 625);
+            xtraScrollableControl1.Size = new Size(1109, 619);
             xtraScrollableControl1.TabIndex = 1;
             xtraScrollableControl1.Click += xtraScrollableControl1_Click;
             // 
@@ -987,21 +1013,21 @@
             stackPanel3.Controls.Add(txtEmployerDescription);
             stackPanel3.Controls.Add(btnClearEmployer);
             stackPanel3.Controls.Add(btnSearchEmployer);
-            stackPanel3.Location = new Point(149, 125);
+            stackPanel3.Location = new Point(150, 125);
             stackPanel3.Name = "stackPanel3";
             stackPanel3.Padding = new Padding(1);
             tablePanel4.SetRow(stackPanel3, 3);
-            stackPanel3.Size = new Size(337, 38);
+            stackPanel3.Size = new Size(335, 38);
             stackPanel3.TabIndex = 7;
             stackPanel3.UseSkinIndents = true;
             // 
             // txtEmployerDescription
             // 
             txtEmployerDescription.Enabled = false;
-            txtEmployerDescription.Location = new Point(1, 9);
+            txtEmployerDescription.Location = new Point(1, 5);
             txtEmployerDescription.Margin = new Padding(0);
             txtEmployerDescription.Name = "txtEmployerDescription";
-            txtEmployerDescription.Size = new Size(204, 20);
+            txtEmployerDescription.Size = new Size(204, 28);
             txtEmployerDescription.TabIndex = 0;
             // 
             // btnClearEmployer
@@ -1041,28 +1067,28 @@
             // txtRealStateReferenceZone
             // 
             tablePanel4.SetColumn(txtRealStateReferenceZone, 1);
-            txtRealStateReferenceZone.Location = new Point(149, 90);
+            txtRealStateReferenceZone.Location = new Point(150, 86);
             txtRealStateReferenceZone.Name = "txtRealStateReferenceZone";
             tablePanel4.SetRow(txtRealStateReferenceZone, 2);
-            txtRealStateReferenceZone.Size = new Size(337, 20);
+            txtRealStateReferenceZone.Size = new Size(335, 28);
             txtRealStateReferenceZone.TabIndex = 6;
             // 
             // txtRealStateReferenceCondominio
             // 
             tablePanel4.SetColumn(txtRealStateReferenceCondominio, 1);
-            txtRealStateReferenceCondominio.Location = new Point(149, 50);
+            txtRealStateReferenceCondominio.Location = new Point(150, 46);
             txtRealStateReferenceCondominio.Name = "txtRealStateReferenceCondominio";
             tablePanel4.SetRow(txtRealStateReferenceCondominio, 1);
-            txtRealStateReferenceCondominio.Size = new Size(337, 20);
+            txtRealStateReferenceCondominio.Size = new Size(335, 28);
             txtRealStateReferenceCondominio.TabIndex = 5;
             // 
             // txtRealStateReferenceUbicacion
             // 
             tablePanel4.SetColumn(txtRealStateReferenceUbicacion, 1);
-            txtRealStateReferenceUbicacion.Location = new Point(149, 11);
+            txtRealStateReferenceUbicacion.Location = new Point(150, 7);
             txtRealStateReferenceUbicacion.Name = "txtRealStateReferenceUbicacion";
             tablePanel4.SetRow(txtRealStateReferenceUbicacion, 0);
-            txtRealStateReferenceUbicacion.Size = new Size(337, 20);
+            txtRealStateReferenceUbicacion.Size = new Size(335, 28);
             txtRealStateReferenceUbicacion.TabIndex = 4;
             // 
             // labelControl45
@@ -1073,11 +1099,11 @@
             labelControl45.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel4.SetColumn(labelControl45, 0);
             labelControl45.Dock = DockStyle.Fill;
-            labelControl45.Location = new Point(3, 124);
+            labelControl45.Location = new Point(4, 125);
             labelControl45.Name = "labelControl45";
             labelControl45.Padding = new Padding(0, 0, 5, 0);
             tablePanel4.SetRow(labelControl45, 3);
-            labelControl45.Size = new Size(142, 40);
+            labelControl45.Size = new Size(140, 38);
             labelControl45.TabIndex = 3;
             labelControl45.Text = "Agente:";
             // 
@@ -1089,11 +1115,11 @@
             labelControl44.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel4.SetColumn(labelControl44, 0);
             labelControl44.Dock = DockStyle.Fill;
-            labelControl44.Location = new Point(3, 81);
+            labelControl44.Location = new Point(4, 82);
             labelControl44.Name = "labelControl44";
             labelControl44.Padding = new Padding(0, 0, 5, 0);
             tablePanel4.SetRow(labelControl44, 2);
-            labelControl44.Size = new Size(142, 39);
+            labelControl44.Size = new Size(140, 37);
             labelControl44.TabIndex = 2;
             labelControl44.Text = "Zona:";
             // 
@@ -1105,11 +1131,11 @@
             labelControl43.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel4.SetColumn(labelControl43, 0);
             labelControl43.Dock = DockStyle.Fill;
-            labelControl43.Location = new Point(3, 44);
+            labelControl43.Location = new Point(4, 45);
             labelControl43.Name = "labelControl43";
             labelControl43.Padding = new Padding(0, 0, 5, 0);
             tablePanel4.SetRow(labelControl43, 1);
-            labelControl43.Size = new Size(142, 33);
+            labelControl43.Size = new Size(140, 31);
             labelControl43.TabIndex = 1;
             labelControl43.Text = "Condominio:";
             // 
@@ -1121,11 +1147,11 @@
             labelControl42.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel4.SetColumn(labelControl42, 0);
             labelControl42.Dock = DockStyle.Fill;
-            labelControl42.Location = new Point(3, 3);
+            labelControl42.Location = new Point(4, 4);
             labelControl42.Name = "labelControl42";
             labelControl42.Padding = new Padding(0, 0, 5, 0);
             tablePanel4.SetRow(labelControl42, 0);
-            labelControl42.Size = new Size(142, 37);
+            labelControl42.Size = new Size(140, 35);
             labelControl42.TabIndex = 0;
             labelControl42.Text = "Ubicación:";
             // 
@@ -1183,55 +1209,55 @@
             // txtRealStateStyleKitchen
             // 
             tablePanel3.SetColumn(txtRealStateStyleKitchen, 1);
-            txtRealStateStyleKitchen.Location = new Point(139, 742);
+            txtRealStateStyleKitchen.Location = new Point(140, 738);
             txtRealStateStyleKitchen.Name = "txtRealStateStyleKitchen";
             tablePanel3.SetRow(txtRealStateStyleKitchen, 19);
-            txtRealStateStyleKitchen.Size = new Size(308, 20);
+            txtRealStateStyleKitchen.Size = new Size(306, 28);
             txtRealStateStyleKitchen.TabIndex = 39;
             // 
             // txtRealStateLinkOther
             // 
             tablePanel3.SetColumn(txtRealStateLinkOther, 1);
-            txtRealStateLinkOther.Location = new Point(139, 702);
+            txtRealStateLinkOther.Location = new Point(140, 698);
             txtRealStateLinkOther.Name = "txtRealStateLinkOther";
             tablePanel3.SetRow(txtRealStateLinkOther, 18);
-            txtRealStateLinkOther.Size = new Size(308, 20);
+            txtRealStateLinkOther.Size = new Size(306, 28);
             txtRealStateLinkOther.TabIndex = 38;
             // 
             // txtRealStateLinkGoogleMaps
             // 
             tablePanel3.SetColumn(txtRealStateLinkGoogleMaps, 1);
-            txtRealStateLinkGoogleMaps.Location = new Point(139, 664);
+            txtRealStateLinkGoogleMaps.Location = new Point(140, 660);
             txtRealStateLinkGoogleMaps.Name = "txtRealStateLinkGoogleMaps";
             tablePanel3.SetRow(txtRealStateLinkGoogleMaps, 17);
-            txtRealStateLinkGoogleMaps.Size = new Size(308, 20);
+            txtRealStateLinkGoogleMaps.Size = new Size(306, 28);
             txtRealStateLinkGoogleMaps.TabIndex = 37;
             // 
             // txtRealStateLinkPhontos
             // 
             tablePanel3.SetColumn(txtRealStateLinkPhontos, 1);
-            txtRealStateLinkPhontos.Location = new Point(139, 627);
+            txtRealStateLinkPhontos.Location = new Point(140, 623);
             txtRealStateLinkPhontos.Name = "txtRealStateLinkPhontos";
             tablePanel3.SetRow(txtRealStateLinkPhontos, 16);
-            txtRealStateLinkPhontos.Size = new Size(308, 20);
+            txtRealStateLinkPhontos.Size = new Size(306, 28);
             txtRealStateLinkPhontos.TabIndex = 36;
             // 
             // txtRealStateLinkPaginaWeb
             // 
             tablePanel3.SetColumn(txtRealStateLinkPaginaWeb, 1);
-            txtRealStateLinkPaginaWeb.Location = new Point(139, 590);
+            txtRealStateLinkPaginaWeb.Location = new Point(140, 586);
             txtRealStateLinkPaginaWeb.Name = "txtRealStateLinkPaginaWeb";
             tablePanel3.SetRow(txtRealStateLinkPaginaWeb, 15);
-            txtRealStateLinkPaginaWeb.Size = new Size(308, 20);
+            txtRealStateLinkPaginaWeb.Size = new Size(306, 28);
             txtRealStateLinkPaginaWeb.TabIndex = 35;
             // 
             // txtRealStateLinkYoutube
             // 
             tablePanel3.SetColumn(txtRealStateLinkYoutube, 1);
-            txtRealStateLinkYoutube.Location = new Point(139, 551);
+            txtRealStateLinkYoutube.Location = new Point(140, 547);
             txtRealStateLinkYoutube.Name = "txtRealStateLinkYoutube";
             tablePanel3.SetRow(txtRealStateLinkYoutube, 14);
-            txtRealStateLinkYoutube.Size = new Size(308, 20);
+            txtRealStateLinkYoutube.Size = new Size(306, 28);
             txtRealStateLinkYoutube.TabIndex = 34;
             // 
             // labelControl41
@@ -1242,11 +1268,11 @@
             labelControl41.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl41, 0);
             labelControl41.Dock = DockStyle.Fill;
-            labelControl41.Location = new Point(3, 734);
+            labelControl41.Location = new Point(4, 735);
             labelControl41.Name = "labelControl41";
             labelControl41.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl41, 19);
-            labelControl41.Size = new Size(132, 36);
+            labelControl41.Size = new Size(130, 34);
             labelControl41.TabIndex = 33;
             labelControl41.Text = "Estilo cocina:";
             // 
@@ -1258,11 +1284,11 @@
             labelControl40.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl40, 0);
             labelControl40.Dock = DockStyle.Fill;
-            labelControl40.Location = new Point(3, 695);
+            labelControl40.Location = new Point(4, 696);
             labelControl40.Name = "labelControl40";
             labelControl40.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl40, 18);
-            labelControl40.Size = new Size(132, 35);
+            labelControl40.Size = new Size(130, 33);
             labelControl40.TabIndex = 32;
             labelControl40.Text = "Otros link:";
             // 
@@ -1274,11 +1300,11 @@
             labelControl39.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl39, 0);
             labelControl39.Dock = DockStyle.Fill;
-            labelControl39.Location = new Point(3, 658);
+            labelControl39.Location = new Point(4, 659);
             labelControl39.Name = "labelControl39";
             labelControl39.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl39, 17);
-            labelControl39.Size = new Size(132, 33);
+            labelControl39.Size = new Size(130, 31);
             labelControl39.TabIndex = 31;
             labelControl39.Text = "Link ubicación google:";
             // 
@@ -1290,11 +1316,11 @@
             labelControl38.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl38, 0);
             labelControl38.Dock = DockStyle.Fill;
-            labelControl38.Location = new Point(3, 620);
+            labelControl38.Location = new Point(4, 621);
             labelControl38.Name = "labelControl38";
             labelControl38.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl38, 16);
-            labelControl38.Size = new Size(132, 34);
+            labelControl38.Size = new Size(130, 32);
             labelControl38.TabIndex = 30;
             labelControl38.Text = "Fotos:";
             // 
@@ -1306,11 +1332,11 @@
             labelControl37.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl37, 0);
             labelControl37.Dock = DockStyle.Fill;
-            labelControl37.Location = new Point(3, 584);
+            labelControl37.Location = new Point(4, 585);
             labelControl37.Name = "labelControl37";
             labelControl37.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl37, 15);
-            labelControl37.Size = new Size(132, 32);
+            labelControl37.Size = new Size(130, 30);
             labelControl37.TabIndex = 29;
             labelControl37.Text = "Página web:";
             // 
@@ -1322,11 +1348,11 @@
             labelControl36.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl36, 0);
             labelControl36.Dock = DockStyle.Fill;
-            labelControl36.Location = new Point(3, 543);
+            labelControl36.Location = new Point(4, 544);
             labelControl36.Name = "labelControl36";
             labelControl36.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl36, 14);
-            labelControl36.Size = new Size(132, 37);
+            labelControl36.Size = new Size(130, 35);
             labelControl36.TabIndex = 28;
             labelControl36.Text = "Link youtube:";
             // 
@@ -1338,11 +1364,11 @@
             labelControl35.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl35, 0);
             labelControl35.Dock = DockStyle.Fill;
-            labelControl35.Location = new Point(3, 507);
+            labelControl35.Location = new Point(4, 508);
             labelControl35.Name = "labelControl35";
             labelControl35.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl35, 13);
-            labelControl35.Size = new Size(132, 32);
+            labelControl35.Size = new Size(130, 30);
             labelControl35.TabIndex = 27;
             labelControl35.Text = "Plan de referido:";
             // 
@@ -1354,11 +1380,11 @@
             labelControl34.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl34, 0);
             labelControl34.Dock = DockStyle.Fill;
-            labelControl34.Location = new Point(3, 471);
+            labelControl34.Location = new Point(4, 472);
             labelControl34.Name = "labelControl34";
             labelControl34.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl34, 12);
-            labelControl34.Size = new Size(132, 32);
+            labelControl34.Size = new Size(130, 30);
             labelControl34.TabIndex = 26;
             labelControl34.Text = "Corretaje";
             // 
@@ -1367,11 +1393,11 @@
             tablePanel3.SetColumn(txtRealStatePlanReference, 1);
             txtRealStatePlanReference.Dock = DockStyle.Fill;
             txtRealStatePlanReference.EditValue = true;
-            txtRealStatePlanReference.Location = new Point(139, 507);
+            txtRealStatePlanReference.Location = new Point(140, 508);
             txtRealStatePlanReference.Name = "txtRealStatePlanReference";
             txtRealStatePlanReference.Properties.Caption = "";
             tablePanel3.SetRow(txtRealStatePlanReference, 13);
-            txtRealStatePlanReference.Size = new Size(308, 32);
+            txtRealStatePlanReference.Size = new Size(306, 30);
             txtRealStatePlanReference.TabIndex = 25;
             // 
             // txtRealStateContractCorrentaje
@@ -1379,11 +1405,11 @@
             tablePanel3.SetColumn(txtRealStateContractCorrentaje, 1);
             txtRealStateContractCorrentaje.Dock = DockStyle.Fill;
             txtRealStateContractCorrentaje.EditValue = true;
-            txtRealStateContractCorrentaje.Location = new Point(139, 471);
+            txtRealStateContractCorrentaje.Location = new Point(140, 472);
             txtRealStateContractCorrentaje.Name = "txtRealStateContractCorrentaje";
             txtRealStateContractCorrentaje.Properties.Caption = "";
             tablePanel3.SetRow(txtRealStateContractCorrentaje, 12);
-            txtRealStateContractCorrentaje.Size = new Size(308, 32);
+            txtRealStateContractCorrentaje.Size = new Size(306, 30);
             txtRealStateContractCorrentaje.TabIndex = 24;
             // 
             // txtRealStateAceptanMascota
@@ -1391,11 +1417,11 @@
             tablePanel3.SetColumn(txtRealStateAceptanMascota, 1);
             txtRealStateAceptanMascota.Dock = DockStyle.Fill;
             txtRealStateAceptanMascota.EditValue = true;
-            txtRealStateAceptanMascota.Location = new Point(139, 430);
+            txtRealStateAceptanMascota.Location = new Point(140, 431);
             txtRealStateAceptanMascota.Name = "txtRealStateAceptanMascota";
             txtRealStateAceptanMascota.Properties.Caption = "";
             tablePanel3.SetRow(txtRealStateAceptanMascota, 11);
-            txtRealStateAceptanMascota.Size = new Size(308, 37);
+            txtRealStateAceptanMascota.Size = new Size(306, 35);
             txtRealStateAceptanMascota.TabIndex = 23;
             // 
             // txtRealStateClubPiscina
@@ -1403,11 +1429,11 @@
             tablePanel3.SetColumn(txtRealStateClubPiscina, 1);
             txtRealStateClubPiscina.Dock = DockStyle.Fill;
             txtRealStateClubPiscina.EditValue = true;
-            txtRealStateClubPiscina.Location = new Point(139, 394);
+            txtRealStateClubPiscina.Location = new Point(140, 395);
             txtRealStateClubPiscina.Name = "txtRealStateClubPiscina";
             txtRealStateClubPiscina.Properties.Caption = "";
             tablePanel3.SetRow(txtRealStateClubPiscina, 10);
-            txtRealStateClubPiscina.Size = new Size(308, 32);
+            txtRealStateClubPiscina.Size = new Size(306, 30);
             txtRealStateClubPiscina.TabIndex = 22;
             // 
             // txtRealStatePiscinaPrivate
@@ -1415,11 +1441,11 @@
             tablePanel3.SetColumn(txtRealStatePiscinaPrivate, 1);
             txtRealStatePiscinaPrivate.Dock = DockStyle.Fill;
             txtRealStatePiscinaPrivate.EditValue = true;
-            txtRealStatePiscinaPrivate.Location = new Point(139, 355);
+            txtRealStatePiscinaPrivate.Location = new Point(140, 356);
             txtRealStatePiscinaPrivate.Name = "txtRealStatePiscinaPrivate";
             txtRealStatePiscinaPrivate.Properties.Caption = "";
             tablePanel3.SetRow(txtRealStatePiscinaPrivate, 9);
-            txtRealStatePiscinaPrivate.Size = new Size(308, 35);
+            txtRealStatePiscinaPrivate.Size = new Size(306, 33);
             txtRealStatePiscinaPrivate.TabIndex = 21;
             // 
             // txtRealStateWallInCloset
@@ -1427,11 +1453,11 @@
             tablePanel3.SetColumn(txtRealStateWallInCloset, 1);
             txtRealStateWallInCloset.Dock = DockStyle.Fill;
             txtRealStateWallInCloset.EditValue = true;
-            txtRealStateWallInCloset.Location = new Point(139, 317);
+            txtRealStateWallInCloset.Location = new Point(140, 318);
             txtRealStateWallInCloset.Name = "txtRealStateWallInCloset";
             txtRealStateWallInCloset.Properties.Caption = "";
             tablePanel3.SetRow(txtRealStateWallInCloset, 8);
-            txtRealStateWallInCloset.Size = new Size(308, 34);
+            txtRealStateWallInCloset.Size = new Size(306, 32);
             txtRealStateWallInCloset.TabIndex = 20;
             // 
             // txtRealStateRoomServices
@@ -1439,11 +1465,11 @@
             tablePanel3.SetColumn(txtRealStateRoomServices, 1);
             txtRealStateRoomServices.Dock = DockStyle.Fill;
             txtRealStateRoomServices.EditValue = true;
-            txtRealStateRoomServices.Location = new Point(139, 279);
+            txtRealStateRoomServices.Location = new Point(140, 280);
             txtRealStateRoomServices.Name = "txtRealStateRoomServices";
             txtRealStateRoomServices.Properties.Caption = "";
             tablePanel3.SetRow(txtRealStateRoomServices, 7);
-            txtRealStateRoomServices.Size = new Size(308, 34);
+            txtRealStateRoomServices.Size = new Size(306, 32);
             txtRealStateRoomServices.TabIndex = 19;
             // 
             // txtRealStateRooBatchVisit
@@ -1451,11 +1477,11 @@
             tablePanel3.SetColumn(txtRealStateRooBatchVisit, 1);
             txtRealStateRooBatchVisit.Dock = DockStyle.Fill;
             txtRealStateRooBatchVisit.EditValue = true;
-            txtRealStateRooBatchVisit.Location = new Point(139, 243);
+            txtRealStateRooBatchVisit.Location = new Point(140, 244);
             txtRealStateRooBatchVisit.Name = "txtRealStateRooBatchVisit";
             txtRealStateRooBatchVisit.Properties.Caption = "";
             tablePanel3.SetRow(txtRealStateRooBatchVisit, 6);
-            txtRealStateRooBatchVisit.Size = new Size(308, 32);
+            txtRealStateRooBatchVisit.Size = new Size(306, 30);
             txtRealStateRooBatchVisit.TabIndex = 18;
             // 
             // txtRealStateRoomBatchServices
@@ -1463,11 +1489,11 @@
             tablePanel3.SetColumn(txtRealStateRoomBatchServices, 1);
             txtRealStateRoomBatchServices.Dock = DockStyle.Fill;
             txtRealStateRoomBatchServices.EditValue = true;
-            txtRealStateRoomBatchServices.Location = new Point(139, 205);
+            txtRealStateRoomBatchServices.Location = new Point(140, 206);
             txtRealStateRoomBatchServices.Name = "txtRealStateRoomBatchServices";
             txtRealStateRoomBatchServices.Properties.Caption = "";
             tablePanel3.SetRow(txtRealStateRoomBatchServices, 5);
-            txtRealStateRoomBatchServices.Size = new Size(308, 34);
+            txtRealStateRoomBatchServices.Size = new Size(306, 32);
             txtRealStateRoomBatchServices.TabIndex = 17;
             // 
             // labelControl33
@@ -1478,11 +1504,11 @@
             labelControl33.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl33, 0);
             labelControl33.Dock = DockStyle.Fill;
-            labelControl33.Location = new Point(3, 430);
+            labelControl33.Location = new Point(4, 431);
             labelControl33.Name = "labelControl33";
             labelControl33.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl33, 11);
-            labelControl33.Size = new Size(132, 37);
+            labelControl33.Size = new Size(130, 35);
             labelControl33.TabIndex = 16;
             labelControl33.Text = "Acepta mascota:";
             // 
@@ -1494,11 +1520,11 @@
             labelControl32.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl32, 0);
             labelControl32.Dock = DockStyle.Fill;
-            labelControl32.Location = new Point(3, 394);
+            labelControl32.Location = new Point(4, 395);
             labelControl32.Name = "labelControl32";
             labelControl32.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl32, 10);
-            labelControl32.Size = new Size(132, 32);
+            labelControl32.Size = new Size(130, 30);
             labelControl32.TabIndex = 15;
             labelControl32.Text = "Área club psicina:";
             // 
@@ -1510,11 +1536,11 @@
             labelControl31.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl31, 0);
             labelControl31.Dock = DockStyle.Fill;
-            labelControl31.Location = new Point(3, 355);
+            labelControl31.Location = new Point(4, 356);
             labelControl31.Name = "labelControl31";
             labelControl31.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl31, 9);
-            labelControl31.Size = new Size(132, 35);
+            labelControl31.Size = new Size(130, 33);
             labelControl31.TabIndex = 14;
             labelControl31.Text = "Piscina privada:";
             // 
@@ -1526,11 +1552,11 @@
             labelControl30.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl30, 0);
             labelControl30.Dock = DockStyle.Fill;
-            labelControl30.Location = new Point(3, 317);
+            labelControl30.Location = new Point(4, 318);
             labelControl30.Name = "labelControl30";
             labelControl30.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl30, 8);
-            labelControl30.Size = new Size(132, 34);
+            labelControl30.Size = new Size(130, 32);
             labelControl30.TabIndex = 13;
             labelControl30.Text = "Walk in closet:";
             // 
@@ -1542,11 +1568,11 @@
             labelControl29.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl29, 0);
             labelControl29.Dock = DockStyle.Fill;
-            labelControl29.Location = new Point(3, 279);
+            labelControl29.Location = new Point(4, 280);
             labelControl29.Name = "labelControl29";
             labelControl29.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl29, 7);
-            labelControl29.Size = new Size(132, 34);
+            labelControl29.Size = new Size(130, 32);
             labelControl29.TabIndex = 12;
             labelControl29.Text = "Cuarto de servicio:";
             // 
@@ -1558,11 +1584,11 @@
             labelControl28.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl28, 0);
             labelControl28.Dock = DockStyle.Fill;
-            labelControl28.Location = new Point(3, 243);
+            labelControl28.Location = new Point(4, 244);
             labelControl28.Name = "labelControl28";
             labelControl28.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl28, 6);
-            labelControl28.Size = new Size(132, 32);
+            labelControl28.Size = new Size(130, 30);
             labelControl28.TabIndex = 11;
             labelControl28.Text = "Baño de visita:";
             // 
@@ -1574,11 +1600,11 @@
             labelControl27.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl27, 0);
             labelControl27.Dock = DockStyle.Fill;
-            labelControl27.Location = new Point(3, 205);
+            labelControl27.Location = new Point(4, 206);
             labelControl27.Name = "labelControl27";
             labelControl27.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl27, 5);
-            labelControl27.Size = new Size(132, 34);
+            labelControl27.Size = new Size(130, 32);
             labelControl27.TabIndex = 10;
             labelControl27.Text = "Baño de servicio:";
             // 
@@ -1590,11 +1616,11 @@
             labelControl26.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl26, 0);
             labelControl26.Dock = DockStyle.Fill;
-            labelControl26.Location = new Point(3, 164);
+            labelControl26.Location = new Point(4, 165);
             labelControl26.Name = "labelControl26";
             labelControl26.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl26, 4);
-            labelControl26.Size = new Size(132, 37);
+            labelControl26.Size = new Size(130, 35);
             labelControl26.TabIndex = 9;
             labelControl26.Text = "E-mail:";
             // 
@@ -1606,11 +1632,11 @@
             labelControl25.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl25, 0);
             labelControl25.Dock = DockStyle.Fill;
-            labelControl25.Location = new Point(3, 122);
+            labelControl25.Location = new Point(4, 123);
             labelControl25.Name = "labelControl25";
             labelControl25.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl25, 3);
-            labelControl25.Size = new Size(132, 38);
+            labelControl25.Size = new Size(130, 36);
             labelControl25.TabIndex = 8;
             labelControl25.Text = "Teléfono:";
             // 
@@ -1622,11 +1648,11 @@
             labelControl24.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl24, 0);
             labelControl24.Dock = DockStyle.Fill;
-            labelControl24.Location = new Point(3, 82);
+            labelControl24.Location = new Point(4, 83);
             labelControl24.Name = "labelControl24";
             labelControl24.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl24, 2);
-            labelControl24.Size = new Size(132, 36);
+            labelControl24.Size = new Size(130, 34);
             labelControl24.TabIndex = 7;
             labelControl24.Text = "Serie o MAI:";
             // 
@@ -1638,57 +1664,57 @@
             labelControl23.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl23, 0);
             labelControl23.Dock = DockStyle.Fill;
-            labelControl23.Location = new Point(3, 42);
+            labelControl23.Location = new Point(4, 43);
             labelControl23.Name = "labelControl23";
             labelControl23.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl23, 1);
-            labelControl23.Size = new Size(132, 36);
+            labelControl23.Size = new Size(130, 34);
             labelControl23.TabIndex = 6;
             labelControl23.Text = "Modelo:";
             // 
             // txtRealStateEmail
             // 
             tablePanel3.SetColumn(txtRealStateEmail, 1);
-            txtRealStateEmail.Location = new Point(139, 172);
+            txtRealStateEmail.Location = new Point(140, 168);
             txtRealStateEmail.Name = "txtRealStateEmail";
             tablePanel3.SetRow(txtRealStateEmail, 4);
-            txtRealStateEmail.Size = new Size(308, 20);
+            txtRealStateEmail.Size = new Size(306, 28);
             txtRealStateEmail.TabIndex = 5;
             // 
             // txtRealStatePhone
             // 
             tablePanel3.SetColumn(txtRealStatePhone, 1);
-            txtRealStatePhone.Location = new Point(139, 131);
+            txtRealStatePhone.Location = new Point(140, 127);
             txtRealStatePhone.Name = "txtRealStatePhone";
             tablePanel3.SetRow(txtRealStatePhone, 3);
-            txtRealStatePhone.Size = new Size(308, 20);
+            txtRealStatePhone.Size = new Size(306, 28);
             txtRealStatePhone.TabIndex = 4;
             // 
             // txtReference3
             // 
             tablePanel3.SetColumn(txtReference3, 1);
-            txtReference3.Location = new Point(139, 90);
+            txtReference3.Location = new Point(140, 86);
             txtReference3.Name = "txtReference3";
             tablePanel3.SetRow(txtReference3, 2);
-            txtReference3.Size = new Size(308, 20);
+            txtReference3.Size = new Size(306, 28);
             txtReference3.TabIndex = 3;
             // 
             // txtReference2
             // 
             tablePanel3.SetColumn(txtReference2, 1);
-            txtReference2.Location = new Point(139, 50);
+            txtReference2.Location = new Point(140, 46);
             txtReference2.Name = "txtReference2";
             tablePanel3.SetRow(txtReference2, 1);
-            txtReference2.Size = new Size(308, 20);
+            txtReference2.Size = new Size(306, 28);
             txtReference2.TabIndex = 2;
             // 
             // txtReference1
             // 
             tablePanel3.SetColumn(txtReference1, 1);
-            txtReference1.Location = new Point(139, 10);
+            txtReference1.Location = new Point(140, 6);
             txtReference1.Name = "txtReference1";
             tablePanel3.SetRow(txtReference1, 0);
-            txtReference1.Size = new Size(308, 20);
+            txtReference1.Size = new Size(306, 28);
             txtReference1.TabIndex = 1;
             // 
             // labelControl22
@@ -1699,11 +1725,11 @@
             labelControl22.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             tablePanel3.SetColumn(labelControl22, 0);
             labelControl22.Dock = DockStyle.Fill;
-            labelControl22.Location = new Point(3, 3);
+            labelControl22.Location = new Point(4, 4);
             labelControl22.Name = "labelControl22";
             labelControl22.Padding = new Padding(0, 0, 5, 0);
             tablePanel3.SetRow(labelControl22, 0);
-            labelControl22.Size = new Size(132, 35);
+            labelControl22.Size = new Size(130, 33);
             labelControl22.TabIndex = 0;
             labelControl22.Text = "Marca:";
             // 
@@ -1712,7 +1738,7 @@
             xtraTabPage3.Controls.Add(btnDeleteDetailWarehouse);
             xtraTabPage3.Controls.Add(gridControlBodegas);
             xtraTabPage3.Name = "xtraTabPage3";
-            xtraTabPage3.Size = new Size(1109, 625);
+            xtraTabPage3.Size = new Size(1109, 619);
             xtraTabPage3.Text = "Bodegas";
             // 
             // btnDeleteDetailWarehouse
@@ -1835,7 +1861,7 @@
             tabPageProveedores.Controls.Add(btnNewDetailProvider);
             tabPageProveedores.Controls.Add(gridControlProvider);
             tabPageProveedores.Name = "tabPageProveedores";
-            tabPageProveedores.Size = new Size(1109, 625);
+            tabPageProveedores.Size = new Size(1109, 619);
             tabPageProveedores.Text = "Proveedores";
             // 
             // btnDeleteDetailProvider
@@ -1905,7 +1931,7 @@
             tabPageConceptos.Controls.Add(btnNewDetailConcept);
             tabPageConceptos.Controls.Add(gridControlConcepts);
             tabPageConceptos.Name = "tabPageConceptos";
-            tabPageConceptos.Size = new Size(1109, 625);
+            tabPageConceptos.Size = new Size(1109, 619);
             tabPageConceptos.Text = "Conceptos";
             // 
             // btnDeleteDetailConcept
@@ -1979,7 +2005,7 @@
             xtraTabPage6.Controls.Add(txtDescription);
             xtraTabPage6.Controls.Add(labelControl46);
             xtraTabPage6.Name = "xtraTabPage6";
-            xtraTabPage6.Size = new Size(1109, 625);
+            xtraTabPage6.Size = new Size(1109, 619);
             xtraTabPage6.Text = "Comentarios";
             // 
             // txtDescription
@@ -2005,7 +2031,7 @@
             tabPageArchivos.Controls.Add(btnUploadFile);
             tabPageArchivos.Controls.Add(gridControlArchivos);
             tabPageArchivos.Name = "tabPageArchivos";
-            tabPageArchivos.Size = new Size(1109, 625);
+            tabPageArchivos.Size = new Size(1109, 619);
             tabPageArchivos.Text = " Archivos";
             // 
             // btnUploadFile
@@ -2038,7 +2064,7 @@
             // 
             xtraTabPage8.Controls.Add(gridControlPrecios);
             xtraTabPage8.Name = "xtraTabPage8";
-            xtraTabPage8.Size = new Size(1109, 625);
+            xtraTabPage8.Size = new Size(1109, 619);
             xtraTabPage8.Text = "Precios";
             // 
             // gridControlPrecios
@@ -2104,7 +2130,7 @@
             xtraTabPage9.Controls.Add(btnEliminarSkuGrid);
             xtraTabPage9.Controls.Add(gridControlSku);
             xtraTabPage9.Name = "xtraTabPage9";
-            xtraTabPage9.Size = new Size(1109, 625);
+            xtraTabPage9.Size = new Size(1109, 619);
             xtraTabPage9.Text = "SKU";
             // 
             // btnEliminarSkuGrid
@@ -2194,30 +2220,15 @@
             // 
             dxErrorProvider.ContainerControl = this;
             // 
-            // txtCodigoBarra
+            // btnImprimirCodigoBarra
             // 
-            txtCodigoBarra.Location = new Point(117, 12);
-            txtCodigoBarra.Name = "txtCodigoBarra";
-            txtCodigoBarra.Properties.ReadOnly = true;
-            txtCodigoBarra.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-            txtCodigoBarra.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            txtCodigoBarra.Size = new Size(342, 96);
-            txtCodigoBarra.StyleController = layoutControlCodigoBarra;
-            txtCodigoBarra.TabIndex = 4;
-            // 
-            // layoutControlItem1
-            // 
-            layoutControlItem1.AppearanceItemCaption.Options.UseTextOptions = true;
-            layoutControlItem1.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            layoutControlItem1.AppearanceItemCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-            layoutControlItem1.Control = txtCodigoBarra;
-            layoutControlItem1.Location = new Point(0, 0);
-            layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new Size(451, 100);
-            layoutControlItem1.Text = "Barra:";
-            layoutControlItem1.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem1.TextSize = new Size(100, 20);
-            layoutControlItem1.TextToControlDistance = 5;
+            btnImprimirCodigoBarra.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton1.ImageOptions.SvgImage");
+            btnImprimirCodigoBarra.Location = new Point(725, 464);
+            btnImprimirCodigoBarra.Name = "btnImprimirCodigoBarra";
+            btnImprimirCodigoBarra.Size = new Size(212, 41);
+            btnImprimirCodigoBarra.TabIndex = 5;
+            btnImprimirCodigoBarra.Text = "Imprimir codigo de barra";
+            btnImprimirCodigoBarra.Click += btnImprimirCodigoBarra_Click;
             // 
             // FormInventoryItemEdit
             // 
@@ -2243,7 +2254,9 @@
             xtraTabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)layoutControlCodigoBarra).EndInit();
             layoutControlCodigoBarra.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)txtCodigoBarra.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)tablePanel2).EndInit();
             tablePanel2.ResumeLayout(false);
             tablePanel2.PerformLayout();
@@ -2331,8 +2344,6 @@
             ((System.ComponentModel.ISupportInitialize)gridViewSku).EndInit();
             ((System.ComponentModel.ISupportInitialize)cmbSku).EndInit();
             ((System.ComponentModel.ISupportInitialize)dxErrorProvider).EndInit();
-            ((System.ComponentModel.ISupportInitialize)txtCodigoBarra.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2500,5 +2511,6 @@
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraEditors.PictureEdit txtCodigoBarra;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraEditors.SimpleButton btnImprimirCodigoBarra;
     }
 }

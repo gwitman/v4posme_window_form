@@ -40,7 +40,7 @@
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(968, 660);
+            ClientSize = new Size(1072, 660);
             Name = "FormInventoryItemList";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LISTA DE PRODUCTOS";

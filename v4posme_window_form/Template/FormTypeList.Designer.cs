@@ -45,6 +45,7 @@ namespace v4posme_window.Template
             btnNuevo = new DevExpress.XtraEditors.SimpleButton();
             centerPane = new DevExpress.XtraEditors.PanelControl();
             progressPanel = new DevExpress.XtraWaitForm.ProgressPanel();
+            btnImprimir = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)stackPanel1).BeginInit();
             stackPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
@@ -153,13 +154,14 @@ namespace v4posme_window.Template
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Controls.Add(btnVistas);
+            flowLayoutPanel1.Controls.Add(btnImprimir);
             flowLayoutPanel1.Controls.Add(btnEditar);
             flowLayoutPanel1.Controls.Add(btnEliminar);
             flowLayoutPanel1.Controls.Add(btnNuevo);
             flowLayoutPanel1.Dock = DockStyle.Right;
-            flowLayoutPanel1.Location = new Point(739, 6);
+            flowLayoutPanel1.Location = new Point(639, 6);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(388, 54);
+            flowLayoutPanel1.Size = new Size(488, 54);
             flowLayoutPanel1.TabIndex = 2;
             // 
             // btnVistas
@@ -176,7 +178,7 @@ namespace v4posme_window.Template
             // 
             btnEditar.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.False;
             btnEditar.ImageOptions.SvgImage = (SvgImage)resources.GetObject("btnEditar.ImageOptions.SvgImage");
-            btnEditar.Location = new Point(98, 3);
+            btnEditar.Location = new Point(193, 3);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(89, 45);
             btnEditar.TabIndex = 2;
@@ -185,7 +187,7 @@ namespace v4posme_window.Template
             // btnEliminar
             // 
             btnEliminar.ImageOptions.SvgImage = (SvgImage)resources.GetObject("btnEliminar.ImageOptions.SvgImage");
-            btnEliminar.Location = new Point(193, 3);
+            btnEliminar.Location = new Point(288, 3);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(89, 45);
             btnEliminar.TabIndex = 3;
@@ -194,7 +196,7 @@ namespace v4posme_window.Template
             // btnNuevo
             // 
             btnNuevo.ImageOptions.SvgImage = (SvgImage)resources.GetObject("btnNuevo.ImageOptions.SvgImage");
-            btnNuevo.Location = new Point(288, 3);
+            btnNuevo.Location = new Point(383, 3);
             btnNuevo.Name = "btnNuevo";
             btnNuevo.Size = new Size(89, 45);
             btnNuevo.TabIndex = 4;
@@ -205,7 +207,7 @@ namespace v4posme_window.Template
             centerPane.Dock = DockStyle.Fill;
             centerPane.Location = new Point(0, 107);
             centerPane.Name = "centerPane";
-            centerPane.Size = new Size(1129, 426);
+            centerPane.Size = new Size(1129, 424);
             centerPane.TabIndex = 2;
             // 
             // progressPanel
@@ -222,11 +224,21 @@ namespace v4posme_window.Template
             progressPanel.TabIndex = 31;
             progressPanel.Visible = false;
             // 
+            // btnImprimir
+            // 
+            btnImprimir.ImageOptions.SvgImage = (SvgImage)resources.GetObject("simpleButton1.ImageOptions.SvgImage");
+            btnImprimir.Location = new Point(98, 3);
+            btnImprimir.Name = "btnImprimir";
+            btnImprimir.Size = new Size(89, 45);
+            btnImprimir.TabIndex = 6;
+            btnImprimir.Text = "Imprimir";
+            btnImprimir.Visible = false;
+            // 
             // FormTypeList
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1129, 533);
+            ClientSize = new Size(1129, 531);
             Controls.Add(progressPanel);
             Controls.Add(centerPane);
             Controls.Add(panelControl1);
@@ -266,5 +278,6 @@ namespace v4posme_window.Template
         public DevExpress.XtraEditors.DateEdit txtFecha;
         public DevExpress.XtraEditors.SimpleButton btnSearchTransaction;
         public DevExpress.XtraWaitForm.ProgressPanel progressPanel;
+        public DevExpress.XtraEditors.SimpleButton btnImprimir;
     }
 }

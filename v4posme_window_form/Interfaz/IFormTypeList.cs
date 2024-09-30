@@ -12,6 +12,7 @@ namespace v4posme_window.Interfaz
         void Delete(object? sender, EventArgs? args);
         void Edit(object? sender, EventArgs? args);
         void New(object? sender, EventArgs? args);
+        void Print(object? sender, EventArgs? args);
         void SearchTransactionMaster(object? sender, EventArgs? args);
         void PreRender();        
 

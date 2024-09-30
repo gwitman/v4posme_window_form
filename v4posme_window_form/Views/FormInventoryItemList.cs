@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,15 +25,17 @@ using DevExpress.XtraScheduler.Outlook.Interop;
 using v4posme_library.Libraries.CustomModels;
 using v4posme_window.ControlCustom;
 using Exception = System.Exception;
+using ESC_POS_USB_NET.Printer;
 
 namespace v4posme_window.Views
 {
     public partial class FormInventoryItemList : FormTypeList, IFormTypeList
     {
         private readonly CoreWebRenderInView _coreWebRender = new CoreWebRenderInView();
+        private readonly ICoreWebParameter _objInterfazCoreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
         private readonly ICoreWebPermission _coreWebPermission = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebPermission>();
         private readonly ICoreWebTools _coreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
-        private readonly ICoreWebTransaction _coreWebTransaction = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTransaction>();
+        private readonly ICoreWebTools _objInterfazCoreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
         private readonly ICoreWebWorkflow _objInterfazCoreWebWorkflow = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebWorkflow>();
         private readonly ICoreWebView _coreWebView = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebView>();
         private readonly IItemModel _itemModel = VariablesGlobales.Instance.UnityContainer.Resolve<IItemModel>();
@@ -58,13 +61,14 @@ namespace v4posme_window.Views
             // Suscribir al manejador de excepciones global
             Application.ThreadException += Application_ThreadException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-
+            btnImprimir.Visible = true;
             Fecha = DateTime.Now;
             DataViewId = 0;
             ObjGridControl = new GridControlCustom();
             btnEditar.Click += Edit;
             btnEliminar.Click += Delete;
             btnNuevo.Click += New;
+            btnImprimir.Click += Print;
             btnSearchTransaction.Click += SearchTransactionMaster;
         }
 
@@ -269,6 +273,7 @@ namespace v4posme_window.Views
                         throw new Exception(notAllEdit);
                     }
                 }
+
                 var permissionMe = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_ME"]);
                 if (resultPermission == permissionMe && objItem.CreatedBy != user.UserID)
                 {
@@ -281,6 +286,7 @@ namespace v4posme_window.Views
                 {
                     throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
                 }
+
                 //VALIDAR CANTIDAD
                 if (VariablesGlobales.Instance.Company is not null && VariablesGlobales.Instance.Company.Type != "luciaralstate")
                 {
@@ -290,6 +296,7 @@ namespace v4posme_window.Views
                         return;
                     }
                 }
+
                 _itemModel.DeleteAppPosme(user.CompanyID, objItem.ItemID);
                 XtraMessageBox.Show("Se ha eliminado el articulo de forma correcta", "Eliminar");
                 FormInventoryItemList_Load(sender, args);
@@ -315,6 +322,36 @@ namespace v4posme_window.Views
         {
             var formEdit = new FormInventoryItemEdit(TypeRender.New, 0);
             formEdit.Show();
+        }
+
+        public void Print(object? sender, EventArgs? args)
+        {
+            var cantidadImprimirFrm = new FormInventoryItemCantidadImprimir();
+            var dialogResult = cantidadImprimirFrm.ShowDialog(this);
+            if (dialogResult == DialogResult.Cancel)
+            {
+                return;
+            }
+            var user = VariablesGlobales.Instance.User;
+            if (user is null)
+            {
+                throw new Exception("Usuario no logeado");
+            }
+
+            var selectedRowsCount = _gridViewData.SelectedRowsCount;
+            if (selectedRowsCount > 0)
+            {
+                for (int i = 0; i < selectedRowsCount; i++)
+                {
+                    var itemId = _gridViewData.GetRowCellValue(i, "itemID");
+                    var item = _itemModel.GetRowByPk(user.CompanyID, Convert.ToInt32(itemId));
+                    if (item is null)
+                    {
+                        continue;
+                    }
+                    _coreWebRender.PrintBarCodeItem(item, cantidadImprimirFrm.CantidadImprimir);
+                }
+            }
         }
 
         public void PreRender()
@@ -376,7 +413,7 @@ namespace v4posme_window.Views
                 }
 
                 var formInventoryItem = new FormInventoryItemEdit(TypeRender.Edit, objItem.ItemID)
-                { MdiParent = CoreFormList.Principal() };
+                    { MdiParent = CoreFormList.Principal() };
                 formInventoryItem.Show();
             }
             catch (Exception ex)
@@ -384,6 +421,5 @@ namespace v4posme_window.Views
                 new CoreWebRenderInView().GetMessageAlert(TypeError.Error, "Error", $"Se produjo un error en {ex.Source} {ex.Message}", this);
             }
         }
-       
     }
 }

@@ -20,6 +20,7 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
+using ESC_POS_USB_NET.Printer;
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
@@ -36,13 +37,49 @@ namespace v4posme_window.Libraries;
 public class CoreWebRenderInView
 {
     private AlertControl _alert=new();
+    private readonly ICoreWebTools _objInterfazCoreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
+    private readonly ICoreWebParameter _objInterfazCoreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
 
     public CoreWebRenderInView()
     {
         _alert.AutoHeight = true;
         _alert.AutoFormDelay = 2000;
     }
+    private byte[] Avanza(int puntos)
+    {
+        return [27, 74, (byte)puntos];//8puntos = 1mm
+    }
+    public void PrintBarCodeItem(TbItem item, int cantidadImprimir)
+    {
+        var user = VariablesGlobales.Instance.User;
+        if (user is null)
+        {
+            throw new Exception("Usuario no logeado");
+        }
 
+        var spacing = 0.5;
+        var objComponentItem = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_item");
+        if (objComponentItem is null)
+        {
+            throw new Exception("EL COMPONENTE 'tb_item' NO EXISTE...");
+        }
+        // Imprimir el documento               
+        var printerName = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT", user.CompanyID);
+        var printer = new Printer(printerName!.Value);
+
+        printer.AlignCenter();
+
+        printer.Code128(item.BarCode);
+        printer.Append(item.Name);
+        printer.Append(item.BarCode);
+        printer.Append(item.Cost.ToString("N2"));
+        printer.Append("-");
+        printer.Append(Avanza(45) /*8puntos = 1mm*/);
+        for (int i = 1; i <= cantidadImprimir * 2; i++)
+        {
+            printer.PrintDocument();
+        }
+    }
     public static void MostrarArchivoGrid(ArchivoDto selectedValue)
     {
         var extension = selectedValue.FileType;
@@ -172,7 +209,7 @@ public class CoreWebRenderInView
         }
     }
 
-    public static void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, GridControl gridControl, bool searchPanel = false)
+    public static void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, GridControl gridControl,bool multiSelect=false, bool searchPanel = false)
     {
         if (dataViewDto.Config is null)
         {
@@ -193,6 +230,7 @@ public class CoreWebRenderInView
             gridView=new GridView(gridControl);
         }
         gridView.BestFitColumns();
+        gridView.OptionsSelection.MultiSelect = multiSelect;
         gridView.OptionsView.ShowGroupPanel = searchPanel;
         gridView.OptionsCustomization.AllowSort = true;
         if (searchPanel)
