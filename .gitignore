@@ -373,3 +373,4 @@ FodyWeavers.xsd
 /v4posme_window_form/obj/Debug/net8.0-windows/v4posme_window.Properties.Resources.resources
 /v4posme_window_form/obj/Debug/net8.0-windows/v4posme_window_form.csproj.FileListAbsolute.txt
 /v4posme_window_form/obj/Debug/net8.0-windows/v4posme_window_form.genruntimeconfig.cache
+/v4posme_window_form/bin/Debug/net8.0-windows/appsettings.json
