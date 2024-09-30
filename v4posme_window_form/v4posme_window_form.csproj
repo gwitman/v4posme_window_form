@@ -125,10 +125,4 @@
       <Folder Include="Api\" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Reference Include="CommandLine">
-        <HintPath>C:\Program Files\Devart\EntityDeveloper\win64\Console\CommandLine.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
 </Project>

@@ -16,7 +16,7 @@ using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
 using ComboBoxItem = v4posme_window.Libraries.ComboBoxItem;
-using CommandLine;
+
 
 namespace v4posme_window.Views
 {

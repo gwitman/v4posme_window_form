@@ -7,6 +7,9 @@
     <Compile Update="ControlCustom\GridControlCustom.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Template\FormTypeCustomInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Template\FormTypeHeadEdit.cs">
       <SubType>Form</SubType>
     </Compile>
