@@ -16,7 +16,7 @@ public interface ICustomerModel
 
     TbCustomer? GetRowByCode(int companyId, string? customerCode);
 
-    TbCustomer? GetRowByIdentification(int companyId, int identification);
+    TbCustomer? GetRowByIdentification(int companyId, string identification);
 
     List<TbCustomerDto> GetRowByCompanyPhoneAndEmail(int companyId);
 

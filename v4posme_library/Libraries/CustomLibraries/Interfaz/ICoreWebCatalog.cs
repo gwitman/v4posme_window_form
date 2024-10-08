@@ -10,5 +10,5 @@ public interface ICoreWebCatalog
 
     List<TbCatalogItem> GetCatalogAllItemParent(string? table, string? field, int companyId, int parentCatalogItemId);
     
-    TbCatalogItem GetCatalogItem(string? table,string? field,int companyId,int catalogItemId);
+    TbCatalogItem? GetCatalogItem(string? table,string? field,int companyId,int catalogItemId);
 }

@@ -104,6 +104,8 @@ namespace v4posme_library.Models
             public object PrinterQuantity { get; set; }
     
             public object EntityIDSecondary { get; set; }
+    
+            public object DayExcluded { get; set; }
         }
     }
 }

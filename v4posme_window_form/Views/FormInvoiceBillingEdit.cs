@@ -1432,7 +1432,17 @@ namespace v4posme_window.Views
             //}
         }
 
+        public void CommandNew(object? sender, EventArgs e)
+        {
+        }
 
+        public void CommandSave(object? sender, EventArgs e)
+        {
+        }
+
+        public void CommandRegresar(object? sender, EventArgs e)
+        {
+        }
         public void SaveUpdate()
         {
             var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];

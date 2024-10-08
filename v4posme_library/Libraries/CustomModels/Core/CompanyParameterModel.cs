@@ -14,7 +14,7 @@ class CompanyParameterModel(DataContext context) : ICompanyParameterModel
         if (finds is null) return;
         data.CompanyParameterID = finds.CompanyParameterID;
         context.Entry(finds).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public TbCompanyParameter? GetRowByParameterIdCompanyId(int companyId, int parameterId)

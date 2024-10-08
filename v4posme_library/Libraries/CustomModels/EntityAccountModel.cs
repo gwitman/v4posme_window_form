@@ -12,14 +12,14 @@ class EntityAccountModel : IEntityAccountModel
         if (find is null) return;
         data.EntityAccountID = find.EntityAccountID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int InsertAppPosme(TbEntityAccount data)
     {
         using var context = new DataContext();
         var add = context.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return add.Entity.EntityAccountID;
     }
 
@@ -30,7 +30,7 @@ class EntityAccountModel : IEntityAccountModel
             .Find(entityAccountId);
         if (find is null) return;
         find.IsActive = false;
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public List<TbEntityAccount> GetRowByEntity(int companyId, int componentId, int componentItemId)

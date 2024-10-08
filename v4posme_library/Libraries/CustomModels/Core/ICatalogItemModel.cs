@@ -8,5 +8,5 @@ public interface ICatalogItemModel
     
     List<TbCatalogItem> GetRowByCatalogIdAndFlavorIdParent(int catalogId,int flavorId,int parentCatalogItemId);
     
-    TbCatalogItem GetRowByCatalogItemId(int catalogItemId);
+    TbCatalogItem? GetRowByCatalogItemId(int catalogItemId);
 }

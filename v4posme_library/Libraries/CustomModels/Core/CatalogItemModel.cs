@@ -11,6 +11,7 @@ class CatalogItemModel : ICatalogItemModel
         return context.TbCatalogItems.AsNoTracking()
             .Where(item => item.CatalogID == catalogId
                            && item.FlavorID == flavorId)
+            .OrderBy(item => item.Sequence)
             .ToList();
     }
 
@@ -21,13 +22,14 @@ class CatalogItemModel : ICatalogItemModel
             .Where(item => item.CatalogID == catalogId
                            && item.FlavorID == flavorId
                            && item.ParentCatalogItemID == parentCatalogItemId)
+            .OrderBy(item => item.Sequence)
             .ToList();
     }
 
-    public TbCatalogItem GetRowByCatalogItemId(int catalogItemId)
+    public TbCatalogItem? GetRowByCatalogItemId(int catalogItemId)
     {
         using var context = new DataContext();
         return context.TbCatalogItems.AsNoTracking()
-            .First(item => item.CatalogItemID == catalogItemId);
+            .FirstOrDefault(item => item.CatalogItemID == catalogItemId);
     }
 }

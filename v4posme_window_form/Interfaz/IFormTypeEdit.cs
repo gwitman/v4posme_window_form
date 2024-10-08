@@ -18,6 +18,9 @@ namespace v4posme_window.Interfaz
         void LoadRender(TypeRender typeRedner);
         void ComandDelete();
         void ComandPrinter();
+        void CommandNew(object? sender, EventArgs e);
+        void CommandSave(object? sender, EventArgs e);
+        void CommandRegresar(object? sender, EventArgs e);
 
         // Manejador de excepciones global para excepciones no controladas en subprocesos de la interfaz de usuario
         void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e);

@@ -1659,6 +1659,9 @@
     <property name="IsActive" type="Boolean" p1:ValidateRequired="true" p1:Guid="9e3d69f9-f81c-4de3-aa17-0beb4d6b4e7d">
       <column name="isActive" default="b'0'" not-null="True" precision="1" sql-type="bit" p1:unicode="False" />
     </property>
+    <property name="DayExcluded" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="534cce04-dc91-4fd8-ab86-f359274dccac">
+      <column name="dayExcluded" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
   </class>
   <class name="TbCustomerFrecuencyActuation" entity-set="TbCustomerFrecuencyActuations" table="tb_customer_frecuency_actuations" schema="posme" p1:Guid="f4984afc-6a6d-48fe-a670-dae8d12f12f8">
     <id name="CustomerFrecuencyActuations" type="Int32" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="true" p1:Guid="c0f7e490-1bdd-40eb-8c64-9bf352b796a8">
@@ -4007,6 +4010,9 @@
     </property>
     <property name="EntityIDSecondary" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="ccf285f0-a36a-4cba-a9a5-cd9e3a482da5">
       <column name="entityIDSecondary" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="DayExcluded" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="eb048bce-2121-44fa-9b58-f93de15c17aa">
+      <column name="dayExcluded" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
   </class>
   <class name="TbTransactionMasterConcept" entity-set="TbTransactionMasterConcepts" table="tb_transaction_master_concept" schema="posme" p1:Guid="e013ab8a-23ea-4d22-9296-f8dcf4d8fd67">

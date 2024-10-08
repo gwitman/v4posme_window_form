@@ -1,0 +1,241 @@
+Country,ISO2,ISO3,FIPS,Phone Code,Continent,Capital,Currency
+Afghanistan,AF,AFG,AF,93,Asia,Kabul,Afghani
+Albania,AL,ALB,AL,355,Europe,Tirana,Lek
+Algeria,DZ,DZA,AG,213,Africa,Algiers,Dinar
+American Samoa,AS,ASM,AQ,1-684,Oceania,Pago Pago,Dollar
+Andorra,AD,AND,AN,376,Europe,Andorra la Vella,Euro
+Angola,AO,AGO,AO,244,Africa,Luanda,Kwanza
+Anguilla,AI,AIA,AV,1-264,North America,The Valley,Dollar
+Antarctica,AQ,ATA,AY,672,Antarctica,,
+Antigua and Barbuda,AG,ATG,AC,1-268,North America,St. John's,Dollar
+Argentina,AR,ARG,AR,54,South America,Buenos Aires,Peso
+Armenia,AM,ARM,AM,374,Asia,Yerevan,Dram
+Aruba,AW,ABW,AA,297,North America,Oranjestad,Guilder
+Australia,AU,AUS,AS,61,Oceania,Canberra,Dollar
+Austria,AT,AUT,AU,43,Europe,Vienna,Euro
+Azerbaijan,AZ,AZE,AJ,994,Asia,Baku,Manat
+Bahamas,BS,BHS,BF,1-242,North America,Nassau,Dollar
+Bahrain,BH,BHR,BA,973,Asia,Manama,Dinar
+Bangladesh,BD,BGD,BG,880,Asia,Dhaka,Taka
+Barbados,BB,BRB,BB,1-246,North America,Bridgetown,Dollar
+Belarus,BY,BLR,BO,375,Europe,Minsk,Ruble
+Belgium,BE,BEL,BE,32,Europe,Brussels,Euro
+Belize,BZ,BLZ,BH,501,North America,Belmopan,Dollar
+Benin,BJ,BEN,BN,229,Africa,Porto-Novo,Franc
+Bermuda,BM,BMU,BD,1-441,North America,Hamilton,Dollar
+Bhutan,BT,BTN,BT,975,Asia,Thimphu,Ngultrum
+Bolivia,BO,BOL,BL,591,South America,Sucre,Boliviano
+Bosnia and Herzegovina,BA,BIH,BK,387,Europe,Sarajevo,Marka
+Botswana,BW,BWA,BC,267,Africa,Gaborone,Pula
+Brazil,BR,BRA,BR,55,South America,Brasilia,Real
+British Indian Ocean Territory,IO,IOT,IO,246,Asia,Diego Garcia,Dollar
+British Virgin Islands,VG,VGB,VI,1-284,North America,Road Town,Dollar
+Brunei,BN,BRN,BX,673,Asia,Bandar Seri Begawan,Dollar
+Bulgaria,BG,BGR,BU,359,Europe,Sofia,Lev
+Burkina Faso,BF,BFA,UV,226,Africa,Ouagadougou,Franc
+Burundi,BI,BDI,BY,257,Africa,Bujumbura,Franc
+Cambodia,KH,KHM,CB,855,Asia,Phnom Penh,Riels
+Cameroon,CM,CMR,CM,237,Africa,Yaounde,Franc
+Canada,CA,CAN,CA,1,North America,Ottawa,Dollar
+Cape Verde,CV,CPV,CV,238,Africa,Praia,Escudo
+Cayman Islands,KY,CYM,CJ,1-345,North America,George Town,Dollar
+Central African Republic,CF,CAF,CT,236,Africa,Bangui,Franc
+Chad,TD,TCD,CD,235,Africa,N'Djamena,Franc
+Chile,CL,CHL,CI,56,South America,Santiago,Peso
+China,CN,CHN,CH,86,Asia,Beijing,Yuan Renminbi
+Christmas Island,CX,CXR,KT,61,Asia,Flying Fish Cove,Dollar
+Cocos Islands,CC,CCK,CK,61,Asia,West Island,Dollar
+Colombia,CO,COL,CO,57,South America,Bogota,Peso
+Comoros,KM,COM,CN,269,Africa,Moroni,Franc
+Cook Islands,CK,COK,CW,682,Oceania,Avarua,Dollar
+Costa Rica,CR,CRI,CS,506,North America,San Jose,Colon
+Croatia,HR,HRV,HR,385,Europe,Zagreb,Kuna
+Cuba,CU,CUB,CU,53,North America,Havana,Peso
+Curacao,CW,CUW,UC,599,North America,Willemstad,Guilder
+Cyprus,CY,CYP,CY,357,Europe,Nicosia,Euro
+Czech Republic,CZ,CZE,EZ,420,Europe,Prague,Koruna
+Democratic Republic of the Congo,CD,COD,CG,243,Africa,Kinshasa,Franc
+Denmark,DK,DNK,DA,45,Europe,Copenhagen,Krone
+Djibouti,DJ,DJI,DJ,253,Africa,Djibouti,Franc
+Dominica,DM,DMA,DO,1-767,North America,Roseau,Dollar
+Dominican Republic,DO,DOM,DR,"1-809, 1-829, 1-849",North America,Santo Domingo,Peso
+East Timor,TL,TLS,TT,670,Oceania,Dili,Dollar
+Ecuador,EC,ECU,EC,593,South America,Quito,Dollar
+Egypt,EG,EGY,EG,20,Africa,Cairo,Pound
+El Salvador,SV,SLV,ES,503,North America,San Salvador,Dollar
+Equatorial Guinea,GQ,GNQ,EK,240,Africa,Malabo,Franc
+Eritrea,ER,ERI,ER,291,Africa,Asmara,Nakfa
+Estonia,EE,EST,EN,372,Europe,Tallinn,Euro
+Ethiopia,ET,ETH,ET,251,Africa,Addis Ababa,Birr
+Falkland Islands,FK,FLK,FK,500,South America,Stanley,Pound
+Faroe Islands,FO,FRO,FO,298,Europe,Torshavn,Krone
+Fiji,FJ,FJI,FJ,679,Oceania,Suva,Dollar
+Finland,FI,FIN,FI,358,Europe,Helsinki,Euro
+France,FR,FRA,FR,33,Europe,Paris,Euro
+French Polynesia,PF,PYF,FP,689,Oceania,Papeete,Franc
+Gabon,GA,GAB,GB,241,Africa,Libreville,Franc
+Gambia,GM,GMB,GA,220,Africa,Banjul,Dalasi
+Georgia,GE,GEO,GG,995,Asia,Tbilisi,Lari
+Germany,DE,DEU,GM,49,Europe,Berlin,Euro
+Ghana,GH,GHA,GH,233,Africa,Accra,Cedi
+Gibraltar,GI,GIB,GI,350,Europe,Gibraltar,Pound
+Greece,GR,GRC,GR,30,Europe,Athens,Euro
+Greenland,GL,GRL,GL,299,North America,Nuuk,Krone
+Grenada,GD,GRD,GJ,1-473,North America,St. George's,Dollar
+Guam,GU,GUM,GQ,1-671,Oceania,Hagatna,Dollar
+Guatemala,GT,GTM,GT,502,North America,Guatemala City,Quetzal
+Guernsey,GG,GGY,GK,44-1481,Europe,St Peter Port,Pound
+Guinea,GN,GIN,GV,224,Africa,Conakry,Franc
+Guinea-Bissau,GW,GNB,PU,245,Africa,Bissau,Franc
+Guyana,GY,GUY,GY,592,South America,Georgetown,Dollar
+Haiti,HT,HTI,HA,509,North America,Port-au-Prince,Gourde
+Honduras,HN,HND,HO,504,North America,Tegucigalpa,Lempira
+Hong Kong,HK,HKG,HK,852,Asia,Hong Kong,Dollar
+Hungary,HU,HUN,HU,36,Europe,Budapest,Forint
+Iceland,IS,ISL,IC,354,Europe,Reykjavik,Krona
+India,IN,IND,IN,91,Asia,New Delhi,Rupee
+Indonesia,ID,IDN,ID,62,Asia,Jakarta,Rupiah
+Iran,IR,IRN,IR,98,Asia,Tehran,Rial
+Iraq,IQ,IRQ,IZ,964,Asia,Baghdad,Dinar
+Ireland,IE,IRL,EI,353,Europe,Dublin,Euro
+Isle of Man,IM,IMN,IM,44-1624,Europe,"Douglas, Isle of Man",Pound
+Israel,IL,ISR,IS,972,Asia,Jerusalem,Shekel
+Italy,IT,ITA,IT,39,Europe,Rome,Euro
+Ivory Coast,CI,CIV,IV,225,Africa,Yamoussoukro,Franc
+Jamaica,JM,JAM,JM,1-876,North America,Kingston,Dollar
+Japan,JP,JPN,JA,81,Asia,Tokyo,Yen
+Jersey,JE,JEY,JE,44-1534,Europe,Saint Helier,Pound
+Jordan,JO,JOR,JO,962,Asia,Amman,Dinar
+Kazakhstan,KZ,KAZ,KZ,7,Asia,Astana,Tenge
+Kenya,KE,KEN,KE,254,Africa,Nairobi,Shilling
+Kiribati,KI,KIR,KR,686,Oceania,Tarawa,Dollar
+Kosovo,XK,XKX,KV,383,Europe,Pristina,Euro
+Kuwait,KW,KWT,KU,965,Asia,Kuwait City,Dinar
+Kyrgyzstan,KG,KGZ,KG,996,Asia,Bishkek,Som
+Laos,LA,LAO,LA,856,Asia,Vientiane,Kip
+Latvia,LV,LVA,LG,371,Europe,Riga,Euro
+Lebanon,LB,LBN,LE,961,Asia,Beirut,Pound
+Lesotho,LS,LSO,LT,266,Africa,Maseru,Loti
+Liberia,LR,LBR,LI,231,Africa,Monrovia,Dollar
+Libya,LY,LBY,LY,218,Africa,Tripolis,Dinar
+Liechtenstein,LI,LIE,LS,423,Europe,Vaduz,Franc
+Lithuania,LT,LTU,LH,370,Europe,Vilnius,Euro
+Luxembourg,LU,LUX,LU,352,Europe,Luxembourg,Euro
+Macau,MO,MAC,MC,853,Asia,Macao,Pataca
+Macedonia,MK,MKD,MK,389,Europe,Skopje,Denar
+Madagascar,MG,MDG,MA,261,Africa,Antananarivo,Ariary
+Malawi,MW,MWI,MI,265,Africa,Lilongwe,Kwacha
+Malaysia,MY,MYS,MY,60,Asia,Kuala Lumpur,Ringgit
+Maldives,MV,MDV,MV,960,Asia,Male,Rufiyaa
+Mali,ML,MLI,ML,223,Africa,Bamako,Franc
+Malta,MT,MLT,MT,356,Europe,Valletta,Euro
+Marshall Islands,MH,MHL,RM,692,Oceania,Majuro,Dollar
+Mauritania,MR,MRT,MR,222,Africa,Nouakchott,Ouguiya
+Mauritius,MU,MUS,MP,230,Africa,Port Louis,Rupee
+Mayotte,YT,MYT,MF,262,Africa,Mamoudzou,Euro
+Mexico,MX,MEX,MX,52,North America,Mexico City,Peso
+Micronesia,FM,FSM,FM,691,Oceania,Palikir,Dollar
+Moldova,MD,MDA,MD,373,Europe,Chisinau,Leu
+Monaco,MC,MCO,MN,377,Europe,Monaco,Euro
+Mongolia,MN,MNG,MG,976,Asia,Ulan Bator,Tugrik
+Montenegro,ME,MNE,MJ,382,Europe,Podgorica,Euro
+Montserrat,MS,MSR,MH,1-664,North America,Plymouth,Dollar
+Morocco,MA,MAR,MO,212,Africa,Rabat,Dirham
+Mozambique,MZ,MOZ,MZ,258,Africa,Maputo,Metical
+Myanmar,MM,MMR,BM,95,Asia,Nay Pyi Taw,Kyat
+Namibia,NA,NAM,WA,264,Africa,Windhoek,Dollar
+Nauru,NR,NRU,NR,674,Oceania,Yaren,Dollar
+Nepal,NP,NPL,NP,977,Asia,Kathmandu,Rupee
+Netherlands,NL,NLD,NL,31,Europe,Amsterdam,Euro
+Netherlands Antilles,AN,ANT,NT,599,North America,Willemstad,Guilder
+New Caledonia,NC,NCL,NC,687,Oceania,Noumea,Franc
+New Zealand,NZ,NZL,NZ,64,Oceania,Wellington,Dollar
+Nicaragua,NI,NIC,NU,505,North America,Managua,Cordoba
+Niger,NE,NER,NG,227,Africa,Niamey,Franc
+Nigeria,NG,NGA,NI,234,Africa,Abuja,Naira
+Niue,NU,NIU,NE,683,Oceania,Alofi,Dollar
+North Korea,KP,PRK,KN,850,Asia,Pyongyang,Won
+Northern Mariana Islands,MP,MNP,CQ,1-670,Oceania,Saipan,Dollar
+Norway,NO,NOR,NO,47,Europe,Oslo,Krone
+Oman,OM,OMN,MU,968,Asia,Muscat,Rial
+Pakistan,PK,PAK,PK,92,Asia,Islamabad,Rupee
+Palau,PW,PLW,PS,680,Oceania,Melekeok,Dollar
+Palestine,PS,PSE,WE,970,Asia,East Jerusalem,Shekel
+Panama,PA,PAN,PM,507,North America,Panama City,Balboa
+Papua New Guinea,PG,PNG,PP,675,Oceania,Port Moresby,Kina
+Paraguay,PY,PRY,PA,595,South America,Asuncion,Guarani
+Peru,PE,PER,PE,51,South America,Lima,Sol
+Philippines,PH,PHL,RP,63,Asia,Manila,Peso
+Pitcairn,PN,PCN,PC,64,Oceania,Adamstown,Dollar
+Poland,PL,POL,PL,48,Europe,Warsaw,Zloty
+Portugal,PT,PRT,PO,351,Europe,Lisbon,Euro
+Puerto Rico,PR,PRI,RQ,"1-787, 1-939",North America,San Juan,Dollar
+Qatar,QA,QAT,QA,974,Asia,Doha,Rial
+Republic of the Congo,CG,COG,CF,242,Africa,Brazzaville,Franc
+Reunion,RE,REU,RE,262,Africa,Saint-Denis,Euro
+Romania,RO,ROU,RO,40,Europe,Bucharest,Leu
+Russia,RU,RUS,RS,7,Europe,Moscow,Ruble
+Rwanda,RW,RWA,RW,250,Africa,Kigali,Franc
+Saint Barthelemy,BL,BLM,TB,590,North America,Gustavia,Euro
+Saint Helena,SH,SHN,SH,290,Africa,Jamestown,Pound
+Saint Kitts and Nevis,KN,KNA,SC,1-869,North America,Basseterre,Dollar
+Saint Lucia,LC,LCA,ST,1-758,North America,Castries,Dollar
+Saint Martin,MF,MAF,RN,590,North America,Marigot,Euro
+Saint Pierre and Miquelon,PM,SPM,SB,508,North America,Saint-Pierre,Euro
+Saint Vincent and the Grenadines,VC,VCT,VC,1-784,North America,Kingstown,Dollar
+Samoa,WS,WSM,WS,685,Oceania,Apia,Tala
+San Marino,SM,SMR,SM,378,Europe,San Marino,Euro
+Sao Tome and Principe,ST,STP,TP,239,Africa,Sao Tome,Dobra
+Saudi Arabia,SA,SAU,SA,966,Asia,Riyadh,Rial
+Senegal,SN,SEN,SG,221,Africa,Dakar,Franc
+Serbia,RS,SRB,RI,381,Europe,Belgrade,Dinar
+Seychelles,SC,SYC,SE,248,Africa,Victoria,Rupee
+Sierra Leone,SL,SLE,SL,232,Africa,Freetown,Leone
+Singapore,SG,SGP,SN,65,Asia,Singapore,Dollar
+Sint Maarten,SX,SXM,NN,1-721,North America,Philipsburg,Guilder
+Slovakia,SK,SVK,LO,421,Europe,Bratislava,Euro
+Slovenia,SI,SVN,SI,386,Europe,Ljubljana,Euro
+Solomon Islands,SB,SLB,BP,677,Oceania,Honiara,Dollar
+Somalia,SO,SOM,SO,252,Africa,Mogadishu,Shilling
+South Africa,ZA,ZAF,SF,27,Africa,Pretoria,Rand
+South Korea,KR,KOR,KS,82,Asia,Seoul,Won
+South Sudan,SS,SSD,OD,211,Africa,Juba,Pound
+Spain,ES,ESP,SP,34,Europe,Madrid,Euro
+Sri Lanka,LK,LKA,CE,94,Asia,Colombo,Rupee
+Sudan,SD,SDN,SU,249,Africa,Khartoum,Pound
+Suriname,SR,SUR,NS,597,South America,Paramaribo,Dollar
+Svalbard and Jan Mayen,SJ,SJM,SV,47,Europe,Longyearbyen,Krone
+Swaziland,SZ,SWZ,WZ,268,Africa,Mbabane,Lilangeni
+Sweden,SE,SWE,SW,46,Europe,Stockholm,Krona
+Switzerland,CH,CHE,SZ,41,Europe,Berne,Franc
+Syria,SY,SYR,SY,963,Asia,Damascus,Pound
+Taiwan,TW,TWN,TW,886,Asia,Taipei,Dollar
+Tajikistan,TJ,TJK,TI,992,Asia,Dushanbe,Somoni
+Tanzania,TZ,TZA,TZ,255,Africa,Dodoma,Shilling
+Thailand,TH,THA,TH,66,Asia,Bangkok,Baht
+Togo,TG,TGO,TO,228,Africa,Lome,Franc
+Tokelau,TK,TKL,TL,690,Oceania,,Dollar
+Tonga,TO,TON,TN,676,Oceania,Nuku'alofa,Pa'anga
+Trinidad and Tobago,TT,TTO,TD,1-868,North America,Port of Spain,Dollar
+Tunisia,TN,TUN,TS,216,Africa,Tunis,Dinar
+Turkey,TR,TUR,TU,90,Asia,Ankara,Lira
+Turkmenistan,TM,TKM,TX,993,Asia,Ashgabat,Manat
+Turks and Caicos Islands,TC,TCA,TK,1-649,North America,Cockburn Town,Dollar
+Tuvalu,TV,TUV,TV,688,Oceania,Funafuti,Dollar
+U.S. Virgin Islands,VI,VIR,VQ,1-340,North America,Charlotte Amalie,Dollar
+Uganda,UG,UGA,UG,256,Africa,Kampala,Shilling
+Ukraine,UA,UKR,UP,380,Europe,Kiev,Hryvnia
+United Arab Emirates,AE,ARE,AE,971,Asia,Abu Dhabi,Dirham
+United Kingdom,GB,GBR,UK,44,Europe,London,Pound
+United States,US,USA,US,1,North America,Washington,Dollar
+Uruguay,UY,URY,UY,598,South America,Montevideo,Peso
+Uzbekistan,UZ,UZB,UZ,998,Asia,Tashkent,Som
+Vanuatu,VU,VUT,NH,678,Oceania,Port Vila,Vatu
+Vatican,VA,VAT,VT,379,Europe,Vatican City,Euro
+Venezuela,VE,VEN,VE,58,South America,Caracas,Bolivar
+Vietnam,VN,VNM,VM,84,Asia,Hanoi,Dong
+Wallis and Futuna,WF,WLF,WF,681,Oceania,Mata Utu,Franc
+Western Sahara,EH,ESH,WI,212,Africa,El-Aaiun,Dirham
+Yemen,YE,YEM,YM,967,Asia,Sanaa,Rial
+Zambia,ZM,ZMB,ZA,260,Africa,Lusaka,Kwacha
+Zimbabwe,ZW,ZWE,ZI,263,Africa,Harare,Dollar

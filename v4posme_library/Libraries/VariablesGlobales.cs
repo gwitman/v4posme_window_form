@@ -26,7 +26,6 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IAccountModel, AccountModel>();
             _unityContainer.RegisterType<IAccountTypeModel, AccountTypeModel>();
             _unityContainer.RegisterType<IBibliaModel, BibliaModel>();
-            _unityContainer.RegisterType<IBiometricUserModel, BiometricUserModel>();
             _unityContainer.RegisterType<ICenterCostModel, CenterCostModel>();
             _unityContainer.RegisterType<ICompanyComponentConceptModel, CompanyComponentConceptModel>();
             _unityContainer.RegisterType<ICompanyCurrencyModel, CompanyCurrencyModel>();
@@ -36,8 +35,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICreditLineModel, CreditLineModel>();
             _unityContainer.RegisterType<ICustomerConsultasSinRiesgoModel, CustomerConsultasSinRiesgoModel>();
             _unityContainer.RegisterType<ICustomerCreditAmortizationModel, CustomerCreditAmortizationModel>();
-            _unityContainer
-                .RegisterType<ICustomerCreditDocumentEntityRelatedModel, CustomerCreditDocumentEntityRelatedModel>();
+            _unityContainer.RegisterType<ICustomerCreditDocumentEntityRelatedModel, CustomerCreditDocumentEntityRelatedModel>();
             _unityContainer.RegisterType<ICustomerCreditDocumentModel, CustomerCreditDocumentModel>();
             _unityContainer.RegisterType<ICustomerCreditLineModel, CustomerCreditLineModel>();
             _unityContainer.RegisterType<ICustomerCreditModel, CustomerCreditModel>();
@@ -117,6 +115,8 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<IWorkflowStageModel, WorkflowStageModel>();
             _unityContainer.RegisterType<IWorkflowStageRelationModel, WorkflowStageRelationModel>();
             _unityContainer.RegisterType<IParameterModel, ParameterModel>();
+            _unityContainer.RegisterType<ICustomerPaymentMethodModel, CustomerPaymentMethodModel>();
+            _unityContainer.RegisterType<ICustomerFrecuencyActuationsModel, CustomerFrecuencyActuationsModel>();
 
             #endregion
 

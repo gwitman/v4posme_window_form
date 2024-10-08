@@ -15,7 +15,7 @@ public class CustomerModel : ICustomerModel
                                 && customer.EntityID == entityId);
         data.CustomerID = find.CustomerID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public void DeleteAppPosme(int companyId, int branchId, int entityId)
@@ -26,14 +26,14 @@ public class CustomerModel : ICustomerModel
                                 && customer.BranchID == branchId
                                 && customer.EntityID == entityId);
         find.IsActive = false;
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int InsertAppPosme(TbCustomer data)
     {
         using var context = new DataContext();
         var entityEntry = context.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return entityEntry.Entity.CustomerID;
     }
 
@@ -69,12 +69,12 @@ public class CustomerModel : ICustomerModel
     {
         using var dbContext = new DataContext();
         return dbContext.TbCustomers
-            .Single(c => c.CompanyID == companyId
+            .SingleOrDefault(c => c.CompanyID == companyId
                          && c.IsActive!.Value
                          && c.CustomerNumber.Equals(customerCode));
     }
 
-    public TbCustomer? GetRowByIdentification(int companyId, int identification)
+    public TbCustomer? GetRowByIdentification(int companyId, string identification)
     {
         using var dbContext = new DataContext();
         return dbContext.TbCustomers

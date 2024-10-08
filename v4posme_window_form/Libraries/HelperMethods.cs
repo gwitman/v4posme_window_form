@@ -7,7 +7,14 @@ public class HelperMethods
     public static void OnlyNumberDecimals(TextEdit textEdit)
     {
         textEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;  
-        textEdit.Properties.Mask.EditMask = @"N2";  
+        textEdit.Properties.Mask.EditMask = @"n2";  
+        textEdit.Properties.Mask.UseMaskAsDisplayFormat = true;  
+    }
+
+    public static void OnlyNumberInt(TextEdit textEdit)
+    {
+        textEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;  
+        textEdit.Properties.Mask.EditMask = @"n0";  
         textEdit.Properties.Mask.UseMaskAsDisplayFormat = true;  
     }
 

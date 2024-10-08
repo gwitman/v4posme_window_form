@@ -17,6 +17,7 @@ public class TbCustomerCreditLineDto
     public decimal? TotalDefeated { get; set; }
     public DateTime DateOpen { get; set; }
     public int PeriodPay { get; set; }
+    public int? DayExcluded { get; set; }
     public DateTime? DateLastPay { get; set; }
     public int? Term { get; set; }
     public string? Note { get; set; }

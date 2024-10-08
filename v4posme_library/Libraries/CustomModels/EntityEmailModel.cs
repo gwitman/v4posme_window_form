@@ -19,11 +19,16 @@ class EntityEmailModel : IEntityEmailModel
     public int DeleteByEntity(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
-        return context.TbEntityEmails
+        var values= context.TbEntityEmails
             .Where(email => email.CompanyID == companyId
                             && email.BranchID == branchId
-                            && email.EntityID == entityId)
-            .ExecuteDelete();
+                            && email.EntityID == entityId).ToList();
+        foreach (var tbEntityEmail in values)
+        {
+            context.Remove(tbEntityEmail);
+        }
+
+        return context.SaveChanges();
     }
 
     public long InsertAppPosme(TbEntityEmail data)

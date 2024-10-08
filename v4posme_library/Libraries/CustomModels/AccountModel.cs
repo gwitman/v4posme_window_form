@@ -5,10 +5,10 @@ namespace v4posme_library.Libraries.CustomModels;
 
 class AccountModel : IAccountModel
 {
-    public TbAccount GetRowByPk(int companyId, int accountId)
+    public TbAccount? GetRowByPk(int companyId, int accountId)
     {
         using var context = new DataContext();
-        return context.TbAccounts.Single(account =>
+        return context.TbAccounts.SingleOrDefault(account =>
             account.IsActive!.Value && account.AccountID == accountId && account.CompanyID == companyId);
     }
 

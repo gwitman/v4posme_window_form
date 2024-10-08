@@ -217,7 +217,7 @@ public class RenderFileGridControl
     {
         if (GridView?.GetFocusedRow() is ArchivoDto selectedValue)
         {
-            var dialogResult = XtraMessageBox.Show( @"¿Seguro desea eliminar el archivo seleccionado?",@"Eliminar");
+            var dialogResult = XtraMessageBox.Show( @"¿Seguro desea eliminar el archivo seleccionado?",@"Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.OK)
             {
                 ArchivoList.Remove(selectedValue);

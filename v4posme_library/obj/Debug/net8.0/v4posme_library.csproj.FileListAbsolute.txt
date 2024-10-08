@@ -15,24 +15,6 @@ E:\RiderProjects\v4posme_window\v4posme_library\obj\Debug\net8.0\v4posme_library
 E:\RiderProjects\v4posme_window\v4posme_library\obj\Debug\net8.0\refint\v4posme_library.dll
 E:\RiderProjects\v4posme_window\v4posme_library\obj\Debug\net8.0\v4posme_library.pdb
 E:\RiderProjects\v4posme_window\v4posme_library\obj\Debug\net8.0\ref\v4posme_library.dll
-E:\Repos\v4posme_window_form\v4posme_library\bin\Debug\net8.0\App.config
-E:\Repos\v4posme_window_form\v4posme_library\bin\Debug\net8.0\appsettings.json
-E:\Repos\v4posme_window_form\v4posme_library\bin\Debug\net8.0\v4posme_library.dll.config
-E:\Repos\v4posme_window_form\v4posme_library\bin\Debug\net8.0\v4posme_library.deps.json
-E:\Repos\v4posme_window_form\v4posme_library\bin\Debug\net8.0\v4posme_library.dll
-E:\Repos\v4posme_window_form\v4posme_library\bin\Debug\net8.0\v4posme_library.pdb
-E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.csproj.AssemblyReference.cache
-E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.Properties.Resources.resources
-E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.csproj.GenerateResource.cache
-E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.GeneratedMSBuildEditorConfig.editorconfig
-E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.AssemblyInfoInputs.cache
-E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.AssemblyInfo.cs
-E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.csproj.CoreCompileInputs.cache
-E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.sourcelink.json
-E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.dll
-E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\refint\v4posme_library.dll
-E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.pdb
-E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\ref\v4posme_library.dll
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_library\bin\Debug\net8.0\App.config
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_library\bin\Debug\net8.0\appsettings.json
 C:\xampp\teamds2\nsSystem\v4posme_window_form\v4posme_library\bin\Debug\net8.0\v4posme_library.dll.config
@@ -69,3 +51,21 @@ E:\Repos\v4posme_window_form - malo\v4posme_library\obj\Debug\net8.0\v4posme_lib
 E:\Repos\v4posme_window_form - malo\v4posme_library\obj\Debug\net8.0\refint\v4posme_library.dll
 E:\Repos\v4posme_window_form - malo\v4posme_library\obj\Debug\net8.0\v4posme_library.pdb
 E:\Repos\v4posme_window_form - malo\v4posme_library\obj\Debug\net8.0\ref\v4posme_library.dll
+E:\Repos\v4posme_window_form\v4posme_library\bin\Debug\net8.0\App.config
+E:\Repos\v4posme_window_form\v4posme_library\bin\Debug\net8.0\appsettings.json
+E:\Repos\v4posme_window_form\v4posme_library\bin\Debug\net8.0\v4posme_library.dll.config
+E:\Repos\v4posme_window_form\v4posme_library\bin\Debug\net8.0\v4posme_library.deps.json
+E:\Repos\v4posme_window_form\v4posme_library\bin\Debug\net8.0\v4posme_library.dll
+E:\Repos\v4posme_window_form\v4posme_library\bin\Debug\net8.0\v4posme_library.pdb
+E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.csproj.AssemblyReference.cache
+E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.Properties.Resources.resources
+E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.csproj.GenerateResource.cache
+E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.GeneratedMSBuildEditorConfig.editorconfig
+E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.AssemblyInfoInputs.cache
+E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.AssemblyInfo.cs
+E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.csproj.CoreCompileInputs.cache
+E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.sourcelink.json
+E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.dll
+E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\refint\v4posme_library.dll
+E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\v4posme_library.pdb
+E:\Repos\v4posme_window_form\v4posme_library\obj\Debug\net8.0\ref\v4posme_library.dll

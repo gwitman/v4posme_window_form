@@ -40,13 +40,12 @@
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(970, 532);
-            MaximizeBox = false;
-            MinimizeBox = false;
             Name = "FormCustomerList";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Listado Clientes";
             WindowState = FormWindowState.Maximized;
             Load += FormCustomerList_Load;
+            Enter += FormCustomerList_Enter;
             ResumeLayout(false);
         }
 

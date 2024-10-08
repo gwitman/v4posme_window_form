@@ -6,7 +6,7 @@ namespace v4posme_library.Libraries.CustomModels;
 
 public interface ICustomerCreditLineModel
 {
-    void UpdateAppPosme(int customerCreditLineId, TbCustomerCreditLine data);
+    void UpdateAppPosme(int customerCreditLineId, TbCustomerCreditLine? data);
 
     int InsertAppPosme(TbCustomerCreditLine data);
 
@@ -22,5 +22,5 @@ public interface ICustomerCreditLineModel
     
     List<TbCustomerCreditLineDto> GetRowByBranchId(int companyId, int branchId);
     
-    TbCustomerCreditLine GetRowByPk(int customerCreditLineId);
+    TbCustomerCreditLine? GetRowByPk(int customerCreditLineId);
 }

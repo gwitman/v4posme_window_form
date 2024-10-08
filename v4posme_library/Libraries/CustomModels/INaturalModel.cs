@@ -10,5 +10,5 @@ public interface INaturalModel
     
     int InsertAppPosme(TbNaturale data);
     
-    TbNaturale GetRowByPk(int companyId,int branchId,int entityId);
+    TbNaturale? GetRowByPk(int companyId,int branchId,int entityId);
 }

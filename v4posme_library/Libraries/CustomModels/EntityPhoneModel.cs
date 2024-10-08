@@ -20,11 +20,16 @@ class EntityPhoneModel : IEntityPhoneModel
     public void DeleteByEntity(int companyId, int branchId, int entityId)
     {
         using var context = new DataContext();
-        context.TbEntityPhones
+        var phones = context.TbEntityPhones
             .Where(phone => phone.CompanyID == companyId
                             && phone.BranchID == branchId
-                            && phone.EntityID == entityId)
-            .ExecuteDelete();
+                            && phone.EntityID == entityId).ToList();
+        foreach (var tbEntityPhone in phones)
+        {
+            context.Remove(tbEntityPhone);
+        }
+
+        context.SaveChanges();
     }
 
     public long InsertAppPosme(TbEntityPhone data)

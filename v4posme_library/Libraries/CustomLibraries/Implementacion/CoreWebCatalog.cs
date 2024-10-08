@@ -166,7 +166,7 @@ class CoreWebCatalog : ICoreWebCatalog
             objCatalog.CatalogID, Convert.ToInt32(objCompanyComponentFlavor.FlavorID), parentCatalogItemId);
     }
 
-    public TbCatalogItem GetCatalogItem(string? table, string? field, int companyId, int catalogItemId)
+    public TbCatalogItem? GetCatalogItem(string? table, string? field, int companyId, int catalogItemId)
     {
         var objElement = _elementModel.GetRowByName(table, Convert.ToInt32(ElementTypeTable));
         if (objElement is null)

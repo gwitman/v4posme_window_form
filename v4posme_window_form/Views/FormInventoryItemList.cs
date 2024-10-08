@@ -129,8 +129,7 @@ namespace v4posme_window.Views
             CustomException.LogException((Exception)e.ExceptionObject);
         }
 
-
-        public new void List()
+        public void List()
         {
             var resultPermission = 0;
 

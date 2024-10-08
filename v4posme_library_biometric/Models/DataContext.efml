@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<efcore context-namespace="Models" namespace="v4posme_library_biometric.Models" p1:name="DataContext" p1:Guid="9e92ef8a-55f5-4f3e-ad1c-db11dfbcda5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0">
+  <class name="Fingerprint" entity-set="Fingerprints" table="fingerprints" schema="biometric" p1:Guid="55e2195e-eb24-436a-8743-659d9b366986">
+    <id name="Id" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="cf7310ad-619c-44a1-909a-9b20df5b1e49">
+      <column name="id" not-null="True" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    </id>
+    <property name="FingerName" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="30" p1:ValidateRequired="false" p1:Guid="6c44677c-a833-4229-ab95-c169c5d510d8">
+      <column name="finger_name" default="NULL" not-null="False" length="30" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Image" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="100" p1:ValidateRequired="false" p1:Guid="166da87e-755a-49f8-a76a-b18e010955b2">
+      <column name="image" default="NULL" not-null="False" length="100" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Fingerprint1" type="Blob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="045b54e0-8519-4a59-8dff-88565e5076c0">
+      <column name="fingerprint" default="NULL" not-null="False" sql-type="longblob" p1:unicode="False" />
+    </property>
+    <property name="Notified" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="0a25caac-a0de-4581-8c6b-326fabfcb84d">
+      <column name="notified" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="UserId" type="Decimal" p1:ValidateRequired="true" p1:Guid="c5c7d89b-af0a-40e1-a39c-96f89864e2bb">
+      <column name="user_id" not-null="True" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="1df364d2-9666-41a0-9b48-8182e9d30d81">
+      <column name="created_at" default="NULL" not-null="False" sql-type="timestamp" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="d9d75e21-8ebd-431f-b304-d8e8389d7361">
+      <column name="updated_at" default="NULL" not-null="False" sql-type="timestamp" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="TempFingerprint" entity-set="TempFingerprints" table="temp_fingerprint" schema="biometric" p1:Guid="28ceab53-afe3-4b5a-9059-dbefd29c6e3d">
+    <id name="Id" type="String" p1:ValidateMaxLength="40" p1:ValidateRequired="true" p1:Guid="932094dd-6758-4d0e-8a2e-a20ad780ac97">
+      <column name="id" not-null="True" length="40" sql-type="varchar" p1:unicode="True" />
+    </id>
+    <property name="Image" type="Blob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="a4d29b96-32b5-4a83-b981-b21b9472a22f">
+      <column name="image" default="NULL" not-null="False" sql-type="longblob" p1:unicode="False" />
+    </property>
+    <property name="Fingerprint" type="Blob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="6478328b-5c86-4f32-a8d7-d474f952e17c">
+      <column name="fingerprint" default="NULL" not-null="False" sql-type="longblob" p1:unicode="False" />
+    </property>
+    <property name="UserIdNumber" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="30" p1:ValidateRequired="false" p1:Guid="b6e86f9b-f944-400a-99fa-1e09434ec5c3">
+      <column name="user_id_number" default="NULL" not-null="False" length="30" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="FingerName" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="30" p1:ValidateRequired="false" p1:Guid="e0a31d68-6501-4395-9bd7-69c9e13e72d1">
+      <column name="finger_name" default="NULL" not-null="False" length="30" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="TokenPc" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="100" p1:ValidateRequired="false" p1:Guid="c707ef03-f5ce-4bf9-a2c4-a3df54b8598f">
+      <column name="token_pc" default="NULL" not-null="False" length="100" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Option" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="30" p1:ValidateRequired="false" p1:Guid="ac564c4e-9c35-41f4-863c-61d7520c9bc7">
+      <column name="`option`" default="NULL" not-null="False" length="30" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Name" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="200" p1:ValidateRequired="false" p1:Guid="572ca7a3-3a14-440d-ba5a-873569e0f257">
+      <column name="name" default="NULL" not-null="False" length="200" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Text" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="100" p1:ValidateRequired="false" p1:Guid="13a0a2cf-0a41-48b5-acbb-1b022f14682c">
+      <column name="`text`" default="NULL" not-null="False" length="100" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="UserId" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="c65decdc-32fa-4503-8025-bb65fb232246">
+      <column name="user_id" default="NULL" not-null="False" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="23f4e008-375c-4fad-ac8a-ce1359d36481">
+      <column name="created_at" default="current_timestamp()" not-null="False" sql-type="timestamp" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="423cc5bd-cee6-4e2c-b69d-37292fdaddc0">
+      <column name="updated_at" default="current_timestamp()" not-null="False" sql-type="timestamp" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="User" entity-set="Users" table="users" schema="biometric" p1:Guid="17dda7a2-82b6-401b-8151-9f39cfb5a00e">
+    <id name="Id" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="a3d452ab-d396-4c37-9b8e-969b6d9b2186">
+      <column name="id" not-null="True" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    </id>
+    <property name="Name" type="String" p1:ValidateMaxLength="255" p1:ValidateRequired="true" p1:Guid="a3678dcf-fc5a-4f58-9f55-b65100cd3923">
+      <column name="name" not-null="True" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Email" type="String" p1:ValidateMaxLength="255" p1:ValidateRequired="true" p1:Guid="91ac3ccf-9e79-43f7-aac5-afb6db8e519b">
+      <column name="email" not-null="True" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="EmailVerifiedAt" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="bd089f44-1d55-4540-ac03-ba52ba3d0ada">
+      <column name="email_verified_at" default="NULL" not-null="False" sql-type="timestamp" p1:unicode="False" />
+    </property>
+    <property name="Password" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="68d5acc3-b1bb-43b4-8fcd-3197d8a2f03b">
+      <column name="`password`" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="RememberToken" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="100" p1:ValidateRequired="false" p1:Guid="0ca04394-153c-478f-9189-9df6d01531e1">
+      <column name="remember_token" default="NULL" not-null="False" length="100" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Image" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="200" p1:ValidateRequired="false" p1:Guid="662f2752-cf87-48c7-957f-f263389f3779">
+      <column name="image" default="NULL" not-null="False" length="200" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="fb3df555-0cbc-4235-821c-d952aba6f478">
+      <column name="created_at" default="NULL" not-null="False" sql-type="timestamp" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="1a76597a-972e-4ace-9324-8cda315ef685">
+      <column name="updated_at" default="NULL" not-null="False" sql-type="timestamp" p1:unicode="False" />
+    </property>
+  </class>
+</efcore>

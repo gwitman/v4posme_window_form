@@ -41,7 +41,14 @@ class CoreWebAuditoria : ICoreWebAuditoria
 
             if (property is { Name: "CreatedBy", CanWrite: true })
             {
-                property.SetValue(obj, dataUser.UserID);
+                if (property.PropertyType == typeof(long?) || property.PropertyType == typeof(long))
+                {
+                    property.SetValue(obj, (long?)dataUser.UserID);
+                }
+                else
+                {
+                    property.SetValue(obj, dataUser.UserID);
+                }
             }
 
             if (property is { Name: "CreatedIn", CanWrite: true })
@@ -137,6 +144,7 @@ class CoreWebAuditoria : ICoreWebAuditoria
             {
                 continue;
             }
+
             elementSalvar[aux] = new Dictionary<string?, object?>
             {
                 { "subelementid", fieldId },

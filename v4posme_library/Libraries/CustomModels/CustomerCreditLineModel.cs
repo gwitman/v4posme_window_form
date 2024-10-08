@@ -6,7 +6,7 @@ namespace v4posme_library.Libraries.CustomModels;
 
 class CustomerCreditLineModel : ICustomerCreditLineModel
 {
-    public void UpdateAppPosme(int customerCreditLineId, TbCustomerCreditLine data)
+    public void UpdateAppPosme(int customerCreditLineId, TbCustomerCreditLine? data)
     {
         using var context = new DataContext();
         var find = context.TbCustomerCreditLines
@@ -14,7 +14,7 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
         if (find == null) return;
         data.CustomerCreditLineID = find.CustomerCreditLineID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int InsertAppPosme(TbCustomerCreditLine data)
@@ -31,7 +31,7 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
         var find = context.TbCustomerCreditLines.Find(customerCreditLineId);
         if (find is null) return;
         find.IsActive = false;
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public void DeleteWhereIdNotIn(int companyId, int branchId, int entityId, List<int> listCustomerCreditLineId)
@@ -105,9 +105,11 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
                 BranchId = i.BranchID,
                 EntityId = i.EntityID,
                 CreditLineId = i.CreditLineID,
+                CreditLineName= cl.Name,
                 AccountNumber = i.AccountNumber,
                 CurrencyId = i.CurrencyID,
                 LimitCredit = i.LimitCredit,
+                DayExcluded = i.DayExcluded,
                 Balance = i.Balance,
                 InterestYear = i.InterestYear,
                 InterestPay = i.InterestPay,
@@ -220,11 +222,11 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
         return result.ToList();
     }
 
-    public TbCustomerCreditLine GetRowByPk(int customerCreditLineId)
+    public TbCustomerCreditLine? GetRowByPk(int customerCreditLineId)
     {
         using var context = new DataContext();
         return context.TbCustomerCreditLines
-            .Single(line => line.CustomerCreditLineID == customerCreditLineId
+            .SingleOrDefault(line => line.CustomerCreditLineID == customerCreditLineId
                             && line.IsActive);
     }
 }

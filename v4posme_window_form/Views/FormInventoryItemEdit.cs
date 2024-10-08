@@ -1120,7 +1120,7 @@ namespace v4posme_window.Views
             }
         }
 
-        private void CommandNew(object? sender, EventArgs e)
+        public void CommandNew(object? sender, EventArgs e)
         {
             Close();
             var nuevo = new FormInventoryItemEdit(TypeRender.New, 0)
@@ -1130,7 +1130,7 @@ namespace v4posme_window.Views
             nuevo.Show();
         }
 
-        private void CommandSave(object? sender, EventArgs e)
+        public void CommandSave(object? sender, EventArgs e)
         {
             if (FnValidateFormAndSubmit())
             {
@@ -1188,7 +1188,7 @@ namespace v4posme_window.Views
             }
         }
 
-        private void CommandRegresar(object? sender, EventArgs e)
+        public void CommandRegresar(object? sender, EventArgs e)
         {
             Close();
         }
@@ -1764,18 +1764,6 @@ namespace v4posme_window.Views
             if (_findValueSku)
                 e.Valid = false;
         }
-
-        private void btnEliminarSkuGrid_Click(object sender, EventArgs e)
-        {
-            gridViewSku.DeleteSelectedRows();
-        }
-
-        private void xtraScrollableControl1_Click(object sender, EventArgs e)
-        {
-        }
-
-        #endregion
-
         private void btnImprimirCodigoBarra_Click(object sender, EventArgs e)
         {
             var cantidadImprimirFrm = new FormInventoryItemCantidadImprimir();
@@ -1799,5 +1787,16 @@ namespace v4posme_window.Views
 
             _objInterfazCoreWebRenderInView.PrintBarCodeItem(ObjItem, cantidadImprimirFrm.CantidadImprimir);
         }
+        private void btnEliminarSkuGrid_Click(object sender, EventArgs e)
+        {
+            gridViewSku.DeleteSelectedRows();
+        }
+
+        private void xtraScrollableControl1_Click(object sender, EventArgs e)
+        {
+        }
+
+        #endregion
+
     }
 }

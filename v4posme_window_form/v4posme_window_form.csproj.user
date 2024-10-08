@@ -7,10 +7,22 @@
     <Compile Update="ControlCustom\GridControlCustom.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Editors\EmailBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Editors\PaymentCardBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Editors\PhoneNumberBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Template\FormTypeCustomInputForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Template\FormTypeHeadEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Template\FormTypeHeadModal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Template\FormTypeList.cs">
@@ -22,7 +34,19 @@
     <Compile Update="Template\FormTypePdfViewer.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Template\FormTypeWebView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\FormCustomerEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\FormCustomerEditCreditLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\FormCustomerEditEmail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\FormCustomerEditTelefonos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\FormCustomerList.cs">
