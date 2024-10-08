@@ -96,61 +96,62 @@
             layoutControl1.Controls.Add(txtTerm);
             layoutControl1.Controls.Add(txtNote);
             layoutControl1.Controls.Add(txtDayExcluded);
-            layoutControl1.Location = new Point(12, 56);
+            layoutControl1.Dock = DockStyle.Fill;
+            layoutControl1.Location = new Point(0, 50);
             layoutControl1.Name = "layoutControl1";
             layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(985, 0, 650, 400);
             layoutControl1.Root = Root;
-            layoutControl1.Size = new Size(627, 620);
+            layoutControl1.Size = new Size(665, 652);
             layoutControl1.TabIndex = 1;
             layoutControl1.Text = "layoutControl1";
             // 
             // txtNumber
             // 
-            txtNumber.Location = new Point(16, 35);
+            txtNumber.Location = new Point(22, 38);
             txtNumber.Name = "txtNumber";
             txtNumber.Properties.Appearance.Options.UseTextOptions = true;
             txtNumber.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             txtNumber.Properties.ContextImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("txtNumber.Properties.ContextImageOptions.SvgImage");
             txtNumber.Properties.ContextImageOptions.SvgImageSize = new Size(18, 18);
             txtNumber.Properties.ReadOnly = true;
-            txtNumber.Size = new Size(595, 30);
+            txtNumber.Size = new Size(621, 22);
             txtNumber.StyleController = layoutControl1;
             txtNumber.TabIndex = 4;
             // 
             // txtCreditLineID
             // 
             txtCreditLineID.EnterMoveNextControl = true;
-            txtCreditLineID.Location = new Point(16, 90);
+            txtCreditLineID.Location = new Point(22, 80);
             txtCreditLineID.Name = "txtCreditLineID";
             txtCreditLineID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtCreditLineID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            txtCreditLineID.Size = new Size(595, 28);
+            txtCreditLineID.Size = new Size(621, 20);
             txtCreditLineID.StyleController = layoutControl1;
             txtCreditLineID.TabIndex = 5;
             // 
             // txtCurrencyID
             // 
-            txtCurrencyID.Location = new Point(16, 143);
+            txtCurrencyID.Location = new Point(22, 120);
             txtCurrencyID.Name = "txtCurrencyID";
             txtCurrencyID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtCurrencyID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            txtCurrencyID.Size = new Size(595, 28);
+            txtCurrencyID.Size = new Size(621, 20);
             txtCurrencyID.StyleController = layoutControl1;
             txtCurrencyID.TabIndex = 6;
             // 
             // txtStatusID
             // 
-            txtStatusID.Location = new Point(16, 196);
+            txtStatusID.Location = new Point(22, 160);
             txtStatusID.Name = "txtStatusID";
             txtStatusID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtStatusID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            txtStatusID.Size = new Size(595, 28);
+            txtStatusID.Size = new Size(621, 20);
             txtStatusID.StyleController = layoutControl1;
             txtStatusID.TabIndex = 7;
             // 
             // txtLimitCredit
             // 
-            txtLimitCredit.Location = new Point(16, 249);
+            txtLimitCredit.Location = new Point(22, 200);
             txtLimitCredit.Name = "txtLimitCredit";
             txtLimitCredit.Properties.Appearance.Options.UseTextOptions = true;
             txtLimitCredit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
@@ -158,14 +159,14 @@
             txtLimitCredit.Properties.ContextImageOptions.SvgImageSize = new Size(18, 18);
             txtLimitCredit.Properties.EditFormat.FormatString = "N2";
             txtLimitCredit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            txtLimitCredit.Size = new Size(595, 30);
+            txtLimitCredit.Size = new Size(621, 22);
             txtLimitCredit.StyleController = layoutControl1;
             txtLimitCredit.TabIndex = 8;
             // 
             // txtInteresYear
             // 
             txtInteresYear.EditValue = new decimal(new int[] { 0, 0, 0, 0 });
-            txtInteresYear.Location = new Point(16, 304);
+            txtInteresYear.Location = new Point(22, 242);
             txtInteresYear.Name = "txtInteresYear";
             txtInteresYear.Properties.Appearance.Options.UseTextOptions = true;
             txtInteresYear.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
@@ -173,56 +174,56 @@
             txtInteresYear.Properties.ContextImageOptions.SvgImageSize = new Size(18, 18);
             txtInteresYear.Properties.EditFormat.FormatString = "N2";
             txtInteresYear.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            txtInteresYear.Size = new Size(595, 30);
+            txtInteresYear.Size = new Size(621, 22);
             txtInteresYear.StyleController = layoutControl1;
             txtInteresYear.TabIndex = 9;
             // 
             // txtPeriodPay
             // 
-            txtPeriodPay.Location = new Point(16, 359);
+            txtPeriodPay.Location = new Point(22, 284);
             txtPeriodPay.Name = "txtPeriodPay";
             txtPeriodPay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtPeriodPay.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            txtPeriodPay.Size = new Size(595, 28);
+            txtPeriodPay.Size = new Size(621, 20);
             txtPeriodPay.StyleController = layoutControl1;
             txtPeriodPay.TabIndex = 10;
             // 
             // txtTypeAmorization
             // 
-            txtTypeAmorization.Location = new Point(16, 465);
+            txtTypeAmorization.Location = new Point(22, 364);
             txtTypeAmorization.Name = "txtTypeAmorization";
             txtTypeAmorization.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtTypeAmorization.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            txtTypeAmorization.Size = new Size(595, 28);
+            txtTypeAmorization.Size = new Size(621, 20);
             txtTypeAmorization.StyleController = layoutControl1;
             txtTypeAmorization.TabIndex = 11;
             // 
             // txtTerm
             // 
-            txtTerm.Location = new Point(16, 518);
+            txtTerm.Location = new Point(22, 404);
             txtTerm.Name = "txtTerm";
             txtTerm.Properties.DisplayFormat.FormatString = "N";
             txtTerm.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             txtTerm.Properties.EditFormat.FormatString = "N";
             txtTerm.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            txtTerm.Size = new Size(595, 28);
+            txtTerm.Size = new Size(621, 20);
             txtTerm.StyleController = layoutControl1;
             txtTerm.TabIndex = 12;
             // 
             // txtNote
             // 
-            txtNote.Location = new Point(16, 571);
+            txtNote.Location = new Point(22, 444);
             txtNote.Name = "txtNote";
-            txtNote.Size = new Size(595, 28);
+            txtNote.Size = new Size(621, 20);
             txtNote.StyleController = layoutControl1;
             txtNote.TabIndex = 13;
             // 
             // txtDayExcluded
             // 
-            txtDayExcluded.Location = new Point(16, 412);
+            txtDayExcluded.Location = new Point(22, 324);
             txtDayExcluded.Name = "txtDayExcluded";
             txtDayExcluded.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            txtDayExcluded.Size = new Size(595, 28);
+            txtDayExcluded.Size = new Size(621, 20);
             txtDayExcluded.StyleController = layoutControl1;
             txtDayExcluded.TabIndex = 15;
             // 
@@ -232,7 +233,8 @@
             Root.GroupBordersVisible = false;
             Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem5, layoutControlItem6, layoutControlItem7, layoutControlItem8, layoutControlItem9, layoutControlItem10, layoutControlItem12 });
             Root.Name = "Root";
-            Root.Size = new Size(627, 620);
+            Root.Padding = new DevExpress.XtraLayout.Utils.Padding(20, 20, 20, 20);
+            Root.Size = new Size(665, 652);
             Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -240,7 +242,7 @@
             layoutControlItem1.Control = txtNumber;
             layoutControlItem1.Location = new Point(0, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new Size(601, 55);
+            layoutControlItem1.Size = new Size(625, 42);
             layoutControlItem1.Text = "Número";
             layoutControlItem1.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem1.TextSize = new Size(94, 13);
@@ -248,9 +250,9 @@
             // layoutControlItem2
             // 
             layoutControlItem2.Control = txtCreditLineID;
-            layoutControlItem2.Location = new Point(0, 55);
+            layoutControlItem2.Location = new Point(0, 42);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new Size(601, 53);
+            layoutControlItem2.Size = new Size(625, 40);
             layoutControlItem2.Text = "Linea";
             layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem2.TextSize = new Size(94, 13);
@@ -258,9 +260,9 @@
             // layoutControlItem3
             // 
             layoutControlItem3.Control = txtCurrencyID;
-            layoutControlItem3.Location = new Point(0, 108);
+            layoutControlItem3.Location = new Point(0, 82);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new Size(601, 53);
+            layoutControlItem3.Size = new Size(625, 40);
             layoutControlItem3.Text = "Moneda";
             layoutControlItem3.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem3.TextSize = new Size(94, 13);
@@ -268,9 +270,9 @@
             // layoutControlItem4
             // 
             layoutControlItem4.Control = txtStatusID;
-            layoutControlItem4.Location = new Point(0, 161);
+            layoutControlItem4.Location = new Point(0, 122);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new Size(601, 53);
+            layoutControlItem4.Size = new Size(625, 40);
             layoutControlItem4.Text = "Estado";
             layoutControlItem4.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem4.TextSize = new Size(94, 13);
@@ -278,9 +280,9 @@
             // layoutControlItem5
             // 
             layoutControlItem5.Control = txtLimitCredit;
-            layoutControlItem5.Location = new Point(0, 214);
+            layoutControlItem5.Location = new Point(0, 162);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new Size(601, 55);
+            layoutControlItem5.Size = new Size(625, 42);
             layoutControlItem5.Text = "Límite de Crédito";
             layoutControlItem5.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem5.TextSize = new Size(94, 13);
@@ -288,9 +290,9 @@
             // layoutControlItem6
             // 
             layoutControlItem6.Control = txtInteresYear;
-            layoutControlItem6.Location = new Point(0, 269);
+            layoutControlItem6.Location = new Point(0, 204);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new Size(601, 55);
+            layoutControlItem6.Size = new Size(625, 42);
             layoutControlItem6.Text = "Interés anual";
             layoutControlItem6.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem6.TextSize = new Size(94, 13);
@@ -298,9 +300,9 @@
             // layoutControlItem7
             // 
             layoutControlItem7.Control = txtPeriodPay;
-            layoutControlItem7.Location = new Point(0, 324);
+            layoutControlItem7.Location = new Point(0, 246);
             layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new Size(601, 53);
+            layoutControlItem7.Size = new Size(625, 40);
             layoutControlItem7.Text = "Frecuencia de Pago";
             layoutControlItem7.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem7.TextSize = new Size(94, 13);
@@ -308,9 +310,9 @@
             // layoutControlItem8
             // 
             layoutControlItem8.Control = txtTypeAmorization;
-            layoutControlItem8.Location = new Point(0, 430);
+            layoutControlItem8.Location = new Point(0, 326);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new Size(601, 53);
+            layoutControlItem8.Size = new Size(625, 40);
             layoutControlItem8.Text = "Plan";
             layoutControlItem8.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem8.TextSize = new Size(94, 13);
@@ -318,9 +320,9 @@
             // layoutControlItem9
             // 
             layoutControlItem9.Control = txtTerm;
-            layoutControlItem9.Location = new Point(0, 483);
+            layoutControlItem9.Location = new Point(0, 366);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new Size(601, 53);
+            layoutControlItem9.Size = new Size(625, 40);
             layoutControlItem9.Text = "Número de Pagos";
             layoutControlItem9.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem9.TextSize = new Size(94, 13);
@@ -328,9 +330,9 @@
             // layoutControlItem10
             // 
             layoutControlItem10.Control = txtNote;
-            layoutControlItem10.Location = new Point(0, 536);
+            layoutControlItem10.Location = new Point(0, 406);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new Size(601, 58);
+            layoutControlItem10.Size = new Size(625, 206);
             layoutControlItem10.Text = "Nota";
             layoutControlItem10.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem10.TextSize = new Size(94, 13);
@@ -338,9 +340,9 @@
             // layoutControlItem12
             // 
             layoutControlItem12.Control = txtDayExcluded;
-            layoutControlItem12.Location = new Point(0, 377);
+            layoutControlItem12.Location = new Point(0, 286);
             layoutControlItem12.Name = "layoutControlItem12";
-            layoutControlItem12.Size = new Size(601, 53);
+            layoutControlItem12.Size = new Size(625, 40);
             layoutControlItem12.Text = "Dias Excluidos";
             layoutControlItem12.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem12.TextSize = new Size(94, 13);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            backgroundWorker = new System.ComponentModel.BackgroundWorker();
             SuspendLayout();
             // 
             // progressPanel
@@ -50,5 +51,7 @@
         }
 
         #endregion
+
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }

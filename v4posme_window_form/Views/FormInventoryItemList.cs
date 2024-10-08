@@ -222,88 +222,62 @@ namespace v4posme_window.Views
 
         public void Delete(object? sender, EventArgs? args)
         {
-            var result = _coreWebRender.XtraMessageBoxArgs(TypeError.Warning, "Eliminar", "¿Seguro desea eliminar el articulo seleccionado? Esta acción no se puede revertir.");
+            var result = _coreWebRender.XtraMessageBoxArgs(TypeError.Error, "Eliminar", "¿Seguro desea eliminar los articulos seleccionados? Esta acción no se puede revertir.");
+
             if (result == DialogResult.No)
             {
                 return;
             }
-
-            try
+            if (!progressPanel.Visible)
             {
-                var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
-                var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
-                var notAllEdit = VariablesGlobales.ConfigurationBuilder["NOT_ALL_EDIT"];
-                var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
-                var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
-                var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
-                var user = VariablesGlobales.Instance.User;
-                if (user is null)
-                {
-                    throw new Exception(userNotAutenticated);
-                }
-
-                var role = VariablesGlobales.Instance.Role;
-                if (role is null)
-                {
-                    throw new Exception("ROL NO VALIDO");
-                }
-
-                var itemId = _gridViewData.GetRowCellValue(_gridViewData.FocusedRowHandle, "itemID");
-
-                var objItem = _itemModel.GetRowByPk(user.CompanyID, Convert.ToInt32(itemId));
-                if (objItem is null)
-                {
-                    XtraMessageBox.Show("No existe el articulo en la base de datos", "Eliminar");
-                    return;
-                }
-
-                int resultPermission = 0;
-                if (appNeedAuthentication == "true")
-                {
-                    var permited = _coreWebPermission.UrlPermited("app_inventory_item", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
-                    if (!permited)
-                    {
-                        throw new Exception(notAccessControl);
-                    }
-
-                    resultPermission = _coreWebPermission.UrlPermissionCmd("app_inventory_item", "delete", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
-                    if (resultPermission == permissionNone)
-                    {
-                        throw new Exception(notAllEdit);
-                    }
-                }
-
-                var permissionMe = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_ME"]);
-                if (resultPermission == permissionMe && objItem.CreatedBy != user.UserID)
-                {
-                    throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_DELETE"]);
-                }
-
-                var command = VariablesGlobales.ConfigurationBuilder["COMMAND_ELIMINABLE"];
-                var commandEditableTotal = _objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_item", "statusID", objItem.StatusID!.Value, Convert.ToInt32(command), user.CompanyID, user.BranchID, role.RoleID);
-                if (!commandEditableTotal!.Value)
-                {
-                    throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
-                }
-
-                //VALIDAR CANTIDAD
-                if (VariablesGlobales.Instance.Company is not null && VariablesGlobales.Instance.Company.Type != "luciaralstate")
-                {
-                    if (objItem.Quantity > 0)
-                    {
-                        _coreWebRender.GetMessageAlert(TypeError.Error, "Eliminar", "EL REGISTRO NO PUEDE SER ELIMINADO, SU CANTIDAD ES MAYOR QUE  0", this);
-                        return;
-                    }
-                }
-
-                _itemModel.DeleteAppPosme(user.CompanyID, objItem.ItemID);
-                XtraMessageBox.Show("Se ha eliminado el articulo de forma correcta", "Eliminar");
-                FormInventoryItemList_Load(sender, args);
+                progressPanel.Visible = true;
             }
-            catch (Exception exception)
+            var countRows = _gridViewData!.SelectedRowsCount > 0;
+            if (!countRows)
             {
-                _coreWebRender.GetMessageAlert(TypeError.Error, "Error", $"No fue posible eliminar el articulo, debido al siguiente error: {exception.Message}", this);
+                _coreWebRender.GetMessageAlert(TypeError.Error, @"Error eliminando", "Debe seleccionar un registro", this);
+                return;
             }
+            
+
+            backgroundWorker=new BackgroundWorker();
+            backgroundWorker.DoWork += (ob, ev) =>
+            {
+                
+                var rowIndex = _gridViewData.GetSelectedRows();
+                foreach (var indexRow in rowIndex)
+                {
+                    var itemId = Convert.ToInt32(_gridViewData.GetRowCellValue(indexRow, "itemID").ToString());
+                    var objFormCustomerEdit = new FormInventoryItemEdit(TypeRender.Edit, itemId);
+                    objFormCustomerEdit.ComandDelete();
+                }
+            };
+            
+            backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+            {   
+                Debug.WriteLine(ev);
+                if (ev.Error is not null)
+                {
+                    _coreWebRender.GetMessageAlert(TypeError.Error, "Error Eliminar", $"Se ha producido un error al eliminar {ev.Error.Message}", this);
+
+                }else if (ev.Cancelled)
+                {
+                    _coreWebRender.GetMessageAlert(TypeError.Warning, "Eliminar", "Se ha cancelado la eliminación de la factura", this);
+                }
+                else
+                {
+                    _coreWebRender.GetMessageAlert(TypeError.Informacion, "Eliminar", "Se han eliminado los articulos de forma correcta", this);
+                    List();
+                    RefreshData();
+                }
+                if (progressPanel.Visible)
+                {
+                    progressPanel.Visible = false;
+                }
+            };
+
+            if (backgroundWorker.IsBusy) return;
+            backgroundWorker.RunWorkerAsync();
         }
 
         public void Edit(object? sender, EventArgs? args)

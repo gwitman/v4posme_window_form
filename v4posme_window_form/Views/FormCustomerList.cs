@@ -191,7 +191,7 @@ namespace v4posme_window.Views
 
         private void RefreshData()
         {
-            CoreWebRenderInView.RenderGrid(_dataViewData!, "customer", ObjGridControl, false,true);
+            CoreWebRenderInView.RenderGrid(_dataViewData!, "customer", ObjGridControl, true,true);
             _gridViewData = (CustomGridView)ObjGridControl.MainView;
             _gridViewData.RefreshData();
             Debug.WriteLine(_gridViewData.Columns);
@@ -214,105 +214,62 @@ namespace v4posme_window.Views
 
         public void Delete(object? sender, EventArgs? args)
         {
-            var objInterfazCoreWebRenderInView = new CoreWebRenderInView();
-            var selectedValue = _gridViewData!.SelectedRowsCount;
-            if (selectedValue <= 0)
+            var result = _coreWebRender.XtraMessageBoxArgs(TypeError.Error, "Eliminar", "¿Seguro desea eliminar los clientes seleccionados? Esta acción no se puede revertir.");
+
+            if (result == DialogResult.No)
             {
-                objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Warning, "Eliminar", "Seleccione un valor de la lista para eliminar", this);
                 return;
             }
 
-            var result = objInterfazCoreWebRenderInView.XtraMessageBoxArgs(TypeError.Informacion, "Eliminar", "¿Seguro desea el iminar el cliente seleccionado? Esta acción no se peude revertir");
-            if (result==DialogResult.No)
+            if (!progressPanel.Visible)
             {
+                progressPanel.Visible = true;
+            }
+            var countRows = _gridViewData!.SelectedRowsCount > 0;
+            if (!countRows)
+            {
+                _coreWebRender.GetMessageAlert(TypeError.Error, @"Error eliminando", "Debe seleccionar un registro", this);
                 return;
-            }
-            var objInterfazCoreWebPermission = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebPermission>();
-            var customerModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerModel>();
-            var notAllEdit = VariablesGlobales.ConfigurationBuilder["NOT_ALL_EDIT"];
-            var user = VariablesGlobales.Instance.User;
-            if (user is null)
-            {
-                throw new Exception(UserNotAutenticated);
-            }
-
-            var role = VariablesGlobales.Instance.Role;
-            if (role is null)
-            {
-                throw new Exception("No hay configurado un Rol");
-            }
-
-            var company = VariablesGlobales.Instance.Company;
-            if (company is null)
-            {
-                throw new Exception("No hay una compañía configurada");
-            }
-
-            var resultPermission = 0;
-            if (AppNeedAuthentication == "true")
-            {
-                var permited = objInterfazCoreWebPermission.UrlPermited("app_cxc_customer", "index", UrlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
-                if (!permited)
-                {
-                    throw new Exception(NotAccessControl);
-                }
-
-                resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_cxc_customer", "delete", UrlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
-                if (resultPermission == PermissionNone)
-                {
-                    throw new Exception(notAllEdit);
-                }
-            }
-
-            var entityId = Convert.ToInt32(_gridViewData.GetRowCellValue(_gridViewData.FocusedRowHandle, "entityID"));
-            if (entityId == 0)
-            {
-                throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_PARAMETER"]);
-            }
-
-            var objCustomer = customerModel.GetRowByPk(user.CompanyID, user.BranchID, entityId);
-            if (objCustomer == null)
-            {
-                throw new Exception("No es posible eliminar el cliente, no existe el registro");
-            }
-
-            var appCustomer01 = VariablesGlobales.ConfigurationBuilder["APP_CUSTOMER01"];
-            var appCustomer02 = VariablesGlobales.ConfigurationBuilder["APP_CUSTOMER02"];
-            if (entityId == Convert.ToInt32(appCustomer01))
-            {
-                throw new Exception("No es posible eliminar el cliente, edite el nombre");
-            }
-
-            if (entityId == Convert.ToInt32(appCustomer02))
-            {
-                throw new Exception("No es posible eliminar el cliente, edite el nombre");
-            }
-
-            //PERMISO SOBRE EL REGISTRO
-            var permissionMe = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_ME"]);
-            if (resultPermission == permissionMe && objCustomer.CreatedBy!.Value != user.UserID)
-            {
-                throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_DELETE"]);
-            }
-
-            //PERMISO PUEDE ELIMINAR EL REGISTRO SEGUN EL WORKFLOW
-            var commandEliminable = VariablesGlobales.ConfigurationBuilder["COMMAND_ELIMINABLE"];
-            if (!_objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_customer", "statusID", objCustomer.StatusID!.Value, Convert.ToInt32(commandEliminable), user.CompanyID, user.BranchID, role.RoleID)!.Value)
-            {
-                throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
-            }
-
-            try
-            {
-                _customerModel.DeleteAppPosme(user.CompanyID, user.BranchID, entityId);
-                objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Eliminar", "Se ha eliminado con exito", this);
-                FormCustomerList_Load(sender!, args!);
-            }
-            catch (Exception e)
-            {
-                objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Eliminar", $"Se ha producido el siguiente error: {e.Message}", this);
             }
             
+
+            backgroundWorker=new BackgroundWorker();
+            backgroundWorker.DoWork += (ob, ev) =>
+            {
+                var rowIndex = _gridViewData.GetSelectedRows();
+                foreach (var indexRow in rowIndex)
+                {
+                    var entityId = Convert.ToInt32(_gridViewData.GetRowCellValue(indexRow, "entityID").ToString());
+                    var objFormCustomerEdit = new FormCustomerEdit(TypeRender.Edit, entityId);
+                    objFormCustomerEdit.ComandDelete();
+                }
+            };
+            
+            backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+            {   
+                Debug.WriteLine(ev);
+                if (ev.Error is not null)
+                {
+                    _coreWebRender.GetMessageAlert(TypeError.Error, "Error Eliminar", $"Se ha producido un error al eliminar {ev.Error.Message}", this);
+
+                }else if (ev.Cancelled)
+                {
+                    _coreWebRender.GetMessageAlert(TypeError.Warning, "Eliminar", "Se ha cancelado la eliminación de la cliente", this);
+                }
+                else
+                {
+                    _coreWebRender.GetMessageAlert(TypeError.Informacion, "Eliminar", "Se han eliminado los clientes de forma correcta", this);
+                    List();
+                    RefreshData();
+                }
+                if (progressPanel.Visible)
+                {
+                    progressPanel.Visible = false;
+                }
+            };
+
+            if (backgroundWorker.IsBusy) return;
+            backgroundWorker.RunWorkerAsync();
         }
 
         public void Edit(object? sender, EventArgs? args)

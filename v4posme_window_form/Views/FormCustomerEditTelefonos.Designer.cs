@@ -56,40 +56,41 @@
             layoutControl1.Controls.Add(txtEntityPhoneNumber);
             layoutControl1.Controls.Add(txtEntityPhoneTypeID);
             layoutControl1.Controls.Add(txtIsPrimary);
-            layoutControl1.Location = new Point(12, 66);
+            layoutControl1.Dock = DockStyle.Fill;
+            layoutControl1.Location = new Point(0, 50);
             layoutControl1.Name = "layoutControl1";
             layoutControl1.Root = Root;
-            layoutControl1.Size = new Size(400, 192);
+            layoutControl1.Size = new Size(439, 201);
             layoutControl1.TabIndex = 2;
             layoutControl1.Text = "layoutControl1";
             // 
             // txtEntityPhoneNumber
             // 
             txtEntityPhoneNumber.EditorSize = DevExpress.XtraEditors.Internal.HtmlTextBoxBase.EditSize.Large;
-            txtEntityPhoneNumber.Location = new Point(16, 97);
+            txtEntityPhoneNumber.Location = new Point(23, 104);
             txtEntityPhoneNumber.Name = "txtEntityPhoneNumber";
-            txtEntityPhoneNumber.Size = new Size(368, 30);
+            txtEntityPhoneNumber.Size = new Size(393, 30);
             txtEntityPhoneNumber.StyleController = layoutControl1;
             txtEntityPhoneNumber.TabIndex = 7;
             // 
             // txtEntityPhoneTypeID
             // 
-            txtEntityPhoneTypeID.Location = new Point(16, 35);
+            txtEntityPhoneTypeID.Location = new Point(23, 42);
             txtEntityPhoneTypeID.Name = "txtEntityPhoneTypeID";
             txtEntityPhoneTypeID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             txtEntityPhoneTypeID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            txtEntityPhoneTypeID.Size = new Size(368, 28);
+            txtEntityPhoneTypeID.Size = new Size(393, 28);
             txtEntityPhoneTypeID.StyleController = layoutControl1;
             txtEntityPhoneTypeID.TabIndex = 4;
             // 
             // txtIsPrimary
             // 
-            txtIsPrimary.Location = new Point(16, 143);
+            txtIsPrimary.Location = new Point(23, 150);
             txtIsPrimary.Name = "txtIsPrimary";
             txtIsPrimary.Properties.Caption = "Es primario";
             txtIsPrimary.Properties.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.SvgCheckBox1;
             txtIsPrimary.RightToLeft = RightToLeft.No;
-            txtIsPrimary.Size = new Size(368, 22);
+            txtIsPrimary.Size = new Size(393, 22);
             txtIsPrimary.StyleController = layoutControl1;
             txtIsPrimary.TabIndex = 6;
             // 
@@ -99,7 +100,8 @@
             Root.GroupBordersVisible = false;
             Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem3, layoutControlItem2 });
             Root.Name = "Root";
-            Root.Size = new Size(400, 192);
+            Root.Padding = new DevExpress.XtraLayout.Utils.Padding(20, 20, 20, 20);
+            Root.Size = new Size(439, 201);
             Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -107,7 +109,7 @@
             layoutControlItem1.Control = txtEntityPhoneTypeID;
             layoutControlItem1.Location = new Point(0, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new Size(374, 63);
+            layoutControlItem1.Size = new Size(399, 63);
             layoutControlItem1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 10);
             layoutControlItem1.Text = "Tipo:";
             layoutControlItem1.TextLocation = DevExpress.Utils.Locations.Top;
@@ -118,7 +120,7 @@
             layoutControlItem3.Control = txtIsPrimary;
             layoutControlItem3.Location = new Point(0, 127);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new Size(374, 39);
+            layoutControlItem3.Size = new Size(399, 34);
             layoutControlItem3.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem3.TextSize = new Size(0, 0);
             layoutControlItem3.TextVisible = false;
@@ -128,7 +130,7 @@
             layoutControlItem2.Control = txtEntityPhoneNumber;
             layoutControlItem2.Location = new Point(0, 63);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new Size(374, 64);
+            layoutControlItem2.Size = new Size(399, 64);
             layoutControlItem2.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 10);
             layoutControlItem2.Text = "Teléfono";
             layoutControlItem2.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
@@ -144,7 +146,7 @@
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(439, 270);
+            ClientSize = new Size(439, 251);
             Controls.Add(layoutControl1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             IconOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("FormCustomerEditTelefonos.IconOptions.SvgImage");

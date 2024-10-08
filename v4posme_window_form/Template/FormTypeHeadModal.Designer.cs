@@ -44,7 +44,7 @@
             stackPanel1.LayoutDirection = DevExpress.Utils.Layout.StackPanelLayoutDirection.RightToLeft;
             stackPanel1.Location = new Point(0, 0);
             stackPanel1.Name = "stackPanel1";
-            stackPanel1.Padding = new Padding(1, 1, 40, 1);
+            stackPanel1.Padding = new Padding(1, 1, 20, 1);
             stackPanel1.Size = new Size(464, 50);
             stackPanel1.TabIndex = 0;
             stackPanel1.UseSkinIndents = true;
@@ -58,7 +58,7 @@
             btnAceptar.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             btnAceptar.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnAceptar.ImageOptions.SvgImage");
             btnAceptar.ImageOptions.SvgImageSize = new Size(16, 16);
-            btnAceptar.Location = new Point(347, 8);
+            btnAceptar.Location = new Point(367, 8);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(75, 34);
             btnAceptar.TabIndex = 5;
@@ -74,7 +74,7 @@
             btnCancelar.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             btnCancelar.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnCancelar.ImageOptions.SvgImage");
             btnCancelar.ImageOptions.SvgImageSize = new Size(16, 16);
-            btnCancelar.Location = new Point(268, 8);
+            btnCancelar.Location = new Point(288, 8);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(75, 34);
             btnCancelar.TabIndex = 4;

@@ -25,7 +25,7 @@ namespace v4posme_window.Views
         public FormCustomerEditTelefonos()
         {
             InitializeComponent();
-            btnCancelar.Click+=BtnCancelarOnClick;
+            btnCancelar.Click += BtnCancelarOnClick;
             btnAceptar.Click += BtnAceptar_Click;
             TbEntityPhoneDto = new();
         }
@@ -42,7 +42,7 @@ namespace v4posme_window.Views
             if (string.IsNullOrWhiteSpace(txtEntityPhoneNumber.Text))
             {
                 dxErrorProvider.SetError(txtEntityPhoneNumber, "Debe especificar este campo para continuar");
-                return;  
+                return;
             }
 
             TbEntityPhoneDto = new TbEntityPhoneDto
@@ -62,16 +62,16 @@ namespace v4posme_window.Views
 
         private void FormCustomerEditTelefonos_Load(object sender, EventArgs e)
         {
-             LoadRender();
-             LoadValues();
+            LoadRender();
+            LoadValues();
         }
 
         private void LoadRender()
         {
-            txtEntityPhoneNumber.Properties.Mask.EditMask = @"+(999)-0000-0000";  
-            txtEntityPhoneNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Simple;  
-            txtEntityPhoneNumber.Properties.Mask.SaveLiteral = false;  
-            txtEntityPhoneNumber.Properties.Mask.UseMaskAsDisplayFormat = true; 
+            txtEntityPhoneNumber.Properties.Mask.EditMask = @"+(999) 0000-0000";
+            txtEntityPhoneNumber.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Regular;
+            txtEntityPhoneNumber.Properties.Mask.SaveLiteral = true;
+            txtEntityPhoneNumber.Properties.Mask.UseMaskAsDisplayFormat = true;
         }
 
         private void LoadValues()

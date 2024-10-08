@@ -29,6 +29,7 @@ using ComboBoxItem = v4posme_window.Libraries.ComboBoxItem;
 using v4posme_window.Api;
 using Exception = System.Exception;
 using DevExpress.Xpo.DB.Helpers;
+using DevExpress.XtraRichEdit.Import.Doc;
 
 namespace v4posme_window.Views;
 
@@ -189,7 +190,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
         _entityId = entityId;
         btnRegresar.Click += CommandRegresar;
         btnGuardar.Click += CommandSave;
-        btnEliminar.Click += (s, e) => ComandDelete();
+        btnEliminar.Click += BtnEliminarOnClick;
         btnNuevo.Click += CommandNew;
     }
 
@@ -265,98 +266,85 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
 
     public void ComandDelete()
     {
-        var result = _objInterfazCoreWebRenderInView.XtraMessageBoxArgs(TypeError.Informacion, "Eliminar", "¿Seguro desea eliminar al cliente actual? Esta acción no se puede revertir");
-        if (result==DialogResult.No)
+        var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
+        var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
+        var notAllEdit = VariablesGlobales.ConfigurationBuilder["NOT_ALL_EDIT"];
+        var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
+        var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+        var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+        var user = VariablesGlobales.Instance.User;
+        if (user is null)
         {
-            return;
+            throw new Exception(userNotAutenticated);
         }
-        try
+
+        var role = VariablesGlobales.Instance.Role;
+        if (role is null)
         {
-            var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
-            var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
-            var notAllEdit = VariablesGlobales.ConfigurationBuilder["NOT_ALL_EDIT"];
-            var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
-            var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
-            var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
-            var user = VariablesGlobales.Instance.User;
-            if (user is null)
-            {
-                throw new Exception(userNotAutenticated);
-            }
-
-            var role = VariablesGlobales.Instance.Role;
-            if (role is null)
-            {
-                throw new Exception("No hay configurado un Rol");
-            }
-
-            var company = VariablesGlobales.Instance.Company;
-            if (company is null)
-            {
-                throw new Exception("No hay una compañía configurada");
-            }
-
-            var resultPermission = 0;
-            if (appNeedAuthentication == "true")
-            {
-                var permited = _objInterfazCoreWebPermission.UrlPermited("app_cxc_customer", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
-                if (!permited)
-                {
-                    throw new Exception(notAccessControl);
-                }
-
-                resultPermission = _objInterfazCoreWebPermission.UrlPermissionCmd("app_cxc_customer", "add", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
-                if (resultPermission == permissionNone)
-                {
-                    throw new Exception(notAllEdit);
-                }
-            }
-
-            ObjComponent = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_customer");
-            if (ObjComponent is null)
-            {
-                throw new Exception("EL COMPONENTE 'tb_customer' NO EXISTE...");
-            }
-
-            if (ObjCustomer is null || _entityId == 0)
-            {
-                throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_PARAMETER"]);
-            }
-
-            var appCustomer01 = VariablesGlobales.ConfigurationBuilder["APP_CUSTOMER01"];
-            var appCustomer02 = VariablesGlobales.ConfigurationBuilder["APP_CUSTOMER02"];
-            if (_entityId == Convert.ToInt32(appCustomer01))
-            {
-                throw new Exception("No es posible eliminar el cliente, edite el nombre");
-            }
-
-            if (_entityId == Convert.ToInt32(appCustomer02))
-            {
-                throw new Exception("No es posible eliminar el cliente, edite el nombre");
-            }
-
-            //PERMISO SOBRE EL REGISTRO
-            var permissionMe = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_ME"]);
-            if (resultPermission == permissionMe && ObjCustomer.CreatedBy!.Value != user.UserID)
-            {
-                throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_DELETE"]);
-            }
-
-            //PERMISO PUEDE ELIMINAR EL REGISTRO SEGUN EL WORKFLOW
-            var commandEliminable = VariablesGlobales.ConfigurationBuilder["COMMAND_ELIMINABLE"];
-            if (!_objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_customer", "statusID", ObjCustomer.StatusID!.Value, Convert.ToInt32(commandEliminable), user.CompanyID, user.BranchID, role.RoleID)!.Value)
-            {
-                throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
-            }
-
-            _customerModel.DeleteAppPosme(user.CompanyID, user.BranchID, ObjCustomer.EntityID);
-            XtraMessageBox.Show("Eliminar", "Se ha eliminado con exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Close();
+            throw new Exception("No hay configurado un Rol");
         }
-        catch (Exception e)
+
+        var company = VariablesGlobales.Instance.Company;
+        if (company is null)
         {
-            _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Eliminar", $"No fue posible eliminar el cliente, debido al siguiente error: {e.Message}", this);
+            throw new Exception("No hay una compañía configurada");
         }
+
+        var resultPermission = 0;
+        if (appNeedAuthentication == "true")
+        {
+            var permited = _objInterfazCoreWebPermission.UrlPermited("app_cxc_customer", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+            if (!permited)
+            {
+                throw new Exception(notAccessControl);
+            }
+
+            resultPermission = _objInterfazCoreWebPermission.UrlPermissionCmd("app_cxc_customer", "add", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+            if (resultPermission == permissionNone)
+            {
+                throw new Exception(notAllEdit);
+            }
+        }
+
+        ObjComponent = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_customer");
+        if (ObjComponent is null)
+        {
+            throw new Exception("EL COMPONENTE 'tb_customer' NO EXISTE...");
+        }
+
+        if (_entityId == 0)
+        {
+            throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_PARAMETER"]);
+        }
+
+        var appCustomer01 = VariablesGlobales.ConfigurationBuilder["APP_CUSTOMER01"];
+        var appCustomer02 = VariablesGlobales.ConfigurationBuilder["APP_CUSTOMER02"];
+        if (_entityId == Convert.ToInt32(appCustomer01))
+        {
+            throw new Exception("No es posible eliminar el cliente, edite el nombre");
+        }
+
+        if (_entityId == Convert.ToInt32(appCustomer02))
+        {
+            throw new Exception("No es posible eliminar el cliente, edite el nombre");
+        }
+
+        ObjCustomer = _customerModel.GetRowByPk(user.CompanyID, user.BranchID, _entityId);
+        //PERMISO SOBRE EL REGISTRO
+        var permissionMe = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_ME"]);
+        if (resultPermission == permissionMe && ObjCustomer.CreatedBy!.Value != user.UserID)
+        {
+            throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_DELETE"]);
+        }
+
+        //PERMISO PUEDE ELIMINAR EL REGISTRO SEGUN EL WORKFLOW
+        var commandEliminable = VariablesGlobales.ConfigurationBuilder["COMMAND_ELIMINABLE"];
+        if (!_objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_customer", "statusID", ObjCustomer.StatusID!.Value, Convert.ToInt32(commandEliminable), user.CompanyID, user.BranchID, role.RoleID)!.Value)
+        {
+            throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
+        }
+
+        _customerModel.DeleteAppPosme(user.CompanyID, user.BranchID, _entityId);
     }
 
     public void ComandPrinter()
@@ -933,7 +921,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             }
         }
 
-        if (ObjListPhone.Count>0)
+        if (ObjListPhone.Count > 0)
         {
             foreach (var tbEntityPhoneDto in ObjListPhone)
             {
@@ -951,7 +939,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
         }
 
         var limitCreditLine = decimal.Zero;
-        if (ObjListCustomerCreditLine.Count>0)
+        if (ObjListCustomerCreditLine.Count > 0)
         {
             foreach (var tbCustomerCreditLineDto in ObjListCustomerCreditLine)
             {
@@ -1163,14 +1151,14 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
 
             if (findPaymentMethod is null)
             {
-                if (txtDatosTarjeta.Card is  null)
+                if (txtDatosTarjeta.Card is null)
                 {
                     findPaymentMethod = new TbCustomerPaymentMethod
                     {
                         EntityID = _entityId,
                         StatusID = 1,
                         IsActive = true,
-                        Name = string.IsNullOrWhiteSpace(txtNombreTarjeta.Text) ? "": txtNombreTarjeta.Text,
+                        Name = string.IsNullOrWhiteSpace(txtNombreTarjeta.Text) ? "" : txtNombreTarjeta.Text,
                         Number = "",
                         Email = "",
                         ExpirationDate = "",
@@ -1186,7 +1174,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                         EntityID = _entityId,
                         StatusID = 1,
                         IsActive = true,
-                        Name =  string.IsNullOrWhiteSpace(txtNombreTarjeta.Text) ? "": txtNombreTarjeta.Text,
+                        Name = string.IsNullOrWhiteSpace(txtNombreTarjeta.Text) ? "" : txtNombreTarjeta.Text,
                         Number = txtDatosTarjeta.Card.Number,
                         Email = txtEmailTarjeta.Text,
                         ExpirationDate = txtDatosTarjeta.Card.ExpirationDate.ToShortDateString(),
@@ -1195,8 +1183,6 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                     };
                     _customerPaymentMethod.InsertAppPosme(findPaymentMethod);
                 }
-
-               
             }
             else
             {
@@ -1210,7 +1196,6 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                     findPaymentMethod.TypeId = typeId;
                     _customerPaymentMethod.UpdateAppPosme(_entityId, findPaymentMethod);
                 }
-                
             }
 
             var selectedIdentificationType = txtIdentificationTypeID.SelectedItem as ComboBoxItem;
@@ -1328,6 +1313,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 {
                     limitCreditDol = decimal.Parse(txtLimitCreditDol.Text);
                 }
+
                 var incomeDol = ObjCustomerCredit.IncomeDol;
                 if (!string.IsNullOrWhiteSpace(txtIncomeDol.Text))
                 {
@@ -1580,154 +1566,154 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
         switch (typeRedner)
         {
             case TypeRender.New:
-                {
-                    Text = "Nuevo Cliente";
-                    lblTitulo.Text = @"CODIGO:#00000000";
-                    btnEliminar.Visible = false;
-                    btnNuevo.Visible = false;
-                    btnImprmir.Visible = false;
-                    txtBirthDate.DateTime = DateTime.Now;
-                    tabPageArchivos.PageVisible = false;
-                    tabLeads.PageVisible=false;
-                    gridControlArchivos.DataSource = null;
-                    btnEditLine.Visible = false;
-                    lcBuro.Visibility = LayoutVisibility.Never;
-                    lcHuella.Visibility = LayoutVisibility.Never;
-                    CoreWebRenderInView.LlenarComboBox(ObjListSexoId, txtSexoID, "CatalogItemID", "Name", ObjListSexoId.First().CatalogItemID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListIdentificationType, txtIdentificationTypeID, "CatalogItemID", "Name", ObjListIdentificationType.First().CatalogItemID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListWorkflowStage, txtStatusID, "WorkflowStageID", "Name", ObjListWorkflowStage.First().WorkflowStageID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListClasificationId, txtClasificationID, "CatalogItemID", "Name", ObjListClasificationId.First().CatalogItemID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListCustomerTypeId, txtCustomerTypeID, "CatalogItemID", "Name", ObjListCustomerTypeId.First().CatalogItemID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListCategoryId, txtCategoryID, "CatalogItemID", "Name", ObjListCategoryId.First().CatalogItemID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListSubCategoryId, txtSubCategoryID, "CatalogItemID", "Name", ObjListSubCategoryId.First().CatalogItemID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListEstadoCivilId, txtCivilStatusID, "CatalogItemID", "Name", ObjListEstadoCivilId.First().CatalogItemID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListProfesionId, txtProfesionID, "CatalogItemID", "Name", ObjListProfesionId.First().CatalogItemID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListCountry, txtCountryID, "CatalogItemID", "Name", Convert.ToInt32(ObjParameterPais));
-                    CoreWebRenderInView.LlenarComboBox(ObjListTypeFirmId, txtTypeFirmID, "CatalogItemID", "Name", ObjListTypeFirmId.First().CatalogItemID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjListCurrency.First().CurrencyId);
-                    CoreWebRenderInView.LlenarComboBox(ObjListTypePay, txtTypePayID, "CatalogItemID", "Name", ObjListTypePay.First().CatalogItemID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListPayConditionId, txtPayConditionID, "CatalogItemID", "Name", ObjListPayConditionId.First().CatalogItemID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListTypeId, txtTipoTarjeta, "CatalogItemID", "Name", ObjListTypeId.First().CatalogItemID);
-                    CoreWebRenderInView.LlenarComboBoxGridControl(ObjListSituationId, cmbEstadoRecordatorio, "CatalogItemID", "Name");
-                    CoreWebRenderInView.LlenarComboBoxGridControl(ObjListFrecuencyContactId, cmbFrecuenciaRecordatorio, "CatalogItemID", "Name");
+            {
+                Text = "Nuevo Cliente";
+                lblTitulo.Text = @"CODIGO:#00000000";
+                btnEliminar.Visible = false;
+                btnNuevo.Visible = false;
+                btnImprmir.Visible = false;
+                txtBirthDate.DateTime = DateTime.Now;
+                tabPageArchivos.PageVisible = false;
+                tabLeads.PageVisible = false;
+                gridControlArchivos.DataSource = null;
+                btnEditLine.Visible = false;
+                lcBuro.Visibility = LayoutVisibility.Never;
+                lcHuella.Visibility = LayoutVisibility.Never;
+                CoreWebRenderInView.LlenarComboBox(ObjListSexoId, txtSexoID, "CatalogItemID", "Name", ObjListSexoId.First().CatalogItemID);
+                CoreWebRenderInView.LlenarComboBox(ObjListIdentificationType, txtIdentificationTypeID, "CatalogItemID", "Name", ObjListIdentificationType.First().CatalogItemID);
+                CoreWebRenderInView.LlenarComboBox(ObjListWorkflowStage, txtStatusID, "WorkflowStageID", "Name", ObjListWorkflowStage.First().WorkflowStageID);
+                CoreWebRenderInView.LlenarComboBox(ObjListClasificationId, txtClasificationID, "CatalogItemID", "Name", ObjListClasificationId.First().CatalogItemID);
+                CoreWebRenderInView.LlenarComboBox(ObjListCustomerTypeId, txtCustomerTypeID, "CatalogItemID", "Name", ObjListCustomerTypeId.First().CatalogItemID);
+                CoreWebRenderInView.LlenarComboBox(ObjListCategoryId, txtCategoryID, "CatalogItemID", "Name", ObjListCategoryId.First().CatalogItemID);
+                CoreWebRenderInView.LlenarComboBox(ObjListSubCategoryId, txtSubCategoryID, "CatalogItemID", "Name", ObjListSubCategoryId.First().CatalogItemID);
+                CoreWebRenderInView.LlenarComboBox(ObjListEstadoCivilId, txtCivilStatusID, "CatalogItemID", "Name", ObjListEstadoCivilId.First().CatalogItemID);
+                CoreWebRenderInView.LlenarComboBox(ObjListProfesionId, txtProfesionID, "CatalogItemID", "Name", ObjListProfesionId.First().CatalogItemID);
+                CoreWebRenderInView.LlenarComboBox(ObjListCountry, txtCountryID, "CatalogItemID", "Name", Convert.ToInt32(ObjParameterPais));
+                CoreWebRenderInView.LlenarComboBox(ObjListTypeFirmId, txtTypeFirmID, "CatalogItemID", "Name", ObjListTypeFirmId.First().CatalogItemID);
+                CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjListCurrency.First().CurrencyId);
+                CoreWebRenderInView.LlenarComboBox(ObjListTypePay, txtTypePayID, "CatalogItemID", "Name", ObjListTypePay.First().CatalogItemID);
+                CoreWebRenderInView.LlenarComboBox(ObjListPayConditionId, txtPayConditionID, "CatalogItemID", "Name", ObjListPayConditionId.First().CatalogItemID);
+                CoreWebRenderInView.LlenarComboBox(ObjListTypeId, txtTipoTarjeta, "CatalogItemID", "Name", ObjListTypeId.First().CatalogItemID);
+                CoreWebRenderInView.LlenarComboBoxGridControl(ObjListSituationId, cmbEstadoRecordatorio, "CatalogItemID", "Name");
+                CoreWebRenderInView.LlenarComboBoxGridControl(ObjListFrecuencyContactId, cmbFrecuenciaRecordatorio, "CatalogItemID", "Name");
 
-                    txtIncomeDol.Text = "5000.00";
-                    txtLimitCreditDol.Text = "900000.00";
-                    break;
-                }
+                txtIncomeDol.Text = "5000.00";
+                txtLimitCreditDol.Text = "900000.00";
+                break;
+            }
             case TypeRender.Edit:
+            {
+                Text = @"Editar Cliente";
+                lblTitulo.Text = @$"CODIGO:#{ObjCustomer.CustomerNumber}";
+                btnEliminar.Visible = true;
+                btnNuevo.Visible = true;
+                btnImprmir.Visible = true;
+                txtBirthDate.DateTime = DateTime.Now;
+                tabPageArchivos.PageVisible = true;
+                tabLeads.PageVisible = true;
+                btnEditLine.Visible = true;
+                lcBuro.Visibility = LayoutVisibility.Always;
+                lcHuella.Visibility = LayoutVisibility.Always;
+                CoreWebRenderInView.LlenarComboBox(ObjListSexoId, txtSexoID, "CatalogItemID", "Name", ObjCustomer.SexoID);
+                CoreWebRenderInView.LlenarComboBox(ObjListIdentificationType, txtIdentificationTypeID, "CatalogItemID", "Name", ObjCustomer.IdentificationType);
+                CoreWebRenderInView.LlenarComboBox(ObjListWorkflowStage, txtStatusID, "WorkflowStageID", "Name", ObjCustomer.StatusID);
+                CoreWebRenderInView.LlenarComboBox(ObjListClasificationId, txtClasificationID, "CatalogItemID", "Name", ObjCustomer.ClasificationID);
+                CoreWebRenderInView.LlenarComboBox(ObjListCustomerTypeId, txtCustomerTypeID, "CatalogItemID", "Name", ObjCustomer.CustomerTypeID);
+                CoreWebRenderInView.LlenarComboBox(ObjListCategoryId, txtCategoryID, "CatalogItemID", "Name", ObjCustomer.CategoryID);
+                CoreWebRenderInView.LlenarComboBox(ObjListSubCategoryId, txtSubCategoryID, "CatalogItemID", "Name", ObjCustomer.SubCategoryID);
+                CoreWebRenderInView.LlenarComboBox(ObjListEstadoCivilId, txtCivilStatusID, "CatalogItemID", "Name", ObjNatural.StatusID);
+                CoreWebRenderInView.LlenarComboBox(ObjListProfesionId, txtProfesionID, "CatalogItemID", "Name", ObjNatural.ProfesionID);
+                CoreWebRenderInView.LlenarComboBox(ObjListCountry, txtCountryID, "CatalogItemID", "Name", ObjCustomer.CountryID);
+                CoreWebRenderInView.LlenarComboBox(ObjListTypeFirmId, txtTypeFirmID, "CatalogItemID", "Name", ObjCustomer.TypeFirm);
+                CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjCustomer.CurrencyID);
+                CoreWebRenderInView.LlenarComboBox(ObjListTypePay, txtTypePayID, "CatalogItemID", "Name", ObjCustomer.TypePay);
+                if (ObjPCItemTypeLeads.Count > 0)
                 {
-                    Text = @"Editar Cliente";
-                    lblTitulo.Text = @$"CODIGO:#{ObjCustomer.CustomerNumber}";
-                    btnEliminar.Visible = true;
-                    btnNuevo.Visible = true;
-                    btnImprmir.Visible = true;
-                    txtBirthDate.DateTime = DateTime.Now;
-                    tabPageArchivos.PageVisible = true;
-                    tabLeads.PageVisible=true;
-                    btnEditLine.Visible = true;
-                    lcBuro.Visibility = LayoutVisibility.Always;
-                    lcHuella.Visibility = LayoutVisibility.Always;
-                    CoreWebRenderInView.LlenarComboBox(ObjListSexoId, txtSexoID, "CatalogItemID", "Name", ObjCustomer.SexoID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListIdentificationType, txtIdentificationTypeID, "CatalogItemID", "Name", ObjCustomer.IdentificationType);
-                    CoreWebRenderInView.LlenarComboBox(ObjListWorkflowStage, txtStatusID, "WorkflowStageID", "Name", ObjCustomer.StatusID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListClasificationId, txtClasificationID, "CatalogItemID", "Name", ObjCustomer.ClasificationID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListCustomerTypeId, txtCustomerTypeID, "CatalogItemID", "Name", ObjCustomer.CustomerTypeID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListCategoryId, txtCategoryID, "CatalogItemID", "Name", ObjCustomer.CategoryID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListSubCategoryId, txtSubCategoryID, "CatalogItemID", "Name", ObjCustomer.SubCategoryID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListEstadoCivilId, txtCivilStatusID, "CatalogItemID", "Name", ObjNatural.StatusID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListProfesionId, txtProfesionID, "CatalogItemID", "Name", ObjNatural.ProfesionID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListCountry, txtCountryID, "CatalogItemID", "Name", ObjCustomer.CountryID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListTypeFirmId, txtTypeFirmID, "CatalogItemID", "Name", ObjCustomer.TypeFirm);
-                    CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjCustomer.CurrencyID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListTypePay, txtTypePayID, "CatalogItemID", "Name", ObjCustomer.TypePay);
-                    if (ObjPCItemTypeLeads.Count>0)
-                    {
-                        CoreWebRenderInView.LlenarComboBox(ObjPCItemTypeLeads, txtLeadTipo, "PublicCatalogDetailID", "Name", ObjPCItemTypeLeads.First().PublicCatalogDetailID);  
-                    }
-
-                    if (ObjPCItemCategoryLeads.Count>0)
-                    {
-                        CoreWebRenderInView.LlenarComboBox(ObjPCItemCategoryLeads, txtLeadCategory, "PublicCatalogDetailID", "Name", ObjPCItemCategoryLeads.First().PublicCatalogDetailID);
-                    }
-
-                    if (ObjPCItemSubTypeLeads.Count>0)
-                    {
-                        CoreWebRenderInView.LlenarComboBox(ObjPCItemSubTypeLeads, txtLeadSubTipo, "PublicCatalogDetailID", "Name", ObjPCItemSubTypeLeads.First().PublicCatalogDetailID); 
-                    }
-                    
-                    CoreWebRenderInView.LlenarComboBox(ObjListPayConditionId, txtPayConditionID, "CatalogItemID", "Name",ObjCustomer.PayConditionID);
-                    if (ObjPaymentMethod is not null)
-                    {
-                        if (!string.IsNullOrWhiteSpace(ObjPaymentMethod.Number))
-                        {
-                            txtNombreTarjeta.Text = ObjPaymentMethod.Name;
-                            txtDatosTarjeta.Card = new PaymentCard(ObjPaymentMethod.Number!, DateTime.Parse(ObjPaymentMethod.ExpirationDate!), ObjPaymentMethod.Cvc!);
-                            txtEmailTarjeta.Text = ObjPaymentMethod.Email!;
-                            CoreWebRenderInView.LlenarComboBox(ObjListTypeId, txtTipoTarjeta, "CatalogItemID", "Name", ObjPaymentMethod.TypeId);
-                        }
-                    }
-                    else
-                    {
-                        CoreWebRenderInView.LlenarComboBox(ObjListTypeId, txtTipoTarjeta, "CatalogItemID", "Name", ObjListTypeId.First().CatalogItemID);
-                    }
-
-                    CoreWebRenderInView.LlenarComboBoxGridControl(ObjListSituationId, cmbEstadoRecordatorio, "CatalogItemID", "Name");
-                    CoreWebRenderInView.LlenarComboBoxGridControl(ObjListFrecuencyContactId, cmbFrecuenciaRecordatorio, "CatalogItemID", "Name");
-                    gridControlArchivos.DataSource = null;
-                    _renderGridFiles = new RenderFileGridControl(user.CompanyID, ObjComponent!.ComponentID, _entityId);
-                    _renderGridFiles.RenderGridControl(gridControlArchivos);
-                    _renderGridFiles.LoadFiles();
-                    txtBirthDate.DateTime = ObjCustomer.BirthDate ?? DateTime.Today;
-                    txtFirstName.Text = ObjNatural.FirstName;
-                    txtLastName.Text = ObjNatural.LastName;
-                    txtLegalName.Text = ObjLegal.LegalName;
-                    txtCommercialName.Text = ObjLegal.ComercialName;
-                    txtIdentification.Text = ObjCustomer.Identification;
-                    txtPhoneNumber.Text = ObjCustomer.PhoneNumber is null ? "" : Encoding.UTF8.GetString(ObjCustomer.PhoneNumber);
-                    txtIncomeDol.Text = ObjCustomerCredit.IncomeDol.ToString("N2");
-                    txtLimitCreditDol.Text = ObjCustomerCredit.LimitCreditDol.ToString("N2");
-                    txtBalanceDol.Text = ObjCustomerCredit.BalanceDol.ToString("N2");
-                    txtBalancePoint.Text = ObjCustomer.BalancePoint!.Value.ToString("N2");
-                    _txtAccountId = ObjAccount?.AccountID ?? 0;
-                    txtAccountIDDescription.Text = ObjAccount is not null ? $"{ObjAccount.AccountNumber} {ObjAccount.Name}" : "";
-                    txtLocation.Text = ObjCustomer.Location;
-                    txtBudget.Text = ObjCustomer.Budget!.Value.ToString("N2");
-                    _txtEmployerId = ObjEmployerNatural?.EntityID ?? 0;
-                    txtEmployerDescription.Text = ObjEmployerNatural is not null ? $"{ObjEmployer!.EmployeNumber} {ObjEmployerNatural.FirstName} {ObjEmployerNatural.LastName}".ToUpper() : "";
-                    txtReference1.Text = ObjCustomer.Reference1;
-                    txtReference2.Text = ObjCustomer.Reference2;
-                    txtReference3.Text = ObjCustomer.Reference3;
-                    txtReference4.Text = ObjCustomer.Reference4;
-                    txtReference5.Text = ObjCustomer.Reference5;
-                    txtAddress.Text = ObjCustomer.Address;
-
-                    if (ObjCustomerSinRiesgo.Count > 0)
-                    {
-                        var barManager1 = new BarManager();
-                        barManager1.Form = this;
-                        var popupMenu1 = new PopupMenu(barManager1);
-                        var urlBase = VariablesGlobales.ConfigurationBuilder["APP_URL_RESOURCE_CSS_JS"];
-                        var frmWebView = new FormTypeWebView();
-                        foreach (var tbCustomerConsultasSinRiesgo in ObjCustomerSinRiesgo)
-                        {
-                            var button = new BarButtonItem(barManager1, tbCustomerConsultasSinRiesgo.Name);
-                            button.ItemClick += (sender, args) =>
-                            {
-                                if (string.IsNullOrWhiteSpace(tbCustomerConsultasSinRiesgo.File))
-                                {
-                                    return;
-                                }
-
-                                frmWebView.webView.Source = new Uri($"{urlBase}/app_cxc_record/index?file_exists={tbCustomerConsultasSinRiesgo.File}");
-                                frmWebView.Show();
-                            };
-                            popupMenu1.AddItem(button);
-                        }
-                    }
-
-                    break;
+                    CoreWebRenderInView.LlenarComboBox(ObjPCItemTypeLeads, txtLeadTipo, "PublicCatalogDetailID", "Name", ObjPCItemTypeLeads.First().PublicCatalogDetailID);
                 }
+
+                if (ObjPCItemCategoryLeads.Count > 0)
+                {
+                    CoreWebRenderInView.LlenarComboBox(ObjPCItemCategoryLeads, txtLeadCategory, "PublicCatalogDetailID", "Name", ObjPCItemCategoryLeads.First().PublicCatalogDetailID);
+                }
+
+                if (ObjPCItemSubTypeLeads.Count > 0)
+                {
+                    CoreWebRenderInView.LlenarComboBox(ObjPCItemSubTypeLeads, txtLeadSubTipo, "PublicCatalogDetailID", "Name", ObjPCItemSubTypeLeads.First().PublicCatalogDetailID);
+                }
+
+                CoreWebRenderInView.LlenarComboBox(ObjListPayConditionId, txtPayConditionID, "CatalogItemID", "Name", ObjCustomer.PayConditionID);
+                if (ObjPaymentMethod is not null)
+                {
+                    if (!string.IsNullOrWhiteSpace(ObjPaymentMethod.Number))
+                    {
+                        txtNombreTarjeta.Text = ObjPaymentMethod.Name;
+                        txtDatosTarjeta.Card = new PaymentCard(ObjPaymentMethod.Number!, DateTime.Parse(ObjPaymentMethod.ExpirationDate!), ObjPaymentMethod.Cvc!);
+                        txtEmailTarjeta.Text = ObjPaymentMethod.Email!;
+                        CoreWebRenderInView.LlenarComboBox(ObjListTypeId, txtTipoTarjeta, "CatalogItemID", "Name", ObjPaymentMethod.TypeId);
+                    }
+                }
+                else
+                {
+                    CoreWebRenderInView.LlenarComboBox(ObjListTypeId, txtTipoTarjeta, "CatalogItemID", "Name", ObjListTypeId.First().CatalogItemID);
+                }
+
+                CoreWebRenderInView.LlenarComboBoxGridControl(ObjListSituationId, cmbEstadoRecordatorio, "CatalogItemID", "Name");
+                CoreWebRenderInView.LlenarComboBoxGridControl(ObjListFrecuencyContactId, cmbFrecuenciaRecordatorio, "CatalogItemID", "Name");
+                gridControlArchivos.DataSource = null;
+                _renderGridFiles = new RenderFileGridControl(user.CompanyID, ObjComponent!.ComponentID, _entityId);
+                _renderGridFiles.RenderGridControl(gridControlArchivos);
+                _renderGridFiles.LoadFiles();
+                txtBirthDate.DateTime = ObjCustomer.BirthDate ?? DateTime.Today;
+                txtFirstName.Text = ObjNatural.FirstName;
+                txtLastName.Text = ObjNatural.LastName;
+                txtLegalName.Text = ObjLegal.LegalName;
+                txtCommercialName.Text = ObjLegal.ComercialName;
+                txtIdentification.Text = ObjCustomer.Identification;
+                txtPhoneNumber.Text = ObjCustomer.PhoneNumber is null ? "" : Encoding.UTF8.GetString(ObjCustomer.PhoneNumber);
+                txtIncomeDol.Text = ObjCustomerCredit.IncomeDol.ToString("N2");
+                txtLimitCreditDol.Text = ObjCustomerCredit.LimitCreditDol.ToString("N2");
+                txtBalanceDol.Text = ObjCustomerCredit.BalanceDol.ToString("N2");
+                txtBalancePoint.Text = ObjCustomer.BalancePoint!.Value.ToString("N2");
+                _txtAccountId = ObjAccount?.AccountID ?? 0;
+                txtAccountIDDescription.Text = ObjAccount is not null ? $"{ObjAccount.AccountNumber} {ObjAccount.Name}" : "";
+                txtLocation.Text = ObjCustomer.Location;
+                txtBudget.Text = ObjCustomer.Budget!.Value.ToString("N2");
+                _txtEmployerId = ObjEmployerNatural?.EntityID ?? 0;
+                txtEmployerDescription.Text = ObjEmployerNatural is not null ? $"{ObjEmployer!.EmployeNumber} {ObjEmployerNatural.FirstName} {ObjEmployerNatural.LastName}".ToUpper() : "";
+                txtReference1.Text = ObjCustomer.Reference1;
+                txtReference2.Text = ObjCustomer.Reference2;
+                txtReference3.Text = ObjCustomer.Reference3;
+                txtReference4.Text = ObjCustomer.Reference4;
+                txtReference5.Text = ObjCustomer.Reference5;
+                txtAddress.Text = ObjCustomer.Address;
+
+                if (ObjCustomerSinRiesgo.Count > 0)
+                {
+                    var barManager1 = new BarManager();
+                    barManager1.Form = this;
+                    var popupMenu1 = new PopupMenu(barManager1);
+                    var urlBase = VariablesGlobales.ConfigurationBuilder["APP_URL_RESOURCE_CSS_JS"];
+                    var frmWebView = new FormTypeWebView();
+                    foreach (var tbCustomerConsultasSinRiesgo in ObjCustomerSinRiesgo)
+                    {
+                        var button = new BarButtonItem(barManager1, tbCustomerConsultasSinRiesgo.Name);
+                        button.ItemClick += (sender, args) =>
+                        {
+                            if (string.IsNullOrWhiteSpace(tbCustomerConsultasSinRiesgo.File))
+                            {
+                                return;
+                            }
+
+                            frmWebView.webView.Source = new Uri($"{urlBase}/app_cxc_record/index?file_exists={tbCustomerConsultasSinRiesgo.File}");
+                            frmWebView.Show();
+                        };
+                        popupMenu1.AddItem(button);
+                    }
+                }
+
+                break;
+            }
         }
     }
 
@@ -1743,12 +1729,14 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             dxErrorProvider.SetError(txtLeadCategory, "Debe seleccionar una categoria para el Leads");
             return false;
         }
+
         var leadTipo = txtLeadTipo.SelectedItem as ComboBoxItem;
         if (leadTipo is null)
         {
             dxErrorProvider.SetError(txtLeadTipo, "Debe seleccionar un tipo para el Leads");
             return false;
         }
+
         var leadSubTipo = txtLeadSubTipo.SelectedItem as ComboBoxItem;
         if (leadSubTipo is null)
         {
@@ -1779,6 +1767,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
         {
             throw new Exception("No hay role activo para este modulo");
         }
+
         _objInterfazCoreWebPermission.GetValueLicense(user.CompanyID, "app_cxc_customer/index");
 
         //Obtener el Componente de Transacciones Facturacion
@@ -1997,6 +1986,63 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
     #endregion
 
     #region Eventos
+
+    private void BtnEliminarOnClick(object? sender, EventArgs e)
+    {
+        var result = _objInterfazCoreWebRenderInView.XtraMessageBoxArgs(TypeError.Error, "Eliminar", "¿Seguro desea eliminar el cliente seleccionado? Esta acción no se puede revertir.");
+
+        if (result == DialogResult.No)
+        {
+            return;
+        }
+
+        _backgroundWorker = new BackgroundWorker();
+        if (!progressPanel.Visible)
+        {
+            progressPanel.Width = Width;
+            progressPanel.Height = Height;
+            progressPanel.Visible = true;
+        }
+
+        _backgroundWorker.DoWork += (ob, ev) =>
+        {
+            ComandDelete();
+        };
+
+        _backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+        {
+            if (ev.Error is not null)
+            {
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", ev.Error.Message, this);
+            }
+            else if (ev.Cancelled)
+            {
+                //se canceló por el usuario
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Warning, "Error", "Operación cancelada por el usuario", this);
+            }
+            else
+            {
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Eliminar", "Se ha eliminado el registro de forma correcta", this);
+                Close();
+            }
+
+            if (progressPanel.Visible)
+            {
+                progressPanel.Visible = false;
+            }
+        };
+
+        if (!progressPanel.Visible)
+        {
+            progressPanel.Size = Size;
+            progressPanel.Visible = true;
+        }
+
+        if (!_backgroundWorker.IsBusy)
+        {
+            _backgroundWorker.RunWorkerAsync();
+        }
+    }
 
     private void btnNewLine_Click(object sender, EventArgs e)
     {
@@ -2394,7 +2440,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 }
                 else
                 {
-                    CoreWebRenderInView.LlenarComboBox(municipios, txtCityID, "CatalogItemID", "Name",Convert.ToInt32(ObjParameterMunicipio));
+                    CoreWebRenderInView.LlenarComboBox(municipios, txtCityID, "CatalogItemID", "Name", Convert.ToInt32(ObjParameterMunicipio));
                 }
             }
         }
@@ -2437,10 +2483,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 progressPanel.Visible = true;
             }
 
-            _backgroundWorker.DoWork += (ob, ev) =>
-            {
-                FnSaveLeads();
-            };
+            _backgroundWorker.DoWork += (ob, ev) => { FnSaveLeads(); };
             _backgroundWorker.RunWorkerCompleted += (ob, ev) =>
             {
                 if (ev.Error is not null)
@@ -2471,5 +2514,4 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
     }
 
     #endregion
-
 }

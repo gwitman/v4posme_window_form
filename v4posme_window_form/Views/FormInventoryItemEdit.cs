@@ -108,10 +108,9 @@ namespace v4posme_window.Views
             InitializeComponent();
             _typeRender = typeRender;
             _itemId = itemId;
-            MdiParent = CoreFormList.Principal();
             btnRegresar.Click += CommandRegresar;
             btnGuardar.Click += CommandSave;
-            btnEliminar.Click += (s, e) => ComandDelete();
+            btnEliminar.Click += BtnEliminarOnClick;
             btnNuevo.Click += CommandNew;
         }
 
@@ -187,97 +186,80 @@ namespace v4posme_window.Views
 
         public void ComandDelete()
         {
-            var result = _objInterfazCoreWebRenderInView.XtraMessageBoxArgs(TypeError.Error, "Eliminar", "¿Seguro desea eliminar el articulo seleccionado? Esta acción no se puede revertir.");
-
-            if (result == DialogResult.No)
+            var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
+            var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
+            var notAllEdit = VariablesGlobales.ConfigurationBuilder["NOT_ALL_EDIT"];
+            var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
+            var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+            var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+            var user = VariablesGlobales.Instance.User;
+            var pathFileApp = VariablesGlobales.ConfigurationBuilder["PATH_FILE_OF_APP"];
+            if (user is null)
             {
-                return;
+                throw new Exception(userNotAutenticated);
             }
 
-            try
+            var role = VariablesGlobales.Instance.Role;
+            if (role is null)
             {
-                var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
-                var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
-                var notAllEdit = VariablesGlobales.ConfigurationBuilder["NOT_ALL_EDIT"];
-                var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
-                var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
-                var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
-                var user = VariablesGlobales.Instance.User;
-                var pathFileApp = VariablesGlobales.ConfigurationBuilder["PATH_FILE_OF_APP"];
-                if (user is null)
-                {
-                    throw new Exception(userNotAutenticated);
-                }
-
-                var role = VariablesGlobales.Instance.Role;
-                if (role is null)
-                {
-                    throw new Exception("ROL NO VALIDO");
-                }
-
-                if (ObjItem is null)
-                {
-                    throw new Exception("ITEM NO VALIDO");
-                }
-
-                int resultPermission = 0;
-                if (appNeedAuthentication == "true")
-                {
-                    var permited = _objInterfazCoreWebPermission.UrlPermited("app_inventory_item", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
-                    if (!permited)
-                    {
-                        throw new Exception(notAccessControl);
-                    }
-
-                    resultPermission = _objInterfazCoreWebPermission.UrlPermissionCmd("app_inventory_item", "delete", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
-                    if (resultPermission == permissionNone)
-                    {
-                        throw new Exception(notAllEdit);
-                    }
-                }
-
-                var permissionMe = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_ME"]);
-                if (resultPermission == permissionMe && ObjItem.CreatedBy != user.UserID)
-                {
-                    throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_DELETE"]);
-                }
-
-                var command = VariablesGlobales.ConfigurationBuilder["COMMAND_ELIMINABLE"];
-                var commandEditableTotal = _objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_item", "statusID", ObjItem.StatusID!.Value, Convert.ToInt32(command), user.CompanyID, user.BranchID, role.RoleID);
-                if (!commandEditableTotal!.Value)
-                {
-                    throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
-                }
-
-                ObjComponentItem = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_item");
-                if (ObjComponentItem is null)
-                {
-                    throw new Exception("EL COMPONENTE 'tb_item' NO EXISTE...");
-                }
-
-                //VALIDAR CANTIDAD
-                if (VariablesGlobales.Instance.Company is not null && VariablesGlobales.Instance.Company.Type != "luciaralstate")
-                {
-                    if (ObjItem.Quantity > 0)
-                    {
-                        _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Warning, "Eliminar", "EL REGISTRO NO PUEDE SER ELIMINADO, SU CANTIDAD ES MAYOR QUE  0", this);
-                        return;
-                    }
-                }
-
-                _objItemModel.DeleteAppPosme(user.CompanyID, _itemId);
-                XtraMessageBox.Show("Se ha eliminado el articulo de forma correcta", "Eliminar");
-                Close();
+                throw new Exception("ROL NO VALIDO");
             }
-            catch (Exception exception)
+
+            ObjItem = _objItemModel.GetRowByPk(user.CompanyID, _itemId);
+            if (ObjItem is null)
             {
-                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", $"No fue posible eliminar el articulo, debido al siguiente error: {exception.Message}", this);
+                throw new Exception("ITEM NO VALIDO");
             }
+
+            int resultPermission = 0;
+            if (appNeedAuthentication == "true")
+            {
+                var permited = _objInterfazCoreWebPermission.UrlPermited("app_inventory_item", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                if (!permited)
+                {
+                    throw new Exception(notAccessControl);
+                }
+
+                resultPermission = _objInterfazCoreWebPermission.UrlPermissionCmd("app_inventory_item", "delete", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                if (resultPermission == permissionNone)
+                {
+                    throw new Exception(notAllEdit);
+                }
+            }
+
+            var permissionMe = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_ME"]);
+            if (resultPermission == permissionMe && ObjItem.CreatedBy != user.UserID)
+            {
+                throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_DELETE"]);
+            }
+
+            var command = VariablesGlobales.ConfigurationBuilder["COMMAND_ELIMINABLE"];
+            var commandEditableTotal = _objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_item", "statusID", ObjItem.StatusID!.Value, Convert.ToInt32(command), user.CompanyID, user.BranchID, role.RoleID);
+            if (!commandEditableTotal!.Value)
+            {
+                throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
+            }
+
+            ObjComponentItem = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_item");
+            if (ObjComponentItem is null)
+            {
+                throw new Exception("EL COMPONENTE 'tb_item' NO EXISTE...");
+            }
+
+            //VALIDAR CANTIDAD
+            if (VariablesGlobales.Instance.Company is not null && VariablesGlobales.Instance.Company.Type != "luciaralstate")
+            {
+                if (ObjItem.Quantity > 0)
+                {
+                    throw new Exception("EL REGISTRO NO PUEDE SER ELIMINADO, SU CANTIDAD ES MAYOR QUE  0");
+                }
+            }
+
+            _objItemModel.DeleteAppPosme(user.CompanyID, _itemId);
         }
 
         public void ComandPrinter()
         {
-            
         }
 
         public void LoadEdit()
@@ -454,14 +436,14 @@ namespace v4posme_window.Views
             if (ObjListTypePrice.Count > 0)
             {
                 var pricesItem = ObjListTypePrice.Select(tbCatalogItem => new TbPriceDto
-                {
-                    CompanyId = user.CompanyID,
-                    TypePriceId = tbCatalogItem.CatalogItemID,
-                    ListPriceId = Convert.ToInt32(objParameterListPreiceDefault!.Value),
-                    NameTypePrice = tbCatalogItem.Name,
-                    Price = decimal.Zero,
-                    PercentageCommision = decimal.Zero
-                })
+                    {
+                        CompanyId = user.CompanyID,
+                        TypePriceId = tbCatalogItem.CatalogItemID,
+                        ListPriceId = Convert.ToInt32(objParameterListPreiceDefault!.Value),
+                        NameTypePrice = tbCatalogItem.Name,
+                        Price = decimal.Zero,
+                        PercentageCommision = decimal.Zero
+                    })
                     .ToList();
 
                 FnPriceItemBindingList(pricesItem);
@@ -1551,6 +1533,63 @@ namespace v4posme_window.Views
 
         #region Eventos
 
+        private void BtnEliminarOnClick(object? sender, EventArgs e)
+        {
+            var result = _objInterfazCoreWebRenderInView.XtraMessageBoxArgs(TypeError.Error, "Eliminar", "¿Seguro desea eliminar el articulo seleccionado? Esta acción no se puede revertir.");
+
+            if (result == DialogResult.No)
+            {
+                return;
+            }
+
+            _backgroundWorker = new BackgroundWorker();
+            if (!progressPanel.Visible)
+            {
+                progressPanel.Width = Width;
+                progressPanel.Height = Height;
+                progressPanel.Visible = true;
+            }
+
+            _backgroundWorker.DoWork += (ob, ev) =>
+            {
+                ComandDelete();
+            };
+
+            _backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+            {
+                if (ev.Error is not null)
+                {
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", ev.Error.Message, this);
+                }
+                else if (ev.Cancelled)
+                {
+                    //se canceló por el usuario
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Warning, "Error", "Operación cancelada por el usuario", this);
+                }
+                else
+                {
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Eliminar", "Se ha eliminado el registro de forma correcta", this);
+                    Close();
+                }
+
+                if (progressPanel.Visible)
+                {
+                    progressPanel.Visible = false;
+                }
+            };
+
+            if (!progressPanel.Visible)
+            {
+                progressPanel.Size = Size;
+                progressPanel.Visible = true;
+            }
+
+            if (!_backgroundWorker.IsBusy)
+            {
+                _backgroundWorker.RunWorkerAsync();
+            }
+        }
+
         private void cmbWarehouseNameGridControl_ValueChanged(object? sender, EventArgs e)
         {
             if (sender is ComboBoxEdit editor)
@@ -1764,6 +1803,7 @@ namespace v4posme_window.Views
             if (_findValueSku)
                 e.Valid = false;
         }
+
         private void btnImprimirCodigoBarra_Click(object sender, EventArgs e)
         {
             var cantidadImprimirFrm = new FormInventoryItemCantidadImprimir();
@@ -1787,6 +1827,7 @@ namespace v4posme_window.Views
 
             _objInterfazCoreWebRenderInView.PrintBarCodeItem(ObjItem, cantidadImprimirFrm.CantidadImprimir);
         }
+
         private void btnEliminarSkuGrid_Click(object sender, EventArgs e)
         {
             gridViewSku.DeleteSelectedRows();
@@ -1797,6 +1838,5 @@ namespace v4posme_window.Views
         }
 
         #endregion
-
     }
 }
