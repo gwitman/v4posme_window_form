@@ -34,7 +34,7 @@ class CoreWebCatalog : ICoreWebCatalog
         _catalogItemModel = catalogItemModel;
     }
 
-    public List<TbCatalogItem> GetCatalogAllItem(string? table, string? field, int companyId)
+    public List<TbCatalogItem>? GetCatalogAllItem(string? table, string? field, int companyId)
     {
         var objCompanyModel = _companyModel.GetRowByPk(companyId);
         var objElement = _elementModel.GetRowByName(table, Convert.ToInt32(ElementTypeTable));
@@ -87,7 +87,7 @@ class CoreWebCatalog : ICoreWebCatalog
         return objCatalogItem;
     }
 
-    public List<TbCatalogItem> GetCatalogAllItemByNameCatalogo(string? name, int companyId)
+    public List<TbCatalogItem>? GetCatalogAllItemByNameCatalogo(string? name, int companyId)
     {
         var objCompanyModel = _companyModel.GetRowByPk(companyId);
 
@@ -122,7 +122,7 @@ class CoreWebCatalog : ICoreWebCatalog
         return objCatalogItem;
     }
 
-    public List<TbCatalogItem> GetCatalogAllItemParent(string? table, string? field, int companyId,
+    public List<TbCatalogItem>? GetCatalogAllItemParent(string? table, string? field, int companyId,
         int parentCatalogItemId)
     {
         var objElement = _elementModel.GetRowByName(table, Convert.ToInt32(ElementTypeTable));

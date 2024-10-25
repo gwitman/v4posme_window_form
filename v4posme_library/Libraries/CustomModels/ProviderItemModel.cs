@@ -12,7 +12,8 @@ class ProviderItemModel : IProviderItemModel
         var findValues= context.TbProviderItems
             .Where(item => item.CompanyID == companyId
                            && item.ItemID == itemId);
-        return findValues.Any() ? findValues.ExecuteDelete() : 0;
+        context.RemoveRange(findValues);
+        return context.SaveChanges();
     }
 
     public int DeleteWhereItemIdyProviderId(int companyId, int itemId, int providerId)
@@ -54,7 +55,7 @@ class ProviderItemModel : IProviderItemModel
         return result.ToList();
     }
 
-    public TbProviderItemDto GetByPk(int companyId, int itemId, int providerId)
+    public TbProviderItemDto? GetByPk(int companyId, int itemId, int providerId)
     {
         using var context = new DataContext();
         var result = from ip in context.TbProviderItems
@@ -72,6 +73,6 @@ class ProviderItemModel : IProviderItemModel
                 LastName = n.LastName,
                 ComercialName = l.ComercialName
             };
-        return result.First();
+        return result.FirstOrDefault();
     }
 }

@@ -273,12 +273,11 @@ namespace v4posme_window.Views
                     _coreWebRender.GetMessageAlert(TypeError.Informacion, "Eliminar", "Se ha eliminado la factura de forma correcta", this);
                     List();
                     RefreshData();
-                    if (progressPanel.Visible)
-                    {
-                        progressPanel.Visible = false;
-                    }
                 }
-               
+                if (progressPanel.Visible)
+                {
+                    progressPanel.Visible = false;
+                }
             };
 
             if (backgroundWorker.IsBusy) return;

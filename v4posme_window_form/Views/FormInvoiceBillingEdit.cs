@@ -2341,6 +2341,9 @@ namespace v4posme_window.Views
             }
         }
 
+        public void InitializeControl()
+        {
+        }
         public void FnEnviarFactura()
         {
             FnValidateFormAndSubmit();

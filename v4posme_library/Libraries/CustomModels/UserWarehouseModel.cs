@@ -23,7 +23,7 @@ class UserWarehouseModel : IUserWarehouseModel
         return add.Entity.UserWarehouseID;
     }
 
-    public List<TbUserWarehouseDto> GetRowByUserIdAndFacturable(int companyId, int userId)
+    public List<TbUserWarehouseDto>? GetRowByUserIdAndFacturable(int companyId, int userId)
     {
         using var context = new DataContext();
         var result = from uw in context.TbUserWarehouses
@@ -47,7 +47,7 @@ class UserWarehouseModel : IUserWarehouseModel
         return result.ToList();
     }
 
-    public List<TbUserWarehouseDto> GetRowByUserId(int companyId, int userId)
+    public List<TbUserWarehouseDto>? GetRowByUserId(int companyId, int userId)
     {
         using var context = new DataContext();
         var result = from uw in context.TbUserWarehouses

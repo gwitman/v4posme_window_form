@@ -14,5 +14,5 @@ public interface IWarehouseModel
     
     TbWarehouse? GetRowByPk(int companyId,int warehouseId);
     
-    List<TbWarehouse> GetByCompany(int companyId);
+    List<TbWarehouse>? GetByCompany(int companyId);
 }

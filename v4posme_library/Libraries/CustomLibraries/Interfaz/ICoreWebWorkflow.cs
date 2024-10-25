@@ -14,7 +14,7 @@ public interface ICoreWebWorkflow
     List<TbWorkflowStage>? GetWorkflowStageApplyFirst(string? table, string? field, int companyId, int branchId,
         int roleId);
 
-    List<TbWorkflowStage> GetWorkflowStageByStageInit(string? table, string? field, int startStageId,
+    List<TbWorkflowStage>? GetWorkflowStageByStageInit(string? table, string? field, int startStageId,
         int companyId, int branchId, int roleId);
     
     bool? ValidateWorkflowStage(string? table, string? field, int stageId, int cmd, int companyId, int branchId,

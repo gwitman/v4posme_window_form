@@ -46,7 +46,7 @@ class ProviderModel : IProviderModel
                                 && provider.IsActive!.Value);
     }
 
-    public List<TbProviderDto> GetRowByCompany(int companyId)
+    public List<TbProviderDto>? GetRowByCompany(int companyId)
     {
         using var context = new DataContext();
         return context.TbProviders

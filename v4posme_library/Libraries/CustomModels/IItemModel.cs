@@ -19,7 +19,7 @@ public interface IItemModel
     
     TbItem? GetRowByPk(int companyId,int itemId);
     
-    TbItem GetRwByPkAndInactive(int companyId,int itemId);
+    TbItem? GetRwByPkAndInactive(int companyId,int itemId);
     
     List<TbItem> GetRowsByPk(int companyId,List<int> listItem);
     

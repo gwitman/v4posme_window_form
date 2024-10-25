@@ -12,5 +12,5 @@ public interface IBankModel
     
     TbBank GetRowByPk(int companyId,int bankId);
     
-    List<TbBank> GetByCompany(int companyId);
+    List<TbBank>? GetByCompany(int companyId);
 }

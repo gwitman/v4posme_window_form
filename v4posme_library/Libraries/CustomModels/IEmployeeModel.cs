@@ -11,7 +11,7 @@ public interface IEmployeeModel
     
     int InsertAppPosme(TbEmployee data);
 
-    List<TbEmployeeDto> GetRowByBranchIdAndType(int companyId, int branchId, int typeEmployer);
+    List<TbEmployeeDto>? GetRowByBranchIdAndType(int companyId, int branchId, int typeEmployer);
     
     List<TbEmployeeDto> GetRowByBranchId(int companyId, int branchId);
     

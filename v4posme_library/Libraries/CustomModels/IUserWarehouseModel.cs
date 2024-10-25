@@ -9,9 +9,9 @@ public interface IUserWarehouseModel
     
     int insert_app_posme(TbUserWarehouse data);
     
-    List<TbUserWarehouseDto> GetRowByUserIdAndFacturable(int companyId, int userId);
+    List<TbUserWarehouseDto>? GetRowByUserIdAndFacturable(int companyId, int userId);
     
-    List<TbUserWarehouseDto> GetRowByUserId(int companyId, int userId);
+    List<TbUserWarehouseDto>? GetRowByUserId(int companyId, int userId);
     
     List<TbUserWarehouseDto> GetRowByBranchId(int companyId, int branchId);
     

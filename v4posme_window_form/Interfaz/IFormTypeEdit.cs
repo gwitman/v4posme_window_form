@@ -22,6 +22,7 @@ namespace v4posme_window.Interfaz
         void CommandSave(object? sender, EventArgs e);
         void CommandRegresar(object? sender, EventArgs e);
 
+        void InitializeControl();
         // Manejador de excepciones global para excepciones no controladas en subprocesos de la interfaz de usuario
         void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e);
 

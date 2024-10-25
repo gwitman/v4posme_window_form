@@ -364,7 +364,7 @@ class CoreWebWorkflow(
         return exist ? objWorkflowStage : null;
     }
 
-    public List<TbWorkflowStage> GetWorkflowStageByStageInit(string? table, string? field, int startStageId,
+    public List<TbWorkflowStage>? GetWorkflowStageByStageInit(string? table, string? field, int startStageId,
         int companyId, int branchId, int roleId)
     {
         var objElement = elementModel.GetRowByName(table, Convert.ToInt32(ElementTypeTable));

@@ -7,11 +7,11 @@ using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
-class TransactionMasterModel(DataContext context) : ITransactionMasterModel
+class TransactionMasterModel : ITransactionMasterModel
 {
     public void DeleteAppPosme(int companyId, int transactionId, int transactionMasterId)
     {
-        
+        using var context = new DataContext();     
         context.TbTransactionMasters
             .Where(master => master.CompanyID == companyId
                              && master.TransactionID == transactionId
@@ -19,17 +19,17 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
             .ExecuteUpdate(calls => calls.SetProperty(master => master.IsActive, false));
     }
 
-    public int InsertAppPosme(TbTransactionMaster data)
+    public int InsertAppPosme(TbTransactionMaster? data)
     {
-        
+        using var context = new DataContext();     
         var add = context.Add(data);
         context.SaveChanges();
         return add.Entity.TransactionMasterID;
     }
 
-    public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, TbTransactionMaster data)
+    public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, TbTransactionMaster? data)
     {
-                
+        using var context = new DataContext();        
         var find = context.TbTransactionMasters
             .AsNoTracking()
             .FirstOrDefault(master => master.CompanyID == companyId
@@ -50,7 +50,7 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
 
     public TbTransactionMasterDto? GetRowByPk(int companyId, int transactionId, int transactionMasterId)
     {
-        
+        using var context = new DataContext();     
         var result = from tm in context.TbTransactionMasters
             join ws in context.TbWorkflowStages on tm.StatusID equals ws.WorkflowStageID
             where tm.TransactionMasterID == transactionMasterId
@@ -112,34 +112,34 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
 
     public TbTransactionMaster? GetRowByPKK( int transactionMasterId)
     {
-        
+        using var context = new DataContext();     
         var result = context.TbTransactionMasters.FirstOrDefault(u => u.TransactionMasterID == transactionMasterId);
         return result;
     }
 
-    public TbTransactionMaster GetRowByTransactionMasterId(int companyId, int transactionMasterId)
+    public TbTransactionMaster? GetRowByTransactionMasterId(int companyId, int transactionMasterId)
     {
-        
+        using var context = new DataContext();     
         return context.TbTransactionMasters
-            .First(master => master.IsActive!.Value
+            .FirstOrDefault(master => master.IsActive!.Value
                              && master.CompanyID == companyId
                              && master.TransactionMasterID == transactionMasterId);
     }
 
     
 
-    public TbTransactionMaster GetRowByTransactionNumber(int companyId, string? transactionNumber)
+    public TbTransactionMaster? GetRowByTransactionNumber(int companyId, string? transactionNumber)
     {
-        
+        using var context = new DataContext();     
         return context.TbTransactionMasters
-            .First(master => master.CompanyID == companyId
+            .SingleOrDefault(master => master.CompanyID == companyId
                              && master.TransactionNumber.Contains(transactionNumber)
                              && master.IsActive!.Value);
     }
 
     public List<TbTransactionMaster> GetRowByNotification(int companyId)
     {
-        
+        using var context = new DataContext();     
         return context.TbTransactionMasters
             .Where(master => master.CompanyID == companyId
                              && master.NextVisit != null
@@ -151,7 +151,7 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
 
     public List<TbTransactionMasterDto> GetRowInStatusRegister(int companyId, int transactionMasterId)
     {
-        
+        using var context = new DataContext();     
         var result = from tm in context.TbTransactionMasters
             join ws in context.TbWorkflowStages on tm.StatusID equals ws.WorkflowStageID
             where tm.IsActive!.Value

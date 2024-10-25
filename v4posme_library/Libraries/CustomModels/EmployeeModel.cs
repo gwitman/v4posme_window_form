@@ -36,7 +36,7 @@ class EmployeeModel : IEmployeeModel
         return add.Entity.EmployeeID;
     }
 
-    public List<TbEmployeeDto> GetRowByBranchIdAndType(int companyId, int branchId, int typeEmployer)
+    public List<TbEmployeeDto>? GetRowByBranchIdAndType(int companyId, int branchId, int typeEmployer)
     {
         using var dbContext = new DataContext();
         var result = from i in dbContext.TbEmployees

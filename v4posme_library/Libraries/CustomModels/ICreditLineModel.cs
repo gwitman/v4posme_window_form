@@ -10,7 +10,7 @@ public interface ICreditLineModel
         
     void DeleteAppPosme(int companyId,int creditLineId);
     
-    List<TbCreditLine> GetRowByCompany(int companyId);
+    List<TbCreditLine>? GetRowByCompany(int companyId);
     
     TbCreditLine  GetRowByPk(int companyId,int creditLineId);
 }

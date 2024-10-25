@@ -34,7 +34,7 @@ class ItemCategoryModel : IItemCategoryModel
         context.SaveChanges();
     }
 
-    public List<TbItemCategory> GetByCompany(int companyId)
+    public List<TbItemCategory>? GetByCompany(int companyId)
     {
         using var context = new DataContext();
         return context.TbItemCategories

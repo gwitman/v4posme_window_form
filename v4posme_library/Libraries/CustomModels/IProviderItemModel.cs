@@ -13,5 +13,5 @@ public interface IProviderItemModel
     
     List<TbProviderItemDto> GetRowByItemId(int companyId, int itemId);
     
-    TbProviderItemDto GetByPk(int companyId, int itemId, int providerId);
+    TbProviderItemDto? GetByPk(int companyId, int itemId, int providerId);
 }

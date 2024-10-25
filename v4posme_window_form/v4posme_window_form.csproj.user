@@ -52,6 +52,15 @@
     <Compile Update="Views\FormCustomerList.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\FormInventoryInputEditMasInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\FormInventoryInputList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\FormInventoryInputEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\FormInventoryItemCantidadImprimir.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +84,9 @@
     </Compile>
     <Compile Update="Views\PrincipalForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Report1.cs">
+      <SubType>XtraReport</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

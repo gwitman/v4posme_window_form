@@ -22,6 +22,10 @@ namespace v4posme_library.Models
             public object FlavorID { get; set; }
     
             public object Type { get; set; }
+    
+            public object Abreviature { get; set; }
+    
+            public object NamePublic { get; set; }
         }
     }
 }

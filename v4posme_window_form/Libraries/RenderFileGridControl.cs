@@ -36,6 +36,7 @@ public class RenderFileGridControl
     public void RenderGridControl(GridControl gridControl)
     {
         GridView = gridControl.MainView as GridView ?? new GridView(gridControl);
+        GridView.Columns.Clear();
         GridView.Columns.AddVisible("PathFile", "Ruta del Archivo");
         GridView.Columns.AddVisible("FileName", "Nombre del Archivo");
         GridView.Columns.AddVisible("FileType", "Tipo de Archivo");
@@ -97,7 +98,7 @@ public class RenderFileGridControl
         }
 
         var pathFile = Path.Combine(path, archivo);
-        File.Copy(archivo, pathFile);
+        File.Copy(archivo, pathFile,true);
         string extensionArchivo = Path.GetExtension(archivo);
         ArchivoList.Add(new ArchivoDto(pathFile, archivo, extensionArchivo));
         ArchivoList.ResetBindings();
@@ -208,7 +209,7 @@ public class RenderFileGridControl
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = saveFileDialog.FileName;
-                File.Copy(selectedValue.PathFile,$"{filePath}{selectedValue.FileType}");
+                File.Copy(selectedValue.PathFile,$"{filePath}{selectedValue.FileType}",true);
             }
         }
     }
@@ -218,7 +219,7 @@ public class RenderFileGridControl
         if (GridView?.GetFocusedRow() is ArchivoDto selectedValue)
         {
             var dialogResult = XtraMessageBox.Show( @"¿Seguro desea eliminar el archivo seleccionado?",@"Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.OK)
+            if (dialogResult == DialogResult.Yes)
             {
                 ArchivoList.Remove(selectedValue);
                 ArchivoList.ResetBindings();

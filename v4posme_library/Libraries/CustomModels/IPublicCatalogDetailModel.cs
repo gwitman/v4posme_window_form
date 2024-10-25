@@ -5,7 +5,7 @@ namespace v4posme_library.Libraries.CustomModels;
 
 public interface IPublicCatalogDetailModel
 {
-    List<TbPublicCatalogDetail> GetView(int publicCatalogId);
+    List<TbPublicCatalogDetail>? GetView(int publicCatalogId);
 
     List<TbPublicCatalogDetail> GetRowByCatalogIDAndName(int publicCatalogID, string name);
 }

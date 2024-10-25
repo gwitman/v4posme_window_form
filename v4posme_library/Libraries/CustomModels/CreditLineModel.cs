@@ -36,7 +36,7 @@ public class CreditLineModel : ICreditLineModel
             .ExecuteUpdate(calls => calls.SetProperty(line => line.IsActive, false));
     }
 
-    public List<TbCreditLine> GetRowByCompany(int companyId)
+    public List<TbCreditLine>? GetRowByCompany(int companyId)
     {
         using var context = new DataContext();
         return context.TbCreditLines

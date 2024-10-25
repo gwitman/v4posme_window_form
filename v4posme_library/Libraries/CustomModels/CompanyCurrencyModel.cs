@@ -50,7 +50,7 @@ public class CompanyCurrencyModel : ICompanyCurrencyModel
                 && currency.CompanyID == companyId);
     }
 
-    public List<TbCompanyCurrencyDto> GetByCompany(int companyId)
+    public List<TbCompanyCurrencyDto>? GetByCompany(int companyId)
     {
         using var context = new DataContext();
         return context.TbCompanyCurrencies

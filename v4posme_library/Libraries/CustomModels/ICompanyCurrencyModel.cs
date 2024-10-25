@@ -13,5 +13,5 @@ public interface ICompanyCurrencyModel
 
     TbCompanyCurrency GetRowByPk(int companyId, int currencyId);
     
-    List<TbCompanyCurrencyDto> GetByCompany(int companyId);
+    List<TbCompanyCurrencyDto>? GetByCompany(int companyId);
 }

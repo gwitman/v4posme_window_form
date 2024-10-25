@@ -1,14 +1,10 @@
 ﻿using System.ComponentModel;
-using System.Globalization;
 using System.IO;
 using System.Text;
-using DevExpress.DataAccess.Wizard.Presenters;
 using DevExpress.UITemplates.Collection.Utilities;
-using DevExpress.Utils;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout.Utils;
@@ -28,8 +24,6 @@ using v4posme_window.Template;
 using ComboBoxItem = v4posme_window.Libraries.ComboBoxItem;
 using v4posme_window.Api;
 using Exception = System.Exception;
-using DevExpress.Xpo.DB.Helpers;
-using DevExpress.XtraRichEdit.Import.Doc;
 
 namespace v4posme_window.Views;
 
@@ -42,7 +36,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
     private int _txtEmployerId;
     private int _txtAccountId = 0;
     private BackgroundWorker? _backgroundWorker;
-    private RenderFileGridControl _renderGridFiles;
+    private RenderFileGridControl? _renderGridFiles;
 
     #endregion
 
@@ -50,47 +44,47 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
 
     public TbCustomer? ObjCustomer { get; set; }
 
-    public List<TbPublicCatalogDetail> ObjPCItemCategoryLeads { get; set; }
+    public List<TbPublicCatalogDetail>? ObjPCItemCategoryLeads { get; set; }
 
-    public List<TbPublicCatalogDetail> ObjPCItemSubTypeLeads { get; set; }
+    public List<TbPublicCatalogDetail>? ObjPCItemSubTypeLeads { get; set; }
 
-    public List<TbPublicCatalogDetail> ObjPCItemTypeLeads { get; set; }
+    public List<TbPublicCatalogDetail>? ObjPCItemTypeLeads { get; set; }
 
-    public List<TbCatalogItem> ObjListFrecuencyContactId { get; set; }
+    public List<TbCatalogItem>? ObjListFrecuencyContactId { get; set; }
 
-    public List<TbCatalogItem> ObjListSituationId { get; set; }
+    public List<TbCatalogItem>? ObjListSituationId { get; set; }
 
-    public List<TbCatalogItem> ObjListTypeId { get; set; }
+    public List<TbCatalogItem>? ObjListTypeId { get; set; }
 
     public TbCurrency? ObjCurrency { get; set; }
 
-    public List<TbCompanyCurrencyDto> ObjListCurrency { get; set; }
+    public List<TbCompanyCurrencyDto>? ObjListCurrency { get; set; }
 
-    public List<TbCatalogItem> ObjListTypeFirmId { get; set; }
+    public List<TbCatalogItem>? ObjListTypeFirmId { get; set; }
 
-    public List<TbCatalogItem> ObjListProfesionId { get; set; }
+    public List<TbCatalogItem>? ObjListProfesionId { get; set; }
 
-    public List<TbCatalogItem> ObjListEstadoCivilId { get; set; }
+    public List<TbCatalogItem>? ObjListEstadoCivilId { get; set; }
 
-    public List<TbCatalogItem> ObjListFormContactId { get; set; }
+    public List<TbCatalogItem>? ObjListFormContactId { get; set; }
 
-    public List<TbCatalogItem> ObjListSexoId { get; set; }
+    public List<TbCatalogItem>? ObjListSexoId { get; set; }
 
-    public List<TbCatalogItem> ObjListPayConditionId { get; set; }
+    public List<TbCatalogItem>? ObjListPayConditionId { get; set; }
 
-    public List<TbCatalogItem> ObjListTypePay { get; set; }
+    public List<TbCatalogItem>? ObjListTypePay { get; set; }
 
-    public List<TbCatalogItem> ObjListSubCategoryId { get; set; }
+    public List<TbCatalogItem>? ObjListSubCategoryId { get; set; }
 
-    public List<TbCatalogItem> ObjListCategoryId { get; set; }
+    public List<TbCatalogItem>? ObjListCategoryId { get; set; }
 
-    public List<TbCatalogItem> ObjListCustomerTypeId { get; set; }
+    public List<TbCatalogItem>? ObjListCustomerTypeId { get; set; }
 
-    public List<TbCatalogItem> ObjListClasificationId { get; set; }
+    public List<TbCatalogItem>? ObjListClasificationId { get; set; }
 
-    public List<TbCatalogItem> ObjListCountry { get; set; }
+    public List<TbCatalogItem>? ObjListCountry { get; set; }
 
-    public List<TbCatalogItem> ObjListIdentificationType { get; set; }
+    public List<TbCatalogItem>? ObjListIdentificationType { get; set; }
 
     public List<TbWorkflowStage>? ObjListWorkflowStage { get; set; }
 
@@ -136,9 +130,9 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
 
     public TbEntityAccount ObjEntityAccount { get; set; }
 
-    public List<TbCatalogItem> ObjListCity { get; set; }
+    public List<TbCatalogItem>? ObjListCity { get; set; }
 
-    public List<TbCatalogItem> ObjListState { get; set; }
+    public List<TbCatalogItem>? ObjListState { get; set; }
 
     #endregion
 
@@ -147,7 +141,6 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
     private readonly ICoreWebAuditoria _objInterfazCoreWebAuditoria = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuditoria>();
     private readonly ICoreWebCatalog _objInterfazCoreWebCatalog = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebCatalog>();
     private readonly ICoreWebParameter _objInterfazCoreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
-    private readonly ICoreWebAccounting _objInterfazCoreWebAccounting = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAccounting>();
     private readonly ICoreWebTransaction _objInterfazCoreWebTransaction = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTransaction>();
     private readonly ICoreWebCurrency _objInterfazCoreWebCurrency = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebCurrency>();
     private readonly ICoreWebTools _objInterfazCoreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
@@ -1715,6 +1708,10 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 break;
             }
         }
+    }
+
+    public void InitializeControl()
+    {
     }
 
     #endregion

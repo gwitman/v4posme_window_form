@@ -80,6 +80,7 @@
             labelControl2 = new DevExpress.XtraEditors.LabelControl();
             txtName = new DevExpress.XtraEditors.TextEdit();
             labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            btnImprimirCodigoBarra = new DevExpress.XtraEditors.SimpleButton();
             xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             xtraScrollableControl1 = new DevExpress.XtraEditors.XtraScrollableControl();
             tablePanel4 = new DevExpress.Utils.Layout.TablePanel();
@@ -191,7 +192,6 @@
             cmbSku = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             colSkuCantidad = new DevExpress.XtraGrid.Columns.GridColumn();
             dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(components);
-            btnImprimirCodigoBarra = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).BeginInit();
             xtraTabControl1.SuspendLayout();
             xtraTabPage1.SuspendLayout();
@@ -307,7 +307,7 @@
             xtraTabControl1.Location = new Point(0, 100);
             xtraTabControl1.Name = "xtraTabControl1";
             xtraTabControl1.SelectedTabPage = xtraTabPage1;
-            xtraTabControl1.Size = new Size(1111, 648);
+            xtraTabControl1.Size = new Size(1111, 646);
             xtraTabControl1.TabIndex = 76;
             xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPage1, xtraTabPage2, xtraTabPage3, tabPageProveedores, tabPageConceptos, xtraTabPage6, tabPageArchivos, xtraTabPage8, xtraTabPage9 });
             // 
@@ -318,7 +318,7 @@
             xtraTabPage1.Controls.Add(tablePanel1);
             xtraTabPage1.Controls.Add(btnImprimirCodigoBarra);
             xtraTabPage1.Name = "xtraTabPage1";
-            xtraTabPage1.Size = new Size(1109, 617);
+            xtraTabPage1.Size = new Size(1109, 615);
             xtraTabPage1.Text = "Información";
             // 
             // layoutControlCodigoBarra
@@ -970,11 +970,21 @@
             labelControl1.TabIndex = 0;
             labelControl1.Text = "Nombre:";
             // 
+            // btnImprimirCodigoBarra
+            // 
+            btnImprimirCodigoBarra.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnImprimirCodigoBarra.ImageOptions.SvgImage");
+            btnImprimirCodigoBarra.Location = new Point(725, 464);
+            btnImprimirCodigoBarra.Name = "btnImprimirCodigoBarra";
+            btnImprimirCodigoBarra.Size = new Size(212, 41);
+            btnImprimirCodigoBarra.TabIndex = 5;
+            btnImprimirCodigoBarra.Text = "Imprimir codigo de barra";
+            btnImprimirCodigoBarra.Click += btnImprimirCodigoBarra_Click;
+            // 
             // xtraTabPage2
             // 
             xtraTabPage2.Controls.Add(xtraScrollableControl1);
             xtraTabPage2.Name = "xtraTabPage2";
-            xtraTabPage2.Size = new Size(1109, 619);
+            xtraTabPage2.Size = new Size(1109, 623);
             xtraTabPage2.Text = "Referencias";
             // 
             // xtraScrollableControl1
@@ -984,7 +994,7 @@
             xtraScrollableControl1.Dock = DockStyle.Fill;
             xtraScrollableControl1.Location = new Point(0, 0);
             xtraScrollableControl1.Name = "xtraScrollableControl1";
-            xtraScrollableControl1.Size = new Size(1109, 619);
+            xtraScrollableControl1.Size = new Size(1109, 623);
             xtraScrollableControl1.TabIndex = 1;
             xtraScrollableControl1.Click += xtraScrollableControl1_Click;
             // 
@@ -1024,7 +1034,7 @@
             // txtEmployerDescription
             // 
             txtEmployerDescription.Enabled = false;
-            txtEmployerDescription.Location = new Point(1, 5);
+            txtEmployerDescription.Location = new Point(1, 9);
             txtEmployerDescription.Margin = new Padding(0);
             txtEmployerDescription.Name = "txtEmployerDescription";
             txtEmployerDescription.Size = new Size(204, 28);
@@ -1738,7 +1748,7 @@
             xtraTabPage3.Controls.Add(btnDeleteDetailWarehouse);
             xtraTabPage3.Controls.Add(gridControlBodegas);
             xtraTabPage3.Name = "xtraTabPage3";
-            xtraTabPage3.Size = new Size(1109, 619);
+            xtraTabPage3.Size = new Size(1109, 623);
             xtraTabPage3.Text = "Bodegas";
             // 
             // btnDeleteDetailWarehouse
@@ -1861,7 +1871,7 @@
             tabPageProveedores.Controls.Add(btnNewDetailProvider);
             tabPageProveedores.Controls.Add(gridControlProvider);
             tabPageProveedores.Name = "tabPageProveedores";
-            tabPageProveedores.Size = new Size(1109, 619);
+            tabPageProveedores.Size = new Size(1109, 623);
             tabPageProveedores.Text = "Proveedores";
             // 
             // btnDeleteDetailProvider
@@ -1931,7 +1941,7 @@
             tabPageConceptos.Controls.Add(btnNewDetailConcept);
             tabPageConceptos.Controls.Add(gridControlConcepts);
             tabPageConceptos.Name = "tabPageConceptos";
-            tabPageConceptos.Size = new Size(1109, 619);
+            tabPageConceptos.Size = new Size(1109, 623);
             tabPageConceptos.Text = "Conceptos";
             // 
             // btnDeleteDetailConcept
@@ -2005,7 +2015,7 @@
             xtraTabPage6.Controls.Add(txtDescription);
             xtraTabPage6.Controls.Add(labelControl46);
             xtraTabPage6.Name = "xtraTabPage6";
-            xtraTabPage6.Size = new Size(1109, 619);
+            xtraTabPage6.Size = new Size(1109, 623);
             xtraTabPage6.Text = "Comentarios";
             // 
             // txtDescription
@@ -2031,7 +2041,7 @@
             tabPageArchivos.Controls.Add(btnUploadFile);
             tabPageArchivos.Controls.Add(gridControlArchivos);
             tabPageArchivos.Name = "tabPageArchivos";
-            tabPageArchivos.Size = new Size(1109, 619);
+            tabPageArchivos.Size = new Size(1109, 623);
             tabPageArchivos.Text = " Archivos";
             // 
             // btnUploadFile
@@ -2064,7 +2074,7 @@
             // 
             xtraTabPage8.Controls.Add(gridControlPrecios);
             xtraTabPage8.Name = "xtraTabPage8";
-            xtraTabPage8.Size = new Size(1109, 619);
+            xtraTabPage8.Size = new Size(1109, 623);
             xtraTabPage8.Text = "Precios";
             // 
             // gridControlPrecios
@@ -2130,7 +2140,7 @@
             xtraTabPage9.Controls.Add(btnEliminarSkuGrid);
             xtraTabPage9.Controls.Add(gridControlSku);
             xtraTabPage9.Name = "xtraTabPage9";
-            xtraTabPage9.Size = new Size(1109, 619);
+            xtraTabPage9.Size = new Size(1109, 623);
             xtraTabPage9.Text = "SKU";
             // 
             // btnEliminarSkuGrid
@@ -2220,21 +2230,11 @@
             // 
             dxErrorProvider.ContainerControl = this;
             // 
-            // btnImprimirCodigoBarra
-            // 
-            btnImprimirCodigoBarra.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton1.ImageOptions.SvgImage");
-            btnImprimirCodigoBarra.Location = new Point(725, 464);
-            btnImprimirCodigoBarra.Name = "btnImprimirCodigoBarra";
-            btnImprimirCodigoBarra.Size = new Size(212, 41);
-            btnImprimirCodigoBarra.TabIndex = 5;
-            btnImprimirCodigoBarra.Text = "Imprimir codigo de barra";
-            btnImprimirCodigoBarra.Click += btnImprimirCodigoBarra_Click;
-            // 
             // FormInventoryItemEdit
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1111, 748);
+            ClientSize = new Size(1111, 746);
             ControlBox = false;
             Controls.Add(xtraTabControl1);
             MaximizeBox = false;
@@ -2355,13 +2355,7 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
         private DevExpress.Utils.Layout.TablePanel tablePanel1;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.TextEdit txtName;
-        private DevExpress.XtraEditors.TextEdit txtBarCode;
         private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.CheckEdit txtIsServices;
-        private DevExpress.XtraEditors.CheckEdit txtIsInvoice;
-        private DevExpress.XtraEditors.CheckEdit txtIsInvoiceQuantityZero;
-        private DevExpress.XtraEditors.CheckEdit txtIsPerishable;
         private DevExpress.XtraEditors.LabelControl labelControl13;
         private DevExpress.XtraEditors.LabelControl labelControl12;
         private DevExpress.XtraEditors.LabelControl labelControl11;
@@ -2373,13 +2367,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.TextEdit txtFactorProgram;
-        private DevExpress.XtraEditors.TextEdit txtFactorBox;
-        private DevExpress.XtraEditors.TextEdit txtCost;
-        private DevExpress.XtraEditors.TextEdit txtQuantityMax;
-        private DevExpress.XtraEditors.TextEdit txtQuantityMin;
-        private DevExpress.XtraEditors.TextEdit txtQuantity;
-        private DevExpress.XtraEditors.TextEdit txtCapacity;
         private DevExpress.Utils.Layout.TablePanel tablePanel2;
         private DevExpress.XtraEditors.LabelControl labelControl21;
         private DevExpress.XtraEditors.LabelControl labelControl20;
@@ -2389,14 +2376,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.LabelControl labelControl15;
         private DevExpress.XtraEditors.LabelControl labelControl14;
-        private DevExpress.XtraEditors.ComboBoxEdit txtCurrencyID;
-        private DevExpress.XtraEditors.ComboBoxEdit txtDefaultWarehouseID;
-        private DevExpress.XtraEditors.ComboBoxEdit txtDisplayUnitMeasureID;
-        private DevExpress.XtraEditors.ComboBoxEdit txtDisplayID;
-        private DevExpress.XtraEditors.ComboBoxEdit txtFamilyID;
-        private DevExpress.XtraEditors.ComboBoxEdit txtInventoryCategoryID;
-        private DevExpress.XtraEditors.ComboBoxEdit txtStatusID;
-        private DevExpress.XtraEditors.ComboBoxEdit txtUnitMeasureID;
         private DevExpress.Utils.Layout.TablePanel tablePanel3;
         private DevExpress.XtraEditors.LabelControl labelControl22;
         private DevExpress.XtraEditors.LabelControl labelControl33;
@@ -2410,11 +2389,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl25;
         private DevExpress.XtraEditors.LabelControl labelControl24;
         private DevExpress.XtraEditors.LabelControl labelControl23;
-        private DevExpress.XtraEditors.TextEdit txtRealStateEmail;
-        private DevExpress.XtraEditors.TextEdit txtRealStatePhone;
-        private DevExpress.XtraEditors.TextEdit txtReference3;
-        private DevExpress.XtraEditors.TextEdit txtReference2;
-        private DevExpress.XtraEditors.TextEdit txtReference1;
         private DevExpress.XtraEditors.CheckEdit txtRealStateAceptanMascota;
         private DevExpress.XtraEditors.CheckEdit txtRealStateClubPiscina;
         private DevExpress.XtraEditors.CheckEdit txtRealStatePiscinaPrivate;
@@ -2461,8 +2435,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colDetailQuantityMax;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit txtDetailQuantity;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cmbWarehouseNameGridControl;
-        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit txtDetailQuantityMin;
-        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit txtDetailQuantityMax;
         private DevExpress.XtraEditors.SimpleButton btnDeleteDetailWarehouse;
         private DevExpress.XtraTab.XtraTabPage tabPageProveedores;
         private DevExpress.XtraGrid.GridControl gridControlProvider;
@@ -2482,7 +2454,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colValueOut;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage6;
         private DevExpress.XtraEditors.LabelControl labelControl46;
-        private RichTextBox txtDescription;
         private DevExpress.XtraTab.XtraTabPage tabPageArchivos;
         private DevExpress.XtraGrid.GridControl gridControlArchivos;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewArcvhivos;
@@ -2512,5 +2483,34 @@
         private DevExpress.XtraEditors.PictureEdit txtCodigoBarra;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraEditors.SimpleButton btnImprimirCodigoBarra;
+        public DevExpress.XtraEditors.ComboBoxEdit txtInventoryCategoryID;
+        public DevExpress.XtraEditors.TextEdit txtName;
+        public DevExpress.XtraEditors.ComboBoxEdit txtFamilyID;
+        public DevExpress.XtraEditors.TextEdit txtBarCode;
+        public RichTextBox txtDescription;
+        public DevExpress.XtraEditors.TextEdit txtCapacity;
+        public DevExpress.XtraEditors.ComboBoxEdit txtDisplayID;
+        public DevExpress.XtraEditors.ComboBoxEdit txtUnitMeasureID;
+        public DevExpress.XtraEditors.ComboBoxEdit txtDisplayUnitMeasureID;
+        public DevExpress.XtraEditors.TextEdit txtQuantityMax;
+        public DevExpress.XtraEditors.CheckEdit txtIsServices;
+        public DevExpress.XtraEditors.CheckEdit txtIsInvoiceQuantityZero;
+        public DevExpress.XtraEditors.CheckEdit txtIsPerishable;
+        public DevExpress.XtraEditors.TextEdit txtQuantityMin;
+        public DevExpress.XtraEditors.ComboBoxEdit txtStatusID;
+        public DevExpress.XtraEditors.TextEdit txtReference3;
+        public DevExpress.XtraEditors.TextEdit txtReference2;
+        public DevExpress.XtraEditors.TextEdit txtReference1;
+        public DevExpress.XtraEditors.CheckEdit txtIsInvoice;
+        public DevExpress.XtraEditors.TextEdit txtFactorProgram;
+        public DevExpress.XtraEditors.TextEdit txtFactorBox;
+        public DevExpress.XtraEditors.TextEdit txtCost;
+        public DevExpress.XtraEditors.TextEdit txtQuantity;
+        public DevExpress.XtraEditors.ComboBoxEdit txtCurrencyID;
+        public DevExpress.XtraEditors.ComboBoxEdit txtDefaultWarehouseID;
+        public DevExpress.XtraEditors.Repository.RepositoryItemTextEdit txtDetailQuantityMin;
+        public DevExpress.XtraEditors.Repository.RepositoryItemTextEdit txtDetailQuantityMax;
+        public DevExpress.XtraEditors.TextEdit txtRealStateEmail;
+        public DevExpress.XtraEditors.TextEdit txtRealStatePhone;
     }
 }

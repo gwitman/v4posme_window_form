@@ -55,7 +55,7 @@ class WarehouseModel : IWarehouseModel
                                 && warehouse.WarehouseID == warehouseId);
     }
 
-    public List<TbWarehouse> GetByCompany(int companyId)
+    public List<TbWarehouse>? GetByCompany(int companyId)
     {
         using var context = new DataContext();
         return context.TbWarehouses

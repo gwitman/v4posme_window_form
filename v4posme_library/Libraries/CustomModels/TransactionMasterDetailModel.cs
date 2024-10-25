@@ -379,10 +379,9 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 InventoryWarehouseSourceId = td.InventoryWarehouseSourceID,
                 InventoryWarehouseTargetId = td.InventoryWarehouseTargetID,
                 ItemNumber = i.ItemNumber,
-                BarCode = i.BarCode.Contains(',')
-                    ? i.BarCode.Substring(0, i.BarCode.IndexOf(',') + 1) + "..."
-                    : i.BarCode,
+                BarCode = i.BarCode.Contains(',') ? i.BarCode.Substring(0, i.BarCode.IndexOf(',') + 1) + "..." : i.BarCode,
                 ItemName = i.Name,
+                ItemId = i.ItemID,
                 UnitMeasureName = ci.Name,
                 DescriptionReference = td.DescriptionReference,
                 ExchangeRateReference = td.ExchangeRateReference,

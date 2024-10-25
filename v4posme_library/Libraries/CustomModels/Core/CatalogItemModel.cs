@@ -5,7 +5,7 @@ namespace v4posme_library.Libraries.CustomModels.Core;
 
 class CatalogItemModel : ICatalogItemModel
 {
-    public List<TbCatalogItem> GetRowByCatalogIdAndFlavorId(int catalogId, int flavorId)
+    public List<TbCatalogItem>? GetRowByCatalogIdAndFlavorId(int catalogId, int flavorId)
     {
         using var context = new DataContext();
         return context.TbCatalogItems.AsNoTracking()
@@ -15,7 +15,7 @@ class CatalogItemModel : ICatalogItemModel
             .ToList();
     }
 
-    public List<TbCatalogItem> GetRowByCatalogIdAndFlavorIdParent(int catalogId, int flavorId, int parentCatalogItemId)
+    public List<TbCatalogItem>? GetRowByCatalogIdAndFlavorIdParent(int catalogId, int flavorId, int parentCatalogItemId)
     {
         using var context = new DataContext();
         return context.TbCatalogItems.AsNoTracking()

@@ -15,7 +15,7 @@ class PublicCatalogDetailModel : IPublicCatalogDetailModel
             .ToList();
     }
 
-    public List<TbPublicCatalogDetail> GetView(int publicCatalogId)
+    public List<TbPublicCatalogDetail>? GetView(int publicCatalogId)
     {
         //el campo IsActive se recuperó como string? dado q es varchar, revisar si es así
         using var context = new DataContext();

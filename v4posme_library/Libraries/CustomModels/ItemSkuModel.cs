@@ -9,9 +9,10 @@ class ItemSkuModel : IItemSkuModel
     public int DeleteAppPosme(int itemId)
     {
         using var context = new DataContext();
-        return context.TbItemSkus
-            .Where(sku => sku.ItemID == itemId)
-            .ExecuteDelete();
+        var findValues = context.TbItemSkus
+            .Where(sku => sku.ItemID == itemId);
+        context.RemoveRange(findValues);
+        return context.SaveChanges();
     }
 
     public void UpdateAppPosme(int itemId, int catalogItemId, TbItemSku data)

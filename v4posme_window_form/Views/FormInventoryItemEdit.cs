@@ -16,6 +16,7 @@ using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
 using ComboBoxItem = v4posme_window.Libraries.ComboBoxItem;
+using DevExpress.XtraGrid.Views.Base.ViewInfo;
 
 
 namespace v4posme_window.Views
@@ -24,8 +25,9 @@ namespace v4posme_window.Views
     {
         #region Campos
 
+        private TypeOpenForm TypeOpen { get; set; }
         private TypeRender _typeRender;
-        private int _itemId;
+        public int ItemId { get; set; } = 0;
         private BackgroundWorker _backgroundWorker;
         private int _txtEmployerId = 0;
         private bool _findValueWarehouse;
@@ -38,23 +40,23 @@ namespace v4posme_window.Views
 
         #region Modelos
 
-        public List<TbCatalogItem> ObjListTypePrice { get; set; }
-        public List<TbCatalogItem> ObjListDisplayGerenciaExcl { get; set; }
-        public List<TbCatalogItem> ObjListDisplayUnitMeasure { get; set; }
-        public List<TbCatalogItem> ObjListCity { get; set; }
-        public List<TbCatalogItem> ObjListState { get; set; }
-        public List<TbCatalogItem> ObjListCountry { get; set; }
+        public List<TbCatalogItem>? ObjListTypePrice { get; set; }
+        public List<TbCatalogItem>? ObjListDisplayGerenciaExcl { get; set; }
+        public List<TbCatalogItem>? ObjListDisplayUnitMeasure { get; set; }
+        public List<TbCatalogItem>? ObjListCity { get; set; }
+        public List<TbCatalogItem>? ObjListState { get; set; }
+        public List<TbCatalogItem>? ObjListCountry { get; set; }
         public TbComponent? ObjComponentItem { get; private set; }
         public TbComponent? ObjComponentEmployer { get; set; }
         public TbComponent? ObjComponentProvider { get; set; }
         public TbItem? ObjItem { get; private set; }
-        public List<TbWorkflowStage> ObjListWorkflowStage { get; private set; }
-        public List<TbCatalogItem> ObjListFamily { get; private set; }
-        public List<TbItemCategory> ObjListInventoryCategory { get; private set; }
-        public List<TbCatalogItem> ObjListUnitMeasure { get; private set; }
-        public List<TbCatalogItem> ObjListDisplay { get; private set; }
-        public List<TbWarehouse> ObjListWarehouse { get; private set; }
-        public List<TbCompanyCurrencyDto> ObjListCurrency { get; private set; }
+        public List<TbWorkflowStage>? ObjListWorkflowStage { get; private set; }
+        public List<TbCatalogItem>? ObjListFamily { get; private set; }
+        public List<TbItemCategory>? ObjListInventoryCategory { get; private set; }
+        public List<TbCatalogItem>? ObjListUnitMeasure { get; set; }
+        public List<TbCatalogItem>? ObjListDisplay { get; private set; }
+        public List<TbWarehouse>? ObjListWarehouse { get; set; }
+        public List<TbCompanyCurrencyDto>? ObjListCurrency { get; private set; }
         public TbEmployeeDto? ObjEmployer { get; set; }
         public TbNaturale ObjEmployerNatural { get; set; }
         public TbLegal? ObjEmployerLegal { get; set; }
@@ -103,11 +105,11 @@ namespace v4posme_window.Views
             InitializeComponent();
         }
 
-        public FormInventoryItemEdit(TypeRender typeRender, int itemId)
+        public FormInventoryItemEdit(TypeOpenForm typeOpen, int itemId)
         {
             InitializeComponent();
-            _typeRender = typeRender;
-            _itemId = itemId;
+            TypeOpen = typeOpen;
+            ItemId = itemId;
             btnRegresar.Click += CommandRegresar;
             btnGuardar.Click += CommandSave;
             btnEliminar.Click += BtnEliminarOnClick;
@@ -134,14 +136,14 @@ namespace v4posme_window.Views
 
             _backgroundWorker.DoWork += (ob, ev) =>
             {
-                switch (_typeRender)
+                if (TypeOpen == TypeOpenForm.Init && ItemId >0)
                 {
-                    case TypeRender.Edit:
-                        LoadEdit();
-                        break;
-                    case TypeRender.New:
-                        LoadNew();
-                        break;
+                    LoadEdit();
+                }
+
+                if (TypeOpen == TypeOpenForm.Init && ItemId == 0)
+                {
+                    LoadNew();
                 }
             };
 
@@ -158,8 +160,21 @@ namespace v4posme_window.Views
                 }
                 else
                 {
-                    PreRender();
-                    LoadRender(_typeRender);
+                    // Aquí puedes actualizar otros controles con los datos cargados
+                    if (TypeOpen == TypeOpenForm.Init)
+                    {
+                        PreRender();
+                    }
+
+                    if (TypeOpen == TypeOpenForm.Init && ItemId > 0)
+                    {
+                        LoadRender(TypeRender.Edit);
+                    }
+
+                    if (TypeOpen == TypeOpenForm.Init && ItemId == 0)
+                    {
+                        LoadRender(TypeRender.New);
+                    }
 
                     if (progressPanel.Visible)
                     {
@@ -205,7 +220,7 @@ namespace v4posme_window.Views
                 throw new Exception("ROL NO VALIDO");
             }
 
-            ObjItem = _objItemModel.GetRowByPk(user.CompanyID, _itemId);
+            ObjItem = _objItemModel.GetRowByPk(user.CompanyID, ItemId);
             if (ObjItem is null)
             {
                 throw new Exception("ITEM NO VALIDO");
@@ -255,7 +270,7 @@ namespace v4posme_window.Views
                 }
             }
 
-            _objItemModel.DeleteAppPosme(user.CompanyID, _itemId);
+            _objItemModel.DeleteAppPosme(user.CompanyID, ItemId);
         }
 
         public void ComandPrinter()
@@ -312,7 +327,7 @@ namespace v4posme_window.Views
 
             var objParameterListPreiceDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_DEFAULT_PRICELIST", user.CompanyID)!.Value;
 
-            ObjItem = _objItemModel.GetRowByPk(user.CompanyID, _itemId);
+            ObjItem = _objItemModel.GetRowByPk(user.CompanyID, ItemId);
             if (ObjItem is null)
             {
                 throw new Exception("EL ITEM NO EXISTE...");
@@ -629,10 +644,10 @@ namespace v4posme_window.Views
             _objInterfazCoreWebAuditoria.SetAuditCreated(ObjItem, user, "");
             ObjItem.IsActive = true;
             //guardar item
-            _itemId = _objItemModel.InsertAppPosme(ObjItem);
+            ItemId = _objItemModel.InsertAppPosme(ObjItem);
 
             var pathFileOfApp = VariablesGlobales.ConfigurationBuilder["PATH_FILE_OF_APP"];
-            var pathItem = $"{pathFileOfApp}/company_{user.CompanyID}/component_{ObjComponentItem.ComponentID}/component_item_{_itemId}";
+            var pathItem = $"{pathFileOfApp}/company_{user.CompanyID}/component_{ObjComponentItem.ComponentID}/component_item_{ItemId}";
             if (!Directory.Exists(pathItem))
             {
                 Directory.CreateDirectory(pathItem);
@@ -663,7 +678,7 @@ namespace v4posme_window.Views
                         CompanyID = user.CompanyID,
                         BranchID = user.BranchID,
                         WarehouseID = warehouseDto.WarehouseId,
-                        ItemID = _itemId,
+                        ItemID = ItemId,
                         Quantity = decimal.Zero,
                         QuantityMax = warehouseDto.QuantityMax,
                         QuantityMin = warehouseDto.QuantityMin
@@ -678,7 +693,7 @@ namespace v4posme_window.Views
             {
                 foreach (var tbWarehouse in objListWarehouse)
                 {
-                    var existWarehouse = _itemWarehouseModel.GetByPk(user.CompanyID, _itemId, tbWarehouse.WarehouseID);
+                    var existWarehouse = _itemWarehouseModel.GetByPk(user.CompanyID, ItemId, tbWarehouse.WarehouseID);
                     if (existWarehouse is not null)
                     {
                         continue;
@@ -689,7 +704,7 @@ namespace v4posme_window.Views
                         CompanyID = user.CompanyID,
                         BranchID = user.BranchID,
                         WarehouseID = tbWarehouse.WarehouseID,
-                        ItemID = _itemId,
+                        ItemID = ItemId,
                         Quantity = decimal.Zero,
                         QuantityMax = decimal.Parse("1000"),
                         QuantityMin = decimal.Zero
@@ -707,20 +722,20 @@ namespace v4posme_window.Views
                     {
                         CatalogItemID = tbItemSkuDto.CatalogItemId,
                         Value = tbItemSkuDto.Value,
-                        ItemID = _itemId
+                        ItemID = ItemId
                     };
                     _itemSkuModel.InsertAppPosme(objSku);
                 }
             }
 
-            var objSkuExist = _itemSkuModel.GetByPk(_itemId, Convert.ToInt32(ObjItem.UnitMeasureID));
+            var objSkuExist = _itemSkuModel.GetByPk(ItemId, Convert.ToInt32(ObjItem.UnitMeasureID));
             if (objSkuExist is null)
             {
                 var objSku = new TbItemSku
                 {
                     CatalogItemID = Convert.ToInt32(ObjItem.UnitMeasureID),
                     Value = decimal.One,
-                    ItemID = _itemId
+                    ItemID = ItemId
                 };
                 _itemSkuModel.InsertAppPosme(objSku);
             }
@@ -732,7 +747,7 @@ namespace v4posme_window.Views
                 CompanyID = user.CompanyID,
                 BranchID = user.BranchID,
                 EntityID = Convert.ToInt32(objParameterProviderDefault),
-                ItemID = _itemId
+                ItemID = ItemId
             };
             _priProviderItemModel.InsertAppPosme(objTmpProvider);
 
@@ -745,7 +760,7 @@ namespace v4posme_window.Views
                     var price = new TbPrice
                     {
                         CompanyID = user.CompanyID,
-                        ItemID = _itemId,
+                        ItemID = ItemId,
                         ListPriceID = priceDto.ListPriceId,
                         TypePriceID = priceDto.TypePriceId,
                         Percentage = decimal.Zero,
@@ -757,7 +772,7 @@ namespace v4posme_window.Views
             }
 
             //Generar la Imagen del Codigo de Barra
-            var pathFileCodeBarra = $"{pathFileOfApp}/company_{user.CompanyID}/component_{ObjComponentItem.ComponentID}/component_item_{_itemId}/barcode.jpg";
+            var pathFileCodeBarra = $"{pathFileOfApp}/company_{user.CompanyID}/component_{ObjComponentItem.ComponentID}/component_item_{ItemId}/barcode.jpg";
             if (ObjItem.BarCode!.IndexOf(",", StringComparison.Ordinal) > 0)
             {
             }
@@ -933,7 +948,7 @@ namespace v4posme_window.Views
                 _objItemModel.UpdateAppPosme(user.CompanyID, ObjItem.ItemID, objNewItem);
 
                 //Guardar el detalle de Conceptos
-                _companyComponentConceptModel.DeleteWhereComponentItemId(user.CompanyID, ObjComponentItem.ComponentID, _itemId);
+                _companyComponentConceptModel.DeleteWhereComponentItemId(user.CompanyID, ObjComponentItem.ComponentID, ItemId);
                 if (ObjListConcept.Count > 0)
                 {
                     foreach (var itemConceptDto in ObjListConcept)
@@ -945,14 +960,14 @@ namespace v4posme_window.Views
                             ValueOut = itemConceptDto.ValueOut,
                             CompanyID = user.CompanyID,
                             ComponentID = ObjComponentItem.ComponentID,
-                            ComponentItemID = _itemId
+                            ComponentItemID = ItemId
                         };
                         _companyComponentConceptModel.InsertAppPosme(concept);
                     }
                 }
 
                 //Guardar el detalle de Proveedores
-                _priProviderItemModel.DeleteWhereItemId(user.CompanyID, _itemId);
+                _priProviderItemModel.DeleteWhereItemId(user.CompanyID, ItemId);
                 if (ObjListProvider.Count > 0)
                 {
                     foreach (var tbProviderItemDto in ObjListProvider)
@@ -960,7 +975,7 @@ namespace v4posme_window.Views
                         var providerItem = new TbProviderItem
                         {
                             CompanyID = user.CompanyID,
-                            ItemID = _itemId,
+                            ItemID = ItemId,
                             BranchID = user.BranchID,
                             EntityID = tbProviderItemDto.EntityId
                         };
@@ -969,7 +984,7 @@ namespace v4posme_window.Views
                 }
 
                 //Guardar Detalle de sku
-                _itemSkuModel.DeleteAppPosme(_itemId);
+                _itemSkuModel.DeleteAppPosme(ItemId);
                 if (ObjItemSku.Count > 0)
                 {
                     foreach (var tbItemSkuDto in ObjItemSku)
@@ -977,20 +992,20 @@ namespace v4posme_window.Views
                         var itemSku = new TbItemSku
                         {
                             CatalogItemID = tbItemSkuDto.CatalogItemId,
-                            ItemID = _itemId,
+                            ItemID = ItemId,
                             Value = tbItemSkuDto.Value
                         };
                         _itemSkuModel.InsertAppPosme(itemSku);
                     }
                 }
 
-                var objSkuExist = _itemSkuModel.GetByPk(_itemId, Convert.ToInt32(objNewItem.UnitMeasureID));
+                var objSkuExist = _itemSkuModel.GetByPk(ItemId, Convert.ToInt32(objNewItem.UnitMeasureID));
                 if (objSkuExist is null)
                 {
                     var itemSku = new TbItemSku
                     {
                         CatalogItemID = Convert.ToInt32(objNewItem.UnitMeasureID),
-                        ItemID = _itemId,
+                        ItemID = ItemId,
                         Value = decimal.One
                     };
                     _itemSkuModel.InsertAppPosme(itemSku);
@@ -999,30 +1014,30 @@ namespace v4posme_window.Views
                 //Guardar el Detalle las Bodegas
                 if (WarehouseDtoBindingList.Count > 0)
                 {
-                    _itemWarehouseModel.DeleteWhereIdNotIn(user.CompanyID, _itemId, WarehouseDtoBindingList.Select(dto => dto.WarehouseId).ToList());
+                    _itemWarehouseModel.DeleteWhereIdNotIn(user.CompanyID, ItemId, WarehouseDtoBindingList.Select(dto => dto.WarehouseId).ToList());
                     foreach (var warehouseDto in WarehouseDtoBindingList)
                     {
-                        var findWarehouse = _itemWarehouseModel.GetByPk(user.CompanyID, _itemId, warehouseDto.WarehouseId);
+                        var findWarehouse = _itemWarehouseModel.GetByPk(user.CompanyID, ItemId, warehouseDto.WarehouseId);
                         if (findWarehouse is not null)
                         {
                             var warehouse = new TbItemWarehouse
                             {
                                 CompanyID = user.CompanyID,
-                                ItemID = _itemId,
+                                ItemID = ItemId,
                                 BranchID = user.BranchID,
                                 Quantity = findWarehouse.Quantity,
                                 QuantityMax = warehouseDto.QuantityMax,
                                 QuantityMin = warehouseDto.QuantityMin,
                                 WarehouseID = warehouseDto.WarehouseId
                             };
-                            _itemWarehouseModel.UpdateAppPosme(user.CompanyID, _itemId, warehouseDto.WarehouseId, warehouse);
+                            _itemWarehouseModel.UpdateAppPosme(user.CompanyID, ItemId, warehouseDto.WarehouseId, warehouse);
                         }
                         else
                         {
                             var warehouse = new TbItemWarehouse
                             {
                                 CompanyID = user.CompanyID,
-                                ItemID = _itemId,
+                                ItemID = ItemId,
                                 BranchID = user.BranchID,
                                 Quantity = decimal.Zero,
                                 QuantityMax = warehouseDto.QuantityMax,
@@ -1040,19 +1055,19 @@ namespace v4posme_window.Views
                 {
                     foreach (var tbPriceDto in ObjListPriceItem)
                     {
-                        var findPrice = _priceModel.GetRowByPk(user.CompanyID, tbPriceDto.ListPriceId, _itemId, tbPriceDto.TypePriceId);
+                        var findPrice = _priceModel.GetRowByPk(user.CompanyID, tbPriceDto.ListPriceId, ItemId, tbPriceDto.TypePriceId);
                         if (findPrice is not null)
                         {
                             findPrice.PercentageCommision = tbPriceDto.PercentageCommision;
                             findPrice.Price = tbPriceDto.Price;
-                            _priceModel.UpdateAppPosme(user.CompanyID, tbPriceDto.ListPriceId, _itemId, tbPriceDto.TypePriceId, findPrice);
+                            _priceModel.UpdateAppPosme(user.CompanyID, tbPriceDto.ListPriceId, ItemId, tbPriceDto.TypePriceId, findPrice);
                         }
                         else
                         {
                             var price = new TbPrice
                             {
                                 CompanyID = user.CompanyID,
-                                ItemID = _itemId,
+                                ItemID = ItemId,
                                 ListPriceID = tbPriceDto.ListPriceId,
                                 Percentage = decimal.Zero,
                                 PercentageCommision = tbPriceDto.PercentageCommision,
@@ -1068,11 +1083,11 @@ namespace v4posme_window.Views
             {
                 var statusId = txtStatusID.SelectedItem as ComboBoxItem;
                 ObjItem.StatusID = Convert.ToInt32(statusId!.Key);
-                _objItemModel.UpdateAppPosme(user.CompanyID, _itemId, ObjItem);
+                _objItemModel.UpdateAppPosme(user.CompanyID, ItemId, ObjItem);
             }
 
             //Generar la Imagen del Codigo de Barra
-            var pathFileCodeBarra = $"{pathFileApp}/company_{user.CompanyID}/component_{ObjComponentItem.ComponentID}/component_item_{_itemId}/barcode.jpg";
+            var pathFileCodeBarra = $"{pathFileApp}/company_{user.CompanyID}/component_{ObjComponentItem.ComponentID}/component_item_{ItemId}/barcode.jpg";
             if (ObjItem.BarCode!.IndexOf(",", StringComparison.Ordinal) > 0)
             {
             }
@@ -1105,7 +1120,7 @@ namespace v4posme_window.Views
         public void CommandNew(object? sender, EventArgs e)
         {
             Close();
-            var nuevo = new FormInventoryItemEdit(TypeRender.New, 0)
+            var nuevo = new FormInventoryItemEdit(TypeOpenForm.Init, 0)
             {
                 MdiParent = CoreFormList.Principal()
             };
@@ -1126,14 +1141,13 @@ namespace v4posme_window.Views
 
                 _backgroundWorker.DoWork += (ob, ev) =>
                 {
-                    switch (_typeRender)
+                    if (ItemId > 0)
                     {
-                        case TypeRender.New:
-                            SaveInsert();
-                            break;
-                        default:
-                            SaveUpdate();
-                            break;
+                        SaveUpdate();
+                    }
+                    else
+                    {
+                        SaveInsert();
                     }
                 };
                 _backgroundWorker.RunWorkerCompleted += (ob, ev) =>
@@ -1150,7 +1164,7 @@ namespace v4posme_window.Views
                     else
                     {
                         _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Registrar", "Se han registrdo los datos de forma correcta", this);
-                        if (ObjItem is not null && _itemId > 0)
+                        if (ObjItem is not null && ItemId > 0)
                         {
                             LoadEdit();
                             LoadRender(TypeRender.Edit);
@@ -1316,6 +1330,25 @@ namespace v4posme_window.Views
             }
         }
 
+        public void InitializeControl()
+        {
+            var companyId = VariablesGlobales.Instance.User.CompanyID;
+            var branchId = VariablesGlobales.Instance.User.BranchID;
+            var roleId = VariablesGlobales.Instance.Role.RoleID;
+            var itemCategorias = _itemCategoryModel.GetByCompany(companyId);
+            var listFamilyID = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_item", "familyID", companyId);
+            var listUnitMeasureID = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_item", "unitMeasureID", companyId);
+            var listDisplayID = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_item", "displayID", companyId);
+            var listDisplayUnitMeasureID = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_item", "displayUnitMeasureID", companyId);
+            var listStatusID = _objInterfazCoreWebWorkflow.GetWorkflowInitStage("tb_item", "statusID", companyId, branchId, roleId);
+            CoreWebRenderInView.LlenarComboBox(listFamilyID, txtFamilyID, "CatalogItemID", "Name", listFamilyID.First().CatalogItemID);
+            CoreWebRenderInView.LlenarComboBox(listUnitMeasureID, txtUnitMeasureID, "CatalogItemID", "Name", listUnitMeasureID.First().CatalogItemID);
+            CoreWebRenderInView.LlenarComboBox(listDisplayID, txtDisplayID, "CatalogItemID", "Name", listDisplayID.First().CatalogItemID);
+            CoreWebRenderInView.LlenarComboBox(listDisplayUnitMeasureID, txtDisplayUnitMeasureID, "CatalogItemID", "Name", listDisplayUnitMeasureID.First().CatalogItemID);
+            CoreWebRenderInView.LlenarComboBox(listDisplayUnitMeasureID, txtDefaultWarehouseID, "CatalogItemID", "Name", listDisplayUnitMeasureID.First().CatalogItemID);
+            CoreWebRenderInView.LlenarComboBox(listStatusID, txtStatusID, "WorkflowStageID", "Name", listStatusID.First().WorkflowStageID);
+            CoreWebRenderInView.LlenarComboBox(itemCategorias, txtInventoryCategoryID, "InventoryCategoryID", "Name", itemCategorias.First().InventoryCategoryID);
+        }
         #endregion
 
         #region Funciones
@@ -1550,10 +1583,7 @@ namespace v4posme_window.Views
                 progressPanel.Visible = true;
             }
 
-            _backgroundWorker.DoWork += (ob, ev) =>
-            {
-                ComandDelete();
-            };
+            _backgroundWorker.DoWork += (ob, ev) => { ComandDelete(); };
 
             _backgroundWorker.RunWorkerCompleted += (ob, ev) =>
             {

@@ -150,6 +150,7 @@
         <File Name="DataContextPosme.VwSinRiesgoReporteCredito.cs" />
         <File Name="DataContextPosme.VwSinRiesgoReporteCreditosToSystema.cs" />
         <File Name="DataContextPosme.VwTransaccionMasterConcept232425.cs" />
+        <File Name="DataContextPosme.TbTransactionMasterDetailReference.cs" />
         <File Name="DataContextPosme.TbAccount.Metadata.cs" />
         <File Name="DataContextPosme.TbAccountingBalance.Metadata.cs" />
         <File Name="DataContextPosme.TbAccountingBalanceTemp.Metadata.cs" />
@@ -295,6 +296,7 @@
         <File Name="DataContextPosme.VwSinRiesgoReporteCredito.Metadata.cs" />
         <File Name="DataContextPosme.VwSinRiesgoReporteCreditosToSystema.Metadata.cs" />
         <File Name="DataContextPosme.VwTransaccionMasterConcept232425.Metadata.cs" />
+        <File Name="DataContextPosme.TbTransactionMasterDetailReference.Metadata.cs" />
       </GeneratedFiles>
     </Generation>
     <DatabaseFirstNamingRules>

@@ -31,14 +31,12 @@ public class CompanyComponentConceptModel : ICompanyComponentConceptModel
     public void DeleteWhereComponentItemId(int companyId, int componentId, int componentItemId)
     {
         using var context = new DataContext();
-        var findValues=context.TbCompanyComponentConcepts
+        var findValues = context.TbCompanyComponentConcepts
             .Where(concepts => concepts.CompanyID == companyId
                                && concepts.ComponentID == componentId
                                && concepts.ComponentItemID == componentItemId);
-        if (findValues.Any())
-        {
-            findValues.ExecuteDelete();
-        }
+        context.RemoveRange(findValues);
+        context.SaveChanges();
     }
 
     public TbCompanyComponentConcept? GetRowByPk(int companyId, int componentId, int componentItemId, string? name)

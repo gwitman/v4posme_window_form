@@ -72,11 +72,11 @@ class ItemModel : IItemModel
                             && item.IsActive!.Value);
     }
 
-    public TbItem GetRwByPkAndInactive(int companyId, int itemId)
+    public TbItem? GetRwByPkAndInactive(int companyId, int itemId)
     {
         using var context = new DataContext();
         return context.TbItems
-            .Single(item => item.CompanyID == companyId
+            .SingleOrDefault(item => item.CompanyID == companyId
                             && item.ItemID == itemId);
     }
 

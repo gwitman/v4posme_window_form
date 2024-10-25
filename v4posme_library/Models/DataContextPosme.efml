@@ -668,6 +668,12 @@
     <property name="Type" type="String" p1:ValidateMaxLength="255" p1:ValidateRequired="true" p1:Guid="0bdd2197-cb59-4220-a7df-79093d32337c">
       <column name="type" default="''" not-null="True" length="255" sql-type="varchar" p1:unicode="False" />
     </property>
+    <property name="Abreviature" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="d4e4f0b7-99e7-4792-9543-d8330c4a10e7">
+      <column name="abreviature" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="NamePublic" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="24e2b596-cc86-4dea-baa5-e6dfc5b527e4">
+      <column name="namePublic" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
   </class>
   <class name="TbCompanyComponent" entity-set="TbCompanyComponents" table="tb_company_component" schema="posme" p1:Guid="8c22ded6-be63-4823-b89f-f5cc6346e4c6">
     <id name="CompanyComponentID" type="Int32" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="true" p1:Guid="4d745c6b-f735-4725-878f-fe4cfe64d4ec">
@@ -4801,16 +4807,16 @@
     <property name="RoleID" type="Int32" p1:ValidateRequired="true" p1:Guid="6d120d0b-b262-4ab0-a213-a56ef461ed89">
       <column name="roleID" default="0" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
-    <property name="Selected" type="Boolean" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="142cc33d-e909-414b-a9fa-c33ac122ab39">
+    <property name="Selected" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="142cc33d-e909-414b-a9fa-c33ac122ab39">
       <column name="selected" default="NULL" not-null="False" precision="1" scale="0" sql-type="tinyint" p1:unicode="False" />
     </property>
-    <property name="Inserted" type="Boolean" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="a0ae1262-7a25-417c-9430-1f30d9b30e80">
+    <property name="Inserted" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="a0ae1262-7a25-417c-9430-1f30d9b30e80">
       <column name="inserted" default="NULL" not-null="False" precision="1" scale="0" sql-type="tinyint" p1:unicode="False" />
     </property>
-    <property name="Deleted" type="Boolean" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="20b7b147-d5a2-4323-81e6-5d0d29f96b49">
+    <property name="Deleted" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="20b7b147-d5a2-4323-81e6-5d0d29f96b49">
       <column name="deleted" default="NULL" not-null="False" precision="1" scale="0" sql-type="tinyint" p1:unicode="False" />
     </property>
-    <property name="Edited" type="Boolean" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="3e4d75de-5136-43c3-b622-0046d61d9163">
+    <property name="Edited" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="3e4d75de-5136-43c3-b622-0046d61d9163">
       <column name="edited" default="NULL" not-null="False" precision="1" scale="0" sql-type="tinyint" p1:unicode="False" />
     </property>
   </class>
@@ -5834,6 +5840,29 @@
       <column name="Referencia1" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
     </property>
   </class>
+  <class name="TbTransactionMasterDetailReference" entity-set="TbTransactionMasterDetailReferences" table="tb_transaction_master_detail_references" schema="posme" p1:Guid="679d8a8e-7273-4377-9efc-39e0e12d3325">
+    <id name="TransactionMasterDetailRefereceID" type="Int32" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="true" p1:Guid="9405ffa0-9bc4-4b65-9257-d2001d6cff84">
+      <column name="transactionMasterDetailRefereceID" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="TransactionMasterDetailID" type="Int32" p1:ValidateRequired="true" p1:Guid="3c15d7bf-7946-491f-b927-7b20148933aa">
+      <column name="transactionMasterDetailID" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="ComponentID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="5894ddab-d99f-4c4b-9b4e-58216bbbbd5e">
+      <column name="componentID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="ComponentItemID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="7999811a-aa46-46ae-9caf-47255b3e25d4">
+      <column name="componentItemID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Quantity" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="3fa30d6b-5d8e-465f-baac-c54c1da125bc">
+      <column name="quantity" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="IsActive" type="Int16" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="a7627ed3-2c26-4c89-a4a3-4cb9f5f02e65">
+      <column name="isActive" default="NULL" not-null="False" precision="6" scale="0" sql-type="smallint" p1:unicode="False" />
+    </property>
+    <property name="CreatedOn" type="DateTime" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="709db1cb-622a-40b8-9908-e9a94ee84f56">
+      <column name="createdOn" default="NULL" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+  </class>
   <method name="PrAccountingAccountBalance" p1:procedure="posme.pr_accounting_account_balance" p1:Guid="45aecaf6-493e-4543-8b90-3b2e705594fd">
     <Documentation>
       <Summary>Procedimiento para obtener el tb_catalog de Cuenta de un Ciclo y sus Saldo</Summary>
@@ -6832,5 +6861,29 @@
     <return-scalar column="return_value" type="Int32" />
     <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+  </method>
+  <method name="PrBoxGetReportAttendance" p1:procedure="posme.pr_box_get_report_attendance" p1:Guid="9608e4af-f2c8-4e07-9b0e-d1cb8ccb08aa">
+    <Documentation>
+      <Summary>lista de asistencia</Summary>
+    </Documentation>
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="150" />
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prAuthorization" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prStartOn" type="DateTime" sql-type="datetime" />
+    <parameter name="prEndOn" type="DateTime" sql-type="datetime" />
+    <parameter name="prUserIDFilter" type="Int32" sql-type="int" precision="10" scale="0" />
+  </method>
+  <method name="PrBoxGetReportClosedGym" p1:procedure="posme.pr_box_get_report_closed_gym" p1:Guid="c1fded94-cbdf-4152-893a-21eb8a9d9df8">
+    <Documentation>
+      <Summary>lista de abonos de los clientes</Summary>
+    </Documentation>
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="150" />
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prAuthorization" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prStartOn" type="DateTime" sql-type="datetime" />
+    <parameter name="prEndOn" type="DateTime" sql-type="datetime" />
+    <parameter name="prUserIDFilter" type="Int32" sql-type="int" precision="10" scale="0" />
   </method>
 </efcore>

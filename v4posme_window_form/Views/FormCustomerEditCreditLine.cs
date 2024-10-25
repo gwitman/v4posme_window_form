@@ -265,17 +265,17 @@ namespace v4posme_window.Views
 
         private TbCompanyParameter? _objParameterCurrenyDefault;
 
-        private List<TbCatalogItem> _objListTypeAmortization = [];
+        private List<TbCatalogItem>? _objListTypeAmortization = [];
 
-        private List<TbCatalogItem> _objListPay = [];
+        private List<TbCatalogItem>? _objListPay = [];
 
         private List<TbWorkflowStage>? _objListWorkflowStage;
 
-        private List<TbCompanyCurrencyDto> _objCurrencyList = [];
+        private List<TbCompanyCurrencyDto>? _objCurrencyList = [];
 
-        private List<TbCreditLine> _objListLine = [];
+        private List<TbCreditLine>? _objListLine = [];
 
-        private List<TbCatalogItem> _objListDayExcluded = [];
+        private List<TbCatalogItem>? _objListDayExcluded = [];
 
         private string? _objParameterCxcDayExcludedInCredit;
     }

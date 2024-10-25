@@ -42,7 +42,7 @@ class BankModel(DataContext context) : IBankModel
             && bank.IsActive == 1);
     }
 
-    public List<TbBank> GetByCompany(int companyId)
+    public List<TbBank>? GetByCompany(int companyId)
     {
         
         return context.TbBanks.AsNoTracking().Where(bank => bank.CompanyID == companyId && bank.IsActive == 1).ToList();

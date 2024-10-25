@@ -7,17 +7,17 @@ public interface ITransactionMasterModel
 {
     void DeleteAppPosme(int companyId,int transactionId,int transactionMasterId);
     
-    int InsertAppPosme(TbTransactionMaster data);
+    int InsertAppPosme(TbTransactionMaster? data);
     
-    void UpdateAppPosme(int companyId,int transactionId,int transactionMasterId,TbTransactionMaster data);
-    
+    void UpdateAppPosme(int companyId,int transactionId,int transactionMasterId,TbTransactionMaster? data);
     
     TbTransactionMasterDto? GetRowByPk(int companyId, int transactionId, int transactionMasterId);
+
     TbTransactionMaster? GetRowByPKK(int transactionMasterId);
     
-    TbTransactionMaster GetRowByTransactionMasterId(int companyId,int transactionMasterId);
+    TbTransactionMaster? GetRowByTransactionMasterId(int companyId,int transactionMasterId);
     
-    TbTransactionMaster GetRowByTransactionNumber(int companyId, string? transactionNumber);
+    TbTransactionMaster? GetRowByTransactionNumber(int companyId, string? transactionNumber);
     
     List<TbTransactionMaster> GetRowByNotification(int companyId);
     

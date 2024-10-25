@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
+using v4posme_library.Models;
 using v4posme_library.ModelsDto;
 using v4posme_window.Libraries;
 using v4posme_window.Template;

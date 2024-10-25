@@ -9,12 +9,13 @@ class ItemWarehouseModel : IItemWarehouseModel
     public void DeleteWhereIdNotIn(int companyId, int itemId, List<int> listWarehouseId)
     {
         using var context = new DataContext();
-        context.TbItemWarehouses
+        var findValues = context.TbItemWarehouses
             .Where(warehouse => warehouse.CompanyID == companyId
                                 && warehouse.ItemID == itemId
                                 && warehouse.Quantity == decimal.Zero
-                                && !listWarehouseId.Contains(warehouse.WarehouseID))
-            .ExecuteDelete();
+                                && !listWarehouseId.Contains(warehouse.WarehouseID));
+        context.RemoveRange(findValues);
+        context.SaveChanges();
     }
 
     public void UpdateAppPosme(int companyId, int itemId, int warehouseId, TbItemWarehouse data)

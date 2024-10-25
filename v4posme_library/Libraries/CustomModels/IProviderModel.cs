@@ -13,7 +13,7 @@ public interface IProviderModel
     
     TbProvider GetRowByEntity(int companyId,int entityId);
     
-    List<TbProviderDto> GetRowByCompany(int companyId);
+    List<TbProviderDto>? GetRowByCompany(int companyId);
     
     TbProvider GetRowByPk(int companyId,int branchId,int entityId);
     

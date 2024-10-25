@@ -228,39 +228,40 @@ namespace v4posme_window.Views
             {
                 return;
             }
+
             if (!progressPanel.Visible)
             {
                 progressPanel.Visible = true;
             }
+
             var countRows = _gridViewData!.SelectedRowsCount > 0;
             if (!countRows)
             {
                 _coreWebRender.GetMessageAlert(TypeError.Error, @"Error eliminando", "Debe seleccionar un registro", this);
                 return;
             }
-            
 
-            backgroundWorker=new BackgroundWorker();
+
+            backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += (ob, ev) =>
             {
-                
                 var rowIndex = _gridViewData.GetSelectedRows();
                 foreach (var indexRow in rowIndex)
                 {
                     var itemId = Convert.ToInt32(_gridViewData.GetRowCellValue(indexRow, "itemID").ToString());
-                    var objFormCustomerEdit = new FormInventoryItemEdit(TypeRender.Edit, itemId);
+                    var objFormCustomerEdit = new FormInventoryItemEdit(TypeOpenForm.NotInit, itemId);
                     objFormCustomerEdit.ComandDelete();
                 }
             };
-            
+
             backgroundWorker.RunWorkerCompleted += (ob, ev) =>
-            {   
+            {
                 Debug.WriteLine(ev);
                 if (ev.Error is not null)
                 {
                     _coreWebRender.GetMessageAlert(TypeError.Error, "Error Eliminar", $"Se ha producido un error al eliminar {ev.Error.Message}", this);
-
-                }else if (ev.Cancelled)
+                }
+                else if (ev.Cancelled)
                 {
                     _coreWebRender.GetMessageAlert(TypeError.Warning, "Eliminar", "Se ha cancelado la eliminación de la factura", this);
                 }
@@ -270,6 +271,7 @@ namespace v4posme_window.Views
                     List();
                     RefreshData();
                 }
+
                 if (progressPanel.Visible)
                 {
                     progressPanel.Visible = false;
@@ -286,14 +288,20 @@ namespace v4posme_window.Views
             if (((GridView)ObjGridControl.MainView).SelectedRowsCount > 0)
             {
                 var itemRow = ((GridView)ObjGridControl.MainView).GetFocusedRowCellValue("itemID");
-                var formEdit = new FormInventoryItemEdit(TypeRender.Edit, (int)itemRow);
+                var formEdit = new FormInventoryItemEdit(TypeOpenForm.Init, (int)itemRow)
+                {
+                    MdiParent = CoreFormList.Principal()
+                };
                 formEdit.Show();
             }
         }
 
         public void New(object? sender, EventArgs? args)
         {
-            var formEdit = new FormInventoryItemEdit(TypeRender.New, 0);
+            var formEdit = new FormInventoryItemEdit(TypeOpenForm.Init, 0)
+            {
+                MdiParent = CoreFormList.Principal()
+            };
             formEdit.Show();
         }
 
@@ -305,6 +313,7 @@ namespace v4posme_window.Views
             {
                 return;
             }
+
             var user = VariablesGlobales.Instance.User;
             if (user is null)
             {
@@ -322,6 +331,7 @@ namespace v4posme_window.Views
                     {
                         continue;
                     }
+
                     _coreWebRender.PrintBarCodeItem(item, cantidadImprimirFrm.CantidadImprimir);
                 }
             }
@@ -385,7 +395,7 @@ namespace v4posme_window.Views
                     return;
                 }
 
-                var formInventoryItem = new FormInventoryItemEdit(TypeRender.Edit, objItem.ItemID)
+                var formInventoryItem = new FormInventoryItemEdit(TypeOpenForm.Init, objItem.ItemID)
                     { MdiParent = CoreFormList.Principal() };
                 formInventoryItem.Show();
             }

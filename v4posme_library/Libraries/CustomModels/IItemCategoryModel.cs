@@ -10,7 +10,7 @@ public interface IItemCategoryModel
 
     void UpdateAppPosme(int companyId, int itemCategoryId, TbItemCategory data);
 
-    List<TbItemCategory> GetByCompany(int companyId);
+    List<TbItemCategory>? GetByCompany(int companyId);
 
     TbItemCategory GetByPk(int companyId, int itemCategoryId);
 }

@@ -36,19 +36,14 @@ namespace v4posme_window.Libraries;
 
 public class CoreWebRenderInView
 {
-    private AlertControl _alert=new();
     private readonly ICoreWebTools _objInterfazCoreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
     private readonly ICoreWebParameter _objInterfazCoreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
 
-    public CoreWebRenderInView()
-    {
-        _alert.AutoHeight = true;
-        _alert.AutoFormDelay = 2000;
-    }
     private byte[] Avanza(int puntos)
     {
-        return [27, 74, (byte)puntos];//8puntos = 1mm
+        return [27, 74, (byte)puntos]; //8puntos = 1mm
     }
+
     public void PrintBarCodeItem(TbItem item, int cantidadImprimir)
     {
         var user = VariablesGlobales.Instance.User;
@@ -63,6 +58,7 @@ public class CoreWebRenderInView
         {
             throw new Exception("EL COMPONENTE 'tb_item' NO EXISTE...");
         }
+
         // Imprimir el documento               
         var printerName = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT", user.CompanyID);
         var printer = new Printer(printerName!.Value);
@@ -80,6 +76,7 @@ public class CoreWebRenderInView
             printer.PrintDocument();
         }
     }
+
     public static void MostrarArchivoGrid(ArchivoDto selectedValue)
     {
         var extension = selectedValue.FileType;
@@ -98,6 +95,7 @@ public class CoreWebRenderInView
                 break;
         }
     }
+
     public static void MostrarDialogImagen(string pathFile)
     {
         var layoutControl = new StackPanel();
@@ -107,11 +105,11 @@ public class CoreWebRenderInView
         pictureEdit.Image = Image.FromFile(pathFile);
         pictureEdit.Width = 500;
         pictureEdit.Height = 350;
-        pictureEdit.Dock= DockStyle.Fill;
+        pictureEdit.Dock = DockStyle.Fill;
         pictureEdit.Properties.ShowMenu = false;
         pictureEdit.Properties.SizeMode = PictureSizeMode.Zoom;
         layoutControl.Controls.Add(pictureEdit);
-        XtraDialog.Show(layoutControl,"Imagen Producto",MessageBoxButtons.OK);
+        XtraDialog.Show(layoutControl, "Imagen Producto", MessageBoxButtons.OK);
     }
 
     public static void MostrarPdf(string pathFile, string fileName)
@@ -172,7 +170,7 @@ public class CoreWebRenderInView
         comboBox.Properties.Items.Add(comboBoxItem);
     }
 
-    public static void LlenarComboBox<T>(List<T> lista, ComboBoxEdit comboBox, string keyField, string descripcionField, object? defaultValue)
+    public static void LlenarComboBox<T>(List<T>? lista, ComboBoxEdit comboBox, string keyField, string descripcionField, object? defaultValue)
     {
         // Limpiar el combobox
         comboBox.Properties.Items.Clear();
@@ -194,7 +192,7 @@ public class CoreWebRenderInView
         }
     }
 
-    public static void LlenarComboBoxGridControl<T>(IList<T> lista, RepositoryItemComboBox comboBox, string keyField, string descripcionField)
+    public static void LlenarComboBoxGridControl<T>(IList<T>? lista, RepositoryItemComboBox comboBox, string keyField, string descripcionField)
     {
         // Limpiar el combobox
         comboBox.Items.Clear();
@@ -209,7 +207,7 @@ public class CoreWebRenderInView
         }
     }
 
-    public static void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, GridControl gridControl,bool multiSelect=false, bool searchPanel = false)
+    public static void RenderGrid(TableCompanyDataViewDto dataViewDto, string nameGridView, GridControl gridControl, bool multiSelect = false, bool searchPanel = false)
     {
         if (dataViewDto.Config is null)
         {
@@ -227,8 +225,9 @@ public class CoreWebRenderInView
         // Ajustar la configuración del GridView
         if (gridControl.MainView is not GridView gridView)
         {
-            gridView=new GridView(gridControl);
+            gridView = new GridView(gridControl);
         }
+
         gridView.BestFitColumns();
         gridView.OptionsSelection.MultiSelect = multiSelect;
         gridView.OptionsView.ShowGroupPanel = searchPanel;
@@ -237,6 +236,7 @@ public class CoreWebRenderInView
         {
             gridView.OptionsFind.AlwaysVisible = true;
         }
+
         var summaryColumns = dataViewDto.Config.SummaryColumns is null
             ? []
             : dataViewDto.Config.SummaryColumns.Split(",");
@@ -334,9 +334,10 @@ public class CoreWebRenderInView
         return table;
     }
 
-    public DialogResult XtraMessageBoxArgs(TypeError type,string title, string body)
+    public DialogResult XtraMessageBoxArgs(TypeError type, string title, string body)
     {
-        var args = new XtraMessageBoxArgs() {
+        var args = new XtraMessageBoxArgs()
+        {
             Caption = title,
             Text = body,
             Buttons = [DialogResult.Yes, DialogResult.No],
@@ -358,10 +359,12 @@ public class CoreWebRenderInView
         args.Showing += Args_Showing;
         return XtraMessageBox.Show(args);
     }
+
     private void Args_Showing(object? sender, XtraMessageShowingArgs e)
     {
         e.Form.Appearance.FontSizeDelta = 2;
-        foreach (var control in e.MessageBoxForm.Controls) {
+        foreach (var control in e.MessageBoxForm.Controls)
+        {
             // Checks if a control is a SimpleButton.
             var button = control as SimpleButton;
             if (button != null)
@@ -383,16 +386,19 @@ public class CoreWebRenderInView
             }
         }
     }
+
     public void GetMessageAlert(TypeError type, string title, string body, Form form)
     {
         var templateHtml = new HtmlTemplate();
         templateHtml.Template = Load("Alert.html");
+        templateHtml.Styles = string.Empty;
         Image? image;
         switch (type)
         {
             case TypeError.Informacion:
                 image = Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_INFORMACION_PATH"]!);
-                templateHtml.Styles = Load("AlertSuccess.css"); break;
+                templateHtml.Styles = Load("AlertSuccess.css");
+                break;
             case TypeError.Error:
                 image = Image.FromFile(VariablesGlobales.ConfigurationBuilder["ICON_ERROR_PATH"]!);
                 templateHtml.Styles = Load("AlertError.css");
@@ -404,15 +410,22 @@ public class CoreWebRenderInView
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
-        
-        var svgImageItemCollection = new SvgImageCollection();
-        svgImageItemCollection.Add("message_close",Properties.Resources.message_close);
-        svgImageItemCollection.Add("message_icon",Properties.Resources.Glyph_Message);
+
+        var svgImageItemCollection = new SvgImageCollection
+        {
+            { "message_close", Properties.Resources.message_close },
+            { "message_icon", Properties.Resources.Glyph_Message }
+        };
         svgImageItemCollection.ImageSize = new Size(16, 16);
-        _alert.HtmlTemplates.Add(templateHtml);
-        _alert.HtmlImages = svgImageItemCollection;
-        _alert.HtmlElementMouseClick += AlertControl1_HtmlElementMouseClick;
-        _alert.Show(form, title, body,"", image);
+        var alert = new AlertControl
+        {
+            AutoHeight = true,
+            AutoFormDelay = 2000,
+            HtmlImages = svgImageItemCollection
+        };
+        alert.HtmlTemplates.Add(templateHtml);
+        alert.HtmlElementMouseClick += AlertControl1_HtmlElementMouseClick;
+        alert.Show(form, title, body, "", image);
     }
 
     public static void RenderMenuLeft(List<TbMenuElement> data, AccordionControl menu)
@@ -523,16 +536,19 @@ public class CoreWebRenderInView
             }
         }
     }
+
     private static string Load(string fileName)
     {
         var directoryPath = Application.StartupPath;
-        var filePath = Path.Combine(directoryPath, "Libraries/Style", fileName);
+        var filePath = $"{directoryPath}/Libraries/Style/{fileName}" ; //Path.Combine(directoryPath, "Libraries/Style", fileName);
         Debug.WriteLine(File.ReadAllText(filePath));
         return File.Exists(filePath) ? File.ReadAllText(filePath) : "";
     }
-    private void AlertControl1_HtmlElementMouseClick(object sender, AlertHtmlElementMouseEventArgs e) {
-        if(e.ElementId == "closeButton" || e.ParentHasId("closeButton") ||
-           e.ElementId == "okButton" || e.ParentHasId("okButton"))
+
+    private void AlertControl1_HtmlElementMouseClick(object sender, AlertHtmlElementMouseEventArgs e)
+    {
+        if (e.ElementId == "closeButton" || e.ParentHasId("closeButton") ||
+            e.ElementId == "okButton" || e.ParentHasId("okButton"))
             e.HtmlPopup.Close();
         else
             e.HtmlPopup.Pinned = !e.HtmlPopup.Pinned;
