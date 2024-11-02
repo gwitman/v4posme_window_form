@@ -16,6 +16,9 @@
     <Compile Update="Editors\PhoneNumberBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Reportes\ReportInventoryInputEdit.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Template\FormTypeCustomInputForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,9 +87,6 @@
     </Compile>
     <Compile Update="Views\PrincipalForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Views\Report1.cs">
-      <SubType>XtraReport</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

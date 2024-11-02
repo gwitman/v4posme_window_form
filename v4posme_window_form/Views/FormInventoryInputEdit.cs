@@ -1,12 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using DevExpress.LookAndFeel;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraPrinting;
+using DevExpress.XtraReports.UI;
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomHelper;
@@ -18,6 +22,7 @@ using v4posme_library.ModelsDto;
 using v4posme_window.Dto;
 using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
+using v4posme_window.Reportes;
 using v4posme_window.Template;
 using Exception = System.Exception;
 
@@ -132,6 +137,7 @@ namespace v4posme_window.Views
             btnGuardar.Click += CommandSave;
             btnEliminar.Click += BtnEliminarOnClick;
             btnNuevo.Click += CommandNew;
+            btnImprmir.Click += BtnImprmir_Click;
             _bindingListTransactionMasterDetail = new BindingList<FormInventoryInputTransactionMasterDetailDto>();
         }
 
@@ -293,8 +299,121 @@ namespace v4posme_window.Views
             _transactionMasterDetailModel.DeleteWhereTm(user.CompanyID, TransactionId, TransactionMasterId);
         }
 
-        public void ComandPrinter()
+        public async void ComandPrinter()
         {
+            var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
+            var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
+            var notAllEdit = VariablesGlobales.ConfigurationBuilder["NOT_ALL_EDIT"];
+            var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
+            var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+            var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+            var user = VariablesGlobales.Instance.User;
+            if (user is null)
+            {
+                throw new Exception(userNotAutenticated);
+            }
+
+            var role = VariablesGlobales.Instance.Role;
+            if (role is null)
+            {
+                throw new Exception("No hay configurado un Rol");
+            }
+
+            var company = VariablesGlobales.Instance.Company;
+            if (company is null)
+            {
+                throw new Exception("No hay una compañía configurada");
+            }
+
+            if (appNeedAuthentication == "true")
+            {
+                var permited = _objInterfazCoreWebPermission.UrlPermited("app_inventory_inputunpost", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                if (!permited)
+                {
+                    throw new Exception(notAccessControl);
+                }
+
+                var resultPermission = _objInterfazCoreWebPermission.UrlPermissionCmd("app_inventory_inputunpost", "edit", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                if (resultPermission == permissionNone)
+                {
+                    throw new Exception(notAllEdit);
+                }
+            }
+
+            if (TransactionId == 0 && TransactionMasterId == 0)
+            {
+                throw new Exception("No hay valores a imprimir");
+            }
+
+            ObjTm = _transactionMasterModel.GetRowByPk(user.CompanyID, TransactionId, TransactionMasterId);
+            if (ObjTm is null)
+            {
+                throw new Exception($"No existe la transacción con el número {TransactionMasterId}");
+            }
+
+            var urlWeb = VariablesGlobales.ConfigurationBuilder["APP_URL_RESOURCE_CSS_JS"];
+            objParameterUrlPrinter = _objInterfazCoreWebParameter.GetParameterValue("INVENTORY_URL_PRINTER_INPUTUNPOST", user.CompanyID);
+            if (string.IsNullOrWhiteSpace(objParameterUrlPrinter))
+            {
+                throw new Exception("No hay parametro de url configurado");
+            }
+
+            //http://localhost/posmev4/app_inventory_inputunpost/viewRegisterFormato80mm/companyID/2/transactionID/21/transactionMasterID/1704
+            var urlPdf = $"{urlWeb}/{objParameterUrlPrinter}/companyID/{user.CompanyID}/transactionID/{TransactionId}/transactionMasterID/{TransactionMasterId}";
+            // Descargar el archivo PDF
+            var urlLogin = $"{urlWeb}/core_acount/login"; // URL de autenticación
+            var usuario = user.Nickname ?? "";
+            var contraseña = user.Password ?? "";
+            var rutaArchivoPdf = $"documento_generado_{TransactionMasterId}_{DateTime.Now.Year}{DateTime.Now.Month}{DateTime.Now.Day}.pdf";
+
+            using var httpClient = new HttpClient();
+            // Credenciales en el cuerpo de la solicitud (si tu API las requiere así)
+            var loginData = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("txtNickname", usuario),
+                new KeyValuePair<string, string>("txtPassword", contraseña)
+            });
+
+            // Enviar solicitud de autenticación
+            var req = new HttpRequestMessage(HttpMethod.Post, urlLogin)
+            {
+                Content = loginData
+            };
+            var responseLogin = await httpClient.SendAsync(req);
+            if (responseLogin.IsSuccessStatusCode)
+            {
+                // Configurar el cliente para descargar el PDF
+                responseLogin.Headers.TryGetValues("Set-Cookie", out var cookies);
+                if (cookies != null)
+                {
+                    httpClient.DefaultRequestHeaders.Add("Cookie", string.Join(";", cookies));
+                }
+
+                // Descargar el PDF
+                var responsePdf = await httpClient.GetAsync(urlPdf);
+                if (responsePdf.IsSuccessStatusCode)
+                {
+                    var pdfBytes = await responsePdf.Content.ReadAsByteArrayAsync();
+                    await File.WriteAllBytesAsync(rutaArchivoPdf, pdfBytes);
+
+                    Console.WriteLine("PDF descargado correctamente.");
+
+                    // Abrir el PDF con el visor predeterminado
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = rutaArchivoPdf,
+                        UseShellExecute = true
+                    });
+                }
+                else
+                {
+                    throw new Exception("Error al descargar el PDF.");
+                }
+            }
+            else
+            {
+                throw new Exception("Error de autenticación.");
+            }
         }
 
         public void LoadEdit()
@@ -601,7 +720,7 @@ namespace v4posme_window.Views
 
             TransactionMasterId = _transactionMasterModel.InsertAppPosme(objTm);
             var pathFileOfApp = VariablesGlobales.ConfigurationBuilder["PATH_FILE_OF_APP"] ?? "";
-            var path = Path.Combine(pathFileOfApp, $"/company_{user.CompanyID}", "/component_56", $"/component_item_{TransactionMasterId}");
+            var path = $"{pathFileOfApp}/company_{user.CompanyID}/component_{ObjComponent.ComponentID}/component_item_{TransactionMasterId}";
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -645,7 +764,7 @@ namespace v4posme_window.Views
                         UnitaryCost = detailDto.Costo,
                         UnitaryPrice = detailDto.Precio,
                         Reference3 = $"{detailDto.Precio2}|{detailDto.Precio3}",
-                        Reference4 = detailDto.BarCodeExtende.Trim().Replace(Environment.NewLine, ",").Replace(",,", ","),
+                        Reference4 = detailDto.Reference4.Trim().Replace(Environment.NewLine, ",").Replace(",,", ","),
                         CatalogStatusID = 0,
                         InventoryStatusID = 0,
                         IsActive = true,
@@ -1114,7 +1233,7 @@ namespace v4posme_window.Views
                                 Lote = dto.Lote,
                                 ExpirationDate = dto.Vencimiento,
                                 Reference3 = $"{dto.Precio2}|{dto.Precio3}",
-                                Reference4 = dto.BarCodeExtende!.Trim().Replace("\n", ",").Replace(",,", ","),
+                                Reference4 = dto.Reference4!.Trim().Replace("\n", ",").Replace(",,", ","),
                                 CatalogStatusID = 0,
                                 InventoryStatusID = 0,
                                 IsActive = true,
@@ -1136,11 +1255,12 @@ namespace v4posme_window.Views
                                 throw new Exception($"No fue posible recuperar el transaction master detail con ID: {transactionMasterDetailId}");
                             }
 
+                            objTmd.UnitaryPrice = dto.Precio;
                             objTmd.Quantity = dto.Quantity;
                             objTmd.UnitaryCost = dto.Costo;
                             objTmd.Amount = dto.Costo * dto.Quantity;
                             objTmd.Reference3 = $"{dto.Precio2}|{dto.Precio3}";
-                            objTmd.Reference4 = dto.BarCodeExtende!.Trim().Replace("\n", ",").Replace(",,", ",");
+                            objTmd.Reference4 = dto.Reference4!.Trim().Replace("\n", ",").Replace(",,", ",");
                             objTmd.UnitaryAmount = dto.Precio;
                             objTmd.Cost = dto.Quantity * dto.Costo;
                             objTmd.Lote = dto.Lote;
@@ -1380,12 +1500,8 @@ namespace v4posme_window.Views
             {
                 var rowCellValueCantidad = gridViewTransactionMasterDetail.GetRowCellValue(i, colCantidad);
                 var rowCellValuePrecio = gridViewTransactionMasterDetail.GetRowCellValue(i, colPrecio);
-                var rowCellValuePrecio2 = gridViewTransactionMasterDetail.GetRowCellValue(i, colPrecio2);
-                var rowCellValuePrecio3 = gridViewTransactionMasterDetail.GetRowCellValue(i, colPrecio3);
                 if (rowCellValueCantidad is null || string.IsNullOrWhiteSpace(rowCellValueCantidad.ToString())
-                                                 || rowCellValuePrecio is null || string.IsNullOrWhiteSpace(rowCellValuePrecio.ToString())
-                                                 || rowCellValuePrecio2 is null || string.IsNullOrWhiteSpace(rowCellValuePrecio2.ToString())
-                                                 || rowCellValuePrecio3 is null || string.IsNullOrWhiteSpace(rowCellValuePrecio3.ToString()))
+                                                 || rowCellValuePrecio is null || string.IsNullOrWhiteSpace(rowCellValuePrecio.ToString()))
                 {
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "No puede haber campos vacios", this);
                     return false;
@@ -1393,16 +1509,18 @@ namespace v4posme_window.Views
 
                 var cantidad = Convert.ToDecimal(rowCellValueCantidad);
                 var precio = Convert.ToDecimal(rowCellValuePrecio);
-                var precio2 = Convert.ToDecimal(rowCellValuePrecio2);
-                var precio3 = Convert.ToDecimal(rowCellValuePrecio3);
 
-                if (cantidad.CompareTo(decimal.Zero) <= 0
-                    || precio.CompareTo(decimal.Zero) <= 0
-                    || precio2.CompareTo(decimal.Zero) <= 0
-                    || precio3.CompareTo(decimal.Zero) <= 0)
+                if (cantidad.CompareTo(decimal.Zero) <= 0)
                 {
                     // Si encuentras un valor en 0, devuelve falso.
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "No puede haber cantidades en negativos o ceros", this);
+                    return false;
+                }
+
+                if (precio.CompareTo(decimal.Zero) <= 0)
+                {
+                    // Si encuentras un valor en 0, devuelve falso.
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "No puede haber precios en negativos o ceros", this);
                     return false;
                 }
             }
@@ -1688,6 +1806,48 @@ namespace v4posme_window.Views
 
         #region Eventos
 
+        private void BtnImprmir_Click(object? sender, EventArgs e)
+        {
+            _backgroundWorker = new BackgroundWorker();
+            if (!progressPanel.Visible)
+            {
+                progressPanel.Width = Width;
+                progressPanel.Height = Height;
+                progressPanel.Visible = true;
+            }
+
+            _backgroundWorker.DoWork += (ob, ev) => { ComandPrinter(); };
+
+            _backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+            {
+                if (ev.Error is not null)
+                {
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", ev.Error.Message, this);
+                }
+                else if (ev.Cancelled)
+                {
+                    //se canceló por el usuario
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Warning, "Error", "Operación cancelada por el usuario", this);
+                }
+
+                if (progressPanel.Visible)
+                {
+                    progressPanel.Visible = false;
+                }
+            };
+
+            if (!progressPanel.Visible)
+            {
+                progressPanel.Size = Size;
+                progressPanel.Visible = true;
+            }
+
+            if (!_backgroundWorker.IsBusy)
+            {
+                _backgroundWorker.RunWorkerAsync();
+            }
+        }
+
         private void btnAgregarArchivo_Click(object sender, EventArgs e)
         {
             var openFileDialog = new XtraOpenFileDialog();
@@ -1858,12 +2018,57 @@ namespace v4posme_window.Views
 
         private void btnPrinterDetailTransaction_Click(object sender, EventArgs e)
         {
+            var cantidadImprimirFrm = new FormInventoryItemCantidadImprimir();
+            var dialogResult = cantidadImprimirFrm.ShowDialog(this);
+            if (dialogResult == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            var user = VariablesGlobales.Instance.User;
+            if (user is null)
+            {
+                throw new Exception("Usuario no logeado");
+            }
+
+            if (gridViewTransactionMasterDetail.SelectedRowsCount <= 0)
+            {
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Imprimir", "No se ha seleccionado un articulo a imprimir", this);
+                return;
+            }
+
+            foreach (var selectedRow in gridViewTransactionMasterDetail.GetSelectedRows())
+            {
+                var itemId = gridViewTransactionMasterDetail.GetRowCellValue(selectedRow, colItemId);
+                if (itemId is null)
+                {
+                    continue;
+                }
+
+                var item = _itemModel.GetRowByPk(user.CompanyID, Convert.ToInt32(itemId));
+                if (item is null)
+                {
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Imprimir", $"No existe el articulo con el Id {itemId}", this);
+                    return;
+                }
+
+                _objInterfazCoreWebRenderInView.PrintBarCodeItem(item, cantidadImprimirFrm.CantidadImprimir);
+            }
         }
 
         private void gridViewTransactionMasterDetail_LostFocus(object sender, EventArgs e)
         {
             colMas.AppearanceCell.ForeColor = Color.Black;
             btnMasInformacion.Appearance.ForeColor = Color.Black;
+        }
+
+        private void btnNuevoArticulo_Click(object sender, EventArgs e)
+        {
+            var frmItemEdit = new FormInventoryItemEdit(TypeOpenForm.Init, 0)
+            {
+                MdiParent = CoreFormList.Principal()
+            };
+            frmItemEdit.Show();
         }
 
         #endregion

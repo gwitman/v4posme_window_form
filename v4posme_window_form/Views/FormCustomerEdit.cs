@@ -31,12 +31,12 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
 {
     #region Campos
 
-    private TypeRender _typeRender;
-    private int _entityId = 0;
-    private int _txtEmployerId;
-    private int _txtAccountId = 0;
-    private BackgroundWorker? _backgroundWorker;
-    private RenderFileGridControl? _renderGridFiles;
+    private TypeOpenForm TypeOpen { get; set; }
+    private int EntityId = 0;
+    private int txtEmployerId;
+    private int txtAccountId = 0;
+    private BackgroundWorker? backgroundWorker;
+    private RenderFileGridControl? renderGridFiles;
 
     #endregion
 
@@ -176,11 +176,11 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
         InitializeComponent();
     }
 
-    public FormCustomerEdit(TypeRender typeRender, int entityId)
+    public FormCustomerEdit(TypeOpenForm typeOpen, int entityId)
     {
         InitializeComponent();
-        _typeRender = typeRender;
-        _entityId = entityId;
+        TypeOpen = typeOpen;
+        EntityId = entityId;
         btnRegresar.Click += CommandRegresar;
         btnGuardar.Click += CommandSave;
         btnEliminar.Click += BtnEliminarOnClick;
@@ -197,7 +197,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
 
     private void FormCustomerEdit_Load(object sender, EventArgs e)
     {
-        _backgroundWorker = new BackgroundWorker();
+        backgroundWorker = new BackgroundWorker();
         if (!progressPanel.Visible)
         {
             progressPanel.Width = Width;
@@ -205,20 +205,20 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             progressPanel.Visible = true;
         }
 
-        _backgroundWorker.DoWork += (ob, ev) =>
+        backgroundWorker.DoWork += (ob, ev) =>
         {
-            switch (_typeRender)
+            if (TypeOpen == TypeOpenForm.Init && EntityId >0)
             {
-                case TypeRender.Edit:
-                    LoadEdit();
-                    break;
-                case TypeRender.New:
-                    LoadNew();
-                    break;
+                LoadEdit();
+            }
+
+            if (TypeOpen == TypeOpenForm.Init && EntityId == 0)
+            {
+                LoadNew();
             }
         };
 
-        _backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+        backgroundWorker.RunWorkerCompleted += (ob, ev) =>
         {
             if (ev.Error is not null)
             {
@@ -231,8 +231,21 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             }
             else
             {
-                PreRender();
-                LoadRender(_typeRender);
+                // Aquí puedes actualizar otros controles con los datos cargados
+                if (TypeOpen == TypeOpenForm.Init)
+                {
+                    PreRender();
+                }
+
+                if (TypeOpen == TypeOpenForm.Init && EntityId > 0)
+                {
+                    LoadRender(TypeRender.Edit);
+                }
+
+                if (TypeOpen == TypeOpenForm.Init && EntityId == 0)
+                {
+                    LoadRender(TypeRender.New);
+                }
             }
 
             if (progressPanel.Visible)
@@ -247,9 +260,9 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             progressPanel.Visible = true;
         }
 
-        if (!_backgroundWorker.IsBusy)
+        if (!backgroundWorker.IsBusy)
         {
-            _backgroundWorker.RunWorkerAsync();
+            backgroundWorker.RunWorkerAsync();
         }
     }
 
@@ -305,24 +318,24 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             throw new Exception("EL COMPONENTE 'tb_customer' NO EXISTE...");
         }
 
-        if (_entityId == 0)
+        if (EntityId == 0)
         {
             throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_PARAMETER"]);
         }
 
         var appCustomer01 = VariablesGlobales.ConfigurationBuilder["APP_CUSTOMER01"];
         var appCustomer02 = VariablesGlobales.ConfigurationBuilder["APP_CUSTOMER02"];
-        if (_entityId == Convert.ToInt32(appCustomer01))
+        if (EntityId == Convert.ToInt32(appCustomer01))
         {
             throw new Exception("No es posible eliminar el cliente, edite el nombre");
         }
 
-        if (_entityId == Convert.ToInt32(appCustomer02))
+        if (EntityId == Convert.ToInt32(appCustomer02))
         {
             throw new Exception("No es posible eliminar el cliente, edite el nombre");
         }
 
-        ObjCustomer = _customerModel.GetRowByPk(user.CompanyID, user.BranchID, _entityId);
+        ObjCustomer = _customerModel.GetRowByPk(user.CompanyID, user.BranchID, EntityId);
         //PERMISO SOBRE EL REGISTRO
         var permissionMe = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_ME"]);
         if (resultPermission == permissionMe && ObjCustomer.CreatedBy!.Value != user.UserID)
@@ -337,7 +350,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
         }
 
-        _customerModel.DeleteAppPosme(user.CompanyID, user.BranchID, _entityId);
+        _customerModel.DeleteAppPosme(user.CompanyID, user.BranchID, EntityId);
     }
 
     public void ComandPrinter()
@@ -404,23 +417,23 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
         }
 
         //Obtener el Registro
-        ObjCustomer = _customerModel.GetRowByPk(user.CompanyID, user.BranchID, _entityId);
+        ObjCustomer = _customerModel.GetRowByPk(user.CompanyID, user.BranchID, EntityId);
         if (ObjCustomer is null)
         {
             throw new Exception("No existe el cliente con el Id indicado");
         }
 
-        _txtEmployerId = ObjCustomer.EntityContactID ?? 0;
-        ObjEntity = _entityModel.GetRowByPk(user.CompanyID, user.BranchID, _entityId);
-        ObjNatural = _naturalModel.GetRowByPk(user.CompanyID, user.BranchID, _entityId);
-        ObjLegal = _legalModel.GetRowByPk(user.CompanyID, user.BranchID, _entityId);
-        var objEntitylistEmail = _entityEmailModel.GetRowByEntity(user.CompanyID, user.BranchID, _entityId);
-        var objEntityListPhone = _entityPhoneModel.GetRowByEntity(user.CompanyID, user.BranchID, _entityId);
-        ObjCustomerCredit = _customerCreditModel.GetRowByPk(user.CompanyID, user.BranchID, _entityId);
-        var objCustomerCreditLine = _customerCreditLineModel.GetRowByEntity(user.CompanyID, user.BranchID, _entityId);
+        txtEmployerId = ObjCustomer.EntityContactID ?? 0;
+        ObjEntity = _entityModel.GetRowByPk(user.CompanyID, user.BranchID, EntityId);
+        ObjNatural = _naturalModel.GetRowByPk(user.CompanyID, user.BranchID, EntityId);
+        ObjLegal = _legalModel.GetRowByPk(user.CompanyID, user.BranchID, EntityId);
+        var objEntitylistEmail = _entityEmailModel.GetRowByEntity(user.CompanyID, user.BranchID, EntityId);
+        var objEntityListPhone = _entityPhoneModel.GetRowByEntity(user.CompanyID, user.BranchID, EntityId);
+        ObjCustomerCredit = _customerCreditModel.GetRowByPk(user.CompanyID, user.BranchID, EntityId);
+        var objCustomerCreditLine = _customerCreditLineModel.GetRowByEntity(user.CompanyID, user.BranchID, EntityId);
         ObjCustomerSinRiesgo = _customerConsultasSinRiesgoModel.GetRowByCedulaFileName(user.CompanyID, ObjCustomer.Identification.Replace("-", ""));
-        ObjPaymentMethod = _customerPaymentMethod.GetRowByEntity(user.CompanyID, _entityId);
-        var objCustomerFrecuency = _customerFrecuencyActuationsModel.GetrowByEntityId(_entityId);
+        ObjPaymentMethod = _customerPaymentMethod.GetRowByEntity(user.CompanyID, EntityId);
+        var objCustomerFrecuency = _customerFrecuencyActuationsModel.GetrowByEntityId(EntityId);
 
         var parametroPaisDefault = _objInterfazCoreWebParameter.GetParameter("CXC_PAIS_DEFAULT", user.CompanyID);
         if (parametroPaisDefault is null)
@@ -443,7 +456,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             throw new Exception("Configure el parametro del municipio por defualt...");
         }
 
-        var objFirstEntityAccount = _entityAccountModel.GetRowByEntity(user.CompanyID, ObjComponent.ComponentID, _entityId).First();
+        var objFirstEntityAccount = _entityAccountModel.GetRowByEntity(user.CompanyID, ObjComponent.ComponentID, EntityId).First();
         ObjAccount = _accountModel.GetRowByPk(user.CompanyID, objFirstEntityAccount.AccountID!.Value);
 
         ObjParameterMunicipio = parametroMunicipioDefault.Value;
@@ -669,7 +682,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
 
         _objInterfazCoreWebAuditoria.SetAuditCreated(objEntity, user, "");
         var entityId = _entityModel.InsertAppPosme(objEntity);
-
+        EntityId = entityId;
         var status = txtCivilStatusID.SelectedItem as ComboBoxItem;
         var profesion = txtProfesionID.SelectedItem as ComboBoxItem;
         var objNatural = new TbNaturale
@@ -839,7 +852,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             TypeFirm = Convert.ToInt32(selectedTypeFirmId.Key),
             Budget = budget,
             IsActive = true,
-            EntityContactID = _txtEmployerId,
+            EntityContactID = txtEmployerId,
             FormContactID = Convert.ToInt32(_objInterfazCoreWebParameter.GetParameterValue("CXC_FORM_CONTACT_ID_DEFAULT", user.CompanyID))
         };
         _objInterfazCoreWebAuditoria.SetAuditCreated(ObjCustomer, user, "");
@@ -882,7 +895,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             DebitLimit = 0,
             MaxDebit = 0,
             StatusID = 0,
-            AccountID = _txtAccountId,
+            AccountID = txtAccountId,
             IsActive = true
         };
         _objInterfazCoreWebAuditoria.SetAuditCreated(objEntityAccount, user, "");
@@ -1109,7 +1122,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             }
 
             ObjCustomer.StatusID = Convert.ToInt32(selectedSatatus.Key);
-            _customerModel.UpdateAppPosme(user.CompanyID, user.BranchID, _entityId, ObjCustomer);
+            _customerModel.UpdateAppPosme(user.CompanyID, user.BranchID, EntityId, ObjCustomer);
         }
         else
         {
@@ -1121,7 +1134,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             ObjNatural.Address = txtAddress.Text;
             ObjNatural.StatusID = Convert.ToInt32(selectedCivilStatusId!.Key);
             ObjNatural.ProfesionID = Convert.ToInt32(selectedProfesionId!.Key);
-            _naturalModel.UpdateAppPosme(user.CompanyID, user.BranchID, _entityId, ObjNatural);
+            _naturalModel.UpdateAppPosme(user.CompanyID, user.BranchID, EntityId, ObjNatural);
 
             if (ObjLegal is null)
             {
@@ -1132,9 +1145,9 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             ObjLegal.ComercialName = txtCommercialName.Text;
             ObjLegal.LegalName = txtLegalName.Text;
             ObjLegal.Address = txtAddress.Text;
-            _legalModel.UpdateAppPosme(user.CompanyID, user.BranchID, _entityId, ObjLegal);
+            _legalModel.UpdateAppPosme(user.CompanyID, user.BranchID, EntityId, ObjLegal);
 
-            var findPaymentMethod = _customerPaymentMethod.GetRowByEntity(user.CompanyID, _entityId);
+            var findPaymentMethod = _customerPaymentMethod.GetRowByEntity(user.CompanyID, EntityId);
             var tipoTarjeta = txtTipoTarjeta.SelectedItem as ComboBoxItem;
             var typeId = 0;
             if (tipoTarjeta is not null)
@@ -1148,7 +1161,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 {
                     findPaymentMethod = new TbCustomerPaymentMethod
                     {
-                        EntityID = _entityId,
+                        EntityID = EntityId,
                         StatusID = 1,
                         IsActive = true,
                         Name = string.IsNullOrWhiteSpace(txtNombreTarjeta.Text) ? "" : txtNombreTarjeta.Text,
@@ -1164,7 +1177,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 {
                     findPaymentMethod = new TbCustomerPaymentMethod
                     {
-                        EntityID = _entityId,
+                        EntityID = EntityId,
                         StatusID = 1,
                         IsActive = true,
                         Name = string.IsNullOrWhiteSpace(txtNombreTarjeta.Text) ? "" : txtNombreTarjeta.Text,
@@ -1187,7 +1200,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                     findPaymentMethod.ExpirationDate = txtDatosTarjeta.Card.ExpirationDate.ToShortDateString();
                     findPaymentMethod.Cvc = txtDatosTarjeta.Card.CVC;
                     findPaymentMethod.TypeId = typeId;
-                    _customerPaymentMethod.UpdateAppPosme(_entityId, findPaymentMethod);
+                    _customerPaymentMethod.UpdateAppPosme(EntityId, findPaymentMethod);
                 }
             }
 
@@ -1203,7 +1216,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 var objCustomerOld = _customerModel.GetRowByIdentification(user.CompanyID, ObjCustomer.Identification);
                 if (objCustomerOld is not null)
                 {
-                    if (objCustomerOld.EntityID == _entityId)
+                    if (objCustomerOld.EntityID == EntityId)
                     {
                         throw new Exception("Error identificacion del cliente ya existe.");
                     }
@@ -1214,13 +1227,13 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             if (ObjListCustomerFrecuencyActuations.Count > 0)
             {
                 var customerFrecuencyActuations = ObjListCustomerFrecuencyActuations.Select(dto => dto.CustomerFreFrecuencyActuations).ToList();
-                _customerFrecuencyActuationsModel.DeleteWhereIdNotIn(_entityId, customerFrecuencyActuations);
+                _customerFrecuencyActuationsModel.DeleteWhereIdNotIn(EntityId, customerFrecuencyActuations);
                 foreach (var frecuencyActuation in ObjListCustomerFrecuencyActuations)
                 {
                     var idFrecuencia = frecuencyActuation.CustomerFreFrecuencyActuations ?? 0;
                     var objFrecuencyActuations = new TbCustomerFrecuencyActuation
                     {
-                        EntityID = _entityId,
+                        EntityID = EntityId,
                         Name = frecuencyActuation.Name,
                         SituationID = frecuencyActuation.SituationID,
                         FrecuencyContactID = frecuencyActuation.FrecuencyContactID,
@@ -1237,7 +1250,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                         objFrecuencyActuations.CustomerFrecuencyActuations = idFrecuencia;
                         objFrecuencyActuations.CreatedOn = frecuencyActuation.CreatedOn;
                         objFrecuencyActuations.IsApply = frecuencyActuation.IsApply;
-                        _customerFrecuencyActuationsModel.UpdateAppPosme(_entityId, idFrecuencia, objFrecuencyActuations);
+                        _customerFrecuencyActuationsModel.UpdateAppPosme(EntityId, idFrecuencia, objFrecuencyActuations);
                     }
                 }
             }
@@ -1293,10 +1306,10 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             ObjCustomer.TypeFirm = Convert.ToInt32(selectedTypeFirmId!.Key);
             ObjCustomer.Budget = budget;
             ObjCustomer.IsActive = true;
-            ObjCustomer.EntityContactID = _txtEmployerId;
+            ObjCustomer.EntityContactID = txtEmployerId;
             ObjCustomer.ModifiedOn = DateTime.Now;
             //$objCustomer["formContactID"]		= $this->request->getPost("txtFormContactID"); no tengo el campo en winform
-            _customerModel.UpdateAppPosme(user.CompanyID, user.BranchID, _entityId, ObjCustomer);
+            _customerModel.UpdateAppPosme(user.CompanyID, user.BranchID, EntityId, ObjCustomer);
 
             //Actualizar Customer Credit
             if (ObjCustomerCredit is not null)
@@ -1322,35 +1335,35 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                     BalanceDol = decimal.Subtract(limitCreditDol, decimal.Subtract(ObjCustomerCredit.LimitCreditDol, ObjCustomerCredit.BalanceDol)),
                     IncomeDol = incomeDol
                 };
-                _customerCreditModel.UpdateAppPosme(user.CompanyID, user.BranchID, _entityId, objCustomerCreditNew);
+                _customerCreditModel.UpdateAppPosme(user.CompanyID, user.BranchID, EntityId, objCustomerCreditNew);
                 ObjCustomerCredit = objCustomerCreditNew;
             }
 
             //actualizar cuenta
-            var objListEntityAccount = _entityAccountModel.GetRowByEntity(user.CompanyID, ObjComponent.ComponentID, _entityId);
+            var objListEntityAccount = _entityAccountModel.GetRowByEntity(user.CompanyID, ObjComponent.ComponentID, EntityId);
             var objFirstEntityAccount = objListEntityAccount.FirstOrDefault();
             if (objFirstEntityAccount is not null)
             {
-                objFirstEntityAccount.AccountID = _txtAccountId;
+                objFirstEntityAccount.AccountID = txtAccountId;
                 _entityAccountModel.UpdateAppPosme(objFirstEntityAccount.EntityAccountID, objFirstEntityAccount);
             }
         }
 
         //Email
-        _entityEmailModel.DeleteByEntity(user.CompanyID, user.BranchID, _entityId);
+        _entityEmailModel.DeleteByEntity(user.CompanyID, user.BranchID, EntityId);
         if (ObjListEmail.Count > 0)
         {
             foreach (var tbEntityEmail in ObjListEmail)
             {
                 tbEntityEmail.CompanyID = user.CompanyID;
                 tbEntityEmail.BranchID = user.BranchID;
-                tbEntityEmail.EntityID = _entityId;
+                tbEntityEmail.EntityID = EntityId;
                 _entityEmailModel.InsertAppPosme(tbEntityEmail);
             }
         }
 
         //Phone
-        _entityPhoneModel.DeleteByEntity(user.CompanyID, user.BranchID, _entityId);
+        _entityPhoneModel.DeleteByEntity(user.CompanyID, user.BranchID, EntityId);
         if (ObjListPhone.Count > 0)
         {
             foreach (var tbEntityPhoneDto in ObjListPhone)
@@ -1359,7 +1372,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 {
                     CompanyID = user.CompanyID,
                     BranchID = user.BranchID,
-                    EntityID = _entityId,
+                    EntityID = EntityId,
                     TypeID = tbEntityPhoneDto.TypeId,
                     Number = tbEntityPhoneDto.Number,
                     IsPrimary = tbEntityPhoneDto.IsPrimary
@@ -1371,7 +1384,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
         //Lineas de Creditos
         var limitCreditLine = decimal.Zero;
         var customerCreditLineId = ObjListCustomerCreditLine.Select(dto => dto.CustomerCreditLineId).ToList();
-        _customerCreditLineModel.DeleteWhereIdNotIn(user.CompanyID, user.BranchID, _entityId, customerCreditLineId);
+        _customerCreditLineModel.DeleteWhereIdNotIn(user.CompanyID, user.BranchID, EntityId, customerCreditLineId);
         if (ObjListCustomerCreditLine.Count > 0)
         {
             foreach (var customerCreditLineDto in ObjListCustomerCreditLine)
@@ -1382,7 +1395,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                     {
                         CompanyID = user.CompanyID,
                         BranchID = user.BranchID,
-                        EntityID = _entityId,
+                        EntityID = EntityId,
                         CreditLineID = customerCreditLineDto.CreditLineId,
                         AccountNumber = _objInterfazCoreWebCounter.GoNextNumber(user.CompanyID, user.BranchID, "tb_customer_credit_line", 0)!,
                         CurrencyID = customerCreditLineDto.CurrencyId,
@@ -1468,7 +1481,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             if (ObjCustomerCredit.BalanceDol.CompareTo(ObjCustomerCredit.LimitCreditDol) > 0)
             {
                 ObjCustomerCredit.BalanceDol = ObjCustomerCredit.LimitCreditDol;
-                _customerCreditModel.UpdateAppPosme(user.CompanyID, user.BranchID, _entityId, ObjCustomerCredit);
+                _customerCreditModel.UpdateAppPosme(user.CompanyID, user.BranchID, EntityId, ObjCustomerCredit);
             }
         }
     }
@@ -1476,7 +1489,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
     public void CommandNew(object? sender, EventArgs e)
     {
         Close();
-        var frmCustomerEdit = new FormCustomerEdit(TypeRender.New, 0)
+        var frmCustomerEdit = new FormCustomerEdit(TypeOpenForm.Init, 0)
         {
             MdiParent = CoreFormList.Principal()
         };
@@ -1487,7 +1500,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
     {
         if (FnValidateFormAndSubmit())
         {
-            _backgroundWorker = new BackgroundWorker();
+            backgroundWorker = new BackgroundWorker();
             if (!progressPanel.Visible)
             {
                 progressPanel.Width = Width;
@@ -1495,19 +1508,18 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 progressPanel.Visible = true;
             }
 
-            _backgroundWorker.DoWork += (ob, ev) =>
+            backgroundWorker.DoWork += (ob, ev) =>
             {
-                switch (_typeRender)
+                if (EntityId==0)
                 {
-                    case TypeRender.New:
-                        SaveInsert();
-                        break;
-                    default:
-                        SaveUpdate();
-                        break;
+                    SaveInsert();  
+                }
+                else
+                {
+                    SaveUpdate();
                 }
             };
-            _backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+            backgroundWorker.RunWorkerCompleted += (ob, ev) =>
             {
                 if (ev.Error is not null)
                 {
@@ -1521,9 +1533,11 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 else
                 {
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Registrar", "Se han registrdo los datos de forma correcta", this);
-                    _entityId = ObjCustomer.EntityID;
-                    LoadEdit();
-                    LoadRender(TypeRender.Edit);
+                    if (ObjCustomer is not null && EntityId>0)
+                    {
+                        LoadEdit();
+                        LoadRender(TypeRender.Edit);
+                    }
                 }
 
                 if (progressPanel.Visible)
@@ -1532,9 +1546,9 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 }
             };
 
-            if (!_backgroundWorker.IsBusy)
+            if (!backgroundWorker.IsBusy)
             {
-                _backgroundWorker.RunWorkerAsync();
+                backgroundWorker.RunWorkerAsync();
             }
         }
     }
@@ -1553,7 +1567,6 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
 
     public void LoadRender(TypeRender typeRedner)
     {
-        _typeRender = typeRedner;
         var user = VariablesGlobales.Instance.User;
         if (user is null) return;
         switch (typeRedner)
@@ -1654,9 +1667,9 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 CoreWebRenderInView.LlenarComboBoxGridControl(ObjListSituationId, cmbEstadoRecordatorio, "CatalogItemID", "Name");
                 CoreWebRenderInView.LlenarComboBoxGridControl(ObjListFrecuencyContactId, cmbFrecuenciaRecordatorio, "CatalogItemID", "Name");
                 gridControlArchivos.DataSource = null;
-                _renderGridFiles = new RenderFileGridControl(user.CompanyID, ObjComponent!.ComponentID, _entityId);
-                _renderGridFiles.RenderGridControl(gridControlArchivos);
-                _renderGridFiles.LoadFiles();
+                renderGridFiles = new RenderFileGridControl(user.CompanyID, ObjComponent!.ComponentID, EntityId);
+                renderGridFiles.RenderGridControl(gridControlArchivos);
+                renderGridFiles.LoadFiles();
                 txtBirthDate.DateTime = ObjCustomer.BirthDate ?? DateTime.Today;
                 txtFirstName.Text = ObjNatural.FirstName;
                 txtLastName.Text = ObjNatural.LastName;
@@ -1668,11 +1681,11 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 txtLimitCreditDol.Text = ObjCustomerCredit.LimitCreditDol.ToString("N2");
                 txtBalanceDol.Text = ObjCustomerCredit.BalanceDol.ToString("N2");
                 txtBalancePoint.Text = ObjCustomer.BalancePoint!.Value.ToString("N2");
-                _txtAccountId = ObjAccount?.AccountID ?? 0;
+                txtAccountId = ObjAccount?.AccountID ?? 0;
                 txtAccountIDDescription.Text = ObjAccount is not null ? $"{ObjAccount.AccountNumber} {ObjAccount.Name}" : "";
                 txtLocation.Text = ObjCustomer.Location;
                 txtBudget.Text = ObjCustomer.Budget!.Value.ToString("N2");
-                _txtEmployerId = ObjEmployerNatural?.EntityID ?? 0;
+                txtEmployerId = ObjEmployerNatural?.EntityID ?? 0;
                 txtEmployerDescription.Text = ObjEmployerNatural is not null ? $"{ObjEmployer!.EmployeNumber} {ObjEmployerNatural.FirstName} {ObjEmployerNatural.LastName}".ToUpper() : "";
                 txtReference1.Text = ObjCustomer.Reference1;
                 txtReference2.Text = ObjCustomer.Reference2;
@@ -1798,7 +1811,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             TransactionID = transactionId!.Value,
             BranchID = user.BranchID,
             TransactionCausalID = _objInterfazCoreWebTransaction.GetDefaultCausalId(user.CompanyID, transactionId.Value),
-            EntityID = _entityId,
+            EntityID = EntityId,
             TransactionOn = DateTime.Now,
             StatusIDChangeOn = DateTime.Now,
             ComponentID = objComponentShare.ComponentID,
@@ -1956,7 +1969,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
         Invoke(() =>
         {
             txtEmployerDescription.EditValue = $@"{diccionario["Codigo"]} / {diccionario["Nombre"]}";
-            _txtEmployerId = Convert.ToInt32(diccionario["entityID"]);
+            txtEmployerId = Convert.ToInt32(diccionario["entityID"]);
         });
     }
 
@@ -1976,7 +1989,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
         Invoke(() =>
         {
             txtAccountIDDescription.EditValue = $@"{diccionario["Codigo"]} / {diccionario["Nombre"]}";
-            _txtAccountId = Convert.ToInt32(diccionario["accountID"]);
+            txtAccountId = Convert.ToInt32(diccionario["accountID"]);
         });
     }
 
@@ -1993,7 +2006,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             return;
         }
 
-        _backgroundWorker = new BackgroundWorker();
+        backgroundWorker = new BackgroundWorker();
         if (!progressPanel.Visible)
         {
             progressPanel.Width = Width;
@@ -2001,12 +2014,12 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             progressPanel.Visible = true;
         }
 
-        _backgroundWorker.DoWork += (ob, ev) =>
+        backgroundWorker.DoWork += (ob, ev) =>
         {
             ComandDelete();
         };
 
-        _backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+        backgroundWorker.RunWorkerCompleted += (ob, ev) =>
         {
             if (ev.Error is not null)
             {
@@ -2035,9 +2048,9 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             progressPanel.Visible = true;
         }
 
-        if (!_backgroundWorker.IsBusy)
+        if (!backgroundWorker.IsBusy)
         {
-            _backgroundWorker.RunWorkerAsync();
+            backgroundWorker.RunWorkerAsync();
         }
     }
 
@@ -2104,7 +2117,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
     private void btnClearEmployer_Click(object sender, EventArgs e)
     {
         txtEmployerDescription.EditValue = "";
-        _txtEmployerId = 0;
+        txtEmployerId = 0;
     }
 
     private void btnNewPhones_Click(object sender, EventArgs e)
@@ -2180,7 +2193,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
 
     private void btnClearAccount_Click(object sender, EventArgs e)
     {
-        _txtAccountId = 0;
+        txtAccountId = 0;
         txtAccountIDDescription.Clear();
     }
 
@@ -2446,7 +2459,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
     private void btnScanerHuella_Click(object sender, EventArgs e)
     {
         var api = new FormFingerprintApi();
-        if (api.WebActiveSensorEnroll(_entityId))
+        if (api.WebActiveSensorEnroll(EntityId))
         {
             _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Huella", "Se ha configurado correctamente el sensor de huell", this);
         }
@@ -2464,7 +2477,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
         if (dialogResult == DialogResult.OK)
         {
             var file = openFileDialog.SafeFileName;
-            _renderGridFiles.AddRow(file);
+            renderGridFiles.AddRow(file);
         }
     }
 
@@ -2472,7 +2485,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
     {
         if (FnValidateLeads())
         {
-            _backgroundWorker = new BackgroundWorker();
+            backgroundWorker = new BackgroundWorker();
             if (!progressPanel.Visible)
             {
                 progressPanel.Width = Width;
@@ -2480,8 +2493,8 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 progressPanel.Visible = true;
             }
 
-            _backgroundWorker.DoWork += (ob, ev) => { FnSaveLeads(); };
-            _backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+            backgroundWorker.DoWork += (ob, ev) => { FnSaveLeads(); };
+            backgroundWorker.RunWorkerCompleted += (ob, ev) =>
             {
                 if (ev.Error is not null)
                 {
@@ -2503,9 +2516,9 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 }
             };
 
-            if (!_backgroundWorker.IsBusy)
+            if (!backgroundWorker.IsBusy)
             {
-                _backgroundWorker.RunWorkerAsync();
+                backgroundWorker.RunWorkerAsync();
             }
         }
     }

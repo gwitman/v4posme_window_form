@@ -1187,6 +1187,10 @@ namespace v4posme_window.Views
         public void CommandRegresar(object? sender, EventArgs e)
         {
             Close();
+            foreach (var child in CoreFormList.Principal().MdiChildren)
+            {
+                child.WindowState = FormWindowState.Maximized;
+            }
         }
 
         public void PreRender()

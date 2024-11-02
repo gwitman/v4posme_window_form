@@ -54,5 +54,6 @@ public record TbTransactionMasterDto()
     public int? EntityIdsecondary { get; set; }
     public string? NameStatus { get; set; }
 
- 
+    public IList<TbTransactionMasterDetailDto> TransactionMasterDetail { get; set; }
+
 }

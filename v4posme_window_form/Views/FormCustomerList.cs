@@ -240,7 +240,7 @@ namespace v4posme_window.Views
                 foreach (var indexRow in rowIndex)
                 {
                     var entityId = Convert.ToInt32(_gridViewData.GetRowCellValue(indexRow, "entityID").ToString());
-                    var objFormCustomerEdit = new FormCustomerEdit(TypeRender.Edit, entityId);
+                    var objFormCustomerEdit = new FormCustomerEdit(TypeOpenForm.Init, entityId);
                     objFormCustomerEdit.ComandDelete();
                 }
             };
@@ -325,7 +325,7 @@ namespace v4posme_window.Views
                 return;
             }
 
-            var frmCustomerEdit = new FormCustomerEdit(TypeRender.Edit, selectedCliente.EntityId)
+            var frmCustomerEdit = new FormCustomerEdit(TypeOpenForm.Init, selectedCliente.EntityId)
             {
                 MdiParent = CoreFormList.Principal()
             };
@@ -334,7 +334,7 @@ namespace v4posme_window.Views
 
         public void New(object? sender, EventArgs? args)
         {
-            var frmCustomerEdit = new FormCustomerEdit(TypeRender.New, 0)
+            var frmCustomerEdit = new FormCustomerEdit(TypeOpenForm.Init, 0)
             {
                 MdiParent = CoreFormList.Principal()
             };
@@ -413,7 +413,7 @@ namespace v4posme_window.Views
                 return;
             }
 
-            var frmCustomerEdit = new FormCustomerEdit(TypeRender.Edit, selectedCliente.EntityID)
+            var frmCustomerEdit = new FormCustomerEdit(TypeOpenForm.Init, selectedCliente.EntityID)
             {
                 MdiParent = CoreFormList.Principal()
             };

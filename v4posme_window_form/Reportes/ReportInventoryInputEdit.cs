@@ -4,11 +4,11 @@ using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 
-namespace v4posme_window.Views
+namespace v4posme_window.Reportes
 {
-    public partial class Report1 : DevExpress.XtraReports.UI.XtraReport
+    public partial class ReportInventoryInputEdit : DevExpress.XtraReports.UI.XtraReport
     {
-        public Report1()
+        public ReportInventoryInputEdit()
         {
             InitializeComponent();
         }
