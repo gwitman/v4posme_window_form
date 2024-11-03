@@ -361,58 +361,28 @@ namespace v4posme_window.Views
             //http://localhost/posmev4/app_inventory_inputunpost/viewRegisterFormato80mm/companyID/2/transactionID/21/transactionMasterID/1704
             var urlPdf = $"{urlWeb}/{objParameterUrlPrinter}/companyID/{user.CompanyID}/transactionID/{TransactionId}/transactionMasterID/{TransactionMasterId}";
             // Descargar el archivo PDF
-            var urlLogin = $"{urlWeb}/core_acount/login"; // URL de autenticación
-            var usuario = user.Nickname ?? "";
-            var contraseña = user.Password ?? "";
-            var rutaArchivoPdf = $"documento_generado_{TransactionMasterId}_{DateTime.Now.Year}{DateTime.Now.Month}{DateTime.Now.Day}.pdf";
+            var rutaDescargas = VariablesGlobales.ConfigurationBuilder["DOWNLOAD_FILE_WINDOW"];
+            var rutaArchivoPdf = $"{rutaDescargas}/compra_{TransactionMasterId}_{DateTime.Now.Year}{DateTime.Now.Month}{DateTime.Now.Day}{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Second}.pdf";
 
             using var httpClient = new HttpClient();
-            // Credenciales en el cuerpo de la solicitud (si tu API las requiere así)
-            var loginData = new FormUrlEncodedContent(new[]
+
+            // Descargar el PDF
+            var responsePdf = await httpClient.GetAsync(urlPdf);
+            if (responsePdf.IsSuccessStatusCode)
             {
-                new KeyValuePair<string, string>("txtNickname", usuario),
-                new KeyValuePair<string, string>("txtPassword", contraseña)
-            });
+                var pdfBytes = await responsePdf.Content.ReadAsByteArrayAsync();
+                await File.WriteAllBytesAsync(rutaArchivoPdf, pdfBytes);
 
-            // Enviar solicitud de autenticación
-            var req = new HttpRequestMessage(HttpMethod.Post, urlLogin)
-            {
-                Content = loginData
-            };
-            var responseLogin = await httpClient.SendAsync(req);
-            if (responseLogin.IsSuccessStatusCode)
-            {
-                // Configurar el cliente para descargar el PDF
-                responseLogin.Headers.TryGetValues("Set-Cookie", out var cookies);
-                if (cookies != null)
+                // Abrir el PDF con el visor predeterminado
+                Process.Start(new ProcessStartInfo
                 {
-                    httpClient.DefaultRequestHeaders.Add("Cookie", string.Join(";", cookies));
-                }
-
-                // Descargar el PDF
-                var responsePdf = await httpClient.GetAsync(urlPdf);
-                if (responsePdf.IsSuccessStatusCode)
-                {
-                    var pdfBytes = await responsePdf.Content.ReadAsByteArrayAsync();
-                    await File.WriteAllBytesAsync(rutaArchivoPdf, pdfBytes);
-
-                    Console.WriteLine("PDF descargado correctamente.");
-
-                    // Abrir el PDF con el visor predeterminado
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = rutaArchivoPdf,
-                        UseShellExecute = true
-                    });
-                }
-                else
-                {
-                    throw new Exception("Error al descargar el PDF.");
-                }
+                    FileName = rutaArchivoPdf,
+                    UseShellExecute = true
+                });
             }
             else
             {
-                throw new Exception("Error de autenticación.");
+                throw new Exception("Error al descargar el PDF.");
             }
         }
 
