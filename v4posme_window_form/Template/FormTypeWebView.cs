@@ -17,5 +17,10 @@ namespace v4posme_window.Template
         {
             InitializeComponent();
         }
+
+        private void FormTypeWebView_Resize(object sender, EventArgs e)
+        {
+            webView.Size = this.ClientSize - new Size(webView.Location);
+        }
     }
 }

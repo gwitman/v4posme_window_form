@@ -18,7 +18,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
 
         public int GetElementId(string? controller, string? method, string? suffix, List<TbMenuElement> dataMenuTop,
             List<TbMenuElement> dataMenuLeft,
-            List<TbMenuElement> dataMenuBodyReport, List<TbMenuElement> dataMenuBodyTop,
+            List<TbMenuElement> dataMenuBodyReport, List<TbMenuElement>? dataMenuBodyTop,
             List<TbMenuElement> dataMenuHiddenPopup)
         {
             var urlSuffixNew = UrlSuffixNew;
@@ -38,7 +38,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
                 }
             }
 
-            if (dataMenuBodyTop.Count > 0)
+            if (dataMenuBodyTop is not null && dataMenuBodyTop.Count > 0)
             {
                 foreach (var menuElement in dataMenuBodyTop)
                 {

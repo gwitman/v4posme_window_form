@@ -76,6 +76,9 @@
     <Compile Update="Views\FormInventoryItemList.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\FormInventoryReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\FormInvoiceBillingEdit.cs">
       <SubType>Form</SubType>
     </Compile>

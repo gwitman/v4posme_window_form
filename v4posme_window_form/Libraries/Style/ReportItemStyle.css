@@ -1,0 +1,88 @@
+﻿.contact {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background-color: @Window;
+    color: @WindowText;
+}
+    .contact:hover {
+        background-color: #224379;
+        color: white;
+    }
+.contact-avatar {
+    padding: 8px;
+    width: 42px;
+    height: 42px;
+}
+
+.photo {
+    background-color: White;
+    margin: 4px;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid @WindowText/0.1;
+    object-fit: contain;
+}
+
+.contact-body {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+    padding-right: 12px;
+}
+
+.contact-info {
+    flex-grow: 1;
+}
+
+    .contact-info:hover .info {
+        opacity: 0.5;
+    }
+
+    .contact-info .info:hover {
+        opacity: 1.0;
+    }
+
+.name-info {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    font-size: 14px;
+    line-height: 24px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.info {
+    margin-left: 4px;
+    min-width: 16px;
+    width: 16px;
+    height: 16px;
+    opacity: 0;
+}
+
+.phone {
+    color: @DisabledText;
+    font-size: 12px;
+    line-height: 18px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.selection {
+    border-top: solid 1px @Window;
+    border-bottom: solid 1px @WindowText/0.1;
+}
+
+:root:select .selection {
+    border-top: solid 0px @Window;
+    border-bottom: solid 2px @HighlightAlternate;
+}

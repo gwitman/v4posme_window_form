@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
@@ -535,6 +536,22 @@ public class CoreWebRenderInView
                 parentElement.Groups.Add(subElement);
             }
         }
+    }
+
+    public static void RenderListViewReport(ImageListBoxControl listBox, List<TbMenuElement>? items, int parentMenuElement, SvgImageCollection svgImageCollection)
+    {
+        if (items is null || items.Count <= 0) return;
+        var listBoxDataSource = items.Where(item => item.ParentMenuElementID == parentMenuElement).ToList();
+        foreach (var tbMenuElement in listBoxDataSource)
+        {
+            svgImageCollection.Add(tbMenuElement.Orden,SvgImage.FromFile(tbMenuElement.IconWindowForm));
+        }
+        var templateHtml = new HtmlTemplate();
+        templateHtml.Template = Load("ReportItem.html");
+        templateHtml.Styles = Load("ReportItemStyle.css");
+        listBox.HtmlImages = svgImageCollection;
+        listBox.HtmlTemplates.Add(templateHtml);
+        listBox.DataSource = listBoxDataSource;
     }
 
     private static string Load(string fileName)

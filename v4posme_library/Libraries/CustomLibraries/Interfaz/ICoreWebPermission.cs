@@ -6,7 +6,7 @@ namespace v4posme_library.Libraries.CustomLibraries.Interfaz
     {
         int GetElementId(string? controller, string? method, string? suffix, List<TbMenuElement> dataMenuTop,
             List<TbMenuElement> dataMenuLeft, List<TbMenuElement> dataMenuBodyReport,
-            List<TbMenuElement> dataMenuBodyTop, List<TbMenuElement> dataMenuHiddenPopup);
+            List<TbMenuElement>? dataMenuBodyTop, List<TbMenuElement> dataMenuHiddenPopup);
 
         bool UrlPermited(string? controller, string? method, string? suffix, List<TbMenuElement>? dataMenuTop,
             List<TbMenuElement>? dataMenuLeft, List<TbMenuElement>? dataMenuBodyReport,

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTypeWebView));
             webView = new Microsoft.Web.WebView2.WinForms.WebView2();
             ((System.ComponentModel.ISupportInitialize)webView).BeginInit();
             SuspendLayout();
@@ -40,7 +41,7 @@
             webView.Dock = DockStyle.Fill;
             webView.Location = new Point(0, 0);
             webView.Name = "webView";
-            webView.Size = new Size(787, 542);
+            webView.Size = new Size(787, 538);
             webView.TabIndex = 0;
             webView.ZoomFactor = 1D;
             // 
@@ -48,12 +49,14 @@
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(787, 542);
+            ClientSize = new Size(787, 538);
             Controls.Add(webView);
+            IconOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("FormTypeWebView.IconOptions.SvgImage");
             Name = "FormTypeWebView";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FormTypeWebView";
+            Text = "Browser";
             WindowState = FormWindowState.Maximized;
+            Resize += FormTypeWebView_Resize;
             ((System.ComponentModel.ISupportInitialize)webView).EndInit();
             ResumeLayout(false);
         }

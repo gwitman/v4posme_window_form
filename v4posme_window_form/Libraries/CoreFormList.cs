@@ -12,6 +12,7 @@ public static class CoreFormList
         var fromInventoryItemList = new FormInventoryItemList();
         var formCustomerList = new FormCustomerList();
         var formInventoyInput = new FormInventoryInputList();
+        var formInventoryReport = new FormInventoryReport();
 
         var forms = new Dictionary<string, Form>
         {
@@ -19,7 +20,8 @@ public static class CoreFormList
             { "app_cxc_customer/index.aspx", formCustomerList },
             { "app_inventory_item/index.aspx", fromInventoryItemList },
             { "app_invoice_billing/index.aspx", formInvoiceBillingList },
-            { "app_inventory_inputunpost/index.aspx", formInventoyInput }
+            { "app_inventory_inputunpost/index.aspx", formInventoyInput },
+            { "app_inventory_report/index.aspx", formInventoryReport }
         };
         return forms;
     }
