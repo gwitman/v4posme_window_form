@@ -103,6 +103,42 @@
     <EmbeddedResource Include="Assets\SVG\CardLogos\MasterCard.svg" />
     <EmbeddedResource Include="Assets\SVG\CardLogos\Visa.svg" />
     <EmbeddedResource Include="Assets\SVG\CardLogos\VisaElectron.svg" />
+    <Compile Update="Views\Inventory\Inputunpost\FormInventoryInputEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Inventory\Inputunpost\FormInventoryInputEditMasInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Inventory\Inputunpost\FormInventoryInputList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Inventory\Report\FormInventoryReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\CXC\Customer\FormCustomerEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\CXC\Customer\FormCustomerEditCreditLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\CXC\Customer\FormCustomerEditEmail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\CXC\Customer\FormCustomerEditTelefonos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\CXC\Customer\FormCustomerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Invoice\Billing\FormInvoiceBillingEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <EmbeddedResource Update="Views\Invoice\Billing\FormInvoiceBillingEdit.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Update="Views\Invoice\Billing\FormInvoiceBillingList.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\posMe.ico" />
@@ -115,7 +151,8 @@
     <PackageReference Include="DevExpress.Win.Design" Version="24.1.3" />
     <PackageReference Include="DevExpress.Xpo" Version="24.1.3" />
     <PackageReference Include="ESC-POS-USB-NET" Version="1.1.3" />
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2792.45" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2849.39" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
     <PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
     <PackageReference Include="System.Security.Cryptography.Pkcs" Version="8.0.1" />
@@ -191,6 +228,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\info_svg.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\list.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\preview.svg">

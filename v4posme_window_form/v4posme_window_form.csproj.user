@@ -16,9 +16,6 @@
     <Compile Update="Editors\PhoneNumberBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="Reportes\ReportInventoryInputEdit.cs">
-      <SubType>XtraReport</SubType>
-    </Compile>
     <Compile Update="Template\FormTypeCustomInputForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -37,52 +34,28 @@
     <Compile Update="Template\FormTypePdfViewer.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Template\FormTypeReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Template\FormTypeWebView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\FormCustomerEdit.cs">
+    <Compile Update="Views\Box\Report\FormBoxReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\FormCustomerEditCreditLine.cs">
+    <Compile Update="Views\CXC\Report\FormCxcReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\FormCustomerEditEmail.cs">
+    <Compile Update="Views\Inventory\Product\FormInventoryItemCantidadImprimir.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\FormCustomerEditTelefonos.cs">
+    <Compile Update="Views\Inventory\Product\FormInventoryItemEditConcepts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\FormCustomerList.cs">
+    <Compile Update="Views\Inventory\Product\FormInventoryItemEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\FormInventoryInputEditMasInfo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Views\FormInventoryInputList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Views\FormInventoryInputEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Views\FormInventoryItemCantidadImprimir.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Views\FormInventoryItemEditConcepts.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Views\FormInventoryItemEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Views\FormInventoryItemList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Views\FormInventoryReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Views\FormInvoiceBillingEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Views\FormInvoiceBillingList.cs">
+    <Compile Update="Views\Inventory\Product\FormInventoryItemList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\LoginForm.cs">
@@ -93,8 +66,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Views\FormInvoiceBillingEdit.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <Compile Update="Views\Sales\Report\FormSalesReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

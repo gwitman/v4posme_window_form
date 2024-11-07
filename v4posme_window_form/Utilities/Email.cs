@@ -1,40 +1,51 @@
-namespace DevExpress.UITemplates.Collection.Utilities {
+namespace v4posme_window.Utilities
+{
     using System;
 
-    public static class Email {
-        public static bool Validate(string email) {
-            if(string.IsNullOrEmpty(email))
+    public static class Email
+    {
+        public static bool Validate(string email)
+        {
+            if (string.IsNullOrEmpty(email))
                 return false;
-            if(email.Length < 3)
+            if (email.Length < 3)
                 return false;
-            if(email.IndexOf("@", 0) < 0)
+            if (email.IndexOf("@", 0) < 0)
                 return false;
-            try {
+            try
+            {
                 new System.Net.Mail.MailAddress(email);
                 return true;
             }
-            catch(FormatException) {
+            catch (FormatException)
+            {
                 return false;
             }
         }
-        public static bool Validate(string email, out string error) {
+        public static bool Validate(string email, out string error)
+        {
             error = string.Empty;
-            if(string.IsNullOrEmpty(email)) {
+            if (string.IsNullOrEmpty(email))
+            {
                 error = "Empty address.";
                 return false;
             }
-            if(email.Length < 3) {
+            if (email.Length < 3)
+            {
                 error = "Incomplete address.";
                 return false;
             }
-            if(email.IndexOf("@", 0) < 0) {
+            if (email.IndexOf("@", 0) < 0)
+            {
                 error = "Email addresses must include the @ character.";
                 return false;
             }
-            try {
+            try
+            {
                 new System.Net.Mail.MailAddress(email);
             }
-            catch(FormatException e) {
+            catch (FormatException e)
+            {
                 error = e.Message;
             }
             return string.IsNullOrEmpty(error);

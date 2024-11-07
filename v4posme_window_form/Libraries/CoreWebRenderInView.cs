@@ -544,7 +544,16 @@ public class CoreWebRenderInView
         var listBoxDataSource = items.Where(item => item.ParentMenuElementID == parentMenuElement).ToList();
         foreach (var tbMenuElement in listBoxDataSource)
         {
-            svgImageCollection.Add(tbMenuElement.Orden,SvgImage.FromFile(tbMenuElement.IconWindowForm));
+            if (string.IsNullOrWhiteSpace(tbMenuElement.IconWindowForm))
+            {
+                var svgPath = Path.Combine(Application.StartupPath, "Resources", "list.svg");
+                svgImageCollection.Add(tbMenuElement.Orden,SvgImage.FromFile(svgPath));
+            }
+            else
+            {
+                svgImageCollection.Add(tbMenuElement.Orden,SvgImage.FromFile(tbMenuElement.IconWindowForm));
+            }
+            
         }
         var templateHtml = new HtmlTemplate();
         templateHtml.Template = Load("ReportItem.html");
