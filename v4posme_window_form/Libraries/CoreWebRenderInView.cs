@@ -39,7 +39,7 @@ public class CoreWebRenderInView
 {
     private readonly ICoreWebTools _objInterfazCoreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
     private readonly ICoreWebParameter _objInterfazCoreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
-
+    private static readonly string SvgPath = Path.Combine(Application.StartupPath, "Resources", "list.svg");
     private byte[] Avanza(int puntos)
     {
         return [27, 74, (byte)puntos]; //8puntos = 1mm
@@ -429,8 +429,12 @@ public class CoreWebRenderInView
         alert.Show(form, title, body, "", image);
     }
 
-    public static void RenderMenuLeft(List<TbMenuElement> data, AccordionControl menu)
+    public static void RenderMenuLeft(List<TbMenuElement> data, AccordionControl menu, SvgImageCollection svgImageCollection)
     {
+        var templateHtml = new HtmlTemplate();
+        templateHtml.Template = Load("MenuItem.html");
+        templateHtml.Styles = Load("MenuItemStyle.css");
+        menu.HtmlTemplates.Item.Assign(templateHtml);
         // Llamada inicial a la función recursiva para agregar elementos al AccordionControl
         foreach (var menuItem in data)
         {
@@ -444,14 +448,18 @@ public class CoreWebRenderInView
                     accordionElement.ImageOptions.Image = Image.FromFile(menuItem.IconWindowForm);
                     accordionElement.ImageOptions.ImageLayoutMode = ImageLayoutMode.Stretch;
                 }
+                else
+                {
+                    accordionElement.ImageOptions.SvgImage = svgImageCollection[0];
+                }
 
                 menu.Elements.Add(accordionElement);
-                RenderItemLeft(accordionElement, data.Where(k => k.ParentMenuElementID == menuItem.MenuElementID).ToList());
+                RenderItemLeft(accordionElement, data.Where(k => k.ParentMenuElementID == menuItem.MenuElementID).ToList(),svgImageCollection);
             }
         }
     }
 
-    private static void RenderItemLeft(AccordionControlElement parentElement, List<TbMenuElement> subItems)
+    private static void RenderItemLeft(AccordionControlElement parentElement, List<TbMenuElement> subItems, SvgImageCollection svgImageCollection)
     {
         foreach (var subItem in subItems)
         {
@@ -463,7 +471,7 @@ public class CoreWebRenderInView
             if (subItemsInner.Count > 0)
             {
                 subElement.Style = ElementStyle.Group;
-                RenderItemLeft(subElement, subItemsInner);
+                RenderItemLeft(subElement, subItemsInner,svgImageCollection);
             }
             else
             {
@@ -475,6 +483,10 @@ public class CoreWebRenderInView
                         subElement.ImageOptions.Image = Image.FromFile(subItem.IconWindowForm);
                         subElement.ImageOptions.ImageLayoutMode = ImageLayoutMode.Stretch;
                     }
+                }
+                else
+                {
+                    subElement.ImageOptions.SvgImage = svgImageCollection[1];
                 }
 
                 if (!string.IsNullOrEmpty(subItem.FormRedirectWindowForm))
@@ -546,8 +558,7 @@ public class CoreWebRenderInView
         {
             if (string.IsNullOrWhiteSpace(tbMenuElement.IconWindowForm))
             {
-                var svgPath = Path.Combine(Application.StartupPath, "Resources", "list.svg");
-                svgImageCollection.Add(tbMenuElement.Orden,SvgImage.FromFile(svgPath));
+                svgImageCollection.Add(tbMenuElement.Orden,SvgImage.FromFile(SvgPath));
             }
             else
             {

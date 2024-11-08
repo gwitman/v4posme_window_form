@@ -74,7 +74,8 @@ public partial class FormTypeReport : XtraForm
         {
             frmWebView.Text = tbMenuElement.Display ?? "Reporte";
             var address = tbMenuElement.Address!.Replace(urlSuffixOld!, urlSuffixNew);
-            var url = $"{appUrlResourceCssJs}/{address}";
+            var webToken = VariablesGlobales.ConfigurationBuilder["WEB_TOKEN"];
+            var url = $"{appUrlResourceCssJs}/{address}?webtoken={webToken}";
             frmWebView.webView.Source = new Uri(url);
             frmWebView.Show();
         }

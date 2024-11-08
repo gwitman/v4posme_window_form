@@ -183,6 +183,12 @@
     <None Update="Libraries\Style\AlertSuccess.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Libraries\Style\MenuItem.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Libraries\Style\MenuItemStyle.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Libraries\Style\ReportItem.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

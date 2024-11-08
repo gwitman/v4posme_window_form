@@ -69,5 +69,16 @@
     <Compile Update="Views\Sales\Report\FormSalesReport.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\WaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\WaitForm.Designer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Views\WaitForm.resx">
+      <SubType>Code</SubType>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

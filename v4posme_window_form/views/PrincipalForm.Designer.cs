@@ -32,6 +32,7 @@ namespace v4posme_window.Views
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrincipalForm));
+            splashScreenManager = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(WaitForm), true, true);
             accordionControl1 = new DevExpress.XtraBars.Navigation.AccordionControl();
             fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
             barCompanyNane = new DevExpress.XtraBars.BarStaticItem();
@@ -43,23 +44,30 @@ namespace v4posme_window.Views
             barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            ribbonPageCategory1 = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
             barStaticItemTitulo = new DevExpress.XtraBars.BarStaticItem();
+            ribbonPageCategory1 = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
+            svgImageCollection = new DevExpress.Utils.SvgImageCollection(components);
             ((System.ComponentModel.ISupportInitialize)accordionControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)fluentDesignFormControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)applicationMenu1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ribbonControl1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)svgImageCollection).BeginInit();
             SuspendLayout();
+            // 
+            // splashScreenManager
+            // 
+            splashScreenManager.ClosingDelay = 500;
             // 
             // accordionControl1
             // 
             accordionControl1.Dock = DockStyle.Left;
             accordionControl1.Location = new Point(0, 0);
             accordionControl1.Name = "accordionControl1";
+            accordionControl1.OptionsMinimizing.CaptionShowMode = DevExpress.XtraBars.Navigation.CaptionShowMode.None;
             accordionControl1.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Touch;
             accordionControl1.ShowFilterControl = DevExpress.XtraBars.Navigation.ShowFilterControl.Always;
-            accordionControl1.Size = new Size(260, 682);
+            accordionControl1.Size = new Size(260, 676);
             accordionControl1.TabIndex = 1;
             accordionControl1.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
             // 
@@ -103,7 +111,7 @@ namespace v4posme_window.Views
             // 
             barDockControlBottom.CausesValidation = false;
             barDockControlBottom.Dock = DockStyle.Bottom;
-            barDockControlBottom.Location = new Point(0, 682);
+            barDockControlBottom.Location = new Point(0, 676);
             barDockControlBottom.Manager = barManager1;
             barDockControlBottom.Size = new Size(961, 0);
             // 
@@ -113,7 +121,7 @@ namespace v4posme_window.Views
             barDockControlLeft.Dock = DockStyle.Left;
             barDockControlLeft.Location = new Point(0, 0);
             barDockControlLeft.Manager = barManager1;
-            barDockControlLeft.Size = new Size(0, 682);
+            barDockControlLeft.Size = new Size(0, 676);
             // 
             // barDockControlRight
             // 
@@ -121,7 +129,7 @@ namespace v4posme_window.Views
             barDockControlRight.Dock = DockStyle.Right;
             barDockControlRight.Location = new Point(961, 0);
             barDockControlRight.Manager = barManager1;
-            barDockControlRight.Size = new Size(0, 682);
+            barDockControlRight.Size = new Size(0, 676);
             // 
             // ribbonControl1
             // 
@@ -142,11 +150,6 @@ namespace v4posme_window.Views
             barButtonItem1.ImageOptions.Image = (Image)resources.GetObject("barButtonItem1.ImageOptions.Image");
             barButtonItem1.Name = "barButtonItem1";
             // 
-            // ribbonPageCategory1
-            // 
-            ribbonPageCategory1.Name = "ribbonPageCategory1";
-            ribbonPageCategory1.Text = "ribbonPageCategory1";
-            // 
             // barStaticItemTitulo
             // 
             barStaticItemTitulo.Caption = "(Empresa)";
@@ -154,12 +157,23 @@ namespace v4posme_window.Views
             barStaticItemTitulo.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             barStaticItemTitulo.ImageOptions.SvgImage = Properties.Resources.bo_organization;
             barStaticItemTitulo.Name = "barStaticItemTitulo";
+            barStaticItemTitulo.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
+            // ribbonPageCategory1
+            // 
+            ribbonPageCategory1.Name = "ribbonPageCategory1";
+            ribbonPageCategory1.Text = "ribbonPageCategory1";
+            // 
+            // svgImageCollection
+            // 
+            svgImageCollection.Add("menu", "image://svgimages/pdf viewer/menu.svg");
+            svgImageCollection.Add("list", (DevExpress.Utils.Svg.SvgImage)resources.GetObject("svgImageCollection.list"));
             // 
             // PrincipalForm
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(961, 682);
+            ClientSize = new Size(961, 676);
             Controls.Add(ribbonControl1);
             Controls.Add(accordionControl1);
             Controls.Add(fluentDesignFormControl1);
@@ -179,6 +193,7 @@ namespace v4posme_window.Views
             ((System.ComponentModel.ISupportInitialize)applicationMenu1).EndInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).EndInit();
             ((System.ComponentModel.ISupportInitialize)ribbonControl1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)svgImageCollection).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -197,5 +212,8 @@ namespace v4posme_window.Views
         private DevExpress.XtraBars.Ribbon.RibbonPageCategory ribbonPageCategory1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraBars.BarStaticItem barStaticItemTitulo;
+        public DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager;
+        public DevExpress.Utils.SvgImageCollection svgImageCollection;
+        private DevExpress.Utils.SvgImageCollection svgImageCollection1;
     }
 }

@@ -1712,7 +1712,8 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                                 return;
                             }
 
-                            frmWebView.webView.Source = new Uri($"{urlBase}/app_cxc_record/index?file_exists={tbCustomerConsultasSinRiesgo.File}");
+                            var webToken = VariablesGlobales.ConfigurationBuilder["WEB_TOKEN"];
+                            frmWebView.webView.Source = new Uri($"{urlBase}/app_cxc_record/index?file_exists={tbCustomerConsultasSinRiesgo.File}&webtoken={webToken}");
                             frmWebView.Show();
                         };
                         popupMenu1.AddItem(button);

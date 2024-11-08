@@ -1,0 +1,46 @@
+﻿.card {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background-color: #007bff; /* Color del borde */
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.item_image {
+    border-radius: 15%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.content h3 {
+    margin: 0;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.content p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #666;
+}

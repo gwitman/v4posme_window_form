@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using DevExpress.XtraBars.FluentDesignSystem;
 using DevExpress.XtraEditors;
+using DevExpress.XtraSplashScreen;
 using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
@@ -36,14 +37,14 @@ namespace v4posme_window.Views
             VariablesGlobales.Instance.Membership = _membershipModel.GetRowByCompanyIdBranchIdUserId(VariablesGlobales.Instance.User.CompanyID, VariablesGlobales.Instance.User.BranchID, VariablesGlobales.Instance.User.UserID);
             barStaticItemTitulo.Caption = VariablesGlobales.Instance.Company!.Name + @"-" + VariablesGlobales.Instance.Branch.Name + $@"(Usuario: {VariablesGlobales.Instance.User.Nickname})";
             var menuElementModel = VariablesGlobales.Instance.UnityContainer.Resolve<IMenuElementModel>();
-
+            splashScreenManager.ShowWaitForm();
             await Task.Run(() =>
             {
                 if (VariablesGlobales.Instance.ListMenuLeft is not null)
                 {
                     accordionControl1.Invoke((MethodInvoker)delegate
                     {
-                        CoreWebRenderInView.RenderMenuLeft(VariablesGlobales.Instance.ListMenuLeft, accordionControl1);
+                        CoreWebRenderInView.RenderMenuLeft(VariablesGlobales.Instance.ListMenuLeft, accordionControl1, svgImageCollection);
                         accordionControl1.ElementClick += accordionControl1_ElementClick;
                     });
                 }
@@ -62,6 +63,7 @@ namespace v4posme_window.Views
             if (formularioDefaultValue is null) return;
             formularioDefaultValue.MdiParent = this;
             formularioDefaultValue.Show();
+            splashScreenManager.CloseWaitForm();
         }
 
         private void accordionControl1_ElementClick(object sender, DevExpress.XtraBars.Navigation.ElementClickEventArgs e)
