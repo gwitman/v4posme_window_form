@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInventoryInputEdit));
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
@@ -108,10 +108,10 @@
             btnNewDetailTransaction = new DevExpress.XtraEditors.SimpleButton();
             btnDeleteDetailTransaction = new DevExpress.XtraEditors.SimpleButton();
             btnPrinterDetailTransaction = new DevExpress.XtraEditors.SimpleButton();
+            btnNuevoArticulo = new DevExpress.XtraEditors.SimpleButton();
             stackPanelArchivo = new DevExpress.Utils.Layout.StackPanel();
             labelControl5 = new DevExpress.XtraEditors.LabelControl();
             txtFileImport = new DevExpress.XtraEditors.TextEdit();
-            btnNuevoArticulo = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).BeginInit();
             xtraTabControl1.SuspendLayout();
             xtraTabPage1.SuspendLayout();
@@ -524,7 +524,7 @@
             // 
             xtraTabPage2.Controls.Add(layoutControl2);
             xtraTabPage2.Name = "xtraTabPage2";
-            xtraTabPage2.Size = new Size(1182, 179);
+            xtraTabPage2.Size = new Size(1182, 185);
             xtraTabPage2.Text = "Referencias";
             // 
             // layoutControl2
@@ -619,7 +619,7 @@
             xtraTabPage3.Controls.Add(txtDescription);
             xtraTabPage3.Controls.Add(labelControl1);
             xtraTabPage3.Name = "xtraTabPage3";
-            xtraTabPage3.Size = new Size(1182, 179);
+            xtraTabPage3.Size = new Size(1182, 185);
             xtraTabPage3.Text = "Comentarios";
             // 
             // txtDescription
@@ -644,7 +644,7 @@
             tabPageArchivos.Controls.Add(gridControlArchivos);
             tabPageArchivos.Controls.Add(btnAgregarArchivo);
             tabPageArchivos.Name = "tabPageArchivos";
-            tabPageArchivos.Size = new Size(1182, 179);
+            tabPageArchivos.Size = new Size(1182, 185);
             tabPageArchivos.Text = "Archivos";
             // 
             // gridControlArchivos
@@ -681,7 +681,6 @@
             // 
             // gridControlTransactionMasterDetail
             // 
-            gridControlTransactionMasterDetail.Dock = DockStyle.Fill;
             gridControlTransactionMasterDetail.Location = new Point(0, 49);
             gridControlTransactionMasterDetail.MainView = gridViewTransactionMasterDetail;
             gridControlTransactionMasterDetail.Name = "gridControlTransactionMasterDetail";
@@ -804,14 +803,14 @@
             btnMasInformacion.Appearance.Options.UseFont = true;
             btnMasInformacion.Appearance.Options.UseForeColor = true;
             btnMasInformacion.Appearance.Options.UseTextOptions = true;
-            editorButtonImageOptions2.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            editorButtonImageOptions2.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            editorButtonImageOptions2.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("editorButtonImageOptions2.SvgImage");
-            editorButtonImageOptions2.SvgImageSize = new Size(18, 18);
-            serializableAppearanceObject5.ForeColor = Color.White;
-            serializableAppearanceObject5.Options.UseBackColor = true;
-            serializableAppearanceObject5.Options.UseForeColor = true;
-            btnMasInformacion.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Más Información", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default) });
+            editorButtonImageOptions1.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            editorButtonImageOptions1.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            editorButtonImageOptions1.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("editorButtonImageOptions1.SvgImage");
+            editorButtonImageOptions1.SvgImageSize = new Size(18, 18);
+            serializableAppearanceObject1.ForeColor = Color.White;
+            serializableAppearanceObject1.Options.UseBackColor = true;
+            serializableAppearanceObject1.Options.UseForeColor = true;
+            btnMasInformacion.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Más Información", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default) });
             btnMasInformacion.Name = "btnMasInformacion";
             btnMasInformacion.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             btnMasInformacion.Click += btnMasInformacion_Click;
@@ -970,9 +969,8 @@
             // stackPanel7
             // 
             stackPanel7.Controls.Add(layoutControl3);
-            stackPanel7.Dock = DockStyle.Bottom;
             stackPanel7.LayoutDirection = DevExpress.Utils.Layout.StackPanelLayoutDirection.RightToLeft;
-            stackPanel7.Location = new Point(0, 611);
+            stackPanel7.Location = new Point(0, 609);
             stackPanel7.Name = "stackPanel7";
             stackPanel7.Size = new Size(1184, 212);
             stackPanel7.TabIndex = 81;
@@ -980,12 +978,12 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.Controls.Add(gridControlTransactionMasterDetail);
             panel1.Controls.Add(stackPanel3);
-            panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 310);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1184, 301);
+            panel1.Size = new Size(1184, 297);
             panel1.TabIndex = 83;
             // 
             // stackPanel3
@@ -1052,6 +1050,23 @@
             btnPrinterDetailTransaction.Text = "Imprimir";
             btnPrinterDetailTransaction.Click += btnPrinterDetailTransaction_Click;
             // 
+            // btnNuevoArticulo
+            // 
+            btnNuevoArticulo.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Success;
+            btnNuevoArticulo.Appearance.ForeColor = Color.White;
+            btnNuevoArticulo.Appearance.Options.UseBackColor = true;
+            btnNuevoArticulo.Appearance.Options.UseForeColor = true;
+            btnNuevoArticulo.Appearance.Options.UseTextOptions = true;
+            btnNuevoArticulo.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            btnNuevoArticulo.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnNuevoArticulo.ImageOptions.SvgImage");
+            btnNuevoArticulo.ImageOptions.SvgImageSize = new Size(18, 18);
+            btnNuevoArticulo.Location = new Point(248, 9);
+            btnNuevoArticulo.Name = "btnNuevoArticulo";
+            btnNuevoArticulo.Size = new Size(123, 30);
+            btnNuevoArticulo.TabIndex = 81;
+            btnNuevoArticulo.Text = "Nuevo Articulo";
+            btnNuevoArticulo.Click += btnNuevoArticulo_Click;
+            // 
             // stackPanelArchivo
             // 
             stackPanelArchivo.Controls.Add(labelControl5);
@@ -1078,29 +1093,12 @@
             txtFileImport.Size = new Size(371, 28);
             txtFileImport.TabIndex = 1;
             // 
-            // btnNuevoArticulo
-            // 
-            btnNuevoArticulo.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Success;
-            btnNuevoArticulo.Appearance.ForeColor = Color.White;
-            btnNuevoArticulo.Appearance.Options.UseBackColor = true;
-            btnNuevoArticulo.Appearance.Options.UseForeColor = true;
-            btnNuevoArticulo.Appearance.Options.UseTextOptions = true;
-            btnNuevoArticulo.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            btnNuevoArticulo.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton1.ImageOptions.SvgImage");
-            btnNuevoArticulo.ImageOptions.SvgImageSize = new Size(18, 18);
-            btnNuevoArticulo.Location = new Point(248, 9);
-            btnNuevoArticulo.Name = "btnNuevoArticulo";
-            btnNuevoArticulo.Size = new Size(123, 30);
-            btnNuevoArticulo.TabIndex = 81;
-            btnNuevoArticulo.Text = "Nuevo Articulo";
-            btnNuevoArticulo.Click += btnNuevoArticulo_Click;
-            // 
             // FormInventoryInputEdit
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(1184, 823);
+            ClientSize = new Size(1184, 819);
             ControlBox = false;
             Controls.Add(panel1);
             Controls.Add(xtraTabControl1);
