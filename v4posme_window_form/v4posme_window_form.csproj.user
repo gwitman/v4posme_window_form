@@ -49,19 +49,52 @@
     <Compile Update="Views\Box\Share\FormShareList.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\CXC\Customer\FormCustomerEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\CXC\Customer\FormCustomerEditCreditLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\CXC\Customer\FormCustomerEditEmail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\CXC\Customer\FormCustomerEditTelefonos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\CXC\Customer\FormCustomerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\CXC\Report\FormCxcReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Inventory\Inputunpost\FormInventoryInputEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Inventory\Inputunpost\FormInventoryInputEditMasInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Inventory\Inputunpost\FormInventoryInputList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\Inventory\Product\FormInventoryItemCantidadImprimir.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\Inventory\Product\FormInventoryItemEditConcepts.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Views\Inventory\Product\FormInventoryItemEdit.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\Inventory\Product\FormInventoryItemEditConcepts.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\Inventory\Product\FormInventoryItemList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Inventory\Report\FormInventoryReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Invoice\Billing\FormInvoiceBillingEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Invoice\Billing\FormInvoiceBillingList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\LoginForm.cs">
@@ -70,8 +103,6 @@
     <Compile Update="Views\PrincipalForm.cs">
       <SubType>Form</SubType>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Update="Views\Sales\Report\FormSalesReport.cs">
       <SubType>Form</SubType>
     </Compile>
