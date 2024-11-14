@@ -14,7 +14,7 @@ class EmployeeModel : IEmployeeModel
                                 && employee.EntityID == entityId);
         data.EmployeeID = find.EmployeeID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public void DeleteAppPosme(int companyId, int branchId, int entityId)
@@ -25,14 +25,14 @@ class EmployeeModel : IEmployeeModel
                                 && employee.BranchID == branchId
                                 && employee.EntityID == entityId);
         find.IsActive = false;
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int InsertAppPosme(TbEmployee data)
     {
         using var context = new DataContext();
         var add = context.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return add.Entity.EmployeeID;
     }
 

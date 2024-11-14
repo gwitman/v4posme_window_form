@@ -524,7 +524,7 @@
             // 
             xtraTabPage2.Controls.Add(layoutControl2);
             xtraTabPage2.Name = "xtraTabPage2";
-            xtraTabPage2.Size = new Size(1182, 185);
+            xtraTabPage2.Size = new Size(1182, 179);
             xtraTabPage2.Text = "Referencias";
             // 
             // layoutControl2
@@ -619,7 +619,7 @@
             xtraTabPage3.Controls.Add(txtDescription);
             xtraTabPage3.Controls.Add(labelControl1);
             xtraTabPage3.Name = "xtraTabPage3";
-            xtraTabPage3.Size = new Size(1182, 185);
+            xtraTabPage3.Size = new Size(1182, 179);
             xtraTabPage3.Text = "Comentarios";
             // 
             // txtDescription
@@ -644,7 +644,7 @@
             tabPageArchivos.Controls.Add(gridControlArchivos);
             tabPageArchivos.Controls.Add(btnAgregarArchivo);
             tabPageArchivos.Name = "tabPageArchivos";
-            tabPageArchivos.Size = new Size(1182, 185);
+            tabPageArchivos.Size = new Size(1182, 179);
             tabPageArchivos.Text = "Archivos";
             // 
             // gridControlArchivos
@@ -983,7 +983,7 @@
             panel1.Controls.Add(stackPanel3);
             panel1.Location = new Point(0, 310);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1184, 297);
+            panel1.Size = new Size(1184, 299);
             panel1.TabIndex = 83;
             // 
             // stackPanel3
@@ -1098,7 +1098,7 @@
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(1184, 819);
+            ClientSize = new Size(1201, 836);
             ControlBox = false;
             Controls.Add(panel1);
             Controls.Add(xtraTabControl1);

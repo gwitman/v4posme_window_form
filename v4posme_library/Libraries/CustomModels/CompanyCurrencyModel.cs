@@ -31,7 +31,7 @@ public class CompanyCurrencyModel : ICompanyCurrencyModel
     {
         using var context = new DataContext();
         var add = context.TbCompanyCurrencies.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return add.Entity.CompanyCurrencyID;
     }
 

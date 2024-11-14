@@ -24,7 +24,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
 
         data.CustomerCreditDocumentID = find.CustomerCreditDocumentID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     
@@ -34,14 +34,14 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
         using var context = new DataContext();
         var find = FindDocuments(customerCreditDocumentId, context).Single();
         find.IsActive = false;
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int InsertAppPosme(TbCustomerCreditDocument data)
     {
         using var context = new DataContext();
         var add = context.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return add.Entity.CustomerCreditDocumentID;
     }
 
@@ -60,7 +60,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                 EntityId = i.EntityID,
                 CustomerCreditLineId = i.CustomerCreditLineID,
                 DocumentNumber = i.DocumentNumber,
-                DateOn = DateOnly.FromDateTime(i.DateOn),
+                DateOn = i.DateOn,
                 Amount = i.Amount,
                 Interes = i.Interes,
                 Term = i.Term,
@@ -136,7 +136,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                 EntityId = g.Key.EntityID,
                 CustomerCreditLineId = g.Key.CustomerCreditLineID,
                 DocumentNumber = g.Key.DocumentNumber,
-                DateOn = DateOnly.FromDateTime(g.Key.DateOn),
+                DateOn = g.Key.DateOn,
                 Amount = g.Key.Amount,
                 Interes = g.Key.Interes,
                 Term = g.Key.Term,
@@ -185,7 +185,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                     EntityId = i.EntityID,
                     CustomerCreditLineId = i.CustomerCreditLineID,
                     DocumentNumber = i.DocumentNumber,
-                    DateOn = DateOnly.FromDateTime(i.DateOn),
+                    DateOn = i.DateOn,
                     Amount = i.Amount,
                     Interes = i.Interes,
                     Term = i.Term,

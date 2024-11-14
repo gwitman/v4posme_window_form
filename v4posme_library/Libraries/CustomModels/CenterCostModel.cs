@@ -9,7 +9,7 @@ public class CenterCostModel : ICenterCostModel
         using var context = new DataContext();
         var find = FindByCompanyIdAndClassId(companyId, classId, context);
         find.IsActive = false;
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public void UpdateAppPosme(int companyId, int classId, TbCenterCost data)
@@ -18,14 +18,14 @@ public class CenterCostModel : ICenterCostModel
         var find = FindByCompanyIdAndClassId(companyId, classId, context);
         data.ClassID = find.ClassID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int InsertAppPosme(TbCenterCost data)
     {
         using var context = new DataContext();
         var add = context.TbCenterCosts.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return add.Entity.ClassID;
     }
 

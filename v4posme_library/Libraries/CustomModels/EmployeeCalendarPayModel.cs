@@ -11,7 +11,7 @@ class EmployeeCalendarPayModel : IEmployeeCalendarPayModel
         if (find is null) return;
         data.CalendarID = find.CalendarID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public void DeleteAppPosme(int calendarId)
@@ -20,14 +20,14 @@ class EmployeeCalendarPayModel : IEmployeeCalendarPayModel
         var find = context.TbEmployeeCalendarPays.Find(calendarId);
         if (find is null) return;
         find.IsActive = false;
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int InsertAppPosme(TbEmployeeCalendarPay data)
     {
         using var context = new DataContext();
         var add = context.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return add.Entity.CalendarID;
     }
 

@@ -1,5 +1,6 @@
 ﻿using v4posme_window.Views;
 using v4posme_window.Views.Box.Report;
+using v4posme_window.Views.Box.Share;
 using v4posme_window.Views.CXC.Customer;
 using v4posme_window.Views.CXC.Report;
 using v4posme_window.Views.Inventory.Inputunpost;
@@ -24,6 +25,7 @@ public static class CoreFormList
         var formSalesReport = new FormSalesReport();
         var formBoxReport = new FormBoxReport();
         var formCxcReport = new FormCxcReport();
+        var formShareList = new FormShareList();
 
         var forms = new Dictionary<string, Form>
         {
@@ -36,6 +38,7 @@ public static class CoreFormList
             { "app_sales_report/index.aspx", formSalesReport },
             { "app_box_report/index.aspx", formBoxReport },
             { "app_cxc_report/index.aspx", formCxcReport },
+            { "app_box_share/index.aspx", formShareList },
         };
         return forms;
     }

@@ -170,7 +170,7 @@ namespace v4posme_window.Views.Inventory.Inputunpost
             }
         }
 
-        private void RefreshData()
+        public void RefreshData()
         {
             ObjGridControl.DataSource = null;
             CoreWebRenderInView.RenderGrid(dataViewData!, "customer", ObjGridControl, true, true);

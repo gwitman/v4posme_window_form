@@ -43,6 +43,12 @@
     <Compile Update="Views\Box\Report\FormBoxReport.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\Box\Share\FormShareEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Box\Share\FormShareList.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\CXC\Report\FormCxcReport.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -41,7 +41,7 @@ public class ComponentCycleModel(DataContext context) : IComponentCycleModel
         }
         data.ComponentCycleID = find.ComponentCycleID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int InsertAppPosme(TbAccountingCycle? data)

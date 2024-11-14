@@ -110,7 +110,7 @@ public class CoreWebAmortization : ICoreWebAmortization
             objCustomerCreditDocument.Interes,
             numCuotas,
             periodPay.Sequence!.Value,
-            objCustomerCreditDocument.DateOn.Value.ToDateTime(TimeOnly.Parse("00:00:00")),
+            objCustomerCreditDocument.DateOn.Date,
             objCustomerCreditLine.TypeAmortization,
             objCatalogItemDiasNoCobrables,
             objCatalogItemDiasFeriados365,

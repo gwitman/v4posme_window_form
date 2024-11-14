@@ -17,7 +17,7 @@ public class TbCustomerCreditDocumentDto
     public int EntityId { get; set; }
     public int CustomerCreditLineId { get; set; }
     public string? DocumentNumber { get; set; }
-    public DateOnly? DateOn { get; set; }
+    public DateTime DateOn { get; set; }
     public decimal? Amount { get; set; }
     public decimal? Interes { get; set; }
     public int Term { get; set; }

@@ -25,7 +25,7 @@ class TransactionMasterDetailCreditModel : ITransactionMasterDetailCreditModel
             context.Entry(iteMasterDetailCredit).CurrentValues.SetValues(data);
         }
 
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int DeleteAppPosme(int transactionMasterDetailId)

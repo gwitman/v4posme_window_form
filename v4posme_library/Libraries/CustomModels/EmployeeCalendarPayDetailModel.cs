@@ -13,7 +13,7 @@ class EmployeeCalendarPayDetailModel : IEmployeeCalendarPayDetailModel
             .Single(detail => detail.CalendarDetailID == calendarDetailId);
         data.CalendarDetailID = find.CalendarDetailID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public void DeleteWhereIdNotIn(int calendarId, List<int> arrayId)
@@ -32,14 +32,14 @@ class EmployeeCalendarPayDetailModel : IEmployeeCalendarPayDetailModel
         var find = context.TbEmployeeCalendarPayDetails
             .Single(detail => detail.CalendarDetailID == calendarDetailId);
         find.IsActive = false;
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int InsertAppPosme(TbEmployeeCalendarPayDetail data)
     {
         using var context = new DataContext();
         var add = context.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return add.Entity.CalendarDetailID;
     }
 

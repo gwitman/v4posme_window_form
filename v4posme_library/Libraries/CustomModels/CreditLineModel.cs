@@ -16,7 +16,7 @@ public class CreditLineModel : ICreditLineModel
     {
         using var context = new DataContext();
         var add = context.TbCreditLines.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return add.Entity.CreditLineID;
     }
 
@@ -26,7 +26,7 @@ public class CreditLineModel : ICreditLineModel
         var find = Find(companyId, creditLineId, context).Single();
         data.CreditLineID = find.CreditLineID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public void DeleteAppPosme(int companyId, int creditLineId)

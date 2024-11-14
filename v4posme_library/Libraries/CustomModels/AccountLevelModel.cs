@@ -11,7 +11,7 @@ public class AccountLevelModel : IAccountLevelModel
         var find = context.TbAccountLevels.Single(account =>
             account.CompanyID == companyId && account.AccountLevelID == accountLevelId);
         find.IsActive = false;
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public void UpdateAppPosme(int companyId, int accountLevelId, TbAccountLevel data)
@@ -21,14 +21,14 @@ public class AccountLevelModel : IAccountLevelModel
             account.CompanyID == companyId && account.AccountLevelID == accountLevelId);
         data.AccountLevelID = find.AccountLevelID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int InsertAppPosme(TbAccountLevel data)
     {
         using var context = new DataContext();
         var insert = context.TbAccountLevels.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return insert.Entity.AccountLevelID;
     }
 

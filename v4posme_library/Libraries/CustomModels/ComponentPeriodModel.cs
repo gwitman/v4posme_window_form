@@ -30,14 +30,14 @@ public class ComponentPeriodModel : IComponentPeriodModel
             .Single();
         data.ComponentPeriodID = find.ComponentPeriodID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int InsertAppPosme(TbAccountingPeriod data)
     {
         using var context = new DataContext();
         var add = context.TbAccountingPeriods.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return add.Entity.ComponentPeriodID;
     }
 

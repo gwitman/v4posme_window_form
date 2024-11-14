@@ -1083,8 +1083,8 @@
     <property name="Location" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="be342ac4-595a-4dc6-8e23-432be5458d32">
       <column name="location" default="NULL" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="Address" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="14f16c52-0ad3-427a-a485-558ffe6029d6">
-      <column name="address" default="NULL" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="Address" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="1500" p1:ValidateRequired="false" p1:Guid="14f16c52-0ad3-427a-a485-558ffe6029d6">
+      <column name="address" default="NULL" not-null="False" length="1500" sql-type="varchar" p1:unicode="False" />
     </property>
     <property name="CurrencyID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="f823159b-7ac7-40a4-85d7-078c3c53cb48">
       <column name="currencyID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
@@ -5526,6 +5526,9 @@
     <property name="Ciudad" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="7b5fe0b1-4f1c-4138-9697-606b69578135">
       <column name="Ciudad" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
     </property>
+    <property name="Telefono" type="String" p1:ValidateMaxLength="255" p1:ValidateRequired="true" p1:Guid="fcce1f83-b521-4270-b093-706a0d945950">
+      <column name="Telefono" not-null="True" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
     <property name="IsActive" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b0eae312-e60e-4f63-8077-fc9e8b22c2ca">
       <column name="isActive" not-null="False" precision="1" scale="0" sql-type="tinyint" p1:unicode="False" />
     </property>
@@ -5623,8 +5626,8 @@
     <property name="ESTADOCIVIL" type="String" p1:ValidateMaxLength="3" p1:ValidateRequired="true" p1:Guid="dac3c4c1-087e-48d7-9c89-e1c858789efb">
       <column name="`ESTADO CIVIL`" not-null="True" length="3" sql-type="varchar" p1:unicode="True" />
     </property>
-    <property name="DIRECCION" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="612f4353-88ff-479a-85be-49d5f5eeddad">
-      <column name="DIRECCION" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="DIRECCION" type="String" p1:nullable="True" p1:ValidateMaxLength="1500" p1:ValidateRequired="false" p1:Guid="612f4353-88ff-479a-85be-49d5f5eeddad">
+      <column name="DIRECCION" not-null="False" length="1500" sql-type="varchar" p1:unicode="False" />
     </property>
     <property name="DEPARTAMENTO" type="String" p1:ValidateMaxLength="2" p1:ValidateRequired="true" p1:Guid="4a5f41da-d8ca-4655-808e-b597e439aa7b">
       <column name="DEPARTAMENTO" not-null="True" length="2" sql-type="varchar" p1:unicode="True" />
@@ -5632,8 +5635,8 @@
     <property name="MUNICIPIO" type="String" p1:ValidateMaxLength="2" p1:ValidateRequired="true" p1:Guid="d3649ed9-b296-4f2e-820f-d6adefea3078">
       <column name="MUNICIPIO" not-null="True" length="2" sql-type="varchar" p1:unicode="True" />
     </property>
-    <property name="DIRECCIONDETRABAJO" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="e4dae2f4-1ee3-490e-8fa7-f5510e359f9d">
-      <column name="`DIRECCION DE TRABAJO`" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="DIRECCIONDETRABAJO" type="String" p1:nullable="True" p1:ValidateMaxLength="1500" p1:ValidateRequired="false" p1:Guid="e4dae2f4-1ee3-490e-8fa7-f5510e359f9d">
+      <column name="`DIRECCION DE TRABAJO`" not-null="False" length="1500" sql-type="varchar" p1:unicode="False" />
     </property>
     <property name="DEPARTAMENTODETRABAJO" type="String" p1:ValidateMaxLength="2" p1:ValidateRequired="true" p1:Guid="89fd02ec-d5c4-456f-92ec-e0b46fdf3738">
       <column name="`DEPARTAMENTO DE TRABAJO`" not-null="True" length="2" sql-type="varchar" p1:unicode="True" />

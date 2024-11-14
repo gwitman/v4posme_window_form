@@ -174,7 +174,7 @@ namespace v4posme_window.Views.CXC.Customer
             }
         }
 
-        private void RefreshData()
+        public void RefreshData()
         {
             CoreWebRenderInView.RenderGrid(_dataViewData!, "customer", ObjGridControl, true,true);
             _gridViewData = (CustomGridView)ObjGridControl.MainView;

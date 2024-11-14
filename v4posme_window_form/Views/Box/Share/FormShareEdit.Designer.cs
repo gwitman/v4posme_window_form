@@ -1,0 +1,1395 @@
+﻿namespace v4posme_window.Views.Box.Share
+{
+    partial class FormShareEdit
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormShareEdit));
+            xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            panelControl3 = new DevExpress.XtraEditors.PanelControl();
+            pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
+            labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            lblExchangeRatePurchase = new DevExpress.XtraEditors.LabelControl();
+            panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            pictureEdit2 = new DevExpress.XtraEditors.PictureEdit();
+            labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            lblExchangeRateSale = new DevExpress.XtraEditors.LabelControl();
+            panelControl5 = new DevExpress.XtraEditors.PanelControl();
+            pictureEdit3 = new DevExpress.XtraEditors.PictureEdit();
+            labelControl6 = new DevExpress.XtraEditors.LabelControl();
+            lblExchangeRate = new DevExpress.XtraEditors.LabelControl();
+            layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
+            stackPanel3 = new DevExpress.Utils.Layout.StackPanel();
+            txtCustomerDescription = new DevExpress.XtraEditors.TextEdit();
+            btnClearCustomer = new DevExpress.XtraEditors.SimpleButton();
+            btnSearchCustomer = new DevExpress.XtraEditors.SimpleButton();
+            txtBalanceStart = new DevExpress.XtraEditors.TextEdit();
+            txtBalanceFinish = new DevExpress.XtraEditors.TextEdit();
+            layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            txtDate = new DevExpress.XtraEditors.DateEdit();
+            txtIsApplied = new DevExpress.XtraEditors.CheckEdit();
+            txtExchangeRate = new DevExpress.XtraEditors.TextEdit();
+            txtStatusID = new DevExpress.XtraEditors.ComboBoxEdit();
+            txtCurrencyID = new DevExpress.XtraEditors.ComboBoxEdit();
+            Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
+            txtReferenceClientName = new DevExpress.XtraEditors.TextEdit();
+            txtReferenceClientIdentifier = new DevExpress.XtraEditors.TextEdit();
+            layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControl4 = new DevExpress.XtraLayout.LayoutControl();
+            txtReference1 = new DevExpress.XtraEditors.TextEdit();
+            txtReference2 = new DevExpress.XtraEditors.TextEdit();
+            layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
+            txtNote = new DevExpress.XtraEditors.MemoEdit();
+            labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            tabPageArchivos = new DevExpress.XtraTab.XtraTabPage();
+            stackPanel4 = new DevExpress.Utils.Layout.StackPanel();
+            btnNewShare = new DevExpress.XtraEditors.SimpleButton();
+            btnDeleteShare = new DevExpress.XtraEditors.SimpleButton();
+            btnVerMovimientos = new DevExpress.XtraEditors.SimpleButton();
+            gridControlTransactionMasterDetail = new DevExpress.XtraGrid.GridControl();
+            bindingSourceDetailDto = new BindingSource(components);
+            gridViewTransactionMasterDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
+            colDetailCustomerCreditDocumentId = new DevExpress.XtraGrid.Columns.GridColumn();
+            colDetailTransactionDetailId = new DevExpress.XtraGrid.Columns.GridColumn();
+            colDetailTransactionDetailDocument = new DevExpress.XtraGrid.Columns.GridColumn();
+            colDetailTransactionDetailFecha = new DevExpress.XtraGrid.Columns.GridColumn();
+            colDetailAmortizationId = new DevExpress.XtraGrid.Columns.GridColumn();
+            colDetailBalanceStart = new DevExpress.XtraGrid.Columns.GridColumn();
+            colDetailBalanceFinish = new DevExpress.XtraGrid.Columns.GridColumn();
+            colDetailBalanceStartShare = new DevExpress.XtraGrid.Columns.GridColumn();
+            colDetailShare = new DevExpress.XtraGrid.Columns.GridColumn();
+            colDetailBalanceFinishShare = new DevExpress.XtraGrid.Columns.GridColumn();
+            sidePanel1 = new DevExpress.XtraEditors.SidePanel();
+            layoutControl7 = new DevExpress.XtraLayout.LayoutControl();
+            txtReceiptAmount = new DevExpress.XtraEditors.TextEdit();
+            txtChangeAmount = new DevExpress.XtraEditors.TextEdit();
+            layoutControlGroup6 = new DevExpress.XtraLayout.LayoutControlGroup();
+            simpleLabelItem4 = new DevExpress.XtraLayout.SimpleLabelItem();
+            layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
+            simpleSeparator2 = new DevExpress.XtraLayout.SimpleSeparator();
+            layoutControl6 = new DevExpress.XtraLayout.LayoutControl();
+            txtTotal = new DevExpress.XtraEditors.TextEdit();
+            layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
+            simpleLabelItem5 = new DevExpress.XtraLayout.SimpleLabelItem();
+            layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            simpleSeparator3 = new DevExpress.XtraLayout.SimpleSeparator();
+            layoutControl5 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
+            simpleLabelItem2 = new DevExpress.XtraLayout.SimpleLabelItem();
+            simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
+            simpleLabelItem3 = new DevExpress.XtraLayout.SimpleLabelItem();
+            simpleLabelItem1 = new DevExpress.XtraLayout.SimpleLabelItem();
+            ((System.ComponentModel.ISupportInitialize)xtraTabControl1).BeginInit();
+            xtraTabControl1.SuspendLayout();
+            xtraTabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)panelControl2).BeginInit();
+            panelControl2.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)panelControl3).BeginInit();
+            panelControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureEdit1.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)panelControl4).BeginInit();
+            panelControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureEdit2.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)panelControl5).BeginInit();
+            panelControl5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureEdit3.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControl2).BeginInit();
+            layoutControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)stackPanel3).BeginInit();
+            stackPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerDescription.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtBalanceStart.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtBalanceFinish.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
+            panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
+            layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtDate.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtDate.Properties.CalendarTimeProperties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtIsApplied.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtExchangeRate.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtStatusID.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtCurrencyID.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
+            xtraTabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControl3).BeginInit();
+            layoutControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtReferenceClientName.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReferenceClientIdentifier.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControl4).BeginInit();
+            layoutControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtReference1.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtReference2.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem12).BeginInit();
+            xtraTabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtNote.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)stackPanel4).BeginInit();
+            stackPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridControlTransactionMasterDetail).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceDetailDto).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewTransactionMasterDetail).BeginInit();
+            sidePanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControl7).BeginInit();
+            layoutControl7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmount.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtChangeAmount.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)simpleLabelItem4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)simpleSeparator2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControl6).BeginInit();
+            layoutControl6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtTotal.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)simpleLabelItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)simpleSeparator3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControl5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)simpleLabelItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)simpleSeparator1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)simpleLabelItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)simpleLabelItem1).BeginInit();
+            SuspendLayout();
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.Appearance.Font = new Font("Tahoma", 10F, FontStyle.Bold);
+            lblTitulo.Appearance.ForeColor = Color.Gray;
+            lblTitulo.Appearance.Options.UseFont = true;
+            lblTitulo.Appearance.Options.UseForeColor = true;
+            lblTitulo.Appearance.Options.UseTextOptions = true;
+            lblTitulo.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            lblTitulo.ImageOptions.Alignment = ContentAlignment.MiddleLeft;
+            lblTitulo.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("lblTitulo.ImageOptions.SvgImage");
+            lblTitulo.Location = new Point(4, 2);
+            // 
+            // progressPanel
+            // 
+            progressPanel.Appearance.BackColor = Color.Transparent;
+            progressPanel.Appearance.Options.UseBackColor = true;
+            // 
+            // xtraTabControl1
+            // 
+            xtraTabControl1.Dock = DockStyle.Top;
+            xtraTabControl1.Location = new Point(0, 98);
+            xtraTabControl1.Name = "xtraTabControl1";
+            xtraTabControl1.SelectedTabPage = xtraTabPage1;
+            xtraTabControl1.Size = new Size(1037, 253);
+            xtraTabControl1.TabIndex = 76;
+            xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPage1, xtraTabPage2, xtraTabPage3, tabPageArchivos });
+            // 
+            // xtraTabPage1
+            // 
+            xtraTabPage1.Controls.Add(panelControl2);
+            xtraTabPage1.Controls.Add(panelControl1);
+            xtraTabPage1.Name = "xtraTabPage1";
+            xtraTabPage1.Size = new Size(1035, 228);
+            xtraTabPage1.Text = "Información";
+            // 
+            // panelControl2
+            // 
+            panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            panelControl2.Controls.Add(flowLayoutPanel1);
+            panelControl2.Controls.Add(layoutControl2);
+            panelControl2.Dock = DockStyle.Fill;
+            panelControl2.Location = new Point(480, 0);
+            panelControl2.Name = "panelControl2";
+            panelControl2.Padding = new Padding(1);
+            panelControl2.Size = new Size(555, 228);
+            panelControl2.TabIndex = 2;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Controls.Add(panelControl3);
+            flowLayoutPanel1.Controls.Add(panelControl4);
+            flowLayoutPanel1.Controls.Add(panelControl5);
+            flowLayoutPanel1.Location = new Point(14, 147);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(526, 70);
+            flowLayoutPanel1.TabIndex = 1;
+            // 
+            // panelControl3
+            // 
+            panelControl3.Controls.Add(pictureEdit1);
+            panelControl3.Controls.Add(labelControl2);
+            panelControl3.Controls.Add(lblExchangeRatePurchase);
+            panelControl3.Location = new Point(3, 3);
+            panelControl3.Name = "panelControl3";
+            panelControl3.Size = new Size(159, 65);
+            panelControl3.TabIndex = 0;
+            // 
+            // pictureEdit1
+            // 
+            pictureEdit1.BackgroundImageLayout = ImageLayout.Center;
+            pictureEdit1.Dock = DockStyle.Left;
+            pictureEdit1.EditValue = resources.GetObject("pictureEdit1.EditValue");
+            pictureEdit1.Location = new Point(2, 2);
+            pictureEdit1.Name = "pictureEdit1";
+            pictureEdit1.Properties.Appearance.ForeColor = Color.White;
+            pictureEdit1.Properties.Appearance.Options.UseForeColor = true;
+            pictureEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            pictureEdit1.Properties.ReadOnly = true;
+            pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+            pictureEdit1.Properties.ShowMenu = false;
+            pictureEdit1.Size = new Size(68, 61);
+            pictureEdit1.TabIndex = 3;
+            // 
+            // labelControl2
+            // 
+            labelControl2.Appearance.Font = new Font("Tahoma", 10F);
+            labelControl2.Appearance.Options.UseFont = true;
+            labelControl2.Location = new Point(76, 31);
+            labelControl2.Name = "labelControl2";
+            labelControl2.Size = new Size(64, 16);
+            labelControl2.TabIndex = 2;
+            labelControl2.Text = "C$ Compra";
+            // 
+            // lblExchangeRatePurchase
+            // 
+            lblExchangeRatePurchase.Appearance.Font = new Font("Tahoma", 10F);
+            lblExchangeRatePurchase.Appearance.Options.UseFont = true;
+            lblExchangeRatePurchase.Location = new Point(76, 5);
+            lblExchangeRatePurchase.Name = "lblExchangeRatePurchase";
+            lblExchangeRatePurchase.Size = new Size(18, 16);
+            lblExchangeRatePurchase.TabIndex = 1;
+            lblExchangeRatePurchase.Text = "0.0";
+            // 
+            // panelControl4
+            // 
+            panelControl4.Controls.Add(pictureEdit2);
+            panelControl4.Controls.Add(labelControl4);
+            panelControl4.Controls.Add(lblExchangeRateSale);
+            panelControl4.Location = new Point(168, 3);
+            panelControl4.Name = "panelControl4";
+            panelControl4.Size = new Size(166, 65);
+            panelControl4.TabIndex = 1;
+            // 
+            // pictureEdit2
+            // 
+            pictureEdit2.Dock = DockStyle.Left;
+            pictureEdit2.EditValue = resources.GetObject("pictureEdit2.EditValue");
+            pictureEdit2.Location = new Point(2, 2);
+            pictureEdit2.Name = "pictureEdit2";
+            pictureEdit2.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            pictureEdit2.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+            pictureEdit2.Size = new Size(64, 61);
+            pictureEdit2.TabIndex = 3;
+            // 
+            // labelControl4
+            // 
+            labelControl4.Appearance.Font = new Font("Tahoma", 10F);
+            labelControl4.Appearance.Options.UseFont = true;
+            labelControl4.Location = new Point(72, 31);
+            labelControl4.Name = "labelControl4";
+            labelControl4.Size = new Size(52, 16);
+            labelControl4.TabIndex = 2;
+            labelControl4.Text = "C$ Venta";
+            // 
+            // lblExchangeRateSale
+            // 
+            lblExchangeRateSale.Appearance.Font = new Font("Tahoma", 10F);
+            lblExchangeRateSale.Appearance.Options.UseFont = true;
+            lblExchangeRateSale.Location = new Point(72, 5);
+            lblExchangeRateSale.Name = "lblExchangeRateSale";
+            lblExchangeRateSale.Size = new Size(18, 16);
+            lblExchangeRateSale.TabIndex = 1;
+            lblExchangeRateSale.Text = "0.0";
+            // 
+            // panelControl5
+            // 
+            panelControl5.Controls.Add(pictureEdit3);
+            panelControl5.Controls.Add(labelControl6);
+            panelControl5.Controls.Add(lblExchangeRate);
+            panelControl5.Location = new Point(340, 3);
+            panelControl5.Name = "panelControl5";
+            panelControl5.Size = new Size(178, 65);
+            panelControl5.TabIndex = 2;
+            // 
+            // pictureEdit3
+            // 
+            pictureEdit3.Dock = DockStyle.Left;
+            pictureEdit3.EditValue = resources.GetObject("pictureEdit3.EditValue");
+            pictureEdit3.Location = new Point(2, 2);
+            pictureEdit3.Name = "pictureEdit3";
+            pictureEdit3.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            pictureEdit3.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+            pictureEdit3.Size = new Size(68, 61);
+            pictureEdit3.TabIndex = 3;
+            // 
+            // labelControl6
+            // 
+            labelControl6.Appearance.Font = new Font("Tahoma", 10F);
+            labelControl6.Appearance.Options.UseFont = true;
+            labelControl6.Location = new Point(76, 31);
+            labelControl6.Name = "labelControl6";
+            labelControl6.Size = new Size(15, 16);
+            labelControl6.TabIndex = 2;
+            labelControl6.Text = "C$";
+            // 
+            // lblExchangeRate
+            // 
+            lblExchangeRate.Appearance.Font = new Font("Tahoma", 10F);
+            lblExchangeRate.Appearance.Options.UseFont = true;
+            lblExchangeRate.Location = new Point(76, 4);
+            lblExchangeRate.Name = "lblExchangeRate";
+            lblExchangeRate.Size = new Size(18, 16);
+            lblExchangeRate.TabIndex = 1;
+            lblExchangeRate.Text = "0.0";
+            // 
+            // layoutControl2
+            // 
+            layoutControl2.Controls.Add(stackPanel3);
+            layoutControl2.Controls.Add(txtBalanceStart);
+            layoutControl2.Controls.Add(txtBalanceFinish);
+            layoutControl2.Location = new Point(1, 1);
+            layoutControl2.Name = "layoutControl2";
+            layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(1268, 14, 650, 400);
+            layoutControl2.Root = layoutControlGroup1;
+            layoutControl2.Size = new Size(553, 111);
+            layoutControl2.TabIndex = 0;
+            layoutControl2.Text = "layoutControl2";
+            // 
+            // stackPanel3
+            // 
+            stackPanel3.AutoScroll = true;
+            stackPanel3.Controls.Add(txtCustomerDescription);
+            stackPanel3.Controls.Add(btnClearCustomer);
+            stackPanel3.Controls.Add(btnSearchCustomer);
+            stackPanel3.Location = new Point(72, 12);
+            stackPanel3.Name = "stackPanel3";
+            stackPanel3.Padding = new Padding(1);
+            stackPanel3.Size = new Size(469, 39);
+            stackPanel3.TabIndex = 4;
+            stackPanel3.UseSkinIndents = true;
+            // 
+            // txtCustomerDescription
+            // 
+            txtCustomerDescription.Location = new Point(3, 9);
+            txtCustomerDescription.Name = "txtCustomerDescription";
+            txtCustomerDescription.Properties.ReadOnly = true;
+            txtCustomerDescription.Size = new Size(328, 20);
+            txtCustomerDescription.TabIndex = 0;
+            // 
+            // btnClearCustomer
+            // 
+            btnClearCustomer.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
+            btnClearCustomer.Appearance.ForeColor = Color.White;
+            btnClearCustomer.Appearance.Options.UseBackColor = true;
+            btnClearCustomer.Appearance.Options.UseForeColor = true;
+            btnClearCustomer.AutoSize = true;
+            btnClearCustomer.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            btnClearCustomer.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnClearCustomer.ImageOptions.SvgImage");
+            btnClearCustomer.ImageOptions.SvgImageSize = new Size(16, 16);
+            btnClearCustomer.Location = new Point(333, 8);
+            btnClearCustomer.Margin = new Padding(0);
+            btnClearCustomer.Name = "btnClearCustomer";
+            btnClearCustomer.Size = new Size(51, 22);
+            btnClearCustomer.TabIndex = 1;
+            btnClearCustomer.Text = "Clear";
+            // 
+            // btnSearchCustomer
+            // 
+            btnSearchCustomer.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Primary;
+            btnSearchCustomer.Appearance.ForeColor = Color.White;
+            btnSearchCustomer.Appearance.Options.UseBackColor = true;
+            btnSearchCustomer.Appearance.Options.UseForeColor = true;
+            btnSearchCustomer.AutoSize = true;
+            btnSearchCustomer.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            btnSearchCustomer.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnSearchCustomer.ImageOptions.SvgImage");
+            btnSearchCustomer.ImageOptions.SvgImageSize = new Size(16, 16);
+            btnSearchCustomer.Location = new Point(384, 8);
+            btnSearchCustomer.Margin = new Padding(0);
+            btnSearchCustomer.Name = "btnSearchCustomer";
+            btnSearchCustomer.Size = new Size(58, 22);
+            btnSearchCustomer.TabIndex = 2;
+            btnSearchCustomer.Text = "Buscar";
+            btnSearchCustomer.Click += btnSearchCustomer_Click;
+            // 
+            // txtBalanceStart
+            // 
+            txtBalanceStart.Location = new Point(72, 55);
+            txtBalanceStart.Name = "txtBalanceStart";
+            txtBalanceStart.Properties.DisplayFormat.FormatString = "N2";
+            txtBalanceStart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            txtBalanceStart.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            txtBalanceStart.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
+            txtBalanceStart.Properties.MaskSettings.Set("mask", "n");
+            txtBalanceStart.Properties.ReadOnly = true;
+            txtBalanceStart.Size = new Size(469, 20);
+            txtBalanceStart.StyleController = layoutControl2;
+            txtBalanceStart.TabIndex = 5;
+            // 
+            // txtBalanceFinish
+            // 
+            txtBalanceFinish.Location = new Point(72, 79);
+            txtBalanceFinish.Name = "txtBalanceFinish";
+            txtBalanceFinish.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            txtBalanceFinish.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
+            txtBalanceFinish.Properties.MaskSettings.Set("mask", "n");
+            txtBalanceFinish.Properties.ReadOnly = true;
+            txtBalanceFinish.Size = new Size(469, 20);
+            txtBalanceFinish.StyleController = layoutControl2;
+            txtBalanceFinish.TabIndex = 6;
+            // 
+            // layoutControlGroup1
+            // 
+            layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup1.GroupBordersVisible = false;
+            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem6, layoutControlItem7, layoutControlItem8 });
+            layoutControlGroup1.Name = "Root";
+            layoutControlGroup1.Size = new Size(553, 111);
+            layoutControlGroup1.TextVisible = false;
+            // 
+            // layoutControlItem6
+            // 
+            layoutControlItem6.AppearanceItemCaption.Options.UseTextOptions = true;
+            layoutControlItem6.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            layoutControlItem6.Control = stackPanel3;
+            layoutControlItem6.Location = new Point(0, 0);
+            layoutControlItem6.Name = "layoutControlItem6";
+            layoutControlItem6.Size = new Size(533, 43);
+            layoutControlItem6.Text = "Cliente";
+            layoutControlItem6.TextSize = new Size(56, 13);
+            // 
+            // layoutControlItem7
+            // 
+            layoutControlItem7.AppearanceItemCaption.Options.UseTextOptions = true;
+            layoutControlItem7.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            layoutControlItem7.Control = txtBalanceStart;
+            layoutControlItem7.Location = new Point(0, 43);
+            layoutControlItem7.Name = "layoutControlItem7";
+            layoutControlItem7.Size = new Size(533, 24);
+            layoutControlItem7.Text = "Saldo Inicial";
+            layoutControlItem7.TextSize = new Size(56, 13);
+            // 
+            // layoutControlItem8
+            // 
+            layoutControlItem8.AppearanceItemCaption.Options.UseTextOptions = true;
+            layoutControlItem8.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            layoutControlItem8.Control = txtBalanceFinish;
+            layoutControlItem8.Location = new Point(0, 67);
+            layoutControlItem8.Name = "layoutControlItem8";
+            layoutControlItem8.Size = new Size(533, 24);
+            layoutControlItem8.Text = "Saldo Final";
+            layoutControlItem8.TextSize = new Size(56, 13);
+            // 
+            // panelControl1
+            // 
+            panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            panelControl1.Controls.Add(layoutControl1);
+            panelControl1.Dock = DockStyle.Left;
+            panelControl1.Location = new Point(0, 0);
+            panelControl1.Name = "panelControl1";
+            panelControl1.Padding = new Padding(1);
+            panelControl1.Size = new Size(480, 228);
+            panelControl1.TabIndex = 1;
+            // 
+            // layoutControl1
+            // 
+            layoutControl1.Controls.Add(txtDate);
+            layoutControl1.Controls.Add(txtIsApplied);
+            layoutControl1.Controls.Add(txtExchangeRate);
+            layoutControl1.Controls.Add(txtStatusID);
+            layoutControl1.Controls.Add(txtCurrencyID);
+            layoutControl1.Dock = DockStyle.Fill;
+            layoutControl1.Location = new Point(1, 1);
+            layoutControl1.Name = "layoutControl1";
+            layoutControl1.Root = Root;
+            layoutControl1.Size = new Size(478, 226);
+            layoutControl1.TabIndex = 0;
+            layoutControl1.Text = "layoutControl1";
+            // 
+            // txtDate
+            // 
+            txtDate.EditValue = null;
+            txtDate.Location = new Point(56, 12);
+            txtDate.Name = "txtDate";
+            txtDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtDate.Size = new Size(410, 20);
+            txtDate.StyleController = layoutControl1;
+            txtDate.TabIndex = 4;
+            // 
+            // txtIsApplied
+            // 
+            txtIsApplied.Enabled = false;
+            txtIsApplied.Location = new Point(56, 36);
+            txtIsApplied.Name = "txtIsApplied";
+            txtIsApplied.Properties.Caption = "";
+            txtIsApplied.Size = new Size(410, 19);
+            txtIsApplied.StyleController = layoutControl1;
+            txtIsApplied.TabIndex = 5;
+            // 
+            // txtExchangeRate
+            // 
+            txtExchangeRate.Location = new Point(56, 59);
+            txtExchangeRate.Name = "txtExchangeRate";
+            txtExchangeRate.Properties.ReadOnly = true;
+            txtExchangeRate.Size = new Size(410, 20);
+            txtExchangeRate.StyleController = layoutControl1;
+            txtExchangeRate.TabIndex = 6;
+            // 
+            // txtStatusID
+            // 
+            txtStatusID.Location = new Point(56, 83);
+            txtStatusID.Name = "txtStatusID";
+            txtStatusID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtStatusID.Size = new Size(410, 20);
+            txtStatusID.StyleController = layoutControl1;
+            txtStatusID.TabIndex = 7;
+            // 
+            // txtCurrencyID
+            // 
+            txtCurrencyID.Location = new Point(56, 107);
+            txtCurrencyID.Name = "txtCurrencyID";
+            txtCurrencyID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            txtCurrencyID.Size = new Size(410, 20);
+            txtCurrencyID.StyleController = layoutControl1;
+            txtCurrencyID.TabIndex = 8;
+            // 
+            // Root
+            // 
+            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            Root.GroupBordersVisible = false;
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem5 });
+            Root.Name = "Root";
+            Root.Size = new Size(478, 226);
+            Root.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            layoutControlItem1.AppearanceItemCaption.Options.UseTextOptions = true;
+            layoutControlItem1.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            layoutControlItem1.Control = txtDate;
+            layoutControlItem1.Location = new Point(0, 0);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new Size(458, 24);
+            layoutControlItem1.Text = "Fecha";
+            layoutControlItem1.TextSize = new Size(40, 13);
+            // 
+            // layoutControlItem2
+            // 
+            layoutControlItem2.AppearanceItemCaption.Options.UseTextOptions = true;
+            layoutControlItem2.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            layoutControlItem2.Control = txtIsApplied;
+            layoutControlItem2.Location = new Point(0, 24);
+            layoutControlItem2.Name = "layoutControlItem2";
+            layoutControlItem2.Size = new Size(458, 23);
+            layoutControlItem2.Text = "Aplicado";
+            layoutControlItem2.TextSize = new Size(40, 13);
+            // 
+            // layoutControlItem3
+            // 
+            layoutControlItem3.AppearanceItemCaption.Options.UseTextOptions = true;
+            layoutControlItem3.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            layoutControlItem3.Control = txtExchangeRate;
+            layoutControlItem3.Location = new Point(0, 47);
+            layoutControlItem3.Name = "layoutControlItem3";
+            layoutControlItem3.Size = new Size(458, 24);
+            layoutControlItem3.Text = "Cambio";
+            layoutControlItem3.TextSize = new Size(40, 13);
+            // 
+            // layoutControlItem4
+            // 
+            layoutControlItem4.AppearanceItemCaption.Options.UseTextOptions = true;
+            layoutControlItem4.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            layoutControlItem4.Control = txtStatusID;
+            layoutControlItem4.Location = new Point(0, 71);
+            layoutControlItem4.Name = "layoutControlItem4";
+            layoutControlItem4.Size = new Size(458, 24);
+            layoutControlItem4.Text = "Estado";
+            layoutControlItem4.TextSize = new Size(40, 13);
+            // 
+            // layoutControlItem5
+            // 
+            layoutControlItem5.AppearanceItemCaption.Options.UseTextOptions = true;
+            layoutControlItem5.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            layoutControlItem5.Control = txtCurrencyID;
+            layoutControlItem5.Location = new Point(0, 95);
+            layoutControlItem5.Name = "layoutControlItem5";
+            layoutControlItem5.Size = new Size(458, 111);
+            layoutControlItem5.Text = "Moneda";
+            layoutControlItem5.TextSize = new Size(40, 13);
+            // 
+            // xtraTabPage2
+            // 
+            xtraTabPage2.Controls.Add(layoutControl3);
+            xtraTabPage2.Controls.Add(layoutControl4);
+            xtraTabPage2.Name = "xtraTabPage2";
+            xtraTabPage2.Size = new Size(1035, 228);
+            xtraTabPage2.Text = "Referencias";
+            // 
+            // layoutControl3
+            // 
+            layoutControl3.Controls.Add(txtReferenceClientName);
+            layoutControl3.Controls.Add(txtReferenceClientIdentifier);
+            layoutControl3.Location = new Point(11, 7);
+            layoutControl3.Name = "layoutControl3";
+            layoutControl3.Root = layoutControlGroup2;
+            layoutControl3.Size = new Size(500, 162);
+            layoutControl3.TabIndex = 0;
+            layoutControl3.Text = "layoutControl3";
+            // 
+            // txtReferenceClientName
+            // 
+            txtReferenceClientName.Location = new Point(93, 12);
+            txtReferenceClientName.Name = "txtReferenceClientName";
+            txtReferenceClientName.Size = new Size(395, 20);
+            txtReferenceClientName.StyleController = layoutControl3;
+            txtReferenceClientName.TabIndex = 4;
+            // 
+            // txtReferenceClientIdentifier
+            // 
+            txtReferenceClientIdentifier.Location = new Point(93, 46);
+            txtReferenceClientIdentifier.Name = "txtReferenceClientIdentifier";
+            txtReferenceClientIdentifier.Size = new Size(395, 20);
+            txtReferenceClientIdentifier.StyleController = layoutControl3;
+            txtReferenceClientIdentifier.TabIndex = 5;
+            // 
+            // layoutControlGroup2
+            // 
+            layoutControlGroup2.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup2.GroupBordersVisible = false;
+            layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem9, layoutControlItem10 });
+            layoutControlGroup2.Name = "layoutControlGroup2";
+            layoutControlGroup2.Size = new Size(500, 162);
+            layoutControlGroup2.TextVisible = false;
+            // 
+            // layoutControlItem9
+            // 
+            layoutControlItem9.Control = txtReferenceClientName;
+            layoutControlItem9.Location = new Point(0, 0);
+            layoutControlItem9.Name = "layoutControlItem9";
+            layoutControlItem9.Size = new Size(480, 34);
+            layoutControlItem9.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 10);
+            layoutControlItem9.Text = "Persona Ref.";
+            layoutControlItem9.TextSize = new Size(77, 13);
+            // 
+            // layoutControlItem10
+            // 
+            layoutControlItem10.Control = txtReferenceClientIdentifier;
+            layoutControlItem10.Location = new Point(0, 34);
+            layoutControlItem10.Name = "layoutControlItem10";
+            layoutControlItem10.Size = new Size(480, 108);
+            layoutControlItem10.Text = "ID Persona Ref.";
+            layoutControlItem10.TextSize = new Size(77, 13);
+            // 
+            // layoutControl4
+            // 
+            layoutControl4.Controls.Add(txtReference1);
+            layoutControl4.Controls.Add(txtReference2);
+            layoutControl4.Location = new Point(524, 7);
+            layoutControl4.Name = "layoutControl4";
+            layoutControl4.Root = layoutControlGroup3;
+            layoutControl4.Size = new Size(500, 165);
+            layoutControl4.TabIndex = 0;
+            layoutControl4.Text = "layoutControl4";
+            // 
+            // txtReference1
+            // 
+            txtReference1.Location = new Point(77, 12);
+            txtReference1.Name = "txtReference1";
+            txtReference1.Size = new Size(411, 20);
+            txtReference1.StyleController = layoutControl4;
+            txtReference1.TabIndex = 4;
+            // 
+            // txtReference2
+            // 
+            txtReference2.Location = new Point(77, 46);
+            txtReference2.Name = "txtReference2";
+            txtReference2.Size = new Size(411, 20);
+            txtReference2.StyleController = layoutControl4;
+            txtReference2.TabIndex = 5;
+            // 
+            // layoutControlGroup3
+            // 
+            layoutControlGroup3.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup3.GroupBordersVisible = false;
+            layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem11, layoutControlItem12 });
+            layoutControlGroup3.Name = "layoutControlGroup3";
+            layoutControlGroup3.Size = new Size(500, 165);
+            layoutControlGroup3.TextVisible = false;
+            // 
+            // layoutControlItem11
+            // 
+            layoutControlItem11.Control = txtReference1;
+            layoutControlItem11.Location = new Point(0, 0);
+            layoutControlItem11.Name = "layoutControlItem11";
+            layoutControlItem11.Size = new Size(480, 34);
+            layoutControlItem11.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 10);
+            layoutControlItem11.Text = "Referencia 1";
+            layoutControlItem11.TextSize = new Size(61, 13);
+            // 
+            // layoutControlItem12
+            // 
+            layoutControlItem12.Control = txtReference2;
+            layoutControlItem12.Location = new Point(0, 34);
+            layoutControlItem12.Name = "layoutControlItem12";
+            layoutControlItem12.Size = new Size(480, 111);
+            layoutControlItem12.Text = "Referencia 2";
+            layoutControlItem12.TextSize = new Size(61, 13);
+            // 
+            // xtraTabPage3
+            // 
+            xtraTabPage3.Controls.Add(txtNote);
+            xtraTabPage3.Controls.Add(labelControl1);
+            xtraTabPage3.Name = "xtraTabPage3";
+            xtraTabPage3.Size = new Size(1035, 228);
+            xtraTabPage3.Text = "Comentarios";
+            // 
+            // txtNote
+            // 
+            txtNote.Location = new Point(102, 6);
+            txtNote.Name = "txtNote";
+            txtNote.Size = new Size(408, 165);
+            txtNote.TabIndex = 1;
+            // 
+            // labelControl1
+            // 
+            labelControl1.Appearance.Font = new Font("Tahoma", 9F);
+            labelControl1.Appearance.Options.UseFont = true;
+            labelControl1.Location = new Point(35, 13);
+            labelControl1.Name = "labelControl1";
+            labelControl1.Size = new Size(61, 14);
+            labelControl1.TabIndex = 0;
+            labelControl1.Text = "Descripcion";
+            // 
+            // tabPageArchivos
+            // 
+            tabPageArchivos.Name = "tabPageArchivos";
+            tabPageArchivos.Size = new Size(1035, 228);
+            tabPageArchivos.Text = "Archivos";
+            // 
+            // stackPanel4
+            // 
+            stackPanel4.Controls.Add(btnNewShare);
+            stackPanel4.Controls.Add(btnDeleteShare);
+            stackPanel4.Controls.Add(btnVerMovimientos);
+            stackPanel4.Dock = DockStyle.Top;
+            stackPanel4.Location = new Point(0, 351);
+            stackPanel4.Name = "stackPanel4";
+            stackPanel4.Padding = new Padding(1);
+            stackPanel4.Size = new Size(1037, 52);
+            stackPanel4.TabIndex = 77;
+            stackPanel4.UseSkinIndents = true;
+            // 
+            // btnNewShare
+            // 
+            btnNewShare.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Question;
+            btnNewShare.Appearance.ForeColor = Color.White;
+            btnNewShare.Appearance.Options.UseBackColor = true;
+            btnNewShare.Appearance.Options.UseForeColor = true;
+            btnNewShare.AutoSize = true;
+            btnNewShare.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            btnNewShare.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnNewShare.ImageOptions.SvgImage");
+            btnNewShare.ImageOptions.SvgImageSize = new Size(18, 18);
+            btnNewShare.Location = new Point(3, 15);
+            btnNewShare.Name = "btnNewShare";
+            btnNewShare.Size = new Size(67, 22);
+            btnNewShare.TabIndex = 2;
+            btnNewShare.Text = "Agregar";
+            btnNewShare.Click += btnNewShare_Click;
+            // 
+            // btnDeleteShare
+            // 
+            btnDeleteShare.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
+            btnDeleteShare.Appearance.ForeColor = Color.White;
+            btnDeleteShare.Appearance.Options.UseBackColor = true;
+            btnDeleteShare.Appearance.Options.UseForeColor = true;
+            btnDeleteShare.AutoSize = true;
+            btnDeleteShare.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            btnDeleteShare.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnDeleteShare.ImageOptions.SvgImage");
+            btnDeleteShare.ImageOptions.SvgImageSize = new Size(18, 18);
+            btnDeleteShare.Location = new Point(74, 15);
+            btnDeleteShare.Name = "btnDeleteShare";
+            btnDeleteShare.Size = new Size(64, 22);
+            btnDeleteShare.TabIndex = 1;
+            btnDeleteShare.Text = "Eliminar";
+            // 
+            // btnVerMovimientos
+            // 
+            btnVerMovimientos.Appearance.BackColor = Color.Teal;
+            btnVerMovimientos.Appearance.ForeColor = Color.White;
+            btnVerMovimientos.Appearance.Options.UseBackColor = true;
+            btnVerMovimientos.Appearance.Options.UseForeColor = true;
+            btnVerMovimientos.AutoSize = true;
+            btnVerMovimientos.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            btnVerMovimientos.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnVerMovimientos.ImageOptions.SvgImage");
+            btnVerMovimientos.ImageOptions.SvgImageSize = new Size(18, 18);
+            btnVerMovimientos.Location = new Point(142, 15);
+            btnVerMovimientos.Name = "btnVerMovimientos";
+            btnVerMovimientos.Size = new Size(106, 22);
+            btnVerMovimientos.TabIndex = 0;
+            btnVerMovimientos.Text = "Ver Movimientos";
+            // 
+            // gridControlTransactionMasterDetail
+            // 
+            gridControlTransactionMasterDetail.DataSource = bindingSourceDetailDto;
+            gridControlTransactionMasterDetail.Dock = DockStyle.Top;
+            gridControlTransactionMasterDetail.Location = new Point(0, 403);
+            gridControlTransactionMasterDetail.MainView = gridViewTransactionMasterDetail;
+            gridControlTransactionMasterDetail.Name = "gridControlTransactionMasterDetail";
+            gridControlTransactionMasterDetail.Size = new Size(1037, 224);
+            gridControlTransactionMasterDetail.TabIndex = 78;
+            gridControlTransactionMasterDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewTransactionMasterDetail });
+            // 
+            // bindingSourceDetailDto
+            // 
+            bindingSourceDetailDto.DataSource = typeof(Dto.FormShareEditDetailDTO);
+            // 
+            // gridViewTransactionMasterDetail
+            // 
+            gridViewTransactionMasterDetail.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colDetailCustomerCreditDocumentId, colDetailTransactionDetailId, colDetailTransactionDetailDocument, colDetailTransactionDetailFecha, colDetailAmortizationId, colDetailBalanceStart, colDetailBalanceFinish, colDetailBalanceStartShare, colDetailShare, colDetailBalanceFinishShare });
+            gridViewTransactionMasterDetail.GridControl = gridControlTransactionMasterDetail;
+            gridViewTransactionMasterDetail.Name = "gridViewTransactionMasterDetail";
+            gridViewTransactionMasterDetail.OptionsView.ShowGroupPanel = false;
+            // 
+            // colDetailCustomerCreditDocumentId
+            // 
+            colDetailCustomerCreditDocumentId.FieldName = "DetailCustomerCreditDocumentId";
+            colDetailCustomerCreditDocumentId.Name = "colDetailCustomerCreditDocumentId";
+            // 
+            // colDetailTransactionDetailId
+            // 
+            colDetailTransactionDetailId.FieldName = "DetailTransactionDetailId";
+            colDetailTransactionDetailId.Name = "colDetailTransactionDetailId";
+            // 
+            // colDetailTransactionDetailDocument
+            // 
+            colDetailTransactionDetailDocument.Caption = "Documento";
+            colDetailTransactionDetailDocument.FieldName = "DetailTransactionDetailDocument";
+            colDetailTransactionDetailDocument.Name = "colDetailTransactionDetailDocument";
+            colDetailTransactionDetailDocument.OptionsColumn.ReadOnly = true;
+            colDetailTransactionDetailDocument.Visible = true;
+            colDetailTransactionDetailDocument.VisibleIndex = 0;
+            // 
+            // colDetailTransactionDetailFecha
+            // 
+            colDetailTransactionDetailFecha.FieldName = "DetailTransactionDetailFecha";
+            colDetailTransactionDetailFecha.Name = "colDetailTransactionDetailFecha";
+            // 
+            // colDetailAmortizationId
+            // 
+            colDetailAmortizationId.FieldName = "DetailAmortizationId";
+            colDetailAmortizationId.Name = "colDetailAmortizationId";
+            // 
+            // colDetailBalanceStart
+            // 
+            colDetailBalanceStart.FieldName = "DetailBalanceStart";
+            colDetailBalanceStart.Name = "colDetailBalanceStart";
+            // 
+            // colDetailBalanceFinish
+            // 
+            colDetailBalanceFinish.FieldName = "DetailBalanceFinish";
+            colDetailBalanceFinish.Name = "colDetailBalanceFinish";
+            // 
+            // colDetailBalanceStartShare
+            // 
+            colDetailBalanceStartShare.Caption = "Saldo Inicial";
+            colDetailBalanceStartShare.FieldName = "DetailBalanceStartShare";
+            colDetailBalanceStartShare.Name = "colDetailBalanceStartShare";
+            colDetailBalanceStartShare.OptionsColumn.ReadOnly = true;
+            colDetailBalanceStartShare.Visible = true;
+            colDetailBalanceStartShare.VisibleIndex = 2;
+            // 
+            // colDetailShare
+            // 
+            colDetailShare.Caption = "Abonar";
+            colDetailShare.FieldName = "DetailShare";
+            colDetailShare.Name = "colDetailShare";
+            colDetailShare.Visible = true;
+            colDetailShare.VisibleIndex = 1;
+            // 
+            // colDetailBalanceFinishShare
+            // 
+            colDetailBalanceFinishShare.Caption = "Saldo Final";
+            colDetailBalanceFinishShare.FieldName = "DetailBalanceFinishShare";
+            colDetailBalanceFinishShare.Name = "colDetailBalanceFinishShare";
+            colDetailBalanceFinishShare.OptionsColumn.ReadOnly = true;
+            colDetailBalanceFinishShare.Visible = true;
+            colDetailBalanceFinishShare.VisibleIndex = 3;
+            // 
+            // sidePanel1
+            // 
+            sidePanel1.Controls.Add(layoutControl7);
+            sidePanel1.Controls.Add(layoutControl6);
+            sidePanel1.Controls.Add(layoutControl5);
+            sidePanel1.Dock = DockStyle.Top;
+            sidePanel1.Location = new Point(0, 627);
+            sidePanel1.Name = "sidePanel1";
+            sidePanel1.Size = new Size(1037, 157);
+            sidePanel1.TabIndex = 79;
+            sidePanel1.Text = "sidePanel1";
+            // 
+            // layoutControl7
+            // 
+            layoutControl7.Controls.Add(txtReceiptAmount);
+            layoutControl7.Controls.Add(txtChangeAmount);
+            layoutControl7.Dock = DockStyle.Fill;
+            layoutControl7.Location = new Point(350, 0);
+            layoutControl7.Name = "layoutControl7";
+            layoutControl7.Root = layoutControlGroup6;
+            layoutControl7.Size = new Size(323, 156);
+            layoutControl7.TabIndex = 4;
+            layoutControl7.Text = "layoutControl7";
+            // 
+            // txtReceiptAmount
+            // 
+            txtReceiptAmount.Location = new Point(53, 36);
+            txtReceiptAmount.Name = "txtReceiptAmount";
+            txtReceiptAmount.Size = new Size(258, 20);
+            txtReceiptAmount.StyleController = layoutControl7;
+            txtReceiptAmount.TabIndex = 0;
+            // 
+            // txtChangeAmount
+            // 
+            txtChangeAmount.Location = new Point(53, 60);
+            txtChangeAmount.Name = "txtChangeAmount";
+            txtChangeAmount.Properties.ReadOnly = true;
+            txtChangeAmount.Size = new Size(258, 20);
+            txtChangeAmount.StyleController = layoutControl7;
+            txtChangeAmount.TabIndex = 2;
+            // 
+            // layoutControlGroup6
+            // 
+            layoutControlGroup6.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup6.GroupBordersVisible = false;
+            layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { simpleLabelItem4, layoutControlItem13, layoutControlItem14, simpleSeparator2 });
+            layoutControlGroup6.Name = "layoutControlGroup6";
+            layoutControlGroup6.Size = new Size(323, 156);
+            layoutControlGroup6.TextVisible = false;
+            // 
+            // simpleLabelItem4
+            // 
+            simpleLabelItem4.AllowHotTrack = false;
+            simpleLabelItem4.AppearanceItemCaption.Font = new Font("Tahoma", 12F);
+            simpleLabelItem4.AppearanceItemCaption.Options.UseFont = true;
+            simpleLabelItem4.Location = new Point(0, 0);
+            simpleLabelItem4.Name = "simpleLabelItem4";
+            simpleLabelItem4.Size = new Size(303, 23);
+            simpleLabelItem4.Text = "Pago";
+            simpleLabelItem4.TextSize = new Size(37, 19);
+            // 
+            // layoutControlItem13
+            // 
+            layoutControlItem13.Control = txtReceiptAmount;
+            layoutControlItem13.Location = new Point(0, 24);
+            layoutControlItem13.Name = "layoutControlItem13";
+            layoutControlItem13.Size = new Size(303, 24);
+            layoutControlItem13.Text = "Ingreso";
+            layoutControlItem13.TextSize = new Size(37, 13);
+            // 
+            // layoutControlItem14
+            // 
+            layoutControlItem14.Control = txtChangeAmount;
+            layoutControlItem14.Location = new Point(0, 48);
+            layoutControlItem14.Name = "layoutControlItem14";
+            layoutControlItem14.Size = new Size(303, 88);
+            layoutControlItem14.Text = "Cambio";
+            layoutControlItem14.TextSize = new Size(37, 13);
+            // 
+            // simpleSeparator2
+            // 
+            simpleSeparator2.AllowHotTrack = false;
+            simpleSeparator2.Location = new Point(0, 23);
+            simpleSeparator2.Name = "simpleSeparator2";
+            simpleSeparator2.Size = new Size(303, 1);
+            // 
+            // layoutControl6
+            // 
+            layoutControl6.Controls.Add(txtTotal);
+            layoutControl6.Dock = DockStyle.Right;
+            layoutControl6.Location = new Point(673, 0);
+            layoutControl6.Name = "layoutControl6";
+            layoutControl6.Root = layoutControlGroup5;
+            layoutControl6.Size = new Size(364, 156);
+            layoutControl6.TabIndex = 1;
+            layoutControl6.Text = "layoutControl6";
+            // 
+            // txtTotal
+            // 
+            txtTotal.Location = new Point(81, 36);
+            txtTotal.Name = "txtTotal";
+            txtTotal.Properties.ReadOnly = true;
+            txtTotal.Size = new Size(271, 20);
+            txtTotal.StyleController = layoutControl6;
+            txtTotal.TabIndex = 0;
+            // 
+            // layoutControlGroup5
+            // 
+            layoutControlGroup5.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup5.GroupBordersVisible = false;
+            layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { simpleLabelItem5, layoutControlItem15, simpleSeparator3 });
+            layoutControlGroup5.Name = "layoutControlGroup5";
+            layoutControlGroup5.Size = new Size(364, 156);
+            layoutControlGroup5.TextVisible = false;
+            // 
+            // simpleLabelItem5
+            // 
+            simpleLabelItem5.AllowHotTrack = false;
+            simpleLabelItem5.AppearanceItemCaption.Font = new Font("Tahoma", 12F);
+            simpleLabelItem5.AppearanceItemCaption.Options.UseFont = true;
+            simpleLabelItem5.Location = new Point(0, 0);
+            simpleLabelItem5.Name = "simpleLabelItem5";
+            simpleLabelItem5.Size = new Size(344, 23);
+            simpleLabelItem5.Text = "Resumen";
+            simpleLabelItem5.TextSize = new Size(65, 19);
+            // 
+            // layoutControlItem15
+            // 
+            layoutControlItem15.Control = txtTotal;
+            layoutControlItem15.Location = new Point(0, 24);
+            layoutControlItem15.Name = "layoutControlItem15";
+            layoutControlItem15.Size = new Size(344, 112);
+            layoutControlItem15.Text = "Total";
+            layoutControlItem15.TextSize = new Size(65, 13);
+            // 
+            // simpleSeparator3
+            // 
+            simpleSeparator3.AllowHotTrack = false;
+            simpleSeparator3.Location = new Point(0, 23);
+            simpleSeparator3.Name = "simpleSeparator3";
+            simpleSeparator3.Size = new Size(344, 1);
+            // 
+            // layoutControl5
+            // 
+            layoutControl5.Dock = DockStyle.Left;
+            layoutControl5.Location = new Point(0, 0);
+            layoutControl5.Name = "layoutControl5";
+            layoutControl5.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(744, 473, 650, 400);
+            layoutControl5.Root = layoutControlGroup4;
+            layoutControl5.Size = new Size(350, 156);
+            layoutControl5.TabIndex = 0;
+            layoutControl5.Text = "layoutControl5";
+            // 
+            // layoutControlGroup4
+            // 
+            layoutControlGroup4.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup4.GroupBordersVisible = false;
+            layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { simpleLabelItem2, simpleSeparator1, simpleLabelItem3, simpleLabelItem1 });
+            layoutControlGroup4.Name = "Root";
+            layoutControlGroup4.Size = new Size(350, 156);
+            layoutControlGroup4.TextVisible = false;
+            // 
+            // simpleLabelItem2
+            // 
+            simpleLabelItem2.AllowHotTrack = false;
+            simpleLabelItem2.AppearanceItemCaption.Font = new Font("Tahoma", 12F);
+            simpleLabelItem2.AppearanceItemCaption.Options.UseBorderColor = true;
+            simpleLabelItem2.AppearanceItemCaption.Options.UseFont = true;
+            simpleLabelItem2.Location = new Point(0, 0);
+            simpleLabelItem2.Name = "simpleLabelItem2";
+            simpleLabelItem2.Size = new Size(330, 23);
+            simpleLabelItem2.Text = "Ref.";
+            simpleLabelItem2.TextSize = new Size(95, 19);
+            // 
+            // simpleSeparator1
+            // 
+            simpleSeparator1.AllowHotTrack = false;
+            simpleSeparator1.Location = new Point(0, 23);
+            simpleSeparator1.Name = "simpleSeparator1";
+            simpleSeparator1.Size = new Size(330, 1);
+            // 
+            // simpleLabelItem3
+            // 
+            simpleLabelItem3.AllowHotTrack = false;
+            simpleLabelItem3.Location = new Point(0, 41);
+            simpleLabelItem3.Name = "simpleLabelItem3";
+            simpleLabelItem3.Size = new Size(330, 95);
+            simpleLabelItem3.Text = "Resumen del Abono";
+            simpleLabelItem3.TextSize = new Size(95, 13);
+            // 
+            // simpleLabelItem1
+            // 
+            simpleLabelItem1.AllowHotTrack = false;
+            simpleLabelItem1.Location = new Point(0, 24);
+            simpleLabelItem1.Name = "simpleLabelItem1";
+            simpleLabelItem1.Size = new Size(330, 17);
+            simpleLabelItem1.Text = "CC*";
+            simpleLabelItem1.TextSize = new Size(95, 13);
+            // 
+            // FormShareEdit
+            // 
+            AutoScaleDimensions = new SizeF(6F, 13F);
+            AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            ClientSize = new Size(1037, 804);
+            Controls.Add(sidePanel1);
+            Controls.Add(gridControlTransactionMasterDetail);
+            Controls.Add(stackPanel4);
+            Controls.Add(xtraTabControl1);
+            IconOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("FormShareEdit.IconOptions.SvgImage");
+            LookAndFeel.SkinName = "Office 2016 Colorful";
+            LookAndFeel.UseDefaultLookAndFeel = false;
+            Name = "FormShareEdit";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "ABONO";
+            WindowState = FormWindowState.Maximized;
+            Load += FormShareEdit_Load;
+            Resize += FormShareEdit_Resize;
+            Controls.SetChildIndex(xtraTabControl1, 0);
+            Controls.SetChildIndex(stackPanel4, 0);
+            Controls.SetChildIndex(gridControlTransactionMasterDetail, 0);
+            Controls.SetChildIndex(sidePanel1, 0);
+            Controls.SetChildIndex(progressPanel, 0);
+            ((System.ComponentModel.ISupportInitialize)xtraTabControl1).EndInit();
+            xtraTabControl1.ResumeLayout(false);
+            xtraTabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)panelControl2).EndInit();
+            panelControl2.ResumeLayout(false);
+            flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)panelControl3).EndInit();
+            panelControl3.ResumeLayout(false);
+            panelControl3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureEdit1.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)panelControl4).EndInit();
+            panelControl4.ResumeLayout(false);
+            panelControl4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureEdit2.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)panelControl5).EndInit();
+            panelControl5.ResumeLayout(false);
+            panelControl5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureEdit3.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControl2).EndInit();
+            layoutControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)stackPanel3).EndInit();
+            stackPanel3.ResumeLayout(false);
+            stackPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerDescription.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtBalanceStart.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtBalanceFinish.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)panelControl1).EndInit();
+            panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
+            layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)txtDate.Properties.CalendarTimeProperties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtDate.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtIsApplied.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtExchangeRate.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtStatusID.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtCurrencyID.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Root).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
+            xtraTabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)layoutControl3).EndInit();
+            layoutControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)txtReferenceClientName.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReferenceClientIdentifier.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControl4).EndInit();
+            layoutControl4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)txtReference1.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtReference2.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem12).EndInit();
+            xtraTabPage3.ResumeLayout(false);
+            xtraTabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)txtNote.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)stackPanel4).EndInit();
+            stackPanel4.ResumeLayout(false);
+            stackPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gridControlTransactionMasterDetail).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceDetailDto).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewTransactionMasterDetail).EndInit();
+            sidePanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)layoutControl7).EndInit();
+            layoutControl7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)txtReceiptAmount.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtChangeAmount.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)simpleLabelItem4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
+            ((System.ComponentModel.ISupportInitialize)simpleSeparator2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControl6).EndInit();
+            layoutControl6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)txtTotal.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)simpleLabelItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
+            ((System.ComponentModel.ISupportInitialize)simpleSeparator3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControl5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)simpleLabelItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)simpleSeparator1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)simpleLabelItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)simpleLabelItem1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraLayout.LayoutControl layoutControl1;
+        private DevExpress.XtraEditors.DateEdit txtDate;
+        private DevExpress.XtraLayout.LayoutControlGroup Root;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraEditors.CheckEdit txtIsApplied;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraEditors.TextEdit txtExchangeRate;
+        private DevExpress.XtraEditors.ComboBoxEdit txtStatusID;
+        private DevExpress.XtraEditors.ComboBoxEdit txtCurrencyID;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraEditors.PanelControl panelControl2;
+        private DevExpress.XtraLayout.LayoutControl layoutControl2;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.Utils.Layout.StackPanel stackPanel3;
+        private DevExpress.XtraEditors.TextEdit txtCustomerDescription;
+        private DevExpress.XtraEditors.SimpleButton btnClearCustomer;
+        private DevExpress.XtraEditors.SimpleButton btnSearchCustomer;
+        private DevExpress.XtraEditors.TextEdit txtBalanceStart;
+        private DevExpress.XtraEditors.TextEdit txtBalanceFinish;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
+        private DevExpress.Utils.Layout.StackPanel stackPanel4;
+        private DevExpress.XtraEditors.SimpleButton btnNewShare;
+        private DevExpress.XtraEditors.SimpleButton btnDeleteShare;
+        private DevExpress.XtraEditors.SimpleButton btnVerMovimientos;
+        private DevExpress.XtraLayout.LayoutControl layoutControl3;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
+        private DevExpress.XtraLayout.LayoutControl layoutControl4;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
+        private DevExpress.XtraEditors.TextEdit txtReferenceClientName;
+        private DevExpress.XtraEditors.TextEdit txtReferenceClientIdentifier;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraEditors.TextEdit txtReference1;
+        private DevExpress.XtraEditors.TextEdit txtReference2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraGrid.GridControl gridControlTransactionMasterDetail;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewTransactionMasterDetail;
+        private DevExpress.XtraEditors.SidePanel sidePanel1;
+        private DevExpress.XtraLayout.LayoutControl layoutControl5;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
+        private DevExpress.XtraLayout.LayoutControl layoutControl7;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup6;
+        private DevExpress.XtraLayout.LayoutControl layoutControl6;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup5;
+        private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItem1;
+        private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItem2;
+        private DevExpress.XtraLayout.SimpleSeparator simpleSeparator1;
+        private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItem3;
+        private DevExpress.XtraEditors.TextEdit txtReceiptAmount;
+        private DevExpress.XtraEditors.TextEdit txtChangeAmount;
+        private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItem4;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
+        private DevExpress.XtraLayout.SimpleSeparator simpleSeparator2;
+        private DevExpress.XtraEditors.TextEdit txtTotal;
+        private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItem5;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private DevExpress.XtraLayout.SimpleSeparator simpleSeparator3;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private DevExpress.XtraEditors.PanelControl panelControl3;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.LabelControl lblExchangeRatePurchase;
+        private DevExpress.XtraEditors.PanelControl panelControl4;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.LabelControl lblExchangeRateSale;
+        private DevExpress.XtraEditors.PanelControl panelControl5;
+        private DevExpress.XtraEditors.LabelControl labelControl6;
+        private DevExpress.XtraEditors.LabelControl lblExchangeRate;
+        private DevExpress.XtraEditors.PictureEdit pictureEdit1;
+        private DevExpress.XtraEditors.PictureEdit pictureEdit2;
+        private DevExpress.XtraEditors.PictureEdit pictureEdit3;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
+        private DevExpress.XtraEditors.MemoEdit txtNote;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraTab.XtraTabPage tabPageArchivos;
+        private BindingSource bindingSourceDetailDto;
+        private DevExpress.XtraGrid.Columns.GridColumn colDetailCustomerCreditDocumentId;
+        private DevExpress.XtraGrid.Columns.GridColumn colDetailTransactionDetailId;
+        private DevExpress.XtraGrid.Columns.GridColumn colDetailTransactionDetailDocument;
+        private DevExpress.XtraGrid.Columns.GridColumn colDetailTransactionDetailFecha;
+        private DevExpress.XtraGrid.Columns.GridColumn colDetailAmortizationId;
+        private DevExpress.XtraGrid.Columns.GridColumn colDetailBalanceStart;
+        private DevExpress.XtraGrid.Columns.GridColumn colDetailBalanceFinish;
+        private DevExpress.XtraGrid.Columns.GridColumn colDetailShare;
+        private DevExpress.XtraGrid.Columns.GridColumn colDetailBalanceStartShare;
+        private DevExpress.XtraGrid.Columns.GridColumn colDetailBalanceFinishShare;
+    }
+}

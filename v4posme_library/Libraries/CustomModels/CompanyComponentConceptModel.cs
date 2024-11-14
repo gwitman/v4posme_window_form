@@ -10,7 +10,7 @@ public class CompanyComponentConceptModel : ICompanyComponentConceptModel
     {
         using var context = new DataContext();
         var add = context.TbCompanyComponentConcepts.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return add.Entity.CompanyComponentConceptID;
     }
 
@@ -25,7 +25,7 @@ public class CompanyComponentConceptModel : ICompanyComponentConceptModel
                                 && concepts.Name.Equals(name));
         data.CompanyComponentConceptID = find.CompanyComponentConceptID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public void DeleteWhereComponentItemId(int companyId, int componentId, int componentItemId)

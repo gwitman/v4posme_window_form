@@ -17,7 +17,7 @@ class NotificationModel : INotificationModel
             context.Entry(notification).CurrentValues.SetValues(data);
         }
 
-        context.BulkUpdate(notifications);
+        context.SaveChanges();
     }
 
     public void UpdateAppPosme(int notificationId, TbNotification data)

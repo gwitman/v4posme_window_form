@@ -4,6 +4,8 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Web;
 using DevExpress.CodeParser;
 using DevExpress.Data;
 using DevExpress.LookAndFeel;
@@ -326,7 +328,17 @@ public class CoreWebRenderInView
             var row = table.NewRow();
             foreach (var kvp in dict)
             {
-                row[kvp.Key] = kvp.Value;
+                var content = kvp.Value;
+
+                if (content is string strContent)
+                {
+                    strContent = Regex.Replace(strContent, "<.*?>", string.Empty);
+                    strContent = HttpUtility.HtmlDecode(strContent);
+                    strContent = Regex.Replace(strContent, @"\b(Nota|Detalle)\b", string.Empty, RegexOptions.IgnoreCase).Trim();
+                    content = strContent;
+                }
+
+                row[kvp.Key] = content;
             }
 
             table.Rows.Add(row);

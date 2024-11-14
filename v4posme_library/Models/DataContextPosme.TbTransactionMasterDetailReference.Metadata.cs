@@ -8,10 +8,10 @@ namespace v4posme_library.Models
         public partial class Metadata
         {
     
-            public object TransactionMasterDetailID { get; set; }
-    
             [Key]
             public object TransactionMasterDetailRefereceID { get; set; }
+    
+            public object TransactionMasterDetailID { get; set; }
     
             public object ComponentID { get; set; }
     

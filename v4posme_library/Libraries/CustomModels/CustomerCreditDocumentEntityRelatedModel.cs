@@ -24,7 +24,7 @@ class CustomerCreditDocumentEntityRelatedModel : ICustomerCreditDocumentEntityRe
         }
 
         //salvar los datos
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public void DeleteAppPosme(int customerCreditDocumentId, int entityId)
@@ -38,7 +38,7 @@ class CustomerCreditDocumentEntityRelatedModel : ICustomerCreditDocumentEntityRe
     {
         using var context = new DataContext();
         var add = context.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return add.Entity.CcEntityRelatedID;
     }
 

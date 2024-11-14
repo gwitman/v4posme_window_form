@@ -23,7 +23,7 @@ public class CustomerConsultasSinRiesgoModel : ICustomerConsultasSinRiesgoModel
         var find = FindByRequestId(requestId, context).Single();
         data.RequestID = find.RequestID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public void UpdateByCedula(int companyId, string? cedula, TbCustomerConsultasSinRiesgo data)
@@ -31,14 +31,14 @@ public class CustomerConsultasSinRiesgoModel : ICustomerConsultasSinRiesgoModel
         using var context = new DataContext();
         var find = FindByCedulaAndCompanyId(companyId, cedula, context).Single();
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int InsertAppPosme(TbCustomerConsultasSinRiesgo data)
     {
         using var context = new DataContext();
         var add = context.TbCustomerConsultasSinRiesgos.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return add.Entity.RequestID;
     }
 

@@ -197,7 +197,7 @@ namespace v4posme_window.Views.Invoice.Billing
             }
         }
 
-        private void RefreshData()
+        public void RefreshData()
         {
             CoreWebRenderInView.RenderGrid(_dataViewData!, "invoice", ObjGridControl);
             _gridViewData = (GridView)ObjGridControl.MainView;

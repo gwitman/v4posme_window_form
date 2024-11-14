@@ -182,7 +182,7 @@ namespace v4posme_window.Views.Inventory.Product
             }
         }
 
-        private void RefreshData()
+        public void RefreshData()
         {
             CoreWebRenderInView.RenderGrid(dataViewData!, "item", ObjGridControl, true);
             gridViewData = (CustomGridView)ObjGridControl.MainView;

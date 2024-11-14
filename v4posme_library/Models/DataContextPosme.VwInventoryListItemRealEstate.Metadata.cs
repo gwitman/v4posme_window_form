@@ -114,6 +114,8 @@ namespace v4posme_library.Models
     
             public object Ciudad { get; set; }
     
+            public object Telefono { get; set; }
+    
             public object IsActive { get; set; }
         }
     }

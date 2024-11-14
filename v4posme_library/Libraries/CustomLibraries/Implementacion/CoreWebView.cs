@@ -39,13 +39,13 @@ class CoreWebView(
         // Obtener la vista por el flavor
         var dataViewId = dataView.DataViewID;
 
-        var companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewIdAndFlavor(user.CompanyID, dataViewId,callerId, componentId, objCompany.FlavorID);
+        var companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewIdAndFlavor(user.CompanyID, dataViewId, callerId, componentId, objCompany.FlavorID);
         if (companyDataView is null)
         {
             // Obtener la vista unica
             companyDataView = companyDataViewModel.GetRowByCompanyIdDataViewId(user.CompanyID, dataViewId, callerId, componentId);
             if (companyDataView is null)
-            return null;
+                return null;
         }
 
         // EXECUTE
@@ -86,6 +86,7 @@ class CoreWebView(
         {
             return null;
         }
+
         objResult.Data = dataRecordSet;
         return objResult;
     }

@@ -11,7 +11,7 @@ class AccountTypeModel : IAccountTypeModel
             .Single(account => account.CompanyID == companyId
                                && account.AccountTypeID == accountTypeId);
         find.IsActive = false;
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public void UpdateAppPosme(int companyId, int accountTypeId, TbAccountType data)
@@ -22,14 +22,14 @@ class AccountTypeModel : IAccountTypeModel
                                && account.AccountTypeID == accountTypeId);
         data.AccountTypeID = find.AccountTypeID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int InsertAppPosme(TbAccountType data)
     {
         using var context = new DataContext();
         var add = context.TbAccountTypes.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return add.Entity.AccountTypeID;
     }
 

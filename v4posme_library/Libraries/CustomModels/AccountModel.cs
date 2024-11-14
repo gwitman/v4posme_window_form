@@ -17,7 +17,7 @@ class AccountModel : IAccountModel
         using var context = new DataContext();
         var find = GetRowByPk(companyId, accountId);
         find.IsActive = false;
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public void UpdateAppPosme(int companyId, int accountId, TbAccount data)
@@ -26,14 +26,14 @@ class AccountModel : IAccountModel
         var find = GetRowByPk(companyId, accountId);
         data.AccountID = find.AccountID;
         context.Entry(find).CurrentValues.SetValues(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
     }
 
     public int InsertAppPosme(TbAccount data)
     {
         using var context = new DataContext();
         EntityEntry<TbAccount> add = context.TbAccounts.Add(data);
-        context.BulkSaveChanges();
+        context.SaveChanges();
         return add.Entity.AccountID;
     }
 
