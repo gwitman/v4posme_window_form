@@ -21,14 +21,15 @@ namespace v4posme_window.Libraries
                     writer.WriteLine($"Método: {ex.TargetSite.Name}");
                     writer.WriteLine($"Número de línea: {GetExceptionLineNumber(ex)}");
                     writer.WriteLine($"Mensaje de error: {ex.Message}");
+                    writer.WriteLine($"String: {ex.ToString()}");
                     writer.WriteLine(new string('-', 50));
                     writer.WriteLine();
                 }
-                MessageBox.Show("Se ha producido un error. Consulte el archivo de registro para obtener más detalles.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
             }
-            catch (Exception)
+            catch (Exception el)
             {
-                MessageBox.Show("Error al intentar escribir en el archivo de registro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al intentar escribir en el archivo de registro,  Ejecutar como administrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
