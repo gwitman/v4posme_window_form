@@ -628,7 +628,8 @@ namespace v4posme_window.Views.Invoice.Billing
                     if (File.Exists(imagePath))
                     {
                         var logoCompany = new Bitmap(Image.FromFile(imagePath));
-                        printer.Image(logoCompany);
+                        //el logo que se esta mostrando no se redimensiona 
+                        //printer.Image(logoCompany);
                     }
                 }
 
