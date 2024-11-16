@@ -999,6 +999,9 @@ namespace v4posme_window.Views.Invoice.Billing
 
             }
 
+           
+
+
             publicCatalogID = CodigoMesero == "none" ? 0 : objPubliCatalogMesasConfig.ElementAt(0).PublicCatalogID;
             List<TbPublicCatalogDetail> objPubliCatalogDetailMesasConfiguradas = _objInterfazPublicCatalogDetailModel.GetRowByCatalogIDAndName(publicCatalogID,CodigoMesero);
 
@@ -1012,6 +1015,14 @@ namespace v4posme_window.Views.Invoice.Billing
             ObjListTypePrice = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_price", "typePriceID", user.CompanyID);
             ObjListZone = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_info_billing", "zoneID", user.CompanyID);
             ObjListMesa = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_info_billing", "mesaID", user.CompanyID);
+
+            //Validar Banco
+            if(ObjListBank is null )
+            throw new Exception("No se puede avanzar configurar bancos");
+
+            if (ObjListBank.Count == 0)
+            throw new Exception("No se puede avanzar configurar bancos");
+
 
             //Filtrar la Lista de mesas
             var obListMesasFiltradas = ObjListMesa.Where(item1 => objPubliCatalogDetailMesasConfiguradas.Any(item2 => item2.Display == item1.Name)).ToList();
