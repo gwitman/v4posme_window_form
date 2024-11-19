@@ -2,12 +2,9 @@ using System.Diagnostics;
 using System.Globalization;
 using DevExpress.Xpo;
 using DevExpress.Xpo.DB;
-using DevExpress.XtraBars.Alerter;
 using DevExpress.XtraEditors;
-using Unity;
 using v4posme_library.Libraries;
 using v4posme_window.Libraries;
-using v4posme_window.Properties;
 using v4posme_window.Views;
 
 namespace v4posme_window;
@@ -22,7 +19,7 @@ static class Program
     {
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
-        ApplicationConfiguration.Initialize();
+        //ApplicationConfiguration.Initialize();
         // Establecer la cultura predeterminada para la aplicación
         var culture = VariablesGlobales.ConfigurationBuilder["APP_REGION_CULTURE"] ?? "es-NI";
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo(culture);
@@ -31,6 +28,7 @@ static class Program
         WindowsFormsSettings.UseAdvancedTextEdit = DevExpress.Utils.DefaultBoolean.True;
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
+        Application.SetHighDpiMode(HighDpiMode.SystemAware);
         var loginForm = new LoginForm();
         try
         {

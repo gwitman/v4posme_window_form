@@ -1,19 +1,29 @@
-﻿using System.ComponentModel;
-using System.Diagnostics;
-using DevExpress.Data.Svg;
-using DevExpress.XtraEditors;
+﻿using DevExpress.XtraEditors;
+using System.ComponentModel;
+using System.Globalization;
+using System.IO;
+using DevExpress.UITemplates.Collection.Editors;
+using DevExpress.Utils.Layout;
+using DevExpress.XtraEditors.Controls;
+using ESC_POS_USB_NET.Printer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Web.WebView2.WinForms;
+using Unity;
 using v4posme_library.Libraries;
+using v4posme_library.Libraries.CustomHelper;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
-using v4posme_library.Libraries.CustomModels.Core;
 using v4posme_library.Libraries.CustomModels;
+using v4posme_library.Libraries.CustomModels.Core;
+using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 using v4posme_window.Dto;
 using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
-using Unity;
-using v4posme_library.Libraries.CustomHelper;
-using v4posme_library.Models;
-using v4posme_library.ModelsDto;
+using ComboBoxItem = v4posme_window.Libraries.ComboBoxItem;
+using Exception = System.Exception;
+using TbTransactionMaster = v4posme_library.Models.TbTransactionMaster;
+using DevExpress.XtraLayout;
 
 namespace v4posme_window.Views.Box.Share;
 
@@ -25,6 +35,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
     private int? TransactionMasterId = 0;
     private int? TransactionId = 0;
     private int? EntityId;
+    private int? txtEmployeeID;
     private int txtCustomerID = 0;
 
     #endregion
@@ -59,37 +70,69 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
 
     public List<TbCustomerCreditDocumentDto> ObjListCustomerCreditDocument { get; set; }
 
+    public string? UrlPrinterDocument { get; set; }
+
+    public TbComponent? ObjComponentTransactionShare { get; set; }
+
+    public TbComponent? ObjComponentEmployee { get; set; }
+
+    public TbNaturale? ObjEmployeeNaturalDefault { get; set; }
+
+    public TbEmployeeDto? ObjEmployeeDefault { get; set; }
+
+    public string? ObjParameterShareInvoiceByInvoice { get; set; }
+
+    public TbLegal? ObjLegalDefault { get; set; }
+
+    public TbNaturale? ObjNaturalDefault { get; set; }
+
+    public TbCustomerDto? ObjCustomerDefault { get; set; }
+
+    public List<TbWorkflowStage> ObjWorkflowStage { get; set; }
+
+    public List<TbTransactionMasterDetail> ObjTransactionMasterDetail { get; set; }
+
+    public TbTransactionMasterInfoDto? ObjTransactionMasterInfo { get; set; }
+
+    public TbTransactionMasterDto? ObjTransactionMaster { get; set; }
+
     #endregion
 
     #region Librerias
 
-    private readonly ICoreWebAccounting objInterfazCoreWebAccounting = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAccounting>();
+    private readonly ICoreWebAmortization objInterfazCoreWebAmortization = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAmortization>();
     private readonly ICoreWebAuditoria objInterfazCoreWebAuditoria = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuditoria>();
-    private readonly ICoreWebCatalog objInterfazCoreWebCatalog = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebCatalog>();
+    private readonly ICoreWebAccounting objInterfazCoreWebAccounting = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAccounting>();
+    private readonly ICoreWebCounter objInterfazCoreWebCounter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebCounter>();
     private readonly ICoreWebConcept objInterfazCoreWebConcept = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebConcept>();
     private readonly ICoreWebParameter objInterfazCoreWebParameter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebParameter>();
     private readonly ICoreWebTransaction objInterfazCoreWebTransaction = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTransaction>();
     private readonly ICoreWebCurrency objInterfazCoreWebCurrency = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebCurrency>();
     private readonly ICoreWebTools objInterfazCoreWebTools = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebTools>();
-    private readonly ICoreWebCounter objInterfazCoreWebCounter = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebCounter>();
     private readonly ICoreWebWorkflow objInterfazCoreWebWorkflow = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebWorkflow>();
-    private readonly ICoreWebInventory objInterfazCoreWebInventory = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebInventory>();
     private readonly CoreWebRenderInView objInterfazCoreWebRenderInView = new();
     private readonly ICoreWebPermission objInterfazCoreWebPermission = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebPermission>();
     private readonly ICustomerModel customerModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerModel>();
     private readonly ICustomerCreditDocumentModel customerCreditDocumentModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditDocumentModel>();
-    private readonly IProviderModel providerModel = VariablesGlobales.Instance.UnityContainer.Resolve<IProviderModel>();
-    private readonly IProviderItemModel providerItemModel = VariablesGlobales.Instance.UnityContainer.Resolve<IProviderItemModel>();
-    private readonly IPriceModel priceModel = VariablesGlobales.Instance.UnityContainer.Resolve<IPriceModel>();
+    private readonly ICustomerCreditModel customerCreditModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditModel>();
+    private readonly ICustomerCreditLineModel customerCreditLineModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditLineModel>();
+    private readonly ICustomerCreditAmortizationModel customerCreditAmortizationModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditAmortizationModel>();
     private readonly INaturalModel naturalModel = VariablesGlobales.Instance.UnityContainer.Resolve<INaturalModel>();
-    private readonly IListPriceModel listPriceModel = VariablesGlobales.Instance.UnityContainer.Resolve<IListPriceModel>();
+    private readonly ICurrencyModel currencyModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICurrencyModel>();
+    private readonly ILegalModel legalModel = VariablesGlobales.Instance.UnityContainer.Resolve<ILegalModel>();
     private readonly ICompanyCurrencyModel companyCurrencyModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyCurrencyModel>();
-    private readonly IUserWarehouseModel userWarehouseModel = VariablesGlobales.Instance.UnityContainer.Resolve<IUserWarehouseModel>();
-    private readonly ITransactionMasterModel transactionMasterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterModel>();
     private readonly ITransactionModel transactionModel = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionModel>();
+    private readonly ITransactionMasterModel transactionMasterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterModel>();
     private readonly ITransactionMasterDetailModel transactionMasterDetailModel = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterDetailModel>();
     private readonly ITransactionCausalModel transactionCausalModel = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionCausalModel>();
-    private readonly ILegalModel legalModel = VariablesGlobales.Instance.UnityContainer.Resolve<ILegalModel>();
+    private readonly ITransactionMasterInfoModel transactionMasterInfoModel = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterInfoModel>();
+    private readonly ITransactionMasterDetailCreditModel transactionMasterDetailCreditModel = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterDetailCreditModel>();
+    private readonly ITransactionMasterDetailReferencesModel transactionMasterDetailReferencesModel = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterDetailReferencesModel>();
+    private readonly IWorkflowStageModel workflowStageModel = VariablesGlobales.Instance.UnityContainer.Resolve<IWorkflowStageModel>();
+    private readonly IEmployeeModel employeeModel = VariablesGlobales.Instance.UnityContainer.Resolve<IEmployeeModel>();
+    private readonly ICompanyModel companyModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyModel>();
+    private readonly IUserModel userModel = VariablesGlobales.Instance.UnityContainer.Resolve<IUserModel>();
+    private readonly IBranchModel branchModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBranchModel>();
 
     #endregion
 
@@ -206,16 +249,392 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
 
     public void ComandDelete()
     {
-        throw new NotImplementedException();
+        var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
+        var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
+        var notAllInsert = VariablesGlobales.ConfigurationBuilder["NOT_ALL_INSERT"];
+        var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
+        var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+        var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+        var user = VariablesGlobales.Instance.User;
+        if (user is null)
+        {
+            throw new Exception(userNotAutenticated);
+        }
+
+        var role = VariablesGlobales.Instance.Role;
+        if (role is null)
+        {
+            throw new Exception("No hay configurado un Rol");
+        }
+
+        var company = VariablesGlobales.Instance.Company;
+        if (company is null)
+        {
+            throw new Exception("No hay una compañía configurada");
+        }
+
+        var resultPermission = 0;
+        if (appNeedAuthentication == "true")
+        {
+            var permited = objInterfazCoreWebPermission.UrlPermited("app_box_share", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+            if (!permited)
+            {
+                throw new Exception(notAccessControl);
+            }
+
+            resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_share", "delete", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+            if (resultPermission == permissionNone)
+            {
+                throw new Exception(notAllInsert);
+            }
+        }
+
+        var workflowStageAmortizationRegister = objInterfazCoreWebParameter.GetParameterValue("SHARE_AMORTIZATION_STATUS_REGISTER", user.CompanyID);
+        var workflowStageDocumentRegister = objInterfazCoreWebParameter.GetParameterValue("SHARE_DOCUMENT_CREDIT_STATUS_REGISTER", user.CompanyID);
+        var objCurrencyCordoba = objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyID);
+
+        if (TransactionId is <= 0 && TransactionMasterId is <= 0)
+        {
+            throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_PARAMETER"]);
+        }
+
+        var objTm = transactionMasterModel.GetRowByPk(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
+        if (objTm is null)
+        {
+            throw new Exception($"No existe el Transaction Master con el ID: {TransactionMasterId.Value}");
+        }
+
+        var permissionMe = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_ME"]);
+        if (resultPermission == permissionMe && objTm.CreatedBy != user.UserID)
+        {
+            throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_DELETE"]);
+        }
+
+        if (objInterfazCoreWebAccounting.CycleIsCloseByDate(user.CompanyID, objTm.TransactionOn.Value))
+        {
+            throw new Exception("EL DOCUMENTO NO PUEDE ELIMINARSE, EL CICLO CONTABLE ESTA CERRADO");
+        }
+
+        var commandEliminable = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_ELIMINABLE"]);
+        var validateWorkflowStage = objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_share", "statusID", objTm.StatusId.Value, commandEliminable, user.CompanyID, user.BranchID, role.RoleID);
+        if (validateWorkflowStage.HasValue && validateWorkflowStage.Value)
+        {
+            //Eliminar el Registro	
+            transactionMasterModel.DeleteAppPosme(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId);
+            transactionMasterDetailModel.DeleteWhereTm(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId);
+        } //Si el documento esta aplicado crear el contra documento
+        else
+        {
+            if (role.IsAdmin.HasValue && !role.IsAdmin.Value)
+            {
+                throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
+            }
+
+            var objTmd = transactionMasterDetailModel.GetRowByTransactionToShare(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId);
+            var objTMDR = transactionMasterDetailReferencesModel.GetRowByTransactionMasterId(objTm.TransactionMasterId);
+            var objTMSOld = transactionMasterModel.getRowByTransactionIDAndEntityID(objTm.CompanyId, objTm.TransactionId, objTm.EntityId!.Value);
+            if (objTMSOld.Count > 0)
+            {
+                if (objTMSOld.ElementAt(0).TransactionMasterID != TransactionMasterId.Value)
+                {
+                    throw new Exception("SOLO PUEDE ELIMINAR EL ULTIMO ABONO DEL CLIENTE...");
+                }
+            }
+
+            //Recorrare las cuotas a regresar
+            foreach (var tbTransactionMasterDetailReference in objTMDR)
+            {
+                var totalCordobaCredit = Convert.ToDecimal(tbTransactionMasterDetailReference.Quantity);
+                var objCCA = customerCreditAmortizationModel.GetRowByPk(tbTransactionMasterDetailReference.ComponentItemID ?? 0);
+                if (objCCA is null)
+                {
+                    throw new Exception("NO EXISTE EL OBJETO CUSTOMER CREDIT AMORTIZACION...");
+                }
+
+                objCCA.Remaining += totalCordobaCredit;
+                objCCA.StatusID = Convert.ToInt32(workflowStageAmortizationRegister);
+                objCCA.DayDelay = 0;
+                customerCreditAmortizationModel.UpdateAppPosme(tbTransactionMasterDetailReference.ComponentItemID!.Value, objCCA);
+
+                //Actualizar Documento
+                var objCC = VariablesGlobales.Instance.DataContext.TbCustomerCreditDocuments.AsNoTracking().SingleOrDefault(document => document.CustomerCreditDocumentID == objCCA.CustomerCreditDocumentID);
+                if (objCC is null)
+                {
+                    throw new Exception("NO EXISTE EL OBJETO CUSTOMER CREDIT DOCUMENT...");
+                }
+
+                objCC.StatusID = Convert.ToInt32(workflowStageDocumentRegister);
+                objCC.Balance += totalCordobaCredit;
+                customerCreditDocumentModel.UpdateAppPosme(objCCA.CustomerCreditDocumentID, objCC);
+
+                //Obtener Linea de Credito
+                var objCustomerCreditLine = customerCreditLineModel.GetRowByPk(objCC.CustomerCreditLineID);
+
+                //Actualizar Linea de Credito
+                if (objCustomerCreditLine is null)
+                {
+                    throw new Exception("NO EXISTE EL OBJETO CUSTOMER CREDIT LINE...");
+                }
+
+                var montoTotalCordobaCredit = objTm.CurrencyId.Value == 1 ? totalCordobaCredit : Math.Round(totalCordobaCredit * objTm.ExchangeRate!.Value);
+                var montoTotalDolaresCredit = objTm.CurrencyId.Value == 2 ? totalCordobaCredit : Math.Round(totalCordobaCredit / objTm.ExchangeRate!.Value);
+
+                //aumentar el balance de general
+                var objCustomerCredit = customerCreditModel.GetRowByPk(objCustomerCreditLine.CompanyID, objCustomerCreditLine.BranchID, objCustomerCreditLine.EntityID);
+                if (objCustomerCredit is null)
+                {
+                    throw new Exception("NO EXISTE EL OBJETO CUSTOMER CREDIT...");
+                }
+
+                objCustomerCredit.BalanceDol += montoTotalDolaresCredit;
+                customerCreditModel.UpdateAppPosme(objCustomerCreditLine.CompanyID, objCustomerCreditLine.BranchID, objCustomerCreditLine.EntityID, objCustomerCredit);
+                //aumentar el balance de linea
+                if (objCustomerCreditLine.CurrencyID == objCurrencyCordoba.CurrencyID)
+                {
+                    objCustomerCreditLine.Balance += montoTotalCordobaCredit;
+                }
+                else
+                {
+                    objCustomerCreditLine.Balance += montoTotalDolaresCredit;
+                }
+
+                customerCreditLineModel.UpdateAppPosme(objCustomerCreditLine.CustomerCreditLineID, objCustomerCreditLine);
+            }
+
+            transactionMasterModel.DeleteAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
+            transactionMasterDetailModel.DeleteWhereTm(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
+        }
     }
 
     public void ComandPrinter()
     {
-        throw new NotImplementedException();
+        var frmSelectPrint = new FormShareEditOpcionPrint();
+        if(frmSelectPrint.ShowDialog() == DialogResult.Cancel)
+        {
+            return;
+        }
+        try
+        {
+            var selectedResult = frmSelectPrint.Result;
+            if (selectedResult is null)
+            {
+                throw new Exception("Seleccione una opcion para continuar");       
+            }
+            var user = VariablesGlobales.Instance.User;
+            if (user is null)
+            {
+                throw new Exception("Usuario no logeado");
+            }
+
+            var role = VariablesGlobales.Instance.Role;
+            var transactionID = TransactionId.Value;
+            var transactionMasterID = TransactionMasterId.Value;
+            var companyID = user.CompanyID;
+            var accountingExchangeSale = objInterfazCoreWebParameter.GetParameterValue("ACCOUNTING_EXCHANGE_SALE", companyID);
+            //Get Logo
+            var objParameterCompanyLogo = objInterfazCoreWebParameter.GetParameterValue("CORE_COMPANY_LOGO", companyID);
+            var objParameterTelefono = objInterfazCoreWebParameter.GetParameterValue("CORE_PHONE", companyID);
+
+            //get company
+            var objCompany = companyModel.GetRowByPk(companyID);
+
+            //Get Documento
+            //Obtener Datos
+            var objTm = transactionMasterModel.GetRowByPk(companyID, transactionID, transactionMasterID);
+            var objTMD = transactionMasterDetailModel.GetRowByTransactionToShare(companyID, transactionID, transactionMasterID);
+            var objTMI = transactionMasterInfoModel.GetRowByPk(companyID, transactionID, transactionMasterID);
+            var objUser = userModel.GetRowByPk(objTm.CompanyId, objTm.BranchId.Value, objTm.CreatedBy.Value);
+            var objBranch = branchModel.GetRowByPk(objTm.CompanyId, objTm.BranchId.Value);
+            var objCustumer = customerModel.GetRowByEntity(objTm.CompanyId, objTm.EntityId.Value);
+            var objNatural = naturalModel.GetRowByPk(objTm.CompanyId, objTm.BranchId.Value, objTm.EntityId.Value);
+            var tipoCambio = Math.Round(objTm.ExchangeRate.Value + Decimal.Parse(accountingExchangeSale));
+            var objCurrency = currencyModel.GetRowByPk(objTm.CurrencyId.Value);
+            var objStage = objInterfazCoreWebWorkflow.GetWorkflowStage("tb_transaction_master_share", "statusID", objTm.StatusId.Value, objTm.CompanyId, objTm.BranchId.Value, role.RoleID);
+
+            // Formatear la fecha de la transacción
+            var transactionDate = objTm.TransactionOn;
+            var formattedTransactionDate = transactionDate!.Value.ToString("yyyy-MM-dd hh:mm:ss tt");
+
+            // Imprimir el documento               
+            var printerName = objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT", companyID);
+            var pathOfLogo = VariablesGlobales.ConfigurationBuilder["PATH_FILE_OF_APP_ROOT"];
+            var printer = new Printer(printerName!.Value);
+
+            printer.AlignCenter();
+            if (objParameterCompanyLogo is not null)
+            {
+                objParameterCompanyLogo = "direct-ticket-" + objParameterCompanyLogo;
+                var imagePath = $"{pathOfLogo}/img/logos/{objParameterCompanyLogo!}";
+                if (File.Exists(imagePath))
+                {
+                    var logoCompany = new Bitmap(Image.FromFile(imagePath));
+                    //el logo que se esta mostrando no se redimensiona 
+                    //printer.Image(logoCompany);
+                }
+            }
+
+            printer.AlignCenter();
+            printer.Append(objCompany.Name);
+            printer.BoldMode("ABONO");
+            printer.Append($"# {objTm.TransactionNumber}");
+            printer.Append($"FECHA: {formattedTransactionDate} ");
+            printer.Separator();
+            printer.AlignLeft();
+            var datos = $"""
+                         CODIGO:   {objCustumer.CustomerNumber}
+                         ESTADO:   {objStage.First().Name}
+                         MONEDA:   {objCurrency.Name}
+                         """;
+            printer.Append(datos);
+            printer.Append("CLIENTE");
+            printer.Append($"{objCustumer.FirstName} {objCustumer.LastName}");
+            var saldoInicial = objTMD.Sum(detail => Convert.ToDecimal(detail.Reference2));
+            var saldoFinal = objTMD.Sum(detail => Convert.ToDecimal(detail.Reference4));
+            var saldoAbonado = objTMD.Sum(detail => detail.Amount);
+
+            /*Calculo de saldos generales*/
+            var saldoInicialGeneral = Math.Round(Convert.ToDecimal(objTMI.Reference1));
+            var saldoFinalGeneral = Math.Round(Convert.ToDecimal(objTMI.Reference2));
+            saldoInicial = selectedResult.Value.ToString() == "Individual" ? saldoInicial : saldoInicialGeneral;
+            saldoFinal = selectedResult.Value.ToString() == "Individual" ? saldoFinal : saldoFinalGeneral;
+
+            var detalle = new List<List<string>>(); // Lista de listas para almacenar los datos
+
+            if (selectedResult.Value.ToString() != "Basico")
+            {
+                // SALDO INICIAL
+                var row = new List<string> { "SALDO INICIAL", "", objCurrency.Simbol + saldoInicial.ToString("F2") };
+                detalle.Add(row);
+
+                // ABONOS
+                foreach (var detail in objTMD)
+                {
+                    row = new List<string> { "ABONO", "", Math.Round((decimal)detail.Amount, 2).ToString("F2") };
+                    detalle.Add(row);
+                }
+
+                // SALDO FINAL
+                row = new List<string> { "SALDO FINAL", "", saldoFinal.ToString("F2") };
+                detalle.Add(row);
+            }
+
+        }
+        catch (Exception e)
+        {
+            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Imprimir", $"Se produjo un error al imprimir, revisar los datos. Error: {e.Message}", this);
+        }
     }
 
     public void LoadEdit()
     {
+        var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
+        var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
+        var notAllInsert = VariablesGlobales.ConfigurationBuilder["NOT_ALL_INSERT"];
+        var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
+        var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+        var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+        var user = VariablesGlobales.Instance.User;
+        if (user is null)
+        {
+            throw new Exception(userNotAutenticated);
+        }
+
+        var role = VariablesGlobales.Instance.Role;
+        if (role is null)
+        {
+            throw new Exception("No hay configurado un Rol");
+        }
+
+        var company = VariablesGlobales.Instance.Company;
+        if (company is null)
+        {
+            throw new Exception("No hay una compañía configurada");
+        }
+
+        if (appNeedAuthentication == "true")
+        {
+            var permited = objInterfazCoreWebPermission.UrlPermited("app_box_share", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+            if (!permited)
+            {
+                throw new Exception(notAccessControl);
+            }
+
+            var resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_share", "edit", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+            if (resultPermission == permissionNone)
+            {
+                throw new Exception(notAllInsert);
+            }
+        }
+
+        if (TransactionId is <= 0 && TransactionMasterId is <= 0)
+        {
+            PreRender();
+            LoadNew();
+            LoadRender(TypeRender.New);
+            return;
+        }
+
+        //Obtener el componente de Item
+        ObjComponentCustomer = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_customer");
+        if (ObjComponentCustomer is null)
+        {
+            throw new Exception("EL COMPONENTE 'tb_customer' NO EXISTE...");
+        }
+
+        //Obtener el componente del recolector de cobro
+        ObjComponentEmployee = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_employee");
+        if (ObjComponentCustomer is null)
+        {
+            throw new Exception("EL COMPONENTE 'tb_employee' NO EXISTE...");
+        }
+
+        //Componente de facturacion
+        ObjComponentTransactionShare = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_share");
+        if (ObjComponentTransactionShare is null)
+        {
+            throw new Exception("EL COMPONENTE 'tb_transaction_master_share' NO EXISTE...");
+        }
+
+        //Componente de facturacion
+        ObjComponentCustomerCreditDocument = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_customer_credit_document");
+        if (ObjComponentCustomerCreditDocument is null)
+        {
+            throw new Exception("EL COMPONENTE 'tb_customer_credit_document' NO EXISTE...");
+        }
+
+        //Obtener el Componente de Transacciones Facturacion
+        var objComponentAmortization = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_customer_credit_amoritization");
+        if (objComponentAmortization is null)
+        {
+            throw new Exception("EL COMPONENTE 'tb_customer_credit_amoritization' NO EXISTE...");
+        }
+
+        var objCurrency = objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyID);
+        var targetCurrency = objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyID);
+        UrlPrinterDocument = objInterfazCoreWebParameter.GetParameterValue("BOX_SHARE_URL_PRINTER", user.CompanyID);
+
+        //Tipo de Factura
+        ObjTransactionMaster = transactionMasterModel.GetRowByPk(user.CompanyID, TransactionId!.Value, TransactionMasterId!.Value);
+        ObjTransactionMasterInfo = transactionMasterInfoModel.GetRowByPk(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
+        ObjTransactionMasterDetail = transactionMasterDetailModel.GetRowByTransactionToShare(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
+        ExchangeRate = objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Now.Date, decimal.One, targetCurrency.CurrencyID, objCurrency.CurrencyID);
+        ObjListWorkflowStage = objInterfazCoreWebWorkflow.GetWorkflowStageByStageInit("tb_transaction_master_share", "statusID", ObjTransactionMaster.StatusId.Value, user.CompanyID, user.BranchID, role.RoleID);
+        ObjWorkflowStage = workflowStageModel.GetRowByWorkflowStageIdOnly(ObjTransactionMaster.StatusId.Value);
+        ObjCustomerDefault = customerModel.GetRowByEntity(user.CompanyID, ObjTransactionMaster.EntityId.Value);
+        ObjNaturalDefault = naturalModel.GetRowByPk(user.CompanyID, user.BranchID, ObjCustomerDefault.EntityId);
+        ObjLegalDefault = legalModel.GetRowByPk(user.CompanyID, user.BranchID, ObjCustomerDefault.EntityId);
+        ObjParameterShareInvoiceByInvoice = objInterfazCoreWebParameter.GetParameterValue("SHARE_INVOICE_BY_INVOICE", user.CompanyID);
+        ObjListCustomer = customerModel.GetRowByCompany(user.CompanyID);
+        ObjListCurrency = companyCurrencyModel.GetByCompany(user.CompanyID);
+        ObjListCurrencyDefault = objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyID);
+        if (!string.IsNullOrWhiteSpace(ObjTransactionMaster.Reference3))
+        {
+            ObjEmployeeDefault = employeeModel.GetRowByEntityId(user.CompanyID, Convert.ToInt32(ObjTransactionMaster.Reference3));
+            if (ObjEmployeeDefault is not null)
+            {
+                ObjEmployeeNaturalDefault = naturalModel.GetRowByPk(user.CompanyID, user.BranchID, ObjEmployeeDefault.EntityId);
+            }
+        }
     }
 
     public void LoadNew()
@@ -331,12 +750,641 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
 
     public void SaveInsert()
     {
-        throw new NotImplementedException();
+        var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
+        var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
+        var notAllInsert = VariablesGlobales.ConfigurationBuilder["NOT_ALL_INSERT"];
+        var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
+        var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+        var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+        var user = VariablesGlobales.Instance.User;
+        if (user is null)
+        {
+            throw new Exception(userNotAutenticated);
+        }
+
+        var role = VariablesGlobales.Instance.Role;
+        if (role is null)
+        {
+            throw new Exception("No hay configurado un Rol");
+        }
+
+        var company = VariablesGlobales.Instance.Company;
+        if (company is null)
+        {
+            throw new Exception("No hay una compañía configurada");
+        }
+
+        if (appNeedAuthentication == "true")
+        {
+            var permited = objInterfazCoreWebPermission.UrlPermited("app_box_share", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+            if (!permited)
+            {
+                throw new Exception(notAccessControl);
+            }
+
+            var resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_share", "add", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+            if (resultPermission == permissionNone)
+            {
+                throw new Exception(notAllInsert);
+            }
+        }
+
+        objInterfazCoreWebPermission.GetValueLicense(user.CompanyID, "app_box_share/index");
+        var objcomponentShare = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_share");
+        if (objcomponentShare is null)
+        {
+            throw new Exception("EL COMPONENTE 'tb_transaction_master_share' NO EXISTE...");
+        }
+
+        var objComponentAmortization = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_customer_credit_amoritization");
+        if (objComponentAmortization is null)
+        {
+            throw new Exception("EL COMPONENTE 'tb_customer_credit_amoritization' NO EXISTE...");
+        }
+
+        ObjComponentCustomer = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_customer");
+        if (ObjComponentCustomer is null)
+        {
+            throw new Exception("EL COMPONENTE 'tb_customer' NO EXISTE...");
+        }
+
+        if (objInterfazCoreWebAccounting.CycleIsCloseByDate(user.CompanyID, txtDate.DateTime))
+        {
+            throw new Exception("EL DOCUMENTO NO PUEDE INGRESAR, EL CICLO CONTABLE ESTA CERRADO");
+        }
+
+        TransactionId = objInterfazCoreWebTransaction.GetTransactionId(user.CompanyID, "tb_transaction_master_share", 0);
+        if (!TransactionId.HasValue)
+        {
+            throw new Exception("No se pudo recuperar el TransactionID");
+        }
+
+        var objT = transactionModel.GetByCompanyAndTransaction(user.CompanyID, TransactionId.Value);
+        if (objT is null)
+        {
+            throw new Exception($"No hay una trasaction con el Trasaction ID: {TransactionId.Value}");
+        }
+
+        if (txtCurrencyID.SelectedItem is not ComboBoxItem selectedCurrency)
+        {
+            throw new Exception("Seleccione el tipo de moneda");
+        }
+
+        var selectedStatus = (ComboBoxItem)txtStatusID.SelectedItem;
+        if (selectedStatus is null)
+        {
+            throw new Exception("Seleccione el Status");
+        }
+
+        var objTm = new TbTransactionMaster()
+        {
+            CompanyID = user.CompanyID,
+            TransactionID = TransactionId.Value,
+            BranchID = user.BranchID,
+            TransactionNumber = objInterfazCoreWebCounter.GoNextNumber(user.CompanyID, user.BranchID, "tb_transaction_master_share", 0) ?? string.Empty,
+            TransactionCausalID = objInterfazCoreWebTransaction.GetDefaultCausalId(user.CompanyID, TransactionId.Value),
+            EntityID = txtCustomerID,
+            TransactionOn = txtDate.DateTime,
+            StatusIDChangeOn = DateTime.Now,
+            ComponentID = objcomponentShare.ComponentID,
+            Note = txtNote.Text,
+            Sign = (short?)(objT.SignInventory ?? 0),
+            CurrencyID = Convert.ToInt32(selectedCurrency.Key),
+            CurrencyID2 = objInterfazCoreWebCurrency.GetTarget(user.CompanyID, Convert.ToInt32(selectedCurrency.Key)),
+            ExchangeRate = ExchangeRate,
+            Reference1 = txtReference1.Text,
+            Reference2 = txtReference2.Text,
+            Reference3 = string.Empty,
+            Reference4 = string.Empty,
+            StatusID = Convert.ToInt32(selectedStatus.Key),
+            Amount = Convert.ToDecimal(txtTotal.EditValue),
+            IsApplied = false,
+            JournalEntryID = 0,
+            ClassID = null,
+            AreaID = null,
+            SourceWarehouseID = null,
+            TargetWarehouseID = null,
+            IsActive = true
+        };
+        objInterfazCoreWebAuditoria.SetAuditCreated(objTm, user, "");
+
+        TransactionMasterId = transactionMasterModel.InsertAppPosme(objTm);
+
+        var pathFileOfApp = VariablesGlobales.ConfigurationBuilder["PATH_FILE_OF_APP"];
+        var path = $"{pathFileOfApp}/company_{user.CompanyID}/component_{objcomponentShare.ComponentID}/component_item_{TransactionMasterId}";
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+
+        var objTmInfo = new TbTransactionMasterInfo()
+        {
+            CompanyID = user.CompanyID,
+            TransactionID = TransactionId.Value,
+            TransactionMasterID = TransactionMasterId.Value,
+            ZoneID = 0,
+            RouteID = 0,
+            ReferenceClientName = txtReferenceClientName.Text,
+            ReferenceClientIdentifier = txtReferenceClientIdentifier.Text,
+            ReceiptAmount = Convert.ToDecimal(txtReceiptAmount.EditValue),
+            Reference1 = $"{txtBalanceStart.EditValue}",
+            Reference2 = $"{txtBalanceFinish.EditValue}"
+        };
+        transactionMasterInfoModel.InsertAppPosme(objTmInfo);
+        var amount = decimal.Zero;
+        if (bindingSourceDetailDto.List is IList<FormShareEditDetailDTO> formShareEditDetailDtos && formShareEditDetailDtos.Count > 0)
+        {
+            foreach (var detail in formShareEditDetailDtos)
+            {
+                var objTmd = new TbTransactionMasterDetail
+                {
+                    CompanyID = user.CompanyID,
+                    TransactionID = TransactionId.Value,
+                    TransactionMasterID = TransactionMasterId.Value,
+                    ComponentID = objcomponentShare.ComponentID,
+                    ComponentItemID = detail.DetailCustomerCreditDocumentId,
+                    Quantity = decimal.Zero,
+                    UnitaryCost = decimal.Zero,
+                    Cost = decimal.Zero,
+                    UnitaryPrice = decimal.Zero,
+                    UnitaryAmount = decimal.Zero,
+                    Amount = detail.DetailShare,
+                    Discount = decimal.Zero,
+                    PromotionID = 0,
+                    Reference1 = detail.DetailTransactionDetailDocument,
+                    Reference2 = $"{detail.DetailBalanceStart}",
+                    Reference3 = $"{detail.DetailAmortizationId}",
+                    Reference4 = "0",
+                    CatalogStatusID = 0,
+                    InventoryStatusID = 0,
+                    IsActive = true,
+                    QuantityStock = decimal.Zero,
+                    QuantiryStockInTraffic = decimal.Zero,
+                    QuantityStockUnaswared = decimal.Zero,
+                    ExpirationDate = null,
+                    InventoryWarehouseSourceID = objTm.SourceWarehouseID,
+                    InventoryWarehouseTargetID = objTm.TargetWarehouseID,
+                };
+                amount = decimal.Add(amount, objTmd.Amount.Value);
+                transactionMasterDetailModel.InsertAppPosme(objTmd);
+            }
+        }
+
+        transactionMasterModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, objTm);
     }
 
     public void SaveUpdate()
     {
-        throw new NotImplementedException();
+        var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
+        var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
+        var notAllInsert = VariablesGlobales.ConfigurationBuilder["NOT_ALL_INSERT"];
+        var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
+        var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+        var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+        var user = VariablesGlobales.Instance.User;
+        if (user is null)
+        {
+            throw new Exception(userNotAutenticated);
+        }
+
+        var role = VariablesGlobales.Instance.Role;
+        if (role is null)
+        {
+            throw new Exception("No hay configurado un Rol");
+        }
+
+        var company = VariablesGlobales.Instance.Company;
+        if (company is null)
+        {
+            throw new Exception("No hay una compañía configurada");
+        }
+
+        var resultPermission = 0;
+        if (appNeedAuthentication == "true")
+        {
+            var permited = objInterfazCoreWebPermission.UrlPermited("app_box_share", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+            if (!permited)
+            {
+                throw new Exception(notAccessControl);
+            }
+
+            resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_share", "edit", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+            if (resultPermission == permissionNone)
+            {
+                throw new Exception(notAllInsert);
+            }
+        }
+
+        var objcomponentShare = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_share");
+        if (objcomponentShare is null)
+        {
+            throw new Exception("EL COMPONENTE 'tb_transaction_master_share' NO EXISTE...");
+        }
+
+        var objComponentAmortization = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_customer_credit_amoritization");
+        if (objComponentAmortization is null)
+        {
+            throw new Exception("EL COMPONENTE 'tb_customer_credit_amoritization' NO EXISTE...");
+        }
+
+        ObjComponentCustomer = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_customer");
+        if (ObjComponentCustomer is null)
+        {
+            throw new Exception("EL COMPONENTE 'tb_customer' NO EXISTE...");
+        }
+
+        var typeAmortizationAmericanoId = objInterfazCoreWebParameter.GetParameterValue("CXC_AMERICANO", user.CompanyID);
+        if (!TransactionId.HasValue)
+        {
+            throw new Exception("No hay un valor para Transaciton Id");
+        }
+
+        if (!TransactionMasterId.HasValue)
+        {
+            throw new Exception("No hay un valor para Transaciton Master Id");
+        }
+
+        var objTm = transactionMasterModel.GetRowByPk(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
+        if (objTm is null)
+        {
+            throw new Exception("No se encontró el Transaction Master de este documento");
+        }
+
+        var objCurrencyDolares = objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyID);
+        var objCurrencyCordoba = objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyID);
+
+        var permissionMe = VariablesGlobales.ConfigurationBuilder["PERMISSION_ME"];
+        if (resultPermission == Convert.ToInt32(permissionMe) && objTm.CreatedBy != user.UserID)
+        {
+            throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_EDIT"]);
+        }
+
+        var commandEditableTotal = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_EDITABLE_TOTAL"]);
+        var validateWorkflow = objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_share", "statusID", objTm.StatusId!.Value, commandEditableTotal, user.CompanyID, user.BranchID, role.RoleID);
+        if (validateWorkflow.HasValue && !validateWorkflow.Value)
+        {
+            throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_EDIT"]);
+        }
+
+        if (objInterfazCoreWebAccounting.CycleIsCloseByDate(user.CompanyID, objTm.TransactionOn!.Value))
+        {
+            throw new Exception("EL DOCUMENTO NO PUEDE ACTUALIZARCE, EL CICLO CONTABLE ESTA CERRADO");
+        }
+
+        var objT = transactionModel.GetByCompanyAndTransaction(user.CompanyID, TransactionId.Value);
+        if (objT is null)
+        {
+            throw new Exception($"No hay una trasaction con el Trasaction ID: {TransactionId.Value}");
+        }
+
+        if (txtCurrencyID.SelectedItem is not ComboBoxItem selectedCurrency)
+        {
+            throw new Exception("Seleccione el tipo de moneda");
+        }
+
+        var selectedStatus = (ComboBoxItem)txtStatusID.SelectedItem;
+        if (selectedStatus is null)
+        {
+            throw new Exception("Seleccione el Status");
+        }
+
+        var objTmNew = new TbTransactionMaster
+        {
+            TransactionMasterID = objTm.TransactionMasterId,
+            CompanyID = user.CompanyID,
+            TransactionID = objTm.TransactionId,
+            BranchID = user.BranchID,
+            TransactionNumber = objTm.TransactionNumber ?? string.Empty,
+            TransactionCausalID = objTm.TransactionCausalId,
+            EntityID = txtCustomerID,
+            TransactionOn = txtDate.DateTime,
+            StatusIDChangeOn = DateTime.Now,
+            ComponentID = objTm.ComponentId,
+            Note = txtNote.Text,
+            Sign = objTm.Sign,
+            CurrencyID = Convert.ToInt32(selectedCurrency.Key),
+            CurrencyID2 = objInterfazCoreWebCurrency.GetTarget(user.CompanyID, Convert.ToInt32(selectedCurrency.Key)),
+            ExchangeRate = ExchangeRate,
+            Reference1 = txtReference1.Text,
+            Reference2 = txtReference2.Text,
+            Reference3 = $"{txtEmployeeID}",
+            Reference4 = "txtCustomerCreditLineID", //no encontré el campo
+            DescriptionReference = "reference1:input,reference2:input,reference3:Gestor de Cobro,reference4:Linea de credito del Cliente",
+            StatusID = Convert.ToInt32(selectedStatus.Key),
+            Amount = Convert.ToDecimal(txtTotal.EditValue),
+            IsApplied = false,
+            JournalEntryID = 0,
+            ClassID = null,
+            AreaID = null,
+            SourceWarehouseID = null,
+            TargetWarehouseID = null,
+            IsActive = true,
+            CreatedAt = objTm.CreatedAt,
+            CreatedBy = objTm.CreatedBy,
+            CreatedIn = objTm.CreatedIn,
+            CreatedOn = objTm.CreatedOn
+        };
+
+        //Ingresar Informacion Adicional
+        var objTMInfoNew = new TbTransactionMasterInfo
+        {
+            CompanyID = objTm.CompanyId,
+            TransactionID = objTm.TransactionId,
+            TransactionMasterID = objTm.TransactionMasterId,
+            ZoneID = 0,
+            RouteID = 0,
+            ReferenceClientName = txtReferenceClientName.Text,
+            ReferenceClientIdentifier = txtReferenceClientIdentifier.Text,
+            ReceiptAmount = Convert.ToDecimal(txtReceiptAmount.EditValue),
+            ChangeAmount = Convert.ToDecimal(txtChangeAmount.EditValue),
+            Reference1 = $"{txtBalanceStart.EditValue}",
+            Reference2 = $"{txtBalanceFinish.EditValue}"
+        };
+        var commandEditable = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_EDITABLE"]);
+        validateWorkflow = objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_share", "statusID", objTm.StatusId!.Value, commandEditable, user.CompanyID, user.BranchID, role.RoleID);
+        if (validateWorkflow.HasValue && validateWorkflow.Value)
+        {
+            var tbTransactionMaster = transactionMasterModel.GetRowByPKK(TransactionMasterId.Value);
+            if (tbTransactionMaster is null)
+            {
+                throw new Exception($"No existe la transaccicon con el ID: {TransactionMasterId}");
+            }
+
+            tbTransactionMaster.StatusID = Convert.ToInt32(selectedStatus.Key);
+            transactionMasterModel.UpdateAppPosme(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId, tbTransactionMaster);
+        }
+        else
+        {
+            transactionMasterModel.UpdateAppPosme(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId, objTmNew);
+            transactionMasterInfoModel.UpdateAppPosme(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId, objTMInfoNew);
+        }
+
+        var abonoTotal = decimal.Zero;
+        var amount = decimal.Zero;
+        if (bindingSourceDetailDto.List is IList<FormShareEditDetailDTO> formShareEditDetailDtos)
+        {
+            var listTmdId = formShareEditDetailDtos.Select(dto => dto.DetailTransactionDetailId).ToList();
+            transactionMasterDetailModel.DeleteWhereIdNotIn(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId, listTmdId);
+
+            //Si este valor esta en true, se tiene que seleccionar una factura a la ves, par ir abonando una a una
+            //Si este valor es false, se puede seleccionar una sola factura, y el sistema va aplicado automaticamente, segun el monto.
+            //Si este valor es false, ingreas a la funcion 
+            var shareInvoiceByInvoice = objInterfazCoreWebParameter.GetParameterValue("SHARE_INVOICE_BY_INVOICE", user.CompanyID);
+            if (string.Compare(shareInvoiceByInvoice, "false", StringComparison.InvariantCultureIgnoreCase) == 0)
+            {
+                abonoTotal = formShareEditDetailDtos.Sum(dto => dto.DetailShare);
+                transactionMasterDetailModel.DeleteWhereTm(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId);
+                if (formShareEditDetailDtos.Count > 0)
+                {
+                    var customerCreditDocumentIDMin = formShareEditDetailDtos.ElementAt(0).DetailCustomerCreditDocumentId;
+                    var objListDocumentoAmortization = customerCreditDocumentModel.GetRowByBalancePending(user.CompanyID, txtCustomerID, customerCreditDocumentIDMin, objTmNew.CurrencyID!.Value);
+                    //Obtener el banace total pendietne
+                    var objListDocumentoAmortizationBalanceTotal = objListDocumentoAmortization.Sum(dto => dto.Remaining) ?? decimal.Zero;
+                    if (decimal.Compare(objListDocumentoAmortizationBalanceTotal, abonoTotal) < 0)
+                    {
+                        throw new Exception("ABONO, no puede ser aplicado por que supera el monto del saldo");
+                    }
+
+                    var arrayListCustomerCreditDocumentID = new List<int>();
+                    var arrayListTransactionDetailID = new List<int>();
+                    var arrayListTransactionDetailDocument = new List<string>();
+                    var arrayListTransactionDetailFecha = new List<DateTime>();
+                    var arrayListCustomerCreditAmortizationID = new List<int>();
+                    var arrayListShare = new List<decimal>();
+                    foreach (var it in objListDocumentoAmortization)
+                    {
+                        if (abonoTotal > it.Remaining)
+                        {
+                            // Agregar y disminuir
+                            abonoTotal -= it.Remaining!.Value;
+                            arrayListCustomerCreditDocumentID.Add(it.CustomerCreditDocumentId!.Value);
+                            arrayListTransactionDetailID.Add(0);
+                            arrayListTransactionDetailDocument.Add(it.DocumentNumber);
+                            arrayListTransactionDetailFecha.Add(it.DateApply);
+                            arrayListCustomerCreditAmortizationID.Add(it.CreditAmortizationId);
+                            arrayListShare.Add(it.Remaining.Value);
+                        }
+                        else
+                        {
+                            arrayListCustomerCreditDocumentID.Add(it.CustomerCreditDocumentId!.Value);
+                            arrayListTransactionDetailID.Add(0);
+                            arrayListTransactionDetailDocument.Add(it.DocumentNumber ?? string.Empty);
+                            arrayListTransactionDetailFecha.Add(it.DateApply);
+                            arrayListCustomerCreditAmortizationID.Add(it.CreditAmortizationId);
+                            arrayListShare.Add(abonoTotal);
+                            break;
+                        }
+                    }
+
+                    //Obtener cuanto abona totalmente
+                    if (arrayListTransactionDetailID.Count > 0)
+                    {
+                        for (var key = 0; key < arrayListTransactionDetailID.Count; key++)
+                        {
+                            var value = arrayListTransactionDetailID[key];
+                            var customerCreditDocumentID = arrayListCustomerCreditDocumentID[key];
+                            var share = arrayListShare[key];
+                            var transactionDetailID = arrayListTransactionDetailID[key];
+                            var reference1Documento = arrayListTransactionDetailDocument[key];
+                            var reference2Fecha = arrayListTransactionDetailFecha[key];
+                            var reference3AmortizationID = arrayListCustomerCreditAmortizationID[key];
+
+                            //Nuevo Detalle
+                            if (transactionDetailID == 0)
+                            {
+                                var objCustomerCreditDocument = customerCreditDocumentModel.GetRowByPk(customerCreditDocumentID);
+                                if (objCustomerCreditDocument is null)
+                                {
+                                    throw new Exception("No eixste el objeto Customer Credit Document");
+                                }
+
+                                var objCustomerCreditLine = customerCreditLineModel.GetRowByPk(objCustomerCreditDocument.CustomerCreditLineId);
+                                if (objCustomerCreditLine is null)
+                                {
+                                    throw new Exception("No eixste el objeto Customer Credit Line");
+                                }
+
+                                var objCustomerAmortization = customerCreditAmortizationModel.GetRowByPk(reference3AmortizationID);
+                                if (objCustomerAmortization is null)
+                                {
+                                    throw new Exception("No eixste el objeto Customer Amortization");
+                                }
+
+                                //Verificar los dias de atraso
+                                var hoy = DateTime.Today;
+                                var cuotaDate = objCustomerAmortization.DateApply.Date;
+                                var cuotaDif = hoy - cuotaDate;
+                                var diferenciaDias = Math.Abs(cuotaDif.Days);
+
+                                var objTmd = new TbTransactionMasterDetail
+                                {
+                                    CompanyID = objTm.CompanyId,
+                                    TransactionID = objTm.TransactionId,
+                                    TransactionMasterID = TransactionMasterId.Value,
+                                    ComponentID = objcomponentShare.ComponentID,
+                                    ComponentItemID = customerCreditDocumentID,
+                                    Quantity = decimal.Zero,
+                                    UnitaryCost = decimal.Zero,
+                                    Cost = decimal.Zero,
+                                    UnitaryPrice = decimal.Zero,
+                                    Amount = share,
+                                    Discount = decimal.Zero,
+                                    PromotionID = 0,
+                                    Reference1 = reference1Documento,
+                                    Reference2 = Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance!.Value.ToString("N2").Replace(",", "") : objCustomerCreditDocument.BalanceNew!.Value.ToString("N2").Replace(",", ""),
+                                    Reference3 = $"{reference3AmortizationID}",
+                                    Reference5 = objCustomerCreditDocument.DateOn.ToString("d"),
+                                    Reference6 = objCustomerCreditDocument.DateFinish!.Value.ToString("d"),
+                                    Reference7 = objCustomerCreditDocument.DateApply.ToString("d"),
+                                    Lote = $"{diferenciaDias}",
+                                    CatalogStatusID = 0,
+                                    InventoryStatusID = 0,
+                                    IsActive = true,
+                                    QuantityStock = decimal.Zero,
+                                    QuantiryStockInTraffic = decimal.Zero,
+                                    QuantityStockUnaswared = decimal.Zero,
+                                    RemaingStock = decimal.Zero,
+                                    ExpirationDate = null,
+                                    InventoryWarehouseSourceID = objTm.SourceWarehouseId,
+                                    InventoryWarehouseTargetID = objTm.TargetWarehouseId
+                                };
+                                amount += share;
+                                transactionMasterDetailModel.InsertAppPosme(objTmd);
+                            }
+                            else
+                            {
+                                //Editar Detalle
+                                var objTmd = transactionMasterDetailModel.GetRowByPKK(transactionDetailID);
+                                if (objTmd is null)
+                                {
+                                    throw new Exception($"NO se encontró el detalle de la trasacción con el ID: {transactionDetailID}");
+                                }
+
+                                var objCustomerCreditDocument = customerCreditDocumentModel.GetRowByPk(objTmd.ComponentItemID!.Value);
+                                if (objCustomerCreditDocument is null)
+                                {
+                                    throw new Exception("No eixste el objeto Customer Credit Document");
+                                }
+
+                                var objCustomerCreditLine = customerCreditLineModel.GetRowByPk(objCustomerCreditDocument.CustomerCreditLineId);
+                                if (objCustomerCreditLine is null)
+                                {
+                                    throw new Exception("No eixste el objeto Customer Credit Line");
+                                }
+
+                                var objCustomerAmortization = customerCreditAmortizationModel.GetRowByPk(reference3AmortizationID);
+                                if (objCustomerAmortization is null)
+                                {
+                                    throw new Exception("No eixste el objeto Customer Amortization");
+                                }
+
+                                //Verificar los dias de atraso
+                                var hoy = DateTime.Today;
+                                var cuotaDate = objCustomerAmortization.DateApply.Date;
+                                var cuotaDif = hoy - cuotaDate;
+                                var diferenciaDias = Math.Abs(cuotaDif.Days);
+                                var objTmdNew = new TbTransactionMasterDetail();
+                                objTmdNew = objTmd;
+                                objTmdNew.Amount = share;
+                                objTmdNew.IsActive = true;
+                                objTmdNew.Reference1 = reference1Documento;
+                                objTmdNew.Reference2 = Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance!.Value.ToString("N2") : objCustomerCreditDocument.BalanceNew!.Value.ToString("N2");
+                                objTmdNew.Reference3 = $"{reference3AmortizationID}";
+                                objTmdNew.Reference5 = objCustomerCreditDocument.DateOn.ToString("d");
+                                objTmdNew.Reference6 = objCustomerCreditDocument.DateFinish!.Value.ToString("d");
+                                objTmdNew.Reference7 = objCustomerCreditDocument.DateApply.ToString("d");
+                                objTmdNew.Lote = $"{diferenciaDias}";
+                                objTmdNew.ExchangeRateReference = objCustomerCreditDocument.ExchangeRate;
+                                objTmdNew.DescriptionReference = "{componentID:\"Componente de transacciones de cuotas\",componentItemID:\"Id del documento de credito\",reference1:\"Numero del desembolso\",refernece2:\"balance anterior\",refernece3:\"Id de la amortizacion\",reference4:\"balance nuevo\",exchangeRateReference:\"Tasa de cambio del desembolso\",referece5:\"Fecha Inical de la deuda\",reference6:\"Fecha Final de la deuda\",reference7:\"dia que tocaba la cuota\",lote:\"Dias de atraso de la cuota\"}";
+                                amount += share;
+                                transactionMasterDetailModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, transactionDetailID, objTmdNew);
+                            }
+                        }
+                    }
+
+                    //Actualizar Transaccion
+                    objTmNew.Amount = amount;
+                    transactionMasterModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, objTmNew);
+
+                    //Aplicar el Documento?
+                    var commandAplicable = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_APLICABLE"]);
+                    validateWorkflow = objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_share", "statusID", objTmNew.StatusID.Value, commandAplicable, user.CompanyID, user.BranchID, role.RoleID);
+                    if (validateWorkflow.HasValue && validateWorkflow.Value && objTm.StatusId.Value != objTmNew.StatusID)
+                    {
+                        //Recorrer Facturas para Actualizar Balances
+                        var objListTmd = transactionMasterDetailModel.GetRowByTransactionToShare(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
+                        if (objListTmd.Count > 0)
+                        {
+                            foreach (var objTmd in objListTmd)
+                            {
+                                var objCustomerCreditDocumentInicial = customerCreditDocumentModel.GetRowByPk(objTmd.ComponentItemID!.Value);
+                                objInterfazCoreWebAmortization.ApplyCuote(user.CompanyID, objTmd.ComponentItemID!.Value, Convert.ToDecimal(objTmd.Reference3), objTmd.TransactionMasterDetailID);
+                                //documento final
+                                var objCustomerCreditDocument = customerCreditDocumentModel.GetRowByPk(objTmd.ComponentItemID.Value);
+                                //capital
+                                var capital = (objCustomerCreditDocumentInicial!.Balance - objCustomerCreditDocument!.Balance) ?? decimal.Zero;
+                                var objTMDC = new TbTransactionMasterDetailCredit
+                                {
+                                    TransactionMasterID = objTmd.TransactionMasterID,
+                                    TransactionMasterDetailID = objTmd.TransactionMasterDetailID,
+                                    Capital = capital,
+                                    Interest = objTmd.Amount!.Value - capital,
+                                    DayDalay = 0,
+                                    InterestMora = 0,
+                                    CurrencyID = objTm.CurrencyId!.Value,
+                                    ExchangeRate = objTmNew.ExchangeRate!.Value,
+                                    Reference1 = null,
+                                    Reference2 = null,
+                                    Reference3 = null,
+                                    Reference4 = null,
+                                };
+                                transactionMasterDetailCreditModel.InsertAppPosme(objTMDC);
+
+                                var objCustomer = customerModel.GetRowByEntity(user.CompanyID, objTmNew.EntityID!.Value);
+                                var objTMFactura = transactionMasterModel.GetRowByTransactionNumber(user.CompanyID, objTmd.Reference1); /*invoiceNumber*/
+                                var objCustomerCreditLine = customerCreditLineModel.GetRowByPk(Convert.ToInt32(objTMFactura.Reference4));
+                                var objCustomerCredit = customerCreditModel.GetRowByPk(user.CompanyID, user.BranchID, objCustomer.EntityId);
+                                var montoAbono = objTMDC.Capital;
+                                var montoAbonoDolares = objTMFactura.ExchangeRate > 1 ? /*cordoba a dolares*/(objTMDC.Capital * Math.Round(1 / Math.Round(objTMFactura.ExchangeRate!.Value, 4), 4)) : objTMDC.Capital;
+                                var montoAbonoCordobas = objTMFactura.ExchangeRate < 1 ? /*dolares a cordoba*/ (objTMDC.Capital / Math.Round(objTMFactura.ExchangeRate!.Value, 4)) : objTMDC.Capital;
+
+                                // Actualizar saldo general del cliente
+                                var objCustomerCreditNew = new TbCustomerCredit();
+                                objCustomerCreditNew.BalanceDol = objCustomerCredit.BalanceDol + montoAbonoDolares;
+                                customerCreditModel.UpdateAppPosme(user.CompanyID, objCustomer.BranchId, objCustomer.EntityId, objCustomerCreditNew);
+
+                                // Actualizar saldo de la línea
+                                // Línea dólares y factura dólares
+                                // Línea córdoba y factura córdoba
+                                var objCustomerCreditLineNew = new TbCustomerCreditLine();
+                                if (objCustomerCreditLine.CurrencyID == objTMFactura.CurrencyID)
+                                {
+                                    objCustomerCreditLineNew.Balance = objCustomerCreditLine.Balance + montoAbono;
+                                }
+
+                                // Línea en dólares, factura en córdoba
+                                if (objCustomerCreditLine.CurrencyID == objCurrencyDolares.CurrencyID && objTMFactura.CurrencyID != objCurrencyDolares.CurrencyID)
+                                    objCustomerCreditLineNew.Balance = objCustomerCreditLine.Balance + montoAbonoDolares;
+
+                                // Línea en córdoba, factura en dólares
+                                if (objCustomerCreditLine.CurrencyID != objCurrencyDolares.CurrencyID && objTMFactura.CurrencyID == objCurrencyDolares.CurrencyID)
+                                    objCustomerCreditLineNew.Balance = objCustomerCreditLine.Balance + montoAbonoCordobas;
+
+                                // Actualizar línea
+                                customerCreditLineModel.UpdateAppPosme(objCustomerCreditLine.CustomerCreditLineID, objCustomerCreditLineNew);
+
+                                // Actualizar saldo del recibo
+                                var objTMDNew = transactionMasterDetailModel.GetRowByPKK(objTmd.TransactionMasterDetailID);
+                                objTMDNew.Reference4 = Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance.Value.ToString("N2") : objCustomerCreditDocument.BalanceNew.Value.ToString("N2");
+                                transactionMasterDetailModel.UpdateAppPosme(user.CompanyID, objTmd.TransactionID, objTmd.TransactionMasterID, objTmd.TransactionMasterDetailID, objTMDNew);
+                            }
+
+                            objInterfazCoreWebConcept.Share(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void CommandNew(object? sender, EventArgs e)
@@ -351,7 +1399,59 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
 
     public void CommandSave(object? sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        if (FnValidateForm())
+        {
+            backgroundWorker = new BackgroundWorker();
+            if (!progressPanel.Visible)
+            {
+                progressPanel.Width = Width;
+                progressPanel.Height = Height;
+                progressPanel.Visible = true;
+            }
+
+            backgroundWorker.DoWork += (ob, ev) =>
+            {
+                if (TransactionMasterId == 0)
+                {
+                    SaveInsert();
+                }
+                else
+                {
+                    SaveUpdate();
+                }
+            };
+            backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+            {
+                if (ev.Error is not null)
+                {
+                    objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Registrar", $"No se registraron los valores. {ev.Error.Message}", this);
+                }
+                else if (ev.Cancelled)
+                {
+                    //cancelado por el usuario   
+                    objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Warning, "Registrar", "Se ha cancelado la operación actual. Linea 3424", this);
+                }
+                else
+                {
+                    objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Registrar", "Se han registrdo los datos de forma correcta", this);
+                    if (TransactionMasterId > 0)
+                    {
+                        LoadEdit();
+                        LoadRender(TypeRender.Edit);
+                    }
+                }
+
+                if (progressPanel.Visible)
+                {
+                    progressPanel.Visible = false;
+                }
+            };
+
+            if (!backgroundWorker.IsBusy)
+            {
+                backgroundWorker.RunWorkerAsync();
+            }
+        }
     }
 
     public void CommandRegresar(object? sender, EventArgs e)
@@ -361,6 +1461,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
 
     public void PreRender()
     {
+        HelperMethods.OnlyNumberDecimals(txtReceiptAmount);
     }
 
 
@@ -369,6 +1470,11 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
         switch (typeRedner)
         {
             case TypeRender.New:
+                btnEliminar.Visible = false;
+                btnImprmir.Visible = false;
+                btnNuevo.Visible = false;
+                layoutControlItemCobrador.ContentVisible = false;
+                lblTitulo.Text = @"ABONO #:00000000";
                 txtCustomerID = 0;
                 txtCustomerDescription.Text = string.Empty;
                 txtDate.DateTime = DateTime.Now;
@@ -381,6 +1487,52 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                 CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjListCurrencyDefault.CurrencyID);
                 break;
             case TypeRender.Edit:
+                btnEliminar.Visible = true;
+                btnImprmir.Visible = true;
+                btnNuevo.Visible = true;
+                layoutControlItemCobrador.ContentVisible = true;
+                lblTitulo.Text = $"ABONO #: {ObjTransactionMaster.TransactionNumber}";
+                txtDate.DateTime = ObjTransactionMaster.TransactionOn ?? DateTime.Now;
+                txtIsApplied.Checked = ObjTransactionMaster.IsApplied.Value;
+                txtExchangeRate.EditValue = ExchangeRate;
+                txtCustomerID = ObjTransactionMaster.EntityId ?? 0;
+                txtNote.Text = ObjTransactionMaster.Note;
+                txtBalanceStart.EditValue = ObjTransactionMasterInfo!.Reference1 ?? string.Empty;
+                txtBalanceFinish.EditValue = ObjTransactionMasterInfo.Reference2 ?? string.Empty;
+                txtReferenceClientName.Text = ObjTransactionMasterInfo.ReferenceClientName;
+                txtReferenceClientIdentifier.Text = ObjTransactionMasterInfo.ReferenceClientIdentifier;
+                txtReference1.Text = ObjTransactionMaster.Reference1;
+                txtReference2.Text = ObjTransactionMaster.Reference2;
+                txtReceiptAmount.EditValue = ObjTransactionMasterInfo.ReceiptAmount;
+                txtChangeAmount.EditValue = ObjTransactionMasterInfo.ChangeAmount;
+                txtTotal.EditValue = ObjTransactionMaster.Amount;
+                txtEmployeeID = string.IsNullOrWhiteSpace(ObjTransactionMaster.Reference3) ? 0 : Convert.ToInt32(ObjTransactionMaster.Reference3);
+                txtCustomerDescription.Text = ObjNaturalDefault is not null ? $"{ObjCustomerDefault.CustomerNumber.ToUpper()} / {ObjNaturalDefault.FirstName} {ObjNaturalDefault.LastName}" : $"{ObjCustomerDefault.CustomerNumber}/{ObjLegalDefault.LegalName}";
+                txtEmployeeDescription.Text = ObjEmployeeDefault is not null ? $"{ObjEmployeeDefault.EmployeNumber} / {ObjEmployeeNaturalDefault.FirstName}" : string.Empty;
+                CoreWebRenderInView.LlenarComboBox(ObjListWorkflowStage, txtStatusID, "WorkflowStageID", "Name", ObjTransactionMaster.StatusId.Value);
+                CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Name", ObjTransactionMaster.CurrencyId.Value);
+                bindingSourceDetailDto.Clear();
+                if (ObjTransactionMasterDetail.Count > 0)
+                {
+                    foreach (var detailDto in ObjTransactionMasterDetail.Select(detail => new FormShareEditDetailDTO
+                             {
+                                 DetailCustomerCreditDocumentId = detail.ComponentItemID ?? 0,
+                                 DetailTransactionDetailId = detail.TransactionMasterID,
+                                 DetailTransactionDetailDocument = detail.Reference1 ?? string.Empty,
+                                 DetailTransactionDetailFecha = null,
+                                 DetailAmortizationId = Convert.ToInt32(detail.Reference3),
+                                 DetailBalanceStart = Convert.ToDecimal(detail.Reference2),
+                                 DetailBalanceFinish = Convert.ToDecimal(detail.Reference4),
+                                 DetailShare = detail.Amount ?? decimal.Zero,
+                                 DetailBalanceStartShare = decimal.Parse(detail.Reference2 ?? "0", CultureInfo.CurrentCulture),
+                                 DetailBalanceFinishShare = decimal.Parse(detail.Reference4 ?? "0", CultureInfo.CurrentCulture)
+                             }))
+                    {
+                        bindingSourceDetailDto.Add(detailDto);
+                    }
+                }
+
+                ObjListCustomerCreditDocument = customerCreditDocumentModel.GetRowByEntityApplied(ObjTransactionMaster.CompanyId, txtCustomerID, ObjTransactionMaster.CurrencyId ?? 0);
                 break;
         }
     }
@@ -394,6 +1546,29 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
     #endregion
 
     #region Funciones
+
+    private bool FnValidateForm()
+    {
+        if (txtDate.EditValue is null)
+        {
+            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "Establecer Fecha al Documento", this);
+            return false;
+        }
+
+        if (txtCustomerID <= 0)
+        {
+            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "Seleccionar el Cliente", this);
+            return false;
+        }
+
+        //esta validación no está en la web, consultar
+        //if (gridViewTransactionMasterDetail.RowCount<0)
+        //{
+        //    objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error","No hay datos a guardar",this);
+        //    return false;
+        //}
+        return true;
+    }
 
     private void FnOnCompleteNewCustomerPopPub(dynamic mensaje)
     {
@@ -426,6 +1601,26 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
         });
     }
 
+    private void FnOnCompleteNewEmployeePopPub(dynamic mensaje)
+    {
+        var diccionario = new Dictionary<string, string>();
+        var objWebToolsHelper = new WebToolsHelper();
+        diccionario.Add("companyID", objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "companyID", "0"));
+        diccionario.Add("entityID", objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "entityID", "0"));
+        diccionario.Add("Codigo", objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Codigo", "0"));
+        diccionario.Add("Nombre", objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Nombre", "0"));
+        FnOnCompleteNewEmployee(diccionario, true);
+    }
+
+    private void FnOnCompleteNewEmployee(Dictionary<string, string> diccionario, bool b)
+    {
+        Invoke(() =>
+        {
+            txtEmployeeID = Convert.ToInt32(diccionario["entityID"]);
+            txtEmployeeDescription.Text = $@"{diccionario["Codigo"]} / {diccionario["Nombre"]}";
+        });
+    }
+
     private void FnOnCompleteNewSharePopPub(dynamic mensaje)
     {
         var diccionario = new Dictionary<string, string>();
@@ -446,14 +1641,11 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
         Invoke(() =>
         {
             var detailTransactionDetailDocument = diccionario["Documento"];
-            // Suponiendo que 'objListaCustomerCredit' es una lista de objetos en C#
             var objBalancesDocument = ObjListCustomerCreditDocument
-                .Where(obj => obj.DocumentNumber == detailTransactionDetailDocument)
-                .Select(obj => obj)
-                .SingleOrDefault();
+                .SingleOrDefault(obj => obj.DocumentNumber == detailTransactionDetailDocument);
             if (objBalancesDocument is null)
             {
-                objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error,"Error",$"No hay un documento con el numero de documento {detailTransactionDetailDocument}",this);
+                objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", $"No hay un documento con el numero de documento {detailTransactionDetailDocument}", this);
                 return;
             }
 
@@ -471,7 +1663,26 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                 DetailBalanceFinishShare = 0
             };
             bindingSourceDetailDto.Add(dto);
+            UpdateSummary();
+            UpdateCalculateChange();
         });
+    }
+
+    private void UpdateSummary()
+    {
+        var total = bindingSourceDetailDto.List.Cast<FormShareEditDetailDTO>().Sum(dto => dto.DetailShare);
+        txtTotal.EditValue = total;
+        var subTotal = decimal.Parse(txtBalanceStart.Text) - total;
+        txtBalanceFinish.EditValue = subTotal;
+    }
+
+    private void UpdateCalculateChange()
+    {
+        if (!string.IsNullOrWhiteSpace(txtReceiptAmount.Text))
+        {
+            var total = string.IsNullOrWhiteSpace(txtTotal.Text) ? decimal.Zero : Convert.ToDecimal(txtTotal.EditValue);
+            txtChangeAmount.EditValue = decimal.Subtract(total, Convert.ToDecimal(txtReceiptAmount.EditValue));
+        }
     }
 
     #endregion
@@ -480,12 +1691,62 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
 
     private void BtnImprmir_Click(object? sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        ComandPrinter();
     }
 
     private void BtnEliminarOnClick(object? sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        if (XtraMessageBox.Show("","",MessageBoxButtons.OKCancel, MessageBoxIcon.Question)== DialogResult.Cancel)
+        {
+            return;
+        }
+        backgroundWorker = new BackgroundWorker();
+        if (!progressPanel.Visible)
+        {
+            progressPanel.Width = Width;
+            progressPanel.Height = Height;
+            progressPanel.Visible = true;
+        }
+
+        backgroundWorker.DoWork += (ob, ev) => { ComandDelete(); };
+        backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+        {
+            if (ev.Error is not null)
+            {
+                objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", ev.Error.Message, this);
+            }
+            else if (ev.Cancelled)
+            {
+                //se canceló por el usuario
+                objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Warning, "Error", "Operación cancelada por el usuario", this);
+            }
+            else
+            {
+                objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Eliminar", "Se ha eliminado el registro de forma correcta", this);
+                Close();
+
+                if (progressPanel.Visible)
+                {
+                    progressPanel.Visible = false;
+                }
+            }
+
+            if (progressPanel.Visible)
+            {
+                progressPanel.Visible = false;
+            }
+        };
+
+        if (!progressPanel.Visible)
+        {
+            progressPanel.Size = Size;
+            progressPanel.Visible = true;
+        }
+
+        if (!backgroundWorker.IsBusy)
+        {
+            backgroundWorker.RunWorkerAsync();
+        }
     }
 
     private void FormShareEdit_Resize(object sender, EventArgs e)
@@ -541,12 +1802,96 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
         formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarNewShare;
         formTypeListSearch.ShowDialog(this);
     }
+
     private void EventoCallBackAceptarNewShare(dynamic mensaje)
     {
-
         FnOnCompleteNewSharePopPub(mensaje);
     }
 
-    #endregion
+    private void txtReceiptAmount_EditValueChanged(object sender, EventArgs e)
+    {
+        UpdateCalculateChange();
+    }
 
+    private void btnVerMovimientos_Click(object sender, EventArgs e)
+    {
+        if (txtCustomerID <= 0)
+        {
+            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Seleccione el cliente para ver los movimientos", "Cliente", this);
+            return;
+        }
+
+        var dialogMovimientos = new FromShareEditVerMovimientos();
+        var pathUrl = VariablesGlobales.ConfigurationBuilder["APP_URL_RESOURCE_CSS_JS"];
+        dialogMovimientos.webView.Source = new Uri($"{pathUrl}/app_cxc_report/movement_customer/viewReport/true/customerNumber/{txtCustomerID}");
+        dialogMovimientos.ShowDialog();
+    }
+
+    private void btnDeleteShare_Click(object sender, EventArgs e)
+    {
+        if (gridViewTransactionMasterDetail.RowCount < 0)
+        {
+            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "No hay datos en la tabla", "Cliente", this);
+            return;
+        }
+
+        if (gridViewTransactionMasterDetail.FocusedRowHandle < 0)
+        {
+            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "No ha seleccionado un valor a eliminar", "Cliente", this);
+            return;
+        }
+
+        bindingSourceDetailDto.RemoveAt(gridViewTransactionMasterDetail.FocusedRowHandle);
+    }
+
+    private void gridViewTransactionMasterDetail_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+    {
+        if (e.Column.FieldName == colDetailShare.FieldName)
+        {
+            UpdateSummary();
+            UpdateCalculateChange();
+        }
+    }
+
+    private void gridViewTransactionMasterDetail_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+    {
+        if (e.Column.FieldName == colDetailShare.FieldName)
+        {
+            UpdateSummary();
+            UpdateCalculateChange();
+        }
+    }
+
+    private void btnClearCustomer_Click(object sender, EventArgs e)
+    {
+        txtCustomerID = 0;
+        txtCustomerDescription.Clear();
+    }
+
+    private void btnClearEmployee_Click(object sender, EventArgs e)
+    {
+        txtEmployeeID = 0;
+        txtEmployeeDescription.Clear();
+    }
+
+    private void btnSearchEmployee_Click(object sender, EventArgs e)
+    {
+        if (ObjComponentEmployee is null)
+        {
+            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Empleado", "No se ha configurado el comonente employee", this);
+            return;
+        }
+
+        var formTypeListSearch = new FormTypeListSearch("Lista de Empleados", ObjComponentEmployee.ComponentID,
+            "SELECCIONAR_EMPLOYEE_COLLECTOR", true, @"", false, "", 0, 5, "", true);
+        formTypeListSearch.EventoCallBackAceptarEvent += EventoCallBackAceptarEmployee;
+        formTypeListSearch.ShowDialog(this);
+    }
+
+    private void EventoCallBackAceptarEmployee(dynamic mensaje)
+    {
+        FnOnCompleteNewEmployeePopPub(mensaje);
+    }
+
+    #endregion
 }

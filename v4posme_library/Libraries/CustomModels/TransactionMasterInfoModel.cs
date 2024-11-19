@@ -27,13 +27,13 @@ class TransactionMasterInfoModel : ITransactionMasterInfoModel
     public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, TbTransactionMasterInfo data)
     {
         using var context = new DataContext();
-        var find = context.TbTransactionMasterInfos
-            .FirstOrDefault(info => info.CompanyID == companyId
+        var find = context.TbTransactionMasterInfos.AsNoTracking()
+            .SingleOrDefault(info => info.CompanyID == companyId
                                     && info.TransactionID == transactionId
                                     && info.TransactionMasterID == transactionMasterId);
         if (find is null) return;
         data.TransactionMasterInfoID = find.TransactionMasterInfoID;
-        context.Entry(find).CurrentValues.SetValues(data);
+        context.Update(data);
         context.SaveChanges();
     }
 

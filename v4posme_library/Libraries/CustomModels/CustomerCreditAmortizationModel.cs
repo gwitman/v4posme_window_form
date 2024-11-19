@@ -35,11 +35,11 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
         return add.Entity.CreditAmortizationID;
     }
 
-    public TbCustomerCreditAmoritization GetRowByPk(int creditAmortizationId)
+    public TbCustomerCreditAmoritization? GetRowByPk(int creditAmortizationId)
     {
         using var context = new DataContext();
         return context.TbCustomerCreditAmoritizations
-            .First(amortization => amortization.IsActive
+            .FirstOrDefault(amortization => amortization.IsActive
                                    && amortization.CreditAmortizationID == creditAmortizationId);
     }
 

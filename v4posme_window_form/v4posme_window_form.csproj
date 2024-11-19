@@ -117,6 +117,15 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Update="Views\Invoice\Billing\FormInvoiceBillingList.cs" />
+    <Compile Update="Editors\ChipGroup.cs" />
+    <EmbeddedResource Include="Assets\Toolbox\ChipGroup.bmp" />
+    <Compile Update="Editors\Base\DesignerActions.cs" />
+    <Compile Update="Editors\Base\ChipGroupBase.cs" />
+    <Compile Update="Editors\Base\ItemBase.cs" />
+    <Compile Update="Editors\Chip.cs" />
+    <Compile Update="Components\Base\ItemsSelector.cs" />
+    <EmbeddedResource Include="Assets\HTML\ChipGroup.html" />
+    <EmbeddedResource Include="Assets\CSS\ChipGroup.css" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\posMe.ico" />

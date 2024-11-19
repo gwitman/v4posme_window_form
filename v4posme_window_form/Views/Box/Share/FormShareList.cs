@@ -187,12 +187,83 @@ public partial class FormShareList : FormTypeList, IFormTypeList
 
     public void Delete(object? sender, EventArgs? args)
     {
-        throw new NotImplementedException();
+        if (gridViewData.RowCount<0)
+        {
+            coreWebRender.GetMessageAlert(TypeError.Warning, "Abono", "No hay datos en la tabla", this); 
+            return;
+        }
+
+        var focused = gridViewData.FocusedRowHandle;
+        if (focused<0)
+        {
+            coreWebRender.GetMessageAlert(TypeError.Warning, "Abono", "Seleccione un abono a editar", this); 
+            return;
+        }
+        
+
+        backgroundWorker = new BackgroundWorker();
+        backgroundWorker.DoWork += (ob, ev) =>
+        {
+            var rowIndex = gridViewData.GetSelectedRows();
+            foreach (var indexRow in rowIndex)
+            {
+                var companyID = Convert.ToInt32(gridViewData.GetRowCellValue(focused, "companyID"));
+                var transactionId = Convert.ToInt32(gridViewData.GetRowCellValue(focused, "transactionID"));
+                var transactionMasterID = Convert.ToInt32(gridViewData.GetRowCellValue(focused, "transactionMasterID"));
+                var formShareEdit = new FormShareEdit(TypeOpenForm.Init, companyID, transactionMasterID, transactionId);
+                formShareEdit.ComandDelete();
+            }
+        };
+
+        backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+        {
+            coreWebRender = new();
+            if (ev.Error is not null)
+            {
+                coreWebRender.GetMessageAlert(TypeError.Error, "Error Eliminar", $"Se ha producido un error al eliminar {ev.Error.Message}", this);
+            }
+            else if (ev.Cancelled)
+            {
+                coreWebRender.GetMessageAlert(TypeError.Warning, "Eliminar", "Se ha cancelado la eliminación de la factura", this);
+            }
+            else
+            {
+                coreWebRender.GetMessageAlert(TypeError.Informacion, "Eliminar", "Se ha eliminado el abono de forma correcta", this);
+                List();
+                RefreshData();
+            }
+            if (progressPanel.Visible)
+            {
+                progressPanel.Visible = false;
+            }
+        };
+
+        if (backgroundWorker.IsBusy) return;
+        backgroundWorker.RunWorkerAsync();
     }
 
     public void Edit(object? sender, EventArgs? args)
     {
-        throw new NotImplementedException();
+        if (gridViewData.RowCount<0)
+        {
+            coreWebRender.GetMessageAlert(TypeError.Warning, "Abono", "No hay datos en la tabla", this); 
+            return;
+        }
+
+        var focused = gridViewData.FocusedRowHandle;
+        if (focused<0)
+        {
+            coreWebRender.GetMessageAlert(TypeError.Warning, "Abono", "Seleccione un abono a editar", this); 
+            return;
+        }
+        var companyID = Convert.ToInt32(gridViewData.GetRowCellValue(focused, "companyID"));
+        var transactionId = Convert.ToInt32(gridViewData.GetRowCellValue(focused, "transactionID"));
+        var transactionMasterID = Convert.ToInt32(gridViewData.GetRowCellValue(focused, "transactionMasterID"));
+        var formShareEdit = new FormShareEdit(TypeOpenForm.Init, companyID, transactionMasterID, transactionId)
+        {
+            MdiParent = CoreFormList.Principal()
+        };
+        formShareEdit.Show();
     }
 
     public void New(object? sender, EventArgs? args)

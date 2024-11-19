@@ -1,3 +1,5 @@
+using DevExpress.UITemplates.Collection.Utilities;
+
 namespace v4posme_window.Editors
 {
     using System;

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 using v4posme_library.Models;
 using v4posme_library.ModelsDto;
 
@@ -27,7 +28,6 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
         context.SaveChanges();
     }
 
-    
 
     public void DeleteAppPosme(int customerCreditDocumentId)
     {
@@ -48,8 +48,8 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
     public TbCustomerCreditDocumentDto? GetRowByPk(int customerCreditDocumentId)
     {
         using var context = new DataContext();
-        var customerCreditDocuments = context.TbCustomerCreditDocuments;
-        var creditAmortizations = context.TbCustomerCreditAmoritizations;
+        var customerCreditDocuments = context.TbCustomerCreditDocuments.AsNoTracking();
+        var creditAmortizations = context.TbCustomerCreditAmoritizations.AsNoTracking();
         var result = from i in customerCreditDocuments
             join cur in context.TbCurrencies on i.CurrencyID equals cur.CurrencyID
             where i.CustomerCreditDocumentID == customerCreditDocumentId && i.IsActive
@@ -80,7 +80,10 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                         on ccd.CustomerCreditDocumentID equals ccda.CustomerCreditDocumentID
                     where ccd.CustomerCreditDocumentID == i.CustomerCreditDocumentID
                     select ccda.Remaining).Sum(),
-                ReportSinRiesgo = i.ReportSinRiesgo
+                ReportSinRiesgo = i.ReportSinRiesgo,
+                DateFinish = customerCreditDocuments.Where(document => document.CustomerCreditDocumentID == i.CustomerCreditDocumentID)
+                    .Join(creditAmortizations, document => document.CustomerCreditDocumentID, amoritization => amoritization.CustomerCreditDocumentID,
+                        (document, amoritization) => amoritization.DateApply).Max()
             };
         return result.SingleOrDefault();
     }
@@ -170,7 +173,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
         using var context = new DataContext();
         var creditDocuments = context.TbCustomerCreditDocuments;
         var creditAmortizations = context.TbCustomerCreditAmoritizations;
-      
+
         try
         {
             var result = from i in creditDocuments
@@ -198,23 +201,22 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                     Balance = i.Balance,
                     CurrencyId = i.CurrencyID,
                     ReportSinRiesgo = i.ReportSinRiesgo,
-                    DateFinish = null 
+                    DateFinish = null
                 };
 
             var objCustomerCreditDocumentDto = result.SingleOrDefault();
             if (objCustomerCreditDocumentDto is null)
                 objCustomerCreditDocumentDto = new TbCustomerCreditDocumentDto();
 
-            var objListCreditAmortiation = from ccd 
-                                           in  creditAmortizations 
-                                           where ccd.CustomerCreditDocumentID == objCustomerCreditDocumentDto.CustomerCreditDocumentId   
-                                           select new { ccd };
+            var objListCreditAmortiation = from ccd
+                    in creditAmortizations
+                where ccd.CustomerCreditDocumentID == objCustomerCreditDocumentDto.CustomerCreditDocumentId
+                select new { ccd };
 
 
-            objCustomerCreditDocumentDto.DateApply =DateOnly.FromDateTime(objListCreditAmortiation.Max(u => u.ccd.DateApply));
+            objCustomerCreditDocumentDto.DateApply = (objListCreditAmortiation.Max(u => u.ccd.DateApply));
 
             return objCustomerCreditDocumentDto;
-
         }
         catch (Exception e)
         {
@@ -228,7 +230,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
         using var context = new DataContext();
         return context.TbCustomerCreditDocuments
             .Where(document => document.CompanyID == companyId
-                               && document.IsActive 
+                               && document.IsActive
                                && document.Balance > 0
                                && document.Balance <= (decimal)0.2)
             .ToList();
@@ -247,7 +249,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                   && d.CompanyID == companyId
                   && a.IsActive
                   && wsa.Aplicable!.Value
-                  && wsd.Aplicable!.Value 
+                  && wsd.Aplicable!.Value
                   && a.Remaining > 0
                   && d.EntityID == entityId
                   && a.CustomerCreditDocumentID >= customerCreditDocumentId
@@ -272,8 +274,8 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
                 Balance = g.Key.Balance,
                 CurrencyId = g.Key.CurrencyID,
                 StatusId = g.Key.StatusID,
-                CreditAmortizationId = g.Min(x => x.a.CustomerCreditDocumentID),
-                DateApply = DateOnly.FromDateTime(g.Min(x => x.a.DateApply)),
+                CreditAmortizationId = g.Min(x => x.a.CreditAmortizationID),
+                DateApply = g.Min(x => x.a.DateApply),
                 Remaining = g.Sum(x => x.a.Remaining),
                 StatusAmotization = g.Min(x => x.a.StatusID),
                 StatusAmortizatonName = g.Min(x => x.wsa.Name)

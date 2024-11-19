@@ -1,4 +1,5 @@
-﻿using v4posme_library.Models;
+﻿using System.ComponentModel.Design;
+using v4posme_library.Models;
 using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
@@ -22,5 +23,7 @@ public interface ITransactionMasterModel
     List<TbTransactionMaster> GetRowByNotification(int companyId);
     
     List<TbTransactionMasterDto> GetRowInStatusRegister(int companyId, int transactionMasterId);
-    
+
+    List<TbTransactionMaster> getRowByTransactionIDAndEntityID(int companyID, int transactionID, int entityID);
+
 }

@@ -1,3 +1,5 @@
+using DevExpress.UITemplates.Collection.Images;
+using DevExpress.UITemplates.Collection.Utilities;
 using DevExpress.XtraEditors.Popup;
 
 namespace v4posme_window.Editors

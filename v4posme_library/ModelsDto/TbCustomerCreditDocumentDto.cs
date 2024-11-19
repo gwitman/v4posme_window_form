@@ -37,7 +37,7 @@ public class TbCustomerCreditDocumentDto
     public decimal? Remaining { get; set; }
     public DateTime? DateFinish { get; set; }
     public int CreditAmortizationId { get; set; }
-    public DateOnly DateApply { get; set; }
+    public DateTime DateApply { get; set; }
     public int StatusAmotization { get; set; }
     public string? StatusAmortizatonName { get; set; }
     

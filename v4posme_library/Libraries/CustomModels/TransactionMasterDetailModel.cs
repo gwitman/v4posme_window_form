@@ -14,7 +14,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
 {
     private readonly MapperConfiguration _mapperConfiguration = new(expression =>
         expression.CreateMap<TbTransactionMasterDetail, TbTransactionMasterDetailDto>());
-    
+
 
     public int InsertAppPosme(TbTransactionMasterDetail data)
     {
@@ -123,7 +123,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         return result.First();
     }
 
-    public TbTransactionMasterDetail? GetRowByPKK(     int transactionMasterDetailId )
+    public TbTransactionMasterDetail? GetRowByPKK(int transactionMasterDetailId)
     {
         using var context = new DataContext();
         var result = context.TbTransactionMasterDetails.FirstOrDefault(c => c.TransactionMasterDetailID == transactionMasterDetailId);
@@ -397,8 +397,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         return result.ToList();
     }
 
-    public List<TbTransactionMasterDetail> GetRowByTransactionToShare(int companyId, int transactionId,
-        int transactionMasterId)
+    public List<TbTransactionMasterDetail> GetRowByTransactionToShare(int companyId, int transactionId, int transactionMasterId)
     {
         using var context = new DataContext();
         return context.TbTransactionMasterDetails

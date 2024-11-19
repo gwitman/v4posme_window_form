@@ -11,7 +11,7 @@ public interface ICustomerCreditAmortizationModel
     
     int InsertAppPosme(TbCustomerCreditAmoritization data);
 
-    TbCustomerCreditAmoritization GetRowByPk(int creditAmortizationId);
+    TbCustomerCreditAmoritization? GetRowByPk(int creditAmortizationId);
     
     List<TbCustomerCreditAmoritization> GetRowByDocument(int customerCreditDocumentId);
     

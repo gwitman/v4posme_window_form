@@ -11,7 +11,7 @@ class TransactionMasterModel : ITransactionMasterModel
 {
     public void DeleteAppPosme(int companyId, int transactionId, int transactionMasterId)
     {
-        using var context = new DataContext();     
+        using var context = new DataContext();
         context.TbTransactionMasters
             .Where(master => master.CompanyID == companyId
                              && master.TransactionID == transactionId
@@ -21,7 +21,7 @@ class TransactionMasterModel : ITransactionMasterModel
 
     public int InsertAppPosme(TbTransactionMaster? data)
     {
-        using var context = new DataContext();     
+        using var context = new DataContext();
         var add = context.Add(data);
         context.SaveChanges();
         return add.Entity.TransactionMasterID;
@@ -29,7 +29,7 @@ class TransactionMasterModel : ITransactionMasterModel
 
     public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, TbTransactionMaster? data)
     {
-        using var context = new DataContext();        
+        using var context = new DataContext();
         var find = context.TbTransactionMasters
             .AsNoTracking()
             .FirstOrDefault(master => master.CompanyID == companyId
@@ -41,8 +41,8 @@ class TransactionMasterModel : ITransactionMasterModel
         data.TransactionMasterID = find.TransactionMasterID;
         data.CompanyID = companyId;
         data.TransactionID = transactionId;
-        
-        
+
+
         context.TbTransactionMasters.Update(data);
         context.SaveChanges();
     }
@@ -50,7 +50,7 @@ class TransactionMasterModel : ITransactionMasterModel
 
     public TbTransactionMasterDto? GetRowByPk(int companyId, int transactionId, int transactionMasterId)
     {
-        using var context = new DataContext();     
+        using var context = new DataContext();
         var result = from tm in context.TbTransactionMasters
             join ws in context.TbWorkflowStages on tm.StatusID equals ws.WorkflowStageID
             where tm.TransactionMasterID == transactionMasterId
@@ -110,36 +110,35 @@ class TransactionMasterModel : ITransactionMasterModel
         return result.AsNoTracking().FirstOrDefault();
     }
 
-    public TbTransactionMaster? GetRowByPKK( int transactionMasterId)
+    public TbTransactionMaster? GetRowByPKK(int transactionMasterId)
     {
-        using var context = new DataContext();     
+        using var context = new DataContext();
         var result = context.TbTransactionMasters.FirstOrDefault(u => u.TransactionMasterID == transactionMasterId);
         return result;
     }
 
     public TbTransactionMaster? GetRowByTransactionMasterId(int companyId, int transactionMasterId)
     {
-        using var context = new DataContext();     
+        using var context = new DataContext();
         return context.TbTransactionMasters
             .FirstOrDefault(master => master.IsActive!.Value
-                             && master.CompanyID == companyId
-                             && master.TransactionMasterID == transactionMasterId);
+                                      && master.CompanyID == companyId
+                                      && master.TransactionMasterID == transactionMasterId);
     }
 
-    
 
     public TbTransactionMaster? GetRowByTransactionNumber(int companyId, string? transactionNumber)
     {
-        using var context = new DataContext();     
+        using var context = new DataContext();
         return context.TbTransactionMasters
             .SingleOrDefault(master => master.CompanyID == companyId
-                             && master.TransactionNumber.Contains(transactionNumber)
-                             && master.IsActive!.Value);
+                                       && master.TransactionNumber.Contains(transactionNumber)
+                                       && master.IsActive!.Value);
     }
 
     public List<TbTransactionMaster> GetRowByNotification(int companyId)
     {
-        using var context = new DataContext();     
+        using var context = new DataContext();
         return context.TbTransactionMasters
             .Where(master => master.CompanyID == companyId
                              && master.NextVisit != null
@@ -151,7 +150,7 @@ class TransactionMasterModel : ITransactionMasterModel
 
     public List<TbTransactionMasterDto> GetRowInStatusRegister(int companyId, int transactionMasterId)
     {
-        using var context = new DataContext();     
+        using var context = new DataContext();
         var result = from tm in context.TbTransactionMasters
             join ws in context.TbWorkflowStages on tm.StatusID equals ws.WorkflowStageID
             where tm.IsActive!.Value
@@ -164,5 +163,15 @@ class TransactionMasterModel : ITransactionMasterModel
                 NameStatus = ws.Name
             };
         return result.ToList();
+    }
+
+    public List<TbTransactionMaster> getRowByTransactionIDAndEntityID(int companyID, int transactionID, int entityID)
+    {
+        using var context = new DataContext();
+        return context.TbTransactionMasters.AsNoTracking()
+            .Where(tm => tm.TransactionID == transactionID && tm.CompanyID == companyID
+                                                           && tm.EntityID == entityID && tm.IsActive!.Value)
+            .OrderByDescending(tm => tm.TransactionMasterID)
+            .Take(10).ToList();
     }
 }
