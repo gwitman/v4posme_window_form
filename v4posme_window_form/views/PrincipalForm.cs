@@ -57,8 +57,7 @@ namespace v4posme_window.Views
 
             //Abrir un formulario por defecto
             var formularioDefaultValue = CoreFormList
-                .Formularios()
-                .FirstOrDefault(c => c.Key == VariablesGlobales.Instance.Role!.UrlDefault).Value;
+                .GetFormulario(VariablesGlobales.Instance.Role!.UrlDefault);
 
             if (formularioDefaultValue is null) return;
             formularioDefaultValue.MdiParent = this;
@@ -71,7 +70,7 @@ namespace v4posme_window.Views
             if (e.Element.Style == DevExpress.XtraBars.Navigation.ElementStyle.Group) return;
             if (e.Element.Name == null) return;
 
-            var filterForm = (from keyValuePair in CoreFormList.Formularios() where e.Element.Name == keyValuePair.Key select keyValuePair.Value).FirstOrDefault();
+            var filterForm = CoreFormList.GetFormulario(e.Element.Name);
             if (filterForm is null) return;
             filterForm.MdiParent = this;
             if (IsFormOpen(filterForm.Name))

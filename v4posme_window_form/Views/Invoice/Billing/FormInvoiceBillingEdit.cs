@@ -3581,7 +3581,7 @@ namespace v4posme_window.Views.Invoice.Billing
             if (e.Item.Name == btnRegresar.Name)
             {
                 Close();
-                var formulario = CoreFormList.Formularios()["core_dashboards"];
+                var formulario = CoreFormList.GetFormulario("core_dashboards");
                 if (!CoreFormList.Principal().IsFormOpen(formulario.Name))
                 {
                     formulario.MdiParent = CoreFormList.Principal();
