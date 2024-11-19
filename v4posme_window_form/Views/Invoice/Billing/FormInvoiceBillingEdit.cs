@@ -2827,6 +2827,12 @@ namespace v4posme_window.Views.Invoice.Billing
         {
             Dictionary<string, string> diccionario = new Dictionary<string, string>();
             WebToolsHelper objWebToolsHelper = new WebToolsHelper();
+            string itemIDTemporal            = objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0");
+
+            if (itemIDTemporal == "0")
+                return;
+
+
             diccionario.Add("itemID", objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0"));
             diccionario.Add("Codigo", objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Codigo", "0"));
             diccionario.Add("Nombre", objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "Nombre", "0"));
