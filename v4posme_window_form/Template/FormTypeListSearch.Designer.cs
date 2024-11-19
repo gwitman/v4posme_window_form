@@ -184,6 +184,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Buscar Producto";
             Load += FormTypeListSearch_Load;
+            Shown += FormTypeListSearch_Shown;
             ((System.ComponentModel.ISupportInitialize)panelControl1).EndInit();
             panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)stackPanel1).EndInit();

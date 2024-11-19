@@ -84,6 +84,14 @@ namespace v4posme_window.Template
         }
 
 
+        private void FormTypeListSearch_Shown(object sender, EventArgs e)
+        {
+            txtFilter.SelectAll();
+            txtFilter.Focus();
+        }
+
+
+
         private void ShowViewByNamePaginate()
         {
             backgroundWorker1 = new();
