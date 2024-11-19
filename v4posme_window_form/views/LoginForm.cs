@@ -126,11 +126,12 @@ namespace v4posme_window.Views
                 _parameterPrice = Convert.ToDecimal(VariablesGlobales.Instance.ObjListParameterAll["CORE_CUST_PRICE"]);
                 var parameterTipoPlan = coreWebParameter.GetParameter("CORE_CUST_PRICE_TIPO_PLAN", companyId).Value;
 
-                var subject = $@"Inicio de session: {nickname}";
+                var subject = $@"Inicio de session: {VariablesGlobales.Instance.Company.Name} {nickname}";
                 var body = $@"
                     Estimados Señores de {VariablesGlobales.Instance.Company.Name}
                     En sus manos:
-                    Su balance de uso es: {parameterBalance}, Cantidad de Transacciones: {parameterCantidadTransacciones}
+                    Su balance de uso es: {parameterBalance}, Cantidad de Transacciones: {parameterCantidadTransacciones} 
+                    Direccion: 
                     Fecha {DateTime.Now.ToLongDateString()}
                  ";
 
