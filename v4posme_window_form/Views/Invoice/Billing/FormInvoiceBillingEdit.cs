@@ -677,6 +677,17 @@ namespace v4posme_window.Views.Invoice.Billing
                                    """;
                 printer.Append(totalstring);
                 printer.Separator();
+
+                if(objCompany.FlavorID == 577 /*Rosie Collection*/ )
+                {   
+                    if (objTmi.ReceiptAmountBank > 0)
+                    {
+                        printer.AlignCenter();
+                        printer.Append($"Monto por transferencia: {Math.Round(objTmi.ReceiptAmountBank,2)}, Ref No: {objTmi.ReceiptAmountBankReference}");
+                        printer.Separator();
+                    }
+                }
+
                 printer.AlignCenter();
                 printer.Append(objCompany.Address);
                 printer.Append($"Tel.: {objParameterTelefono!.Value}");
