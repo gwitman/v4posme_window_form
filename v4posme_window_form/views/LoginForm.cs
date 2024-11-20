@@ -130,7 +130,7 @@ namespace v4posme_window.Views
                 var body = $@"
                     Estimados Señores de {VariablesGlobales.Instance.Company.Name}
                     En sus manos:
-                    Su balance de uso es: {parameterBalance}, Cantidad de Transacciones: {parameterCantidadTransacciones} 
+                    Su balance de uso es: {parameterBalance}, Cantidad de Transacciones: {parameterCantidadTransacciones} , Dirección: {VariablesGlobales.Instance.Company.Address}
                     Direccion: 
                     Fecha {DateTime.Now.ToLongDateString()}
                  ";
