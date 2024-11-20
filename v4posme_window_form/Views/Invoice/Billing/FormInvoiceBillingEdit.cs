@@ -553,6 +553,19 @@ namespace v4posme_window.Views.Invoice.Billing
 
         public void ComandPrinter()
         {
+            var objCompany          = VariablesGlobales.Instance.Company;
+            if (objCompany.FlavorID == 577 /*Rosie Collection*/ )
+            {
+                ComandPrinterRosies();
+            }
+            else
+            {
+                ComandPrinterDefault();
+            }
+        }
+
+        public void ComandPrinterDefault()
+        {
             try
             {
                 var user = VariablesGlobales.Instance.User;
@@ -678,15 +691,6 @@ namespace v4posme_window.Views.Invoice.Billing
                 printer.Append(totalstring);
                 printer.Separator();
 
-                if(objCompany.FlavorID == 577 /*Rosie Collection*/ )
-                {   
-                    if (objTmi.ReceiptAmountBank > 0)
-                    {
-                        printer.AlignCenter();
-                        printer.Append($"Monto por transferencia: {Math.Round(objTmi.ReceiptAmountBank,2)}, Ref No: {objTmi.ReceiptAmountBankReference}");
-                        printer.Separator();
-                    }
-                }
 
                 printer.AlignCenter();
                 printer.Append(objCompany.Address);
@@ -700,6 +704,146 @@ namespace v4posme_window.Views.Invoice.Billing
             }
         }
 
+        public void ComandPrinterRosies()
+        {
+            try
+            {
+                var user = VariablesGlobales.Instance.User;
+                if (user is null)
+                {
+                    throw new Exception("Usuario no logeado");
+                }
+
+                var transactionID = TransactionId.Value;
+                var transactionMasterID = TransactionMasterId.Value;
+                var companyID = user.CompanyID;
+
+                //Get Component
+                var objComponent = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_company");
+                var objParameterCompanyLogo = _objInterfazCoreWebParameter.GetParameter("CORE_COMPANY_LOGO", companyID);
+                var objParameterTelefono = _objInterfazCoreWebParameter.GetParameter("CORE_PHONE", companyID);
+                var objParameterRuc = _objInterfazCoreWebParameter.GetParameter("CORE_COMPANY_IDENTIFIER", companyID)!.Value;
+                var objCompany = VariablesGlobales.Instance.Company;
+                var spacing = 0.5;
+
+                // Obtener datos del documento
+                var objTm = _objInterfazTransactionMasterModel.GetRowByPk(companyID, transactionID, transactionMasterID) ?? throw new ArgumentNullException("_objInterfazTransactionMasterModel.GetRowByPk(companyID, transactionID, transactionMasterID)");
+                var objTmi = _objInterfazTransactionMasterInfoModel.GetRowByPk(companyID, transactionID, transactionMasterID);
+                var objTmd = _objInterfazTransactionMasterDetailModel.GetRowByTransaction(companyID, transactionID, transactionMasterID);
+                var objTc = _objInterfazTransactionCausalModel.GetByCompanyAndTransactionAndCausal(companyID, transactionID, objTm.TransactionCausalId!.Value);
+                if (objTmd is null || objCompany is null)
+                {
+                    return;
+                }
+
+                // Formatear la fecha de la transacción
+                var transactionDate = objTm.TransactionOn;
+                string formattedTransactionDate = transactionDate!.Value.ToString("yyyy-M-d");
+
+                // Obtener el identificador de la empresa
+                var identifier = _objInterfazCoreWebParameter.GetParameter("CORE_COMPANY_IDENTIFIER", companyID);
+
+                // Obtener información de la sucursal
+                var objBranch = VariablesGlobales.Instance.UnityContainer.Resolve<IBranchModel>().GetRowByPk(objTm.CompanyId, objTm.BranchId!.Value);
+
+                // Obtener información de la etapa de flujo de trabajo
+                var objStage = _objInterfazCoreWebWorkflow.GetWorkflowStage("tb_transaction_master_billing", "statusID", objTm.StatusId!.Value, objTm.CompanyId, objTm.BranchId.Value, Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["APP_ROL_SUPERADMIN"]));
+
+                // Obtener el tipo de transacción
+                var objTipo = _objInterfazTransactionCausalModel.GetByCompanyAndTransactionAndCausal(companyID, objTm.TransactionId, objTm.TransactionCausalId!.Value);
+
+                // Obtener información del cliente
+                var objCustomer = _objInterfazCustomerModel.GetRowByEntity(companyID, objTm.EntityId!.Value);
+
+                // Obtener información de la moneda
+                var objCurrency = VariablesGlobales.Instance.UnityContainer.Resolve<ICurrencyModel>().GetRowByPk(objTm.CurrencyId!.Value);
+
+                // Obtener información del cliente natural
+                var objNatural = VariablesGlobales.Instance.UnityContainer.Resolve<INaturalModel>().GetRowByPk(companyID, objCustomer.BranchId, objCustomer.EntityId);
+
+                // Calcular el tipo de cambio
+                var exchangeSale = WebToolsHelper.ConvertToNumber<decimal>(_objInterfazCoreWebParameter.GetParameter("ACCOUNTING_EXCHANGE_SALE", companyID)!.Value);
+                var tipoCambio = Math.Round(objTm.ExchangeRate!.Value + exchangeSale, 2);
+
+                // Obtener información del usuario que creó la transacción
+                var objUserCreated = VariablesGlobales.Instance.UnityContainer.Resolve<IUserModel>().GetRowByPk(companyID, objTm.CreatedAt!.Value, objTm.CreatedBy!.Value);
+
+                // Imprimir el documento               
+                var printerName = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT", companyID);
+                var pathOfLogo = VariablesGlobales.ConfigurationBuilder["PATH_FILE_OF_APP_ROOT"];
+                var printer = new Printer(printerName!.Value);
+
+                printer.AlignCenter();
+                if (objParameterCompanyLogo is not null)
+                {
+                    objParameterCompanyLogo.Value = "direct-ticket-" + objParameterCompanyLogo.Value;
+                    var imagePath = $"{pathOfLogo}/img/logos/{objParameterCompanyLogo.Value!}";
+                    if (File.Exists(imagePath))
+                    {
+                        var logoCompany = new Bitmap(Image.FromFile(imagePath));
+                        //el logo que se esta mostrando no se redimensiona 
+                        //printer.Image(logoCompany);
+                    }
+                }
+
+                printer.AlignCenter();
+                printer.Append(objCompany.Name);
+                printer.Append($"RUC: {objParameterRuc}");
+                printer.BoldMode("FACTURA");
+                printer.Append(objTm.TransactionNumber);
+                printer.Append($"FECHA: {objTm.CreatedOn.Value:yyyy-M-d hh:mm:ss tt} ");
+                printer.Separator();
+                printer.AlignLeft();
+                var datos = $"""
+                             VENDEDOR:      {objUserCreated.Nickname}
+                             CODIGO:        {objCustomer.CustomerNumber}
+                             TIPO:          {objTipo.Name}
+                             ESTADO:        {objStage.First().Name}
+                             MONEDA:        {objCurrency.Name}
+                             TIPO DE PAGO:  N/D 
+                             """;
+                printer.Append(datos);
+                printer.Append("CLIENTE");
+                printer.Append($"{objCustomer.FirstName} {objCustomer.LastName}");
+                printer.Append(" ");
+                printer.Append($"{objTm.Note}");
+                printer.Append(" ");
+                printer.Append("PRODUCTO               CANT            TOTAL");
+                //printer.CondensedMode(PrinterModeState.On);
+                foreach (var detailDto in objTmd)
+                {
+                    printer.AlignLeft();
+                    printer.Append($"{detailDto.ItemNameLog}");
+
+                    printer.AlignRight();
+                    var subTotal = detailDto.Quantity * detailDto.UnitaryAmount;
+                    var detail = $"{detailDto.Quantity!.Value:N2}          {subTotal!.Value:C}";
+                    printer.Append(detail);
+                }
+
+                //printer.CondensedMode(PrinterModeState.Off);
+                printer.Separator();
+                printer.AlignLeft();
+                var totalstring = $"""
+                                   TOTAL:      {objTm!.Amount!.Value:C}
+                                   RECIBIDO:   {objTmi!.ReceiptAmount!.Value:C}
+                                   CAMBIO:     {objTmi.ChangeAmount:C}
+                                   """;
+                printer.Append(totalstring);
+                printer.Separator();
+
+                
+                printer.AlignCenter();
+                printer.Append(objCompany.Address);
+                printer.Append($"Tel.: {objParameterTelefono!.Value}");
+                printer.FullPaperCut();
+                printer.PrintDocument();
+            }
+            catch (Exception e)
+            {
+                _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Imprimir", $"Se produjo un error al imprimir, revisar los datos. Error: {e.Message}", this);
+            }
+        }
         public void LoadEdit()
         {
             //using var tx = new TransactionScope();
@@ -2152,6 +2296,8 @@ namespace v4posme_window.Views.Invoice.Billing
 
         public void PreRender()
         {
+            var objWebToolsCustomizationViewHelper  = new WebToolsCustomizationViewHelper();
+            var objCompany                          = VariablesGlobales.Instance.Company;
             var imagenInvoice = VariablesGlobales.ConfigurationBuilder["PATH_IMAGE_IN_INVOICE_POSME"];
             if (imagenInvoice is not null)
             {
@@ -2170,11 +2316,12 @@ namespace v4posme_window.Views.Invoice.Billing
                 }
             }
 
-            colTransactionDetailName.OptionsColumn.AllowEdit = varPermisosEsPermitidoModificarNombre;
-            colPrice.OptionsColumn.AllowEdit = varPermisosEsPermitidoModificarPrecio;
-            colAccionMas.Caption = "Mas";
-            colAccionMenos.Caption = "Menos";
-            colAccionPrecios.Caption = "Precios";
+            colTransactionDetailName.OptionsColumn.AllowEdit    = varPermisosEsPermitidoModificarNombre;
+            colPrice.OptionsColumn.AllowEdit                    = varPermisosEsPermitidoModificarPrecio;
+            colAccionMas.Caption                                = "Mas";
+            colAccionMenos.Caption                              = "Menos";
+            colAccionPrecios.Caption                            = "Precios";
+            labelControl12.Text                                 = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZone", "Zona");
 
             ObjSELECCIONAR_ITEM_BILLING_BACKGROUND = VariablesGlobales.Instance.ObjSELECCIONAR_ITEM_BILLING_BACKGROUND;
         }
