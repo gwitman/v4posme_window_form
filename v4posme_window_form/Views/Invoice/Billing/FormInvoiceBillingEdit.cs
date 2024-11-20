@@ -2328,7 +2328,7 @@ namespace v4posme_window.Views.Invoice.Billing
             ObjSELECCIONAR_ITEM_BILLING_BACKGROUND              = VariablesGlobales.Instance.ObjSELECCIONAR_ITEM_BILLING_BACKGROUND;
 
 
-            //Personalizar ZONAS
+            //Personalizar Label ZONAS
             string? controlSourceName   = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZoneControlPosition", "");
 
             if(controlSourceName != "")
@@ -2343,6 +2343,20 @@ namespace v4posme_window.Views.Invoice.Billing
                     labelControl12.Location.Y
             );
 
+            //Personalizar Control ZONAS
+            controlSourceName   = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlZoneControlPosition", "");
+
+            if (controlSourceName != "")
+                objCoreWebRenderInView.MoveControlToSource(controlSourceName, "txtZoneID", this);
+
+            txtZoneID.Width     = 
+                        objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlZoneWidth", "0") == "0" ?
+                        txtZoneID.Width :
+                        Convert.ToInt32(objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlZoneWidth", "0")) ;
+
+            //Personalizar Label Identificacion del cliente
+            labelControl6.Visible                   = Convert.ToBoolean(objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelShowWindowIdentificationCustomer", "true"));
+            txtReferenceClientIdentifier.Visible    = Convert.ToBoolean(objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlShowWindowIdentificationCustomer", "true"));
         }
 
 
