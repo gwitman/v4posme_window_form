@@ -45,6 +45,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Listado Clientes";
             WindowState = FormWindowState.Maximized;
+            Activated += FormCustomerList_Enter;
             Load += FormCustomerList_Load;
             Enter += FormCustomerList_Enter;
             ResumeLayout(false);

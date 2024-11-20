@@ -45,6 +45,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LISTA DE PRODUCTOS";
             WindowState = FormWindowState.Maximized;
+            Activated += FormInventoryItemList_Enter;
             Load += FormInventoryItemList_Load;
             Enter += FormInventoryItemList_Enter;
             ResumeLayout(false);

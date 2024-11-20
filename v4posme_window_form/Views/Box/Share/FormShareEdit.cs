@@ -453,7 +453,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
 
             // Formatear la fecha de la transacción
             var transactionDate = objTm.TransactionOn;
-            var formattedTransactionDate = transactionDate!.Value.ToString("yyyy-MM-dd hh:mm:ss tt");
+            var formattedTransactionDate = transactionDate!.Value.ToString("yyyy-M-d HH:mm:ss");
 
             // Imprimir el documento               
             var printerName = objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT", companyID);
@@ -498,26 +498,37 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             saldoInicial = selectedResult.Value.ToString() == "Individual" ? saldoInicial : saldoInicialGeneral;
             saldoFinal = selectedResult.Value.ToString() == "Individual" ? saldoFinal : saldoFinalGeneral;
 
-            var detalle = new List<List<string>>(); // Lista de listas para almacenar los datos
+            var detalle = new Dictionary<string, string>(); // Lista de listas para almacenar los datos
 
             if (selectedResult.Value.ToString() != "Basico")
             {
                 // SALDO INICIAL
-                var row = new List<string> { "SALDO INICIAL", "", objCurrency.Simbol + saldoInicial.ToString("F2") };
-                detalle.Add(row);
-
+                detalle.Add("SALDO INICIAL", $"{objCurrency.Simbol} {saldoInicial:F}");
                 // ABONOS
+                var aux = 1;
                 foreach (var detail in objTMD)
                 {
-                    row = new List<string> { "ABONO", "", Math.Round((decimal)detail.Amount, 2).ToString("F2") };
-                    detalle.Add(row);
+                    detalle.Add($"ABONO {aux}",Math.Round(detail.Amount!.Value, 2).ToString("F"));
+                    aux++;
                 }
 
                 // SALDO FINAL
-                row = new List<string> { "SALDO FINAL", "", saldoFinal.ToString("F2") };
-                detalle.Add(row);
+                detalle.Add("SALDO FINAL",  saldoFinal.ToString("F2"));
             }
 
+            if (detalle.Count>0)
+            {
+                foreach (var deta in detalle)
+                {
+                    printer.Append($"{deta.Key} {deta.Value}");
+                }
+            }
+
+            printer.AlignCenter();
+            printer.Append(objCompany.Address);
+            printer.Append($"Tel.: {objParameterTelefono!}");
+            printer.FullPaperCut();
+            printer.PrintDocument();
         }
         catch (Exception e)
         {

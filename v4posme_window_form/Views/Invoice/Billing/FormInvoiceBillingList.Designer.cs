@@ -50,6 +50,7 @@
             Name = "FormInvoiceBillingList";
             Text = "FormInvoiceBillingList";
             WindowState = FormWindowState.Maximized;
+            Activated += FormInvoiceBillingList_Enter;
             Load += FormInvoiceBillingList_Load;
             Enter += FormInvoiceBillingList_Enter;
             Resize += FormInvoiceBillingList_Resize;

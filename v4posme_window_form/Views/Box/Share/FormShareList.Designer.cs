@@ -46,6 +46,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Lista de Abonos";
             WindowState = FormWindowState.Maximized;
+            Activated += FormShareList_Enter;
             Load += FormShareList_Load;
             Enter += FormShareList_Enter;
             ResumeLayout(false);

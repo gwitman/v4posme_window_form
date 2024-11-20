@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInventoryInputList));
             SuspendLayout();
             // 
             // progressPanel
@@ -39,11 +40,13 @@
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1129, 579);
+            ClientSize = new Size(1129, 577);
+            IconOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("FormInventoryInputList.IconOptions.SvgImage");
             Name = "FormInventoryInputList";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FormInventoryInputList";
+            Text = "Inventario";
             WindowState = FormWindowState.Maximized;
+            Activated += FormInventoryInput_Enter;
             Load += FormInventoryInput_Load;
             Enter += FormInventoryInput_Enter;
             ResumeLayout(false);
