@@ -602,4 +602,43 @@ public class CoreWebRenderInView
         else
             e.HtmlPopup.Pinned = !e.HtmlPopup.Pinned;
     }
+
+    public void MoveControlToSource(string sourceControlName, string targetControlName, Form form)
+    {
+        // Encuentra el control origen
+        Control? sourceControl = form.Controls.Find(sourceControlName, true).FirstOrDefault();
+
+        // Encuentra el control destino
+        Control? targetControl = form.Controls.Find(targetControlName, true).FirstOrDefault();
+
+        // Validar que ambos controles existan
+        if (sourceControl == null)
+        {   
+            return;
+        }
+
+        if (targetControl == null)
+        {
+            return;
+        }
+
+        // Obtén el contenedor del control origen
+        Control? sourceParent = sourceControl.Parent;
+
+        if (sourceParent == null)
+        {
+            return;
+        }
+
+        // Verifica si el control destino está en un contenedor diferente
+        if (targetControl.Parent != sourceParent)
+        {
+            // Si están en diferentes contenedores, mueve el control destino al contenedor del origen
+            sourceParent.Controls.Add(targetControl);
+        }
+
+        // Mueve el control destino a la posición del origen dentro del contenedor compartido
+        targetControl.Location = new Point(sourceControl.Location.X, sourceControl.Location.Y);
+    }
+
 }

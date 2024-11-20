@@ -11,7 +11,7 @@ namespace v4posme_library.Libraries.CustomHelper
             var divs = ReadXmlFile();
             if (keyController != "core_web_menu")
             {
-                var key = typeCompany.ToLower() + "_" + keyController.ToLower() + "_" + keyElement!.ToLower();
+                var key = typeCompany.ToLower() + "_" + keyController.ToLower() + "_" + keyElement;
                 if (!divs.ContainsKey(key))
                 {
                     // Si el key no existe, buscar el key para la empresa por defecto

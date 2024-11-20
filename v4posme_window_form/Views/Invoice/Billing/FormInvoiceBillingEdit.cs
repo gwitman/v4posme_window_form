@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using DevExpress.Utils.Controls;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
@@ -2297,7 +2298,10 @@ namespace v4posme_window.Views.Invoice.Billing
         public void PreRender()
         {
             var objWebToolsCustomizationViewHelper  = new WebToolsCustomizationViewHelper();
+            var objCoreWebRenderInView              = new CoreWebRenderInView();
             var objCompany                          = VariablesGlobales.Instance.Company;
+            
+
             var imagenInvoice = VariablesGlobales.ConfigurationBuilder["PATH_IMAGE_IN_INVOICE_POSME"];
             if (imagenInvoice is not null)
             {
@@ -2321,9 +2325,24 @@ namespace v4posme_window.Views.Invoice.Billing
             colAccionMas.Caption                                = "Mas";
             colAccionMenos.Caption                              = "Menos";
             colAccionPrecios.Caption                            = "Precios";
-            labelControl12.Text                                 = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZone", "Zona");
+            ObjSELECCIONAR_ITEM_BILLING_BACKGROUND              = VariablesGlobales.Instance.ObjSELECCIONAR_ITEM_BILLING_BACKGROUND;
 
-            ObjSELECCIONAR_ITEM_BILLING_BACKGROUND = VariablesGlobales.Instance.ObjSELECCIONAR_ITEM_BILLING_BACKGROUND;
+
+            //Personalizar ZONAS
+            string? controlSourceName   = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZoneControlPosition", "");
+
+            if(controlSourceName != "")
+            objCoreWebRenderInView.MoveControlToSource(controlSourceName, "labelControl12", this);
+
+            labelControl12.Text             = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZone", "Zona");
+            labelControl12.AutoSizeMode     = DevExpress.XtraEditors.LabelAutoSizeMode.None; 
+            labelControl12.Size             = new Size(TextRenderer.MeasureText(labelControl12.Text, labelControl12.Font).Width, labelControl12.Height);
+            labelControl12.Location         = new Point(
+                    labelControl12.Location.X - 
+                    Convert.ToInt32(objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZoneX", "0")),
+                    labelControl12.Location.Y
+            );
+
         }
 
 
