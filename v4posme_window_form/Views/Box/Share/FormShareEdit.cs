@@ -37,6 +37,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
     private int? EntityId;
     private int? txtEmployeeID;
     private int txtCustomerID = 0;
+    private RenderFileGridControl renderGridFiles;
 
     #endregion
 
@@ -409,7 +410,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
     public void ComandPrinter()
     {
         var frmSelectPrint = new FormShareEditOpcionPrint();
-        if(frmSelectPrint.ShowDialog() == DialogResult.Cancel)
+        if (frmSelectPrint.ShowDialog() == DialogResult.Cancel)
         {
             return;
         }
@@ -418,12 +419,18 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             var selectedResult = frmSelectPrint.Result;
             if (selectedResult is null)
             {
-                throw new Exception("Seleccione una opcion para continuar");       
+                throw new Exception("Seleccione una opcion para continuar");
             }
             var user = VariablesGlobales.Instance.User;
             if (user is null)
             {
                 throw new Exception("Usuario no logeado");
+            }
+
+            if (Convert.ToInt32(selectedResult.Key) == 4)
+            {
+                ViewRegisterFormatoPaginaTicketInvoiceCancel();
+                return;
             }
 
             var role = VariablesGlobales.Instance.Role;
@@ -488,13 +495,23 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             printer.Append(datos);
             printer.Append("CLIENTE");
             printer.Append($"{objCustumer.FirstName} {objCustumer.LastName}");
+            printer.NewLine();
             var saldoInicial = objTMD.Sum(detail => Convert.ToDecimal(detail.Reference2));
             var saldoFinal = objTMD.Sum(detail => Convert.ToDecimal(detail.Reference4));
             var saldoAbonado = objTMD.Sum(detail => detail.Amount);
 
             /*Calculo de saldos generales*/
-            var saldoInicialGeneral = Math.Round(Convert.ToDecimal(objTMI.Reference1));
-            var saldoFinalGeneral = Math.Round(Convert.ToDecimal(objTMI.Reference2));
+            var saldoInicialGeneral = decimal.Zero;
+            if (!string.IsNullOrWhiteSpace(objTMI.Reference1))
+            {
+                saldoInicialGeneral = Math.Round(Convert.ToDecimal(objTMI.Reference1));
+            }
+
+            var saldoFinalGeneral = decimal.Zero;
+            if (!string.IsNullOrWhiteSpace(objTMI.Reference2))
+            {
+                saldoFinalGeneral = Math.Round(Convert.ToDecimal(objTMI.Reference2));
+            }
             saldoInicial = selectedResult.Value.ToString() == "Individual" ? saldoInicial : saldoInicialGeneral;
             saldoFinal = selectedResult.Value.ToString() == "Individual" ? saldoFinal : saldoFinalGeneral;
 
@@ -503,27 +520,39 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             if (selectedResult.Value.ToString() != "Basico")
             {
                 // SALDO INICIAL
-                detalle.Add("SALDO INICIAL", $"{objCurrency.Simbol} {saldoInicial:F}");
+                detalle.Add("SALDO INICIAL", $"{saldoInicial:N2}");
                 // ABONOS
                 var aux = 1;
                 foreach (var detail in objTMD)
                 {
-                    detalle.Add($"ABONO {aux}",Math.Round(detail.Amount!.Value, 2).ToString("F"));
+                    detalle.Add($"ABONO {aux}", $"{Math.Round(detail.Amount!.Value, 2):N2}");
                     aux++;
                 }
 
                 // SALDO FINAL
-                detalle.Add("SALDO FINAL",  saldoFinal.ToString("F2"));
+                detalle.Add("SALDO FINAL", $"{saldoFinal:N2}");
             }
 
-            if (detalle.Count>0)
+            if (detalle.Count > 0)
             {
                 foreach (var deta in detalle)
                 {
-                    printer.Append($"{deta.Key} {deta.Value}");
+                    printer.Append($"{deta.Key}               {objCurrency.Simbol} {deta.Value}");
                 }
             }
-
+            else
+            {
+                printer.Append($"SALDO INIIAL               {objCurrency.Simbol} {saldoInicial:N2}");
+                printer.Append($"ABONO                      {objCurrency.Simbol} {saldoAbonado:N2}");
+                printer.Append($"SALDO FINAL                {objCurrency.Simbol} {saldoFinal:N2}");
+            }
+            printer.NewLine();
+            printer.Append($"SUB-TOTAL               {objCurrency.Simbol} {objTm.SubAmount:N2 ?? decimal.Zero:N2}");
+            printer.Append($"IVA                     {objCurrency.Simbol} {objTm.Tax1:N2 ?? decimal.Zero:N2}");
+            printer.Append($"DESC                    {objCurrency.Simbol} {objTm.Discount:N2 ?? decimal.Zero:N2}");
+            printer.Append($"TOTAL                   {objCurrency.Simbol} {objTm.Amount:N2}");
+            printer.Append($"RECIBIDO                {objCurrency.Simbol} {objTm.Amount - objTMI.ChangeAmount:N2}");
+            printer.NewLine();
             printer.AlignCenter();
             printer.Append(objCompany.Address);
             printer.Append($"Tel.: {objParameterTelefono!}");
@@ -1237,6 +1266,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                                     Quantity = decimal.Zero,
                                     UnitaryCost = decimal.Zero,
                                     Cost = decimal.Zero,
+                                    UnitaryAmount = decimal.Zero,
                                     UnitaryPrice = decimal.Zero,
                                     Amount = share,
                                     Discount = decimal.Zero,
@@ -1244,9 +1274,9 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                                     Reference1 = reference1Documento,
                                     Reference2 = Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance!.Value.ToString("N2").Replace(",", "") : objCustomerCreditDocument.BalanceNew!.Value.ToString("N2").Replace(",", ""),
                                     Reference3 = $"{reference3AmortizationID}",
-                                    Reference5 = objCustomerCreditDocument.DateOn.ToString("d"),
-                                    Reference6 = objCustomerCreditDocument.DateFinish!.Value.ToString("d"),
-                                    Reference7 = objCustomerCreditDocument.DateApply.ToString("d"),
+                                    Reference5 = objCustomerCreditDocument.DateOn.ToString("yyyy-MM-dd"),
+                                    Reference6 = objCustomerCreditDocument.DateFinish!.Value.ToString("yyyy-MM-dd"),
+                                    Reference7 = objCustomerAmortization.DateApply.ToString("yyyy-MM-dd"),
                                     Lote = $"{diferenciaDias}",
                                     CatalogStatusID = 0,
                                     InventoryStatusID = 0,
@@ -1478,6 +1508,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
 
     public void LoadRender(TypeRender typeRedner)
     {
+        var user = VariablesGlobales.Instance.User;
         switch (typeRedner)
         {
             case TypeRender.New:
@@ -1485,6 +1516,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                 btnImprmir.Visible = false;
                 btnNuevo.Visible = false;
                 layoutControlItemCobrador.ContentVisible = false;
+                tabPageArchivos.PageVisible = false;
                 lblTitulo.Text = @"ABONO #:00000000";
                 txtCustomerID = 0;
                 txtCustomerDescription.Text = string.Empty;
@@ -1526,23 +1558,27 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                 if (ObjTransactionMasterDetail.Count > 0)
                 {
                     foreach (var detailDto in ObjTransactionMasterDetail.Select(detail => new FormShareEditDetailDTO
-                             {
-                                 DetailCustomerCreditDocumentId = detail.ComponentItemID ?? 0,
-                                 DetailTransactionDetailId = detail.TransactionMasterID,
-                                 DetailTransactionDetailDocument = detail.Reference1 ?? string.Empty,
-                                 DetailTransactionDetailFecha = null,
-                                 DetailAmortizationId = Convert.ToInt32(detail.Reference3),
-                                 DetailBalanceStart = Convert.ToDecimal(detail.Reference2),
-                                 DetailBalanceFinish = Convert.ToDecimal(detail.Reference4),
-                                 DetailShare = detail.Amount ?? decimal.Zero,
-                                 DetailBalanceStartShare = decimal.Parse(detail.Reference2 ?? "0", CultureInfo.CurrentCulture),
-                                 DetailBalanceFinishShare = decimal.Parse(detail.Reference4 ?? "0", CultureInfo.CurrentCulture)
-                             }))
+                    {
+                        DetailCustomerCreditDocumentId = detail.ComponentItemID ?? 0,
+                        DetailTransactionDetailId = detail.TransactionMasterID,
+                        DetailTransactionDetailDocument = detail.Reference1 ?? string.Empty,
+                        DetailTransactionDetailFecha = null,
+                        DetailAmortizationId = Convert.ToInt32(detail.Reference3),
+                        DetailBalanceStart = Convert.ToDecimal(detail.Reference2),
+                        DetailBalanceFinish = Convert.ToDecimal(detail.Reference4),
+                        DetailShare = detail.Amount ?? decimal.Zero,
+                        DetailBalanceStartShare = decimal.Parse(detail.Reference2 ?? "0", CultureInfo.CurrentCulture),
+                        DetailBalanceFinishShare = decimal.Parse(detail.Reference4 ?? "0", CultureInfo.CurrentCulture)
+                    }))
                     {
                         bindingSourceDetailDto.Add(detailDto);
                     }
                 }
-
+                gridControlArchivos.DataSource = null;
+                gridControlArchivos.MainView = null;
+                renderGridFiles = new RenderFileGridControl(user.CompanyID, ObjComponentTransactionShare!.ComponentID, TransactionMasterId.Value);
+                renderGridFiles.RenderGridControl(gridControlArchivos);
+                renderGridFiles.LoadFiles();
                 ObjListCustomerCreditDocument = customerCreditDocumentModel.GetRowByEntityApplied(ObjTransactionMaster.CompanyId, txtCustomerID, ObjTransactionMaster.CurrencyId ?? 0);
                 break;
         }
@@ -1696,6 +1732,60 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
         }
     }
 
+    private void ViewRegisterFormatoPaginaTicketInvoiceCancel()
+    {
+        var user = VariablesGlobales.Instance.User!;
+        var role = VariablesGlobales.Instance.Role!;
+        var transactionID = TransactionId!.Value;
+        var transactionMasterID = TransactionMasterId!.Value;
+        var companyID = user.CompanyID;
+
+        //Get Logo
+        var objParameterCompanyLogo = objInterfazCoreWebParameter.GetParameterValue("CORE_COMPANY_LOGO", companyID);
+        var objParameterTelefono = objInterfazCoreWebParameter.GetParameterValue("CORE_PHONE", companyID);
+
+        //Get Company
+        var objCompany = companyModel.GetRowByPk(companyID);
+
+        //Get Documento
+        var objDetail = transactionMasterDetailModel.GetRowByShareId(companyID, transactionMasterID);
+        var Identifier = objInterfazCoreWebParameter.GetParameterValue("CORE_COMPANY_IDENTIFIER", companyID);
+        if (objDetail.Count < 0)
+        {
+            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Imprimir", "No hay datos a imprimir", this);
+            return;
+        }
+        // Imprimir el documento               
+        var printerName = objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_NAME_DEFAULT", companyID);
+        var pathOfLogo = VariablesGlobales.ConfigurationBuilder["PATH_FILE_OF_APP_ROOT"];
+        var printer = new Printer(printerName!.Value);
+
+        printer.AlignCenter();
+        if (objParameterCompanyLogo is not null)
+        {
+            objParameterCompanyLogo = "direct-ticket-" + objParameterCompanyLogo;
+            var imagePath = $"{pathOfLogo}/img/logos/{objParameterCompanyLogo!}";
+            if (File.Exists(imagePath))
+            {
+                var logoCompany = new Bitmap(Image.FromFile(imagePath));
+                //el logo que se esta mostrando no se redimensiona 
+                printer.Image(logoCompany);
+            }
+        }
+
+        printer.AlignCenter();
+        printer.Append(objCompany.Name.ToUpper());
+        printer.Append("DETALLE");
+        printer.AlignLeft();
+        printer.Append($"Código       {objDetail.ElementAt(0).CustomerNumber}");
+        printer.Append($"Cliente      {objDetail.ElementAt(0).FirstName}");
+        printer.NewLine();
+        foreach (var detail in objDetail)
+        {
+
+        }
+    }
+
     #endregion
 
     #region Eventos
@@ -1707,7 +1797,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
 
     private void BtnEliminarOnClick(object? sender, EventArgs e)
     {
-        if (XtraMessageBox.Show("","",MessageBoxButtons.OKCancel, MessageBoxIcon.Question)== DialogResult.Cancel)
+        if (XtraMessageBox.Show("", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
         {
             return;
         }
@@ -1904,5 +1994,18 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
         FnOnCompleteNewEmployeePopPub(mensaje);
     }
 
+    private void btnAgregarArchivo_Click(object sender, EventArgs e)
+    {
+        var openFileDialog = new XtraOpenFileDialog();
+        openFileDialog.Title = @"Seleccionar archivo";
+        var dialogResult = openFileDialog.ShowDialog(this);
+        if (dialogResult == DialogResult.OK)
+        {
+            var file = openFileDialog.SafeFileName;
+            renderGridFiles.AddRow(file);
+        }
+    }
+
     #endregion
+
 }

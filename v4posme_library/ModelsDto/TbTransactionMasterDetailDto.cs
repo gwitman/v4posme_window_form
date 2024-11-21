@@ -67,4 +67,8 @@ public class TbTransactionMasterDetailDto
     public string? Indicador { get; set; }
     public int Cantidad { get; set; }
     public string? Agente { get; set; }
+    public string? FacturaCancelada { get; set; }
+    public string? TransactionNumber { get; set; }
+    public string? CustomerNumber { get; set; }
+    public DateTime? CreatedOn { get; set; }
 }

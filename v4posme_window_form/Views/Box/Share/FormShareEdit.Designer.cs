@@ -251,7 +251,7 @@
             xtraTabControl1.Location = new Point(0, 100);
             xtraTabControl1.Name = "xtraTabControl1";
             xtraTabControl1.SelectedTabPage = xtraTabPage1;
-            xtraTabControl1.Size = new Size(1139, 274);
+            xtraTabControl1.Size = new Size(1173, 274);
             xtraTabControl1.TabIndex = 76;
             xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPage1, xtraTabPage2, xtraTabPage3, tabPageArchivos });
             // 
@@ -260,7 +260,7 @@
             xtraTabPage1.Controls.Add(panelControl2);
             xtraTabPage1.Controls.Add(panelControl1);
             xtraTabPage1.Name = "xtraTabPage1";
-            xtraTabPage1.Size = new Size(1137, 243);
+            xtraTabPage1.Size = new Size(1171, 243);
             xtraTabPage1.Text = "Información";
             // 
             // panelControl2
@@ -272,7 +272,7 @@
             panelControl2.Location = new Point(480, 0);
             panelControl2.Name = "panelControl2";
             panelControl2.Padding = new Padding(1);
-            panelControl2.Size = new Size(657, 243);
+            panelControl2.Size = new Size(691, 243);
             panelControl2.TabIndex = 2;
             // 
             // flowLayoutPanel1
@@ -768,7 +768,7 @@
             xtraTabPage2.Controls.Add(layoutControl3);
             xtraTabPage2.Controls.Add(layoutControl4);
             xtraTabPage2.Name = "xtraTabPage2";
-            xtraTabPage2.Size = new Size(1103, 243);
+            xtraTabPage2.Size = new Size(1137, 249);
             xtraTabPage2.Text = "Referencias";
             // 
             // layoutControl3
@@ -886,7 +886,7 @@
             xtraTabPage3.Controls.Add(txtNote);
             xtraTabPage3.Controls.Add(labelControl1);
             xtraTabPage3.Name = "xtraTabPage3";
-            xtraTabPage3.Size = new Size(1103, 243);
+            xtraTabPage3.Size = new Size(1137, 249);
             xtraTabPage3.Text = "Comentarios";
             // 
             // txtNote
@@ -911,7 +911,7 @@
             tabPageArchivos.Controls.Add(btnAgregarArchivo);
             tabPageArchivos.Controls.Add(gridControlArchivos);
             tabPageArchivos.Name = "tabPageArchivos";
-            tabPageArchivos.Size = new Size(1103, 243);
+            tabPageArchivos.Size = new Size(1171, 243);
             tabPageArchivos.Text = "Archivos";
             // 
             // btnAgregarArchivo
@@ -928,6 +928,7 @@
             btnAgregarArchivo.Size = new Size(75, 30);
             btnAgregarArchivo.TabIndex = 4;
             btnAgregarArchivo.Text = "Importar";
+            btnAgregarArchivo.Click += btnAgregarArchivo_Click;
             // 
             // gridControlArchivos
             // 
@@ -953,7 +954,7 @@
             stackPanel4.Location = new Point(0, 374);
             stackPanel4.Name = "stackPanel4";
             stackPanel4.Padding = new Padding(1);
-            stackPanel4.Size = new Size(1139, 52);
+            stackPanel4.Size = new Size(1173, 52);
             stackPanel4.TabIndex = 77;
             stackPanel4.UseSkinIndents = true;
             // 
@@ -1015,7 +1016,7 @@
             gridControlTransactionMasterDetail.Location = new Point(0, 426);
             gridControlTransactionMasterDetail.MainView = gridViewTransactionMasterDetail;
             gridControlTransactionMasterDetail.Name = "gridControlTransactionMasterDetail";
-            gridControlTransactionMasterDetail.Size = new Size(1139, 224);
+            gridControlTransactionMasterDetail.Size = new Size(1173, 224);
             gridControlTransactionMasterDetail.TabIndex = 78;
             gridControlTransactionMasterDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewTransactionMasterDetail });
             // 
@@ -1111,7 +1112,7 @@
             sidePanel1.Dock = DockStyle.Top;
             sidePanel1.Location = new Point(0, 650);
             sidePanel1.Name = "sidePanel1";
-            sidePanel1.Size = new Size(1139, 157);
+            sidePanel1.Size = new Size(1173, 157);
             sidePanel1.TabIndex = 79;
             sidePanel1.Text = "sidePanel1";
             // 
@@ -1123,7 +1124,7 @@
             layoutControl7.Location = new Point(350, 0);
             layoutControl7.Name = "layoutControl7";
             layoutControl7.Root = layoutControlGroup6;
-            layoutControl7.Size = new Size(425, 156);
+            layoutControl7.Size = new Size(459, 156);
             layoutControl7.TabIndex = 4;
             layoutControl7.Text = "layoutControl7";
             // 
@@ -1136,7 +1137,7 @@
             txtReceiptAmount.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             txtReceiptAmount.Properties.EditFormat.FormatString = "N2";
             txtReceiptAmount.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            txtReceiptAmount.Size = new Size(340, 28);
+            txtReceiptAmount.Size = new Size(374, 28);
             txtReceiptAmount.StyleController = layoutControl7;
             txtReceiptAmount.TabIndex = 0;
             txtReceiptAmount.EditValueChanged += txtReceiptAmount_EditValueChanged;
@@ -1150,7 +1151,7 @@
             txtChangeAmount.Properties.EditFormat.FormatString = "N2";
             txtChangeAmount.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             txtChangeAmount.Properties.ReadOnly = true;
-            txtChangeAmount.Size = new Size(340, 28);
+            txtChangeAmount.Size = new Size(374, 28);
             txtChangeAmount.StyleController = layoutControl7;
             txtChangeAmount.TabIndex = 2;
             // 
@@ -1160,7 +1161,7 @@
             layoutControlGroup6.GroupBordersVisible = false;
             layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { simpleLabelItem4, layoutControlItem13, layoutControlItem14, simpleSeparator2 });
             layoutControlGroup6.Name = "layoutControlGroup6";
-            layoutControlGroup6.Size = new Size(425, 156);
+            layoutControlGroup6.Size = new Size(459, 156);
             layoutControlGroup6.TextVisible = false;
             // 
             // simpleLabelItem4
@@ -1170,7 +1171,7 @@
             simpleLabelItem4.AppearanceItemCaption.Options.UseFont = true;
             simpleLabelItem4.Location = new Point(0, 0);
             simpleLabelItem4.Name = "simpleLabelItem4";
-            simpleLabelItem4.Size = new Size(399, 25);
+            simpleLabelItem4.Size = new Size(433, 25);
             simpleLabelItem4.Text = "Pago";
             simpleLabelItem4.TextSize = new Size(37, 19);
             // 
@@ -1179,7 +1180,7 @@
             layoutControlItem13.Control = txtReceiptAmount;
             layoutControlItem13.Location = new Point(0, 26);
             layoutControlItem13.Name = "layoutControlItem13";
-            layoutControlItem13.Size = new Size(399, 34);
+            layoutControlItem13.Size = new Size(433, 34);
             layoutControlItem13.Text = "Ingreso";
             layoutControlItem13.TextSize = new Size(37, 13);
             // 
@@ -1188,7 +1189,7 @@
             layoutControlItem14.Control = txtChangeAmount;
             layoutControlItem14.Location = new Point(0, 60);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new Size(399, 70);
+            layoutControlItem14.Size = new Size(433, 70);
             layoutControlItem14.Text = "Cambio";
             layoutControlItem14.TextSize = new Size(37, 13);
             // 
@@ -1197,13 +1198,13 @@
             simpleSeparator2.AllowHotTrack = false;
             simpleSeparator2.Location = new Point(0, 25);
             simpleSeparator2.Name = "simpleSeparator2";
-            simpleSeparator2.Size = new Size(399, 1);
+            simpleSeparator2.Size = new Size(433, 1);
             // 
             // layoutControl6
             // 
             layoutControl6.Controls.Add(txtTotal);
             layoutControl6.Dock = DockStyle.Right;
-            layoutControl6.Location = new Point(775, 0);
+            layoutControl6.Location = new Point(809, 0);
             layoutControl6.Name = "layoutControl6";
             layoutControl6.Root = layoutControlGroup5;
             layoutControl6.Size = new Size(364, 156);
@@ -1323,7 +1324,7 @@
             AutoScroll = true;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(1156, 794);
+            ClientSize = new Size(1190, 792);
             Controls.Add(sidePanel1);
             Controls.Add(gridControlTransactionMasterDetail);
             Controls.Add(stackPanel4);

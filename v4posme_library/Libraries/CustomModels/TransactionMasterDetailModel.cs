@@ -779,4 +779,50 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             };
         return result.ToList();
     }
+
+    public List<TbTransactionMasterDetailDto> GetRowByShareId(int companyId, int transactionMasterId)
+    {
+        using var context = new DataContext();
+        var query =
+            from tm in context.TbTransactionMasters.AsNoTracking()
+            join ws in context.TbWorkflowStages.AsNoTracking()
+                on tm.StatusID equals ws.WorkflowStageID
+            join tmd in context.TbTransactionMasterDetails.AsNoTracking()
+                on tm.TransactionMasterID equals tmd.TransactionMasterID
+            join ccd in context.TbCustomerCreditDocuments.AsNoTracking()
+                on tmd.Reference1 equals ccd.DocumentNumber
+            join wss in context.TbWorkflowStages.AsNoTracking()
+                on ccd.StatusID equals wss.WorkflowStageID
+            join fac in context.TbTransactionMasters.AsNoTracking()
+                on ccd.DocumentNumber equals fac.TransactionNumber
+            join ul in context.TbTransactionMasterDetails.AsNoTracking()
+                on fac.TransactionMasterID equals ul.TransactionMasterID
+            join i in context.TbItems.AsNoTracking()
+                on ul.ComponentItemID equals i.ItemID
+            join nat in context.TbNaturales.AsNoTracking()
+                on ccd.EntityID equals nat.EntityID
+            join cus in context.TbCustomers.AsNoTracking()
+                on nat.EntityID equals cus.EntityID
+            where
+                tm.IsActive!.Value &&
+                tm.TransactionID == 23 &&
+                tm.StatusID == 80 && // "aplicado"
+                ccd.StatusID == 82 && // "cancelado"
+                tm.TransactionMasterID == transactionMasterId
+            select new TbTransactionMasterDetailDto
+            {
+                TransactionNumber = tm.TransactionNumber,
+                CustomerNumber = cus.CustomerNumber,
+                FirstName = nat.FirstName,
+                FacturaCancelada = fac.TransactionNumber,
+                CreatedOn = fac.CreatedOn,
+                ItemName = i.Name,
+                Quantity = ul.Quantity,
+                UnitaryPrice = ul.UnitaryPrice,
+                Tax1 = ul.Tax1 ?? 0,
+                Tax2 = ul.Tax2 ?? 0,
+                Amount = ul.Amount
+            };
+        return query.ToList();
+    }
 }
