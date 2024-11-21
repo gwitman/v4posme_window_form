@@ -2329,34 +2329,24 @@ namespace v4posme_window.Views.Invoice.Billing
 
 
             //Personalizar Label ZONAS
-            string? controlSourceName   = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZoneControlPosition", "");
-
-            if(controlSourceName != "")
-            objCoreWebRenderInView.MoveControlToSource(controlSourceName, "labelControl12", this);
-
-            labelControl12.Text             = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZone", "Zona");
-            labelControl12.AutoSizeMode     = DevExpress.XtraEditors.LabelAutoSizeMode.None; 
-            labelControl12.Size             = new Size(TextRenderer.MeasureText(labelControl12.Text, labelControl12.Font).Width, labelControl12.Height);
-            labelControl12.Location         = new Point(
-                    labelControl12.Location.X - 
-                    Convert.ToInt32(objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZoneX", "0")),
-                    labelControl12.Location.Y
-            );
-
+            string? targetControlLabelZone      = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZoneControlPosition", "");                        
+            labelControl12.Text                 = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZone", "Zona");
+            objCoreWebRenderInView.MoveControlToSource(targetControlLabelZone, "labelControl12", this);
+            objCoreWebRenderInView.ChangeSizeAutoSizeMode(labelControl12,this);
+            objCoreWebRenderInView.ChangePositionX("labelControl12", objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZoneX", "0"),this);
+        
             //Personalizar Control ZONAS
-            controlSourceName   = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlZoneControlPosition", "");
+            string? targetControlSourceName   = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlZoneControlPosition", "");
+            objCoreWebRenderInView.MoveControlToSource(targetControlSourceName, "txtZoneID", this);
+            objCoreWebRenderInView.ChangeWidth("txtZoneID", objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlZoneWidth", "0"),this);
 
-            if (controlSourceName != "")
-                objCoreWebRenderInView.MoveControlToSource(controlSourceName, "txtZoneID", this);
-
-            txtZoneID.Width     = 
-                        objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlZoneWidth", "0") == "0" ?
-                        txtZoneID.Width :
-                        Convert.ToInt32(objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlZoneWidth", "0")) ;
 
             //Personalizar Label Identificacion del cliente
-            labelControl6.Visible                   = Convert.ToBoolean(objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelShowWindowIdentificationCustomer", "true"));
-            txtReferenceClientIdentifier.Visible    = Convert.ToBoolean(objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlShowWindowIdentificationCustomer", "true"));
+            //labelControl6.Visible                   = Convert.ToBoolean(objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelShowWindowIdentificationCustomer", "true"));
+            //txtReferenceClientIdentifier.Visible    = Convert.ToBoolean(objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlShowWindowIdentificationCustomer", "true"));
+            objCoreWebRenderInView.ChangeHigth("txtReferenceClientIdentifier", objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlIdentificationCustomerHigth", "0"), this);
+            objCoreWebRenderInView.ChangeWidth("txtReferenceClientIdentifier", objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlIdentificationCustomerWidth", "0"), this);
+
         }
 
 

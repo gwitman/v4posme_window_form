@@ -603,13 +603,80 @@ public class CoreWebRenderInView
             e.HtmlPopup.Pinned = !e.HtmlPopup.Pinned;
     }
 
-    public void MoveControlToSource(string sourceControlName, string targetControlName, Form form)
+
+    public void ChangeSizeAutoSizeMode(LabelControl objControl, Form form)
+    {   
+        objControl.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+        objControl.Size = new Size(TextRenderer.MeasureText(objControl.Text, objControl.Font).Width, objControl.Height);
+
+    }
+    public void ChangeWidth(string controlName,string width,Form form)
     {
         // Encuentra el control origen
-        Control? sourceControl = form.Controls.Find(sourceControlName, true).FirstOrDefault();
+        Control? sourceControl = form.Controls.Find(controlName, true).FirstOrDefault();
+        if (width == "")
+            return;
+
+        if (width == "0")
+            return;
+
+        sourceControl.Width = Convert.ToInt32(width);
+
+    }
+    public void ChangeHigth(string controlName, string higth, Form form)
+    {
+        // Encuentra el control origen
+        Control? sourceControl = form.Controls.Find(controlName, true).FirstOrDefault();
+        if (higth == "")
+            return;
+
+        if (higth == "0")
+            return;
+
+        sourceControl.Height = Convert.ToInt32(higth);
+
+    }
+
+    public void ChangePositionX(string controlName, string x, Form form)
+    {
+        // Encuentra el control origen
+        Control? sourceControl = form.Controls.Find(controlName, true).FirstOrDefault();
+        if (x == "")
+            return;
+
+        if (x == "0")
+            return;
+
+        sourceControl.Location = new Point(sourceControl.Location.X -Convert.ToInt32(x),sourceControl.Location.Y);
+
+    }
+    public void ChangePositionY(string controlName, string y, Form form)
+    {
+        // Encuentra el control origen
+        Control? sourceControl = form.Controls.Find(controlName, true).FirstOrDefault();
+        if (y == "")
+            return;
+
+        if (y == "0")
+            return;
+
+        sourceControl.Location = new Point(sourceControl.Location.X , sourceControl.Location.Y - Convert.ToInt32(y) );
+
+    }
+    public void MoveControlToSource( string targetControlName, string sourceControlName, Form form)
+    {
+
+        if (targetControlName == "")
+            return;
+
+        if (sourceControlName == "")
+            return;
+
+        // Encuentra el control origen
+        Control? sourceControl = form.Controls.Find(targetControlName, true).FirstOrDefault();
 
         // Encuentra el control destino
-        Control? targetControl = form.Controls.Find(targetControlName, true).FirstOrDefault();
+        Control? targetControl = form.Controls.Find(sourceControlName, true).FirstOrDefault();
 
         // Validar que ambos controles existan
         if (sourceControl == null)
@@ -624,8 +691,14 @@ public class CoreWebRenderInView
 
         // Obtén el contenedor del control origen
         Control? sourceParent = sourceControl.Parent;
+        Control? targetParent = targetControl.Parent;
 
         if (sourceParent == null)
+        {
+            return;
+        }
+
+        if(targetParent == null)
         {
             return;
         }
@@ -635,10 +708,16 @@ public class CoreWebRenderInView
         {
             // Si están en diferentes contenedores, mueve el control destino al contenedor del origen
             sourceParent.Controls.Add(targetControl);
+            targetParent.Controls.Add(sourceControl);
+
         }
 
         // Mueve el control destino a la posición del origen dentro del contenedor compartido
+        int xOld = targetControl.Location.X;
+        int yOld = targetControl.Location.Y;
         targetControl.Location = new Point(sourceControl.Location.X, sourceControl.Location.Y);
+        sourceControl.Location = new Point(xOld, yOld);
+
     }
 
 }
