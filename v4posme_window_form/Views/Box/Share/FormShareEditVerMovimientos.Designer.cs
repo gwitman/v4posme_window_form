@@ -1,6 +1,6 @@
 ﻿namespace v4posme_window.Views.Box.Share
 {
-    partial class FromShareEditVerMovimientos
+    partial class FormShareEditVerMovimientos
     {
         /// <summary>
         /// Required designer variable.
@@ -44,14 +44,14 @@
             webView.TabIndex = 0;
             webView.ZoomFactor = 1D;
             // 
-            // FromShareEditVerMovimientos
+            // FormShareEditVerMovimientos
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(756, 425);
             Controls.Add(webView);
-            Name = "FromShareEditVerMovimientos";
-            Text = "FromShareEditVerMovimientos";
+            Name = "FormShareEditVerMovimientos";
+            Text = "FormShareEditVerMovimientos";
             Load += FromShareEditVerMovimientos_Load;
             ((System.ComponentModel.ISupportInitialize)webView).EndInit();
             ResumeLayout(false);

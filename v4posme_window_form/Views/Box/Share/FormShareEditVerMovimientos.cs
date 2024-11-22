@@ -12,9 +12,9 @@ using v4posme_window.Template;
 
 namespace v4posme_window.Views.Box.Share
 {
-    public partial class FromShareEditVerMovimientos : XtraForm
+    public partial class FormShareEditVerMovimientos : XtraForm
     {
-        public FromShareEditVerMovimientos()
+        public FormShareEditVerMovimientos()
         {
             InitializeComponent();
         }

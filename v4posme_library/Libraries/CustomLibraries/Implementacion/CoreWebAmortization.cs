@@ -59,7 +59,7 @@ public class CoreWebAmortization : ICoreWebAmortization
         if (amount >= objCustomerCreditDocument.Balance)
         {
             //mapeamos los valores para q no queden en null lo sque no se usaran
-            var objCustomerCreditDocumentNew        = objCustomerCreditDocument.Mapper(objCustomerCreditDocument);
+            var objCustomerCreditDocumentNew        = _customerCreditDocumentModel.GetRowByPkk(objCustomerCreditDocument.CustomerCreditDocumentId.Value);
             objCustomerCreditDocumentNew.Balance    = 0;
             objCustomerCreditDocumentNew.StatusID   = Convert.ToInt32(documentCancel);
             _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value,objCustomerCreditDocumentNew);
@@ -150,7 +150,7 @@ public class CoreWebAmortization : ICoreWebAmortization
         
         
 
-        var objCustomerCreditDocumentNew        = objCustomerCreditDocument.Mapper(objCustomerCreditDocument);
+        var objCustomerCreditDocumentNew        = _customerCreditDocumentModel.GetRowByPkk(objCustomerCreditDocument.CustomerCreditDocumentId.Value);
         objCustomerCreditDocumentNew.Balance    = totalCapital!.Value;
         _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value,objCustomerCreditDocumentNew);
     }
@@ -172,7 +172,7 @@ public class CoreWebAmortization : ICoreWebAmortization
 
         if (objCustomerCreditDocument.BalanceProvicioned >= objCustomerCreditDocument.Balance)
         {
-            var objCustomerCreditDocumentNew = objCustomerCreditDocument.Mapper(objCustomerCreditDocument);
+            var objCustomerCreditDocumentNew = _customerCreditDocumentModel.GetRowByPkk(objCustomerCreditDocument.CustomerCreditDocumentId.Value);
             objCustomerCreditDocumentNew.StatusID = Convert.ToInt32(documentProvisioned);
             _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value,objCustomerCreditDocumentNew);
         }
@@ -273,7 +273,7 @@ public class CoreWebAmortization : ICoreWebAmortization
         
 
         //Actualizar Balance del Documento
-        var objCustomerCreditDocumentNew        = objCustomerCreditDocument!.Mapper(objCustomerCreditDocument);
+        var objCustomerCreditDocumentNew = _customerCreditDocumentModel.GetRowByPkk(objCustomerCreditDocument.CustomerCreditDocumentId.Value);
         objCustomerCreditDocumentNew.Balance    = objCustomerCreditDocument.Balance!.Value - capital;
         _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value,objCustomerCreditDocumentNew);
 

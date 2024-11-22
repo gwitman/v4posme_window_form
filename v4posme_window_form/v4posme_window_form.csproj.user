@@ -58,7 +58,7 @@
     <Compile Update="Views\Box\Share\FormShareList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\Box\Share\FromShareEditVerMovimientos.cs">
+    <Compile Update="Views\Box\Share\FormShareEditVerMovimientos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\CXC\Customer\FormCustomerEdit.cs">

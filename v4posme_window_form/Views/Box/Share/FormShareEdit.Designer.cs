@@ -33,19 +33,6 @@
             xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            panelControl3 = new DevExpress.XtraEditors.PanelControl();
-            pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
-            labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            lblExchangeRatePurchase = new DevExpress.XtraEditors.LabelControl();
-            panelControl4 = new DevExpress.XtraEditors.PanelControl();
-            pictureEdit2 = new DevExpress.XtraEditors.PictureEdit();
-            labelControl4 = new DevExpress.XtraEditors.LabelControl();
-            lblExchangeRateSale = new DevExpress.XtraEditors.LabelControl();
-            panelControl5 = new DevExpress.XtraEditors.PanelControl();
-            pictureEdit3 = new DevExpress.XtraEditors.PictureEdit();
-            labelControl6 = new DevExpress.XtraEditors.LabelControl();
-            lblExchangeRate = new DevExpress.XtraEditors.LabelControl();
             layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
             stackPanel5 = new DevExpress.Utils.Layout.StackPanel();
             txtEmployeeDescription = new DevExpress.XtraEditors.TextEdit();
@@ -138,16 +125,6 @@
             xtraTabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)panelControl2).BeginInit();
             panelControl2.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)panelControl3).BeginInit();
-            panelControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureEdit1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)panelControl4).BeginInit();
-            panelControl4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureEdit2.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)panelControl5).BeginInit();
-            panelControl5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureEdit3.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl2).BeginInit();
             layoutControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)stackPanel5).BeginInit();
@@ -251,7 +228,7 @@
             xtraTabControl1.Location = new Point(0, 100);
             xtraTabControl1.Name = "xtraTabControl1";
             xtraTabControl1.SelectedTabPage = xtraTabPage1;
-            xtraTabControl1.Size = new Size(1173, 274);
+            xtraTabControl1.Size = new Size(1241, 224);
             xtraTabControl1.TabIndex = 76;
             xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPage1, xtraTabPage2, xtraTabPage3, tabPageArchivos });
             // 
@@ -260,158 +237,19 @@
             xtraTabPage1.Controls.Add(panelControl2);
             xtraTabPage1.Controls.Add(panelControl1);
             xtraTabPage1.Name = "xtraTabPage1";
-            xtraTabPage1.Size = new Size(1171, 243);
+            xtraTabPage1.Size = new Size(1239, 193);
             xtraTabPage1.Text = "Información";
             // 
             // panelControl2
             // 
             panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            panelControl2.Controls.Add(flowLayoutPanel1);
             panelControl2.Controls.Add(layoutControl2);
             panelControl2.Dock = DockStyle.Fill;
             panelControl2.Location = new Point(480, 0);
             panelControl2.Name = "panelControl2";
             panelControl2.Padding = new Padding(1);
-            panelControl2.Size = new Size(691, 243);
+            panelControl2.Size = new Size(759, 193);
             panelControl2.TabIndex = 2;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Controls.Add(panelControl3);
-            flowLayoutPanel1.Controls.Add(panelControl4);
-            flowLayoutPanel1.Controls.Add(panelControl5);
-            flowLayoutPanel1.Location = new Point(14, 187);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(526, 51);
-            flowLayoutPanel1.TabIndex = 1;
-            // 
-            // panelControl3
-            // 
-            panelControl3.Controls.Add(pictureEdit1);
-            panelControl3.Controls.Add(labelControl2);
-            panelControl3.Controls.Add(lblExchangeRatePurchase);
-            panelControl3.Location = new Point(3, 3);
-            panelControl3.Name = "panelControl3";
-            panelControl3.Size = new Size(159, 47);
-            panelControl3.TabIndex = 0;
-            // 
-            // pictureEdit1
-            // 
-            pictureEdit1.BackgroundImageLayout = ImageLayout.Center;
-            pictureEdit1.Dock = DockStyle.Left;
-            pictureEdit1.EditValue = resources.GetObject("pictureEdit1.EditValue");
-            pictureEdit1.Location = new Point(2, 2);
-            pictureEdit1.Name = "pictureEdit1";
-            pictureEdit1.Properties.Appearance.ForeColor = Color.White;
-            pictureEdit1.Properties.Appearance.Options.UseForeColor = true;
-            pictureEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            pictureEdit1.Properties.ReadOnly = true;
-            pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-            pictureEdit1.Properties.ShowMenu = false;
-            pictureEdit1.Size = new Size(68, 43);
-            pictureEdit1.TabIndex = 3;
-            // 
-            // labelControl2
-            // 
-            labelControl2.Appearance.Font = new Font("Tahoma", 10F);
-            labelControl2.Appearance.Options.UseFont = true;
-            labelControl2.Location = new Point(76, 31);
-            labelControl2.Name = "labelControl2";
-            labelControl2.Size = new Size(64, 16);
-            labelControl2.TabIndex = 2;
-            labelControl2.Text = "C$ Compra";
-            // 
-            // lblExchangeRatePurchase
-            // 
-            lblExchangeRatePurchase.Appearance.Font = new Font("Tahoma", 10F);
-            lblExchangeRatePurchase.Appearance.Options.UseFont = true;
-            lblExchangeRatePurchase.Location = new Point(76, 5);
-            lblExchangeRatePurchase.Name = "lblExchangeRatePurchase";
-            lblExchangeRatePurchase.Size = new Size(18, 16);
-            lblExchangeRatePurchase.TabIndex = 1;
-            lblExchangeRatePurchase.Text = "0.0";
-            // 
-            // panelControl4
-            // 
-            panelControl4.Controls.Add(pictureEdit2);
-            panelControl4.Controls.Add(labelControl4);
-            panelControl4.Controls.Add(lblExchangeRateSale);
-            panelControl4.Location = new Point(168, 3);
-            panelControl4.Name = "panelControl4";
-            panelControl4.Size = new Size(166, 47);
-            panelControl4.TabIndex = 1;
-            // 
-            // pictureEdit2
-            // 
-            pictureEdit2.Dock = DockStyle.Left;
-            pictureEdit2.EditValue = resources.GetObject("pictureEdit2.EditValue");
-            pictureEdit2.Location = new Point(2, 2);
-            pictureEdit2.Name = "pictureEdit2";
-            pictureEdit2.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            pictureEdit2.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-            pictureEdit2.Size = new Size(64, 43);
-            pictureEdit2.TabIndex = 3;
-            // 
-            // labelControl4
-            // 
-            labelControl4.Appearance.Font = new Font("Tahoma", 10F);
-            labelControl4.Appearance.Options.UseFont = true;
-            labelControl4.Location = new Point(72, 31);
-            labelControl4.Name = "labelControl4";
-            labelControl4.Size = new Size(52, 16);
-            labelControl4.TabIndex = 2;
-            labelControl4.Text = "C$ Venta";
-            // 
-            // lblExchangeRateSale
-            // 
-            lblExchangeRateSale.Appearance.Font = new Font("Tahoma", 10F);
-            lblExchangeRateSale.Appearance.Options.UseFont = true;
-            lblExchangeRateSale.Location = new Point(72, 5);
-            lblExchangeRateSale.Name = "lblExchangeRateSale";
-            lblExchangeRateSale.Size = new Size(18, 16);
-            lblExchangeRateSale.TabIndex = 1;
-            lblExchangeRateSale.Text = "0.0";
-            // 
-            // panelControl5
-            // 
-            panelControl5.Controls.Add(pictureEdit3);
-            panelControl5.Controls.Add(labelControl6);
-            panelControl5.Controls.Add(lblExchangeRate);
-            panelControl5.Location = new Point(340, 3);
-            panelControl5.Name = "panelControl5";
-            panelControl5.Size = new Size(178, 47);
-            panelControl5.TabIndex = 2;
-            // 
-            // pictureEdit3
-            // 
-            pictureEdit3.Dock = DockStyle.Left;
-            pictureEdit3.EditValue = resources.GetObject("pictureEdit3.EditValue");
-            pictureEdit3.Location = new Point(2, 2);
-            pictureEdit3.Name = "pictureEdit3";
-            pictureEdit3.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            pictureEdit3.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-            pictureEdit3.Size = new Size(68, 43);
-            pictureEdit3.TabIndex = 3;
-            // 
-            // labelControl6
-            // 
-            labelControl6.Appearance.Font = new Font("Tahoma", 10F);
-            labelControl6.Appearance.Options.UseFont = true;
-            labelControl6.Location = new Point(76, 31);
-            labelControl6.Name = "labelControl6";
-            labelControl6.Size = new Size(15, 16);
-            labelControl6.TabIndex = 2;
-            labelControl6.Text = "C$";
-            // 
-            // lblExchangeRate
-            // 
-            lblExchangeRate.Appearance.Font = new Font("Tahoma", 10F);
-            lblExchangeRate.Appearance.Options.UseFont = true;
-            lblExchangeRate.Location = new Point(76, 4);
-            lblExchangeRate.Name = "lblExchangeRate";
-            lblExchangeRate.Size = new Size(18, 16);
-            lblExchangeRate.TabIndex = 1;
-            lblExchangeRate.Text = "0.0";
             // 
             // layoutControl2
             // 
@@ -423,7 +261,7 @@
             layoutControl2.Name = "layoutControl2";
             layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(1268, 14, 650, 400);
             layoutControl2.Root = layoutControlGroup1;
-            layoutControl2.Size = new Size(553, 182);
+            layoutControl2.Size = new Size(553, 192);
             layoutControl2.TabIndex = 0;
             layoutControl2.Text = "layoutControl2";
             // 
@@ -433,16 +271,16 @@
             stackPanel5.Controls.Add(txtEmployeeDescription);
             stackPanel5.Controls.Add(btnClearEmployee);
             stackPanel5.Controls.Add(btnSearchEmployee);
-            stackPanel5.Location = new Point(88, 59);
+            stackPanel5.Location = new Point(88, 57);
             stackPanel5.Name = "stackPanel5";
             stackPanel5.Padding = new Padding(1);
-            stackPanel5.Size = new Size(449, 39);
+            stackPanel5.Size = new Size(449, 41);
             stackPanel5.TabIndex = 80;
             stackPanel5.UseSkinIndents = true;
             // 
             // txtEmployeeDescription
             // 
-            txtEmployeeDescription.Location = new Point(4, 5);
+            txtEmployeeDescription.Location = new Point(4, 6);
             txtEmployeeDescription.Name = "txtEmployeeDescription";
             txtEmployeeDescription.Properties.ReadOnly = true;
             txtEmployeeDescription.Size = new Size(328, 28);
@@ -458,7 +296,7 @@
             btnClearEmployee.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             btnClearEmployee.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnClearEmployee.ImageOptions.SvgImage");
             btnClearEmployee.ImageOptions.SvgImageSize = new Size(16, 16);
-            btnClearEmployee.Location = new Point(335, 5);
+            btnClearEmployee.Location = new Point(335, 6);
             btnClearEmployee.Margin = new Padding(0);
             btnClearEmployee.Name = "btnClearEmployee";
             btnClearEmployee.Size = new Size(53, 28);
@@ -476,7 +314,7 @@
             btnSearchEmployee.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             btnSearchEmployee.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnSearchEmployee.ImageOptions.SvgImage");
             btnSearchEmployee.ImageOptions.SvgImageSize = new Size(16, 16);
-            btnSearchEmployee.Location = new Point(388, 5);
+            btnSearchEmployee.Location = new Point(388, 6);
             btnSearchEmployee.Margin = new Padding(0);
             btnSearchEmployee.Name = "btnSearchEmployee";
             btnSearchEmployee.Size = new Size(60, 28);
@@ -493,13 +331,13 @@
             stackPanel3.Location = new Point(88, 16);
             stackPanel3.Name = "stackPanel3";
             stackPanel3.Padding = new Padding(1);
-            stackPanel3.Size = new Size(449, 37);
+            stackPanel3.Size = new Size(449, 35);
             stackPanel3.TabIndex = 4;
             stackPanel3.UseSkinIndents = true;
             // 
             // txtCustomerDescription
             // 
-            txtCustomerDescription.Location = new Point(4, 4);
+            txtCustomerDescription.Location = new Point(4, 3);
             txtCustomerDescription.Name = "txtCustomerDescription";
             txtCustomerDescription.Properties.ReadOnly = true;
             txtCustomerDescription.Size = new Size(328, 28);
@@ -515,7 +353,7 @@
             btnClearCustomer.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             btnClearCustomer.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnClearCustomer.ImageOptions.SvgImage");
             btnClearCustomer.ImageOptions.SvgImageSize = new Size(16, 16);
-            btnClearCustomer.Location = new Point(335, 4);
+            btnClearCustomer.Location = new Point(335, 3);
             btnClearCustomer.Margin = new Padding(0);
             btnClearCustomer.Name = "btnClearCustomer";
             btnClearCustomer.Size = new Size(53, 28);
@@ -533,7 +371,7 @@
             btnSearchCustomer.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             btnSearchCustomer.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnSearchCustomer.ImageOptions.SvgImage");
             btnSearchCustomer.ImageOptions.SvgImageSize = new Size(16, 16);
-            btnSearchCustomer.Location = new Point(388, 4);
+            btnSearchCustomer.Location = new Point(388, 3);
             btnSearchCustomer.Margin = new Padding(0);
             btnSearchCustomer.Name = "btnSearchCustomer";
             btnSearchCustomer.Size = new Size(60, 28);
@@ -543,7 +381,7 @@
             // 
             // txtBalanceStart
             // 
-            txtBalanceStart.Location = new Point(88, 104);
+            txtBalanceStart.Location = new Point(88, 114);
             txtBalanceStart.Name = "txtBalanceStart";
             txtBalanceStart.Properties.DisplayFormat.FormatString = "N2";
             txtBalanceStart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -551,15 +389,16 @@
             txtBalanceStart.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             txtBalanceStart.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
             txtBalanceStart.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
-            txtBalanceStart.Properties.MaskSettings.Set("mask", "n");
+            txtBalanceStart.Properties.MaskSettings.Set("mask", "n2");
             txtBalanceStart.Properties.ReadOnly = true;
+            txtBalanceStart.Properties.UseMaskAsDisplayFormat = true;
             txtBalanceStart.Size = new Size(449, 28);
             txtBalanceStart.StyleController = layoutControl2;
             txtBalanceStart.TabIndex = 5;
             // 
             // txtBalanceFinish
             // 
-            txtBalanceFinish.Location = new Point(88, 138);
+            txtBalanceFinish.Location = new Point(88, 148);
             txtBalanceFinish.Name = "txtBalanceFinish";
             txtBalanceFinish.Properties.DisplayFormat.FormatString = "N2";
             txtBalanceFinish.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -567,8 +406,9 @@
             txtBalanceFinish.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             txtBalanceFinish.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
             txtBalanceFinish.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
-            txtBalanceFinish.Properties.MaskSettings.Set("mask", "n");
+            txtBalanceFinish.Properties.MaskSettings.Set("mask", "n2");
             txtBalanceFinish.Properties.ReadOnly = true;
+            txtBalanceFinish.Properties.UseMaskAsDisplayFormat = true;
             txtBalanceFinish.Size = new Size(449, 28);
             txtBalanceFinish.StyleController = layoutControl2;
             txtBalanceFinish.TabIndex = 6;
@@ -579,7 +419,7 @@
             layoutControlGroup1.GroupBordersVisible = false;
             layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem6, layoutControlItem7, layoutControlItem8, layoutControlItemCobrador });
             layoutControlGroup1.Name = "Root";
-            layoutControlGroup1.Size = new Size(553, 182);
+            layoutControlGroup1.Size = new Size(553, 192);
             layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem6
@@ -589,7 +429,7 @@
             layoutControlItem6.Control = stackPanel3;
             layoutControlItem6.Location = new Point(0, 0);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new Size(527, 43);
+            layoutControlItem6.Size = new Size(527, 41);
             layoutControlItem6.Text = "Cliente";
             layoutControlItem6.TextSize = new Size(56, 13);
             // 
@@ -598,7 +438,7 @@
             layoutControlItem7.AppearanceItemCaption.Options.UseTextOptions = true;
             layoutControlItem7.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             layoutControlItem7.Control = txtBalanceStart;
-            layoutControlItem7.Location = new Point(0, 88);
+            layoutControlItem7.Location = new Point(0, 98);
             layoutControlItem7.Name = "layoutControlItem7";
             layoutControlItem7.Size = new Size(527, 34);
             layoutControlItem7.Text = "Saldo Inicial";
@@ -609,7 +449,7 @@
             layoutControlItem8.AppearanceItemCaption.Options.UseTextOptions = true;
             layoutControlItem8.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             layoutControlItem8.Control = txtBalanceFinish;
-            layoutControlItem8.Location = new Point(0, 122);
+            layoutControlItem8.Location = new Point(0, 132);
             layoutControlItem8.Name = "layoutControlItem8";
             layoutControlItem8.Size = new Size(527, 34);
             layoutControlItem8.Text = "Saldo Final";
@@ -617,10 +457,13 @@
             // 
             // layoutControlItemCobrador
             // 
+            layoutControlItemCobrador.AppearanceItemCaption.Options.UseTextOptions = true;
+            layoutControlItemCobrador.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             layoutControlItemCobrador.Control = stackPanel5;
-            layoutControlItemCobrador.Location = new Point(0, 43);
+            layoutControlItemCobrador.Location = new Point(0, 41);
             layoutControlItemCobrador.Name = "layoutControlItemCobrador";
-            layoutControlItemCobrador.Size = new Size(527, 45);
+            layoutControlItemCobrador.Size = new Size(527, 57);
+            layoutControlItemCobrador.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 10);
             layoutControlItemCobrador.Text = "Cobrador";
             layoutControlItemCobrador.TextSize = new Size(56, 13);
             // 
@@ -632,7 +475,7 @@
             panelControl1.Location = new Point(0, 0);
             panelControl1.Name = "panelControl1";
             panelControl1.Padding = new Padding(1);
-            panelControl1.Size = new Size(480, 243);
+            panelControl1.Size = new Size(480, 193);
             panelControl1.TabIndex = 1;
             // 
             // layoutControl1
@@ -646,7 +489,7 @@
             layoutControl1.Location = new Point(1, 1);
             layoutControl1.Name = "layoutControl1";
             layoutControl1.Root = Root;
-            layoutControl1.Size = new Size(478, 241);
+            layoutControl1.Size = new Size(478, 191);
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
             // 
@@ -705,7 +548,7 @@
             Root.GroupBordersVisible = false;
             Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem5 });
             Root.Name = "Root";
-            Root.Size = new Size(478, 241);
+            Root.Size = new Size(478, 191);
             Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -759,7 +602,7 @@
             layoutControlItem5.Control = txtCurrencyID;
             layoutControlItem5.Location = new Point(0, 130);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new Size(452, 85);
+            layoutControlItem5.Size = new Size(452, 35);
             layoutControlItem5.Text = "Moneda";
             layoutControlItem5.TextSize = new Size(40, 13);
             // 
@@ -768,7 +611,7 @@
             xtraTabPage2.Controls.Add(layoutControl3);
             xtraTabPage2.Controls.Add(layoutControl4);
             xtraTabPage2.Name = "xtraTabPage2";
-            xtraTabPage2.Size = new Size(1137, 249);
+            xtraTabPage2.Size = new Size(1239, 199);
             xtraTabPage2.Text = "Referencias";
             // 
             // layoutControl3
@@ -792,7 +635,7 @@
             // 
             // txtReferenceClientIdentifier
             // 
-            txtReferenceClientIdentifier.Location = new Point(109, 60);
+            txtReferenceClientIdentifier.Location = new Point(109, 50);
             txtReferenceClientIdentifier.Name = "txtReferenceClientIdentifier";
             txtReferenceClientIdentifier.Size = new Size(375, 28);
             txtReferenceClientIdentifier.StyleController = layoutControl3;
@@ -812,17 +655,16 @@
             layoutControlItem9.Control = txtReferenceClientName;
             layoutControlItem9.Location = new Point(0, 0);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new Size(474, 44);
-            layoutControlItem9.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 10);
+            layoutControlItem9.Size = new Size(474, 34);
             layoutControlItem9.Text = "Persona Ref.";
             layoutControlItem9.TextSize = new Size(77, 13);
             // 
             // layoutControlItem10
             // 
             layoutControlItem10.Control = txtReferenceClientIdentifier;
-            layoutControlItem10.Location = new Point(0, 44);
+            layoutControlItem10.Location = new Point(0, 34);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new Size(474, 92);
+            layoutControlItem10.Size = new Size(474, 102);
             layoutControlItem10.Text = "ID Persona Ref.";
             layoutControlItem10.TextSize = new Size(77, 13);
             // 
@@ -847,7 +689,7 @@
             // 
             // txtReference2
             // 
-            txtReference2.Location = new Point(93, 60);
+            txtReference2.Location = new Point(93, 50);
             txtReference2.Name = "txtReference2";
             txtReference2.Size = new Size(391, 28);
             txtReference2.StyleController = layoutControl4;
@@ -867,17 +709,16 @@
             layoutControlItem11.Control = txtReference1;
             layoutControlItem11.Location = new Point(0, 0);
             layoutControlItem11.Name = "layoutControlItem11";
-            layoutControlItem11.Size = new Size(474, 44);
-            layoutControlItem11.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 10);
+            layoutControlItem11.Size = new Size(474, 34);
             layoutControlItem11.Text = "Referencia 1";
             layoutControlItem11.TextSize = new Size(61, 13);
             // 
             // layoutControlItem12
             // 
             layoutControlItem12.Control = txtReference2;
-            layoutControlItem12.Location = new Point(0, 44);
+            layoutControlItem12.Location = new Point(0, 34);
             layoutControlItem12.Name = "layoutControlItem12";
-            layoutControlItem12.Size = new Size(474, 95);
+            layoutControlItem12.Size = new Size(474, 105);
             layoutControlItem12.Text = "Referencia 2";
             layoutControlItem12.TextSize = new Size(61, 13);
             // 
@@ -886,14 +727,14 @@
             xtraTabPage3.Controls.Add(txtNote);
             xtraTabPage3.Controls.Add(labelControl1);
             xtraTabPage3.Name = "xtraTabPage3";
-            xtraTabPage3.Size = new Size(1137, 249);
+            xtraTabPage3.Size = new Size(1239, 199);
             xtraTabPage3.Text = "Comentarios";
             // 
             // txtNote
             // 
             txtNote.Location = new Point(102, 6);
             txtNote.Name = "txtNote";
-            txtNote.Size = new Size(408, 165);
+            txtNote.Size = new Size(774, 136);
             txtNote.TabIndex = 1;
             // 
             // labelControl1
@@ -911,7 +752,7 @@
             tabPageArchivos.Controls.Add(btnAgregarArchivo);
             tabPageArchivos.Controls.Add(gridControlArchivos);
             tabPageArchivos.Name = "tabPageArchivos";
-            tabPageArchivos.Size = new Size(1171, 243);
+            tabPageArchivos.Size = new Size(1239, 199);
             tabPageArchivos.Text = "Archivos";
             // 
             // btnAgregarArchivo
@@ -932,10 +773,11 @@
             // 
             // gridControlArchivos
             // 
+            gridControlArchivos.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             gridControlArchivos.Location = new Point(11, 46);
             gridControlArchivos.MainView = gridViewArchivos;
             gridControlArchivos.Name = "gridControlArchivos";
-            gridControlArchivos.Size = new Size(1016, 171);
+            gridControlArchivos.Size = new Size(1165, 133);
             gridControlArchivos.TabIndex = 0;
             gridControlArchivos.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewArchivos });
             // 
@@ -951,10 +793,10 @@
             stackPanel4.Controls.Add(btnDeleteShare);
             stackPanel4.Controls.Add(btnVerMovimientos);
             stackPanel4.Dock = DockStyle.Top;
-            stackPanel4.Location = new Point(0, 374);
+            stackPanel4.Location = new Point(0, 324);
             stackPanel4.Name = "stackPanel4";
             stackPanel4.Padding = new Padding(1);
-            stackPanel4.Size = new Size(1173, 52);
+            stackPanel4.Size = new Size(1241, 52);
             stackPanel4.TabIndex = 77;
             stackPanel4.UseSkinIndents = true;
             // 
@@ -1013,10 +855,10 @@
             // 
             gridControlTransactionMasterDetail.DataSource = bindingSourceDetailDto;
             gridControlTransactionMasterDetail.Dock = DockStyle.Top;
-            gridControlTransactionMasterDetail.Location = new Point(0, 426);
+            gridControlTransactionMasterDetail.Location = new Point(0, 376);
             gridControlTransactionMasterDetail.MainView = gridViewTransactionMasterDetail;
             gridControlTransactionMasterDetail.Name = "gridControlTransactionMasterDetail";
-            gridControlTransactionMasterDetail.Size = new Size(1173, 224);
+            gridControlTransactionMasterDetail.Size = new Size(1241, 224);
             gridControlTransactionMasterDetail.TabIndex = 78;
             gridControlTransactionMasterDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewTransactionMasterDetail });
             // 
@@ -1081,7 +923,7 @@
             colDetailBalanceStartShare.Name = "colDetailBalanceStartShare";
             colDetailBalanceStartShare.OptionsColumn.ReadOnly = true;
             colDetailBalanceStartShare.Visible = true;
-            colDetailBalanceStartShare.VisibleIndex = 2;
+            colDetailBalanceStartShare.VisibleIndex = 1;
             // 
             // colDetailShare
             // 
@@ -1091,7 +933,7 @@
             colDetailShare.FieldName = "DetailShare";
             colDetailShare.Name = "colDetailShare";
             colDetailShare.Visible = true;
-            colDetailShare.VisibleIndex = 1;
+            colDetailShare.VisibleIndex = 2;
             // 
             // colDetailBalanceFinishShare
             // 
@@ -1110,9 +952,9 @@
             sidePanel1.Controls.Add(layoutControl6);
             sidePanel1.Controls.Add(layoutControl5);
             sidePanel1.Dock = DockStyle.Top;
-            sidePanel1.Location = new Point(0, 650);
+            sidePanel1.Location = new Point(0, 600);
             sidePanel1.Name = "sidePanel1";
-            sidePanel1.Size = new Size(1173, 157);
+            sidePanel1.Size = new Size(1241, 157);
             sidePanel1.TabIndex = 79;
             sidePanel1.Text = "sidePanel1";
             // 
@@ -1124,7 +966,7 @@
             layoutControl7.Location = new Point(350, 0);
             layoutControl7.Name = "layoutControl7";
             layoutControl7.Root = layoutControlGroup6;
-            layoutControl7.Size = new Size(459, 156);
+            layoutControl7.Size = new Size(527, 156);
             layoutControl7.TabIndex = 4;
             layoutControl7.Text = "layoutControl7";
             // 
@@ -1137,7 +979,7 @@
             txtReceiptAmount.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             txtReceiptAmount.Properties.EditFormat.FormatString = "N2";
             txtReceiptAmount.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            txtReceiptAmount.Size = new Size(374, 28);
+            txtReceiptAmount.Size = new Size(442, 28);
             txtReceiptAmount.StyleController = layoutControl7;
             txtReceiptAmount.TabIndex = 0;
             txtReceiptAmount.EditValueChanged += txtReceiptAmount_EditValueChanged;
@@ -1151,7 +993,7 @@
             txtChangeAmount.Properties.EditFormat.FormatString = "N2";
             txtChangeAmount.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             txtChangeAmount.Properties.ReadOnly = true;
-            txtChangeAmount.Size = new Size(374, 28);
+            txtChangeAmount.Size = new Size(442, 28);
             txtChangeAmount.StyleController = layoutControl7;
             txtChangeAmount.TabIndex = 2;
             // 
@@ -1161,7 +1003,7 @@
             layoutControlGroup6.GroupBordersVisible = false;
             layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { simpleLabelItem4, layoutControlItem13, layoutControlItem14, simpleSeparator2 });
             layoutControlGroup6.Name = "layoutControlGroup6";
-            layoutControlGroup6.Size = new Size(459, 156);
+            layoutControlGroup6.Size = new Size(527, 156);
             layoutControlGroup6.TextVisible = false;
             // 
             // simpleLabelItem4
@@ -1171,7 +1013,7 @@
             simpleLabelItem4.AppearanceItemCaption.Options.UseFont = true;
             simpleLabelItem4.Location = new Point(0, 0);
             simpleLabelItem4.Name = "simpleLabelItem4";
-            simpleLabelItem4.Size = new Size(433, 25);
+            simpleLabelItem4.Size = new Size(501, 25);
             simpleLabelItem4.Text = "Pago";
             simpleLabelItem4.TextSize = new Size(37, 19);
             // 
@@ -1180,7 +1022,7 @@
             layoutControlItem13.Control = txtReceiptAmount;
             layoutControlItem13.Location = new Point(0, 26);
             layoutControlItem13.Name = "layoutControlItem13";
-            layoutControlItem13.Size = new Size(433, 34);
+            layoutControlItem13.Size = new Size(501, 34);
             layoutControlItem13.Text = "Ingreso";
             layoutControlItem13.TextSize = new Size(37, 13);
             // 
@@ -1189,7 +1031,7 @@
             layoutControlItem14.Control = txtChangeAmount;
             layoutControlItem14.Location = new Point(0, 60);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new Size(433, 70);
+            layoutControlItem14.Size = new Size(501, 70);
             layoutControlItem14.Text = "Cambio";
             layoutControlItem14.TextSize = new Size(37, 13);
             // 
@@ -1198,13 +1040,13 @@
             simpleSeparator2.AllowHotTrack = false;
             simpleSeparator2.Location = new Point(0, 25);
             simpleSeparator2.Name = "simpleSeparator2";
-            simpleSeparator2.Size = new Size(433, 1);
+            simpleSeparator2.Size = new Size(501, 1);
             // 
             // layoutControl6
             // 
             layoutControl6.Controls.Add(txtTotal);
             layoutControl6.Dock = DockStyle.Right;
-            layoutControl6.Location = new Point(809, 0);
+            layoutControl6.Location = new Point(877, 0);
             layoutControl6.Name = "layoutControl6";
             layoutControl6.Root = layoutControlGroup5;
             layoutControl6.Size = new Size(364, 156);
@@ -1324,12 +1166,14 @@
             AutoScroll = true;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(1190, 792);
+            ClientSize = new Size(1241, 784);
             Controls.Add(sidePanel1);
             Controls.Add(gridControlTransactionMasterDetail);
             Controls.Add(stackPanel4);
             Controls.Add(xtraTabControl1);
             IconOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("FormShareEdit.IconOptions.SvgImage");
+            LookAndFeel.SkinName = "WXI";
+            LookAndFeel.UseDefaultLookAndFeel = false;
             Name = "FormShareEdit";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ABONO";
@@ -1346,19 +1190,6 @@
             xtraTabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)panelControl2).EndInit();
             panelControl2.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)panelControl3).EndInit();
-            panelControl3.ResumeLayout(false);
-            panelControl3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureEdit1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)panelControl4).EndInit();
-            panelControl4.ResumeLayout(false);
-            panelControl4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureEdit2.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)panelControl5).EndInit();
-            panelControl5.ResumeLayout(false);
-            panelControl5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureEdit3.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl2).EndInit();
             layoutControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)stackPanel5).EndInit();
@@ -1515,19 +1346,6 @@
         private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
         private DevExpress.XtraLayout.SimpleSeparator simpleSeparator3;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private DevExpress.XtraEditors.PanelControl panelControl3;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.LabelControl lblExchangeRatePurchase;
-        private DevExpress.XtraEditors.PanelControl panelControl4;
-        private DevExpress.XtraEditors.LabelControl labelControl4;
-        private DevExpress.XtraEditors.LabelControl lblExchangeRateSale;
-        private DevExpress.XtraEditors.PanelControl panelControl5;
-        private DevExpress.XtraEditors.LabelControl labelControl6;
-        private DevExpress.XtraEditors.LabelControl lblExchangeRate;
-        private DevExpress.XtraEditors.PictureEdit pictureEdit1;
-        private DevExpress.XtraEditors.PictureEdit pictureEdit2;
-        private DevExpress.XtraEditors.PictureEdit pictureEdit3;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private DevExpress.XtraEditors.MemoEdit txtNote;
         private DevExpress.XtraEditors.LabelControl labelControl1;

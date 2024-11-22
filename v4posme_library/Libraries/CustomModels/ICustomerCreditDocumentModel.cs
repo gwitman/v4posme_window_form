@@ -14,6 +14,8 @@ public interface ICustomerCreditDocumentModel
 
     TbCustomerCreditDocumentDto? GetRowByPk(int customerCreditDocumentId);
 
+    TbCustomerCreditDocument? GetRowByPkk(int customerCreditDocumentId);
+
     List<TbCustomerCreditDocument> GetRowByEntity(int companyId,int entityId);
 
     List<TbCustomerCreditDocumentDto> GetRowByEntityApplied(int companyId, int entityId, int currencyId);

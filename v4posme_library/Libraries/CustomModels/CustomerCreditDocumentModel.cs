@@ -88,6 +88,12 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
         return result.SingleOrDefault();
     }
 
+    public TbCustomerCreditDocument? GetRowByPkk(int customerCreditDocumentId)
+    {
+        using var context = new DataContext();
+        return context.TbCustomerCreditDocuments.AsNoTracking().SingleOrDefault(document => document.CustomerCreditDocumentID == customerCreditDocumentId);
+    }
+
     public List<TbCustomerCreditDocument> GetRowByEntity(int companyId, int entityId)
     {
         using var context = new DataContext();
