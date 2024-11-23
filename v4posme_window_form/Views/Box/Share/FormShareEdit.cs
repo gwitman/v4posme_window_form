@@ -1423,8 +1423,10 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                     transactionMasterDetailModel.UpdateAppPosme(user.CompanyID, objTmd.TransactionID, objTmd.TransactionMasterID, objTmd.TransactionMasterDetailID, objTMDNew);
                 }
 
-                objInterfazCoreWebConcept.Share(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
+                
             }
+
+            objInterfazCoreWebConcept.Share(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
         }
     }
 
