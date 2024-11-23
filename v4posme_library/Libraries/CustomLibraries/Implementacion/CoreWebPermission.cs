@@ -330,21 +330,21 @@ namespace v4posme_library.Libraries.CustomLibraries.Implementacion
             var parameterCreditos = (int)Math.Floor(Convert.ToDouble(objParameterCreditos.Value));
             var objParameterPriceByInvoice = (int)Math.Floor(Convert.ToDouble(coreWebParameter.GetParameter("CORE_CUST_PRICE_BY_INVOICE", companyId)!.Value));
             var parameterMaxUser = Convert.ToInt32(objParameterMaxUser!.Value);
-            if (parameterMaxUser > 0)
-            {
-                var count = userModel.GetCount(companyId);
-                if ((count + 1) > parameterMaxUser)
-                {
-                    throw new Exception("""
+            //if (parameterMaxUser > 0)
+            //{
+            //    var count = userModel.GetCount(companyId);
+            //    if ((count + 1) > parameterMaxUser)
+            //    {
+            //        throw new Exception("""
                                         
-                                            Ha superado el número máximo de usuarios.
-                                            Teléfono de contacto: 8712-5827 para activar licencia
-                                            Realizar el pago de la licencia aquí o
-                                            Realizar la transferencia a la siguiente cuenta BAC Dólares: 366-577-484
+            //                                Ha superado el número máximo de usuarios.
+            //                                Teléfono de contacto: 8712-5827 para activar licencia
+            //                                Realizar el pago de la licencia aquí o
+            //                                Realizar la transferencia a la siguiente cuenta BAC Dólares: 366-577-484
                                                                             
-                                        """);
-                }
-            }
+            //                            """);
+            //    }
+            //}
 
             var fechaNow = DateTime.Now;
             if (fechaNow > parameterFechaExpiration)

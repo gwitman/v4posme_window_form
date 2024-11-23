@@ -115,8 +115,7 @@ public partial class FormShareList : FormTypeList, IFormTypeList
                 VariablesGlobales.Instance.ListMenuHiddenPopup);
             if (!permited)
             {
-                coreWebRender.GetMessageAlert(TypeError.Error, "Permisos", "No tiene acceso a los controles", this);
-                return;
+                throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"]);
             }
 
             resultPermission = coreWebPermission.UrlPermissionCmd("app_box_share", "index", urlSuffix!,
@@ -126,8 +125,7 @@ public partial class FormShareList : FormTypeList, IFormTypeList
                 VariablesGlobales.Instance.ListMenuHiddenPopup);
             if (resultPermission == permissionNone)
             {
-                coreWebRender.GetMessageAlert(TypeError.Error, "Permisos", "No se encontraron permisos", this);
-                return;
+                throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_FUNCTION"]);
             }
         }
 
