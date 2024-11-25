@@ -851,16 +851,9 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             throw new Exception($"No hay una trasaction con el Trasaction ID: {TransactionId.Value}");
         }
 
-        if (txtCurrencyID.SelectedItem is not ComboBoxItem selectedCurrency)
-        {
-            throw new Exception("Seleccione el tipo de moneda");
-        }
-
-        var selectedStatus = (ComboBoxItem)txtStatusID.SelectedItem;
-        if (selectedStatus is null)
-        {
-            throw new Exception("Seleccione el Status");
-        }
+        var selectedCurrency    = (ComboBoxItem)txtCurrencyID.SelectedItem;
+        var selectedStatus      = (ComboBoxItem)txtStatusID.SelectedItem;
+      
 
         var objTm = new TbTransactionMaster()
         {
@@ -963,7 +956,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
     {
         var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
         var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
-        var notAllInsert = VariablesGlobales.ConfigurationBuilder["NOT_ALL_INSERT"];
+        var notAllEdit = VariablesGlobales.ConfigurationBuilder["NOT_ALL_EDIT"];
         var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
         var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
         var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
@@ -997,7 +990,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_share", "edit", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
             if (resultPermission == permissionNone)
             {
-                throw new Exception(notAllInsert);
+                throw new Exception(notAllEdit);
             }
         }
 
@@ -1145,7 +1138,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                     arrayListTransactionDetailFecha = new List<DateTime?>();
                     arrayListCustomerCreditAmortizationId = new List<int>();
                     arrayListShare = new List<decimal>();
-                    var customerCreditDocumentIDMin = formShareEditDetailDtos.ElementAt(0).DetailCustomerCreditDocumentId;
+                    var customerCreditDocumentIDMin = formShareEditDetailDto.EslementAt(0).DetailCustomerCreditDocumentId;
                     var objListDocumentoAmortization = customerCreditDocumentModel.GetRowByBalancePending(user.CompanyID, txtCustomerID, customerCreditDocumentIDMin, objTmNew.CurrencyID!.Value);
                     //Obtener el banace total pendietne
                     var objListDocumentoAmortizationBalanceTotal = objListDocumentoAmortization.Sum(dto => dto.Remaining) ?? decimal.Zero;
@@ -1191,7 +1184,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                     var customerCreditDocumentID = arrayListCustomerCreditDocumentId[key];
                     var share = arrayListShare[key];
                     var transactionDetailID = arrayListTransactionDetailId[key];
-                    ;
+                    
                     var reference1Documento = arrayListTransactionDetailDocument[key];
                     var reference2Fecha = arrayListTransactionDetailFecha[key];
                     var reference3AmortizationID = arrayListCustomerCreditAmortizationId[key];
