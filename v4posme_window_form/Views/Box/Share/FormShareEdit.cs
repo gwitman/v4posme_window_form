@@ -1063,370 +1063,345 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             throw new Exception($"No hay una trasaction con el Trasaction ID: {TransactionId.Value}");
         }
 
-        if (txtCurrencyID.SelectedItem is not ComboBoxItem selectedCurrency)
-        {
-            throw new Exception("Seleccione el tipo de moneda");
-        }
-
+        var selectedCurrency = txtCurrencyID.SelectedItem as ComboBoxItem;
         var selectedStatus = (ComboBoxItem)txtStatusID.SelectedItem;
-        if (selectedStatus is null)
-        {
-            throw new Exception("Seleccione el Status");
-        }
 
-        var objTmNew = new TbTransactionMaster
+        using var dbTransaction = VariablesGlobales.Instance.DataContext.Database.BeginTransaction();
+        try
         {
-            TransactionMasterID = objTm.TransactionMasterId,
-            CompanyID = user.CompanyID,
-            TransactionID = objTm.TransactionId,
-            BranchID = user.BranchID,
-            TransactionNumber = objTm.TransactionNumber ?? string.Empty,
-            TransactionCausalID = objTm.TransactionCausalId,
-            EntityID = txtCustomerID,
-            TransactionOn = txtDate.DateTime,
-            StatusIDChangeOn = DateTime.Now,
-            ComponentID = objTm.ComponentId,
-            Note = txtNote.Text,
-            Sign = objTm.Sign,
-            CurrencyID = Convert.ToInt32(selectedCurrency.Key),
-            CurrencyID2 = objInterfazCoreWebCurrency.GetTarget(user.CompanyID, Convert.ToInt32(selectedCurrency.Key)),
-            ExchangeRate = ExchangeRate,
-            Reference1 = txtReference1.Text,
-            Reference2 = txtReference2.Text,
-            Reference3 = $"{txtEmployeeID}",
-            Reference4 = "txtCustomerCreditLineID", //no encontré el campo
-            DescriptionReference = "reference1:input,reference2:input,reference3:Gestor de Cobro,reference4:Linea de credito del Cliente",
-            StatusID = Convert.ToInt32(selectedStatus.Key),
-            Amount = Convert.ToDecimal(txtTotal.EditValue),
-            IsApplied = false,
-            JournalEntryID = 0,
-            ClassID = null,
-            AreaID = null,
-            SourceWarehouseID = null,
-            TargetWarehouseID = null,
-            IsActive = true,
-            CreatedAt = objTm.CreatedAt,
-            CreatedBy = objTm.CreatedBy,
-            CreatedIn = objTm.CreatedIn,
-            CreatedOn = objTm.CreatedOn
-        };
+            var objTmNew = transactionMasterModel.GetRowByPKK(TransactionMasterId.Value)!;
+            objTmNew.EntityID = txtCustomerID;
+            objTmNew.TransactionOn = txtDate.DateTime;
+            objTmNew.StatusIDChangeOn = DateTime.Now;
+            objTmNew.Note = txtNote.Text;
+            objTmNew.Reference1 = txtReference1.Text;
+            objTmNew.Reference2 = txtReference2.Text;
+            objTmNew.Reference3 = $"{txtEmployeeID}";
+            objTmNew.Reference4 = "txtCustomerCreditLineID"; //no encontré el campo
+            objTmNew.DescriptionReference = "reference1:input,reference2:input,reference3:Gestor de Cobro,reference4:Linea de credito del Cliente";
+            objTmNew.StatusID = Convert.ToInt32(selectedStatus.Key);
+            objTmNew.Amount = Convert.ToDecimal(txtTotal.EditValue);
+            objTmNew.CurrencyID = Convert.ToInt32(selectedCurrency.Key);
+            objTmNew.CurrencyID2 = objInterfazCoreWebCurrency.GetTarget(user.CompanyID, Convert.ToInt32(selectedCurrency.Key));
+            objTmNew.ExchangeRate = objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Now.Date, decimal.One, objTmNew.CurrencyID2.Value, objTmNew.CurrencyID.Value);
 
-        //Ingresar Informacion Adicional
-        var objTMInfoNew = new TbTransactionMasterInfo
-        {
-            CompanyID = objTm.CompanyId,
-            TransactionID = objTm.TransactionId,
-            TransactionMasterID = objTm.TransactionMasterId,
-            ZoneID = 0,
-            RouteID = 0,
-            ReferenceClientName = txtReferenceClientName.Text,
-            ReferenceClientIdentifier = txtReferenceClientIdentifier.Text,
-            ReceiptAmount = Convert.ToDecimal(txtReceiptAmount.EditValue),
-            ChangeAmount = Convert.ToDecimal(txtChangeAmount.EditValue),
-            Reference1 = $"{txtBalanceStart.EditValue}",
-            Reference2 = $"{txtBalanceFinish.EditValue}"
-        };
-        var commandEditable = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_EDITABLE"]);
-        validateWorkflow = objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_share", "statusID", objTm.StatusId!.Value, commandEditable, user.CompanyID, user.BranchID, role.RoleID);
-        if (validateWorkflow.HasValue && validateWorkflow.Value)
-        {
-            var tbTransactionMaster = transactionMasterModel.GetRowByPKK(TransactionMasterId.Value);
-            if (tbTransactionMaster is null)
+            //Ingresar Informacion Adicional
+            var objTMInfoNew = transactionMasterInfoModel.GetRowByPkPk(TransactionMasterId.Value)!;
+            objTMInfoNew.CompanyID = objTm.CompanyId;
+            objTMInfoNew.TransactionID = objTm.TransactionId;
+            objTMInfoNew.TransactionMasterID = objTm.TransactionMasterId;
+            objTMInfoNew.ZoneID = 0;
+            objTMInfoNew.RouteID = 0;
+            objTMInfoNew.ReferenceClientName = txtReferenceClientName.Text;
+            objTMInfoNew.ReferenceClientIdentifier = txtReferenceClientIdentifier.Text;
+            objTMInfoNew.ReceiptAmount = Convert.ToDecimal(txtReceiptAmount.EditValue);
+            objTMInfoNew.ChangeAmount = Convert.ToDecimal(txtChangeAmount.EditValue);
+            objTMInfoNew.Reference1 = $"{txtBalanceStart.EditValue}";
+            objTMInfoNew.Reference2 = $"{txtBalanceFinish.EditValue}";
+
+            var commandEditable = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_EDITABLE"]);
+            validateWorkflow = objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_share", "statusID", objTm.StatusId!.Value, commandEditable, user.CompanyID, user.BranchID, role.RoleID);
+            if (validateWorkflow.HasValue && validateWorkflow.Value)
             {
-                throw new Exception($"No existe la transaccicon con el ID: {TransactionMasterId}");
+                var tbTransactionMaster = transactionMasterModel.GetRowByPKK(TransactionMasterId.Value);
+                tbTransactionMaster.StatusID = Convert.ToInt32(selectedStatus.Key);
+                transactionMasterModel.UpdateAppPosme(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId, tbTransactionMaster);
+            }
+            else
+            {
+                transactionMasterModel.UpdateAppPosme(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId, objTmNew);
+                transactionMasterInfoModel.UpdateAppPosme(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId, objTMInfoNew);
             }
 
-            tbTransactionMaster.StatusID = Convert.ToInt32(selectedStatus.Key);
-            transactionMasterModel.UpdateAppPosme(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId, tbTransactionMaster);
-        }
-        else
-        {
-            transactionMasterModel.UpdateAppPosme(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId, objTmNew);
-            transactionMasterInfoModel.UpdateAppPosme(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId, objTMInfoNew);
-        }
+            var formShareEditDetailDtos = bindingSourceDetailDto.List as IList<FormShareEditDetailDTO>;
+            //Actualizar Detalle
+            var shareInvoiceByInvoice = objInterfazCoreWebParameter.GetParameterValue("SHARE_INVOICE_BY_INVOICE", user.CompanyID);
+            var arrayListCustomerCreditDocumentId = formShareEditDetailDtos!.Select(dto => dto.DetailCustomerCreditDocumentId).ToList();
+            var arrayListTransactionDetailId = formShareEditDetailDtos.Select(dto => dto.DetailTransactionDetailId).ToList();
+            var arrayListTransactionDetailDocument = formShareEditDetailDtos.Select(dto => dto.DetailTransactionDetailDocument).ToList();
+            var arrayListTransactionDetailFecha = formShareEditDetailDtos.Select(dto => dto.DetailTransactionDetailFecha).ToList();
+            var arrayListCustomerCreditAmortizationId = formShareEditDetailDtos.Select(dto => dto.DetailAmortizationId).ToList();
+            var arrayListShare = formShareEditDetailDtos.Select(dto => dto.DetailShare).ToList();
+            decimal abonoTotal;
+            var amount = decimal.Zero;
 
-        /***
-         * Aqui se recupera los datos del GridControl, y dado q el BindingSource es generico, se convierto al dto
-         * Sino logra realizar la conversion, debido al C#, capturar el error y enviar al metodo principal
-         */
-        if (bindingSourceDetailDto.List is not IList<FormShareEditDetailDTO> formShareEditDetailDtos)
-        {
-            throw new Exception("No fue posible recuperar la lista del binding source");
-        }
+            transactionMasterDetailModel.DeleteWhereIdNotIn(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId, arrayListTransactionDetailId);
 
-        var shareInvoiceByInvoice = objInterfazCoreWebParameter.GetParameterValue("SHARE_INVOICE_BY_INVOICE", user.CompanyID);
+            //Si este valor esta en true, se tiene que seleccionar una factura a la ves, par ir abonando una a una
+            //Si este valor es false, se puede seleccionar una sola factura, y el sistema va aplicado automaticamente, segun el monto.
+            //Si este valor es false, ingreas a la funcion 
+            if (string.Compare(shareInvoiceByInvoice, "false", StringComparison.InvariantCultureIgnoreCase) == 0)
+            {
+                //Sumar abono total.
+                abonoTotal = arrayListShare.Sum();
 
-        var arrayListCustomerCreditDocumentId = formShareEditDetailDtos.Select(dto => dto.DetailCustomerCreditDocumentId).ToList();
-        var arrayListTransactionDetailId = formShareEditDetailDtos.Select(dto => dto.DetailTransactionDetailId).ToList();
-        var arrayListTransactionDetailDocument = formShareEditDetailDtos.Select(dto => dto.DetailTransactionDetailDocument).ToList();
-        var arrayListTransactionDetailFecha = formShareEditDetailDtos.Select(dto => dto.DetailTransactionDetailFecha).ToList();
-        var arrayListCustomerCreditAmortizationId = formShareEditDetailDtos.Select(dto => dto.DetailAmortizationId).ToList();
-        var arrayListShare = formShareEditDetailDtos.Select(dto => dto.DetailShare).ToList();
-        decimal abonoTotal;
-        var amount = decimal.Zero;
+                transactionMasterDetailModel.DeleteWhereTm(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId);
 
-        transactionMasterDetailModel.DeleteWhereIdNotIn(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId, arrayListTransactionDetailId);
+                if (arrayListTransactionDetailId.Count > 0)
+                {
+                    arrayListCustomerCreditDocumentId = new List<int>();
+                    arrayListTransactionDetailId = new List<int>();
+                    arrayListTransactionDetailDocument = new List<string>();
+                    arrayListTransactionDetailFecha = new List<DateTime?>();
+                    arrayListCustomerCreditAmortizationId = new List<int>();
+                    arrayListShare = new List<decimal>();
+                    var customerCreditDocumentIDMin = formShareEditDetailDtos.ElementAt(0).DetailCustomerCreditDocumentId;
+                    var objListDocumentoAmortization = customerCreditDocumentModel.GetRowByBalancePending(user.CompanyID, txtCustomerID, customerCreditDocumentIDMin, objTmNew.CurrencyID!.Value);
+                    //Obtener el banace total pendietne
+                    var objListDocumentoAmortizationBalanceTotal = objListDocumentoAmortization.Sum(dto => dto.Remaining) ?? decimal.Zero;
 
-        //Si este valor esta en true, se tiene que seleccionar una factura a la ves, par ir abonando una a una
-        //Si este valor es false, se puede seleccionar una sola factura, y el sistema va aplicado automaticamente, segun el monto.
-        //Si este valor es false, ingreas a la funcion 
-        if (string.Compare(shareInvoiceByInvoice, "false", StringComparison.InvariantCultureIgnoreCase) == 0)
-        {
-            //Sumar abono total.
-            abonoTotal = arrayListShare.Sum();
-            transactionMasterDetailModel.DeleteWhereTm(user.CompanyID, objTm.TransactionId, objTm.TransactionMasterId);
+                    if (decimal.Compare(objListDocumentoAmortizationBalanceTotal, abonoTotal) < 0)
+                    {
+                        throw new Exception("ABONO, no puede ser aplicado por que supera el monto del saldo");
+                    }
+
+                    foreach (var it in objListDocumentoAmortization)
+                    {
+                        if (abonoTotal > it.Remaining)
+                        {
+                            // Agregar y disminuir
+                            abonoTotal -= it.Remaining!.Value;
+                            arrayListCustomerCreditDocumentId.Add(it.CustomerCreditDocumentId!.Value);
+                            arrayListTransactionDetailId.Add(0);
+                            arrayListTransactionDetailDocument.Add(it.DocumentNumber ?? string.Empty);
+                            arrayListTransactionDetailFecha.Add(it.DateApply);
+                            arrayListCustomerCreditAmortizationId.Add(it.CreditAmortizationId);
+                            arrayListShare.Add(it.Remaining.Value);
+                        }
+                        else
+                        {
+                            arrayListCustomerCreditDocumentId.Add(it.CustomerCreditDocumentId!.Value);
+                            arrayListTransactionDetailId.Add(0);
+                            arrayListTransactionDetailDocument.Add(it.DocumentNumber ?? string.Empty);
+                            arrayListTransactionDetailFecha.Add(it.DateApply);
+                            arrayListCustomerCreditAmortizationId.Add(it.CreditAmortizationId);
+                            arrayListShare.Add(abonoTotal);
+                            abonoTotal = decimal.Zero;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            //Obtener cuanto abona totalmente
             if (arrayListTransactionDetailId.Count > 0)
             {
-                arrayListCustomerCreditDocumentId = new List<int>();
-                arrayListTransactionDetailId = new List<int>();
-                arrayListTransactionDetailDocument = new List<string>();
-                arrayListTransactionDetailFecha = new List<DateTime?>();
-                arrayListCustomerCreditAmortizationId = new List<int>();
-                arrayListShare = new List<decimal>();
-                var customerCreditDocumentIDMin = formShareEditDetailDtos.ElementAt(0).DetailCustomerCreditDocumentId;
-                var objListDocumentoAmortization = customerCreditDocumentModel.GetRowByBalancePending(user.CompanyID, txtCustomerID, customerCreditDocumentIDMin, objTmNew.CurrencyID!.Value);
-                //Obtener el banace total pendietne
-                var objListDocumentoAmortizationBalanceTotal = objListDocumentoAmortization.Sum(dto => dto.Remaining) ?? decimal.Zero;
-                if (decimal.Compare(objListDocumentoAmortizationBalanceTotal, abonoTotal) < 0)
+                for (var key = 0; key < arrayListTransactionDetailId.Count; key++)
                 {
-                    throw new Exception("ABONO, no puede ser aplicado por que supera el monto del saldo");
-                }
+                    var customerCreditDocumentID = arrayListCustomerCreditDocumentId[key];
+                    var share = arrayListShare[key];
+                    var transactionDetailID = arrayListTransactionDetailId[key];
+                    ;
+                    var reference1Documento = arrayListTransactionDetailDocument[key];
+                    var reference2Fecha = arrayListTransactionDetailFecha[key];
+                    var reference3AmortizationID = arrayListCustomerCreditAmortizationId[key];
 
-                foreach (var it in objListDocumentoAmortization)
-                {
-                    if (abonoTotal > it.Remaining)
+                    //Nuevo Detalle
+                    if (transactionDetailID == 0)
                     {
-                        // Agregar y disminuir
-                        abonoTotal -= it.Remaining!.Value;
-                        arrayListCustomerCreditDocumentId.Add(it.CustomerCreditDocumentId!.Value);
-                        arrayListTransactionDetailId.Add(0);
-                        arrayListTransactionDetailDocument.Add(it.DocumentNumber ?? string.Empty);
-                        arrayListTransactionDetailFecha.Add(it.DateApply);
-                        arrayListCustomerCreditAmortizationId.Add(it.CreditAmortizationId);
-                        arrayListShare.Add(it.Remaining.Value);
+                        var objCustomerCreditDocument = customerCreditDocumentModel.GetRowByPk(customerCreditDocumentID);
+                        if (objCustomerCreditDocument is null)
+                        {
+                            throw new Exception("No eixste el objeto Customer Credit Document");
+                        }
+
+                        var objCustomerCreditLine = customerCreditLineModel.GetRowByPk(objCustomerCreditDocument.CustomerCreditLineId);
+                        if (objCustomerCreditLine is null)
+                        {
+                            throw new Exception("No eixste el objeto Customer Credit Line");
+                        }
+
+                        var objCustomerAmortization = customerCreditAmortizationModel.GetRowByPk(reference3AmortizationID);
+                        if (objCustomerAmortization is null)
+                        {
+                            throw new Exception("No eixste el objeto Customer Amortization");
+                        }
+
+                        //Verificar los dias de atraso
+                        var hoy = DateTime.Today;
+                        var cuotaDate = objCustomerAmortization.DateApply.Date;
+                        var cuotaDif = hoy - cuotaDate;
+                        var diferenciaDias = Math.Abs(cuotaDif.Days);
+
+                        var objTmd = new TbTransactionMasterDetail
+                        {
+                            CompanyID = objTm.CompanyId,
+                            TransactionID = objTm.TransactionId,
+                            TransactionMasterID = TransactionMasterId.Value,
+                            ComponentID = objcomponentShare.ComponentID,
+                            ComponentItemID = customerCreditDocumentID,
+                            Quantity = decimal.Zero,
+                            UnitaryCost = decimal.Zero,
+                            Cost = decimal.Zero,
+                            UnitaryAmount = decimal.Zero,
+                            UnitaryPrice = decimal.Zero,
+                            Amount = share,
+                            Discount = decimal.Zero,
+                            PromotionID = 0,
+                            Reference1 = reference1Documento,
+                            Reference2 = Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance!.Value.ToString("N2").Replace(",", "") : objCustomerCreditDocument.BalanceNew!.Value.ToString("N2").Replace(",", ""),
+                            Reference3 = $"{reference3AmortizationID}",
+                            Reference5 = objCustomerCreditDocument.DateOn.ToString("yyyy-MM-dd"),
+                            Reference6 = objCustomerCreditDocument.DateFinish!.Value.ToString("yyyy-MM-dd"),
+                            Reference7 = objCustomerAmortization.DateApply.ToString("yyyy-MM-dd"),
+                            Lote = $"{diferenciaDias}",
+                            CatalogStatusID = 0,
+                            InventoryStatusID = 0,
+                            IsActive = true,
+                            QuantityStock = decimal.Zero,
+                            QuantiryStockInTraffic = decimal.Zero,
+                            QuantityStockUnaswared = decimal.Zero,
+                            RemaingStock = decimal.Zero,
+                            ExpirationDate = null,
+                            InventoryWarehouseSourceID = objTm.SourceWarehouseId,
+                            InventoryWarehouseTargetID = objTm.TargetWarehouseId
+                        };
+                        amount += share;
+                        transactionMasterDetailModel.InsertAppPosme(objTmd);
                     }
                     else
                     {
-                        arrayListCustomerCreditDocumentId.Add(it.CustomerCreditDocumentId!.Value);
-                        arrayListTransactionDetailId.Add(0);
-                        arrayListTransactionDetailDocument.Add(it.DocumentNumber ?? string.Empty);
-                        arrayListTransactionDetailFecha.Add(it.DateApply);
-                        arrayListCustomerCreditAmortizationId.Add(it.CreditAmortizationId);
-                        arrayListShare.Add(abonoTotal);
-                        break;
+                        //Editar Detalle
+                        var objTmd = transactionMasterDetailModel.GetRowByPKK(transactionDetailID);
+                        if (objTmd is null)
+                        {
+                            throw new Exception($"NO se encontró el detalle de la trasacción con el ID: {transactionDetailID}");
+                        }
+
+                        var objCustomerCreditDocument = customerCreditDocumentModel.GetRowByPk(objTmd.ComponentItemID!.Value);
+                        if (objCustomerCreditDocument is null)
+                        {
+                            throw new Exception("No eixste el objeto Customer Credit Document");
+                        }
+
+                        var objCustomerCreditLine = customerCreditLineModel.GetRowByPk(objCustomerCreditDocument.CustomerCreditLineId);
+                        if (objCustomerCreditLine is null)
+                        {
+                            throw new Exception("No eixste el objeto Customer Credit Line");
+                        }
+
+                        var objCustomerAmortization = customerCreditAmortizationModel.GetRowByPk(reference3AmortizationID);
+                        if (objCustomerAmortization is null)
+                        {
+                            throw new Exception("No eixste el objeto Customer Amortization");
+                        }
+
+                        //Verificar los dias de atraso
+                        var hoy = DateTime.Today;
+                        var cuotaDate = objCustomerAmortization.DateApply.Date;
+                        var cuotaDif = hoy - cuotaDate;
+                        var diferenciaDias = Math.Abs(cuotaDif.Days);
+                        var objTmdNew = objTmd;
+                        objTmdNew.Amount = share;
+                        objTmdNew.IsActive = true;
+                        objTmdNew.Reference1 = reference1Documento;
+                        objTmdNew.Reference2 = Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance!.Value.ToString("N2") : objCustomerCreditDocument.BalanceNew!.Value.ToString("N2");
+                        objTmdNew.Reference3 = $"{reference3AmortizationID}";
+                        objTmdNew.Reference5 = objCustomerCreditDocument.DateOn.ToString("d");
+                        objTmdNew.Reference6 = objCustomerCreditDocument.DateFinish!.Value.ToString("d");
+                        objTmdNew.Reference7 = objCustomerCreditDocument.DateApply.ToString("d");
+                        objTmdNew.Lote = $"{diferenciaDias}";
+                        objTmdNew.ExchangeRateReference = objCustomerCreditDocument.ExchangeRate;
+                        objTmdNew.DescriptionReference = "{componentID:\"Componente de transacciones de cuotas\",componentItemID:\"Id del documento de credito\",reference1:\"Numero del desembolso\",refernece2:\"balance anterior\",refernece3:\"Id de la amortizacion\",reference4:\"balance nuevo\",exchangeRateReference:\"Tasa de cambio del desembolso\",referece5:\"Fecha Inical de la deuda\",reference6:\"Fecha Final de la deuda\",reference7:\"dia que tocaba la cuota\",lote:\"Dias de atraso de la cuota\"}";
+                        amount += share;
+                        transactionMasterDetailModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, transactionDetailID, objTmdNew);
                     }
                 }
             }
-        }
 
-        //Obtener cuanto abona totalmente
-        if (arrayListTransactionDetailId.Count > 0)
-        {
-            for (var key = 0; key < arrayListTransactionDetailId.Count; key++)
+            //Actualizar Transaccion
+            objTmNew.Amount = amount;
+            transactionMasterModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, objTmNew);
+
+            //Aplicar el Documento?
+            var commandAplicable = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_APLICABLE"]);
+            validateWorkflow = objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_share", "statusID", objTmNew.StatusID.Value, commandAplicable, user.CompanyID, user.BranchID, role.RoleID);
+            if (validateWorkflow.HasValue && validateWorkflow.Value && objTm.StatusId.Value != objTmNew.StatusID)
             {
-                var value = arrayListTransactionDetailId[key];
-                var customerCreditDocumentID = arrayListCustomerCreditDocumentId[key];
-                var share = arrayListShare[key];
-                var transactionDetailID = value;
-                var reference1Documento = arrayListTransactionDetailDocument[key];
-                var reference2Fecha = arrayListTransactionDetailFecha[key];
-                var reference3AmortizationID = arrayListCustomerCreditAmortizationId[key];
-
-                //Nuevo Detalle
-                if (transactionDetailID == 0)
+                //Recorrer Facturas para Actualizar Balances
+                var objListTmd = transactionMasterDetailModel.GetRowByTransactionToShare(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
+                if (objListTmd.Count > 0)
                 {
-                    var objCustomerCreditDocument = customerCreditDocumentModel.GetRowByPk(customerCreditDocumentID);
-                    if (objCustomerCreditDocument is null)
+                    foreach (var objTmd in objListTmd)
                     {
-                        throw new Exception("No eixste el objeto Customer Credit Document");
+                        var objCustomerCreditDocumentInicial = customerCreditDocumentModel.GetRowByPk(objTmd.ComponentItemID!.Value);
+                        objInterfazCoreWebAmortization.ApplyCuote(user.CompanyID, objTmd.ComponentItemID!.Value, Convert.ToDecimal(objTmd.Reference3), objTmd.TransactionMasterDetailID);
+                        //documento final
+                        var objCustomerCreditDocument = customerCreditDocumentModel.GetRowByPk(objTmd.ComponentItemID.Value);
+                        //capital
+                        var capital = (objCustomerCreditDocumentInicial!.Balance - objCustomerCreditDocument!.Balance) ?? decimal.Zero;
+                        var objTMDC = new TbTransactionMasterDetailCredit
+                        {
+                            TransactionMasterID = objTmd.TransactionMasterID,
+                            TransactionMasterDetailID = objTmd.TransactionMasterDetailID,
+                            Capital = capital,
+                            Interest = objTmd.Amount!.Value - capital,
+                            DayDalay = 0,
+                            InterestMora = 0,
+                            CurrencyID = objTm.CurrencyId!.Value,
+                            ExchangeRate = objTmNew.ExchangeRate!.Value,
+                            Reference1 = null,
+                            Reference2 = null,
+                            Reference3 = null,
+                            Reference4 = null,
+                        };
+                        transactionMasterDetailCreditModel.InsertAppPosme(objTMDC);
+
+                        var objCustomer = customerModel.GetRowByEntity(user.CompanyID, objTmNew.EntityID!.Value);
+                        var objTMFactura = transactionMasterModel.GetRowByTransactionNumber(user.CompanyID, objTmd.Reference1); /*invoiceNumber*/
+                        var objCustomerCreditLine = customerCreditLineModel.GetRowByPk(Convert.ToInt32(objTMFactura.Reference4));
+                        var objCustomerCredit = customerCreditModel.GetRowByPk(user.CompanyID, user.BranchID, objCustomer.EntityId);
+                        var montoAbono = objTMDC.Capital;
+                        var montoAbonoDolares = objTMFactura.ExchangeRate > 1 ? /*cordoba a dolares*/(objTMDC.Capital * Math.Round(1 / Math.Round(objTMFactura.ExchangeRate!.Value, 4), 4)) : objTMDC.Capital;
+                        var montoAbonoCordobas = objTMFactura.ExchangeRate < 1 ? /*dolares a cordoba*/ (objTMDC.Capital / Math.Round(objTMFactura.ExchangeRate!.Value, 4)) : objTMDC.Capital;
+
+                        // Actualizar saldo general del cliente
+                        var objCustomerCreditNew = objCustomerCredit;
+                        objCustomerCreditNew.BalanceDol = objCustomerCredit.BalanceDol + montoAbonoDolares;
+                        customerCreditModel.UpdateAppPosme(user.CompanyID, objCustomer.BranchId, objCustomer.EntityId, objCustomerCreditNew);
+
+                        // Actualizar saldo de la línea
+                        // Línea dólares y factura dólares
+                        // Línea córdoba y factura córdoba
+                        var objCustomerCreditLineNew = objCustomerCreditLine;
+                        if (objCustomerCreditLine.CurrencyID == objTMFactura.CurrencyID)
+                        {
+                            objCustomerCreditLineNew.Balance = objCustomerCreditLine.Balance + montoAbono;
+                        }
+
+                        // Línea en dólares, factura en córdoba
+                        if (objCustomerCreditLine.CurrencyID == objCurrencyDolares.CurrencyID && objTMFactura.CurrencyID != objCurrencyDolares.CurrencyID)
+                            objCustomerCreditLineNew.Balance = objCustomerCreditLine.Balance + montoAbonoDolares;
+
+                        // Línea en córdoba, factura en dólares
+                        if (objCustomerCreditLine.CurrencyID != objCurrencyDolares.CurrencyID && objTMFactura.CurrencyID == objCurrencyDolares.CurrencyID)
+                            objCustomerCreditLineNew.Balance = objCustomerCreditLine.Balance + montoAbonoCordobas;
+
+                        // Actualizar línea
+                        customerCreditLineModel.UpdateAppPosme(objCustomerCreditLine.CustomerCreditLineID, objCustomerCreditLineNew);
+
+                        // Actualizar saldo del recibo
+                        var objTMDNew = transactionMasterDetailModel.GetRowByPKK(objTmd.TransactionMasterDetailID);
+                        if (Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization)
+                            objTMDNew.Reference4 = objCustomerCreditDocument.Balance.Value.ToString("N2");
+                        else
+                            objTMDNew.Reference4 = objCustomerCreditDocument.BalanceNew.Value.ToString("N2");
+
+                        // Actualizar saldo del recibo
+                        transactionMasterDetailModel.UpdateAppPosme(user.CompanyID, objTmd.TransactionID, objTmd.TransactionMasterID, objTmd.TransactionMasterDetailID, objTMDNew);
                     }
-
-                    var objCustomerCreditLine = customerCreditLineModel.GetRowByPk(objCustomerCreditDocument.CustomerCreditLineId);
-                    if (objCustomerCreditLine is null)
-                    {
-                        throw new Exception("No eixste el objeto Customer Credit Line");
-                    }
-
-                    var objCustomerAmortization = customerCreditAmortizationModel.GetRowByPk(reference3AmortizationID);
-                    if (objCustomerAmortization is null)
-                    {
-                        throw new Exception("No eixste el objeto Customer Amortization");
-                    }
-
-                    //Verificar los dias de atraso
-                    var hoy = DateTime.Today;
-                    var cuotaDate = objCustomerAmortization.DateApply.Date;
-                    var cuotaDif = hoy - cuotaDate;
-                    var diferenciaDias = Math.Abs(cuotaDif.Days);
-
-                    var objTmd = new TbTransactionMasterDetail
-                    {
-                        CompanyID = objTm.CompanyId,
-                        TransactionID = objTm.TransactionId,
-                        TransactionMasterID = TransactionMasterId.Value,
-                        ComponentID = objcomponentShare.ComponentID,
-                        ComponentItemID = customerCreditDocumentID,
-                        Quantity = decimal.Zero,
-                        UnitaryCost = decimal.Zero,
-                        Cost = decimal.Zero,
-                        UnitaryAmount = decimal.Zero,
-                        UnitaryPrice = decimal.Zero,
-                        Amount = share,
-                        Discount = decimal.Zero,
-                        PromotionID = 0,
-                        Reference1 = reference1Documento,
-                        Reference2 = Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance!.Value.ToString("N2").Replace(",", "") : objCustomerCreditDocument.BalanceNew!.Value.ToString("N2").Replace(",", ""),
-                        Reference3 = $"{reference3AmortizationID}",
-                        Reference5 = objCustomerCreditDocument.DateOn.ToString("yyyy-MM-dd"),
-                        Reference6 = objCustomerCreditDocument.DateFinish!.Value.ToString("yyyy-MM-dd"),
-                        Reference7 = objCustomerAmortization.DateApply.ToString("yyyy-MM-dd"),
-                        Lote = $"{diferenciaDias}",
-                        CatalogStatusID = 0,
-                        InventoryStatusID = 0,
-                        IsActive = true,
-                        QuantityStock = decimal.Zero,
-                        QuantiryStockInTraffic = decimal.Zero,
-                        QuantityStockUnaswared = decimal.Zero,
-                        RemaingStock = decimal.Zero,
-                        ExpirationDate = null,
-                        InventoryWarehouseSourceID = objTm.SourceWarehouseId,
-                        InventoryWarehouseTargetID = objTm.TargetWarehouseId
-                    };
-                    amount += share;
-                    transactionMasterDetailModel.InsertAppPosme(objTmd);
                 }
-                else
-                {
-                    //Editar Detalle
-                    var objTmd = transactionMasterDetailModel.GetRowByPKK(transactionDetailID);
-                    if (objTmd is null)
-                    {
-                        throw new Exception($"NO se encontró el detalle de la trasacción con el ID: {transactionDetailID}");
-                    }
 
-                    var objCustomerCreditDocument = customerCreditDocumentModel.GetRowByPk(objTmd.ComponentItemID!.Value);
-                    if (objCustomerCreditDocument is null)
-                    {
-                        throw new Exception("No eixste el objeto Customer Credit Document");
-                    }
-
-                    var objCustomerCreditLine = customerCreditLineModel.GetRowByPk(objCustomerCreditDocument.CustomerCreditLineId);
-                    if (objCustomerCreditLine is null)
-                    {
-                        throw new Exception("No eixste el objeto Customer Credit Line");
-                    }
-
-                    var objCustomerAmortization = customerCreditAmortizationModel.GetRowByPk(reference3AmortizationID);
-                    if (objCustomerAmortization is null)
-                    {
-                        throw new Exception("No eixste el objeto Customer Amortization");
-                    }
-
-                    //Verificar los dias de atraso
-                    var hoy = DateTime.Today;
-                    var cuotaDate = objCustomerAmortization.DateApply.Date;
-                    var cuotaDif = hoy - cuotaDate;
-                    var diferenciaDias = Math.Abs(cuotaDif.Days);
-                    var objTmdNew = new TbTransactionMasterDetail();
-                    objTmdNew = objTmd;
-                    objTmdNew.Amount = share;
-                    objTmdNew.IsActive = true;
-                    objTmdNew.Reference1 = reference1Documento;
-                    objTmdNew.Reference2 = Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance!.Value.ToString("N2") : objCustomerCreditDocument.BalanceNew!.Value.ToString("N2");
-                    objTmdNew.Reference3 = $"{reference3AmortizationID}";
-                    objTmdNew.Reference5 = objCustomerCreditDocument.DateOn.ToString("d");
-                    objTmdNew.Reference6 = objCustomerCreditDocument.DateFinish!.Value.ToString("d");
-                    objTmdNew.Reference7 = objCustomerCreditDocument.DateApply.ToString("d");
-                    objTmdNew.Lote = $"{diferenciaDias}";
-                    objTmdNew.ExchangeRateReference = objCustomerCreditDocument.ExchangeRate;
-                    objTmdNew.DescriptionReference = "{componentID:\"Componente de transacciones de cuotas\",componentItemID:\"Id del documento de credito\",reference1:\"Numero del desembolso\",refernece2:\"balance anterior\",refernece3:\"Id de la amortizacion\",reference4:\"balance nuevo\",exchangeRateReference:\"Tasa de cambio del desembolso\",referece5:\"Fecha Inical de la deuda\",reference6:\"Fecha Final de la deuda\",reference7:\"dia que tocaba la cuota\",lote:\"Dias de atraso de la cuota\"}";
-                    amount += share;
-                    transactionMasterDetailModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, transactionDetailID, objTmdNew);
-                }
+                //Crear Conceptos.
+                objInterfazCoreWebConcept.Share(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
             }
+
+            dbTransaction.Commit();
         }
-
-        //Actualizar Transaccion
-        objTmNew.Amount = amount;
-        transactionMasterModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, objTmNew);
-
-        //Aplicar el Documento?
-        var commandAplicable = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_APLICABLE"]);
-        validateWorkflow = objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_share", "statusID", objTmNew.StatusID.Value, commandAplicable, user.CompanyID, user.BranchID, role.RoleID);
-        if (validateWorkflow.HasValue && validateWorkflow.Value && objTm.StatusId.Value != objTmNew.StatusID)
+        catch (Exception ex)
         {
-            //Recorrer Facturas para Actualizar Balances
-            var objListTmd = transactionMasterDetailModel.GetRowByTransactionToShare(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
-            if (objListTmd.Count > 0)
-            {
-                foreach (var objTmd in objListTmd)
-                {
-                    var objCustomerCreditDocumentInicial = customerCreditDocumentModel.GetRowByPk(objTmd.ComponentItemID!.Value);
-                    objInterfazCoreWebAmortization.ApplyCuote(user.CompanyID, objTmd.ComponentItemID!.Value, Convert.ToDecimal(objTmd.Reference3), objTmd.TransactionMasterDetailID);
-                    //documento final
-                    var objCustomerCreditDocument = customerCreditDocumentModel.GetRowByPk(objTmd.ComponentItemID.Value);
-                    //capital
-                    var capital = (objCustomerCreditDocumentInicial!.Balance - objCustomerCreditDocument!.Balance) ?? decimal.Zero;
-                    var objTMDC = new TbTransactionMasterDetailCredit
-                    {
-                        TransactionMasterID = objTmd.TransactionMasterID,
-                        TransactionMasterDetailID = objTmd.TransactionMasterDetailID,
-                        Capital = capital,
-                        Interest = objTmd.Amount!.Value - capital,
-                        DayDalay = 0,
-                        InterestMora = 0,
-                        CurrencyID = objTm.CurrencyId!.Value,
-                        ExchangeRate = objTmNew.ExchangeRate!.Value,
-                        Reference1 = null,
-                        Reference2 = null,
-                        Reference3 = null,
-                        Reference4 = null,
-                    };
-                    transactionMasterDetailCreditModel.InsertAppPosme(objTMDC);
-
-                    var objCustomer = customerModel.GetRowByEntity(user.CompanyID, objTmNew.EntityID!.Value);
-                    var objTMFactura = transactionMasterModel.GetRowByTransactionNumber(user.CompanyID, objTmd.Reference1); /*invoiceNumber*/
-                    var objCustomerCreditLine = customerCreditLineModel.GetRowByPk(Convert.ToInt32(objTMFactura.Reference4));
-                    var objCustomerCredit = customerCreditModel.GetRowByPk(user.CompanyID, user.BranchID, objCustomer.EntityId);
-                    var montoAbono = objTMDC.Capital;
-                    var montoAbonoDolares = objTMFactura.ExchangeRate > 1 ? /*cordoba a dolares*/(objTMDC.Capital * Math.Round(1 / Math.Round(objTMFactura.ExchangeRate!.Value, 4), 4)) : objTMDC.Capital;
-                    var montoAbonoCordobas = objTMFactura.ExchangeRate < 1 ? /*dolares a cordoba*/ (objTMDC.Capital / Math.Round(objTMFactura.ExchangeRate!.Value, 4)) : objTMDC.Capital;
-
-                    // Actualizar saldo general del cliente
-                    var objCustomerCreditNew = new TbCustomerCredit();
-                    objCustomerCreditNew.BalanceDol = objCustomerCredit.BalanceDol + montoAbonoDolares;
-                    customerCreditModel.UpdateAppPosme(user.CompanyID, objCustomer.BranchId, objCustomer.EntityId, objCustomerCreditNew);
-
-                    // Actualizar saldo de la línea
-                    // Línea dólares y factura dólares
-                    // Línea córdoba y factura córdoba
-                    var objCustomerCreditLineNew = new TbCustomerCreditLine();
-                    if (objCustomerCreditLine.CurrencyID == objTMFactura.CurrencyID)
-                    {
-                        objCustomerCreditLineNew.Balance = objCustomerCreditLine.Balance + montoAbono;
-                    }
-
-                    // Línea en dólares, factura en córdoba
-                    if (objCustomerCreditLine.CurrencyID == objCurrencyDolares.CurrencyID && objTMFactura.CurrencyID != objCurrencyDolares.CurrencyID)
-                        objCustomerCreditLineNew.Balance = objCustomerCreditLine.Balance + montoAbonoDolares;
-
-                    // Línea en córdoba, factura en dólares
-                    if (objCustomerCreditLine.CurrencyID != objCurrencyDolares.CurrencyID && objTMFactura.CurrencyID == objCurrencyDolares.CurrencyID)
-                        objCustomerCreditLineNew.Balance = objCustomerCreditLine.Balance + montoAbonoCordobas;
-
-                    // Actualizar línea
-                    customerCreditLineModel.UpdateAppPosme(objCustomerCreditLine.CustomerCreditLineID, objCustomerCreditLineNew);
-
-                    // Actualizar saldo del recibo
-                    var objTMDNew = transactionMasterDetailModel.GetRowByPKK(objTmd.TransactionMasterDetailID);
-                    objTMDNew.Reference4 = Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance.Value.ToString("N2") : objCustomerCreditDocument.BalanceNew.Value.ToString("N2");
-                    transactionMasterDetailModel.UpdateAppPosme(user.CompanyID, objTmd.TransactionID, objTmd.TransactionMasterID, objTmd.TransactionMasterDetailID, objTMDNew);
-                }
-
-                
-            }
-
-            objInterfazCoreWebConcept.Share(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
+            dbTransaction.Rollback();
+            throw ex;
         }
     }
 
@@ -1790,6 +1765,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             printer.Append($"{detail.Amount}");
             printer.Append($"{detail.Quantity * detail.UnitaryPrice}");
         }
+
         printer.NewLine();
         printer.AlignCenter();
         printer.Append(objCompany.Address);

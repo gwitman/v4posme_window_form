@@ -185,19 +185,26 @@ public partial class FormShareList : FormTypeList, IFormTypeList
 
     public void Delete(object? sender, EventArgs? args)
     {
-        if (gridViewData.RowCount<0)
+        var result = coreWebRender.XtraMessageBoxArgs(TypeError.Error, "Eliminar", "¿Seguro desea eliminar el abono seleccionado? Esta acción no se puede revertir.");
+
+        if (result == DialogResult.No)
         {
-            coreWebRender.GetMessageAlert(TypeError.Warning, "Abono", "No hay datos en la tabla", this); 
+            return;
+        }
+
+        if (gridViewData.RowCount < 0)
+        {
+            coreWebRender.GetMessageAlert(TypeError.Warning, "Abono", "No hay datos en la tabla", this);
             return;
         }
 
         var focused = gridViewData.FocusedRowHandle;
-        if (focused<0)
+        if (focused < 0)
         {
-            coreWebRender.GetMessageAlert(TypeError.Warning, "Abono", "Seleccione un abono a editar", this); 
+            coreWebRender.GetMessageAlert(TypeError.Warning, "Abono", "Seleccione un abono a editar", this);
             return;
         }
-        
+
 
         backgroundWorker = new BackgroundWorker();
         backgroundWorker.DoWork += (ob, ev) =>
@@ -230,6 +237,7 @@ public partial class FormShareList : FormTypeList, IFormTypeList
                 List();
                 RefreshData();
             }
+
             if (progressPanel.Visible)
             {
                 progressPanel.Visible = false;
@@ -242,18 +250,19 @@ public partial class FormShareList : FormTypeList, IFormTypeList
 
     public void Edit(object? sender, EventArgs? args)
     {
-        if (gridViewData.RowCount<0)
+        if (gridViewData.RowCount < 0)
         {
-            coreWebRender.GetMessageAlert(TypeError.Warning, "Abono", "No hay datos en la tabla", this); 
+            coreWebRender.GetMessageAlert(TypeError.Warning, "Abono", "No hay datos en la tabla", this);
             return;
         }
 
         var focused = gridViewData.FocusedRowHandle;
-        if (focused<0)
+        if (focused < 0)
         {
-            coreWebRender.GetMessageAlert(TypeError.Warning, "Abono", "Seleccione un abono a editar", this); 
+            coreWebRender.GetMessageAlert(TypeError.Warning, "Abono", "Seleccione un abono a editar", this);
             return;
         }
+
         var companyID = Convert.ToInt32(gridViewData.GetRowCellValue(focused, "companyID"));
         var transactionId = Convert.ToInt32(gridViewData.GetRowCellValue(focused, "transactionID"));
         var transactionMasterID = Convert.ToInt32(gridViewData.GetRowCellValue(focused, "transactionMasterID"));
