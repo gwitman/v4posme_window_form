@@ -1138,7 +1138,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                     arrayListTransactionDetailFecha = new List<DateTime?>();
                     arrayListCustomerCreditAmortizationId = new List<int>();
                     arrayListShare = new List<decimal>();
-                    var customerCreditDocumentIDMin = formShareEditDetailDto.EslementAt(0).DetailCustomerCreditDocumentId;
+                    var customerCreditDocumentIDMin = formShareEditDetailDtos.ElementAt(0).DetailCustomerCreditDocumentId;
                     var objListDocumentoAmortization = customerCreditDocumentModel.GetRowByBalancePending(user.CompanyID, txtCustomerID, customerCreditDocumentIDMin, objTmNew.CurrencyID!.Value);
                     //Obtener el banace total pendietne
                     var objListDocumentoAmortizationBalanceTotal = objListDocumentoAmortization.Sum(dto => dto.Remaining) ?? decimal.Zero;
