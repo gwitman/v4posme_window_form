@@ -11,6 +11,7 @@ using v4posme_library.Libraries.CustomModels;
 using v4posme_library.Libraries.CustomModels.Core;
 using v4posme_library.Models;
 using v4posme_library.ModelsDto;
+using v4posme_window.Api;
 using v4posme_window.Dto;
 using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
@@ -126,7 +127,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
     private readonly ICompanyModel companyModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICompanyModel>();
     private readonly IUserModel userModel = VariablesGlobales.Instance.UnityContainer.Resolve<IUserModel>();
     private readonly IBranchModel branchModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBranchModel>();
-
+    private readonly FormCxcApi formCxcApi = new FormCxcApi();
     #endregion
 
     #region Init
@@ -1139,7 +1140,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                     arrayListCustomerCreditAmortizationId = new List<int>();
                     arrayListShare = new List<decimal>();
                     var customerCreditDocumentIDMin = formShareEditDetailDtos.ElementAt(0).DetailCustomerCreditDocumentId;
-                    var objListDocumentoAmortization = customerCreditDocumentModel.GetRowByBalancePending(user.CompanyID, txtCustomerID, customerCreditDocumentIDMin, objTmNew.CurrencyID!.Value);
+                    var objListDocumentoAmortization = formCxcApi.GetCustomerBalance(txtCustomerID, Convert.ToInt32(selectedCurrency));
                     //Obtener el banace total pendietne
                     var objListDocumentoAmortizationBalanceTotal = objListDocumentoAmortization.Sum(dto => dto.Remaining) ?? decimal.Zero;
 
@@ -1576,23 +1577,27 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             return false;
         }
 
-        if (!string.IsNullOrWhiteSpace(ObjParameterShareInvoiceByInvoice))
+        if (TransactionMasterId.HasValue && TransactionMasterId.Value > 0)
         {
-            if (ObjParameterShareInvoiceByInvoice.Equals("true", StringComparison.InvariantCultureIgnoreCase))
+            if (!string.IsNullOrWhiteSpace(ObjParameterShareInvoiceByInvoice))
             {
-                var datos = bindingSourceDetailDto.List as IList<FormShareEditDetailDTO>;
-                foreach (var dato in datos)
+                if (ObjParameterShareInvoiceByInvoice.Equals("true", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    var saldoInicial = dato.DetailBalanceStartShare;
-                    var amountShare = dato.DetailShare;
-                    if (amountShare > (saldoInicial + 2))
+                    var datos = bindingSourceDetailDto.List as IList<FormShareEditDetailDTO>;
+                    foreach (var dato in datos)
                     {
-                        objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "El monto del abono en la factura es mayor quel saldo", this);
-                        return false;
+                        var saldoInicial = dato.DetailBalanceStartShare;
+                        var amountShare = dato.DetailShare;
+                        if (amountShare > (saldoInicial + 2))
+                        {
+                            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "El monto del abono en la factura es mayor quel saldo", this);
+                            return false;
+                        }
                     }
                 }
-            } 
+            }
         }
+
 
         return true;
     }
@@ -1622,9 +1627,9 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             var saldoTotal = decimal.Zero;
             if (ObjListCustomerCreditDocument.Count > 0)
             {
-                
                 ObjListCustomerCreditDocument.ForEach(dto => saldoTotal = decimal.Add(saldoTotal, dto.Remaining ?? decimal.Zero));
             }
+
             txtBalanceStart.EditValue = saldoTotal;
         });
     }
@@ -1700,8 +1705,8 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
     {
         var total = bindingSourceDetailDto.List.Cast<FormShareEditDetailDTO>().Sum(dto => dto.DetailShare);
         txtTotal.EditValue = total;
-        var subTotal = decimal.Parse(txtBalanceStart.Text) - total;
-        txtBalanceFinish.EditValue = subTotal;
+        var saldoFinal = decimal.Parse(txtBalanceStart.Text) - total;
+        txtBalanceFinish.EditValue = saldoFinal;
     }
 
     private void UpdateCalculateChange()
@@ -1912,7 +1917,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             return;
         }
 
-        var dialogMovimientos = new FormShareEditVerMovimientos();
+        var dialogMovimientos = new FormShareEditVerMovimientos("Ver Movimientos");
         var pathUrl = VariablesGlobales.ConfigurationBuilder["APP_URL_RESOURCE_CSS_JS"];
         dialogMovimientos.webView.Source = new Uri($"{pathUrl}/app_cxc_report/movement_customer/viewReport/true/customerNumber/{txtCustomerID}");
         dialogMovimientos.ShowDialog();

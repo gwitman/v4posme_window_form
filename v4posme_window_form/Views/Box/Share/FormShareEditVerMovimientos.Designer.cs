@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormShareEditVerMovimientos));
             webView = new Microsoft.Web.WebView2.WinForms.WebView2();
             ((System.ComponentModel.ISupportInitialize)webView).BeginInit();
             SuspendLayout();
@@ -40,7 +41,7 @@
             webView.Dock = DockStyle.Fill;
             webView.Location = new Point(0, 0);
             webView.Name = "webView";
-            webView.Size = new Size(756, 425);
+            webView.Size = new Size(973, 533);
             webView.TabIndex = 0;
             webView.ZoomFactor = 1D;
             // 
@@ -48,8 +49,9 @@
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(756, 425);
+            ClientSize = new Size(973, 533);
             Controls.Add(webView);
+            IconOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("FormShareEditVerMovimientos.IconOptions.SvgImage");
             Name = "FormShareEditVerMovimientos";
             Text = "FormShareEditVerMovimientos";
             Load += FromShareEditVerMovimientos_Load;

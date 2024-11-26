@@ -14,9 +14,10 @@ namespace v4posme_window.Views.Box.Share
 {
     public partial class FormShareEditVerMovimientos : XtraForm
     {
-        public FormShareEditVerMovimientos()
+        public FormShareEditVerMovimientos(string title = "Ver Movimientos")
         {
             InitializeComponent();
+            Text = title;
         }
 
         private void FromShareEditVerMovimientos_Load(object sender, EventArgs e)
