@@ -128,6 +128,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
     private readonly IUserModel userModel = VariablesGlobales.Instance.UnityContainer.Resolve<IUserModel>();
     private readonly IBranchModel branchModel = VariablesGlobales.Instance.UnityContainer.Resolve<IBranchModel>();
     private readonly FormCxcApi formCxcApi = new FormCxcApi();
+
     #endregion
 
     #region Init
@@ -1623,7 +1624,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             txtCustomerID = Convert.ToInt32(diccionario["entityID"]);
             txtCustomerDescription.Text = $@"{diccionario["Codigo"]} {diccionario["Nombre"]} / {diccionario["Comercial"]}";
             var selectedCurrency = txtCurrencyID.SelectedItem as ComboBoxItem;
-            ObjListCustomerCreditDocument = selectedCurrency is not null ? customerCreditDocumentModel.GetRowByEntityApplied(companyId, txtCustomerID, Convert.ToInt32(selectedCurrency.Key)) : new();
+            ObjListCustomerCreditDocument = selectedCurrency is not null ? formCxcApi.GetCustomerBalance(txtCustomerID, Convert.ToInt32(selectedCurrency)) : new();
             var saldoTotal = decimal.Zero;
             if (ObjListCustomerCreditDocument.Count > 0)
             {
