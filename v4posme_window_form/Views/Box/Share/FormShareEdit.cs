@@ -1141,7 +1141,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                     arrayListCustomerCreditAmortizationId = new List<int>();
                     arrayListShare = new List<decimal>();
                     var customerCreditDocumentIDMin = formShareEditDetailDtos.ElementAt(0).DetailCustomerCreditDocumentId;
-                    var objListDocumentoAmortization = formCxcApi.GetCustomerBalance(txtCustomerID, Convert.ToInt32(selectedCurrency));
+                    var objListDocumentoAmortization = formCxcApi.GetCustomerBalance(txtCustomerID, Convert.ToInt32(selectedCurrency.Key));
                     //Obtener el banace total pendietne
                     var objListDocumentoAmortizationBalanceTotal = objListDocumentoAmortization.Sum(dto => dto.Remaining) ?? decimal.Zero;
 
@@ -1624,7 +1624,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             txtCustomerID = Convert.ToInt32(diccionario["entityID"]);
             txtCustomerDescription.Text = $@"{diccionario["Codigo"]} {diccionario["Nombre"]} / {diccionario["Comercial"]}";
             var selectedCurrency = txtCurrencyID.SelectedItem as ComboBoxItem;
-            ObjListCustomerCreditDocument = selectedCurrency is not null ? formCxcApi.GetCustomerBalance(txtCustomerID, Convert.ToInt32(selectedCurrency)) : new();
+            ObjListCustomerCreditDocument = selectedCurrency is not null ? formCxcApi.GetCustomerBalance(txtCustomerID, Convert.ToInt32(selectedCurrency.Key)) : new();
             var saldoTotal = decimal.Zero;
             if (ObjListCustomerCreditDocument.Count > 0)
             {
