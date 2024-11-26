@@ -851,9 +851,9 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             throw new Exception($"No hay una trasaction con el Trasaction ID: {TransactionId.Value}");
         }
 
-        var selectedCurrency    = (ComboBoxItem)txtCurrencyID.SelectedItem;
-        var selectedStatus      = (ComboBoxItem)txtStatusID.SelectedItem;
-      
+        var selectedCurrency = (ComboBoxItem)txtCurrencyID.SelectedItem;
+        var selectedStatus = (ComboBoxItem)txtStatusID.SelectedItem;
+
 
         var objTm = new TbTransactionMaster()
         {
@@ -1184,7 +1184,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                     var customerCreditDocumentID = arrayListCustomerCreditDocumentId[key];
                     var share = arrayListShare[key];
                     var transactionDetailID = arrayListTransactionDetailId[key];
-                    
+
                     var reference1Documento = arrayListTransactionDetailDocument[key];
                     var reference2Fecha = arrayListTransactionDetailFecha[key];
                     var reference3AmortizationID = arrayListCustomerCreditAmortizationId[key];
@@ -1576,12 +1576,24 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             return false;
         }
 
-        //esta validación no está en la web, consultar
-        //if (gridViewTransactionMasterDetail.RowCount<0)
-        //{
-        //    objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error","No hay datos a guardar",this);
-        //    return false;
-        //}
+        if (!string.IsNullOrWhiteSpace(ObjParameterShareInvoiceByInvoice))
+        {
+            if (ObjParameterShareInvoiceByInvoice.Equals("true", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var datos = bindingSourceDetailDto.List as IList<FormShareEditDetailDTO>;
+                foreach (var dato in datos)
+                {
+                    var saldoInicial = dato.DetailBalanceStartShare;
+                    var amountShare = dato.DetailShare;
+                    if (amountShare > (saldoInicial + 2))
+                    {
+                        objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "El monto del abono en la factura es mayor quel saldo", this);
+                        return false;
+                    }
+                }
+            } 
+        }
+
         return true;
     }
 
@@ -1607,12 +1619,13 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             txtCustomerDescription.Text = $@"{diccionario["Codigo"]} {diccionario["Nombre"]} / {diccionario["Comercial"]}";
             var selectedCurrency = txtCurrencyID.SelectedItem as ComboBoxItem;
             ObjListCustomerCreditDocument = selectedCurrency is not null ? customerCreditDocumentModel.GetRowByEntityApplied(companyId, txtCustomerID, Convert.ToInt32(selectedCurrency.Key)) : new();
+            var saldoTotal = decimal.Zero;
             if (ObjListCustomerCreditDocument.Count > 0)
             {
-                var saldoTotal = decimal.Zero;
+                
                 ObjListCustomerCreditDocument.ForEach(dto => saldoTotal = decimal.Add(saldoTotal, dto.Remaining ?? decimal.Zero));
-                txtBalanceStart.EditValue = saldoTotal;
             }
+            txtBalanceStart.EditValue = saldoTotal;
         });
     }
 
@@ -1842,9 +1855,10 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
 
     private void btnSearchCustomer_Click(object sender, EventArgs e)
     {
-        if (ObjComponentCustomer is null)
+        var selectedCurrency = txtCurrencyID.SelectedItem as ComboBoxItem;
+        if (selectedCurrency is null)
         {
-            XtraMessageBox.Show("No se ha definido el componente ObjComponentCustomer");
+            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "Seleccione la moneda", this);
             return;
         }
 
@@ -1863,20 +1877,14 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
     {
         if (txtCustomerID <= 0)
         {
-            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Seleccione el cliente para continuar", "Cliente", this);
+            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Cliente", "Seleccione el cliente para continuar", this);
             return;
         }
 
         var selectedCurrency = txtCurrencyID.SelectedItem as ComboBoxItem;
         if (selectedCurrency is null)
         {
-            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Seleccione la moneda para continuar", "Moneda", this);
-            return;
-        }
-
-        if (ObjComponentCustomerCreditDocument is null)
-        {
-            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "No existe el componente ComponentCustomerCreditDocument", "Moneda", this);
+            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Moneda", "Seleccione la moneda para continuar", this);
             return;
         }
 
@@ -1949,6 +1957,8 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
     {
         txtCustomerID = 0;
         txtCustomerDescription.Clear();
+        txtBalanceStart.Clear();
+        txtBalanceFinish.Clear();
     }
 
     private void btnClearEmployee_Click(object sender, EventArgs e)
