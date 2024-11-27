@@ -70,7 +70,7 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
     {
         using var context = new DataContext();
         return FindCreditAmortizations(customerCreditDocumentId, context)
-            .OrderBy(key => key.DateApply)
+            .OrderBy(key => key.DateApply.Date)
             .ToList();
     }
 

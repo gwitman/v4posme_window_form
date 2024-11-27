@@ -18,7 +18,6 @@ using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
 using ComboBoxItem = v4posme_window.Libraries.ComboBoxItem;
-using IsolationLevel = System.Data.IsolationLevel;
 
 namespace v4posme_window.Views.Box.Share;
 
@@ -1074,8 +1073,8 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             objTmNew.Note = txtNote.Text;
             objTmNew.Reference1 = txtReference1.Text;
             objTmNew.Reference2 = txtReference2.Text;
-            objTmNew.Reference3 = $"{txtEmployeeID}";
-            objTmNew.Reference4 = "txtCustomerCreditLineID"; //no encontré el campo
+            objTmNew.Reference3 = txtEmployeeID== 0 ? string.Empty : $"{txtEmployeeID}";
+            objTmNew.Reference4 = null; //no encontré el campo
             objTmNew.DescriptionReference = "reference1:input,reference2:input,reference3:Gestor de Cobro,reference4:Linea de credito del Cliente";
             objTmNew.StatusID = Convert.ToInt32(selectedStatus.Key);
             objTmNew.Amount = Convert.ToDecimal(txtTotal.EditValue);
@@ -1237,7 +1236,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                             Discount = decimal.Zero,
                             PromotionID = 0,
                             Reference1 = reference1Documento,
-                            Reference2 = Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance!.Value.ToString("N2").Replace(",", "") : objCustomerCreditDocument.BalanceNew!.Value.ToString("N2").Replace(",", ""),
+                            Reference2 = Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance!.Value.ToString("F") : objCustomerCreditDocument.BalanceNew!.Value.ToString("F"),
                             Reference3 = $"{reference3AmortizationID}",
                             Reference5 = objCustomerCreditDocument.DateOn.ToString("yyyy-MM-dd"),
                             Reference6 = objCustomerCreditDocument.DateFinish!.Value.ToString("yyyy-MM-dd"),
@@ -1283,21 +1282,21 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                         {
                             throw new Exception("No eixste el objeto Customer Amortization");
                         }
-
+                        
+                        var objTmdNew = objTmd;
+                        objTmdNew.Amount = share;
+                        objTmdNew.IsActive = true;
+                        objTmdNew.Reference1 = reference1Documento;
+                        objTmdNew.Reference2 = Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance!.Value.ToString("F") : objCustomerCreditDocument.BalanceNew!.Value.ToString("F");
+                        objTmdNew.Reference3 = $"{reference3AmortizationID}";
+                        objTmdNew.Reference5 = objCustomerCreditDocument.DateOn.ToString("yyyy-MM-dd");
+                        objTmdNew.Reference6 = objCustomerCreditDocument.DateFinish!.Value.ToString("yyyy-MM-dd");
+                        objTmdNew.Reference7 = objCustomerAmortization.DateApply.ToString("yyyy-MM-dd");
                         //Verificar los dias de atraso
                         var hoy = DateTime.Today;
                         var cuotaDate = objCustomerAmortization.DateApply.Date;
                         var cuotaDif = hoy - cuotaDate;
                         var diferenciaDias = Math.Abs(cuotaDif.Days);
-                        var objTmdNew = objTmd;
-                        objTmdNew.Amount = share;
-                        objTmdNew.IsActive = true;
-                        objTmdNew.Reference1 = reference1Documento;
-                        objTmdNew.Reference2 = Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance!.Value.ToString("N2") : objCustomerCreditDocument.BalanceNew!.Value.ToString("N2");
-                        objTmdNew.Reference3 = $"{reference3AmortizationID}";
-                        objTmdNew.Reference5 = objCustomerCreditDocument.DateOn.ToString("d");
-                        objTmdNew.Reference6 = objCustomerCreditDocument.DateFinish!.Value.ToString("d");
-                        objTmdNew.Reference7 = objCustomerCreditDocument.DateApply.ToString("d");
                         objTmdNew.Lote = $"{diferenciaDias}";
                         objTmdNew.ExchangeRateReference = objCustomerCreditDocument.ExchangeRate;
                         objTmdNew.DescriptionReference = "{componentID:\"Componente de transacciones de cuotas\",componentItemID:\"Id del documento de credito\",reference1:\"Numero del desembolso\",refernece2:\"balance anterior\",refernece3:\"Id de la amortizacion\",reference4:\"balance nuevo\",exchangeRateReference:\"Tasa de cambio del desembolso\",referece5:\"Fecha Inical de la deuda\",reference6:\"Fecha Final de la deuda\",reference7:\"dia que tocaba la cuota\",lote:\"Dias de atraso de la cuota\"}";
@@ -1350,8 +1349,8 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                         var objCustomerCreditLine = customerCreditLineModel.GetRowByPk(Convert.ToInt32(objTMFactura.Reference4));
                         var objCustomerCredit = customerCreditModel.GetRowByPk(user.CompanyID, user.BranchID, objCustomer.EntityId);
                         var montoAbono = objTMDC.Capital;
-                        var montoAbonoDolares = objTMFactura.ExchangeRate > 1 ? /*cordoba a dolares*/(objTMDC.Capital * Math.Round(1 / Math.Round(objTMFactura.ExchangeRate!.Value, 4), 4)) : objTMDC.Capital;
-                        var montoAbonoCordobas = objTMFactura.ExchangeRate < 1 ? /*dolares a cordoba*/ (objTMDC.Capital / Math.Round(objTMFactura.ExchangeRate!.Value, 4)) : objTMDC.Capital;
+                        var montoAbonoDolares = objTMFactura.CurrencyID == 2 ? /*cordoba a dolares*/ objTMDC.Capital : (objTMDC.Capital * Math.Round(objTMFactura.ExchangeRate!.Value, 4)) ;
+                        var montoAbonoCordobas = objTMFactura.CurrencyID == 1 ? /*dolares a cordoba*/ objTMDC.Capital : (objTMDC.Capital * Math.Round(objTMFactura.ExchangeRate!.Value, 4));
 
                         // Actualizar saldo general del cliente
                         var objCustomerCreditNew = objCustomerCredit;
@@ -1381,9 +1380,9 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                         // Actualizar saldo del recibo
                         var objTMDNew = transactionMasterDetailModel.GetRowByPKK(objTmd.TransactionMasterDetailID);
                         if (Convert.ToInt32(typeAmortizationAmericanoId) == objCustomerCreditLine.TypeAmortization)
-                            objTMDNew.Reference4 = objCustomerCreditDocument.Balance.Value.ToString("N2");
+                            objTMDNew.Reference4 = objCustomerCreditDocument.Balance.Value.ToString("F");
                         else
-                            objTMDNew.Reference4 = objCustomerCreditDocument.BalanceNew.Value.ToString("N2");
+                            objTMDNew.Reference4 = objCustomerCreditDocument.BalanceNew.Value.ToString("F");
 
                         // Actualizar saldo del recibo
                         transactionMasterDetailModel.UpdateAppPosme(user.CompanyID, objTmd.TransactionID, objTmd.TransactionMasterID, objTmd.TransactionMasterDetailID, objTMDNew);
@@ -1808,7 +1807,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
 
     private void BtnEliminarOnClick(object? sender, EventArgs e)
     {
-        if (XtraMessageBox.Show("", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
+        if (XtraMessageBox.Show("Eliminar", "¿Seguro desea eliminar el abono seleccionado? Esta acción no se puede revertir.", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
         {
             return;
         }

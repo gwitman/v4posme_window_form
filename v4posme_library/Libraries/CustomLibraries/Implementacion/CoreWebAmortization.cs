@@ -26,6 +26,7 @@ public class CoreWebAmortization : ICoreWebAmortization
     private readonly ICoreWebFinancialAmort _financialAmort;
     private readonly ICoreWebTools _coreWebTools;
     private readonly ITransactionMasterDetailReferencesModel _transactionMasterDetailReferencesModel;
+
     public CoreWebAmortization(ICoreWebParameter coreWebParameter, ICustomerCreditDocumentModel customerCreditDocumentModel, ICustomerCreditAmortizationModel customerCreditAmortizationModel, ICustomerCreditLineModel customerCreditLineModel, ICatalogItemModel catalogItemModel, ICoreWebCatalog coreWebCatalog, ICoreWebFinancialAmort financialAmort, ICoreWebTools coreWebTools, ITransactionMasterDetailReferencesModel transactionMasterDetailReferencesModel)
     {
         _coreWebParameter = coreWebParameter;
@@ -55,17 +56,17 @@ public class CoreWebAmortization : ICoreWebAmortization
             throw new Exception($"NO EXISTE EL PARAMETRO SHARE_CANCEL EN EL COMPANYId {companyId}");
         }
 
-        var amortizationCancel          = shareCancel.Value;
-        var objCustomerCreditDocument   = _customerCreditDocumentModel.GetRowByPk(customerCreditDocumentId);
+        var amortizationCancel = shareCancel.Value;
+        var objCustomerCreditDocument = _customerCreditDocumentModel.GetRowByPk(customerCreditDocumentId);
 
         // Cancel Document
         if (amount >= objCustomerCreditDocument.Balance)
         {
             //mapeamos los valores para q no queden en null lo sque no se usaran
-            var objCustomerCreditDocumentNew        = _customerCreditDocumentModel.GetRowByPkk(objCustomerCreditDocument.CustomerCreditDocumentId.Value);
-            objCustomerCreditDocumentNew.Balance    = 0;
-            objCustomerCreditDocumentNew.StatusID   = Convert.ToInt32(documentCancel);
-            _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value,objCustomerCreditDocumentNew);
+            var objCustomerCreditDocumentNew = _customerCreditDocumentModel.GetRowByPkk(objCustomerCreditDocument.CustomerCreditDocumentId.Value);
+            objCustomerCreditDocumentNew.Balance = 0;
+            objCustomerCreditDocumentNew.StatusID = Convert.ToInt32(documentCancel);
+            _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value, objCustomerCreditDocumentNew);
         }
         else
         {
@@ -83,22 +84,19 @@ public class CoreWebAmortization : ICoreWebAmortization
             itemAmortizationNew.Remaining = 0;
             _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationID, itemAmortizationNew);
         }
-
     }
 
     public void ShareCapital(int companyId, int customerCreditDocumentId, decimal amount)
     {
-        
+        var objCustomerCreditDocument = _customerCreditDocumentModel.GetRowByPk(customerCreditDocumentId);
+        var objListCustomerCreditDocumentAmortization = _customerCreditAmortizationModel.GetRowByDocumentAndVinculable(customerCreditDocumentId);
+        var objCustomerCreditLine = _customerCreditLineModel.GetRowByPk(objCustomerCreditDocument.CustomerCreditLineId);
+        var periodPay = _catalogItemModel.GetRowByCatalogItemId(objCustomerCreditLine.PeriodPay);
+        decimal? totalCapital = 0;
 
-        var objCustomerCreditDocument                   = _customerCreditDocumentModel.GetRowByPk(customerCreditDocumentId);
-        var objListCustomerCreditDocumentAmortization   =_customerCreditAmortizationModel.GetRowByDocumentAndVinculable(customerCreditDocumentId);
-        var objCustomerCreditLine                       = _customerCreditLineModel.GetRowByPk(objCustomerCreditDocument.CustomerCreditLineId);
-        var periodPay                                   = _catalogItemModel.GetRowByCatalogItemId(objCustomerCreditLine.PeriodPay);
-        decimal? totalCapital                           = 0;
-            
-        var numCuotas       = objListCustomerCreditDocumentAmortization.Count;
-        totalCapital        = objCustomerCreditDocument!.Balance - amount;
-        var dateApplyFirst  = objListCustomerCreditDocumentAmortization.First().DateApply;
+        var numCuotas = objListCustomerCreditDocumentAmortization.Count;
+        totalCapital = objCustomerCreditDocument!.Balance - amount;
+        var dateApplyFirst = objListCustomerCreditDocumentAmortization.First().DateApply;
 
         var objCatalogItemDiasNoCobrables =
             _coreWebCatalog.GetCatalogAllItemByNameCatalogo("CXC_NO_COBRABLES", companyId);
@@ -106,7 +104,7 @@ public class CoreWebAmortization : ICoreWebAmortization
             _coreWebCatalog.GetCatalogAllItemByNameCatalogo("CXC_NO_COBRABLES_FERIADOS_365", companyId);
         var objCatalogItemDiasFeriados366 =
             _coreWebCatalog.GetCatalogAllItemByNameCatalogo("CXC_NO_COBRABLES_FERIADOS_366", companyId);
-           
+
 
         _financialAmort.Amort(
             totalCapital,
@@ -150,12 +148,11 @@ public class CoreWebAmortization : ICoreWebAmortization
                 aux++;
             }
         }
-        
-        
 
-        var objCustomerCreditDocumentNew        = _customerCreditDocumentModel.GetRowByPkk(objCustomerCreditDocument.CustomerCreditDocumentId.Value);
-        objCustomerCreditDocumentNew.Balance    = totalCapital!.Value;
-        _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value,objCustomerCreditDocumentNew);
+
+        var objCustomerCreditDocumentNew = _customerCreditDocumentModel.GetRowByPkk(objCustomerCreditDocument.CustomerCreditDocumentId.Value);
+        objCustomerCreditDocumentNew.Balance = totalCapital!.Value;
+        _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value, objCustomerCreditDocumentNew);
     }
 
     public void ChangeStatus(int companyId, int customerCreditDocumentId)
@@ -177,7 +174,7 @@ public class CoreWebAmortization : ICoreWebAmortization
         {
             var objCustomerCreditDocumentNew = _customerCreditDocumentModel.GetRowByPkk(objCustomerCreditDocument.CustomerCreditDocumentId.Value);
             objCustomerCreditDocumentNew.StatusID = Convert.ToInt32(documentProvisioned);
-            _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value,objCustomerCreditDocumentNew);
+            _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value, objCustomerCreditDocumentNew);
         }
     }
 
@@ -194,56 +191,70 @@ public class CoreWebAmortization : ICoreWebAmortization
         {
             throw new Exception("NO el parametro SHARE_CANCEL");
         }
+
         var objComponentAmortization = _coreWebTools.GetComponentIdByComponentName("tb_customer_credit_amoritization");
+        if (objComponentAmortization is null)
+        {
+            throw new Exception("EL COMPONENTE 'tb_customer_credit_amoritization' NO EXISTE...");
+        }
+
         var documentCancel = shareDocumentCancel.Value;
         var amortizationCancel = shareCancel.Value;
         var objCustomerCreditDocument = _customerCreditDocumentModel.GetRowByPk(customerCreditDocumentId);
         var objListCustomerCreditDocumentAmortization = _customerCreditAmortizationModel.GetRowByDocumentAndVinculable(customerCreditDocumentId);
-        var capital = decimal.Zero;
-        var interes = decimal.Zero;
+        var objConceptos = new Dictionary<string, decimal>
+        {
+            { "capital", 0 },
+            { "interes", 0 }
+        };
 
-        if (objListCustomerCreditDocumentAmortization is not  null)
+        if (objListCustomerCreditDocumentAmortization is not null)
         {
             foreach (var itemAmortization in objListCustomerCreditDocumentAmortization)
             {
-                var now = DateOnly.FromDateTime(DateTime.Now);
-                var interval            = now.DayNumber-DateOnly.FromDateTime(itemAmortization.DateApply).DayNumber;
-                var itemAmortizationNew = itemAmortization;
-                if (amount >= itemAmortization.Remaining && amount != decimal.Zero)                {
-                    amount = amount - itemAmortization.Remaining;				
-				    var dif = itemAmortization.Remaining - amount;
+                var interval = (DateTime.Now - itemAmortization.DateApply).Days;
+
+                var tempRemaining = itemAmortization.Remaining;
+                if (amount >= tempRemaining && amount != decimal.Zero)
+                {
+                    amount = amount - tempRemaining;
+                    var dif = tempRemaining - amount;
+                    var itemAmortizationNew = new TbCustomerCreditAmoritization();
+                    itemAmortizationNew = itemAmortization;
                     itemAmortizationNew.StatusID = Convert.ToInt32(amortizationCancel);
                     itemAmortizationNew.Remaining = decimal.Zero;
-                    itemAmortizationNew.DayDelay = interval;     
-                    
-                    if (itemAmortization.Remaining == itemAmortization.Share)
+                    itemAmortizationNew.DayDelay = interval;
+
+                    // Abonar a la cuota completa
+                    if (tempRemaining == itemAmortization.Share)
                     {
-                        capital = capital + itemAmortization.Capital;
-                        interes = interes + itemAmortization.Interest;
+                        objConceptos["capital"] = objConceptos["capital"] + itemAmortization.Capital;
+                        objConceptos["interes"] = objConceptos["interes"] + itemAmortization.Interest;
                     }
-                    else if (itemAmortization.Remaining > itemAmortization.Interest)
+                    else if (tempRemaining > itemAmortization.Interest)
                     {
-                        capital = capital + (itemAmortization.Remaining - itemAmortization.Interest);
-                        interes = interes + itemAmortization.Interest;
+                        objConceptos["capital"] = objConceptos["capital"] + (tempRemaining - itemAmortization.Interest);
+                        objConceptos["interes"] = objConceptos["interes"] + itemAmortization.Interest;
                     }
-                    else if (itemAmortization.Remaining < itemAmortization.Interest)
+                    else if (tempRemaining < itemAmortization.Interest)
                     {
-                        capital = capital + 0;
-                        interes = interes + itemAmortization.Remaining;
+                        objConceptos["capital"] = objConceptos["capital"] + 0;
+                        objConceptos["interes"] = objConceptos["interes"] + tempRemaining;
                     }
-                    else if (itemAmortization.Remaining == itemAmortization.Interest)
+                    else if (tempRemaining == itemAmortization.Interest)
                     {
-                        capital = capital + 0;
-                        interes = interes + itemAmortization.Interest;
+                        objConceptos["capital"] = objConceptos["capital"] + 0;
+                        objConceptos["interes"] = objConceptos["interes"] + itemAmortization.Interest;
                     }
 
-                    _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationID,itemAmortizationNew);
+
+                    _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationID, itemAmortizationNew);
                     var dataTMDR = new TbTransactionMasterDetailReference
                     {
                         TransactionMasterDetailID = transactionMasterDetailID,
                         ComponentID = objComponentAmortization.ComponentID,
                         ComponentItemID = itemAmortization.CreditAmortizationID,
-                        Quantity = itemAmortization.Remaining.ToString("N2"),
+                        Quantity = tempRemaining.ToString("N2"),
                         IsActive = 1,
                         CreatedOn = DateTime.Now,
                     };
@@ -251,39 +262,41 @@ public class CoreWebAmortization : ICoreWebAmortization
                 }
                 else if (amount != decimal.Zero)
                 {
-                    var dif = itemAmortization.Remaining - amount;
-                    itemAmortizationNew.Remaining = dif;
+                    var itemAmortizationNew = itemAmortization;
+                    var dif = tempRemaining - amount;
+                    itemAmortizationNew.Remaining = tempRemaining - amount;
                     itemAmortizationNew.DayDelay = interval;
                     if (dif > itemAmortization.Interest)
                     {
-                        capital = capital + amount;
-                        interes = interes + 0;
+                        objConceptos["capital"] = objConceptos["capital"] + amount;
+                        objConceptos["interes"] = objConceptos["interes"] + 0;
                     }
                     else if (dif == itemAmortization.Interest)
                     {
-                        capital = capital + amount;
-                        interes = interes + 0;
+                        objConceptos["capital"] = objConceptos["capital"] + amount;
+                        objConceptos["interes"] = objConceptos["interes"] + 0;
                     }
-                    else if (dif < itemAmortization.Interest && itemAmortization.Remaining <= itemAmortization.Interest)
+                    else if (dif < itemAmortization.Interest && tempRemaining <= itemAmortization.Interest)
                     {
-                        capital = capital + 0;
-                        interes = interes + amount;
+                        objConceptos["capital"] = objConceptos["capital"] + 0;
+                        objConceptos["interes"] = objConceptos["interes"] + amount;
                     }
-                    else if (dif < itemAmortization.Interest && itemAmortization.Remaining > itemAmortization.Interest)
+                    else if (dif < itemAmortization.Interest && tempRemaining > itemAmortization.Interest)
                     {
-                        var capital001 = itemAmortization.Remaining - itemAmortization.Interest;
+                        var capital001 = tempRemaining - itemAmortization.Interest;
                         var interes001 = amount - capital001;
-                        capital = capital + capital001;
-                        interes = interes + interes001;
+                        objConceptos["capital"] += capital001;
+                        objConceptos["interes"] += interes001;
                     }
 
-                    _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationID,itemAmortizationNew);
+
+                    _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationID, itemAmortizationNew);
                     var dataTMDR = new TbTransactionMasterDetailReference
                     {
                         TransactionMasterDetailID = transactionMasterDetailID,
                         ComponentID = objComponentAmortization.ComponentID,
                         ComponentItemID = itemAmortization.CreditAmortizationID,
-                        Quantity = itemAmortization.Remaining.ToString("N2"),
+                        Quantity = tempRemaining.ToString("N2"),
                         IsActive = 1,
                         CreatedOn = DateTime.Now,
                     };
@@ -293,20 +306,21 @@ public class CoreWebAmortization : ICoreWebAmortization
             }
         }
 
-        
 
         //Actualizar Balance del Documento
         var objCustomerCreditDocumentNew = _customerCreditDocumentModel.GetRowByPkk(objCustomerCreditDocument.CustomerCreditDocumentId.Value);
-        objCustomerCreditDocumentNew.Balance    = objCustomerCreditDocument.Balance!.Value - capital;
-        _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value,objCustomerCreditDocumentNew);
+        objCustomerCreditDocumentNew.Balance = objCustomerCreditDocument.Balance!.Value - objConceptos["capital"];
+        _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value, objCustomerCreditDocumentNew);
 
         //Cancel Document
         objListCustomerCreditDocumentAmortization = _customerCreditAmortizationModel.GetRowByDocumentAndVinculable(customerCreditDocumentId);
         if (objListCustomerCreditDocumentAmortization is not null)
         {
-            objCustomerCreditDocumentNew.StatusID = Convert.ToInt32(documentCancel);
-            _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value, objCustomerCreditDocumentNew);
+            if (objListCustomerCreditDocumentAmortization.Count == 0)
+            {
+                objCustomerCreditDocumentNew.StatusID = Convert.ToInt32(documentCancel);
+                _customerCreditDocumentModel.UpdateAppPosme(objCustomerCreditDocument.CustomerCreditDocumentId!.Value, objCustomerCreditDocumentNew);
+            }
         }
-
     }
 }
