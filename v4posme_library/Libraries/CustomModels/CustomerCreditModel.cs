@@ -6,7 +6,7 @@ class CustomerCreditModel : ICustomerCreditModel
 {
     public void UpdateAppPosme(int companyId, int branchId, int entityId, TbCustomerCredit? data)
     {
-        using var context = new DataContext();
+        var context = VariablesGlobales.Instance.DataContext;
         var find = context.TbCustomerCredits
             .Single(credit => credit.CompanyID == companyId
                               && credit.EntityID == entityId

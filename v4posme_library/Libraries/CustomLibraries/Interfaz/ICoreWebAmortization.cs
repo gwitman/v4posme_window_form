@@ -5,5 +5,5 @@ public interface ICoreWebAmortization
     void CancelDocument(int companyId,int customerCreditDocumentId,decimal amount);
     void ShareCapital(int companyId,int customerCreditDocumentId,decimal amount);
     void ChangeStatus(int companyId,int customerCreditDocumentId);
-    void ApplyCuote(int companyId,int customerCreditDocumentId,decimal amount,int amoritizationId);
+    void ApplyCuote(int companyId, int customerCreditDocumentId, decimal amount, int amoritizationId, int transactionMasterDetailID);
 }

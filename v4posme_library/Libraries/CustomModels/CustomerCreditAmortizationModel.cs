@@ -9,9 +9,8 @@ public class CustomerCreditAmortizationModel : ICustomerCreditAmortizationModel
 {
     public void UpdateAppPosme(int creditAmortizationId, TbCustomerCreditAmoritization data)
     {
-        using var context = new DataContext();
-        var find = context.TbCustomerCreditAmoritizations
-            .Find(creditAmortizationId);
+        var context = VariablesGlobales.Instance.DataContext;
+        var find = context.TbCustomerCreditAmoritizations.SingleOrDefault(amoritization => amoritization.CreditAmortizationID==creditAmortizationId);
         if (find is null) return;
         data.CreditAmortizationID = find.CreditAmortizationID;
         context.Entry(find).CurrentValues.SetValues(data);

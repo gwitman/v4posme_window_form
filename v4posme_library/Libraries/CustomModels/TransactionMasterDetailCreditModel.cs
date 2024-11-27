@@ -7,7 +7,7 @@ class TransactionMasterDetailCreditModel : ITransactionMasterDetailCreditModel
 {
     public int InsertAppPosme(TbTransactionMasterDetailCredit data)
     {
-        using var context = new DataContext();
+        var context = VariablesGlobales.Instance.DataContext;
         var add = context.Add(data);
         context.SaveChanges();
         return add.Entity.TransactionMasterDetailCreditID;

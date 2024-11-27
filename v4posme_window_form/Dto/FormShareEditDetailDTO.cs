@@ -113,13 +113,13 @@ public class FormShareEditDetailDTO : INotifyPropertyChanged, IDXDataErrorInfo
         set => SetField(ref _detailShare, value);
     }
 
-    public decimal DetailBalanceStartShare
+    public decimal BalanceStartShare
     {
         get => _detailBalanceStartShare;
         set => SetField(ref _detailBalanceStartShare, value);
     }
 
-    public decimal DetailBalanceFinishShare
+    public decimal BalanceFinishShare
     {
         get => _detailBalanceFinishShare;
         set => SetField(ref _detailBalanceFinishShare, value);

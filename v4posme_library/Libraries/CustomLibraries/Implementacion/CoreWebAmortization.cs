@@ -24,8 +24,9 @@ public class CoreWebAmortization : ICoreWebAmortization
     private readonly ICoreWebCatalog _coreWebCatalog;
 
     private readonly ICoreWebFinancialAmort _financialAmort;
-
-    public CoreWebAmortization(ICoreWebParameter coreWebParameter, ICustomerCreditDocumentModel customerCreditDocumentModel, ICustomerCreditAmortizationModel customerCreditAmortizationModel, ICustomerCreditLineModel customerCreditLineModel, ICatalogItemModel catalogItemModel, ICoreWebCatalog coreWebCatalog, ICoreWebFinancialAmort financialAmort)
+    private readonly ICoreWebTools _coreWebTools;
+    private readonly ITransactionMasterDetailReferencesModel _transactionMasterDetailReferencesModel;
+    public CoreWebAmortization(ICoreWebParameter coreWebParameter, ICustomerCreditDocumentModel customerCreditDocumentModel, ICustomerCreditAmortizationModel customerCreditAmortizationModel, ICustomerCreditLineModel customerCreditLineModel, ICatalogItemModel catalogItemModel, ICoreWebCatalog coreWebCatalog, ICoreWebFinancialAmort financialAmort, ICoreWebTools coreWebTools, ITransactionMasterDetailReferencesModel transactionMasterDetailReferencesModel)
     {
         _coreWebParameter = coreWebParameter;
         _customerCreditDocumentModel = customerCreditDocumentModel;
@@ -34,6 +35,8 @@ public class CoreWebAmortization : ICoreWebAmortization
         _catalogItemModel = catalogItemModel;
         _coreWebCatalog = coreWebCatalog;
         _financialAmort = financialAmort;
+        _coreWebTools = coreWebTools;
+        _transactionMasterDetailReferencesModel = transactionMasterDetailReferencesModel;
     }
 
     public void CancelDocument(int companyId, int customerCreditDocumentId, decimal amount)
@@ -178,20 +181,20 @@ public class CoreWebAmortization : ICoreWebAmortization
         }
     }
 
-    public void ApplyCuote(int companyId, int customerCreditDocumentId, decimal amount, int amoritizationId)
+    public void ApplyCuote(int companyId, int customerCreditDocumentId, decimal amount, int amoritizationId, int transactionMasterDetailID)
     {
         var shareDocumentCancel = _coreWebParameter.GetParameter("SHARE_DOCUMENT_CANCEL", companyId);
         var shareCancel = _coreWebParameter.GetParameter("SHARE_CANCEL", companyId);
         if (shareDocumentCancel is null)
         {
-            throw new Exception("NO existe la compañia con el parametro SHARE_DOCUMENT_CANCEL");
+            throw new Exception("NO el parametro SHARE_DOCUMENT_CANCEL");
         }
 
         if (shareCancel is null)
         {
-            throw new Exception("NO existe la compañia con el parametro SHARE_CANCEL");
+            throw new Exception("NO el parametro SHARE_CANCEL");
         }
-
+        var objComponentAmortization = _coreWebTools.GetComponentIdByComponentName("tb_customer_credit_amoritization");
         var documentCancel = shareDocumentCancel.Value;
         var amortizationCancel = shareCancel.Value;
         var objCustomerCreditDocument = _customerCreditDocumentModel.GetRowByPk(customerCreditDocumentId);
@@ -235,6 +238,16 @@ public class CoreWebAmortization : ICoreWebAmortization
                     }
 
                     _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationID,itemAmortizationNew);
+                    var dataTMDR = new TbTransactionMasterDetailReference
+                    {
+                        TransactionMasterDetailID = transactionMasterDetailID,
+                        ComponentID = objComponentAmortization.ComponentID,
+                        ComponentItemID = itemAmortization.CreditAmortizationID,
+                        Quantity = itemAmortization.Remaining.ToString("N2"),
+                        IsActive = 1,
+                        CreatedOn = DateTime.Now,
+                    };
+                    _transactionMasterDetailReferencesModel.InsertAppPosme(dataTMDR);
                 }
                 else if (amount != decimal.Zero)
                 {
@@ -265,6 +278,16 @@ public class CoreWebAmortization : ICoreWebAmortization
                     }
 
                     _customerCreditAmortizationModel.UpdateAppPosme(itemAmortization.CreditAmortizationID,itemAmortizationNew);
+                    var dataTMDR = new TbTransactionMasterDetailReference
+                    {
+                        TransactionMasterDetailID = transactionMasterDetailID,
+                        ComponentID = objComponentAmortization.ComponentID,
+                        ComponentItemID = itemAmortization.CreditAmortizationID,
+                        Quantity = itemAmortization.Remaining.ToString("N2"),
+                        IsActive = 1,
+                        CreatedOn = DateTime.Now,
+                    };
+                    _transactionMasterDetailReferencesModel.InsertAppPosme(dataTMDR);
                     amount = 0;
                 }
             }

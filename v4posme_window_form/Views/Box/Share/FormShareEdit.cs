@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
+using System.Transactions;
 using ESC_POS_USB_NET.Printer;
 using Unity;
 using v4posme_library.Libraries;
@@ -17,6 +18,7 @@ using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
 using ComboBoxItem = v4posme_window.Libraries.ComboBoxItem;
+using IsolationLevel = System.Data.IsolationLevel;
 
 namespace v4posme_window.Views.Box.Share;
 
@@ -942,6 +944,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                     QuantityStock = decimal.Zero,
                     QuantiryStockInTraffic = decimal.Zero,
                     QuantityStockUnaswared = decimal.Zero,
+                    RemaingStock = decimal.Zero,
                     ExpirationDate = null,
                     InventoryWarehouseSourceID = objTm.SourceWarehouseID,
                     InventoryWarehouseTargetID = objTm.TargetWarehouseID,
@@ -1060,8 +1063,8 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
 
         var selectedCurrency = txtCurrencyID.SelectedItem as ComboBoxItem;
         var selectedStatus = (ComboBoxItem)txtStatusID.SelectedItem;
-
-        using var dbTransaction = VariablesGlobales.Instance.DataContext.Database.BeginTransaction();
+        using var dbContext = VariablesGlobales.Instance.DataContext;
+        using var dbTransaction = dbContext.Database.BeginTransaction();
         try
         {
             var objTmNew = transactionMasterModel.GetRowByPKK(TransactionMasterId.Value)!;
@@ -1141,7 +1144,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                     arrayListCustomerCreditAmortizationId = new List<int>();
                     arrayListShare = new List<decimal>();
                     var customerCreditDocumentIDMin = formShareEditDetailDtos.ElementAt(0).DetailCustomerCreditDocumentId;
-                    var objListDocumentoAmortization = formCxcApi.GetCustomerBalance(txtCustomerID, Convert.ToInt32(selectedCurrency.Key));
+                    var objListDocumentoAmortization = customerCreditDocumentModel.GetRowByBalancePending(user.CompanyID, objTmNew.EntityID.Value, customerCreditDocumentIDMin, objTmNew.CurrencyID.Value);
                     //Obtener el banace total pendietne
                     var objListDocumentoAmortizationBalanceTotal = objListDocumentoAmortization.Sum(dto => dto.Remaining) ?? decimal.Zero;
 
@@ -1320,7 +1323,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                     foreach (var objTmd in objListTmd)
                     {
                         var objCustomerCreditDocumentInicial = customerCreditDocumentModel.GetRowByPk(objTmd.ComponentItemID!.Value);
-                        objInterfazCoreWebAmortization.ApplyCuote(user.CompanyID, objTmd.ComponentItemID!.Value, Convert.ToDecimal(objTmd.Reference3), objTmd.TransactionMasterDetailID);
+                        objInterfazCoreWebAmortization.ApplyCuote(user.CompanyID, objTmd.ComponentItemID!.Value,objTmd.Amount.Value, Convert.ToInt32(objTmd.Reference3), objTmd.TransactionMasterDetailID);
                         //documento final
                         var objCustomerCreditDocument = customerCreditDocumentModel.GetRowByPk(objTmd.ComponentItemID.Value);
                         //capital
@@ -1396,7 +1399,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
         catch (Exception ex)
         {
             dbTransaction.Rollback();
-            throw ex;
+            throw;
         }
     }
 
@@ -1529,15 +1532,15 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                     foreach (var detailDto in ObjTransactionMasterDetail.Select(detail => new FormShareEditDetailDTO
                              {
                                  DetailCustomerCreditDocumentId = detail.ComponentItemID ?? 0,
-                                 DetailTransactionDetailId = detail.TransactionMasterID,
+                                 DetailTransactionDetailId = detail.TransactionMasterDetailID,
                                  DetailTransactionDetailDocument = detail.Reference1 ?? string.Empty,
                                  DetailTransactionDetailFecha = null,
                                  DetailAmortizationId = Convert.ToInt32(detail.Reference3),
                                  DetailBalanceStart = Convert.ToDecimal(detail.Reference2),
                                  DetailBalanceFinish = Convert.ToDecimal(detail.Reference4),
                                  DetailShare = detail.Amount ?? decimal.Zero,
-                                 DetailBalanceStartShare = decimal.Parse(detail.Reference2 ?? "0", CultureInfo.CurrentCulture),
-                                 DetailBalanceFinishShare = decimal.Parse(detail.Reference4 ?? "0", CultureInfo.CurrentCulture)
+                                 BalanceStartShare = decimal.Parse(detail.Reference2 ?? "0", CultureInfo.CurrentCulture),
+                                 BalanceFinishShare = decimal.Parse(detail.Reference4 ?? "0", CultureInfo.CurrentCulture)
                              }))
                     {
                         bindingSourceDetailDto.Add(detailDto);
@@ -1549,7 +1552,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                 renderGridFiles = new RenderFileGridControl(user.CompanyID, ObjComponentTransactionShare!.ComponentID, TransactionMasterId.Value);
                 renderGridFiles.RenderGridControl(gridControlArchivos);
                 renderGridFiles.LoadFiles();
-                ObjListCustomerCreditDocument = customerCreditDocumentModel.GetRowByEntityApplied(ObjTransactionMaster.CompanyId, txtCustomerID, ObjTransactionMaster.CurrencyId ?? 0);
+                ObjListCustomerCreditDocument = formCxcApi.GetCustomerBalance(txtCustomerID, ObjTransactionMaster.CurrencyId ?? 0);
                 break;
         }
     }
@@ -1587,7 +1590,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                     var datos = bindingSourceDetailDto.List as IList<FormShareEditDetailDTO>;
                     foreach (var dato in datos)
                     {
-                        var saldoInicial = dato.DetailBalanceStartShare;
+                        var saldoInicial = dato.BalanceStartShare;
                         var amountShare = dato.DetailShare;
                         if (amountShare > (saldoInicial + 2))
                         {
@@ -1675,14 +1678,22 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
         Invoke(() =>
         {
             var detailTransactionDetailDocument = diccionario["Documento"];
-            var objBalancesDocument = ObjListCustomerCreditDocument
-                .SingleOrDefault(obj => obj.DocumentNumber == detailTransactionDetailDocument);
+            var objBalancesDocument = ObjListCustomerCreditDocument.FirstOrDefault(obj => obj.DocumentNumber == detailTransactionDetailDocument);
             if (objBalancesDocument is null)
             {
                 objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", $"No hay un documento con el numero de documento {detailTransactionDetailDocument}", this);
                 return;
             }
 
+            var remaining = decimal.Zero;
+            if (TransactionMasterId.HasValue && TransactionMasterId.Value>0)
+            {
+                remaining = objBalancesDocument.Balance ?? decimal.Zero;
+            }
+            else
+            {
+                remaining = objBalancesDocument.Remaining ?? decimal.Zero;
+            }
             var dto = new FormShareEditDetailDTO
             {
                 DetailCustomerCreditDocumentId = Convert.ToInt32(diccionario["customerCreditDocumentID"]),
@@ -1690,11 +1701,11 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                 DetailTransactionDetailDocument = detailTransactionDetailDocument,
                 DetailTransactionDetailFecha = null,
                 DetailAmortizationId = Convert.ToInt32(diccionario["creditAmortizationID"]),
-                DetailBalanceStart = objBalancesDocument.Balance ?? decimal.Zero,
+                DetailBalanceStart = remaining,
                 DetailBalanceFinish = 0,
                 DetailShare = Convert.ToDecimal(diccionario["Faltante"]),
-                DetailBalanceStartShare = objBalancesDocument.Balance ?? decimal.Zero,
-                DetailBalanceFinishShare = 0
+                BalanceStartShare = remaining,
+                BalanceFinishShare = 0
             };
             bindingSourceDetailDto.Add(dto);
             UpdateSummary();

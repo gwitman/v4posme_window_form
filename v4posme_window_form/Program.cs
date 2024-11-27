@@ -4,6 +4,7 @@ using DevExpress.Xpo;
 using DevExpress.Xpo.DB;
 using DevExpress.XtraEditors;
 using v4posme_library.Libraries;
+using v4posme_library.Models;
 using v4posme_window.Libraries;
 using v4posme_window.Views;
 

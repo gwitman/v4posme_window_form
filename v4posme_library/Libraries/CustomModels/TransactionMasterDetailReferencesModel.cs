@@ -33,7 +33,7 @@ public class TransactionMasterDetailReferencesModel : ITransactionMasterDetailRe
 
     public int InsertAppPosme(TbTransactionMasterDetailReference data)
     {
-        using var context = new DataContext();
+        var context = VariablesGlobales.Instance.DataContext;
         var add = context.Add(data).Entity;
         context.SaveChanges();
         return add.TransactionMasterDetailRefereceID;

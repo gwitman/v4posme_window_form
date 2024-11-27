@@ -29,7 +29,7 @@ class TransactionMasterModel : ITransactionMasterModel
 
     public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, TbTransactionMaster? data)
     {
-        using var context = new DataContext();
+        var context = VariablesGlobales.Instance.DataContext;
         var find = context.TbTransactionMasters
             .AsNoTracking()
             .FirstOrDefault(master => master.CompanyID == companyId
@@ -132,7 +132,7 @@ class TransactionMasterModel : ITransactionMasterModel
         using var context = new DataContext();
         return context.TbTransactionMasters
             .SingleOrDefault(master => master.CompanyID == companyId
-                                       && master.TransactionNumber.Contains(transactionNumber)
+                                       && master.TransactionNumber == transactionNumber
                                        && master.IsActive!.Value);
     }
 

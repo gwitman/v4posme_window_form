@@ -940,7 +940,7 @@
             colDetailBalanceStartShare.Caption = "Saldo Inicial";
             colDetailBalanceStartShare.DisplayFormat.FormatString = "N2";
             colDetailBalanceStartShare.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            colDetailBalanceStartShare.FieldName = "DetailBalanceStartShare";
+            colDetailBalanceStartShare.FieldName = "BalanceStartShare";
             colDetailBalanceStartShare.Name = "colDetailBalanceStartShare";
             colDetailBalanceStartShare.OptionsColumn.ReadOnly = true;
             colDetailBalanceStartShare.Visible = true;
@@ -961,7 +961,7 @@
             colDetailBalanceFinishShare.Caption = "Saldo Final";
             colDetailBalanceFinishShare.DisplayFormat.FormatString = "N2";
             colDetailBalanceFinishShare.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            colDetailBalanceFinishShare.FieldName = "DetailBalanceFinishShare";
+            colDetailBalanceFinishShare.FieldName = "BalanceFinishShare";
             colDetailBalanceFinishShare.Name = "colDetailBalanceFinishShare";
             colDetailBalanceFinishShare.OptionsColumn.ReadOnly = true;
             colDetailBalanceFinishShare.Visible = true;

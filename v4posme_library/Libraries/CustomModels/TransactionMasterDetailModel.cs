@@ -18,7 +18,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
 
     public int InsertAppPosme(TbTransactionMasterDetail data)
     {
-        using var context = new DataContext();
+        var context = VariablesGlobales.Instance.DataContext;
         var add = context.Add(data);
         context.SaveChanges();
         return add.Entity.TransactionMasterDetailID;
@@ -27,7 +27,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
     public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId,
         int transactionMasterDetailId, TbTransactionMasterDetail data)
     {
-        using var context = new DataContext();
+        var context = VariablesGlobales.Instance.DataContext;
         var find = context.TbTransactionMasterDetails
             .FirstOrDefault(detail => detail.CompanyID == companyId
                                       && detail.TransactionID == transactionId
@@ -126,7 +126,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
     public TbTransactionMasterDetail? GetRowByPKK(int transactionMasterDetailId)
     {
         using var context = new DataContext();
-        var result = context.TbTransactionMasterDetails.FirstOrDefault(c => c.TransactionMasterDetailID == transactionMasterDetailId);
+        var result = context.TbTransactionMasterDetails.SingleOrDefault(c => c.TransactionMasterDetailID == transactionMasterDetailId);
         return result;
     }
 
@@ -410,23 +410,31 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
 
     public void DeleteWhereTm(int companyId, int transactionId, int transactionMasterId)
     {
-        using var context = new DataContext();
-        context.TbTransactionMasterDetails
+        var context = VariablesGlobales.Instance.DataContext;
+        var tbTransactionMasterDetails = context.TbTransactionMasterDetails
             .Where(detail => detail.CompanyID == companyId
                              && detail.TransactionID == transactionId
-                             && detail.TransactionMasterID == transactionMasterId)
-            .ExecuteUpdate(calls => calls.SetProperty(detail => detail.IsActive, false));
+                             && detail.TransactionMasterID == transactionMasterId).ToList();
+        foreach (var tbTransactionMasterDetail in tbTransactionMasterDetails)
+        {
+            tbTransactionMasterDetail.IsActive = false;
+        }
     }
 
     public void DeleteWhereIdNotIn(int companyId, int transactionId, int transactionMasterId, List<int> listTmdId)
     {
-        using var context = new DataContext();
-        context.TbTransactionMasterDetails
+        var context = VariablesGlobales.Instance.DataContext;
+        var tbTransactionMasterDetails = context.TbTransactionMasterDetails
             .Where(detail => detail.CompanyID == companyId
                              && detail.TransactionID == transactionId
                              && detail.TransactionMasterID == transactionMasterId
-                             && !listTmdId.Contains(detail.TransactionMasterDetailID))
-            .ExecuteUpdate(calls => calls.SetProperty(detail => detail.IsActive, false));
+                             && !listTmdId.Contains(detail.TransactionMasterDetailID)).ToList();
+        foreach (var tbTransactionMasterDetail in tbTransactionMasterDetails)
+        {
+            tbTransactionMasterDetail.IsActive = false;
+        }
+
+        context.SaveChanges();
     }
 
     public List<TbTransactionMasterDetailDto> GlobalProGetRowBySalesByEmployeerMonthOnlySales(int companyId,

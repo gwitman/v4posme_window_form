@@ -8,7 +8,7 @@ class CustomerCreditLineModel : ICustomerCreditLineModel
 {
     public void UpdateAppPosme(int customerCreditLineId, TbCustomerCreditLine? data)
     {
-        using var context = new DataContext();
+        using var context = VariablesGlobales.Instance.DataContext;
         var find = context.TbCustomerCreditLines
             .Find(customerCreditLineId);
         if (find == null) return;

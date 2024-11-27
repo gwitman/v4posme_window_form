@@ -16,7 +16,7 @@ class CustomerCreditDocumentModel : ICustomerCreditDocumentModel
 
     public void UpdateAppPosme(int customerCreditDocumentId, TbCustomerCreditDocument data)
     {
-        using var context = new DataContext();
+        using var context = VariablesGlobales.Instance.DataContext;
         var find = FindDocuments(customerCreditDocumentId, context).SingleOrDefault();
         if (find is null)
         {

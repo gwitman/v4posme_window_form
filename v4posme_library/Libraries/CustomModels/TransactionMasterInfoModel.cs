@@ -26,7 +26,7 @@ class TransactionMasterInfoModel : ITransactionMasterInfoModel
 
     public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, TbTransactionMasterInfo data)
     {
-        using var context = new DataContext();
+        var context = VariablesGlobales.Instance.DataContext;
         var find = context.TbTransactionMasterInfos.AsNoTracking()
             .SingleOrDefault(info => info.CompanyID == companyId
                                     && info.TransactionID == transactionId
