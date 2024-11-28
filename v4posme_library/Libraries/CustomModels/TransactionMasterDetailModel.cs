@@ -410,7 +410,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
 
     public void DeleteWhereTm(int companyId, int transactionId, int transactionMasterId)
     {
-        var context = VariablesGlobales.Instance.DataContext;
+        using var context = new DataContext();
         var tbTransactionMasterDetails = context.TbTransactionMasterDetails
             .Where(detail => detail.CompanyID == companyId
                              && detail.TransactionID == transactionId
@@ -419,11 +419,13 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         {
             tbTransactionMasterDetail.IsActive = false;
         }
+
+        context.SaveChanges();
     }
 
     public void DeleteWhereIdNotIn(int companyId, int transactionId, int transactionMasterId, List<int> listTmdId)
     {
-        var context = VariablesGlobales.Instance.DataContext;
+        using var context = new DataContext();
         var tbTransactionMasterDetails = context.TbTransactionMasterDetails
             .Where(detail => detail.CompanyID == companyId
                              && detail.TransactionID == transactionId
