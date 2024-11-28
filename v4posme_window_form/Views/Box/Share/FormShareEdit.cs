@@ -1063,7 +1063,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
         var selectedCurrency = txtCurrencyID.SelectedItem as ComboBoxItem;
         var selectedStatus = (ComboBoxItem)txtStatusID.SelectedItem;
         using var dbContext = VariablesGlobales.Instance.DataContext;
-        using var dbTransaction = dbContext.Database.BeginTransaction();
+        //using var dbTransaction = dbContext.Database.BeginTransaction();
         try
         {
             var objTmNew = transactionMasterModel.GetRowByPKK(TransactionMasterId.Value)!;
@@ -1393,11 +1393,11 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
                 objInterfazCoreWebConcept.Share(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
             }
 
-            dbTransaction.Commit();
+            //dbTransaction.Commit();
         }
         catch (Exception ex)
         {
-            dbTransaction.Rollback();
+            //dbTransaction.Rollback();
             throw;
         }
     }
