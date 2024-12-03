@@ -98,12 +98,9 @@ public class CoreWebAmortization : ICoreWebAmortization
         totalCapital = objCustomerCreditDocument!.Balance - amount;
         var dateApplyFirst = objListCustomerCreditDocumentAmortization.First().DateApply;
 
-        var objCatalogItemDiasNoCobrables =
-            _coreWebCatalog.GetCatalogAllItemByNameCatalogo("CXC_NO_COBRABLES", companyId);
-        var objCatalogItemDiasFeriados365 =
-            _coreWebCatalog.GetCatalogAllItemByNameCatalogo("CXC_NO_COBRABLES_FERIADOS_365", companyId);
-        var objCatalogItemDiasFeriados366 =
-            _coreWebCatalog.GetCatalogAllItemByNameCatalogo("CXC_NO_COBRABLES_FERIADOS_366", companyId);
+        var objCatalogItemDiasNoCobrables = _coreWebCatalog.GetCatalogAllItemByNameCatalogo("CXC_NO_COBRABLES", companyId);
+        var objCatalogItemDiasFeriados365 = _coreWebCatalog.GetCatalogAllItemByNameCatalogo("CXC_NO_COBRABLES_FERIADOS_365", companyId);
+        var objCatalogItemDiasFeriados366 = _coreWebCatalog.GetCatalogAllItemByNameCatalogo("CXC_NO_COBRABLES_FERIADOS_366", companyId);
 
 
         _financialAmort.Amort(
@@ -120,18 +117,23 @@ public class CoreWebAmortization : ICoreWebAmortization
 
         var tableAmortization = _financialAmort.GetTable();
         var aux = 0;
-        if (objListCustomerCreditDocumentAmortization is not null)
+        if (objListCustomerCreditDocumentAmortization.Count>0)
         {
             foreach (var itemAmortization in objListCustomerCreditDocumentAmortization)
             {
-                var itemAmortizationNew = new TbCustomerCreditAmoritization();
+                var itemAmortizationNew = _customerCreditAmortizationModel.GetRowByPk(itemAmortization.CreditAmortizationID);
 
                 if (dateApplyFirst == itemAmortization.DateApply)
                 {
                     itemAmortizationNew.ShareCapital = amount;
                 }
 
-                var detailDto = tableAmortization.ListDetailDto?[aux + 1];
+                var temp = aux + 1;
+                if (temp>=numCuotas)
+                {
+                    continue;
+                }
+                var detailDto = tableAmortization.ListDetailDto?[temp];
                 if (detailDto is null)
                 {
                     continue;

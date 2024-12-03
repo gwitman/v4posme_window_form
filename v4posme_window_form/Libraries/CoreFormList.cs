@@ -1,6 +1,7 @@
 ﻿using v4posme_window.Views;
 using v4posme_window.Views.Box.Report;
 using v4posme_window.Views.Box.Share;
+using v4posme_window.Views.Box.ShareCapital;
 using v4posme_window.Views.CXC.Customer;
 using v4posme_window.Views.CXC.Report;
 using v4posme_window.Views.Inventory.Inputunpost;
@@ -27,6 +28,7 @@ public static class CoreFormList
         "app_box_report/index.aspx" => new FormBoxReport(),
         "app_cxc_report/index.aspx" => new FormCxcReport(),
         "app_box_share/index.aspx" => new FormShareList(),
+        "app_box_sharecapital/index.aspx" => new FormShareCapitalList(),
         _ => new FormInvoiceBillingList(),
     };
 

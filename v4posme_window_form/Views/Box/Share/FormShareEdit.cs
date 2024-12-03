@@ -411,7 +411,7 @@ public partial class FormShareEdit : FormTypeHeadEdit, IFormTypeEdit
             var user = VariablesGlobales.Instance.User;
             if (user is null)
             {
-                throw new Exception("Usuario no logeado");
+                throw new Exception(VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"]);
             }
 
             if (Convert.ToInt32(selectedResult.Key) == 4)

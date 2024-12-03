@@ -350,5 +350,11 @@ public partial class FormShareList : FormTypeList, IFormTypeList
             coreWebRender.GetMessageAlert(TypeError.Warning, "Filtrar", $"No se ha encontró el documento con número {transactionNumber}", this);
             return;
         }
+
+        var frm = new FormShareEdit(TypeOpenForm.Init, objTm.CompanyID, objTm.TransactionID, objTm.TransactionMasterID)
+        {
+            MdiParent = CoreFormList.Principal()
+        };
+        frm.Show();
     }
 }
