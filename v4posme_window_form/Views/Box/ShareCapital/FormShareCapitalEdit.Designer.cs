@@ -32,11 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormShareCapitalEdit));
             xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            layoutControl4 = new DevExpress.XtraLayout.LayoutControl();
             stackPanel3 = new DevExpress.Utils.Layout.StackPanel();
-            label1 = new Label();
-            txtCustomerDescription = new TextBox();
             btnClearCustomer = new DevExpress.XtraEditors.SimpleButton();
             btnSearchCustomer = new DevExpress.XtraEditors.SimpleButton();
+            layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             txtDate = new DevExpress.XtraEditors.DateEdit();
             txtIsApplied = new DevExpress.XtraEditors.CheckEdit();
@@ -98,11 +99,16 @@
             stackPanel4 = new DevExpress.Utils.Layout.StackPanel();
             btnNewShare = new DevExpress.XtraEditors.SimpleButton();
             btnDeleteShare = new DevExpress.XtraEditors.SimpleButton();
+            txtCustomerDescription = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).BeginInit();
             xtraTabControl1.SuspendLayout();
             xtraTabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControl4).BeginInit();
+            layoutControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)stackPanel3).BeginInit();
             stackPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtDate.Properties).BeginInit();
@@ -165,6 +171,7 @@
             ((System.ComponentModel.ISupportInitialize)simpleLabelItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)stackPanel4).BeginInit();
             stackPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerDescription.Properties).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -195,44 +202,34 @@
             // 
             // xtraTabPage1
             // 
-            xtraTabPage1.Controls.Add(stackPanel3);
+            xtraTabPage1.Controls.Add(layoutControl4);
             xtraTabPage1.Controls.Add(layoutControl1);
             xtraTabPage1.Name = "xtraTabPage1";
             xtraTabPage1.Size = new Size(1163, 170);
             xtraTabPage1.Text = "Información";
             // 
+            // layoutControl4
+            // 
+            layoutControl4.Controls.Add(stackPanel3);
+            layoutControl4.Location = new Point(518, 7);
+            layoutControl4.Name = "layoutControl4";
+            layoutControl4.Padding = new Padding(1);
+            layoutControl4.Root = layoutControlGroup3;
+            layoutControl4.Size = new Size(523, 51);
+            layoutControl4.TabIndex = 2;
+            layoutControl4.Text = "layoutControl4";
+            // 
             // stackPanel3
             // 
-            stackPanel3.Controls.Add(label1);
             stackPanel3.Controls.Add(txtCustomerDescription);
             stackPanel3.Controls.Add(btnClearCustomer);
             stackPanel3.Controls.Add(btnSearchCustomer);
-            stackPanel3.Location = new Point(518, 14);
+            stackPanel3.Location = new Point(57, 8);
             stackPanel3.Name = "stackPanel3";
-            stackPanel3.Padding = new Padding(2);
-            stackPanel3.Size = new Size(482, 44);
+            stackPanel3.Padding = new Padding(1);
+            stackPanel3.Size = new Size(458, 35);
             stackPanel3.TabIndex = 1;
             stackPanel3.UseSkinIndents = true;
-            // 
-            // label1
-            // 
-            label1.Dock = DockStyle.Left;
-            label1.Location = new Point(5, 14);
-            label1.Name = "label1";
-            label1.Size = new Size(55, 15);
-            label1.TabIndex = 2;
-            label1.Text = "Cliente";
-            label1.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // txtCustomerDescription
-            // 
-            txtCustomerDescription.Dock = DockStyle.Left;
-            txtCustomerDescription.Location = new Point(63, 11);
-            txtCustomerDescription.Margin = new Padding(0);
-            txtCustomerDescription.Name = "txtCustomerDescription";
-            txtCustomerDescription.ReadOnly = true;
-            txtCustomerDescription.Size = new Size(257, 21);
-            txtCustomerDescription.TabIndex = 3;
             // 
             // btnClearCustomer
             // 
@@ -240,14 +237,13 @@
             btnClearCustomer.Appearance.ForeColor = Color.White;
             btnClearCustomer.Appearance.Options.UseBackColor = true;
             btnClearCustomer.Appearance.Options.UseForeColor = true;
-            btnClearCustomer.Dock = DockStyle.Left;
             btnClearCustomer.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             btnClearCustomer.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnClearCustomer.ImageOptions.SvgImage");
             btnClearCustomer.ImageOptions.SvgImageSize = new Size(18, 18);
-            btnClearCustomer.Location = new Point(320, 11);
+            btnClearCustomer.Location = new Point(333, 3);
             btnClearCustomer.Margin = new Padding(0);
             btnClearCustomer.Name = "btnClearCustomer";
-            btnClearCustomer.Size = new Size(75, 22);
+            btnClearCustomer.Size = new Size(53, 28);
             btnClearCustomer.TabIndex = 0;
             btnClearCustomer.Text = "Clear";
             btnClearCustomer.Click += btnClearCustomer_Click;
@@ -258,17 +254,37 @@
             btnSearchCustomer.Appearance.ForeColor = Color.White;
             btnSearchCustomer.Appearance.Options.UseBackColor = true;
             btnSearchCustomer.Appearance.Options.UseForeColor = true;
-            btnSearchCustomer.Dock = DockStyle.Left;
             btnSearchCustomer.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             btnSearchCustomer.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnSearchCustomer.ImageOptions.SvgImage");
             btnSearchCustomer.ImageOptions.SvgImageSize = new Size(18, 18);
-            btnSearchCustomer.Location = new Point(395, 11);
+            btnSearchCustomer.Location = new Point(386, 3);
             btnSearchCustomer.Margin = new Padding(0);
             btnSearchCustomer.Name = "btnSearchCustomer";
-            btnSearchCustomer.Size = new Size(75, 22);
+            btnSearchCustomer.Size = new Size(60, 28);
             btnSearchCustomer.TabIndex = 1;
             btnSearchCustomer.Text = "Buscar";
             btnSearchCustomer.Click += btnSearchCustomer_Click;
+            // 
+            // layoutControlGroup3
+            // 
+            layoutControlGroup3.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup3.GroupBordersVisible = false;
+            layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem10 });
+            layoutControlGroup3.Name = "layoutControlGroup3";
+            layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
+            layoutControlGroup3.Size = new Size(523, 51);
+            layoutControlGroup3.TextVisible = false;
+            // 
+            // layoutControlItem10
+            // 
+            layoutControlItem10.AppearanceItemCaption.Options.UseTextOptions = true;
+            layoutControlItem10.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            layoutControlItem10.Control = stackPanel3;
+            layoutControlItem10.Location = new Point(0, 0);
+            layoutControlItem10.Name = "layoutControlItem10";
+            layoutControlItem10.Size = new Size(513, 41);
+            layoutControlItem10.Text = "Cliente";
+            layoutControlItem10.TextSize = new Size(33, 13);
             // 
             // layoutControl1
             // 
@@ -560,6 +576,7 @@
             btnAgregarArchivo.Size = new Size(75, 30);
             btnAgregarArchivo.TabIndex = 6;
             btnAgregarArchivo.Text = "Importar";
+            btnAgregarArchivo.Click += btnAgregarArchivo_Click;
             // 
             // gridControlArchivos
             // 
@@ -584,7 +601,7 @@
             gridControlMasterDetail.Location = new Point(0, 353);
             gridControlMasterDetail.MainView = gridViewMasterDetail;
             gridControlMasterDetail.Name = "gridControlMasterDetail";
-            gridControlMasterDetail.Size = new Size(1165, 168);
+            gridControlMasterDetail.Size = new Size(1165, 139);
             gridControlMasterDetail.TabIndex = 77;
             gridControlMasterDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewMasterDetail });
             // 
@@ -611,6 +628,7 @@
             // 
             // colDetailShare
             // 
+            colDetailShare.Caption = "Saldo";
             colDetailShare.CustomizationCaption = "Saldo";
             colDetailShare.DisplayFormat.FormatString = "N2";
             colDetailShare.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -625,9 +643,9 @@
             panel1.Controls.Add(layoutControl6);
             panel1.Controls.Add(layoutControl5);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 521);
+            panel1.Location = new Point(0, 492);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1165, 194);
+            panel1.Size = new Size(1165, 221);
             panel1.TabIndex = 78;
             // 
             // layoutControl7
@@ -638,7 +656,7 @@
             layoutControl7.Location = new Point(350, 0);
             layoutControl7.Name = "layoutControl7";
             layoutControl7.Root = layoutControlGroup6;
-            layoutControl7.Size = new Size(451, 194);
+            layoutControl7.Size = new Size(451, 221);
             layoutControl7.TabIndex = 5;
             layoutControl7.Text = "layoutControl7";
             // 
@@ -681,7 +699,7 @@
             layoutControlGroup6.GroupBordersVisible = false;
             layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { simpleLabelItem4, layoutControlItem13, layoutControlItem14, simpleSeparator2 });
             layoutControlGroup6.Name = "layoutControlGroup6";
-            layoutControlGroup6.Size = new Size(451, 194);
+            layoutControlGroup6.Size = new Size(451, 221);
             layoutControlGroup6.TextVisible = false;
             // 
             // simpleLabelItem4
@@ -709,7 +727,7 @@
             layoutControlItem14.Control = txtChangeAmount;
             layoutControlItem14.Location = new Point(0, 60);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new Size(425, 108);
+            layoutControlItem14.Size = new Size(425, 135);
             layoutControlItem14.Text = "Cambio";
             layoutControlItem14.TextSize = new Size(37, 13);
             // 
@@ -727,7 +745,7 @@
             layoutControl6.Location = new Point(801, 0);
             layoutControl6.Name = "layoutControl6";
             layoutControl6.Root = layoutControlGroup5;
-            layoutControl6.Size = new Size(364, 194);
+            layoutControl6.Size = new Size(364, 221);
             layoutControl6.TabIndex = 2;
             layoutControl6.Text = "layoutControl6";
             // 
@@ -751,7 +769,7 @@
             layoutControlGroup5.GroupBordersVisible = false;
             layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { simpleLabelItem5, layoutControlItem15, simpleSeparator3 });
             layoutControlGroup5.Name = "layoutControlGroup5";
-            layoutControlGroup5.Size = new Size(364, 194);
+            layoutControlGroup5.Size = new Size(364, 221);
             layoutControlGroup5.TextVisible = false;
             // 
             // simpleLabelItem5
@@ -770,7 +788,7 @@
             layoutControlItem15.Control = txtTotal;
             layoutControlItem15.Location = new Point(0, 26);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new Size(338, 142);
+            layoutControlItem15.Size = new Size(338, 169);
             layoutControlItem15.Text = "Total";
             layoutControlItem15.TextSize = new Size(65, 13);
             // 
@@ -788,7 +806,7 @@
             layoutControl5.Name = "layoutControl5";
             layoutControl5.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(744, 473, 650, 400);
             layoutControl5.Root = layoutControlGroup4;
-            layoutControl5.Size = new Size(350, 194);
+            layoutControl5.Size = new Size(350, 221);
             layoutControl5.TabIndex = 1;
             layoutControl5.Text = "layoutControl5";
             // 
@@ -798,7 +816,7 @@
             layoutControlGroup4.GroupBordersVisible = false;
             layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { simpleLabelItem2, simpleSeparator1, simpleLabelItem3, simpleLabelItem1 });
             layoutControlGroup4.Name = "Root";
-            layoutControlGroup4.Size = new Size(350, 194);
+            layoutControlGroup4.Size = new Size(350, 221);
             layoutControlGroup4.TextVisible = false;
             // 
             // simpleLabelItem2
@@ -825,7 +843,7 @@
             simpleLabelItem3.AllowHotTrack = false;
             simpleLabelItem3.Location = new Point(0, 45);
             simpleLabelItem3.Name = "simpleLabelItem3";
-            simpleLabelItem3.Size = new Size(324, 123);
+            simpleLabelItem3.Size = new Size(324, 150);
             simpleLabelItem3.Text = "Resumen del Abono";
             simpleLabelItem3.TextSize = new Size(95, 13);
             // 
@@ -884,11 +902,19 @@
             btnDeleteShare.Text = "Eliminar";
             btnDeleteShare.Click += btnDeleteShare_Click;
             // 
+            // txtCustomerDescription
+            // 
+            txtCustomerDescription.Location = new Point(4, 3);
+            txtCustomerDescription.Name = "txtCustomerDescription";
+            txtCustomerDescription.Properties.ReadOnly = true;
+            txtCustomerDescription.Size = new Size(326, 28);
+            txtCustomerDescription.TabIndex = 2;
+            // 
             // FormShareCapitalEdit
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1165, 715);
+            ClientSize = new Size(1165, 713);
             Controls.Add(gridControlMasterDetail);
             Controls.Add(stackPanel4);
             Controls.Add(panel1);
@@ -905,9 +931,12 @@
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).EndInit();
             xtraTabControl1.ResumeLayout(false);
             xtraTabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)layoutControl4).EndInit();
+            layoutControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)stackPanel3).EndInit();
             stackPanel3.ResumeLayout(false);
-            stackPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)txtDate.Properties.CalendarTimeProperties).EndInit();
@@ -972,6 +1001,7 @@
             ((System.ComponentModel.ISupportInitialize)stackPanel4).EndInit();
             stackPanel4.ResumeLayout(false);
             stackPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)txtCustomerDescription.Properties).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -988,8 +1018,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.Utils.Layout.StackPanel stackPanel3;
-        private Label label1;
-        private TextBox txtCustomerDescription;
         private DevExpress.XtraEditors.SimpleButton btnClearCustomer;
         private DevExpress.XtraEditors.SimpleButton btnSearchCustomer;
         private DevExpress.XtraEditors.TextEdit txtExchangeRate;
@@ -1046,5 +1074,9 @@
         private DevExpress.XtraEditors.SimpleButton btnAgregarArchivo;
         private DevExpress.XtraGrid.GridControl gridControlArchivos;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewArchivos;
+        private DevExpress.XtraLayout.LayoutControl layoutControl4;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraEditors.TextEdit txtCustomerDescription;
     }
 }

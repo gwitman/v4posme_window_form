@@ -284,7 +284,18 @@ namespace v4posme_window.Views.Box.ShareCapital
 
         public void Print(object? sender, EventArgs? args)
         {
-            throw new NotImplementedException();
+            var focused = gridViewData.FocusedRowHandle;
+            if (focused < 0)
+            {
+                coreWebRender.GetMessageAlert(TypeError.Warning, "Abono Cap", "Seleccione un abono a editar", this);
+                return;
+            }
+
+            var companyID = Convert.ToInt32(gridViewData.GetRowCellValue(focused, "companyID"));
+            var transactionId = Convert.ToInt32(gridViewData.GetRowCellValue(focused, "transactionID"));
+            var transactionMasterID = Convert.ToInt32(gridViewData.GetRowCellValue(focused, "transactionMasterID"));
+            var formShareEdit = new FormShareCapitalEdit(TypeOpenForm.NotInit, companyID, transactionMasterID, transactionId);
+            formShareEdit.ComandPrinter();
         }
 
         public void PreRender()

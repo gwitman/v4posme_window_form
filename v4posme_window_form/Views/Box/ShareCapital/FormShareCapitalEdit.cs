@@ -323,7 +323,7 @@ public partial class FormShareCapitalEdit : FormTypeHeadEdit, IFormTypeEdit
         var objTMD = transactionMasterDetailModel.GetRowByTransactionToShare(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
         var objTMI = transactionMasterInfoModel.GetRowByPk(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
         var objUser = userModel.GetRowByPk(objTM.CompanyId, objTM.CreatedAt.Value, objTM.CreatedBy.Value);
-        var objBranch = branchModel.GetRowByPk(objTM.CompanyId,objTM.BranchId.Value);
+        var objBranch = branchModel.GetRowByPk(objTM.CompanyId, objTM.BranchId.Value);
         var objCustumer = customerModel.GetRowByEntity(user.CompanyID, objTM.EntityId.Value);
         var objNatural = naturalModel.GetRowByPk(user.CompanyID, objCustumer.BranchId, objCustumer.EntityId);
         var tipoCambio = Math.Round(objTM.ExchangeRate.Value + accountingExchangeSale, 2);
@@ -559,8 +559,8 @@ public partial class FormShareCapitalEdit : FormTypeHeadEdit, IFormTypeEdit
         objInterfazCoreWebPermission.GetValueLicense(user.CompanyID, "app_box_sharecapital/index");
 
         //Obtener el Componente de Transacciones Facturacion
-        var objComponentShareCapital = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_share_capital");
-        if (objComponentShareCapital is null)
+        ObjComponentTransactionShareCapital = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_share_capital");
+        if (ObjComponentTransactionShareCapital is null)
         {
             throw new Exception("EL COMPONENTE 'tb_transaction_master_share_capital' NO EXISTE...");
         }
@@ -596,7 +596,7 @@ public partial class FormShareCapitalEdit : FormTypeHeadEdit, IFormTypeEdit
             EntityID = txtCustomerID,
             TransactionOn = txtDate.DateTime,
             StatusIDChangeOn = DateTime.Now,
-            ComponentID = objComponentShareCapital.ComponentID,
+            ComponentID = ObjComponentTransactionShareCapital.ComponentID,
             Note = txtNote.Text,
             Sign = (short?)objT.SignInventory.Value,
             CurrencyID = currencyId,
@@ -621,7 +621,7 @@ public partial class FormShareCapitalEdit : FormTypeHeadEdit, IFormTypeEdit
         TransactionMasterId = transactionMasterModel.InsertAppPosme(objTM);
 
         var pathFileOfApp = VariablesGlobales.ConfigurationBuilder["objComponentShareCapital"];
-        var path = $"{pathFileOfApp}/company_{user.CompanyID}/component_{objComponentShareCapital.ComponentID}/component_item_{TransactionMasterId}";
+        var path = $"{pathFileOfApp}/company_{user.CompanyID}/component_{ObjComponentTransactionShareCapital.ComponentID}/component_item_{TransactionMasterId}";
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
@@ -678,6 +678,7 @@ public partial class FormShareCapitalEdit : FormTypeHeadEdit, IFormTypeEdit
             }
         }
 
+        objTM.Amount = amount;
         transactionMasterModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, objTM);
     }
 
@@ -776,7 +777,6 @@ public partial class FormShareCapitalEdit : FormTypeHeadEdit, IFormTypeEdit
         objTMNew.StatusIDChangeOn = DateTime.Now;
         objTMNew.Note = txtNote.Text;
         objTMNew.ExchangeRate = objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Now.Date, decimal.One, objTm.CurrencyId2.Value, objTm.CurrencyId.Value);
-        ;
         objTMNew.Reference1 = txtReference1.Text;
         objTMNew.Reference2 = txtReference2.Text;
         objTMNew.Reference3 = txtReference3.Text;
@@ -1081,7 +1081,7 @@ public partial class FormShareCapitalEdit : FormTypeHeadEdit, IFormTypeEdit
                 txtReference2.Text = ObjTransactionMaster.Reference2;
                 txtReference3.Text = ObjTransactionMaster.Reference3;
                 txtNote.Text = ObjTransactionMaster.Note;
-                if (ObjTransactionMasterDetail.Count>0)
+                if (ObjTransactionMasterDetail.Count > 0)
                 {
                     bindingSourceDetailDto.Clear();
                     foreach (var detail in ObjTransactionMasterDetail)
@@ -1106,6 +1106,11 @@ public partial class FormShareCapitalEdit : FormTypeHeadEdit, IFormTypeEdit
                 txtChangeAmount.EditValue = ObjTransactionMasterInfo.ChangeAmount;
                 txtTotal.EditValue = ObjTransactionMaster.Amount ?? decimal.Zero;
                 CoreWebRenderInView.LlenarComboBox(ObjListWorkflowStage, txtStatusID, "WorkflowStageID", "Name", ObjTransactionMaster.StatusId);
+                gridControlArchivos.DataSource = null;
+                gridControlArchivos.MainView = null;
+                renderGridFiles = new RenderFileGridControl(user.CompanyID, ObjComponentTransactionShareCapital!.ComponentID, TransactionMasterId.Value);
+                renderGridFiles.RenderGridControl(gridControlArchivos);
+                renderGridFiles.LoadFiles();
                 break;
         }
     }
@@ -1355,5 +1360,18 @@ public partial class FormShareCapitalEdit : FormTypeHeadEdit, IFormTypeEdit
         UpdateCalculateChange();
     }
 
+    private void btnAgregarArchivo_Click(object sender, EventArgs e)
+    {
+        var openFileDialog = new XtraOpenFileDialog();
+        openFileDialog.Title = @"Seleccionar archivo";
+        var dialogResult = openFileDialog.ShowDialog(this);
+        if (dialogResult == DialogResult.OK)
+        {
+            var file = openFileDialog.SafeFileName;
+            renderGridFiles.AddRow(file);
+        }
+    }
+
     #endregion
+
 }
