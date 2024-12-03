@@ -933,6 +933,12 @@ public partial class FormShareCapitalEdit : FormTypeHeadEdit, IFormTypeEdit
                     var montoAbonoDolares = objTMFactura.CurrencyID == 2 ? /*cordoba a dolares*/ objTMDC.Capital : (objTMDC.Capital * Math.Round(objTMFactura.ExchangeRate!.Value, 4));
                     var montoAbonoCordobas = objTMFactura.CurrencyID == 1 ? /*dolares a cordoba*/ objTMDC.Capital : (objTMDC.Capital * Math.Round(objTMFactura.ExchangeRate!.Value, 4));
 
+
+                    //actualizar saldo general del cliente
+                    var objCustomerCreditNew = objCustomerCredit;
+                    objCustomerCreditNew.BalanceDol = objCustomerCredit.BalanceDol + montoAbonoDolares;
+                    customerCreditModel.UpdateAppPosme(user.CompanyID, objCustomer.BranchId, objCustomer.EntityId, objCustomerCreditNew);
+
                     // Actualizar saldo de la línea
                     // Línea dólares y factura dólares
                     // Línea córdoba y factura córdoba
