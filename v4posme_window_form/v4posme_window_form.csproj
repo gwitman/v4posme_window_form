@@ -242,4 +242,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Box\CancelDocument\" />
+  </ItemGroup>
 </Project>
