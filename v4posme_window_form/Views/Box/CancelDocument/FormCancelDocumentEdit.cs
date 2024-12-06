@@ -850,7 +850,7 @@ public partial class FormCancelDocumentEdit : FormTypeHeadEdit, IFormTypeEdit
                         Discount = decimal.Zero,
                         PromotionID = 0,
                         Reference1 = objCustomerCreditDocument.DocumentNumber,
-                        Reference2 = Convert.ToInt32(typeAmortizationAmericanoID) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance!.Value.ToString("F") : objCustomerCreditDocument.BalanceNew!.Value.ToString("F"),
+                        Reference2 = objCustomerCreditDocument.BalanceNew!.Value.ToString("F"),
                         Reference3 = null,
                         CatalogStatusID = 0,
                         InventoryStatusID = 0,
@@ -871,7 +871,7 @@ public partial class FormCancelDocumentEdit : FormTypeHeadEdit, IFormTypeEdit
                     var objTMDNew = transactionMasterDetailModel.GetRowByPKK(detailDto.DetailTransactionDetailId);
                     objTMDNew.Amount = share;
                     objTMDNew.Reference1 = objCustomerCreditDocument.DocumentNumber;
-                    objTMDNew.Reference2 = Convert.ToInt32(typeAmortizationAmericanoID) == objCustomerCreditLine.TypeAmortization ? objCustomerCreditDocument.Balance!.Value.ToString("F") : objCustomerCreditDocument.BalanceNew!.Value.ToString("F");
+                    objTMDNew.Reference2 = objCustomerCreditDocument.BalanceNew!.Value.ToString("F");
                     objTMDNew.Reference3 = null;
                     objTMDNew.ExchangeRateReference = objCustomerCreditDocument.ExchangeRate;
                     objTMDNew.DescriptionReference = "{componentID:Componente de los documentos de credito,componentItemID:Id del documento de credito,reference1:Numero del desembolso,refernece2:balance anterior,reference4:balance nuevo,exchangeRateReference:Tasa de cambio del desembolso}";
