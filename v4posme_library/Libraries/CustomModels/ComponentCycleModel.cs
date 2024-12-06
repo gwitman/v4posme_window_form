@@ -84,7 +84,7 @@ public class ComponentCycleModel(DataContext context) : IComponentCycleModel
     {
         
         return context.TbAccountingCycles
-            .Single(cycle => cycle!.IsActive &&
+            .SingleOrDefault(cycle => cycle!.IsActive &&
                              cycle.CompanyID == companyId &&
                              dateStart >= cycle.StartOn &&
                              dateStart <= cycle.EndOn);

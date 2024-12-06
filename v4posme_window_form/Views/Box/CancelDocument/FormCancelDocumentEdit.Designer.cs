@@ -318,6 +318,7 @@
             txtDate.Size = new Size(413, 28);
             txtDate.StyleController = layoutControl1;
             txtDate.TabIndex = 4;
+            txtDate.Validating += txtDate_Validating;
             // 
             // txtIsApplied
             // 
@@ -405,7 +406,7 @@
             xtraTabPage2.Controls.Add(layoutControl3);
             xtraTabPage2.Controls.Add(layoutControl2);
             xtraTabPage2.Name = "xtraTabPage2";
-            xtraTabPage2.Size = new Size(1163, 170);
+            xtraTabPage2.Size = new Size(1163, 176);
             xtraTabPage2.Text = "Referencias";
             // 
             // layoutControl3
@@ -543,7 +544,7 @@
             xtraTabPage3.Controls.Add(txtNote);
             xtraTabPage3.Controls.Add(label2);
             xtraTabPage3.Name = "xtraTabPage3";
-            xtraTabPage3.Size = new Size(1163, 170);
+            xtraTabPage3.Size = new Size(1163, 176);
             xtraTabPage3.Text = "Comentarios";
             // 
             // txtNote
@@ -567,7 +568,7 @@
             tabPageArchivos.Controls.Add(btnAgregarArchivo);
             tabPageArchivos.Controls.Add(gridControlArchivos);
             tabPageArchivos.Name = "tabPageArchivos";
-            tabPageArchivos.Size = new Size(1163, 170);
+            tabPageArchivos.Size = new Size(1163, 176);
             tabPageArchivos.Text = "Archivos";
             // 
             // btnAgregarArchivo
@@ -609,7 +610,7 @@
             gridControlMasterDetail.Location = new Point(0, 353);
             gridControlMasterDetail.MainView = gridViewMasterDetail;
             gridControlMasterDetail.Name = "gridControlMasterDetail";
-            gridControlMasterDetail.Size = new Size(1165, 139);
+            gridControlMasterDetail.Size = new Size(1165, 137);
             gridControlMasterDetail.TabIndex = 77;
             gridControlMasterDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewMasterDetail });
             // 
@@ -651,7 +652,7 @@
             panel1.Controls.Add(layoutControl6);
             panel1.Controls.Add(layoutControl5);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 492);
+            panel1.Location = new Point(0, 490);
             panel1.Name = "panel1";
             panel1.Size = new Size(1165, 221);
             panel1.TabIndex = 78;
@@ -914,7 +915,7 @@
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1165, 713);
+            ClientSize = new Size(1165, 711);
             Controls.Add(gridControlMasterDetail);
             Controls.Add(stackPanel4);
             Controls.Add(panel1);
@@ -922,7 +923,7 @@
             Name = "FormCancelDocumentEdit";
             Text = "DOCUMENTO DE CANCELACION";
             Load += FormCancelDocumentEdit_Load;
-            Resize += FormShareCapitalEdit_Resize;
+            Resize += FormCancelDocumentEdit_Resize;
             Controls.SetChildIndex(xtraTabControl1, 0);
             Controls.SetChildIndex(panel1, 0);
             Controls.SetChildIndex(stackPanel4, 0);

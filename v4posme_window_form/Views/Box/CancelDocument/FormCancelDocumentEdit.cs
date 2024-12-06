@@ -411,7 +411,7 @@ public partial class FormCancelDocumentEdit : FormTypeHeadEdit, IFormTypeEdit
         if (TransactionId is 0 && TransactionMasterId is 0)
         {
             Close();
-            var frm = new FormShareCapitalEdit(TypeOpenForm.Init, 0, 0, 0)
+            var frm = new FormCancelDocumentEdit(TypeOpenForm.Init, 0, 0, 0)
             {
                 MdiParent = CoreFormList.Principal()
             };
@@ -975,7 +975,7 @@ public partial class FormCancelDocumentEdit : FormTypeHeadEdit, IFormTypeEdit
     public void CommandNew(object? sender, EventArgs e)
     {
         Close();
-        var frm = new FormShareCapitalEdit(TypeOpenForm.Init, 0, 0, 0)
+        var frm = new FormCancelDocumentEdit(TypeOpenForm.Init, 0, 0, 0)
         {
             MdiParent = CoreFormList.Principal()
         };
@@ -1046,6 +1046,8 @@ public partial class FormCancelDocumentEdit : FormTypeHeadEdit, IFormTypeEdit
 
     public void PreRender()
     {
+        txtDate.Properties.Mask.EditMask = @"d";
+        txtDate.Properties.Mask.UseMaskAsDisplayFormat = true;
     }
 
     public void LoadRender(TypeRender typeRedner)
@@ -1130,6 +1132,12 @@ public partial class FormCancelDocumentEdit : FormTypeHeadEdit, IFormTypeEdit
         if (txtDate.EditValue is null)
         {
             objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "Establecer Fecha al Documento", this);
+            return false;
+        }
+
+        if (!DateTime.TryParse(txtDate.Text, out _))
+        {
+            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Fecha", "Por favor, ingrese una fecha válida", this);
             return false;
         }
 
@@ -1290,7 +1298,7 @@ public partial class FormCancelDocumentEdit : FormTypeHeadEdit, IFormTypeEdit
         }
     }
 
-    private void FormShareCapitalEdit_Resize(object sender, EventArgs e)
+    private void FormCancelDocumentEdit_Resize(object sender, EventArgs e)
     {
         var thirdWidth = ClientSize.Width / 3;
         layoutControl5.Width = thirdWidth;
@@ -1374,5 +1382,15 @@ public partial class FormCancelDocumentEdit : FormTypeHeadEdit, IFormTypeEdit
         }
     }
 
+    private void txtDate_Validating(object sender, CancelEventArgs e)
+    {
+        if (!DateTime.TryParse(txtDate.Text, out _))
+        {
+            objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Fecha", "Por favor, ingrese una fecha válida", this);
+            e.Cancel = true;
+        }
+    }
+
     #endregion
+
 }
