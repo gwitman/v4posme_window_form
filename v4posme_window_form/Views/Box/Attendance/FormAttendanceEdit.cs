@@ -27,6 +27,7 @@ namespace v4posme_window.Views.Box.Attendance
         private int txtCustomerID = 0;
         private RenderFileGridControl renderGridFiles;
         private System.Windows.Forms.Timer timerHuella;
+        private TypeRender TypeRender;
 
         #endregion
 
@@ -761,11 +762,23 @@ namespace v4posme_window.Views.Box.Attendance
                     else
                     {
                         objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Registrar", "Se han registrdo los datos de forma correcta", this);
-                        if (TransactionMasterId > 0)
+                        if (TypeRender == TypeRender.New)
                         {
-                            LoadEdit();
-                            LoadRender(TypeRender.Edit);
+                            Close();
+                            var frm = new FormAttendanceEdit(TypeOpenForm.Init, 0,0,0)
+                            {
+                                MdiParent = CoreFormList.Principal()
+                            };
+                            frm.Show();
+                        }else
+                        {
+                            if (TransactionMasterId > 0)
+                            {
+                                LoadEdit();
+                                LoadRender(TypeRender.Edit);
+                            }
                         }
+                        
                     }
 
                     if (progressPanel.Visible)
@@ -792,6 +805,7 @@ namespace v4posme_window.Views.Box.Attendance
 
         public void LoadRender(TypeRender typeRedner)
         {
+            TypeRender = typeRedner;
             var user = VariablesGlobales.Instance.User;
             switch (typeRedner)
             {
@@ -870,7 +884,6 @@ namespace v4posme_window.Views.Box.Attendance
                 FnCompleteGetCustomerCreditLineNew();
             }
         }
-
         private void FnCompleteGetCustomerCreditLineNew()
         {
             var getData = formInvoiceApi.GetLineByCustomer(txtCustomerID);
@@ -992,7 +1005,6 @@ namespace v4posme_window.Views.Box.Attendance
             var fechaVencimiento = fechaVencimientoFilter.ElementAt(0).DateApply;
             txtDetailReference3.DateTime = fechaVencimiento;
         }
-
         private bool FnValidateForm()
         {
             if (txtDate.EditValue is null)
@@ -1066,7 +1078,7 @@ namespace v4posme_window.Views.Box.Attendance
 
         private void Timer_Tick(object? sender, EventArgs e)
         {
-            if (TransactionId.Value == 0 && TransactionMasterId.Value == 0)
+            if (TransactionId.Value==0 && TransactionMasterId.Value==0)
             {
                 FnHuellaLeida();
             }
@@ -1168,5 +1180,7 @@ namespace v4posme_window.Views.Box.Attendance
         }
 
         #endregion
+
+       
     }
 }
