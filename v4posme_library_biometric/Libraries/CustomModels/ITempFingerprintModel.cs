@@ -9,4 +9,5 @@ public interface ITempFingerprintModel
     void UpdateAppPosme(string tockenPc, TempFingerprint data);
 
     bool InsertAppPosme(TempFingerprint data);
+    TempFingerprint? GetSsejs(string tockenPc);
 }

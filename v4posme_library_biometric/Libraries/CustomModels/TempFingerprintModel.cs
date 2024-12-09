@@ -36,4 +36,13 @@ public class TempFingerprintModel : ITempFingerprintModel
         var entry = context.TempFingerprints.Add(data);
         return context.SaveChanges() > 0;
     }
+
+    public TempFingerprint? GetSsejs(string tockenPc)
+    {
+        using var context = new DataContext();
+        return context.TempFingerprints
+            .Where(tf => tf.TokenPc == tockenPc && tf.Option == "read")
+            .OrderByDescending(tf => tf.UpdatedAt)
+            .FirstOrDefault();
+    }
 }

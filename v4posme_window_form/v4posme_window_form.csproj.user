@@ -46,6 +46,12 @@
     <Compile Update="Template\FormTypeWebView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\Box\Attendance\FormAttendanceEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Box\Attendance\FormAttendanceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\Box\CancelDocument\FormCancelDocumentEdit.cs">
       <SubType>Form</SubType>
     </Compile>
