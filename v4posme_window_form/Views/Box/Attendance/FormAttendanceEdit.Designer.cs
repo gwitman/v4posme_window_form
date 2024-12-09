@@ -400,6 +400,7 @@
             Controls.Add(xtraTabControl1);
             Name = "FormAttendanceEdit";
             Text = "Agregar Asistencia";
+            FormClosing += FormAttendanceEdit_FormClosing;
             Load += FormAttendanceEdit_Load;
             Controls.SetChildIndex(xtraTabControl1, 0);
             Controls.SetChildIndex(progressPanel, 0);

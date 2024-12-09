@@ -14,8 +14,8 @@ public class FormFingerprintApi
 
     public bool WebActiveSensorEnroll(int entityId)
     {
-        const string tockenPc = "llRnk81687411555823";
-        const string fingerName = "Pulgar_Derecho";
+        var tockenPc = v4posme_library.Libraries.VariablesGlobales.ConfigurationBuilder["TOKEN_PC"];
+        var fingerName = v4posme_library.Libraries.VariablesGlobales.ConfigurationBuilder["Pulgar_Derecho"];
         _tempFingerprintModel.DeleteAppPosme(tockenPc);
 
         var tempFingerprint = new TempFingerprint
@@ -34,8 +34,7 @@ public class FormFingerprintApi
     {
         try
         {
-            const string tockenPc = "llRnk81687411555823";
-            const string fingerName = "Pulgar_Derecho";
+            var tockenPc = v4posme_library.Libraries.VariablesGlobales.ConfigurationBuilder["TOKEN_PC"];
             _tempFingerprintModel.DeleteAppPosme(tockenPc);
 
             var tempFingerprint = new TempFingerprint
@@ -43,8 +42,7 @@ public class FormFingerprintApi
                 Id = DateTime.Now.ToShortTimeString(),
                 Option = "read",
                 TokenPc = tockenPc,
-                CreatedAt = DateTime.Now,
-                FingerName = fingerName
+                CreatedAt = DateTime.Now
             };
             _tempFingerprintModel.InsertAppPosme(tempFingerprint);
             var appCompany = v4posme_library.Libraries.VariablesGlobales.ConfigurationBuilder["APP_COMPANY"];
@@ -63,8 +61,8 @@ public class FormFingerprintApi
     {
         try
         {
-            const string tockenPc = "llRnk81687411555823";
-            const string fingerName = "Pulgar_Derecho";
+            var tockenPc = v4posme_library.Libraries.VariablesGlobales.ConfigurationBuilder["TOKEN_PC"];
+            var fingerName = v4posme_library.Libraries.VariablesGlobales.ConfigurationBuilder["Pulgar_Derecho"];
             var resultado = _tempFingerprintModel.GetSsejs(tockenPc);
 
             if (resultado.Image is not null)

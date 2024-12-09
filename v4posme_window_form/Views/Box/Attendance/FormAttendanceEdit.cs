@@ -26,6 +26,7 @@ namespace v4posme_window.Views.Box.Attendance
         private int? TransactionId = 0;
         private int txtCustomerID = 0;
         private RenderFileGridControl renderGridFiles;
+        private System.Windows.Forms.Timer timerHuella;
 
         #endregion
 
@@ -124,6 +125,7 @@ namespace v4posme_window.Views.Box.Attendance
             btnEliminar.Click += BtnEliminarOnClick;
             btnNuevo.Click += CommandNew;
             btnImprmir.Click += BtnImprmir_Click;
+            InicializarTimer();
         }
 
         public void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
@@ -342,10 +344,10 @@ namespace v4posme_window.Views.Box.Attendance
 
                 printer.Append($"Codigo:          {objCustumer.CustomerNumber}");
                 printer.Append($"Cliente:         {objNatural.FirstName}");
-                printer.Append($"Solvencia:       {ObjTransactionMaster.Reference1}");
-                printer.Append($"Proximo Pago:    {ObjTransactionMaster.Reference2}");
-                printer.Append($"Dias Pro. Pago:  {ObjTransactionMaster.Reference4}");
-                printer.Append($"Vencimiento:     {ObjTransactionMaster.Reference3}");
+                printer.Append($"Solvencia:       {objTM.Reference1}");
+                printer.Append($"Proximo Pago:    {objTM.Reference2}");
+                printer.Append($"Dias Pro. Pago:  {objTM.Reference4}");
+                printer.Append($"Vencimiento:     {objTM.Reference3}");
                 var estado = objStage.ElementAt(0).Display == "CANCELADA" ? "APLICADA" : objStage.ElementAt(0).Display;
                 printer.Append($"Estado:          {estado}");
                 printer.NewLine();
@@ -803,6 +805,8 @@ namespace v4posme_window.Views.Box.Attendance
                     txtCustomerDescription.Text = ObjNaturalDefault is not null ? $"{ObjCustomerDefaultNew.CustomerNumber} {ObjNaturalDefault.FirstName.ToUpper()} {ObjNaturalDefault.LastName.ToUpper()}" : $"{ObjCustomerDefaultNew.CustomerNumber} {ObjLegalDefault.ComercialName.ToUpper()}";
                     CoreWebRenderInView.LlenarComboBox(ObjListPrioridad, txtPriorityID, "CatalogItemID", "Display", ObjListPrioridad.ElementAt(0).CatalogItemID);
                     CoreWebRenderInView.LlenarComboBox(ObjListWorkflowStage, txtStatusID, "WorkflowStageID", "Name", ObjListWorkflowStage.ElementAt(0).WorkflowStageID);
+                    FnActiveSensorRead();
+                    FnHuellaLeida();
                     break;
                 case TypeRender.Edit:
                     btnEliminar.Visible = true;
@@ -856,6 +860,17 @@ namespace v4posme_window.Views.Box.Attendance
         }
 
         private void FnCompleteGetCustomerCreditLine()
+        {
+            if (TransactionId.Value > 0 && TransactionMasterId.Value > 0)
+            {
+                FnCompleteGetCustomerCreditLineEdit();
+            }
+            else
+            {
+                FnCompleteGetCustomerCreditLineNew();
+            }
+        }
+        private void FnCompleteGetCustomerCreditLineNew()
         {
             var getData = formInvoiceApi.GetLineByCustomer(txtCustomerID);
             if (getData is null)
@@ -922,8 +937,60 @@ namespace v4posme_window.Views.Box.Attendance
             {
                 txtDetailReference4.EditValue = fechaProximoPagoMora * -1;
             }
+
+            if (TransactionMasterId == 0 && TransactionId == 0)
+            {
+                if (ObjParameterAttendanceAutoPrinter.Equals("true", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    CommandSave(null, new EventArgs());
+                }
+            }
         }
 
+        private void FnCompleteGetCustomerCreditLineEdit()
+        {
+            var getData = formInvoiceApi.GetLineByCustomer(txtCustomerID);
+            if (getData is null)
+            {
+                txtCustomerID = 0;
+                txtCustomerDescription.Text = @"Cliente no tiene membresía";
+                objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "Cliente sin membresia", this);
+                return;
+            }
+
+            var data = getData.ObjCustomerCreditAmoritizationAll;
+            if (data is null || data.Count <= 0)
+            {
+                txtCustomerID = 0;
+                txtCustomerDescription.Text = @"Cliente no tiene membresía";
+                objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "Cliente sin membresia", this);
+                return;
+            }
+
+            var cantidadMora = data.Where(dto => dto.Mora > 0).Select(dto => dto.Mora).Sum() ?? 0;
+            switch (cantidadMora)
+            {
+                case > 0:
+                    objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Error", "Cliente con mora", this);
+                    txtDetailReference1.Text = @"NO";
+                    break;
+                case <= 0:
+                    txtDetailReference1.Text = @"SI";
+                    break;
+            }
+
+            //Fecha del proximo pago
+            var fechaProximoPagoMax = data.Max(dto => dto.Mora) ?? 0;
+            var FechaProximoPagoFilter = data.Where(dto => dto.Mora == fechaProximoPagoMax).ToList();
+            var fechaProximaPago = FechaProximoPagoFilter.ElementAt(0).DateApply;
+            txtDetailReference2.DateTime = fechaProximaPago;
+
+            //Fecha de Vencimiento
+            var fechaVencimientoMin = data.Min(dto => dto.Mora) ?? 0;
+            var fechaVencimientoFilter = data.Where(dto => dto.Mora == fechaVencimientoMin).ToList();
+            var fechaVencimiento = fechaVencimientoFilter.ElementAt(0).DateApply;
+            txtDetailReference3.DateTime = fechaVencimiento;
+        }
         private bool FnValidateForm()
         {
             if (txtDate.EditValue is null)
@@ -984,6 +1051,19 @@ namespace v4posme_window.Views.Box.Attendance
             {
                 objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Huella", "Error al leer la huella", this);
             }
+        }
+
+        private void InicializarTimer()
+        {
+            timerHuella = new System.Windows.Forms.Timer();
+            timerHuella.Interval = 10000; // 10 segundos en milisegundos
+            timerHuella.Tick += Timer_Tick;
+            timerHuella.Start();
+        }
+
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            FnHuellaLeida();
         }
 
         #endregion
@@ -1051,8 +1131,6 @@ namespace v4posme_window.Views.Box.Attendance
             }
         }
 
-        #endregion
-
         private void btnSearchCustomer_Click(object sender, EventArgs e)
         {
             var formTypeListSearch = new FormTypeListSearch("Lista de Clientes", ObjComponentCustomer.ComponentID,
@@ -1071,5 +1149,14 @@ namespace v4posme_window.Views.Box.Attendance
         {
             FnOnCompleteNewCustomerPopPub(mensaje);
         }
+
+        private void FormAttendanceEdit_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            timerHuella.Stop();
+            timerHuella.Dispose();
+        }
+
+        #endregion
+        
     }
 }
