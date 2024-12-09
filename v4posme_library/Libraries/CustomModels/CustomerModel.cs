@@ -74,59 +74,6 @@ public class CustomerModel : ICustomerModel
                          && c.CustomerNumber.Equals(customerCode));
     }
 
-    public TbCustomerDto? GetRowByCodeDto(int companyId, string? customerCode)
-    {
-        using var dbContext = new DataContext();
-        var result = from i in dbContext.TbCustomers
-            join nat in dbContext.TbNaturales on i.EntityID equals nat.EntityID
-            where i.CompanyID == companyId
-                  && i.CustomerNumber.Equals(customerCode)
-                  && i.IsActive!.Value
-            select new TbCustomerDto
-            {
-                CompanyId = i.CompanyID,
-                BranchId = i.BranchID,
-                EntityId = i.EntityID,
-                CustomerNumber = i.CustomerNumber,
-                IdentificationType = i.IdentificationType,
-                Identification = i.Identification,
-                CountryId = i.CountryID,
-                StateId = i.StateID,
-                CityId = i.CityID,
-                Location = i.Location,
-                Address = i.Address,
-                CurrencyId = i.CurrencyID,
-                ClasificationId = i.ClasificationID,
-                CategoryId = i.CategoryID,
-                SubCategoryId = i.SubCategoryID,
-                CustomerTypeId = i.CustomerTypeID,
-                BirthDate = i.BirthDate,
-                StatusId = i.StatusID,
-                TypePay = i.TypePay,
-                PayConditionId = i.PayConditionID,
-                SexoId = i.SexoID,
-                Reference1 = i.Reference1,
-                Reference2 = i.Reference2,
-                CreatedIn = i.CreatedIn,
-                CreatedBy = i.CreatedBy,
-                CreatedOn = i.CreatedOn,
-                CreatedAt = i.CreatedAt,
-                IsActive = i.IsActive,
-                FirstName = nat.FirstName,
-                LastName = nat.LastName,
-                TypeFirm = i.TypeFirm,
-                BalancePoint = i.BalancePoint,
-                PhoneNumber = i.PhoneNumber,
-                DateContract = (i.DateContract),
-                EntityContactId = i.EntityContactID,
-                Reference3 = i.Reference3,
-                Reference4 = i.Reference4,
-                Reference5 = i.Reference5,
-                Reference6 = i.Reference6,
-                Budget = i.Budget
-            };
-        return result.SingleOrDefault();
-    }
 
     public TbCustomer? GetRowByIdentification(int companyId, string identification)
     {

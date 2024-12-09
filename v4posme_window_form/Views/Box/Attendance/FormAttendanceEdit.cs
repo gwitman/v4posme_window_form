@@ -41,7 +41,9 @@ namespace v4posme_window.Views.Box.Attendance
 
         public TbNaturale? ObjNaturalDefault { get; set; }
 
-        public TbCustomerDto? ObjCustomerDefault { get; set; }
+        public TbCustomer? ObjCustomerDefaultNew { get; set; }
+
+        public TbCustomerDto? ObjCustomerDefaultEdit { get; set; }
 
         public TbComponent? ObjComponentCustomer { get; set; }
 
@@ -434,9 +436,9 @@ namespace v4posme_window.Views.Box.Attendance
             ObjParameterAttendanceAutoPrinter = objInterfazCoreWebParameter.GetParameterValue("ATTENDANCE_AUTO_PRINTER", user.CompanyID);
             ExchangeRate = objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Now.Date, decimal.One, targetCurrency.CurrencyID, objCurrency.CurrencyID);
             ObjListWorkflowStage = objInterfazCoreWebWorkflow.GetWorkflowStageByStageInit("tb_transaction_master_attendance", "statusID", ObjTransactionMaster.StatusId.Value, user.CompanyID, user.BranchID, role.RoleID);
-            ObjCustomerDefault = customerModel.GetRowByEntity(user.CompanyID, ObjTransactionMaster.EntityId.Value);
-            ObjNaturalDefault = naturalModel.GetRowByPk(user.CompanyID, ObjCustomerDefault.BranchId, ObjCustomerDefault.EntityId);
-            ObjLegalDefault = legalModel.GetRowByPk(user.CompanyID, ObjCustomerDefault.BranchId, ObjCustomerDefault.EntityId);
+            ObjCustomerDefaultEdit = customerModel.GetRowByEntity(user.CompanyID, ObjTransactionMaster.EntityId.Value);
+            ObjNaturalDefault = naturalModel.GetRowByPk(user.CompanyID, ObjCustomerDefaultEdit.BranchId, ObjCustomerDefaultEdit.EntityId);
+            ObjLegalDefault = legalModel.GetRowByPk(user.CompanyID, ObjCustomerDefaultEdit.BranchId, ObjCustomerDefaultEdit.EntityId);
             ObjListPrioridad = objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_attendance", "priorityID", user.CompanyID);
         }
 
@@ -500,9 +502,9 @@ namespace v4posme_window.Views.Box.Attendance
             ExchangeRateSale = ExchangeRate + Convert.ToDecimal(objParameterExchangeSales);
             ObjCaudal = transactionCausalModel.GetCausalByBranch(user.CompanyID, transactionID, user.BranchID);
             ObjListWorkflowStage = objInterfazCoreWebWorkflow.GetWorkflowInitStage("tb_transaction_master_attendance", "statusID", user.CompanyID, user.BranchID, role.RoleID);
-            ObjCustomerDefault = customerModel.GetRowByCodeDto(user.CompanyID, customerDefault);
-            ObjNaturalDefault = naturalModel.GetRowByPk(user.CompanyID, ObjCustomerDefault.BranchId, ObjCustomerDefault.EntityId);
-            ObjLegalDefault = legalModel.GetRowByPk(user.CompanyID, ObjCustomerDefault.BranchId, ObjCustomerDefault.EntityId);
+            ObjCustomerDefaultNew = customerModel.GetRowByCode(user.CompanyID, customerDefault);
+            ObjNaturalDefault = naturalModel.GetRowByPk(user.CompanyID, ObjCustomerDefaultNew.BranchID, ObjCustomerDefaultNew.EntityID);
+            ObjLegalDefault = legalModel.GetRowByPk(user.CompanyID, ObjCustomerDefaultNew.BranchID, ObjCustomerDefaultNew.EntityID);
             ObjListPrioridad = objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_attendance", "priorityID", user.CompanyID);
         }
 
@@ -611,6 +613,7 @@ namespace v4posme_window.Views.Box.Attendance
 
             if (ObjParameterAttendanceAutoPrinter.Equals("true", StringComparison.InvariantCultureIgnoreCase))
             {
+                ComandPrinter();
             }
         }
 
@@ -796,8 +799,8 @@ namespace v4posme_window.Views.Box.Attendance
                     btnNuevo.Visible = false;
                     lblTitulo.Text = @"ASISTENCIA: 00000000";
                     txtDate.DateTime = DateTime.Now;
-                    txtCustomerID = ObjCustomerDefault.EntityId;
-                    txtCustomerDescription.Text = ObjNaturalDefault is not null ? $"{ObjCustomerDefault.CustomerNumber} {ObjNaturalDefault.FirstName.ToUpper()} {ObjNaturalDefault.LastName.ToUpper()}" : $"{ObjCustomerDefault.CustomerNumber} {ObjLegalDefault.ComercialName.ToUpper()}";
+                    txtCustomerID = ObjCustomerDefaultNew.EntityID;
+                    txtCustomerDescription.Text = ObjNaturalDefault is not null ? $"{ObjCustomerDefaultNew.CustomerNumber} {ObjNaturalDefault.FirstName.ToUpper()} {ObjNaturalDefault.LastName.ToUpper()}" : $"{ObjCustomerDefaultNew.CustomerNumber} {ObjLegalDefault.ComercialName.ToUpper()}";
                     CoreWebRenderInView.LlenarComboBox(ObjListPrioridad, txtPriorityID, "CatalogItemID", "Display", ObjListPrioridad.ElementAt(0).CatalogItemID);
                     CoreWebRenderInView.LlenarComboBox(ObjListWorkflowStage, txtStatusID, "WorkflowStageID", "Name", ObjListWorkflowStage.ElementAt(0).WorkflowStageID);
                     break;
@@ -808,8 +811,8 @@ namespace v4posme_window.Views.Box.Attendance
                     layoutControlItemHuella.ContentVisible = false;
                     lblTitulo.Text = @$"ASISTENCIA: {ObjTransactionMaster.TransactionNumber}";
                     txtDate.DateTime = ObjTransactionMaster.TransactionOn ?? DateTime.Now;
-                    txtCustomerID = ObjCustomerDefault.EntityId;
-                    txtCustomerDescription.Text = ObjNaturalDefault is not null ? $"{ObjCustomerDefault.CustomerNumber} {ObjNaturalDefault.FirstName.ToUpper()} {ObjNaturalDefault.LastName.ToUpper()}" : $"{ObjCustomerDefault.CustomerNumber} {ObjLegalDefault.ComercialName.ToUpper()}";
+                    txtCustomerID = ObjCustomerDefaultEdit.EntityId;
+                    txtCustomerDescription.Text = ObjNaturalDefault is not null ? $"{ObjCustomerDefaultEdit.CustomerNumber} {ObjNaturalDefault.FirstName.ToUpper()} {ObjNaturalDefault.LastName.ToUpper()}" : $"{ObjCustomerDefaultEdit.CustomerNumber} {ObjLegalDefault.ComercialName.ToUpper()}";
                     CoreWebRenderInView.LlenarComboBox(ObjListPrioridad, txtPriorityID, "CatalogItemID", "Display", ObjTransactionMaster.PriorityId);
                     CoreWebRenderInView.LlenarComboBox(ObjListWorkflowStage, txtStatusID, "WorkflowStageID", "Name", ObjTransactionMaster.StatusId);
                     txtDetailReference1.Text = ObjTransactionMaster.Reference1;
