@@ -870,6 +870,7 @@ namespace v4posme_window.Views.Box.Attendance
                 FnCompleteGetCustomerCreditLineNew();
             }
         }
+
         private void FnCompleteGetCustomerCreditLineNew()
         {
             var getData = formInvoiceApi.GetLineByCustomer(txtCustomerID);
@@ -991,6 +992,7 @@ namespace v4posme_window.Views.Box.Attendance
             var fechaVencimiento = fechaVencimientoFilter.ElementAt(0).DateApply;
             txtDetailReference3.DateTime = fechaVencimiento;
         }
+
         private bool FnValidateForm()
         {
             if (txtDate.EditValue is null)
@@ -1055,15 +1057,19 @@ namespace v4posme_window.Views.Box.Attendance
 
         private void InicializarTimer()
         {
+            var tick = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["TIMER_TICK_HUELLA_ASISTENCIA"]);
             timerHuella = new System.Windows.Forms.Timer();
-            timerHuella.Interval = 10000; // 10 segundos en milisegundos
+            timerHuella.Interval = tick;
             timerHuella.Tick += Timer_Tick;
             timerHuella.Start();
         }
 
         private void Timer_Tick(object? sender, EventArgs e)
         {
-            FnHuellaLeida();
+            if (TransactionId.Value == 0 && TransactionMasterId.Value == 0)
+            {
+                FnHuellaLeida();
+            }
         }
 
         #endregion
@@ -1156,7 +1162,11 @@ namespace v4posme_window.Views.Box.Attendance
             timerHuella.Dispose();
         }
 
+        private void btnScanerHuella_Click(object sender, EventArgs e)
+        {
+            FnActiveSensorRead();
+        }
+
         #endregion
-        
     }
 }

@@ -148,6 +148,7 @@
             btnScanerHuella.StyleController = layoutControl1;
             btnScanerHuella.TabIndex = 10;
             btnScanerHuella.Text = "Abrir Sensor";
+            btnScanerHuella.Click += btnScanerHuella_Click;
             // 
             // stackPanel3
             // 
