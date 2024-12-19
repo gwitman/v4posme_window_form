@@ -346,7 +346,7 @@ namespace v4posme_window.Views.Box.InputCash
             // Formatear la fecha de la transacción
             var transactionDate = objTM.TransactionOn;
             var formattedTransactionDate = transactionDate!.Value.ToString("yyyy-M-d HH:mm:ss");
-
+            var tipoMovimiento = ObjTipoMovement.SingleOrDefault(item => item.CatalogItemID == objTM.AreaId.Value);
             try
             {
                 // Imprimir el documento               
@@ -375,11 +375,18 @@ namespace v4posme_window.Views.Box.InputCash
                 printer.Separator();
                 printer.AlignLeft();
                 var datos = $"""
+                             TIPO:     {tipoMovimiento.Name}
                              ESTADO:   {objStage.First().Name}
                              MONEDA:   {objCurrency.Simbol}
                              """;
                 printer.Append(datos);
                 printer.Append($"TOTAL                                 {objTM.Amount}");
+                printer.NewLine();
+                printer.Append(objTM.Reference1);
+                printer.Append(objTM.Reference2);
+                printer.Append(objTM.Reference3);
+                printer.Append($"Comentario: {objTM.Note}");
+                printer.NewLine();
                 printer.AlignCenter();
                 printer.Append(objCompany.Address);
                 printer.Append($"Tel.: {objParameterTelefono}");
