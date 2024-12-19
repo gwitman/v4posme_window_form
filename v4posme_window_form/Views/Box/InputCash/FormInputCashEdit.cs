@@ -811,10 +811,9 @@ namespace v4posme_window.Views.Box.InputCash
 
             //Ingresar el detalle de moneda
             transactionMasterDenominationModel.DeleteAppPosme(TransactionMasterId.Value);
-            if (bindingSourceInputCashDetailDto.Count > 0)
+            if (FormInputCashDetaiList.Count>0)
             {
-                var lista = (IList<FormInputCashDetailDto>)bindingSourceInputCashDetailDto.List;
-                foreach (var detail in lista)
+                foreach (var detail in FormInputCashDetaiList)
                 {
                     var objTMDeno = new TbTransactionMasterDenomination
                     {
@@ -1066,6 +1065,7 @@ namespace v4posme_window.Views.Box.InputCash
                     }
                     if (ObjTransactionMasterDenomination.Count > 0)
                     {
+                        FormInputCashDetaiList.Clear();
                         foreach (var deno in ObjTransactionMasterDenomination)
                         {
                             var dto = new FormInputCashDetailDto
@@ -1081,7 +1081,6 @@ namespace v4posme_window.Views.Box.InputCash
                             FormInputCashDetaiList.Add(dto);
                         }
                     }
-
                     UpdatePantalla();
                     txtDetailAmount.Text = ObjTransactionMasterDetail.ElementAt(0).Amount.Value.ToString("F2");
                     gridControlArchivos.DataSource = null;
@@ -1137,14 +1136,10 @@ namespace v4posme_window.Views.Box.InputCash
         private void UpdateAmount()
         {
             var totalTemp = 0m;
-            txtDetailAmount.Text = "0.0";
-            if (bindingSourceInputCashDetailDto is not null && bindingSourceInputCashDetailDto.Count > 0)
+            txtDetailAmount.Text = @"0.0";
+            if (FormInputCashDetaiList.Count>0)
             {
-                foreach (var detailDto in bindingSourceInputCashDetailDto)
-                {
-                    var data = detailDto as FormInputCashDetailDto;
-                    totalTemp += (data.TransactionMasterDenominationQuantity * Convert.ToDecimal(data.TransactionMasterDenominationReference));
-                }
+                totalTemp += FormInputCashDetaiList.Sum(data => (data.TransactionMasterDenominationQuantity * Convert.ToDecimal(data.TransactionMasterDenominationReference)));
 
                 txtDetailAmount.Text = totalTemp.ToString("F2");
             }
