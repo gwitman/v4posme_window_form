@@ -9,9 +9,11 @@ class TransactionMasterDenominationModel : ITransactionMasterDenominationModel
     public int DeleteAppPosme(int transactionMasterId)
     {
         using var context = new DataContext();
-        return context.TbTransactionMasterDenominations
+        var datos = context.TbTransactionMasterDenominations
             .Where(denomination => denomination.TransactionMasterID == transactionMasterId)
-            .ExecuteDelete();
+            .ToList();
+        context.RemoveRange(datos);
+        return context.SaveChanges();
     }
 
     public int InsertAppPosme(TbTransactionMasterDenomination data)

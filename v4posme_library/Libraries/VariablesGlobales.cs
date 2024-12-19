@@ -118,6 +118,8 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ICustomerPaymentMethodModel, CustomerPaymentMethodModel>();
             _unityContainer.RegisterType<ICustomerFrecuencyActuationsModel, CustomerFrecuencyActuationsModel>();
             _unityContainer.RegisterType<ITransactionMasterDetailReferencesModel, TransactionMasterDetailReferencesModel>();
+            _unityContainer.RegisterType<ICashBoxUserModel, CashBoxUserModel>();
+            _unityContainer.RegisterType<ICashBoxSessionModel, CashBoxSessionModel>();
 
             #endregion
 

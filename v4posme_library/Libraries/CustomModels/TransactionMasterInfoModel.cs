@@ -80,7 +80,7 @@ class TransactionMasterInfoModel : ITransactionMasterInfoModel
                 ZonaName = ci.Name,
                 MesaName = ci2.Name
             };
-        return result.First();
+        return result.SingleOrDefault();
     }
 
     public TbTransactionMasterInfo? GetRowByPkPk(int transactionMasterId)

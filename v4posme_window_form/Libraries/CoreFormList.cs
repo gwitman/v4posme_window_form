@@ -1,6 +1,7 @@
 ﻿using v4posme_window.Views;
 using v4posme_window.Views.Box.Attendance;
 using v4posme_window.Views.Box.CancelDocument;
+using v4posme_window.Views.Box.InputCash;
 using v4posme_window.Views.Box.Report;
 using v4posme_window.Views.Box.Share;
 using v4posme_window.Views.Box.ShareCapital;
@@ -33,6 +34,7 @@ public static class CoreFormList
         "app_box_sharecapital/index.aspx" => new FormShareCapitalList(),
         "app_box_canceldocument/index.aspx" => new FormCancelDocumentList(),
         "app_box_attendance/index.aspx" => new FormAttendanceList(),
+        "app_box_inputcash/index.aspx" => new FormInputCashList(),
         _ => new FormInvoiceBillingList(),
     };
 
