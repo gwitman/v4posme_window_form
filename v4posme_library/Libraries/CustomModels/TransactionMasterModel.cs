@@ -7,7 +7,7 @@ using v4posme_library.ModelsDto;
 
 namespace v4posme_library.Libraries.CustomModels;
 
-class TransactionMasterModel : ITransactionMasterModel
+class TransactionMasterModel(DataContext context) : ITransactionMasterModel
 {
     public void DeleteAppPosme(int companyId, int transactionId, int transactionMasterId)
     {
@@ -33,7 +33,6 @@ class TransactionMasterModel : ITransactionMasterModel
         {
             using var context = new DataContext();
             UpdateAppPosme(companyId, transactionId, transactionMasterId, data, context);
-            context.SaveChanges();
             return;
         }
 
@@ -49,6 +48,7 @@ class TransactionMasterModel : ITransactionMasterModel
         data.CompanyID = companyId;
         data.TransactionID = transactionId;
         dataContext.TbTransactionMasters.Update(data);
+        dataContext.SaveChanges();
     }
 
 

@@ -598,7 +598,7 @@ namespace v4posme_window.Views.Box.OutCash
                 BranchID = Convert.ToInt32(selectedBranch.Key),
                 TransactionNumber = objInterfazCoreWebCounter.GoNextNumber(user.CompanyID, user.BranchID, "tb_transaction_master_outputcash", 0),
                 TransactionCausalID = objInterfazCoreWebTransaction.GetDefaultCausalId(user.CompanyID, TransactionId.Value),
-                TransactionOn = txtDate.DateTime,
+                TransactionOn = txtDate.DateTime.Date,
                 StatusIDChangeOn = DateTime.Now,
                 ComponentID = ObjComponentShare.ComponentID,
                 Note = txtNote.Text,
@@ -664,7 +664,7 @@ namespace v4posme_window.Views.Box.OutCash
                     CompanyID = objTM.CompanyID,
                     TransactionID = objTM.TransactionID,
                     TransactionMasterID = objTM.TransactionMasterID,
-                    ComponentID = 0,
+                    ComponentID = ObjComponentShare.ComponentID,
                     ComponentItemID = 0,
                     Quantity = decimal.Zero,
                     UnitaryCost = decimal.Zero,
@@ -786,7 +786,7 @@ namespace v4posme_window.Views.Box.OutCash
             try
             {
                 var objTMNew = transactionMasterModel.GetRowByPKK(objTM.TransactionMasterId);
-                objTMNew.TransactionOn = txtDate.DateTime;
+                objTMNew.TransactionOn = txtDate.DateTime.Date;
                 objTMNew.StatusIDChangeOn = DateTime.Now;
                 objTMNew.BranchID = Convert.ToInt32(selectedBranch.Key);
                 objTMNew.Note = txtNote.Text;
@@ -800,7 +800,24 @@ namespace v4posme_window.Views.Box.OutCash
                 objTMNew.StatusID = Convert.ToInt32(selectedStatus.Key);
                 objTMNew.Amount = decimal.Zero;
 
+                //Aplicar documento	
                 var objCatalogItemTypeMovement = catalogItemModel.GetRowByCatalogItemId(objTMNew.AreaID.Value);
+                var COMMAND_APLICABLE = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_APLICABLE"]);
+                if (objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_outputcash",
+                        "statusID", objTMNew.StatusID.Value,
+                        COMMAND_APLICABLE, user.CompanyID,
+                        user.BranchID, role.RoleID).Value
+                    && oldStatusID.Value != objTMNew.StatusID.Value
+                    && objCatalogItemTypeMovement.Name.Equals(movementTypeCierreParameter, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    //Validar registro de caja
+                    var objListTMRegister = transactionMasterModel.GetRowInStatusRegister(user.CompanyID, TransactionMasterId.Value);
+                    if (objListTMRegister.Count > 0)
+                    {
+                        throw new Exception("Caja no puede ser cerrada tiene movimientos registrados, o los anula o los aplica");
+                    }
+                }
+                
                 var COMMAND_EDITABLE = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_EDITABLE"]);
                 if (objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_outputcash", "statusID", objTM.StatusId.Value, COMMAND_EDITABLE, user.CompanyID, user.BranchID, role.RoleID).Value)
                 {
@@ -900,23 +917,6 @@ namespace v4posme_window.Views.Box.OutCash
                 //Actualizar Transaccion
                 objTMNew.Amount = amount;
                 transactionMasterModel.UpdateAppPosme(user.CompanyID, objTMNew.TransactionID, objTMNew.TransactionMasterID, objTMNew, context);
-
-                //Aplicar documento	
-                var COMMAND_APLICABLE = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_APLICABLE"]);
-                if (objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_outputcash",
-                        "statusID", objTMNew.StatusID.Value,
-                        COMMAND_APLICABLE, user.CompanyID,
-                        user.BranchID, role.RoleID).Value
-                    && oldStatusID.Value != objTMNew.StatusID.Value
-                    && objCatalogItemTypeMovement.Name.Equals(movementTypeCierreParameter, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    //Validar registro de caja
-                    var objListTMRegister = transactionMasterModel.GetRowInStatusRegister(user.CompanyID, TransactionMasterId.Value);
-                    if (objListTMRegister.Count > 0)
-                    {
-                        throw new Exception("Caja no puede ser cerrada tiene movimientos registrados, o los anula o los aplica");
-                    }
-                }
 
                 //Cerrar caja si el tipo es Cierre
                 var typeOutputCash = objTMNew.AreaID.Value;
