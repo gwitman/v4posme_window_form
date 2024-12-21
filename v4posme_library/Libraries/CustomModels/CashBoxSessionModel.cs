@@ -18,4 +18,16 @@ public class CashBoxSessionModel : ICashBoxSessionModel
         context.SaveChanges();
         return add.CashBoxSessionID;
     }
+
+    public void UpdateAppPosme(int cashBoxSessionID, TbCashBoxSession data, DataContext? dataContext = null)
+    {
+        if (dataContext == null)
+        {
+            using var context = new DataContext();
+            UpdateAppPosme(cashBoxSessionID, data, context);
+            return;
+        }
+        dataContext.Update(data);
+        dataContext.SaveChanges();
+    }
 }

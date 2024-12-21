@@ -16,27 +16,36 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         expression.CreateMap<TbTransactionMasterDetail, TbTransactionMasterDetailDto>());
 
 
-    public int InsertAppPosme(TbTransactionMasterDetail data)
+    public int InsertAppPosme(TbTransactionMasterDetail data, DataContext? dataContext = null)
     {
-        var context = VariablesGlobales.Instance.DataContext;
-        var add = context.Add(data);
-        context.SaveChanges();
+        if (dataContext == null)
+        {
+            using var context = new DataContext();
+            return InsertAppPosme(data, context);
+        }
+
+        var add = dataContext.Add(data);
+        dataContext.SaveChanges();
         return add.Entity.TransactionMasterDetailID;
     }
 
-    public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId,
-        int transactionMasterDetailId, TbTransactionMasterDetail data)
+    public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, int transactionMasterDetailId, TbTransactionMasterDetail data, DataContext? dataContext = null)
     {
-        var context = VariablesGlobales.Instance.DataContext;
-        var find = context.TbTransactionMasterDetails
+        if (dataContext == null)
+        {
+            using var context = new DataContext();
+            UpdateAppPosme(companyId, transactionId, transactionMasterId, transactionMasterDetailId, data, context);
+            return;
+        }
+        var find = dataContext.TbTransactionMasterDetails
             .FirstOrDefault(detail => detail.CompanyID == companyId
                                       && detail.TransactionID == transactionId
                                       && detail.TransactionMasterID == transactionMasterId
                                       && detail.TransactionMasterDetailID == transactionMasterDetailId);
         if (find is null) return;
         data.TransactionMasterDetailID = find.TransactionMasterDetailID;
-        context.Entry(find).CurrentValues.SetValues(data);
-        context.SaveChanges();
+        dataContext.Entry(find).CurrentValues.SetValues(data);
+        dataContext.SaveChanges();
     }
 
     public TbTransactionMasterDetailDto GetRowByPk(int companyId, int transactionId, int transactionMasterId,
@@ -423,10 +432,16 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
         context.SaveChanges();
     }
 
-    public void DeleteWhereIdNotIn(int companyId, int transactionId, int transactionMasterId, List<int> listTmdId)
+    public void DeleteWhereIdNotIn(int companyId, int transactionId, int transactionMasterId, List<int> listTmdId, DataContext? dataContext = null)
     {
-        using var context = new DataContext();
-        var tbTransactionMasterDetails = context.TbTransactionMasterDetails
+        if (dataContext == null)
+        {
+            using var context = new DataContext();
+            DeleteWhereIdNotIn(companyId, transactionId, transactionMasterId, listTmdId, context);
+            return;
+        }
+
+        var tbTransactionMasterDetails = dataContext.TbTransactionMasterDetails
             .Where(detail => detail.CompanyID == companyId
                              && detail.TransactionID == transactionId
                              && detail.TransactionMasterID == transactionMasterId
@@ -436,7 +451,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             tbTransactionMasterDetail.IsActive = false;
         }
 
-        context.SaveChanges();
+        dataContext.SaveChanges();
     }
 
     public List<TbTransactionMasterDetailDto> GlobalProGetRowBySalesByEmployeerMonthOnlySales(int companyId,

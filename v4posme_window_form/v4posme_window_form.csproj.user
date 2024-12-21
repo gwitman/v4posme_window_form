@@ -64,6 +64,12 @@
     <Compile Update="Views\Box\InputCash\FormInputCashList.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\Box\OutCash\FormOutCashEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Box\OutCash\FormOutCashList.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\Box\Report\FormBoxReport.cs">
       <SubType>Form</SubType>
     </Compile>

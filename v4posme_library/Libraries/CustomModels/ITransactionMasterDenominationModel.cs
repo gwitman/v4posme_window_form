@@ -5,9 +5,9 @@ namespace v4posme_library.Libraries.CustomModels;
 
 public interface ITransactionMasterDenominationModel
 {
-    int DeleteAppPosme(int transactionMasterId);
+    int DeleteAppPosme(int transactionMasterId, DataContext? dataContext =null);
 
-    int InsertAppPosme(TbTransactionMasterDenomination data);
+    int InsertAppPosme(TbTransactionMasterDenomination data, DataContext? dataContext =null);
 
     void UpdateAppPosme(int transactionMasterDenominationId, TbTransactionMasterDenomination data);
 

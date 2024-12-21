@@ -27,10 +27,17 @@ class TransactionMasterModel : ITransactionMasterModel
         return add.Entity.TransactionMasterID;
     }
 
-    public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, TbTransactionMaster? data)
+    public void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, TbTransactionMaster? data, DataContext? dataContext = null)
     {
-        var context = VariablesGlobales.Instance.DataContext;
-        var find = context.TbTransactionMasters
+        if (dataContext is null)
+        {
+            using var context = new DataContext();
+            UpdateAppPosme(companyId, transactionId, transactionMasterId, data, context);
+            context.SaveChanges();
+            return;
+        }
+
+        var find = dataContext.TbTransactionMasters
             .AsNoTracking()
             .FirstOrDefault(master => master.CompanyID == companyId
                                       && master.TransactionID == transactionId
@@ -41,10 +48,7 @@ class TransactionMasterModel : ITransactionMasterModel
         data.TransactionMasterID = find.TransactionMasterID;
         data.CompanyID = companyId;
         data.TransactionID = transactionId;
-
-
-        context.TbTransactionMasters.Update(data);
-        context.SaveChanges();
+        dataContext.TbTransactionMasters.Update(data);
     }
 
 

@@ -244,5 +244,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Box\CancelDocument\" />
+    <Folder Include="Views\Box\OutCash\" />
   </ItemGroup>
 </Project>

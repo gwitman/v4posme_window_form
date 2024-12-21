@@ -7,4 +7,6 @@ public interface ICashBoxSessionModel
     List<TbCashBoxSession> GetRowByUserIdAndStatusId(int userId, int statusId);
 
     int InsertAppPosme(TbCashBoxSession data);
+
+    void UpdateAppPosme(int cashBoxSessionID, TbCashBoxSession data, DataContext? dataContext = null);
 }

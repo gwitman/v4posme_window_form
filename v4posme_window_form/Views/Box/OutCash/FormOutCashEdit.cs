@@ -1,33 +1,25 @@
-﻿using DevExpress.XtraEditors;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using DevExpress.XtraEditors;
+using ESC_POS_USB_NET.Printer;
+using Unity;
 using v4posme_library.Libraries;
 using v4posme_library.Libraries.CustomLibraries.Interfaz;
-using v4posme_library.Libraries.CustomModels.Core;
 using v4posme_library.Libraries.CustomModels;
+using v4posme_library.Libraries.CustomModels.Core;
+using v4posme_library.Models;
+using v4posme_library.ModelsDto;
 using v4posme_window.Api;
+using v4posme_window.Dto;
 using v4posme_window.Interfaz;
 using v4posme_window.Libraries;
 using v4posme_window.Template;
-using Unity;
-using v4posme_library.ModelsDto;
-using v4posme_library.Models;
-using v4posme_window.Dto;
-using v4posme_window.Views.Box.CancelDocument;
-using ESC_POS_USB_NET.Printer;
+using v4posme_window.Views.Box.InputCash;
 
-namespace v4posme_window.Views.Box.InputCash
+namespace v4posme_window.Views.Box.OutCash
 {
-    public partial class FormInputCashEdit : FormTypeHeadEdit, IFormTypeEdit
+    public partial class FormOutCashEdit : FormTypeHeadEdit, IFormTypeEdit
     {
         #region Campos
 
@@ -122,12 +114,12 @@ namespace v4posme_window.Views.Box.InputCash
 
         #region Init
 
-        public FormInputCashEdit()
+        public FormOutCashEdit()
         {
             InitializeComponent();
         }
 
-        public FormInputCashEdit(TypeOpenForm typeOpenForm, int companyId, int transactionMasterId, int transactionId)
+        public FormOutCashEdit(TypeOpenForm typeOpenForm, int companyId, int transactionMasterId, int transactionId)
         {
             InitializeComponent();
             Application.ThreadException += Application_ThreadException;
@@ -152,7 +144,7 @@ namespace v4posme_window.Views.Box.InputCash
             CustomException.LogException((Exception)e.ExceptionObject);
         }
 
-        private void FormInputCashEdit_Load(object sender, EventArgs e)
+        private void FormOutCashEdit_Load(object sender, EventArgs e)
         {
             backgroundWorker = new BackgroundWorker();
             if (!progressPanel.Visible)
@@ -250,13 +242,13 @@ namespace v4posme_window.Views.Box.InputCash
             var resultPermission = 0;
             if (appNeedAuthentication == "true")
             {
-                var permited = objInterfazCoreWebPermission.UrlPermited("app_box_inputcash", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                var permited = objInterfazCoreWebPermission.UrlPermited("app_box_outcash", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (!permited)
                 {
                     throw new Exception(notAccessControl);
                 }
 
-                resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_inputcash", "delete", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_outcash", "delete", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (resultPermission == permissionNone)
                 {
                     throw new Exception(notAllDelete);
@@ -282,7 +274,7 @@ namespace v4posme_window.Views.Box.InputCash
             }
 
             var commandEliminable = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_ELIMINABLE"]);
-            var validateWorkflowStage = objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_inputcash", "statusID", objTm.StatusId.Value, commandEliminable, user.CompanyID, user.BranchID, role.RoleID);
+            var validateWorkflowStage = objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_outputcash", "statusID", objTm.StatusId.Value, commandEliminable, user.CompanyID, user.BranchID, role.RoleID);
             if (validateWorkflowStage.HasValue && validateWorkflowStage.Value)
             {
                 throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_DELETE"]);
@@ -311,13 +303,13 @@ namespace v4posme_window.Views.Box.InputCash
             var resultPermission = 0;
             if (appNeedAuthentication == "true")
             {
-                var permited = objInterfazCoreWebPermission.UrlPermited("app_box_inputcash", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                var permited = objInterfazCoreWebPermission.UrlPermited("app_box_outcash", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (!permited)
                 {
                     throw new Exception(notAccessControl);
                 }
 
-                resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_inputcash", "edit", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_outcash", "edit", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (resultPermission == permissionNone)
                 {
                     throw new Exception(notAllEdit);
@@ -341,7 +333,7 @@ namespace v4posme_window.Views.Box.InputCash
             //var objCustumer = customerModel.GetRowByEntity(user.CompanyID, objTM.EntityId.Value);
             //var objNatural = naturalModel.GetRowByPk(user.CompanyID, objCustumer.BranchId, objCustumer.EntityId);
             var objCurrency = currencyModel.GetRowByPk(objTM.CurrencyId.Value);
-            var objStage = objInterfazCoreWebWorkflow.GetWorkflowStage("tb_transaction_master_inputcash", "statusID", objTM.StatusId.Value, user.CompanyID, user.BranchID, role.RoleID);
+            var objStage = objInterfazCoreWebWorkflow.GetWorkflowStage("tb_transaction_master_outputcash", "statusID", objTM.StatusId.Value, user.CompanyID, user.BranchID, role.RoleID);
 
             // Formatear la fecha de la transacción
             var transactionDate = objTM.TransactionOn;
@@ -363,13 +355,13 @@ namespace v4posme_window.Views.Box.InputCash
                     {
                         var logoCompany = new Bitmap(Image.FromFile(imagePath));
                         //el logo que se esta mostrando no se redimensiona 
-                        //printer.Image(logoCompany);
+                        printer.Image(logoCompany);
                     }
                 }
 
                 printer.AlignCenter();
                 printer.Append(objCompany.Name);
-                printer.BoldMode("INGRESO DE CAJA");
+                printer.BoldMode("SALIDA DE CAJA");
                 printer.Append($"# {objTM.TransactionNumber}");
                 printer.Append($"FECHA: {formattedTransactionDate} ");
                 printer.Separator();
@@ -419,13 +411,13 @@ namespace v4posme_window.Views.Box.InputCash
 
             if (appNeedAuthentication == "true")
             {
-                var permited = objInterfazCoreWebPermission.UrlPermited("app_box_inputcash", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                var permited = objInterfazCoreWebPermission.UrlPermited("app_box_outcash", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (!permited)
                 {
                     throw new Exception(notAccessControl);
                 }
 
-                var resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_inputcash", "edit", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                var resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_outcash", "edit", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (resultPermission == permissionNone)
                 {
                     throw new Exception(notAllEdit);
@@ -435,7 +427,7 @@ namespace v4posme_window.Views.Box.InputCash
             if (TransactionId is 0 && TransactionMasterId is 0)
             {
                 Close();
-                var frm = new FormInputCashEdit(TypeOpenForm.Init, 0, 0, 0)
+                var frm = new FormOutCashEdit(TypeOpenForm.Init, 0, 0, 0)
                 {
                     MdiParent = CoreFormList.Principal()
                 };
@@ -443,10 +435,10 @@ namespace v4posme_window.Views.Box.InputCash
                 return;
             }
 
-            ObjComponentShare = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_inputcash");
+            ObjComponentShare = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_outputcash");
             if (ObjComponentShare is null)
             {
-                throw new Exception("EL COMPONENTE 'tb_transaction_master_inputcash' NO EXISTE...");
+                throw new Exception("EL COMPONENTE 'tb_transaction_master_outputcash' NO EXISTE...");
             }
 
             var objCurrency = objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyID);
@@ -456,15 +448,15 @@ namespace v4posme_window.Views.Box.InputCash
             ObjTransactionMasterDetail = transactionMasterDetailModel.GetRowByTransactionToShare(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
             ObjTransactionMasterDenomination = transactionMasterDenominationModel.GetRowByTransactionMaster(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
             ExchangeRate = objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Now.Date, decimal.One, targetCurrency.CurrencyID, objCurrency.CurrencyID);
-            ObjListWorkflowStage = objInterfazCoreWebWorkflow.GetWorkflowStageByStageInit("tb_transaction_master_inputcash", "statusID", ObjTransactionMaster.StatusId.Value, user.CompanyID, user.BranchID, role.RoleID);
-            ObjTipoMovement = objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_inputcash", "areaID", user.CompanyID);
+            ObjListWorkflowStage = objInterfazCoreWebWorkflow.GetWorkflowStageByStageInit("tb_transaction_master_outputcash", "statusID", ObjTransactionMaster.StatusId.Value, user.CompanyID, user.BranchID, role.RoleID);
+            ObjTipoMovement = objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_outputcash", "areaID", user.CompanyID);
             if (ObjTransactionMaster.PriorityId is null)
             {
                 ObjSubTipoMovement = new();
             }
             else
             {
-                ObjSubTipoMovement = objInterfazCoreWebCatalog.GetCatalogAllItemParent("tb_transaction_master_inputcash", "priorityID", user.CompanyID, ObjTransactionMaster.PriorityId.Value);
+                ObjSubTipoMovement = objInterfazCoreWebCatalog.GetCatalogAllItemParent("tb_transaction_master_outputcash", "priorityID", user.CompanyID, ObjTransactionMaster.PriorityId.Value);
             }
 
             ObjListDenomination = objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_denomination", "catalogItemID", user.CompanyID);
@@ -500,20 +492,20 @@ namespace v4posme_window.Views.Box.InputCash
 
             if (appNeedAuthentication == "true")
             {
-                var permited = objInterfazCoreWebPermission.UrlPermited("app_box_inputcash", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                var permited = objInterfazCoreWebPermission.UrlPermited("app_box_outcash", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (!permited)
                 {
                     throw new Exception(notAccessControl);
                 }
 
-                var resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_inputcash", "add", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                var resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_outcash", "add", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (resultPermission == permissionNone)
                 {
                     throw new Exception(notAllInsert);
                 }
             }
 
-            var transactionID = objInterfazCoreWebTransaction.GetTransactionId(user.CompanyID, "tb_transaction_master_inputcash", 0);
+            var transactionID = objInterfazCoreWebTransaction.GetTransactionId(user.CompanyID, "tb_transaction_master_outputcash", 0);
             var objCurrency = objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyID);
             var targetCurrency = objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyID);
             ObjListCurrency = companyCurrencyModel.GetByCompany(user.CompanyID);
@@ -523,9 +515,9 @@ namespace v4posme_window.Views.Box.InputCash
             var objParameterExchangeSales = objInterfazCoreWebParameter.GetParameterValue("ACCOUNTING_EXCHANGE_SALE", user.CompanyID);
             ExchangeRateSale = ExchangeRate + Convert.ToDecimal(objParameterExchangeSales);
             ObjCaudal = transactionCausalModel.GetCausalByBranch(user.CompanyID, transactionID.Value, user.BranchID);
-            ObjListWorkflowStage = objInterfazCoreWebWorkflow.GetWorkflowInitStage("tb_transaction_master_inputcash", "statusID", user.CompanyID, user.BranchID, role.RoleID);
-            ObjTipoMovement = objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_inputcash", "areaID", user.CompanyID);
-            ObjSubTipoMovement = objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_inputcash", "priorityID", user.CompanyID);
+            ObjListWorkflowStage = objInterfazCoreWebWorkflow.GetWorkflowInitStage("tb_transaction_master_outputcash", "statusID", user.CompanyID, user.BranchID, role.RoleID);
+            ObjTipoMovement = objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_outputcash", "areaID", user.CompanyID);
+            ObjSubTipoMovement = objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_outputcash", "priorityID", user.CompanyID);
             ObjListDenomination = objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_denomination", "catalogItemID", user.CompanyID);
             ObjListBranch = branchModel.GetByCompany(user.CompanyID);
         }
@@ -558,25 +550,25 @@ namespace v4posme_window.Views.Box.InputCash
 
             if (appNeedAuthentication == "true")
             {
-                var permited = objInterfazCoreWebPermission.UrlPermited("app_box_inputcash", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                var permited = objInterfazCoreWebPermission.UrlPermited("app_box_outcash", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (!permited)
                 {
                     throw new Exception(notAccessControl);
                 }
 
-                var resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_inputcash", "add", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                var resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_outcash", "add", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (resultPermission == permissionNone)
                 {
                     throw new Exception(notAllInsert);
                 }
             }
 
-            objInterfazCoreWebPermission.GetValueLicense(user.CompanyID, "app_box_inputcash/index");
+            objInterfazCoreWebPermission.GetValueLicense(user.CompanyID, "app_box_outcash/index");
 
-            ObjComponentShare = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_inputcash");
+            ObjComponentShare = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_outputcash");
             if (ObjComponentShare is null)
             {
-                throw new Exception("EL COMPONENTE 'tb_transaction_master_inputcash' NO EXISTE...");
+                throw new Exception("EL COMPONENTE 'tb_transaction_master_outputcash' NO EXISTE...");
             }
 
             var objComponentDenomination = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_denomination");
@@ -590,7 +582,7 @@ namespace v4posme_window.Views.Box.InputCash
                 throw new Exception("EL DOCUMENTO NO PUEDE INGRESAR, EL CICLO CONTABLE ESTA CERRADO");
             }
 
-            TransactionId = objInterfazCoreWebTransaction.GetTransactionId(user.CompanyID, "tb_transaction_master_inputcash", 0);
+            TransactionId = objInterfazCoreWebTransaction.GetTransactionId(user.CompanyID, "tb_transaction_master_outputcash", 0);
             var objT = transactionModel.GetByCompanyAndTransaction(user.CompanyID, TransactionId.Value);
             var selectedBranch = txtBranchID.SelectedItem as ComboBoxItem;
             var selectedCurrency = txtCurrencyID.SelectedItem as ComboBoxItem;
@@ -604,7 +596,7 @@ namespace v4posme_window.Views.Box.InputCash
                 CompanyID = user.CompanyID,
                 TransactionID = TransactionId.Value,
                 BranchID = Convert.ToInt32(selectedBranch.Key),
-                TransactionNumber = objInterfazCoreWebCounter.GoNextNumber(user.CompanyID, user.BranchID, "tb_transaction_master_inputcash", 0),
+                TransactionNumber = objInterfazCoreWebCounter.GoNextNumber(user.CompanyID, user.BranchID, "tb_transaction_master_outputcash", 0),
                 TransactionCausalID = objInterfazCoreWebTransaction.GetDefaultCausalId(user.CompanyID, TransactionId.Value),
                 TransactionOn = txtDate.DateTime,
                 StatusIDChangeOn = DateTime.Now,
@@ -733,23 +725,23 @@ namespace v4posme_window.Views.Box.InputCash
             var resultPermission = 0;
             if (appNeedAuthentication == "true")
             {
-                var permited = objInterfazCoreWebPermission.UrlPermited("app_box_inputcash", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                var permited = objInterfazCoreWebPermission.UrlPermited("app_box_outcash", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (!permited)
                 {
                     throw new Exception(notAccessControl);
                 }
 
-                resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_inputcash", "edit", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                resultPermission = objInterfazCoreWebPermission.UrlPermissionCmd("app_box_outcash", "edit", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
                 if (resultPermission == permissionNone)
                 {
                     throw new Exception(notAllEdit);
                 }
             }
 
-            ObjComponentShare = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_inputcash");
+            ObjComponentShare = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_outputcash");
             if (ObjComponentShare is null)
             {
-                throw new Exception("EL COMPONENTE 'tb_transaction_master_inputcash' NO EXISTE...");
+                throw new Exception("EL COMPONENTE 'tb_transaction_master_outputcash' NO EXISTE...");
             }
 
             var objComponentDenomination = objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_denomination");
@@ -760,6 +752,7 @@ namespace v4posme_window.Views.Box.InputCash
 
             var objTM = transactionMasterModel.GetRowByPk(user.CompanyID, TransactionId.Value, TransactionMasterId.Value);
             var oldStatusID = objTM.StatusId;
+            var movementTypeCierreParameter = objInterfazCoreWebParameter.GetParameterValue("BOX_MOVEMENT_TYPE_CIERRE", user.CompanyID);
             var objCurrencyDolares = objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyID);
             var objCurrencyCordoba = objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyID);
             ExchangeRate = objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Now.Date, decimal.One, objCurrencyDolares.CurrencyID, objCurrencyCordoba.CurrencyID);
@@ -771,7 +764,7 @@ namespace v4posme_window.Views.Box.InputCash
             }
 
             var commandEditableTotal = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_EDITABLE_TOTAL"]);
-            var validateWorkflow = objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_inputcash", "statusID", objTM.StatusId!.Value, commandEditableTotal, user.CompanyID, user.BranchID, role.RoleID);
+            var validateWorkflow = objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_outputcash", "statusID", objTM.StatusId!.Value, commandEditableTotal, user.CompanyID, user.BranchID, role.RoleID);
             if (validateWorkflow.HasValue && !validateWorkflow.Value)
             {
                 throw new Exception(VariablesGlobales.ConfigurationBuilder["NOT_WORKFLOW_EDIT"]);
@@ -788,154 +781,176 @@ namespace v4posme_window.Views.Box.InputCash
             var selectedStatus = txtStatusID.SelectedItem as ComboBoxItem;
             var selectedArea = txtAreaID.SelectedItem as ComboBoxItem;
             var selectedPriority = txtPriorityID.SelectedItem as ComboBoxItem;
-            var detailAmount = Convert.ToDecimal(txtDetailAmount.EditValue);
+            using var context = new DataContext();
+            using var tx = context.Database.BeginTransaction();
+            try
+            {
+                var objTMNew = transactionMasterModel.GetRowByPKK(objTM.TransactionMasterId);
+                objTMNew.TransactionOn = txtDate.DateTime;
+                objTMNew.StatusIDChangeOn = DateTime.Now;
+                objTMNew.BranchID = Convert.ToInt32(selectedBranch.Key);
+                objTMNew.Note = txtNote.Text;
+                objTMNew.CurrencyID = Convert.ToInt32(selectedCurrency.Key);
+                objTMNew.ExchangeRate = objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Now.Date, decimal.One, objTM.CurrencyId2.Value, objTMNew.CurrencyID.Value);
+                objTMNew.AreaID = Convert.ToInt32(selectedArea.Key);
+                objTMNew.PriorityID = selectedPriority is null ? 0 : Convert.ToInt32(selectedPriority.Key);
+                objTMNew.Reference1 = txtDetailReference1.Text;
+                objTMNew.Reference2 = txtDetailReference2.Text;
+                objTMNew.Reference3 = txtDetailReference3.Text;
+                objTMNew.StatusID = Convert.ToInt32(selectedStatus.Key);
+                objTMNew.Amount = decimal.Zero;
 
-            var objTMNew = transactionMasterModel.GetRowByPKK(objTM.TransactionMasterId);
-            objTMNew.TransactionOn = txtDate.DateTime;
-            objTMNew.StatusIDChangeOn = DateTime.Now;
-            objTMNew.BranchID = Convert.ToInt32(selectedBranch.Key);
-            objTMNew.Note = txtNote.Text;
-            objTMNew.CurrencyID = Convert.ToInt32(selectedCurrency.Key);
-            objTMNew.ExchangeRate = objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Now.Date, decimal.One, objTM.CurrencyId2.Value, objTMNew.CurrencyID.Value);
-            objTMNew.AreaID = Convert.ToInt32(selectedArea.Key);
-            objTMNew.PriorityID = selectedPriority is null ? 0 : Convert.ToInt32(selectedPriority.Key);
-            objTMNew.Reference1 = txtDetailReference1.Text;
-            objTMNew.Reference2 = txtDetailReference2.Text;
-            objTMNew.Reference3 = txtDetailReference3.Text;
-            objTMNew.StatusID = Convert.ToInt32(selectedStatus.Key);
-            objTMNew.Amount = decimal.Zero;
-            var COMMAND_EDITABLE = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_EDITABLE"]);
-            if (objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_inputcash", "statusID", objTM.StatusId.Value, COMMAND_EDITABLE, user.CompanyID, user.BranchID, role.RoleID).Value)
-            {
-                var objTmMaster = transactionMasterModel.GetRowByPKK(objTM.TransactionMasterId);
-                objTmMaster.StatusID = Convert.ToInt32(selectedStatus.Key);
-                transactionMasterModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, objTmMaster);
-            }
-            else
-            {
-                transactionMasterModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, objTMNew);
-            }
-
-            //Ingresar el detalle de moneda
-            transactionMasterDenominationModel.DeleteAppPosme(TransactionMasterId.Value);
-            if (FormInputCashDetaiList.Count>0)
-            {
-                foreach (var detail in FormInputCashDetaiList)
+                var objCatalogItemTypeMovement = catalogItemModel.GetRowByCatalogItemId(objTMNew.AreaID.Value);
+                var COMMAND_EDITABLE = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_EDITABLE"]);
+                if (objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_outputcash", "statusID", objTM.StatusId.Value, COMMAND_EDITABLE, user.CompanyID, user.BranchID, role.RoleID).Value)
                 {
-                    var objTMDeno = new TbTransactionMasterDenomination
-                    {
-                        CompanyID = user.CompanyID,
-                        TransactionID = TransactionId.Value,
-                        TransactionMasterID = TransactionMasterId.Value,
-                        IsActive = 1,
-                        ComponentID = objComponentDenomination.ComponentID,
-                        CatalogItemID = detail.TransactionMasterDenominationCatalogItemId,
-                        CurrencyID = detail.TransactionMasterDenominationCurrencyId,
-                        ExchangeRate = detail.TransactionMasterDenominationExchangeRate,
-                        Quantity = (int)detail.TransactionMasterDenominationQuantity,
-                        Reference1 = detail.TransactionMasterDenominationReference,
-                    };
-                    transactionMasterDenominationModel.InsertAppPosme(objTMDeno);
+                    var objTmMaster = transactionMasterModel.GetRowByPKK(objTM.TransactionMasterId);
+                    objTmMaster.StatusID = Convert.ToInt32(selectedStatus.Key);
+                    transactionMasterModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, objTmMaster, context);
                 }
-            }
-
-            //Actualizar Detalle
-            var arrayListTransactionDetailID = txtDetailTransactionDetailID ?? 0;
-            var arrayListTransactionDetailID_ = new List<int> { arrayListTransactionDetailID };
-            var arrayListShare = Convert.ToDecimal(txtDetailAmount.EditValue);
-            var amount = decimal.Zero;
-            transactionMasterDetailModel.DeleteWhereIdNotIn(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, arrayListTransactionDetailID_);
-
-            if (arrayListTransactionDetailID > 0)
-            {
-                amount += arrayListShare;
-                var transactionDetailID = arrayListTransactionDetailID;
-
-                //Nuevo Detalle
-                if (transactionDetailID == 0)
-                {
-                    var objTMD = new TbTransactionMasterDetail
-                    {
-                        CompanyID = objTM.CompanyId,
-                        TransactionID = objTM.TransactionId,
-                        TransactionMasterID = objTM.TransactionMasterId,
-                        ComponentID = ObjComponentShare.ComponentID,
-                        ComponentItemID = 0,
-                        Quantity = decimal.Zero,
-                        UnitaryCost = decimal.Zero,
-                        Cost = decimal.Zero,
-                        UnitaryPrice = decimal.Zero,
-                        UnitaryAmount = decimal.Zero,
-                        Amount = amount,
-                        Discount = 0,
-                        PromotionID = 0,
-                        Reference1 = string.Empty,
-                        Reference2 = string.Empty,
-                        Reference3 = string.Empty,
-                        CatalogStatusID = 0,
-                        InventoryStatusID = 0,
-                        IsActive = true,
-                        QuantityStock = decimal.Zero,
-                        QuantiryStockInTraffic = decimal.Zero,
-                        QuantityStockUnaswared = decimal.Zero,
-                        RemaingStock = decimal.Zero,
-                        ExpirationDate = null,
-                        InventoryWarehouseSourceID = null,
-                        InventoryWarehouseTargetID = null
-                    };
-                    //amount += objTMD.Amount.Value; creo q se va a duplicar el monto con esta lineas
-                    transactionMasterDetailModel.InsertAppPosme(objTMD);
-                }
-                //Editar Detalle
                 else
                 {
-                    var objTMDNew = transactionMasterDetailModel.GetRowByPKK(transactionDetailID);
-                    objTMDNew.Amount = amount;
-                    objTMDNew.Reference1 = string.Empty;
-                    objTMDNew.Reference2 = string.Empty;
-                    objTMDNew.Reference3 = string.Empty;
-                    objTMDNew.ExchangeRateReference = decimal.Zero;
-                    objTMDNew.DescriptionReference = "";
-                    transactionMasterDetailModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, transactionDetailID, objTMDNew);
+                    transactionMasterModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, objTMNew, context);
                 }
-            }
 
-            //Actualizar Transaccion
-            objTMNew.Amount = amount;
-            transactionMasterModel.UpdateAppPosme(user.CompanyID, objTMNew.TransactionID, objTMNew.TransactionMasterID, objTMNew);
-
-            //Abrir caja si el tipo es Apertura
-            var typeInputCash = objTMNew.AreaID;
-            var objCatalogItem = catalogItemModel.GetRowByCatalogItemId(typeInputCash.Value);
-            var objWorkflowStageApply = objInterfazCoreWebWorkflow.GetWorkflowStageApplyFirst("tb_cash_box_session", "statusID", user.CompanyID, user.BranchID, role.RoleID);
-            var objWorkflowStageInit = objInterfazCoreWebWorkflow.GetWorkflowInitStage("tb_cash_box_session", "statusID", user.CompanyID, user.BranchID, role.RoleID);
-            var objListCashUser = cashBoxUserModel.GetRowByCompanyIdAndUserId(user.CompanyID, user.UserID);
-            var cashBoxID = objListCashUser.Count > 0 ? objListCashUser.ElementAt(0).CashBoxID : 0;
-            if (objCatalogItem.Display.Equals("Apertura", StringComparison.InvariantCultureIgnoreCase))
-            {
-                var objCashBoxSession = cashBoxSessionModel.GetRowByUserIdAndStatusId(user.UserID, objWorkflowStageInit.ElementAt(0).WorkflowStageID);
-                if (objCashBoxSession.Count == 0)
+                //Ingresar el detalle de moneda
+                transactionMasterDenominationModel.DeleteAppPosme(TransactionMasterId.Value, context);
+                if (FormInputCashDetaiList.Count > 0)
                 {
-                    var cashBoxSession = new TbCashBoxSession
+                    foreach (var detail in FormInputCashDetaiList)
                     {
-                        CompanyID = user.CompanyID,
-                        BranchID = user.BranchID,
-                        CashBoxID = cashBoxID,
-                        UserID = user.UserID,
-                        IsActive = true,
-                        StatusID = objWorkflowStageInit.ElementAt(0).WorkflowStageID,
-                        StartOn = DateTime.Now,
-                        EndOn = DateTime.MinValue
-                    };
-                    cashBoxSessionModel.InsertAppPosme(cashBoxSession);
+                        var objTMDeno = new TbTransactionMasterDenomination
+                        {
+                            CompanyID = user.CompanyID,
+                            TransactionID = TransactionId.Value,
+                            TransactionMasterID = TransactionMasterId.Value,
+                            IsActive = 1,
+                            ComponentID = objComponentDenomination.ComponentID,
+                            CatalogItemID = detail.TransactionMasterDenominationCatalogItemId,
+                            CurrencyID = detail.TransactionMasterDenominationCurrencyId,
+                            ExchangeRate = detail.TransactionMasterDenominationExchangeRate,
+                            Quantity = (int)detail.TransactionMasterDenominationQuantity,
+                            Reference1 = detail.TransactionMasterDenominationReference,
+                        };
+                        transactionMasterDenominationModel.InsertAppPosme(objTMDeno, context);
+                    }
                 }
+
+                //Actualizar Detalle
+                var arrayListTransactionDetailID = txtDetailTransactionDetailID ?? 0;
+                var arrayListTransactionDetailID_ = new List<int> { arrayListTransactionDetailID };
+                var arrayListShare = Convert.ToDecimal(txtDetailAmount.EditValue);
+                var amount = decimal.Zero;
+                transactionMasterDetailModel.DeleteWhereIdNotIn(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, arrayListTransactionDetailID_, context);
+
+                if (arrayListTransactionDetailID > 0)
+                {
+                    amount += arrayListShare;
+                    var transactionDetailID = arrayListTransactionDetailID;
+
+                    //Nuevo Detalle
+                    if (transactionDetailID == 0)
+                    {
+                        var objTMD = new TbTransactionMasterDetail
+                        {
+                            CompanyID = objTM.CompanyId,
+                            TransactionID = objTM.TransactionId,
+                            TransactionMasterID = objTM.TransactionMasterId,
+                            ComponentID = ObjComponentShare.ComponentID,
+                            ComponentItemID = 0,
+                            Quantity = decimal.Zero,
+                            UnitaryCost = decimal.Zero,
+                            Cost = decimal.Zero,
+                            UnitaryPrice = decimal.Zero,
+                            UnitaryAmount = decimal.Zero,
+                            Amount = amount,
+                            Discount = 0,
+                            PromotionID = 0,
+                            Reference1 = string.Empty,
+                            Reference2 = string.Empty,
+                            Reference3 = string.Empty,
+                            CatalogStatusID = 0,
+                            InventoryStatusID = 0,
+                            IsActive = true,
+                            QuantityStock = decimal.Zero,
+                            QuantiryStockInTraffic = decimal.Zero,
+                            QuantityStockUnaswared = decimal.Zero,
+                            RemaingStock = decimal.Zero,
+                            ExpirationDate = null,
+                            InventoryWarehouseSourceID = null,
+                            InventoryWarehouseTargetID = null
+                        };
+                        //amount += objTMD.Amount.Value; creo q se va a duplicar el monto con esta lineas
+                        transactionMasterDetailModel.InsertAppPosme(objTMD, context);
+                    }
+                    //Editar Detalle
+                    else
+                    {
+                        var objTMDNew = transactionMasterDetailModel.GetRowByPKK(transactionDetailID);
+                        objTMDNew.Amount = amount;
+                        objTMDNew.Reference1 = string.Empty;
+                        objTMDNew.Reference2 = string.Empty;
+                        objTMDNew.Reference3 = string.Empty;
+                        objTMDNew.ExchangeRateReference = decimal.Zero;
+                        objTMDNew.DescriptionReference = "";
+                        transactionMasterDetailModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, transactionDetailID, objTMDNew, context);
+                    }
+                }
+
+                //Actualizar Transaccion
+                objTMNew.Amount = amount;
+                transactionMasterModel.UpdateAppPosme(user.CompanyID, objTMNew.TransactionID, objTMNew.TransactionMasterID, objTMNew, context);
+
+                //Aplicar documento	
+                var COMMAND_APLICABLE = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["COMMAND_APLICABLE"]);
+                if (objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_outputcash",
+                        "statusID", objTMNew.StatusID.Value,
+                        COMMAND_APLICABLE, user.CompanyID,
+                        user.BranchID, role.RoleID).Value
+                    && oldStatusID.Value != objTMNew.StatusID.Value
+                    && objCatalogItemTypeMovement.Name.Equals(movementTypeCierreParameter, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    //Validar registro de caja
+                    var objListTMRegister = transactionMasterModel.GetRowInStatusRegister(user.CompanyID, TransactionMasterId.Value);
+                    if (objListTMRegister.Count > 0)
+                    {
+                        throw new Exception("Caja no puede ser cerrada tiene movimientos registrados, o los anula o los aplica");
+                    }
+                }
+
+                //Cerrar caja si el tipo es Cierre
+                var typeOutputCash = objTMNew.AreaID.Value;
+                var objCatalogItem = catalogItemModel.GetRowByCatalogItemId(typeOutputCash);
+                var objWorkflowStageApply = objInterfazCoreWebWorkflow.GetWorkflowStageApplyFirst("tb_cash_box_session", "statusID", user.CompanyID, user.BranchID, role.RoleID);
+                var objWorkflowStageInit = objInterfazCoreWebWorkflow.GetWorkflowInitStage("tb_cash_box_session", "statusID", user.CompanyID, user.BranchID, role.RoleID);
+                var objListCashUser = cashBoxUserModel.GetRowByCompanyIdAndUserId(user.CompanyID, user.UserID);
+                var cashBoxID = objListCashUser.Count > 0 ? objListCashUser[0].CashBoxID : 0;
+
+                if (objCatalogItem.Display.Equals("Cierre", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    var objCashBoxSession = cashBoxSessionModel.GetRowByUserIdAndStatusId(user.UserID, objWorkflowStageInit[0].WorkflowStageID);
+                    if (objCashBoxSession.Count > 0)
+                    {
+                        var cashBoxSession = objCashBoxSession[0];
+                        cashBoxSession.StatusID = objWorkflowStageApply[0].WorkflowStageID;
+                        cashBoxSession.EndOn = DateTime.Now;
+                        cashBoxSessionModel.UpdateAppPosme(cashBoxSession.CashBoxSessionID, cashBoxSession, context);
+                    }
+                }
+
+                tx.Commit();
+            }
+            catch (Exception e)
+            {
+                tx.Rollback();
+                throw;
             }
         }
 
         public void CommandNew(object? sender, EventArgs e)
         {
             Close();
-            var frm = new FormInputCashEdit(TypeOpenForm.Init, 0, 0, 0)
+            var frm = new FormOutCashEdit(TypeOpenForm.Init, 0, 0, 0)
             {
                 MdiParent = CoreFormList.Principal()
             };
@@ -1018,7 +1033,7 @@ namespace v4posme_window.Views.Box.InputCash
                     btnImprmir.Visible = false;
                     btnNuevo.Visible = false;
                     xtraTabPageArchivos.PageVisible = false;
-                    lblTitulo.Text = @"INGRESO:#00000000";
+                    lblTitulo.Text = @"EGRESO:#00000000";
                     txtExchangeRate.EditValue = ExchangeRate;
                     txtDetailAmount.EditValue = decimal.Zero;
                     txtDetailTransactionDetailID = 0;
@@ -1053,7 +1068,7 @@ namespace v4posme_window.Views.Box.InputCash
                     btnImprmir.Visible = true;
                     btnNuevo.Visible = true;
                     xtraTabPageArchivos.PageVisible = true;
-                    lblTitulo.Text = @$"INGRESO:#{ObjTransactionMaster.TransactionNumber}";
+                    lblTitulo.Text = @$"EGRESO:#{ObjTransactionMaster.TransactionNumber}";
                     txtExchangeRate.EditValue = ExchangeRate;
                     txtDetailTransactionDetailID = ObjTransactionMasterDetail.ElementAt(0).TransactionMasterDetailID;
                     txtDate.DateTime = ObjTransactionMaster.TransactionOn.Value;
@@ -1066,10 +1081,11 @@ namespace v4posme_window.Views.Box.InputCash
                     CoreWebRenderInView.LlenarComboBox(ObjListBranch, txtBranchID, "BranchID", "Name", ObjTransactionMaster.BranchId.Value);
                     CoreWebRenderInView.LlenarComboBox(ObjListCurrency, txtCurrencyID, "CurrencyId", "Simb", ObjTransactionMaster.CurrencyId.Value);
                     CoreWebRenderInView.LlenarComboBox(ObjTipoMovement, txtAreaID, "CatalogItemID", "Name", ObjTransactionMaster.AreaId.Value);
-                    if ( ObjTransactionMaster.PriorityId is not null)
+                    if (ObjTransactionMaster.PriorityId is not null)
                     {
                         CoreWebRenderInView.LlenarComboBox(ObjSubTipoMovement, txtPriorityID, "CatalogItemID", "Name", ObjTransactionMaster.PriorityId.Value);
                     }
+
                     if (ObjTransactionMasterDenomination.Count > 0)
                     {
                         FormInputCashDetaiList.Clear();
@@ -1088,6 +1104,7 @@ namespace v4posme_window.Views.Box.InputCash
                             FormInputCashDetaiList.Add(dto);
                         }
                     }
+
                     UpdatePantalla();
                     txtDetailAmount.Text = ObjTransactionMasterDetail.ElementAt(0).Amount.Value.ToString("F2");
                     gridControlArchivos.DataSource = null;
@@ -1135,7 +1152,7 @@ namespace v4posme_window.Views.Box.InputCash
         {
             var selectedArea = txtAreaID.SelectedItem as ComboBoxItem;
             txtPriorityID.Text = "";
-            ObjSubTipoMovement = appCatalogApi.GetCatalogItemByParentCatalogItemId("tb_transaction_master_inputcash", "priorityID", Convert.ToInt32(selectedArea.Key));
+            ObjSubTipoMovement = appCatalogApi.GetCatalogItemByParentCatalogItemId("tb_transaction_master_outputcash", "priorityID", Convert.ToInt32(selectedArea.Key));
             var catalogItemId = ObjSubTipoMovement.Count > 0 ? ObjSubTipoMovement.ElementAt(0).CatalogItemID : 0;
             CoreWebRenderInView.LlenarComboBox(ObjSubTipoMovement, txtPriorityID, "CatalogItemID", "Name", catalogItemId);
         }
@@ -1144,7 +1161,7 @@ namespace v4posme_window.Views.Box.InputCash
         {
             var totalTemp = 0m;
             txtDetailAmount.Text = @"0.0";
-            if (FormInputCashDetaiList.Count>0)
+            if (FormInputCashDetaiList.Count > 0)
             {
                 totalTemp += FormInputCashDetaiList.Sum(data => (data.TransactionMasterDenominationQuantity * Convert.ToDecimal(data.TransactionMasterDenominationReference)));
 
@@ -1161,7 +1178,7 @@ namespace v4posme_window.Views.Box.InputCash
                 return;
             }
 
-            if (selectedArea.Value.ToString().Equals("Apertura", StringComparison.InvariantCultureIgnoreCase))
+            if (selectedArea.Value.ToString().Equals("Cierre", StringComparison.InvariantCultureIgnoreCase))
             {
                 txtDetailAmount.Properties.ReadOnly = true;
                 if (FormInputCashDetaiList.Count > 0)
@@ -1174,6 +1191,7 @@ namespace v4posme_window.Views.Box.InputCash
                             detailDto.TransactionMasterDenominationQuantity = decimal.Zero;
                         }
                     }
+
                     var cashDetailDtos = FormInputCashDetaiList.Where(item => item.TransactionMasterDenominationCurrencyId == Convert.ToInt32(selectedMoneda.Key)).ToList();
                     bindingSourceInputCashDetailDto.DataSource = cashDetailDtos;
                 }
@@ -1196,7 +1214,7 @@ namespace v4posme_window.Views.Box.InputCash
 
         private void BtnEliminarOnClick(object? sender, EventArgs e)
         {
-            if (XtraMessageBox.Show("Eliminar", "¿Seguro desea eliminar el abono seleccionado? Esta acción no se puede revertir.", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
+            if (XtraMessageBox.Show("¿Seguro desea eliminar el abono seleccionado? Esta acción no se puede revertir.", "Eliminar", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
             {
                 return;
             }
@@ -1292,5 +1310,6 @@ namespace v4posme_window.Views.Box.InputCash
         }
 
         #endregion
+
     }
 }

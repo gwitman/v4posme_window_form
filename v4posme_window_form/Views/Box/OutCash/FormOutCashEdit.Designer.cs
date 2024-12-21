@@ -1,6 +1,8 @@
-﻿namespace v4posme_window.Views.Box.InputCash
+﻿using v4posme_window.Views.Box.InputCash;
+
+namespace v4posme_window.Views.Box.OutCash
 {
-    partial class FormInputCashEdit
+    partial class FormOutCashEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +31,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInputCashEdit));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormOutCashEdit));
             xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             xtraTabPageInformacion = new DevExpress.XtraTab.XtraTabPage();
             layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
@@ -140,7 +142,7 @@
             xtraTabControl1.Location = new Point(0, 100);
             xtraTabControl1.Name = "xtraTabControl1";
             xtraTabControl1.SelectedTabPage = xtraTabPageInformacion;
-            xtraTabControl1.Size = new Size(1067, 537);
+            xtraTabControl1.Size = new Size(1067, 533);
             xtraTabControl1.TabIndex = 76;
             xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPageInformacion, xtraTabPageReferencias, xtraTabPageComentario, xtraTabPageArchivos });
             // 
@@ -149,7 +151,7 @@
             xtraTabPageInformacion.Controls.Add(layoutControl2);
             xtraTabPageInformacion.Controls.Add(layoutControl1);
             xtraTabPageInformacion.Name = "xtraTabPageInformacion";
-            xtraTabPageInformacion.Size = new Size(1065, 506);
+            xtraTabPageInformacion.Size = new Size(1065, 502);
             xtraTabPageInformacion.Text = "Información";
             // 
             // layoutControl2
@@ -168,6 +170,7 @@
             // 
             // txtBranchID
             // 
+            txtBranchID.EnterMoveNextControl = true;
             txtBranchID.Location = new Point(79, 16);
             txtBranchID.Name = "txtBranchID";
             txtBranchID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -177,6 +180,7 @@
             // 
             // txtCurrencyID
             // 
+            txtCurrencyID.EnterMoveNextControl = true;
             txtCurrencyID.Location = new Point(79, 50);
             txtCurrencyID.Name = "txtCurrencyID";
             txtCurrencyID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -187,6 +191,7 @@
             // 
             // txtAreaID
             // 
+            txtAreaID.EnterMoveNextControl = true;
             txtAreaID.Location = new Point(79, 84);
             txtAreaID.Name = "txtAreaID";
             txtAreaID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -197,6 +202,7 @@
             // 
             // txtPriorityID
             // 
+            txtPriorityID.EnterMoveNextControl = true;
             txtPriorityID.Location = new Point(79, 118);
             txtPriorityID.Name = "txtPriorityID";
             txtPriorityID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -206,6 +212,7 @@
             // 
             // txtDetailAmount
             // 
+            txtDetailAmount.EnterMoveNextControl = true;
             txtDetailAmount.Location = new Point(79, 152);
             txtDetailAmount.Name = "txtDetailAmount";
             txtDetailAmount.Size = new Size(405, 28);
@@ -285,6 +292,7 @@
             // txtDate
             // 
             txtDate.EditValue = null;
+            txtDate.EnterMoveNextControl = true;
             txtDate.Location = new Point(93, 16);
             txtDate.Name = "txtDate";
             txtDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -295,6 +303,7 @@
             // 
             // txtIsApplied
             // 
+            txtIsApplied.EnterMoveNextControl = true;
             txtIsApplied.Location = new Point(96, 53);
             txtIsApplied.Name = "txtIsApplied";
             txtIsApplied.Properties.Caption = "";
@@ -304,6 +313,7 @@
             // 
             // txtExchangeRate
             // 
+            txtExchangeRate.EnterMoveNextControl = true;
             txtExchangeRate.Location = new Point(93, 84);
             txtExchangeRate.Name = "txtExchangeRate";
             txtExchangeRate.Size = new Size(391, 28);
@@ -312,6 +322,7 @@
             // 
             // txtStatusID
             // 
+            txtStatusID.EnterMoveNextControl = true;
             txtStatusID.Location = new Point(93, 118);
             txtStatusID.Name = "txtStatusID";
             txtStatusID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -321,6 +332,7 @@
             // 
             // txtDetailReference1
             // 
+            txtDetailReference1.EnterMoveNextControl = true;
             txtDetailReference1.Location = new Point(93, 152);
             txtDetailReference1.Name = "txtDetailReference1";
             txtDetailReference1.Size = new Size(391, 28);
@@ -329,6 +341,7 @@
             // 
             // txtDetailReference2
             // 
+            txtDetailReference2.EnterMoveNextControl = true;
             txtDetailReference2.Location = new Point(93, 186);
             txtDetailReference2.Name = "txtDetailReference2";
             txtDetailReference2.Size = new Size(391, 28);
@@ -337,6 +350,7 @@
             // 
             // txtDetailReference3
             // 
+            txtDetailReference3.EnterMoveNextControl = true;
             txtDetailReference3.Location = new Point(93, 220);
             txtDetailReference3.Name = "txtDetailReference3";
             txtDetailReference3.Size = new Size(391, 28);
@@ -434,7 +448,7 @@
             // 
             xtraTabPageReferencias.Controls.Add(gridControlReferencias);
             xtraTabPageReferencias.Name = "xtraTabPageReferencias";
-            xtraTabPageReferencias.Size = new Size(1065, 506);
+            xtraTabPageReferencias.Size = new Size(1065, 502);
             xtraTabPageReferencias.Text = "Referencias";
             // 
             // gridControlReferencias
@@ -444,7 +458,7 @@
             gridControlReferencias.Location = new Point(11, 32);
             gridControlReferencias.MainView = gridViewTransactionMaster;
             gridControlReferencias.Name = "gridControlReferencias";
-            gridControlReferencias.Size = new Size(1043, 445);
+            gridControlReferencias.Size = new Size(1043, 437);
             gridControlReferencias.TabIndex = 0;
             gridControlReferencias.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewTransactionMaster });
             // 
@@ -484,7 +498,7 @@
             xtraTabPageComentario.Controls.Add(txtNote);
             xtraTabPageComentario.Controls.Add(labelControl1);
             xtraTabPageComentario.Name = "xtraTabPageComentario";
-            xtraTabPageComentario.Size = new Size(1065, 506);
+            xtraTabPageComentario.Size = new Size(1065, 510);
             xtraTabPageComentario.Text = "Comentario";
             // 
             // txtNote
@@ -507,7 +521,7 @@
             xtraTabPageArchivos.Controls.Add(btnAgregarArchivo);
             xtraTabPageArchivos.Controls.Add(gridControlArchivos);
             xtraTabPageArchivos.Name = "xtraTabPageArchivos";
-            xtraTabPageArchivos.Size = new Size(1065, 506);
+            xtraTabPageArchivos.Size = new Size(1065, 510);
             xtraTabPageArchivos.Text = "Archivos";
             // 
             // btnAgregarArchivo
@@ -542,16 +556,16 @@
             gridViewArchivos.Name = "gridViewArchivos";
             gridViewArchivos.OptionsView.ShowGroupPanel = false;
             // 
-            // FormInputCashEdit
+            // FormOutCashEdit
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1067, 637);
+            ClientSize = new Size(1067, 633);
             Controls.Add(xtraTabControl1);
-            IconOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("FormInputCashEdit.IconOptions.SvgImage");
-            Name = "FormInputCashEdit";
-            Text = "Agregar Ingreso a Caja";
-            Load += FormInputCashEdit_Load;
+            IconOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("FormOutCashEdit.IconOptions.SvgImage");
+            Name = "FormOutCashEdit";
+            Text = "Agregar Egreso a Caja";
+            Load += FormOutCashEdit_Load;
             Controls.SetChildIndex(xtraTabControl1, 0);
             Controls.SetChildIndex(progressPanel, 0);
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).EndInit();

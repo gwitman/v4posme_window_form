@@ -5,9 +5,9 @@ namespace v4posme_library.Libraries.CustomModels;
 
 public interface ITransactionMasterDetailModel
 {
-    int InsertAppPosme(TbTransactionMasterDetail data);
+    int InsertAppPosme(TbTransactionMasterDetail data, DataContext? dataContext = null);
 
-    void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, int transactionMasterDetailId, TbTransactionMasterDetail data);
+    void UpdateAppPosme(int companyId, int transactionId, int transactionMasterId, int transactionMasterDetailId, TbTransactionMasterDetail data, DataContext? dataContext = null);
 
     TbTransactionMasterDetailDto GetRowByPk(int companyId, int transactionId, int transactionMasterId, int transactionMasterDetailId, int componentId = 33);
 
@@ -25,7 +25,7 @@ public interface ITransactionMasterDetailModel
 
     void DeleteWhereTm(int companyId, int transactionId, int transactionMasterId);
 
-    void DeleteWhereIdNotIn(int companyId, int transactionId, int transactionMasterId, List<int> listTmdId);
+    void DeleteWhereIdNotIn(int companyId, int transactionId, int transactionMasterId, List<int> listTmdId, DataContext? dataContext=null);
 
     List<TbTransactionMasterDetailDto> GlobalProGetRowBySalesByEmployeerMonthOnlySales(int companyId, DateTime dateFirst,
         DateTime dateLast);

@@ -6,21 +6,30 @@ namespace v4posme_library.Libraries.CustomModels;
 
 class TransactionMasterDenominationModel : ITransactionMasterDenominationModel
 {
-    public int DeleteAppPosme(int transactionMasterId)
+    public int DeleteAppPosme(int transactionMasterId, DataContext? dataContext=null)
     {
-        using var context = new DataContext();
-        var datos = context.TbTransactionMasterDenominations
+        if (dataContext==null)
+        {
+            using var context = new DataContext();
+            return DeleteAppPosme(transactionMasterId, context);
+        }
+        
+        var datos = dataContext.TbTransactionMasterDenominations
             .Where(denomination => denomination.TransactionMasterID == transactionMasterId)
             .ToList();
-        context.RemoveRange(datos);
-        return context.SaveChanges();
+        dataContext.RemoveRange(datos);
+        return dataContext.SaveChanges();
     }
 
-    public int InsertAppPosme(TbTransactionMasterDenomination data)
+    public int InsertAppPosme(TbTransactionMasterDenomination data, DataContext? dataContext = null)
     {
-        using var context = new DataContext();
-        var add = context.Add(data);
-        context.SaveChanges();
+        if (dataContext==null)
+        {
+            using var context = new DataContext();
+            return InsertAppPosme(data, context);
+        }
+        var add = dataContext.Add(data);
+        dataContext.SaveChanges();
         return add.Entity.TransactionMasterDenominationID;
     }
 
