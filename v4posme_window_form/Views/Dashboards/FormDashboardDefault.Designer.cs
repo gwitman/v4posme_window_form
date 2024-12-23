@@ -34,10 +34,6 @@ namespace v4posme_window.Views.Dashboards
             accordionControl1 = new AccordionControl();
             accordionContentContainer2 = new AccordionContentContainer();
             picLogo = new PictureBox();
-            accordionContentContainer10 = new AccordionContentContainer();
-            chartControlPagosMensuales = new DevExpress.XtraCharts.ChartControl();
-            accordionContentContainer6 = new AccordionContentContainer();
-            chartControlVentasContadoMensuales = new DevExpress.XtraCharts.ChartControl();
             accordionContentContainer7 = new AccordionContentContainer();
             tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
             lblCORE_CUST_PRICE = new DevExpress.XtraEditors.LabelControl();
@@ -58,6 +54,10 @@ namespace v4posme_window.Views.Dashboards
             labelControl5 = new DevExpress.XtraEditors.LabelControl();
             labelControl4 = new DevExpress.XtraEditors.LabelControl();
             labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            accordionContentContainer6 = new AccordionContentContainer();
+            chartControlVentasContadoMensuales = new DevExpress.XtraCharts.ChartControl();
+            accordionContentContainer10 = new AccordionContentContainer();
+            chartControlPagosMensuales = new DevExpress.XtraCharts.ChartControl();
             accordionControlElementCompany = new AccordionControlElement();
             accordionControlElement6 = new AccordionControlElement();
             accordionControlElement5 = new AccordionControlElement();
@@ -101,13 +101,13 @@ namespace v4posme_window.Views.Dashboards
             accordionControl1.SuspendLayout();
             accordionContentContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
-            accordionContentContainer10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)chartControlPagosMensuales).BeginInit();
-            accordionContentContainer6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)chartControlVentasContadoMensuales).BeginInit();
             accordionContentContainer7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)tablePanel2).BeginInit();
             tablePanel2.SuspendLayout();
+            accordionContentContainer6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)chartControlVentasContadoMensuales).BeginInit();
+            accordionContentContainer10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)chartControlPagosMensuales).BeginInit();
             ((System.ComponentModel.ISupportInitialize)accordionControl2).BeginInit();
             accordionControl2.SuspendLayout();
             accordionContentContainer11.SuspendLayout();
@@ -129,15 +129,15 @@ namespace v4posme_window.Views.Dashboards
             accordionControl1.Appearance.AccordionControl.BackColor = Color.White;
             accordionControl1.Appearance.AccordionControl.Options.UseBackColor = true;
             accordionControl1.Controls.Add(accordionContentContainer2);
-            accordionControl1.Controls.Add(accordionContentContainer10);
-            accordionControl1.Controls.Add(accordionContentContainer6);
             accordionControl1.Controls.Add(accordionContentContainer7);
+            accordionControl1.Controls.Add(accordionContentContainer6);
+            accordionControl1.Controls.Add(accordionContentContainer10);
             accordionControl1.Dock = DockStyle.Fill;
             accordionControl1.Elements.AddRange(new AccordionControlElement[] { accordionControlElementCompany, accordionControlElement6, accordionControlElement5, accordionControlElement10 });
             accordionControl1.ExpandElementMode = ExpandElementMode.Multiple;
             accordionControl1.Location = new Point(2, 2);
             accordionControl1.Name = "accordionControl1";
-            accordionControl1.Size = new Size(486, 820);
+            accordionControl1.Size = new Size(486, 808);
             accordionControl1.TabIndex = 4;
             // 
             // accordionContentContainer2
@@ -145,7 +145,7 @@ namespace v4posme_window.Views.Dashboards
             accordionContentContainer2.Controls.Add(picLogo);
             accordionContentContainer2.MaximumSize = new Size(0, 150);
             accordionContentContainer2.Name = "accordionContentContainer2";
-            accordionContentContainer2.Size = new Size(453, 150);
+            accordionContentContainer2.Size = new Size(453, 100);
             accordionContentContainer2.SizeMode = AccordionContentContainerSizeMode.Stretch;
             accordionContentContainer2.TabIndex = 3;
             // 
@@ -154,48 +154,17 @@ namespace v4posme_window.Views.Dashboards
             picLogo.Dock = DockStyle.Fill;
             picLogo.Location = new Point(0, 0);
             picLogo.Name = "picLogo";
-            picLogo.Size = new Size(453, 150);
+            picLogo.Size = new Size(453, 100);
             picLogo.SizeMode = PictureBoxSizeMode.Zoom;
             picLogo.TabIndex = 0;
             picLogo.TabStop = false;
-            // 
-            // accordionContentContainer10
-            // 
-            accordionContentContainer10.Controls.Add(chartControlPagosMensuales);
-            accordionContentContainer10.Name = "accordionContentContainer10";
-            accordionContentContainer10.Size = new Size(453, 146);
-            accordionContentContainer10.TabIndex = 10;
-            // 
-            // chartControlPagosMensuales
-            // 
-            chartControlPagosMensuales.Dock = DockStyle.Fill;
-            chartControlPagosMensuales.Location = new Point(0, 0);
-            chartControlPagosMensuales.Name = "chartControlPagosMensuales";
-            chartControlPagosMensuales.Size = new Size(453, 146);
-            chartControlPagosMensuales.TabIndex = 0;
-            // 
-            // accordionContentContainer6
-            // 
-            accordionContentContainer6.Controls.Add(chartControlVentasContadoMensuales);
-            accordionContentContainer6.Name = "accordionContentContainer6";
-            accordionContentContainer6.Size = new Size(453, 165);
-            accordionContentContainer6.TabIndex = 8;
-            // 
-            // chartControlVentasContadoMensuales
-            // 
-            chartControlVentasContadoMensuales.Dock = DockStyle.Fill;
-            chartControlVentasContadoMensuales.Location = new Point(0, 0);
-            chartControlVentasContadoMensuales.Name = "chartControlVentasContadoMensuales";
-            chartControlVentasContadoMensuales.Size = new Size(453, 165);
-            chartControlVentasContadoMensuales.TabIndex = 0;
             // 
             // accordionContentContainer7
             // 
             accordionContentContainer7.Controls.Add(tablePanel2);
             accordionContentContainer7.MaximumSize = new Size(0, 265);
             accordionContentContainer7.Name = "accordionContentContainer7";
-            accordionContentContainer7.Size = new Size(453, 191);
-            accordionContentContainer7.SizeMode = AccordionContentContainerSizeMode.Stretch;
+            accordionContentContainer7.Size = new Size(453, 265);
             accordionContentContainer7.TabIndex = 6;
             // 
             // tablePanel2
@@ -224,27 +193,27 @@ namespace v4posme_window.Views.Dashboards
             tablePanel2.MaximumSize = new Size(0, 265);
             tablePanel2.Name = "tablePanel2";
             tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F) });
-            tablePanel2.Size = new Size(453, 191);
+            tablePanel2.Size = new Size(453, 265);
             tablePanel2.TabIndex = 4;
             tablePanel2.UseSkinIndents = true;
             // 
             // lblCORE_CUST_PRICE
             // 
             tablePanel2.SetColumn(lblCORE_CUST_PRICE, 1);
-            lblCORE_CUST_PRICE.Location = new Point(0, 0);
+            lblCORE_CUST_PRICE.Location = new Point(252, 229);
             lblCORE_CUST_PRICE.Name = "lblCORE_CUST_PRICE";
             tablePanel2.SetRow(lblCORE_CUST_PRICE, 8);
-            lblCORE_CUST_PRICE.Size = new Size(0, 0);
+            lblCORE_CUST_PRICE.Size = new Size(69, 13);
             lblCORE_CUST_PRICE.TabIndex = 17;
             lblCORE_CUST_PRICE.Text = "labelControl20";
             // 
             // labelControl19
             // 
             tablePanel2.SetColumn(labelControl19, 0);
-            labelControl19.Location = new Point(0, 0);
+            labelControl19.Location = new Point(17, 229);
             labelControl19.Name = "labelControl19";
             tablePanel2.SetRow(labelControl19, 8);
-            labelControl19.Size = new Size(0, 0);
+            labelControl19.Size = new Size(96, 13);
             labelControl19.TabIndex = 16;
             labelControl19.Text = "CORE_CUST_PRICE";
             // 
@@ -426,8 +395,42 @@ namespace v4posme_window.Views.Dashboards
             labelControl3.TabIndex = 0;
             labelControl3.Text = "Llave";
             // 
+            // accordionContentContainer6
+            // 
+            accordionContentContainer6.Controls.Add(chartControlVentasContadoMensuales);
+            accordionContentContainer6.Name = "accordionContentContainer6";
+            accordionContentContainer6.Size = new Size(453, 165);
+            accordionContentContainer6.TabIndex = 8;
+            // 
+            // chartControlVentasContadoMensuales
+            // 
+            chartControlVentasContadoMensuales.Dock = DockStyle.Fill;
+            chartControlVentasContadoMensuales.Location = new Point(0, 0);
+            chartControlVentasContadoMensuales.Name = "chartControlVentasContadoMensuales";
+            chartControlVentasContadoMensuales.Size = new Size(453, 165);
+            chartControlVentasContadoMensuales.TabIndex = 0;
+            // 
+            // accordionContentContainer10
+            // 
+            accordionContentContainer10.Controls.Add(chartControlPagosMensuales);
+            accordionContentContainer10.Name = "accordionContentContainer10";
+            accordionContentContainer10.Size = new Size(453, 146);
+            accordionContentContainer10.TabIndex = 10;
+            // 
+            // chartControlPagosMensuales
+            // 
+            chartControlPagosMensuales.Dock = DockStyle.Fill;
+            chartControlPagosMensuales.Location = new Point(0, 0);
+            chartControlPagosMensuales.Name = "chartControlPagosMensuales";
+            chartControlPagosMensuales.Size = new Size(453, 146);
+            chartControlPagosMensuales.TabIndex = 0;
+            // 
             // accordionControlElementCompany
             // 
+            accordionControlElementCompany.Appearance.Default.Font = new Font("Tahoma", 12F);
+            accordionControlElementCompany.Appearance.Default.Options.UseFont = true;
+            accordionControlElementCompany.Appearance.Normal.Font = new Font("Tahoma", 12F);
+            accordionControlElementCompany.Appearance.Normal.Options.UseFont = true;
             accordionControlElementCompany.ContentContainer = accordionContentContainer2;
             accordionControlElementCompany.Expanded = true;
             accordionControlElementCompany.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("accordionControlElementCompany.ImageOptions.SvgImage");
@@ -438,6 +441,10 @@ namespace v4posme_window.Views.Dashboards
             // 
             // accordionControlElement6
             // 
+            accordionControlElement6.Appearance.Default.Font = new Font("Tahoma", 12F);
+            accordionControlElement6.Appearance.Default.Options.UseFont = true;
+            accordionControlElement6.Appearance.Normal.Font = new Font("Tahoma", 12F);
+            accordionControlElement6.Appearance.Normal.Options.UseFont = true;
             accordionControlElement6.ContentContainer = accordionContentContainer7;
             accordionControlElement6.Expanded = true;
             accordionControlElement6.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("accordionControlElement6.ImageOptions.SvgImage");
@@ -448,6 +455,10 @@ namespace v4posme_window.Views.Dashboards
             // 
             // accordionControlElement5
             // 
+            accordionControlElement5.Appearance.Default.Font = new Font("Tahoma", 12F);
+            accordionControlElement5.Appearance.Default.Options.UseFont = true;
+            accordionControlElement5.Appearance.Normal.Font = new Font("Tahoma", 12F);
+            accordionControlElement5.Appearance.Normal.Options.UseFont = true;
             accordionControlElement5.ContentContainer = accordionContentContainer6;
             accordionControlElement5.Expanded = true;
             accordionControlElement5.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("accordionControlElement5.ImageOptions.SvgImage");
@@ -458,6 +469,10 @@ namespace v4posme_window.Views.Dashboards
             // 
             // accordionControlElement10
             // 
+            accordionControlElement10.Appearance.Default.Font = new Font("Tahoma", 12F);
+            accordionControlElement10.Appearance.Default.Options.UseFont = true;
+            accordionControlElement10.Appearance.Normal.Font = new Font("Tahoma", 12F);
+            accordionControlElement10.Appearance.Normal.Options.UseFont = true;
             accordionControlElement10.ContentContainer = accordionContentContainer10;
             accordionControlElement10.Expanded = true;
             accordionControlElement10.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("accordionControlElement10.ImageOptions.SvgImage");
@@ -507,7 +522,7 @@ namespace v4posme_window.Views.Dashboards
             accordionControl2.ExpandElementMode = ExpandElementMode.Multiple;
             accordionControl2.Location = new Point(2, 2);
             accordionControl2.Name = "accordionControl2";
-            accordionControl2.Size = new Size(547, 820);
+            accordionControl2.Size = new Size(547, 808);
             accordionControl2.TabIndex = 6;
             // 
             // accordionContentContainer11
@@ -528,11 +543,13 @@ namespace v4posme_window.Views.Dashboards
             // 
             // labelControl14
             // 
-            labelControl14.Appearance.Font = new Font("Tahoma", 12F);
+            labelControl14.Appearance.Font = new Font("Tahoma", 12F, FontStyle.Bold);
+            labelControl14.Appearance.ForeColor = Color.Red;
             labelControl14.Appearance.Options.UseFont = true;
+            labelControl14.Appearance.Options.UseForeColor = true;
             labelControl14.Location = new Point(50, 23);
             labelControl14.Name = "labelControl14";
-            labelControl14.Size = new Size(142, 19);
+            labelControl14.Size = new Size(158, 19);
             labelControl14.TabIndex = 0;
             labelControl14.Text = "BAC $ 366-620-045";
             // 
@@ -547,11 +564,13 @@ namespace v4posme_window.Views.Dashboards
             // 
             // lblEmail
             // 
-            lblEmail.Appearance.Font = new Font("Tahoma", 12F);
+            lblEmail.Appearance.Font = new Font("Tahoma", 12F, FontStyle.Bold);
+            lblEmail.Appearance.ForeColor = Color.Blue;
             lblEmail.Appearance.Options.UseFont = true;
+            lblEmail.Appearance.Options.UseForeColor = true;
             lblEmail.Location = new Point(77, 46);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(103, 19);
+            lblEmail.Size = new Size(120, 19);
             lblEmail.TabIndex = 3;
             lblEmail.Text = "labelControl18";
             // 
@@ -565,11 +584,13 @@ namespace v4posme_window.Views.Dashboards
             // 
             // lblNickname
             // 
-            lblNickname.Appearance.Font = new Font("Tahoma", 12F);
+            lblNickname.Appearance.Font = new Font("Tahoma", 12F, FontStyle.Bold);
+            lblNickname.Appearance.ForeColor = Color.Blue;
             lblNickname.Appearance.Options.UseFont = true;
+            lblNickname.Appearance.Options.UseForeColor = true;
             lblNickname.Location = new Point(77, 21);
             lblNickname.Name = "lblNickname";
-            lblNickname.Size = new Size(103, 19);
+            lblNickname.Size = new Size(120, 19);
             lblNickname.TabIndex = 0;
             lblNickname.Text = "labelControl16";
             // 
@@ -690,16 +711,22 @@ namespace v4posme_window.Views.Dashboards
             // 
             // labelControl12
             // 
-            labelControl12.Appearance.Font = new Font("Tahoma", 12F);
+            labelControl12.Appearance.Font = new Font("Tahoma", 12F, FontStyle.Bold);
+            labelControl12.Appearance.ForeColor = Color.Red;
             labelControl12.Appearance.Options.UseFont = true;
+            labelControl12.Appearance.Options.UseForeColor = true;
             labelControl12.Location = new Point(38, 28);
             labelControl12.Name = "labelControl12";
-            labelControl12.Size = new Size(196, 19);
+            labelControl12.Size = new Size(221, 19);
             labelControl12.TabIndex = 0;
             labelControl12.Text = "Soporte Tenico: 8712-5827";
             // 
             // accordionControlElement2
             // 
+            accordionControlElement2.Appearance.Default.Font = new Font("Tahoma", 12F);
+            accordionControlElement2.Appearance.Default.Options.UseFont = true;
+            accordionControlElement2.Appearance.Normal.Font = new Font("Tahoma", 12F);
+            accordionControlElement2.Appearance.Normal.Options.UseFont = true;
             accordionControlElement2.ContentContainer = accordionContentContainer4;
             accordionControlElement2.Expanded = true;
             accordionControlElement2.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("accordionControlElement2.ImageOptions.SvgImage");
@@ -710,6 +737,10 @@ namespace v4posme_window.Views.Dashboards
             // 
             // accordionControlElement4
             // 
+            accordionControlElement4.Appearance.Default.Font = new Font("Tahoma", 12F);
+            accordionControlElement4.Appearance.Default.Options.UseFont = true;
+            accordionControlElement4.Appearance.Normal.Font = new Font("Tahoma", 12F);
+            accordionControlElement4.Appearance.Normal.Options.UseFont = true;
             accordionControlElement4.ContentContainer = accordionContentContainer5;
             accordionControlElement4.Expanded = true;
             accordionControlElement4.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("accordionControlElement4.ImageOptions.SvgImage");
@@ -720,6 +751,10 @@ namespace v4posme_window.Views.Dashboards
             // 
             // accordionControlElement8
             // 
+            accordionControlElement8.Appearance.Default.Font = new Font("Tahoma", 12F);
+            accordionControlElement8.Appearance.Default.Options.UseFont = true;
+            accordionControlElement8.Appearance.Normal.Font = new Font("Tahoma", 12F);
+            accordionControlElement8.Appearance.Normal.Options.UseFont = true;
             accordionControlElement8.ContentContainer = accordionContentContainer8;
             accordionControlElement8.Expanded = true;
             accordionControlElement8.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("accordionControlElement8.ImageOptions.SvgImage");
@@ -730,6 +765,10 @@ namespace v4posme_window.Views.Dashboards
             // 
             // accordionControlElement9
             // 
+            accordionControlElement9.Appearance.Default.Font = new Font("Tahoma", 12F);
+            accordionControlElement9.Appearance.Default.Options.UseFont = true;
+            accordionControlElement9.Appearance.Normal.Font = new Font("Tahoma", 12F);
+            accordionControlElement9.Appearance.Normal.Options.UseFont = true;
             accordionControlElement9.ContentContainer = accordionContentContainer9;
             accordionControlElement9.Expanded = true;
             accordionControlElement9.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("accordionControlElement9.ImageOptions.SvgImage");
@@ -740,6 +779,10 @@ namespace v4posme_window.Views.Dashboards
             // 
             // accordionControlElement11
             // 
+            accordionControlElement11.Appearance.Default.Font = new Font("Tahoma", 12F);
+            accordionControlElement11.Appearance.Default.Options.UseFont = true;
+            accordionControlElement11.Appearance.Normal.Font = new Font("Tahoma", 12F);
+            accordionControlElement11.Appearance.Normal.Options.UseFont = true;
             accordionControlElement11.ContentContainer = accordionContentContainer11;
             accordionControlElement11.Expanded = true;
             accordionControlElement11.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("accordionControlElement11.ImageOptions.SvgImage");
@@ -750,6 +793,10 @@ namespace v4posme_window.Views.Dashboards
             // 
             // accordionControlElement12
             // 
+            accordionControlElement12.Appearance.Default.Font = new Font("Tahoma", 12F);
+            accordionControlElement12.Appearance.Default.Options.UseFont = true;
+            accordionControlElement12.Appearance.Normal.Font = new Font("Tahoma", 12F);
+            accordionControlElement12.Appearance.Normal.Options.UseFont = true;
             accordionControlElement12.ContentContainer = accordionContentContainer12;
             accordionControlElement12.Expanded = true;
             accordionControlElement12.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("accordionControlElement12.ImageOptions.SvgImage");
@@ -766,7 +813,7 @@ namespace v4posme_window.Views.Dashboards
             panelControl1.Dock = DockStyle.Left;
             panelControl1.Location = new Point(0, 0);
             panelControl1.Name = "panelControl1";
-            panelControl1.Size = new Size(490, 824);
+            panelControl1.Size = new Size(490, 812);
             panelControl1.TabIndex = 7;
             // 
             // panelControl2
@@ -777,7 +824,7 @@ namespace v4posme_window.Views.Dashboards
             panelControl2.Dock = DockStyle.Fill;
             panelControl2.Location = new Point(490, 0);
             panelControl2.Name = "panelControl2";
-            panelControl2.Size = new Size(551, 824);
+            panelControl2.Size = new Size(551, 812);
             panelControl2.TabIndex = 8;
             // 
             // accordionContentContainer1
@@ -812,7 +859,7 @@ namespace v4posme_window.Views.Dashboards
             Appearance.Options.UseBackColor = true;
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1041, 824);
+            ClientSize = new Size(1041, 812);
             Controls.Add(progressPanel);
             Controls.Add(panelControl2);
             Controls.Add(panelControl1);
@@ -827,14 +874,14 @@ namespace v4posme_window.Views.Dashboards
             accordionControl1.ResumeLayout(false);
             accordionContentContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
-            accordionContentContainer10.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)chartControlPagosMensuales).EndInit();
-            accordionContentContainer6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)chartControlVentasContadoMensuales).EndInit();
             accordionContentContainer7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)tablePanel2).EndInit();
             tablePanel2.ResumeLayout(false);
             tablePanel2.PerformLayout();
+            accordionContentContainer6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)chartControlVentasContadoMensuales).EndInit();
+            accordionContentContainer10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)chartControlPagosMensuales).EndInit();
             ((System.ComponentModel.ISupportInitialize)accordionControl2).EndInit();
             accordionControl2.ResumeLayout(false);
             accordionContentContainer11.ResumeLayout(false);
