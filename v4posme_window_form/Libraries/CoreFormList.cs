@@ -8,6 +8,7 @@ using v4posme_window.Views.Box.Share;
 using v4posme_window.Views.Box.ShareCapital;
 using v4posme_window.Views.CXC.Customer;
 using v4posme_window.Views.CXC.Report;
+using v4posme_window.Views.Dashboards;
 using v4posme_window.Views.Inventory.Inputunpost;
 using v4posme_window.Views.Inventory.Product;
 using v4posme_window.Views.Inventory.Report;
@@ -22,7 +23,7 @@ public static class CoreFormList
 
     public static Form GetFormulario(string path) => path switch
     {
-        "core_dashboards" => new FormInvoiceBillingList(),
+        "core_dashboards" => new FormDashboardDefault(),
         "app_cxc_customer/index.aspx" => new FormCustomerList(),
         "app_inventory_item/index.aspx" => new FormInventoryItemList(),
         "app_invoice_billing/index.aspx" => new FormInvoiceBillingList(),

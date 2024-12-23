@@ -71,4 +71,10 @@ public class TbTransactionMasterDetailDto
     public string? TransactionNumber { get; set; }
     public string? CustomerNumber { get; set; }
     public DateTime? CreatedOn { get; set; }
+
+    public int? Dia { get; set; }
+    public int? Mes { get; set; }
+
+    public decimal? Venta { get; set; }
+    public decimal? Pagos { get; set; }
 }

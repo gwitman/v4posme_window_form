@@ -98,6 +98,8 @@ namespace v4posme_library.Models
             public object SkuQuantityBySku { get; set; }
     
             public object SkuFormatoDescription { get; set; }
+    
+            public object ItemNameLog { get; set; }
         }
     }
 }

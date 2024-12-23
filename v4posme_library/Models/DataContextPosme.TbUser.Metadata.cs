@@ -40,6 +40,8 @@ namespace v4posme_library.Models
             public object Foto { get; set; }
     
             public object TokenGoogleCalendar { get; set; }
+    
+            public object LocationID { get; set; }
         }
     }
 }

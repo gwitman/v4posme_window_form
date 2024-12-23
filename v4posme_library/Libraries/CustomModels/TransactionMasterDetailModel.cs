@@ -37,6 +37,7 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
             UpdateAppPosme(companyId, transactionId, transactionMasterId, transactionMasterDetailId, data, context);
             return;
         }
+
         var find = dataContext.TbTransactionMasterDetails
             .FirstOrDefault(detail => detail.CompanyID == companyId
                                       && detail.TransactionID == transactionId
@@ -849,5 +850,87 @@ class TransactionMasterDetailModel : ITransactionMasterDetailModel
                 Amount = ul.Amount
             };
         return query.ToList();
+    }
+
+    public List<TbTransactionMasterDetailDto> DefaultVentasDeContadoMensuales(int userCompanyId, DateTime dateFirst, DateTime dateLast)
+    {
+        using var context = new DataContext();
+        var causalIdIn = new List<int> { 21, 23 };
+        return context.TbTransactionMasters
+            .Where(master => master.CompanyID == userCompanyId
+                             && master.TransactionID == 19
+                             && master.IsActive.Value
+                             && causalIdIn.Contains(master.TransactionCausalID.Value)
+                             && master.StatusID == 67
+                             && master.CreatedOn.Value.Date >= dateFirst
+                             && master.CreatedOn.Value.Date <= dateLast)
+            .GroupBy(c => c.CreatedOn.Value.Month)
+            .Select(g => new TbTransactionMasterDetailDto
+            {
+                Mes = g.Key,
+                Venta = g.Sum(c => c.Amount)
+            })
+            .ToList();
+    }
+
+    public List<TbTransactionMasterDetailDto> DefaultVentasDeContadoMesActual(int userCompanyId, DateTime dateFirst, DateTime dateLast)
+    {
+        using var context = new DataContext();
+        var causalIdIn = new List<int> { 21, 23 };
+        return context.TbTransactionMasters
+            .Where(master => master.CompanyID == userCompanyId
+                             && master.TransactionID == 19
+                             && master.IsActive == true
+                             && causalIdIn.Contains(master.TransactionCausalID.Value)
+                             && master.StatusID == 67
+                             && master.CreatedOn.Value.Date >= dateFirst
+                             && master.CreatedOn.Value.Date <= dateLast)
+            .GroupBy(c => c.CreatedOn.Value.Day)
+            .Select(g => new TbTransactionMasterDetailDto
+            {
+                Dia = g.Key,
+                Venta = g.Sum(c => c.Amount)
+            })
+            .ToList();
+    }
+
+    public List<TbTransactionMasterDetailDto> DefaultVentasDeCreditoMesActual(int userCompanyId, DateTime dateFirst, DateTime dateLast)
+    {
+        using var context = new DataContext();
+        var causalIdIn = new List<int> { 22, 24 };
+        return context.TbTransactionMasters
+            .Where(master => master.CompanyID == userCompanyId
+                             && master.TransactionID == 19
+                             && master.IsActive == true
+                             && causalIdIn.Contains(master.TransactionCausalID.Value)
+                             && master.StatusID == 67
+                             && master.CreatedOn.Value.Date >= dateFirst
+                             && master.CreatedOn.Value.Date <= dateLast)
+            .GroupBy(c => c.CreatedOn.Value.Month)
+            .Select(g => new TbTransactionMasterDetailDto
+            {
+                Mes = g.Key,
+                Venta = g.Sum(c => c.Amount)
+            })
+            .ToList();
+    }
+
+    public List<TbTransactionMasterDetailDto> DefaultPagossMensuales(int userCompanyId, DateTime dateFirst, DateTime dateLast)
+    {
+        using var context = new DataContext();
+        return context.TbTransactionMasters
+            .Where(master => master.CompanyID == userCompanyId
+                             && master.TransactionID == 23
+                             && master.IsActive == true
+                             && master.StatusID == 80
+                             && master.CreatedOn.Value.Date >= dateFirst
+                             && master.CreatedOn.Value.Date <= dateLast)
+            .GroupBy(c => c.CreatedOn.Value.Month)
+            .Select(g => new TbTransactionMasterDetailDto
+            {
+                Mes = g.Key,
+                Pagos = g.Sum(c => c.Amount)
+            })
+            .ToList();
     }
 }

@@ -402,6 +402,9 @@
     <property name="IsActive" type="Boolean" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="c3b0957f-1883-4caa-82ad-53fcfdd9003f">
       <column name="isActive" default="NULL" not-null="False" precision="1" scale="0" sql-type="tinyint" p1:unicode="False" />
     </property>
+    <property name="Address" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="1200" p1:ValidateRequired="false" p1:Guid="2dea0d9b-d2e1-43d8-aca0-ffb9f90a80b8">
+      <column name="address" default="NULL" not-null="False" length="1200" sql-type="varchar" p1:unicode="False" />
+    </property>
   </class>
   <class name="TbCaller" entity-set="TbCallers" table="tb_caller" schema="posme" p1:Guid="7a579968-d445-4bd3-9558-a7e545ef94d0">
     <id name="CallerID" type="Int32" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="true" p1:Guid="33276920-87c6-4e3f-a369-f2fff53057ff">
@@ -4429,6 +4432,9 @@
     <property name="SkuFormatoDescription" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="32d6f68e-7c14-471b-98cc-e5d3633c17df">
       <column name="skuFormatoDescription" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
     </property>
+    <property name="ItemNameLog" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="450" p1:ValidateRequired="false" p1:Guid="29752b0a-02b1-47ee-bcfa-a55941fa430f">
+      <column name="itemNameLog" default="NULL" not-null="False" length="450" sql-type="varchar" p1:unicode="False" />
+    </property>
   </class>
   <class name="TbTransactionMasterInfo" entity-set="TbTransactionMasterInfos" table="tb_transaction_master_info" schema="posme" p1:Guid="7b89aa57-1209-4321-b553-b20a391d6bf1">
     <id name="TransactionMasterInfoID" type="Int32" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="true" p1:Guid="9de11904-b0e6-4d04-9a80-e1c44513fa93">
@@ -4789,6 +4795,9 @@
     </property>
     <property name="TokenGoogleCalendar" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="1200" p1:ValidateRequired="false" p1:Guid="82746c69-d967-4b21-9d21-bd65c2ff8b61">
       <column name="token_google_calendar" default="NULL" not-null="False" length="1200" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="LocationID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="519354a1-f3ac-4147-86b0-bb7b30e602d6">
+      <column name="locationID" default="0" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
   </class>
   <class name="TbUserPermission" entity-set="TbUserPermissions" table="tb_user_permission" schema="posme" p1:Guid="fb94463d-2746-41d5-b8e8-0d0c251f3889">
@@ -5866,6 +5875,35 @@
       <column name="createdOn" default="NULL" not-null="False" sql-type="datetime" p1:unicode="False" />
     </property>
   </class>
+  <class name="TbEntityLocation" entity-set="TbEntityLocations" table="tb_entity_location" schema="posme" p1:Guid="8896c9cd-d262-4f43-a621-c66664b43477">
+    <id name="EntityLocationID" type="Int32" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="true" p1:Guid="82871702-6f42-443e-85c1-d6b0a664d636">
+      <column name="entityLocationID" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="EntityID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="cb3ca0aa-e1ae-40e5-8f9f-09d15d155832">
+      <column name="entityID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CreatedOn" type="DateTime" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="5a67dd19-df4a-4eb2-a678-3efd58625e2e">
+      <column name="createdOn" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="5a8bb394-a530-48fd-a6ce-f5528994363a">
+      <column name="isActive" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Latituded" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="f13278d6-9d90-410c-be29-0c0e8ece9de6">
+      <column name="latituded" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Longituded" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="5db61ae7-9e56-4c5a-b61f-33f03cdd3b3f">
+      <column name="longituded" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Reference1" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="9a23b3fa-6c01-4d77-b3bd-b7bac05cbfa9">
+      <column name="reference1" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="UserName" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="a1d91b1f-60c8-4e45-9117-503a1999ed4f">
+      <column name="userName" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="CompanyName" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="600" p1:ValidateRequired="false" p1:Guid="bf54b3d8-24db-4b3e-9144-96e040620364">
+      <column name="companyName" default="NULL" not-null="False" length="600" sql-type="varchar" p1:unicode="True" />
+    </property>
+  </class>
   <method name="PrAccountingAccountBalance" p1:procedure="posme.pr_accounting_account_balance" p1:Guid="45aecaf6-493e-4543-8b90-3b2e705594fd">
     <Documentation>
       <Summary>Procedimiento para obtener el tb_catalog de Cuenta de un Ciclo y sus Saldo</Summary>
@@ -6099,6 +6137,7 @@
     <parameter name="prStartOn" type="DateTime" sql-type="date" />
     <parameter name="prEndOn" type="DateTime" sql-type="date" />
     <parameter name="prUserIDFilter" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prBranchID" type="Int32" sql-type="int" precision="10" scale="0" />
   </method>
   <method name="PrBoxGetReportClosed" p1:procedure="posme.pr_box_get_report_closed" p1:Guid="1d53d115-3c59-47ff-8118-5dac83764285">
     <Documentation>
@@ -6136,6 +6175,7 @@
     <parameter name="prEndOn" type="DateTime" sql-type="date" />
     <parameter name="prUserIDFilter" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prConceptFilter" type="String" sql-type="varchar" length="150" />
+    <parameter name="prBranchID" type="Int32" sql-type="int" precision="10" scale="0" />
   </method>
   <method name="PrBoxGetReportOutputCash" p1:procedure="posme.pr_box_get_report_output_cash" p1:Guid="4e4a229d-2c46-4eb7-a79d-fba986a2669e">
     <Documentation>
@@ -6149,6 +6189,7 @@
     <parameter name="prEndOn" type="DateTime" sql-type="date" />
     <parameter name="prUserIDFilter" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prConceptFilter" type="String" sql-type="varchar" length="150" />
+    <parameter name="prBranchID" type="Int32" sql-type="int" precision="10" scale="0" />
   </method>
   <method name="PrCollectionGetReportCommisionProvider" p1:procedure="posme.pr_collection_get_report_commision_provider" p1:Guid="7f4c0959-0ea8-4bd5-8355-80130a2a3fdd">
     <Documentation>
@@ -6324,6 +6365,8 @@
     <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
     <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prEmployeeCode" type="String" sql-type="varchar" length="50" />
+    <parameter name="prStartOn" type="DateTime" sql-type="datetime" />
+    <parameter name="prEndOn" type="DateTime" sql-type="datetime" />
   </method>
   <method name="PrCxcGetReportCustomerCredit" p1:procedure="posme.pr_cxc_get_report_customer_credit" p1:Guid="1e6f98c6-8f7b-411d-a3bb-c70fa4a763bd">
     <Documentation>
@@ -6748,6 +6791,7 @@
     <parameter name="prUserIDFilter" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prConceptFilter" type="String" sql-type="varchar" length="150" />
     <parameter name="prWithTax1" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prBranchID" type="Int32" sql-type="int" precision="10" scale="0" />
   </method>
   <method name="PrSalesGetReportSalesSummaryCredit" p1:procedure="posme.pr_sales_get_report_sales_summary_credit" p1:Guid="405b162b-db0f-4bf2-b795-fd675f0e0697">
     <Documentation>
@@ -6760,6 +6804,7 @@
     <parameter name="prEndOn" type="DateTime" sql-type="datetime" />
     <parameter name="prUserIDFilter" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prConceptFilter" type="String" sql-type="varchar" length="150" />
+    <parameter name="prBranchID" type="Int32" sql-type="int" precision="10" scale="0" />
   </method>
   <method name="PrSalesGetReportSalesUtilitySummary" p1:procedure="posme.pr_sales_get_report_sales_utility_summary" p1:Guid="6888d3a5-8349-4a84-b39c-89228b4f0f18">
     <Documentation>
@@ -6771,6 +6816,7 @@
     <parameter name="prStartOn" type="DateTime" sql-type="date" />
     <parameter name="prEndOn" type="DateTime" sql-type="date" />
     <parameter name="prExpenditureClassification" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prBranchID" type="Int32" sql-type="int" precision="10" scale="0" />
   </method>
   <method name="PrSalesGetReportVentaDeProducto" p1:procedure="posme.pr_sales_get_report_venta_de_producto" p1:Guid="32862a8a-cb28-40ae-b3ab-63f5f79a38e8">
     <Documentation>
@@ -6888,5 +6934,13 @@
     <parameter name="prStartOn" type="DateTime" sql-type="datetime" />
     <parameter name="prEndOn" type="DateTime" sql-type="datetime" />
     <parameter name="prUserIDFilter" type="Int32" sql-type="int" precision="10" scale="0" />
+  </method>
+  <method name="PrBoxGetReportReconciliationDeposit" p1:procedure="posme.pr_box_get_report_reconciliation_deposit" p1:Guid="1eb74065-d47c-4ec6-a8b6-45bec3db072e">
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prEmployeeCode" type="String" sql-type="varchar" length="50" />
+    <parameter name="prStartOn" type="DateTime" sql-type="datetime" />
+    <parameter name="prEndOn" type="DateTime" sql-type="datetime" />
   </method>
 </efcore>

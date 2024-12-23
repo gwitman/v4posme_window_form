@@ -109,6 +109,9 @@
     <Compile Update="Views\CXC\Report\FormCxcReport.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\Dashboards\FormDashboardDefault.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\Inventory\Inputunpost\FormInventoryInputEdit.cs">
       <SubType>Form</SubType>
     </Compile>

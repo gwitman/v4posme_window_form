@@ -58,4 +58,8 @@ public interface ITransactionMasterDetailModel
 
     List<TbTransactionMasterDetailDto> RealStateGetPropiedadesRendimientoAnualEnlistamiento(int companyId, DateTime dateFirst, DateTime dateLast);
     List<TbTransactionMasterDetailDto> GetRowByShareId(int companyId, int transactionMasterId);
+    List<TbTransactionMasterDetailDto> DefaultVentasDeContadoMensuales(int userCompanyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> DefaultVentasDeContadoMesActual(int userCompanyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> DefaultVentasDeCreditoMesActual(int userCompanyId, DateTime dateFirst, DateTime dateLast);
+    List<TbTransactionMasterDetailDto> DefaultPagossMensuales(int userCompanyId, DateTime dateFirst, DateTime dateLast);
 }

@@ -18,6 +18,8 @@ namespace v4posme_library.Models
             public object CreatedOn { get; set; }
     
             public object IsActive { get; set; }
+    
+            public object Address { get; set; }
         }
     }
 }
