@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
@@ -646,7 +647,7 @@ namespace v4posme_window.Views.Invoice.Billing
                         var fixedHeight = 300; // Alto fijo
                         using var originalImage = Image.FromFile(imagePath);
                         using var resizedImage = new Bitmap(originalImage, new Size(fixedWidth, fixedHeight));
-                        printer.Image(resizedImage);
+                        printer.Append(HelperMethods.Print(resizedImage));
                     }
                 }
 
