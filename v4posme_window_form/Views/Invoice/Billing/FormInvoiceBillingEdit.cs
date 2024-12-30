@@ -637,13 +637,16 @@ namespace v4posme_window.Views.Invoice.Billing
                 printer.AlignCenter();
                 if (objParameterCompanyLogo is not null)
                 {
-                    objParameterCompanyLogo.Value = "direct-ticket-" + objParameterCompanyLogo.Value;
+                    //objParameterCompanyLogo.Value = "direct-ticket-" + objParameterCompanyLogo.Value;
                     var imagePath = $"{pathOfLogo}/img/logos/{objParameterCompanyLogo.Value!}";
                     if (File.Exists(imagePath))
                     {
-                        var logoCompany = new Bitmap(Image.FromFile(imagePath));
-                        //el logo que se esta mostrando no se redimensiona 
-                        //printer.Image(logoCompany);
+                        // Define el tamaño fijo deseado
+                        var fixedWidth = 500; // Ancho fijo
+                        var fixedHeight = 300; // Alto fijo
+                        using var originalImage = Image.FromFile(imagePath);
+                        using var resizedImage = new Bitmap(originalImage, new Size(fixedWidth, fixedHeight));
+                        printer.Image(resizedImage);
                     }
                 }
 
@@ -907,7 +910,7 @@ namespace v4posme_window.Views.Invoice.Billing
             }
 
 
-            CodigoMesero = "abc";
+            CodigoMesero = "none";
             int publicCatalogID = 0;
             List<TbPublicCatalog> objPubliCatalogMesasConfig = _objInterfazPublicCatalogModel.GetBySystemNameAndFlavorID("tb_transaction_master_billing.mesas_x_meseros", VariablesGlobales.Instance.Company!.FlavorID);
             if (CodigoMesero != "none")
