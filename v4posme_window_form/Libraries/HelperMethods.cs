@@ -37,11 +37,11 @@ public class HelperMethods
         }
     }
 
-    private static BitmapData GetBitmapData(Bitmap bmp)
+    private static BitmapData GetBitmapData(Bitmap bmp,double scalex)
     {
         var threshold = 127;
         var index = 0;
-        double multiplier = 380; // this depends on your printer model.
+        double multiplier = scalex; // this depends on your printer model.
         double scale = multiplier / bmp.Width;
         var xheight = (int)(bmp.Height * scale);
         var xwidth = (int)(bmp.Width * scale);
@@ -69,9 +69,9 @@ public class HelperMethods
         };
     }
 
-    public static byte[] Print(Bitmap image)
+    public static byte[] Print(Bitmap image,double scale)
     {
-        var data = GetBitmapData(image);
+        var data = GetBitmapData(image, scale);
         var dots = data.Dots;
         var width = BitConverter.GetBytes(data.Width);
 
@@ -134,4 +134,8 @@ public class HelperMethods
         bw.Dispose();
         return bytes;
     }
+
+
+
+
 }

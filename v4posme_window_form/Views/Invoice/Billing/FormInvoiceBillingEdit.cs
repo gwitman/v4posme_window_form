@@ -638,16 +638,14 @@ namespace v4posme_window.Views.Invoice.Billing
                 printer.AlignCenter();
                 if (objParameterCompanyLogo is not null)
                 {
-                    //objParameterCompanyLogo.Value = "direct-ticket-" + objParameterCompanyLogo.Value;
-                    var imagePath = $"{pathOfLogo}/img/logos/{objParameterCompanyLogo.Value!}";
+                    objParameterCompanyLogo.Value   = "direct-ticket-" + objParameterCompanyLogo.Value;
+                    var imagePath                   = $"{pathOfLogo}/img/logos/{objParameterCompanyLogo.Value!}";
                     if (File.Exists(imagePath))
                     {
-                        // Define el tamaño fijo deseado
-                        var fixedWidth = 500; // Ancho fijo
-                        var fixedHeight = 300; // Alto fijo
+                        // Define el tamaño fijo deseado                        
                         using var originalImage = Image.FromFile(imagePath);
-                        using var resizedImage = new Bitmap(originalImage, new Size(fixedWidth, fixedHeight));
-                        printer.Append(HelperMethods.Print(resizedImage));
+                        using var resizedImage  = new Bitmap(originalImage);
+                        printer.Append(HelperMethods.Print(resizedImage,500 /*entre mas pequeño, la imagen es mas pequeña*/ ));
                     }
                 }
 
