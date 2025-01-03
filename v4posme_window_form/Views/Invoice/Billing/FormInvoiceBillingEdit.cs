@@ -5,8 +5,11 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Text;
+using DevExpress.Utils;
 using DevExpress.Utils.Controls;
 using DevExpress.XtraBars;
+using DevExpress.XtraBars.InternalItems;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
@@ -66,6 +69,7 @@ namespace v4posme_window.Views.Invoice.Billing
         #endregion
 
         #region Libreria Model Custom DLL
+
         private readonly IPublicCatalogModel _objInterfazPublicCatalogModel = VariablesGlobales.Instance.UnityContainer.Resolve<IPublicCatalogModel>();
 
         private readonly IPublicCatalogDetailModel _objInterfazPublicCatalogDetailModel = VariablesGlobales.Instance.UnityContainer.Resolve<IPublicCatalogDetailModel>();
@@ -273,8 +277,9 @@ namespace v4posme_window.Views.Invoice.Billing
         public string? ObjParameterInvoiceBillingPrinterDirect { get; set; }
         private DataTable? ObjSELECCIONAR_ITEM_BILLING_BACKGROUND { get; set; }
 
-        #endregion
+        private FormInvoiceBillingEditPaymentDialog FormInvoiceBillingEditPayment;
 
+        #endregion
 
         #region Variables internas
 
@@ -294,9 +299,17 @@ namespace v4posme_window.Views.Invoice.Billing
 
         #region Init
 
-        public FormInvoiceBillingEdit(TypeOpenForm typeOpen, int companyId, int transactionId, int transactionMasterId,string codeMesero)
+        public FormInvoiceBillingEdit()
         {
             InitializeComponent();
+            FormInvoiceBillingEditPayment = new(this);
+            SetTabOrder();
+        }
+
+        public FormInvoiceBillingEdit(TypeOpenForm typeOpen, int companyId, int transactionId, int transactionMasterId, string codeMesero)
+        {
+            InitializeComponent();
+            SetTabOrder();
             // Suscribir al manejador de excepciones global
             Application.ThreadException += Application_ThreadException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
@@ -305,6 +318,7 @@ namespace v4posme_window.Views.Invoice.Billing
             TransactionMasterId = transactionMasterId;
             TypeOpen = typeOpen;
             CodigoMesero = codeMesero;
+            FormInvoiceBillingEditPayment = new(this);
         }
 
 
@@ -321,7 +335,6 @@ namespace v4posme_window.Views.Invoice.Billing
 
         private void FormInvoiceBillingEdit_Load(object sender, EventArgs e)
         {
-            
             _backgroundWorker = new BackgroundWorker();
             _backgroundWorker.DoWork += (ob, ev) =>
             {
@@ -370,7 +383,6 @@ namespace v4posme_window.Views.Invoice.Billing
                     {
                         progressPanel.Visible = false;
                     }
-                    
                 }
             };
 
@@ -383,6 +395,48 @@ namespace v4posme_window.Views.Invoice.Billing
             if (!_backgroundWorker.IsBusy)
             {
                 _backgroundWorker.RunWorkerAsync();
+            }
+        }
+
+        private void SetTabOrder()
+        {
+            
+            var controls = new Control[]
+            {
+                txtScanerCodigo,
+                gridViewTbTransactionMasterDetail,
+                txtDate,
+                txtNote,
+                btnSearchCustomer,
+                txtReferenceClientName,
+                txtReferenceClientIdentifier,
+                txtCausalID,
+                txtCustomerCreditLineID,
+                txtCurrencyID
+            };
+            var controlCount = controls.Length;
+            ResetTabIndex(this, ref controlCount);
+
+            for (var i = 0; i < controls.Length; i++)
+            {
+                controls[i].TabIndex = i;
+                controls[i].TabStop = true;
+            }
+        }
+
+        private void ResetTabIndex(Control parent, ref int controlCount)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                control.TabIndex = controlCount;
+                controlCount++;
+                control.TabStop = false;
+
+                if (control.HasChildren)
+                {
+                    ResetTabIndex(control, ref controlCount);
+                }
+                
             }
         }
 
@@ -555,8 +609,8 @@ namespace v4posme_window.Views.Invoice.Billing
 
         public void ComandPrinter()
         {
-            var objCompany          = VariablesGlobales.Instance.Company;
-            if (objCompany.FlavorID == 577 /*Rosie Collection*/ )
+            var objCompany = VariablesGlobales.Instance.Company;
+            if (objCompany.FlavorID == 577 /*Rosie Collection*/)
             {
                 ComandPrinterRosies();
             }
@@ -638,14 +692,14 @@ namespace v4posme_window.Views.Invoice.Billing
                 printer.AlignCenter();
                 if (objParameterCompanyLogo is not null)
                 {
-                    objParameterCompanyLogo.Value   = "direct-ticket-" + objParameterCompanyLogo.Value;
-                    var imagePath                   = $"{pathOfLogo}/img/logos/{objParameterCompanyLogo.Value!}";
+                    objParameterCompanyLogo.Value = "direct-ticket-" + objParameterCompanyLogo.Value;
+                    var imagePath = $"{pathOfLogo}/img/logos/{objParameterCompanyLogo.Value!}";
                     if (File.Exists(imagePath))
                     {
                         // Define el tamaño fijo deseado                        
                         using var originalImage = Image.FromFile(imagePath);
-                        using var resizedImage  = new Bitmap(originalImage);
-                        printer.Append(HelperMethods.Print(resizedImage,500 /*entre mas pequeño, la imagen es mas pequeña*/ ));
+                        using var resizedImage = new Bitmap(originalImage);
+                        printer.Append(HelperMethods.Print(resizedImage, 500 /*entre mas pequeño, la imagen es mas pequeña*/));
                     }
                 }
 
@@ -835,7 +889,7 @@ namespace v4posme_window.Views.Invoice.Billing
                 printer.Append(totalstring);
                 printer.Separator();
 
-                
+
                 printer.AlignCenter();
                 printer.Append(objCompany.Address);
                 printer.Append($"Tel.: {objParameterTelefono!.Value}");
@@ -847,6 +901,7 @@ namespace v4posme_window.Views.Invoice.Billing
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Imprimir", $"Se produjo un error al imprimir, revisar los datos. Error: {e.Message}", this);
             }
         }
+
         public void LoadEdit()
         {
             //using var tx = new TransactionScope();
@@ -919,13 +974,10 @@ namespace v4posme_window.Views.Invoice.Billing
 
                 if (objPubliCatalogMesasConfig.Count == 0)
                     throw new Exception("CONFIGURAR EL CATALOGO DE MESAS tb_transaction_master_billing.mesas_x_meseros");
-
             }
 
             publicCatalogID = CodigoMesero == "none" ? 0 : objPubliCatalogMesasConfig.ElementAt(0).PublicCatalogID;
             List<TbPublicCatalogDetail> objPubliCatalogDetailMesasConfiguradas = _objInterfazPublicCatalogDetailModel.GetRowByCatalogIDAndName(publicCatalogID, CodigoMesero);
-
-
 
 
             ObjParameterInvoiceTypeEmployer = _objInterfazCoreWebParameter.GetParameter("INVOICE_TYPE_EMPLOYEER", user.CompanyID)!.Value;
@@ -959,12 +1011,13 @@ namespace v4posme_window.Views.Invoice.Billing
             {
                 throw new Exception("No existe el ObjTransactionMaster");
             }
+
             ObjTransactionMasterInfo = _objInterfazTransactionMasterInfoModel.GetRowByPk(user.CompanyID, TransactionId!.Value, TransactionMasterId!.Value);
             ObjTransactionMasterDetail = _objInterfazTransactionMasterDetailModel.GetRowByTransaction(user.CompanyID, TransactionId!.Value, TransactionMasterId!.Value);
             ObjTransactionMasterDetailWarehouse = _objInterfazTransactionMasterDetailModel.GetRowByTransactionAndWarehouse(user.CompanyID, TransactionId!.Value, TransactionMasterId!.Value);
             ObjTransactionMasterDetailConcept = _objInterfazTransactionMasterConceptModel.GetRowByTransactionMasterConcept(user.CompanyID, TransactionId!.Value, TransactionMasterId!.Value, ObjComponentItem.ComponentID);
             var dateTimeNow = DateTime.Now;
-            var dateRatio =DateTime.Now.Date;
+            var dateRatio = DateTime.Now.Date;
             ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyID, dateRatio, decimal.One, ObjCurrencyDolares!.CurrencyID, ObjCurrency!.CurrencyID);
             ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyID, user.BranchID, Convert.ToInt32(ObjParameterInvoiceTypeEmployer));
             ObjListBank = _objInterfazBankModel.GetByCompany(user.CompanyID);
@@ -986,7 +1039,7 @@ namespace v4posme_window.Views.Invoice.Billing
             if (ObjListMesa.Count == 0)
                 throw new Exception("No se puede avanzar configurar catalogo de MESS");
 
-            if(!ObjListMesa.Any( u => u.CatalogItemID == ObjTransactionMasterInfo!.MesaId))
+            if (!ObjListMesa.Any(u => u.CatalogItemID == ObjTransactionMasterInfo!.MesaId))
             {
                 throw new Exception("No tiene acceso al catalogo MESS");
             }
@@ -1049,7 +1102,6 @@ namespace v4posme_window.Views.Invoice.Billing
 
         public void LoadNew()
         {
-            
             //using var tx = new TransactionScope();
             var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
             var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
@@ -1063,7 +1115,7 @@ namespace v4posme_window.Views.Invoice.Billing
                 throw new Exception(userNotAutenticated);
             }
 
-            
+
             var role = VariablesGlobales.Instance.Role;
             if (appNeedAuthentication == "true")
             {
@@ -1147,21 +1199,18 @@ namespace v4posme_window.Views.Invoice.Billing
             //Obtener lista de mesas configuradas            
             int publicCatalogID = 0;
             List<TbPublicCatalog> objPubliCatalogMesasConfig = _objInterfazPublicCatalogModel.GetBySystemNameAndFlavorID("tb_transaction_master_billing.mesas_x_meseros", VariablesGlobales.Instance.Company!.FlavorID);
-            if(CodigoMesero != "none" )
+            if (CodigoMesero != "none")
             {
-                if(objPubliCatalogMesasConfig is null)
-                throw new Exception("CONFIGURAR EL CATALOGO DE MESAS tb_transaction_master_billing.mesas_x_meseros");
+                if (objPubliCatalogMesasConfig is null)
+                    throw new Exception("CONFIGURAR EL CATALOGO DE MESAS tb_transaction_master_billing.mesas_x_meseros");
 
                 if (objPubliCatalogMesasConfig.Count == 0)
                     throw new Exception("CONFIGURAR EL CATALOGO DE MESAS tb_transaction_master_billing.mesas_x_meseros");
-
             }
-
-           
 
 
             publicCatalogID = CodigoMesero == "none" ? 0 : objPubliCatalogMesasConfig.ElementAt(0).PublicCatalogID;
-            List<TbPublicCatalogDetail> objPubliCatalogDetailMesasConfiguradas = _objInterfazPublicCatalogDetailModel.GetRowByCatalogIDAndName(publicCatalogID,CodigoMesero);
+            List<TbPublicCatalogDetail> objPubliCatalogDetailMesasConfiguradas = _objInterfazPublicCatalogDetailModel.GetRowByCatalogIDAndName(publicCatalogID, CodigoMesero);
 
             ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Today, decimal.One, ObjCurrencyDolares!.CurrencyID, ObjCurrency!.CurrencyID);
             ObjListEmployee = _objInterfazEmployeeModel.GetRowByBranchIdAndType(user.CompanyID, user.BranchID, Convert.ToInt32(ObjParameterInvoiceTypeEmployer));
@@ -1175,23 +1224,22 @@ namespace v4posme_window.Views.Invoice.Billing
             ObjListMesa = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_transaction_master_info_billing", "mesaID", user.CompanyID);
 
             //Validar Banco
-            if(ObjListBank is null )
-            throw new Exception("No se puede avanzar configurar bancos");
+            if (ObjListBank is null)
+                throw new Exception("No se puede avanzar configurar bancos");
 
             if (ObjListBank.Count == 0)
-            throw new Exception("No se puede avanzar configurar bancos");
+                throw new Exception("No se puede avanzar configurar bancos");
 
 
             //Filtrar la Lista de mesas
             var obListMesasFiltradas = ObjListMesa.Where(item1 => objPubliCatalogDetailMesasConfiguradas.Any(item2 => item2.Display == item1.Name)).ToList();
             ObjListMesa = CodigoMesero == "none" ? ObjListMesa : obListMesasFiltradas;
 
-            if(ObjListMesa is null)
-            throw new Exception("No se puede avanzar configurar catalogo de MESS");
+            if (ObjListMesa is null)
+                throw new Exception("No se puede avanzar configurar catalogo de MESS");
 
             if (ObjListMesa.Count == 0)
-            throw new Exception("No se puede avanzar configurar catalogo de MESS");
-
+                throw new Exception("No se puede avanzar configurar catalogo de MESS");
 
 
             ObjListPay = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_customer_credit_line", "periodPay", user.CompanyID);
@@ -1209,17 +1257,17 @@ namespace v4posme_window.Views.Invoice.Billing
             ObjParameterRegresarAListaDespuesDeGuardar = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SAVE_AFTER_TO_LIST", user.CompanyID)!.Value;
             ObjParameterMostrarImagenEnSeleccion = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SHOW_IMAGE_IN_DETAIL_SELECTION", user.CompanyID)!.Value;
             ObjParameterPantallaParaFacturar = _objInterfazCoreWebParameter.GetParameter("INVOICE_PANTALLA_FACTURACION", user.CompanyID)!.Value;
-            
+
             if (ObjCustomerDefault is null)
             {
                 throw new Exception("NO EXISTE EL CLIENTE POR DEFECTO");
             }
 
-            
-            ObjNaturalDefault = _objInterfazNaturalModel.GetRowByPk(user.CompanyID, ObjCustomerDefault.BranchID, ObjCustomerDefault.EntityID);            
-            ObjLegalDefault = _objInterfazLegalModel.GetRowByPk(user.CompanyID, ObjCustomerDefault.BranchID, ObjCustomerDefault.EntityID);            
+
+            ObjNaturalDefault = _objInterfazNaturalModel.GetRowByPk(user.CompanyID, ObjCustomerDefault.BranchID, ObjCustomerDefault.EntityID);
+            ObjLegalDefault = _objInterfazLegalModel.GetRowByPk(user.CompanyID, ObjCustomerDefault.BranchID, ObjCustomerDefault.EntityID);
             ObjEmployeeNatural = _objInterfazNaturalModel.GetRowByPk(user.CompanyID, user.BranchID, user.EmployeeID);
-            if(ObjEmployeeNatural == null)
+            if (ObjEmployeeNatural == null)
                 throw new Exception("USUARIO DEBE DE TENER CONFIGURADO UN COLABORADOR ");
 
             //Obtener la linea de credito del cliente por defecto
@@ -1228,7 +1276,7 @@ namespace v4posme_window.Views.Invoice.Billing
             ParameterCausalTypeCredit = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyID);
             ObjCustomerCreditAmoritizationAll = _objInterfazCustomerCreditAmortizationModel.GetRowByCustomerId(ObjCustomerDefault.EntityID);
             ObjListCustomerCreditLine = _objInterfazCustomerCreditLineModel.GetRowByEntityBalanceMayorCero(user.CompanyID, user.BranchID, this.ObjCustomerDefault.EntityID);
-            
+
 
             ObjListPermisos = VariablesGlobales.Instance.ListMenuHiddenPopup;
             varPermisosEsPermitidoModificarPrecio = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_MODIFICAR_PRECIO_EN_FACTURACION") > 0;
@@ -1237,351 +1285,349 @@ namespace v4posme_window.Views.Invoice.Billing
             varPermisosEsPermitidoSeleccionarPrecioMayor = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_PORMAYOR") > 0;
             varPermisosEsPermitidoSeleccionarPrecioCredito = ObjListPermisos!.Count(element => element.Display == "ES_PERMITIDO_SELECCIONAR_PRECIO_CREDITO") > 0;
             //tx.Complete();
-            
         }
 
         public void SaveInsert()
         {
             //try
             //{
-                var coreWebAuditoria = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuditoria>();
-                var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
-                var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
-                var notAllInsert = VariablesGlobales.ConfigurationBuilder["NOT_ALL_INSERT"];
-                var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
-                var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
-                var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
-                var user = VariablesGlobales.Instance.User;
-                if (user is null)
+            var coreWebAuditoria = VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebAuditoria>();
+            var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
+            var notAccessControl = VariablesGlobales.ConfigurationBuilder["NOT_ACCESS_CONTROL"];
+            var notAllInsert = VariablesGlobales.ConfigurationBuilder["NOT_ALL_INSERT"];
+            var permissionNone = Convert.ToInt32(VariablesGlobales.ConfigurationBuilder["PERMISSION_NONE"]);
+            var appNeedAuthentication = VariablesGlobales.ConfigurationBuilder["APP_NEED_AUTHENTICATION"];
+            var urlSuffix = VariablesGlobales.ConfigurationBuilder["URL_SUFFIX"];
+            var user = VariablesGlobales.Instance.User;
+            if (user is null)
+            {
+                throw new Exception(userNotAutenticated);
+            }
+
+            var role = VariablesGlobales.Instance.Role;
+            if (appNeedAuthentication == "true")
+            {
+                var permited = _objInterfazCoreWebPermission.UrlPermited("app_invoice_billing", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                if (!permited)
                 {
-                    throw new Exception(userNotAutenticated);
+                    throw new Exception(notAccessControl);
                 }
 
-                var role = VariablesGlobales.Instance.Role;
-                if (appNeedAuthentication == "true")
+                var resultPermission = _objInterfazCoreWebPermission.UrlPermissionCmd("app_invoice_billing", "add", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
+                if (resultPermission == permissionNone)
                 {
-                    var permited = _objInterfazCoreWebPermission.UrlPermited("app_invoice_billing", "index", urlSuffix!, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
-                    if (!permited)
-                    {
-                        throw new Exception(notAccessControl);
-                    }
+                    throw new Exception(notAllInsert);
+                }
+            }
 
-                    var resultPermission = _objInterfazCoreWebPermission.UrlPermissionCmd("app_invoice_billing", "add", urlSuffix!, role, user, VariablesGlobales.Instance.ListMenuTop, VariablesGlobales.Instance.ListMenuLeft, VariablesGlobales.Instance.ListMenuBodyReport, VariablesGlobales.Instance.ListMenuBodyTop, VariablesGlobales.Instance.ListMenuHiddenPopup);
-                    if (resultPermission == permissionNone)
-                    {
-                        throw new Exception(notAllInsert);
-                    }
+            //Obtener el Componente de Transacciones Facturacion
+            var objComponentBilling = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_billing");
+            if (objComponentBilling is null) throw new Exception("EL COMPONENTE 'tb_transaction_master_billing' NO EXISTE...");
+
+
+            var objComponentItem = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_item");
+            if (objComponentItem is null) throw new Exception("EL COMPONENTE 'tb_item' NO EXISTE...");
+
+            //Obtener transaccion
+            var causalIdEditValue = (ComboBoxItem)txtCausalID.SelectedItem;
+            var causalId = Convert.ToInt32(causalIdEditValue.Key);
+            TransactionId = _objInterfazCoreWebTransaction.GetTransactionId(user.CompanyID, "tb_transaction_master_billing", 0);
+            var objT = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionModel>().GetByCompanyAndTransaction(user.CompanyID, TransactionId!.Value);
+            var objTransactionCausal = _objInterfazTransactionCausalModel.GetByCompanyAndTransactionAndCausal(user.CompanyID, TransactionId!.Value, causalId);
+
+
+            //Valores de tasa de cambio
+            ObjCurrencyDolares = _objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyID);
+            ObjCurrencyCordoba = _objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyID);
+            ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Now.Date, 1, ObjCurrencyDolares!.CurrencyID, ObjCurrencyCordoba!.CurrencyID);
+            var cycleIsCloseByDate = _objInterfazCoreWebAccounting.CycleIsCloseByDate(user.CompanyID, txtDate.DateTime);
+            if (cycleIsCloseByDate) throw new Exception("EL DOCUMENTO NO PUEDE INGRESAR, EL CICLO CONTABLE ESTA CERRADO");
+            _objInterfazCoreWebPermission.GetValueLicense(user.CompanyID, "app_invoice_billing/index");
+
+
+            //obtener el primer estado  de la factura o el estado inicial.
+            ObjParameterInvoiceBillingQuantityZero = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_QUANTITY_ZERO", user.CompanyID)!.Value;
+            ObjListWorkflowStage = _objInterfazCoreWebWorkflow.GetWorkflowAllStage("tb_transaction_master_billing", "statusID", user.CompanyID, user.BranchID, role!.RoleID);
+            //Saber si se va autoaplicar
+            ObjParameterInvoiceAutoApply = _objInterfazCoreWebParameter.GetParameter("INVOICE_AUTOAPPLY_CASH", user.CompanyID)!.Value;
+            ObjParaemterStatusCanceled = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CANCEL", user.CompanyID)!.Value;
+            ObjParameterUrlPrinterDirect = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_URL", user.CompanyID)!.Value;
+            ObjParameterImprimirPorCadaFactura = _objInterfazCoreWebParameter.GetParameter("INVOICE_PRINT_BY_INVOICE", user.CompanyID)!.Value;
+
+            //Saber si es al credito
+            ParameterCausalTypeCredit = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyID);
+            var causalIdTypeCredit = ParameterCausalTypeCredit!.Value!.Split(',');
+            // Buscar el valor en la matriz
+            var exisCausalInCredit = Array.IndexOf(causalIdTypeCredit, ((ComboBoxItem)txtCausalID.SelectedItem).Key) > 0;
+            //Si esta configurado como auto aplicado
+            //y es al credito. cambiar el estado por el estado inicial, que es registrada
+            int? statusId = 0;
+
+
+            if (ObjParameterInvoiceAutoApply == "true" && exisCausalInCredit)
+            {
+                statusId = ObjListWorkflowStage?[0].WorkflowStageID;
+            }
+            else if (ObjParameterInvoiceAutoApply == "true" && exisCausalInCredit != true)
+            {
+                statusId = Convert.ToInt32(ObjParaemterStatusCanceled);
+            }
+            else
+            {
+                statusId = TxtStatusId;
+            }
+
+
+            var currencyId = Convert.ToInt32(((ComboBoxItem)txtCurrencyID.SelectedItem).Key);
+            var goNextNumber = _objInterfazCoreWebCounter.GoNextNumber(user.CompanyID, user.BranchID, "tb_transaction_master_proforma", 0);
+            var sourceWarehouseId = Convert.ToInt32(((ComboBoxItem)txtWarehouseID.SelectedItem).Key);
+            var objTm = new TbTransactionMaster
+            {
+                CompanyID = user.CompanyID,
+                TransactionID = TransactionId!.Value,
+                BranchID = user.BranchID,
+                TransactionNumber = string.IsNullOrEmpty(goNextNumber) ? "" : goNextNumber,
+                TransactionCausalID = Convert.ToInt32(causalIdEditValue.Key),
+                EntityID = TxtCustomerId,
+                TransactionOn = txtDate.DateTime,
+                TransactionOn2 = txtDateFirst.DateTime,
+                StatusIDChangeOn = DateTime.Now,
+                ComponentID = objComponentBilling.ComponentID,
+                Note = txtNote.Text,
+                Sign = (short?)objT!.SignInventory,
+                CurrencyID = currencyId, //validar este campo
+                CurrencyID2 = _objInterfazCoreWebCurrency.GetTarget(user.CompanyID, currencyId),
+                Reference1 = ((ComboBoxItem)txtReference1.SelectedItem).Key,
+                DescriptionReference = "reference1:entityID del proveedor de credito para las facturas al credito,reference4: customerCreditLineID linea de credito del cliente",
+                Reference2 = txtReference2.Text,
+                Reference3 = txtReference3.Text,
+                Reference4 = txtCustomerCreditLineID.SelectedIndex < 0 ? "0" : ((ComboBoxItem)txtCustomerCreditLineID.SelectedItem).Key,
+                StatusID = statusId,
+                Amount = decimal.Zero,
+                IsApplied = false,
+                JournalEntryID = 0,
+                ClassID = null,
+                AreaID = null,
+                SourceWarehouseID = sourceWarehouseId,
+                TargetWarehouseID = null,
+                IsActive = true,
+                PeriodPay = Convert.ToInt32(((ComboBoxItem)txtPeriodPay.SelectedItem).Key),
+                NextVisit = txtNextVisit.DateTime,
+                NumberPhone = txtNumberPhone.Text,
+                EntityIDSecondary = Convert.ToInt32(((ComboBoxItem)txtEmployeeID.SelectedItem).Key)
+            };
+            objTm.ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Now.Date, decimal.One, objTm.CurrencyID2!.Value, objTm.CurrencyID!.Value);
+            coreWebAuditoria.SetAuditCreated(objTm, user, "");
+            TransactionMasterId = _objInterfazTransactionMasterModel.InsertAppPosme(objTm);
+            var assembly = Assembly.GetEntryAssembly();
+            var documentoPath = "";
+            if (assembly is not null)
+            {
+                //Crear la Carpeta para almacenar los Archivos del Documento
+                documentoPath = $"{assembly.Location}/company_{user.CompanyID}/component_{objComponentBilling.ComponentID}/component_item_{TransactionMasterId.Value}";
+            }
+
+            var objTmInfo = new TbTransactionMasterInfo
+            {
+                CompanyID = objTm.CompanyID,
+                TransactionID = objTm.TransactionID,
+                TransactionMasterID = TransactionMasterId.Value,
+                ZoneID = Convert.ToInt32(((ComboBoxItem)txtZoneID.SelectedItem).Key),
+                MesaID = Convert.ToInt32(((ComboBoxItem)txtMesaID.SelectedItem).Key),
+                RouteID = 0,
+                ReferenceClientName = txtReferenceClientName.Text,
+                ReferenceClientIdentifier = txtReferenceClientIdentifier.Text,
+                ReceiptAmount = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmount.Text),
+                ReceiptAmountDol = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountDol.Text),
+                ReceiptAmountPoint = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountPoint.Text),
+                ReceiptAmountBank = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountBank.Text),
+                ReceiptAmountBankDol = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountBankDol.Text),
+                ReceiptAmountCardDol = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol.Text),
+                ReceiptAmountCard = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta.Text),
+                ChangeAmount = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtChangeAmount.Text),
+                ReceiptAmountBankReference = FormInvoiceBillingEditPayment.txtReceiptAmountBank_Reference.Text,
+                ReceiptAmountBankDolReference = FormInvoiceBillingEditPayment.txtReceiptAmountBankDol_Reference.Text,
+                ReceiptAmountCardBankReference = FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta_Reference.Text,
+                ReceiptAmountCardBankDolReference = FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol_Reference.Text,
+                ReceiptAmountBankID = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)FormInvoiceBillingEditPayment.txtReceiptAmountBank_BankID.SelectedItem).Key),
+                ReceiptAmountBankDolID = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)FormInvoiceBillingEditPayment.txtReceiptAmountBankDol_BankID.SelectedItem).Key),
+                ReceiptAmountCardBankID = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta_BankID.SelectedItem).Key),
+                ReceiptAmountCardBankDolID = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol_BankID.SelectedItem).Key)
+            };
+            objTmInfo.TransactionMasterInfoID = _objInterfazTransactionMasterInfoModel.InsertAppPosme(objTmInfo);
+
+            //Ingresar la configuracion de precios		
+            var amountTotal = decimal.Zero;
+            var tax1Total = decimal.Zero;
+            var subAmountTotal = decimal.Zero;
+
+            //Tipo de precio seleccionado por el usuario,
+            //Actualmente no se esta usando
+            var typePriceId = ((ComboBoxItem)txtTypePriceID.SelectedItem).Key; //verificar valor
+            var objListPrice = _objInterfazListPriceModel.GetListPriceToApply(user.CompanyID);
+            //obtener la lista de precio por defecto
+            var objParameterPriceDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_DEFAULT_PRICELIST", user.CompanyID);
+            var listPriceId = objParameterPriceDefault!.Value;
+            //obener los tipos de precio de la lista de precio por defecto
+            var objTipePrice = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_price", "typePriceID", user.CompanyID);
+
+            //Parametro para validar si se cambian los precios en la facturacion
+            var objParameterUpdatePrice = _objInterfazCoreWebParameter.GetParameter("INVOICE_UPDATEPRICE_ONLINE", user.CompanyID);
+            var objUpdatePrice = objParameterUpdatePrice!.Value;
+
+            var ObjParameterUpdateNameInTransactionOnly = _objInterfazCoreWebParameter.GetParameter("INVOICE_UPDATENAME_IN_TRANSACTION_ONLY", user.CompanyID);
+            ObjParameterInvoiceUpdateNameInTransactionOnly = ObjParameterUpdateNameInTransactionOnly!.Value;
+
+            var rowCount = gridViewValues.RowCount;
+            for (var i = 0; i < rowCount; i++)
+            {
+                //Recorrer la lista del detalle del documento
+                var transactionDetailName = gridViewValues.GetRowCellValue(i, colTransactionDetailName).ToString();
+                var itemNameDetail = transactionDetailName is null ? "" : transactionDetailName.Replace("'", "");
+                var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity).ToString());
+                var listPrice = Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colPrice));
+                var listLote = string.Empty;
+                var listVencimiento = string.Empty;
+                var skuCatalogItemId = Convert.ToInt32(gridViewValues.GetRowCellValue(i, colSku));
+                var skuFormatoDescription = gridViewValues.GetRowCellValue(i, colSkuFormatoDescripton).ToString();
+                var itemId = Convert.ToInt32(gridViewValues.GetRowCellValue(i, colItemId));
+
+
+                var lote = string.IsNullOrEmpty(listLote) ? "" : listLote;
+                var vencimiento = string.IsNullOrEmpty(listVencimiento) ? "" : listVencimiento;
+                var warehouseId = objTm.SourceWarehouseID;
+                var objItem = _objInterfazItemModel.GetRowByPk(user.CompanyID, itemId);
+                var objItemWarehouse = VariablesGlobales.Instance.UnityContainer.Resolve<IItemWarehouseModel>().GetByPk(user.CompanyID, itemId, warehouseId.Value);
+                var objPrice = _objInterfazPriceModel.GetRowByPk(user.CompanyID, objListPrice!.ListPriceID, itemId, Convert.ToInt32(typePriceId));
+                var objCompanyComponentConcept = _objInterfazCompanyComponentConceptModel.GetRowByPk(user.CompanyID, objComponentItem.ComponentID, itemId, "IVA");
+                var objItemSku = _objInterfazItemSkuModel.GetByPk(itemId, skuCatalogItemId);
+                decimal price;
+                if (objItemSku is null)
+                {
+                    throw new Exception("No hay un objeto del tipo item sku");
                 }
 
-                //Obtener el Componente de Transacciones Facturacion
-                var objComponentBilling = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_transaction_master_billing");
-                if (objComponentBilling is null) throw new Exception("EL COMPONENTE 'tb_transaction_master_billing' NO EXISTE...");
+                price = listPrice / objItemSku.Value;
+                var ivaPercentage = (objCompanyComponentConcept is not null) ? objCompanyComponentConcept.ValueOut : decimal.Zero;
+                var unitaryAmount = price * (1 + ivaPercentage);
+                var tax1 = price * ivaPercentage;
 
-
-                var objComponentItem = _objInterfazCoreWebTools.GetComponentIdByComponentName("tb_item");
-                if (objComponentItem is null) throw new Exception("EL COMPONENTE 'tb_item' NO EXISTE...");
-
-                //Obtener transaccion
-                var causalIdEditValue = (ComboBoxItem)txtCausalID.SelectedItem;
-                var causalId = Convert.ToInt32(causalIdEditValue.Key);
-                TransactionId = _objInterfazCoreWebTransaction.GetTransactionId(user.CompanyID, "tb_transaction_master_billing", 0);
-                var objT = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionModel>().GetByCompanyAndTransaction(user.CompanyID, TransactionId!.Value);
-                var objTransactionCausal = _objInterfazTransactionCausalModel.GetByCompanyAndTransactionAndCausal(user.CompanyID, TransactionId!.Value, causalId);
-
-
-                //Valores de tasa de cambio
-                ObjCurrencyDolares = _objInterfazCoreWebCurrency.GetCurrencyExternal(user.CompanyID);
-                ObjCurrencyCordoba = _objInterfazCoreWebCurrency.GetCurrencyDefault(user.CompanyID);
-                ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Now.Date, 1, ObjCurrencyDolares!.CurrencyID, ObjCurrencyCordoba!.CurrencyID);
-                var cycleIsCloseByDate = _objInterfazCoreWebAccounting.CycleIsCloseByDate(user.CompanyID, txtDate.DateTime);
-                if (cycleIsCloseByDate) throw new Exception("EL DOCUMENTO NO PUEDE INGRESAR, EL CICLO CONTABLE ESTA CERRADO");
-                _objInterfazCoreWebPermission.GetValueLicense(user.CompanyID, "app_invoice_billing/index");
-
-
-                //obtener el primer estado  de la factura o el estado inicial.
-                ObjParameterInvoiceBillingQuantityZero = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_QUANTITY_ZERO", user.CompanyID)!.Value;
-                ObjListWorkflowStage = _objInterfazCoreWebWorkflow.GetWorkflowAllStage("tb_transaction_master_billing", "statusID", user.CompanyID, user.BranchID, role!.RoleID);
-                //Saber si se va autoaplicar
-                ObjParameterInvoiceAutoApply = _objInterfazCoreWebParameter.GetParameter("INVOICE_AUTOAPPLY_CASH", user.CompanyID)!.Value;
-                ObjParaemterStatusCanceled = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CANCEL", user.CompanyID)!.Value;
-                ObjParameterUrlPrinterDirect = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_PRINTER_DIRECT_URL", user.CompanyID)!.Value;
-                ObjParameterImprimirPorCadaFactura = _objInterfazCoreWebParameter.GetParameter("INVOICE_PRINT_BY_INVOICE", user.CompanyID)!.Value;
-
-                //Saber si es al credito
-                ParameterCausalTypeCredit = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyID);
-                var causalIdTypeCredit = ParameterCausalTypeCredit!.Value!.Split(',');
-                // Buscar el valor en la matriz
-                var exisCausalInCredit = Array.IndexOf(causalIdTypeCredit, ((ComboBoxItem)txtCausalID.SelectedItem).Key) > 0;
-                //Si esta configurado como auto aplicado
-                //y es al credito. cambiar el estado por el estado inicial, que es registrada
-                int? statusId = 0;
-
-
-                if (ObjParameterInvoiceAutoApply == "true" && exisCausalInCredit)
+                //Actualisar nombre 
+                if (ObjParameterInvoiceUpdateNameInTransactionOnly == "false")
                 {
-                    statusId = ObjListWorkflowStage?[0].WorkflowStageID;
-                }
-                else if (ObjParameterInvoiceAutoApply == "true" && exisCausalInCredit != true)
-                {
-                    statusId = Convert.ToInt32(ObjParaemterStatusCanceled);
-                }
-                else
-                {
-                    statusId = TxtStatusId;
+                    var objItemNew = _objInterfazItemModel.GetRowByPk(user.CompanyID, itemId);
+                    objItemNew.Name = itemNameDetail;
+                    _objInterfazItemModel.UpdateAppPosme(user.CompanyID, itemId, objItemNew);
                 }
 
 
-                var currencyId = Convert.ToInt32(((ComboBoxItem)txtCurrencyID.SelectedItem).Key);
-                var goNextNumber = _objInterfazCoreWebCounter.GoNextNumber(user.CompanyID, user.BranchID, "tb_transaction_master_proforma", 0);
-                var sourceWarehouseId = Convert.ToInt32(((ComboBoxItem)txtWarehouseID.SelectedItem).Key);
-                var objTm = new TbTransactionMaster
+                if (objItemWarehouse.Quantity < quantity && objItem.IsInvoiceQuantityZero == 0 && ObjParameterInvoiceBillingQuantityZero == "false")
                 {
-                    CompanyID = user.CompanyID,
-                    TransactionID = TransactionId!.Value,
-                    BranchID = user.BranchID,
-                    TransactionNumber = string.IsNullOrEmpty(goNextNumber) ? "" : goNextNumber,
-                    TransactionCausalID = Convert.ToInt32(causalIdEditValue.Key),
-                    EntityID = TxtCustomerId,
-                    TransactionOn = txtDate.DateTime,
-                    TransactionOn2 = txtDateFirst.DateTime,
-                    StatusIDChangeOn = DateTime.Now,
-                    ComponentID = objComponentBilling.ComponentID,
-                    Note = txtNote.Text,
-                    Sign = (short?)objT!.SignInventory,
-                    CurrencyID = currencyId, //validar este campo
-                    CurrencyID2 = _objInterfazCoreWebCurrency.GetTarget(user.CompanyID, currencyId),
-                    Reference1 = ((ComboBoxItem)txtReference1.SelectedItem).Key,
-                    DescriptionReference = "reference1:entityID del proveedor de credito para las facturas al credito,reference4: customerCreditLineID linea de credito del cliente",
-                    Reference2 = txtReference2.Text,
-                    Reference3 = txtReference3.Text,
-                    Reference4 = txtCustomerCreditLineID.SelectedIndex < 0 ? "0" : ((ComboBoxItem)txtCustomerCreditLineID.SelectedItem).Key,
-                    StatusID = statusId,
-                    Amount = decimal.Zero,
-                    IsApplied = false,
-                    JournalEntryID = 0,
-                    ClassID = null,
-                    AreaID = null,
-                    SourceWarehouseID = sourceWarehouseId,
-                    TargetWarehouseID = null,
-                    IsActive = true,
-                    PeriodPay = Convert.ToInt32(((ComboBoxItem)txtPeriodPay.SelectedItem).Key),
-                    NextVisit = txtNextVisit.DateTime,
-                    NumberPhone = txtNumberPhone.Text,
-                    EntityIDSecondary = Convert.ToInt32(((ComboBoxItem)txtEmployeeID.SelectedItem).Key)
-                };
-                objTm.ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Now.Date, decimal.One, objTm.CurrencyID2!.Value, objTm.CurrencyID!.Value);
-                coreWebAuditoria.SetAuditCreated(objTm, user, "");
-                TransactionMasterId = _objInterfazTransactionMasterModel.InsertAppPosme(objTm);
-                var assembly = Assembly.GetEntryAssembly();
-                var documentoPath = "";
-                if (assembly is not null)
-                {
-                    //Crear la Carpeta para almacenar los Archivos del Documento
-                    documentoPath = $"{assembly.Location}/company_{user.CompanyID}/component_{objComponentBilling.ComponentID}/component_item_{TransactionMasterId.Value}";
+                    throw new Exception($"La cantidad de '{objItem.ItemNumber} {objItem.Name}' es mayor que la disponible en bodega");
                 }
 
-                var objTmInfo = new TbTransactionMasterInfo
+
+                var objTmd = new TbTransactionMasterDetail
                 {
                     CompanyID = objTm.CompanyID,
                     TransactionID = objTm.TransactionID,
                     TransactionMasterID = TransactionMasterId.Value,
-                    ZoneID = Convert.ToInt32(((ComboBoxItem)txtZoneID.SelectedItem).Key),
-                    MesaID = Convert.ToInt32(((ComboBoxItem)txtMesaID.SelectedItem).Key),
-                    RouteID = 0,
-                    ReferenceClientName = txtReferenceClientName.Text,
-                    ReferenceClientIdentifier = txtReferenceClientIdentifier.Text,
-                    ReceiptAmount = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmount.Text),
-                    ReceiptAmountDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountDol.Text),
-                    ReceiptAmountPoint = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountPoint.Text),
-                    ReceiptAmountBank = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBank.Text),
-                    ReceiptAmountBankDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBankDol.Text),
-                    ReceiptAmountCardDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjetaDol.Text),
-                    ReceiptAmountCard = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjeta.Text),
-                    ChangeAmount = WebToolsHelper.ConvertToNumber<decimal>(txtChangeAmount.Text),
-                    ReceiptAmountBankReference = txtReceiptAmountBank_Reference.Text,
-                    ReceiptAmountBankDolReference = txtReceiptAmountBankDol_Reference.Text,
-                    ReceiptAmountCardBankReference = txtReceiptAmountTarjeta_Reference.Text,
-                    ReceiptAmountCardBankDolReference = txtReceiptAmountTarjetaDol_Reference.Text,
-                    ReceiptAmountBankID = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)txtReceiptAmountBank_BankID.SelectedItem).Key),
-                    ReceiptAmountBankDolID = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)txtReceiptAmountBankDol_BankID.SelectedItem).Key),
-                    ReceiptAmountCardBankID = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)txtReceiptAmountTarjeta_BankID.SelectedItem).Key),
-                    ReceiptAmountCardBankDolID = WebToolsHelper.ConvertToNumber<int>(((ComboBoxItem)txtReceiptAmountTarjetaDol_BankID.SelectedItem).Key)
+                    ComponentID = objComponentItem.ComponentID,
+                    ComponentItemID = itemId,
+                    Quantity = quantity * objItemSku.Value,
+                    SkuQuantity = quantity,
+                    SkuQuantityBySku = objItemSku.Value,
+                    UnitaryCost = objItem.Cost,
+                    UnitaryPrice = price,
+                    UnitaryAmount = unitaryAmount,
+                    Tax1 = tax1,
+                    Discount = 0,
+                    PromotionID = 0,
+                    Reference1 = lote,
+                    Reference2 = vencimiento,
+                    Reference3 = "0", // Asumiendo que Reference3 es una cadena
+                    ItemNameLog = itemNameDetail,
+                    CatalogStatusID = 0,
+                    InventoryStatusID = 0,
+                    IsActive = true,
+                    QuantityStock = 0,
+                    QuantiryStockInTraffic = 0,
+                    QuantityStockUnaswared = 0,
+                    RemaingStock = 0,
+                    ExpirationDate = null,
+                    InventoryWarehouseSourceID = objTm.SourceWarehouseID,
+                    InventoryWarehouseTargetID = objTm.TargetWarehouseID,
+                    SkuCatalogItemID = skuCatalogItemId,
+                    SkuFormatoDescription = skuFormatoDescription
                 };
-                objTmInfo.TransactionMasterInfoID = _objInterfazTransactionMasterInfoModel.InsertAppPosme(objTmInfo);
 
-                //Ingresar la configuracion de precios		
-                var amountTotal = decimal.Zero;
-                var tax1Total = decimal.Zero;
-                var subAmountTotal = decimal.Zero;
+                objTmd.Cost = objTmd.Quantity * objTmd.UnitaryCost;
+                objTmd.Amount = objTmd.Quantity * objTmd.UnitaryAmount;
 
-                //Tipo de precio seleccionado por el usuario,
-                //Actualmente no se esta usando
-                var typePriceId = ((ComboBoxItem)txtTypePriceID.SelectedItem).Key; //verificar valor
-                var objListPrice = _objInterfazListPriceModel.GetListPriceToApply(user.CompanyID);
-                //obtener la lista de precio por defecto
-                var objParameterPriceDefault = _objInterfazCoreWebParameter.GetParameter("INVOICE_DEFAULT_PRICELIST", user.CompanyID);
-                var listPriceId = objParameterPriceDefault!.Value;
-                //obener los tipos de precio de la lista de precio por defecto
-                var objTipePrice = _objInterfazCoreWebCatalog.GetCatalogAllItem("tb_price", "typePriceID", user.CompanyID);
 
-                //Parametro para validar si se cambian los precios en la facturacion
-                var objParameterUpdatePrice = _objInterfazCoreWebParameter.GetParameter("INVOICE_UPDATEPRICE_ONLINE", user.CompanyID);
-                var objUpdatePrice = objParameterUpdatePrice!.Value;
+                tax1Total = decimal.Add(tax1Total, tax1!.Value);
+                subAmountTotal = subAmountTotal + (quantity * price);
+                amountTotal = decimal.Add(amountTotal, (decimal)objTmd.Amount!);
 
-                var ObjParameterUpdateNameInTransactionOnly = _objInterfazCoreWebParameter.GetParameter("INVOICE_UPDATENAME_IN_TRANSACTION_ONLY", user.CompanyID);
-                ObjParameterInvoiceUpdateNameInTransactionOnly = ObjParameterUpdateNameInTransactionOnly!.Value;
+                var transactionMasterDetailId = _objInterfazTransactionMasterDetailModel.InsertAppPosme(objTmd);
 
-                var rowCount = gridViewValues.RowCount;
-                for (var i = 0; i < rowCount; i++)
+                var objTmdc = new TbTransactionMasterDetailCredit
                 {
-                    //Recorrer la lista del detalle del documento
-                    var transactionDetailName = gridViewValues.GetRowCellValue(i, colTransactionDetailName).ToString();
-                    var itemNameDetail = transactionDetailName is null ? "" : transactionDetailName.Replace("'", "");
-                    var quantity = WebToolsHelper.ConvertToNumber<decimal>(gridViewValues.GetRowCellValue(i, colQuantity).ToString());
-                    var listPrice = Convert.ToDecimal(gridViewValues.GetRowCellValue(i, colPrice));
-                    var listLote = string.Empty;
-                    var listVencimiento = string.Empty;
-                    var skuCatalogItemId = Convert.ToInt32(gridViewValues.GetRowCellValue(i, colSku));
-                    var skuFormatoDescription = gridViewValues.GetRowCellValue(i, colSkuFormatoDescripton).ToString();
-                    var itemId = Convert.ToInt32(gridViewValues.GetRowCellValue(i, colItemId));
-
-
-                    var lote = string.IsNullOrEmpty(listLote) ? "" : listLote;
-                    var vencimiento = string.IsNullOrEmpty(listVencimiento) ? "" : listVencimiento;
-                    var warehouseId = objTm.SourceWarehouseID;
-                    var objItem = _objInterfazItemModel.GetRowByPk(user.CompanyID, itemId);
-                    var objItemWarehouse = VariablesGlobales.Instance.UnityContainer.Resolve<IItemWarehouseModel>().GetByPk(user.CompanyID, itemId, warehouseId.Value);
-                    var objPrice = _objInterfazPriceModel.GetRowByPk(user.CompanyID, objListPrice!.ListPriceID, itemId, Convert.ToInt32(typePriceId));
-                    var objCompanyComponentConcept = _objInterfazCompanyComponentConceptModel.GetRowByPk(user.CompanyID, objComponentItem.ComponentID, itemId, "IVA");
-                    var objItemSku = _objInterfazItemSkuModel.GetByPk(itemId, skuCatalogItemId);
-                    decimal price;
-                    if (objItemSku is null)
+                    TransactionMasterID = TransactionMasterId.Value,
+                    TransactionMasterDetailID = transactionMasterDetailId,
+                    Reference1 = string.IsNullOrEmpty(txtFixedExpenses.Text) ? "0" : txtFixedExpenses.Text,
+                    Reference2 = txtReportSinRiesgo.IsOn ? "1" : "0",
+                    Reference3 = "0", //no existe el campo
+                    Reference4 = "",
+                    Reference5 = "",
+                    Reference9 = "reference1: Porcentaje de Gastos Fijo para las facturas de credito,reference2: Escritura Publica,reference3: Primer Linea del Protocolo"
+                };
+                _objInterfazTransactionMasterDetailCreditModel.InsertAppPosme(objTmdc);
+                //Actualizar tipo de precio
+                if (objUpdatePrice == "true")
+                {
+                    var dataUpdatePrice = _objInterfazPriceModel.GetRowByPk(user.CompanyID, Convert.ToInt32(listPriceId), itemId, Convert.ToInt32(typePriceId));
+                    if (dataUpdatePrice is not null)
                     {
-                        throw new Exception("No hay un objeto del tipo item sku");
-                    }
-
-                    price = listPrice / objItemSku.Value;
-                    var ivaPercentage = (objCompanyComponentConcept is not null) ? objCompanyComponentConcept.ValueOut : decimal.Zero;
-                    var unitaryAmount = price * (1 + ivaPercentage);
-                    var tax1 = price * ivaPercentage;
-
-                    //Actualisar nombre 
-                    if (ObjParameterInvoiceUpdateNameInTransactionOnly == "false")
-                    {
-                        var objItemNew = _objInterfazItemModel.GetRowByPk(user.CompanyID, itemId);
-                        objItemNew.Name = itemNameDetail;
-                        _objInterfazItemModel.UpdateAppPosme(user.CompanyID, itemId, objItemNew);
-                    }
-
-
-                    if (objItemWarehouse.Quantity < quantity && objItem.IsInvoiceQuantityZero == 0 && ObjParameterInvoiceBillingQuantityZero == "false")
-                    {
-                        throw new Exception($"La cantidad de '{objItem.ItemNumber} {objItem.Name}' es mayor que la disponible en bodega");
-                    }
-
-
-                    var objTmd = new TbTransactionMasterDetail
-                    {
-                        CompanyID = objTm.CompanyID,
-                        TransactionID = objTm.TransactionID,
-                        TransactionMasterID = TransactionMasterId.Value,
-                        ComponentID = objComponentItem.ComponentID,
-                        ComponentItemID = itemId,
-                        Quantity = quantity * objItemSku.Value,
-                        SkuQuantity = quantity,
-                        SkuQuantityBySku = objItemSku.Value,
-                        UnitaryCost = objItem.Cost,
-                        UnitaryPrice = price,
-                        UnitaryAmount = unitaryAmount,
-                        Tax1 = tax1,
-                        Discount = 0,
-                        PromotionID = 0,
-                        Reference1 = lote,
-                        Reference2 = vencimiento,
-                        Reference3 = "0", // Asumiendo que Reference3 es una cadena
-                        ItemNameLog = itemNameDetail,
-                        CatalogStatusID = 0,
-                        InventoryStatusID = 0,
-                        IsActive = true,
-                        QuantityStock = 0,
-                        QuantiryStockInTraffic = 0,
-                        QuantityStockUnaswared = 0,
-                        RemaingStock = 0,
-                        ExpirationDate = null,
-                        InventoryWarehouseSourceID = objTm.SourceWarehouseID,
-                        InventoryWarehouseTargetID = objTm.TargetWarehouseID,
-                        SkuCatalogItemID = skuCatalogItemId,
-                        SkuFormatoDescription = skuFormatoDescription
-                    };
-
-                    objTmd.Cost = objTmd.Quantity * objTmd.UnitaryCost;
-                    objTmd.Amount = objTmd.Quantity * objTmd.UnitaryAmount;
-
-
-                    tax1Total = decimal.Add(tax1Total, tax1!.Value);
-                    subAmountTotal = subAmountTotal + (quantity * price);
-                    amountTotal = decimal.Add(amountTotal, (decimal)objTmd.Amount!);
-
-                    var transactionMasterDetailId = _objInterfazTransactionMasterDetailModel.InsertAppPosme(objTmd);
-
-                    var objTmdc = new TbTransactionMasterDetailCredit
-                    {
-                        TransactionMasterID= TransactionMasterId.Value,
-                        TransactionMasterDetailID = transactionMasterDetailId,
-                        Reference1 = string.IsNullOrEmpty(txtFixedExpenses.Text) ? "0" : txtFixedExpenses.Text,
-                        Reference2 = txtReportSinRiesgo.IsOn ? "1" : "0",
-                        Reference3 = "0", //no existe el campo
-                        Reference4 = "",
-                        Reference5 = "",
-                        Reference9 = "reference1: Porcentaje de Gastos Fijo para las facturas de credito,reference2: Escritura Publica,reference3: Primer Linea del Protocolo"
-                    };
-                    _objInterfazTransactionMasterDetailCreditModel.InsertAppPosme(objTmdc);
-                    //Actualizar tipo de precio
-                    if (objUpdatePrice == "true")
-                    {
-                        var dataUpdatePrice = _objInterfazPriceModel.GetRowByPk(user.CompanyID, Convert.ToInt32(listPriceId), itemId, Convert.ToInt32(typePriceId));
-                        if (dataUpdatePrice is not null)
-                        {
-                            dataUpdatePrice.Price = price;
-                            dataUpdatePrice.Percentage = objItem.Cost == 0 ? (price / 100) : (((100 * price) / objItem.Cost) - 100);
-                            _objInterfazPriceModel.UpdateAppPosme(user.CompanyID, Convert.ToInt32(listPriceId), itemId, Convert.ToInt32(typePriceId), dataUpdatePrice!);
-                        }
+                        dataUpdatePrice.Price = price;
+                        dataUpdatePrice.Percentage = objItem.Cost == 0 ? (price / 100) : (((100 * price) / objItem.Cost) - 100);
+                        _objInterfazPriceModel.UpdateAppPosme(user.CompanyID, Convert.ToInt32(listPriceId), itemId, Convert.ToInt32(typePriceId), dataUpdatePrice!);
                     }
                 }
+            }
 
-                //Actualizar Transaccion
-                objTm.Amount = amountTotal;
-                objTm.Tax1 = tax1Total;
-                objTm.SubAmount = subAmountTotal;
-                _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyID, TransactionId!.Value, TransactionMasterId.Value, objTm);
+            //Actualizar Transaccion
+            objTm.Amount = amountTotal;
+            objTm.Tax1 = tax1Total;
+            objTm.SubAmount = subAmountTotal;
+            _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyID, TransactionId!.Value, TransactionMasterId.Value, objTm);
 
-                //Aplicar el Documento?
-                //Las factuas de credito no se auto aplican auque este el parametro, por que hay que crer el documento
-                //y esto debe ser revisado cuidadosamente
-                var commandAplicable = VariablesGlobales.ConfigurationBuilder["COMMAND_APLICABLE"];
-                var validateWorkflowStage = _objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing", "statusID", (int)objTm.StatusID!, Convert.ToInt32(commandAplicable), user.CompanyID, user.BranchID, role.RoleID);
-                if (validateWorkflowStage!.Value)
-                {
-                    //Ingresar en Kardex.
-                    VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebInventory>().CalculateKardexNewOutput(user.CompanyID, TransactionId!.Value, TransactionMasterId.Value);
+            //Aplicar el Documento?
+            //Las factuas de credito no se auto aplican auque este el parametro, por que hay que crer el documento
+            //y esto debe ser revisado cuidadosamente
+            var commandAplicable = VariablesGlobales.ConfigurationBuilder["COMMAND_APLICABLE"];
+            var validateWorkflowStage = _objInterfazCoreWebWorkflow.ValidateWorkflowStage("tb_transaction_master_billing", "statusID", (int)objTm.StatusID!, Convert.ToInt32(commandAplicable), user.CompanyID, user.BranchID, role.RoleID);
+            if (validateWorkflowStage!.Value)
+            {
+                //Ingresar en Kardex.
+                VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebInventory>().CalculateKardexNewOutput(user.CompanyID, TransactionId!.Value, TransactionMasterId.Value);
 
-                    //Crear Conceptos.
-                    VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebConcept>().Billing(user.CompanyID, TransactionId!.Value, TransactionMasterId.Value);
+                //Crear Conceptos.
+                VariablesGlobales.Instance.UnityContainer.Resolve<ICoreWebConcept>().Billing(user.CompanyID, TransactionId!.Value, TransactionMasterId.Value);
 
-                    //Actualizar el numero de factura
-                    objTm.TransactionNumber = _objInterfazCoreWebCounter.GoNextNumber(user.CompanyID, user.BranchID, "tb_transaction_master_billing", 0);
-                    _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, objTm);
+                //Actualizar el numero de factura
+                objTm.TransactionNumber = _objInterfazCoreWebCounter.GoNextNumber(user.CompanyID, user.BranchID, "tb_transaction_master_billing", 0);
+                _objInterfazTransactionMasterModel.UpdateAppPosme(user.CompanyID, TransactionId.Value, TransactionMasterId.Value, objTm);
+            }
 
-                }
 
-
-                switch (ObjParameterInvoiceAutoApply)
-                {
-                    //No auto aplicar
-                    //Si auto aplicar
-                    case "false":
-                        return;
-                    case "true":
+            switch (ObjParameterInvoiceAutoApply)
+            {
+                //No auto aplicar
+                //Si auto aplicar
+                case "false":
+                    return;
+                case "true":
                     {
                         //si es auto aplicadao mandar a imprimir
                         if (ObjParameterInvoiceAutoApply == "true" && ObjParameterImprimirPorCadaFactura == "true")
@@ -1591,7 +1637,7 @@ namespace v4posme_window.Views.Invoice.Billing
 
                         break;
                     }
-                }
+            }
             //}
             //catch (Exception e)
             //{
@@ -1611,6 +1657,7 @@ namespace v4posme_window.Views.Invoice.Billing
         public void CommandRegresar(object? sender, EventArgs e)
         {
         }
+
         public void SaveUpdate()
         {
             var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
@@ -1717,10 +1764,10 @@ namespace v4posme_window.Views.Invoice.Billing
             objTmNew.CurrencyID2 = _objInterfazCoreWebCurrency.GetTarget(user.CompanyID, objTmNew.CurrencyID!.Value);
             objTmNew.ExchangeRate = _objInterfazCoreWebCurrency.GetRatio(user.CompanyID, DateTime.Now.Date, 1, objTmNew.CurrencyID2!.Value, objTmNew.CurrencyID!.Value);
 
-            var receiptAmountBankBankIdkey = txtReceiptAmountBank_BankID.SelectedItem is null ? "0" : ((ComboBoxItem)txtReceiptAmountBank_BankID.SelectedItem).Key;
-            var receiptAmountBankDolBankIdkey = txtReceiptAmountBankDol_BankID.SelectedItem is null ? "0" : ((ComboBoxItem)txtReceiptAmountBankDol_BankID.SelectedItem).Key;
-            var receiptAmountTajertaBankIdKey = txtReceiptAmountTarjeta_BankID.SelectedItem is null ? "0" : ((ComboBoxItem)txtReceiptAmountTarjeta_BankID.SelectedItem).Key;
-            var receiptAmountTarjetDolBankIdKey = txtReceiptAmountTarjetaDol_BankID.SelectedItem is null ? "0" : ((ComboBoxItem)txtReceiptAmountTarjetaDol_BankID.SelectedItem).Key;
+            var receiptAmountBankBankIdkey = FormInvoiceBillingEditPayment.txtReceiptAmountBank_BankID.SelectedItem is null ? "0" : ((ComboBoxItem)FormInvoiceBillingEditPayment.txtReceiptAmountBank_BankID.SelectedItem).Key;
+            var receiptAmountBankDolBankIdkey = FormInvoiceBillingEditPayment.txtReceiptAmountBankDol_BankID.SelectedItem is null ? "0" : ((ComboBoxItem)FormInvoiceBillingEditPayment.txtReceiptAmountBankDol_BankID.SelectedItem).Key;
+            var receiptAmountTajertaBankIdKey = FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta_BankID.SelectedItem is null ? "0" : ((ComboBoxItem)FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta_BankID.SelectedItem).Key;
+            var receiptAmountTarjetDolBankIdKey = FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol_BankID.SelectedItem is null ? "0" : ((ComboBoxItem)FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol_BankID.SelectedItem).Key;
             var objTmInfoNew = _objInterfazTransactionMasterInfoModel.GetRowByPkPk(TransactionMasterId.Value);
             objTmInfoNew.CompanyID = objTm.CompanyId;
             objTmInfoNew.TransactionID = TransactionId.Value;
@@ -1730,18 +1777,18 @@ namespace v4posme_window.Views.Invoice.Billing
             objTmInfoNew.RouteID = 0;
             objTmInfoNew.ReferenceClientName = txtReferenceClientName.Text;
             objTmInfoNew.ReferenceClientIdentifier = txtReferenceClientIdentifier.Text;
-            objTmInfoNew.ReceiptAmount = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmount.Text);
-            objTmInfoNew.ReceiptAmountDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountDol.Text);
-            objTmInfoNew.ReceiptAmountPoint = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountPoint.Text);
-            objTmInfoNew.ReceiptAmountBank = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBank.Text);
-            objTmInfoNew.ReceiptAmountBankDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBankDol.Text);
-            objTmInfoNew.ReceiptAmountCardDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjetaDol.Text);
-            objTmInfoNew.ReceiptAmountCard = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjeta.Text);
-            objTmInfoNew.ChangeAmount = WebToolsHelper.ConvertToNumber<decimal>(txtChangeAmount.Text);
-            objTmInfoNew.ReceiptAmountBankReference = txtReceiptAmountBank_Reference.Text;
-            objTmInfoNew.ReceiptAmountBankDolReference = txtReceiptAmountBankDol_Reference.Text;
-            objTmInfoNew.ReceiptAmountCardBankReference = txtReceiptAmountTarjeta_Reference.Text;
-            objTmInfoNew.ReceiptAmountCardBankDolReference = txtReceiptAmountTarjetaDol_Reference.Text;
+            objTmInfoNew.ReceiptAmount = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmount.Text);
+            objTmInfoNew.ReceiptAmountDol = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountDol.Text);
+            objTmInfoNew.ReceiptAmountPoint = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountPoint.Text);
+            objTmInfoNew.ReceiptAmountBank = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountBank.Text);
+            objTmInfoNew.ReceiptAmountBankDol = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountBankDol.Text);
+            objTmInfoNew.ReceiptAmountCardDol = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol.Text);
+            objTmInfoNew.ReceiptAmountCard = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta.Text);
+            objTmInfoNew.ChangeAmount = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtChangeAmount.Text);
+            objTmInfoNew.ReceiptAmountBankReference = FormInvoiceBillingEditPayment.txtReceiptAmountBank_Reference.Text;
+            objTmInfoNew.ReceiptAmountBankDolReference = FormInvoiceBillingEditPayment.txtReceiptAmountBankDol_Reference.Text;
+            objTmInfoNew.ReceiptAmountCardBankReference = FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta_Reference.Text;
+            objTmInfoNew.ReceiptAmountCardBankDolReference = FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol_Reference.Text;
             objTmInfoNew.ReceiptAmountBankID = WebToolsHelper.ConvertToNumber<int>(receiptAmountBankBankIdkey);
             objTmInfoNew.ReceiptAmountBankDolID = WebToolsHelper.ConvertToNumber<int>(receiptAmountBankDolBankIdkey);
             objTmInfoNew.ReceiptAmountCardBankID = WebToolsHelper.ConvertToNumber<int>(receiptAmountTajertaBankIdKey);
@@ -2227,7 +2274,7 @@ namespace v4posme_window.Views.Invoice.Billing
                                 DayDelay = 0,
                                 Note = "",
                                 StatusID = _objInterfazCoreWebWorkflow.GetWorkflowInitStage("tb_customer_credit_amoritization", "statusID", user.CompanyID, user.BranchID, role.RoleID)![0].WorkflowStageID,
-                                IsActive = true 
+                                IsActive = true
                             };
                             _objInterfazCustomerCreditAmortizationModel.InsertAppPosme(objCustomerAmoritizacion);
                         }
@@ -2299,10 +2346,10 @@ namespace v4posme_window.Views.Invoice.Billing
 
         public void PreRender()
         {
-            var objWebToolsCustomizationViewHelper  = new WebToolsCustomizationViewHelper();
-            var objCoreWebRenderInView              = new CoreWebRenderInView();
-            var objCompany                          = VariablesGlobales.Instance.Company;
-            
+            var objWebToolsCustomizationViewHelper = new WebToolsCustomizationViewHelper();
+            var objCoreWebRenderInView = new CoreWebRenderInView();
+            var objCompany = VariablesGlobales.Instance.Company;
+
 
             var imagenInvoice = VariablesGlobales.ConfigurationBuilder["PATH_IMAGE_IN_INVOICE_POSME"];
             if (imagenInvoice is not null)
@@ -2322,25 +2369,25 @@ namespace v4posme_window.Views.Invoice.Billing
                 }
             }
 
-            colTransactionDetailName.OptionsColumn.AllowEdit    = varPermisosEsPermitidoModificarNombre;
-            colPrice.OptionsColumn.AllowEdit                    = varPermisosEsPermitidoModificarPrecio;
-            colAccionMas.Caption                                = "Mas";
-            colAccionMenos.Caption                              = "Menos";
-            colAccionPrecios.Caption                            = "Precios";
-            ObjSELECCIONAR_ITEM_BILLING_BACKGROUND              = VariablesGlobales.Instance.ObjSELECCIONAR_ITEM_BILLING_BACKGROUND;
+            colTransactionDetailName.OptionsColumn.AllowEdit = varPermisosEsPermitidoModificarNombre;
+            colPrice.OptionsColumn.AllowEdit = varPermisosEsPermitidoModificarPrecio;
+            colAccionMas.Caption = "Mas";
+            colAccionMenos.Caption = "Menos";
+            colAccionPrecios.Caption = "Precios";
+            ObjSELECCIONAR_ITEM_BILLING_BACKGROUND = VariablesGlobales.Instance.ObjSELECCIONAR_ITEM_BILLING_BACKGROUND;
 
 
             //Personalizar Label ZONAS
-            string? targetControlLabelZone      = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZoneControlPosition", "");                        
-            labelControl12.Text                 = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZone", "Zona");
+            string? targetControlLabelZone = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZoneControlPosition", "");
+            labelControl12.Text = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZone", "Zona");
             objCoreWebRenderInView.MoveControlToSource(targetControlLabelZone, "labelControl12", this);
-            objCoreWebRenderInView.ChangeSizeAutoSizeMode(labelControl12,this);
-            objCoreWebRenderInView.ChangePositionX("labelControl12", objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZoneX", "0"),this);
-        
+            objCoreWebRenderInView.ChangeSizeAutoSizeMode(labelControl12, this);
+            objCoreWebRenderInView.ChangePositionX("labelControl12", objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divLabelZoneX", "0"), this);
+
             //Personalizar Control ZONAS
-            string? targetControlSourceName   = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlZoneControlPosition", "");
+            string? targetControlSourceName = objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlZoneControlPosition", "");
             objCoreWebRenderInView.MoveControlToSource(targetControlSourceName, "txtZoneID", this);
-            objCoreWebRenderInView.ChangeWidth("txtZoneID", objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlZoneWidth", "0"),this);
+            objCoreWebRenderInView.ChangeWidth("txtZoneID", objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlZoneWidth", "0"), this);
 
 
             //Personalizar Label Identificacion del cliente
@@ -2348,7 +2395,6 @@ namespace v4posme_window.Views.Invoice.Billing
             //txtReferenceClientIdentifier.Visible    = Convert.ToBoolean(objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlShowWindowIdentificationCustomer", "true"));
             objCoreWebRenderInView.ChangeHigth("txtReferenceClientIdentifier", objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlIdentificationCustomerHigth", "0"), this);
             objCoreWebRenderInView.ChangeWidth("txtReferenceClientIdentifier", objWebToolsCustomizationViewHelper.GetBehavior(objCompany.Type, "app_invoice_billing", "divControlIdentificationCustomerWidth", "0"), this);
-
         }
 
 
@@ -2372,10 +2418,10 @@ namespace v4posme_window.Views.Invoice.Billing
                     CoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "CatalogItemID", "Name", ObjParameterCxcFrecuenciaPayDefault);
                     CoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "TransactionCausalID", "Name", ObjCausal.ElementAt(0).TransactionCausalID);
                     CoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "CatalogItemID", "Name", ObjListTypePrice.ElementAt(0).CatalogItemID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "BankID", "Name", ObjListBank.ElementAt(0).BankID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "BankID", "Name", ObjListBank.ElementAt(0).BankID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "BankID", "Name", ObjListBank.ElementAt(0).BankID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "BankID", "Name", ObjListBank.ElementAt(0).BankID);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta_BankID, "BankID", "Name", ObjListBank.ElementAt(0).BankID);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol_BankID, "BankID", "Name", ObjListBank.ElementAt(0).BankID);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, FormInvoiceBillingEditPayment.txtReceiptAmountBank_BankID, "BankID", "Name", ObjListBank.ElementAt(0).BankID);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, FormInvoiceBillingEditPayment.txtReceiptAmountBankDol_BankID, "BankID", "Name", ObjListBank.ElementAt(0).BankID);
                     lblTitulo.Text = @"Factura: #00000000";
                     txtExchangeRate.Text = ExchangeRate.ToString(CultureInfo.InvariantCulture);
                     txtCustomerDescription.Text = ObjNaturalDefault is not null ? ($"{ObjCustomerDefault.CustomerNumber} {ObjNaturalDefault!.FirstName!.ToUpper()} {ObjNaturalDefault!.LastName!.ToUpper()}") : ($"{ObjCustomerDefault.CustomerNumber} {ObjLegalDefault!.ComercialName!.ToUpper()}");
@@ -2395,26 +2441,29 @@ namespace v4posme_window.Views.Invoice.Billing
                     txtReportSinRiesgo.IsOn = false;
                     TxtStatusOldId = ObjListWorkflowStage!.ElementAt(0).WorkflowStageID;
                     TxtStatusId = ObjListWorkflowStage!.ElementAt(0).WorkflowStageID;
-                    txtSubTotal.Text = @"0.0";
-                    txtIva.Text = @"0.0";
-                    txtTotal.Text = @"0.0";
-                    txtChangeAmount.Text = @"0.0";
-                    txtReceiptAmount.Text = @"0.0";
-                    txtReceiptAmountDol.Text = @"0.0";
-                    txtReceiptAmountTarjeta.Text = @"0.0";
-                    txtReceiptAmountTarjeta_Reference.Text = string.Empty;
-                    txtReceiptAmountTarjetaDol.Text = @"0.0";
-                    txtReceiptAmountTarjetaDol_Reference.Text = string.Empty;
-                    txtReceiptAmountBank.Text = @"0.0";
-                    txtReceiptAmountBank_Reference.Text = string.Empty;
-                    txtReceiptAmountBankDol.Text = @"0.0";
-                    txtReceiptAmountBankDol_Reference.Text = string.Empty;
-                    txtReceiptAmountPoint.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtSubTotal.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtIva.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtTotal.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtSubTotal.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtIva.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtTotal.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtChangeAmount.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmount.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountDol.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta_Reference.Text = string.Empty;
+                    FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol_Reference.Text = string.Empty;
+                    FormInvoiceBillingEditPayment.txtReceiptAmountBank.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountBank_Reference.Text = string.Empty;
+                    FormInvoiceBillingEditPayment.txtReceiptAmountBankDol.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountBankDol_Reference.Text = string.Empty;
+                    FormInvoiceBillingEditPayment.txtReceiptAmountPoint.Text = @"0.0";
                     txtNote.Text = "sin comentario...";
 
                     //Llenar Linea de Credito
                     FnRenderLineaCredit(ObjListCustomerCreditLine, ParameterCausalTypeCredit!);
-                    btnAplicar.Visible = false;
+                    FormInvoiceBillingEditPayment.btnAplicar.Visible = false;
 
                     btnPrinterFooter.Visibility = ObjParameterShowComandoDeCocina!.ToUpper() == "false".ToUpper() ? BarItemVisibility.Never : BarItemVisibility.Always;
                     btnPrinterBar.Visibility = ObjParameterInvoiceBillingShowCommandBar!.ToUpper() == "false".ToUpper() ? BarItemVisibility.Never : BarItemVisibility.Always;
@@ -2432,10 +2481,10 @@ namespace v4posme_window.Views.Invoice.Billing
                     CoreWebRenderInView.LlenarComboBox(ObjListPay, txtPeriodPay, "CatalogItemID", "Name", ObjTransactionMaster.PeriodPay);
                     CoreWebRenderInView.LlenarComboBox(ObjCausal, txtCausalID, "TransactionCausalID", "Name", ObjTransactionMaster.TransactionCausalId);
                     CoreWebRenderInView.LlenarComboBox(ObjListTypePrice, txtTypePriceID, "CatalogItemID", "Name", ObjListTypePrice.ElementAt(0).CatalogItemID);
-                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjeta_BankID, "BankID", "Name", ObjTransactionMasterInfo.ReceiptAmountCardBankId);
-                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountTarjetaDol_BankID, "BankID", "Name", ObjTransactionMasterInfo.ReceiptAmountCardBankDolId);
-                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBank_BankID, "BankID", "Name", ObjTransactionMasterInfo.ReceiptAmountBankId);
-                    CoreWebRenderInView.LlenarComboBox(ObjListBank, txtReceiptAmountBankDol_BankID, "BankID", "Name", ObjTransactionMasterInfo.ReceiptAmountBankDolId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta_BankID, "BankID", "Name", ObjTransactionMasterInfo.ReceiptAmountCardBankId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol_BankID, "BankID", "Name", ObjTransactionMasterInfo.ReceiptAmountCardBankDolId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, FormInvoiceBillingEditPayment.txtReceiptAmountBank_BankID, "BankID", "Name", ObjTransactionMasterInfo.ReceiptAmountBankId);
+                    CoreWebRenderInView.LlenarComboBox(ObjListBank, FormInvoiceBillingEditPayment.txtReceiptAmountBankDol_BankID, "BankID", "Name", ObjTransactionMasterInfo.ReceiptAmountBankDolId);
 
                     lblTitulo.Text = $@"Factura: #{ObjTransactionMaster.TransactionNumber}";
                     txtExchangeRate.Text = ExchangeRate.ToString(CultureInfo.InvariantCulture);
@@ -2459,9 +2508,9 @@ namespace v4posme_window.Views.Invoice.Billing
                     txtReportSinRiesgo.IsOn = ObjTransactionMasterDetailCredit is not null && ObjTransactionMasterDetailCredit.Reference2!.Equals("1", StringComparison.InvariantCultureIgnoreCase);
                     TxtStatusOldId = ObjTransactionMaster.StatusId;
                     TxtStatusId = ObjTransactionMaster.StatusId;
-                    txtSubTotal.Text = @"0.0";
-                    txtIva.Text = @"0.0";
-                    txtTotal.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtSubTotal.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtIva.Text = @"0.0";
+                    FormInvoiceBillingEditPayment.txtTotal.Text = @"0.0";
 
                     if (ObjTransactionMasterDetail.Count > 0)
                     {
@@ -2505,21 +2554,21 @@ namespace v4posme_window.Views.Invoice.Billing
                     FnRecalculateDetail(false, "");
 
                     //Renderizar Pagos                    
-                    txtReceiptAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString(FormatDecimal);
-                    txtReceiptAmountDol.Text = ObjTransactionMasterInfo.ReceiptAmountDol.ToString(FormatDecimal);
-                    txtReceiptAmountTarjeta.Text = ObjTransactionMasterInfo.ReceiptAmountCard.ToString(FormatDecimal);
-                    txtReceiptAmountTarjeta_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountCardBankReference;
-                    txtReceiptAmountTarjetaDol.Text = ObjTransactionMasterInfo.ReceiptAmountCardDol.ToString(FormatDecimal);
-                    txtReceiptAmountTarjetaDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
-                    txtReceiptAmountBank.Text = ObjTransactionMasterInfo.ReceiptAmountBank.ToString(FormatDecimal);
-                    txtReceiptAmountBank_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankReference;
-                    txtReceiptAmountBankDol.Text = ObjTransactionMasterInfo.ReceiptAmountBankDol.ToString(FormatDecimal);
-                    txtReceiptAmountBankDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
-                    txtReceiptAmountPoint.Text = ObjTransactionMasterInfo.ReceiptAmountPoint!.Value.ToString(FormatDecimal);
-                    txtChangeAmount.Text = ObjTransactionMasterInfo.ChangeAmount.ToString(FormatDecimal);
-                    btnAplicar.Visible = true;
+                    FormInvoiceBillingEditPayment.txtReceiptAmount.Text = ObjTransactionMasterInfo.ReceiptAmount!.Value.ToString(FormatDecimal);
+                    FormInvoiceBillingEditPayment.txtReceiptAmountDol.Text = ObjTransactionMasterInfo.ReceiptAmountDol.ToString(FormatDecimal);
+                    FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta.Text = ObjTransactionMasterInfo.ReceiptAmountCard.ToString(FormatDecimal);
+                    FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountCardBankReference;
+                    FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol.Text = ObjTransactionMasterInfo.ReceiptAmountCardDol.ToString(FormatDecimal);
+                    FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
+                    FormInvoiceBillingEditPayment.txtReceiptAmountBank.Text = ObjTransactionMasterInfo.ReceiptAmountBank.ToString(FormatDecimal);
+                    FormInvoiceBillingEditPayment.txtReceiptAmountBank_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankReference;
+                    FormInvoiceBillingEditPayment.txtReceiptAmountBankDol.Text = ObjTransactionMasterInfo.ReceiptAmountBankDol.ToString(FormatDecimal);
+                    FormInvoiceBillingEditPayment.txtReceiptAmountBankDol_Reference.Text = ObjTransactionMasterInfo.ReceiptAmountBankDolReference;
+                    FormInvoiceBillingEditPayment.txtReceiptAmountPoint.Text = ObjTransactionMasterInfo.ReceiptAmountPoint!.Value.ToString(FormatDecimal);
+                    FormInvoiceBillingEditPayment.txtChangeAmount.Text = ObjTransactionMasterInfo.ChangeAmount.ToString(FormatDecimal);
+                    FormInvoiceBillingEditPayment.btnAplicar.Visible = true;
 
-                    btnPrinterFooter.Visibility = ObjParameterShowComandoDeCocina!.ToUpper() == "false".ToUpper() ?  BarItemVisibility.Never : BarItemVisibility.Always;
+                    btnPrinterFooter.Visibility = ObjParameterShowComandoDeCocina!.ToUpper() == "false".ToUpper() ? BarItemVisibility.Never : BarItemVisibility.Always;
                     btnPrinterBar.Visibility = ObjParameterInvoiceBillingShowCommandBar!.ToUpper() == "false".ToUpper() ? BarItemVisibility.Never : BarItemVisibility.Always;
                     break;
                 default:
@@ -2537,6 +2586,7 @@ namespace v4posme_window.Views.Invoice.Billing
         public void InitializeControl()
         {
         }
+
         public void FnEnviarFactura()
         {
             FnValidateFormAndSubmit();
@@ -2668,7 +2718,7 @@ namespace v4posme_window.Views.Invoice.Billing
                 return false;
             }
 
-            if (WebToolsHelper.ConvertToNumber<decimal>(txtChangeAmount.EditValue.ToString()) > 0 && invoiceTypeCredit)
+            if (WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtChangeAmount.EditValue.ToString()) > 0 && invoiceTypeCredit)
             {
                 _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
                     "No puede haber cambios si la factura es de credito.", this);
@@ -2695,7 +2745,7 @@ namespace v4posme_window.Views.Invoice.Billing
                     return false;
                 }
 
-                var montoTotalInvoice = WebToolsHelper.ConvertToNumber<decimal>(txtTotal.EditValue.ToString());
+                var montoTotalInvoice = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtTotal.EditValue.ToString());
                 decimal? balanceCredit = 0.0m;
 
                 if (ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE!.ToUpper() == "true".ToUpper())
@@ -2720,7 +2770,7 @@ namespace v4posme_window.Views.Invoice.Billing
             }
             else
             {
-                if (WebToolsHelper.ConvertToNumber<decimal>(txtChangeAmount.EditValue.ToString()) < 0)
+                if (WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtChangeAmount.EditValue.ToString()) < 0)
                 {
                     _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Datos incorrectos",
                         "El cambio de la factura no puede ser menor que 0.", this);
@@ -2906,46 +2956,46 @@ namespace v4posme_window.Views.Invoice.Billing
             var currencyId = ((ComboBoxItem)txtCurrencyID.SelectedItem).Key;
             if (Convert.ToInt32(currencyId) == 1 /*cordoba*/)
             {
-                var ingresoCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmount.Text);
-                var bancoCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBank.Text);
-                var puntoCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountPoint.Text);
+                var ingresoCordoba = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmount.Text);
+                var bancoCordoba = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountBank.Text);
+                var puntoCordoba = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountPoint.Text);
 
-                var tarjetaCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjeta.Text);
-                var tarejtaDolares = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjetaDol.Text);
-                var bancoDolares = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBankDol.Text);
+                var tarjetaCordoba = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta.Text);
+                var tarejtaDolares = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol.Text);
+                var bancoDolares = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountBankDol.Text);
 
-                var ingresoDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountDol.Text);
+                var ingresoDol = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountDol.Text);
                 var tipoCambio = WebToolsHelper.ConvertToNumber<decimal>(txtExchangeRate.Text);
-                var total = WebToolsHelper.ConvertToNumber<decimal>(txtTotal.Text);
+                var total = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtTotal.Text);
 
                 if (tipoCambio == 0)
                 {
                     var resultTotal = 0;
-                    txtChangeAmount.Text = resultTotal.ToString(FormatDecimal);
+                    FormInvoiceBillingEditPayment.txtChangeAmount.Text = resultTotal.ToString(FormatDecimal);
                 }
                 else
                 {
                     var resultTotal = (ingresoCordoba + bancoCordoba + puntoCordoba + tarjetaCordoba + (bancoDolares / tipoCambio) + (tarejtaDolares / tipoCambio) + (ingresoDol / tipoCambio)) - total;
-                    txtChangeAmount.Text = resultTotal.ToString(FormatDecimal);
+                    FormInvoiceBillingEditPayment.txtChangeAmount.Text = resultTotal.ToString(FormatDecimal);
                 }
             }
 
             if (Convert.ToInt32(currencyId) == 2 /*dolar*/)
             {
-                var ingresoCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmount.Text);
-                var bancoCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBank.Text);
-                var puntoCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountPoint.Text);
+                var ingresoCordoba = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmount.Text);
+                var bancoCordoba = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountBank.Text);
+                var puntoCordoba = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountPoint.Text);
 
-                var tarjetaCordoba = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjeta.Text);
-                var tarejtaDolares = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountTarjetaDol.Text);
-                var bancoDolares = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountBankDol.Text);
+                var tarjetaCordoba = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta.Text);
+                var tarejtaDolares = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol.Text);
+                var bancoDolares = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountBankDol.Text);
 
-                var ingresoDol = WebToolsHelper.ConvertToNumber<decimal>(txtReceiptAmountDol.Text);
+                var ingresoDol = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtReceiptAmountDol.Text);
                 var tipoCambio = WebToolsHelper.ConvertToNumber<decimal>(txtExchangeRate.Text);
-                var total = WebToolsHelper.ConvertToNumber<decimal>(txtTotal.Text);
+                var total = WebToolsHelper.ConvertToNumber<decimal>(FormInvoiceBillingEditPayment.txtTotal.Text);
 
                 var resultTotal = (ingresoCordoba + bancoCordoba + puntoCordoba + tarjetaCordoba + (bancoDolares * tipoCambio) + (tarejtaDolares * tipoCambio) + (ingresoDol * tipoCambio)) - total;
-                txtChangeAmount.Text = resultTotal.ToString(FormatDecimal);
+                FormInvoiceBillingEditPayment.txtChangeAmount.Text = resultTotal.ToString(FormatDecimal);
             }
         }
 
@@ -2981,17 +3031,17 @@ namespace v4posme_window.Views.Invoice.Billing
             gridViewValues.RefreshData();
             gridViewTbTransactionMasterDetail.RefreshDataSource();
 
-            txtReceiptAmount.Text = "0";
-            txtReceiptAmountDol.Text = "0";
-            txtReceiptAmountBank.Text = "0";
-            txtReceiptAmountPoint.Text = "0";
-            txtChangeAmount.Text = "0";
-            txtSubTotal.Text = "0";
-            txtIva.Text = "0";
-            txtTotal.Text = "0";
-            txtReceiptAmountTarjeta.Text = "0";
-            txtReceiptAmountTarjetaDol.Text = "0";
-            txtReceiptAmountBankDol.Text = "0";
+            FormInvoiceBillingEditPayment.txtReceiptAmount.Text = "0";
+            FormInvoiceBillingEditPayment.txtReceiptAmountDol.Text = "0";
+            FormInvoiceBillingEditPayment.txtReceiptAmountBank.Text = "0";
+            FormInvoiceBillingEditPayment.txtReceiptAmountPoint.Text = "0";
+            FormInvoiceBillingEditPayment.txtChangeAmount.Text = "0";
+            FormInvoiceBillingEditPayment.txtSubTotal.Text = "0";
+            FormInvoiceBillingEditPayment.txtIva.Text = "0";
+            FormInvoiceBillingEditPayment.txtTotal.Text = "0";
+            FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta.Text = "0";
+            FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol.Text = "0";
+            FormInvoiceBillingEditPayment.txtReceiptAmountBankDol.Text = "0";
         }
 
 
@@ -2999,7 +3049,7 @@ namespace v4posme_window.Views.Invoice.Billing
         {
             Dictionary<string, string> diccionario = new Dictionary<string, string>();
             WebToolsHelper objWebToolsHelper = new WebToolsHelper();
-            string itemIDTemporal            = objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0");
+            string itemIDTemporal = objWebToolsHelper.helper_RequestGetValueObjet(mensaje, "itemID", "0");
 
             if (itemIDTemporal == "0")
                 return;
@@ -3157,22 +3207,22 @@ namespace v4posme_window.Views.Invoice.Billing
                 NSSystemDetailInvoice.SetRowCellValue(i, colSubTotal, subtotal);
             }
 
-            txtSubTotal.Text = subtotalGeneral.ToString(FormatDecimal);
-            txtIva.Text = ivaGeneral.ToString(FormatDecimal);
-            txtTotal.Text = totalGeneral.ToString(FormatDecimal);
-
-
+            FormInvoiceBillingEditPayment.txtSubTotal.Text = subtotalGeneral.ToString(FormatDecimal);
+            FormInvoiceBillingEditPayment.txtIva.Text = ivaGeneral.ToString(FormatDecimal);
+            FormInvoiceBillingEditPayment.txtTotal.Text = totalGeneral.ToString(FormatDecimal);
+            FormInvoiceBillingEditPayment.lblTotal.Text = totalGeneral.ToString(FormatDecimal);
+            lblTotal.Text = totalGeneral.ToString(FormatDecimal);
             //Si es de credito que la factura no supere la linea de credito
             if (TransactionMasterId > 0)
             {
-                txtReceiptAmountDol.Text = @"0";
-                txtChangeAmount.Text = @"0";
-                txtReceiptAmountBank.Text = @"0";
-                txtReceiptAmountPoint.Text = @"0";
-                txtReceiptAmountTarjeta.Text = @"0";
-                txtReceiptAmountTarjetaDol.Text = @"0";
-                txtReceiptAmountBankDol.Text = @"0";
-                txtReceiptAmount.Text = @"0";
+                FormInvoiceBillingEditPayment.txtReceiptAmountDol.Text = @"0";
+                FormInvoiceBillingEditPayment.txtChangeAmount.Text = @"0";
+                FormInvoiceBillingEditPayment.txtReceiptAmountBank.Text = @"0";
+                FormInvoiceBillingEditPayment.txtReceiptAmountPoint.Text = @"0";
+                FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta.Text = @"0";
+                FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol.Text = @"0";
+                FormInvoiceBillingEditPayment.txtReceiptAmountBankDol.Text = @"0";
+                FormInvoiceBillingEditPayment.txtReceiptAmount.Text = @"0";
             }
             else
             {
@@ -3198,25 +3248,25 @@ namespace v4posme_window.Views.Invoice.Billing
 
                 if (invoiceTypeCredit == true)
                 {
-                    txtReceiptAmountDol.Text = @"0";
-                    txtChangeAmount.Text = @"0";
-                    txtReceiptAmountBank.Text = @"0";
-                    txtReceiptAmountPoint.Text = @"0";
-                    txtReceiptAmountTarjeta.Text = @"0";
-                    txtReceiptAmountTarjetaDol.Text = @"0";
-                    txtReceiptAmountBankDol.Text = @"0";
-                    txtReceiptAmount.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountDol.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtChangeAmount.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountBank.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountPoint.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountBankDol.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmount.Text = @"0";
                 }
                 else
                 {
-                    txtReceiptAmountDol.Text = @"0";
-                    txtChangeAmount.Text = @"0";
-                    txtReceiptAmountBank.Text = @"0";
-                    txtReceiptAmountPoint.Text = @"0";
-                    txtReceiptAmountTarjeta.Text = @"0";
-                    txtReceiptAmountTarjetaDol.Text = @"0";
-                    txtReceiptAmountBankDol.Text = @"0";
-                    txtReceiptAmount.Text = decimal.Round(totalGeneral, 2).ToString("N2");
+                    FormInvoiceBillingEditPayment.txtReceiptAmountDol.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtChangeAmount.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountBank.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountPoint.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmountBankDol.Text = @"0";
+                    FormInvoiceBillingEditPayment.txtReceiptAmount.Text = decimal.Round(totalGeneral, 2).ToString("N2");
                 }
             }
         }
@@ -3228,8 +3278,20 @@ namespace v4posme_window.Views.Invoice.Billing
             FnRenderLineaCredit(dataForm!.ObjListCustomerCreditLine!, dataForm.ParameterCausalTypeCredit!);
         }
 
-        #endregion
+        private bool IsDialogPaymentOpen()
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is FormInvoiceBillingEditPaymentDialog)
+                {
+                    return true;
+                }
+            }
 
+            return false;
+        }
+
+        #endregion
 
         #region Eventos Formulario
 
@@ -3252,25 +3314,25 @@ namespace v4posme_window.Views.Invoice.Billing
                     OpenCashbox();
                     break;
                 case Keys.Down:
-                {
-                    if (gridViewValues.RowCount > 0)
                     {
-                        gridViewValues.Focus();
-                        gridViewValues.FocusedRowHandle = 0;
-                    }
+                        if (gridViewValues.RowCount > 0)
+                        {
+                            gridViewValues.Focus();
+                            gridViewValues.FocusedRowHandle = 0;
+                        }
 
-                    break;
-                }
+                        break;
+                    }
             }
         }
 
-        private void txtReceiptAmountDol_KeyPress(object sender, KeyPressEventArgs e)
+        public void txtReceiptAmountDol_KeyPress(object sender, KeyPressEventArgs e)
         {
             switch (e.KeyChar)
             {
                 case (char)Keys.Tab:
                 case (char)Keys.Enter:
-                    btnRegistrar.Focus();
+                    FormInvoiceBillingEditPayment.btnRegistrar.Focus();
                     break;
             }
         }
@@ -3296,7 +3358,7 @@ namespace v4posme_window.Views.Invoice.Billing
 
             if (codigoABuscar == "")
             {
-                txtReceiptAmount.Focus();
+                FormInvoiceBillingEditPayment.txtReceiptAmount.Focus();
             }
 
 
@@ -3419,7 +3481,7 @@ namespace v4posme_window.Views.Invoice.Billing
             FnClearData();
         }
 
-        private void txtReceiptAmount_EditValueChanged(object sender, EventArgs e)
+        public void txtReceiptAmount_EditValueChanged(object sender, EventArgs e)
         {
             FnCalculateAmountPay();
         }
@@ -3428,28 +3490,28 @@ namespace v4posme_window.Views.Invoice.Billing
         {
         }
 
-        private void txtReceiptAmount_KeyDown(object sender, KeyEventArgs e)
+        public void txtReceiptAmount_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter)
             {
                 return;
             }
 
-            txtReceiptAmountDol.Focus();
+            FormInvoiceBillingEditPayment.txtReceiptAmountDol.Focus();
         }
 
-        private void txtReceiptAmountDol_KeyDown(object sender, KeyEventArgs e)
+        public void txtReceiptAmountDol_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.Enter:
                 case Keys.Tab:
-                    btnRegistrar.Focus();
+                    FormInvoiceBillingEditPayment.btnRegistrar.Focus();
                     break;
             }
         }
 
-        private void txtReceiptAmountDol_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        public void txtReceiptAmountDol_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.A)
             {
@@ -3464,32 +3526,32 @@ namespace v4posme_window.Views.Invoice.Billing
             }
         }
 
-        private void txtReceiptAmountDol_EditValueChanged(object sender, EventArgs e)
+        public void txtReceiptAmountDol_EditValueChanged(object sender, EventArgs e)
         {
             FnCalculateAmountPay();
         }
 
-        private void txtReceiptAmountTarjeta_EditValueChanged(object sender, EventArgs e)
+        public void txtReceiptAmountTarjeta_EditValueChanged(object sender, EventArgs e)
         {
             FnCalculateAmountPay();
         }
 
-        private void txtReceiptAmountTarjetaDol_EditValueChanged(object sender, EventArgs e)
+        public void txtReceiptAmountTarjetaDol_EditValueChanged(object sender, EventArgs e)
         {
             FnCalculateAmountPay();
         }
 
-        private void txtReceiptAmountPoint_EditValueChanged(object sender, EventArgs e)
+        public void txtReceiptAmountPoint_EditValueChanged(object sender, EventArgs e)
         {
             FnCalculateAmountPay();
         }
 
-        private void txtReceiptAmountBank_EditValueChanged(object sender, EventArgs e)
+        public void txtReceiptAmountBank_EditValueChanged(object sender, EventArgs e)
         {
             FnCalculateAmountPay();
         }
 
-        private void txtReceiptAmountBankDol_EditValueChanged(object sender, EventArgs e)
+        public void txtReceiptAmountBankDol_EditValueChanged(object sender, EventArgs e)
         {
             FnCalculateAmountPay();
         }
@@ -3612,8 +3674,13 @@ namespace v4posme_window.Views.Invoice.Billing
             FnRecalculateDetail(true, "txtPrice");
         }
 
-        private void btnNew_Click(object sender, EventArgs e)
+        public void btnNew_Click(object sender, EventArgs e)
         {
+            if (IsDialogPaymentOpen())
+            {
+                FormInvoiceBillingEditPayment.Close();
+            }
+
             if (!progressPanel.Visible)
             {
                 progressPanel.Visible = true;
@@ -3793,7 +3860,7 @@ namespace v4posme_window.Views.Invoice.Billing
         {
         }
 
-        private void btnRegistrar_Click(object sender, EventArgs e)
+        public void btnRegistrar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -3826,6 +3893,11 @@ namespace v4posme_window.Views.Invoice.Billing
                         }
                         else
                         {
+                            if (IsDialogPaymentOpen())
+                            {
+                                FormInvoiceBillingEditPayment.Close();
+                            }
+
                             _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Registrar", "Se han registrdo los datos de forma correcta", this);
                             if (TransactionMasterId > 0 && ObjParameterInvoiceAutoApply == "false")
                             {
@@ -3859,7 +3931,7 @@ namespace v4posme_window.Views.Invoice.Billing
             }
         }
 
-        private void btnAplicar_Click(object sender, EventArgs e)
+        public void btnAplicar_Click(object sender, EventArgs e)
         {
             _backgroundWorker = new BackgroundWorker();
             if (!FnValidateFormAndSubmit()) return;
@@ -3979,30 +4051,45 @@ namespace v4posme_window.Views.Invoice.Billing
 
         private void gridViewValues_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Up && gridViewValues.FocusedRowHandle == 0)
+            switch (e.KeyCode)
             {
-                txtScanerCodigo.Focus();
-            }
-
-            if (e.KeyCode == Keys.Enter)
-            {
-                var focusedColumn = gridViewValues.FocusedColumn;
-
-                if (focusedColumn.FieldName == colAccionMas.FieldName)
-                {
+                case Keys.Tab:
+                    e.SuppressKeyPress = true;
+                    txtDate.Focus();
+                    break;
+                case Keys.Up when gridViewValues.FocusedRowHandle == 0:
+                    txtScanerCodigo.Focus();
+                    break;
+                case Keys.Add:
+                case Keys.Oemplus:
                     ButtonPlusQuantity_Click(sender, e);
-                }
-
-                if (focusedColumn.FieldName == colAccionMenos.FieldName)
-                {
+                    break;
+                case Keys.Subtract:
+                case Keys.OemMinus:
                     ButtonMinusQuantity_Click(sender, e);
-                }
+                    break;
+                case Keys.Enter:
+                    {
+                        var focusedColumn = gridViewValues.FocusedColumn;
 
-                if (focusedColumn.FieldName == colAccionPrecios.FieldName)
-                {
-                    var editor = (sender as GridView);
-                    repositoryItemComboBox2.OwnerEdit.ShowPopup();
-                }
+                        if (focusedColumn.FieldName == colAccionMas.FieldName)
+                        {
+                            ButtonPlusQuantity_Click(sender, e);
+                        }
+
+                        if (focusedColumn.FieldName == colAccionMenos.FieldName)
+                        {
+                            ButtonMinusQuantity_Click(sender, e);
+                        }
+
+                        if (focusedColumn.FieldName == colAccionPrecios.FieldName)
+                        {
+                            var editor = (sender as GridView);
+                            repositoryItemComboBox2.OwnerEdit.ShowPopup();
+                        }
+
+                        break;
+                    }
             }
         }
 
@@ -4014,5 +4101,105 @@ namespace v4posme_window.Views.Invoice.Billing
         }
 
         #endregion
+
+        private void FormInvoiceBillingEdit_KeyDown(object sender, KeyEventArgs e)
+        {
+            //agregar una tecla para q el scaner tenga el focus
+            switch (e.KeyData)
+            {
+                case Keys.F1:
+                    //Ayuda
+                    var panelAyuda = new FormInvoiceBillingEditHelpDialog();
+                    panelAyuda.ShowDialog(this);
+                    break;
+                case Keys.F2:
+                    //Imprimir
+                    ComandPrinter();
+                    break;
+                case Keys.F3:
+                    //Eliminar Factura
+                    barManager1_ItemClick(sender, new ItemClickEventArgs(barManager1.Items["btnInvoiceDelete"], null));
+                    break;
+                case Keys.F4:
+                    //Nueva Factura
+                    btnNew_Click(sender, EventArgs.Empty);
+                    break;
+                case Keys.F5:
+                    //Registrar Factura
+                    btnRegistrar_Click(sender, EventArgs.Empty);
+                    break;
+                case Keys.F6:
+                    //Aplicar Facutra
+                    btnAplicar_Click(sender, EventArgs.Empty);
+                    break;
+                case Keys.F7:
+                    //Buscar producto
+                    btnAddProduct_Click(sender, EventArgs.Empty);
+                    break;
+                case Keys.F8:
+                    //Metodo de pago
+                    _backgroundWorker = new BackgroundWorker();
+                    if (!progressPanel.Visible)
+                    {
+                        progressPanel.Visible = true;
+                    }
+
+                    _backgroundWorker.DoWork += (ob, ev) => { Invoke(() => FormInvoiceBillingEditPayment.ShowDialog(this)); };
+                    _backgroundWorker.RunWorkerCompleted += (ob, ev) =>
+                    {
+                        if (ev.Error is not null)
+                        {
+                            CustomException.LogException(ev.Error);
+                            _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Registrar", $"No se registraron los valores. {ev.Error.Message}", this);
+                        }
+                        else if (ev.Cancelled)
+                        {
+                            //cancelado por el usuario   
+                            _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Registrar", "Se ha cancelado la operación actual. Linea 3424", this);
+                        }
+                        else
+                        {
+                            if (progressPanel.Visible)
+                            {
+                                progressPanel.Visible = false;
+                            }
+                        }
+                    };
+
+                    if (!_backgroundWorker.IsBusy)
+                    {
+                        _backgroundWorker.RunWorkerAsync();
+                    }
+
+                    break;
+                case Keys.F9:
+                    txtScanerCodigo.Focus();
+                    break;
+            }
+        }
+
+        private void GetTabIndexInfo(Control parent, StringBuilder tabIndexInfo, ref int controlCount)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                tabIndexInfo.AppendLine($"{controlCount} Control: {control.Name}, TabIndex: {control.TabIndex}");
+                controlCount++; 
+
+                if (control.HasChildren)
+                {
+                    GetTabIndexInfo(control, tabIndexInfo, ref controlCount);
+                }
+            }
+        }
+
+        private void btnSearchCustomer_Enter(object sender, EventArgs e)
+        {
+            btnSearchCustomer.Appearance.BackColor = Color.DarkBlue;
+        }
+
+        private void btnSearchCustomer_Leave(object sender, EventArgs e)
+        {
+            btnSearchCustomer.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Primary;
+        }
     }
 }

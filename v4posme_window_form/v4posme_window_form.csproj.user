@@ -136,10 +136,16 @@
     <Compile Update="Views\Inventory\Report\FormInventoryReport.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\Invoice\Billing\FormInvoiceBillingEditPaymentDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\Invoice\Billing\FormInvoiceBillingEdit.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\Invoice\Billing\FormInvoiceBillingList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Invoice\Billing\FormInvoiceBillingEditHelpDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\LoginForm.cs">

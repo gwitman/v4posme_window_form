@@ -181,12 +181,32 @@ namespace v4posme_window.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage pagar_puntos_01 {
+            get {
+                object obj = ResourceManager.GetObject("pagar_puntos_01", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap posMe_Logo_fondo_blanco {
             get {
                 object obj = ResourceManager.GetObject("posMe Logo fondo blanco", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage transfer_bank_01 {
+            get {
+                object obj = ResourceManager.GetObject("transfer_bank_01", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
             }
         }
         
