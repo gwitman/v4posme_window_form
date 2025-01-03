@@ -17,5 +17,15 @@ namespace v4posme_window.Views.Invoice.Billing
         {
             InitializeComponent();
         }
+
+        private void FormInvoiceBillingEditHelpDialog_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    Close();
+                    break;
+            }
+        }
     }
 }

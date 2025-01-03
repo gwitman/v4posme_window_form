@@ -3635,6 +3635,7 @@ namespace v4posme_window.Views.Invoice.Billing
             var quantityDecimal = WebToolsHelper.ConvertToNumber<decimal>(quantity);
             if (decimal.Compare(quantityDecimal, decimal.Zero) == 0)
             {
+                gridViewValues.DeleteRow(gridViewValues.FocusedRowHandle);
                 return;
             }
 

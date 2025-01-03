@@ -341,11 +341,13 @@
             ClientSize = new Size(573, 285);
             Controls.Add(tablePanel1);
             IconOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("FormInvoiceBillingEditHelpDialog.IconOptions.SvgImage");
+            KeyPreview = true;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormInvoiceBillingEditHelpDialog";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ayuda";
+            KeyDown += FormInvoiceBillingEditHelpDialog_KeyDown;
             ((System.ComponentModel.ISupportInitialize)tablePanel1).EndInit();
             tablePanel1.ResumeLayout(false);
             tablePanel1.PerformLayout();
