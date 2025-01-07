@@ -68,6 +68,10 @@ namespace v4posme_library.Models
             public object CreatedBy { get; set; }
     
             public object IsActive { get; set; }
+    
+            public object VacationBalanceDay { get; set; }
+    
+            public object AmountSaving { get; set; }
         }
     }
 }

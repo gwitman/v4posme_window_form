@@ -15,6 +15,7 @@ namespace v4posme_window.Dto
         public int? ItemId { get; set; }
         public string? ItemNumber { get; set; }
         public string? TransactionDetailName { get; set; }
+        public string? TransactionDetailNameDescription { get; set; }
         public int Sku { get; set; }
         [Precision(18,2)]
         public decimal Quantity { get; set; }
@@ -24,6 +25,8 @@ namespace v4posme_window.Dto
         public decimal SubTotal { get; set; }
         [Precision(18,2)]
         public decimal Iva { get; set; }
+        [Precision(18,2)]
+        public decimal TaxServices { get; set; }
         public decimal SkuQuantityBySku { get; set; }
         public decimal UnitaryPriceIndividual { get; set; }
         public string? SkuFormatoDescription { get; set; }

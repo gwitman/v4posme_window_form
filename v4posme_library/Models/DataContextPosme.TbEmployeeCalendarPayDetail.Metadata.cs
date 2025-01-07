@@ -15,13 +15,33 @@ namespace v4posme_library.Models
     
             public object EmployeeID { get; set; }
     
-            public object Salary { get; set; }
+            public object PlusSalary { get; set; }
     
-            public object Commission { get; set; }
+            public object PlusCommission { get; set; }
     
-            public object Adelantos { get; set; }
+            public object PlusBonus { get; set; }
     
-            public object Neto { get; set; }
+            public object MinusAdelantos { get; set; }
+    
+            public object MinusDeductionForLoans { get; set; }
+    
+            public object MinusDeductionForLateArrival { get; set; }
+    
+            public object MinusInss { get; set; }
+    
+            public object InssPatronal { get; set; }
+    
+            public object MinusIr { get; set; }
+    
+            public object Saving { get; set; }
+    
+            public object EqualNeto { get; set; }
+    
+            public object Reference1 { get; set; }
+    
+            public object Reference2 { get; set; }
+    
+            public object Reference3 { get; set; }
     
             public object IsActive { get; set; }
         }

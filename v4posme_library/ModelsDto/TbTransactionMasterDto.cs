@@ -55,5 +55,5 @@ public record TbTransactionMasterDto()
     public string? NameStatus { get; set; }
 
     public IList<TbTransactionMasterDetailDto> TransactionMasterDetail { get; set; }
-
+    public int? DayExcluded { get; set; }
 }

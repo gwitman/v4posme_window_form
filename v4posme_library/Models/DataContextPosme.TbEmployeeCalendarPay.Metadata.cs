@@ -35,6 +35,8 @@ namespace v4posme_library.Models
     
             public object CreatedIn { get; set; }
     
+            public object WeekID { get; set; }
+    
             public object IsActive { get; set; }
         }
     }

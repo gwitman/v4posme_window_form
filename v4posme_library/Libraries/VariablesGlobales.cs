@@ -120,6 +120,7 @@ namespace v4posme_library.Libraries
             _unityContainer.RegisterType<ITransactionMasterDetailReferencesModel, TransactionMasterDetailReferencesModel>();
             _unityContainer.RegisterType<ICashBoxUserModel, CashBoxUserModel>();
             _unityContainer.RegisterType<ICashBoxSessionModel, CashBoxSessionModel>();
+            _unityContainer.RegisterType<ITransactionMasterReferencesModel, TransactionMasterReferencesModel>();
 
             #endregion
 

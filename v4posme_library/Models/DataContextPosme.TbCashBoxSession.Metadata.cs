@@ -26,6 +26,10 @@ namespace v4posme_library.Models
             public object IsActive { get; set; }
     
             public object UserID { get; set; }
+    
+            public object TransactionMasterIDOpen { get; set; }
+    
+            public object TransactionMasterIDClosed { get; set; }
         }
     }
 }

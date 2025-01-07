@@ -109,7 +109,8 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
                 NextVisit = tm.NextVisit,
                 NumberPhone = tm.NumberPhone,
                 PrinterQuantity = tm.PrinterQuantity,
-                EntityIdsecondary = tm.EntityIDSecondary
+                EntityIdsecondary = tm.EntityIDSecondary,
+                DayExcluded = tm.DayExcluded ?? 0
             };
         return result.AsNoTracking().FirstOrDefault();
     }

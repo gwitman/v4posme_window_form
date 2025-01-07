@@ -26,6 +26,8 @@ public interface ICoreWebTools
 
     void SendEmail(string? subject, string? body);
 
+    void SendEmail(string toAddress,string? subject, string? body);
+
     TbComponent? GetComponentIdByComponentName(string? componentName);
 
     string? HelperSegmentsByIndex(string[] objListSegments, int i, string? variable);

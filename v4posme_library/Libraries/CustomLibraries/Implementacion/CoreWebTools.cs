@@ -132,5 +132,27 @@ class CoreWebTools : ICoreWebTools
         message.Body = body;
         smtp.Send(message);
     }
+
+    public void SendEmail(string toAddress, string? subject, string? body)
+    {
+        var emailFrom = VariablesGlobales.ConfigurationBuilder["EMAIL_APP"];
+        var fromAddress = new MailAddress(emailFrom, "posMe");
+        var toMailAddress = new MailAddress(toAddress, "posMe");
+        var fromPassword = VariablesGlobales.ConfigurationBuilder["EMAIL_APP_PASSWORD"];
+
+        var smtp = new SmtpClient
+        {
+            Host = "smtp.gmail.com",
+            Port = 587,
+            EnableSsl = true,
+            DeliveryMethod = SmtpDeliveryMethod.Network,
+            UseDefaultCredentials = false,
+            Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+        };
+        using var message = new MailMessage(fromAddress, toMailAddress);
+        message.Subject = subject;
+        message.Body = body;
+        smtp.Send(message);
+    }
   
 }

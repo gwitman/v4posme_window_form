@@ -9,7 +9,9 @@ public interface ICoreWebFinancialAmort
         DateTime? firstDate = null, int typeAmortization = 0,
         List<TbCatalogItem>? objCatalogItemsDiasNoCobrables = null,
         List<TbCatalogItem>? objCatalogItemsDiasFeridos365 = null,
-        List<TbCatalogItem>? objCatalogItemsDiasFeridos366 = null);
+        List<TbCatalogItem>? objCatalogItemsDiasFeridos366 = null,
+        TbCatalogItem objCatalogItems_DiasExcluded = null,
+        int flavorID = 0);
     
     decimal GetPmtValueAleman(decimal? pv, int n, decimal i);
     

@@ -474,6 +474,12 @@
     <property name="UserID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="ab205265-3d6a-41e1-8e3f-69c470188975">
       <column name="userID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
+    <property name="TransactionMasterIDOpen" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="9e6b91be-54d8-476b-974a-3f7abea13238">
+      <column name="transactionMasterIDOpen" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="TransactionMasterIDClosed" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="6071dd86-a6f4-4372-95bc-f1d800bbe34f">
+      <column name="transactionMasterIDClosed" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
   </class>
   <class name="TbCashBoxSessionTransactionMaster" entity-set="TbCashBoxSessionTransactionMasters" table="tb_cash_box_session_transaction_master" schema="posme" p1:Guid="059fe79b-a80f-495c-a3f3-fe3f84bdca8c">
     <id name="CashBoxSessionTransactionMasterID" type="Int32" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="true" p1:Guid="d1dce4af-9887-4d77-ae82-973506479d26">
@@ -1875,6 +1881,12 @@
     <property name="IsActive" type="Boolean" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="05e47b88-3d6a-428d-b21e-abb4e46d9d88">
       <column name="isActive" default="NULL" not-null="False" precision="1" sql-type="bit" p1:unicode="False" />
     </property>
+    <property name="VacationBalanceDay" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="3d08b391-0186-4920-8863-2661afb95818">
+      <column name="vacationBalanceDay" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="AmountSaving" type="Decimal" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="54c371b2-3dbc-4b3f-b8e8-601b9aacf4db">
+      <column name="amountSaving" default="NULL" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
   </class>
   <class name="TbEmployeeCalendarPay" entity-set="TbEmployeeCalendarPays" table="tb_employee_calendar_pay" schema="posme" p1:Guid="cd075652-fea4-4ae5-ba17-aeae94a7e639">
     <id name="CalendarID" type="Int32" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="true" p1:Guid="a33b727a-fbf1-4aa0-a324-f09feaebbc25">
@@ -1916,6 +1928,9 @@
     <property name="CreatedIn" type="String" p1:ValidateMaxLength="50" p1:ValidateRequired="true" p1:Guid="77a56964-e840-41ef-b25f-e341e0f594b1">
       <column name="createdIn" default="'0'" not-null="True" length="50" sql-type="varchar" p1:unicode="False" />
     </property>
+    <property name="WeekID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="69ee2a23-dee2-4106-8a5a-9879893acd91">
+      <column name="weekID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
     <property name="IsActive" type="Boolean" p1:ValidateRequired="true" p1:Guid="c9f21a33-4e1c-472f-9353-c249b4404110">
       <column name="isActive" default="b'0'" not-null="True" precision="1" sql-type="bit" p1:unicode="False" />
     </property>
@@ -1930,17 +1945,47 @@
     <property name="EmployeeID" type="Int32" p1:ValidateRequired="true" p1:Guid="6a08e223-6ad5-4ae4-91f7-e9e13dad2253">
       <column name="employeeID" default="0" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
-    <property name="Salary" type="Decimal" p1:ValidateRequired="true" p1:Guid="6ef0b2dc-6906-4a41-9a90-587992faff1e">
-      <column name="salary" default="0.00" not-null="True" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
+    <property name="PlusSalary" type="Decimal" p1:ValidateRequired="true" p1:Guid="046ab7f6-f81e-4ecc-89c7-48fa88445c47">
+      <column name="plus_salary" default="0.00" not-null="True" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="Commission" type="Decimal" p1:ValidateRequired="true" p1:Guid="d3df2617-2221-452b-95b0-4a18f34ed4ce">
-      <column name="commission" default="0.00" not-null="True" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
+    <property name="PlusCommission" type="Decimal" p1:ValidateRequired="true" p1:Guid="5f346113-8bf4-43bf-a671-13d34e21764e">
+      <column name="plus_commission" default="0.00" not-null="True" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="Adelantos" type="Decimal" p1:ValidateRequired="true" p1:Guid="63302fed-5f07-49bf-a518-3e25bca36caf">
-      <column name="adelantos" default="0.00" not-null="True" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
+    <property name="PlusBonus" type="Decimal" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="0bdd5715-0a08-4969-8fdd-a7f3e7d9b7ab">
+      <column name="plus_bonus" default="NULL" not-null="False" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="Neto" type="Decimal" p1:ValidateRequired="true" p1:Guid="522b15b4-fa63-45b3-9cba-32fc2782fcfb">
-      <column name="neto" default="0.00" not-null="True" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
+    <property name="MinusAdelantos" type="Decimal" p1:ValidateRequired="true" p1:Guid="d9428bac-2cf5-44c2-8198-abfcccdd598c">
+      <column name="minus_adelantos" default="0.00" not-null="True" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="MinusDeductionForLoans" type="Decimal" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="52f20207-19cc-4b1a-be08-13f4d85413b6">
+      <column name="minus_deduction_for_loans" default="NULL" not-null="False" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="MinusDeductionForLateArrival" type="Decimal" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="fc8ade34-1e8a-4084-b682-7db5801b1812">
+      <column name="minus_deduction_for_late_arrival" default="NULL" not-null="False" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="MinusInss" type="Decimal" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="c9f308ed-d3c2-4717-a447-9b62d09ad770">
+      <column name="minus_inss" default="NULL" not-null="False" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="InssPatronal" type="Decimal" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="206c8c18-df8e-4255-aab6-d2bb0f23c309">
+      <column name="inss_patronal" default="NULL" not-null="False" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="MinusIr" type="Decimal" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="f58dc946-f75d-469e-87e5-1024a8b04a40">
+      <column name="minus_ir" default="NULL" not-null="False" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Saving" type="Decimal" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="f531f5e6-15ba-410a-9c6a-ab44539daa71">
+      <column name="saving" default="NULL" not-null="False" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="EqualNeto" type="Decimal" p1:ValidateRequired="true" p1:Guid="1a876b0a-6ed6-4788-bfe0-cf873565f4f6">
+      <column name="equal_neto" default="0.00" not-null="True" precision="18" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Reference1" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="1c79f84c-a73e-4a9c-933c-8542c2902290">
+      <column name="reference1" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Reference2" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="16a25fc6-2dd7-43f4-8261-65d76a4b21c3">
+      <column name="reference2" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Reference3" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="84239fb3-bd0e-43e6-889f-1eeb1ad1970b">
+      <column name="reference3" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
     </property>
     <property name="IsActive" type="Boolean" p1:ValidateRequired="true" p1:Guid="8b93082b-c5b8-47c4-9fe5-1d92cb3e15f1">
       <column name="isActive" default="b'0'" not-null="True" precision="1" sql-type="bit" p1:unicode="False" />
@@ -6942,5 +6987,29 @@
     <parameter name="prEmployeeCode" type="String" sql-type="varchar" length="50" />
     <parameter name="prStartOn" type="DateTime" sql-type="datetime" />
     <parameter name="prEndOn" type="DateTime" sql-type="datetime" />
+  </method>
+  <method name="PrBoxClosedBox" p1:procedure="posme.pr_box_closed_box" p1:Guid="1758fc75-df30-4ec9-bf9b-1ce3867e83c9">
+    <Documentation>
+      <Summary>guarda el listado de transacciones que se guardan dentro de una session de caja</Summary>
+    </Documentation>
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prBranchID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="150" />
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTransactionMasterOpen" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTransactionMasterClosed" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prCashBoxID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prCashBoxSessionID" type="Int32" sql-type="int" precision="10" scale="0" />
+  </method>
+  <method name="PrCxcGetReportCertificateOfGrade" p1:procedure="posme.pr_cxc_get_report_certificate_of_grades" p1:Guid="3a982d06-6b4e-44d7-87bd-7a5a6ce4c54e">
+    <Documentation>
+      <Summary>Obtener certificado de nota </Summary>
+    </Documentation>
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prGrado" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prYear" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prCustomerID" type="Int32" sql-type="int" precision="10" scale="0" />
   </method>
 </efcore>

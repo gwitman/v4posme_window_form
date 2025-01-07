@@ -46,9 +46,13 @@ class TransactionMasterDetailCreditModel : ITransactionMasterDetailCreditModel
     public int DeleteWhereIdNotIn(int transactionMasterId, List<int> listTmdId)
     {
         using var context = new DataContext();
-        return context.TbTransactionMasterDetailCredits
+        var findValues = context.TbTransactionMasterDetailCredits
             .Where(credit => credit.TransactionMasterID == transactionMasterId
-            && !listTmdId.Contains(credit.TransactionMasterDetailID))
-            .ExecuteDelete();
+                             && !listTmdId.Contains(credit.TransactionMasterDetailID)).ToList();
+        foreach (var tbTransactionMasterDetailCredit in findValues)
+        {
+            context.Remove(tbTransactionMasterDetailCredit);
+        }
+        return context.SaveChanges();
     }
 }

@@ -68,6 +68,12 @@
             btnNew = new DevExpress.XtraEditors.SimpleButton();
             btnRegistrar = new DevExpress.XtraEditors.SimpleButton();
             tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
+            txtServices = new DevExpress.XtraEditors.TextEdit();
+            txtDescuento = new DevExpress.XtraEditors.TextEdit();
+            txtPorcentajeDescuento = new DevExpress.XtraEditors.TextEdit();
+            labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            labelControl2 = new DevExpress.XtraEditors.LabelControl();
             txtTotal = new DevExpress.XtraEditors.TextEdit();
             txtIva = new DevExpress.XtraEditors.TextEdit();
             txtSubTotal = new DevExpress.XtraEditors.TextEdit();
@@ -102,6 +108,9 @@
             ((System.ComponentModel.ISupportInitialize)txtChangeAmount.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tablePanel2).BeginInit();
             tablePanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtServices.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtDescuento.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtPorcentajeDescuento.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtTotal.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtIva.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtSubTotal.Properties).BeginInit();
@@ -596,7 +605,7 @@
             // 
             btnAplicar.Appearance.BackColor = Color.FromArgb(128, 255, 128);
             btnAplicar.Appearance.Options.UseBackColor = true;
-            btnAplicar.Location = new Point(590, 208);
+            btnAplicar.Location = new Point(590, 305);
             btnAplicar.Name = "btnAplicar";
             btnAplicar.Size = new Size(278, 40);
             btnAplicar.TabIndex = 18;
@@ -607,7 +616,7 @@
             // 
             btnNew.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Question;
             btnNew.Appearance.Options.UseBackColor = true;
-            btnNew.Location = new Point(590, 306);
+            btnNew.Location = new Point(590, 397);
             btnNew.Name = "btnNew";
             btnNew.Size = new Size(278, 40);
             btnNew.TabIndex = 19;
@@ -618,7 +627,7 @@
             // 
             btnRegistrar.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Warning;
             btnRegistrar.Appearance.Options.UseBackColor = true;
-            btnRegistrar.Location = new Point(590, 257);
+            btnRegistrar.Location = new Point(590, 351);
             btnRegistrar.Name = "btnRegistrar";
             btnRegistrar.Size = new Size(278, 40);
             btnRegistrar.TabIndex = 17;
@@ -628,6 +637,12 @@
             // tablePanel2
             // 
             tablePanel2.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 28.24F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 31.76F) });
+            tablePanel2.Controls.Add(txtServices);
+            tablePanel2.Controls.Add(txtDescuento);
+            tablePanel2.Controls.Add(txtPorcentajeDescuento);
+            tablePanel2.Controls.Add(labelControl4);
+            tablePanel2.Controls.Add(labelControl3);
+            tablePanel2.Controls.Add(labelControl2);
             tablePanel2.Controls.Add(txtTotal);
             tablePanel2.Controls.Add(txtIva);
             tablePanel2.Controls.Add(txtSubTotal);
@@ -637,22 +652,103 @@
             tablePanel2.Location = new Point(584, 3);
             tablePanel2.Name = "tablePanel2";
             tablePanel2.Padding = new Padding(3);
-            tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 41.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 40.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.3999939F) });
-            tablePanel2.Size = new Size(284, 134);
+            tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 41.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 40.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 37.3999939F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 39.1F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 39.7F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 43.2F) });
+            tablePanel2.Size = new Size(284, 270);
             tablePanel2.TabIndex = 40;
             tablePanel2.UseSkinIndents = true;
+            // 
+            // txtServices
+            // 
+            tablePanel2.SetColumn(txtServices, 1);
+            txtServices.Location = new Point(137, 180);
+            txtServices.Name = "txtServices";
+            txtServices.Properties.Appearance.Font = new Font("Tahoma", 12F);
+            txtServices.Properties.Appearance.Options.UseFont = true;
+            txtServices.Properties.Appearance.Options.UseTextOptions = true;
+            txtServices.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            txtServices.Properties.ReadOnly = true;
+            tablePanel2.SetRow(txtServices, 4);
+            txtServices.Size = new Size(141, 34);
+            txtServices.TabIndex = 42;
+            txtServices.TabStop = false;
+            // 
+            // txtDescuento
+            // 
+            tablePanel2.SetColumn(txtDescuento, 1);
+            txtDescuento.Location = new Point(137, 137);
+            txtDescuento.Name = "txtDescuento";
+            txtDescuento.Properties.Appearance.Font = new Font("Tahoma", 12F);
+            txtDescuento.Properties.Appearance.Options.UseFont = true;
+            txtDescuento.Properties.Appearance.Options.UseTextOptions = true;
+            txtDescuento.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            txtDescuento.Properties.ReadOnly = true;
+            tablePanel2.SetRow(txtDescuento, 3);
+            txtDescuento.Size = new Size(141, 34);
+            txtDescuento.TabIndex = 41;
+            txtDescuento.TabStop = false;
+            // 
+            // txtPorcentajeDescuento
+            // 
+            tablePanel2.SetColumn(txtPorcentajeDescuento, 1);
+            txtPorcentajeDescuento.Location = new Point(137, 95);
+            txtPorcentajeDescuento.Name = "txtPorcentajeDescuento";
+            txtPorcentajeDescuento.Properties.Appearance.Font = new Font("Tahoma", 12F);
+            txtPorcentajeDescuento.Properties.Appearance.Options.UseFont = true;
+            txtPorcentajeDescuento.Properties.Appearance.Options.UseTextOptions = true;
+            txtPorcentajeDescuento.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            tablePanel2.SetRow(txtPorcentajeDescuento, 2);
+            txtPorcentajeDescuento.Size = new Size(141, 34);
+            txtPorcentajeDescuento.TabIndex = 40;
+            txtPorcentajeDescuento.TabStop = false;
+            txtPorcentajeDescuento.EditValueChanged += txtPorcentajeDescuento_EditValueChanged;
+            // 
+            // labelControl4
+            // 
+            labelControl4.Appearance.Font = new Font("Tahoma", 12F, FontStyle.Bold);
+            labelControl4.Appearance.Options.UseFont = true;
+            tablePanel2.SetColumn(labelControl4, 0);
+            labelControl4.Location = new Point(6, 187);
+            labelControl4.Name = "labelControl4";
+            tablePanel2.SetRow(labelControl4, 4);
+            labelControl4.Size = new Size(92, 19);
+            labelControl4.TabIndex = 39;
+            labelControl4.Text = "05) % Serv";
+            // 
+            // labelControl3
+            // 
+            labelControl3.Appearance.Font = new Font("Tahoma", 12F, FontStyle.Bold);
+            labelControl3.Appearance.Options.UseFont = true;
+            tablePanel2.SetColumn(labelControl3, 0);
+            labelControl3.Location = new Point(6, 102);
+            labelControl3.Name = "labelControl3";
+            tablePanel2.SetRow(labelControl3, 2);
+            labelControl3.Size = new Size(94, 19);
+            labelControl3.TabIndex = 38;
+            labelControl3.Text = "03) % Desc";
+            // 
+            // labelControl2
+            // 
+            labelControl2.Appearance.Font = new Font("Tahoma", 12F, FontStyle.Bold);
+            labelControl2.Appearance.Options.UseFont = true;
+            tablePanel2.SetColumn(labelControl2, 0);
+            labelControl2.Location = new Point(6, 144);
+            labelControl2.Name = "labelControl2";
+            tablePanel2.SetRow(labelControl2, 3);
+            labelControl2.Size = new Size(70, 19);
+            labelControl2.TabIndex = 37;
+            labelControl2.Text = "04) Desc";
             // 
             // txtTotal
             // 
             tablePanel2.SetColumn(txtTotal, 1);
-            txtTotal.Location = new Point(137, 90);
+            txtTotal.Location = new Point(137, 226);
             txtTotal.Name = "txtTotal";
             txtTotal.Properties.Appearance.Font = new Font("Tahoma", 12F);
             txtTotal.Properties.Appearance.Options.UseFont = true;
             txtTotal.Properties.Appearance.Options.UseTextOptions = true;
             txtTotal.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             txtTotal.Properties.ReadOnly = true;
-            tablePanel2.SetRow(txtTotal, 2);
+            tablePanel2.SetRow(txtTotal, 5);
             txtTotal.Size = new Size(141, 34);
             txtTotal.TabIndex = 32;
             txtTotal.TabStop = false;
@@ -660,7 +756,7 @@
             // txtIva
             // 
             tablePanel2.SetColumn(txtIva, 1);
-            txtIva.Location = new Point(137, 47);
+            txtIva.Location = new Point(137, 53);
             txtIva.Name = "txtIva";
             txtIva.Properties.Appearance.Font = new Font("Tahoma", 12F);
             txtIva.Properties.Appearance.Options.UseFont = true;
@@ -675,7 +771,7 @@
             // txtSubTotal
             // 
             tablePanel2.SetColumn(txtSubTotal, 1);
-            txtSubTotal.Location = new Point(137, 6);
+            txtSubTotal.Location = new Point(137, 8);
             txtSubTotal.Name = "txtSubTotal";
             txtSubTotal.Properties.Appearance.Font = new Font("Tahoma", 12F);
             txtSubTotal.Properties.Appearance.Options.UseFont = true;
@@ -692,9 +788,9 @@
             labelControl39.Appearance.Font = new Font("Tahoma", 12F, FontStyle.Bold);
             labelControl39.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl39, 0);
-            labelControl39.Location = new Point(6, 97);
+            labelControl39.Location = new Point(6, 233);
             labelControl39.Name = "labelControl39";
-            tablePanel2.SetRow(labelControl39, 2);
+            tablePanel2.SetRow(labelControl39, 5);
             labelControl39.Size = new Size(75, 19);
             labelControl39.TabIndex = 36;
             labelControl39.Text = "03) Total";
@@ -704,7 +800,7 @@
             labelControl38.Appearance.Font = new Font("Tahoma", 12F, FontStyle.Bold);
             labelControl38.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl38, 0);
-            labelControl38.Location = new Point(6, 54);
+            labelControl38.Location = new Point(6, 60);
             labelControl38.Name = "labelControl38";
             tablePanel2.SetRow(labelControl38, 1);
             labelControl38.Size = new Size(58, 19);
@@ -716,7 +812,7 @@
             labelControl37.Appearance.Font = new Font("Tahoma", 12F, FontStyle.Bold);
             labelControl37.Appearance.Options.UseFont = true;
             tablePanel2.SetColumn(labelControl37, 0);
-            labelControl37.Location = new Point(6, 13);
+            labelControl37.Location = new Point(6, 15);
             labelControl37.Name = "labelControl37";
             tablePanel2.SetRow(labelControl37, 0);
             labelControl37.Size = new Size(110, 19);
@@ -729,7 +825,7 @@
             Appearance.Options.UseBackColor = true;
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(880, 367);
+            ClientSize = new Size(880, 449);
             Controls.Add(tablePanel2);
             Controls.Add(btnAplicar);
             Controls.Add(tablePanel1);
@@ -776,6 +872,9 @@
             ((System.ComponentModel.ISupportInitialize)tablePanel2).EndInit();
             tablePanel2.ResumeLayout(false);
             tablePanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)txtServices.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtDescuento.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtPorcentajeDescuento.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtTotal.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtIva.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtSubTotal.Properties).EndInit();
@@ -829,5 +928,11 @@
         private DevExpress.XtraEditors.SvgImageBox svgImageBox5;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         public DevExpress.XtraEditors.LabelControl lblTotal;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        public DevExpress.XtraEditors.TextEdit txtServices;
+        public DevExpress.XtraEditors.TextEdit txtDescuento;
+        public DevExpress.XtraEditors.TextEdit txtPorcentajeDescuento;
     }
 }

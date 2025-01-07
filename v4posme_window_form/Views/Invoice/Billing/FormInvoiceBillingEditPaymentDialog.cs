@@ -98,6 +98,11 @@ namespace v4posme_window.Views.Invoice.Billing
             formInvoiceBillingEdit.txtReceiptAmountPoint_EditValueChanged(sender, e);
         }
 
+        private void txtPorcentajeDescuento_EditValueChanged(object sender, EventArgs e)
+        {
+            formInvoiceBillingEdit.txtPorcentajeDescuento_EditValueChanged(sender, e);
+        }
+
         private void FormInvoiceBillingEditPaymentDialog_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)

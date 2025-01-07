@@ -12,6 +12,8 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
     private int NumberPay { get; set; }
     private int PeriodPay { get; set; }
     private int? TypeAmortization { get; set; }
+    private TbCatalogItem? ObjCatalogItemsDiasExcluded { get; set; }
+    private int? FlavorId { get; set; }
     private DateTime? FirstDate { get; set; }
 
     private List<TbCatalogItem>? ObjCatalogItemsDiasNoCobrables { get; set; }
@@ -22,7 +24,9 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         DateTime? firstDate = null, int typeAmortization = 0,
         List<TbCatalogItem>? objCatalogItemsDiasNoCobrables = null,
         List<TbCatalogItem>? objCatalogItemsDiasFeridos365 = null,
-        List<TbCatalogItem>? objCatalogItemsDiasFeridos366 = null)
+        List<TbCatalogItem>? objCatalogItemsDiasFeridos366 = null,
+        TbCatalogItem objCatalogItemsDiasExcluded = null,
+        int flavorId = 0)
     {
         Amount = amount;
         Rate = rate!.Value;
@@ -34,6 +38,9 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         ObjCatalogItemsDiasNoCobrables = objCatalogItemsDiasNoCobrables;
         ObjCatalogItemsDiasFeridos365 = objCatalogItemsDiasFeridos365;
         ObjCatalogItemsDiasFeridos366 = objCatalogItemsDiasFeridos366;
+
+        ObjCatalogItemsDiasExcluded = objCatalogItemsDiasExcluded;
+        FlavorId = flavorId;
     }
 
     public decimal GetPmtValueAleman(decimal? pv, int n, decimal i)
@@ -61,6 +68,19 @@ class CoreWebFinancialAmort : ICoreWebFinancialAmort
         var diaSemana = (int)fecha.DayOfWeek;
         var diaAno = fecha.DayOfYear;
         var diasTotalesDelAno = DateTime.IsLeapYear(fecha.Year) ? 366 : 365;
+
+        // Suponiendo que objCatalogItems_DiasExcluded es un objeto que tiene una propiedad reference1
+        if (ObjCatalogItemsDiasExcluded is not null)
+        {
+            var reference1 = ObjCatalogItemsDiasExcluded.Reference1;
+            var arrayDiasExcluidos = reference1.Split([','], StringSplitOptions.RemoveEmptyEntries); 
+            if (arrayDiasExcluidos.Any(catalogItem => Convert.ToInt32(catalogItem)== diaSemana))
+            {
+                return true;
+            }
+        }
+        
+
         if (ObjCatalogItemsDiasNoCobrables is not null)
         {
             if (ObjCatalogItemsDiasNoCobrables.Any(catalogItem => catalogItem.Sequence == diaSemana))
