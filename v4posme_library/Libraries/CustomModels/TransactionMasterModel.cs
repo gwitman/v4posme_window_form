@@ -179,4 +179,24 @@ class TransactionMasterModel(DataContext context) : ITransactionMasterModel
             .OrderByDescending(tm => tm.TransactionMasterID)
             .Take(10).ToList();
     }
+
+    public List<TbTransactionMasterDto> GetRowbyNumberExoneration(int userCompanyId, string exonerationNumber)
+    {
+
+            var result = from t in context.TbTransactionMasters.AsNoTracking()
+                join ws in context.TbWorkflowStages.AsNoTracking() on t.StatusID equals ws.WorkflowStageID
+                join tr in context.TbTransactionMasterReferences.AsNoTracking() on t.TransactionMasterID equals tr.TransactionMasterID
+                where t.TransactionID == 19
+                      && t.IsActive.Value
+                      && ws.Aplicable.Value
+                      && !string.IsNullOrEmpty(tr.Reference1)
+                      && tr.Reference1 == exonerationNumber
+                select new TbTransactionMasterDto
+                {
+                    TransactionNumber = t.TransactionNumber,
+                    ExonerationNumber = tr.Reference1
+                };
+
+            return result.ToList();
+    }
 }

@@ -23,7 +23,7 @@ namespace v4posme_window.Api
         private readonly ICustomerModel _objInterfazCustomerModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerModel>();
         private readonly ICustomerCreditLineModel _objInterfazCustomerCreditLineModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditLineModel>();
         private readonly ICustomerCreditAmortizationModel _objInterfazCustomerCreditAmortizationModel = VariablesGlobales.Instance.UnityContainer.Resolve<ICustomerCreditAmortizationModel>();
-
+        private readonly ITransactionMasterModel _objInterfazTransactionMasterModel = VariablesGlobales.Instance.UnityContainer.Resolve<ITransactionMasterModel>();
 
 
 
@@ -125,6 +125,18 @@ namespace v4posme_window.Api
                 XtraMessageBox.Show($"Se produjo el siguiente error: {ex.Message}");
                 return null;
             }
+        }
+
+        public List<TbTransactionMasterDto> GetNumberExoneration(string exonerationNumber)
+        {
+            var userNotAutenticated = VariablesGlobales.ConfigurationBuilder["USER_NOT_AUTENTICATED"];
+            var user = VariablesGlobales.Instance.User;
+            if (user is null)
+            {
+                throw new Exception(userNotAutenticated);
+            }
+
+            return _objInterfazTransactionMasterModel.GetRowbyNumberExoneration(user.CompanyID, exonerationNumber);
         }
         public DataTable? GetViewApi(int componentId,string viewName = "",string filter = "")
         {

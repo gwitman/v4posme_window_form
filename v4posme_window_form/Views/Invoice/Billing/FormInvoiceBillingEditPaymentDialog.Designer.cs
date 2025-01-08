@@ -119,8 +119,6 @@
             // tablePanel1
             // 
             tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 27.2F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 54.9F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 43.17F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 42.33F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 42.4F) });
-            tablePanel1.Controls.Add(lblTotal);
-            tablePanel1.Controls.Add(labelControl1);
             tablePanel1.Controls.Add(svgImageBox8);
             tablePanel1.Controls.Add(svgImageBox7);
             tablePanel1.Controls.Add(svgImageBox6);
@@ -163,29 +161,26 @@
             // 
             // lblTotal
             // 
-            lblTotal.Appearance.Font = new Font("Tahoma", 14F, FontStyle.Bold);
+            lblTotal.Appearance.Font = new Font("Tahoma", 48F, FontStyle.Bold);
             lblTotal.Appearance.ForeColor = Color.Green;
             lblTotal.Appearance.Options.UseFont = true;
             lblTotal.Appearance.Options.UseForeColor = true;
+            lblTotal.Appearance.Options.UseTextOptions = true;
+            lblTotal.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             lblTotal.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            tablePanel1.SetColumn(lblTotal, 4);
-            lblTotal.Dock = DockStyle.Fill;
-            lblTotal.Location = new Point(460, 45);
+            lblTotal.Location = new Point(240, 355);
             lblTotal.Name = "lblTotal";
-            tablePanel1.SetRow(lblTotal, 1);
-            lblTotal.Size = new Size(109, 36);
+            lblTotal.Size = new Size(338, 73);
             lblTotal.TabIndex = 60;
             lblTotal.Text = "0.0";
             // 
             // labelControl1
             // 
-            labelControl1.Appearance.Font = new Font("Tahoma", 12F, FontStyle.Bold);
+            labelControl1.Appearance.Font = new Font("Tahoma", 48F, FontStyle.Bold);
             labelControl1.Appearance.Options.UseFont = true;
-            tablePanel1.SetColumn(labelControl1, 3);
-            labelControl1.Location = new Point(345, 53);
+            labelControl1.Location = new Point(71, 351);
             labelControl1.Name = "labelControl1";
-            tablePanel1.SetRow(labelControl1, 1);
-            labelControl1.Size = new Size(43, 19);
+            labelControl1.Size = new Size(163, 77);
             labelControl1.TabIndex = 59;
             labelControl1.Text = "Total";
             // 
@@ -826,7 +821,9 @@
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(880, 449);
+            Controls.Add(lblTotal);
             Controls.Add(tablePanel2);
+            Controls.Add(labelControl1);
             Controls.Add(btnAplicar);
             Controls.Add(tablePanel1);
             Controls.Add(btnNew);
@@ -879,6 +876,7 @@
             ((System.ComponentModel.ISupportInitialize)txtIva.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtSubTotal.Properties).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

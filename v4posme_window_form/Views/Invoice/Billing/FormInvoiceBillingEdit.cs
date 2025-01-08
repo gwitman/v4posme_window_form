@@ -134,7 +134,7 @@ namespace v4posme_window.Views.Invoice.Billing
 
         #region Properties
 
-        private IBindingList _bindingListTransactionMasterDetail = new BindingList<FormInvoiceBillingEditDetailDTO>();
+        private BindingList<FormInvoiceBillingEditDetailDTO> _bindingListTransactionMasterDetail = new BindingList<FormInvoiceBillingEditDetailDTO>();
         private string? ObjCompanyParameter_Key_INVOICE_VALIDATE_BALANCE { get; set; }
         private string? objCompanyParameter_Key_INVOICE_BILLING_CREDIT { get; set; }
 
@@ -283,6 +283,8 @@ namespace v4posme_window.Views.Invoice.Billing
         public string? UrlPrinterDocumentCocina { get; set; }
 
         public string? ObjParameterShowComandoDeCocina { get; set; }
+
+        public string? ObjParameterINVOICE_BILLING_VALIDATE_EXONERATION { get; set; }
 
         public string? ObjParameterInvoiceBillingPrinterDirectUrl { get; set; }
 
@@ -1031,6 +1033,8 @@ namespace v4posme_window.Views.Invoice.Billing
             objCompanyParameter_Key_INVOICE_BILLING_CREDIT = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_CREDIT", user.CompanyID)!.Value;
             objParameterCXC_DAY_EXCLUDED_IN_CREDIT = _objInterfazCoreWebParameter.GetParameterValue("CXC_DAY_EXCLUDED_IN_CREDIT", user.CompanyID);
             ObjTransactionMaster = _objInterfazTransactionMasterModel.GetRowByPk(user.CompanyID, TransactionId!.Value, TransactionMasterId!.Value);
+            ObjParameterINVOICE_BILLING_VALIDATE_EXONERATION = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_VALIDATE_EXONERATION", user.CompanyID)!.Value;
+
             if (ObjTransactionMaster is null)
             {
                 throw new Exception("No existe el ObjTransactionMaster");
@@ -1209,7 +1213,7 @@ namespace v4posme_window.Views.Invoice.Billing
             ObjParameterAlturaDelModalDeSeleccionProducto = _objInterfazCoreWebParameter.GetParameter("INVOICE_ALTO_MODAL_DE_SELECCION_DE_PRODUCTO_AL_FACTURAR", user.CompanyID)!.Value;
             ObjParameterScrollDelModalDeSeleccionProducto = _objInterfazCoreWebParameter.GetParameter("INVOICE_SCROLL_DE_MODAL_EN_SELECCION_DE_PRODUTO_AL_FACTURAR", user.CompanyID)!.Value;
             ObjParameterShowComandoDeCocina = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_SHOW_COMMAND_FOOT", user.CompanyID)!.Value;
-
+            ObjParameterINVOICE_BILLING_VALIDATE_EXONERATION = _objInterfazCoreWebParameter.GetParameter("INVOICE_BILLING_VALIDATE_EXONERATION", user.CompanyID)!.Value;
             //Obtener la lista de estados
             if (ObjParameterInvoiceAutoApply == "true")
             {
@@ -1668,7 +1672,8 @@ namespace v4posme_window.Views.Invoice.Billing
                     _objInterfazTransactionMasterDetailReferencesModel.InsertAppPosme(objTMDRNew);
                 }
             }
-            amountTotal = amountTotal-varDescuento;
+
+            amountTotal = amountTotal - varDescuento;
             //Actualizar Transaccion
             objTm.SubAmount = subAmountTotal;
             objTm.Tax1 = tax1Total;
@@ -2270,8 +2275,8 @@ namespace v4posme_window.Views.Invoice.Billing
             }
 
             //Actualizar Transaccion
-            amountTotal = amountTotal-varDescuento;	
-            objTmNew.SubAmount = subAmountTotal;		
+            amountTotal = amountTotal - varDescuento;
+            objTmNew.SubAmount = subAmountTotal;
             objTmNew.Tax1 = tax1Total;
             objTmNew.Tax2 = tax2Total;
             objTmNew.Tax4 = varPorcentajeDescuento;
@@ -2684,12 +2689,20 @@ namespace v4posme_window.Views.Invoice.Billing
                     txtNextVisit.DateTime = ObjTransactionMaster.NextVisit!.Value;
                     txtLayFirstLineProtocolo.Text = ObjTransactionMasterReferences.Reference1;
                     txtCheckApplyExoneracion.IsOn = !string.IsNullOrWhiteSpace(ObjTransactionMasterReferences.Reference2) && ObjTransactionMasterReferences.Reference2.Equals("1");
-                    txtFixedExpenses.Text = ObjTransactionMasterDetailCredit is null ? "" : ObjTransactionMasterDetailCredit.Reference1;
+                    if (ObjTransactionMasterDetailCredit is not null)
+                    {
+                        txtFixedExpenses.Text = ObjTransactionMasterDetailCredit.Reference1;
+                        txtReportSinRiesgo.IsOn = !string.IsNullOrWhiteSpace(ObjTransactionMasterDetailCredit.Reference2) && ObjTransactionMasterDetailCredit.Reference2.Equals("1", StringComparison.InvariantCultureIgnoreCase);
+                    }
+                    else
+                    {
+                        txtFixedExpenses.Text = string.Empty;
+                    }
+
                     txtIsApplied.Checked = ObjTransactionMaster.IsApplied!.Value;
                     txtDateFirst.DateTime = ObjTransactionMaster.TransactionOn2!.Value;
                     txtReference2.Text = ObjTransactionMaster.Reference2;
                     txtDesembolsoEfectivo.IsOn = true; //txtCheckDeEfectivo
-                    txtReportSinRiesgo.IsOn = ObjTransactionMasterDetailCredit is not null && ObjTransactionMasterDetailCredit.Reference2!.Equals("1", StringComparison.InvariantCultureIgnoreCase);
                     TxtStatusOldId = ObjTransactionMaster.StatusId;
                     TxtStatusId = ObjTransactionMaster.StatusId;
                     FormInvoiceBillingEditPayment.txtSubTotal.Text = @"0.0";
@@ -2698,6 +2711,11 @@ namespace v4posme_window.Views.Invoice.Billing
                     FormInvoiceBillingEditPayment.txtDescuento.Text = @"0.0";
                     FormInvoiceBillingEditPayment.txtServices.Text = @"0.0";
                     FormInvoiceBillingEditPayment.txtTotal.Text = @"0.0";
+
+                    //Llenar Linea de Credito
+                    FnRenderLineaCredit(ObjListCustomerCreditLine, ParameterCausalTypeCredit!);
+                    FormInvoiceBillingEditPayment.txtDescuento.Text = ObjTransactionMaster.Discount.Value.ToString(FormatDecimal);
+                    FormInvoiceBillingEditPayment.txtPorcentajeDescuento.Text = ObjTransactionMaster.Tax4.Value.ToString(FormatDecimal);
 
                     if (ObjTransactionMasterDetail.Count > 0)
                     {
@@ -2736,10 +2754,6 @@ namespace v4posme_window.Views.Invoice.Billing
                         }
                     }
 
-                    //Llenar Linea de Credito
-                    FnRenderLineaCredit(ObjListCustomerCreditLine, ParameterCausalTypeCredit!);
-                    FormInvoiceBillingEditPayment.txtDescuento.Text = ObjTransactionMaster.Discount.Value.ToString(FormatDecimal);
-                    FormInvoiceBillingEditPayment.txtPorcentajeDescuento.Text = ObjTransactionMaster.Tax4.Value.ToString(FormatDecimal);
                     //Refrescar
                     FnRefrechDetail();
                     FnRecalculateDetail(false, "");
@@ -3223,7 +3237,8 @@ namespace v4posme_window.Views.Invoice.Billing
 
         public void FnClearData()
         {
-            gridViewTbTransactionMasterDetail.DataSource = null;
+            //gridViewTbTransactionMasterDetail.DataSource = null;
+            _bindingListTransactionMasterDetail.Clear();
             gridViewValues.RefreshData();
             gridViewTbTransactionMasterDetail.RefreshDataSource();
 
@@ -3334,27 +3349,29 @@ namespace v4posme_window.Views.Invoice.Billing
             //Recalculoa el concepto via AJAX 2023-12-05 Inicio		
             if (_bindingListTransactionMasterDetail.Count <= 0) return;
             var user = VariablesGlobales.Instance.User;
-            var objConceptIva = _objInterfazCompanyComponentConceptModel.GetRowByPk(user!.CompanyID, ObjComponentItem!.ComponentID, itemID, "IVA");
-            foreach (FormInvoiceBillingEditDetailDTO detailDto in _bindingListTransactionMasterDetail)
+            var findValue = _bindingListTransactionMasterDetail.SingleOrDefault(dto => dto.ItemId==itemID);
+            if (!txtCheckApplyExoneracion.IsOn)
             {
-                if (detailDto.ItemId == itemID)
-                {
-                    if (objConceptIva is not null)
-                    {
-                        detailDto.Iva = objConceptIva.ValueOut!.Value;
-                    }
-                }
-            }
-
-            var objConceptTaxServices = _objInterfazCompanyComponentConceptModel.GetRowByPk(user!.CompanyID, ObjComponentItem!.ComponentID, itemID, "TAX_SERVICES");
-            foreach (FormInvoiceBillingEditDetailDTO detailDto in _bindingListTransactionMasterDetail)
-            {
-                if (detailDto.ItemId == itemID)
+                var objConceptIva = _objInterfazCompanyComponentConceptModel.GetRowByPk(user!.CompanyID, ObjComponentItem!.ComponentID, itemID, "IVA");
+                var objConceptTaxServices = _objInterfazCompanyComponentConceptModel.GetRowByPk(user!.CompanyID, ObjComponentItem!.ComponentID, itemID, "TAX_SERVICES");
+                if (findValue != null)
                 {
                     if (objConceptTaxServices is not null)
                     {
-                        detailDto.TaxServices = objConceptTaxServices.ValueOut!.Value;
+                        findValue.TaxServices = objConceptTaxServices.ValueOut!.Value;
                     }
+                    if (objConceptIva is not null)
+                    {
+                        findValue.Iva = objConceptIva.ValueOut!.Value;
+                    }
+                }
+            }
+            else
+            {
+                if (findValue != null)
+                {
+                    findValue.TaxServices = decimal.Zero;
+                    findValue.Iva = decimal.Zero;
                 }
             }
 
@@ -3420,10 +3437,9 @@ namespace v4posme_window.Views.Invoice.Billing
                 totalGeneral = totalGeneral + total;
                 NSSystemDetailInvoice.SetRowCellValue(i, colSubTotal, subtotal);
             }
-
+            gridViewTbTransactionMasterDetail.RefreshDataSource();
             var descuento = subtotalGeneral * (porcentajeDescuento / 100);
             totalGeneral = subtotalGeneral + serviceGeneral + ivaGeneral - descuento;
-
             FormInvoiceBillingEditPayment.txtSubTotal.Text = subtotalGeneral.ToString(FormatDecimal);
             FormInvoiceBillingEditPayment.txtDescuento.Text = descuento.ToString(FormatDecimal);
             FormInvoiceBillingEditPayment.txtIva.Text = ivaGeneral.ToString(FormatDecimal);
@@ -3431,6 +3447,7 @@ namespace v4posme_window.Views.Invoice.Billing
             FormInvoiceBillingEditPayment.txtTotal.Text = totalGeneral.ToString(FormatDecimal);
             FormInvoiceBillingEditPayment.lblTotal.Text = totalGeneral.ToString(FormatDecimal);
             lblTotal.Text = totalGeneral.ToString(FormatDecimal);
+            FormInvoiceBillingEditPayment.txtChangeAmount.Text = @"0";
             //Si es de credito que la factura no supere la linea de credito
             if (TransactionMasterId > 0)
             {
@@ -3465,7 +3482,7 @@ namespace v4posme_window.Views.Invoice.Billing
                 }
 
 
-                if (invoiceTypeCredit == true)
+                if (invoiceTypeCredit)
                 {
                     FormInvoiceBillingEditPayment.txtReceiptAmountDol.Text = @"0";
                     FormInvoiceBillingEditPayment.txtChangeAmount.Text = @"0";
@@ -3478,14 +3495,14 @@ namespace v4posme_window.Views.Invoice.Billing
                 }
                 else
                 {
+                    FormInvoiceBillingEditPayment.txtReceiptAmount.Text = decimal.Round(totalGeneral, 2).ToString("N2");
                     FormInvoiceBillingEditPayment.txtReceiptAmountDol.Text = @"0";
-                    FormInvoiceBillingEditPayment.txtChangeAmount.Text = @"0";
                     FormInvoiceBillingEditPayment.txtReceiptAmountBank.Text = @"0";
                     FormInvoiceBillingEditPayment.txtReceiptAmountPoint.Text = @"0";
                     FormInvoiceBillingEditPayment.txtReceiptAmountTarjeta.Text = @"0";
                     FormInvoiceBillingEditPayment.txtReceiptAmountTarjetaDol.Text = @"0";
                     FormInvoiceBillingEditPayment.txtReceiptAmountBankDol.Text = @"0";
-                    FormInvoiceBillingEditPayment.txtReceiptAmount.Text = decimal.Round(totalGeneral, 2).ToString("N2");
+                    FormInvoiceBillingEditPayment.txtChangeAmount.Text = @"0";
                 }
             }
         }
@@ -3510,9 +3527,46 @@ namespace v4posme_window.Views.Invoice.Billing
             return false;
         }
 
+        private void UpdateConcept()
+        {
+            var length = _bindingListTransactionMasterDetail.Count;
+            var i = 0;
+            while (i < length)
+            {
+                FnGetConcept(_bindingListTransactionMasterDetail[i].ItemId ?? 0, "IVA");
+                i++;
+            }
+        }
+
         #endregion
 
         #region Eventos Formulario
+
+        private void txtCheckApplyExoneracion_Toggled(object sender, EventArgs e)
+        {
+            UpdateConcept();
+        }
+
+        private void txtLayFirstLineProtocolo_EditValueChanged(object sender, EventArgs e)
+        {
+            if (ObjParameterINVOICE_BILLING_VALIDATE_EXONERATION == "true")
+            {
+                var api = new FormInvoiceApi();
+                var data = api.GetNumberExoneration(txtLayFirstLineProtocolo.Text);
+                if (data.Count > 0)
+                {
+                    txtCheckApplyExoneracion.IsOn = false;
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Error, "Exoneracion", "El numero de exoneracion ya existe!!", this);
+                }
+                else
+                {
+                    txtCheckApplyExoneracion.IsOn = true;
+                    _objInterfazCoreWebRenderInView.GetMessageAlert(TypeError.Informacion, "Exoneracion", "Exoneracion aplicada!!", this);
+                }
+
+                UpdateConcept();
+            }
+        }
 
         private void txtScanerCodigo_KeyDown(object sender, KeyEventArgs e)
         {

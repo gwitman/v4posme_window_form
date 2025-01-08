@@ -56,4 +56,5 @@ public record TbTransactionMasterDto()
 
     public IList<TbTransactionMasterDetailDto> TransactionMasterDetail { get; set; }
     public int? DayExcluded { get; set; }
+    public string ExonerationNumber { get; set; } = string.Empty;
 }

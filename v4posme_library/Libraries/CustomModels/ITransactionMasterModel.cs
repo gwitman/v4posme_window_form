@@ -25,4 +25,6 @@ public interface ITransactionMasterModel
     List<TbTransactionMasterDto> GetRowInStatusRegister(int companyId, int transactionMasterId);
 
     List<TbTransactionMaster> getRowByTransactionIDAndEntityID(int companyID, int transactionID, int entityID);
+
+    List<TbTransactionMasterDto> GetRowbyNumberExoneration(int userCompanyId, string exonerationNumber);
 }

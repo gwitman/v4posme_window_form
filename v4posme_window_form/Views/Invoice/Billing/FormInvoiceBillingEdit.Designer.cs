@@ -30,16 +30,16 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInvoiceBillingEdit));
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions4 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject13 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject14 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject15 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject16 = new DevExpress.Utils.SerializableAppearanceObject();
             stackPanel1 = new DevExpress.Utils.Layout.StackPanel();
             lblTitulo = new DevExpress.XtraEditors.LabelControl();
             barManager1 = new DevExpress.XtraBars.BarManager(components);
@@ -311,7 +311,7 @@
             // 
             barDockControlBottom.CausesValidation = false;
             barDockControlBottom.Dock = DockStyle.Bottom;
-            barDockControlBottom.Location = new Point(0, 819);
+            barDockControlBottom.Location = new Point(0, 815);
             barDockControlBottom.Manager = barManager1;
             barDockControlBottom.Size = new Size(1139, 0);
             // 
@@ -321,7 +321,7 @@
             barDockControlLeft.Dock = DockStyle.Left;
             barDockControlLeft.Location = new Point(0, 0);
             barDockControlLeft.Manager = barManager1;
-            barDockControlLeft.Size = new Size(0, 819);
+            barDockControlLeft.Size = new Size(0, 815);
             // 
             // barDockControlRight
             // 
@@ -329,7 +329,7 @@
             barDockControlRight.Dock = DockStyle.Right;
             barDockControlRight.Location = new Point(1139, 0);
             barDockControlRight.Manager = barManager1;
-            barDockControlRight.Size = new Size(0, 819);
+            barDockControlRight.Size = new Size(0, 815);
             // 
             // btnNuevoProducto
             // 
@@ -732,7 +732,7 @@
             tabReferencias.Controls.Add(labelControl11);
             tabReferencias.Controls.Add(labelControl12);
             tabReferencias.Name = "tabReferencias";
-            tabReferencias.Size = new Size(1031, 165);
+            tabReferencias.Size = new Size(1031, 169);
             tabReferencias.Text = "Referencias";
             // 
             // txtMesaID
@@ -914,7 +914,7 @@
             tabInfoCredito.Controls.Add(txtReference1);
             tabInfoCredito.Controls.Add(labelControl18);
             tabInfoCredito.Name = "tabInfoCredito";
-            tabInfoCredito.Size = new Size(1031, 165);
+            tabInfoCredito.Size = new Size(1031, 169);
             tabInfoCredito.Text = "Info de Credito";
             // 
             // labelControl37
@@ -943,6 +943,7 @@
             txtLayFirstLineProtocolo.Name = "txtLayFirstLineProtocolo";
             txtLayFirstLineProtocolo.Size = new Size(207, 28);
             txtLayFirstLineProtocolo.TabIndex = 69;
+            txtLayFirstLineProtocolo.EditValueChanged += txtLayFirstLineProtocolo_EditValueChanged;
             // 
             // labelControl36
             // 
@@ -962,6 +963,7 @@
             txtCheckApplyExoneracion.Properties.OnText = "";
             txtCheckApplyExoneracion.Size = new Size(81, 24);
             txtCheckApplyExoneracion.TabIndex = 67;
+            txtCheckApplyExoneracion.Toggled += txtCheckApplyExoneracion_Toggled;
             // 
             // labelControl35
             // 
@@ -1132,7 +1134,7 @@
             xtraTabPage1.Controls.Add(txtTMIReference1);
             xtraTabPage1.Controls.Add(labelControl38);
             xtraTabPage1.Name = "xtraTabPage1";
-            xtraTabPage1.Size = new Size(1031, 165);
+            xtraTabPage1.Size = new Size(1031, 169);
             xtraTabPage1.Text = "Comentario";
             // 
             // txtTMIReference1
@@ -1156,7 +1158,7 @@
             tabMas.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("tabMas.ImageOptions.SvgImage");
             tabMas.ImageOptions.SvgImageSize = new Size(15, 15);
             tabMas.Name = "tabMas";
-            tabMas.Size = new Size(1031, 165);
+            tabMas.Size = new Size(1031, 169);
             tabMas.Text = "Mas";
             // 
             // colQuantity
@@ -1321,9 +1323,9 @@
             // repositoryItemButtonEdit1
             // 
             repositoryItemButtonEdit1.AutoHeight = false;
-            editorButtonImageOptions1.ImageUri.Uri = "Add";
-            editorButtonImageOptions1.SvgImageSize = new Size(20, 20);
-            repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default) });
+            editorButtonImageOptions3.ImageUri.Uri = "Add";
+            editorButtonImageOptions3.SvgImageSize = new Size(20, 20);
+            repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default) });
             repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             repositoryItemButtonEdit1.Click += ButtonPlusQuantity_Click;
@@ -1342,9 +1344,9 @@
             // repositoryItemButtonEdit2
             // 
             repositoryItemButtonEdit2.AutoHeight = false;
-            editorButtonImageOptions2.ImageUri.Uri = "icon%20builder/actions_remove";
-            editorButtonImageOptions2.SvgImageSize = new Size(20, 20);
-            repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default) });
+            editorButtonImageOptions4.ImageUri.Uri = "icon%20builder/actions_remove";
+            editorButtonImageOptions4.SvgImageSize = new Size(20, 20);
+            repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions4, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject13, serializableAppearanceObject14, serializableAppearanceObject15, serializableAppearanceObject16, "", null, null, DevExpress.Utils.ToolTipAnchor.Default) });
             repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
             repositoryItemButtonEdit2.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             repositoryItemButtonEdit2.Click += ButtonMinusQuantity_Click;
@@ -1486,17 +1488,17 @@
             tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 24.19F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 35.81F) });
             tablePanel1.Controls.Add(lblTotal);
             tablePanel1.Controls.Add(labelControl9);
-            tablePanel1.Location = new Point(693, 586);
+            tablePanel1.Location = new Point(454, 586);
             tablePanel1.Name = "tablePanel1";
             tablePanel1.Padding = new Padding(1);
             tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F) });
-            tablePanel1.Size = new Size(340, 52);
+            tablePanel1.Size = new Size(579, 78);
             tablePanel1.TabIndex = 86;
             tablePanel1.UseSkinIndents = true;
             // 
             // lblTotal
             // 
-            lblTotal.Appearance.Font = new Font("Tahoma", 14F, FontStyle.Bold);
+            lblTotal.Appearance.Font = new Font("Tahoma", 48F, FontStyle.Bold);
             lblTotal.Appearance.ForeColor = Color.Green;
             lblTotal.Appearance.Options.UseFont = true;
             lblTotal.Appearance.Options.UseForeColor = true;
@@ -1505,16 +1507,16 @@
             lblTotal.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             tablePanel1.SetColumn(lblTotal, 1);
             lblTotal.Dock = DockStyle.Fill;
-            lblTotal.Location = new Point(140, 4);
+            lblTotal.Location = new Point(237, 4);
             lblTotal.Name = "lblTotal";
             tablePanel1.SetRow(lblTotal, 0);
-            lblTotal.Size = new Size(196, 44);
+            lblTotal.Size = new Size(338, 70);
             lblTotal.TabIndex = 1;
             lblTotal.Text = "0.0";
             // 
             // labelControl9
             // 
-            labelControl9.Appearance.Font = new Font("Tahoma", 14F);
+            labelControl9.Appearance.Font = new Font("Tahoma", 48F);
             labelControl9.Appearance.Options.UseFont = true;
             labelControl9.Appearance.Options.UseTextOptions = true;
             labelControl9.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
@@ -1524,7 +1526,7 @@
             labelControl9.Location = new Point(4, 4);
             labelControl9.Name = "labelControl9";
             tablePanel1.SetRow(labelControl9, 0);
-            labelControl9.Size = new Size(130, 44);
+            labelControl9.Size = new Size(227, 70);
             labelControl9.TabIndex = 0;
             labelControl9.Text = "Total:";
             // 
@@ -1535,7 +1537,7 @@
             svgImageBox2.Location = new Point(4, 4);
             svgImageBox2.Name = "svgImageBox2";
             tablePanel2.SetRow(svgImageBox2, 0);
-            svgImageBox2.Size = new Size(107, 55);
+            svgImageBox2.Size = new Size(107, 59);
             svgImageBox2.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("svgImageBox2.SvgImage");
             svgImageBox2.TabIndex = 91;
             svgImageBox2.Text = "Ayuda";
@@ -1547,7 +1549,7 @@
             svgImageBox3.Location = new Point(117, 4);
             svgImageBox3.Name = "svgImageBox3";
             tablePanel2.SetRow(svgImageBox3, 0);
-            svgImageBox3.Size = new Size(107, 55);
+            svgImageBox3.Size = new Size(107, 59);
             svgImageBox3.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("svgImageBox3.SvgImage");
             svgImageBox3.TabIndex = 92;
             svgImageBox3.Text = "Ayuda";
@@ -1559,7 +1561,7 @@
             svgImageBox4.Location = new Point(344, 4);
             svgImageBox4.Name = "svgImageBox4";
             tablePanel2.SetRow(svgImageBox4, 0);
-            svgImageBox4.Size = new Size(107, 55);
+            svgImageBox4.Size = new Size(107, 59);
             svgImageBox4.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("svgImageBox4.SvgImage");
             svgImageBox4.TabIndex = 94;
             svgImageBox4.Text = "Ayuda";
@@ -1571,7 +1573,7 @@
             svgImageBox5.Location = new Point(231, 4);
             svgImageBox5.Name = "svgImageBox5";
             tablePanel2.SetRow(svgImageBox5, 0);
-            svgImageBox5.Size = new Size(107, 55);
+            svgImageBox5.Size = new Size(107, 59);
             svgImageBox5.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("svgImageBox5.SvgImage");
             svgImageBox5.TabIndex = 93;
             svgImageBox5.Text = "Ayuda";
@@ -1583,7 +1585,7 @@
             svgImageBox6.Location = new Point(798, 4);
             svgImageBox6.Name = "svgImageBox6";
             tablePanel2.SetRow(svgImageBox6, 0);
-            svgImageBox6.Size = new Size(107, 55);
+            svgImageBox6.Size = new Size(107, 59);
             svgImageBox6.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("svgImageBox6.SvgImage");
             svgImageBox6.TabIndex = 98;
             svgImageBox6.Text = "Ayuda";
@@ -1595,7 +1597,7 @@
             svgImageBox7.Location = new Point(685, 4);
             svgImageBox7.Name = "svgImageBox7";
             tablePanel2.SetRow(svgImageBox7, 0);
-            svgImageBox7.Size = new Size(107, 55);
+            svgImageBox7.Size = new Size(107, 59);
             svgImageBox7.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("svgImageBox7.SvgImage");
             svgImageBox7.TabIndex = 97;
             svgImageBox7.Text = "Ayuda";
@@ -1607,7 +1609,7 @@
             svgImageBox8.Location = new Point(571, 4);
             svgImageBox8.Name = "svgImageBox8";
             tablePanel2.SetRow(svgImageBox8, 0);
-            svgImageBox8.Size = new Size(107, 55);
+            svgImageBox8.Size = new Size(107, 59);
             svgImageBox8.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("svgImageBox8.SvgImage");
             svgImageBox8.TabIndex = 96;
             svgImageBox8.Text = "Ayuda";
@@ -1619,7 +1621,7 @@
             svgImageBox9.Location = new Point(458, 4);
             svgImageBox9.Name = "svgImageBox9";
             tablePanel2.SetRow(svgImageBox9, 0);
-            svgImageBox9.Size = new Size(107, 55);
+            svgImageBox9.Size = new Size(107, 59);
             svgImageBox9.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("svgImageBox9.SvgImage");
             svgImageBox9.TabIndex = 95;
             svgImageBox9.Text = "Ayuda";
@@ -1631,7 +1633,7 @@
             svgImageBox10.Location = new Point(912, 4);
             svgImageBox10.Name = "svgImageBox10";
             tablePanel2.SetRow(svgImageBox10, 0);
-            svgImageBox10.Size = new Size(107, 55);
+            svgImageBox10.Size = new Size(107, 59);
             svgImageBox10.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("svgImageBox10.SvgImage");
             svgImageBox10.TabIndex = 99;
             svgImageBox10.Text = "Ayuda";
@@ -1646,10 +1648,10 @@
             labelControl26.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             tablePanel2.SetColumn(labelControl26, 0);
             labelControl26.Dock = DockStyle.Fill;
-            labelControl26.Location = new Point(4, 65);
+            labelControl26.Location = new Point(4, 69);
             labelControl26.Name = "labelControl26";
             tablePanel2.SetRow(labelControl26, 1);
-            labelControl26.Size = new Size(107, 54);
+            labelControl26.Size = new Size(107, 58);
             labelControl26.TabIndex = 100;
             labelControl26.Text = "Ayuda";
             // 
@@ -1663,10 +1665,10 @@
             labelControl27.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             tablePanel2.SetColumn(labelControl27, 1);
             labelControl27.Dock = DockStyle.Fill;
-            labelControl27.Location = new Point(117, 65);
+            labelControl27.Location = new Point(117, 69);
             labelControl27.Name = "labelControl27";
             tablePanel2.SetRow(labelControl27, 1);
-            labelControl27.Size = new Size(107, 54);
+            labelControl27.Size = new Size(107, 58);
             labelControl27.TabIndex = 101;
             labelControl27.Text = "Imprimir factura";
             // 
@@ -1680,10 +1682,10 @@
             labelControl28.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             tablePanel2.SetColumn(labelControl28, 3);
             labelControl28.Dock = DockStyle.Fill;
-            labelControl28.Location = new Point(344, 65);
+            labelControl28.Location = new Point(344, 69);
             labelControl28.Name = "labelControl28";
             tablePanel2.SetRow(labelControl28, 1);
-            labelControl28.Size = new Size(107, 54);
+            labelControl28.Size = new Size(107, 58);
             labelControl28.TabIndex = 103;
             labelControl28.Text = "Nueva factura";
             // 
@@ -1697,10 +1699,10 @@
             labelControl29.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             tablePanel2.SetColumn(labelControl29, 2);
             labelControl29.Dock = DockStyle.Fill;
-            labelControl29.Location = new Point(231, 65);
+            labelControl29.Location = new Point(231, 69);
             labelControl29.Name = "labelControl29";
             tablePanel2.SetRow(labelControl29, 1);
-            labelControl29.Size = new Size(107, 54);
+            labelControl29.Size = new Size(107, 58);
             labelControl29.TabIndex = 102;
             labelControl29.Text = "Eliminar factura";
             // 
@@ -1714,10 +1716,10 @@
             labelControl30.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             tablePanel2.SetColumn(labelControl30, 7);
             labelControl30.Dock = DockStyle.Fill;
-            labelControl30.Location = new Point(798, 65);
+            labelControl30.Location = new Point(798, 69);
             labelControl30.Name = "labelControl30";
             tablePanel2.SetRow(labelControl30, 1);
-            labelControl30.Size = new Size(107, 54);
+            labelControl30.Size = new Size(107, 58);
             labelControl30.TabIndex = 107;
             labelControl30.Text = "Proceder con pago";
             // 
@@ -1731,10 +1733,10 @@
             labelControl31.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             tablePanel2.SetColumn(labelControl31, 6);
             labelControl31.Dock = DockStyle.Fill;
-            labelControl31.Location = new Point(685, 65);
+            labelControl31.Location = new Point(685, 69);
             labelControl31.Name = "labelControl31";
             tablePanel2.SetRow(labelControl31, 1);
-            labelControl31.Size = new Size(107, 54);
+            labelControl31.Size = new Size(107, 58);
             labelControl31.TabIndex = 106;
             labelControl31.Text = "Buscar producto";
             // 
@@ -1748,10 +1750,10 @@
             labelControl32.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             tablePanel2.SetColumn(labelControl32, 5);
             labelControl32.Dock = DockStyle.Fill;
-            labelControl32.Location = new Point(571, 65);
+            labelControl32.Location = new Point(571, 69);
             labelControl32.Name = "labelControl32";
             tablePanel2.SetRow(labelControl32, 1);
-            labelControl32.Size = new Size(107, 54);
+            labelControl32.Size = new Size(107, 58);
             labelControl32.TabIndex = 105;
             labelControl32.Text = "Aplicar factura";
             // 
@@ -1765,10 +1767,10 @@
             labelControl33.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             tablePanel2.SetColumn(labelControl33, 4);
             labelControl33.Dock = DockStyle.Fill;
-            labelControl33.Location = new Point(458, 65);
+            labelControl33.Location = new Point(458, 69);
             labelControl33.Name = "labelControl33";
             tablePanel2.SetRow(labelControl33, 1);
-            labelControl33.Size = new Size(107, 54);
+            labelControl33.Size = new Size(107, 58);
             labelControl33.TabIndex = 104;
             labelControl33.Text = "Registrar factura";
             // 
@@ -1782,10 +1784,10 @@
             labelControl34.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             tablePanel2.SetColumn(labelControl34, 8);
             labelControl34.Dock = DockStyle.Fill;
-            labelControl34.Location = new Point(912, 65);
+            labelControl34.Location = new Point(912, 69);
             labelControl34.Name = "labelControl34";
             tablePanel2.SetRow(labelControl34, 1);
-            labelControl34.Size = new Size(107, 54);
+            labelControl34.Size = new Size(107, 58);
             labelControl34.TabIndex = 108;
             labelControl34.Text = "Escaner código";
             // 
@@ -1817,7 +1819,7 @@
             tablePanel2.Name = "tablePanel2";
             tablePanel2.Padding = new Padding(1);
             tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F) });
-            tablePanel2.Size = new Size(1023, 123);
+            tablePanel2.Size = new Size(1023, 131);
             tablePanel2.TabIndex = 109;
             tablePanel2.UseSkinIndents = true;
             // 
@@ -1826,7 +1828,7 @@
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(1139, 819);
+            ClientSize = new Size(1139, 815);
             Controls.Add(tablePanel2);
             Controls.Add(progressPanel);
             Controls.Add(txtScanerCodigo);
