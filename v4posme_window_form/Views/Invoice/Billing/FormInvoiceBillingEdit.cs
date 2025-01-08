@@ -333,6 +333,7 @@ namespace v4posme_window.Views.Invoice.Billing
             TypeOpen = typeOpen;
             CodigoMesero = codeMesero;
             FormInvoiceBillingEditPayment = new(this);
+            FormInvoiceBillingEditPayment.SetTabOrder();
         }
 
 

@@ -19,11 +19,13 @@ namespace v4posme_window.Views.Invoice.Billing
         {
             InitializeComponent();
             formInvoiceBillingEdit = new FormInvoiceBillingEdit();
+            SetTabOrder();
         }
 
         public FormInvoiceBillingEditPaymentDialog(FormInvoiceBillingEdit formInvoiceBillingEdit)
         {
             InitializeComponent();
+            SetTabOrder();
             this.formInvoiceBillingEdit = formInvoiceBillingEdit;
             txtReceiptAmount.Focus();
         }
@@ -116,6 +118,63 @@ namespace v4posme_window.Views.Invoice.Billing
                 case Keys.F6:
                     btnAplicar_Click(sender, EventArgs.Empty);
                     break;
+            }
+        }
+
+        private void FormInvoiceBillingEditPaymentDialog_Load(object sender, EventArgs e)
+        {
+            txtReceiptAmount.Focus();
+        }
+
+        private void FormInvoiceBillingEditPaymentDialog_Shown(object sender, EventArgs e)
+        {
+            txtReceiptAmount.Focus();
+            SetTabOrder();
+        }
+
+        public void SetTabOrder()
+        {
+            var controls = new Control[]
+            {
+                txtReceiptAmount,
+                txtReceiptAmountDol,
+                txtPorcentajeDescuento,
+                txtReceiptAmountTarjeta,
+                txtReceiptAmountTarjeta_BankID,
+                txtReceiptAmountTarjeta_Reference,
+                txtReceiptAmountTarjetaDol,
+                txtReceiptAmountTarjetaDol_BankID,
+                txtReceiptAmountTarjetaDol_Reference,
+                txtReceiptAmountBank,
+                txtReceiptAmountBank_BankID,
+                txtReceiptAmountBank_Reference,
+                txtReceiptAmountBankDol,
+                txtReceiptAmountBankDol_BankID,
+                txtReceiptAmountBankDol_Reference,
+                txtReceiptAmountPoint
+            };
+            var controlCountPayment = controls.Length;
+            ResetTabIndex(this, ref controlCountPayment);
+
+            for (var i = 0; i < controls.Length; i++)
+            {
+                controls[i].TabIndex = i;
+                controls[i].TabStop = true;
+            }
+        }
+
+        private void ResetTabIndex(Control parent, ref int controlCountPayment)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                control.TabIndex = controlCountPayment;
+                controlCountPayment++;
+                control.TabStop = false;
+
+                if (control.HasChildren)
+                {
+                    ResetTabIndex(control, ref controlCountPayment);
+                }
             }
         }
     }
