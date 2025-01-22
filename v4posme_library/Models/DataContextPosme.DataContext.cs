@@ -60,7 +60,8 @@ namespace v4posme_library.Models
         {
             var configurationBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: true, reloadOnChange: false);
             var configuration = configurationBuilder.Build();
-            return configuration.GetConnectionString(connectionStringName);
+            string resunt_ = configuration.GetConnectionString(connectionStringName);
+            return resunt_;
         }
 
         partial void CustomizeConfiguration(ref DbContextOptionsBuilder optionsBuilder);

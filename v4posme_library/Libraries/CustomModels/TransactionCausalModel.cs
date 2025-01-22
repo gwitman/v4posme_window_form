@@ -22,7 +22,7 @@ class TransactionCausalModel(DataContext context) : ITransactionCausalModel
     {
         
         return context.TbTransactionCausals
-            .SingleOrDefault(causal => causal!.CompanyID == companyId
+            .FirstOrDefault(causal => causal!.CompanyID == companyId
                               && causal.TransactionID == transactionId
                               && causal.IsActive  && causal.IsDefault );
     }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityDeveloper Version="7.2.21.0">
   <ModelSettings xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" AppConnectionStringName="Posmeconnectionstring" ConnectionStringInAppConfig="True" RegenareteConnectionStringInAppConfig="False" TargetFramework="Net80" DetectTPTInheritance="True" ExecuteProcedures="False" UseNullParameterValues="True" EntityFrameworkCoreVersion="Version7" StoreGeneratedAsContructorParameter="True" DetectFunctionBasedColumnDefault="True">
-    <Connection ConnectionString="persistsecurityinfo=True;server=localhost;user id=root;password=root1.2Blandon;database=posme" Provider="MySql.Data.MySqlClient" />
+    <Connection ConnectionString="persistsecurityinfo=True;server=localhost;user id=root;password=root1.2Blandon;database=posme_merge" Provider="MySql.Data.MySqlClient" />
     <Generation>
       <GeneratedFiles>
         <File Name="DataContextPosme.DataContext.cs" />
