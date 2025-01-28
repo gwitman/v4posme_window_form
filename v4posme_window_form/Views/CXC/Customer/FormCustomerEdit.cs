@@ -1681,7 +1681,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 txtIncomeDol.Text = ObjCustomerCredit.IncomeDol.ToString("N2");
                 txtLimitCreditDol.Text = ObjCustomerCredit.LimitCreditDol.ToString("N2");
                 txtBalanceDol.Text = ObjCustomerCredit.BalanceDol.ToString("N2");
-                txtBalancePoint.Text = ObjCustomer.BalancePoint!.Value.ToString("N2");
+                txtBalancePoint.Text = ObjCustomer.BalancePoint is null ? "0" : ObjCustomer.BalancePoint!.Value.ToString("N2");
                 txtAccountId = ObjAccount?.AccountID ?? 0;
                 txtAccountIDDescription.Text = ObjAccount is not null ? $"{ObjAccount.AccountNumber} {ObjAccount.Name}" : "";
                 txtLocation.Text = ObjCustomer.Location;
