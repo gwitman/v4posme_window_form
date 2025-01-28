@@ -1685,7 +1685,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 txtAccountId = ObjAccount?.AccountID ?? 0;
                 txtAccountIDDescription.Text = ObjAccount is not null ? $"{ObjAccount.AccountNumber} {ObjAccount.Name}" : "";
                 txtLocation.Text = ObjCustomer.Location;
-                txtBudget.Text = ObjCustomer.Budget!.Value.ToString("N2");
+                txtBudget.Text = ObjCustomer.Budget is null ? "0" : ObjCustomer.Budget!.Value.ToString("N2");
                 txtEmployerId = ObjEmployerNatural?.EntityID ?? 0;
                 txtEmployerDescription.Text = ObjEmployerNatural is not null ? $"{ObjEmployer!.EmployeNumber} {ObjEmployerNatural.FirstName} {ObjEmployerNatural.LastName}".ToUpper() : "";
                 txtReference1.Text = ObjCustomer.Reference1;
