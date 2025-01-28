@@ -307,7 +307,7 @@
             xtraTabControl1.Location = new Point(0, 100);
             xtraTabControl1.Name = "xtraTabControl1";
             xtraTabControl1.SelectedTabPage = xtraTabPage1;
-            xtraTabControl1.Size = new Size(1111, 646);
+            xtraTabControl1.Size = new Size(1111, 642);
             xtraTabControl1.TabIndex = 76;
             xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPage1, xtraTabPage2, xtraTabPage3, tabPageProveedores, tabPageConceptos, xtraTabPage6, tabPageArchivos, xtraTabPage8, xtraTabPage9 });
             // 
@@ -318,7 +318,7 @@
             xtraTabPage1.Controls.Add(tablePanel1);
             xtraTabPage1.Controls.Add(btnImprimirCodigoBarra);
             xtraTabPage1.Name = "xtraTabPage1";
-            xtraTabPage1.Size = new Size(1109, 615);
+            xtraTabPage1.Size = new Size(1109, 611);
             xtraTabPage1.Text = "Información";
             // 
             // layoutControlCodigoBarra
@@ -335,8 +335,12 @@
             // 
             txtCodigoBarra.Location = new Point(121, 16);
             txtCodigoBarra.Name = "txtCodigoBarra";
+            txtCodigoBarra.Properties.AllowDisposeImage = true;
             txtCodigoBarra.Properties.ReadOnly = true;
             txtCodigoBarra.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+            txtCodigoBarra.Properties.ShowEditMenuItem = DevExpress.Utils.DefaultBoolean.False;
+            txtCodigoBarra.Properties.ShowMenu = false;
+            txtCodigoBarra.Properties.ShowZoomSubMenu = DevExpress.Utils.DefaultBoolean.False;
             txtCodigoBarra.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
             txtCodigoBarra.Size = new Size(334, 88);
             txtCodigoBarra.StyleController = layoutControlCodigoBarra;
@@ -984,7 +988,7 @@
             // 
             xtraTabPage2.Controls.Add(xtraScrollableControl1);
             xtraTabPage2.Name = "xtraTabPage2";
-            xtraTabPage2.Size = new Size(1109, 623);
+            xtraTabPage2.Size = new Size(1109, 619);
             xtraTabPage2.Text = "Referencias";
             // 
             // xtraScrollableControl1
@@ -994,7 +998,7 @@
             xtraScrollableControl1.Dock = DockStyle.Fill;
             xtraScrollableControl1.Location = new Point(0, 0);
             xtraScrollableControl1.Name = "xtraScrollableControl1";
-            xtraScrollableControl1.Size = new Size(1109, 623);
+            xtraScrollableControl1.Size = new Size(1109, 619);
             xtraScrollableControl1.TabIndex = 1;
             xtraScrollableControl1.Click += xtraScrollableControl1_Click;
             // 
@@ -1748,7 +1752,7 @@
             xtraTabPage3.Controls.Add(btnDeleteDetailWarehouse);
             xtraTabPage3.Controls.Add(gridControlBodegas);
             xtraTabPage3.Name = "xtraTabPage3";
-            xtraTabPage3.Size = new Size(1109, 623);
+            xtraTabPage3.Size = new Size(1109, 619);
             xtraTabPage3.Text = "Bodegas";
             // 
             // btnDeleteDetailWarehouse
@@ -1871,7 +1875,7 @@
             tabPageProveedores.Controls.Add(btnNewDetailProvider);
             tabPageProveedores.Controls.Add(gridControlProvider);
             tabPageProveedores.Name = "tabPageProveedores";
-            tabPageProveedores.Size = new Size(1109, 623);
+            tabPageProveedores.Size = new Size(1109, 619);
             tabPageProveedores.Text = "Proveedores";
             // 
             // btnDeleteDetailProvider
@@ -1941,7 +1945,7 @@
             tabPageConceptos.Controls.Add(btnNewDetailConcept);
             tabPageConceptos.Controls.Add(gridControlConcepts);
             tabPageConceptos.Name = "tabPageConceptos";
-            tabPageConceptos.Size = new Size(1109, 623);
+            tabPageConceptos.Size = new Size(1109, 619);
             tabPageConceptos.Text = "Conceptos";
             // 
             // btnDeleteDetailConcept
@@ -2015,7 +2019,7 @@
             xtraTabPage6.Controls.Add(txtDescription);
             xtraTabPage6.Controls.Add(labelControl46);
             xtraTabPage6.Name = "xtraTabPage6";
-            xtraTabPage6.Size = new Size(1109, 623);
+            xtraTabPage6.Size = new Size(1109, 619);
             xtraTabPage6.Text = "Comentarios";
             // 
             // txtDescription
@@ -2041,7 +2045,7 @@
             tabPageArchivos.Controls.Add(btnUploadFile);
             tabPageArchivos.Controls.Add(gridControlArchivos);
             tabPageArchivos.Name = "tabPageArchivos";
-            tabPageArchivos.Size = new Size(1109, 623);
+            tabPageArchivos.Size = new Size(1109, 619);
             tabPageArchivos.Text = " Archivos";
             // 
             // btnUploadFile
@@ -2060,7 +2064,7 @@
             gridControlArchivos.Location = new Point(11, 71);
             gridControlArchivos.MainView = gridViewArcvhivos;
             gridControlArchivos.Name = "gridControlArchivos";
-            gridControlArchivos.Size = new Size(1087, 533);
+            gridControlArchivos.Size = new Size(1087, 525);
             gridControlArchivos.TabIndex = 0;
             gridControlArchivos.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewArcvhivos });
             // 
@@ -2074,7 +2078,7 @@
             // 
             xtraTabPage8.Controls.Add(gridControlPrecios);
             xtraTabPage8.Name = "xtraTabPage8";
-            xtraTabPage8.Size = new Size(1109, 623);
+            xtraTabPage8.Size = new Size(1109, 619);
             xtraTabPage8.Text = "Precios";
             // 
             // gridControlPrecios
@@ -2140,7 +2144,7 @@
             xtraTabPage9.Controls.Add(btnEliminarSkuGrid);
             xtraTabPage9.Controls.Add(gridControlSku);
             xtraTabPage9.Name = "xtraTabPage9";
-            xtraTabPage9.Size = new Size(1109, 623);
+            xtraTabPage9.Size = new Size(1109, 619);
             xtraTabPage9.Text = "SKU";
             // 
             // btnEliminarSkuGrid
@@ -2234,7 +2238,7 @@
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1111, 746);
+            ClientSize = new Size(1111, 742);
             ControlBox = false;
             Controls.Add(xtraTabControl1);
             MaximizeBox = false;

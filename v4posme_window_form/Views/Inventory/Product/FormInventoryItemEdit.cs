@@ -1274,7 +1274,12 @@ namespace v4posme_window.Views.Inventory.Product
                         var pathFile = Path.Combine(path, "barcode.jpg");
                         if (File.Exists(pathFile))
                         {
-                            txtCodigoBarra.Image = Image.FromFile(pathFile);
+                            // Cargar la imagen desde el archivo
+                            using (Image tempImage = Image.FromFile(pathFile))
+                            {
+                                // Clonar la imagen en un nuevo objeto
+                                txtCodigoBarra.Image = new Bitmap(tempImage);
+                            }
                         }
                     }
 
