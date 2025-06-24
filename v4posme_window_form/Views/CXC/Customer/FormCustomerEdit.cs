@@ -849,7 +849,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             Reference4 = txtReference4.Text,
             Reference5 = txtReference5.Text,
             BalancePoint = balancePoint,
-            PhoneNumber = Encoding.UTF8.GetBytes(txtPhoneNumber.Text),
+            PhoneNumber = txtPhoneNumber.Text,
             TypeFirm = Convert.ToInt32(selectedTypeFirmId.Key),
             Budget = budget,
             IsActive = true,
@@ -1303,7 +1303,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
             ObjCustomer.Reference4 = txtReference4.Text;
             ObjCustomer.Reference5 = txtReference5.Text;
             ObjCustomer.BalancePoint = balancePoint;
-            ObjCustomer.PhoneNumber = Encoding.UTF8.GetBytes(txtPhoneNumber.Text);
+            ObjCustomer.PhoneNumber = txtPhoneNumber.Text;
             ObjCustomer.TypeFirm = Convert.ToInt32(selectedTypeFirmId!.Key);
             ObjCustomer.Budget = budget;
             ObjCustomer.IsActive = true;
@@ -1677,7 +1677,7 @@ public partial class FormCustomerEdit : FormTypeHeadEdit, IFormTypeEdit
                 txtLegalName.Text = ObjLegal.LegalName;
                 txtCommercialName.Text = ObjLegal.ComercialName;
                 txtIdentification.Text = ObjCustomer.Identification;
-                txtPhoneNumber.Text = ObjCustomer.PhoneNumber is null ? "" : Encoding.UTF8.GetString(ObjCustomer.PhoneNumber);
+                txtPhoneNumber.Text = ObjCustomer.PhoneNumber is null ? "" : ObjCustomer.PhoneNumber;
                 txtIncomeDol.Text = ObjCustomerCredit.IncomeDol.ToString("N2");
                 txtLimitCreditDol.Text = ObjCustomerCredit.LimitCreditDol.ToString("N2");
                 txtBalanceDol.Text = ObjCustomerCredit.BalanceDol.ToString("N2");

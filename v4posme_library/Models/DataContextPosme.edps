@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<EntityDeveloper Version="7.2.21.0">
-  <ModelSettings xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" AppConnectionStringName="Posmeconnectionstring" ConnectionStringInAppConfig="True" RegenareteConnectionStringInAppConfig="False" TargetFramework="Net80" DetectTPTInheritance="True" ExecuteProcedures="False" UseNullParameterValues="True" EntityFrameworkCoreVersion="Version7" StoreGeneratedAsContructorParameter="True" DetectFunctionBasedColumnDefault="True">
-    <Connection ConnectionString="persistsecurityinfo=True;server=localhost;user id=root;password=root1.2Blandon;database=posme_merge" Provider="MySql.Data.MySqlClient" />
+<EntityDeveloper Version="7.1.177.0">
+  <ModelSettings xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" AppConnectionStringName="PosmeConnectionString" ConnectionStringInAppConfig="True" RegenareteConnectionStringInAppConfig="False" TargetFramework="Net70" DetectTPTInheritance="True" EntityFrameworkCoreVersion="Version7" DetectFunctionBasedColumnDefault="True">
+    <Connection ConnectionString="persistsecurityinfo=True;server=localhost;user id=root;password=root1.2Blandon;database=posme" Provider="MySql.Data.MySqlClient" />
     <Generation>
       <GeneratedFiles>
         <File Name="DataContextPosme.DataContext.cs" />
@@ -14,6 +14,7 @@
         <File Name="DataContextPosme.TbAccountTmp.cs" />
         <File Name="DataContextPosme.TbAccountType.cs" />
         <File Name="DataContextPosme.TbBank.cs" />
+        <File Name="DataContextPosme.TbBankCheque.cs" />
         <File Name="DataContextPosme.TbBiblia.cs" />
         <File Name="DataContextPosme.TbBranch.cs" />
         <File Name="DataContextPosme.TbCaller.cs" />
@@ -66,6 +67,7 @@
         <File Name="DataContextPosme.TbEntity.cs" />
         <File Name="DataContextPosme.TbEntityAccount.cs" />
         <File Name="DataContextPosme.TbEntityEmail.cs" />
+        <File Name="DataContextPosme.TbEntityLocation.cs" />
         <File Name="DataContextPosme.TbEntityPhone.cs" />
         <File Name="DataContextPosme.TbError.cs" />
         <File Name="DataContextPosme.TbEstadisticaCategoria.cs" />
@@ -119,6 +121,7 @@
         <File Name="DataContextPosme.TbTransactionMasterDenomination.cs" />
         <File Name="DataContextPosme.TbTransactionMasterDetail.cs" />
         <File Name="DataContextPosme.TbTransactionMasterDetailCredit.cs" />
+        <File Name="DataContextPosme.TbTransactionMasterDetailReference.cs" />
         <File Name="DataContextPosme.TbTransactionMasterDetailTemp.cs" />
         <File Name="DataContextPosme.TbTransactionMasterInfo.cs" />
         <File Name="DataContextPosme.TbTransactionMasterPurchase.cs" />
@@ -134,6 +137,7 @@
         <File Name="DataContextPosme.TbWarehouse.cs" />
         <File Name="DataContextPosme.TbWorkflow.cs" />
         <File Name="DataContextPosme.TbWorkflowStage.cs" />
+        <File Name="DataContextPosme.TbWorkflowStageAffect.cs" />
         <File Name="DataContextPosme.TbWorkflowStageChangeLog.cs" />
         <File Name="DataContextPosme.TbWorkflowStageRelation.cs" />
         <File Name="DataContextPosme.VwContabilidadComprobante.cs" />
@@ -150,159 +154,73 @@
         <File Name="DataContextPosme.VwSinRiesgoReporteCredito.cs" />
         <File Name="DataContextPosme.VwSinRiesgoReporteCreditosToSystema.cs" />
         <File Name="DataContextPosme.VwTransaccionMasterConcept232425.cs" />
-        <File Name="DataContextPosme.TbTransactionMasterDetailReference.cs" />
-        <File Name="DataContextPosme.TbEntityLocation.cs" />
-        <File Name="DataContextPosme.TbBankCheque.cs" />
-        <File Name="DataContextPosme.TbWorkflowStageAffect.cs" />
-        <File Name="DataContextPosme.TbAccount.Metadata.cs" />
-        <File Name="DataContextPosme.TbAccountingBalance.Metadata.cs" />
-        <File Name="DataContextPosme.TbAccountingBalanceTemp.Metadata.cs" />
-        <File Name="DataContextPosme.TbAccountingCycle.Metadata.cs" />
-        <File Name="DataContextPosme.TbAccountingPeriod.Metadata.cs" />
-        <File Name="DataContextPosme.TbAccountLevel.Metadata.cs" />
-        <File Name="DataContextPosme.TbAccountTmp.Metadata.cs" />
-        <File Name="DataContextPosme.TbAccountType.Metadata.cs" />
-        <File Name="DataContextPosme.TbBank.Metadata.cs" />
-        <File Name="DataContextPosme.TbBiblia.Metadata.cs" />
-        <File Name="DataContextPosme.TbBranch.Metadata.cs" />
-        <File Name="DataContextPosme.TbCaller.Metadata.cs" />
-        <File Name="DataContextPosme.TbCashBox.Metadata.cs" />
-        <File Name="DataContextPosme.TbCashBoxSession.Metadata.cs" />
-        <File Name="DataContextPosme.TbCashBoxSessionTransactionMaster.Metadata.cs" />
-        <File Name="DataContextPosme.TbCashBoxUser.Metadata.cs" />
-        <File Name="DataContextPosme.TbCatalog.Metadata.cs" />
-        <File Name="DataContextPosme.TbCatalogItem.Metadata.cs" />
-        <File Name="DataContextPosme.TbCatalogItemConvertion.Metadata.cs" />
-        <File Name="DataContextPosme.TbCenterCost.Metadata.cs" />
-        <File Name="DataContextPosme.TbCompany.Metadata.cs" />
-        <File Name="DataContextPosme.TbCompanyComponent.Metadata.cs" />
-        <File Name="DataContextPosme.TbCompanyComponentConcept.Metadata.cs" />
-        <File Name="DataContextPosme.TbCompanyComponentFlavor.Metadata.cs" />
-        <File Name="DataContextPosme.TbCompanyComponentItemDataview.Metadata.cs" />
-        <File Name="DataContextPosme.TbCompanyCurrency.Metadata.cs" />
-        <File Name="DataContextPosme.TbCompanyDataview.Metadata.cs" />
-        <File Name="DataContextPosme.TbCompanyDefaultDataview.Metadata.cs" />
-        <File Name="DataContextPosme.TbCompanyParameter.Metadata.cs" />
-        <File Name="DataContextPosme.TbCompanySubelementAudit.Metadata.cs" />
-        <File Name="DataContextPosme.TbCompanySubelementObligatory.Metadata.cs" />
-        <File Name="DataContextPosme.TbComponent.Metadata.cs" />
-        <File Name="DataContextPosme.TbComponentAudit.Metadata.cs" />
-        <File Name="DataContextPosme.TbComponentAuditDetail.Metadata.cs" />
-        <File Name="DataContextPosme.TbComponentAutorization.Metadata.cs" />
-        <File Name="DataContextPosme.TbComponentAutorizationDetail.Metadata.cs" />
-        <File Name="DataContextPosme.TbComponentElement.Metadata.cs" />
-        <File Name="DataContextPosme.TbCounter.Metadata.cs" />
-        <File Name="DataContextPosme.TbCreditLine.Metadata.cs" />
-        <File Name="DataContextPosme.TbCurrency.Metadata.cs" />
-        <File Name="DataContextPosme.TbCustomer.Metadata.cs" />
-        <File Name="DataContextPosme.TbCustomerConsultasSinRiesgo.Metadata.cs" />
-        <File Name="DataContextPosme.TbCustomerCredit.Metadata.cs" />
-        <File Name="DataContextPosme.TbCustomerCreditAmoritization.Metadata.cs" />
-        <File Name="DataContextPosme.TbCustomerCreditClasification.Metadata.cs" />
-        <File Name="DataContextPosme.TbCustomerCreditDocument.Metadata.cs" />
-        <File Name="DataContextPosme.TbCustomerCreditDocumentEntityRelated.Metadata.cs" />
-        <File Name="DataContextPosme.TbCustomerCreditExternalSharon.Metadata.cs" />
-        <File Name="DataContextPosme.TbCustomerCreditExternalSharonTmp.Metadata.cs" />
-        <File Name="DataContextPosme.TbCustomerCreditLine.Metadata.cs" />
-        <File Name="DataContextPosme.TbCustomerFrecuencyActuation.Metadata.cs" />
-        <File Name="DataContextPosme.TbCustomerPaymentMethod.Metadata.cs" />
-        <File Name="DataContextPosme.TbDataview.Metadata.cs" />
-        <File Name="DataContextPosme.TbElement.Metadata.cs" />
-        <File Name="DataContextPosme.TbElementType.Metadata.cs" />
-        <File Name="DataContextPosme.TbEmployee.Metadata.cs" />
-        <File Name="DataContextPosme.TbEmployeeCalendarPay.Metadata.cs" />
-        <File Name="DataContextPosme.TbEmployeeCalendarPayDetail.Metadata.cs" />
-        <File Name="DataContextPosme.TbEntity.Metadata.cs" />
-        <File Name="DataContextPosme.TbEntityAccount.Metadata.cs" />
-        <File Name="DataContextPosme.TbEntityEmail.Metadata.cs" />
-        <File Name="DataContextPosme.TbEntityPhone.Metadata.cs" />
-        <File Name="DataContextPosme.TbError.Metadata.cs" />
-        <File Name="DataContextPosme.TbEstadisticaCategoria.Metadata.cs" />
-        <File Name="DataContextPosme.TbEstadisticaClase.Metadata.cs" />
-        <File Name="DataContextPosme.TbExchangeRate.Metadata.cs" />
-        <File Name="DataContextPosme.TbFixedAssent.Metadata.cs" />
-        <File Name="DataContextPosme.TbIndicator.Metadata.cs" />
-        <File Name="DataContextPosme.TbIndicatorHistory.Metadata.cs" />
-        <File Name="DataContextPosme.TbIndicatorTmp.Metadata.cs" />
-        <File Name="DataContextPosme.TbItem.Metadata.cs" />
-        <File Name="DataContextPosme.TbItemCategory.Metadata.cs" />
-        <File Name="DataContextPosme.TbItemConfigLoto.Metadata.cs" />
-        <File Name="DataContextPosme.TbItemDataSheet.Metadata.cs" />
-        <File Name="DataContextPosme.TbItemDataSheetDetail.Metadata.cs" />
-        <File Name="DataContextPosme.TbItemImport.Metadata.cs" />
-        <File Name="DataContextPosme.TbItemSku.Metadata.cs" />
-        <File Name="DataContextPosme.TbItemWarehouse.Metadata.cs" />
-        <File Name="DataContextPosme.TbItemWarehouseExpired.Metadata.cs" />
-        <File Name="DataContextPosme.TbJournalEntry.Metadata.cs" />
-        <File Name="DataContextPosme.TbJournalEntryDetail.Metadata.cs" />
-        <File Name="DataContextPosme.TbJournalEntryDetailSummary.Metadata.cs" />
-        <File Name="DataContextPosme.TbKardex.Metadata.cs" />
-        <File Name="DataContextPosme.TbLegal.Metadata.cs" />
-        <File Name="DataContextPosme.TbListPrice.Metadata.cs" />
-        <File Name="DataContextPosme.TbLog.Metadata.cs" />
-        <File Name="DataContextPosme.TbLogMesseger.Metadata.cs" />
-        <File Name="DataContextPosme.TbLogSession.Metadata.cs" />
-        <File Name="DataContextPosme.TbMasterKardexTemp.Metadata.cs" />
-        <File Name="DataContextPosme.TbMembership.Metadata.cs" />
-        <File Name="DataContextPosme.TbMenuElement.Metadata.cs" />
-        <File Name="DataContextPosme.TbNaturale.Metadata.cs" />
-        <File Name="DataContextPosme.TbNotification.Metadata.cs" />
-        <File Name="DataContextPosme.TbParameter.Metadata.cs" />
-        <File Name="DataContextPosme.TbPrice.Metadata.cs" />
-        <File Name="DataContextPosme.TbProvider.Metadata.cs" />
-        <File Name="DataContextPosme.TbProviderItem.Metadata.cs" />
-        <File Name="DataContextPosme.TbPublicCatalog.Metadata.cs" />
-        <File Name="DataContextPosme.TbPublicCatalogDetail.Metadata.cs" />
-        <File Name="DataContextPosme.TbRazonesFinancierasTmp.Metadata.cs" />
-        <File Name="DataContextPosme.TbRelationship.Metadata.cs" />
-        <File Name="DataContextPosme.TbRemember.Metadata.cs" />
-        <File Name="DataContextPosme.TbRole.Metadata.cs" />
-        <File Name="DataContextPosme.TbRoleAutorization.Metadata.cs" />
-        <File Name="DataContextPosme.TbSubelement.Metadata.cs" />
-        <File Name="DataContextPosme.TbTag.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransaction.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionCausal.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionConcept.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionMaster.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionMasterConcept.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionMasterDenomination.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionMasterDetail.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionMasterDetailCredit.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionMasterDetailTemp.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionMasterInfo.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionMasterPurchase.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionMasterReference.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionMasterSummaryConceptTmp.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionProfileDetail.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionProfileDetailTmp.Metadata.cs" />
-        <File Name="DataContextPosme.TbTypeMenuElement.Metadata.cs" />
-        <File Name="DataContextPosme.TbUser.Metadata.cs" />
-        <File Name="DataContextPosme.TbUserPermission.Metadata.cs" />
-        <File Name="DataContextPosme.TbUserTag.Metadata.cs" />
-        <File Name="DataContextPosme.TbUserWarehouse.Metadata.cs" />
-        <File Name="DataContextPosme.TbWarehouse.Metadata.cs" />
-        <File Name="DataContextPosme.TbWorkflow.Metadata.cs" />
-        <File Name="DataContextPosme.TbWorkflowStage.Metadata.cs" />
-        <File Name="DataContextPosme.TbWorkflowStageChangeLog.Metadata.cs" />
-        <File Name="DataContextPosme.TbWorkflowStageRelation.Metadata.cs" />
-        <File Name="DataContextPosme.VwContabilidadComprobante.Metadata.cs" />
-        <File Name="DataContextPosme.VwCxcCustomerListRealEstate.Metadata.cs" />
-        <File Name="DataContextPosme.VwGerenciaBalance.Metadata.cs" />
-        <File Name="DataContextPosme.VwGerenciaCustomer.Metadata.cs" />
-        <File Name="DataContextPosme.VwGerenciaDesembolsosDetalle.Metadata.cs" />
-        <File Name="DataContextPosme.VwGerenciaDesembolsosResuman.Metadata.cs" />
-        <File Name="DataContextPosme.VwGerenciaEstadoResultado001.Metadata.cs" />
-        <File Name="DataContextPosme.VwGerenciaEstadoResultado002.Metadata.cs" />
-        <File Name="DataContextPosme.VwInventoryListItemRealEstate.Metadata.cs" />
-        <File Name="DataContextPosme.VwSalesInventory.Metadata.cs" />
-        <File Name="DataContextPosme.VwSinRiesgoReporteCliente.Metadata.cs" />
-        <File Name="DataContextPosme.VwSinRiesgoReporteCredito.Metadata.cs" />
-        <File Name="DataContextPosme.VwSinRiesgoReporteCreditosToSystema.Metadata.cs" />
-        <File Name="DataContextPosme.VwTransaccionMasterConcept232425.Metadata.cs" />
-        <File Name="DataContextPosme.TbTransactionMasterDetailReference.Metadata.cs" />
-        <File Name="DataContextPosme.TbEntityLocation.Metadata.cs" />
-        <File Name="DataContextPosme.TbBankCheque.Metadata.cs" />
-        <File Name="DataContextPosme.TbWorkflowStageAffect.Metadata.cs" />
+        <File Name="DataContextPosme.PrAccountingAccountBalanceResult.cs" />
+        <File Name="DataContextPosme.PrAccountingGetReportAuxiliarAccountResult.cs" />
+        <File Name="DataContextPosme.PrAccountingGetReportAuxiliarAccountResult1.cs" />
+        <File Name="DataContextPosme.PrAccountingGetReportAuxiliarAccountResult2.cs" />
+        <File Name="DataContextPosme.PrAccountingGetReportAuxiliarAccountResult3.cs" />
+        <File Name="DataContextPosme.PrAccountingGetReportAuxiliarMovTipoComprobanteResult.cs" />
+        <File Name="DataContextPosme.PrAccountingGetReportBalanzaDeComprobacionResult.cs" />
+        <File Name="DataContextPosme.PrAccountingGetReportCashFlowResult.cs" />
+        <File Name="DataContextPosme.PrAccountingGetReportCatalogoDeCuentaResult.cs" />
+        <File Name="DataContextPosme.PrAccountingGetReportPresupuestoryResult.cs" />
+        <File Name="DataContextPosme.PrBoxGetReportAbonoResult.cs" />
+        <File Name="DataContextPosme.PrBoxGetReportAttendanceResult.cs" />
+        <File Name="DataContextPosme.PrBoxGetReportClosedResult.cs" />
+        <File Name="DataContextPosme.PrBoxGetReportClosedOperationResult.cs" />
+        <File Name="DataContextPosme.PrBoxGetReportReconciliationDepositResult.cs" />
+        <File Name="DataContextPosme.PrCollectionGetReportCommisionProviderResult.cs" />
+        <File Name="DataContextPosme.PrCollectionGetReportCustomerResult.cs" />
+        <File Name="DataContextPosme.PrCollectionGetReportDetalleTransactionResult.cs" />
+        <File Name="DataContextPosme.PrCollectionGetReportDocumentsCreditResult.cs" />
+        <File Name="DataContextPosme.PrCollectionGetReportDocumentCreditResult.cs" />
+        <File Name="DataContextPosme.PrCollectionGetReportSummaryCreditResult.cs" />
+        <File Name="DataContextPosme.PrCoreGetIndicatorResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCollectionManagerResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerCreditResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerCreditByUserResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerCreditDolareResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerExpensaResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerExpensaResult1.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerExpensaResult2.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerListResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerPayResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerPayByInvoiceResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerPayByInvoiceResult1.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerSrListResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerStatusResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerStatusResult1.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerStatusResult2.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportCustomerStatusResult3.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportDocumentContractResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportDocumentCreditResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportExchangeRateResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportInfoProyectResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportInteresPeriodoResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportMovementCustomerResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportSummaryCreditResult.cs" />
+        <File Name="DataContextPosme.PrCxcGetReportUploadBuroResult.cs" />
+        <File Name="DataContextPosme.PrCxcProcExpandinvoiceResult.cs" />
+        <File Name="DataContextPosme.PrCxpGetReportExpensesDetailResult.cs" />
+        <File Name="DataContextPosme.PrCxpGetReportExpensesSummaryPivotResult.cs" />
+        <File Name="DataContextPosme.PrCxpGetReportPurchaseDetailResult.cs" />
+        <File Name="DataContextPosme.PrInventoryGetEportListItemExpiredResult.cs" />
+        <File Name="DataContextPosme.PrInventoryGetReportAuxiliarMovByAllwarehouseResult.cs" />
+        <File Name="DataContextPosme.PrInventoryGetReportAuxiliarMovByWarehouseResult.cs" />
+        <File Name="DataContextPosme.PrInventoryGetReportListItemResult.cs" />
+        <File Name="DataContextPosme.PrInventoryGetReportListItemOutExistResult.cs" />
+        <File Name="DataContextPosme.PrInventoryGetReportMasterKardexResult.cs" />
+        <File Name="DataContextPosme.PrInventoryGetReportPurchaseResult.cs" />
+        <File Name="DataContextPosme.PrInventoryLastItemMovementResult.cs" />
+        <File Name="DataContextPosme.PrNotificationBuyResult.cs" />
+        <File Name="DataContextPosme.PrPurchaseGetReportPurchaseDetailResult.cs" />
+        <File Name="DataContextPosme.PrSalesGetReportSalesByClientResult.cs" />
+        <File Name="DataContextPosme.PrSalesGetReportSalesComisssionSummaryResult.cs" />
+        <File Name="DataContextPosme.PrSalesGetReportSalesDayResult.cs" />
+        <File Name="DataContextPosme.PrSalesGetReportSalesDetailResult.cs" />
+        <File Name="DataContextPosme.PrSalesGetReportVentaDeProductoResult.cs" />
+        <File Name="DataContextPosme.PrTransactionReportRegistradasAnuladaResult.cs" />
+        <File Name="DataContextPosme.PrZerrorRepararTablaAmortizationDiasParaGymRaptorResult.cs" />
       </GeneratedFiles>
     </Generation>
     <DatabaseFirstNamingRules>
@@ -310,39 +228,39 @@
       <Class UseSchemaAsPrefix="False" PluralizeCollectionNavigationPropertyName="True" AddConstraintColumnsToNavigationPropertyName="False" RemoveUnderscores="True" AddUnderscores="False" RemoveInvalidCharacters="True" CodeCase="FirstLetterUppercase" AddPrefix="" AddSuffix="" RemovePrefixes="" RemoveSuffixes="" PluralizationName="Singularize" />
       <Property RemoveUnderscores="True" AddUnderscores="False" RemoveInvalidCharacters="True" CodeCase="FirstLetterUppercase" AddPrefix="" AddSuffix="" RemovePrefixes="" RemoveSuffixes="" PluralizationName="Unchanged" />
     </DatabaseFirstNamingRules>
-    <ModelFirst StorageSynchronizationEnabled="False" TargetSchema="posme" TargetProviderName="Devart.Data.MySql">
+    <ModelFirst StorageSynchronizationEnabled="False" TargetSchema="posme" TargetProviderName="MySql.Data.MySqlClient">
       <TargetServer Server="MySQL" ServerVersion="5.5" />
       <ModelFirstNamingRules>
-        <Table RemoveUnderscores="True" AddUnderscores="False" RemoveInvalidCharacters="True" CodeCase="FirstLetterUppercase" AddPrefix="" AddSuffix="" RemovePrefixes="" RemoveSuffixes="" PluralizationName="Pluralize" />
-        <Column RemoveUnderscores="True" AddUnderscores="False" RemoveInvalidCharacters="True" CodeCase="FirstLetterUppercase" AddPrefix="" AddSuffix="" RemovePrefixes="" RemoveSuffixes="" PluralizationName="Unchanged" />
+        <Table RemoveUnderscores="False" AddUnderscores="False" RemoveInvalidCharacters="True" CodeCase="Unchanged" AddPrefix="" AddSuffix="" RemovePrefixes="" RemoveSuffixes="" PluralizationName="Pluralize" />
+        <Column RemoveUnderscores="False" AddUnderscores="False" RemoveInvalidCharacters="True" CodeCase="Unchanged" AddPrefix="" AddSuffix="" RemovePrefixes="" RemoveSuffixes="" PluralizationName="Unchanged" />
       </ModelFirstNamingRules>
     </ModelFirst>
     <Diagrams>
-      <Diagram Name="Diagram1" DefaultDiagram="True" />
+      <Diagram Name="DataContextDiagram" DefaultDiagram="True" />
     </Diagrams>
     <Templates>
       <Template Name="EF Core" Description="Use this template to generate classes for an Entity Framework Core model." Enabled="True" PredefinedTemplateName="EF Core C#">
-        <ed:Property Name="ValidationFramework" Type="EntityDeveloper.TemplateEngine.ValidationFramework, EntityDeveloper.Common, Version=7.2.21.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
-          <ValidationFramework>DataAnnotations</ValidationFramework>
+        <ed:Property Name="ValidationFramework" Type="EntityDeveloper.TemplateEngine.ValidationFramework, EntityDeveloper.Common, Version=7.1.177.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <ValidationFramework>None</ValidationFramework>
         </ed:Property>
-        <ed:Property Name="ValidationErrorMessages" Type="EntityDeveloper.TemplateEngine.ValidationErrorMessages, EntityDeveloper.Common, Version=7.2.21.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="ValidationErrorMessages" Type="EntityDeveloper.TemplateEngine.ValidationErrorMessages, EntityDeveloper.Common, Version=7.1.177.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <ValidationErrorMessages xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />
         </ed:Property>
-        <ed:Property Name="ContextOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=7.2.21.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="ContextOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=7.1.177.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <OutputInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <Project />
             <ProjectFolder />
             <DestinationFolder />
           </OutputInfo>
         </ed:Property>
-        <ed:Property Name="EntitiesOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=7.2.21.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="EntitiesOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=7.1.177.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <OutputInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <Project />
             <ProjectFolder />
             <DestinationFolder />
           </OutputInfo>
         </ed:Property>
-        <ed:Property Name="EnumOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=7.2.21.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="EnumOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=7.1.177.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <OutputInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <Project />
             <ProjectFolder />
@@ -385,29 +303,29 @@
         <ed:Property Name="JsonFileBasePath" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <string d6p1:nil="true" xmlns:d6p1="http://www.w3.org/2001/XMLSchema-instance" />
         </ed:Property>
-        <ed:Property Name="PrimitiveDefaultValueGeneration" Type="EntityDeveloper.DefaultValueBehavior, EntityDeveloper.Orm.Common, Version=7.2.21.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="PrimitiveDefaultValueGeneration" Type="EntityDeveloper.DefaultValueBehavior, EntityDeveloper.Orm.Common, Version=7.1.177.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <DefaultValueBehavior>Literal</DefaultValueBehavior>
         </ed:Property>
-        <ed:Property Name="CollectionPropertyType" Type="EntityDeveloper.EntityFrameworkCore.EFCoreCollectionPropertyType, EntityDeveloper.Orm.EntityFrameworkCore, Version=7.2.21.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="CollectionPropertyType" Type="EntityDeveloper.EntityFrameworkCore.EFCoreCollectionPropertyType, EntityDeveloper.Orm.EntityFrameworkCore, Version=7.1.177.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <EFCoreCollectionPropertyType>Default</EFCoreCollectionPropertyType>
         </ed:Property>
-        <ed:Property Name="CollectionInitializationType" Type="EntityDeveloper.EntityFrameworkCore.EFCoreCollectionInitializationType, EntityDeveloper.Orm.EntityFrameworkCore, Version=7.2.21.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="CollectionInitializationType" Type="EntityDeveloper.EntityFrameworkCore.EFCoreCollectionInitializationType, EntityDeveloper.Orm.EntityFrameworkCore, Version=7.1.177.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <EFCoreCollectionInitializationType>Default</EFCoreCollectionInitializationType>
         </ed:Property>
-        <ed:Property Name="NullableReferenceTypes" Type="EntityDeveloper.ReferenceTypeNullability, EntityDeveloper.Orm.Common, Version=7.2.21.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="NullableReferenceTypes" Type="EntityDeveloper.ReferenceTypeNullability, EntityDeveloper.Orm.Common, Version=7.1.177.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <ReferenceTypeNullability>Enable</ReferenceTypeNullability>
         </ed:Property>
         <ed:Property Name="SelfContainedEntityConfiguration" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>false</boolean>
         </ed:Property>
-        <ed:Property Name="EntitiesConfigurationOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=7.2.21.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="EntitiesConfigurationOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=7.1.177.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <OutputInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <Project />
             <ProjectFolder />
             <DestinationFolder />
           </OutputInfo>
         </ed:Property>
-        <ed:Property Name="SerializationLibrary" Type="EntityDeveloper.SerializationLibrary, EntityDeveloper.Orm.Common, Version=7.2.21.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="SerializationLibrary" Type="EntityDeveloper.SerializationLibrary, EntityDeveloper.Orm.Common, Version=7.1.177.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <SerializationLibrary>None</SerializationLibrary>
         </ed:Property>
         <ed:Property Name="SerializeOriginalColumnNames" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -416,46 +334,13 @@
         <ed:Property Name="SerializeNullValues" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>true</boolean>
         </ed:Property>
-        <ed:Property Name="SerializeNavigationProperties" Type="EntityDeveloper.NavigationPropertySerializationBehavior, EntityDeveloper.Orm.Common, Version=7.2.21.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="SerializeNavigationProperties" Type="EntityDeveloper.NavigationPropertySerializationBehavior, EntityDeveloper.Orm.Common, Version=7.1.177.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <NavigationPropertySerializationBehavior>All</NavigationPropertySerializationBehavior>
         </ed:Property>
         <ed:Property Name="GenerateSerializableAttributes" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>false</boolean>
         </ed:Property>
         <ed:Property Name="GenerateDataContracts" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <boolean>false</boolean>
-        </ed:Property>
-      </Template>
-      <Template Name="Data Annotations Metadata" Description="Use this template to generate Data Annotations metadata classes and decorate classes and properties with data annotation attributes that specify validation rules, specify how the data is displayed, and define metadata for Windows Communication Foundation(WCF), Dynamic Data and WCF RIA Services." Enabled="True" PredefinedTemplateName="Data Annotations Metadata C#">
-        <ed:Property Name="EntitiesOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=7.2.21.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
-          <OutputInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <Project />
-            <ProjectFolder />
-            <DestinationFolder />
-          </OutputInfo>
-        </ed:Property>
-        <ed:Property Name="NestedMetadata" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <boolean>true</boolean>
-        </ed:Property>
-        <ed:Property Name="GenerateDisplayResourceFile" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <boolean>false</boolean>
-        </ed:Property>
-        <ed:Property Name="Validation" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <boolean>false</boolean>
-        </ed:Property>
-        <ed:Property Name="ValidationErrorMessages" Type="EntityDeveloper.TemplateEngine.ValidationErrorMessages, EntityDeveloper.Common, Version=7.2.21.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
-          <ValidationErrorMessages xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />
-        </ed:Property>
-        <ed:Property Name="DynamicData" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <boolean>false</boolean>
-        </ed:Property>
-        <ed:Property Name="RIAService" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <boolean>false</boolean>
-        </ed:Property>
-        <ed:Property Name="WCFService" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <boolean>false</boolean>
-        </ed:Property>
-        <ed:Property Name="CoreMVC" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>false</boolean>
         </ed:Property>
       </Template>

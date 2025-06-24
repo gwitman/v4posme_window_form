@@ -44,7 +44,7 @@ public class TbCustomerDto()
     public int? CreatedAt { get; set; }
     public bool? IsActive { get; set; }
     public int? TypeFirm { get; set; }
-    public byte[] PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; }
     public int CustomerId { get; set; }
 
     
