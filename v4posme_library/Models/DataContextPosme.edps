@@ -152,6 +152,8 @@
         <File Name="DataContextPosme.VwTransaccionMasterConcept232425.cs" />
         <File Name="DataContextPosme.TbTransactionMasterDetailReference.cs" />
         <File Name="DataContextPosme.TbEntityLocation.cs" />
+        <File Name="DataContextPosme.TbBankCheque.cs" />
+        <File Name="DataContextPosme.TbWorkflowStageAffect.cs" />
         <File Name="DataContextPosme.TbAccount.Metadata.cs" />
         <File Name="DataContextPosme.TbAccountingBalance.Metadata.cs" />
         <File Name="DataContextPosme.TbAccountingBalanceTemp.Metadata.cs" />
@@ -299,6 +301,8 @@
         <File Name="DataContextPosme.VwTransaccionMasterConcept232425.Metadata.cs" />
         <File Name="DataContextPosme.TbTransactionMasterDetailReference.Metadata.cs" />
         <File Name="DataContextPosme.TbEntityLocation.Metadata.cs" />
+        <File Name="DataContextPosme.TbBankCheque.Metadata.cs" />
+        <File Name="DataContextPosme.TbWorkflowStageAffect.Metadata.cs" />
       </GeneratedFiles>
     </Generation>
     <DatabaseFirstNamingRules>

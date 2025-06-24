@@ -59,6 +59,32 @@ namespace v4posme_library.Models
     
             public object CreatedBy { get; set; }
     
+            public object CountryID { get; set; }
+    
+            public object CityID { get; set; }
+    
+            public object MunicipalityID { get; set; }
+    
+            public object Address { get; set; }
+    
+            public object AreaID { get; set; }
+    
+            public object ProjectID { get; set; }
+    
+            public object Duration { get; set; }
+    
+            public object TypeFixedAssentID { get; set; }
+    
+            public object StartOn { get; set; }
+    
+            public object Ratio { get; set; }
+    
+            public object CurrencyID { get; set; }
+    
+            public object CurrentAmount { get; set; }
+    
+            public object SettlementAmount { get; set; }
+    
             public object IsActive { get; set; }
         }
     }

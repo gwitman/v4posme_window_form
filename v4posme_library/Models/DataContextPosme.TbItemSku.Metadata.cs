@@ -16,6 +16,10 @@ namespace v4posme_library.Models
             public object CatalogItemID { get; set; }
     
             public object Value { get; set; }
+    
+            public object Price { get; set; }
+    
+            public object Predeterminado { get; set; }
         }
     }
 }

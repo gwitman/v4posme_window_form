@@ -20,6 +20,8 @@ namespace v4posme_library.Models
             public object IsActive { get; set; }
     
             public object Address { get; set; }
+    
+            public object Serie { get; set; }
         }
     }
 }

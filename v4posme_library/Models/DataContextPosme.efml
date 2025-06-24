@@ -353,6 +353,9 @@
     <property name="Name" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="3479fc7a-681d-4d43-962e-56ca72f343a4">
       <column name="name" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
     </property>
+    <property name="AccountNumber" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="03a59501-f904-43b8-8331-b38d6d8ef993">
+      <column name="accountNumber" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
     <property name="AccountID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="2aa27d9f-c95b-4cb7-8f06-105962c298e7">
       <column name="accountID" default="0" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
@@ -362,8 +365,50 @@
     <property name="Balance" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b05e6370-bdbd-462d-9e3b-4da2db0b3512">
       <column name="balance" default="0.00000000" not-null="False" precision="19" scale="8" sql-type="decimal" p1:unicode="False" />
     </property>
+    <property name="ManagerID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="42ad6c56-f8c8-4174-9eb5-47cf8b1cf663">
+      <column name="managerID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CardNumber" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="90a54577-4667-48a1-9134-3782e6c88163">
+      <column name="cardNumber" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="DateExpired" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="aba26855-deee-48cc-8d9e-d0df20ae3fb8">
+      <column name="dateExpired" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Reference1" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="22acdebd-48b9-4bdc-bea3-5bee27c0e1a6">
+      <column name="reference1" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Reference2" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="1e6bc92a-01a8-4fe8-9aaf-b3788dac3041">
+      <column name="reference2" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Note" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="f45abd39-6afd-4893-8d6f-7d4a7c4c3cb5">
+      <column name="note" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="UrlBank" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="ed2f03bb-0b0a-404e-ae90-e58da74fa459">
+      <column name="urlBank" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="User" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="669478e6-e5de-4ed9-a886-ca71b5f34376">
+      <column name="user" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Password" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="e354ed2e-081d-4b98-8d72-59604f327006">
+      <column name="`password`" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Pin" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="29ddef03-1612-4d9f-b17f-c43d75e95e2f">
+      <column name="pin" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="StatusID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="3e3a3772-dab5-47cd-a20a-f817f7b43504">
+      <column name="statusID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Invoiceable" type="SByte" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="56b8523e-21dd-4a10-a90b-baca675a3129">
+      <column name="invoiceable" default="NULL" not-null="False" scale="0" sql-type="tinyint" p1:unicode="False" />
+    </property>
     <property name="IsActive" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="6ac6b117-378f-4f8e-9995-cd84b173fc64">
       <column name="isActive" default="1" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="ComisionPos" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="bc102366-3ea9-4e4e-a4f1-0277b4a91fb3">
+      <column name="comisionPos" default="0.00000000" not-null="False" precision="18" scale="8" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="ComisionSave" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="3d69bc75-c4f5-4106-a4ee-37441e1c9cc2">
+      <column name="comisionSave" default="0.00000000" not-null="False" precision="18" scale="8" sql-type="decimal" p1:unicode="False" />
     </property>
   </class>
   <class name="TbBiblia" entity-set="TbBiblias" table="tb_biblia" schema="posme" p1:Guid="6b606234-c17b-4598-a909-4d1f0caa4e73">
@@ -405,6 +450,9 @@
     <property name="Address" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="1200" p1:ValidateRequired="false" p1:Guid="2dea0d9b-d2e1-43d8-aca0-ffb9f90a80b8">
       <column name="address" default="NULL" not-null="False" length="1200" sql-type="varchar" p1:unicode="False" />
     </property>
+    <property name="Serie" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="4c087085-1d6a-4308-8b3d-60fea76e99c3">
+      <column name="serie" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
   </class>
   <class name="TbCaller" entity-set="TbCallers" table="tb_caller" schema="posme" p1:Guid="7a579968-d445-4bd3-9558-a7e545ef94d0">
     <id name="CallerID" type="Int32" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="true" p1:Guid="33276920-87c6-4e3f-a369-f2fff53057ff">
@@ -430,8 +478,8 @@
     <property name="BranchID" type="Int32" p1:ValidateRequired="true" p1:Guid="1d0f773c-2883-4f68-be1c-78714b0fd326">
       <column name="branchID" default="0" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
-    <property name="CashBoxCode" type="String" p1:ValidateMaxLength="10" p1:ValidateRequired="true" p1:Guid="1bbbfbd1-ebdc-4ff0-9b97-b14dfcfec4ad">
-      <column name="cashBoxCode" default="'0'" not-null="True" length="10" sql-type="varchar" p1:unicode="False" />
+    <property name="CashBoxCode" type="String" p1:ValidateMaxLength="20" p1:ValidateRequired="true" p1:Guid="1bbbfbd1-ebdc-4ff0-9b97-b14dfcfec4ad">
+      <column name="cashBoxCode" default="'0'" not-null="True" length="20" sql-type="varchar" p1:unicode="False" />
     </property>
     <property name="Name" type="String" p1:ValidateMaxLength="50" p1:ValidateRequired="true" p1:Guid="b6482e16-9606-4e1d-8040-1a80d91ebb36">
       <column name="name" default="'0'" not-null="True" length="50" sql-type="varchar" p1:unicode="False" />
@@ -852,8 +900,8 @@
     <property name="Description" type="String" p1:ValidateMaxLength="250" p1:ValidateRequired="true" p1:Guid="f77c04e2-0776-4a91-afb6-806d74da6fff">
       <column name="description" default="'0'" not-null="True" length="250" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="Value" type="String" p1:ValidateMaxLength="300" p1:ValidateRequired="true" p1:Guid="df855d1e-c9c6-4fde-9481-53c05d321f2f">
-      <column name="value" default="'0'" not-null="True" length="300" sql-type="varchar" p1:unicode="False" />
+    <property name="Value" type="String" p1:ValidateMaxLength="1000" p1:ValidateRequired="true" p1:Guid="df855d1e-c9c6-4fde-9481-53c05d321f2f">
+      <column name="value" default="'0'" not-null="True" length="1000" sql-type="varchar" p1:unicode="False" />
     </property>
     <property name="CustomValue" type="String" p1:ValidateMaxLength="300" p1:ValidateRequired="true" p1:Guid="5426cffe-808c-4a75-808b-1b11bc2dbaff">
       <column name="customValue" default="'0'" not-null="True" length="300" sql-type="varchar" p1:unicode="False" />
@@ -1188,6 +1236,15 @@
     <property name="FormContactID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c180ead7-cb18-400d-92b1-ca292cfc1acc">
       <column name="formContactID" default="0" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
+    <property name="BalanceDol" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="95586382-189c-4f7b-b60a-c3cdb8479af0">
+      <column name="balanceDol" default="0.00" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="BalanceCor" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="d1fe8fb8-ec6b-4de7-b7e3-97184071f4fe">
+      <column name="balanceCor" default="0.00" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="EntityReferenceID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="0cebdc4d-560e-443d-8e21-c7941454b4ce">
+      <column name="entityReferenceID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
   </class>
   <class name="TbCustomerConsultasSinRiesgo" entity-set="TbCustomerConsultasSinRiesgos" table="tb_customer_consultas_sin_riesgo" schema="posme" p1:Guid="b508fd81-3e57-4caf-b43d-d21aa88166f0">
     <id name="RequestID" type="Int32" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="true" p1:Guid="1489d94e-987d-42a4-9b0b-076c1b807f9e">
@@ -1292,6 +1349,9 @@
     </property>
     <property name="IsActive" type="Boolean" p1:ValidateRequired="true" p1:Guid="8bf612e3-e891-4419-9835-3c6d6948b05d">
       <column name="isActive" default="b'0'" not-null="True" precision="1" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="Sequence" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="474e01b0-ebfc-40d1-864a-16ff1e0e34db">
+      <column name="sequence" default="0" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
   </class>
   <class name="TbCustomerCreditClasification" entity-set="TbCustomerCreditClasifications" table="tb_customer_credit_clasification" schema="posme" p1:Guid="13fdd9de-e1f4-4ebc-b864-47e45a9a1194">
@@ -2269,8 +2329,8 @@
     <property name="PriceStart" type="Decimal" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="d2f36e3c-2af8-49b4-9e18-fb9525b79444">
       <column name="priceStart" default="NULL" not-null="False" precision="28" scale="8" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="IsForaneo" type="Boolean" p1:ValidateRequired="true" p1:Guid="11294241-768a-480f-8968-e941f17cf7dc">
-      <column name="isForaneo" default="0" not-null="True" precision="1" scale="0" sql-type="tinyint" p1:unicode="False" />
+    <property name="IsForaneo" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="11294241-768a-480f-8968-e941f17cf7dc">
+      <column name="isForaneo" default="0" not-null="False" precision="1" scale="0" sql-type="tinyint" p1:unicode="False" />
     </property>
     <property name="StatusID" type="Int32" p1:ValidateRequired="true" p1:Guid="1aaa64e5-9807-4ab8-8a36-eb14f5da86a4">
       <column name="statusID" default="0" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
@@ -2286,6 +2346,45 @@
     </property>
     <property name="CreatedBy" type="Int32" p1:ValidateRequired="true" p1:Guid="4561d167-e9d0-4ea4-8185-b9335c9bb579">
       <column name="createdBy" default="0" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CountryID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="bfce2fca-8cd0-4a70-a3cb-fe7ea5151d42">
+      <column name="countryID" default="0" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CityID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="7fda38bf-daba-4ed8-97b4-88f6bc1bd8c4">
+      <column name="cityID" default="0" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="MunicipalityID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="ba6f4b45-d593-42de-b097-c72682e8044e">
+      <column name="municipalityID" default="0" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Address" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="89c0909f-f749-4d28-8fa8-7cadd9e5c1e2">
+      <column name="address" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="AreaID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="004a1e1a-e74f-4a60-a714-a4dc06673f40">
+      <column name="areaID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="ProjectID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="31e3c284-ec38-4348-803c-40cd11f4c0b1">
+      <column name="projectID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Duration" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="76f496e8-fffc-4256-8078-a1b08639d40d">
+      <column name="duration" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="TypeFixedAssentID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="b413b0cf-3740-4d57-bb67-716ac5ecb454">
+      <column name="typeFixedAssentID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="StartOn" type="DateTime" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="99413496-f44e-47b2-b1e9-5b92210a43ca">
+      <column name="startOn" default="NULL" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="Ratio" type="Decimal" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="3570504e-ab8b-4abc-b488-e27a4387c5aa">
+      <column name="ratio" default="NULL" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="CurrencyID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="f6fbca30-5683-4fa2-898c-2d636f4c6d30">
+      <column name="currencyID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CurrentAmount" type="Decimal" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="99b4b9c5-9a15-49dd-b988-6813247549f9">
+      <column name="currentAmount" default="NULL" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="SettlementAmount" type="Decimal" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="23f425c0-50b6-45d0-8b72-678e5f7b233a">
+      <column name="settlementAmount" default="NULL" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
     </property>
     <property name="IsActive" type="Boolean" p1:ValidateRequired="true" p1:Guid="ccee7d11-6d14-49e8-9fcd-e814f4852bb0">
       <column name="isActive" default="b'0'" not-null="True" precision="1" sql-type="bit" p1:unicode="False" />
@@ -2699,6 +2798,12 @@
     </property>
     <property name="Value" type="Decimal" p1:ValidateRequired="true" p1:Guid="44ed9beb-69e6-41f8-8d6c-08456643a322">
       <column name="value" not-null="True" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Price" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="5db08a96-e1fa-4cc1-ba01-c08f6a1d0f15">
+      <column name="price" default="0.00000000" not-null="False" precision="19" scale="8" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Predeterminado" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b5785e57-a441-40e8-ac03-c11392fd9c20">
+      <column name="predeterminado" default="0" not-null="False" precision="1" scale="0" sql-type="tinyint" p1:unicode="False" />
     </property>
   </class>
   <class name="TbItemWarehouse" entity-set="TbItemWarehouses" table="tb_item_warehouse" schema="posme" p1:Guid="613b98d0-1812-405b-86fb-5eec76097ab3">
@@ -3243,8 +3348,8 @@
     <property name="EntityID" type="Int32" p1:ValidateRequired="true" p1:Guid="b2ed1e7b-1dcd-40a0-85e9-84da0442bf4e">
       <column name="entityID" default="0" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
-    <property name="FirstName" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="06c5a98b-d1df-47d2-bc65-c4993a4329c5">
-      <column name="firstName" default="NULL" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="FirstName" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="06c5a98b-d1df-47d2-bc65-c4993a4329c5">
+      <column name="firstName" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
     </property>
     <property name="LastName" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="a57ebfbd-62ff-4e8b-8526-a653ff465c98">
       <column name="lastName" default="NULL" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
@@ -3467,6 +3572,12 @@
     <property name="IsActive" type="Boolean" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="f6902e54-0975-4677-8d40-b12892cfdf3a">
       <column name="isActive" default="NULL" not-null="False" precision="1" sql-type="bit" p1:unicode="False" />
     </property>
+    <property name="BalanceDol" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="99e430ad-38bb-49e0-9400-177e41fa4a6f">
+      <column name="balanceDol" default="0.00" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="BalanceCor" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="6aa68088-ace3-4c28-af7f-aee4912c3e92">
+      <column name="balanceCor" default="0.00" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
   </class>
   <class name="TbProviderItem" entity-set="TbProviderItems" table="tb_provider_item" schema="posme" p1:Guid="63555aa6-ba6a-4ec3-bf9f-6197b81e5b2f">
     <id name="ProviderItemID" type="Int32" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="true" p1:Guid="efcf9339-3487-40e8-9380-6dce144acf40">
@@ -3672,6 +3783,21 @@
     <property name="IsActive" type="Boolean" p1:ValidateRequired="true" p1:Guid="a4849381-201b-4b00-99d3-7be6a355823b">
       <column name="isActive" default="b'0'" not-null="True" precision="1" sql-type="bit" p1:unicode="False" />
     </property>
+    <property name="OrderNo" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="a63e4b9e-87ba-4a58-bd98-a93302f1d063">
+      <column name="orderNo" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Reference1" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="556b58c8-f14b-4150-937b-bc31b4a591bc">
+      <column name="reference1" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Reference2" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="c0164a9a-dfe0-45f7-aeec-c3a34e01afad">
+      <column name="reference2" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Reference3" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="cb105bd8-7179-44c6-8295-c501e12632ae">
+      <column name="reference3" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="CustomerIDAfter" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="44a982cc-dbee-468d-8ddb-252eaff9ad69">
+      <column name="customerIDAfter" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
   </class>
   <class name="TbRemember" entity-set="TbRemembers" table="tb_remember" schema="posme" p1:Guid="841e49d1-5518-44b3-8af5-f3097d7525ab">
     <id name="RememberID" type="Int32" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="true" p1:Guid="f76c6c58-8724-4ec6-9253-ad0a63401bdb">
@@ -3680,8 +3806,8 @@
     <property name="CompanyID" type="Int32" p1:ValidateRequired="true" p1:Guid="7af19a5e-346e-4e7d-96a9-96d33ebbf96f">
       <column name="companyID" default="0" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
-    <property name="Title" type="String" p1:ValidateMaxLength="250" p1:ValidateRequired="true" p1:Guid="804eb63a-1b4a-4109-810a-96438b2be9a6">
-      <column name="title" default="'0'" not-null="True" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="Title" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="804eb63a-1b4a-4109-810a-96438b2be9a6">
+      <column name="title" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
     </property>
     <property name="Description" type="String" p1:ValidateMaxLength="500" p1:ValidateRequired="true" p1:Guid="9f2b4cd9-49dc-4ea6-ac31-1249b3f1d8fa">
       <column name="description" default="'0'" not-null="True" length="500" sql-type="varchar" p1:unicode="False" />
@@ -4521,8 +4647,8 @@
     <property name="ReceiptAmountDol" type="Decimal" p1:ValidateRequired="true" p1:Guid="59e02fef-c709-42a2-a542-1166ea4eff39">
       <column name="receiptAmountDol" default="0.00000" not-null="True" precision="19" scale="5" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="Reference1" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="150" p1:ValidateRequired="false" p1:Guid="68d7ef9f-0cbc-4492-aba2-02bbfe5612d8">
-      <column name="reference1" default="NULL" not-null="False" length="150" sql-type="varchar" p1:unicode="False" />
+    <property name="Reference1" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="1500" p1:ValidateRequired="false" p1:Guid="68d7ef9f-0cbc-4492-aba2-02bbfe5612d8">
+      <column name="reference1" default="NULL" not-null="False" length="1500" sql-type="varchar" p1:unicode="False" />
     </property>
     <property name="Reference2" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="150" p1:ValidateRequired="false" p1:Guid="267ec06f-735e-40d7-b821-0c0d689f8397">
       <column name="reference2" default="NULL" not-null="False" length="150" sql-type="varchar" p1:unicode="False" />
@@ -5125,62 +5251,62 @@
     <property name="EntityID" type="Int32" p1:ValidateRequired="true" p1:Guid="60ef9f81-445a-4b6e-9622-e28683f2dd64">
       <column name="entityID" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
-    <property name="Codigo" type="String" p1:ValidateMaxLength="250" p1:ValidateRequired="true" p1:Guid="8dd0f548-771e-418e-83ab-4f9d6e1f8c9e">
-      <column name="Codigo" not-null="True" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="Codigo" type="String" p1:nullable="True" p1:ValidateMaxLength="305" p1:ValidateRequired="false" p1:Guid="8dd0f548-771e-418e-83ab-4f9d6e1f8c9e">
+      <column name="Codigo" not-null="False" length="305" sql-type="varchar" p1:unicode="False" />
     </property>
     <property name="Contacto" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="7bea94af-a207-401e-8899-1c1454c6a494">
       <column name="Contacto" not-null="False" sql-type="date" p1:unicode="False" />
     </property>
-    <property name="Modificacion" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="81f6c8f2-e637-4e44-887c-f723cf5128df">
-      <column name="Modificacion" not-null="False" sql-type="date" p1:unicode="False" />
+    <property name="Modificacion" type="String" p1:nullable="True" p1:ValidateMaxLength="65" p1:ValidateRequired="false" p1:Guid="81f6c8f2-e637-4e44-887c-f723cf5128df">
+      <column name="Modificacion" not-null="False" length="65" sql-type="varchar" p1:unicode="True" />
     </property>
-    <property name="Cliente" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="486f33ac-851b-4e0a-acf7-4914eca1b13c">
-      <column name="Cliente" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="Cliente" type="String" p1:nullable="True" p1:ValidateMaxLength="310" p1:ValidateRequired="false" p1:Guid="486f33ac-851b-4e0a-acf7-4914eca1b13c">
+      <column name="Cliente" not-null="False" length="310" sql-type="varchar" p1:unicode="True" />
     </property>
-    <property name="Sexo" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="1def56cb-96a3-466a-b47d-643e82192287">
-      <column name="Sexo" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="Sexo" type="String" p1:nullable="True" p1:ValidateMaxLength="305" p1:ValidateRequired="false" p1:Guid="1def56cb-96a3-466a-b47d-643e82192287">
+      <column name="Sexo" not-null="False" length="305" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="Email" type="String" p1:ValidateMaxLength="250" p1:ValidateRequired="true" p1:Guid="2183c407-0625-4f52-9413-328aec9466a4">
-      <column name="Email" not-null="True" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="Email" type="String" p1:nullable="True" p1:ValidateMaxLength="305" p1:ValidateRequired="false" p1:Guid="2183c407-0625-4f52-9413-328aec9466a4">
+      <column name="Email" not-null="False" length="305" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="Estado" type="String" p1:nullable="True" p1:ValidateMaxLength="307" p1:ValidateRequired="false" p1:Guid="b5ce0cbf-d1b1-47ce-bfae-b4ae29fabc35">
-      <column name="Estado" not-null="False" length="307" sql-type="varchar" p1:unicode="False" />
+    <property name="Estado" type="String" p1:nullable="True" p1:ValidateMaxLength="305" p1:ValidateRequired="false" p1:Guid="b5ce0cbf-d1b1-47ce-bfae-b4ae29fabc35">
+      <column name="Estado" not-null="False" length="305" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="Clasificacion" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="cd937701-991d-431b-9918-3cc36f32481b">
-      <column name="Clasificacion" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="Clasificacion" type="String" p1:nullable="True" p1:ValidateMaxLength="305" p1:ValidateRequired="false" p1:Guid="cd937701-991d-431b-9918-3cc36f32481b">
+      <column name="Clasificacion" not-null="False" length="305" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="Categoria" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="e8a4cd0b-57f8-4130-9b07-c3a198a4be73">
-      <column name="Categoria" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="Categoria" type="String" p1:nullable="True" p1:ValidateMaxLength="305" p1:ValidateRequired="false" p1:Guid="e8a4cd0b-57f8-4130-9b07-c3a198a4be73">
+      <column name="Categoria" not-null="False" length="305" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="Presupuesto" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="0694e712-e878-4456-ab5a-ad3896dbf69e">
-      <column name="Presupuesto" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    <property name="Presupuesto" type="String" p1:nullable="True" p1:ValidateMaxLength="67" p1:ValidateRequired="false" p1:Guid="0694e712-e878-4456-ab5a-ad3896dbf69e">
+      <column name="Presupuesto" not-null="False" length="67" sql-type="varchar" p1:unicode="True" />
     </property>
     <property name="Telefono" type="VarBinary" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="d3d4da04-d707-4843-b576-85f46615ede9">
-      <column name="Telefono" not-null="False" length="255" sql-type="varbinary" p1:unicode="False" />
+      <column name="Telefono" not-null="False" length="310" sql-type="varbinary" p1:unicode="False" />
     </property>
-    <property name="UbicacionInteres" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="a963a8b9-e135-4e50-8d27-dcc7e06c2bff">
-      <column name="`Ubicacion Interes`" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="UbicacionInteres" type="String" p1:nullable="True" p1:ValidateMaxLength="305" p1:ValidateRequired="false" p1:Guid="a963a8b9-e135-4e50-8d27-dcc7e06c2bff">
+      <column name="`Ubicacion Interes`" not-null="False" length="305" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="Agente" type="String" p1:ValidateMaxLength="250" p1:ValidateRequired="true" p1:Guid="71258207-706c-4bac-bc47-61d51c0b7e7d">
-      <column name="Agente" not-null="True" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="Agente" type="String" p1:nullable="True" p1:ValidateMaxLength="310" p1:ValidateRequired="false" p1:Guid="71258207-706c-4bac-bc47-61d51c0b7e7d">
+      <column name="Agente" not-null="False" length="310" sql-type="varchar" p1:unicode="True" />
     </property>
-    <property name="Encuentra24" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="ecc05a5f-42c8-465f-9b76-e7ea8c970cc3">
-      <column name="`Encuentra 24`" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="Encuentra24" type="String" p1:nullable="True" p1:ValidateMaxLength="305" p1:ValidateRequired="false" p1:Guid="ecc05a5f-42c8-465f-9b76-e7ea8c970cc3">
+      <column name="`Encuentra 24`" not-null="False" length="305" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="Mensaje" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="9aade96c-9c60-4326-a0bc-82e2956bfa63">
-      <column name="Mensaje" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="Mensaje" type="String" p1:nullable="True" p1:ValidateMaxLength="305" p1:ValidateRequired="false" p1:Guid="9aade96c-9c60-4326-a0bc-82e2956bfa63">
+      <column name="Mensaje" not-null="False" length="305" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="Comentario1" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="70481cda-22c3-40e2-8f14-2aa7e6d0da94">
-      <column name="`Comentario 1`" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    <property name="Comentario1" type="String" p1:nullable="True" p1:ValidateMaxLength="310" p1:ValidateRequired="false" p1:Guid="70481cda-22c3-40e2-8f14-2aa7e6d0da94">
+      <column name="`Comentario 1`" not-null="False" length="310" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="Comentario2" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="6314ef97-c288-4a2b-8676-1a494b37456b">
-      <column name="`Comentario 2`" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    <property name="Comentario2" type="String" p1:nullable="True" p1:ValidateMaxLength="310" p1:ValidateRequired="false" p1:Guid="6314ef97-c288-4a2b-8676-1a494b37456b">
+      <column name="`Comentario 2`" not-null="False" length="310" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="Ubicacion" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="797257b4-7e4b-411a-aaa2-3c30301084c9">
-      <column name="Ubicacion" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    <property name="Ubicacion" type="String" p1:nullable="True" p1:ValidateMaxLength="310" p1:ValidateRequired="false" p1:Guid="797257b4-7e4b-411a-aaa2-3c30301084c9">
+      <column name="Ubicacion" not-null="False" length="310" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="Formadecontacto" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="3fce1b3a-c0d0-4079-93eb-58c2d34fb21b">
-      <column name="`Forma de contacto`" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="Formadecontacto" type="String" p1:nullable="True" p1:ValidateMaxLength="305" p1:ValidateRequired="false" p1:Guid="3fce1b3a-c0d0-4079-93eb-58c2d34fb21b">
+      <column name="`Forma de contacto`" not-null="False" length="305" sql-type="varchar" p1:unicode="False" />
     </property>
   </class>
   <class name="VwGerenciaBalance" entity-set="VwGerenciaBalances" table="vw_gerencia_balance" schema="posme" query-type="True" p1:Guid="71f76c19-221c-4268-8383-c72ebf656012">
@@ -5219,8 +5345,8 @@
     <property name="CustomerNumber" type="String" p1:ValidateMaxLength="250" p1:ValidateRequired="true" p1:Guid="47882e62-adf0-4276-9e01-5450f66873ee">
       <column name="customerNumber" not-null="True" length="250" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="FirstName" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="6b53010a-0154-4035-93dd-b6639c222af6">
-      <column name="firstName" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="FirstName" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="6b53010a-0154-4035-93dd-b6639c222af6">
+      <column name="firstName" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
     </property>
     <property name="Identification" type="String" p1:ValidateMaxLength="250" p1:ValidateRequired="true" p1:Guid="568e8443-189f-4065-a974-4ab72f811b1c">
       <column name="identification" not-null="True" length="250" sql-type="varchar" p1:unicode="False" />
@@ -5236,14 +5362,14 @@
     <property name="Colaborador" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="9dfa2c63-b3bb-48e7-887c-dea38dfefbe2">
       <column name="Colaborador" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="NombreColaborador" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="74d8774e-15af-46ab-91f1-ef14406d1aaa">
-      <column name="NombreColaborador" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="NombreColaborador" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="74d8774e-15af-46ab-91f1-ef14406d1aaa">
+      <column name="NombreColaborador" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
     </property>
     <property name="Cliente" type="String" p1:ValidateMaxLength="250" p1:ValidateRequired="true" p1:Guid="b92e4936-0160-46c0-8aa9-71440bb10daa">
       <column name="Cliente" not-null="True" length="250" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="NombreCliente" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="ae48a8b8-56d9-462c-8bd5-1d4dc764e985">
-      <column name="NombreCliente" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="NombreCliente" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="ae48a8b8-56d9-462c-8bd5-1d4dc764e985">
+      <column name="NombreCliente" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
     </property>
     <property name="Factura" type="String" p1:ValidateMaxLength="50" p1:ValidateRequired="true" p1:Guid="98e0f6b7-8f90-420d-929f-c3b94f90ca94">
       <column name="Factura" not-null="True" length="50" sql-type="varchar" p1:unicode="False" />
@@ -5316,8 +5442,8 @@
     <property name="CodigoCliente" type="String" p1:ValidateMaxLength="250" p1:ValidateRequired="true" p1:Guid="a8340ee1-3ad6-4f6a-b4ce-fa944081736e">
       <column name="CodigoCliente" not-null="True" length="250" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="Nombre" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="89e68c19-5f45-4824-a796-96f63137c5da">
-      <column name="Nombre" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="Nombre" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="89e68c19-5f45-4824-a796-96f63137c5da">
+      <column name="Nombre" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
     </property>
     <property name="Moneda" type="String" p1:ValidateMaxLength="5" p1:ValidateRequired="true" p1:Guid="379a4856-fa3c-46bf-af81-c388ad70cd83">
       <column name="Moneda" not-null="True" length="5" sql-type="varchar" p1:unicode="False" />
@@ -5556,8 +5682,8 @@
     <property name="Estilodecocina" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="b6ea5217-a648-45e9-bc34-abc424c1d6df">
       <column name="`Estilo de cocina`" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
     </property>
-    <property name="Agente" type="String" p1:ValidateMaxLength="250" p1:ValidateRequired="true" p1:Guid="2bf4b3ec-42e4-49cd-b713-134c2d0dead1">
-      <column name="Agente" not-null="True" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="Agente" type="String" p1:ValidateMaxLength="255" p1:ValidateRequired="true" p1:Guid="2bf4b3ec-42e4-49cd-b713-134c2d0dead1">
+      <column name="Agente" not-null="True" length="255" sql-type="varchar" p1:unicode="True" />
     </property>
     <property name="Zona" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="ea165b75-9291-47cb-840d-8285047907f3">
       <column name="Zona" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
@@ -5621,8 +5747,8 @@
     <property name="CustomerNumber" type="String" p1:ValidateMaxLength="250" p1:ValidateRequired="true" p1:Guid="a7b8f063-edf4-4cde-82e1-778c07489d19">
       <column name="customerNumber" not-null="True" length="250" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="FirstName" type="String" p1:nullable="True" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="ed283765-f806-4852-8fcc-47fa71fb8f3b">
-      <column name="firstName" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    <property name="FirstName" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="ed283765-f806-4852-8fcc-47fa71fb8f3b">
+      <column name="firstName" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
     </property>
     <property name="ItemNumber" type="String" p1:ValidateMaxLength="250" p1:ValidateRequired="true" p1:Guid="73b7975f-78bf-4da3-a8e1-028710bb2e08">
       <column name="itemNumber" not-null="True" length="250" sql-type="varchar" p1:unicode="False" />
@@ -5748,8 +5874,8 @@
     <property name="NUMERODECEDULAORUC" type="String" p1:ValidateMaxLength="250" p1:ValidateRequired="true" p1:Guid="442c49e8-0f97-4b9f-92be-fb3bec3c25b2">
       <column name="`NUMERO DE CEDULA O RUC`" not-null="True" length="250" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="NOMBREDEPERSONA" type="String" p1:nullable="True" p1:ValidateMaxLength="501" p1:ValidateRequired="false" p1:Guid="56123e1c-16f7-487e-81d0-fb4ef9a50b4c">
-      <column name="`NOMBRE DE PERSONA`" not-null="False" length="501" sql-type="varchar" p1:unicode="False" />
+    <property name="NOMBREDEPERSONA" type="String" p1:nullable="True" p1:ValidateMaxLength="506" p1:ValidateRequired="false" p1:Guid="56123e1c-16f7-487e-81d0-fb4ef9a50b4c">
+      <column name="`NOMBRE DE PERSONA`" not-null="False" length="506" sql-type="varchar" p1:unicode="True" />
     </property>
     <property name="TIPODECREDITO" type="String" p1:nullable="True" p1:ValidateMaxLength="2" p1:ValidateRequired="false" p1:Guid="0c401287-4de2-4ddf-a7c0-f6e326c2703d">
       <column name="`TIPO DE CREDITO`" not-null="False" length="2" sql-type="varchar" p1:unicode="True" />
@@ -5816,8 +5942,8 @@
     <property name="NUMERODECEDULAORUC" type="String" p1:ValidateMaxLength="250" p1:ValidateRequired="true" p1:Guid="6c792385-6f89-4c63-9915-74d0fe50af9c">
       <column name="NUMERO_DE_CEDULA_O_RUC" not-null="True" length="250" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="NOMBREDEPERSONA" type="String" p1:nullable="True" p1:ValidateMaxLength="501" p1:ValidateRequired="false" p1:Guid="4d3e33af-4b88-4015-921e-59af713138b9">
-      <column name="NOMBRE_DE_PERSONA" not-null="False" length="501" sql-type="varchar" p1:unicode="False" />
+    <property name="NOMBREDEPERSONA" type="String" p1:nullable="True" p1:ValidateMaxLength="506" p1:ValidateRequired="false" p1:Guid="4d3e33af-4b88-4015-921e-59af713138b9">
+      <column name="NOMBRE_DE_PERSONA" not-null="False" length="506" sql-type="varchar" p1:unicode="True" />
     </property>
     <property name="TIPODECREDITO" type="String" p1:nullable="True" p1:ValidateMaxLength="2" p1:ValidateRequired="false" p1:Guid="45b93a13-6760-4de3-8833-1ead443fe59a">
       <column name="TIPO_DE_CREDITO" not-null="False" length="2" sql-type="varchar" p1:unicode="True" />
@@ -5916,8 +6042,35 @@
     <property name="IsActive" type="Int16" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="a7627ed3-2c26-4c89-a4a3-4cb9f5f02e65">
       <column name="isActive" default="NULL" not-null="False" precision="6" scale="0" sql-type="smallint" p1:unicode="False" />
     </property>
+    <property name="Reference1" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="7e262730-fc09-4560-a9cb-cea393db2af1">
+      <column name="reference1" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Reference2" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="b3011df0-3994-4736-af6c-a2f145a619d5">
+      <column name="reference2" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Sales" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="bab2a8ce-2613-4435-8b69-74d521789e7a">
+      <column name="sales" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
     <property name="CreatedOn" type="DateTime" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="709db1cb-622a-40b8-9908-e9a94ee84f56">
       <column name="createdOn" default="NULL" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="Precio1" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="d6745791-64ec-4ea9-b552-2d7e5485f14e">
+      <column name="precio1" default="0.00" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Precio2" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="9d6572ab-8fe2-4e7c-9b3e-5449c41cc35e">
+      <column name="precio2" default="0.00" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Precio3" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="d340cfe6-ed4d-4d23-9268-087dade77c12">
+      <column name="precio3" default="0.00" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Precio4" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b6364d55-29e3-4f1e-88b7-c1fcaa9a89cd">
+      <column name="precio4" default="0.00" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Precio5" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="f331e80b-c29d-4081-ae4e-e9829977445b">
+      <column name="precio5" default="0.00" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Precio6" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b828f714-b7e0-4685-bc44-e58eacf63408">
+      <column name="precio6" default="0.00" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
     </property>
   </class>
   <class name="TbEntityLocation" entity-set="TbEntityLocations" table="tb_entity_location" schema="posme" p1:Guid="8896c9cd-d262-4f43-a621-c66664b43477">
@@ -5928,7 +6081,7 @@
       <column name="entityID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
     <property name="CreatedOn" type="DateTime" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="5a67dd19-df4a-4eb2-a678-3efd58625e2e">
-      <column name="createdOn" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+      <column name="createdOn" default="NULL" not-null="False" sql-type="datetime" p1:unicode="False" />
     </property>
     <property name="IsActive" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="5a8bb394-a530-48fd-a6ce-f5528994363a">
       <column name="isActive" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
@@ -5947,6 +6100,97 @@
     </property>
     <property name="CompanyName" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="600" p1:ValidateRequired="false" p1:Guid="bf54b3d8-24db-4b3e-9144-96e040620364">
       <column name="companyName" default="NULL" not-null="False" length="600" sql-type="varchar" p1:unicode="True" />
+    </property>
+  </class>
+  <class name="TbBankCheque" entity-set="TbBankCheques" table="tb_bank_cheque" schema="posme" p1:Guid="92f8445d-9793-452d-9100-f2b3dbca46d8">
+    <id name="ChequeID" type="Int32" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="true" p1:Guid="9e9031a7-6f31-49ec-b0ee-6ca0ee53e835">
+      <column name="chequeID" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="ChequeNumber" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="6706531b-1950-4fdb-af9d-811c6c740a09">
+      <column name="chequeNumber" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Name" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="e7e89d12-2897-455a-a03c-50ea61ca6e27">
+      <column name="name" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="StatusID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="08633135-671e-4383-9b88-571f6c1cdb7a">
+      <column name="statusID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="BankID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="c6966efb-8792-4fc6-9914-12595fdb7df6">
+      <column name="bankID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CurrencyID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="6c578b6e-1344-477c-9551-2100c56a721b">
+      <column name="currencyID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="ValueInitial" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="a8eee4aa-5d76-4af1-88fc-3287088e6ae4">
+      <column name="valueInitial" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="ValueCurrent" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="03423075-965a-42e3-b7c3-89f094d92011">
+      <column name="valueCurrent" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="ValueFinal" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="f36164e0-8aa2-4b89-b47b-c3ce8edb9eb2">
+      <column name="valueFinal" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Serie" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="6deef9d1-1b76-469f-8812-b570da36dbb5">
+      <column name="serie" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="ManagerID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="35edc733-0350-40f5-b729-7768826db9d0">
+      <column name="managerID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="SByte" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="d983ba9e-d5e1-4ed6-816d-bd8a9c1a5d6c">
+      <column name="isActive" default="NULL" not-null="False" scale="0" sql-type="tinyint" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="TbWorkflowStageAffect" entity-set="TbWorkflowStageAffects" table="tb_workflow_stage_affect" schema="posme" p1:Guid="bbd49b2c-b13a-4cca-8267-3f839cefba41">
+    <id name="WorkflowStageAffectID" type="Int32" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="true" p1:Guid="305c271d-b018-4a6b-b8fe-9d3f6f1e876c">
+      <column name="workflowStageAffectID" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="TransactionID" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="cc5ce612-4a24-49e7-aaf5-0ca61c773446">
+      <column name="transactionID" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="FlavorID" type="Int32" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="6643f3f4-76de-47f9-b2e0-2bdbf407f4f1">
+      <column name="flavorID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="TransactionCausalID" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="394fa7ab-de09-46dc-8081-dbab15d6e444">
+      <column name="transactionCausalID" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="ComponentSourceID" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="148128bb-ab7f-47fb-b565-99d2e7068e41">
+      <column name="componentSourceID" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="WorkflowSourceID" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="7fb752b2-7f7b-409d-9ff6-74e9e34874fb">
+      <column name="workflowSourceID" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="WorkflowSourceStageID" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="c3402340-893c-4245-8970-2ea95206a8d9">
+      <column name="workflowSourceStageID" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="ComponentTargetID" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="addf3fc5-9699-4788-803e-ce20b00dd966">
+      <column name="componentTargetID" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="WorkflowTargetID" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="7912f655-b941-482e-879a-efead940ff00">
+      <column name="workflowTargetID" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="WorkflowTargetStageID" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="9f62fb7c-07fb-4489-a833-aed3e69761b0">
+      <column name="workflowTargetStageID" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="IsActive" type="SByte" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateRequired="false" p1:Guid="30f71892-3527-4522-842d-cc7ea7253b72">
+      <column name="isActive" default="NULL" not-null="False" scale="0" sql-type="tinyint" p1:unicode="False" />
+    </property>
+    <property name="Condition1" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="1cbe0c3a-8e01-4c4d-a808-9e1f021eabfb">
+      <column name="condition1" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Condition2" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="e96229e4-7d5c-47b7-9b19-fe6719041b83">
+      <column name="condition2" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Condition3" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="c53eb437-7bcd-4cc7-b59c-ff2f5c896aa4">
+      <column name="condition3" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Reference1" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="2f6f0452-ba93-4bf3-bb9d-8533e6205805">
+      <column name="reference1" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Reference2" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="c1c5bfe7-04d3-48a7-99bd-88cd1381aa7a">
+      <column name="reference2" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Reference3" type="String" p1:nullable="True" value-generated="OnAdd" constructor-parameter="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="efa201d1-bbb8-4ad2-9a3d-648b10a18868">
+      <column name="reference3" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
     </property>
   </class>
   <method name="PrAccountingAccountBalance" p1:procedure="posme.pr_accounting_account_balance" p1:Guid="45aecaf6-493e-4543-8b90-3b2e705594fd">
@@ -6179,8 +6423,8 @@
     <parameter name="prTokenID" type="String" sql-type="varchar" length="150" />
     <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prAuthorization" type="Int32" sql-type="int" precision="10" scale="0" />
-    <parameter name="prStartOn" type="DateTime" sql-type="date" />
-    <parameter name="prEndOn" type="DateTime" sql-type="date" />
+    <parameter name="prStartOn" type="DateTime" sql-type="datetime" />
+    <parameter name="prEndOn" type="DateTime" sql-type="datetime" />
     <parameter name="prUserIDFilter" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prBranchID" type="Int32" sql-type="int" precision="10" scale="0" />
   </method>
@@ -6837,6 +7081,8 @@
     <parameter name="prConceptFilter" type="String" sql-type="varchar" length="150" />
     <parameter name="prWithTax1" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prBranchID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prWarehouseID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prEntityIDCustomer" type="Int32" sql-type="int" precision="10" scale="0" />
   </method>
   <method name="PrSalesGetReportSalesSummaryCredit" p1:procedure="posme.pr_sales_get_report_sales_summary_credit" p1:Guid="405b162b-db0f-4bf2-b795-fd675f0e0697">
     <Documentation>
@@ -7011,5 +7257,115 @@
     <parameter name="prGrado" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prYear" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prCustomerID" type="Int32" sql-type="int" precision="10" scale="0" />
+  </method>
+  <method name="PrBoxGetReportClosedOperation" p1:procedure="posme.pr_box_get_report_closed_operation" p1:Guid="411dc59f-7c0c-497a-9085-045d456f19b9">
+    <Documentation>
+      <Summary>Reporte de cierre de caja</Summary>
+    </Documentation>
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="150" />
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prUserBoxID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prStartOn" type="DateTime" sql-type="datetime" />
+    <parameter name="prEndOn" type="DateTime" sql-type="datetime" />
+  </method>
+  <method name="PrCollectionGetReportDocumentsCredit" p1:procedure="posme.pr_collection_get_report_documents_credit" p1:Guid="a20a5ac3-45b5-4f50-a458-24c101ef2889">
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prDate" type="DateTime" sql-type="datetime" />
+  </method>
+  <method name="PrCollectionGetReportSummaryCredit" p1:procedure="posme.pr_collection_get_report_summary_credit" p1:Guid="8313bae6-e6a6-4d9d-9c8e-2cdf4fe0c0a7">
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prDate" type="DateTime" sql-type="datetime" />
+  </method>
+  <method name="PrCxpGetReportPurchaseDetail" p1:procedure="posme.pr_cxp_get_report_purchase_detail" p1:Guid="b8b7df43-1881-4e04-b0a4-bec6ff729df4">
+    <Documentation>
+      <Summary>Detalle de Compra</Summary>
+    </Documentation>
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prStartOn" type="DateTime" sql-type="date" />
+    <parameter name="prEndOn" type="DateTime" sql-type="date" />
+    <parameter name="prInventoryCategoryID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prWarehouse" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prEntityIDProvider" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prItmeID" type="Int32" sql-type="int" precision="10" scale="0" />
+  </method>
+  <method name="PrInventoryCreateTransactionOtherinputByProduction" p1:procedure="posme.pr_inventory_create_transaction_otherinput_by_production" p1:Guid="f92c0cf6-794c-4b5c-9c62-751b01eb15e7">
+    <Documentation>
+      <Summary>Procedimiento para crer entradas de meraderia por produccion</Summary>
+    </Documentation>
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prBranchID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prLoginID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTransactionID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTransactionMasterID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prWarehouseID" type="Int32" sql-type="int" precision="10" scale="0" />
+  </method>
+  <method name="PrInventoryCreateTransactionOtheroutputByProduction" p1:procedure="posme.pr_inventory_create_transaction_otheroutput_by_production" p1:Guid="12c0c64b-3a98-4584-9812-aad6ba64a7ff">
+    <Documentation>
+      <Summary>Procedimiento para crer salida de meraderia</Summary>
+    </Documentation>
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prBranchID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prLoginID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTransactionID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTransactionMasterID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prWarehouseID" type="Int32" sql-type="int" precision="10" scale="0" />
+  </method>
+  <method name="PrInventoryGetReportListItemOutExist" p1:procedure="posme.pr_inventory_get_report_list_item_out_exists" p1:Guid="a90f1a1b-f4f0-43d6-b48b-a278988117e5">
+    <Documentation>
+      <Summary>Lista de Productos</Summary>
+    </Documentation>
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+  </method>
+  <method name="PrInventoryGetReportPurchase" p1:procedure="posme.pr_inventory_get_report_purchase" p1:Guid="0e5e7f72-6022-4da0-bcbf-04715ff69196">
+    <Documentation>
+      <Summary>Procedimiento para obtener el karde de mercaderia</Summary>
+    </Documentation>
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prWarehouseID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prStartOn" type="DateTime" sql-type="datetime" />
+    <parameter name="prEndOn" type="DateTime" sql-type="datetime" />
+    <parameter name="prEntityIDProvider" type="Int32" sql-type="int" precision="10" scale="0" />
+  </method>
+  <method name="PrSalesGetReportSalesDetailCommission" p1:procedure="posme.pr_sales_get_report_sales_detail_commission" p1:Guid="5b644e1d-8b5c-496e-9c71-27ea418181ee">
+    <Documentation>
+      <Summary>Detalle de ventas</Summary>
+    </Documentation>
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prStartOn" type="DateTime" sql-type="date" />
+    <parameter name="prEndOn" type="DateTime" sql-type="date" />
+    <parameter name="prInventoryCategoryID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prWarehouse" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prUserIDSales" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prText" type="String" sql-type="varchar" length="50" />
+    <parameter name="prEmployerID" type="Int32" sql-type="int" precision="10" scale="0" />
+  </method>
+  <method name="FnInsertarStringN" p1:procedure="posme.fn_insertar_string_n" p1:Guid="738cb634-5a61-46c7-b3cd-505901074fd8">
+    <return-scalar column="return_value" type="String" />
+    <parameter name="texto" type="String" sql-type="longtext" length="2147483647" />
+    <parameter name="marcador" type="String" sql-type="varchar" length="50" />
+    <parameter name="n" type="Int32" sql-type="int" precision="10" scale="0" />
+  </method>
+  <method name="PrCxcGetReportCustomerPayByInvoice" p1:procedure="posme.pr_cxc_get_report_customer_pay_by_invoice" p1:Guid="66e50f5c-869c-4a12-bb55-e0c075a66c1c">
+    <Documentation>
+      <Summary>Lista de Pagos del Cliente</Summary>
+    </Documentation>
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prCustomerNumber" type="String" sql-type="varchar" length="50" />
+    <parameter name="prInvoiceNumber" type="String" sql-type="varchar" length="50" />
   </method>
 </efcore>

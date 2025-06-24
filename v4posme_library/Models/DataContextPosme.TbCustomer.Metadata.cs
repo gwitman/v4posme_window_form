@@ -90,6 +90,12 @@ namespace v4posme_library.Models
             public object ModifiedOn { get; set; }
     
             public object FormContactID { get; set; }
+    
+            public object BalanceDol { get; set; }
+    
+            public object BalanceCor { get; set; }
+    
+            public object EntityReferenceID { get; set; }
         }
     }
 }

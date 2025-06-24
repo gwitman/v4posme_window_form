@@ -64,6 +64,10 @@ namespace v4posme_library.Models
             public object CreatedOn { get; set; }
     
             public object IsActive { get; set; }
+    
+            public object BalanceDol { get; set; }
+    
+            public object BalanceCor { get; set; }
         }
     }
 }

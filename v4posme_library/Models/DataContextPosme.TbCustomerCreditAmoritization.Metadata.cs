@@ -36,6 +36,8 @@ namespace v4posme_library.Models
             public object StatusID { get; set; }
     
             public object IsActive { get; set; }
+    
+            public object Sequence { get; set; }
         }
     }
 }
