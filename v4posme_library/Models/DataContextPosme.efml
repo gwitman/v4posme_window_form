@@ -2733,6 +2733,184 @@
         <column name="dateApply" not-null="False" p1:unicode="False" />
       </property>
     </component>
+    <component class="PrAppInvoiceSurveryGetReportResult" p1:Guid="de3eed1a-7bb2-4e3b-9145-9545b796658a">
+      <property name="TransactionNumber" type="String" p1:ValidateRequired="true" p1:Guid="0a814014-6bf7-437e-afb9-d735dc278185">
+        <column name="transactionNumber" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="TransactionOn" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="407d3d20-8a34-4183-bad2-cf3676ed2d3a">
+        <column name="transactionOn" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="CustomerNumber" type="String" p1:ValidateRequired="true" p1:Guid="f8089533-7560-4934-9f8c-156d059f2f6e">
+        <column name="customerNumber" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Cliente" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="58dc1e6a-9516-43fb-b35b-b5070b0233a6">
+        <column name="Cliente" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="ItemNumber" type="String" p1:ValidateRequired="true" p1:Guid="a6b4f31f-7529-41cf-9632-4bad671098c5">
+        <column name="itemNumber" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Name" type="String" p1:ValidateRequired="true" p1:Guid="3632c395-9e1f-47bb-a416-d9c1904e7361">
+        <column name="name" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Quantity" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="d87e3d7a-768b-4519-a820-bb8691c7ed56">
+        <column name="quantity" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="Moneda" type="String" p1:ValidateRequired="true" p1:Guid="ed0ab191-aef3-4b19-ad18-c556e0a7379c">
+        <column name="Moneda" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Amount" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="e49c7e1f-77f3-44e7-9816-f233a2740b29">
+        <column name="amount" not-null="False" p1:unicode="False" />
+      </property>
+    </component>
+    <component class="PrAppInvoiceSurveryGetReportResult1" p1:Guid="c4f2f2b4-7107-4baf-83a1-1a8dd954dea9">
+      <property name="Codigo" type="String" p1:ValidateRequired="true" p1:Guid="6fc15f54-1110-4136-9bc7-3bcbf5f9d05e">
+        <column name="Codigo" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Descripcion" type="String" p1:ValidateRequired="true" p1:Guid="a91dd90d-3755-44c2-9b89-3f4c120b2516">
+        <column name="Descripcion" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Cantidad" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="86fccfbd-9d34-4900-84a9-8bf0db967855">
+        <column name="Cantidad" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="Moneda" type="String" p1:ValidateRequired="true" p1:Guid="7f03dbad-cde2-44d1-8fe8-f8c4691949cd">
+        <column name="Moneda" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Monto" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="3235def9-00a7-4646-ab57-ee41ae5b967d">
+        <column name="Monto" not-null="False" p1:unicode="False" />
+      </property>
+    </component>
+    <component class="PrAppInvoiceSurveryGetReportResult2" p1:Guid="065fd4c2-f728-4ffb-b746-6920364ab2a8">
+      <property name="CustomerNumber" type="String" p1:ValidateRequired="true" p1:Guid="7876037d-8e39-4975-bc89-d1e0447347f5">
+        <column name="customerNumber" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Nombres" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="5ed1b1a8-35be-42a1-9fea-b925dfd0d22b">
+        <column name="Nombres" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="Apellidos" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="63edd43f-c37f-48ea-943c-e43a5f9554ad">
+        <column name="Apellidos" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="Cantidad" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="1f0a47a1-57e8-4dfe-94ef-1bd58af201cf">
+        <column name="Cantidad" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="Moneda" type="String" p1:ValidateRequired="true" p1:Guid="20ced6fa-e8c9-4911-b288-c86d77c4f077">
+        <column name="Moneda" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Monto" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c9500546-a37f-4223-be8d-d5d94620434a">
+        <column name="Monto" not-null="False" p1:unicode="False" />
+      </property>
+    </component>
+    <component class="PrAppInvoiceSurveryGetReportResult3" p1:Guid="2ce89709-80bf-4dc9-8743-ad62f62a7ba2">
+      <property name="Fecha" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="26cc57fe-78d4-486d-857e-73322d5e1812">
+        <column name="Fecha" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="TransactionNumber" type="String" p1:ValidateRequired="true" p1:Guid="9fdb21a7-f00c-4864-8fc4-0719304c6500">
+        <column name="transactionNumber" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Cantidad" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="5824fb97-ab0e-4535-b26f-7c6fa0787cb2">
+        <column name="Cantidad" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="Moneda" type="String" p1:ValidateRequired="true" p1:Guid="e3ff69ca-9826-47ad-9354-dd0010df3299">
+        <column name="Moneda" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Monto" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="0411bbbd-a381-4bc9-8f7f-408a3480815b">
+        <column name="Monto" not-null="False" p1:unicode="False" />
+      </property>
+    </component>
+    <component class="PrCxcGetReportInvoiceByCustomerResult" p1:Guid="110b27c0-5414-415a-8a3d-59e3e83f71cc">
+      <property name="Cliente" type="String" p1:ValidateRequired="true" p1:Guid="10a70492-eedc-4fc7-9e70-905842d53ef8">
+        <column name="Cliente" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Nombre" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="6c030704-0eaf-465f-b9ea-747bf96b3f99">
+        <column name="Nombre" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="Identificacion" type="String" p1:ValidateRequired="true" p1:Guid="6c2c226f-8c82-4f42-942c-3e71b64e82bb">
+        <column name="Identificacion" not-null="True" p1:unicode="False" />
+      </property>
+    </component>
+    <component class="PrCxcGetReportInvoiceByCustomerResult1" p1:Guid="4be348da-3438-4578-8d16-82111d32da58">
+      <property name="Fecha" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="5fef77d6-8ae6-40a7-b991-250b645d149c">
+        <column name="Fecha" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="Factura" type="String" p1:ValidateRequired="true" p1:Guid="d41abef5-f479-4858-9590-455d2f9926af">
+        <column name="Factura" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Codigo" type="String" p1:ValidateRequired="true" p1:Guid="09f72409-681b-4859-8c8e-b367374a5c58">
+        <column name="Codigo" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Producto" type="String" p1:ValidateRequired="true" p1:Guid="018955e7-aa3d-4b08-8c7c-724d93ad4514">
+        <column name="Producto" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Cantidad" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="359be5fe-a9ea-4d00-838a-5382936cdda9">
+        <column name="Cantidad" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="Precio" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c9b97c28-017d-476f-a48c-f5e0a39655bc">
+        <column name="Precio" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="Monto" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="873af2ef-2ed7-4e39-8253-b37c035fe277">
+        <column name="Monto" not-null="False" p1:unicode="False" />
+      </property>
+    </component>
+    <component class="PrSalesGetReportSalesByPaymentResult" p1:Guid="a5f2d987-41cd-46a7-89a1-90a3688026af">
+      <property name="Banco" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="585db1c2-2d3a-49b3-a641-6d2b1ac1bc0a">
+        <column name="Banco" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="TransferenciaCordoba" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="5ce124c7-51ab-4082-8bba-56ac51b59bfb">
+        <column name="`Transferencia Cordoba`" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="TransferenciaDólar" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="def31466-7fd2-44b0-b827-2a375f11b9cb">
+        <column name="`Transferencia Dólar`" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="TarjetaCordoba" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="ce1e8846-e255-4851-99f4-d5f1a1d07203">
+        <column name="`Tarjeta Cordoba`" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="TarjetaDólar" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="27bde818-b4bd-49a8-af19-f4ead6b872fd">
+        <column name="`Tarjeta Dólar`" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="EfectivoCordoba" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="27d87da9-d831-4737-9d5b-4259d655402a">
+        <column name="`Efectivo Cordoba`" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="EfectivoDólar" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="2ca82d04-d329-4d5d-b6b3-0dc9341c554a">
+        <column name="`Efectivo Dólar`" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="Puntos" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b6ba4548-6c96-4991-857e-0179b12e3e5b">
+        <column name="Puntos" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="TotalCordoba" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="91c10a55-80dd-4281-aefe-c9b3551c879f">
+        <column name="`Total Cordoba`" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="TotalDólar" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="402d1153-c6f8-438c-8d75-a5d4151b3117">
+        <column name="`Total Dólar`" not-null="False" p1:unicode="False" />
+      </property>
+    </component>
+    <component class="PrSalesGetReporSalesByReferenceResult" p1:Guid="0ca9b4c8-c4e9-45c3-aba4-2eafe9c24eba">
+      <property name="Doctor" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="fde829fd-b276-415a-8b2d-b15750d431b6">
+        <column name="doctor" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="EmployerName" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="72ed4711-95d9-4244-901f-6104589f932b">
+        <column name="employerName" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="TransactionNumber" type="String" p1:ValidateRequired="true" p1:Guid="bb51d399-d4a9-4a02-870b-fb5e4703dc5a">
+        <column name="transactionNumber" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="Tipo" type="String" p1:ValidateRequired="true" p1:Guid="35cd3625-989c-4e24-8298-c27ed54d52c1">
+        <column name="tipo" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="CurrencyName" type="String" p1:ValidateRequired="true" p1:Guid="db658c52-529b-4296-9fb8-6cfdb16007f6">
+        <column name="currencyName" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="CustomerNumber" type="String" p1:ValidateRequired="true" p1:Guid="c4ab89b4-3d68-4c0f-b0c9-cf6217da3280">
+        <column name="customerNumber" not-null="True" p1:unicode="False" />
+      </property>
+      <property name="LegalName" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="e3545461-1076-4242-ba21-71cddab26d23">
+        <column name="legalName" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="VarCurrencyReporte" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="ac5247c1-bd6d-4978-9497-fbcccc0b5bf4">
+        <column name="varCurrencyReporte" not-null="False" p1:unicode="False" />
+      </property>
+      <property name="AmountConIva" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="93b8aab4-c03c-4f48-87d0-73a09eaee376">
+        <column name="amountConIva" not-null="False" p1:unicode="False" />
+      </property>
+    </component>
   </class>
   <class name="TbAccount" entity-set="TbAccounts" table="tb_account" schema="posme" p1:Guid="ccc59704-bfc6-43c3-a4a5-65c5da545504">
     <id name="AccountID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="9890f0d2-6395-429b-8857-ada7ab55673c">
@@ -3342,6 +3520,12 @@
     </property>
     <property name="TypeID" type="Int32" p1:ValidateRequired="true" p1:Guid="ac5369e1-3102-410e-9c50-6800bafdad48">
       <column name="typeID" default="0" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="IsPrimary" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c7cf8043-6e9e-4ce5-91c3-72f7cedbfcd5">
+      <column name="isPrimary" default="0" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="6287268f-9c83-498f-b508-18d405ca62d6">
+      <column name="isActive" default="0" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
   </class>
   <class name="TbCatalog" entity-set="TbCatalogs" table="tb_catalog" schema="posme" p1:Guid="03bf8baf-4443-46a6-a43a-3f753edc5431">
@@ -4016,6 +4200,18 @@
     </property>
     <property name="EntityReferenceID" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="3750fab6-54f6-4ced-937e-585e3e9419e7">
       <column name="entityReferenceID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="AllowWhatsappPromotions" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="5ad23106-2223-422e-9438-c0bead20afd3">
+      <Documentation>
+        <Summary>Acepta promociones por whatapp</Summary>
+      </Documentation>
+      <column name="allowWhatsappPromotions" default="b'0'" not-null="False" precision="1" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="AllowWhatsappCollection" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c162a812-98da-4ee9-b49c-a135718c8394">
+      <Documentation>
+        <Summary>Acepta cobro por whatsapp</Summary>
+      </Documentation>
+      <column name="allowWhatsappCollection" default="b'0'" not-null="False" precision="1" sql-type="bit" p1:unicode="False" />
     </property>
   </class>
   <class name="TbCustomerConsultasSinRiesgo" entity-set="TbCustomerConsultasSinRiesgos" table="tb_customer_consultas_sin_riesgo" schema="posme" p1:Guid="339c6200-d879-4d1e-81ef-446286357a6c">
@@ -8927,6 +9123,225 @@
       <column name="Referencia1" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
     </property>
   </class>
+  <class name="TbCompanyComponentRelation" entity-set="TbCompanyComponentRelations" table="tb_company_component_relation" schema="posme" p1:Guid="77bdcc33-87fe-455f-94cc-2774a2972ca1">
+    <id name="CompanyComponentRelationID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="e10b19ad-625a-45c7-96f3-02fb1391e408">
+      <column name="companyComponentRelationID" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="ComponentIDSource" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="452d89a8-a980-49c1-8670-1d49fb34ffd2">
+      <column name="componentIDSource" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="ComponentItemIDSource" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="e23a2070-4935-4b5c-a668-686fd9e1b0f7">
+      <column name="componentItemIDSource" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="ComponentIDTarget" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="4c4a5291-459e-4be5-bca6-111ae6269743">
+      <column name="componentIDTarget" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="ComponentItemIDTarget" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="259ed175-0dc0-4d65-88d0-658bb61603e8">
+      <column name="componentItemIDTarget" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="b9c2adc5-a51b-4dd3-a403-2cdfd729fc73">
+      <column name="isActive" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Note" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="1000" p1:ValidateRequired="false" p1:Guid="b3e0ddfb-2be7-40dd-aa82-9a1410067f4f">
+      <column name="note" default="NULL" not-null="False" length="1000" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Reference1" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="31f564b1-ac6a-49ca-acbe-af2a59532c03">
+      <column name="reference1" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Reference2" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="5c221e20-02f0-4e2d-9422-9f94314d9f47">
+      <column name="reference2" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Reference3" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="d5b878bd-805a-4f59-90c7-23368dc28f5b">
+      <column name="reference3" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+  </class>
+  <class name="TbCompanyPageSetting" entity-set="TbCompanyPageSettings" table="tb_company_page_setting" schema="posme" p1:Guid="d0554a7b-7eaf-49c4-9bd9-f02dee4bdb40">
+    <id name="CustomPageID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="861ae5c0-3bcb-4207-88d4-d5567e7bb49e">
+      <column name="customPageID" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Namei" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="013d0864-5c8e-4a4d-ae3a-8b0ed04068c6">
+      <column name="namei" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Keyi" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="1133316b-9659-4742-99f6-cd81e1b7031e">
+      <column name="keyi" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Controller" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="dd99049c-6017-4561-8d32-6217d08563f2">
+      <column name="controller" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Method" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="75a958eb-7e3d-45fb-b269-b649d49fcbe3">
+      <column name="method" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Type" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="f9bf1eb6-a084-472f-be7a-b52a590192a0">
+      <column name="type" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="FlavorID" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="018c5ea9-1420-410a-a0d8-a128f66cc9ba">
+      <column name="flavorID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Element" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="a6720d7e-358c-4ad5-86b8-efc0aa89f0dc">
+      <column name="element" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Valuei" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="4000" p1:ValidateRequired="false" p1:Guid="c2ded1e5-927e-40ee-bdee-30a397cd314a">
+      <column name="valuei" default="NULL" not-null="False" length="4000" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="IsActive" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="4daf331a-3be2-43c9-af13-1947d41bfb4b">
+      <column name="isActive" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="TbCompanyPageSettingLarge" entity-set="TbCompanyPageSettingLarges" table="tb_company_page_setting_large" schema="posme" p1:Guid="da002baf-b6be-4b22-8ac4-449472b057d8">
+    <id name="CustomPageLargeID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="88e56a0e-31f6-44e2-9abb-ad9ded0cc4c5">
+      <column name="customPageLargeID" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Namei" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="e24a5d56-e6fe-4cfc-ac32-a6956fcb6859">
+      <column name="namei" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Keyi" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="ee49a6d1-022a-4703-9aab-f8e3efcc3986">
+      <column name="keyi" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Controller" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="04ac3269-29f4-4fab-9de0-8b68310ea5ab">
+      <column name="controller" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Method" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="00aa2e5a-052d-495c-ba87-cc20cb42f214">
+      <column name="method" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Type" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="505a7ee2-263b-46b1-892d-e238a12d0e84">
+      <column name="type" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="FlavorID" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="bbf3b3f3-910d-46a7-b3bd-32862d868b48">
+      <column name="flavorID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Element" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="6da299d1-71ec-4e06-963a-3e5740953044">
+      <column name="element" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Valuei" type="Blob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ad93fa2d-8c22-4c7e-a2ef-0854fda94a64">
+      <column name="valuei" default="NULL" not-null="False" sql-type="blob" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="eac14759-1bd3-4a65-9052-eecedf5ec0ef">
+      <column name="isActive" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="TbReporting" entity-set="TbReportings" table="tb_reporting" schema="posme" p1:Guid="f6fff330-840c-49d9-baa3-7e6189ae83be">
+    <id name="ReportID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="a1af539c-e945-4468-bdaa-2189d7ab11ac">
+      <column name="reportID" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Keyi" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="96cad70b-be75-4394-8664-73b7bac72446">
+      <column name="keyi" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Namei" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="c6343b2e-e83f-4277-8cef-8543a2f26ec5">
+      <column name="namei" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Display" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="4500aade-d232-4c52-86a8-922d70785ea2">
+      <column name="display" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="UrlReport" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="eac07dc2-f367-4bc8-8040-8916ace4e89e">
+      <column name="urlReport" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="UrlReportProcess" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="500" p1:ValidateRequired="false" p1:Guid="1f4bdefb-7df3-4a04-b554-021b43b1665d">
+      <column name="urlReportProcess" default="NULL" not-null="False" length="500" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Ranking" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="836ee52e-21e6-46d5-bf4f-b6ee4fb5196d">
+      <column name="ranking" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="IsMobile" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="18fbfc0e-a855-45e8-9ae7-1b49588b652b">
+      <column name="isMobile" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Queryi" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="5000" p1:ValidateRequired="false" p1:Guid="c13f9ea4-f6e8-431e-b75a-741a99ee63f5">
+      <column name="queryi" default="NULL" not-null="False" length="5000" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="NeedAutenticated" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="dcc3dd34-48eb-4309-b1c7-e4ff58481e1a">
+      <column name="needAutenticated" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="1b4380d8-2755-4fce-aca8-978147452b62">
+      <column name="isActive" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="FlavorID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c134f0be-07ce-4a75-b44c-e796552f9665">
+      <column name="flavorID" default="0" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="TbReportingParameter" entity-set="TbReportingParameters" table="tb_reporting_parameter" schema="posme" p1:Guid="901c6c59-59b7-4c1a-b9b2-9a84987eb9f0">
+    <id name="ReportParameterID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="650462dd-b854-4d79-b0ea-b7c9fbf11714">
+      <column name="reportParameterID" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="ReportID" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="2fab6649-8192-4aac-9ac7-f89753ac8818">
+      <column name="reportID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Name" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="e031333b-5375-4116-898c-5c49d8996119">
+      <column name="name" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Display" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="f1bdc38a-cf0c-49da-917d-0f96db9a7411">
+      <column name="display" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Orden" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="605455d3-2113-426f-a5af-8682f080f1dd">
+      <column name="orden" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Description" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="bc02b9c0-b2d0-4c67-a6d5-ede050df71f4">
+      <column name="description" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Type" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="911facea-9678-469e-bcf0-9e4d010a3bc0">
+      <column name="type" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="IsActive" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="963dbbc1-c25b-481f-a5da-22fce4392a4c">
+      <column name="isActive" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Datasource" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="500" p1:ValidateRequired="false" p1:Guid="3102d4fc-6ab7-4b3d-a5e7-a0a6abb02841">
+      <column name="datasource" default="NULL" not-null="False" length="500" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Value" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="fb71e0d5-af4a-47a4-9eb9-288b22389da5">
+      <column name="value" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+  </class>
+  <class name="TbReportingResult" entity-set="TbReportingResults" table="tb_reporting_result" schema="posme" p1:Guid="379a8e4b-8069-4f11-a6c2-05304f37d693">
+    <id name="ReportResultID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="3aa51c46-629b-4336-8314-158c56457e41">
+      <column name="reportResultID" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="ReportID" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="0a666a4d-4f55-41cc-8ad0-3c10bc640ce1">
+      <column name="reportID" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="ResultNumber" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="82bfc780-64b9-4ec6-a181-8650f324c749">
+      <column name="resultNumber" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Title" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="ae318593-bd88-44d8-8563-b5f645775a25">
+      <column name="title" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Source" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="236dfbb3-ed43-4602-941e-1ba9321c79a0">
+      <column name="source" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Prefix" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="8e357de7-99fd-4889-adc6-1994f1256bc6">
+      <column name="prefix" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Sumary" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="b3abda73-d04b-41bf-a92c-bd0b42e12096">
+      <column name="sumary" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Type" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="d33de5fb-db69-4d6b-bb0e-d8469a4d9a60">
+      <column name="type" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="ReportStyle" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="f9de2c48-88f0-48b0-b481-950e1e0f1fc1">
+      <column name="reportStyle" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Width" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="35a94667-e471-4b8a-85cc-b84281d78073">
+      <column name="width" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Sufix" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="6027d11e-a97d-46ea-8e01-588d220dfcf6">
+      <column name="sufix" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="IsSequence" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="05f75b6f-20f5-4482-914c-2e84d69a78ad">
+      <column name="isSequence" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Sequence" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="01c9a2b1-c344-40eb-abda-e00c378029ea">
+      <column name="sequence" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="TableTitle" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="ca74fca8-dfb4-4d20-9b1b-6500f4d88343">
+      <column name="tableTitle" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="TableWidth" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="b3a57006-3248-4b6a-a1a5-47d7c14b6f54">
+      <column name="tableWidth" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="TableNumberColumn" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="de8db20d-260c-4065-bdbd-31f980456e03">
+      <column name="tableNumberColumn" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7a079e30-6848-4c8d-90f6-051543c1d5a7">
+      <column name="isActive" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
   <method name="PrAccountingAccountBalance" p1:procedure="posme.pr_accounting_account_balance" p1:Guid="40240678-f9b5-4e2e-bd7e-7eb5b10d65e7">
     <Documentation>
       <Summary>Procedimiento para obtener el tb_catalog de Cuenta de un Ciclo y sus Saldo</Summary>
@@ -9530,7 +9945,8 @@
     <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
     <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
-    <parameter name="prDate" type="DateTime" sql-type="datetime" />
+    <parameter name="prDateStart" type="DateTime" sql-type="datetime" />
+    <parameter name="prDateEnd" type="DateTime" sql-type="datetime" />
   </method>
   <method name="PrCollectionGetReportDocumentCredit" p1:procedure="posme.pr_collection_get_report_document_credit" p1:Guid="506f6a08-ab07-46ec-94b8-ee28bb662efc">
     <return class="PrCollectionGetReportDocumentCreditResult">
@@ -9899,6 +10315,7 @@
     <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
     <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prCustomerNumber" type="String" sql-type="varchar" length="50" />
+    <parameter name="prReference" type="String" sql-type="varchar" length="50" />
   </method>
   <method name="PrCxcGetReportCustomerPayByInvoice" p1:procedure="posme.pr_cxc_get_report_customer_pay_by_invoice" p1:Guid="0a7aa1f1-a4eb-43f5-ab1d-99e4e931d553">
     <Documentation>
@@ -10798,6 +11215,7 @@
     <parameter name="prEndOn" type="DateTime" sql-type="date" />
     <parameter name="prInventoryCategoryID" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prWarehouse" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prUserIDCreatedBy" type="Int32" sql-type="int" precision="10" scale="0" />
   </method>
   <method name="PrSalesGetReportSalesDetailCommission" p1:procedure="posme.pr_sales_get_report_sales_detail_commission" p1:Guid="5e4e4b54-1499-4edf-9836-712f2d73745e">
     <Documentation>
@@ -10889,6 +11307,7 @@
     <parameter name="prEndOn" type="DateTime" sql-type="date" />
     <parameter name="prExpenditureClassification" type="Int32" sql-type="int" precision="10" scale="0" />
     <parameter name="prBranchID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prWarehouseID" type="Int32" sql-type="int" precision="10" scale="0" />
   </method>
   <method name="PrSalesGetReportVentaDeProducto" p1:procedure="posme.pr_sales_get_report_venta_de_producto" p1:Guid="d4bcd4e9-a58d-408f-b670-45393c506cef">
     <Documentation>
@@ -11018,5 +11437,127 @@
     <parameter name="texto" type="String" sql-type="longtext" length="2147483647" />
     <parameter name="marcador" type="String" sql-type="varchar" length="50" />
     <parameter name="n" type="Int32" sql-type="int" precision="10" scale="0" />
+  </method>
+  <method name="PrAppInvoiceSurveryGetReport" p1:procedure="posme.pr_app_invoice_survery_get_report" p1:Guid="465f2ad7-40a7-4dfe-866c-584ab912985e">
+    <return class="PrAppInvoiceSurveryGetReportResult;PrAppInvoiceSurveryGetReportResult1;PrAppInvoiceSurveryGetReportResult2;PrAppInvoiceSurveryGetReportResult3" />
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prDateTimeStart" type="DateTime" sql-type="datetime" />
+    <parameter name="prDateTimeFinish" type="DateTime" sql-type="datetime" />
+    <parameter name="prSurveryKey" type="String" sql-type="varchar" length="50" />
+  </method>
+  <method name="PrCxcGetReportInvoiceByCustomer" p1:procedure="posme.pr_cxc_get_report_invoice_by_customer" p1:Guid="5914e75a-bcff-4781-8a2b-983b87cec2e8">
+    <return class="PrCxcGetReportInvoiceByCustomerResult;PrCxcGetReportInvoiceByCustomerResult1" />
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prDateTimeStart" type="DateTime" sql-type="datetime" />
+    <parameter name="prDateTimeFinish" type="DateTime" sql-type="datetime" />
+    <parameter name="prCustomerEntityID" type="String" sql-type="varchar" length="50" />
+  </method>
+  <method name="PrCxcGetReportSalesCustomer" p1:procedure="posme.pr_cxc_get_report_sales_customer" p1:Guid="e61fe0bd-3860-459e-ad93-8290991545e6">
+    <Documentation>
+      <Summary>Detalle de ventas</Summary>
+    </Documentation>
+    <return class="PrSalesGetReportSalesDetailResult">
+      <return-property name="UserID" column="userID" />
+      <return-property name="Nickname" column="nickname" />
+      <return-property name="TransactionNumber" column="transactionNumber" />
+      <return-property name="EmployerName" column="employerName" />
+      <return-property name="Tipo" column="tipo" />
+      <return-property name="TransactionOn" column="transactionOn" />
+      <return-property name="CreatedOn" column="createdOn" />
+      <return-property name="DayOfMonth" column="dayOfMonth" />
+      <return-property name="CustomerNumber" column="customerNumber" />
+      <return-property name="CurrencyName" column="currencyName" />
+      <return-property name="Note" column="note" />
+      <return-property name="LegalName" column="legalName" />
+      <return-property name="Zone" column="zone" />
+      <return-property name="ItemNumber" column="itemNumber" />
+      <return-property name="ItemName" column="itemName" />
+      <return-property name="ItemNameLog" column="itemNameLog" />
+      <return-property name="PhoneNumber" column="phoneNumber" />
+      <return-property name="Agent" column="Agent" />
+      <return-property name="Commentary" column="Commentary" />
+      <return-property name="NameCategory" column="nameCategory" />
+      <return-property name="Quantity" column="quantity" />
+      <return-property name="UnitaryCost" column="unitaryCost" />
+      <return-property name="UnitaryPrice" column="unitaryPrice" />
+      <return-property name="Cost" column="cost" />
+      <return-property name="Amount" column="amount" />
+      <return-property name="AmountConIva" column="amountConIva" />
+      <return-property name="Utilidad" column="utilidad" />
+      <return-property name="Iva" column="iva" />
+      <return-property name="IvaTotal" column="ivaTotal" />
+      <return-property name="VarCurrencyReporte" column="varCurrencyReporte" />
+      <return-property name="CurrencyID" column="currencyID" />
+      <return-property name="ExchangeRate" column="exchangeRate" />
+      <return-property name="AmountCommision" column="amountCommision" />
+    </return>
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prCustomerNumber" type="String" sql-type="varchar" length="250" />
+  </method>
+  <method name="PrSalesGetReportSalesByPayment" p1:procedure="posme.pr_sales_get_report_sales_by_payment" p1:Guid="8328235f-cf21-4730-b732-e77d47a29aed">
+    <Documentation>
+      <Summary>Detalle de ventas por metodo de pago</Summary>
+    </Documentation>
+    <return class="PrSalesGetReportSalesByPaymentResult">
+      <return-property name="Banco" column="Banco" />
+      <return-property name="TransferenciaCordoba" column="Transferencia Cordoba" />
+      <return-property name="TransferenciaDólar" column="Transferencia Dólar" />
+      <return-property name="TarjetaCordoba" column="Tarjeta Cordoba" />
+      <return-property name="TarjetaDólar" column="Tarjeta Dólar" />
+      <return-property name="EfectivoCordoba" column="Efectivo Cordoba" />
+      <return-property name="EfectivoDólar" column="Efectivo Dólar" />
+      <return-property name="Puntos" column="Puntos" />
+      <return-property name="TotalCordoba" column="Total Cordoba" />
+      <return-property name="TotalDólar" column="Total Dólar" />
+    </return>
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
+    <parameter name="prDateTimeStart" type="String" sql-type="varchar" length="50" />
+    <parameter name="prDateTimeFinish" type="String" sql-type="varchar" length="50" />
+  </method>
+  <method name="PrSalesGetReporSalesByReference" p1:procedure="posme.pr_sales_get_repor_sales_by_reference" p1:Guid="0e10a3bd-8c4a-435d-b694-78ab926d3574">
+    <return class="PrSalesGetReporSalesByReferenceResult">
+      <return-property name="Doctor" column="doctor" />
+      <return-property name="EmployerName" column="employerName" />
+      <return-property name="TransactionNumber" column="transactionNumber" />
+      <return-property name="Tipo" column="tipo" />
+      <return-property name="CurrencyName" column="currencyName" />
+      <return-property name="CustomerNumber" column="customerNumber" />
+      <return-property name="LegalName" column="legalName" />
+      <return-property name="VarCurrencyReporte" column="varCurrencyReporte" />
+      <return-property name="AmountConIva" column="amountConIva" />
+    </return>
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTokenID" type="String" sql-type="varchar" length="50" />
+    <parameter name="prUserID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prStartOn" type="DateTime" sql-type="date" />
+    <parameter name="prEndOn" type="DateTime" sql-type="date" />
+    <parameter name="prInventoryCategoryID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prWarehouse" type="Int32" sql-type="int" precision="10" scale="0" />
+  </method>
+  <method name="FnGetNombreDelDia" p1:procedure="posme.fn_get_nombre_del_dia" p1:Guid="682d9417-1ba4-43c3-8e4f-733325e74e9b">
+    <return-scalar column="return_value" type="String" />
+    <parameter name="fecha" type="DateTime" sql-type="date" />
+  </method>
+  <method name="FnTranslateTransactionMasterInfoAmount" p1:procedure="posme.fn_translate_transaction_master_info_amounts" p1:Guid="0539121f-79a9-4743-a138-d70e82190ae9">
+    <return-scalar column="return_value" type="String" />
+    <parameter name="prCompanyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prFlavorID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prTransactionID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prCurrencyFunction" type="String" sql-type="varchar" length="50" />
+    <parameter name="prCurrencyReport" type="String" sql-type="varchar" length="50" />
+    <parameter name="prCurrencyReportConvert" type="String" sql-type="varchar" length="50" />
+    <parameter name="prTransactionCurrencyID" type="Int32" sql-type="int" precision="10" scale="0" />
+    <parameter name="prExchangeRate" type="Decimal" sql-type="decimal" precision="18" scale="8" />
+    <parameter name="prTransactionAmount" type="Decimal" sql-type="decimal" precision="18" scale="6" />
+    <parameter name="prTransactionAmountExt" type="Decimal" sql-type="decimal" precision="18" scale="6" />
+    <parameter name="prField" type="String" sql-type="varchar" length="30" />
   </method>
 </efcore>
