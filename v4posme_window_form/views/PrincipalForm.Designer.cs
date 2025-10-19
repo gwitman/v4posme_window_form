@@ -63,11 +63,12 @@ namespace v4posme_window.Views
             // 
             accordionControl1.Dock = DockStyle.Left;
             accordionControl1.Location = new Point(0, 0);
+            accordionControl1.Margin = new Padding(4);
             accordionControl1.Name = "accordionControl1";
             accordionControl1.OptionsMinimizing.CaptionShowMode = DevExpress.XtraBars.Navigation.CaptionShowMode.None;
             accordionControl1.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Touch;
             accordionControl1.ShowFilterControl = DevExpress.XtraBars.Navigation.ShowFilterControl.Always;
-            accordionControl1.Size = new Size(260, 676);
+            accordionControl1.Size = new Size(303, 832);
             accordionControl1.TabIndex = 1;
             accordionControl1.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
             // 
@@ -75,8 +76,9 @@ namespace v4posme_window.Views
             // 
             fluentDesignFormControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { barCompanyNane });
             fluentDesignFormControl1.Location = new Point(0, 0);
+            fluentDesignFormControl1.Margin = new Padding(4);
             fluentDesignFormControl1.Name = "fluentDesignFormControl1";
-            fluentDesignFormControl1.Size = new Size(961, 0);
+            fluentDesignFormControl1.Size = new Size(1121, 0);
             fluentDesignFormControl1.TabIndex = 2;
             fluentDesignFormControl1.TabStop = false;
             fluentDesignFormControl1.TitleItemLinks.Add(barCompanyNane);
@@ -105,15 +107,17 @@ namespace v4posme_window.Views
             barDockControlTop.Dock = DockStyle.Top;
             barDockControlTop.Location = new Point(0, 0);
             barDockControlTop.Manager = barManager1;
-            barDockControlTop.Size = new Size(961, 0);
+            barDockControlTop.Margin = new Padding(4);
+            barDockControlTop.Size = new Size(1121, 0);
             // 
             // barDockControlBottom
             // 
             barDockControlBottom.CausesValidation = false;
             barDockControlBottom.Dock = DockStyle.Bottom;
-            barDockControlBottom.Location = new Point(0, 676);
+            barDockControlBottom.Location = new Point(0, 832);
             barDockControlBottom.Manager = barManager1;
-            barDockControlBottom.Size = new Size(961, 0);
+            barDockControlBottom.Margin = new Padding(4);
+            barDockControlBottom.Size = new Size(1121, 0);
             // 
             // barDockControlLeft
             // 
@@ -121,27 +125,32 @@ namespace v4posme_window.Views
             barDockControlLeft.Dock = DockStyle.Left;
             barDockControlLeft.Location = new Point(0, 0);
             barDockControlLeft.Manager = barManager1;
-            barDockControlLeft.Size = new Size(0, 676);
+            barDockControlLeft.Margin = new Padding(4);
+            barDockControlLeft.Size = new Size(0, 832);
             // 
             // barDockControlRight
             // 
             barDockControlRight.CausesValidation = false;
             barDockControlRight.Dock = DockStyle.Right;
-            barDockControlRight.Location = new Point(961, 0);
+            barDockControlRight.Location = new Point(1121, 0);
             barDockControlRight.Manager = barManager1;
-            barDockControlRight.Size = new Size(0, 676);
+            barDockControlRight.Margin = new Padding(4);
+            barDockControlRight.Size = new Size(0, 832);
             // 
             // ribbonControl1
             // 
+            ribbonControl1.EmptyAreaImageOptions.ImagePadding = new Padding(35, 37, 35, 37);
             ribbonControl1.ExpandCollapseItem.Id = 0;
             ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbonControl1.ExpandCollapseItem, barButtonItem1, barStaticItemTitulo });
-            ribbonControl1.Location = new Point(260, 0);
+            ribbonControl1.Location = new Point(303, 0);
+            ribbonControl1.Margin = new Padding(4);
             ribbonControl1.MaxItemId = 3;
             ribbonControl1.Name = "ribbonControl1";
+            ribbonControl1.OptionsMenuMinWidth = 385;
             ribbonControl1.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] { ribbonPageCategory1 });
             ribbonControl1.PageHeaderItemLinks.Add(barStaticItemTitulo);
-            ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2019;
-            ribbonControl1.Size = new Size(701, 82);
+            ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.OfficeUniversal;
+            ribbonControl1.Size = new Size(818, 31);
             // 
             // barButtonItem1
             // 
@@ -171,9 +180,9 @@ namespace v4posme_window.Views
             // 
             // PrincipalForm
             // 
-            AutoScaleDimensions = new SizeF(6F, 13F);
+            AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(961, 676);
+            ClientSize = new Size(1121, 832);
             Controls.Add(ribbonControl1);
             Controls.Add(accordionControl1);
             Controls.Add(fluentDesignFormControl1);
@@ -183,6 +192,7 @@ namespace v4posme_window.Views
             Controls.Add(barDockControlTop);
             IconOptions.Icon = (Icon)resources.GetObject("PrincipalForm.IconOptions.Icon");
             IsMdiContainer = true;
+            Margin = new Padding(4);
             Name = "PrincipalForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "posMe";

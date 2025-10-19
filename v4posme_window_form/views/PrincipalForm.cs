@@ -21,6 +21,8 @@ namespace v4posme_window.Views
         public PrincipalForm()
         {
             InitializeComponent();
+            ribbonControl1.Minimized            = true;
+            ribbonControl1.AllowMinimizeRibbon  = false;
         }
 
         private async void PrincipalForm_Load(object sender, EventArgs e)
