@@ -2147,6 +2147,7 @@ namespace v4posme_window.Views.Invoice.Billing
                             InventoryWarehouseTargetID = objTmNew.TargetWarehouseID,
                             SkuCatalogItemID = skuCatalogItemId,
                             SkuFormatoDescription = skuFormatoDescription,
+                            TypePriceID = 0,
                             AmountCommision = price * comisionPorcentage * quantity // impuesto de lista
                         };
                         objTmd.Cost = objTmd.Quantity * unitaryCost; // costo por unIdad
@@ -2165,7 +2166,7 @@ namespace v4posme_window.Views.Invoice.Billing
                         objTmdc.Reference2 = txtReportSinRiesgo.IsOn ? "1" : "0";
                         objTmdc.Reference3 = "0"; //no existe el campo
                         objTmdc.Reference4 = "";
-                        objTmdc.Reference5 = "";
+                        objTmdc.Reference5 = "";                        
                         objTmdc.Reference9 = "reference1: Porcentaje de Gastos fijos para las facturas de credito,reference2: Escritura Publica,reference3: Primer Linea del Protocolo";
                         _objInterfazTransactionMasterDetailCreditModel.InsertAppPosme(objTmdc);
 
@@ -2204,12 +2205,12 @@ namespace v4posme_window.Views.Invoice.Billing
                     }
                     else
                     {
-                        var objTmdc = _objInterfazTransactionMasterDetailCreditModel.GetRowByPk(transactionMasterDetailId);
-                        var objTmdNew = _objInterfazTransactionMasterDetailModel.GetRowByPKK(transactionMasterDetailId);
+                        var objTmdc             = _objInterfazTransactionMasterDetailCreditModel.GetRowByPk(transactionMasterDetailId);
+                        var objTmdNew           = _objInterfazTransactionMasterDetailModel.GetRowByPKK(transactionMasterDetailId);
                         if (objTmdNew is null) throw new Exception("No existe el objeto objTmdNew");
                         objTmdNew.Quantity = quantity * objItemSku.Value; // cantidad
                         objTmdNew.SkuQuantity = quantity; // cantidad
-                        objTmdNew.SkuQuantityBySku = objItemSku.Value; // cantidad
+                        objTmdNew.SkuQuantityBySku = objItemSku.Value ; // cantidad
                         objTmdNew.UnitaryCost = unitaryCost; // costo
                         objTmdNew.UnitaryPrice = price; // precio de lista
                         objTmdNew.UnitaryAmount = unitaryAmount; // precio de lista con impuesto
@@ -2226,7 +2227,7 @@ namespace v4posme_window.Views.Invoice.Billing
                         objTmdNew.SkuFormatoDescription = skuFormatoDescription;
                         objTmdNew.AmountCommision = price * comisionPorcentage * quantity;
                         objTmdNew.Cost = objTmdNew.Quantity * unitaryCost; // costo por cantidad
-
+                        objTmdNew.TypePriceID = 0;
 
                         tax1Total = tax1Total + (tax1.Value * quantity);
                         tax2Total = tax2Total + (tax2.Value * quantity);
